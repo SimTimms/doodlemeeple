@@ -20,8 +20,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { useStyles } from './styles';
-import logo from '../assets/logo.svg';
-import { Content, StyledNavBar } from '../components';
+import { StyledNavBar } from '../components';
 
 function PublicLayout() {
   const classes = useStyles();
@@ -47,9 +46,8 @@ function PublicLayout() {
           edge="start"
           className={clsx(classes.menuButton, open && classes.hide)}
         >
-          <MenuIcon />
+          <MenuIcon color="primary" />
         </IconButton>
-        <img src={logo} />
       </StyledNavBar>
       <Drawer
         className={classes.drawer}

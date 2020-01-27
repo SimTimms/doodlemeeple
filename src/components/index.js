@@ -1,11 +1,14 @@
 import React from 'react';
 import { styles } from './styles';
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import logo from '../assets/logo.svg';
 const drawerWidth = 240;
 
 export const useStyles = makeStyles(theme => ({
@@ -37,7 +40,15 @@ function NavBar({ children, open }) {
         [classes.appBarShift]: open,
       })} ${classes.root}`}
     >
-      <Toolbar>{children}</Toolbar>
+      <Toolbar style={{ display: 'flex' }}>
+        {children}
+        <Link to="/" style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}>
+          <img src={logo} />
+        </Link>
+        <Typography variant="h6" noWrap>
+          Register
+        </Typography>
+      </Toolbar>
     </AppBar>
   );
 }
