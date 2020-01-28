@@ -41,14 +41,11 @@ function NavBar(props) {
         [classes.appBarShift]: open,
       })} ${classes.root}`}
     >
-      <Toolbar style={{ display: 'flex' }}>
-        {children}
+      <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Link to="/" style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}>
           <img src={logo} alt="DoodleMeeple Man next to DoodleMeeple Text" />
         </Link>
-        <Typography variant="h6" noWrap>
-          {title}
-        </Typography>
+        {children}
       </Toolbar>
     </AppBar>
   );

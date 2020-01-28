@@ -3,12 +3,15 @@ import RegisterCard from './views/RegisterCard';
 import ThanksCard from './views/ThanksCard';
 import { Content, StyledNavBar } from '../../components';
 
+import { PublicMenu } from '../menus';
+
 function RegisterLayout() {
   const [page, setPage] = React.useState(0);
-  console.log('DA');
   return (
     <div>
-      <StyledNavBar title="Register" open={false}></StyledNavBar>
+      <StyledNavBar title="Register" open={false}>
+        <PublicMenu />
+      </StyledNavBar>
       <Content>
         {page === 0 ? (
           <RegisterCard setPage={setPage} />

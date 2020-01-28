@@ -11,6 +11,10 @@ function App() {
         </Route>
         <Route path="/devlogout">Dev Logout</Route>
         <Route path="/devlogin">Dev Login</Route>
+        <Route
+          path="/:page"
+          render={props => <PublicLayoutFrame {...props} />}
+        />
         <Route path="/">
           <PublicLayoutFrame />
         </Route>
