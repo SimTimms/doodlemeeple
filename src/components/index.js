@@ -3,7 +3,6 @@ import { styles } from './styles';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import { makeStyles } from '@material-ui/core/styles';
@@ -31,8 +30,10 @@ export const useStyles = makeStyles(theme => ({
   },
 }));
 
-function NavBar({ children, open }) {
+function NavBar(props) {
+  const { children, open, title } = props;
   const classes = useStyles();
+
   return (
     <AppBar
       position="fixed"
@@ -43,10 +44,10 @@ function NavBar({ children, open }) {
       <Toolbar style={{ display: 'flex' }}>
         {children}
         <Link to="/" style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}>
-          <img src={logo} />
+          <img src={logo} alt="DoodleMeeple Man next to DoodleMeeple Text" />
         </Link>
         <Typography variant="h6" noWrap>
-          Register
+          {title}
         </Typography>
       </Toolbar>
     </AppBar>
@@ -62,33 +63,4 @@ export const StyledNavBar = withStyles({
 export function Content(props) {
   const classes = styles();
   return <div className={clsx(classes.content)}>{props.children}</div>;
-}
-
-export function FormInput(props) {
-  const fieldValue = props.fieldValue;
-  const classes = styles();
-
-  return (
-    <TextField
-      id={props.fieldName}
-      label={props.fieldName}
-      className={clsx(classes.textField)}
-      value={fieldValue}
-      onChange={e => {
-        props.setFieldValue(e.target.value);
-      }}
-      margin="normal"
-      variant="outlined"
-    />
-  );
-}
-
-export function Form(props) {
-  const classes = styles();
-
-  return (
-    <form className={clsx(classes.container)} noValidate autoComplete="off">
-      {props.children}
-    </form>
-  );
 }

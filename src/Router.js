@@ -12,7 +12,7 @@ function App() {
         <Route path="/devlogout">Dev Logout</Route>
         <Route path="/devlogin">Dev Login</Route>
         <Route path="/">
-          <PublicLayoutFrame />;
+          <PublicLayoutFrame />
         </Route>
       </Switch>
     </Router>

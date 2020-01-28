@@ -1,9 +1,7 @@
 import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import { DevNavBar } from '../navbars';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import SideBar from '../sidebars';
-import Grid from '@material-ui/core/Grid';
 import LogIn from '../views/login';
 import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
@@ -20,8 +18,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { useStyles } from './styles';
-import { StyledNavBar } from '../components';
-
+import { StyledNavBar, Content } from '../components';
 function PublicLayout() {
   const classes = useStyles();
   const theme = useTheme();
@@ -94,14 +91,11 @@ function PublicLayout() {
           [classes.contentShift]: open,
         })}
       >
-        <DevNavBar />
         <div className={classes.drawerHeader} />
         <Typography paragraph>Content Area</Typography>
-        <Grid container className={classes.root} justify="center" spacing={2}>
-          <Grid item xs={4}>
-            <LogIn />
-          </Grid>
-        </Grid>
+        <Content>
+          <LogIn />
+        </Content>
       </main>
     </div>
   );
