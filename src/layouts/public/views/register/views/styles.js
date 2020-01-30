@@ -12,10 +12,4 @@ export const styles = makeStyles({
     flexWrap: 'wrap',
     padding: '10px !important',
   },
-  buttonCentre: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textDecoration: 'none',
-  },
 });

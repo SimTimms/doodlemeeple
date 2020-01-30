@@ -1,20 +1,25 @@
 import React from 'react';
-import { PublicLayoutFrame, RegisterLayoutFrame } from './layouts';
+import { PublicLayoutFrame, AboutLayoutFrame } from './layouts';
+import AppLayout from './layouts/app';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/register">
-          <RegisterLayoutFrame />
+        <Route
+          path="/app/project/:projectId"
+          render={props => <AppLayout {...props} />}
+        />
+        <Route path="/app/:page" render={props => <AppLayout {...props} />} />
+        <Route path="/about">
+          <AboutLayoutFrame />
         </Route>
-        <Route path="/devlogout">Dev Logout</Route>
-        <Route path="/devlogin">Dev Login</Route>
         <Route
           path="/:page"
           render={props => <PublicLayoutFrame {...props} />}
         />
+
         <Route path="/">
           <PublicLayoutFrame />
         </Route>

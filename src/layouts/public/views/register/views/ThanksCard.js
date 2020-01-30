@@ -3,16 +3,13 @@ import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { Form, FormInput } from '../../../components/form';
 import { styles } from './styles';
 import ActionButton from '../components';
-import Slide from '@material-ui/core/Slide';
 import { Link } from 'react-router-dom';
+import Slide from '@material-ui/core/Slide';
 
-export default function LoginCard() {
+export default function RegisterCard({ setPage }) {
   const classes = styles();
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -32,34 +29,22 @@ export default function LoginCard() {
               color="textPrimary"
               style={{ textAlign: 'center' }}
             >
-              Login
+              Thank You
+            </Typography>
+            <Typography
+              variant="body2"
+              component="p"
+              style={{ textAlign: 'center' }}
+            >
+              You'll receive an email any moment now, simply follow the
+              instructions to complete your registration
             </Typography>
           </CardContent>
           <Divider />
+
           <CardContent className={classes.cardContentCenter}>
-            <Form width={200}>
-              <FormInput
-                fieldName="emailAddress"
-                fieldTitle="Email"
-                fieldValue={name}
-                setFieldValue={setName}
-              />
-              <FormInput
-                fieldName="password"
-                fieldTitle="Password"
-                fieldValue={email}
-                setFieldValue={setEmail}
-              />
-            </Form>
-          </CardContent>
-          <Divider />
-          <CardContent className={classes.cardContentCenter}>
-            <Link
-              to="/app/dashboard"
-              style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
-              className={classes.buttonCentre}
-            >
-              <ActionButton name="Login" />
+            <Link to="/">
+              <ActionButton linkTo="/d" name="OK" />
             </Link>
           </CardContent>
         </Card>

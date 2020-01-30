@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const styles = makeStyles({
-  card: { margin: 10, maxWidth: 512 },
+export const useStyles = makeStyles(theme => ({
+  card: { width: '100%', margin: '20px 0 20px 0' },
   title: {
     fontSize: 14,
   },
@@ -18,4 +18,4 @@ export const styles = makeStyles({
     alignItems: 'center',
     textDecoration: 'none',
   },
-});
+}));

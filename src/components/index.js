@@ -1,7 +1,5 @@
 import React from 'react';
 import { styles } from './styles';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
@@ -28,10 +26,16 @@ export const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
+  appBarChild: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
 }));
 
-function NavBar(props) {
-  const { children, open, title } = props;
+export function StyledNavBar(props) {
+  const { children, open, menu } = props;
   const classes = useStyles();
 
   return (
@@ -42,22 +46,27 @@ function NavBar(props) {
       })} ${classes.root}`}
     >
       <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Link to="/" style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}>
-          <img src={logo} alt="DoodleMeeple Man next to DoodleMeeple Text" />
-        </Link>
-        {children}
+        {menu}
+        <div className={`${clsx(classes.appBarChild)}`}>
+          <Link
+            to="/"
+            style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
+          >
+            <img src={logo} alt="DoodleMeeple Man next to DoodleMeeple Text" />
+          </Link>
+          {children}
+        </div>
       </Toolbar>
     </AppBar>
   );
 }
 
-export const StyledNavBar = withStyles({
-  root: {
-    background: '#fff',
-  },
-})(NavBar);
-
 export function Content(props) {
   const classes = styles();
   return <div className={clsx(classes.content)}>{props.children}</div>;
+}
+
+export function ContentTop(props) {
+  const classes = styles();
+  return <div className={clsx(classes.contentTop)}>{props.children}</div>;
 }

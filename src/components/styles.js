@@ -10,6 +10,11 @@ export const styles = makeStyles({
     flexAlign: 'center',
     justifyContent: 'center',
   },
+  contentTop: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
   dense: {
     marginTop: 16,
   },
