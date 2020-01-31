@@ -72,8 +72,8 @@ function AppLayout(props) {
               <Community />
             ) : page === 'portfolio' ? (
               <Portfolio />
-            ) : page === 'projecy' ? (
-              <Project />
+            ) : page === 'project' ? (
+              <Project params={props.match.params} />
             ) : null}
           </div>
         </ContentTop>

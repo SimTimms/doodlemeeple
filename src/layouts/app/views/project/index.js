@@ -12,7 +12,7 @@ import { InvitesWidget } from 'src/components/invites';
 import { TagsWidget } from 'src/components/tags';
 import { projectObject } from 'src/testData/projects';
 
-export function Project() {
+export function Project(props) {
   const classes = useStyles();
 
   return (
