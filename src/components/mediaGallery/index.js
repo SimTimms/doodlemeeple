@@ -5,12 +5,16 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 
 export function MediaGallery({ items }) {
+  const seedID = Math.floor(Math.random(1000));
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <GridList cellHeight={160} className={classes.gridList} cols={3}>
-        {items.map(tile => (
-          <GridListTile key={tile.img} cols={tile.cols || 1}>
+        {items.map((tile, index) => (
+          <GridListTile
+            key={`${tile.img}_${seedID}_${index}`}
+            cols={tile.cols || 1}
+          >
             <img src={tile.img} alt={tile.title} />
           </GridListTile>
         ))}

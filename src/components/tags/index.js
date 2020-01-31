@@ -7,7 +7,9 @@ export function TagsWidget({ tags }) {
   return (
     <div className={classes.root}>
       {tags.map((tag, index) => (
-        <div className={classes.tag}>{tag}</div>
+        <div className={classes.tag} key={`tag_${index}`}>
+          {tag}
+        </div>
       ))}
 
       <div className={classes.tagAdd}>

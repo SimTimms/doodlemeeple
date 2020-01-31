@@ -5,11 +5,11 @@ import boxes from 'src/assets/boxes.jpg';
 import smithy from 'src/assets/smithy.jpg';
 
 export const projectObject = {
-  id: 'ID123',
+  id: 'ID122',
   primaryImage: heromaster,
   projectName: 'Hero Master',
   projectSummary:
-    ' Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
+    ' Lizards are a widespread group of squamate reptiles, with over 6,000 species,  Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
   projectFiles: ['something.txt', 'something.pdf'],
   invites: [
     {
@@ -43,11 +43,10 @@ export const projectObject = {
 };
 
 export const projectObjectThree = {
-  id: 'ID123',
+  id: 'ID124',
   primaryImage: boxes,
   projectName: 'Hero Master',
-  projectSummary:
-    ' Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
+  projectSummary: ' Lizards are a widespread group of squamate reptiles',
   projectFiles: ['something.txt', 'something.pdf'],
   invites: [
     {

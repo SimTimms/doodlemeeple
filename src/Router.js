@@ -7,11 +7,11 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/app/:page" render={props => <AppLayout {...props} />} />
         <Route
-          path="/app/:page/:projectId"
+          path="/app/:page/:pathParam?"
           render={props => <AppLayout {...props} />}
         />
+
         <Route path="/about">
           <AboutLayoutFrame />
         </Route>

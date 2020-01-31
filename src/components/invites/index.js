@@ -9,6 +9,7 @@ export function InvitesWidget({ invites }) {
     <div className={classes.root}>
       {invites.map((invite, index) => (
         <CardMedia
+          key={`cardmedia_${index}`}
           className={classes.profileImg}
           component="img"
           alt="Profile Photo"

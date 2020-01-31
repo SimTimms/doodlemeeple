@@ -7,6 +7,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
 import { useStyles } from './styles';
+import Icon from '@material-ui/core/Icon';
 
 export function ProjectComponent({ project }) {
   const classes = useStyles();
@@ -26,6 +27,7 @@ export function ProjectComponent({ project }) {
             color="textSecondary"
             component="p"
             style={{ textAlign: 'center' }}
+            className={classes.cardSummary}
           >
             {project.projectSummary}
           </Typography>
@@ -37,6 +39,21 @@ export function ProjectComponent({ project }) {
           </Link>
         </CardContent>
       </div>
+    </Card>
+  );
+}
+
+export function EmptyProjectComponent() {
+  const classes = useStyles();
+  return (
+    <Card className={classes.card}>
+      <Link to={`/app/new-project`} className={classes.cardLink}>
+        <CardContent className={classes.cardContentCenter}>
+          <div className={classes.flexCenter}>
+            <Icon style={{ fontSize: 50, color: '#fff' }}>add_circle</Icon>
+          </div>
+        </CardContent>
+      </Link>
     </Card>
   );
 }

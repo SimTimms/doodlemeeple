@@ -12,7 +12,7 @@ export function FileGallery({ items }) {
   return (
     <div className={classes.root}>
       {items.map((tile, index) => (
-        <Card className={classes.card} variant="outlined">
+        <Card className={classes.card} variant="outlined" key={`card_${index}`}>
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
               {tile}

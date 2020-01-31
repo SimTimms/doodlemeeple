@@ -6,7 +6,10 @@ import {
   projectObjectTwo,
   projectObjectThree,
 } from 'src/testData/projects';
-import { ProjectComponent } from './components/projectComponent';
+import {
+  ProjectComponent,
+  EmptyProjectComponent,
+} from './components/projectComponent';
 import { useStyles } from './styles';
 
 export function Projects() {
@@ -25,8 +28,11 @@ export function Projects() {
         </Typography>
         <div className={classes.cardGrid}>
           {projectArray.map((project, index) => {
-            return <ProjectComponent project={project} />;
+            return (
+              <ProjectComponent key={`project_${index}`} project={project} />
+            );
           })}
+          <EmptyProjectComponent key={`project_empty`} />
         </div>
       </div>
     </Slide>

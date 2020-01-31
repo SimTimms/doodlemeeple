@@ -19,7 +19,14 @@ import { Community } from './views/Community';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('home');
+
   const pageJump = props.match ? props.match.params.page : null;
+  //TODO: I guess this is proper dirty
+  const pathParam = props.match
+    ? props.match.params.pathParam
+      ? props.match.params.pathParam
+      : null
+    : null;
 
   if (pageJump !== page) {
     setPage(pageJump);
@@ -73,7 +80,7 @@ function AppLayout(props) {
             ) : page === 'portfolio' ? (
               <Portfolio />
             ) : page === 'project' ? (
-              <Project params={props.match.params} />
+              <Project projectId={pathParam} />
             ) : null}
           </div>
         </ContentTop>
