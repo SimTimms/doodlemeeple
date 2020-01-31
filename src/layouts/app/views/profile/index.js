@@ -103,7 +103,7 @@ export function Profile() {
             Lizards are a widespread group of squamate reptiles, with over 6,000
             species, ranging across all continents except Antarctica
           </Typography>
-          <MediaGallery />
+          <MediaGallery  items={items}/>
         </CardContent>
       </Card>
     </Slide>
