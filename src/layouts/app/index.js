@@ -11,6 +11,7 @@ import { Profile } from './views/profile';
 import { Account } from './views/Account';
 import { Invites } from './views/invites';
 import { Project } from './views/project';
+import { NewProject } from './views/newProject';
 import { Jobs } from './views/Jobs';
 import { Messages } from './views/Messages';
 import { Portfolio } from './views/Portfolio';
@@ -81,6 +82,8 @@ function AppLayout(props) {
               <Portfolio />
             ) : page === 'project' ? (
               <Project projectId={pathParam} />
+            ) : page === 'new-project' ? (
+              <NewProject />
             ) : null}
           </div>
         </ContentTop>

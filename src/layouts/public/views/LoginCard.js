@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { Form, FormInput } from '../../../components/form';
+import { Form, FormInput } from 'src/components/form';
 import { styles } from './styles';
 import ActionButton from '../components';
 import Slide from '@material-ui/core/Slide';

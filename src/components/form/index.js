@@ -23,6 +23,7 @@ export function Form(props) {
 const StyledTextField = withStyles({
   root: {
     margin: 3,
+    width: '100%',
   },
 })(TextField);
 
