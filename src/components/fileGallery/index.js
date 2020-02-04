@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-export function FileGallery({ items }) {
+export function FileGallery({ items, files, setFiles }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -35,7 +35,15 @@ export function FileGallery({ items }) {
           padding: 10,
         }}
       >
-        <Icon style={{ fontSize: 50, color: '#fff' }}>add_circle</Icon>
+        <Icon
+          style={{ fontSize: 50, color: '#fff' }}
+          onClick={() => {
+            const newArr = [...files, 'New.txt'];
+            setFiles(newArr);
+          }}
+        >
+          add_circle
+        </Icon>
       </div>
     </div>
   );

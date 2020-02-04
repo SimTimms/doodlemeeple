@@ -3,10 +3,12 @@ import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import map from 'src/assets/map.jpg';
 
-export function MediaGallery({ items }) {
+export function MediaGallery({ items, sketches, setSketches }) {
   const seedID = Math.floor(Math.random());
   const classes = useStyles();
+
   return (
     <div className={classes.root}>
       <GridList cellHeight={160} className={classes.gridList} cols={3}>
@@ -28,7 +30,23 @@ export function MediaGallery({ items }) {
               alignItems: 'center ',
             }}
           >
-            <Icon style={{ fontSize: 50, color: '#fff' }}>add_circle</Icon>
+            <Icon
+              style={{ fontSize: 50, color: '#fff' }}
+              onClick={() => {
+                const newArr = [
+                  ...sketches,
+                  {
+                    img: map,
+                    title: 'Image',
+                    author: 'author',
+                    cols: 1,
+                  },
+                ];
+                setSketches(newArr);
+              }}
+            >
+              add_circle
+            </Icon>
           </div>
         </GridListTile>
       </GridList>

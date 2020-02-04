@@ -21,6 +21,9 @@ export function NewProject() {
   const [tags, setTags] = React.useState(null);
   const [about, setAbout] = React.useState(null);
   const [sketches, setSketches] = React.useState(null);
+  const [files, setFiles] = React.useState(null);
+  const [budget, setBudget] = React.useState(null);
+  const [deadline, setDeadline] = React.useState(null);
 
   const project = {
     id: 'ID126',
@@ -86,6 +89,7 @@ export function NewProject() {
           <div>
             <Divider />
             <CardContent>
+              <GalleryHeader title="About" />
               <ProjectComponent
                 fieldValue={about}
                 setFieldValue={setAbout}
@@ -99,53 +103,52 @@ export function NewProject() {
           <div>
             <Divider />
             <CardContent>
-              <GalleryHeader title="Sketches" />
-              <MediaGallery items={sketches} />
+              <GalleryHeader title="Gallery" />
+              <MediaGallery
+                items={sketches}
+                sketches={sketches}
+                setSketches={setSketches}
+              />
             </CardContent>
           </div>
         ) : null}
-        {project.projectFiles ? (
+        {files ? (
           <div>
             <Divider />
             <CardContent>
               <GalleryHeader title="Files" />
-              <FileGallery items={project.projectFiles} />
+              <FileGallery items={files} setFiles={setFiles} files={files} />
             </CardContent>
           </div>
         ) : null}
-        {project.budget ? (
+        {budget ? (
           <div>
             <Divider />
             <CardContent>
               <GalleryHeader title="Budget" />
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                gutterBottom
-              >
-                {project.budget}
-              </Typography>
+              <ProjectComponent
+                fieldValue={budget}
+                setFieldValue={setBudget}
+                title="Budget"
+                width={'100%'}
+              />
             </CardContent>
           </div>
         ) : null}
-        {project.deadline ? (
+        {deadline ? (
           <div>
             <Divider />
             <CardContent>
               <GalleryHeader title="Deadline" />
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                gutterBottom
-              >
-                {project.deadline}
-              </Typography>
+              <ProjectComponent
+                fieldValue={deadline}
+                setFieldValue={setDeadline}
+                title="Deadline"
+                width={'100%'}
+              />
             </CardContent>
           </div>
         ) : null}
-
         <Divider />
         <CardContent
           style={{
@@ -161,11 +164,29 @@ export function NewProject() {
                 setTags([]);
               } else if (!about) {
                 setAbout(' ');
+              } else if (!sketches) {
+                setSketches([]);
+              } else if (!files) {
+                setFiles([]);
+              } else if (!budget) {
+                setBudget(' ');
+              } else if (!deadline) {
+                setDeadline(' ');
               }
             }}
           >
             add_circle
           </Icon>
+        </CardContent>
+        <Divider style={{ margin: '10px 0 0 0' }} />
+        <CardContent
+          style={{
+            background: '#ddd',
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <Icon style={{ fontSize: 50, color: '#fff' }}>chevron_right</Icon>
         </CardContent>
       </Card>
     </Slide>
