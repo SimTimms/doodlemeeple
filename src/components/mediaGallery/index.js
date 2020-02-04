@@ -5,7 +5,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 
 export function MediaGallery({ items }) {
-  const seedID = Math.floor(Math.random(1000));
+  const seedID = Math.floor(Math.random());
   const classes = useStyles();
   return (
     <div className={classes.root}>

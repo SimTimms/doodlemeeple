@@ -2,25 +2,56 @@ import React from 'react';
 import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
 import CardMedia from '@material-ui/core/CardMedia';
+import tim from 'src/assets/tim.jpg';
 
-export function InvitesWidget({ invites }) {
+export function InvitesWidget({ invites, setInvite }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       {invites.map((invite, index) => (
-        <CardMedia
-          key={`cardmedia_${index}`}
-          className={classes.profileImg}
-          component="img"
-          alt="Profile Photo"
-          image={invite.profileImg}
-          title="Profile Photo"
-        />
+        <div className={classes.inviteMain}>
+          <CardMedia
+            key={`cardmedia_${index}`}
+            className={classes.profileImg}
+            component="img"
+            alt="Profile Photo"
+            image={invite.profileImg}
+            title="Profile Photo"
+          />
+          <Icon
+            className={classes.inviteRemove}
+            onClick={() => {
+              const newInviteArr = invites.filter(
+                item => item.id !== invite.id,
+              );
+              setInvite(newInviteArr);
+            }}
+          >
+            close_circle
+          </Icon>
+        </div>
       ))}
 
-      <div className={classes.inviteAdd}>
-        <Icon style={{ fontSize: 50, color: '#fff' }}>add_circle</Icon>
-      </div>
+      {invites.length < 5 && (
+        <div className={classes.inviteAdd}>
+          <Icon
+            style={{ fontSize: 50, color: '#fff' }}
+            onClick={() => {
+              const newInviteArr = [
+                ...invites,
+                {
+                  id: Math.floor(Math.random() * 100),
+                  profileImg: tim,
+                  name: 'Tim Simms',
+                },
+              ];
+              setInvite(newInviteArr);
+            }}
+          >
+            add_circle
+          </Icon>
+        </div>
+      )}
     </div>
   );
 }

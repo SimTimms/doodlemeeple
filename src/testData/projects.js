@@ -13,10 +13,12 @@ export const projectObject = {
   projectFiles: ['something.txt', 'something.pdf'],
   invites: [
     {
+      id: 1,
       profileImg: tim,
       name: 'Tim Simms',
     },
     {
+      id: 2,
       profileImg: tim,
       name: 'Tim Simms',
     },
@@ -50,10 +52,12 @@ export const projectObjectThree = {
   projectFiles: ['something.txt', 'something.pdf'],
   invites: [
     {
+      id: 1,
       profileImg: tim,
       name: 'Tim Simms',
     },
     {
+      id: 2,
       profileImg: tim,
       name: 'Tim Simms',
     },
@@ -88,10 +92,12 @@ export const projectObjectTwo = {
   projectFiles: ['something.txt', 'something.pdf'],
   invites: [
     {
+      id: 1,
       profileImg: tim,
       name: 'Tim Simms',
     },
     {
+      id: 2,
       profileImg: tim,
       name: 'Tim Simms',
     },

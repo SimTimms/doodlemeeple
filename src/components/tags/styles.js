@@ -9,6 +9,15 @@ export const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     margin: '0 0 10px 0',
   },
+  tagMain: { position: 'relative', margin: '0 10px 0 0' },
+  tagRemove: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    borderRadius: '50%',
+    background: '#ddd',
+    color: '#fff',
+  },
   tag: {
     borderRadius: 10,
     height: 60,

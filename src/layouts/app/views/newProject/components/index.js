@@ -57,7 +57,7 @@ export function GalleryHeader({ title }) {
   const classes = useStyles();
   return (
     <div className={classes.galleryWrapper}>
-      <Typography gutterBottom variant="h5" component="h2">
+      <Typography gutterBottom variant="h5">
         {title}
       </Typography>
       <Icon className={classes.galleryIcon}>edit</Icon>
