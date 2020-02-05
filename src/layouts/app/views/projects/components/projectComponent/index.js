@@ -26,7 +26,7 @@ export function ProjectComponent({ project }) {
             variant="body2"
             color="textSecondary"
             component="p"
-            style={{ textAlign: 'center' }}
+            style={{ textAlign: 'center', width: '100%' }}
             className={classes.cardSummary}
           >
             {project.projectSummary}

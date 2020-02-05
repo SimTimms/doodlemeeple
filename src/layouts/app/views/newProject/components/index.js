@@ -4,7 +4,7 @@ import Icon from '@material-ui/core/Icon';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useStyles } from './styles';
 import smithy from 'src/assets/smithy.jpg';
-import { Form, FormInput } from '../../../../../components/form';
+import { FormInput } from '../../../../../components/form';
 
 export function ProjectHeader({ profile, setPrimaryImage, primaryImage }) {
   const classes = useStyles();

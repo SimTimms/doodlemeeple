@@ -7,15 +7,15 @@ import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import { useStyles } from './styles';
 import { ProjectComponent, ProjectHeader, GalleryHeader } from './components';
+import { Link } from 'react-router-dom';
 import ActionButton from '../../../../components/buttons';
 import { MediaGallery } from '../../../../components/mediaGallery';
 import { FileGallery } from '../../../../components/fileGallery';
 import { InvitesWidget } from '../../../../components/invites';
 import { TagsWidget } from '../../../../components/tags';
 import tim from '../../../../assets/tim.jpg';
-import { Link } from 'react-router-dom';
 
-export function NewProject({ gamesTemp, setGamesTestData }) {
+export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [title, setTitle] = React.useState('');
@@ -100,6 +100,7 @@ export function NewProject({ gamesTemp, setGamesTestData }) {
                 items={sketches}
                 sketches={sketches}
                 setSketches={setSketches}
+                edit={true}
               />
             </CardContent>
           </div>
@@ -109,7 +110,12 @@ export function NewProject({ gamesTemp, setGamesTestData }) {
             <Divider />
             <CardContent>
               <GalleryHeader title="Files" />
-              <FileGallery items={files} setFiles={setFiles} files={files} />
+              <FileGallery
+                items={files}
+                setFiles={setFiles}
+                files={files}
+                edit={true}
+              />
             </CardContent>
           </div>
         ) : null}

@@ -17,6 +17,9 @@ import { Messages } from './views/Messages';
 import { Portfolio } from './views/Portfolio';
 import { Projects } from './views/projects';
 import { Community } from './views/Community';
+import { Link } from 'react-router-dom';
+import ActionButton from '../../components/buttons';
+import { CardActionArea } from '../../components/wrappers';
 import {
   projectObject,
   projectObjectTwo,
@@ -90,21 +93,33 @@ function AppLayout(props) {
             ) : page === 'portfolio' ? (
               <Portfolio />
             ) : page === 'edit-project' ? (
-              <Project
+              <NewProject
                 projectId={pathParam}
                 gamesTemp={gamesTestData}
-                actionSet="edit"
-                edit={true}
+                setGamesTestData={setGamesTestData}
               />
             ) : page === 'view-project' ? (
               <Project
                 projectId={pathParam}
                 gamesTemp={gamesTestData}
-                actionSet="invite"
+                actionSet={
+                  <CardActionArea>
+                    <Link to="/app/invites">
+                      <ActionButton name="Back" />
+                    </Link>
+                    <Link to={`/app/message-invite/${pathParam}`}>
+                      <ActionButton name="Message" />
+                    </Link>
+                    <Link to="/app/accept">
+                      <ActionButton name="Accept" />
+                    </Link>
+                  </CardActionArea>
+                }
                 edit={false}
               />
             ) : page === 'new-project' ? (
               <NewProject
+                projectId={null}
                 gamesTemp={gamesTestData}
                 setGamesTestData={setGamesTestData}
               />

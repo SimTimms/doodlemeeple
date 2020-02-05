@@ -6,12 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import { useStyles } from './styles';
 import { ProfileHeader, ProjectHeader, GalleryHeader } from './components';
-import { MediaGallery } from '../../../../../src/components/mediaGallery';
-import { FileGallery } from '../../../../../src/components/fileGallery';
-import { InvitesWidget } from '../../../../../src/components/invites';
-import { TagsWidget } from '../../../../../src/components/tags';
-import CardActions from '@material-ui/core/CardActions';
-
+import { MediaGallery } from '../../../../components/mediaGallery';
+import { FileGallery } from '../../../../components/fileGallery';
+import { InvitesWidget } from '../../../../components/invites';
+import { TagsWidget } from '../../../../components/tags';
 export function Project({ projectId, gamesTemp, actionSet, edit }) {
   const classes = useStyles();
 
@@ -137,9 +135,9 @@ export function Project({ projectId, gamesTemp, actionSet, edit }) {
                 {project.deadline}
               </Typography>
             </CardContent>
-            <CardActions> </CardActions>
           </div>
         )}
+        {actionSet}
       </Card>
     </Slide>
   );
