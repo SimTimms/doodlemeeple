@@ -32,9 +32,12 @@ export function ProjectComponent({ project }) {
             {project.projectSummary}
           </Typography>
           <Divider style={{ margin: 10, width: '100%' }} />
-          <Link to={`/app/project/${project.id}`} className={classes.cardLink}>
+          <Link
+            to={`/app/edit-project/${project.id}`}
+            className={classes.cardLink}
+          >
             <Button variant="contained" color="primary">
-              View Project
+              Edit Project
             </Button>
           </Link>
         </CardContent>

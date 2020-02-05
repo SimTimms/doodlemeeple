@@ -6,23 +6,31 @@ import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import { useStyles } from './styles';
 import { ProfileHeader, ProjectHeader, GalleryHeader } from './components';
-import { MediaGallery } from 'src/components/mediaGallery';
-import { FileGallery } from 'src/components/fileGallery';
-import { InvitesWidget } from 'src/components/invites';
-import { TagsWidget } from 'src/components/tags';
-import {
-  projectObject,
-  projectObjectTwo,
-  projectObjectThree,
-} from 'src/testData/projects';
+import { MediaGallery } from '../../../../../src/components/mediaGallery';
+import { FileGallery } from '../../../../../src/components/fileGallery';
+import { InvitesWidget } from '../../../../../src/components/invites';
+import { TagsWidget } from '../../../../../src/components/tags';
+import CardActions from '@material-ui/core/CardActions';
 
-export function Project({ projectId }) {
+export function Project({ projectId, gamesTemp, actionSet, edit }) {
   const classes = useStyles();
 
   //TODO move to DB driven
-  const projectArray = [projectObject, projectObjectTwo, projectObjectThree];
+  const projectArray = gamesTemp;
   const project = projectArray.filter(project => project.id === projectId)[0];
-
+  if (!project) {
+    return (
+      <Slide direction="left" in={true} mountOnEnter unmountOnExit>
+        <Card className={classes.card}>
+          <CardContent>
+            <Typography color="textSecondary" component="p">
+              We couldn't find that project
+            </Typography>
+          </CardContent>
+        </Card>
+      </Slide>
+    );
+  }
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <Card className={classes.card}>
@@ -30,85 +38,108 @@ export function Project({ projectId }) {
         <CardContent>
           <ProfileHeader title={project.projectName} user={project.user.name} />
           <Typography color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {project.projectSummary}
           </Typography>
         </CardContent>
-        <Divider />
-        <CardContent>
-          <GalleryHeader title="Tags" />
-          <TagsWidget tags={project.tags} />
-        </CardContent>
-        <Divider />
-        <CardContent>
-          <GalleryHeader title="Invites" />
-          <InvitesWidget invites={project.invites} />
-        </CardContent>
-        <Divider />
-        <CardContent>
-          <GalleryHeader title="About this project" />
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            gutterBottom
-          >
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-        <Divider />
-        <CardContent>
-          <GalleryHeader title="Sketches" />
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            gutterBottom
-          >
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-          <MediaGallery items={project.projectSketches} />
-        </CardContent>
-        <Divider />
-        <CardContent>
-          <GalleryHeader title="Files" />
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            gutterBottom
-          >
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-          <FileGallery items={project.projectFiles} />
-        </CardContent>
-        <CardContent>
-          <GalleryHeader title="Budget" />
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            gutterBottom
-          >
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-        <CardContent>
-          <GalleryHeader title="Deadline" />
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            gutterBottom
-          >
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
+        {project.tags && (
+          <div>
+            <Divider />
+            <CardContent>
+              <GalleryHeader title="Tags" />
+              <TagsWidget tags={project.tags} setTags={null} edit={edit} />
+            </CardContent>
+          </div>
+        )}
+        {project.invites && edit && (
+          <div>
+            <Divider />
+            <CardContent>
+              <GalleryHeader title="Invites" />
+              <InvitesWidget
+                invites={project.invites}
+                setInvite={null}
+                edit={edit}
+              />
+            </CardContent>
+          </div>
+        )}
+        {project.about && (
+          <div>
+            <Divider />
+            <CardContent>
+              <GalleryHeader title="About this project" />
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                gutterBottom
+              >
+                {project.about}
+              </Typography>
+            </CardContent>
+          </div>
+        )}
+        {project.projectSketches && (
+          <div>
+            <Divider />
+            <CardContent>
+              <GalleryHeader title="Gallery" />
+              <MediaGallery
+                items={project.projectSketches}
+                sketches={null}
+                setSketches={null}
+                edit={edit}
+              />
+            </CardContent>
+          </div>
+        )}
+        {project.projectFiles && (
+          <div>
+            <Divider />
+            <CardContent>
+              <GalleryHeader title="Files" />
+              <FileGallery
+                items={project.projectFiles}
+                files={null}
+                setFiles={null}
+                edit={edit}
+              />
+            </CardContent>
+          </div>
+        )}
+        {project.budget && (
+          <div>
+            <Divider />
+            <CardContent>
+              <GalleryHeader title="Budget" />
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                gutterBottom
+              >
+                {project.budget}
+              </Typography>
+            </CardContent>
+          </div>
+        )}
+        {project.deadline && (
+          <div>
+            <Divider />
+            <CardContent>
+              <GalleryHeader title="Deadline" />
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                gutterBottom
+              >
+                {project.deadline}
+              </Typography>
+            </CardContent>
+            <CardActions> </CardActions>
+          </div>
+        )}
       </Card>
     </Slide>
   );

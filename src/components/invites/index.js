@@ -4,35 +4,37 @@ import { useStyles } from './styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import tim from 'src/assets/tim.jpg';
 
-export function InvitesWidget({ invites, setInvite }) {
+export function InvitesWidget({ invites, setInvite, edit }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       {invites.map((invite, index) => (
-        <div className={classes.inviteMain}>
+        <div className={classes.inviteMain} key={`cardmedia_${index}`}>
           <CardMedia
-            key={`cardmedia_${index}`}
             className={classes.profileImg}
             component="img"
             alt="Profile Photo"
             image={invite.profileImg}
             title="Profile Photo"
           />
-          <Icon
-            className={classes.inviteRemove}
-            onClick={() => {
-              const newInviteArr = invites.filter(
-                item => item.id !== invite.id,
-              );
-              setInvite(newInviteArr);
-            }}
-          >
-            close_circle
-          </Icon>
+
+          {edit && (
+            <Icon
+              className={classes.inviteRemove}
+              onClick={() => {
+                const newInviteArr = invites.filter(
+                  item => item.id !== invite.id,
+                );
+                setInvite(newInviteArr);
+              }}
+            >
+              close_circle
+            </Icon>
+          )}
         </div>
       ))}
 
-      {invites.length < 5 && (
+      {invites.length < 5 && edit && (
         <div className={classes.inviteAdd}>
           <Icon
             style={{ fontSize: 50, color: '#fff' }}

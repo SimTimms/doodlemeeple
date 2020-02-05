@@ -50,7 +50,6 @@ export function GalleryHeader({ title }) {
       <Typography gutterBottom variant="h5" component="h2">
         {title}
       </Typography>
-      <Icon style={{ fontSize: 20, color: '#ddd' }}>edit</Icon>
     </div>
   );
 }
@@ -68,7 +67,6 @@ export function ProfileHeader({ title, user }) {
       <Typography gutterBottom variant="h5" component="h2">
         {title} <span style={{ color: '#aaa' }}>by {user}</span>
       </Typography>
-      <Icon style={{ fontSize: 20, color: '#ddd' }}>edit</Icon>
     </div>
   );
 }

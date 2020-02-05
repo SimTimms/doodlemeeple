@@ -4,7 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { styles } from './styles';
-import ActionButton from '../components';
+import ActionButton from '../../../../../components/buttons';
 import { Link } from 'react-router-dom';
 import Slide from '@material-ui/core/Slide';
 

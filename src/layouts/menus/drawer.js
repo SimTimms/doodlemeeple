@@ -49,8 +49,6 @@ export function AppDrawer(props) {
           { name: 'Jobs', icon: <MailIcon />, link: '/app/jobs' },
           { name: 'My Games', icon: <MailIcon />, link: '/app/projects' },
           { name: 'Messages', icon: <MailIcon />, link: '/app/messages' },
-          { name: 'Community', icon: <MailIcon />, link: '/app/community' },
-          { name: 'Portfolio', icon: <MailIcon />, link: '/app/portfolio' },
         ].map((text, index) => (
           <Link to={text.link} className={classes.link} key={text.name}>
             <ListItem button>

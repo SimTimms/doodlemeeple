@@ -4,17 +4,16 @@ import Icon from '@material-ui/core/Icon';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useStyles } from './styles';
 import smithy from 'src/assets/smithy.jpg';
-import { Form, FormInput } from 'src/components/form';
+import { Form, FormInput } from '../../../../../components/form';
 
-export function ProjectHeader({ profile }) {
+export function ProjectHeader({ profile, setPrimaryImage, primaryImage }) {
   const classes = useStyles();
-  const [image, setImage] = React.useState('');
 
-  const addImage = !image ? (
+  const addImage = !primaryImage ? (
     <Icon
       className={classes.imageIcon}
       onClick={() => {
-        setImage(smithy);
+        setPrimaryImage(smithy);
       }}
     >
       add_photo_alternate
@@ -23,7 +22,7 @@ export function ProjectHeader({ profile }) {
     <Icon
       className={classes.imageIcon}
       onClick={() => {
-        setImage(smithy);
+        setPrimaryImage(smithy);
       }}
     >
       add_photo_alternate
@@ -33,7 +32,7 @@ export function ProjectHeader({ profile }) {
   return (
     <div
       className={classes.wrapper}
-      style={{ backgroundImage: `url(${image})` }}
+      style={{ backgroundImage: `url(${primaryImage})` }}
     >
       {addImage}
       <div

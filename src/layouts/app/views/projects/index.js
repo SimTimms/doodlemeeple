@@ -2,19 +2,15 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import {
-  projectObject,
-  projectObjectTwo,
-  projectObjectThree,
-} from 'src/testData/projects';
-import {
   ProjectComponent,
   EmptyProjectComponent,
 } from './components/projectComponent';
 import { useStyles } from './styles';
 
-export function Projects() {
+export function Projects({ gamesTemp }) {
   const classes = useStyles();
-  const projectArray = [projectObject, projectObjectTwo, projectObjectThree];
+  console.log(gamesTemp);
+  const projectArray = gamesTemp;
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>

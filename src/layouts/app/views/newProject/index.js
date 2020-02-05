@@ -7,15 +7,19 @@ import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import { useStyles } from './styles';
 import { ProjectComponent, ProjectHeader, GalleryHeader } from './components';
-import { MediaGallery } from 'src/components/mediaGallery';
-import { FileGallery } from 'src/components/fileGallery';
-import { InvitesWidget } from 'src/components/invites';
-import { TagsWidget } from 'src/components/tags';
-import tim from 'src/assets/tim.jpg';
+import ActionButton from '../../../../components/buttons';
+import { MediaGallery } from '../../../../components/mediaGallery';
+import { FileGallery } from '../../../../components/fileGallery';
+import { InvitesWidget } from '../../../../components/invites';
+import { TagsWidget } from '../../../../components/tags';
+import tim from '../../../../assets/tim.jpg';
+import { Link } from 'react-router-dom';
 
-export function NewProject() {
+export function NewProject({ gamesTemp, setGamesTestData }) {
   const classes = useStyles();
+  const [page, setPage] = React.useState(0);
   const [title, setTitle] = React.useState('');
+  const [primaryImage, setPrimaryImage] = React.useState(null);
   const [summary, setSummary] = React.useState('');
   const [invites, setInvite] = React.useState([]);
   const [tags, setTags] = React.useState(null);
@@ -25,25 +29,12 @@ export function NewProject() {
   const [budget, setBudget] = React.useState(null);
   const [deadline, setDeadline] = React.useState(null);
 
-  const project = {
-    id: 'ID126',
-    primaryImage: null,
-    projectName: '',
-    projectSummary: '',
-    projectFiles: null,
-    invites: [],
-    tags: null,
-    projectSketches: null,
-    about: null,
-    user: {
-      profileImg: tim,
-      name: 'Tim Simms',
-    },
-    budget: null,
-    deadline: null,
+  const user = {
+    profileImg: tim,
+    name: 'Tim Simms',
   };
 
-  return (
+  return page === 0 ? (
     <Slide
       direction="left"
       in={true}
@@ -52,7 +43,11 @@ export function NewProject() {
       style={{ width: 700 }}
     >
       <Card className={classes.card}>
-        <ProjectHeader profile={project.user} />
+        <ProjectHeader
+          profile={user}
+          primaryImage={primaryImage}
+          setPrimaryImage={setPrimaryImage}
+        />
         <CardContent>
           <ProjectComponent
             fieldValue={title}
@@ -66,14 +61,11 @@ export function NewProject() {
             title="Description"
             width={'100%'}
           />
-          <Typography color="textSecondary" component="p">
-            {project.projectSummary}
-          </Typography>
         </CardContent>
         <Divider />
         <CardContent>
           <GalleryHeader title="Invites" />
-          <InvitesWidget invites={invites} setInvite={setInvite} />
+          <InvitesWidget invites={invites} setInvite={setInvite} edit={true} />
         </CardContent>
         <Divider />
         {tags ? (
@@ -81,7 +73,7 @@ export function NewProject() {
             <Divider />
             <CardContent>
               <GalleryHeader title="Tags" />
-              <TagsWidget tags={tags} setTags={setTags} />
+              <TagsWidget tags={tags} setTags={setTags} edit={true} />
             </CardContent>
           </div>
         ) : null}
@@ -155,39 +147,88 @@ export function NewProject() {
             background: '#ddd',
             display: 'flex',
             justifyContent: 'center',
+            alignItems: 'center',
+            cursor: 'pointer',
+          }}
+          onClick={() => {
+            if (!tags) {
+              setTags([]);
+            } else if (!about) {
+              setAbout(' ');
+            } else if (!sketches) {
+              setSketches([]);
+            } else if (!files) {
+              setFiles([]);
+            } else if (!budget) {
+              setBudget(' ');
+            } else if (!deadline) {
+              setDeadline(' ');
+            }
           }}
         >
-          <Icon
-            style={{ fontSize: 50, color: '#fff' }}
-            onClick={() => {
-              if (!tags) {
-                setTags([]);
-              } else if (!about) {
-                setAbout(' ');
-              } else if (!sketches) {
-                setSketches([]);
-              } else if (!files) {
-                setFiles([]);
-              } else if (!budget) {
-                setBudget(' ');
-              } else if (!deadline) {
-                setDeadline(' ');
-              }
-            }}
+          <Icon style={{ fontSize: 50, color: '#fff' }}>add_circle</Icon>
+          <Typography
+            color="textSecondary"
+            component="p"
+            style={{ fontSize: 24, color: '#fff', marginLeft: 10 }}
           >
-            add_circle
-          </Icon>
+            Add Section
+          </Typography>
         </CardContent>
         <Divider style={{ margin: '10px 0 0 0' }} />
         <CardContent
           style={{
-            background: '#ddd',
             display: 'flex',
-            justifyContent: 'center',
+            justifyContent: 'space-around',
+            alignItems: 'center',
           }}
         >
-          <Icon style={{ fontSize: 50, color: '#fff' }}>chevron_right</Icon>
+          <Link to="/app/projects">
+            <ActionButton name="Cancel" />
+          </Link>
+
+          <ActionButton
+            name="Continue"
+            onClick={() => {
+              const newArr = [
+                ...gamesTemp,
+                {
+                  id: 'ID128',
+                  primaryImage,
+                  projectName: title,
+                  projectSummary: summary,
+                  projectFiles: files,
+                  invites: invites,
+                  tags: tags,
+                  projectSketches: sketches,
+                  user: {
+                    profileImg: tim,
+                    name: 'Tim Simms',
+                  },
+                },
+              ];
+              setGamesTestData(newArr);
+              setPage(1);
+            }}
+          />
         </CardContent>
+      </Card>
+    </Slide>
+  ) : (
+    <Slide
+      direction="left"
+      in={true}
+      mountOnEnter
+      unmountOnExit
+      style={{ width: 700 }}
+    >
+      <Card className={classes.card}>
+        <Typography color="textSecondary" component="p">
+          All Done
+        </Typography>
+        <Link to="/app/projects">
+          <ActionButton name="Back to Projects" />
+        </Link>
       </Card>
     </Slide>
   );

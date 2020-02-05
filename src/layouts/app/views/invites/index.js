@@ -57,7 +57,7 @@ export function Invites() {
               </Typography>
               <Divider style={{ margin: 10 }} />
               <Link
-                to={`/app/project/${projectId}`}
+                to={`/app/view-project/${projectId}`}
                 style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
               >
                 <Button variant="contained" color="primary">

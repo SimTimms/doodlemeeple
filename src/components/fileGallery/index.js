@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-export function FileGallery({ items, files, setFiles }) {
+export function FileGallery({ items, files, setFiles, edit }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -25,26 +25,28 @@ export function FileGallery({ items, files, setFiles }) {
         </Card>
       ))}
 
-      <div
-        style={{
-          height: '100%',
-          background: '#ddd',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center ',
-          padding: 10,
-        }}
-      >
-        <Icon
-          style={{ fontSize: 50, color: '#fff' }}
-          onClick={() => {
-            const newArr = [...files, 'New.txt'];
-            setFiles(newArr);
+      {edit && (
+        <div
+          style={{
+            height: '100%',
+            background: '#ddd',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center ',
+            padding: 10,
           }}
         >
-          add_circle
-        </Icon>
-      </div>
+          <Icon
+            style={{ fontSize: 50, color: '#fff' }}
+            onClick={() => {
+              const newArr = [...files, 'New.txt'];
+              setFiles(newArr);
+            }}
+          >
+            add_circle
+          </Icon>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import SideBar from 'src/sidebars';
+import SideBar from '../../sidebars';
 import clsx from 'clsx';
 import { useStyles } from './styles';
-import { StyledNavBar, ContentTop } from 'src/components';
+import { StyledNavBar, ContentTop } from '../../components';
 import { AppMenu } from '../menus';
 import { AppDrawer } from '../menus/drawer';
 import { Dashboard } from './views/Dashboard';
@@ -17,10 +17,19 @@ import { Messages } from './views/Messages';
 import { Portfolio } from './views/Portfolio';
 import { Projects } from './views/projects';
 import { Community } from './views/Community';
+import {
+  projectObject,
+  projectObjectTwo,
+  projectObjectThree,
+} from '../../testData/projects';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('home');
-
+  const [gamesTestData, setGamesTestData] = React.useState([
+    projectObject,
+    projectObjectTwo,
+    projectObjectThree,
+  ]);
   const pageJump = props.match ? props.match.params.page : null;
   //TODO: I guess this is proper dirty
   const pathParam = props.match
@@ -73,17 +82,32 @@ function AppLayout(props) {
             ) : page === 'jobs' ? (
               <Jobs />
             ) : page === 'projects' ? (
-              <Projects />
+              <Projects gamesTemp={gamesTestData} />
             ) : page === 'messages' ? (
               <Messages />
             ) : page === 'community' ? (
               <Community />
             ) : page === 'portfolio' ? (
               <Portfolio />
-            ) : page === 'project' ? (
-              <Project projectId={pathParam} />
+            ) : page === 'edit-project' ? (
+              <Project
+                projectId={pathParam}
+                gamesTemp={gamesTestData}
+                actionSet="edit"
+                edit={true}
+              />
+            ) : page === 'view-project' ? (
+              <Project
+                projectId={pathParam}
+                gamesTemp={gamesTestData}
+                actionSet="invite"
+                edit={false}
+              />
             ) : page === 'new-project' ? (
-              <NewProject />
+              <NewProject
+                gamesTemp={gamesTestData}
+                setGamesTestData={setGamesTestData}
+              />
             ) : null}
           </div>
         </ContentTop>

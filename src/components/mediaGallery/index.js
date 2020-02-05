@@ -5,7 +5,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import map from 'src/assets/map.jpg';
 
-export function MediaGallery({ items, sketches, setSketches }) {
+export function MediaGallery({ items, sketches, setSketches, edit }) {
   const seedID = Math.floor(Math.random());
   const classes = useStyles();
 
@@ -20,35 +20,38 @@ export function MediaGallery({ items, sketches, setSketches }) {
             <img src={tile.img} alt={tile.title} />
           </GridListTile>
         ))}
-        <GridListTile key="add_tile" cols={1}>
-          <div
-            style={{
-              height: '100%',
-              background: '#ddd',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center ',
-            }}
-          >
-            <Icon
-              style={{ fontSize: 50, color: '#fff' }}
-              onClick={() => {
-                const newArr = [
-                  ...sketches,
-                  {
-                    img: map,
-                    title: 'Image',
-                    author: 'author',
-                    cols: 1,
-                  },
-                ];
-                setSketches(newArr);
+
+        {edit && (
+          <GridListTile key="add_tile" cols={1}>
+            <div
+              style={{
+                height: '100%',
+                background: '#ddd',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center ',
               }}
             >
-              add_circle
-            </Icon>
-          </div>
-        </GridListTile>
+              <Icon
+                style={{ fontSize: 50, color: '#fff' }}
+                onClick={() => {
+                  const newArr = [
+                    ...sketches,
+                    {
+                      img: map,
+                      title: 'Image',
+                      author: 'author',
+                      cols: 1,
+                    },
+                  ];
+                  setSketches(newArr);
+                }}
+              >
+                add_circle
+              </Icon>
+            </div>
+          </GridListTile>
+        )}
       </GridList>
     </div>
   );
