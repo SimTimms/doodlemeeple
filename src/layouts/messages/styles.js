@@ -1,32 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
+
 const drawerWidth = 240;
 
 export const useStyles = makeStyles(theme => ({
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  link: {
-    textDecoration: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    color: '#444',
-  },
-  icon: {
-    minWidth: 30,
-    borderRight: '1px solid #ddd',
-    marginRight: 10,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',

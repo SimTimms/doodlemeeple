@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { useStyles } from './styles';
 import { StyledNavBar, ContentTop } from '../../components';
 import { AppMenu } from '../menus';
-import { AppDrawer } from '../menus/drawer';
+import { AppDrawer } from '../menus/AppDrawer';
 import { Dashboard } from './views/Dashboard';
 import { Profile } from './views/profile';
 import { Account } from './views/Account';
@@ -46,7 +46,7 @@ function AppLayout(props) {
   }
 
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -107,8 +107,11 @@ function AppLayout(props) {
                     <Link to="/app/invites">
                       <ActionButton name="Back" />
                     </Link>
-                    <Link to={`/app/message-invite/${pathParam}`}>
+                    <Link to={`/messages/project/${pathParam}`}>
                       <ActionButton name="Message" />
+                    </Link>
+                    <Link to="/app/decline">
+                      <ActionButton name="Decline" />
                     </Link>
                     <Link to="/app/accept">
                       <ActionButton name="Accept" />

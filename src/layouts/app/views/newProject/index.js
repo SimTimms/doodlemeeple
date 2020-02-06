@@ -16,18 +16,21 @@ import { TagsWidget } from '../../../../components/tags';
 import tim from '../../../../assets/tim.jpg';
 
 export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
+  let project = gamesTemp.filter(project => project.id === projectId)[0];
+  if (!project) project = { projectName: null, invites: [] };
   const classes = useStyles();
+
   const [page, setPage] = React.useState(0);
-  const [title, setTitle] = React.useState('');
-  const [primaryImage, setPrimaryImage] = React.useState(null);
-  const [summary, setSummary] = React.useState('');
-  const [invites, setInvite] = React.useState([]);
-  const [tags, setTags] = React.useState(null);
-  const [about, setAbout] = React.useState(null);
-  const [sketches, setSketches] = React.useState(null);
-  const [files, setFiles] = React.useState(null);
-  const [budget, setBudget] = React.useState(null);
-  const [deadline, setDeadline] = React.useState(null);
+  const [title, setTitle] = React.useState(project.projectName);
+  const [primaryImage, setPrimaryImage] = React.useState(project.primaryImage);
+  const [summary, setSummary] = React.useState(project.projectSummary);
+  const [invites, setInvite] = React.useState(project.invites);
+  const [tags, setTags] = React.useState(project.tags);
+  const [about, setAbout] = React.useState(project.about);
+  const [sketches, setSketches] = React.useState(project.projectSketches);
+  const [files, setFiles] = React.useState(project.projectFiles);
+  const [budget, setBudget] = React.useState(project.budget);
+  const [deadline, setDeadline] = React.useState(project.deadline);
 
   const user = {
     profileImg: tim,

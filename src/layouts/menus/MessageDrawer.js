@@ -7,14 +7,14 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import Chat from '@material-ui/icons/Chat';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
 
-export function AppDrawer(props) {
+export function MessageDrawer(props) {
   const classes = useStyles();
   const { handleDrawerClose, open } = props;
   const theme = useTheme();
@@ -41,18 +41,16 @@ export function AppDrawer(props) {
       <Divider />
       <List>
         {[
-          { name: 'Home', icon: <InboxIcon />, link: '/' },
-          { name: 'Dashboard', icon: <InboxIcon />, link: '/app/dashboard' },
-          { name: 'Profile', icon: <MailIcon />, link: '/app/profile' },
-          { name: 'Account', icon: <MailIcon />, link: '/app/account' },
-          { name: 'Invites', icon: <MailIcon />, link: '/app/invites' },
-          { name: 'Jobs', icon: <MailIcon />, link: '/app/jobs' },
-          { name: 'My Games', icon: <MailIcon />, link: '/app/projects' },
-          { name: 'Messages', icon: <MailIcon />, link: '/app/messages' },
+          { name: 'Back', icon: <ChevronLeft />, link: '/app/dashboard' },
+          {
+            name: 'Conversations',
+            icon: <Chat />,
+            link: '/messages/conversations',
+          },
         ].map((text, index) => (
           <Link to={text.link} className={classes.link} key={text.name}>
             <ListItem button>
-              <ListItemIcon>{text.icon}</ListItemIcon>
+              <ListItemIcon className={classes.icon}>{text.icon}</ListItemIcon>
               <ListItemText primary={text.name} />
             </ListItem>
           </Link>
