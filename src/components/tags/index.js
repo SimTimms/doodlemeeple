@@ -43,3 +43,41 @@ export function TagsWidget({ tags, setTags, edit }) {
     </div>
   );
 }
+
+export function SelectTagsWidget({ tags, fieldTags, setTags, setFieldTags }) {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      {tags.map((tag, index) => {
+        const tagClass = tag.selected ? classes.tag : classes.tagSelected;
+
+        return (
+          <div
+            className={classes.tagMain}
+            key={`tag_${index}`}
+            onClick={() => {
+              //This might be overkill, it needs refactoring
+              const newTags = Object.assign([], tags);
+              newTags[index].selected
+                ? (newTags[index].selected = false)
+                : (newTags[index].selected = true);
+
+              let newFieldTags = Object.assign([], fieldTags);
+
+              newFieldTags.indexOf(tag.name) === -1
+                ? newFieldTags.push(tag.name)
+                : (newFieldTags = newFieldTags.filter(id => id !== tag.name));
+
+              setFieldTags(newFieldTags);
+              setTags(newTags);
+            }}
+          >
+            <div className={tagClass}>{tag.name}</div>
+            <Icon className={classes.tagSelect}>check_circle</Icon>
+          </div>
+        );
+      })}
+    </div>
+  );
+}

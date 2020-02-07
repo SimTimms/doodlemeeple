@@ -7,15 +7,13 @@ import { AppMenu } from '../menus';
 import { RolesDrawer } from '../menus/RolesDrawer';
 import { Dashboard } from './views/dashboard';
 import { CreateRole } from './views/createRole';
+import { Invites } from './views/invites';
+import { rolesArrayTemp } from '../../testData/roles';
 
-const rolesArrayTemp = [
-  { id: 'JOB123', title: 'Graphic Artist', summary: 'I need a graphic artist' },
-  { id: 'JOB124', title: 'Fantasy Artist', summary: 'I need a fantasy artist' },
-];
 function RolesLayout(props) {
   const [page, setPage] = React.useState('dashboard');
   const pageJump = props.match ? props.match.params.page : null;
-  const gameId = props.match
+  const paramId = props.match
     ? props.match.params.pathParam
       ? props.match.params.pathParam
       : null
@@ -53,9 +51,11 @@ function RolesLayout(props) {
         <ContentTop>
           <div>
             {page === 'dashboard' ? (
-              <Dashboard gameId={gameId} roles={rolesArrayTemp} />
+              <Dashboard gameId={paramId} roles={rolesArrayTemp} />
             ) : page === 'create-role' ? (
-              <CreateRole gameId={gameId} roles={rolesArrayTemp} />
+              <CreateRole gameId={paramId} />
+            ) : page === 'invites' ? (
+              <Invites roleId={paramId} />
             ) : null}
           </div>
         </ContentTop>
