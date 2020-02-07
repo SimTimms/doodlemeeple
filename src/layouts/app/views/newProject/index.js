@@ -17,10 +17,9 @@ import tim from '../../../../assets/tim.jpg';
 
 export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
   let project = gamesTemp.filter(project => project.id === projectId)[0];
-  if (!project) project = { projectName: null, invites: [] };
+  if (!project) project = { projectName: '', invites: [] };
   const classes = useStyles();
 
-  const [page, setPage] = React.useState(0);
   const [title, setTitle] = React.useState(project.projectName);
   const [primaryImage, setPrimaryImage] = React.useState(project.primaryImage);
   const [summary, setSummary] = React.useState(project.projectSummary);
@@ -36,8 +35,8 @@ export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
     profileImg: tim,
     name: 'Tim Simms',
   };
-
-  return page === 0 ? (
+  const newId = 'ID128';
+  return (
     <Slide
       direction="left"
       in={true}
@@ -65,12 +64,12 @@ export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
             width={'100%'}
           />
         </CardContent>
-        {/*
+
         <Divider />
         <CardContent>
           <GalleryHeader title="Invites" />
           <InvitesWidget invites={invites} setInvite={setInvite} edit={true} />
-        </CardContent>*/}
+        </CardContent>
         <Divider />
         {tags ? (
           <div>
@@ -198,12 +197,12 @@ export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
           </Link>
 
           <Link
-            to="/roles/dashboard"
+            to={`/roles/dashboard/${newId}`}
             onClick={() => {
               const newArr = [
                 ...gamesTemp,
                 {
-                  id: 'ID128',
+                  id: newId,
                   primaryImage,
                   projectName: title,
                   projectSummary: summary,
@@ -220,26 +219,9 @@ export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
               setGamesTestData(newArr);
             }}
           >
-            <ActionButton name="Continue" />
+            <ActionButton name="Roles" />
           </Link>
         </CardContent>
-      </Card>
-    </Slide>
-  ) : (
-    <Slide
-      direction="left"
-      in={true}
-      mountOnEnter
-      unmountOnExit
-      style={{ width: 700 }}
-    >
-      <Card className={classes.card}>
-        <Typography color="textSecondary" component="p">
-          All Done
-        </Typography>
-        <Link to="/app/projects">
-          <ActionButton name="Back to Projects" />
-        </Link>
       </Card>
     </Slide>
   );

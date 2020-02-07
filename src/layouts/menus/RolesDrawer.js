@@ -7,7 +7,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Chat from '@material-ui/icons/Chat';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';

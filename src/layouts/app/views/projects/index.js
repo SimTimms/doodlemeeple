@@ -9,7 +9,6 @@ import { useStyles } from './styles';
 
 export function Projects({ gamesTemp }) {
   const classes = useStyles();
-  console.log(gamesTemp);
   const projectArray = gamesTemp;
 
   return (

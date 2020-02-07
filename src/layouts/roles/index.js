@@ -10,7 +10,7 @@ import { Dashboard } from './views/dashboard';
 function RolesLayout(props) {
   const [page, setPage] = React.useState('dashboard');
   const pageJump = props.match ? props.match.params.page : null;
-  const pathParam = props.match
+  const gameId = props.match
     ? props.match.params.pathParam
       ? props.match.params.pathParam
       : null
@@ -46,7 +46,9 @@ function RolesLayout(props) {
       >
         <div className={classes.drawerHeader} />
         <ContentTop>
-          <div>{page === 'dashboard' ? <Dashboard /> : null}</div>
+          <div>
+            {page === 'dashboard' ? <Dashboard gameId={gameId} /> : null}
+          </div>
         </ContentTop>
       </main>
     </div>
