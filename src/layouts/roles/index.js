@@ -4,13 +4,17 @@ import clsx from 'clsx';
 import { useStyles } from './styles';
 import { StyledNavBar, ContentTop } from '../../components';
 import { AppMenu } from '../menus';
-import { MessagesDrawer } from '../menus/MessagesDrawer';
-import { Conversations } from './views/conversations';
+import { RolesDrawer } from '../menus/RolesDrawer';
+import { Dashboard } from './views/dashboard';
 
-function MessagesLayout(props) {
-  const [page, setPage] = React.useState('conversations');
+function RolesLayout(props) {
+  const [page, setPage] = React.useState('dashboard');
   const pageJump = props.match ? props.match.params.page : null;
-
+  const pathParam = props.match
+    ? props.match.params.pathParam
+      ? props.match.params.pathParam
+      : null
+    : null;
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
 
@@ -33,7 +37,7 @@ function MessagesLayout(props) {
         open={open}
         menu={<AppMenu handleDrawerOpen={handleDrawerOpen} open={open} />}
       ></StyledNavBar>
-      <MessagesDrawer handleDrawerClose={handleDrawerClose} open={open} />
+      <RolesDrawer handleDrawerClose={handleDrawerClose} open={open} />
 
       <main
         className={clsx(classes.content, {
@@ -42,11 +46,11 @@ function MessagesLayout(props) {
       >
         <div className={classes.drawerHeader} />
         <ContentTop>
-          <div>{page === 'conversations' ? <Conversations /> : null}</div>
+          <div>{page === 'dashboard' ? <Dashboard /> : null}</div>
         </ContentTop>
       </main>
     </div>
   );
 }
 
-export default MessagesLayout;
+export default RolesLayout;

@@ -41,10 +41,9 @@ export function MessageDrawer(props) {
       <Divider />
       <List>
         {[
-          { name: 'Back', icon: <ChevronLeft />, link: '/app/dashboard' },
           {
-            name: 'Conversations',
-            icon: <Chat />,
+            name: 'Back',
+            icon: <ChevronLeft />,
             link: '/messages/conversations',
           },
         ].map((text, index) => (

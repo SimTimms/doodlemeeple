@@ -1,80 +1,36 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(theme => ({
-  messageCard: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-  messageWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexWrap: 'wrap',
-    width: '100%',
-  },
-  messageDetails: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  messageButton: {
-    maxWidth: 326,
-    width: '100%',
-    lineHeight: 0.6,
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-    justifyContent: 'flex-end',
-  },
-  card: { width: '100%', margin: '20px 0 20px 0' },
-  title: {
-    fontSize: 14,
-  },
-  cardContentCenter: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    padding: '10px !important',
-  },
-  buttonCentre: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textDecoration: 'none',
-  },
-  profileWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
+  messageBox: {
+    background: '#fff',
+    borderRadius: 10,
+    boxShadow: '5px 5px 5px rgba(0,0,0,0.1)',
     padding: 10,
+    margin: 10,
   },
-  wrapperOne: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    padding: 10,
+  messageBoxMe: {
+    marginRight: 'auto',
   },
-  avatarWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    width: 100,
-    padding: 10,
-    marginBottom: -50,
+  messageBoxYou: {
+    marginLeft: 'auto',
+  },
+  speakerName: {
+    color: '#bbb',
+    fontSize: 12,
+    marginLeft: 10,
   },
   avatarRounded: {
     borderRadius: '50%',
     border: '3px solid #ddd',
-    width: 60,
-    minWidth: 60,
-    height: 60,
+    width: 40,
+    height: 40,
+  },
+  speakerWrapper: {
+    marginTop: -20,
+    marginLeft: -20,
+
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 }));

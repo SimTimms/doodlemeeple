@@ -7,17 +7,14 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
-import HomeIcon from '@material-ui/icons/Home';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ContactMailIcon from '@material-ui/icons/ContactMail';
-import AccountBalanceIcon from '@material-ui/icons/AccountBalanceWallet';
+import Chat from '@material-ui/icons/Chat';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
 
-export function AppDrawer(props) {
+export function RolesDrawer(props) {
   const classes = useStyles();
   const { handleDrawerClose, open } = props;
   const theme = useTheme();
@@ -44,30 +41,15 @@ export function AppDrawer(props) {
       <Divider />
       <List>
         {[
-          { name: 'Home', icon: <HomeIcon />, link: '/' },
           {
-            name: 'Dashboard',
-            icon: <DashboardIcon />,
-            link: '/app/dashboard',
-          },
-          { name: 'Profile', icon: <ContactMailIcon />, link: '/app/profile' },
-          {
-            name: 'Account',
-            icon: <AccountBalanceIcon />,
-            link: '/app/account',
-          },
-          { name: 'Invites', icon: <MailIcon />, link: '/app/invites' },
-          { name: 'Jobs', icon: <MailIcon />, link: '/app/jobs' },
-          { name: 'My Games', icon: <MailIcon />, link: '/app/projects' },
-          {
-            name: 'Messages',
-            icon: <MailIcon />,
+            name: 'Back',
+            icon: <ChevronLeft />,
             link: '/messages/conversations',
           },
         ].map((text, index) => (
           <Link to={text.link} className={classes.link} key={text.name}>
             <ListItem button>
-              <ListItemIcon>{text.icon}</ListItemIcon>
+              <ListItemIcon className={classes.icon}>{text.icon}</ListItemIcon>
               <ListItemText primary={text.name} />
             </ListItem>
           </Link>

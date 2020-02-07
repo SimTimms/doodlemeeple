@@ -65,11 +65,12 @@ export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
             width={'100%'}
           />
         </CardContent>
+        {/*
         <Divider />
         <CardContent>
           <GalleryHeader title="Invites" />
           <InvitesWidget invites={invites} setInvite={setInvite} edit={true} />
-        </CardContent>
+        </CardContent>*/}
         <Divider />
         {tags ? (
           <div>
@@ -196,8 +197,8 @@ export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
             <ActionButton name="Cancel" />
           </Link>
 
-          <ActionButton
-            name="Continue"
+          <Link
+            to="/roles/dashboard"
             onClick={() => {
               const newArr = [
                 ...gamesTemp,
@@ -217,9 +218,10 @@ export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
                 },
               ];
               setGamesTestData(newArr);
-              setPage(1);
             }}
-          />
+          >
+            <ActionButton name="Continue" />
+          </Link>
         </CardContent>
       </Card>
     </Slide>
