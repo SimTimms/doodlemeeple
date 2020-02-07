@@ -21,12 +21,7 @@ export const useStyles = makeStyles(theme => ({
   },
   icon: { fontSize: 20, color: '#ddd', position: 'absolute', top: 0, right: 0 },
   galleryIcon: { fontSize: 20, color: '#ddd' },
-  galleryWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
+
   imageIcon: { fontSize: 50, color: '#fff', cursor: 'pointer' },
   profileWrapper: {
     display: 'flex',

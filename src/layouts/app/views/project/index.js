@@ -5,7 +5,7 @@ import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import { useStyles } from './styles';
-import { ProfileHeader, ProjectHeader, GalleryHeader } from './components';
+import { ProfileHeader, ProjectHeader, CardHeader } from './components';
 import { MediaGallery } from '../../../../components/mediaGallery';
 import { FileGallery } from '../../../../components/fileGallery';
 import { InvitesWidget } from '../../../../components/invites';
@@ -43,7 +43,7 @@ export function Project({ projectId, gamesTemp, actionSet, edit }) {
           <div>
             <Divider />
             <CardContent>
-              <GalleryHeader title="Tags" />
+              <CardHeader title="Tags" />
               <TagsWidget tags={project.tags} setTags={null} edit={edit} />
             </CardContent>
           </div>
@@ -52,7 +52,7 @@ export function Project({ projectId, gamesTemp, actionSet, edit }) {
           <div>
             <Divider />
             <CardContent>
-              <GalleryHeader title="Invites" />
+              <CardHeader title="Invites" />
               <InvitesWidget
                 invites={project.invites}
                 setInvite={null}
@@ -65,7 +65,7 @@ export function Project({ projectId, gamesTemp, actionSet, edit }) {
           <div>
             <Divider />
             <CardContent>
-              <GalleryHeader title="About this project" />
+              <CardHeader title="About this project" />
               <Typography
                 variant="body2"
                 color="textSecondary"
@@ -81,7 +81,7 @@ export function Project({ projectId, gamesTemp, actionSet, edit }) {
           <div>
             <Divider />
             <CardContent>
-              <GalleryHeader title="Gallery" />
+              <CardHeader title="Gallery" />
               <MediaGallery
                 items={project.projectSketches}
                 sketches={null}
@@ -95,7 +95,7 @@ export function Project({ projectId, gamesTemp, actionSet, edit }) {
           <div>
             <Divider />
             <CardContent>
-              <GalleryHeader title="Files" />
+              <CardHeader title="Files" />
               <FileGallery
                 items={project.projectFiles}
                 files={null}
@@ -109,7 +109,7 @@ export function Project({ projectId, gamesTemp, actionSet, edit }) {
           <div>
             <Divider />
             <CardContent>
-              <GalleryHeader title="Budget" />
+              <CardHeader title="Budget" />
               <Typography
                 variant="body2"
                 color="textSecondary"
@@ -125,7 +125,7 @@ export function Project({ projectId, gamesTemp, actionSet, edit }) {
           <div>
             <Divider />
             <CardContent>
-              <GalleryHeader title="Deadline" />
+              <CardHeader title="Deadline" />
               <Typography
                 variant="body2"
                 color="textSecondary"

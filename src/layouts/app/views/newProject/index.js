@@ -6,13 +6,14 @@ import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import { useStyles } from './styles';
-import { ProjectComponent, ProjectHeader, GalleryHeader } from './components';
+import { ProjectComponent, ProjectHeader } from './components';
 import { Link } from 'react-router-dom';
 import ActionButton from '../../../../components/buttons';
 import { MediaGallery } from '../../../../components/mediaGallery';
 import { FileGallery } from '../../../../components/fileGallery';
 import { InvitesWidget } from '../../../../components/invites';
 import { TagsWidget } from '../../../../components/tags';
+import { CardHeader } from '../../../../components/headers';
 import tim from '../../../../assets/tim.jpg';
 
 export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
@@ -67,7 +68,7 @@ export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
 
         <Divider />
         <CardContent>
-          <GalleryHeader title="Invites" />
+          <CardHeader title="Invites" />
           <InvitesWidget invites={invites} setInvite={setInvite} edit={true} />
         </CardContent>
         <Divider />
@@ -75,7 +76,7 @@ export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
           <div>
             <Divider />
             <CardContent>
-              <GalleryHeader title="Tags" />
+              <CardHeader title="Tags" />
               <TagsWidget tags={tags} setTags={setTags} edit={true} />
             </CardContent>
           </div>
@@ -84,7 +85,7 @@ export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
           <div>
             <Divider />
             <CardContent>
-              <GalleryHeader title="About" />
+              <CardHeader title="About" />
               <ProjectComponent
                 fieldValue={about}
                 setFieldValue={setAbout}
@@ -98,7 +99,7 @@ export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
           <div>
             <Divider />
             <CardContent>
-              <GalleryHeader title="Gallery" />
+              <CardHeader title="Gallery" />
               <MediaGallery
                 items={sketches}
                 sketches={sketches}
@@ -112,7 +113,7 @@ export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
           <div>
             <Divider />
             <CardContent>
-              <GalleryHeader title="Files" />
+              <CardHeader title="Files" />
               <FileGallery
                 items={files}
                 setFiles={setFiles}
@@ -126,7 +127,7 @@ export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
           <div>
             <Divider />
             <CardContent>
-              <GalleryHeader title="Budget" />
+              <CardHeader title="Budget" />
               <ProjectComponent
                 fieldValue={budget}
                 setFieldValue={setBudget}
@@ -140,7 +141,7 @@ export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
           <div>
             <Divider />
             <CardContent>
-              <GalleryHeader title="Deadline" />
+              <CardHeader title="Deadline" />
               <ProjectComponent
                 fieldValue={deadline}
                 setFieldValue={setDeadline}

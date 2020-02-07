@@ -36,7 +36,7 @@ export function ProjectHeader({ bgImage, profile }) {
     </div>
   );
 }
-export function GalleryHeader({ title }) {
+export function CardHeader({ title }) {
   return (
     <div
       style={{

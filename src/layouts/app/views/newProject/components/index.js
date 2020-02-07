@@ -1,5 +1,4 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useStyles } from './styles';
@@ -49,17 +48,6 @@ export function ProjectHeader({ profile, setPrimaryImage, primaryImage }) {
           className={classes.cardMedia}
         />
       </div>
-    </div>
-  );
-}
-export function GalleryHeader({ title }) {
-  const classes = useStyles();
-  return (
-    <div className={classes.galleryWrapper}>
-      <Typography gutterBottom variant="h5">
-        {title}
-      </Typography>
-      <Icon className={classes.galleryIcon}>edit</Icon>
     </div>
   );
 }

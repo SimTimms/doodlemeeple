@@ -41,9 +41,9 @@ export function RolesDrawer(props) {
       <List>
         {[
           {
-            name: 'Back',
+            name: 'Games',
             icon: <ChevronLeft />,
-            link: '/messages/conversations',
+            link: '/app/projects',
           },
         ].map((text, index) => (
           <Link to={text.link} className={classes.link} key={text.name}>
