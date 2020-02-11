@@ -1,7 +1,6 @@
 import React from 'react';
 import CardMedia from '@material-ui/core/CardMedia';
 import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
 import Collapse from '@material-ui/core/Collapse';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';

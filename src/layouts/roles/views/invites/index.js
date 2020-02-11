@@ -8,8 +8,6 @@ import { useStyles } from './styles';
 import { rolesArrayTemp } from '../../../../testData/roles';
 import { creativesTemp } from '../../../../testData/creatives';
 import { PictureProfileCard, ProfileCard } from './components';
-
-import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 
@@ -53,17 +51,37 @@ export function Invites({ roleId }) {
         <Button variant="contained">
           <Icon>favorite_border</Icon>
         </Button>
+        {invited.indexOf(creativeId) === -1 ? (
+          <Button
+            variant="contained"
+            style={{ marginLeft: 10 }}
+            color="secondary"
+            onClick={() => {
+              let invitedArr = Object.assign([], invited);
 
-        <Button
-          variant="contained"
-          style={{ marginLeft: 10 }}
-          color="secondary"
-          onClick={() => {
-            setInvited([creativeId]);
-          }}
-        >
-          Invite
-        </Button>
+              if (invitedArr.indexOf(creativeId) === -1) {
+                invitedArr.push(creativeId);
+              }
+              setInvited(invitedArr);
+              console.log(invitedArr);
+            }}
+          >
+            Invite
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            style={{ marginLeft: 10 }}
+            onClick={() => {
+              let invitedArr = Object.assign([], invited);
+              invitedArr = invitedArr.filter(item => item != creativeId);
+              setInvited(invitedArr);
+              console.log(invitedArr);
+            }}
+          >
+            Un-Invite
+          </Button>
+        )}
       </div>
     );
   }
@@ -110,7 +128,11 @@ export function Invites({ roleId }) {
               </Typography>
               {allProfiles.map((item, index) => {
                 return (
-                  <ProfileCard profile={item} ProfileActions={ProfileActions} />
+                  <ProfileCard
+                    profile={item}
+                    ProfileActions={ProfileActions}
+                    key={`profile_${index}`}
+                  />
                 );
               })}
             </CardContent>
