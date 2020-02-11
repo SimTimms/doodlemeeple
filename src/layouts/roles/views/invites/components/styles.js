@@ -5,10 +5,15 @@ export const useStyles = makeStyles(theme => ({
   profileBG: {
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
-    padding: '10px !important',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-end',
+  },
+  profileStandard: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    borderBottom: '1px solid #ddd',
   },
   actionArea: {
     display: 'flex',
@@ -30,15 +35,27 @@ export const useStyles = makeStyles(theme => ({
   summaryWrapper: {
     display: 'flex',
     flexDirection: 'column',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
   },
   iconWrapper: {
-    marginTop: 10,
     marginRight: 10,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    alignSelf: 'flex-end',
+  },
+  colWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  rowWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   profileWrapper: {
     display: 'flex',

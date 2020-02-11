@@ -17,7 +17,7 @@ export function CreateRole({ gameId }) {
   const classes = useStyles();
   const roleIdTemp = 'ROLE123';
   const [roleName, setRoleName] = React.useState('');
-  const [roleSummary, setRoleSummary] = React.useState(null);
+  const [roleSummary, setRoleSummary] = React.useState('');
   const [roleTags, setRoleTags] = React.useState([]);
   const [keywordTags, setKeywordTags] = React.useState([]);
   const [sketches, setSketches] = React.useState([]);

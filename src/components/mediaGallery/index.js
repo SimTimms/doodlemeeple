@@ -10,12 +10,18 @@ export function MediaGallery({ items, sketches, setSketches, edit }) {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <GridList cellHeight={160} className={classes.gridList} cols={3}>
+    <div className={classes.root} style={{ background: 'none' }}>
+      <GridList
+        cellHeight={160}
+        className={classes.gridList}
+        cols={3}
+        style={{ background: 'none' }}
+      >
         {items.map((tile, index) => (
           <GridListTile
             key={`${tile.img}_${seedID}_${index}`}
             cols={tile.cols || 1}
+            style={{ background: 'none' }}
           >
             <img src={tile.img} alt={tile.title} />
           </GridListTile>

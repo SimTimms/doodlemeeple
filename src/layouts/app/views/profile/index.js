@@ -9,7 +9,7 @@ import Slide from '@material-ui/core/Slide';
 import { useStyles } from './styles';
 import tim from 'src/assets/tim.jpg';
 import { ProfileHeader } from './components';
-import { MediaGallery } from 'src/components/mediaGallery';
+import { MediaGallery } from '../../../../components/mediaGallery';
 import boxes from 'src/assets/boxes.jpg';
 import smithy from 'src/assets/smithy.jpg';
 
@@ -39,33 +39,14 @@ export function Profile() {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <Card className={classes.card}>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            backgroundImage: `url(${smithy})`,
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center center',
-            alignItems: 'flex-end',
-            justifyContent: 'flex-end',
-            width: '100%',
-            height: 300,
-            padding: 10,
-          }}
-        >
+        <div className={classes.profileWrapper}>
           <div>
             <CardMedia
+              className={classes.avatar}
               component="img"
               alt="Contemplative Reptile"
-              height="140"
               image={tim}
               title="Contemplative Reptile"
-              style={{
-                borderRadius: '50%',
-                border: '10px solid #fff',
-                marginBottom: -50,
-              }}
             />
           </div>
         </div>
@@ -89,7 +70,12 @@ export function Profile() {
             Lizards are a widespread group of squamate reptiles, with over 6,000
             species, ranging across all continents except Antarctica
           </Typography>
-          <MediaGallery items={items} />
+          <MediaGallery
+            items={items}
+            sketches={null}
+            setSketches={null}
+            edit={false}
+          />
         </CardContent>
         <Divider />
         <CardContent>
@@ -103,7 +89,12 @@ export function Profile() {
             Lizards are a widespread group of squamate reptiles, with over 6,000
             species, ranging across all continents except Antarctica
           </Typography>
-          <MediaGallery items={items} />
+          <MediaGallery
+            items={items}
+            sketches={null}
+            setSketches={null}
+            edit={false}
+          />
         </CardContent>
       </Card>
     </Slide>
