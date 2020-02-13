@@ -7,11 +7,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import { useStyles } from './styles';
-import tim from 'src/assets/tim.jpg';
+import tim from '../../../../assets/tim.jpg';
 import { ProfileHeader } from './components';
 import { MediaGallery } from '../../../../components/mediaGallery';
-import boxes from 'src/assets/boxes.jpg';
-import smithy from 'src/assets/smithy.jpg';
+import boxes from '../../../../assets/boxes.jpg';
+import smithy from '../../../../assets/smithy.jpg';
 
 export function Profile() {
   const classes = useStyles();

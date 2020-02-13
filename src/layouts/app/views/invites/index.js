@@ -7,7 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import { useStyles } from './styles';
-import tim from 'src/assets/tim.jpg';
+import tim from '../../../../assets/tim.jpg';
 import { InviteHeader } from './components';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';

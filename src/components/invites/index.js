@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
 import CardMedia from '@material-ui/core/CardMedia';
-import tim from 'src/assets/tim.jpg';
+import tim from '../../assets/tim.jpg';
 
 export function InvitesWidget({ invites, setInvite, edit }) {
   const classes = useStyles();

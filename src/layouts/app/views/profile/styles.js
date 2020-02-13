@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import smithy from 'src/assets/smithy.jpg';
+import smithy from '../../../../assets/smithy.jpg';
 
 export const useStyles = makeStyles(theme => ({
   card: { margin: 10, maxWidth: 712 },

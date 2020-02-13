@@ -1,8 +1,8 @@
-import tim from 'src/assets/tim.jpg';
-import jamie from 'src/assets/jamie.jpg';
-import man from 'src/assets/man.jpg';
-import smithy from 'src/assets/smithy.jpg';
-import jumping from 'src/assets/jumping.jpg';
+import tim from '../assets/tim.jpg';
+import jamie from '../assets/jamie.jpg';
+import man from '../assets/man.jpg';
+import smithy from '../assets/smithy.jpg';
+import jumping from '../assets/jumping.jpg';
 
 export const creativesTemp = [
   {

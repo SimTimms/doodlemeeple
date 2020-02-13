@@ -1,6 +1,6 @@
-import tim from 'src/assets/tim.jpg';
-import jamie from 'src/assets/jamie.jpg';
-import man from 'src/assets/man.jpg';
+import tim from '../assets/tim.jpg';
+import jamie from '../assets/jamie.jpg';
+import man from '../assets/man.jpg';
 
 export const conversationsData = [
   {

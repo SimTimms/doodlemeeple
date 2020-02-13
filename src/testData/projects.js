@@ -1,8 +1,8 @@
-import heromaster from 'src/assets/heromaster.jpg';
-import tim from 'src/assets/tim.jpg';
-import map from 'src/assets/map.jpg';
-import boxes from 'src/assets/boxes.jpg';
-import smithy from 'src/assets/smithy.jpg';
+import heromaster from '../assets/heromaster.jpg';
+import tim from '../assets/tim.jpg';
+import map from '../assets/map.jpg';
+import boxes from '../assets/boxes.jpg';
+import smithy from '../assets/smithy.jpg';
 
 export const projectObject = {
   id: 'ID122',

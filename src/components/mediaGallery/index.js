@@ -3,7 +3,7 @@ import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import map from 'src/assets/map.jpg';
+import map from '../../assets/map.jpg';
 
 export function MediaGallery({ items, sketches, setSketches, edit }) {
   const seedID = Math.floor(Math.random());

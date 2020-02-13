@@ -1,7 +1,7 @@
 import React from 'react';
 import RegisterCard from './views/RegisterCard';
 import ThanksCard from './views/ThanksCard';
-import { Content } from 'src/components';
+import { Content } from '../../../../components';
 
 function RegisterLayout() {
   const [page, setPage] = React.useState(0);
