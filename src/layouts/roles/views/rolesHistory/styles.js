@@ -27,7 +27,7 @@ export const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     padding: 10,
-    borderRight: '1px solid #ddd',
+    borderRight: '1px solid #ccc',
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
@@ -46,7 +46,7 @@ export const useStyles = makeStyles(theme => ({
     flexWrap: 'nowrap',
     justifyContent: 'flex-end',
   },
-  card: { width: '100%', margin: '20px 0 20px 0' },
+  card: { width: '100%', margin: '20px 0 20px 0', background: '#ddd' },
   title: {
     fontSize: 14,
   },

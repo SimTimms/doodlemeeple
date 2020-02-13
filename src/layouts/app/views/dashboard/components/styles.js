@@ -12,8 +12,15 @@ export const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'wrap',
-    width: '100%',
     justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  projectImage: {
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center',
+    width: 200,
+    height: 100,
   },
   rowWrapper: {
     display: 'flex',
@@ -31,11 +38,25 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
+  projectNotifications: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 10,
+    borderRight: '1px solid #ddd',
+  },
+  actions: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 10,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
   messageDetails: {
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    width: '100%',
   },
   messageButton: {
     maxWidth: 326,
@@ -46,7 +67,7 @@ export const useStyles = makeStyles(theme => ({
     flexWrap: 'nowrap',
     justifyContent: 'flex-end',
   },
-  card: { width: '100%', margin: '20px 0 20px 0' },
+  card: { width: '100%', margin: '5px 0 0 0' },
   title: {
     fontSize: 14,
   },
@@ -69,7 +90,7 @@ export const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
-    padding: 10,
+    borderRight: '1px solid #ddd',
   },
   wrapperOne: {
     display: 'flex',
@@ -77,6 +98,7 @@ export const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
     padding: 10,
+    width: '100%',
   },
   avatarWrapper: {
     display: 'flex',

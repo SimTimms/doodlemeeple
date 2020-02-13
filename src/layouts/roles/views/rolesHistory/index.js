@@ -6,19 +6,16 @@ import { useStyles } from './styles';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { rolesArrayTemp } from '../../../../testData/roles';
-/*
-import { creativesTemp } from '../../../../testData/creatives';
-import CardMedia from '@material-ui/core/CardMedia';*/
 import { projectObject } from '../../../../testData/projects';
 import Icon from '@material-ui/core/Icon';
 
-export function CreatorRoles() {
+export function RolesHistory() {
   const classes = useStyles();
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div>
         <Typography variant="h6" color="textPrimary">
-          My Jobs
+          My Job History
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
           Lizards are a widespread group of squamate reptiles, with over 6,000
@@ -40,13 +37,13 @@ export function CreatorRoles() {
                 <div className={classes.rowWrapper}>
                   <div className={classes.notifications}>
                     <Link
-                      to={`/messages/conversations/${role.id}`}
+                      to={`/message/conversation/${role.id}`}
                       className={classes.messageButton}
                       style={{ textDecoration: 'none' }}
                     >
-                      <Icon style={{ color: '#f50057' }}>message</Icon>
+                      <Icon style={{ color: '#ccc' }}>message</Icon>
                     </Link>
-                    <Icon style={{ color: '#ddd' }}>check_circle</Icon>
+                    <Icon style={{ color: '#ccc' }}>check_circle</Icon>
                   </div>
 
                   {/*
@@ -99,27 +96,14 @@ export function CreatorRoles() {
                         </Typography>
                       </div>
                     </div>
-                    {role.status === 'active' ? (
-                      <Link
-                        to={`/roles/create-role/${role.id}`}
-                        className={classes.messageButton}
-                        style={{ textDecoration: 'none' }}
-                      >
-                        <Button variant="contained" color="secondary">
-                          View
-                        </Button>
-                      </Link>
-                    ) : (
-                      <Link
-                        to={`/roles/create-role/${role.id}`}
-                        className={classes.messageButton}
-                        style={{ textDecoration: 'none' }}
-                      >
-                        <Button variant="contained" color="secondary">
-                          Edit
-                        </Button>
-                      </Link>
-                    )}
+
+                    <Link
+                      to={`/roles/create-role/${role.id}`}
+                      className={classes.messageButton}
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <Button variant="contained">View</Button>
+                    </Link>
                   </div>
                 </div>
               </Card>

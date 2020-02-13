@@ -60,7 +60,7 @@ export function Invites() {
                 to={`/app/view-project/${projectId}`}
                 style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
               >
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="secondary">
                   View Project
                 </Button>
               </Link>

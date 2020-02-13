@@ -24,9 +24,24 @@ export const rolesArrayTemp = [
     status: 'hiring',
     workers: [],
     invitees: [
-      { id: 'JAMIENOBLE', userName: 'Jamie Noble', profileImg: jamie },
-      { id: 'DUKEJOHNSON', userName: 'Duke Johnson', profileImg: man },
-      { id: 'TIMSIMMS', userName: 'Tim Simms', profileImg: tim },
+      {
+        id: 'JAMIENOBLE',
+        userName: 'Jamie Noble',
+        profileImg: jamie,
+        status: 'responded',
+      },
+      {
+        id: 'DUKEJOHNSON',
+        userName: 'Duke Johnson',
+        profileImg: man,
+        status: 'declined',
+      },
+      {
+        id: 'TIMSIMMS',
+        userName: 'Tim Simms',
+        profileImg: tim,
+        status: 'ignored',
+      },
     ],
   },
 ];

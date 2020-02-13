@@ -10,6 +10,11 @@ import { Conversations } from './views/conversations';
 function MessagesLayout(props) {
   const [page, setPage] = React.useState('conversations');
   const pageJump = props.match ? props.match.params.page : null;
+  const pathParam = props.match
+    ? props.match.params.pathParam
+      ? props.match.params.pathParam
+      : null
+    : null;
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -42,7 +47,11 @@ function MessagesLayout(props) {
       >
         <div className={classes.drawerHeader} />
         <ContentTop>
-          <div>{page === 'conversations' ? <Conversations /> : null}</div>
+          <div>
+            {page === 'conversations' ? (
+              <Conversations roleId={pathParam} />
+            ) : null}
+          </div>
         </ContentTop>
       </main>
     </div>

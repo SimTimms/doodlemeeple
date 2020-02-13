@@ -12,6 +12,8 @@ export function Conversation({ conversationId }) {
     conversation => conversation.id === conversationId,
   )[0];
 
+  console.log(conversationId);
+
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div>

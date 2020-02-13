@@ -4,6 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import HistoryIcon from '@material-ui/icons/History';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -24,6 +25,19 @@ export function RolesDrawer(props) {
             name: 'Back',
             icon: <ChevronLeft />,
             link: '/app/dashboard',
+          },
+          {
+            name: 'History',
+            icon: <HistoryIcon />,
+            link: '/roles/history',
+          },
+        ]
+      : variant === 'history'
+      ? [
+          {
+            name: 'Back',
+            icon: <ChevronLeft />,
+            link: '/roles/my-roles',
           },
         ]
       : [

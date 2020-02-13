@@ -4,7 +4,7 @@ import man from 'src/assets/man.jpg';
 
 export const conversationsData = [
   {
-    id: 'CONV123',
+    id: 'ROLE123',
     projectId: 'ID123',
     groupMembers: [
       { id: 'TIMSIMMS', profileImg: tim, name: 'Tim Simms' },

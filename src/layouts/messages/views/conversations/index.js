@@ -8,13 +8,13 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { conversationsData } from '../../../../testData/conversations';
 
-export function Conversations() {
+export function Conversations({ roleId }) {
   const classes = useStyles();
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div>
         <Typography variant="h6" color="textPrimary">
-          Conversations
+          Conversations about {roleId}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
           Lizards are a widespread group of squamate reptiles, with over 6,000
@@ -51,9 +51,10 @@ export function Conversations() {
                     <Link
                       to={`/message/conversation/${conversation.id}`}
                       className={classes.messageButton}
+                      style={{ textDecoration: 'none' }}
                     >
-                      <Button variant="contained" color="primary">
-                        Reply
+                      <Button variant="contained" color="secondary">
+                        Thread
                       </Button>
                     </Link>
                   </div>

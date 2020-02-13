@@ -7,7 +7,7 @@ import { useStyles } from './styles';
 import { StyledNavBar, ContentTop } from '../../components';
 import { AppMenu } from '../menus';
 import { AppDrawer } from '../menus/AppDrawer';
-import { Dashboard } from './views/Dashboard';
+import { Dashboard } from './views/dashboard';
 import { Profile } from './views/profile';
 import { Account } from './views/Account';
 import { Invites } from './views/invites';

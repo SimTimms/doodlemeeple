@@ -8,6 +8,7 @@ import { RolesDrawer } from '../menus/RolesDrawer';
 import { Dashboard } from './views/dashboard';
 import { CreateRole } from './views/createRole';
 import { CreatorRoles } from './views/creatorRoles';
+import { RolesHistory } from './views/rolesHistory';
 import { Invites } from './views/invites';
 import { rolesArrayTemp } from '../../testData/roles';
 import { Link } from 'react-router-dom';
@@ -42,6 +43,7 @@ function RolesLayout(props) {
         open={open}
         menu={<AppMenu handleDrawerOpen={handleDrawerOpen} open={open} />}
       ></StyledNavBar>
+
       <RolesDrawer
         handleDrawerClose={handleDrawerClose}
         open={open}
@@ -68,7 +70,9 @@ function RolesLayout(props) {
                 <Link to="../projects">"Projects"</Link> screen
               </div>
             ) : page === 'my-roles' ? (
-              <CreatorRoles roles={rolesArrayTemp} />
+              <CreatorRoles />
+            ) : page === 'history' ? (
+              <RolesHistory />
             ) : null}
           </div>
         </ContentTop>
