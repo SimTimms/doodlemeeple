@@ -7,8 +7,10 @@ import { AppMenu } from '../menus';
 import { RolesDrawer } from '../menus/RolesDrawer';
 import { Dashboard } from './views/dashboard';
 import { CreateRole } from './views/createRole';
+import { CreatorRoles } from './views/creatorRoles';
 import { Invites } from './views/invites';
 import { rolesArrayTemp } from '../../testData/roles';
+import { Link } from 'react-router-dom';
 
 function RolesLayout(props) {
   const [page, setPage] = React.useState('dashboard');
@@ -40,7 +42,11 @@ function RolesLayout(props) {
         open={open}
         menu={<AppMenu handleDrawerOpen={handleDrawerOpen} open={open} />}
       ></StyledNavBar>
-      <RolesDrawer handleDrawerClose={handleDrawerClose} open={open} />
+      <RolesDrawer
+        handleDrawerClose={handleDrawerClose}
+        open={open}
+        variant={page}
+      />
 
       <main
         className={clsx(classes.content, {
@@ -56,6 +62,13 @@ function RolesLayout(props) {
               <CreateRole gameId={paramId} />
             ) : page === 'invites' ? (
               <Invites roleId={paramId} />
+            ) : page === 'invites-sent' ? (
+              <div>
+                Invites Sent, keep track of this role on your{' '}
+                <Link to="../projects">"Projects"</Link> screen
+              </div>
+            ) : page === 'my-roles' ? (
+              <CreatorRoles roles={rolesArrayTemp} />
             ) : null}
           </div>
         </ContentTop>

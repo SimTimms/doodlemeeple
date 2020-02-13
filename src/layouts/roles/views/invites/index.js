@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { useStyles } from './styles';
 import { rolesArrayTemp } from '../../../../testData/roles';
 import { creativesTemp } from '../../../../testData/creatives';
-import { PictureProfileCard, ProfileCard } from './components';
+import { PictureProfileCard, ProfileCard, Invitees } from './components';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 
@@ -30,6 +30,7 @@ export function Invites({ roleId }) {
   const classes = useStyles();
   const [page, setPage] = React.useState('search');
   const [invited, setInvited] = React.useState([]);
+
   const thisRole = rolesArrayTemp.filter(role => role.id === roleId)[0];
   const creativeKeywords = thisRole.creatives;
   const keywords = thisRole.keywords;
@@ -43,7 +44,13 @@ export function Invites({ roleId }) {
   const profile2 = creativesFiltered2[0];
   const allProfiles = creativesTemp;
 
-  function ProfileActions({ display, setDisplay, creativeId }) {
+  function unInvite(profileId) {
+    let invitedArr = Object.assign([], invited);
+    invitedArr = invitedArr.filter(item => item.id !== profileId);
+    setInvited(invitedArr);
+  }
+
+  function ProfileActions({ display, setDisplay, profile }) {
     const classes = useStyles();
     return (
       <div className={classes.actionArea} style={{ zIndex: 1 }}>
@@ -51,19 +58,20 @@ export function Invites({ roleId }) {
         <Button variant="contained">
           <Icon>favorite_border</Icon>
         </Button>
-        {invited.indexOf(creativeId) === -1 ? (
+        {invited.map(item => item.id).indexOf(profile.id) === -1 ? (
           <Button
             variant="contained"
             style={{ marginLeft: 10 }}
             color="secondary"
             onClick={() => {
               let invitedArr = Object.assign([], invited);
+              invitedArr.push({
+                id: profile.id,
+                profileImg: profile.profileImg,
+                userName: profile.userName,
+              });
 
-              if (invitedArr.indexOf(creativeId) === -1) {
-                invitedArr.push(creativeId);
-              }
               setInvited(invitedArr);
-              console.log(invitedArr);
             }}
           >
             Invite
@@ -73,10 +81,7 @@ export function Invites({ roleId }) {
             variant="contained"
             style={{ marginLeft: 10 }}
             onClick={() => {
-              let invitedArr = Object.assign([], invited);
-              invitedArr = invitedArr.filter(item => item != creativeId);
-              setInvited(invitedArr);
-              console.log(invitedArr);
+              unInvite(profile.id);
             }}
           >
             Un-Invite
@@ -100,6 +105,10 @@ export function Invites({ roleId }) {
                 Sed ut perspiciatis unde omnis iste natus error sit voluptatem
                 accusantium doloremque laudantium, totam rem aperiam.
               </Typography>
+            </CardContent>
+            <Divider />
+            <CardContent style={{ background: '#eee' }}>
+              <Invitees invited={invited} uninvite={unInvite} />
             </CardContent>
             <Divider />
             <CardContent>
@@ -146,6 +155,8 @@ export function Invites({ roleId }) {
             ></CardContent>
           </Card>
         </Slide>
+      ) : page === 'sent' ? (
+        <div>Invites Sent</div>
       ) : null}
     </div>
   );

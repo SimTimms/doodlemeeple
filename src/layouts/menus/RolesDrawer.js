@@ -15,9 +15,24 @@ import { useStyles } from './styles';
 
 export function RolesDrawer(props) {
   const classes = useStyles();
-  const { handleDrawerClose, open } = props;
+  const { handleDrawerClose, open, variant } = props;
   const theme = useTheme();
-
+  const menuArr =
+    variant === 'my-roles'
+      ? [
+          {
+            name: 'Back',
+            icon: <ChevronLeft />,
+            link: '/app/dashboard',
+          },
+        ]
+      : [
+          {
+            name: 'Games',
+            icon: <ChevronLeft />,
+            link: '/app/projects',
+          },
+        ];
   return (
     <Drawer
       className={classes.drawer}
@@ -39,13 +54,7 @@ export function RolesDrawer(props) {
       </div>
       <Divider />
       <List>
-        {[
-          {
-            name: 'Games',
-            icon: <ChevronLeft />,
-            link: '/app/projects',
-          },
-        ].map((text, index) => (
+        {menuArr.map((text, index) => (
           <Link to={text.link} className={classes.link} key={text.name}>
             <ListItem button>
               <ListItemIcon className={classes.icon}>{text.icon}</ListItemIcon>

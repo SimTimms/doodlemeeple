@@ -1,5 +1,6 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Button from '@material-ui/core/Button';
 import SideBar from '../../sidebars';
 import clsx from 'clsx';
 import { useStyles } from './styles';
@@ -12,7 +13,8 @@ import { Account } from './views/Account';
 import { Invites } from './views/invites';
 import { Project } from './views/project';
 import { NewProject } from './views/newProject';
-import { Jobs } from './views/Jobs';
+import { NewQuote } from './views/newQuote';
+import { Decline } from './views/decline';
 import { Messages } from './views/Messages';
 import { Portfolio } from './views/Portfolio';
 import { Projects } from './views/projects';
@@ -82,8 +84,6 @@ function AppLayout(props) {
               <Account />
             ) : page === 'invites' ? (
               <Invites />
-            ) : page === 'jobs' ? (
-              <Jobs />
             ) : page === 'projects' ? (
               <Projects gamesTemp={gamesTestData} />
             ) : page === 'messages' ? (
@@ -107,14 +107,14 @@ function AppLayout(props) {
                     <Link to="/app/invites">
                       <ActionButton name="Back" />
                     </Link>
-                    <Link to={`/messages/project/${pathParam}`}>
-                      <ActionButton name="Message" />
-                    </Link>
-                    <Link to="/app/decline">
+
+                    <Link to={`/app/decline/${pathParam}`}>
                       <ActionButton name="Decline" />
                     </Link>
-                    <Link to="/app/accept">
-                      <ActionButton name="Accept" />
+                    <Link to={`/app/create-quote/${pathParam}`}>
+                      <Button variant="contained" color="secondary">
+                        Continue
+                      </Button>
                     </Link>
                   </CardActionArea>
                 }
@@ -126,6 +126,10 @@ function AppLayout(props) {
                 gamesTemp={gamesTestData}
                 setGamesTestData={setGamesTestData}
               />
+            ) : page === 'decline' ? (
+              <Decline projectId={pathParam} />
+            ) : page === 'create-quote' ? (
+              <NewQuote projectId={pathParam} />
             ) : null}
           </div>
         </ContentTop>

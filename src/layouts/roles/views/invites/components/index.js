@@ -7,6 +7,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from './styles';
 import { MediaGallery } from '../../../../../components/mediaGallery';
+import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 function ProfileInterior({ profile }) {
   const classes = useStyles();
@@ -74,7 +76,7 @@ export function PictureProfileCard({ profile, ProfileActions }) {
           <ProfileActions
             display={display}
             setDisplay={setDisplay}
-            creativeId={profile.id}
+            profile={profile}
           />
         </div>
         <ProfileExtra profile={profile} display={display} />
@@ -93,8 +95,65 @@ export function ProfileCard({ profile, ProfileActions }) {
       <ProfileActions
         display={display}
         setDisplay={setDisplay}
-        creativeId={profile.id}
+        profile={profile}
       />
     </CardContent>
+  );
+}
+
+export function Invitees({ invited, uninvite }) {
+  const classes = useStyles();
+
+  function Filler(length) {
+    let fillers = [];
+    for (let i = length; i < 5; i++) {
+      fillers.push(
+        <div
+          className={classes.profileImg}
+          style={{ background: '#ddd', width: 60, height: 60 }}
+        ></div>,
+      );
+    }
+    return fillers;
+  }
+  return (
+    <div
+      className={classes.rowWrapper}
+      style={{ justifyContent: 'space-between' }}
+    >
+      <div
+        className={classes.rowWrapper}
+        style={{ justifyContent: 'flex-start' }}
+      >
+        {invited.map((profile, index) => {
+          return (
+            <div key={`invitee_${index}`} style={{ position: 'relative' }}>
+              <CardMedia
+                className={classes.profileImg}
+                component="img"
+                alt="Profile Photo"
+                image={profile.profileImg}
+                title="Profile Photo"
+              />
+              <Icon
+                className={classes.tagRemove}
+                onClick={() => {
+                  uninvite(profile.id);
+                }}
+              >
+                close_circle
+              </Icon>
+            </div>
+          );
+        })}
+        {Filler(invited.length)}
+      </div>
+
+      <Link to="../invites-sent">
+        <Button variant="contained" color="secondary">
+          Send Invites
+        </Button>
+      </Link>
+    </div>
   );
 }

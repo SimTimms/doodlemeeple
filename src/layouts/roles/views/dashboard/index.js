@@ -10,16 +10,7 @@ export function Dashboard({ gameId, roles }) {
         {roles.map((role, index) => {
           return <div key={`role_${index}`}>Role: {role.title}</div>;
         })}
-        <Link
-          to={`/roles/create-role/${gameId}`}
-          onClick={() => {
-            alert(
-              'Go to a page where you can create a job description and invite people',
-            );
-          }}
-        >
-          + Create Role
-        </Link>
+        <Link to={`/roles/create-role/${gameId}`}>+ Create Role</Link>
       </div>
     </Slide>
   );

@@ -9,6 +9,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import HomeIcon from '@material-ui/icons/Home';
+import WorkIcon from '@material-ui/icons/Work';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalanceWallet';
@@ -57,7 +58,7 @@ export function AppDrawer(props) {
             link: '/app/account',
           },
           { name: 'Invites', icon: <MailIcon />, link: '/app/invites' },
-          { name: 'Jobs', icon: <MailIcon />, link: '/app/jobs' },
+          { name: 'Jobs', icon: <WorkIcon />, link: '/roles/my-roles' },
           { name: 'My Games', icon: <MailIcon />, link: '/app/projects' },
           {
             name: 'Messages',

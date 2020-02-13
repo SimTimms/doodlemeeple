@@ -9,6 +9,12 @@ export const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'flex-end',
   },
+  profileImg: {
+    width: 60,
+    height: 60,
+    borderRadius: '50%',
+    margin: '0 10px 0 10px',
+  },
   profileStandard: {
     display: 'flex',
     flexDirection: 'column',
@@ -50,6 +56,15 @@ export const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+  },
+  tagRemove: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    borderRadius: '50%',
+    background: '#ddd',
+    color: '#222',
+    cursor: 'pointer',
   },
   rowWrapper: {
     display: 'flex',
