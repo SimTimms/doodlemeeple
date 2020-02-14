@@ -15,6 +15,12 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
+  iconButton: {
+    cursor: 'pointer',
+    '&:hover': {
+      color: '#222',
+    },
+  },
   projectImage: {
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',

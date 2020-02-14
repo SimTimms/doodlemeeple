@@ -16,7 +16,7 @@ export const notificationsTemp = [
     },
   },
   {
-    id: 'NOTIFICATION123',
+    id: 'NOTIFICATION124',
     title: 'Reply',
     summary: 'Jamie Noble has accepted your invite',
     icon: 'check_circle',
@@ -30,7 +30,7 @@ export const notificationsTemp = [
     },
   },
   {
-    id: 'NOTIFICATION123',
+    id: 'NOTIFICATION125',
     title: 'Decline',
     summary: 'Duke Johnson has declined your invite',
     projectId: 'ID123',
@@ -43,7 +43,7 @@ export const notificationsTemp = [
     },
   },
   {
-    id: 'NOTIFICATION123',
+    id: 'NOTIFICATION126',
     title: 'Decline',
     summary: 'Tim Simms has sent you a message',
     projectId: 'ID122',

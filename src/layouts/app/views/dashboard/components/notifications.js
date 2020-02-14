@@ -8,8 +8,11 @@ import { dashboardTemp } from '../../../../../testData/dashboard';
 
 export function Notifications() {
   const classes = useStyles();
+  const { projects, notifications } = dashboardTemp;
+  const [notificationArray, setNotificationArray] = React.useState(
+    notifications,
+  );
 
-  const { roles, projects, notifications } = dashboardTemp;
   return (
     <div className={classes.messageWrapper}>
       <Typography
@@ -19,7 +22,7 @@ export function Notifications() {
       >
         Notifications
       </Typography>
-      {notifications.map((notification, index) => {
+      {notificationArray.map((notification, index) => {
         const project = projects.filter(
           item => item.id === notification.projectId,
         )[0];
@@ -63,13 +66,18 @@ export function Notifications() {
                 </div>
               </div>
               <div className={classes.actions}>
-                <Link
-                  to={`/messages/conversations/${notification.id}`}
-                  className={classes.messageButton}
-                  style={{ textDecoration: 'none' }}
+                <Icon
+                  color="disabled"
+                  onClick={() => {
+                    const notificationArrayFiltered = notificationArray.filter(
+                      item => item.id !== notification.id,
+                    );
+                    setNotificationArray(notificationArrayFiltered);
+                  }}
+                  className={classes.iconButton}
                 >
-                  <Icon color="disabled">delete</Icon>
-                </Link>
+                  delete
+                </Icon>
               </div>
             </div>
           </Card>

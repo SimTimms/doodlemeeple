@@ -27,12 +27,6 @@ export function Projects() {
         return (
           <Card className={classes.card} key={`conversation_${index}`}>
             <div className={classes.rowWrapper}>
-              <div className={classes.projectNotifications}>
-                <Link to="/messages/conversations/ROLE123">
-                  <Icon color="disabled">message</Icon>
-                </Link>
-                <Icon color="disabled">more_horizontal</Icon>
-              </div>
               <div className={classes.notifications}>
                 <div
                   className={classes.projectImage}
@@ -58,13 +52,10 @@ export function Projects() {
                 </div>
               </div>
               <div className={classes.actions}>
-                <Link
-                  to={`/messages/conversations/12`}
-                  className={classes.messageButton}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <Icon color="disabled">delete</Icon>
+                <Link to="/messages/conversations/ROLE123">
+                  <Icon color="disabled">message</Icon>
                 </Link>
+                <Icon color="disabled">more_horizontal</Icon>
               </div>
             </div>
           </Card>
