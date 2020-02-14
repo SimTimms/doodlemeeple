@@ -29,17 +29,11 @@ export function Profile() {
 
         <Card className={classes.card}>
           <ProfileHeader bgImage={creative.profileBG} profile={creative} />
-          <CardContent>
-            <Typography color="textSecondary" component="p">
-              {creative.summary}
-            </Typography>
-          </CardContent>
 
           {creative.gallery && (
             <div>
               <Divider />
               <CardContent>
-                <ContentHeader>TEST</ContentHeader>
                 <MediaGallery
                   items={creative.gallery}
                   sketches={null}

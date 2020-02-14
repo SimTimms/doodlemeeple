@@ -63,7 +63,7 @@ function AppLayout(props) {
   });
 
   theme.typography.h1 = { fontFamily: ['Quicksand'].join(','), fontSize: 30 };
-  theme.typography.h2 = { fontFamily: ['Quicksand'].join(','), fontSize: 22 };
+  theme.typography.h2 = { fontFamily: ['Quicksand'].join(','), fontSize: 18 };
 
   return (
     <div>

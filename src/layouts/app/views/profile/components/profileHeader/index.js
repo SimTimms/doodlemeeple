@@ -2,18 +2,36 @@ import React from 'react';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import clsx from 'clsx';
 
 export function ProfileHeader({ bgImage, profile }) {
   const classes = useStyles();
+  const mobile = useMediaQuery('(max-width:800px)');
   return (
     <div
       style={{
         backgroundImage: `url(${bgImage})`,
       }}
-      className={classes.root}
+      className={clsx({
+        [classes.root]: true,
+        [classes.rootMobile]: mobile,
+        [classes.rootDesktop]: !mobile,
+      })}
     >
-      <div className={classes.profileWrapper}>
-        <div className={classes.avatarWrapper}>
+      <div
+        className={clsx({
+          [classes.profileWrapper]: true,
+          [classes.profileWrapperMobile]: mobile,
+          [classes.profileWrapperDesktop]: !mobile,
+        })}
+      >
+        <div
+          className={clsx({
+            [classes.avatarWrapper]: true,
+            [classes.avatarWrapperMobile]: mobile,
+          })}
+        >
           <CardMedia
             component="img"
             alt="Profile Photo"
@@ -22,7 +40,12 @@ export function ProfileHeader({ bgImage, profile }) {
             className={classes.avatar}
           />
         </div>
-        <div className={classes.profileName}>
+        <div
+          className={clsx({
+            [classes.profileName]: true,
+            [classes.profileNameMobile]: mobile,
+          })}
+        >
           <Typography variant="h1" color="textPrimary">
             {profile.userName}
           </Typography>
