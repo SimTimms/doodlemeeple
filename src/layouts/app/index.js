@@ -1,9 +1,9 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import SideBar from '../../sidebars';
 import clsx from 'clsx';
 import { useStyles } from './styles';
 import { ContentTop } from '../../components';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { StyledNavBar } from '../../components/navBar';
 import { AppMenu } from '../menus';
 import { AppDrawer } from '../menus/AppDrawer';
@@ -58,6 +58,17 @@ function AppLayout(props) {
     setOpen(false);
   };
 
+  const theme = createMuiTheme({
+    typography: {
+      fontFamily: ['Quicksand'].join(','),
+      fontSize: 12,
+    },
+  });
+
+  theme.typography.h1 = {
+    fontSize: 30,
+  };
+
   return (
     <div>
       <StyledNavBar
@@ -65,74 +76,73 @@ function AppLayout(props) {
         menu={<AppMenu handleDrawerOpen={handleDrawerOpen} open={open} />}
       ></StyledNavBar>
       <AppDrawer handleDrawerClose={handleDrawerClose} open={open} />
+      <ThemeProvider theme={theme}>
+        <main
+          className={clsx(classes.content, {
+            [classes.contentShift]: open,
+          })}
+        >
+          <ContentTop>
+            <div>
+              {page === 'dashboard' ? (
+                <Dashboard />
+              ) : page === 'profile' ? (
+                <Profile />
+              ) : page === 'account' ? (
+                <Account />
+              ) : page === 'invites' ? (
+                <Invites />
+              ) : page === 'projects' ? (
+                <Projects gamesTemp={gamesTestData} />
+              ) : page === 'messages' ? (
+                <Messages />
+              ) : page === 'community' ? (
+                <Community />
+              ) : page === 'portfolio' ? (
+                <Portfolio />
+              ) : page === 'edit-project' ? (
+                <NewProject
+                  projectId={pathParam}
+                  gamesTemp={gamesTestData}
+                  setGamesTestData={setGamesTestData}
+                />
+              ) : page === 'view-project' ? (
+                <Project
+                  projectId={pathParam}
+                  gamesTemp={gamesTestData}
+                  actionSet={
+                    <CardActionArea>
+                      <Link to="/app/invites">
+                        <ActionButton name="Back" />
+                      </Link>
 
-      <SideBar />
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-      >
-        <div className={classes.drawerHeader} />
-        <ContentTop>
-          <div>
-            {page === 'dashboard' ? (
-              <Dashboard />
-            ) : page === 'profile' ? (
-              <Profile />
-            ) : page === 'account' ? (
-              <Account />
-            ) : page === 'invites' ? (
-              <Invites />
-            ) : page === 'projects' ? (
-              <Projects gamesTemp={gamesTestData} />
-            ) : page === 'messages' ? (
-              <Messages />
-            ) : page === 'community' ? (
-              <Community />
-            ) : page === 'portfolio' ? (
-              <Portfolio />
-            ) : page === 'edit-project' ? (
-              <NewProject
-                projectId={pathParam}
-                gamesTemp={gamesTestData}
-                setGamesTestData={setGamesTestData}
-              />
-            ) : page === 'view-project' ? (
-              <Project
-                projectId={pathParam}
-                gamesTemp={gamesTestData}
-                actionSet={
-                  <CardActionArea>
-                    <Link to="/app/invites">
-                      <ActionButton name="Back" />
-                    </Link>
-
-                    <Link to={`/app/decline/${pathParam}`}>
-                      <ActionButton name="Decline" />
-                    </Link>
-                    <Link to={`/app/create-quote/${pathParam}`}>
-                      <Button variant="contained" color="secondary">
-                        Continue
-                      </Button>
-                    </Link>
-                  </CardActionArea>
-                }
-                edit={false}
-              />
-            ) : page === 'new-project' ? (
-              <NewProject
-                projectId={null}
-                gamesTemp={gamesTestData}
-                setGamesTestData={setGamesTestData}
-              />
-            ) : page === 'decline' ? (
-              <Decline projectId={pathParam} />
-            ) : page === 'create-quote' ? (
-              <NewQuote projectId={pathParam} />
-            ) : null}
-          </div>
-        </ContentTop>
-      </main>
+                      <Link to={`/app/decline/${pathParam}`}>
+                        <ActionButton name="Decline" />
+                      </Link>
+                      <Link to={`/app/create-quote/${pathParam}`}>
+                        <Button variant="contained" color="secondary">
+                          Continue
+                        </Button>
+                      </Link>
+                    </CardActionArea>
+                  }
+                  edit={false}
+                />
+              ) : page === 'new-project' ? (
+                <NewProject
+                  projectId={null}
+                  gamesTemp={gamesTestData}
+                  setGamesTestData={setGamesTestData}
+                />
+              ) : page === 'decline' ? (
+                <Decline projectId={pathParam} />
+              ) : page === 'create-quote' ? (
+                <NewQuote projectId={pathParam} />
+              ) : null}
+            </div>
+          </ContentTop>
+        </main>
+      </ThemeProvider>
     </div>
   );
 }
