@@ -11,7 +11,7 @@ export const useStyles = makeStyles({
     flexDirection: 'row',
     flexWrap: 'wrap',
     width: '100%',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'flex-start',
     margin: 10,
     '&:first-child': {
