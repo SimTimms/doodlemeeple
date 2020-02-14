@@ -1,7 +1,6 @@
 import React from 'react';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useStyles } from './styles';
-import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Icon from '@material-ui/core/Icon';
 import clsx from 'clsx';
