@@ -9,16 +9,13 @@ import { AppMenu } from '../menus';
 import { AppDrawer } from '../menus/AppDrawer';
 import { Dashboard } from './views/dashboard';
 import { Profile } from './views/profile';
-import { Account } from './views/Account';
+import { Account } from './views/account';
 import { Invites } from './views/invites';
 import { Project } from './views/project';
 import { NewProject } from './views/newProject';
 import { NewQuote } from './views/newQuote';
 import { Decline } from './views/decline';
-import { Messages } from './views/Messages';
-import { Portfolio } from './views/Portfolio';
 import { Projects } from './views/projects';
-import { Community } from './views/Community';
 import { Link } from 'react-router-dom';
 import ActionButton from '../../components/buttons';
 import { CardActionArea } from '../../components/wrappers';
@@ -92,12 +89,6 @@ function AppLayout(props) {
                 <Invites />
               ) : page === 'projects' ? (
                 <Projects gamesTemp={gamesTestData} />
-              ) : page === 'messages' ? (
-                <Messages />
-              ) : page === 'community' ? (
-                <Community />
-              ) : page === 'portfolio' ? (
-                <Portfolio />
               ) : page === 'edit-project' ? (
                 <NewProject
                   projectId={pathParam}
