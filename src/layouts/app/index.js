@@ -1,10 +1,10 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import SideBar from '../../sidebars';
 import clsx from 'clsx';
 import { useStyles } from './styles';
-import { StyledNavBar, ContentTop } from '../../components';
+import { ContentTop } from '../../components';
+import { StyledNavBar } from '../../components/navBar';
 import { AppMenu } from '../menus';
 import { AppDrawer } from '../menus/AppDrawer';
 import { Dashboard } from './views/dashboard';
@@ -60,7 +60,6 @@ function AppLayout(props) {
 
   return (
     <div>
-      <CssBaseline />
       <StyledNavBar
         open={open}
         menu={<AppMenu handleDrawerOpen={handleDrawerOpen} open={open} />}

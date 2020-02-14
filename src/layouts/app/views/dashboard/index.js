@@ -14,7 +14,7 @@ export function Dashboard() {
         <Typography variant="h6" color="textPrimary">
           Dashboard
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography color="textSecondary" component="p">
           Keep up to date with your projects, messages and the DoodleMeeple
           community.
         </Typography>

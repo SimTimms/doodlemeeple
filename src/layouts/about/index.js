@@ -1,6 +1,7 @@
 import React from 'react';
 import { AboutPage } from './views/AboutPage';
-import { Content, StyledNavBar } from '../../components';
+import { Content } from '../../components';
+import { StyledNavBar } from '../../components/navBar';
 import { PublicMenu } from '../menus';
 import { withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
