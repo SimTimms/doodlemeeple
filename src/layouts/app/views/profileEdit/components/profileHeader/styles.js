@@ -8,17 +8,24 @@ export const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'flex-end',
-
     width: '100%',
     height: 300,
     paddingBottom: 10,
+    position: 'relative',
+  },
+  imageIcon: {
+    fontSize: 50,
+    color: '#fff',
+    cursor: 'pointer',
+    position: 'absolute',
+    top: 0,
+    right: 0,
   },
   rootDesktop: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
   },
-  imageIcon: { fontSize: 50, color: '#fff', cursor: 'pointer' },
   rootMobile: {
     display: 'flex',
     flexDirection: 'column',
@@ -47,6 +54,7 @@ export const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     paddingLeft: 10,
     textAlign: 'left',
+    width: '100%',
   },
   profileNameMobile: {
     textAlign: 'center',

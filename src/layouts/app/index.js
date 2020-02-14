@@ -9,6 +9,7 @@ import { AppMenu } from '../menus';
 import { AppDrawer } from '../menus/AppDrawer';
 import { Dashboard } from './views/dashboard';
 import { Profile } from './views/profile';
+import { EditProfile } from './views/profileEdit';
 import { Account } from './views/account';
 import { Invites } from './views/invites';
 import { Project } from './views/project';
@@ -84,6 +85,8 @@ function AppLayout(props) {
                 <Dashboard />
               ) : page === 'profile' ? (
                 <Profile />
+              ) : page === 'edit-profile' ? (
+                <EditProfile />
               ) : page === 'account' ? (
                 <Account />
               ) : page === 'invites' ? (

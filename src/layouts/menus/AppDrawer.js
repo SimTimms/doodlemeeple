@@ -51,7 +51,11 @@ export function AppDrawer(props) {
             icon: <DashboardIcon />,
             link: '/app/dashboard',
           },
-          { name: 'Profile', icon: <ContactMailIcon />, link: '/app/profile' },
+          {
+            name: 'Profile',
+            icon: <ContactMailIcon />,
+            link: '/app/edit-profile',
+          },
           {
             name: 'Account',
             icon: <AccountBalanceIcon />,

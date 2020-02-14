@@ -5,7 +5,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import map from '../../assets/map.jpg';
 
-export function MediaGallery({ items, sketches, setSketches, edit }) {
+export function MediaGallery({ items, setItems, edit }) {
   const seedID = Math.floor(Math.random());
   const classes = useStyles();
 
@@ -42,7 +42,7 @@ export function MediaGallery({ items, sketches, setSketches, edit }) {
                 style={{ fontSize: 50, color: '#fff' }}
                 onClick={() => {
                   const newArr = [
-                    ...sketches,
+                    ...items,
                     {
                       img: map,
                       title: 'Image',
@@ -50,7 +50,7 @@ export function MediaGallery({ items, sketches, setSketches, edit }) {
                       cols: 1,
                     },
                   ];
-                  setSketches(newArr);
+                  setItems(newArr);
                 }}
               >
                 add_circle

@@ -10,10 +10,22 @@ import { ContentHeader } from '../../../../components/headers/contentHeader';
 import { ProfileHeader } from './components/profileHeader';
 import { MediaGallery } from '../../../../components/mediaGallery';
 import { creativesTemp } from '../../../../testData/creatives';
+import TextField from '@material-ui/core/TextField';
 
-export function Profile() {
+export function EditProfile() {
   const classes = useStyles();
   const creative = creativesTemp[0];
+  const [bgImage, setBgImage] = React.useState(creative.profileBG);
+  const [userName, setUserName] = React.useState(creative.userName);
+  const [summary, setSummary] = React.useState(creative.summary);
+  const [gallery, setGallery] = React.useState(creative.gallery);
+
+  const userProfile = {
+    userName: userName,
+    summary: summary,
+    profileImg: creative.profileImg,
+    gallery: gallery,
+  };
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div>
@@ -26,19 +38,33 @@ export function Profile() {
             work
           </Typography>
         </ContentHeader>
-
         <Card className={classes.card}>
-          <ProfileHeader bgImage={creative.profileBG} profile={creative} />
-
+          <ProfileHeader
+            bgImage={bgImage}
+            profile={userProfile}
+            setBgImage={setBgImage}
+            setUserName={setUserName}
+          />
+          <div style={{ padding: 10 }}>
+            <TextField
+              id={'summary'}
+              label={'Summary'}
+              value={userProfile.summary}
+              onChange={e => {
+                setSummary(e.target.value);
+              }}
+              margin="normal"
+              variant="outlined"
+              style={{ width: '100%' }}
+            />
+          </div>
           {creative.gallery && (
             <div>
               <Divider />
               <CardContent>
-                <ContentHeader>TEST</ContentHeader>
                 <MediaGallery
-                  items={creative.gallery}
-                  sketches={null}
-                  setSketches={null}
+                  items={gallery}
+                  setItems={setGallery}
                   edit={true}
                 />
               </CardContent>
