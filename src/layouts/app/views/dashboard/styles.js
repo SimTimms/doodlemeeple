@@ -9,7 +9,7 @@ export const useStyles = makeStyles({
   gridRow: {
     display: 'flex',
     flexDirection: 'row',
-    flexWrap: 'nowrap',
+    flexWrap: 'wrap',
     width: '100%',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
