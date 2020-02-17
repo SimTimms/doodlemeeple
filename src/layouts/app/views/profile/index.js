@@ -37,8 +37,7 @@ export function Profile() {
                 <ContentHeader>TEST</ContentHeader>
                 <MediaGallery
                   items={creative.gallery}
-                  sketches={null}
-                  setSketches={null}
+                  setItems={null}
                   edit={true}
                 />
               </CardContent>

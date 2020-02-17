@@ -14,18 +14,12 @@ export const creativesTemp = [
     summary:
       'A super friendly digital artist specialising in bespoke fantasy and sci-fi digital paintings for book cover work and illustration.',
     location: 'Horsham, UK',
-    gallery: [
+    sections: [
       {
-        img: jumping,
-        title: 'Image',
-        author: 'author',
-        cols: 1,
-      },
-      {
-        img: smithy,
-        title: 'Image',
-        author: 'author',
-        cols: 1,
+        gallery: {
+          summary: 'This is my gallery',
+          images: [],
+        },
       },
     ],
   },
@@ -38,18 +32,25 @@ export const creativesTemp = [
     summary:
       'Lizards are a widespread group of squamate reptiles, with over 6,000 species,  Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
     location: 'Nottingham, UK',
-    gallery: [
+    sections: [
       {
-        img: smithy,
-        title: 'Image',
-        author: 'author',
-        cols: 1,
-      },
-      {
-        img: jumping,
-        title: 'Image',
-        author: 'author',
-        cols: 1,
+        gallery: {
+          summary: 'This is my gallery',
+          images: [
+            {
+              img: jumping,
+              title: 'Image',
+              author: 'author',
+              cols: 1,
+            },
+            {
+              img: smithy,
+              title: 'Image',
+              author: 'author',
+              cols: 1,
+            },
+          ],
+        },
       },
     ],
   },
@@ -62,18 +63,25 @@ export const creativesTemp = [
     summary:
       'Lizards are a widespread group of squamate reptiles, with over 6,000 species,  Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
     location: 'Worthing, UK',
-    gallery: [
+    sections: [
       {
-        img: jumping,
-        title: 'Image',
-        author: 'author',
-        cols: 1,
-      },
-      {
-        img: smithy,
-        title: 'Image',
-        author: 'author',
-        cols: 1,
+        gallery: {
+          summary: 'This is my gallery',
+          images: [
+            {
+              img: jumping,
+              title: 'Image',
+              author: 'author',
+              cols: 1,
+            },
+            {
+              img: smithy,
+              title: 'Image',
+              author: 'author',
+              cols: 1,
+            },
+          ],
+        },
       },
     ],
   },

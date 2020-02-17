@@ -11,10 +11,12 @@ import { ProfileHeader } from './components/profileHeader';
 import { MediaGallery } from '../../../../components/mediaGallery';
 import { creativesTemp } from '../../../../testData/creatives';
 import TextField from '@material-ui/core/TextField';
+import { AddSection } from '../../../../components/buttons/addSection';
 
 export function EditProfile() {
   const classes = useStyles();
   const creative = creativesTemp[0];
+  console.log(creative);
   const [bgImage, setBgImage] = React.useState(creative.profileBG);
   const [userName, setUserName] = React.useState(creative.userName);
   const [summary, setSummary] = React.useState(creative.summary);
@@ -58,18 +60,33 @@ export function EditProfile() {
               style={{ width: '100%' }}
             />
           </div>
-          {creative.gallery && (
-            <div>
-              <Divider />
-              <CardContent>
-                <MediaGallery
-                  items={gallery}
-                  setItems={setGallery}
-                  edit={true}
-                />
-              </CardContent>
-            </div>
+          {creative.sections.map(
+            section =>
+              section.gallery && (
+                <div>
+                  <Divider />
+                  <CardContent>
+                    <TextField
+                      id={'summary'}
+                      label={'Summary'}
+                      value={section.gallery.summary}
+                      onChange={e => {
+                        setSummary(e.target.value);
+                      }}
+                      margin="normal"
+                      variant="outlined"
+                      style={{ width: '100%' }}
+                    />
+                    <MediaGallery
+                      items={section.gallery.images}
+                      setItems={setGallery}
+                      edit={true}
+                    />
+                  </CardContent>
+                </div>
+              ),
           )}
+          <AddSection />
         </Card>
       </div>
     </Slide>
