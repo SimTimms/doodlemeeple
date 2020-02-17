@@ -10,10 +10,12 @@ import { Conversation } from './views/conversation';
 
 function MessageLayout(props) {
   const [page, setPage] = React.useState('conversations');
-  const pageJump = props.match ? props.match.params.page : null;
-  const pathParam = props.match
-    ? props.match.params.pathParam
+
+  const pathParam = props
+    ? props.match
       ? props.match.params.pathParam
+        ? props.match.params.pathParam
+        : null
       : null
     : null;
   const classes = useStyles();
@@ -26,10 +28,6 @@ function MessageLayout(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  if (pageJump !== page) {
-    setPage(pageJump);
-  }
 
   return (
     <div>
@@ -48,9 +46,7 @@ function MessageLayout(props) {
         <div className={classes.drawerHeader} />
         <ContentTop>
           <div>
-            {page === 'conversation' ? (
-              <Conversation conversationId={pathParam} />
-            ) : null}
+            <Conversation conversationId={pathParam} />
           </div>
         </ContentTop>
       </main>

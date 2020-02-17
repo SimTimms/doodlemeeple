@@ -4,7 +4,6 @@ import { Content } from '../../components';
 import { StyledNavBar } from '../../components/navBar';
 import { PublicMenu } from '../menus';
 import { withStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 
 function AboutLayoutStyled(props) {
   const { classes } = props;
@@ -15,7 +14,7 @@ function AboutLayoutStyled(props) {
         <PublicMenu />
       </StyledNavBar>
       <Content>
-        <div className={clsx(classes.background)}>
+        <div className={classes.background}>
           <AboutPage />
         </div>
       </Content>
