@@ -85,7 +85,6 @@ export function AddSection({ setSections, sections }) {
           </Typography>
         </Card>
         <Button
-          color="secondary"
           onClick={() => {
             setDisplay(false);
           }}

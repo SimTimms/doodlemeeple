@@ -15,9 +15,7 @@ import { rolesArrayTemp } from '../../testData/roles';
 import { Link } from 'react-router-dom';
 
 function RolesLayout(props) {
-  const [page, setPage] = React.useState(
-    'dashboard',
-  ); /*
+  const [page, setPage] = React.useState('dashboard');
   const pageJump = props.match ? props.match.params.page : null;
   const paramId = props.match
     ? props.match.params.pathParam
@@ -81,7 +79,7 @@ function RolesLayout(props) {
         </ContentTop>
       </main>
     </div>
-  );*/
+  );
 }
 
 export default RolesLayout;
