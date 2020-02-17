@@ -10,9 +10,30 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/">
-          <PublicLayoutFrame />
+        <Route
+          path="/app/:page/:pathParam?"
+          render={props => <AppLayout {...props} />}
+        />
+        <Route
+          path="/messages/:page/:pathParam?"
+          render={props => <MessagesLayout {...props} />}
+        />
+        <Route
+          path="/roles/:page/:pathParam?"
+          render={props => <RolesLayout {...props} />}
+        />
+        <Route
+          path="/message/:page/:pathParam?"
+          render={props => <MessageLayout {...props} />}
+        />
+        <Route path="/about">
+          <AboutLayoutFrame />
         </Route>
+        <Route
+          path="/:page"
+          render={props => <PublicLayoutFrame {...props} />}
+        />
+        <Route path="/" render={props => <PublicLayoutFrame {...props} />} />
       </Switch>
     </Router>
   );
