@@ -1,39 +1,17 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
+import { useStyles } from './styles';
 
 export function ProjectHeader({ bgImage, profile }) {
+  const classes = useStyles();
   return (
     <div
+      className={classes.root}
       style={{
-        display: 'flex',
-        flexDirection: 'row',
         backgroundImage: `url(${bgImage})`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center center',
-        alignItems: 'flex-end',
-        justifyContent: 'flex-end',
-        width: '100%',
-        height: 300,
-        padding: 10,
       }}
-    >
-      <div>
-        <CardMedia
-          component="img"
-          alt="Profile Photo"
-          height="140"
-          image={profile.profileImg}
-          title="Profile Photo"
-          style={{
-            borderRadius: '50%',
-            border: '10px solid #fff',
-            marginBottom: -50,
-          }}
-        />
-      </div>
-    </div>
+    ></div>
   );
 }
 export function CardHeader({ title }) {
@@ -53,19 +31,39 @@ export function CardHeader({ title }) {
   );
 }
 
-export function ProfileHeader({ title, user }) {
+export function ProfileHeader({ title, user, tags }) {
+  const classes = useStyles();
   return (
     <div
       style={{
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
       }}
     >
-      <Typography gutterBottom variant="h5" component="h2">
-        {title} <span style={{ color: '#aaa' }}>by {user}</span>
-      </Typography>
+      <div className={classes.avatarWrapper}>
+        <CardMedia
+          component="img"
+          alt="Profile Photo"
+          image={user.profileImg}
+          title="Profile Photo"
+          className={classes.avatar}
+        />
+      </div>
+      <div className={classes.profileNameWrapper}>
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="h2"
+          style={{ marginTop: -20 }}
+        >
+          {title} <span style={{ color: '#aaa' }}>by {user.name}</span>
+        </Typography>
+        <Typography gutterBottom component="p" color="textSecondary">
+          {tags.map(tag => `${tag} `)}
+        </Typography>
+      </div>
     </div>
   );
 }

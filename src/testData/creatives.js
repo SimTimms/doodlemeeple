@@ -9,6 +9,7 @@ export const creativesTemp = [
     id: 'JAMIENOBLE',
     userName: 'Jamie Noble',
     keywords: ['Digital Artist'],
+    emailAddress: 'jamie@doodlemeeple.com',
     profileImg: jamie,
     profileBG: jumping,
     summary:
@@ -20,62 +21,26 @@ export const creativesTemp = [
     id: 'DUKEJOHNSON',
     userName: 'Duke Johnson',
     keywords: ['Fantasy Artist'],
+    emailAddress: 'duke@doodlemeeple.com',
+    stripe: 'duke@doodlemeeple.com',
     profileImg: man,
     profileBG: smithy,
     summary:
       'Lizards are a widespread group of squamate reptiles, with over 6,000 species,  Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
     location: 'Nottingham, UK',
-    sections: [
-      {
-        gallery: {
-          summary: 'This is my gallery',
-          images: [
-            {
-              img: jumping,
-              title: 'Image',
-              author: 'author',
-              cols: 1,
-            },
-            {
-              img: smithy,
-              title: 'Image',
-              author: 'author',
-              cols: 1,
-            },
-          ],
-        },
-      },
-    ],
+    sections: [],
   },
   {
     id: 'TIMSIMMS',
     userName: 'Tim Simms',
     keywords: ['Copywriter'],
+    stripe: 'duke@doodlemeeple.com',
+    emailAddress: 'tim@doodlemeeple.com',
     profileImg: tim,
     profileBG: smithy,
     summary:
       'Lizards are a widespread group of squamate reptiles, with over 6,000 species,  Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
     location: 'Worthing, UK',
-    sections: [
-      {
-        gallery: {
-          summary: 'This is my gallery',
-          images: [
-            {
-              img: jumping,
-              title: 'Image',
-              author: 'author',
-              cols: 1,
-            },
-            {
-              img: smithy,
-              title: 'Image',
-              author: 'author',
-              cols: 1,
-            },
-          ],
-        },
-      },
-    ],
+    sections: [],
   },
 ];

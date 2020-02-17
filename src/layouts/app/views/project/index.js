@@ -34,20 +34,16 @@ export function Project({ projectId, gamesTemp, actionSet, edit }) {
       <Card className={classes.card}>
         <ProjectHeader bgImage={project.primaryImage} profile={project.user} />
         <CardContent>
-          <ProfileHeader title={project.projectName} user={project.user.name} />
+          <ProfileHeader
+            title={project.projectName}
+            user={project.user}
+            tags={project.tags}
+          />
           <Typography color="textSecondary" component="p">
             {project.projectSummary}
           </Typography>
         </CardContent>
-        {project.tags && (
-          <div>
-            <Divider />
-            <CardContent>
-              <CardHeader title="Tags" />
-              <TagsWidget tags={project.tags} setTags={null} edit={edit} />
-            </CardContent>
-          </div>
-        )}
+
         {project.invites && edit && (
           <div>
             <Divider />

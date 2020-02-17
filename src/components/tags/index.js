@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from '@material-ui/core/Icon';
+import Typography from '@material-ui/core/Typography';
 import { useStyles } from './styles';
 
 export function TagsWidget({ tags, setTags, edit }) {
@@ -9,7 +10,10 @@ export function TagsWidget({ tags, setTags, edit }) {
     <div className={classes.root}>
       {tags.map((tag, index) => (
         <div className={classes.tagMain} key={`tag_${index}`}>
-          <div className={classes.tag}>{tag}</div>
+          <Typography gutterBottom variant="h2" component="h2">
+            {tag}
+          </Typography>
+
           {edit && (
             <Icon
               className={classes.tagRemove}
@@ -73,7 +77,14 @@ export function SelectTagsWidget({ tags, fieldTags, setTags, setFieldTags }) {
               setTags(newTags);
             }}
           >
-            <div className={tagClass}>{tag.name}</div>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h2"
+              className={tagClass}
+            >
+              {tag.name}
+            </Typography>
             <Icon className={classes.tagSelect}>check_circle</Icon>
           </div>
         );

@@ -30,12 +30,12 @@ export const useStyles = makeStyles(theme => ({
   },
   tag: {
     borderRadius: 10,
-    height: 60,
+
     background: '#ddd',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center ',
-    padding: '5px 20px 5px 20px',
+    padding: '10px 20px 10px 20px',
     marginRight: 10,
   },
   tagSelected: {

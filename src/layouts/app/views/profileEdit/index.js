@@ -27,6 +27,7 @@ export function EditProfile() {
     profileImg: creative.profileImg,
     sections: sections,
   };
+
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>

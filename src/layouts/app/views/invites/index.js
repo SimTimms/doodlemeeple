@@ -58,7 +58,12 @@ export function Invites() {
               <Divider style={{ margin: 10 }} />
               <Link
                 to={`/app/view-project/${projectId}`}
-                style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
+                style={{
+                  maxWidth: 326,
+                  width: '100%',
+                  lineHeight: 0.6,
+                  textDecoration: 'none',
+                }}
               >
                 <Button variant="contained" color="secondary">
                   View Project
