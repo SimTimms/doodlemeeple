@@ -33,6 +33,7 @@ function App() {
           path="/:page"
           render={props => <PublicLayoutFrame {...props} />}
         />
+        <Route path="/" render={props => <PublicLayoutFrame {...props} />} />
       </Switch>
     </Router>
   );
