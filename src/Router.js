@@ -26,10 +26,9 @@ function App() {
           path="/message/:page/:pathParam?"
           render={props => <MessageLayout {...props} />}
         />
-        <Route
-          path="/about"
-          render={props => <AboutLayoutFrame {...props} />}
-        ></Route>
+        <Route path="/about">
+          <AboutLayoutFrame />
+        </Route>
         <Route
           path="/:page"
           render={props => <PublicLayoutFrame {...props} />}

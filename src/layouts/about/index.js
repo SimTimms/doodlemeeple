@@ -7,13 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
 function AboutLayoutStyled(props) {
-  const [page, setPage] = React.useState('home');
   const { classes } = props;
-  const pageJump = props.match ? props.match.params.page : null;
-
-  if (pageJump !== page) {
-    setPage(pageJump);
-  }
 
   return (
     <div>
