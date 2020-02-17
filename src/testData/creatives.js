@@ -14,14 +14,7 @@ export const creativesTemp = [
     summary:
       'A super friendly digital artist specialising in bespoke fantasy and sci-fi digital paintings for book cover work and illustration.',
     location: 'Horsham, UK',
-    sections: [
-      {
-        gallery: {
-          summary: 'This is my gallery',
-          images: [],
-        },
-      },
-    ],
+    sections: [],
   },
   {
     id: 'DUKEJOHNSON',

@@ -17,7 +17,6 @@ export function FileGallery({ items, files, setFiles, edit }) {
             <Typography color="textSecondary" gutterBottom>
               {tile}
             </Typography>
-            <Typography variant="h5" component="h2"></Typography>
           </CardContent>
           <CardActions>
             <Button size="small">Open</Button>

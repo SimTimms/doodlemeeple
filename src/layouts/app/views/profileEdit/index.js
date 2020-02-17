@@ -1,36 +1,35 @@
 import React from 'react';
 
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
+import TextField from '@material-ui/core/TextField';
+
 import { useStyles } from './styles';
 import { ContentHeader } from '../../../../components/headers/contentHeader';
 import { ProfileHeader } from './components/profileHeader';
-import { MediaGallery } from '../../../../components/mediaGallery';
 import { creativesTemp } from '../../../../testData/creatives';
-import TextField from '@material-ui/core/TextField';
 import { AddSection } from '../../../../components/buttons/addSection';
+import { MediaGalleryObject } from './components/mediaGalleryOject';
 
 export function EditProfile() {
   const classes = useStyles();
   const creative = creativesTemp[0];
-  console.log(creative);
   const [bgImage, setBgImage] = React.useState(creative.profileBG);
   const [userName, setUserName] = React.useState(creative.userName);
   const [summary, setSummary] = React.useState(creative.summary);
-  const [gallery, setGallery] = React.useState(creative.gallery);
+  const [sections, setSections] = React.useState(creative.sections);
 
   const userProfile = {
     userName: userName,
     summary: summary,
     profileImg: creative.profileImg,
-    gallery: gallery,
+    sections: sections,
   };
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div>
+      <div className={classes.root}>
         <ContentHeader>
           <Typography variant="h1" color="textPrimary">
             Profile
@@ -60,33 +59,30 @@ export function EditProfile() {
               style={{ width: '100%' }}
             />
           </div>
-          {creative.sections.map(
-            section =>
-              section.gallery && (
-                <div>
-                  <Divider />
-                  <CardContent>
-                    <TextField
-                      id={'summary'}
-                      label={'Summary'}
-                      value={section.gallery.summary}
-                      onChange={e => {
-                        setSummary(e.target.value);
-                      }}
-                      margin="normal"
-                      variant="outlined"
-                      style={{ width: '100%' }}
-                    />
-                    <MediaGallery
-                      items={section.gallery.images}
-                      setItems={setGallery}
-                      edit={true}
-                    />
-                  </CardContent>
-                </div>
-              ),
+          {userProfile.sections.map((section, index) =>
+            section.gallery ? (
+              <div key={`gallery_${index}`}>
+                <Divider />
+                <MediaGalleryObject
+                  gallery={section.gallery}
+                  sections={sections}
+                  setSections={setSections}
+                  index={index}
+                />
+              </div>
+            ) : section.graphicArtist ? (
+              <div key={`graphic_${index}`}>
+                <Divider />
+                <MediaGalleryObject
+                  gallery={section.graphicArtist}
+                  sections={sections}
+                  setSections={setSections}
+                  index={index}
+                />
+              </div>
+            ) : null,
           )}
-          <AddSection />
+          <AddSection setSections={setSections} sections={sections} />
         </Card>
       </div>
     </Slide>

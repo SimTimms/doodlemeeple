@@ -7,7 +7,6 @@ import { StyledNavBar } from '../../components/navBar';
 import { Footer } from '../../components/Footer';
 import { PublicMenu, PublicFooterMenu } from '../menus';
 import { withStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import smithy from '../../assets/smithy.jpg';
 import Typography from '@material-ui/core/Typography';
 
@@ -26,7 +25,7 @@ function PublicLayoutStyled(props) {
         <PublicMenu />
       </StyledNavBar>
       <Content>
-        <div className={clsx(classes.background)}>
+        <div className={classes.background}>
           {page === 'login' ? (
             <LoginCard />
           ) : page === 'register' ? (
