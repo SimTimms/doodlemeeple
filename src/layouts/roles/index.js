@@ -17,9 +17,11 @@ import { Link } from 'react-router-dom';
 function RolesLayout(props) {
   const [page, setPage] = React.useState('dashboard');
   const pageJump = props.match ? props.match.params.page : null;
-  const paramId = props.match
-    ? props.match.params.pathParam
+  const paramId = props
+    ? props.match
       ? props.match.params.pathParam
+        ? props.match.params.pathParam
+        : null
       : null
     : null;
   const classes = useStyles();

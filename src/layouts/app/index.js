@@ -35,9 +35,11 @@ function AppLayout(props) {
   ]);
   const pageJump = props.match ? props.match.params.page : null;
   //TODO: I guess this is proper dirty
-  const pathParam = props.match
-    ? props.match.params.pathParam
+  const pathParam = props
+    ? props.match
       ? props.match.params.pathParam
+        ? props.match.params.pathParam
+        : null
       : null
     : null;
 

@@ -11,9 +11,11 @@ import { Conversations } from './views/conversations';
 function MessagesLayout(props) {
   const [page, setPage] = React.useState('conversations');
   const pageJump = props.match ? props.match.params.page : null;
-  const pathParam = props.match
-    ? props.match.params.pathParam
+  const pathParam = props
+    ? props.match
       ? props.match.params.pathParam
+        ? props.match.params.pathParam
+        : null
       : null
     : null;
 
