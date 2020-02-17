@@ -9,7 +9,6 @@ import { ProfileHeader, ProjectHeader, CardHeader } from './components';
 import { MediaGallery } from '../../../../components/mediaGallery';
 import { FileGallery } from '../../../../components/fileGallery';
 import { InvitesWidget } from '../../../../components/invites';
-import { TagsWidget } from '../../../../components/tags';
 export function Project({ projectId, gamesTemp, actionSet, edit }) {
   const classes = useStyles();
 
