@@ -1,5 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import jumping from '../../../../../../assets/jumping.jpg';
 import CardContent from '@material-ui/core/CardContent';
 import { MediaGallery } from '../../../../../../components/mediaGallery';
@@ -7,6 +8,9 @@ import { MediaGallery } from '../../../../../../components/mediaGallery';
 export function MediaGalleryObject({ gallery, sections, setSections, index }) {
   return (
     <CardContent>
+      <Typography color="textSecondary" component="p">
+        Summary
+      </Typography>
       <TextField
         id={'summary'}
         label={'Summary'}
@@ -22,7 +26,9 @@ export function MediaGalleryObject({ gallery, sections, setSections, index }) {
         variant="outlined"
         style={{ width: '100%' }}
       />
-
+      <Typography color="textSecondary" component="p">
+        Upload Images
+      </Typography>
       <MediaGallery
         items={gallery.images}
         setItems={() => {
