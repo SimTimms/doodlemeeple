@@ -21,12 +21,12 @@ export function PublicLayout(props) {
   return (
     <div>
       <StyledNavBar title="" open={false}>
-        <PublicMenu />
+        <PublicMenu history={props.history} />
       </StyledNavBar>
       <Content>
         {page === 'login' ? (
           <div className={classes.backgroundLogin}>
-            <LoginCard />
+            <LoginCard history={props.history} />
           </div>
         ) : page === 'register' ? (
           <div className={classes.backgroundSignup}>

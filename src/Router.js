@@ -43,9 +43,7 @@ function App() {
             <AboutLayoutFrame />
           </Route>
           <Route path="/:page" render={props => <PublicLayout {...props} />} />
-          <Route path="/">
-            <PublicLayout />
-          </Route>
+          <Route path="/" render={props => <PublicLayout {...props} />} />
         </Switch>
       </Router>
     </ThemeProvider>

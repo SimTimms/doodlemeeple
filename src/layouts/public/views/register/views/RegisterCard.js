@@ -31,7 +31,7 @@ export default function RegisterCard({ setPage }) {
     const emailPass = validate(email);
     !emailPass && (passed = false);
 
-    const namePass = name.length > 5 ? true : false;
+    const namePass = name.length > 2 ? true : false;
     !namePass && (passed = false);
 
     let passwordSchema = new passwordValidator();

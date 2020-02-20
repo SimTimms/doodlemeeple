@@ -11,7 +11,7 @@ function AboutLayoutStyled(props) {
   return (
     <div>
       <StyledNavBar title="" open={false}>
-        <PublicMenu />
+        <PublicMenu history={props.history} />
       </StyledNavBar>
       <Content>
         <div className={classes.background}>

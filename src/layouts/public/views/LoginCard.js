@@ -5,13 +5,15 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Form, FormInput } from '../../../components/form';
 import { styles } from './styles';
-import ActionButton from '../components';
 import Slide from '@material-ui/core/Slide';
-import { Link } from 'react-router-dom';
+import { Mutation } from 'react-apollo';
+import Button from '@material-ui/core/Button';
+import { LOGIN_MUTATION, POST_MUTATION } from '../../../data/mutations';
+import Cookies from 'js-cookie';
 
-export default function LoginCard() {
+export default function LoginCard({ history }) {
   const classes = styles();
-  const [name, setName] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
 
   return (
@@ -41,26 +43,68 @@ export default function LoginCard() {
               <FormInput
                 fieldName="emailAddress"
                 fieldTitle="Email"
-                fieldValue={name}
-                setFieldValue={setName}
+                fieldValue={email}
+                setFieldValue={setEmail}
               />
               <FormInput
                 fieldName="password"
                 fieldTitle="Password"
-                fieldValue={email}
-                setFieldValue={setEmail}
+                fieldValue={password}
+                setFieldValue={setPassword}
               />
             </Form>
           </CardContent>
           <Divider />
           <CardContent className={classes.cardContentCenter}>
-            <Link
-              to="/app/dashboard"
-              style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
-              className={classes.buttonCentre}
+            <Mutation
+              mutation={LOGIN_MUTATION}
+              variables={{ email, password }}
+              onCompleted={data => {
+                if (data.login.token) {
+                  Cookies.set('token', data.login.token);
+                  history.push('/app/dashboard');
+                }
+              }}
             >
-              <ActionButton name="Login" />
-            </Link>
+              {LoginMutation => {
+                return (
+                  <div>
+                    <Button
+                      onClick={() => {
+                        LoginMutation();
+                      }}
+                      variant="contained"
+                      color="secondary"
+                    >
+                      Login
+                    </Button>
+                  </div>
+                );
+              }}
+            </Mutation>
+            <Mutation
+              mutation={POST_MUTATION}
+              variables={{ url: 'dd', description: 'dd' }}
+              onCompleted={data => {
+                console.log(data);
+              }}
+            >
+              {PostMutation => {
+                return (
+                  <div>
+                    <Button
+                      onClick={() => {
+                        PostMutation();
+                      }}
+                      variant="contained"
+                      color="secondary"
+                    >
+                      Login2
+                    </Button>
+                  </div>
+                );
+              }}
+            </Mutation>
           </CardContent>
         </Card>
       </div>

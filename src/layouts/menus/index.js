@@ -6,6 +6,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import Cookies from 'js-cookie';
 
 const StyledButton = withStyles({
   root: {
@@ -58,15 +59,29 @@ export function AppMenu({ handleDrawerOpen, open }) {
   );
 }
 
-export function PublicMenu() {
+export function PublicMenu({ history }) {
+  const authToken = Cookies.get('token');
+
   return (
     <div>
       <Link to="/home" style={{ textDecoration: 'none' }}>
         <StyledButton>Home</StyledButton>
       </Link>
-      <Link to="/login" style={{ textDecoration: 'none' }}>
-        <StyledButton>Login</StyledButton>
-      </Link>
+      {authToken ? (
+        <StyledButton
+          onClick={() => {
+            Cookies.remove('token');
+            history.push(`/`);
+          }}
+        >
+          Logout
+        </StyledButton>
+      ) : (
+        <Link to="/login" style={{ textDecoration: 'none' }}>
+          <StyledButton>Login</StyledButton>
+        </Link>
+      )}
+
       <Link to="/register" style={{ textDecoration: 'none' }}>
         <StyledButton>Register</StyledButton>
       </Link>
