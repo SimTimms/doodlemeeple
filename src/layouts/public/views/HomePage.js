@@ -21,22 +21,6 @@ function HomePageStyled(props) {
               Connecting board game creatives
             </span>
           </Typography>
-          <div className={clsx(classes.bgOverlay)}>
-            <Typography variant="h4" color="textPrimary">
-              Creator
-            </Typography>
-            <Typography variant="h6" color="textSecondary">
-              I design, publish or produce board games
-            </Typography>
-          </div>
-          <div className={clsx(classes.bgOverlay)}>
-            <Typography variant="h4" color="textPrimary">
-              Creative
-            </Typography>
-            <Typography variant="h6" color="textSecondary">
-              I draw, paint, sketch, model or copy write
-            </Typography>
-          </div>
         </div>
         <div className={clsx(classes.columnProfile)}>
           <div className={clsx(classes.profileName)}>

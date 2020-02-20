@@ -7,13 +7,11 @@ function RegisterLayout() {
   const [page, setPage] = React.useState(0);
   return (
     <div>
-      <Content>
-        {page === 0 ? (
-          <RegisterCard setPage={setPage} />
-        ) : (
-          <ThanksCard setPage={setPage} />
-        )}
-      </Content>
+      {page === 0 ? (
+        <RegisterCard setPage={setPage} />
+      ) : (
+        <ThanksCard setPage={setPage} />
+      )}
     </div>
   );
 }

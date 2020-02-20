@@ -70,7 +70,7 @@ export function Invites({ roleId }) {
                 profileImg: profile.profileImg,
                 userName: profile.userName,
               });
-
+              setPage('sent');
               setInvited(invitedArr);
             }}
           >

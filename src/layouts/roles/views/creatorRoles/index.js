@@ -6,9 +6,6 @@ import { useStyles } from './styles';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { rolesArrayTemp } from '../../../../testData/roles';
-/*
-import { creativesTemp } from '../../../../testData/creatives';
-import CardMedia from '@material-ui/core/CardMedia';*/
 import { projectObject } from '../../../../testData/projects';
 import Icon from '@material-ui/core/Icon';
 
@@ -26,11 +23,6 @@ export function CreatorRoles() {
         </Typography>
         <div className={classes.messageWrapper}>
           {rolesArrayTemp.map((role, index) => {
-            const invitedMembers =
-              role.invitees.length > 0 ? role.invitees : [];
-
-            const workerMembers = role.workers.length > 0 ? role.workers : [];
-
             const project = [projectObject].filter(
               item => item.id === role.projectId,
             )[0];

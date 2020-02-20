@@ -10,8 +10,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import HomeIcon from '@material-ui/icons/Home';
 import WorkIcon from '@material-ui/icons/Work';
+import ExtensionIcon from '@material-ui/icons/Extension';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalanceWallet';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -61,12 +63,16 @@ export function AppDrawer(props) {
             icon: <AccountBalanceIcon />,
             link: '/app/account',
           },
-          { name: 'Invites', icon: <MailIcon />, link: '/app/invites' },
+          {
+            name: 'Invites',
+            icon: <MailIcon />,
+            link: '/app/invites',
+          },
           { name: 'Jobs', icon: <WorkIcon />, link: '/roles/my-roles' },
-          { name: 'My Games', icon: <MailIcon />, link: '/app/projects' },
+          { name: 'My Games', icon: <ExtensionIcon />, link: '/app/projects' },
           {
             name: 'Messages',
-            icon: <MailIcon />,
+            icon: <QuestionAnswerIcon />,
             link: '/messages/conversations',
           },
         ].map((text, index) => (

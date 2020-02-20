@@ -6,13 +6,12 @@ import { Content } from '../../components';
 import { StyledNavBar } from '../../components/navBar';
 import { Footer } from '../../components/Footer';
 import { PublicMenu, PublicFooterMenu } from '../menus';
-import { withStyles } from '@material-ui/core/styles';
-import smithy from '../../assets/smithy.jpg';
+import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
 
-function PublicLayoutStyled(props) {
+export function PublicLayout(props) {
   const [page, setPage] = React.useState('home');
-  const { classes } = props;
+  const classes = useStyles();
   const pageJump = props.match ? props.match.params.page : null;
 
   if (pageJump !== page) {
@@ -25,15 +24,19 @@ function PublicLayoutStyled(props) {
         <PublicMenu />
       </StyledNavBar>
       <Content>
-        <div className={classes.background}>
-          {page === 'login' ? (
+        {page === 'login' ? (
+          <div className={classes.backgroundLogin}>
             <LoginCard />
-          ) : page === 'register' ? (
+          </div>
+        ) : page === 'register' ? (
+          <div className={classes.backgroundSignup}>
             <Registry />
-          ) : (
+          </div>
+        ) : (
+          <div className={classes.background}>
             <HomePage />
-          )}
-        </div>
+          </div>
+        )}
       </Content>
       <div style={{ marginTop: 40 }}>
         <Typography variant="h4" color="textPrimary" gutterBottom>
@@ -81,39 +84,3 @@ function PublicLayoutStyled(props) {
     </div>
   );
 }
-
-export const PublicLayout = withStyles({
-  root: {},
-  background: {
-    backgroundImage: `url(${smithy})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center center',
-    width: '100%',
-    height: 400,
-    padding: 10,
-  },
-  bgOverlay: {
-    background: '#fff',
-    padding: '20px 10px 20px 10px',
-    width: '80%',
-    marginBottom: 10,
-    marginLeft: '-10px',
-    height: 44,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    display: 'flex',
-    boxShadow: ' 10px 5px 10px rgba(0,0,0,0.4)',
-  },
-  grid: { display: 'flex', justifyContent: 'space-between', height: '100%' },
-  column: { display: 'flex', width: '50%', flexWrap: 'wrap' },
-  columnProfile: {
-    display: 'flex',
-    width: '50%',
-    height: '100%',
-    flexWrap: 'wrap',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-  },
-  profileName: { marginRight: 10 },
-})(PublicLayoutStyled);

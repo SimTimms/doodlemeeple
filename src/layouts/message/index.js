@@ -9,8 +9,6 @@ import { MessageDrawer } from '../menus/MessageDrawer';
 import { Conversation } from './views/conversation';
 
 function MessageLayout(props) {
-  const [page, setPage] = React.useState('conversations');
-
   const pathParam = props
     ? props.match
       ? props.match.params.pathParam

@@ -23,11 +23,6 @@ export function RolesHistory() {
         </Typography>
         <div className={classes.messageWrapper}>
           {rolesArrayTemp.map((role, index) => {
-            const invitedMembers =
-              role.invitees.length > 0 ? role.invitees : [];
-
-            const workerMembers = role.workers.length > 0 ? role.workers : [];
-
             const project = [projectObject].filter(
               item => item.id === role.projectId,
             )[0];
