@@ -12,7 +12,7 @@ import { PASSWORD_RESET_MUTATION } from '../../../../../data/mutations';
 import { ErrorBox } from '../../../../../components/pageElements';
 var passwordValidator = require('password-validator');
 
-export default function ResetCard({ history, setPage, token }) {
+export default function ResetCard({ setPage, token }) {
   const classes = styles();
   const [password, setPassword] = React.useState('');
   const [buttonStatus, setButtonStatus] = React.useState({
@@ -23,7 +23,7 @@ export default function ResetCard({ history, setPage, token }) {
     password: null,
   });
 
-  function submitChecks(SignupMutation) {
+  function submitChecks(password, SignupMutation) {
     let passed = true;
 
     let passwordSchema = new passwordValidator();
@@ -47,7 +47,7 @@ export default function ResetCard({ history, setPage, token }) {
 
     const passwordPass = passwordSchema.validate(password);
     !passwordPass && (passed = false);
-    console.log(password);
+
     setError({
       password: !passwordPass ? 'Enter a valid password' : null,
     });
@@ -98,7 +98,12 @@ export default function ResetCard({ history, setPage, token }) {
               mutation={PASSWORD_RESET_MUTATION}
               variables={{ password, token }}
               onCompleted={async data => {
-                setButtonStatus({ value: 'Done', action: () => {} });
+                data.passwordReset === true
+                  ? setPage(1)
+                  : setButtonStatus({
+                      value: 'Try Again',
+                      action: submitChecks,
+                    });
               }}
               onError={error => {
                 setButtonStatus({
@@ -112,7 +117,7 @@ export default function ResetCard({ history, setPage, token }) {
                   <div>
                     <Button
                       onClick={() => {
-                        buttonStatus.action(passwordResetMutation);
+                        buttonStatus.action(password, passwordResetMutation);
                       }}
                       variant="contained"
                       color="secondary"

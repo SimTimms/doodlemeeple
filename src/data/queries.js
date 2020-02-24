@@ -8,3 +8,11 @@ export const PROFILE = gql`
     }
   }
 `;
+
+export const NOTIFICATIONS = gql`
+  {
+    getNotifications {
+      message
+    }
+  }
+`;

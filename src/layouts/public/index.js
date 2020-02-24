@@ -25,7 +25,7 @@ export function PublicLayout(props) {
   if (pageJump !== page) {
     setPage(pageJump);
   }
-  console.log(props.match.params);
+
   return (
     <div>
       <StyledNavBar title="" open={false}>
