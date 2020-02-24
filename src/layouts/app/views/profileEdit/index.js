@@ -12,14 +12,25 @@ import { ProfileHeader } from './components/profileHeader';
 import { creativesTemp } from '../../../../testData/creatives';
 import { AddSection } from '../../../../components/buttons/addSection';
 import { MediaGalleryObject } from './components/mediaGalleryOject';
+import { Mutation, Query } from 'react-apollo';
+import { UPDATE_USER_MUTATION } from '../../../../data/mutations';
+import { PROFILE } from '../../../../data/queries';
+import { readableErrors } from '../../../../utils/readableErrors';
+import { ErrorBox } from '../../../../components/pageElements';
+import Button from '@material-ui/core/Button';
 
 export function EditProfile() {
   const classes = useStyles();
   const creative = creativesTemp[0];
   const [bgImage, setBgImage] = React.useState(creative.profileBG);
-  const [userName, setUserName] = React.useState(creative.userName);
-  const [summary, setSummary] = React.useState(creative.summary);
+  const [userName, setUserName] = React.useState('');
+  const [summary, setSummary] = React.useState('');
   const [sections, setSections] = React.useState(creative.sections);
+  const [errors, setError] = React.useState({
+    name: null,
+    email: null,
+    password: null,
+  });
 
   const userProfile = {
     userName: userName,
@@ -31,6 +42,19 @@ export function EditProfile() {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
+        <Query
+          query={PROFILE}
+          onCompleted={data => {
+            setUserName(data.profile.name);
+            setSummary(data.profile.summary);
+          }}
+        >
+          {({ loading, error, data }) => {
+            if (loading) return <div>Fetching</div>;
+            if (error) return <div>Error</div>;
+            return null;
+          }}
+        </Query>
         <ContentHeader>
           <Typography variant="h1" color="textPrimary">
             Profile
@@ -40,6 +64,7 @@ export function EditProfile() {
             work
           </Typography>
         </ContentHeader>
+
         <Card className={classes.card}>
           <ProfileHeader
             bgImage={bgImage}
@@ -47,6 +72,37 @@ export function EditProfile() {
             setBgImage={setBgImage}
             setUserName={setUserName}
           />
+          <Mutation
+            mutation={UPDATE_USER_MUTATION}
+            variables={{ name: userName, summary }}
+            onError={error => {
+              setError(readableErrors(error, errors));
+            }}
+          >
+            {SignupMutation => {
+              return (
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Button
+                    onClick={() => {
+                      SignupMutation();
+                    }}
+                    variant="contained"
+                    color="secondary"
+                    style={{ margin: 10 }}
+                  >
+                    Save
+                  </Button>
+                </div>
+              );
+            }}
+          </Mutation>
+          <ErrorBox errorMsg={errors.name} />
           <div style={{ padding: 10 }}>
             <TextField
               id={'summary'}

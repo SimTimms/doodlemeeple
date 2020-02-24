@@ -13,5 +13,15 @@ export const readableErrors = (errorIn, errors) => {
   } else {
     errors.password = null;
   }
+  if (errorString.indexOf('Not authenticated') > -1) {
+    errors.testError = "You don't have permission";
+  } else {
+    errors.testError = null;
+  }
+  if (errorString.indexOf('No such user') > -1) {
+    errors.noUserError = "That's not right";
+  } else {
+    errors.noUserError = null;
+  }
   return Object.assign({}, errors);
 };

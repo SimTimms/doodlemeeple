@@ -38,6 +38,7 @@ export function FormInput(props) {
       onChange={e => {
         props.setFieldValue(e.target.value);
       }}
+      type={props.type}
       margin="normal"
       variant="outlined"
     />

@@ -33,6 +33,7 @@ function AppLayout(props) {
     projectObjectThree,
   ]);
   const pageJump = props.match ? props.match.params.page : null;
+
   //TODO: I guess this is proper dirty
   const pathParam = props
     ? props.match
@@ -64,7 +65,6 @@ function AppLayout(props) {
         menu={<AppMenu handleDrawerOpen={handleDrawerOpen} open={open} />}
       ></StyledNavBar>
       <AppDrawer handleDrawerClose={handleDrawerClose} open={open} />
-
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,

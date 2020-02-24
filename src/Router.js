@@ -7,8 +7,10 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import MessageLayout from './layouts/message';
 import RolesLayout from './layouts/roles';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 function App() {
+  const authToken = Cookies.get('token');
   const theme = createMuiTheme({
     typography: {
       fontFamily: ['Quicksand'].join(','),
@@ -23,25 +25,37 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Switch>
-          <Route
-            path="/app/:page/:pathParam?"
-            render={props => <AppLayout {...props} />}
-          />
-          <Route
-            path="/messages/:page/:pathParam?"
-            render={props => <MessagesLayout {...props} />}
-          />
-          <Route
-            path="/roles/:page/:pathParam?"
-            render={props => <RolesLayout {...props} />}
-          />
-          <Route
-            path="/message/:page/:pathParam?"
-            render={props => <MessageLayout {...props} />}
-          />
+          {authToken && (
+            <Route
+              path="/app/:page/:pathParam?"
+              render={props => <AppLayout {...props} />}
+            />
+          )}
+          {authToken && (
+            <Route
+              path="/messages/:page/:pathParam?"
+              render={props => <MessagesLayout {...props} />}
+            />
+          )}
+          {authToken && (
+            <Route
+              path="/roles/:page/:pathParam?"
+              render={props => <RolesLayout {...props} />}
+            />
+          )}
+          {authToken && (
+            <Route
+              path="/message/:page/:pathParam?"
+              render={props => <MessageLayout {...props} />}
+            />
+          )}
           <Route path="/about">
             <AboutLayoutFrame />
           </Route>
+          <Route
+            path="/:page/:token"
+            render={props => <PublicLayout {...props} />}
+          />
           <Route path="/:page" render={props => <PublicLayout {...props} />} />
           <Route path="/" render={props => <PublicLayout {...props} />} />
         </Switch>

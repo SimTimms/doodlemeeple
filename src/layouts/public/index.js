@@ -6,6 +6,8 @@ import { Content } from '../../components';
 import { StyledNavBar } from '../../components/navBar';
 import { Footer } from '../../components/Footer';
 import { PublicMenu, PublicFooterMenu } from '../menus';
+import { PasswordForgot } from './views/passwordForgot';
+import { PasswordReset } from './views/passwordReset';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
 
@@ -13,11 +15,17 @@ export function PublicLayout(props) {
   const [page, setPage] = React.useState('home');
   const classes = useStyles();
   const pageJump = props.match ? props.match.params.page : null;
-
+  const token = props
+    ? props.match
+      ? props.match.params.token
+        ? props.match.params.token
+        : null
+      : null
+    : null;
   if (pageJump !== page) {
     setPage(pageJump);
   }
-
+  console.log(props.match.params);
   return (
     <div>
       <StyledNavBar title="" open={false}>
@@ -31,6 +39,14 @@ export function PublicLayout(props) {
         ) : page === 'register' ? (
           <div className={classes.backgroundSignup}>
             <Registry />
+          </div>
+        ) : page === 'password-forgot' ? (
+          <div className={classes.backgroundSignup}>
+            <PasswordForgot history={props.history} />
+          </div>
+        ) : page === 'password-reset' ? (
+          <div className={classes.backgroundSignup}>
+            <PasswordReset history={props.history} token={token} />
           </div>
         ) : (
           <div className={classes.background}>

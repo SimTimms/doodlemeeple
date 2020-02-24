@@ -11,6 +11,14 @@ export const SIGNUP_MUTATION = gql`
   }
 `;
 
+export const UPDATE_USER_MUTATION = gql`
+  mutation UpdateUserMutation($name: String!, $summary: String) {
+    updateUser(name: $name, summary: $summary) {
+      id
+    }
+  }
+`;
+
 export const LOGIN_MUTATION = gql`
   mutation LoginMutation($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -22,10 +30,14 @@ export const LOGIN_MUTATION = gql`
   }
 `;
 
-export const POST_MUTATION = gql`
-  mutation PostMutation($url: String!, $description: String!) {
-    post(url: $url, description: $description) {
-      description
-    }
+export const PASSWORD_FORGOT_MUTATION = gql`
+  mutation PasswordForgotMutation($email: String!) {
+    passwordForgot(email: $email)
+  }
+`;
+
+export const PASSWORD_RESET_MUTATION = gql`
+  mutation PasswordResetMutation($password: String!, $token: String!) {
+    passwordReset(password: $password, token: $token)
   }
 `;

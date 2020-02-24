@@ -2,45 +2,55 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Form, FormInput } from '../../../components/form';
+import { Form, FormInput } from '../../../../../components/form';
 import { styles } from './styles';
+import Button from '@material-ui/core/Button';
 import Slide from '@material-ui/core/Slide';
 import { Mutation } from 'react-apollo';
-import { LOGIN_MUTATION } from '../../../data/mutations';
-import Cookies from 'js-cookie';
-import { readableErrors } from '../../../utils/readableErrors';
-import { ErrorBox } from '../../../components/pageElements';
+import { PASSWORD_FORGOT_MUTATION } from '../../../../../data/mutations';
+import { ErrorBox } from '../../../../../components/pageElements';
+import { validate } from 'email-validator';
 
-export default function LoginCard({ history }) {
+export default function ForgotCard({ history, setPage }) {
   const classes = styles();
-  const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [errors, setError] = React.useState({
-    testError: null,
-    noUserError: null,
+    email: null,
   });
+
+  function submitChecks(SignupMutation) {
+    let passed = true;
+
+    const emailPass = validate(email);
+    !emailPass && (passed = false);
+
+    setError({
+      email: !emailPass ? 'Enter a valid email address' : null,
+    });
+
+    passed && SignupMutation();
+  }
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div
-        style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100%',
-        }}
-      >
+      <div className={classes.root}>
         <Card className={classes.card}>
           <CardContent style={{ padding: 5 }}>
             <Typography
-              variant="h6"
+              variant="h1"
               color="textPrimary"
               style={{ textAlign: 'center' }}
             >
-              Login
+              Forgotten Password
+            </Typography>
+            <Typography
+              color="textSecondary"
+              component="p"
+              style={{ textAlign: 'center' }}
+              className={classes.description}
+            >
+              Enter a few details and we'll send you a registration link.
             </Typography>
           </CardContent>
           <Divider />
@@ -52,58 +62,37 @@ export default function LoginCard({ history }) {
                 fieldValue={email}
                 setFieldValue={setEmail}
               />
-              <FormInput
-                fieldName="password"
-                fieldTitle="Password"
-                fieldValue={password}
-                setFieldValue={setPassword}
-                type="password"
-              />
+              <ErrorBox errorMsg={errors.email} />
             </Form>
           </CardContent>
           <Divider />
           <CardContent className={classes.cardContentCenter}>
             <Mutation
-              mutation={LOGIN_MUTATION}
-              variables={{ email, password }}
+              mutation={PASSWORD_FORGOT_MUTATION}
+              variables={{ email }}
               onCompleted={async data => {
-                if (data.login.token) {
-                  await Cookies.set('token', data.login.token);
-                  history.push('/app/dashboard');
-                }
+                setPage(1);
               }}
               onError={error => {
-                setError(readableErrors(error, errors));
+                setPage(1);
               }}
             >
-              {LoginMutation => {
+              {passwordForgotMutation => {
                 return (
                   <div>
                     <Button
                       onClick={() => {
-                        LoginMutation();
+                        submitChecks(passwordForgotMutation);
                       }}
                       variant="contained"
                       color="secondary"
                     >
-                      Login
+                      Reset Password
                     </Button>
                   </div>
                 );
               }}
             </Mutation>
-            <ErrorBox errorMsg={errors.testError} />
-            <ErrorBox errorMsg={errors.noUserError} />
-          </CardContent>
-
-          <CardContent className={classes.cardContentCenter}>
-            <Button
-              onClick={() => {
-                history.push('/password-forgot');
-              }}
-            >
-              Forgot Password
-            </Button>
           </CardContent>
         </Card>
       </div>
