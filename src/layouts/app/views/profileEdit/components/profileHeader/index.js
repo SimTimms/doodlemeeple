@@ -2,12 +2,9 @@ import React from 'react';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useStyles } from './styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Icon from '@material-ui/core/Icon';
 import clsx from 'clsx';
-import smithy from '../../../../../../assets/smithy.jpg';
-import jumping from '../../../../../../assets/jumping.jpg';
-
 import TextField from '@material-ui/core/TextField';
+import { Uploader } from '../../../../../../components/uploader';
 
 export function ProfileHeader({ bgImage, profile, setBgImage, setUserName }) {
   const classes = useStyles();
@@ -23,14 +20,7 @@ export function ProfileHeader({ bgImage, profile, setBgImage, setUserName }) {
         [classes.rootDesktop]: !mobile,
       })}
     >
-      <Icon
-        className={classes.imageIcon}
-        onClick={() => {
-          bgImage === smithy ? setBgImage(jumping) : setBgImage(smithy);
-        }}
-      >
-        add_photo_alternate
-      </Icon>
+      <Uploader cbImage={setBgImage} />
       <div
         className={clsx({
           [classes.profileWrapper]: true,

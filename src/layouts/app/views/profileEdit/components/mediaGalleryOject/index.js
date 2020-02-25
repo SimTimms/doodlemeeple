@@ -52,12 +52,13 @@ export function MediaGalleryObject({ gallery, sections, setSections, index }) {
           let newGallery = Object.assign({}, gallery);
           let newSections = Object.assign([], sections);
           newGallery.images.push({
-            img: jumping,
+            img: 'https://dm-uploads-uk.s3.amazonaws.com/purps',
             title: 'Image',
             author: 'author',
             cols: 1,
           });
           newSections.splice(index, 1, { gallery: newGallery });
+
           setSections(newSections);
         }}
         edit={true}

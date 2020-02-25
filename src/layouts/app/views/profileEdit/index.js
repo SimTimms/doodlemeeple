@@ -22,10 +22,10 @@ import Button from '@material-ui/core/Button';
 export function EditProfile() {
   const classes = useStyles();
   const creative = creativesTemp[0];
-  const [bgImage, setBgImage] = React.useState(creative.profileBG);
+  const [bgImage, setBgImage] = React.useState('');
   const [userName, setUserName] = React.useState('');
   const [summary, setSummary] = React.useState('');
-  const [sections, setSections] = React.useState(creative.sections);
+  const [sections, setSections] = React.useState([]);
   const [errors, setError] = React.useState({
     name: null,
     email: null,
@@ -47,6 +47,8 @@ export function EditProfile() {
           onCompleted={data => {
             setUserName(data.profile.name);
             setSummary(data.profile.summary);
+            setBgImage(data.profile.profileBG);
+            data.profile.sections && setSections(data.profile.sections);
           }}
         >
           {({ loading, error, data }) => {
@@ -74,12 +76,18 @@ export function EditProfile() {
           />
           <Mutation
             mutation={UPDATE_USER_MUTATION}
-            variables={{ name: userName, summary }}
+            variables={{
+              name: userName,
+              summary,
+              profileBG: bgImage,
+              sections,
+            }}
             onError={error => {
               setError(readableErrors(error, errors));
             }}
           >
             {SignupMutation => {
+              console.log(sections);
               return (
                 <div
                   style={{

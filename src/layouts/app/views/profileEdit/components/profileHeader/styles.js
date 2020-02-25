@@ -4,7 +4,7 @@ export const useStyles = makeStyles(theme => ({
   root: {
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'bottom center',
+    backgroundPosition: 'top center',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'flex-end',
@@ -12,14 +12,6 @@ export const useStyles = makeStyles(theme => ({
     height: 300,
     paddingBottom: 10,
     position: 'relative',
-  },
-  imageIcon: {
-    fontSize: 50,
-    color: '#fff',
-    cursor: 'pointer',
-    position: 'absolute',
-    top: 0,
-    right: 0,
   },
   rootDesktop: {
     display: 'flex',

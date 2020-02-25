@@ -43,7 +43,6 @@ export function AddSection({ setSections, sections }) {
             setDisplay(false);
             const newSection = {
               gallery: {
-                id: Math.floor(Math.random() * 100),
                 summary: '',
                 images: [],
               },

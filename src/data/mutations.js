@@ -12,8 +12,18 @@ export const SIGNUP_MUTATION = gql`
 `;
 
 export const UPDATE_USER_MUTATION = gql`
-  mutation UpdateUserMutation($name: String!, $summary: String) {
-    updateUser(name: $name, summary: $summary) {
+  mutation UpdateUserMutation(
+    $name: String!
+    $summary: String
+    $profileBG: String
+    $sections: [SectionInput]
+  ) {
+    updateUser(
+      name: $name
+      summary: $summary
+      profileBG: $profileBG
+      sections: $sections
+    ) {
       id
     }
   }
