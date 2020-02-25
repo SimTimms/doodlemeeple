@@ -18,7 +18,7 @@ export default function LoginCard({ history }) {
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [errors, setError] = React.useState({
-    testError: null,
+    passwordError: null,
     noUserError: null,
   });
 
@@ -92,7 +92,7 @@ export default function LoginCard({ history }) {
                 );
               }}
             </Mutation>
-            <ErrorBox errorMsg={errors.testError} />
+            <ErrorBox errorMsg={errors.passwordError} />
             <ErrorBox errorMsg={errors.noUserError} />
           </CardContent>
 

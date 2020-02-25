@@ -13,6 +13,10 @@ export const NOTIFICATIONS = gql`
   {
     getNotifications {
       message
+      id
+      icon
+      title
+      createdAt
     }
   }
 `;

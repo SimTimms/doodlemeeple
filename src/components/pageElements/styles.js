@@ -7,8 +7,11 @@ export const useStyles = makeStyles(theme => {
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'flex-start',
+      justifyContent: 'center',
       paddingBottom: 10,
+      paddingTop: 10,
+      border: '1px solid #ddd',
+      marginTop: 10,
     },
     errorMsg: {
       marginBottom: 2,

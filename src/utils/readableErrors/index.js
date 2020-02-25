@@ -1,9 +1,7 @@
 export const readableErrors = (errorIn, errors) => {
   let errorString = errorIn.toString();
 
-  if (
-    errorString.indexOf('A unique constraint would be violated on User') > -1
-  ) {
+  if (errorString.indexOf('A unique constraint') > -1) {
     errors.email = 'This user already exists';
   } else {
     errors.email = null;
@@ -22,6 +20,11 @@ export const readableErrors = (errorIn, errors) => {
     errors.noUserError = "That's not right";
   } else {
     errors.noUserError = null;
+  }
+  if (errorString.indexOf('Invalid password') > -1) {
+    errors.passwordError = "That's not right";
+  } else {
+    errors.passwordError = null;
   }
   return Object.assign({}, errors);
 };

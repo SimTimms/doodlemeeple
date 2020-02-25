@@ -67,6 +67,15 @@ export function PublicMenu({ history }) {
       <Link to="/home" style={{ textDecoration: 'none' }}>
         <StyledButton>Home</StyledButton>
       </Link>
+      {authToken && (
+        <StyledButton
+          onClick={() => {
+            history.push(`/app/dashboard`);
+          }}
+        >
+          Dashboard
+        </StyledButton>
+      )}
       {authToken ? (
         <StyledButton
           onClick={() => {
@@ -81,7 +90,6 @@ export function PublicMenu({ history }) {
           <StyledButton>Login</StyledButton>
         </Link>
       )}
-
       <Link to="/register" style={{ textDecoration: 'none' }}>
         <StyledButton>Register</StyledButton>
       </Link>
