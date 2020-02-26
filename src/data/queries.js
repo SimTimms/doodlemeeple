@@ -6,15 +6,6 @@ export const PROFILE = gql`
       name
       summary
       profileBG
-      sections {
-        id
-        summary
-        gallery {
-          id
-          summary
-          images
-        }
-      }
     }
   }
 `;
@@ -35,11 +26,14 @@ export const SECTIONS = gql`
   {
     getSections {
       id
+      title
       summary
       gallery {
         id
         summary
-        images
+        images {
+          img
+        }
       }
     }
   }

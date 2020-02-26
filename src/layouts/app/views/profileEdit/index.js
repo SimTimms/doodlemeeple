@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Card from '@material-ui/core/Card';
-import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import TextField from '@material-ui/core/TextField';
@@ -10,12 +9,11 @@ import { ContentHeader } from '../../../../components/headers/contentHeader';
 import { ProfileHeader } from './components/profileHeader';
 import { creativesTemp } from '../../../../testData/creatives';
 import { AddSection } from '../../../../components/buttons/addSection';
-import { MediaGalleryObject } from './components/mediaGalleryOject';
 import { Query } from 'react-apollo';
 import { PROFILE, SECTIONS } from '../../../../data/queries';
 import { ErrorBox } from '../../../../components/pageElements';
 import { UpdateUserButton } from './components/updateUserButton';
-import { Section } from './components/section';
+import { Section, GallerySection } from './components/section';
 
 export function EditProfile() {
   const classes = useStyles();
@@ -95,6 +93,7 @@ export function EditProfile() {
           <Query
             query={SECTIONS}
             onCompleted={data => {
+              console.log(data);
               setSections(data.getSections);
             }}
           >
@@ -107,26 +106,14 @@ export function EditProfile() {
           {sections &&
             sections.map((section, index) =>
               section.gallery ? (
-                <div key={`gallery_${index}`}>
-                  <Divider />
-                  <MediaGalleryObject
-                    gallery={section.gallery}
-                    sections={sections}
-                    setSections={setSections}
-                    index={index}
-                  />
-                </div>
-              ) : section.graphicArtist ? (
-                <div key={`graphic_${index}`}>
-                  <Divider />
-                  <MediaGalleryObject
-                    gallery={section.graphicArtist}
-                    sections={sections}
-                    setSections={setSections}
-                    index={index}
-                  />
-                </div>
-              ) : section.summary ? (
+                <GallerySection
+                  key={`section_${index}`}
+                  index={index}
+                  sections={sections}
+                  setSections={setSections}
+                  section={section}
+                />
+              ) : section.summary !== null ? (
                 <Section
                   key={`section_${index}`}
                   index={index}

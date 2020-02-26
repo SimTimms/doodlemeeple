@@ -7,7 +7,7 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
-    padding: '10px 0 10px 0',
+    padding: '5px 3px 5px 3px',
   },
   gridList: {
     width: '100%',

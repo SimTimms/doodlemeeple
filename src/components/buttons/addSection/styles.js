@@ -24,6 +24,7 @@ export const useStyles = makeStyles(theme => {
       justifyContent: 'space-around',
       alignItems: 'center',
       flexDirection: 'row',
+      flexWrap: 'wrap',
     },
     skillCard: {
       padding: 20,

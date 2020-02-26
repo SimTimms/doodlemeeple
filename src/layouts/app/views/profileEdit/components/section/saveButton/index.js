@@ -1,49 +1,36 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Mutation } from 'react-apollo';
-import { UPDATE_USER_MUTATION } from '../../../../../../data/mutations';
-import { readableErrors } from '../../../../../../utils/readableErrors';
+import { UPDATE_SECTION_MUTATION } from '../../../../../../../data/mutations';
 
-export function UpdateUserButton({
-  userName,
-  summary,
-  bgImage,
-  setError,
-  errors,
+export function SaveButton({
+  sectionId,
+  sectionValues,
+  disabledValue,
+  setDisabledValue,
 }) {
+  console.log(sectionValues);
   return (
     <Mutation
-      mutation={UPDATE_USER_MUTATION}
+      mutation={UPDATE_SECTION_MUTATION}
       variables={{
-        name: userName,
-        summary,
-        profileBG: bgImage,
-        sections: [{ summary: 'Test Section' }, { summary: 'Test Section 2' }],
-      }}
-      onError={error => {
-        setError(readableErrors(error, errors));
+        id: sectionId,
+        section: sectionValues,
       }}
     >
-      {SignupMutation => {
+      {UpdateSectionMutation => {
         return (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              alignItems: 'center',
+          <Button
+            onClick={() => {
+              setDisabledValue(false);
+              UpdateSectionMutation();
             }}
+            variant="contained"
+            color="secondary"
+            disabled={!disabledValue}
           >
-            <Button
-              onClick={() => {
-                SignupMutation();
-              }}
-              variant="contained"
-              color="secondary"
-              style={{ margin: 10 }}
-            >
-              Save
-            </Button>
-          </div>
+            Save
+          </Button>
         );
       }}
     </Mutation>

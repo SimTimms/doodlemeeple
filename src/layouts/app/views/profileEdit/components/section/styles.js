@@ -9,4 +9,12 @@ export const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     padding: '10px !important',
   },
+  actionWrapper: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    width: '100%',
+  },
 }));

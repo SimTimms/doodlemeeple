@@ -1,7 +1,6 @@
 import React from 'react';
 import { styles } from './styles';
 import { withStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import TextField from '@material-ui/core/TextField';
 
 export function Form(props) {
@@ -10,7 +9,7 @@ export function Form(props) {
 
   return (
     <form
-      className={clsx(classes.container)}
+      className={classes.container}
       style={{ width: width ? width : '100%' }}
       noValidate
       autoComplete="off"

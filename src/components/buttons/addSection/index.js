@@ -27,7 +27,7 @@ export function AddSection({ setSections, sections }) {
           component="p"
           style={{ fontSize: 24, color: '#fff', marginLeft: 10 }}
         >
-          Add a Skill
+          Add More
         </Typography>
       </CardContent>
       <Divider />
@@ -42,8 +42,29 @@ export function AddSection({ setSections, sections }) {
           onClick={() => {
             setDisplay(false);
             const newSection = {
+              id: 'new',
+              summary: '',
+              title: '',
+            };
+            const newSections = Object.assign([], sections);
+            newSections.push(newSection);
+            setSections(newSections);
+          }}
+        >
+          <Icon style={{ fontSize: 50, color: '#333' }}>brush</Icon>
+          <Typography color="textSecondary" component="p">
+            Summary
+          </Typography>
+        </Card>
+        <Card
+          className={classes.skillCard}
+          onClick={() => {
+            setDisplay(false);
+            const newSection = {
+              id: 'new',
+              title: '',
+              summary: '',
               gallery: {
-                summary: '',
                 images: [],
               },
             };
@@ -54,29 +75,10 @@ export function AddSection({ setSections, sections }) {
         >
           <Icon style={{ fontSize: 50, color: '#333' }}>brush</Icon>
           <Typography color="textSecondary" component="p">
-            Digital Artist
+            Gallery
           </Typography>
         </Card>
-        <Card
-          className={classes.skillCard}
-          onClick={() => {
-            const newSection = {
-              graphicArtist: {
-                id: Math.floor(Math.random() * 100),
-                summary: '',
-                images: [],
-              },
-            };
-            const newSections = Object.assign([], sections);
-            newSections.push(newSection);
-            setSections(newSections);
-          }}
-        >
-          <Icon style={{ fontSize: 50, color: '#333' }}>font_download</Icon>
-          <Typography color="textSecondary" component="p">
-            Graphic Artist
-          </Typography>
-        </Card>
+
         <Card className={classes.skillCard}>
           <Icon style={{ fontSize: 50, color: '#333' }}>edit</Icon>
           <Typography color="textSecondary" component="p">

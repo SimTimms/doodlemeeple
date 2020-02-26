@@ -31,9 +31,15 @@ export const UPDATE_USER_MUTATION = gql`
 
 export const UPDATE_SECTION_MUTATION = gql`
   mutation UpdateSectionMutation($id: String!, $section: SectionInput) {
-    updateUser(id: $id, section: $section) {
+    updateSection(id: $id, section: $section) {
       id
     }
+  }
+`;
+
+export const REMOVE_SECTION_MUTATION = gql`
+  mutation RemoveSectionMutation($id: String!) {
+    removeSection(id: $id)
   }
 `;
 

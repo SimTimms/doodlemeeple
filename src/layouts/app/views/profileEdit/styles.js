@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import smithy from '../../../../assets/smithy.jpg';
 
 export const useStyles = makeStyles(theme => ({
-  root: { minWidth: 600 },
+  root: { minWidth: 600, maxWidth: 600 },
   card: { margin: 10, maxWidth: 712 },
   title: {
     fontSize: 14,
