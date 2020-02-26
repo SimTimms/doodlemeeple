@@ -5,19 +5,17 @@ import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import TextField from '@material-ui/core/TextField';
-
 import { useStyles } from './styles';
 import { ContentHeader } from '../../../../components/headers/contentHeader';
 import { ProfileHeader } from './components/profileHeader';
 import { creativesTemp } from '../../../../testData/creatives';
 import { AddSection } from '../../../../components/buttons/addSection';
 import { MediaGalleryObject } from './components/mediaGalleryOject';
-import { Mutation, Query } from 'react-apollo';
-import { UPDATE_USER_MUTATION } from '../../../../data/mutations';
-import { PROFILE } from '../../../../data/queries';
-import { readableErrors } from '../../../../utils/readableErrors';
+import { Query } from 'react-apollo';
+import { PROFILE, SECTIONS } from '../../../../data/queries';
 import { ErrorBox } from '../../../../components/pageElements';
-import Button from '@material-ui/core/Button';
+import { UpdateUserButton } from './components/updateUserButton';
+import { Section } from './components/section';
 
 export function EditProfile() {
   const classes = useStyles();
@@ -48,13 +46,12 @@ export function EditProfile() {
             setUserName(data.profile.name);
             setSummary(data.profile.summary);
             setBgImage(data.profile.profileBG);
-            data.profile.sections && setSections(data.profile.sections);
           }}
         >
           {({ loading, error, data }) => {
             if (loading) return <div>Fetching</div>;
             if (error) return <div>Error</div>;
-            return null;
+            return <div></div>;
           }}
         </Query>
         <ContentHeader>
@@ -74,42 +71,13 @@ export function EditProfile() {
             setBgImage={setBgImage}
             setUserName={setUserName}
           />
-          <Mutation
-            mutation={UPDATE_USER_MUTATION}
-            variables={{
-              name: userName,
-              summary,
-              profileBG: bgImage,
-              sections,
-            }}
-            onError={error => {
-              setError(readableErrors(error, errors));
-            }}
-          >
-            {SignupMutation => {
-              console.log(sections);
-              return (
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Button
-                    onClick={() => {
-                      SignupMutation();
-                    }}
-                    variant="contained"
-                    color="secondary"
-                    style={{ margin: 10 }}
-                  >
-                    Save
-                  </Button>
-                </div>
-              );
-            }}
-          </Mutation>
+          <UpdateUserButton
+            userName={userName}
+            summary={summary}
+            bgImage={bgImage}
+            setError={setError}
+            errors={errors}
+          />
           <ErrorBox errorMsg={errors.name} />
           <div style={{ padding: 10 }}>
             <TextField
@@ -124,29 +92,50 @@ export function EditProfile() {
               style={{ width: '100%' }}
             />
           </div>
-          {userProfile.sections.map((section, index) =>
-            section.gallery ? (
-              <div key={`gallery_${index}`}>
-                <Divider />
-                <MediaGalleryObject
-                  gallery={section.gallery}
+          <Query
+            query={SECTIONS}
+            onCompleted={data => {
+              setSections(data.getSections);
+            }}
+          >
+            {({ loading, error, data }) => {
+              if (loading) return <div>Fetching</div>;
+              if (error) return <div>Error</div>;
+              return null;
+            }}
+          </Query>
+          {sections &&
+            sections.map((section, index) =>
+              section.gallery ? (
+                <div key={`gallery_${index}`}>
+                  <Divider />
+                  <MediaGalleryObject
+                    gallery={section.gallery}
+                    sections={sections}
+                    setSections={setSections}
+                    index={index}
+                  />
+                </div>
+              ) : section.graphicArtist ? (
+                <div key={`graphic_${index}`}>
+                  <Divider />
+                  <MediaGalleryObject
+                    gallery={section.graphicArtist}
+                    sections={sections}
+                    setSections={setSections}
+                    index={index}
+                  />
+                </div>
+              ) : section.summary ? (
+                <Section
+                  key={`section_${index}`}
+                  index={index}
                   sections={sections}
                   setSections={setSections}
-                  index={index}
+                  section={section}
                 />
-              </div>
-            ) : section.graphicArtist ? (
-              <div key={`graphic_${index}`}>
-                <Divider />
-                <MediaGalleryObject
-                  gallery={section.graphicArtist}
-                  sections={sections}
-                  setSections={setSections}
-                  index={index}
-                />
-              </div>
-            ) : null,
-          )}
+              ) : null,
+            )}
           <AddSection setSections={setSections} sections={sections} />
         </Card>
       </div>

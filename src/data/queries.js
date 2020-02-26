@@ -30,3 +30,17 @@ export const NOTIFICATIONS = gql`
     }
   }
 `;
+
+export const SECTIONS = gql`
+  {
+    getSections {
+      id
+      summary
+      gallery {
+        id
+        summary
+        images
+      }
+    }
+  }
+`;
