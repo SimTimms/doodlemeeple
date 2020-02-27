@@ -10,7 +10,7 @@ import { setContext } from 'apollo-link-context';
 import Cookies from 'js-cookie';
 
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_API,
+  uri: 'http://localhost:4000',
 });
 
 const authLink = setContext((_, { headers }) => {
