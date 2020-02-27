@@ -8,8 +8,11 @@ export function UpdateUserButton({
   userName,
   summary,
   bgImage,
+  profileImg,
   setError,
   errors,
+  disabledValue,
+  setDisabledValue,
 }) {
   return (
     <Mutation
@@ -18,6 +21,7 @@ export function UpdateUserButton({
         name: userName,
         summary,
         profileBG: bgImage,
+        profileImg,
         sections: [{ summary: 'Test Section' }, { summary: 'Test Section 2' }],
       }}
       onError={error => {
@@ -35,11 +39,13 @@ export function UpdateUserButton({
           >
             <Button
               onClick={() => {
+                setDisabledValue(false);
                 SignupMutation();
               }}
               variant="contained"
               color="secondary"
               style={{ margin: 10 }}
+              disabled={!disabledValue}
             >
               Save
             </Button>

@@ -6,6 +6,11 @@ import { DeleteButton } from './deleteButton';
 import { useStyles } from './styles';
 import { MediaGalleryObject } from '../mediaGalleryOject';
 
+import {
+  UPDATE_SECTION_MUTATION,
+  UPDATE_GALLERY_SECTION_MUTATION,
+} from '../../../../../../data/mutations';
+
 export function Section({ index, sections, setSections, section }) {
   const classes = useStyles();
   const [title, setTitle] = React.useState(section.title);
@@ -53,6 +58,7 @@ export function Section({ index, sections, setSections, section }) {
             sectionValues={sectionValues}
             disabledValue={changed}
             setDisabledValue={setChanged}
+            mutation={UPDATE_SECTION_MUTATION}
           />
         </div>
       </div>
@@ -64,10 +70,15 @@ export function GallerySection({ index, sections, setSections, section }) {
   const classes = useStyles();
   const [title, setTitle] = React.useState(section.title);
   const [summary, setSummary] = React.useState(section.summary);
-  const [images, setImages] = React.useState(section.gallery);
+  const [images, setImages] = React.useState(section.gallery.images);
   const [changed, setChanged] = React.useState(false);
 
-  let sectionValues = { summary, title, gallery: images };
+  const imageFilter = images.map(item => {
+    return {
+      img: item.img,
+    };
+  });
+  let sectionValues = { summary, title, gallery: { images: imageFilter } };
 
   return (
     <div>
@@ -99,7 +110,10 @@ export function GallerySection({ index, sections, setSections, section }) {
         />
         <MediaGalleryObject
           images={images}
-          setImages={setImages}
+          setImages={newImages => {
+            setChanged(true);
+            setImages(newImages);
+          }}
           index={index}
         />
         <div className={classes.actionWrapper}>
@@ -114,6 +128,7 @@ export function GallerySection({ index, sections, setSections, section }) {
             sectionValues={sectionValues}
             disabledValue={changed}
             setDisabledValue={setChanged}
+            mutation={UPDATE_GALLERY_SECTION_MUTATION}
           />
         </div>
       </div>

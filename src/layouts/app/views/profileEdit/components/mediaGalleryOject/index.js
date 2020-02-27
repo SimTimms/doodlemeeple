@@ -2,6 +2,7 @@ import React from 'react';
 import { MediaGallery } from '../../../../../../components/mediaGallery';
 
 export function MediaGalleryObject({ images, setImages, index }) {
+  images = images ? images : [];
   return (
     <div
       style={{
@@ -12,15 +13,16 @@ export function MediaGalleryObject({ images, setImages, index }) {
       }}
     >
       <MediaGallery
-        items={images.images}
-        setItems={() => {
-          let imageArray = Object.assign({}, images);
-          imageArray.images.push({
-            img: 'https://dm-uploads-uk.s3.amazonaws.com/purps',
+        items={images}
+        setBgImage={url => {
+          let imageArray = Object.assign([], images);
+          imageArray.push({
+            img: url,
           });
           setImages(imageArray);
         }}
         edit={true}
+        setImages={setImages}
       />
     </div>
   );

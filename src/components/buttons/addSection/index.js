@@ -79,12 +79,6 @@ export function AddSection({ setSections, sections }) {
           </Typography>
         </Card>
 
-        <Card className={classes.skillCard}>
-          <Icon style={{ fontSize: 50, color: '#333' }}>edit</Icon>
-          <Typography color="textSecondary" component="p">
-            Copy Writer
-          </Typography>
-        </Card>
         <Button
           onClick={() => {
             setDisplay(false);

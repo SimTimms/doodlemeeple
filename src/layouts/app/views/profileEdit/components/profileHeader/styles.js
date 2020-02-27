@@ -12,6 +12,8 @@ export const useStyles = makeStyles(theme => ({
     height: 300,
     paddingBottom: 10,
     position: 'relative',
+    borderBottom: '1px solid #ddd',
+    backgroundColor: '#ccc',
   },
   rootDesktop: {
     display: 'flex',
@@ -56,10 +58,37 @@ export const useStyles = makeStyles(theme => ({
   avatarWrapper: {
     borderRadius: '50%',
     border: '10px solid #fff',
+    backgroundColor: '#ccc',
     marginTop: -10,
     marginBottom: -10,
     width: 140,
+    minWidth: 140,
+    maxWidth: 140,
     height: 140,
+    position: 'relative',
+  },
+  deleteBGButton: { display: 'none' },
+  deleteBGButtonShow: {
+    display: 'flex',
+    position: 'absolute',
+    top: 0,
+    background: 'rgba(0,0,0,0.3)',
+  },
+  deleteAvatarButton: {
+    color: '#fff',
+    textShadow: '2px 2px 2px rgba(0,0,0,0.4)',
+  },
+  deleteAvatarWrapper: {
+    display: 'none',
+  },
+  deleteAvatarWrapperShow: {
+    display: 'flex',
+    position: 'absolute',
+    justifyContent: 'center',
+    bottom: 10,
+    width: '100%',
+
+    borderRadius: 70,
   },
   avatarWrapperMobile: {
     marginTop: -70,

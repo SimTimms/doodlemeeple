@@ -4,7 +4,7 @@ import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
 
-export function Uploader({ cbImage }) {
+export function Uploader({ cbImage, styleOverride }) {
   const classes = useStyles();
   const [statusMessage, setStatusMessage] = React.useState('');
   let uploadInput = null;
@@ -32,7 +32,6 @@ export function Uploader({ cbImage }) {
         category: 'profileBG',
       })
       .then(response => {
-        cbImage('');
         setStatusMessage('Sending...');
         if (response.data.data) {
           setStatusMessage('Sending more...');
@@ -47,8 +46,7 @@ export function Uploader({ cbImage }) {
           axios
             .put(signedRequest, file, options)
             .then(result => {
-              console.log(result);
-              setStatusMessage('Done');
+              setStatusMessage('');
               cbImage(url);
             })
             .catch(error => {
@@ -56,17 +54,17 @@ export function Uploader({ cbImage }) {
               console.log(error);
             });
         } else {
-          setStatusMessage(response.data.error);
+          setStatusMessage(response.data.toString());
         }
       })
       .catch(error => {
-        setStatusMessage('d');
+        setStatusMessage('Error');
         console.log(error);
       });
   }
 
   return (
-    <label className={classes.imageIconWrapper}>
+    <label className={classes.imageIconWrapper} style={styleOverride}>
       <Typography gutterBottom>{statusMessage}</Typography>
       <Icon className={classes.imageIcon}>add_photo_alternate</Icon>
       <input

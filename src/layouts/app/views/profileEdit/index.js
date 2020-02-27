@@ -7,7 +7,6 @@ import TextField from '@material-ui/core/TextField';
 import { useStyles } from './styles';
 import { ContentHeader } from '../../../../components/headers/contentHeader';
 import { ProfileHeader } from './components/profileHeader';
-import { creativesTemp } from '../../../../testData/creatives';
 import { AddSection } from '../../../../components/buttons/addSection';
 import { Query } from 'react-apollo';
 import { PROFILE, SECTIONS } from '../../../../data/queries';
@@ -17,11 +16,12 @@ import { Section, GallerySection } from './components/section';
 
 export function EditProfile() {
   const classes = useStyles();
-  const creative = creativesTemp[0];
   const [bgImage, setBgImage] = React.useState('');
   const [userName, setUserName] = React.useState('');
   const [summary, setSummary] = React.useState('');
   const [sections, setSections] = React.useState([]);
+  const [profileImg, setProfileImg] = React.useState('');
+  const [disabledValue, setDisabledValue] = React.useState(false);
   const [errors, setError] = React.useState({
     name: null,
     email: null,
@@ -31,7 +31,7 @@ export function EditProfile() {
   const userProfile = {
     userName: userName,
     summary: summary,
-    profileImg: creative.profileImg,
+    profileImg: profileImg,
     sections: sections,
   };
 
@@ -44,6 +44,7 @@ export function EditProfile() {
             setUserName(data.profile.name);
             setSummary(data.profile.summary);
             setBgImage(data.profile.profileBG);
+            setProfileImg(data.profile.profileImg);
           }}
         >
           {({ loading, error, data }) => {
@@ -66,16 +67,12 @@ export function EditProfile() {
           <ProfileHeader
             bgImage={bgImage}
             profile={userProfile}
+            setProfileImg={setProfileImg}
             setBgImage={setBgImage}
             setUserName={setUserName}
+            setDisabledValue={setDisabledValue}
           />
-          <UpdateUserButton
-            userName={userName}
-            summary={summary}
-            bgImage={bgImage}
-            setError={setError}
-            errors={errors}
-          />
+
           <ErrorBox errorMsg={errors.name} />
           <div style={{ padding: 10 }}>
             <TextField
@@ -83,17 +80,27 @@ export function EditProfile() {
               label={'Summary'}
               value={userProfile.summary}
               onChange={e => {
+                setDisabledValue(true);
                 setSummary(e.target.value);
               }}
               margin="normal"
               variant="outlined"
               style={{ width: '100%' }}
             />
+            <UpdateUserButton
+              userName={userName}
+              summary={summary}
+              bgImage={bgImage}
+              profileImg={profileImg}
+              setError={setError}
+              errors={errors}
+              disabledValue={disabledValue}
+              setDisabledValue={setDisabledValue}
+            />
           </div>
           <Query
             query={SECTIONS}
             onCompleted={data => {
-              console.log(data);
               setSections(data.getSections);
             }}
           >

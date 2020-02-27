@@ -16,12 +16,14 @@ export const UPDATE_USER_MUTATION = gql`
     $name: String!
     $summary: String
     $profileBG: String
+    $profileImg: String
     $sections: [SectionInput]
   ) {
     updateUser(
       name: $name
       summary: $summary
       profileBG: $profileBG
+      profileImg: $profileImg
       sections: $sections
     ) {
       id
@@ -37,9 +39,23 @@ export const UPDATE_SECTION_MUTATION = gql`
   }
 `;
 
+export const UPDATE_GALLERY_SECTION_MUTATION = gql`
+  mutation UpdateGallerySectionMutation($id: String!, $section: SectionInput) {
+    updateGallerySection(id: $id, section: $section) {
+      id
+    }
+  }
+`;
+
 export const REMOVE_SECTION_MUTATION = gql`
   mutation RemoveSectionMutation($id: String!) {
     removeSection(id: $id)
+  }
+`;
+
+export const REMOVE_NOTIFICATION_MUTATION = gql`
+  mutation RemoveNotificationMutation($id: String!) {
+    removeNotification(id: $id)
   }
 `;
 

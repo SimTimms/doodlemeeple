@@ -4,8 +4,11 @@ import Card from '@material-ui/core/Card';
 import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import { Query } from 'react-apollo';
 import { NOTIFICATIONS } from '../../../../../data/queries';
+import { Mutation } from 'react-apollo';
+import { REMOVE_NOTIFICATION_MUTATION } from '../../../../../data/mutations';
 import { timeDifferenceForDate } from '../../../../../utils/dates';
 
 export function Notifications() {
@@ -70,20 +73,31 @@ export function Notifications() {
                   </div>
                 </div>
               </div>
-              <div className={classes.actions}>
-                <Icon
-                  color="disabled"
-                  onClick={() => {
-                    const notificationArrayFiltered = notificationArray.filter(
-                      item => item.id !== notification.id,
-                    );
-                    setNotificationArray(notificationArrayFiltered);
-                  }}
-                  className={classes.iconButton}
-                >
-                  delete
-                </Icon>
-              </div>
+              <Mutation
+                mutation={REMOVE_NOTIFICATION_MUTATION}
+                variables={{
+                  id: notification.id,
+                }}
+              >
+                {RemoveNotificationMutation => {
+                  return (
+                    <Button
+                      color="secondary"
+                      onClick={() => {
+                        RemoveNotificationMutation();
+                        const notificationArrayFiltered = notificationArray.filter(
+                          item => item.id !== notification.id,
+                        );
+                        setNotificationArray(notificationArrayFiltered);
+                      }}
+                    >
+                      <Icon color="disabled" className={classes.iconButton}>
+                        delete
+                      </Icon>
+                    </Button>
+                  );
+                }}
+              </Mutation>
             </div>
           </Card>
         );

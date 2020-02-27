@@ -1,14 +1,16 @@
 import React from 'react';
-import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { Uploader } from '../../components/uploader';
+import Icon from '@material-ui/core/Icon';
 
-export function MediaGallery({ items, setItems, edit }) {
+export function MediaGallery({ items, edit, setBgImage, setImages }) {
   const seedID = Math.floor(Math.random());
   const [mediaViewer, setMediaViewer] = React.useState(null);
+
   const classes = useStyles();
 
   return (
@@ -24,10 +26,26 @@ export function MediaGallery({ items, setItems, edit }) {
             <GridListTile
               key={`${tile.img}_${seedID}_${index}`}
               cols={tile.cols || 1}
-              style={{ background: 'none' }}
-              onClick={() => setMediaViewer(tile)}
+              style={{ background: 'none', position: 'relative' }}
             >
-              <img src={tile.img} alt={tile.title} />
+              <Button
+                className={classes.iconButton}
+                onClick={() => {
+                  let imageArray = Object.assign([], items);
+                  imageArray = imageArray.filter(
+                    arrItem => arrItem.img !== tile.img,
+                  );
+                  console.log(imageArray);
+                  setImages(imageArray);
+                }}
+              >
+                <Icon className={classes.iconButtonIcon}>delete</Icon>
+              </Button>
+              <img
+                src={tile.img}
+                alt={tile.title}
+                onClick={() => setMediaViewer(tile)}
+              />
             </GridListTile>
           ))}
 
@@ -42,14 +60,7 @@ export function MediaGallery({ items, setItems, edit }) {
                   alignItems: 'center ',
                 }}
               >
-                <Icon
-                  style={{ fontSize: 50, color: '#fff' }}
-                  onClick={() => {
-                    setItems();
-                  }}
-                >
-                  add_circle
-                </Icon>
+                <Uploader cbImage={setBgImage} styleOverride={null} />
               </div>
             </GridListTile>
           )}
