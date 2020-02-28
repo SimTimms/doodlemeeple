@@ -19,6 +19,7 @@ export const NOTIFICATIONS = gql`
       icon
       title
       createdAt
+      linkTo
     }
   }
 `;
