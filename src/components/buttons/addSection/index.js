@@ -21,12 +21,12 @@ export function AddSection({ setSections, sections }) {
         })}
         onClick={() => (display ? setDisplay(false) : setDisplay(true))}
       >
-        <Icon style={{ fontSize: 20, color: '#fff' }}>add_circle</Icon>
+        <Icon style={{ fontSize: 18, color: '#fff' }}>add_circle</Icon>
         <Typography
           component="p"
-          style={{ fontSize: 18, color: '#fff', marginLeft: 10 }}
+          style={{ fontSize: 16, color: '#fff', marginLeft: 10 }}
         >
-          Add More
+          {`Add Section (${3 - sections.length} remaining)`}
         </Typography>
       </CardContent>
       <Divider />

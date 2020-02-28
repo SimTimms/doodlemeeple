@@ -134,7 +134,9 @@ export function EditProfile() {
                 />
               ) : null,
             )}
-          <AddSection setSections={setSections} sections={sections} />
+          {sections.length < 3 && (
+            <AddSection setSections={setSections} sections={sections} />
+          )}
         </Card>
       </div>
     </Slide>

@@ -21,7 +21,7 @@ export function Uploader({ cbImage, styleOverride }) {
       'Content-Type': 'image/jpeg',
     };
 
-    const uploadURL = `${process.env.REACT_APP_API}/sign_s3`;
+    const uploadURL = `${process.env.REACT_APP_API}sign_s3`;
 
     setStatusMessage('Uploading...');
     axios
