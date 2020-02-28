@@ -32,6 +32,7 @@ export function EditProfile() {
     userName: userName,
     summary: summary,
     profileImg: profileImg,
+    bgImage: bgImage,
     sections: sections,
   };
 
@@ -65,7 +66,6 @@ export function EditProfile() {
 
         <Card className={classes.card}>
           <ProfileHeader
-            bgImage={bgImage}
             profile={userProfile}
             setProfileImg={setProfileImg}
             setBgImage={setBgImage}
@@ -83,13 +83,13 @@ export function EditProfile() {
                   : ''
               }`}
               inputProps={{ maxLength: 256 }}
+              multiline
               type="text"
               value={userProfile.summary}
               onChange={e => {
                 setDisabledValue(true);
                 setSummary(e.target.value);
               }}
-              multiline
               margin="normal"
               variant="outlined"
               style={{ width: '100%' }}

@@ -8,7 +8,6 @@ import { Uploader } from '../../../../../../components/uploader';
 import Button from '@material-ui/core/Button';
 
 export function ProfileHeader({
-  bgImage,
   profile,
   setProfileImg,
   setBgImage,
@@ -17,11 +16,11 @@ export function ProfileHeader({
 }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
-
+  console.log(profile);
   return (
     <div
       style={{
-        backgroundImage: `url(${bgImage})`,
+        backgroundImage: `url(${profile.bgImage})`,
       }}
       className={clsx({
         [classes.root]: true,
@@ -36,7 +35,8 @@ export function ProfileHeader({
         }}
         className={clsx({
           [classes.deleteBGButton]: true,
-          [classes.deleteBGButtonShow]: bgImage !== '' && bgImage !== null,
+          [classes.deleteBGButtonShow]:
+            profile.bgImage !== '' && profile.bgImage !== null,
         })}
         style={{ color: '#fff', borderRadius: '0 0 5px 0', left: 0 }}
       >
