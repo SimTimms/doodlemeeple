@@ -21,11 +21,10 @@ export function AddSection({ setSections, sections }) {
         })}
         onClick={() => (display ? setDisplay(false) : setDisplay(true))}
       >
-        <Icon style={{ fontSize: 50, color: '#fff' }}>add_circle</Icon>
+        <Icon style={{ fontSize: 20, color: '#fff' }}>add_circle</Icon>
         <Typography
-          color="textSecondary"
           component="p"
-          style={{ fontSize: 24, color: '#fff', marginLeft: 10 }}
+          style={{ fontSize: 18, color: '#fff', marginLeft: 10 }}
         >
           Add More
         </Typography>
@@ -51,7 +50,7 @@ export function AddSection({ setSections, sections }) {
             setSections(newSections);
           }}
         >
-          <Icon style={{ fontSize: 50, color: '#333' }}>brush</Icon>
+          <Icon style={{ fontSize: 50, color: '#333' }}>dehaze</Icon>
           <Typography color="textSecondary" component="p">
             Summary
           </Typography>
@@ -73,20 +72,29 @@ export function AddSection({ setSections, sections }) {
             setSections(newSections);
           }}
         >
-          <Icon style={{ fontSize: 50, color: '#333' }}>brush</Icon>
+          <Icon style={{ fontSize: 50, color: '#333' }}>photo_library</Icon>
           <Typography color="textSecondary" component="p">
             Gallery
           </Typography>
         </Card>
-
-        <Button
-          onClick={() => {
-            setDisplay(false);
-          }}
-        >
-          Cancel
-        </Button>
       </div>
+      <CardContent
+        className={clsx({
+          [classes.cancel]: true,
+          [classes.hide]: !display,
+        })}
+        onClick={() => {
+          setDisplay(false);
+        }}
+      >
+        <Icon style={{ fontSize: 18, color: '#aaa' }}>close</Icon>
+        <Typography
+          component="p"
+          style={{ fontSize: 16, color: '#aaa', marginLeft: 10 }}
+        >
+          Close
+        </Typography>
+      </CardContent>
     </div>
   );
 }

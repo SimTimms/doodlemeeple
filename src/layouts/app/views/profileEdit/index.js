@@ -77,21 +77,25 @@ export function EditProfile() {
           <div style={{ padding: 10 }}>
             <TextField
               id={'summary'}
-              label={'Summary'}
+              label={`About Me ${
+                userProfile.summary
+                  ? `(${256 - userProfile.summary.length})`
+                  : ''
+              }`}
+              inputProps={{ maxLength: 256 }}
+              type="text"
               value={userProfile.summary}
               onChange={e => {
                 setDisabledValue(true);
                 setSummary(e.target.value);
               }}
+              multiline
               margin="normal"
               variant="outlined"
               style={{ width: '100%' }}
             />
             <UpdateUserButton
-              userName={userName}
-              summary={summary}
-              bgImage={bgImage}
-              profileImg={profileImg}
+              profile={userProfile}
               setError={setError}
               errors={errors}
               disabledValue={disabledValue}

@@ -13,6 +13,17 @@ export const useStyles = makeStyles(theme => {
         background: theme.palette.secondary.light,
       },
     },
+    cancel: {
+      background: '#fff',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      cursor: 'pointer',
+
+      '&:hover': {
+        background: '#ccc',
+      },
+    },
     hide: { display: 'none' },
     skillWrapper: {
       display: 'none',

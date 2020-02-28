@@ -24,7 +24,8 @@ export function Section({ index, sections, setSections, section }) {
       <div className={classes.sectionWrapper}>
         <TextField
           id={'title'}
-          label={'Title'}
+          label={`Title ${title ? `(${46 - title.length})` : ''}`}
+          inputProps={{ maxLength: 46 }}
           value={title}
           margin="normal"
           variant="outlined"
@@ -36,7 +37,8 @@ export function Section({ index, sections, setSections, section }) {
         />
         <TextField
           id={'summary'}
-          label={'Summary'}
+          label={`Summary ${summary ? `(${46 - summary.length})` : ''}`}
+          inputProps={{ maxLength: 46 }}
           value={summary}
           margin="normal"
           variant="outlined"
@@ -86,8 +88,10 @@ export function GallerySection({ index, sections, setSections, section }) {
       <div className={classes.sectionWrapper}>
         <TextField
           id={'title'}
-          label={'Title'}
           value={title}
+          label={`Title ${title ? `(${46 - title.length})` : ''}`}
+          inputProps={{ maxLength: 46 }}
+          multiline
           margin="normal"
           variant="outlined"
           style={{ width: '100%' }}
@@ -98,7 +102,9 @@ export function GallerySection({ index, sections, setSections, section }) {
         />
         <TextField
           id={'summary'}
-          label={'Summary'}
+          label={`Description ${summary ? `(${256 - summary.length})` : ''}`}
+          inputProps={{ maxLength: 256 }}
+          multiline
           value={summary}
           margin="normal"
           variant="outlined"

@@ -5,23 +5,21 @@ import { UPDATE_USER_MUTATION } from '../../../../../../data/mutations';
 import { readableErrors } from '../../../../../../utils/readableErrors';
 
 export function UpdateUserButton({
-  userName,
-  summary,
-  bgImage,
-  profileImg,
+  profile,
   setError,
   errors,
   disabledValue,
   setDisabledValue,
 }) {
+  const validate = profile.userName.length < 3 ? false : disabledValue;
   return (
     <Mutation
       mutation={UPDATE_USER_MUTATION}
       variables={{
-        name: userName,
-        summary,
-        profileBG: bgImage,
-        profileImg,
+        name: profile.userName,
+        summary: profile.summary,
+        profileBG: profile.bgImage,
+        profileImg: profile.profileImg,
         sections: [{ summary: 'Test Section' }, { summary: 'Test Section 2' }],
       }}
       onError={error => {
@@ -45,7 +43,7 @@ export function UpdateUserButton({
               variant="contained"
               color="secondary"
               style={{ margin: 10 }}
-              disabled={!disabledValue}
+              disabled={!validate}
             >
               Save
             </Button>

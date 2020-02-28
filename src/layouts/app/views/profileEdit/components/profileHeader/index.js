@@ -36,7 +36,7 @@ export function ProfileHeader({
         }}
         className={clsx({
           [classes.deleteBGButton]: true,
-          [classes.deleteBGButtonShow]: bgImage !== '',
+          [classes.deleteBGButtonShow]: bgImage !== '' && bgImage !== null,
         })}
         style={{ color: '#fff', borderRadius: '0 0 5px 0', left: 0 }}
       >
@@ -65,7 +65,8 @@ export function ProfileHeader({
           <div
             className={clsx({
               [classes.deleteAvatarWrapper]: true,
-              [classes.deleteAvatarWrapperShow]: profile.profileImg !== '',
+              [classes.deleteAvatarWrapperShow]:
+                profile.profileImg !== '' && profile.profileImg !== null,
             })}
           >
             <Button
@@ -91,14 +92,14 @@ export function ProfileHeader({
               marginLeft: 'auto',
               marginRight: 'auto',
               left: 0,
-              top: 40,
+              top: 38,
               borderRadius: '50%',
               padding: 0,
               opacity: 0.5,
               background: 'none',
             }}
           />
-          {profile.profileImg !== '' && (
+          {profile.profileImg !== '' && profile.profileImg !== null && (
             <CardMedia
               component="img"
               alt={profile.profileImg}
@@ -116,8 +117,11 @@ export function ProfileHeader({
         >
           <TextField
             id={'userName'}
-            label={'Name'}
             value={profile.userName}
+            label={`Name ${
+              profile.userName ? `(${36 - profile.userName.length})` : ''
+            }`}
+            inputProps={{ maxLength: 36 }}
             onChange={e => {
               setDisabledValue(true);
               setUserName(e.target.value);

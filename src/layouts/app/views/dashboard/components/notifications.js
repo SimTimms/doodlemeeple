@@ -39,16 +39,15 @@ export function Notifications() {
         console.log(notification);
         return (
           <Card className={classes.card} key={`conversation_${index}`}>
-            <Link
-              to={notification.linkTo}
-              className={classes.messageButton}
-              style={{ textDecoration: 'none' }}
-            >
-              <div className={classes.rowWrapper}>
+            <div className={classes.rowWrapper}>
+              <Link
+                to={notification.linkTo}
+                className={classes.messageButton}
+                style={{ textDecoration: 'none' }}
+              >
                 <div className={classes.notifications}>
                   <Icon style={{ color: '#f50057' }}>{notification.icon}</Icon>
                 </div>
-
                 <div className={classes.profileWrapper}>
                   <div className={classes.wrapperOne}>
                     <div className={classes.messageDetails}>
@@ -73,33 +72,33 @@ export function Notifications() {
                     </div>
                   </div>
                 </div>
-                <Mutation
-                  mutation={REMOVE_NOTIFICATION_MUTATION}
-                  variables={{
-                    id: notification.id,
-                  }}
-                >
-                  {RemoveNotificationMutation => {
-                    return (
-                      <Button
-                        color="secondary"
-                        onClick={() => {
-                          RemoveNotificationMutation();
-                          const notificationArrayFiltered = notificationArray.filter(
-                            item => item.id !== notification.id,
-                          );
-                          setNotificationArray(notificationArrayFiltered);
-                        }}
-                      >
-                        <Icon color="disabled" className={classes.iconButton}>
-                          delete
-                        </Icon>
-                      </Button>
-                    );
-                  }}
-                </Mutation>
-              </div>{' '}
-            </Link>
+              </Link>
+              <Mutation
+                mutation={REMOVE_NOTIFICATION_MUTATION}
+                variables={{
+                  id: notification.id,
+                }}
+              >
+                {RemoveNotificationMutation => {
+                  return (
+                    <Button
+                      color="secondary"
+                      onClick={() => {
+                        RemoveNotificationMutation();
+                        const notificationArrayFiltered = notificationArray.filter(
+                          item => item.id !== notification.id,
+                        );
+                        setNotificationArray(notificationArrayFiltered);
+                      }}
+                    >
+                      <Icon color="disabled" className={classes.iconButton}>
+                        delete
+                      </Icon>
+                    </Button>
+                  );
+                }}
+              </Mutation>
+            </div>
           </Card>
         );
       })}
