@@ -16,7 +16,7 @@ export function DeleteButton({ index, sections, setSections, sectionId }) {
           <Button
             color="secondary"
             onClick={() => {
-              RemoveSectionMutation();
+              sectionId !== 'new' && RemoveSectionMutation();
               let newSections = Object.assign([], sections);
               newSections.splice(index, 1);
               setSections(newSections);
