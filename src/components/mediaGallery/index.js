@@ -49,7 +49,7 @@ export function MediaGallery({ items, edit, setBgImage, setImages }) {
             </GridListTile>
           ))}
 
-          {edit && (
+          {edit && items.length < 6 && (
             <GridListTile key="add_tile" cols={1}>
               <div
                 style={{
