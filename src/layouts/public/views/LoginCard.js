@@ -69,7 +69,7 @@ export default function LoginCard({ history }) {
               onCompleted={async data => {
                 if (data.login.token) {
                   await Cookies.set('token', data.login.token);
-                  history.push('/app/dashboard');
+                  history.replace('/app/dashboard');
                 }
               }}
               onError={error => {
