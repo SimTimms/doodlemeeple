@@ -12,6 +12,8 @@ import { SIGNUP_MUTATION } from '../../../../../data/mutations';
 import { readableErrors } from '../../../../../utils/readableErrors';
 import { ErrorBox } from '../../../../../components/pageElements';
 import { validate } from 'email-validator';
+import { Link } from 'react-router-dom';
+
 var passwordValidator = require('password-validator');
 
 export default function RegisterCard({ setPage }) {
@@ -58,8 +60,10 @@ export default function RegisterCard({ setPage }) {
 
     setError({
       name: !namePass ? 'Enter your name' : null,
-      email: !emailPass ? 'Enter a valid email address' : null,
-      password: !passwordPass ? 'This password is not secure' : null,
+      email: !emailPass ? 'Valid email required' : null,
+      password: !passwordPass
+        ? 'At least 6 characters, 1 uppercase, 1 lowercase, 1 number'
+        : null,
     });
     passed && SignupMutation();
   }
@@ -77,12 +81,12 @@ export default function RegisterCard({ setPage }) {
               Register
             </Typography>
             <Typography
-              color="textSecondary"
+              variant="body1"
               component="p"
               style={{ textAlign: 'center' }}
               className={classes.description}
             >
-              Enter a few details and we'll send you a registration link.
+              Enter a few details to create your account
             </Typography>
           </CardContent>
           <Divider />
@@ -111,7 +115,7 @@ export default function RegisterCard({ setPage }) {
               <ErrorBox errorMsg={errors.password} />
             </Form>
           </CardContent>
-          <Divider />
+
           <CardContent className={classes.cardContentCenter}>
             <Mutation
               mutation={SIGNUP_MUTATION}
@@ -139,6 +143,33 @@ export default function RegisterCard({ setPage }) {
                 );
               }}
             </Mutation>
+          </CardContent>
+          <Divider />
+          <CardContent
+            style={{ paddingBottom: 70 }}
+            className={classes.cardContentCenter}
+          >
+            <Typography
+              component="p"
+              style={{ textAlign: 'center', fontSize: 12 }}
+              color="secondary"
+            >
+              Already have an account?
+            </Typography>
+            <Link to="/">
+              <Button
+                color="secondary"
+                style={{
+                  width: 80,
+                  textTransform: 'none',
+                  fontWeight: 600,
+                  fontSize: 16,
+                  padding: 0,
+                }}
+              >
+                Login
+              </Button>
+            </Link>
           </CardContent>
         </Card>
       </div>

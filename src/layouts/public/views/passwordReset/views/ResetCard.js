@@ -49,7 +49,7 @@ export default function ResetCard({ setPage, token }) {
     !passwordPass && (passed = false);
 
     setError({
-      password: !passwordPass ? 'Enter a valid password' : null,
+      password: !passwordPass ? 'Valid password required' : null,
     });
 
     if (passed) {

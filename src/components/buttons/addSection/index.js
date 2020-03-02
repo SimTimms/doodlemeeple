@@ -22,6 +22,7 @@ export function AddSection({ setSections, sections }) {
       >
         <Icon style={{ fontSize: 18, color: '#fff' }}>add_circle</Icon>
         <Typography
+          variant="body1"
           component="p"
           style={{ fontSize: 16, color: '#fff', marginLeft: 10 }}
         >
@@ -50,7 +51,7 @@ export function AddSection({ setSections, sections }) {
           }}
         >
           <Icon style={{ fontSize: 50, color: '#333' }}>dehaze</Icon>
-          <Typography color="textSecondary" component="p">
+          <Typography variant="body1" component="p">
             Summary
           </Typography>
         </Card>
@@ -72,7 +73,7 @@ export function AddSection({ setSections, sections }) {
           }}
         >
           <Icon style={{ fontSize: 50, color: '#333' }}>photo_library</Icon>
-          <Typography color="textSecondary" component="p">
+          <Typography variant="body1" component="p">
             Gallery
           </Typography>
         </Card>
@@ -88,6 +89,7 @@ export function AddSection({ setSections, sections }) {
       >
         <Icon style={{ fontSize: 18, color: '#aaa' }}>close</Icon>
         <Typography
+          variant="body1"
           component="p"
           style={{ fontSize: 16, color: '#aaa', marginLeft: 10 }}
         >

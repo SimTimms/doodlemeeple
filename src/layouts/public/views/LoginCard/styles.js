@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 export const styles = makeStyles({
   card: {
     margin: 10,
-    maxWidth: 512,
-
+    maxWidth: 312,
     paddingLeft: 30,
     paddingRight: 30,
+    minWidth: 312,
   },
   title: {
     fontSize: 14,

@@ -26,7 +26,7 @@ export default function ForgotCard({ history, setPage }) {
     !emailPass && (passed = false);
 
     setError({
-      email: !emailPass ? 'Enter a valid email address' : null,
+      email: !emailPass ? 'Valid email require' : null,
     });
 
     passed && SignupMutation();

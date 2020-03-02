@@ -9,7 +9,12 @@ export function ErrorBox({ errorMsg }) {
   return errorMsg === null ? null : (
     <div className={classes.root}>
       <Icon color="secondary">error_outline</Icon>
-      <Typography gutterBottom component="p" className={classes.errorMsg}>
+      <Typography
+        gutterBottom
+        variant="body1"
+        component="p"
+        className={classes.errorMsg}
+      >
         {errorMsg}
       </Typography>
     </div>

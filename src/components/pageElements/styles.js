@@ -9,9 +9,9 @@ export const useStyles = makeStyles(theme => {
       alignItems: 'center',
       justifyContent: 'center',
       paddingBottom: 10,
-      paddingTop: 10,
-      border: '1px solid #ddd',
-      marginTop: 10,
+      paddingTop: 0,
+
+      marginTop: 0,
     },
     errorMsg: {
       marginBottom: 2,

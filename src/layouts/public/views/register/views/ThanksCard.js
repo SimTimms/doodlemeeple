@@ -32,7 +32,7 @@ export default function RegisterCard({ setPage }) {
               Thank You
             </Typography>
             <Typography
-              variant="body2"
+              variant="body1"
               component="p"
               style={{ textAlign: 'center' }}
             >

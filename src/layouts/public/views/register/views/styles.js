@@ -11,7 +11,7 @@ export const styles = makeStyles({
   description: {
     padding: 10,
   },
-  card: { margin: 10, maxWidth: 512 },
+  card: { margin: 10, maxWidth: 512, paddingLeft: 30, paddingRight: 30 },
   title: {
     fontSize: 14,
   },
@@ -19,6 +19,7 @@ export const styles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'column',
     flexWrap: 'wrap',
     padding: '10px !important',
   },

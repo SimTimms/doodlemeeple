@@ -13,7 +13,6 @@ import Cookies from 'js-cookie';
 import { readableErrors } from '../../../../utils/readableErrors';
 import { ErrorBox } from '../../../../components/pageElements';
 import { Link } from 'react-router-dom';
-import logo from '../../../../assets/device.svg';
 
 export default function LoginCard({ history }) {
   const classes = styles();
@@ -36,17 +35,16 @@ export default function LoginCard({ history }) {
         }}
       >
         <Card className={classes.card}>
-          <CardContent
-            className={classes.cardContentCenter}
-            style={{ padding: 30 }}
-          >
-            <img
-              src={logo}
-              alt="DoodleMeeple Man next to DoodleMeeple Text"
-              style={{ width: 70 }}
-            />
+          <CardContent style={{ marginTop: 50 }}>
+            <Typography
+              variant="h1"
+              color="textPrimary"
+              style={{ textAlign: 'center' }}
+            >
+              Register
+            </Typography>
           </CardContent>
-
+          <Divider />
           <CardContent className={classes.cardContentCenter}>
             <Form width={200}>
               <FormInput
@@ -118,7 +116,7 @@ export default function LoginCard({ history }) {
             >
               Don't have an account?
             </Typography>
-            <Link to="/">
+            <Link to="/register">
               <Button
                 color="secondary"
                 style={{
