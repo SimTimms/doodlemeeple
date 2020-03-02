@@ -5,7 +5,7 @@ import { useStyles } from './styles';
 import { ContentTop } from '../../components';
 import { StyledNavBar } from '../../components/navBar';
 import { AppMenu } from '../menus';
-import { MessageDrawer } from '../menus/MessageDrawer';
+import { MessageDrawer } from '../menus/messageDrawer';
 import { Conversation } from './views/conversation';
 
 function MessageLayout(props) {

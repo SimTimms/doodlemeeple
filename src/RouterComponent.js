@@ -6,12 +6,7 @@ import MessagesLayout from './layouts/messages';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import MessageLayout from './layouts/message';
 import RolesLayout from './layouts/roles';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  withRouter,
-} from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 function RouterComponent(props) {

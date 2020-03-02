@@ -4,14 +4,16 @@ import Divider from '@material-ui/core/Divider';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Form, FormInput } from '../../../components/form';
-import { styles } from './styles';
 import Slide from '@material-ui/core/Slide';
+import { Form, FormInput } from '../../../../components/form';
+import { styles } from './styles';
 import { Mutation } from 'react-apollo';
-import { LOGIN_MUTATION } from '../../../data/mutations';
+import { LOGIN_MUTATION } from '../../../../data/mutations';
 import Cookies from 'js-cookie';
-import { readableErrors } from '../../../utils/readableErrors';
-import { ErrorBox } from '../../../components/pageElements';
+import { readableErrors } from '../../../../utils/readableErrors';
+import { ErrorBox } from '../../../../components/pageElements';
+import { Link } from 'react-router-dom';
+import logo from '../../../../assets/device.svg';
 
 export default function LoginCard({ history }) {
   const classes = styles();
@@ -34,16 +36,17 @@ export default function LoginCard({ history }) {
         }}
       >
         <Card className={classes.card}>
-          <CardContent style={{ padding: 5 }}>
-            <Typography
-              variant="h6"
-              color="textPrimary"
-              style={{ textAlign: 'center' }}
-            >
-              Login
-            </Typography>
+          <CardContent
+            className={classes.cardContentCenter}
+            style={{ padding: 30 }}
+          >
+            <img
+              src={logo}
+              alt="DoodleMeeple Man next to DoodleMeeple Text"
+              style={{ width: 70 }}
+            />
           </CardContent>
-          <Divider />
+
           <CardContent className={classes.cardContentCenter}>
             <Form width={200}>
               <FormInput
@@ -59,9 +62,18 @@ export default function LoginCard({ history }) {
                 setFieldValue={setPassword}
                 type="password"
               />
+              <ErrorBox errorMsg={errors.passwordError} />
+              <ErrorBox errorMsg={errors.noUserError} />
+              <Button
+                onClick={() => {
+                  history.push('/password-forgot');
+                }}
+                style={{ color: '#aaa', paddingTop: 0, textTransform: 'none' }}
+              >
+                Forgot Password
+              </Button>
             </Form>
           </CardContent>
-          <Divider />
           <CardContent className={classes.cardContentCenter}>
             <Mutation
               mutation={LOGIN_MUTATION}
@@ -85,6 +97,7 @@ export default function LoginCard({ history }) {
                       }}
                       variant="contained"
                       color="secondary"
+                      style={{ width: 80 }}
                     >
                       Login
                     </Button>
@@ -92,18 +105,33 @@ export default function LoginCard({ history }) {
                 );
               }}
             </Mutation>
-            <ErrorBox errorMsg={errors.passwordError} />
-            <ErrorBox errorMsg={errors.noUserError} />
           </CardContent>
-
-          <CardContent className={classes.cardContentCenter}>
-            <Button
-              onClick={() => {
-                history.push('/password-forgot');
-              }}
+          <Divider />
+          <CardContent
+            style={{ paddingBottom: 70 }}
+            className={classes.cardContentCenter}
+          >
+            <Typography
+              component="p"
+              style={{ textAlign: 'center', fontSize: 12 }}
+              color="secondary"
             >
-              Forgot Password
-            </Button>
+              Don't have an account?
+            </Typography>
+            <Link to="/">
+              <Button
+                color="secondary"
+                style={{
+                  width: 80,
+                  textTransform: 'none',
+                  fontWeight: 600,
+                  fontSize: 16,
+                  padding: 0,
+                }}
+              >
+                Sign Up
+              </Button>
+            </Link>
           </CardContent>
         </Card>
       </div>

@@ -1,11 +1,11 @@
 import React from 'react';
 import CardMedia from '@material-ui/core/CardMedia';
-import { useStyles } from './styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import clsx from 'clsx';
 import TextField from '@material-ui/core/TextField';
-import { Uploader } from '../../../../../../components/uploader';
 import Button from '@material-ui/core/Button';
+import { useStyles } from './styles';
+import clsx from 'clsx';
+import { Uploader } from '../../../../../../components/uploader';
 
 export function ProfileHeader({
   profile,
@@ -16,7 +16,7 @@ export function ProfileHeader({
 }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
-  console.log(profile);
+
   return (
     <div
       style={{

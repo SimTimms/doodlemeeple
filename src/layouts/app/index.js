@@ -5,7 +5,7 @@ import { useStyles } from './styles';
 import { ContentTop } from '../../components';
 import { StyledNavBar } from '../../components/navBar';
 import { AppMenu } from '../menus';
-import { AppDrawer } from '../menus/AppDrawer';
+import { AppDrawer } from '../menus/appDrawer';
 import { Dashboard } from './views/dashboard';
 import { Profile } from './views/profile';
 import { EditProfile } from './views/profileEdit';

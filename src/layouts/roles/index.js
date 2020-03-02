@@ -5,7 +5,7 @@ import { useStyles } from './styles';
 import { ContentTop } from '../../components';
 import { StyledNavBar } from '../../components/navBar';
 import { AppMenu } from '../menus';
-import { RolesDrawer } from '../menus/RolesDrawer';
+import { RolesDrawer } from '../menus/rolesDrawer';
 import { Dashboard } from './views/dashboard';
 import { CreateRole } from './views/createRole';
 import { CreatorRoles } from './views/creatorRoles';

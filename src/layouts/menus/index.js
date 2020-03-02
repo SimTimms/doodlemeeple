@@ -1,10 +1,11 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Link } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
-import { makeStyles } from '@material-ui/core/styles';
+import { useStyles } from './styles';
 import clsx from 'clsx';
 import Cookies from 'js-cookie';
 
@@ -29,18 +30,6 @@ const StyledButtonFooter = withStyles({
   },
 })(Button);
 
-export const useStyles = makeStyles(theme => ({
-  root: {
-    marginRight: theme.spacing(2),
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  hide: {
-    display: 'none',
-  },
-}));
-
 export function AppMenu({ handleDrawerOpen, open }) {
   const classes = useStyles();
 
@@ -61,12 +50,18 @@ export function AppMenu({ handleDrawerOpen, open }) {
 
 export function PublicMenu({ history }) {
   const authToken = Cookies.get('token');
+  const mobile = useMediaQuery('(max-width:800px)');
+  const classes = useStyles();
 
   return (
-    <div>
-      <Link to="/home" style={{ textDecoration: 'none' }}>
+    <div
+      className={`${clsx({
+        [classes.menuWrapperMobile]: mobile,
+      })}`}
+    >
+      <a href="https://doodlemeeple.com" style={{ textDecoration: 'none' }}>
         <StyledButton>Home</StyledButton>
-      </Link>
+      </a>
       {authToken && (
         <StyledButton
           onClick={() => {
@@ -90,28 +85,16 @@ export function PublicMenu({ history }) {
           <StyledButton>Login</StyledButton>
         </Link>
       )}
-      <Link to="/register" style={{ textDecoration: 'none' }}>
-        <StyledButton>Register</StyledButton>
-      </Link>
-      <Link to="/about" style={{ textDecoration: 'none' }}>
-        <StyledButton>About</StyledButton>
-      </Link>
-      <StyledButton>Community</StyledButton>
     </div>
   );
 }
 
 export function PublicFooterMenu() {
+  const classes = useStyles();
   return (
-    <div>
-      <Link to="/login" style={{ textDecoration: 'none' }}>
-        <StyledButtonFooter>Login</StyledButtonFooter>
-      </Link>
+    <div className={classes.menuWrapperMobile}>
       <Link to="/register" style={{ textDecoration: 'none' }}>
         <StyledButtonFooter>Register</StyledButtonFooter>
-      </Link>
-      <Link to="/login" style={{ textDecoration: 'none' }}>
-        <StyledButtonFooter>Disputes</StyledButtonFooter>
       </Link>
       <Link to="/home" style={{ textDecoration: 'none' }}>
         <StyledButtonFooter>Terms of Service</StyledButtonFooter>
@@ -121,15 +104,6 @@ export function PublicFooterMenu() {
       </Link>
       <Link to="/register" style={{ textDecoration: 'none' }}>
         <StyledButtonFooter>Contact</StyledButtonFooter>
-      </Link>
-      <Link to="/about" style={{ textDecoration: 'none' }}>
-        <StyledButtonFooter>About</StyledButtonFooter>
-      </Link>
-      <Link to="/about" style={{ textDecoration: 'none' }}>
-        <StyledButtonFooter>Community</StyledButtonFooter>
-      </Link>{' '}
-      <Link to="/about" style={{ textDecoration: 'none' }}>
-        <StyledButtonFooter>Social</StyledButtonFooter>
       </Link>
     </div>
   );

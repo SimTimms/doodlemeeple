@@ -4,14 +4,10 @@ import ThanksCard from './views/ThanksCard';
 
 function RegisterLayout() {
   const [page, setPage] = React.useState(0);
-  return (
-    <div>
-      {page === 0 ? (
-        <RegisterCard setPage={setPage} />
-      ) : (
-        <ThanksCard setPage={setPage} />
-      )}
-    </div>
+  return page === 0 ? (
+    <RegisterCard setPage={setPage} />
+  ) : (
+    <ThanksCard setPage={setPage} />
   );
 }
 

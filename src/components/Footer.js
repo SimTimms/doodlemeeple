@@ -11,6 +11,5 @@ export const Footer = withStyles({
   root: {
     background: '#222',
     padding: 10,
-    marginTop: 50,
   },
 })(StyledFooter);

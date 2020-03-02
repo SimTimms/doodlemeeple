@@ -7,8 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Query } from 'react-apollo';
 import { NOTIFICATIONS } from '../../../../../data/queries';
-import { Mutation } from 'react-apollo';
 import { REMOVE_NOTIFICATION_MUTATION } from '../../../../../data/mutations';
+import { Mutation } from 'react-apollo';
 import { timeDifferenceForDate } from '../../../../../utils/dates';
 
 export function Notifications() {

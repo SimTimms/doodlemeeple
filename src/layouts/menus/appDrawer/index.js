@@ -18,24 +18,24 @@ import AccountBalanceIcon from '@material-ui/icons/AccountBalanceWallet';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import { Link } from 'react-router-dom';
-import { useStyles } from './styles';
+import { useStyles } from '../styles';
 
 export function AppDrawer(props) {
-  const classes = useStyles();
+  const { drawer, drawerPaper, link, drawerHeader } = useStyles();
   const { handleDrawerClose, open } = props;
   const theme = useTheme();
 
   return (
     <Drawer
-      className={classes.drawer}
+      className={drawer}
       variant="persistent"
       anchor="left"
       open={open}
       classes={{
-        paper: classes.drawerPaper,
+        paper: drawerPaper,
       }}
     >
-      <div className={classes.drawerHeader}>
+      <div className={drawerHeader}>
         <IconButton onClick={handleDrawerClose}>
           {theme.direction === 'ltr' ? (
             <ChevronLeftIcon />
@@ -76,7 +76,7 @@ export function AppDrawer(props) {
             link: '/messages/conversations',
           },
         ].map((text, index) => (
-          <Link to={text.link} className={classes.link} key={text.name}>
+          <Link to={text.link} className={link} key={text.name}>
             <ListItem button>
               <ListItemIcon>{text.icon}</ListItemIcon>
               <ListItemText primary={text.name} />

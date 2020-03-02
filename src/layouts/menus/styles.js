@@ -2,6 +2,13 @@ import { makeStyles } from '@material-ui/core/styles';
 const drawerWidth = 240;
 
 export const useStyles = makeStyles(theme => ({
+  menuWrapperMobile: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },

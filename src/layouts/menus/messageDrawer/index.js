@@ -7,29 +7,28 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Chat from '@material-ui/icons/Chat';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import { Link } from 'react-router-dom';
-import { useStyles } from './styles';
+import { useStyles } from '../styles';
 
-export function MessagesDrawer(props) {
-  const classes = useStyles();
+export function MessageDrawer(props) {
+  const { drawer, drawerPaper, drawerHeader, link, icon } = useStyles();
   const { handleDrawerClose, open } = props;
   const theme = useTheme();
 
   return (
     <Drawer
-      className={classes.drawer}
+      className={drawer}
       variant="persistent"
       anchor="left"
       open={open}
       classes={{
-        paper: classes.drawerPaper,
+        paper: drawerPaper,
       }}
     >
-      <div className={classes.drawerHeader}>
+      <div className={drawerHeader}>
         <IconButton onClick={handleDrawerClose}>
           {theme.direction === 'ltr' ? (
             <ChevronLeftIcon />
@@ -41,16 +40,15 @@ export function MessagesDrawer(props) {
       <Divider />
       <List>
         {[
-          { name: 'Back', icon: <ChevronLeft />, link: '/app/dashboard' },
           {
-            name: 'Conversations',
-            icon: <Chat />,
+            name: 'Back',
+            icon: <ChevronLeft />,
             link: '/messages/conversations',
           },
         ].map((text, index) => (
-          <Link to={text.link} className={classes.link} key={text.name}>
+          <Link to={text.link} className={link} key={text.name}>
             <ListItem button>
-              <ListItemIcon className={classes.icon}>{text.icon}</ListItemIcon>
+              <ListItemIcon className={icon}>{text.icon}</ListItemIcon>
               <ListItemText primary={text.name} />
             </ListItem>
           </Link>
