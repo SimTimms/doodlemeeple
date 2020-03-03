@@ -36,7 +36,6 @@ export function Notifications() {
         }}
       </Query>
       {notificationArray.map((notification, index) => {
-        console.log(notification);
         return (
           <Card className={classes.card} key={`conversation_${index}`}>
             <div className={classes.rowWrapper}>
@@ -62,7 +61,11 @@ export function Notifications() {
                         >
                           <b>{notification.title}</b>
                         </Typography>
-                        <Typography variant="caption" component="p">
+                        <Typography
+                          variant="caption"
+                          color="textPrimary"
+                          component="p"
+                        >
                           <b>{timeDifferenceForDate(notification.createdAt)}</b>
                         </Typography>
                       </div>

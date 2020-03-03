@@ -7,14 +7,16 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import HomeIcon from '@material-ui/icons/Home';
+/*
+import MailIcon from '@material-ui/icons/Mail';
 import WorkIcon from '@material-ui/icons/Work';
 import ExtensionIcon from '@material-ui/icons/Extension';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+*/
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
-import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalanceWallet';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -91,7 +93,6 @@ export function AppDrawer(props) {
             icon: <QuestionAnswerIcon />,
             link: '/messages/conversations',
           },*/,
-          ,
         ].map((text, index) => (
           <Link to={text.link} className={link} key={text.name}>
             <ListItem button>

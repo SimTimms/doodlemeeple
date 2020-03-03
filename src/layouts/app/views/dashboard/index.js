@@ -2,12 +2,26 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import { Notifications } from './components/notifications';
-import { Projects } from './components/projects';
+import { Posts } from './components/Posts';
+import axios from 'axios';
+/*import { Projects } from './components/projects';*/
 import { ContentHeader } from '../../../../components/headers/contentHeader';
 import { useStyles } from './styles';
 
 export function Dashboard() {
   const classes = useStyles();
+  const [posts, setPosts] = React.useState(null);
+
+  if (posts === null) {
+    axios
+      .get('https://doodlemeeple.com/wp-json/wp/v2/posts?_embed')
+      .then(response => {
+        setPosts(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -24,7 +38,14 @@ export function Dashboard() {
         <div className={classes.dashboardGrid}>
           <div className={classes.gridRow}>
             <Notifications />
-            <Projects />
+
+            {/*<Projects />*/}
+          </div>
+        </div>
+        <div className={classes.dashboardGrid}>
+          <div className={classes.gridRow}>
+            <Posts posts={posts ? posts : []} />
+            {/*<Projects />*/}
           </div>
         </div>
       </div>
