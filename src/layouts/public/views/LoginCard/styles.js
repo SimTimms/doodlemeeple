@@ -1,29 +1,20 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const styles = makeStyles({
-  card: {
-    margin: 10,
-    maxWidth: 312,
-    paddingLeft: 30,
-    paddingRight: 30,
-    minWidth: 312,
+export const styles = makeStyles(theme => ({
+  cardContainer: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
   },
   title: {
     fontSize: 14,
   },
-  cardContentCenter: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-    flexWrap: 'wrap',
-    padding: 10,
-  },
-
   buttonCentre: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     textDecoration: 'none',
   },
-});
+}));

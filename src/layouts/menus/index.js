@@ -50,15 +50,10 @@ export function AppMenu({ handleDrawerOpen, open }) {
 
 export function PublicMenu({ history }) {
   const authToken = Cookies.get('token');
-  const mobile = useMediaQuery('(max-width:800px)');
   const classes = useStyles();
 
   return (
-    <div
-      className={`${clsx({
-        [classes.menuWrapperMobile]: mobile,
-      })}`}
-    >
+    <div className={classes.menuWrapperMobile}>
       <a href="https://doodlemeeple.com" style={{ textDecoration: 'none' }}>
         <StyledButton>Home</StyledButton>
       </a>

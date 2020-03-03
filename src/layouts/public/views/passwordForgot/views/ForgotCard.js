@@ -3,21 +3,26 @@ import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { Form, FormInput } from '../../../../../components/form';
-import { styles } from './styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Button from '@material-ui/core/Button';
 import Slide from '@material-ui/core/Slide';
+import { Form, FormInput } from '../../../../../components/form';
+import { styles } from './styles';
+import { sharedStyles } from '../../styles';
 import { Mutation } from 'react-apollo';
 import { PASSWORD_FORGOT_MUTATION } from '../../../../../data/mutations';
 import { ErrorBox } from '../../../../../components/pageElements';
 import { validate } from 'email-validator';
+import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 
 export default function ForgotCard({ history, setPage }) {
-  const classes = styles();
+  const classes = { ...styles(), ...sharedStyles() };
   const [email, setEmail] = React.useState('');
   const [errors, setError] = React.useState({
     email: null,
   });
+  const mobile = useMediaQuery('(max-width:800px)');
 
   function submitChecks(SignupMutation) {
     let passed = true;
@@ -34,23 +39,28 @@ export default function ForgotCard({ history, setPage }) {
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div className={classes.root}>
-        <Card className={classes.card}>
+      <div className={classes.cardWrapper}>
+        <Card
+          className={clsx({
+            [classes.card]: true,
+            [classes.cardMobile]: mobile,
+          })}
+        >
           <CardContent style={{ padding: 5 }}>
             <Typography
               variant="h1"
               color="textPrimary"
               style={{ textAlign: 'center' }}
             >
-              Forgotten Password
+              Forgot your password?
             </Typography>
             <Typography
-              color="textSecondary"
+              variant="body1"
               component="p"
               style={{ textAlign: 'center' }}
               className={classes.description}
             >
-              Enter a few details and we'll send you a registration link.
+              Enter your email address and we'll send you a reset link
             </Typography>
           </CardContent>
           <Divider />
@@ -65,7 +75,6 @@ export default function ForgotCard({ history, setPage }) {
               <ErrorBox errorMsg={errors.email} />
             </Form>
           </CardContent>
-          <Divider />
           <CardContent className={classes.cardContentCenter}>
             <Mutation
               mutation={PASSWORD_FORGOT_MUTATION}
@@ -79,20 +88,49 @@ export default function ForgotCard({ history, setPage }) {
             >
               {passwordForgotMutation => {
                 return (
-                  <div>
-                    <Button
-                      onClick={() => {
-                        submitChecks(passwordForgotMutation);
-                      }}
-                      variant="contained"
-                      color="secondary"
-                    >
-                      Reset Password
-                    </Button>
-                  </div>
+                  <Button
+                    onClick={() => {
+                      submitChecks(passwordForgotMutation);
+                    }}
+                    variant="contained"
+                    color="secondary"
+                  >
+                    Reset Password
+                  </Button>
                 );
               }}
             </Mutation>
+          </CardContent>
+          <Divider />
+          <CardContent
+            style={{
+              paddingBottom: 70,
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+            className={classes.cardContentCenter}
+          >
+            <Typography
+              component="p"
+              style={{ textAlign: 'center', fontSize: 12 }}
+              color="secondary"
+            >
+              Remembered your password?
+            </Typography>
+            <Link to="/login">
+              <Button
+                color="secondary"
+                style={{
+                  width: 80,
+                  textTransform: 'none',
+                  fontWeight: 600,
+                  fontSize: 16,
+                  padding: 0,
+                }}
+              >
+                Login
+              </Button>
+            </Link>
           </CardContent>
         </Card>
       </div>

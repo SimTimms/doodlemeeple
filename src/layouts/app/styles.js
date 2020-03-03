@@ -45,5 +45,6 @@ export const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     marginLeft: drawerWidth,
+    background: '#fafafa',
   },
 }));

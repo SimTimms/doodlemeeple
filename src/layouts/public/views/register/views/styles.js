@@ -8,9 +8,6 @@ export const styles = makeStyles({
     alignItems: 'center',
     height: '100%',
   },
-  description: {
-    padding: 10,
-  },
   card: { margin: 10, maxWidth: 512, paddingLeft: 30, paddingRight: 30 },
   title: {
     fontSize: 14,

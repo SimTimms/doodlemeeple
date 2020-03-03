@@ -9,7 +9,7 @@ export function PasswordReset({ history, token }) {
       {page === 0 ? (
         <ResetCard setPage={setPage} token={token} />
       ) : (
-        <ThanksCard setPage={setPage} />
+        <ThanksCard />
       )}
     </div>
   );

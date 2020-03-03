@@ -5,43 +5,53 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Form, FormInput } from '../../../../components/form';
 import { styles } from './styles';
+import { sharedStyles } from '../styles';
 import { Mutation } from 'react-apollo';
 import { LOGIN_MUTATION } from '../../../../data/mutations';
 import Cookies from 'js-cookie';
 import { readableErrors } from '../../../../utils/readableErrors';
 import { ErrorBox } from '../../../../components/pageElements';
 import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 
 export default function LoginCard({ history }) {
-  const classes = styles();
+  const classes = { ...styles(), ...sharedStyles() };
+
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [errors, setError] = React.useState({
     passwordError: null,
     noUserError: null,
   });
+  const mobile = useMediaQuery('(max-width:800px)');
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div
-        style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100%',
-        }}
-      >
-        <Card className={classes.card}>
-          <CardContent style={{ marginTop: 50 }}>
+      <div className={classes.cardWrapper}>
+        <Card
+          className={clsx({
+            [classes.card]: true,
+            [classes.cardMobile]: mobile,
+          })}
+        >
+          <CardContent>
             <Typography
               variant="h1"
               color="textPrimary"
               style={{ textAlign: 'center' }}
             >
-              Register
+              Welcome
+            </Typography>{' '}
+            <Typography
+              variant="body1"
+              component="p"
+              style={{ textAlign: 'center' }}
+              className={classes.description}
+            >
+              Please login
             </Typography>
           </CardContent>
           <Divider />
@@ -62,17 +72,12 @@ export default function LoginCard({ history }) {
               />
               <ErrorBox errorMsg={errors.passwordError} />
               <ErrorBox errorMsg={errors.noUserError} />
-              <Button
-                onClick={() => {
-                  history.push('/password-forgot');
-                }}
-                style={{ color: '#aaa', paddingTop: 0, textTransform: 'none' }}
-              >
-                Forgot Password
-              </Button>
             </Form>
           </CardContent>
-          <CardContent className={classes.cardContentCenter}>
+          <CardContent
+            className={classes.cardContentCenter}
+            style={{ paddingTop: 0 }}
+          >
             <Mutation
               mutation={LOGIN_MUTATION}
               variables={{ email, password }}
@@ -95,7 +100,7 @@ export default function LoginCard({ history }) {
                       }}
                       variant="contained"
                       color="secondary"
-                      style={{ width: 80 }}
+                      style={{ width: 180, marginTop: 0 }}
                     >
                       Login
                     </Button>
@@ -103,10 +108,21 @@ export default function LoginCard({ history }) {
                 );
               }}
             </Mutation>
+            <Button
+              onClick={() => {
+                history.push('/password-forgot');
+              }}
+              style={{ color: '#aaa', textTransform: 'none' }}
+            >
+              Forgot Password
+            </Button>
           </CardContent>
           <Divider />
           <CardContent
-            style={{ paddingBottom: 70 }}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+            }}
             className={classes.cardContentCenter}
           >
             <Typography
@@ -127,7 +143,7 @@ export default function LoginCard({ history }) {
                   padding: 0,
                 }}
               >
-                Sign Up
+                Register
               </Button>
             </Link>
           </CardContent>

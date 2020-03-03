@@ -5,6 +5,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Form, FormInput } from '../../../../../components/form';
 import { styles } from './styles';
+import { sharedStyles } from '../../styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Button from '@material-ui/core/Button';
 import Slide from '@material-ui/core/Slide';
 import { Mutation } from 'react-apollo';
@@ -13,11 +15,12 @@ import { readableErrors } from '../../../../../utils/readableErrors';
 import { ErrorBox } from '../../../../../components/pageElements';
 import { validate } from 'email-validator';
 import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 
 var passwordValidator = require('password-validator');
 
 export default function RegisterCard({ setPage }) {
-  const classes = styles();
+  const classes = { ...styles(), ...sharedStyles() };
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [errors, setError] = React.useState({
@@ -26,6 +29,7 @@ export default function RegisterCard({ setPage }) {
     password: null,
   });
   const [password, setPassword] = React.useState('');
+  const mobile = useMediaQuery('(max-width:800px)');
 
   function submitChecks(SignupMutation) {
     let passed = true;
@@ -71,7 +75,12 @@ export default function RegisterCard({ setPage }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <Card className={classes.card}>
+        <Card
+          className={clsx({
+            [classes.card]: true,
+            [classes.cardMobile]: mobile,
+          })}
+        >
           <CardContent style={{ padding: 5 }}>
             <Typography
               variant="h1"
