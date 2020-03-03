@@ -8,6 +8,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import HomeIcon from '@material-ui/icons/Home';
 import WorkIcon from '@material-ui/icons/Work';
 import ExtensionIcon from '@material-ui/icons/Extension';
@@ -19,6 +20,7 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import { Link } from 'react-router-dom';
 import { useStyles } from '../styles';
+import Cookies from 'js-cookie';
 
 export function AppDrawer(props) {
   const { drawer, drawerPaper, link, drawerHeader } = useStyles();
@@ -45,9 +47,23 @@ export function AppDrawer(props) {
         </IconButton>
       </div>
       <Divider />
+
       <List>
+        <a
+          href="https://doodlemeeple.com"
+          style={{
+            textDecoration: 'none',
+            color: '#444',
+          }}
+        >
+          <ListItem button>
+            <ListItemIcon style={{ minWidth: 32 }}>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Website & Blog" />
+          </ListItem>
+        </a>
         {[
-          { name: 'Home', icon: <HomeIcon />, link: '/' },
           {
             name: 'Dashboard',
             icon: <DashboardIcon />,
@@ -62,7 +78,7 @@ export function AppDrawer(props) {
             name: 'Account',
             icon: <AccountBalanceIcon />,
             link: '/app/account',
-          },
+          } /*
           {
             name: 'Invites',
             icon: <MailIcon />,
@@ -74,15 +90,28 @@ export function AppDrawer(props) {
             name: 'Messages',
             icon: <QuestionAnswerIcon />,
             link: '/messages/conversations',
-          },
+          },*/,
+          ,
         ].map((text, index) => (
           <Link to={text.link} className={link} key={text.name}>
             <ListItem button>
-              <ListItemIcon>{text.icon}</ListItemIcon>
+              <ListItemIcon style={{ minWidth: 32 }}>{text.icon}</ListItemIcon>
               <ListItemText primary={text.name} />
             </ListItem>
           </Link>
         ))}
+        <ListItem
+          button
+          onClick={() => {
+            Cookies.remove('token');
+            props.history.push(`/`);
+          }}
+        >
+          <ListItemIcon style={{ minWidth: 32 }}>
+            <ExitToAppIcon />
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
+        </ListItem>
       </List>
       <Divider />
     </Drawer>

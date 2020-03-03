@@ -62,9 +62,19 @@ function AppLayout(props) {
     <div style={{ background: '#fafafa', height: '100vh' }}>
       <StyledNavBar
         open={open}
-        menu={<AppMenu handleDrawerOpen={handleDrawerOpen} open={open} />}
+        menu={
+          <AppMenu
+            handleDrawerOpen={handleDrawerOpen}
+            open={open}
+            history={props.history}
+          />
+        }
       ></StyledNavBar>
-      <AppDrawer handleDrawerClose={handleDrawerClose} open={open} />
+      <AppDrawer
+        handleDrawerClose={handleDrawerClose}
+        open={open}
+        history={props.history}
+      />
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,

@@ -30,7 +30,7 @@ const StyledButtonFooter = withStyles({
   },
 })(Button);
 
-export function AppMenu({ handleDrawerOpen, open }) {
+export function AppMenu({ handleDrawerOpen, open, history }) {
   const classes = useStyles();
 
   return (
