@@ -1,11 +1,12 @@
 import React from 'react';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Icon from '@material-ui/core/Icon';
 import { SaveButton } from './saveButton';
 import { DeleteButton } from './deleteButton';
 import { useStyles } from './styles';
 import { MediaGalleryObject } from '../mediaGalleryOject';
-
 import {
   UPDATE_SECTION_MUTATION,
   UPDATE_GALLERY_SECTION_MUTATION,
@@ -21,6 +22,7 @@ export function Section({ index, sections, setSections, section }) {
   return (
     <div>
       <Divider />
+
       <div className={classes.sectionWrapper}>
         <TextField
           id={'title'}
@@ -86,6 +88,17 @@ export function GallerySection({ index, sections, setSections, section }) {
     <div>
       <Divider />
       <div className={classes.sectionWrapper}>
+        <div className={classes.sectionHeader}>
+          <Icon style={{ fontSize: 42, marginRight: 10 }}>edit</Icon>
+          <div>
+            <Typography variant="h1" color="textPrimary">
+              Artist
+            </Typography>
+            <Typography variant="h6" color="textPrimary">
+              Fantasy, Sci-Fi, Character Design...
+            </Typography>
+          </div>
+        </div>
         <TextField
           id={'title'}
           value={title}
