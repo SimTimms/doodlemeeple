@@ -38,6 +38,7 @@ export const SECTIONS = gql`
         }
       }
       notableProjects {
+        id
         summary
       }
       testimonials {

@@ -35,7 +35,7 @@ export function MediaGallery({ items, edit, setBgImage, setImages }) {
                   imageArray = imageArray.filter(
                     arrItem => arrItem.img !== tile.img,
                   );
-                  console.log(imageArray);
+
                   setImages(imageArray);
                 }}
               >

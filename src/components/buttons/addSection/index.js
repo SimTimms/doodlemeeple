@@ -66,6 +66,7 @@ export function AddSection({ setSections, sections }) {
               gallery: {
                 images: [],
               },
+              notableProjects: [],
             };
             const newSections = Object.assign([], sections);
             newSections.push(newSection);

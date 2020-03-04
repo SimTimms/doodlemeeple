@@ -53,6 +53,12 @@ export const REMOVE_SECTION_MUTATION = gql`
   }
 `;
 
+export const REMOVE_NOTABLE_PROJECT_MUTATION = gql`
+  mutation RemoveNotableProjectMutation($id: String!) {
+    removeNotableProject(id: $id)
+  }
+`;
+
 export const REMOVE_NOTIFICATION_MUTATION = gql`
   mutation RemoveNotificationMutation($id: String!) {
     removeNotification(id: $id)

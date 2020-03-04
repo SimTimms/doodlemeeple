@@ -2,9 +2,11 @@ import React from 'react';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import { SaveButton } from './saveButton';
 import { DeleteButton } from './deleteButton';
+import { DeleteNotableProjectButton } from './deleteNotableProjectButton';
 import { useStyles } from './styles';
 import { MediaGalleryObject } from '../mediaGalleryOject';
 import {
@@ -35,6 +37,19 @@ export function Section({ index, sections, setSections, section }) {
           onChange={ev => {
             setChanged(true);
             setTitle(ev.target.value);
+          }}
+        />
+        <TextField
+          id={'summary'}
+          label={`Summary ${summary ? `(${46 - summary.length})` : ''}`}
+          inputProps={{ maxLength: 46 }}
+          value={summary}
+          margin="normal"
+          variant="outlined"
+          style={{ width: '100%' }}
+          onChange={ev => {
+            setChanged(true);
+            setSummary(ev.target.value);
           }}
         />
         <TextField
@@ -96,6 +111,8 @@ export function GallerySection({ index, sections, setSections, section }) {
     testimonials,
   };
 
+  const notableProjectsLength = notableProjects ? notableProjects.length : 0;
+
   return (
     <div>
       <Divider />
@@ -139,6 +156,62 @@ export function GallerySection({ index, sections, setSections, section }) {
             setSummary(ev.target.value);
           }}
         />
+        <Typography variant="h6" color="textPrimary" style={{ marginTop: 20 }}>
+          Notable Projects
+        </Typography>
+        {notableProjects &&
+          notableProjects.map((notableProject, index) => {
+            return (
+              <div className={classes.actionInputWrapper}>
+                <TextField
+                  id={'notableProjects'}
+                  label={`Notable Projects ${
+                    notableProject.summary
+                      ? `(${56 - notableProject.summary.length})`
+                      : ''
+                  }`}
+                  inputProps={{ maxLength: 56 }}
+                  multiline
+                  value={notableProject.summary}
+                  margin="normal"
+                  variant="outlined"
+                  style={{ width: '100%' }}
+                  onChange={ev => {
+                    setChanged(true);
+                    const newNotableProjects = Object.assign(
+                      [],
+                      notableProjects,
+                    );
+                    newNotableProjects[index].summary = ev.target.value;
+
+                    setNotableProjects(newNotableProjects);
+                  }}
+                />
+                <DeleteNotableProjectButton
+                  notableProjectId={notableProject.id}
+                  notableProjects={notableProjects}
+                  index={index}
+                  setNotableProjects={setNotableProjects}
+                />
+              </div>
+            );
+          })}
+        {notableProjectsLength < 5 && (
+          <div style={{ width: '100%' }}>
+            <Button
+              onClick={() => {
+                const newNotableProject = { summary: '', id: 'new' };
+                const newNotableProjects = Object.assign([], notableProjects);
+                newNotableProjects.push(newNotableProject);
+                setNotableProjects(newNotableProjects);
+              }}
+              color="secondary"
+              style={{ textTransform: 'none' }}
+            >
+              {`+ Add a notable project (${5 - notableProjects.length})`}
+            </Button>
+          </div>
+        )}
         <MediaGalleryObject
           images={images}
           setImages={newImages => {

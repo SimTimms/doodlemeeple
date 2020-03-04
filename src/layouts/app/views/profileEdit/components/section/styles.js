@@ -28,4 +28,13 @@ export const useStyles = makeStyles(theme => ({
     width: '100%',
     marginTop: 10,
   },
+  actionInputWrapper: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'no-wrap',
+    flexDirection: 'row',
+    width: '100%',
+    marginTop: 10,
+  },
 }));
