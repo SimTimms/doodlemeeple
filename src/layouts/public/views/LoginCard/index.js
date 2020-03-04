@@ -15,17 +15,18 @@ import Cookies from 'js-cookie';
 import { readableErrors } from '../../../../utils/readableErrors';
 import { ErrorBox } from '../../../../components/pageElements';
 import { Link } from 'react-router-dom';
+import { LoginButton } from './components';
 import clsx from 'clsx';
 
 export default function LoginCard({ history }) {
   const classes = { ...styles(), ...sharedStyles() };
-
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [errors, setError] = React.useState({
     passwordError: null,
     noUserError: null,
   });
+  const [loginStatus, setStatus] = React.useState('Login');
   const mobile = useMediaQuery('(max-width:800px)');
 
   return (
@@ -44,7 +45,7 @@ export default function LoginCard({ history }) {
               style={{ textAlign: 'center' }}
             >
               Welcome
-            </Typography>{' '}
+            </Typography>
             <Typography
               variant="body1"
               component="p"
@@ -88,23 +89,19 @@ export default function LoginCard({ history }) {
                 }
               }}
               onError={error => {
+                setStatus('Login');
                 setError(readableErrors(error, errors));
               }}
             >
               {LoginMutation => {
                 return (
-                  <div>
-                    <Button
-                      onClick={() => {
-                        LoginMutation();
-                      }}
-                      variant="contained"
-                      color="secondary"
-                      style={{ width: 180, marginTop: 0 }}
-                    >
-                      Login
-                    </Button>
-                  </div>
+                  <LoginButton
+                    loginMutation={LoginMutation}
+                    status={loginStatus}
+                    setStatus={setStatus}
+                    email={email}
+                    password={password}
+                  />
                 );
               }}
             </Mutation>

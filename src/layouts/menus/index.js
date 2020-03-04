@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import Cookies from 'js-cookie';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const StyledButton = withStyles({
   root: {
@@ -50,9 +51,15 @@ export function AppMenu({ handleDrawerOpen, open, history }) {
 export function PublicMenu({ history }) {
   const authToken = Cookies.get('token');
   const classes = useStyles();
+  const mobile = useMediaQuery('(max-width:800px)');
 
   return (
-    <div className={classes.menuWrapperMobile}>
+    <div
+      className={`${clsx({
+        [classes.menuWrapper]: true,
+        [classes.menuWrapperMobile]: mobile,
+      })}`}
+    >
       <a href="https://doodlemeeple.com" style={{ textDecoration: 'none' }}>
         <StyledButton>Home</StyledButton>
       </a>

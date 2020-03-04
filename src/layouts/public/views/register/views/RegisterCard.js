@@ -132,7 +132,7 @@ export default function RegisterCard({ setPage }) {
               onError={error => {
                 setError(readableErrors(error, errors));
               }}
-              onCompleted={() => {
+              onCompleted={(a, b) => {
                 setPage();
               }}
             >
