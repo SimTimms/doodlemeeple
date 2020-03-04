@@ -75,6 +75,12 @@ export function GallerySection({ index, sections, setSections, section }) {
   const [title, setTitle] = React.useState(section.title);
   const [summary, setSummary] = React.useState(section.summary);
   const [images, setImages] = React.useState(section.gallery.images);
+  const [notableProjects, setNotableProjects] = React.useState(
+    section.notableProjects,
+  );
+  const [testimonials, setTestimonials] = React.useState([
+    { name: 'test', summary: 'test' },
+  ]);
   const [changed, setChanged] = React.useState(false);
 
   const imageFilter = images.map(item => {
@@ -82,7 +88,13 @@ export function GallerySection({ index, sections, setSections, section }) {
       img: item.img,
     };
   });
-  let sectionValues = { summary, title, gallery: { images: imageFilter } };
+  let sectionValues = {
+    summary,
+    title,
+    gallery: { images: imageFilter },
+    notableProjects,
+    testimonials,
+  };
 
   return (
     <div>
@@ -107,7 +119,7 @@ export function GallerySection({ index, sections, setSections, section }) {
           multiline
           margin="normal"
           variant="outlined"
-          style={{ width: '100%' }}
+          style={{ width: '300px' }}
           onChange={ev => {
             setChanged(true);
             setTitle(ev.target.value);

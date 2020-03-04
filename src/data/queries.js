@@ -37,6 +37,13 @@ export const SECTIONS = gql`
           img
         }
       }
+      notableProjects {
+        summary
+      }
+      testimonials {
+        name
+        summary
+      }
     }
   }
 `;
