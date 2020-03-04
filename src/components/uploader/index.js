@@ -34,7 +34,7 @@ export function Uploader({ cbImage, styleOverride }) {
       .then(response => {
         setStatusMessage('Sending...');
         if (response.data.data) {
-          setStatusMessage('Sending more...');
+          setStatusMessage('Uploading...');
           const returnData = response.data.data.returnData;
           const signedRequest = returnData.signedRequest;
           const url = returnData.url;
