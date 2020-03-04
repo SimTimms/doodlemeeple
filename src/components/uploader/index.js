@@ -54,7 +54,7 @@ export function Uploader({ cbImage, styleOverride }) {
               console.log(error);
             });
         } else {
-          setStatusMessage(response.data.toString());
+          setStatusMessage(response.data.toString().error);
         }
       })
       .catch(error => {
