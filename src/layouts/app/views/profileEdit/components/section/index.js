@@ -2,11 +2,13 @@ import React from 'react';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import { SaveButton } from './saveButton';
 import { DeleteButton } from './deleteButton';
 import { NotableProject } from '../notableProject';
+import { AddNotableProject } from '../notableProject/addButton';
+import { AddTestimonial } from '../testimonial/addButton';
+import { Testimonial } from '../testimonial';
 import { useStyles } from './styles';
 import { MediaGalleryObject } from '../mediaGalleryOject';
 import {
@@ -93,9 +95,7 @@ export function GallerySection({ index, sections, setSections, section }) {
   const [notableProjects, setNotableProjects] = React.useState(
     section.notableProjects,
   );
-  const [testimonials, setTestimonials] = React.useState([
-    { id: 'new', name: 'test', summary: 'test' },
-  ]);
+  const [testimonials, setTestimonials] = React.useState(section.testimonials);
   const [changed, setChanged] = React.useState(false);
 
   const imageFilter = images.map(item => {
@@ -112,6 +112,7 @@ export function GallerySection({ index, sections, setSections, section }) {
   };
 
   const notableProjectsLength = notableProjects ? notableProjects.length : 0;
+  const testimonialsLength = testimonials ? testimonials.length : 0;
 
   return (
     <div>
@@ -168,24 +169,37 @@ export function GallerySection({ index, sections, setSections, section }) {
                 index={index}
                 setNotableProjects={setNotableProjects}
                 notableProjects={notableProjects}
+                key={`project_${index}`}
               />
             );
           })}
         {notableProjectsLength < 5 && (
-          <div style={{ width: '100%' }}>
-            <Button
-              onClick={() => {
-                const newNotableProject = { summary: '', id: 'new' };
-                const newNotableProjects = Object.assign([], notableProjects);
-                newNotableProjects.push(newNotableProject);
-                setNotableProjects(newNotableProjects);
-              }}
-              color="secondary"
-              style={{ textTransform: 'none' }}
-            >
-              {`+ Add a notable project (${5 - notableProjects.length})`}
-            </Button>
-          </div>
+          <AddNotableProject
+            notableProjects={notableProjects}
+            setNotableProjects={setNotableProjects}
+          />
+        )}
+        <Typography variant="h6" color="textPrimary" style={{ marginTop: 20 }}>
+          Testimonials
+        </Typography>
+        {testimonials &&
+          testimonials.map((testimonial, index) => {
+            return (
+              <Testimonial
+                testimonial={testimonial}
+                setChanged={setChanged}
+                index={index}
+                setTestimonials={setTestimonials}
+                testimonials={testimonials}
+                key={`testimonial_${index}`}
+              />
+            );
+          })}
+        {testimonialsLength < 5 && (
+          <AddTestimonial
+            testimonials={testimonials}
+            setTestimonials={setTestimonials}
+          />
         )}
         <MediaGalleryObject
           images={images}

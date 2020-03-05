@@ -42,6 +42,7 @@ export const SECTIONS = gql`
         summary
       }
       testimonials {
+        id
         name
         summary
       }

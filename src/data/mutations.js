@@ -59,6 +59,12 @@ export const REMOVE_NOTABLE_PROJECT_MUTATION = gql`
   }
 `;
 
+export const REMOVE_TESTIMONIAL_MUTATION = gql`
+  mutation RemoveTestimonialMutation($id: String!) {
+    removeTestimonial(id: $id)
+  }
+`;
+
 export const REMOVE_NOTIFICATION_MUTATION = gql`
   mutation RemoveNotificationMutation($id: String!) {
     removeNotification(id: $id)
