@@ -76,9 +76,33 @@ export function AddSection({ setSections, sections }) {
             setSections(newSections);
           }}
         >
-          <Icon style={{ fontSize: 50, color: '#333' }}>photo_library</Icon>
+          <Icon style={{ fontSize: 50, color: '#333' }}>brush</Icon>
           <Typography variant="body1" component="p">
-            Gallery
+            Artist
+          </Typography>
+        </Card>
+        <Card
+          className={classes.skillCard}
+          onClick={() => {
+            setDisplay(false);
+            const newSection = {
+              id: 'new',
+              title: '',
+              summary: '',
+              gallery: {
+                images: [],
+              },
+              notableProjects: [],
+              testimonials: [],
+            };
+            const newSections = Object.assign([], sections);
+            newSections.push(newSection);
+            setSections(newSections);
+          }}
+        >
+          <Icon style={{ fontSize: 50, color: '#333' }}>create</Icon>
+          <Typography variant="body1" component="p">
+            Graphic Artist
           </Typography>
         </Card>
       </div>

@@ -120,8 +120,8 @@ export function GallerySection({ index, sections, setSections, section }) {
       <div className={classes.sectionWrapper}>
         <div className={classes.sectionHeader}>
           <div className={classes.sectionHeaderTitle}>
-            <Icon color="secondary" style={{ fontSize: 23, marginRight: 10 }}>
-              edit
+            <Icon color="secondary" style={{ fontSize: 28, marginRight: 10 }}>
+              brush
             </Icon>
             <Typography variant="h1" color="secondary">
               Artist
@@ -137,7 +137,7 @@ export function GallerySection({ index, sections, setSections, section }) {
           style={{ width: '100%' }}
           className={classes.headerLeft}
         >
-          About my artistry
+          About
         </Typography>
         <TextField
           id={'title'}
