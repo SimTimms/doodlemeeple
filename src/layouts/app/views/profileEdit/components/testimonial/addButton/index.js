@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 
 export function AddTestimonial({ setTestimonials, testimonials }) {
-  console.log(testimonials);
   return (
     <div style={{ width: '100%' }}>
       <Button

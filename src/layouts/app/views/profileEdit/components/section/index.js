@@ -219,9 +219,13 @@ export function GallerySection({ index, sections, setSections, section }) {
           style={{
             background: '#ddd',
             width: '100%',
-            padding: testimonials > 0 ? 20 : 0,
-            paddingTop: testimonials > 0 ? 10 : 0,
-            paddingBottom: testimonials > 0 ? 10 : 0,
+            padding: testimonials ? (testimonials.length > 0 ? 20 : 0) : 0,
+            paddingTop: testimonials ? (testimonials.length > 0 ? 10 : 0) : 0,
+            paddingBottom: testimonials
+              ? testimonials.length > 0
+                ? 10
+                : 0
+              : 0,
             boxSizing: 'border-box',
           }}
         >
