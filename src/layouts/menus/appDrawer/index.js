@@ -57,14 +57,7 @@ export function AppDrawer(props) {
             textDecoration: 'none',
             color: '#444',
           }}
-        >
-          <ListItem button>
-            <ListItemIcon style={{ minWidth: 32 }}>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Website & Blog" />
-          </ListItem>
-        </a>
+        ></a>
         {[
           {
             name: 'Dashboard',
@@ -101,6 +94,12 @@ export function AppDrawer(props) {
             </ListItem>
           </Link>
         ))}
+        <ListItem button>
+          <ListItemIcon style={{ minWidth: 32 }}>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Website & Blog" />
+        </ListItem>
         <ListItem
           button
           onClick={() => {

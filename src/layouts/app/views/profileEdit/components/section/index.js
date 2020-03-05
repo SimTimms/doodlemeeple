@@ -94,7 +94,7 @@ export function GallerySection({ index, sections, setSections, section }) {
     section.notableProjects,
   );
   const [testimonials, setTestimonials] = React.useState([
-    { name: 'test', summary: 'test' },
+    { id: 'new', name: 'test', summary: 'test' },
   ]);
   const [changed, setChanged] = React.useState(false);
 
