@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import { SaveButton } from './saveButton';
 import { DeleteButton } from './deleteButton';
-import { DeleteNotableProjectButton } from './deleteNotableProjectButton';
+import { NotableProject } from '../notableProject';
 import { useStyles } from './styles';
 import { MediaGalleryObject } from '../mediaGalleryOject';
 import {
@@ -162,38 +162,13 @@ export function GallerySection({ index, sections, setSections, section }) {
         {notableProjects &&
           notableProjects.map((notableProject, index) => {
             return (
-              <div className={classes.actionInputWrapper}>
-                <TextField
-                  id={'notableProjects'}
-                  label={`Notable Projects ${
-                    notableProject.summary
-                      ? `(${56 - notableProject.summary.length})`
-                      : ''
-                  }`}
-                  inputProps={{ maxLength: 56 }}
-                  multiline
-                  value={notableProject.summary}
-                  margin="normal"
-                  variant="outlined"
-                  style={{ width: '100%' }}
-                  onChange={ev => {
-                    setChanged(true);
-                    const newNotableProjects = Object.assign(
-                      [],
-                      notableProjects,
-                    );
-                    newNotableProjects[index].summary = ev.target.value;
-
-                    setNotableProjects(newNotableProjects);
-                  }}
-                />
-                <DeleteNotableProjectButton
-                  notableProjectId={notableProject.id}
-                  notableProjects={notableProjects}
-                  index={index}
-                  setNotableProjects={setNotableProjects}
-                />
-              </div>
+              <NotableProject
+                notableProject={notableProject}
+                setChanged={setChanged}
+                index={index}
+                setNotableProjects={setNotableProjects}
+                notableProjects={notableProjects}
+              />
             );
           })}
         {notableProjectsLength < 5 && (
