@@ -119,9 +119,11 @@ export function GallerySection({ index, sections, setSections, section }) {
       <Divider />
       <div className={classes.sectionWrapper}>
         <div className={classes.sectionHeader}>
-          <Icon style={{ fontSize: 42, marginRight: 10 }}>edit</Icon>
+          <Icon color="secondary" style={{ fontSize: 42, marginRight: 10 }}>
+            edit
+          </Icon>
           <div>
-            <Typography variant="h1" color="textPrimary">
+            <Typography variant="h1" color="secondary">
               Artist
             </Typography>
             <Typography variant="h6" color="textPrimary">

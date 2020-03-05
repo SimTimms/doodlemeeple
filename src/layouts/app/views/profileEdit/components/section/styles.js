@@ -15,7 +15,7 @@ export const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     flexWrap: 'wrap',
     flexDirection: 'row',
-    borderBottom: '10px solid #222',
+    borderBottom: `10px solid ${theme.palette.secondary.main}`,
     paddingBottom: 10,
     width: '100%',
   },
