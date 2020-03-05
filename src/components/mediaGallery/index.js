@@ -60,7 +60,11 @@ export function MediaGallery({ items, edit, setBgImage, setImages }) {
                   alignItems: 'center ',
                 }}
               >
-                <Uploader cbImage={setBgImage} styleOverride={null} />
+                <Uploader
+                  cbImage={setBgImage}
+                  styleOverride={null}
+                  className={null}
+                />
               </div>
             </GridListTile>
           )}

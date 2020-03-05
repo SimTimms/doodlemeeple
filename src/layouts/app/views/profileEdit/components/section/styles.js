@@ -12,12 +12,23 @@ export const useStyles = makeStyles(theme => ({
   sectionHeader: {
     display: 'flex',
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     flexWrap: 'wrap',
     flexDirection: 'row',
-    borderBottom: `10px solid ${theme.palette.secondary.main}`,
-    paddingBottom: 10,
+
     width: '100%',
+  },
+  sectionHeaderTitle: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexWrap: 'nowrap',
+    flexDirection: 'row',
+    width: '100%',
+  },
+  headerLeft: {
+    color: theme.palette.secondary.main,
+    marginTop: 20,
   },
   actionWrapper: {
     display: 'flex',

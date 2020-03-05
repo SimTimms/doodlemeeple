@@ -44,6 +44,8 @@ export function AddSection({ setSections, sections }) {
               id: 'new',
               summary: '',
               title: '',
+              notableProjects: [],
+              testimonials: [],
             };
             const newSections = Object.assign([], sections);
             newSections.push(newSection);
@@ -67,6 +69,7 @@ export function AddSection({ setSections, sections }) {
                 images: [],
               },
               notableProjects: [],
+              testimonials: [],
             };
             const newSections = Object.assign([], sections);
             newSections.push(newSection);

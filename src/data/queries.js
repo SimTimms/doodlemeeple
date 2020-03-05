@@ -45,6 +45,7 @@ export const SECTIONS = gql`
         id
         name
         summary
+        image
       }
     }
   }

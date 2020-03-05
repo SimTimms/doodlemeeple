@@ -119,18 +119,26 @@ export function GallerySection({ index, sections, setSections, section }) {
       <Divider />
       <div className={classes.sectionWrapper}>
         <div className={classes.sectionHeader}>
-          <Icon color="secondary" style={{ fontSize: 42, marginRight: 10 }}>
-            edit
-          </Icon>
-          <div>
+          <div className={classes.sectionHeaderTitle}>
+            <Icon color="secondary" style={{ fontSize: 23, marginRight: 10 }}>
+              edit
+            </Icon>
             <Typography variant="h1" color="secondary">
               Artist
             </Typography>
-            <Typography variant="h6" color="textPrimary">
-              Fantasy, Sci-Fi, Character Design...
-            </Typography>
           </div>
+          <Typography variant="h6" color="textPrimary">
+            Fantasy, Sci-Fi, Character Design...
+          </Typography>
         </div>
+        <Typography
+          variant="h6"
+          color="textPrimary"
+          style={{ width: '100%' }}
+          className={classes.headerLeft}
+        >
+          About my artistry
+        </Typography>
         <TextField
           id={'title'}
           value={title}
@@ -159,7 +167,26 @@ export function GallerySection({ index, sections, setSections, section }) {
             setSummary(ev.target.value);
           }}
         />
-        <Typography variant="h6" color="textPrimary" style={{ marginTop: 20 }}>
+        <Typography
+          variant="h6"
+          color="textPrimary"
+          className={classes.headerLeft}
+        >
+          Gallery
+        </Typography>
+        <MediaGalleryObject
+          images={images}
+          setImages={newImages => {
+            setChanged(true);
+            setImages(newImages);
+          }}
+          index={index}
+        />
+        <Typography
+          variant="h6"
+          color="textPrimary"
+          className={classes.headerLeft}
+        >
           Notable Projects
         </Typography>
         {notableProjects &&
@@ -181,36 +208,43 @@ export function GallerySection({ index, sections, setSections, section }) {
             setNotableProjects={setNotableProjects}
           />
         )}
-        <Typography variant="h6" color="textPrimary" style={{ marginTop: 20 }}>
+        <Typography
+          variant="h6"
+          color="textPrimary"
+          className={classes.headerLeft}
+        >
           Testimonials
         </Typography>
-        {testimonials &&
-          testimonials.map((testimonial, index) => {
-            return (
-              <Testimonial
-                testimonial={testimonial}
-                setChanged={setChanged}
-                index={index}
-                setTestimonials={setTestimonials}
-                testimonials={testimonials}
-                key={`testimonial_${index}`}
-              />
-            );
-          })}
+        <div
+          style={{
+            background: '#ddd',
+            width: '100%',
+            padding: testimonials > 0 ? 20 : 0,
+            paddingTop: testimonials > 0 ? 10 : 0,
+            paddingBottom: testimonials > 0 ? 10 : 0,
+            boxSizing: 'border-box',
+          }}
+        >
+          {testimonials &&
+            testimonials.map((testimonial, index) => {
+              return (
+                <Testimonial
+                  testimonial={testimonial}
+                  setChanged={setChanged}
+                  index={index}
+                  setTestimonials={setTestimonials}
+                  testimonials={testimonials}
+                  key={`testimonial_${index}`}
+                />
+              );
+            })}
+        </div>
         {testimonialsLength < 5 && (
           <AddTestimonial
             testimonials={testimonials}
             setTestimonials={setTestimonials}
           />
         )}
-        <MediaGalleryObject
-          images={images}
-          setImages={newImages => {
-            setChanged(true);
-            setImages(newImages);
-          }}
-          index={index}
-        />
         <div className={classes.actionWrapper}>
           <DeleteButton
             sectionId={section.id}

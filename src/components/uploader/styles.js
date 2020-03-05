@@ -5,7 +5,7 @@ export const useStyles = makeStyles(theme => ({
     color: '#fff',
     position: 'absolute',
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     top: 0,
@@ -13,6 +13,7 @@ export const useStyles = makeStyles(theme => ({
     background: 'rgba(0,0,0,0.3)',
     borderRadius: '0 0  0 10px',
     paddingLeft: 10,
+
     cursor: 'pointer',
     '&:hover': {
       background: 'rgba(0,0,0,0.5)',

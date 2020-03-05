@@ -28,26 +28,18 @@ export function ProfileHeader({
         [classes.rootDesktop]: !mobile,
       })}
     >
-      <Button
-        onClick={() => {
-          setDisabledValue(true);
-          setBgImage('');
-        }}
-        className={clsx({
-          [classes.deleteBGButton]: true,
-          [classes.deleteBGButtonShow]:
-            profile.bgImage !== '' && profile.bgImage !== null,
-        })}
-        style={{ color: '#fff', borderRadius: '0 0 5px 0', left: 0 }}
-      >
-        Remove
-      </Button>
       <Uploader
         cbImage={url => {
           setDisabledValue(true);
           setBgImage(url);
         }}
+        cbDelete={() => {
+          setDisabledValue(true);
+          setBgImage('');
+        }}
         styleOverride={null}
+        hasFile={profile.bgImage !== '' || profile.bgImage ? true : false}
+        className={null}
       />
       <div
         className={clsx({
@@ -62,24 +54,6 @@ export function ProfileHeader({
             [classes.avatarWrapperMobile]: mobile,
           })}
         >
-          <div
-            className={clsx({
-              [classes.deleteAvatarWrapper]: true,
-              [classes.deleteAvatarWrapperShow]:
-                profile.profileImg !== '' && profile.profileImg !== null,
-            })}
-          >
-            <Button
-              color="secondary"
-              onClick={() => {
-                setDisabledValue(true);
-                setProfileImg('');
-              }}
-              className={classes.deleteAvatarButton}
-            >
-              Remove
-            </Button>
-          </div>
           <Uploader
             cbImage={url => {
               setDisabledValue(true);
@@ -98,6 +72,14 @@ export function ProfileHeader({
               opacity: 0.5,
               background: 'none',
             }}
+            cbDelete={() => {
+              setDisabledValue(true);
+              setProfileImg('');
+            }}
+            hasFile={
+              profile.profileImg !== '' || profile.profileImg ? true : false
+            }
+            className={null}
           />
           {profile.profileImg !== '' && profile.profileImg !== null && (
             <CardMedia

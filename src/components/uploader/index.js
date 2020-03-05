@@ -2,14 +2,23 @@ import React from 'react';
 import axios from 'axios';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 
-export function Uploader({ cbImage, styleOverride }) {
+export function Uploader({
+  cbImage,
+  styleOverride,
+  className,
+  cbDelete,
+  hasFile,
+}) {
   const classes = useStyles();
   const [statusMessage, setStatusMessage] = React.useState('');
+
   let uploadInput = null;
 
-  function handleUpload(ev) {
+  console.log(hasFile);
+  async function handleUpload(ev) {
     let file = uploadInput.files[0];
     // Split the filename to get the name and type
     let fileParts = uploadInput.files[0].name.split('.');
@@ -23,8 +32,8 @@ export function Uploader({ cbImage, styleOverride }) {
 
     const uploadURL = `${process.env.REACT_APP_API}/sign_s3`;
 
-    setStatusMessage('Uploading...');
-    axios
+    setStatusMessage('Loading...');
+    await axios
       .post(uploadURL, {
         fileName: fileName,
         fileType: fileType,
@@ -64,9 +73,27 @@ export function Uploader({ cbImage, styleOverride }) {
   }
 
   return (
-    <label className={classes.imageIconWrapper} style={styleOverride}>
+    <label
+      className={`${classes.imageIconWrapper} ${className}`}
+      style={styleOverride}
+    >
       <Typography gutterBottom>{statusMessage}</Typography>
-      <Icon className={classes.imageIcon}>add_photo_alternate</Icon>
+      {hasFile ? (
+        <Button
+          onClick={() => {
+            cbDelete();
+          }}
+          style={{ color: '#fff', left: 0 }}
+        >
+          Remove
+        </Button>
+      ) : statusMessage === '' ? (
+        <Icon className={classes.imageIcon}>add_photo_alternate</Icon>
+      ) : (
+        <Icon className={classes.imageIcon} style={{ fontSize: 20 }}>
+          cancel
+        </Icon>
+      )}
       <input
         type="file"
         ref={input => {
