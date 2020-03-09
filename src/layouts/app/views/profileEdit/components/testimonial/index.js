@@ -1,6 +1,5 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import CardMedia from '@material-ui/core/CardMedia';
 import { DeleteButton } from './deleteButton';
 import { useStyles } from './styles';
 import { Uploader } from '../../../../../../components/uploader';

@@ -1,11 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
 import { timeDifferenceForDate } from '../../../../../../utils/dates';
-import axios from 'axios';
 
 export function Posts({ posts }) {
   const classes = useStyles();
@@ -23,9 +21,12 @@ export function Posts({ posts }) {
       {posts.map((post, index) => {
         const regex = /(<([^>]+)>)/gi;
         const linkTo = post.link;
-        const icon = '';
         const createdAt = post.date;
-        const message = post.excerpt.rendered.replace(regex, '');
+        const message = post.excerpt.rendered
+          .replace(regex, '')
+          .replace(/&#8217;/gi, "'")
+          .replace(/&amp;/gi, '&')
+          .replace(/\[&hellip;\]/gi, '...');
         const title = post.title.rendered;
         const media = post._embedded['wp:featuredmedia']['0'].source_url;
 
@@ -37,35 +38,44 @@ export function Posts({ posts }) {
                 className={classes.messageButton}
                 style={{ textDecoration: 'none' }}
               >
-                <div className={classes.notifications}>
-                  <img src={media} alt="new" style={{ maxWidth: 200 }} />
-                </div>
-                <div className={classes.profileWrapper}>
-                  <div className={classes.wrapperOne}>
-                    <div className={classes.messageDetails}>
-                      <div
-                        className={classes.rowWrapper}
-                        style={{ justifyContent: 'space-between' }}
+                <div
+                  className={classes.postImage}
+                  style={{ backgroundImage: `url(${media})` }}
+                >
+                  <div className={classes.postHeader}>
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        width: '100%',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Typography
+                        style={{
+                          color: '#fff',
+                        }}
+                        variant="h4"
+                        component="h2"
                       >
-                        <Typography
-                          color="secondary"
-                          variant="caption"
-                          component="p"
-                        >
-                          <b>{title}</b>
-                        </Typography>
-                        <Typography
-                          variant="caption"
-                          component="p"
-                          color="textPrimary"
-                        >
-                          <b>{timeDifferenceForDate(createdAt)}</b>
-                        </Typography>
-                      </div>
-                      <Typography color="textPrimary" component="p">
-                        {message}
+                        <b>{title}</b>
+                      </Typography>
+                      <Typography
+                        style={{
+                          color: '#fff',
+                          display: 'flex',
+                          flexDirection: 'row',
+                        }}
+                        component="p"
+                      >
+                        <b>{timeDifferenceForDate(createdAt)}</b>
                       </Typography>
                     </div>
+
+                    <Typography style={{ color: '#fff' }} component="p">
+                      {message}
+                    </Typography>
                   </div>
                 </div>
               </a>

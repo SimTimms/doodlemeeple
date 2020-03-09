@@ -9,16 +9,21 @@ export const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     width: '100%',
   },
-  notifications: {
-    display: 'flex',
-    flexDirection: 'column',
+  postHeader: {
+    color: '#fff',
+    position: 'absolute',
+    bottom: 0,
+    background: 'rgba(0,0,0,0.5)',
     padding: 10,
-    borderRight: '1px solid #ddd',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
   },
-
-  card: { width: '100%', maxWidth: 500, margin: '5px 0 0 0' },
+  postImage: {
+    position: 'relative',
+    width: '100%',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
+    height: 200,
+  },
+  card: { width: '100%', margin: '5px 0 0 0' },
   rowWrapper: {
     display: 'flex',
     flexDirection: 'row',
@@ -49,8 +54,8 @@ export const useStyles = makeStyles(theme => ({
     width: '100%',
     lineHeight: 0.6,
     display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
+    flexDirection: 'column',
+    flexWrap: 'wrap',
     justifyContent: 'flex-end',
   },
   profileWrapper: {

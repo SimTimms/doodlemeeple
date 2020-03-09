@@ -17,7 +17,6 @@ export function Uploader({
 
   let uploadInput = null;
 
-  console.log(hasFile);
   async function handleUpload(ev) {
     let file = uploadInput.files[0];
     // Split the filename to get the name and type
@@ -85,7 +84,9 @@ export function Uploader({
           }}
           style={{ color: '#fff', left: 0 }}
         >
-          Remove
+          <Icon className={classes.imageIcon} style={{ fontSize: 20 }}>
+            delete
+          </Icon>
         </Button>
       ) : statusMessage === '' ? (
         <Icon className={classes.imageIcon}>add_photo_alternate</Icon>

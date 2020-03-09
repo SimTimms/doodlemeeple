@@ -51,13 +51,6 @@ export function AppDrawer(props) {
       <Divider />
 
       <List>
-        <a
-          href="https://doodlemeeple.com"
-          style={{
-            textDecoration: 'none',
-            color: '#444',
-          }}
-        ></a>
         {[
           {
             name: 'Dashboard',

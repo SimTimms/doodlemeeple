@@ -2,7 +2,6 @@ import React from 'react';
 import CardMedia from '@material-ui/core/CardMedia';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import { Uploader } from '../../../../../../components/uploader';
@@ -101,9 +100,9 @@ export function ProfileHeader({
             id={'userName'}
             value={profile.userName}
             label={`Name ${
-              profile.userName ? `(${36 - profile.userName.length})` : ''
+              profile.userName ? `(${26 - profile.userName.length})` : ''
             }`}
-            inputProps={{ maxLength: 36 }}
+            inputProps={{ maxLength: 26 }}
             onChange={e => {
               setDisabledValue(true);
               setUserName(e.target.value);

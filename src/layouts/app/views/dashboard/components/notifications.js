@@ -45,7 +45,7 @@ export function Notifications() {
                 style={{ textDecoration: 'none' }}
               >
                 <div className={classes.notifications}>
-                  <Icon style={{ color: '#f50057' }}>{notification.icon}</Icon>
+                  <Icon color="secondary">{notification.icon}</Icon>
                 </div>
                 <div className={classes.profileWrapper}>
                   <div className={classes.wrapperOne}>

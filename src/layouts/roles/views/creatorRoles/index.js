@@ -36,7 +36,7 @@ export function CreatorRoles() {
                       className={classes.messageButton}
                       style={{ textDecoration: 'none' }}
                     >
-                      <Icon style={{ color: '#f50057' }}>message</Icon>
+                      <Icon color="secondary">message</Icon>
                     </Link>
                     <Icon style={{ color: '#ddd' }}>check_circle</Icon>
                   </div>

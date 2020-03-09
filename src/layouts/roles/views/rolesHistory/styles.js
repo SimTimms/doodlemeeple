@@ -87,7 +87,7 @@ export const useStyles = makeStyles(theme => ({
     padding: 10,
   },
   avatarResponded: {
-    border: '4px solid #f50057 !important',
+    border: `4px solid ${theme.palette.secondary.main} !important`,
   },
   avatarDeclined: {
     border: '4px solid #444 !important',
