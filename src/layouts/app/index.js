@@ -80,60 +80,58 @@ function AppLayout(props) {
           [classes.contentShift]: open,
         })}
       >
-        <ContentTop>
-          <div>
-            {page === 'dashboard' ? (
-              <Dashboard />
-            ) : page === 'profile' ? (
-              <Profile />
-            ) : page === 'edit-profile' ? (
-              <EditProfile />
-            ) : page === 'account' ? (
-              <Account />
-            ) : page === 'invites' ? (
-              <Invites />
-            ) : page === 'projects' ? (
-              <Projects gamesTemp={gamesTestData} />
-            ) : page === 'edit-project' ? (
-              <NewProject
-                projectId={pathParam}
-                gamesTemp={gamesTestData}
-                setGamesTestData={setGamesTestData}
-              />
-            ) : page === 'view-project' ? (
-              <Project
-                projectId={pathParam}
-                gamesTemp={gamesTestData}
-                actionSet={
-                  <CardActionArea>
-                    <Link to="/app/invites">
-                      <ActionButton name="Back" />
-                    </Link>
+        <ContentTop style={{ width: '100%' }}>
+          {page === 'dashboard' ? (
+            <Dashboard />
+          ) : page === 'profile' ? (
+            <Profile />
+          ) : page === 'edit-profile' ? (
+            <EditProfile />
+          ) : page === 'account' ? (
+            <Account />
+          ) : page === 'invites' ? (
+            <Invites />
+          ) : page === 'projects' ? (
+            <Projects gamesTemp={gamesTestData} />
+          ) : page === 'edit-project' ? (
+            <NewProject
+              projectId={pathParam}
+              gamesTemp={gamesTestData}
+              setGamesTestData={setGamesTestData}
+            />
+          ) : page === 'view-project' ? (
+            <Project
+              projectId={pathParam}
+              gamesTemp={gamesTestData}
+              actionSet={
+                <CardActionArea>
+                  <Link to="/app/invites">
+                    <ActionButton name="Back" />
+                  </Link>
 
-                    <Link to={`/app/decline/${pathParam}`}>
-                      <ActionButton name="Decline" />
-                    </Link>
-                    <Link to={`/app/create-quote/${pathParam}`}>
-                      <Button variant="contained" color="secondary">
-                        Continue
-                      </Button>
-                    </Link>
-                  </CardActionArea>
-                }
-                edit={false}
-              />
-            ) : page === 'new-project' ? (
-              <NewProject
-                projectId={null}
-                gamesTemp={gamesTestData}
-                setGamesTestData={setGamesTestData}
-              />
-            ) : page === 'decline' ? (
-              <Decline projectId={pathParam} />
-            ) : page === 'create-quote' ? (
-              <NewQuote projectId={pathParam} />
-            ) : null}
-          </div>
+                  <Link to={`/app/decline/${pathParam}`}>
+                    <ActionButton name="Decline" />
+                  </Link>
+                  <Link to={`/app/create-quote/${pathParam}`}>
+                    <Button variant="contained" color="secondary">
+                      Continue
+                    </Button>
+                  </Link>
+                </CardActionArea>
+              }
+              edit={false}
+            />
+          ) : page === 'new-project' ? (
+            <NewProject
+              projectId={null}
+              gamesTemp={gamesTestData}
+              setGamesTestData={setGamesTestData}
+            />
+          ) : page === 'decline' ? (
+            <Decline projectId={pathParam} />
+          ) : page === 'create-quote' ? (
+            <NewQuote projectId={pathParam} />
+          ) : null}
         </ContentTop>
       </main>
     </div>

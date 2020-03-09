@@ -25,7 +25,7 @@ export function Dashboard() {
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div>
+      <div style={{ width: '100%' }}>
         <ContentHeader>
           <Typography variant="h1" color="textPrimary">
             Dashboard
@@ -40,10 +40,7 @@ export function Dashboard() {
             <Notifications />
 
             {/*<Projects />*/}
-          </div>
-        </div>
-        <div className={classes.dashboardGrid}>
-          <div className={classes.gridRow}>
+
             <Posts posts={posts ? posts : []} />
             {/*<Projects />*/}
           </div>

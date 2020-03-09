@@ -7,7 +7,7 @@ export const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    width: '100%',
+    width: '50%',
   },
   postHeader: {
     color: '#fff',

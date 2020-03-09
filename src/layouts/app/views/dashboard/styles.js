@@ -4,7 +4,7 @@ export const useStyles = makeStyles({
   dashboardGrid: {
     width: '100%',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
   },
   gridRow: {
     display: 'flex',
