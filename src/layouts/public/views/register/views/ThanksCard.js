@@ -4,7 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { styles } from './styles';
-import ActionButton from '../../../../../components/buttons';
+import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import Slide from '@material-ui/core/Slide';
 
@@ -36,15 +36,16 @@ export default function RegisterCard({ setPage }) {
               component="p"
               style={{ textAlign: 'center' }}
             >
-              You'll receive an email any moment now, simply follow the
-              instructions to complete your registration
+              You can now login to DoodleMeeple
             </Typography>
           </CardContent>
           <Divider />
 
           <CardContent className={classes.cardContentCenter}>
-            <Link to="/">
-              <ActionButton linkTo="/d" name="OK" />
+            <Link to="/login">
+              <Button variant="contained" color="secondary">
+                Login
+              </Button>
             </Link>
           </CardContent>
         </Card>

@@ -34,6 +34,7 @@ export default function RegisterCard({ setPage }) {
     password: null,
   });
   const [password, setPassword] = React.useState('');
+  const [buttonStatus, setButtonStatus] = React.useState('Register');
   const mobile = useMediaQuery('(max-width:800px)');
 
   function submitChecks(SignupMutation) {
@@ -74,6 +75,7 @@ export default function RegisterCard({ setPage }) {
         ? 'At least 6 characters, 1 uppercase, 1 lowercase, 1 number'
         : null,
     });
+    !passed && setButtonStatus('Try Again');
     passed && SignupMutation();
   }
 
@@ -144,9 +146,11 @@ export default function RegisterCard({ setPage }) {
               mutation={SIGNUP_MUTATION}
               variables={{ name, email, password }}
               onError={error => {
+                setButtonStatus('Error');
                 setError(readableErrors(error, errors));
               }}
               onCompleted={(a, b) => {
+                setButtonStatus('Done');
                 setPage();
               }}
             >
@@ -155,12 +159,13 @@ export default function RegisterCard({ setPage }) {
                   <div>
                     <Button
                       onClick={() => {
+                        setButtonStatus('Checking...');
                         submitChecks(SignupMutation);
                       }}
                       variant="contained"
                       color="secondary"
                     >
-                      Register
+                      {buttonStatus}
                     </Button>
                   </div>
                 );
