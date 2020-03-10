@@ -9,6 +9,14 @@ export const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     width: '50%',
   },
+  messageWrapperMobile: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '100%',
+  },
   postHeader: {
     color: '#fff',
     position: 'absolute',

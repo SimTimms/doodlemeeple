@@ -4,12 +4,19 @@ import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
 import { timeDifferenceForDate } from '../../../../../../utils/dates';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import clsx from 'clsx';
 
 export function Posts({ posts }) {
   const classes = useStyles();
-
+  const mobile = useMediaQuery('(max-width:800px)');
   return (
-    <div className={classes.messageWrapper}>
+    <div
+      className={clsx({
+        [classes.messageWrapper]: !mobile,
+        [classes.messageWrapperMobile]: mobile,
+      })}
+    >
       <Typography
         color="textPrimary"
         component="p"
