@@ -12,6 +12,11 @@ import Slide from '@material-ui/core/Slide';
 import { Mutation } from 'react-apollo';
 import { SIGNUP_MUTATION } from '../../../../../data/mutations';
 import { readableErrors } from '../../../../../utils/readableErrors';
+import {
+  PROFILE_NAME,
+  PROFILE_EMAIL,
+  PROFILE_PASSWORD,
+} from '../../../../../utils/dataLengths';
 import { ErrorBox } from '../../../../../components/pageElements';
 import { validate } from 'email-validator';
 import { Link } from 'react-router-dom';
@@ -103,23 +108,32 @@ export default function RegisterCard({ setPage }) {
             <Form width={200}>
               <FormInput
                 fieldName="name"
-                fieldTitle="Name"
                 fieldValue={name}
                 setFieldValue={setName}
+                fieldTitle={`Name ${
+                  name ? `(${PROFILE_NAME - name.length})` : ''
+                }`}
+                inputProps={{ maxLength: PROFILE_NAME }}
               />
               <ErrorBox errorMsg={errors.name} />
               <FormInput
                 fieldName="emailAddress"
-                fieldTitle="Email"
                 fieldValue={email}
                 setFieldValue={setEmail}
+                fieldTitle={`Email ${
+                  email ? `(${PROFILE_EMAIL - email.length})` : ''
+                }`}
+                inputProps={{ maxLength: PROFILE_EMAIL }}
               />
               <ErrorBox errorMsg={errors.email} />
               <FormInput
                 fieldName="password"
-                fieldTitle="Password"
                 fieldValue={password}
                 setFieldValue={setPassword}
+                fieldTitle={`Password ${
+                  password ? `(${PROFILE_PASSWORD - password.length})` : ''
+                }`}
+                inputProps={{ maxLength: PROFILE_PASSWORD }}
               />
               <ErrorBox errorMsg={errors.password} />
             </Form>

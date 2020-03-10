@@ -40,6 +40,7 @@ export function FormInput(props) {
       type={props.type}
       margin="normal"
       variant="outlined"
+      inputProps={props.inputProps}
     />
   );
 }

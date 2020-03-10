@@ -11,6 +11,7 @@ import { styles } from './styles';
 import { sharedStyles } from '../styles';
 import { Mutation } from 'react-apollo';
 import { LOGIN_MUTATION } from '../../../../data/mutations';
+import { PROFILE_EMAIL, PROFILE_PASSWORD } from '../../../../utils/dataLengths';
 import Cookies from 'js-cookie';
 import { readableErrors } from '../../../../utils/readableErrors';
 import { ErrorBox } from '../../../../components/pageElements';
@@ -60,16 +61,22 @@ export default function LoginCard({ history }) {
             <Form width={200}>
               <FormInput
                 fieldName="emailAddress"
-                fieldTitle="Email"
                 fieldValue={email}
                 setFieldValue={setEmail}
+                fieldTitle={`Email ${
+                  email ? `(${PROFILE_EMAIL - email.length})` : ''
+                }`}
+                inputProps={{ maxLength: PROFILE_EMAIL }}
               />
               <FormInput
                 fieldName="password"
-                fieldTitle="Password"
                 fieldValue={password}
                 setFieldValue={setPassword}
                 type="password"
+                fieldTitle={`Password ${
+                  password ? `(${PROFILE_PASSWORD - password.length})` : ''
+                }`}
+                inputProps={{ maxLength: PROFILE_PASSWORD }}
               />
               <ErrorBox errorMsg={errors.passwordError} />
               <ErrorBox errorMsg={errors.noUserError} />

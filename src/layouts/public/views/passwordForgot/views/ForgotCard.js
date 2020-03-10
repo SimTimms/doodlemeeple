@@ -11,6 +11,7 @@ import { styles } from './styles';
 import { sharedStyles } from '../../styles';
 import { Mutation } from 'react-apollo';
 import { PASSWORD_FORGOT_MUTATION } from '../../../../../data/mutations';
+import { PROFILE_EMAIL } from '../../../../../utils/dataLengths';
 import { ErrorBox } from '../../../../../components/pageElements';
 import { validate } from 'email-validator';
 import { Link } from 'react-router-dom';
@@ -68,9 +69,12 @@ export default function ForgotCard({ history, setPage }) {
             <Form width={200}>
               <FormInput
                 fieldName="emailAddress"
-                fieldTitle="Email"
                 fieldValue={email}
                 setFieldValue={setEmail}
+                fieldTitle={`Email ${
+                  email ? `(${PROFILE_EMAIL - email.length})` : ''
+                }`}
+                inputProps={{ maxLength: PROFILE_EMAIL }}
               />
               <ErrorBox errorMsg={errors.email} />
             </Form>
