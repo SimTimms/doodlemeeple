@@ -34,6 +34,8 @@ export function AppDrawer(props) {
     drawerHeader,
     drawerMobile,
     drawerHeaderMobile,
+    button,
+    buttonMobile,
   } = useStyles();
   const { handleDrawerClose, open } = props;
   const theme = useTheme();
@@ -96,7 +98,13 @@ export function AppDrawer(props) {
           <Link to={text.link} className={link} key={text.name}>
             <ListItem button>
               <ListItemIcon style={{ minWidth: 32 }}>{text.icon}</ListItemIcon>
-              <ListItemText primary={text.name} />
+              <ListItemText
+                primary={text.name}
+                className={clsx({
+                  [button]: !mobile,
+                  [buttonMobile]: mobile,
+                })}
+              />
             </ListItem>
           </Link>
         ))}
@@ -104,7 +112,13 @@ export function AppDrawer(props) {
           <ListItemIcon style={{ minWidth: 32 }}>
             <HomeIcon />
           </ListItemIcon>
-          <ListItemText primary="Website & Blog" />
+          <ListItemText
+            primary="Website & Blog"
+            className={clsx({
+              [button]: !mobile,
+              [buttonMobile]: mobile,
+            })}
+          />
         </ListItem>
         <ListItem
           button
@@ -116,7 +130,13 @@ export function AppDrawer(props) {
           <ListItemIcon style={{ minWidth: 32 }}>
             <ExitToAppIcon />
           </ListItemIcon>
-          <ListItemText primary="Logout" />
+          <ListItemText
+            primary="Logout"
+            className={clsx({
+              [button]: !mobile,
+              [buttonMobile]: mobile,
+            })}
+          />
         </ListItem>
       </List>
       <Divider />

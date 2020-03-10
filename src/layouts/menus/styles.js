@@ -14,6 +14,11 @@ export const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     justifyContent: 'center',
   },
+  button: { textAlign: 'left' },
+  buttonMobile: {
+    padding: 5,
+    textAlign: 'center',
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -36,6 +41,7 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
     color: '#444',
   },
+
   icon: {
     minWidth: 30,
     borderRight: '1px solid #ddd',
