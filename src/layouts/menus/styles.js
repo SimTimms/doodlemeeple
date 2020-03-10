@@ -14,7 +14,6 @@ export const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -25,6 +24,11 @@ export const useStyles = makeStyles(theme => ({
     width: drawerWidth,
     flexShrink: 0,
   },
+  drawerMobile: {
+    width: '100%',
+    flexShrink: 0,
+  },
+
   link: {
     textDecoration: 'none',
     display: 'flex',
@@ -37,15 +41,19 @@ export const useStyles = makeStyles(theme => ({
     borderRight: '1px solid #ddd',
     marginRight: 10,
   },
-  drawerPaper: {
-    width: drawerWidth,
-  },
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
+  },
+  drawerHeaderMobile: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    ...theme.mixins.toolbar,
+    justifyContent: 'center',
   },
   content: {
     flexGrow: 1,

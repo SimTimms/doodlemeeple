@@ -28,8 +28,8 @@ export const useStyles = makeStyles(theme => ({
     }),
   },
   appBarShiftMobile: {
-    width: `0%`,
-    marginLeft: drawerWidth,
+    width: `100%`,
+    marginLeft: 0,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
@@ -39,7 +39,7 @@ export const useStyles = makeStyles(theme => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   appBarChildMobile: {

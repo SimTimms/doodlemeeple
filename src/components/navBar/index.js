@@ -25,10 +25,10 @@ export function StyledNavBar(props) {
       <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
         {menu}
         <div
-          className={`${clsx({
+          className={clsx({
             [classes.appBarChild]: !mobile,
             [classes.appBarChildMobile]: mobile,
-          })}`}
+          })}
         >
           <Link
             to="/"

@@ -9,38 +9,51 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import HomeIcon from '@material-ui/icons/Home';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ContactMailIcon from '@material-ui/icons/ContactMail';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalanceWallet';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 /*
 import MailIcon from '@material-ui/icons/Mail';
 import WorkIcon from '@material-ui/icons/Work';
 import ExtensionIcon from '@material-ui/icons/Extension';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 */
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ContactMailIcon from '@material-ui/icons/ContactMail';
-import AccountBalanceIcon from '@material-ui/icons/AccountBalanceWallet';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
+
 import { Link } from 'react-router-dom';
 import { useStyles } from '../styles';
 import Cookies from 'js-cookie';
+import clsx from 'clsx';
 
 export function AppDrawer(props) {
-  const { drawer, drawerPaper, link, drawerHeader } = useStyles();
+  const {
+    drawer,
+    link,
+    drawerHeader,
+    drawerMobile,
+    drawerHeaderMobile,
+  } = useStyles();
   const { handleDrawerClose, open } = props;
   const theme = useTheme();
+  const mobile = useMediaQuery('(max-width:800px)');
 
   return (
     <Drawer
-      className={drawer}
+      classes={{ paper: !mobile ? drawer : drawerMobile }}
       variant="persistent"
       anchor="left"
       open={open}
-      classes={{
-        paper: drawerPaper,
-      }}
     >
-      <div className={drawerHeader}>
-        <IconButton onClick={handleDrawerClose}>
+      <div
+        className={clsx({
+          [drawerHeader]: !mobile,
+          [drawerHeaderMobile]: mobile,
+        })}
+        onClick={handleDrawerClose}
+      >
+        <IconButton>
           {theme.direction === 'ltr' ? (
             <ChevronLeftIcon />
           ) : (
