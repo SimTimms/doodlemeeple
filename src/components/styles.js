@@ -19,4 +19,10 @@ export const styles = makeStyles({
     alignItems: 'flex-start',
     justifyContent: 'center',
   },
+  contentTopMobile: {
+    marginTop: 74,
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
 });

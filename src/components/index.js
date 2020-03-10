@@ -19,6 +19,16 @@ export function Content(props) {
 }
 
 export function ContentTop(props) {
+  const mobile = useMediaQuery('(max-width:800px)');
   const classes = styles();
-  return <div className={classes.contentTop}>{props.children}</div>;
+  return (
+    <div
+      className={clsx({
+        [classes.contentTop]: true,
+        [classes.contentTopMobile]: mobile,
+      })}
+    >
+      {props.children}
+    </div>
+  );
 }
