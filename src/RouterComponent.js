@@ -20,8 +20,8 @@ function RouterComponent(props) {
 
   theme.typography.h1 = { fontFamily: ['Quicksand'].join(','), fontSize: 30 };
   theme.typography.h2 = { fontFamily: ['Quicksand'].join(','), fontSize: 18 };
-  theme.palette.secondary = {
-    ...theme.palette.secondary,
+  theme.palette.primary = {
+    ...theme.palette.primary,
     main: '#57499e',
     light: '#8474d3',
     dark: '#433878',

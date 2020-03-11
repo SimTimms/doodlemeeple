@@ -4,6 +4,7 @@ import smithy from '../../../../assets/smithy.jpg';
 export const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 700,
+    width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-end',

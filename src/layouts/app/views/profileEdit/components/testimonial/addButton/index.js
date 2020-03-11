@@ -11,7 +11,7 @@ export function AddTestimonial({ setTestimonials, testimonials }) {
           copyArr.push(newObj);
           setTestimonials(copyArr);
         }}
-        color="secondary"
+        color="primary"
         style={{ textTransform: 'none' }}
       >
         {`+ Add a Testimonial (${5 - testimonials.length})`}

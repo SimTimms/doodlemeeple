@@ -150,7 +150,7 @@ export function Invitees({ invited, uninvite }) {
       </div>
 
       <Link to="../invites-sent">
-        <Button variant="contained" color="secondary">
+        <Button variant="contained" color="primary">
           Send Invites
         </Button>
       </Link>

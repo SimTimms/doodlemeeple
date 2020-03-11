@@ -103,7 +103,7 @@ export function ProfileHeader({
             inputProps={{ maxLength: 26 }}
             onChange={e => {
               setDisabledValue(true);
-              setUserName(e.target.value);
+              setUserName(e.target.value.replace(/[^A-Za-z0-9 ]/g, ''));
             }}
             margin="normal"
             variant="outlined"

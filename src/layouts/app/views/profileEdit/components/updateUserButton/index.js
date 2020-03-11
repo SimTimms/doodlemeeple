@@ -42,7 +42,7 @@ export function UpdateUserButton({
                 SignupMutation();
               }}
               variant="contained"
-              color="secondary"
+              color="primary"
               style={{ margin: 10 }}
               disabled={!validate}
             >

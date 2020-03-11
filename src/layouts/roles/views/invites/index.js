@@ -62,7 +62,7 @@ export function Invites({ roleId }) {
           <Button
             variant="contained"
             style={{ marginLeft: 10 }}
-            color="secondary"
+            color="primary"
             onClick={() => {
               let invitedArr = Object.assign([], invited);
               invitedArr.push({

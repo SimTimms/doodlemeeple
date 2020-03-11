@@ -26,7 +26,7 @@ export function SaveButton({
               mutation();
             }}
             variant="contained"
-            color="secondary"
+            color="primary"
             disabled={!disabledValue}
           >
             <Icon style={{ fontSize: 18, color: '#fff' }}>save</Icon>

@@ -16,6 +16,13 @@ export const useStyles = makeStyles({
     padding: 10,
     boxSizing: 'border-box',
   },
+  inputWrapperMobile: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+  },
   actionInputWrapper: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -35,6 +42,9 @@ export const useStyles = makeStyles({
     borderRadius: '50%',
     padding: 0,
     border: '5px solid #bbb',
-    marginRight: 20,
+    marginRight: 10,
+  },
+  avatarWrapperMobile: {
+    marginRight: 0,
   },
 });

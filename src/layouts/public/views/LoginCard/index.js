@@ -132,13 +132,13 @@ export default function LoginCard({ history }) {
             <Typography
               component="p"
               style={{ textAlign: 'center', fontSize: 12 }}
-              color="secondary"
+              color="primary"
             >
               Don't have an account?
             </Typography>
             <Link to="/register">
               <Button
-                color="secondary"
+                color="primary"
                 style={{
                   width: 80,
                   textTransform: 'none',

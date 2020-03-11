@@ -1,8 +1,9 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
+import { TextField, useMediaQuery } from '@material-ui/core';
 import { DeleteButton } from './deleteButton';
 import { useStyles } from './styles';
 import { Uploader } from '../../../../../../components/uploader';
+import clsx from 'clsx';
 
 export function Testimonial({
   testimonial,
@@ -12,9 +13,15 @@ export function Testimonial({
   testimonials,
 }) {
   const classes = useStyles();
+  const mobile = useMediaQuery('(max-width:800px)');
 
   return (
-    <div className={classes.inputWrapper}>
+    <div
+      className={clsx({
+        [classes.inputWrapper]: true,
+        [classes.inputWrapperMobile]: mobile,
+      })}
+    >
       <div>
         <Uploader
           cbImage={url => {
@@ -36,7 +43,10 @@ export function Testimonial({
             setTestimonials(copyArr);
           }}
           hasFile={testimonial.image !== '' || testimonial.image ? true : false}
-          className={classes.avatarWrapper}
+          className={clsx({
+            [classes.avatarWrapper]: true,
+            [classes.avatarWrapperMobile]: mobile,
+          })}
         />
       </div>
       <div className={classes.actionInputWrapper}>

@@ -43,7 +43,7 @@ export default function RegisterCard({ setPage }) {
 
           <CardContent className={classes.cardContentCenter}>
             <Link to="/login">
-              <Button variant="contained" color="secondary">
+              <Button variant="contained" color="primary">
                 Login
               </Button>
             </Link>

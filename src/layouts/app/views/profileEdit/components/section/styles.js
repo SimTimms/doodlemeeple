@@ -15,7 +15,6 @@ export const useStyles = makeStyles(theme => ({
     alignItems: 'flex-start',
     flexWrap: 'wrap',
     flexDirection: 'row',
-
     width: '100%',
   },
   sectionHeaderTitle: {
@@ -27,12 +26,12 @@ export const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   headerLeft: {
-    color: theme.palette.secondary.main,
+    color: theme.palette.primary.main,
     marginTop: 20,
   },
   actionWrapper: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     flexWrap: 'wrap',
     flexDirection: 'row',

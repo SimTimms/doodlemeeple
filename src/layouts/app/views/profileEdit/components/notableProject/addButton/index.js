@@ -11,7 +11,7 @@ export function AddNotableProject({ setNotableProjects, notableProjects }) {
           newNotableProjects.push(newNotableProject);
           setNotableProjects(newNotableProjects);
         }}
-        color="secondary"
+        color="primary"
         style={{ textTransform: 'none' }}
       >
         {`+ Add a notable project (${5 - notableProjects.length})`}

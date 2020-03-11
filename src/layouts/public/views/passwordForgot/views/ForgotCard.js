@@ -97,7 +97,7 @@ export default function ForgotCard({ history, setPage }) {
                       submitChecks(passwordForgotMutation);
                     }}
                     variant="contained"
-                    color="secondary"
+                    color="primary"
                   >
                     Reset Password
                   </Button>
@@ -117,13 +117,13 @@ export default function ForgotCard({ history, setPage }) {
             <Typography
               component="p"
               style={{ textAlign: 'center', fontSize: 12 }}
-              color="secondary"
+              color="primary"
             >
               Remembered your password?
             </Typography>
             <Link to="/login">
               <Button
-                color="secondary"
+                color="primary"
                 style={{
                   width: 80,
                   textTransform: 'none',

@@ -77,7 +77,7 @@ export function EditProfile() {
         </ContentHeader>
         <Button
           variant="contained"
-          color="secondary"
+          color="primary"
           style={{ width: 60, margin: 10 }}
         >
           <Icon style={{ fontSize: 18, color: '#fff' }}>pageview</Icon>
@@ -106,7 +106,7 @@ export function EditProfile() {
               value={userProfile.summary}
               onChange={e => {
                 setDisabledValue(true);
-                setSummary(e.target.value);
+                setSummary(e.target.value.replace(/[^A-Za-z0-9 \n]/g, ''));
               }}
               margin="normal"
               variant="outlined"

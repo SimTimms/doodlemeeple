@@ -48,7 +48,7 @@ function AppLayout(props) {
   }
 
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -113,7 +113,7 @@ function AppLayout(props) {
                     <ActionButton name="Decline" />
                   </Link>
                   <Link to={`/app/create-quote/${pathParam}`}>
-                    <Button variant="contained" color="secondary">
+                    <Button variant="contained" color="primary">
                       Continue
                     </Button>
                   </Link>

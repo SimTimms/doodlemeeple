@@ -21,8 +21,8 @@ export function Section({ index, sections, setSections, section }) {
   const [title, setTitle] = React.useState(section.title);
   const [summary, setSummary] = React.useState(section.summary);
   const [changed, setChanged] = React.useState(false);
-
   let sectionValues = { summary, title };
+
   return (
     <div>
       <Divider />
@@ -118,12 +118,18 @@ export function GallerySection({ index, sections, setSections, section }) {
     <div>
       <Divider />
       <div className={classes.sectionWrapper}>
+        <DeleteButton
+          sectionId={section.id}
+          sections={sections}
+          index={index}
+          setSections={setSections}
+        />
         <div className={classes.sectionHeader}>
           <div className={classes.sectionHeaderTitle}>
-            <Icon color="secondary" style={{ fontSize: 28, marginRight: 10 }}>
+            <Icon color="primary" style={{ fontSize: 28, marginRight: 10 }}>
               brush
             </Icon>
-            <Typography variant="h1" color="secondary">
+            <Typography variant="h1" color="primary">
               Artist
             </Typography>
           </div>
@@ -131,49 +137,21 @@ export function GallerySection({ index, sections, setSections, section }) {
             Fantasy, Sci-Fi, Character Design...
           </Typography>
         </div>
-        <Typography
-          variant="h6"
-          color="textPrimary"
-          style={{ width: '100%' }}
-          className={classes.headerLeft}
-        >
-          About
-        </Typography>
-        <TextField
-          id={'title'}
-          value={title}
-          label={`Title ${title ? `(${46 - title.length})` : ''}`}
-          inputProps={{ maxLength: 46 }}
-          multiline
-          margin="normal"
-          variant="outlined"
-          style={{ width: '300px' }}
-          onChange={ev => {
-            setChanged(true);
-            setTitle(ev.target.value);
-          }}
-        />
         <TextField
           id={'summary'}
           label={`Description ${summary ? `(${256 - summary.length})` : ''}`}
           inputProps={{ maxLength: 256 }}
           multiline
+          rows={3}
           value={summary}
           margin="normal"
           variant="outlined"
           style={{ width: '100%' }}
           onChange={ev => {
             setChanged(true);
-            setSummary(ev.target.value);
+            setSummary(ev.target.value.replace(/[^A-Za-z0-9 \n]/g, ''));
           }}
         />
-        <Typography
-          variant="h6"
-          color="textPrimary"
-          className={classes.headerLeft}
-        >
-          Gallery
-        </Typography>
         <MediaGalleryObject
           images={images}
           setImages={newImages => {
@@ -250,12 +228,6 @@ export function GallerySection({ index, sections, setSections, section }) {
           />
         )}
         <div className={classes.actionWrapper}>
-          <DeleteButton
-            sectionId={section.id}
-            sections={sections}
-            index={index}
-            setSections={setSections}
-          />
           <SaveButton
             sectionId={section.id}
             sectionValues={sectionValues}

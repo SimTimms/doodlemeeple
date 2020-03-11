@@ -56,9 +56,12 @@ export function AddSection({ setSections, sections }) {
           }}
         >
           <Icon style={{ fontSize: 20, marginRight: 10 }}>brush</Icon>
-          <Typography variant="body1" component="p">
-            Artist
-          </Typography>
+          <div style={{ textAlign: 'right' }}>
+            <Typography variant="h2">Artist</Typography>
+            <Typography variant="body1" component="p">
+              Create works of 2D art
+            </Typography>
+          </div>
         </Card>
         <Card
           className={classes.skillCard}
@@ -79,10 +82,67 @@ export function AddSection({ setSections, sections }) {
             setSections(newSections);
           }}
         >
-          <Icon style={{ fontSize: 20, marginRight: 10 }}>create</Icon>
-          <Typography variant="body1" component="p">
-            Artist
-          </Typography>
+          <Icon style={{ fontSize: 20, marginRight: 10 }}>brush</Icon>
+          <div style={{ textAlign: 'right' }}>
+            <Typography variant="h2">Digital Scupltor</Typography>
+            <Typography variant="body1" component="p">
+              Create works of digital 3D art
+            </Typography>
+          </div>
+        </Card>
+        <Card
+          className={classes.skillCard}
+          onClick={() => {
+            setDisplay(false);
+            const newSection = {
+              id: 'new',
+              title: '',
+              summary: '',
+              gallery: {
+                images: [],
+              },
+              notableProjects: [],
+              testimonials: [],
+            };
+            const newSections = Object.assign([], sections);
+            newSections.push(newSection);
+            setSections(newSections);
+          }}
+        >
+          <Icon style={{ fontSize: 20, marginRight: 10 }}>brush</Icon>
+          <div style={{ textAlign: 'right' }}>
+            <Typography variant="h2">Scupltor</Typography>
+            <Typography variant="body1" component="p">
+              Create works of 3D art
+            </Typography>
+          </div>
+        </Card>
+        <Card
+          className={classes.skillCard}
+          onClick={() => {
+            setDisplay(false);
+            const newSection = {
+              id: 'new',
+              title: '',
+              summary: '',
+              gallery: {
+                images: [],
+              },
+              notableProjects: [],
+              testimonials: [],
+            };
+            const newSections = Object.assign([], sections);
+            newSections.push(newSection);
+            setSections(newSections);
+          }}
+        >
+          <Icon style={{ fontSize: 20, marginRight: 10 }}>brush</Icon>
+          <div style={{ textAlign: 'right' }}>
+            <Typography variant="h2">Content</Typography>
+            <Typography variant="body1" component="p">
+              Proof-read, analyse and/or create content
+            </Typography>
+          </div>
         </Card>
       </div>
       <CardContent

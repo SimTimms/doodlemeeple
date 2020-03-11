@@ -36,7 +36,7 @@ export function CreatorRoles() {
                       className={classes.messageButton}
                       style={{ textDecoration: 'none' }}
                     >
-                      <Icon color="secondary">message</Icon>
+                      <Icon color="primary">message</Icon>
                     </Link>
                     <Icon style={{ color: '#ddd' }}>check_circle</Icon>
                   </div>
@@ -97,7 +97,7 @@ export function CreatorRoles() {
                         className={classes.messageButton}
                         style={{ textDecoration: 'none' }}
                       >
-                        <Button variant="contained" color="secondary">
+                        <Button variant="contained" color="primary">
                           View
                         </Button>
                       </Link>
@@ -107,7 +107,7 @@ export function CreatorRoles() {
                         className={classes.messageButton}
                         style={{ textDecoration: 'none' }}
                       >
-                        <Button variant="contained" color="secondary">
+                        <Button variant="contained" color="primary">
                           Edit
                         </Button>
                       </Link>

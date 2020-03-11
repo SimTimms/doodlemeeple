@@ -37,7 +37,7 @@ export function ProjectComponent({ project }) {
             className={classes.cardLink}
             style={{ textDecoration: 'none' }}
           >
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="primary">
               Edit Project
             </Button>
           </Link>

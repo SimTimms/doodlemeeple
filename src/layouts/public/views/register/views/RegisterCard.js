@@ -163,7 +163,7 @@ export default function RegisterCard({ setPage }) {
                         submitChecks(SignupMutation);
                       }}
                       variant="contained"
-                      color="secondary"
+                      color="primary"
                     >
                       {buttonStatus}
                     </Button>
@@ -180,13 +180,13 @@ export default function RegisterCard({ setPage }) {
             <Typography
               component="p"
               style={{ textAlign: 'center', fontSize: 12 }}
-              color="secondary"
+              color="primary"
             >
               Already have an account?
             </Typography>
             <Link to="/">
               <Button
-                color="secondary"
+                color="primary"
                 style={{
                   width: 80,
                   textTransform: 'none',

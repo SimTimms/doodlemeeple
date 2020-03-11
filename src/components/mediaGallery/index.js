@@ -1,25 +1,28 @@
 import React from 'react';
 import { useStyles } from './styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import {
+  GridList,
+  GridListTile,
+  Typography,
+  Button,
+  useMediaQuery,
+  Icon,
+} from '@material-ui/core';
 import { Uploader } from '../../components/uploader';
-import Icon from '@material-ui/core/Icon';
 
 export function MediaGallery({ items, edit, setBgImage, setImages }) {
   const seedID = Math.floor(Math.random());
   const [mediaViewer, setMediaViewer] = React.useState(null);
 
   const classes = useStyles();
-
+  const mobile = useMediaQuery('(max-width:800px)');
   return (
     <div className={classes.root} style={{ background: 'none' }}>
       {!mediaViewer ? (
         <GridList
           cellHeight={160}
           className={classes.gridList}
-          cols={3}
+          cols={mobile ? 1 : 3}
           style={{ background: 'none' }}
         >
           {items.map((tile, index) => (
@@ -64,6 +67,8 @@ export function MediaGallery({ items, edit, setBgImage, setImages }) {
                   cbImage={setBgImage}
                   styleOverride={null}
                   className={null}
+                  cbDelete={null}
+                  hasFile={false}
                 />
               </div>
             </GridListTile>
@@ -84,7 +89,7 @@ export function MediaGallery({ items, edit, setBgImage, setImages }) {
             {mediaViewer.title}
           </Typography>
           <Button
-            color="secondary"
+            color="primary"
             onClick={() => {
               setMediaViewer(null);
             }}

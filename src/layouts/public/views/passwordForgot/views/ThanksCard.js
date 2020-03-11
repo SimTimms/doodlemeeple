@@ -45,7 +45,7 @@ export default function RegisterCard() {
 
           <CardContent className={classes.cardContentCenter}>
             <Link to="/">
-              <Button variant="contained" color="secondary">
+              <Button variant="contained" color="primary">
                 Back
               </Button>
             </Link>

@@ -53,7 +53,7 @@ export function Conversations({ roleId }) {
                       className={classes.messageButton}
                       style={{ textDecoration: 'none' }}
                     >
-                      <Button variant="contained" color="secondary">
+                      <Button variant="contained" color="primary">
                         Thread
                       </Button>
                     </Link>

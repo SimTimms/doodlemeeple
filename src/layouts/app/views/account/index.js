@@ -53,7 +53,7 @@ export function Account() {
           style={{ width: '100%' }}
         />
         <Divider />
-        <Button color="secondary" variant="contained" style={{ marginTop: 10 }}>
+        <Button color="primary" variant="contained" style={{ marginTop: 10 }}>
           Change Password
         </Button>
       </div>

@@ -45,7 +45,7 @@ export function Notifications() {
                 style={{ textDecoration: 'none' }}
               >
                 <div className={classes.notifications}>
-                  <Icon color="secondary">{notification.icon}</Icon>
+                  <Icon color="primary">{notification.icon}</Icon>
                 </div>
                 <div className={classes.profileWrapper}>
                   <div className={classes.wrapperOne}>
@@ -55,7 +55,7 @@ export function Notifications() {
                         style={{ justifyContent: 'space-between' }}
                       >
                         <Typography
-                          color="secondary"
+                          color="primary"
                           variant="caption"
                           component="p"
                         >
@@ -85,7 +85,7 @@ export function Notifications() {
                 {RemoveNotificationMutation => {
                   return (
                     <Button
-                      color="secondary"
+                      color="primary"
                       onClick={() => {
                         RemoveNotificationMutation();
                         const notificationArrayFiltered = notificationArray.filter(

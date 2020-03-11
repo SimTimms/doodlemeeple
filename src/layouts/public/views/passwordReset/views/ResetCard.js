@@ -130,7 +130,7 @@ export default function ResetCard({ setPage, token }) {
                         buttonStatus.action(password, passwordResetMutation);
                       }}
                       variant="contained"
-                      color="secondary"
+                      color="primary"
                     >
                       {buttonStatus.value}
                     </Button>
@@ -151,13 +151,13 @@ export default function ResetCard({ setPage, token }) {
             <Typography
               component="p"
               style={{ textAlign: 'center', fontSize: 12 }}
-              color="secondary"
+              color="primary"
             >
               Remembered your password?
             </Typography>
             <Link to="/login">
               <Button
-                color="secondary"
+                color="primary"
                 style={{
                   width: 80,
                   textTransform: 'none',

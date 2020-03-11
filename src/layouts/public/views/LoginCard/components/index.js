@@ -22,7 +22,7 @@ export function LoginButton({
         }
       }}
       variant="contained"
-      color="secondary"
+      color="primary"
       style={{ width: 180, marginTop: 0 }}
     >
       {status}

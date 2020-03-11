@@ -42,7 +42,7 @@ export function Decline({ projectId }) {
             <Button variant="contained">Cancel</Button>
           </Link>
           <Link to={`/app/invites`}>
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="primary">
               Decline
             </Button>
           </Link>

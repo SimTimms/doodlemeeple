@@ -65,7 +65,7 @@ export function Invites() {
                   textDecoration: 'none',
                 }}
               >
-                <Button variant="contained" color="secondary">
+                <Button variant="contained" color="primary">
                   View Project
                 </Button>
               </Link>

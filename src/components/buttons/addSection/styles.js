@@ -3,14 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(theme => {
   return {
     root: {
-      background: theme.palette.secondary.main,
+      background: theme.palette.primary.main,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       cursor: 'pointer',
 
       '&:hover': {
-        background: theme.palette.secondary.light,
+        background: theme.palette.primary.light,
       },
     },
     cancel: {
@@ -34,7 +34,7 @@ export const useStyles = makeStyles(theme => {
       display: 'flex',
       justifyContent: 'space-around',
       alignItems: 'center',
-      flexDirection: 'column',
+      flexDirection: 'row',
       flexWrap: 'wrap',
       boxSizing: 'border-box',
       padding: 20,
@@ -43,15 +43,15 @@ export const useStyles = makeStyles(theme => {
       padding: 10,
       boxSizing: 'border-box',
       background: theme.palette.grey.A100,
-      width: '100%',
+      width: '40%',
       marginBottom: 10,
       display: 'flex',
-      justifyContent: 'center',
+      justifyContent: 'space-between',
       alignItems: 'center',
       flexDirection: 'row',
       cursor: 'pointer',
       '&:hover': {
-        background: theme.palette.secondary.main,
+        background: theme.palette.primary.main,
         color: '#fff',
       },
     },
