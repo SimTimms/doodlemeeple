@@ -38,7 +38,7 @@ export const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: 0,
-    background: '#fff',
+    background: '#efeff5',
   },
   contentShift: {
     transition: theme.transitions.create('margin', {
@@ -46,6 +46,6 @@ export const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     marginLeft: drawerWidth,
-    background: '#fafafa',
+    background: '#efeff5',
   },
 }));

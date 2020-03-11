@@ -59,7 +59,7 @@ function AppLayout(props) {
   };
 
   return (
-    <div style={{ background: '#fafafa', height: '100vh' }}>
+    <div style={{ height: '100vh' }}>
       <StyledNavBar
         open={open}
         menu={
