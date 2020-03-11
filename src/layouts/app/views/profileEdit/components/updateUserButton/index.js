@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import { Mutation } from 'react-apollo';
 import { UPDATE_USER_MUTATION } from '../../../../../../data/mutations';
 import { readableErrors } from '../../../../../../utils/readableErrors';
+import Icon from '@material-ui/core/Icon';
 
 export function UpdateUserButton({
   profile,
@@ -45,7 +46,7 @@ export function UpdateUserButton({
               style={{ margin: 10 }}
               disabled={!validate}
             >
-              Save
+              <Icon style={{ fontSize: 18, color: '#fff' }}>save</Icon>
             </Button>
           </div>
         );

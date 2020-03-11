@@ -4,6 +4,7 @@ import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
+import Cookies from 'js-cookie';
 
 export function Uploader({
   cbImage,
@@ -30,10 +31,17 @@ export function Uploader({
     };
 
     const uploadURL = `${process.env.REACT_APP_API}/sign_s3`;
+    const token = Cookies.get('token');
+    let config = {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    };
 
     setStatusMessage('Loading...');
     await axios
       .post(uploadURL, {
+        ...config,
         fileName: fileName,
         fileType: fileType,
         fileSize,

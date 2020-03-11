@@ -26,7 +26,7 @@ export function AddSection({ setSections, sections }) {
           component="p"
           style={{ fontSize: 16, color: '#fff', marginLeft: 10 }}
         >
-          {`Add Section (${3 - sections.length} remaining)`}
+          {`Skill (${3 - sections.length})`}
         </Typography>
       </CardContent>
       <Divider />
@@ -36,27 +36,6 @@ export function AddSection({ setSections, sections }) {
           [classes.skillWrapperOpen]: display,
         })}
       >
-        <Card
-          className={classes.skillCard}
-          onClick={() => {
-            setDisplay(false);
-            const newSection = {
-              id: 'new',
-              summary: '',
-              title: '',
-              notableProjects: [],
-              testimonials: [],
-            };
-            const newSections = Object.assign([], sections);
-            newSections.push(newSection);
-            setSections(newSections);
-          }}
-        >
-          <Icon style={{ fontSize: 50, color: '#333' }}>dehaze</Icon>
-          <Typography variant="body1" component="p">
-            Summary
-          </Typography>
-        </Card>
         <Card
           className={classes.skillCard}
           onClick={() => {
@@ -76,7 +55,7 @@ export function AddSection({ setSections, sections }) {
             setSections(newSections);
           }}
         >
-          <Icon style={{ fontSize: 50, color: '#333' }}>brush</Icon>
+          <Icon style={{ fontSize: 20, marginRight: 10 }}>brush</Icon>
           <Typography variant="body1" component="p">
             Artist
           </Typography>
@@ -100,9 +79,9 @@ export function AddSection({ setSections, sections }) {
             setSections(newSections);
           }}
         >
-          <Icon style={{ fontSize: 50, color: '#333' }}>create</Icon>
+          <Icon style={{ fontSize: 20, marginRight: 10 }}>create</Icon>
           <Typography variant="body1" component="p">
-            Graphic Artist
+            Artist
           </Typography>
         </Card>
       </div>
@@ -115,14 +94,7 @@ export function AddSection({ setSections, sections }) {
           setDisplay(false);
         }}
       >
-        <Icon style={{ fontSize: 18, color: '#aaa' }}>close</Icon>
-        <Typography
-          variant="body1"
-          component="p"
-          style={{ fontSize: 16, color: '#aaa', marginLeft: 10 }}
-        >
-          Close
-        </Typography>
+        <Icon style={{ fontSize: 18, color: '#aaa' }}>keyboard_arrow_up</Icon>
       </CardContent>
     </div>
   );

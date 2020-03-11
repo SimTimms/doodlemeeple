@@ -37,7 +37,7 @@ export function ProfileHeader({
           setBgImage('');
         }}
         styleOverride={null}
-        hasFile={profile.bgImage !== '' || profile.bgImage ? true : false}
+        hasFile={profile.bgImage ? true : false}
         className={null}
       />
       <div
@@ -75,12 +75,10 @@ export function ProfileHeader({
               setDisabledValue(true);
               setProfileImg('');
             }}
-            hasFile={
-              profile.profileImg !== '' || profile.profileImg ? true : false
-            }
+            hasFile={profile.profileImg ? true : false}
             className={null}
           />
-          {profile.profileImg !== '' && profile.profileImg !== null && (
+          {profile.profileImg && (
             <CardMedia
               component="img"
               alt={profile.profileImg}

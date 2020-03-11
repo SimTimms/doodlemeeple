@@ -3,6 +3,7 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
+import Icon from '@material-ui/core/Icon';
 import TextField from '@material-ui/core/TextField';
 import { useStyles } from './styles';
 import { ContentHeader } from '../../../../components/headers/contentHeader';
@@ -13,14 +14,15 @@ import { PROFILE, SECTIONS } from '../../../../data/queries';
 import { ErrorBox } from '../../../../components/pageElements';
 import { UpdateUserButton } from './components/updateUserButton';
 import { Section, GallerySection } from './components/section';
+import Button from '@material-ui/core/Button';
 
 export function EditProfile() {
   const classes = useStyles();
-  const [bgImage, setBgImage] = React.useState('');
+  const [bgImage, setBgImage] = React.useState(null);
   const [userName, setUserName] = React.useState('');
   const [summary, setSummary] = React.useState('');
   const [sections, setSections] = React.useState([]);
-  const [profileImg, setProfileImg] = React.useState('');
+  const [profileImg, setProfileImg] = React.useState(null);
   const [disabledValue, setDisabledValue] = React.useState(false);
   const [errors, setError] = React.useState({
     name: null,
@@ -55,15 +57,31 @@ export function EditProfile() {
           }}
         </Query>
         <ContentHeader>
-          <Typography variant="h1" color="textPrimary">
-            Profile
-          </Typography>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+            }}
+          >
+            <Typography variant="h1" color="textPrimary">
+              Profile
+            </Typography>
+          </div>
           <Typography color="textSecondary" component="p">
             Tell everyone about yourself, showcase the best examples of your
             work
           </Typography>
         </ContentHeader>
-
+        <Button
+          variant="contained"
+          color="secondary"
+          style={{ width: 60, margin: 10 }}
+        >
+          <Icon style={{ fontSize: 18, color: '#fff' }}>pageview</Icon>
+        </Button>
         <Card className={classes.card}>
           <ProfileHeader
             profile={userProfile}

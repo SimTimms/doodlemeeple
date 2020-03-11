@@ -32,10 +32,13 @@ export function AppDrawer(props) {
     drawer,
     link,
     drawerHeader,
-    drawerMobile,
     drawerHeaderMobile,
     button,
     buttonMobile,
+    drawerOpen,
+    drawerOpenMobile,
+    drawerClose,
+    drawerCloseMobile,
   } = useStyles();
   const { handleDrawerClose, open } = props;
   const theme = useTheme();
@@ -43,10 +46,21 @@ export function AppDrawer(props) {
 
   return (
     <Drawer
-      classes={{ paper: !mobile ? drawer : drawerMobile }}
-      variant="persistent"
-      anchor="left"
-      open={open}
+      variant="permanent"
+      className={clsx({
+        [drawerOpenMobile]: open && mobile,
+        [drawerOpen]: open && !mobile,
+        [drawerCloseMobile]: !open && mobile,
+        [drawerClose]: !open && !mobile,
+      })}
+      classes={{
+        paper: clsx({
+          [drawerOpenMobile]: open && mobile,
+          [drawerOpen]: open && !mobile,
+          [drawerCloseMobile]: !open && mobile,
+          [drawerClose]: !open,
+        }),
+      }}
     >
       <div
         className={clsx({
@@ -95,7 +109,12 @@ export function AppDrawer(props) {
             link: '/messages/conversations',
           },*/,
         ].map((text, index) => (
-          <Link to={text.link} className={link} key={text.name}>
+          <Link
+            to={text.link}
+            className={link}
+            key={text.name}
+            onClick={handleDrawerClose}
+          >
             <ListItem button>
               <ListItemIcon style={{ minWidth: 32 }}>{text.icon}</ListItemIcon>
               <ListItemText
@@ -113,7 +132,7 @@ export function AppDrawer(props) {
             <HomeIcon />
           </ListItemIcon>
           <ListItemText
-            primary="Website & Blog"
+            primary="Website"
             className={clsx({
               [button]: !mobile,
               [buttonMobile]: mobile,

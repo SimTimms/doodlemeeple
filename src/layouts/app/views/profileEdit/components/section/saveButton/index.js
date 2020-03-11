@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Mutation } from 'react-apollo';
+import Icon from '@material-ui/core/Icon';
 
 export function SaveButton({
   sectionId,
@@ -28,7 +29,7 @@ export function SaveButton({
             color="secondary"
             disabled={!disabledValue}
           >
-            Save
+            <Icon style={{ fontSize: 18, color: '#fff' }}>save</Icon>
           </Button>
         );
       }}

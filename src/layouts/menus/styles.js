@@ -28,12 +28,8 @@ export const useStyles = makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+    visibility: 'visible',
   },
-  drawerMobile: {
-    width: '100%',
-    flexShrink: 0,
-  },
-
   link: {
     textDecoration: 'none',
     display: 'flex',
@@ -41,7 +37,37 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
     color: '#444',
   },
-
+  drawerOpenMobile: {
+    width: '100%',
+    marginTop: 32,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerClose: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: 48,
+  },
+  drawerCloseMobile: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    display: 'none',
+  },
   icon: {
     minWidth: 30,
     borderRight: '1px solid #ddd',
