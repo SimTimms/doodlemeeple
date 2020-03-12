@@ -14,7 +14,6 @@ export const useStyles = makeStyles({
   deleteButtonConfirmYes: {
     marginLeft: 5,
     boxShadow: 'none',
-
     minHeight: 32,
     maxHeight: 32,
     borderRadius: '5px 0 0 5px',
