@@ -14,10 +14,12 @@ export const styles = makeStyles({
     justifyContent: 'center',
   },
   contentTop: {
-    marginTop: 44,
+    marginTop: 42,
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center',
+    maxWidth: 900,
+    width: '100%',
   },
   contentTopMobile: {
     marginTop: 74,

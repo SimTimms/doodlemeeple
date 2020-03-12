@@ -13,9 +13,6 @@ export const useStyles = makeStyles({
     width: '100%',
     justifyContent: 'space-around',
     alignItems: 'flex-start',
-    margin: 10,
-    '&:first-child': {
-      marginLeft: 0,
-    },
+    margin: 0,
   },
 });

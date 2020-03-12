@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import { Button, useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 import { useStyles } from './styles';
 import { ContentTop } from '../../components';
@@ -33,6 +33,7 @@ function AppLayout(props) {
     projectObjectThree,
   ]);
   const pageJump = props.match ? props.match.params.page : null;
+  const mobile = useMediaQuery('(max-width:800px)');
 
   //TODO: I guess this is proper dirty
   const pathParam = props
@@ -59,7 +60,7 @@ function AppLayout(props) {
   };
 
   return (
-    <div style={{ height: '100vh' }}>
+    <div style={{ height: '100vh', background: '#efeff5' }}>
       <StyledNavBar
         open={open}
         menu={
@@ -76,7 +77,9 @@ function AppLayout(props) {
         history={props.history}
       />
       <main
-        className={clsx(classes.content, {
+        className={clsx({
+          [classes.content]: true,
+          [classes.contentMobile]: !open && mobile,
           [classes.contentShift]: open,
         })}
       >
