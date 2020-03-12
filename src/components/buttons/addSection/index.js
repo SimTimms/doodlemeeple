@@ -59,7 +59,7 @@ export function AddSection({ setSections, sections }) {
           <div style={{ textAlign: 'right' }}>
             <Typography variant="h2">Artist</Typography>
             <Typography variant="body1" component="p">
-              Create works of 2D art
+              I create works of 2D art
             </Typography>
           </div>
         </Card>
@@ -86,7 +86,7 @@ export function AddSection({ setSections, sections }) {
           <div style={{ textAlign: 'right' }}>
             <Typography variant="h2">Digital Scupltor</Typography>
             <Typography variant="body1" component="p">
-              Create works of digital 3D art
+              I create works of digital 3D art
             </Typography>
           </div>
         </Card>
@@ -113,7 +113,7 @@ export function AddSection({ setSections, sections }) {
           <div style={{ textAlign: 'right' }}>
             <Typography variant="h2">Scupltor</Typography>
             <Typography variant="body1" component="p">
-              Create works of 3D art
+              I create works of 3D art
             </Typography>
           </div>
         </Card>
@@ -140,7 +140,7 @@ export function AddSection({ setSections, sections }) {
           <div style={{ textAlign: 'right' }}>
             <Typography variant="h2">Content</Typography>
             <Typography variant="body1" component="p">
-              Proof-read, analyse and/or create content
+              I proof-read, analyse and/or create content
             </Typography>
           </div>
         </Card>

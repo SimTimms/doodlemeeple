@@ -31,7 +31,6 @@ export function NotableProject({
           setChanged(true);
           const newNotableProjects = Object.assign([], notableProjects);
           newNotableProjects[index].summary = ev.target.value;
-
           setNotableProjects(newNotableProjects);
         }}
       />
