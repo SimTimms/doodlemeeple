@@ -109,9 +109,9 @@ export function PublicFooterMenu() {
       <Link to="/login" style={{ textDecoration: 'none' }}>
         <StyledButtonFooter>Data (Coming Soon)</StyledButtonFooter>
       </Link>
-      <Link to="/register" style={{ textDecoration: 'none' }}>
-        <StyledButtonFooter>Contact (Coming Soon)</StyledButtonFooter>
-      </Link>
+      <a href="mailto:info@doodlemeeplecom" style={{ textDecoration: 'none' }}>
+        <StyledButtonFooter>info@doodlemeeple.com</StyledButtonFooter>
+      </a>
     </div>
   );
 }
