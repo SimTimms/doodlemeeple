@@ -97,14 +97,20 @@ export function PublicFooterMenu() {
       <Link to="/register" style={{ textDecoration: 'none' }}>
         <StyledButtonFooter>Register</StyledButtonFooter>
       </Link>
-      <Link to="/home" style={{ textDecoration: 'none' }}>
+      <a
+        href="https://doodlemeeple.com/terms-of-service/"
+        style={{ textDecoration: 'none' }}
+      >
         <StyledButtonFooter>Terms of Service</StyledButtonFooter>
+      </a>
+      <Link to="/login" style={{ textDecoration: 'none' }}>
+        <StyledButtonFooter>Privacy (Coming Soon)</StyledButtonFooter>
       </Link>
       <Link to="/login" style={{ textDecoration: 'none' }}>
-        <StyledButtonFooter>Privacy</StyledButtonFooter>
+        <StyledButtonFooter>Data (Coming Soon)</StyledButtonFooter>
       </Link>
       <Link to="/register" style={{ textDecoration: 'none' }}>
-        <StyledButtonFooter>Contact</StyledButtonFooter>
+        <StyledButtonFooter>Contact (Coming Soon)</StyledButtonFooter>
       </Link>
     </div>
   );
