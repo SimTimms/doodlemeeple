@@ -16,8 +16,8 @@ import Cookies from 'js-cookie';
 import { readableErrors } from '../../../../utils/readableErrors';
 import { ErrorBox } from '../../../../components/pageElements';
 import { Link } from 'react-router-dom';
-import { LoginButton } from './components';
 import clsx from 'clsx';
+const CHECKING = 'Checking...';
 
 export default function LoginCard({ history }) {
   const classes = { ...styles(), ...sharedStyles() };
@@ -29,6 +29,17 @@ export default function LoginCard({ history }) {
   });
   const [loginStatus, setStatus] = React.useState('Login');
   const mobile = useMediaQuery('(max-width:800px)');
+
+  function loginSubmit(LoginMutation) {
+    if (password === '' || email === '') {
+      setStatus('Try Again');
+      return;
+    }
+    if (loginStatus !== CHECKING) {
+      setStatus('Checking...');
+      LoginMutation();
+    }
+  }
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -57,31 +68,7 @@ export default function LoginCard({ history }) {
             </Typography>
           </CardContent>
           <Divider />
-          <CardContent className={classes.cardContentCenter}>
-            <Form width={200}>
-              <FormInput
-                fieldName="emailAddress"
-                fieldValue={email}
-                setFieldValue={setEmail}
-                fieldTitle={`Email ${
-                  email ? `(${PROFILE_EMAIL - email.length})` : ''
-                }`}
-                inputProps={{ maxLength: PROFILE_EMAIL }}
-              />
-              <FormInput
-                fieldName="password"
-                fieldValue={password}
-                setFieldValue={setPassword}
-                type="password"
-                fieldTitle={`Password ${
-                  password ? `(${PROFILE_PASSWORD - password.length})` : ''
-                }`}
-                inputProps={{ maxLength: PROFILE_PASSWORD }}
-              />
-              <ErrorBox errorMsg={errors.passwordError} />
-              <ErrorBox errorMsg={errors.noUserError} />
-            </Form>
-          </CardContent>
+          <CardContent className={classes.cardContentCenter}></CardContent>
           <CardContent
             className={classes.cardContentCenter}
             style={{ paddingTop: 0 }}
@@ -102,17 +89,56 @@ export default function LoginCard({ history }) {
             >
               {LoginMutation => {
                 return (
-                  <LoginButton
-                    loginMutation={LoginMutation}
-                    status={loginStatus}
-                    setStatus={setStatus}
-                    email={email}
-                    password={password}
-                  />
+                  <Form width={200} onSubmit={item => alert}>
+                    <FormInput
+                      fieldName="emailAddress"
+                      fieldValue={email}
+                      setFieldValue={setEmail}
+                      fieldTitle={`Email ${
+                        email ? `(${PROFILE_EMAIL - email.length})` : ''
+                      }`}
+                      inputProps={{ maxLength: PROFILE_EMAIL }}
+                      onKeyPress={event => {
+                        if (event.key === 'Enter') {
+                          loginSubmit(LoginMutation);
+                        }
+                      }}
+                    />
+                    <FormInput
+                      fieldName="password"
+                      fieldValue={password}
+                      setFieldValue={setPassword}
+                      type="password"
+                      fieldTitle={`Password ${
+                        password
+                          ? `(${PROFILE_PASSWORD - password.length})`
+                          : ''
+                      }`}
+                      inputProps={{ maxLength: PROFILE_PASSWORD }}
+                      onKeyPress={event => {
+                        if (event.key === 'Enter') {
+                          loginSubmit(LoginMutation);
+                        }
+                      }}
+                    />
+                    <ErrorBox errorMsg={errors.passwordError} />
+                    <ErrorBox errorMsg={errors.noUserError} />
+                    <Button
+                      onClick={() => {
+                        loginSubmit(LoginMutation);
+                      }}
+                      variant="contained"
+                      color="primary"
+                      style={{ width: 180, marginTop: 0 }}
+                    >
+                      {loginStatus}
+                    </Button>
+                  </Form>
                 );
               }}
             </Mutation>
             <Button
+              type="button"
               onClick={() => {
                 history.push('/password-forgot');
               }}
@@ -138,6 +164,7 @@ export default function LoginCard({ history }) {
             </Typography>
             <Link to="/register">
               <Button
+                type="button"
                 color="primary"
                 style={{
                   width: 80,

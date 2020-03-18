@@ -9,6 +9,12 @@ export const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     padding: '10px !important',
   },
+  testimonialWrapper: {
+    background: '#ddd',
+    width: '100%',
+    boxSizing: 'border-box',
+    marginTop: 10,
+  },
   sectionHeader: {
     display: 'flex',
     justifyContent: 'flex-start',

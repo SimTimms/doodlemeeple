@@ -26,6 +26,12 @@ function RouterComponent(props) {
     light: '#8474d3',
     dark: '#433878',
   };
+  theme.palette.secondary = {
+    ...theme.palette.secondary,
+    main: '#34BEB1',
+    light: '#8474d3',
+    dark: '#433878',
+  };
 
   return (
     <ThemeProvider theme={theme}>

@@ -75,13 +75,14 @@ export function EditProfile() {
             work
           </Typography>
         </ContentHeader>
+        {/*}
         <Button
           variant="contained"
           color="primary"
           style={{ width: 60, margin: 10 }}
         >
           <Icon style={{ fontSize: 18, color: '#fff' }}>pageview</Icon>
-        </Button>
+          </Button>*/}
         <Card className={classes.card}>
           <ProfileHeader
             profile={userProfile}

@@ -41,6 +41,7 @@ export function FormInput(props) {
       margin="normal"
       variant="outlined"
       inputProps={props.inputProps}
+      onKeyPress={props.onKeyPress}
     />
   );
 }

@@ -15,6 +15,8 @@ import {
   UPDATE_SECTION_MUTATION,
   UPDATE_GALLERY_SECTION_MUTATION,
 } from '../../../../../../data/mutations';
+import { FieldTitle } from './fieldTitle';
+import ReactPlayer from 'react-player';
 
 export function Section({ index, sections, setSections, section }) {
   const classes = useStyles();
@@ -91,6 +93,7 @@ export function GallerySection({ index, sections, setSections, section }) {
   const classes = useStyles();
   const [title, setTitle] = React.useState(section.title);
   const [summary, setSummary] = React.useState(section.summary);
+  const [showreel, setShowreel] = React.useState(section.showreel);
   const [images, setImages] = React.useState(section.gallery.images);
   const [notableProjects, setNotableProjects] = React.useState(
     section.notableProjects,
@@ -109,6 +112,7 @@ export function GallerySection({ index, sections, setSections, section }) {
     gallery: { images: imageFilter },
     notableProjects,
     testimonials,
+    showreel,
   };
 
   const notableProjectsLength = notableProjects ? notableProjects.length : 0;
@@ -133,10 +137,14 @@ export function GallerySection({ index, sections, setSections, section }) {
               Artist
             </Typography>
           </div>
-          <Typography variant="h6" color="textPrimary">
-            Fantasy, Sci-Fi, Character Design...
-          </Typography>
         </div>
+        <FieldTitle
+          name="Description"
+          description=" This is an opportunity for you to shout about yourself! Describe your
+          best genres, what it's like working with you, your work ethic,
+          successes, and process. "
+          warning="Please do not include any external links on your profile."
+        />
         <TextField
           id={'summary'}
           label={`Description ${summary ? `(${256 - summary.length})` : ''}`}
@@ -152,6 +160,11 @@ export function GallerySection({ index, sections, setSections, section }) {
             setSummary(ev.target.value.replace(/[^A-Za-z0-9 \n]/g, ''));
           }}
         />
+        <FieldTitle
+          name="Portfolio"
+          description="Choose your most impressive pieces of work, and try to think about what clients are looking for, such as piece of card art, box cover or spot illustration in a manual. Consider including an image that shows your process. Show your range if you're able to provide a variety of styles"
+          warning=""
+        />
         <MediaGalleryObject
           images={images}
           setImages={newImages => {
@@ -160,13 +173,11 @@ export function GallerySection({ index, sections, setSections, section }) {
           }}
           index={index}
         />
-        <Typography
-          variant="h6"
-          color="textPrimary"
-          className={classes.headerLeft}
-        >
-          Notable Projects
-        </Typography>
+        <FieldTitle
+          name="Notable Projects"
+          description="What have you worked on in the industry that will impress clients? Please specify your role within the project."
+          warning=""
+        />
         {notableProjects &&
           notableProjects.map((notableProject, index) => {
             return (
@@ -186,17 +197,57 @@ export function GallerySection({ index, sections, setSections, section }) {
             setNotableProjects={setNotableProjects}
           />
         )}
-        <Typography
-          variant="h6"
-          color="textPrimary"
-          className={classes.headerLeft}
-        >
-          Testimonials
-        </Typography>
+        <FieldTitle
+          name="Featured Showreel"
+          description="Grab the attention of a client with a short video (we recommend about 30 seconds). Please enter the URL you'd like to embed,"
+          warning=""
+        />
+        <TextField
+          id={'showreel'}
+          label={`Showreel ${showreel ? `(${256 - showreel.length})` : ''}`}
+          inputProps={{ maxLength: 256 }}
+          value={showreel}
+          margin="normal"
+          variant="outlined"
+          style={{ width: '100%', marginTop: 10 }}
+          onChange={ev => {
+            setChanged(true);
+            setShowreel(ev.target.value);
+          }}
+        />
+
+        {showreel ? (
+          <ReactPlayer
+            url={showreel}
+            playing
+            controls={true}
+            muted={true}
+            style={{ width: '100%' }}
+            width="100%"
+          />
+        ) : (
+          <div
+            style={{
+              width: '100%',
+              background: '#222',
+              height: 340,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Icon style={{ color: '#fff' }}>videocam_off</Icon>{' '}
+          </div>
+        )}
+
+        <FieldTitle
+          name="Testimonials"
+          description="Ask for some references from previous clients to add to give your profile credibility. Please ask for permission from the referee. It's imperative that DoodleMeeple showcases the best in the industry, references will be spot checked by DoodleMeeple at random, please do not be offended if yours are."
+          warning=""
+        />
         <div
+          className={classes.testimonialWrapper}
           style={{
-            background: '#ddd',
-            width: '100%',
             padding: testimonials ? (testimonials.length > 0 ? 20 : 0) : 0,
             paddingTop: testimonials ? (testimonials.length > 0 ? 10 : 0) : 0,
             paddingBottom: testimonials
@@ -204,7 +255,6 @@ export function GallerySection({ index, sections, setSections, section }) {
                 ? 10
                 : 0
               : 0,
-            boxSizing: 'border-box',
           }}
         >
           {testimonials &&

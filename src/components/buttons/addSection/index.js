@@ -58,9 +58,6 @@ export function AddSection({ setSections, sections }) {
           <Icon style={{ fontSize: 20, marginRight: 10 }}>brush</Icon>
           <div style={{ textAlign: 'right' }}>
             <Typography variant="h2">Artist</Typography>
-            <Typography variant="body1" component="p">
-              I create works of 2D art
-            </Typography>
           </div>
         </Card>
         <Card
@@ -84,10 +81,7 @@ export function AddSection({ setSections, sections }) {
         >
           <Icon style={{ fontSize: 20, marginRight: 10 }}>brush</Icon>
           <div style={{ textAlign: 'right' }}>
-            <Typography variant="h2">Digital Scupltor</Typography>
-            <Typography variant="body1" component="p">
-              I create works of digital 3D art
-            </Typography>
+            <Typography variant="h2">Graphic Artist</Typography>
           </div>
         </Card>
         <Card
