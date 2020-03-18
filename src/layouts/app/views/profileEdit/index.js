@@ -135,7 +135,9 @@ export function EditProfile() {
           </Query>
           {sections &&
             sections.map((section, index) =>
-              section.gallery ? (
+              section.type === 'artist' ||
+              section.type === 'graphic-artist' ||
+              section.type === '3d-artist' ? (
                 <GallerySection
                   key={`section_${index}`}
                   index={index}

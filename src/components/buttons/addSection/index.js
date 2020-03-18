@@ -6,6 +6,7 @@ import Icon from '@material-ui/core/Icon';
 import Divider from '@material-ui/core/Divider';
 import { useStyles } from './styles';
 import clsx from 'clsx';
+import { ArtistCard } from './ArtistCard';
 
 export function AddSection({ setSections, sections }) {
   const [display, setDisplay] = React.useState(false);
@@ -36,81 +37,31 @@ export function AddSection({ setSections, sections }) {
           [classes.skillWrapperOpen]: display,
         })}
       >
-        <Card
-          className={classes.skillCard}
-          onClick={() => {
-            setDisplay(false);
-            const newSection = {
-              id: 'new',
-              title: '',
-              summary: '',
-              gallery: {
-                images: [],
-              },
-              notableProjects: [],
-              testimonials: [],
-            };
-            const newSections = Object.assign([], sections);
-            newSections.push(newSection);
-            setSections(newSections);
-          }}
-        >
-          <Icon style={{ fontSize: 20, marginRight: 10 }}>brush</Icon>
-          <div style={{ textAlign: 'right' }}>
-            <Typography variant="h2">Artist</Typography>
-          </div>
-        </Card>
-        <Card
-          className={classes.skillCard}
-          onClick={() => {
-            setDisplay(false);
-            const newSection = {
-              id: 'new',
-              title: '',
-              summary: '',
-              gallery: {
-                images: [],
-              },
-              notableProjects: [],
-              testimonials: [],
-            };
-            const newSections = Object.assign([], sections);
-            newSections.push(newSection);
-            setSections(newSections);
-          }}
-        >
-          <Icon style={{ fontSize: 20, marginRight: 10 }}>brush</Icon>
-          <div style={{ textAlign: 'right' }}>
-            <Typography variant="h2">Graphic Artist</Typography>
-          </div>
-        </Card>
-        <Card
-          className={classes.skillCard}
-          onClick={() => {
-            setDisplay(false);
-            const newSection = {
-              id: 'new',
-              title: '',
-              summary: '',
-              gallery: {
-                images: [],
-              },
-              notableProjects: [],
-              testimonials: [],
-            };
-            const newSections = Object.assign([], sections);
-            newSections.push(newSection);
-            setSections(newSections);
-          }}
-        >
-          <Icon style={{ fontSize: 20, marginRight: 10 }}>brush</Icon>
-          <div style={{ textAlign: 'right' }}>
-            <Typography variant="h2">Scupltor</Typography>
-            <Typography variant="body1" component="p">
-              I create works of 3D art
-            </Typography>
-          </div>
-        </Card>
+        <ArtistCard
+          setDisplay={setDisplay}
+          sections={sections}
+          setSections={setSections}
+          type="artist"
+        />
+        <ArtistCard
+          setDisplay={setDisplay}
+          sections={sections}
+          setSections={setSections}
+          type="graphic-artist"
+        />
+        <ArtistCard
+          setDisplay={setDisplay}
+          sections={sections}
+          setSections={setSections}
+          type="rulebook-editor"
+        />
+        <ArtistCard
+          setDisplay={setDisplay}
+          sections={sections}
+          setSections={setSections}
+          type="Rulebook Editor"
+        />
+
         <Card
           className={classes.skillCard}
           onClick={() => {

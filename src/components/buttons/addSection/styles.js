@@ -8,7 +8,6 @@ export const useStyles = makeStyles(theme => {
       justifyContent: 'center',
       alignItems: 'center',
       cursor: 'pointer',
-
       '&:hover': {
         background: theme.palette.primary.light,
       },

@@ -17,6 +17,7 @@ import {
 } from '../../../../../../data/mutations';
 import { FieldTitle } from './fieldTitle';
 import ReactPlayer from 'react-player';
+import { TYPE_HELPER } from '../../../../../../utils';
 
 export function Section({ index, sections, setSections, section }) {
   const classes = useStyles();
@@ -92,6 +93,7 @@ export function Section({ index, sections, setSections, section }) {
 export function GallerySection({ index, sections, setSections, section }) {
   const classes = useStyles();
   const [title, setTitle] = React.useState(section.title);
+  const [type, setType] = React.useState(section.type);
   const [summary, setSummary] = React.useState(section.summary);
   const [showreel, setShowreel] = React.useState(section.showreel);
   const [images, setImages] = React.useState(section.gallery.images);
@@ -113,6 +115,7 @@ export function GallerySection({ index, sections, setSections, section }) {
     notableProjects,
     testimonials,
     showreel,
+    type,
   };
 
   const notableProjectsLength = notableProjects ? notableProjects.length : 0;
@@ -134,7 +137,7 @@ export function GallerySection({ index, sections, setSections, section }) {
               brush
             </Icon>
             <Typography variant="h1" color="primary">
-              Artist
+              {TYPE_HELPER(type)}
             </Typography>
           </div>
         </div>
@@ -204,7 +207,9 @@ export function GallerySection({ index, sections, setSections, section }) {
         />
         <TextField
           id={'showreel'}
-          label={`Showreel ${showreel ? `(${256 - showreel.length})` : ''}`}
+          label={`YouTube, Vimeo URL ${
+            showreel ? `(${256 - showreel.length})` : ''
+          }`}
           inputProps={{ maxLength: 256 }}
           value={showreel}
           margin="normal"
