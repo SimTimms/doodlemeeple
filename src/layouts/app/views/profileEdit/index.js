@@ -13,16 +13,18 @@ import { Query } from 'react-apollo';
 import { PROFILE, SECTIONS } from '../../../../data/queries';
 import { ErrorBox } from '../../../../components/pageElements';
 import { UpdateUserButton } from './components/updateUserButton';
-import { Section, GallerySection } from './components/section';
+import { Section, GallerySection, EditorSection } from './components/section';
 import Button from '@material-ui/core/Button';
 
 export function EditProfile() {
   const classes = useStyles();
   const [bgImage, setBgImage] = React.useState(null);
+  const [profileImgStyle, setProfileImgStyle] = React.useState([0, 0]);
   const [userName, setUserName] = React.useState('');
   const [summary, setSummary] = React.useState('');
   const [sections, setSections] = React.useState([]);
   const [profileImg, setProfileImg] = React.useState(null);
+  const [profileBGStyle, setProfileBGStyle] = React.useState([0, 0]);
   const [disabledValue, setDisabledValue] = React.useState(false);
   const [errors, setError] = React.useState({
     name: null,
@@ -31,13 +33,16 @@ export function EditProfile() {
   });
 
   const userProfile = {
-    userName: userName,
-    summary: summary,
-    profileImg: profileImg,
-    bgImage: bgImage,
-    sections: sections,
+    userName,
+    summary,
+    profileImg,
+    bgImage,
+    sections,
+    profileImgStyle,
+    profileBGStyle,
   };
 
+  console.log(userProfile);
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -47,7 +52,17 @@ export function EditProfile() {
             setUserName(data.profile.name);
             setSummary(data.profile.summary);
             setBgImage(data.profile.profileBG);
+            setProfileBGStyle(
+              data.profile.profileBGStyle.length > 0
+                ? data.profile.profileBGStyle
+                : [0, 0],
+            );
             setProfileImg(data.profile.profileImg);
+            setProfileImgStyle(
+              data.profile.profileImgStyle
+                ? data.profile.profileImgStyle
+                : [0, 0],
+            );
           }}
         >
           {({ loading, error, data }) => {
@@ -87,7 +102,11 @@ export function EditProfile() {
           <ProfileHeader
             profile={userProfile}
             setProfileImg={setProfileImg}
+            setProfileImgStyle={setProfileImgStyle}
             setBgImage={setBgImage}
+            profileBGStyle={profileBGStyle}
+            setProfileBGStyle={setProfileBGStyle}
+            profileImgStyle={profileImgStyle}
             setUserName={setUserName}
             setDisabledValue={setDisabledValue}
           />
@@ -139,6 +158,14 @@ export function EditProfile() {
               section.type === 'graphic-artist' ||
               section.type === '3d-artist' ? (
                 <GallerySection
+                  key={`section_${index}`}
+                  index={index}
+                  sections={sections}
+                  setSections={setSections}
+                  section={section}
+                />
+              ) : section.type === 'rulebook-editor' ? (
+                <EditorSection
                   key={`section_${index}`}
                   index={index}
                   sections={sections}

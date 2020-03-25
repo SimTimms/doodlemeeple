@@ -16,14 +16,18 @@ export const UPDATE_USER_MUTATION = gql`
     $name: String!
     $summary: String
     $profileBG: String
+    $profileBGStyle: String
     $profileImg: String
+    $profileImgStyle: String
     $sections: [SectionInput]
   ) {
     updateUser(
       name: $name
       summary: $summary
       profileBG: $profileBG
+      profileBGStyle: $profileBGStyle
       profileImg: $profileImg
+      profileImgStyle: $profileImgStyle
       sections: $sections
     ) {
       id

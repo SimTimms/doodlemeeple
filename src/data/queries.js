@@ -6,7 +6,9 @@ export const PROFILE = gql`
       name
       summary
       profileBG
+      profileBGStyle
       profileImg
+      profileImgStyle
     }
   }
 `;

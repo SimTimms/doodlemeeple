@@ -12,6 +12,7 @@ export function Uploader({
   className,
   cbDelete,
   hasFile,
+  setImagePosition,
 }) {
   const classes = useStyles();
   const [statusMessage, setStatusMessage] = React.useState('');
@@ -21,6 +22,9 @@ export function Uploader({
   async function handleUpload(ev) {
     let file = uploadInput.files[0];
     // Split the filename to get the name and type
+    if (!uploadInput.files[0]) {
+      return null;
+    }
     let fileParts = uploadInput.files[0].name.split('.');
     let fileName = fileParts[0];
     let fileType = fileParts[1];

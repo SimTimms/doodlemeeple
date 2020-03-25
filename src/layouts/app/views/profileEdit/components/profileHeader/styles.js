@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(theme => ({
   root: {
     backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
     backgroundPosition: 'top center',
     display: 'flex',
     flexDirection: 'row',
@@ -14,6 +13,22 @@ export const useStyles = makeStyles(theme => ({
     position: 'relative',
     borderBottom: '1px solid #ddd',
     backgroundColor: '#ccc',
+  },
+  controlsWrapper: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    display: 'flex',
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 10,
+    boxSizing: 'border-box',
+  },
+  controlsWrapperCenter: {
+    display: 'flex',
+    justifyContent: 'center',
   },
   rootDesktop: {
     display: 'flex',
@@ -95,7 +110,7 @@ export const useStyles = makeStyles(theme => ({
   },
   avatar: {
     borderRadius: '50%',
-    width: 140,
-    height: 140,
+    width: '100%',
+    height: '100%',
   },
 }));
