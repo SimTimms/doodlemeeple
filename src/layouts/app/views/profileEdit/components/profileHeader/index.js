@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import TextField from '@material-ui/core/TextField';
 import { useStyles } from './styles';
@@ -20,23 +20,31 @@ export function ProfileHeader({
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
 
-  const [imagePosition, setImagePosition] = React.useState([
-    profileBGStyle[0],
-    profileBGStyle[1],
-  ]);
-  const [imagePositionBG, setImagePositionBG] = React.useState([
-    profileBGStyle[0],
-    profileBGStyle[1],
-  ]);
+  const [imagePositionBG, setImagePositionBG] = React.useState({
+    x: 0,
+    y: 0,
+  });
+  const [imagePosition, setImagePosition] = React.useState({
+    x: 0,
+    y: 0,
+  });
 
+  useEffect(() => {
+    setImagePositionBG({
+      x: profileBGStyle[0] * 1,
+      y: profileBGStyle[1] * 1,
+    });
+    setImagePosition({
+      x: profileImgStyle[0] * 1,
+      y: profileImgStyle[1] * 1,
+    });
+  }, [profileBGStyle, profileImgStyle]);
   console.log(imagePositionBG);
-
   return (
     <div
       style={{
         backgroundImage: `url(${profile.bgImage})`,
-        backgroundPosition: `${-imagePositionBG[0] *
-          2}px ${-imagePositionBG[1] * 2}px`,
+        backgroundPosition: `${-imagePositionBG.x}px ${-imagePositionBG.y}px`,
       }}
       className={clsx({
         [classes.root]: true,
@@ -114,8 +122,7 @@ export function ProfileHeader({
               style={{
                 backgroundSize: 'cover',
                 backgroundImage: `url(${profile.profileImg})`,
-                backgroundPosition: `${-imagePosition[0] *
-                  2}px ${-imagePosition[1] * 2}px`,
+                backgroundPosition: `${-imagePosition.x}px ${-imagePosition.y}px`,
               }}
               className={classes.avatar}
             ></div>

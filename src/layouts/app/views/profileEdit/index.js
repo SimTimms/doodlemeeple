@@ -42,7 +42,6 @@ export function EditProfile() {
     profileBGStyle,
   };
 
-  console.log(userProfile);
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -53,14 +52,14 @@ export function EditProfile() {
             setSummary(data.profile.summary);
             setBgImage(data.profile.profileBG);
             setProfileBGStyle(
-              data.profile.profileBGStyle.length > 0
-                ? data.profile.profileBGStyle
+              data.profile.profileBGStyle
+                ? data.profile.profileBGStyle.split(':')
                 : [0, 0],
             );
             setProfileImg(data.profile.profileImg);
             setProfileImgStyle(
               data.profile.profileImgStyle
-                ? data.profile.profileImgStyle
+                ? data.profile.profileImgStyle.split(':')
                 : [0, 0],
             );
           }}
