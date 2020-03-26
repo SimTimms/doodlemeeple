@@ -57,6 +57,7 @@ export function ProfileHeader({
           <ImagePos
             imagePosition={imagePositionBG}
             setImagePosition={setImagePositionBG}
+            setCB={() => setDisabledValue(true)}
             setStyle={setProfileBGStyle}
           />
         )}
@@ -100,6 +101,7 @@ export function ProfileHeader({
                 imagePosition={imagePosition}
                 setImagePosition={setImagePosition}
                 setStyle={setProfileImgStyle}
+                setCB={() => setDisabledValue(true)}
               />
             )}
             <Uploader

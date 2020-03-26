@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
 
-export function ImagePos({ imagePosition, setImagePosition, setStyle }) {
+export function ImagePos({ imagePosition, setImagePosition, setStyle, setCB }) {
   const [mouseDown, setMouseDown] = React.useState(false);
   const [origin, setOrigin] = React.useState({ x: 0, y: 0 });
   const classes = useStyles();
@@ -19,10 +19,12 @@ export function ImagePos({ imagePosition, setImagePosition, setStyle }) {
         });
       }}
       onMouseUp={e => {
+        setCB();
         setStyle([imagePosition.x, imagePosition.y]);
         setMouseDown(false);
       }}
       onMouseLeave={e => {
+        setCB();
         setStyle([imagePosition.x, imagePosition.y]);
         setMouseDown(false);
       }}
