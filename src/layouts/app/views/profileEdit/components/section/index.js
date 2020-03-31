@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -18,13 +18,25 @@ import {
 import { FieldTitle } from './fieldTitle';
 import ReactPlayer from 'react-player';
 import { TYPE_HELPER } from '../../../../../../utils';
+import autosave from '../../../../../../utils/autosave';
 
-export function Section({ index, sections, setSections, section }) {
+export function Section({
+  index,
+  sections,
+  setSections,
+  section,
+  autosaveFunction,
+}) {
   const classes = useStyles();
-  const [title, setTitle] = React.useState(section.title);
+  const [title, setTitle] = React.useState('loading...');
   const [summary, setSummary] = React.useState(section.summary);
   const [changed, setChanged] = React.useState(false);
   let sectionValues = { summary, title };
+
+  useEffect(() => {
+    setTitle(section.title);
+    setSummary(section.summary);
+  }, [section]);
 
   return (
     <div>
@@ -42,6 +54,9 @@ export function Section({ index, sections, setSections, section }) {
           onChange={ev => {
             setChanged(true);
             setTitle(ev.target.value);
+            if (autosaveFunction) {
+              autosave(autosaveFunction);
+            }
           }}
         />
         <TextField
@@ -90,13 +105,19 @@ export function Section({ index, sections, setSections, section }) {
   );
 }
 
-export function GallerySection({ index, sections, setSections, section }) {
+export function GallerySection({
+  index,
+  sections,
+  setSections,
+  section,
+  autosaveFunction,
+}) {
   const classes = useStyles();
-  const [title, setTitle] = React.useState(section.title);
-  const [type, setType] = React.useState(section.type);
-  const [summary, setSummary] = React.useState(section.summary);
-  const [showreel, setShowreel] = React.useState(section.showreel);
-  const [images, setImages] = React.useState(section.gallery.images);
+  const [title, setTitle] = React.useState('loading...');
+  const [type, setType] = React.useState('loading...');
+  const [summary, setSummary] = React.useState('loading...');
+  const [showreel, setShowreel] = React.useState('loading...');
+  const [images, setImages] = React.useState([]);
   const [notableProjects, setNotableProjects] = React.useState(
     section.notableProjects,
   );
@@ -120,6 +141,16 @@ export function GallerySection({ index, sections, setSections, section }) {
 
   const notableProjectsLength = notableProjects ? notableProjects.length : 0;
   const testimonialsLength = testimonials ? testimonials.length : 0;
+
+  useEffect(() => {
+    setTitle(section.title);
+    setSummary(section.summary);
+    setType(section.type);
+    setShowreel(section.showreel);
+    setImages(section.gallery.images);
+    setNotableProjects(section.notableProjects);
+    setTestimonials(section.testimonials);
+  }, [section]);
 
   return (
     <div>
@@ -161,6 +192,9 @@ export function GallerySection({ index, sections, setSections, section }) {
           onChange={ev => {
             setChanged(true);
             setSummary(ev.target.value.replace(/[^A-Za-z0-9 \n]/g, ''));
+            if (autosaveFunction) {
+              autosave(autosaveFunction);
+            }
           }}
         />
         <FieldTitle

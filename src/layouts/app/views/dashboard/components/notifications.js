@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
+import { toastStyles } from '../../../../../components/toast/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Query } from 'react-apollo';
@@ -10,14 +11,26 @@ import { NOTIFICATIONS } from '../../../../../data/queries';
 import { REMOVE_NOTIFICATION_MUTATION } from '../../../../../data/mutations';
 import { Mutation } from 'react-apollo';
 import { timeDifferenceForDate } from '../../../../../utils/dates';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+function SaveIcon() {
+  const toastStyle = toastStyles();
+  return (
+    <Icon style={{ fontSize: 18 }} className={toastStyle.toastIcon}>
+      save
+    </Icon>
+  );
+}
 
 export function Notifications() {
   const classes = useStyles();
-
+  const toastStyle = toastStyles();
   const [notificationArray, setNotificationArray] = React.useState([]);
 
   return (
     <div className={classes.messageWrapper}>
+      <ToastContainer />
       <Typography
         color="textPrimary"
         component="p"
@@ -30,6 +43,7 @@ export function Notifications() {
         onCompleted={data => {
           setNotificationArray(data.getNotifications);
         }}
+        fetchPolicy="network-only"
       >
         {({ loading, error, data }) => {
           return null;
@@ -80,6 +94,27 @@ export function Notifications() {
                 mutation={REMOVE_NOTIFICATION_MUTATION}
                 variables={{
                   id: notification.id,
+                }}
+                update={(store, { data: { removeNotification } }) => {
+                  let data = store.readQuery({ query: NOTIFICATIONS });
+                  toast(<SaveIcon />, {
+                    className: toastStyle.toast,
+                    progressClassName: toastStyle.progress,
+                    bodyClassName: toastStyle.toastBody,
+                    autoClose: 2000,
+                    draggable: false,
+                    closeButton: false,
+                    hideProgressBar: true,
+                  });
+
+                  data.getNotifications = data.getNotifications.filter(
+                    item => item.id !== removeNotification,
+                  );
+                  console.log(data);
+                  store.writeQuery({
+                    query: NOTIFICATIONS,
+                    data,
+                  });
                 }}
               >
                 {RemoveNotificationMutation => {

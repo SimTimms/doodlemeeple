@@ -29,8 +29,8 @@ function RouterComponent(props) {
   theme.palette.secondary = {
     ...theme.palette.secondary,
     main: '#34BEB1',
-    light: '#8474d3',
-    dark: '#433878',
+    light: '#6aebde',
+    dark: '#248c82',
   };
 
   return (
@@ -39,7 +39,7 @@ function RouterComponent(props) {
         {authToken && (
           <Route
             path="/app/:page/:pathParam?"
-            render={props => <AppLayout {...props} />}
+            render={props => <AppLayout {...props} theme={theme} />}
           />
         )}
         {authToken && (

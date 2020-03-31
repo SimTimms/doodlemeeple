@@ -11,9 +11,10 @@ export function UpdateUserButton({
   errors,
   disabledValue,
   setDisabledValue,
+  toast,
 }) {
   const validate = profile.userName.length < 3 ? false : disabledValue;
-  console.log(profile);
+
   return (
     <Mutation
       mutation={UPDATE_USER_MUTATION}
@@ -24,7 +25,11 @@ export function UpdateUserButton({
         profileBGStyle: profile.profileBGStyle.join(':'),
         profileImg: profile.profileImg,
         profileImgStyle: profile.profileImgStyle.join(':'),
+        autosave: profile.autosave,
         sections: [{ summary: 'Test Section' }, { summary: 'Test Section 2' }],
+      }}
+      onCompleted={() => {
+        toast();
       }}
       onError={error => {
         setError(readableErrors(error, errors));

@@ -8,7 +8,7 @@ export const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     alignItems: 'flex-end',
     width: '100%',
-    height: 300,
+    height: 400,
     paddingBottom: 10,
     position: 'relative',
     borderBottom: '1px solid #ddd',

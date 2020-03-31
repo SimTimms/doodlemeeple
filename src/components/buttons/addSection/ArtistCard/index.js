@@ -13,6 +13,7 @@ export function ArtistCard({ setDisplay, sections, setSections, type }) {
     },
     notableProjects: [],
     testimonials: [],
+    showreel: '',
   };
 
   const classes = useStyles();

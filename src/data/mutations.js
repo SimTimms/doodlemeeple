@@ -20,6 +20,7 @@ export const UPDATE_USER_MUTATION = gql`
     $profileImg: String
     $profileImgStyle: String
     $sections: [SectionInput]
+    $autosave: Boolean
   ) {
     updateUser(
       name: $name
@@ -29,8 +30,16 @@ export const UPDATE_USER_MUTATION = gql`
       profileImg: $profileImg
       profileImgStyle: $profileImgStyle
       sections: $sections
+      autosave: $autosave
     ) {
       id
+      name
+      summary
+      profileBG
+      profileBGStyle
+      profileImg
+      profileImgStyle
+      autosave
     }
   }
 `;

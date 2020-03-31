@@ -5,6 +5,7 @@ import { useStyles } from './styles';
 import clsx from 'clsx';
 import { Uploader } from '../../../../../../components/uploader';
 import { ImagePos } from '../../../../../../components/imagePos';
+import autosave from '../../../../../../utils/autosave';
 
 export function ProfileHeader({
   profile,
@@ -16,6 +17,7 @@ export function ProfileHeader({
   setProfileBGStyle,
   setUserName,
   setDisabledValue,
+  autosaveFunction,
 }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
@@ -29,6 +31,8 @@ export function ProfileHeader({
     y: 0,
   });
 
+  const [timer, setTimer] = React.useState(null);
+
   useEffect(() => {
     setImagePositionBG({
       x: profileBGStyle[0] * 1,
@@ -39,7 +43,7 @@ export function ProfileHeader({
       y: profileImgStyle[1] * 1,
     });
   }, [profileBGStyle, profileImgStyle]);
-  console.log(imagePositionBG);
+
   return (
     <div
       style={{
@@ -57,7 +61,12 @@ export function ProfileHeader({
           <ImagePos
             imagePosition={imagePositionBG}
             setImagePosition={setImagePositionBG}
-            setCB={() => setDisabledValue(true)}
+            setCB={() => {
+              setDisabledValue(true);
+              if (autosaveFunction) {
+                autosave(autosaveFunction);
+              }
+            }}
             setStyle={setProfileBGStyle}
           />
         )}
@@ -101,7 +110,15 @@ export function ProfileHeader({
                 imagePosition={imagePosition}
                 setImagePosition={setImagePosition}
                 setStyle={setProfileImgStyle}
-                setCB={() => setDisabledValue(true)}
+                setCB={() => {
+                  setDisabledValue(true);
+                  setDisabledValue(true);
+                  if (autosaveFunction) {
+                    if (autosaveFunction) {
+                      autosave(autosaveFunction);
+                    }
+                  }
+                }}
               />
             )}
             <Uploader
@@ -145,6 +162,11 @@ export function ProfileHeader({
             inputProps={{ maxLength: 26 }}
             onChange={e => {
               setDisabledValue(true);
+              if (autosaveFunction) {
+                if (autosaveFunction) {
+                  autosave(autosaveFunction);
+                }
+              }
               setUserName(e.target.value.replace(/[^A-Za-z0-9 ]/g, ''));
             }}
             margin="normal"

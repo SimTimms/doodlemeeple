@@ -89,7 +89,7 @@ function AppLayout(props) {
           ) : page === 'profile' ? (
             <Profile />
           ) : page === 'edit-profile' ? (
-            <EditProfile />
+            <EditProfile theme={props.theme} />
           ) : page === 'account' ? (
             <Account />
           ) : page === 'invites' ? (

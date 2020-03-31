@@ -9,6 +9,7 @@ export const PROFILE = gql`
       profileBGStyle
       profileImg
       profileImgStyle
+      autosave
     }
   }
 `;
