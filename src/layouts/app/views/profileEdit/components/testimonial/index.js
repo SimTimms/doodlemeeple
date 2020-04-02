@@ -11,6 +11,7 @@ export function Testimonial({
   index,
   setTestimonials,
   testimonials,
+  autosave,
 }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
@@ -22,31 +23,36 @@ export function Testimonial({
         [classes.inputWrapperMobile]: mobile,
       })}
     >
-      <div>
+      <div
+        style={{
+          background: testimonial.image
+            ? `url(${testimonial.image}) center center/100% `
+            : '#ddd',
+        }}
+        className={clsx({
+          [classes.avatarWrapper]: true,
+          [classes.avatarWrapperMobile]: mobile,
+        })}
+      >
         <Uploader
           cbImage={url => {
             setChanged(true);
             const copyArr = Object.assign([], testimonials);
             copyArr[index].image = url;
+            autosave && autosave();
             setTestimonials(copyArr);
           }}
-          styleOverride={{
-            background: testimonial.image
-              ? `url(${testimonial.image})`
-              : '#ddd',
-            backgroundPosition: 'center center',
-          }}
+          styleOverride={null}
           cbDelete={() => {
             setChanged(true);
+            autosave && autosave();
             const copyArr = Object.assign([], testimonials);
             copyArr[index].image = '';
             setTestimonials(copyArr);
           }}
           hasFile={testimonial.image !== '' || testimonial.image ? true : false}
-          className={clsx({
-            [classes.avatarWrapper]: true,
-            [classes.avatarWrapperMobile]: mobile,
-          })}
+          className={null}
+          setImagePosition={null}
         />
       </div>
       <div className={classes.actionInputWrapper}>
@@ -65,6 +71,7 @@ export function Testimonial({
           style={{ width: '100%' }}
           onChange={ev => {
             setChanged(true);
+            autosave && autosave();
             const copyArr = Object.assign([], testimonials);
             copyArr[index].summary = ev.target.value;
             setTestimonials(copyArr);
@@ -83,6 +90,7 @@ export function Testimonial({
           style={{ width: '100%' }}
           onChange={ev => {
             setChanged(true);
+            autosave && autosave();
             const copyArr = Object.assign([], testimonials);
             copyArr[index].name = ev.target.value;
             setTestimonials(copyArr);
@@ -94,6 +102,9 @@ export function Testimonial({
         testimonials={testimonials}
         index={index}
         setTestimonials={setTestimonials}
+        autosave={() => {
+          autosave && autosave();
+        }}
       />
     </div>
   );

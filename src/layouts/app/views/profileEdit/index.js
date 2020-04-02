@@ -264,6 +264,7 @@ export function EditProfile({ theme }) {
                     onCompleted={data => {
                       setSections(data.getSections);
                     }}
+                    fetchPolicy="network-only"
                   >
                     {({ loading, error, data }) => {
                       if (loading) return <div>Fetching</div>;

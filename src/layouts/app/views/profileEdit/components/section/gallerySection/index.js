@@ -206,6 +206,7 @@ function GallerySection({
                 style={{ width: '100%', marginTop: 10 }}
                 onChange={ev => {
                   setChanged(true);
+                  autosaveIsOn && autosave(mutation, 'showreel');
                   setShowreel(ev.target.value);
                 }}
               />
@@ -269,6 +270,13 @@ function GallerySection({
                         setTestimonials={setTestimonials}
                         testimonials={testimonials}
                         key={`testimonial_${index}`}
+                        autosave={
+                          autosaveIsOn
+                            ? () => {
+                                autosave(mutation, 'summary');
+                              }
+                            : null
+                        }
                       />
                     );
                   })}

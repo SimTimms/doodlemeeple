@@ -26,6 +26,7 @@ export const useStyles = makeStyles(theme => ({
     padding: 10,
     boxSizing: 'border-box',
   },
+  controlsWrapperCenterMobile: { justifyContent: 'center' },
   controlsWrapperCenter: {
     display: 'flex',
     justifyContent: 'center',

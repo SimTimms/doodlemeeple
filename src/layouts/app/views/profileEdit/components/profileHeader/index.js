@@ -56,7 +56,7 @@ export function ProfileHeader({
       })}
     >
       <div style={{ position: 'absolute', right: 0, top: 0, display: 'flex' }}>
-        {profile.bgImage && (
+        {profile.bgImage && !mobile && (
           <ImagePos
             imagePosition={imagePositionBG}
             setImagePosition={setImagePositionBG}
@@ -84,7 +84,6 @@ export function ProfileHeader({
           setImagePosition={setImagePositionBG}
         />
       </div>
-
       <div
         className={clsx({
           [classes.profileWrapper]: true,
@@ -102,9 +101,10 @@ export function ProfileHeader({
             className={clsx({
               [classes.controlsWrapper]: true,
               [classes.controlsWrapperCenter]: !profile.profileImg,
+              [classes.controlsWrapperCenterMobile]: mobile,
             })}
           >
-            {profile.profileImg && (
+            {profile.profileImg && !mobile && (
               <ImagePos
                 imagePosition={imagePosition}
                 setImagePosition={setImagePosition}

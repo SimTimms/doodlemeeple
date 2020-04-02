@@ -43,6 +43,11 @@ export const useStyles = makeStyles({
     padding: 0,
     border: '5px solid #bbb',
     marginRight: 10,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundPosition: 'center center',
+    backgroundSize: '100%',
   },
   avatarWrapperMobile: {
     marginRight: 0,
