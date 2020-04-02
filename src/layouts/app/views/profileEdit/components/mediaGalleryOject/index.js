@@ -1,5 +1,5 @@
 import React from 'react';
-import { MediaGallery } from '../../../../../../components/mediaGallery';
+import { MediaGallery } from '../../../../../../components';
 
 export function MediaGalleryObject({ images, setImages, index }) {
   images = images ? images : [];

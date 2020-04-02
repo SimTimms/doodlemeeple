@@ -1,9 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { useStyles } from './styles';
 import { Button, useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
-import { useStyles } from './styles';
-import { ContentTop } from '../../components';
-import { StyledNavBar } from '../../components/navBar';
 import { AppMenu } from '../menus';
 import { AppDrawer } from '../menus/appDrawer';
 import { Dashboard } from './views/dashboard';
@@ -16,9 +15,12 @@ import { NewProject } from './views/newProject';
 import { NewQuote } from './views/newQuote';
 import { Decline } from './views/decline';
 import { Projects } from './views/projects';
-import { Link } from 'react-router-dom';
-import ActionButton from '../../components/buttons';
-import { CardActionArea } from '../../components/wrappers';
+import {
+  CardActionArea,
+  ActionButton,
+  ContentTop,
+  StyledNavBar,
+} from '../../components';
 import {
   projectObject,
   projectObjectTwo,

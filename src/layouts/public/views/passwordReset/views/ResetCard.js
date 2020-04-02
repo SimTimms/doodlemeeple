@@ -1,18 +1,19 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import Divider from '@material-ui/core/Divider';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Slide from '@material-ui/core/Slide';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Link } from 'react-router-dom';
-import { Form, FormInput } from '../../../../../components/form';
+import {
+  Card,
+  Divider,
+  CardContent,
+  Typography,
+  Button,
+  Slide,
+  useMediaQuery,
+} from '@material-ui/core';
+import { Form, FormInput, ErrorBox } from '../../../../../components';
 import { styles } from './styles';
 import { sharedStyles } from '../../styles';
 import { Mutation } from 'react-apollo';
 import { PASSWORD_RESET_MUTATION } from '../../../../../data/mutations';
-import { ErrorBox } from '../../../../../components/pageElements';
 import clsx from 'clsx';
 
 var passwordValidator = require('password-validator');

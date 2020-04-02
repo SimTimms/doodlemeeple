@@ -3,13 +3,13 @@ import Slide from '@material-ui/core/Slide';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
-import { FormInput } from '../../../../components/form';
-import { CardHeader } from '../../../../components/headers';
+import { FormInput } from '../../../../components';
+import { CardHeader } from '../../../../components';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
 import { SelectTagsWidget } from '../../../../components/tags';
-import { MediaGallery } from '../../../../components/mediaGallery';
-import { FileGallery } from '../../../../components/fileGallery';
+import { MediaGallery } from '../../../../components';
+import { FileGallery } from '../../../../components';
 import { Link } from 'react-router-dom';
 import ActionButton from '../../../../components/buttons';
 

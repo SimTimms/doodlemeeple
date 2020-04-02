@@ -3,7 +3,7 @@ import Icon from '@material-ui/core/Icon';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useStyles } from './styles';
 import smithy from '../../../../../assets/smithy.jpg';
-import { FormInput } from '../../../../../components/form';
+import { FormInput } from '../../../../../components';
 
 export function ProjectHeader({ profile, setPrimaryImage, primaryImage }) {
   const classes = useStyles();

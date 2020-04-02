@@ -1,7 +1,6 @@
 import React from 'react';
 import { AboutPage } from './views/AboutPage';
-import { Content } from '../../components';
-import { StyledNavBar } from '../../components/navBar';
+import { Content, StyledNavBar } from '../../components';
 import { PublicMenu } from '../menus';
 import { withStyles } from '@material-ui/core/styles';
 

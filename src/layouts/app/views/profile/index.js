@@ -1,14 +1,15 @@
 import React from 'react';
-
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
-import Slide from '@material-ui/core/Slide';
+import {
+  Card,
+  CardContent,
+  Divider,
+  Typography,
+  Slide,
+} from '@material-ui/core';
 import { useStyles } from './styles';
-import { ContentHeader } from '../../../../components/headers/contentHeader';
+import { ContentHeader } from '../../../../components';
 import { ProfileHeader } from './components/profileHeader';
-import { MediaGallery } from '../../../../components/mediaGallery';
+import { MediaGallery } from '../../../../components';
 import { creativesTemp } from '../../../../testData/creatives';
 
 export function Profile() {

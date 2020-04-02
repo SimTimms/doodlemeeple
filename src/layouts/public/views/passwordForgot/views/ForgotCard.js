@@ -1,20 +1,21 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import Divider from '@material-ui/core/Divider';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Button from '@material-ui/core/Button';
-import Slide from '@material-ui/core/Slide';
-import { Form, FormInput } from '../../../../../components/form';
+import { Link } from 'react-router-dom';
+import {
+  Card,
+  Divider,
+  CardContent,
+  Typography,
+  useMediaQuery,
+  Button,
+  Slide,
+} from '@material-ui/core';
 import { styles } from './styles';
 import { sharedStyles } from '../../styles';
 import { Mutation } from 'react-apollo';
 import { PASSWORD_FORGOT_MUTATION } from '../../../../../data/mutations';
 import { PROFILE_EMAIL } from '../../../../../utils/dataLengths';
-import { ErrorBox } from '../../../../../components/pageElements';
+import { ErrorBox, Form, FormInput } from '../../../../../components';
 import { validate } from 'email-validator';
-import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
 export default function ForgotCard({ history, setPage }) {

@@ -1,14 +1,15 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Slide from '@material-ui/core/Slide';
+import {
+  Card,
+  CardContent,
+  Typography,
+  Slide,
+  Button,
+  Divider,
+} from '@material-ui/core';
 import { useStyles } from './styles';
-import { FormInput } from '../../../../components/form';
+import { FormInput, CardActionArea } from '../../../../components';
 import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import { CardActionArea } from '../../../../components/wrappers';
 
 export function NewQuote({ projectId }) {
   const classes = useStyles();

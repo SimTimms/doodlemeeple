@@ -5,8 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
-
-import { ContentHeader } from '../../../../components/headers/contentHeader';
+import { ContentHeader } from '../../../../components';
 import { useStyles } from './styles';
 import { creativesTemp } from '../../../../testData/creatives';
 

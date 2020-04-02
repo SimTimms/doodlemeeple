@@ -3,8 +3,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import TextField from '@material-ui/core/TextField';
 import { useStyles } from './styles';
 import clsx from 'clsx';
-import { Uploader } from '../../../../../../components/uploader';
-import { ImagePos } from '../../../../../../components/imagePos';
+import { ImagePos, Uploader } from '../../../../../../components';
 import autosave from '../../../../../../utils/autosave';
 
 export function ProfileHeader({
@@ -64,7 +63,7 @@ export function ProfileHeader({
             setCB={() => {
               setDisabledValue(true);
               if (autosaveFunction) {
-                autosave(autosaveFunction);
+                autosave(autosaveFunction, 'imagepos');
               }
             }}
             setStyle={setProfileBGStyle}
@@ -114,9 +113,7 @@ export function ProfileHeader({
                   setDisabledValue(true);
                   setDisabledValue(true);
                   if (autosaveFunction) {
-                    if (autosaveFunction) {
-                      autosave(autosaveFunction);
-                    }
+                    autosave(autosaveFunction, 'imageposprofile');
                   }
                 }}
               />
@@ -163,9 +160,7 @@ export function ProfileHeader({
             onChange={e => {
               setDisabledValue(true);
               if (autosaveFunction) {
-                if (autosaveFunction) {
-                  autosave(autosaveFunction);
-                }
+                autosave(autosaveFunction, 'username');
               }
               setUserName(e.target.value.replace(/[^A-Za-z0-9 ]/g, ''));
             }}

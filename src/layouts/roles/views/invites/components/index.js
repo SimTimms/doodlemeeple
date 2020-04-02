@@ -1,12 +1,14 @@
 import React from 'react';
-import CardMedia from '@material-ui/core/CardMedia';
-import Icon from '@material-ui/core/Icon';
-import Collapse from '@material-ui/core/Collapse';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import {
+  CardMedia,
+  Icon,
+  Collapse,
+  Card,
+  CardContent,
+  Typography,
+} from '@material-ui/core';
 import { useStyles } from './styles';
-import { MediaGallery } from '../../../../../components/mediaGallery';
+import { MediaGallery } from '../../../../../components';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 

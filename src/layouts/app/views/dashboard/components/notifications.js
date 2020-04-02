@@ -18,7 +18,7 @@ function SaveIcon() {
   const toastStyle = toastStyles();
   return (
     <Icon style={{ fontSize: 18 }} className={toastStyle.toastIcon}>
-      save
+      delete
     </Icon>
   );
 }

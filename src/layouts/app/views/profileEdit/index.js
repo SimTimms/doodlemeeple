@@ -2,12 +2,15 @@ import React from 'react';
 import { Icon, Card, Typography, Slide, TextField } from '@material-ui/core';
 import { useStyles } from './styles';
 import { toastStyles } from '../../../../components/toast/styles';
-import { ContentHeader } from '../../../../components/headers/contentHeader';
 import { ProfileHeader } from './components/profileHeader';
-import { AddSection } from '../../../../components/buttons/addSection';
+import {
+  AddSection,
+  LoadIcon,
+  ErrorBox,
+  ContentHeader,
+} from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE, SECTIONS } from '../../../../data/queries';
-import { ErrorBox } from '../../../../components/pageElements';
 import { UpdateUserButton } from './components/updateUserButton';
 import { Section, GallerySection, EditorSection } from './components/section';
 import { UPDATE_USER_MUTATION } from '../../../../data/mutations';
@@ -81,7 +84,7 @@ export function EditProfile({ theme }) {
           }}
         >
           {({ loading, error, data }) => {
-            if (loading) return <div>Fetching</div>;
+            if (loading) return <LoadIcon />;
             if (error) return <div>Error</div>;
             return <div></div>;
           }}

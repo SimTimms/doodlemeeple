@@ -8,12 +8,15 @@ import Slide from '@material-ui/core/Slide';
 import { useStyles } from './styles';
 import { ProjectComponent, ProjectHeader } from './components';
 import { Link } from 'react-router-dom';
-import ActionButton from '../../../../components/buttons';
-import { MediaGallery } from '../../../../components/mediaGallery';
-import { FileGallery } from '../../../../components/fileGallery';
-import { InvitesWidget } from '../../../../components/invites';
+import {
+  FileGallery,
+  InvitesWidget,
+  MediaGallery,
+  ActionButton,
+} from '../../../../components';
+
 import { TagsWidget } from '../../../../components/tags';
-import { CardHeader } from '../../../../components/headers';
+import { CardHeader } from '../../../../components';
 import tim from '../../../../assets/tim.jpg';
 
 export function NewProject({ gamesTemp, setGamesTestData, projectId }) {

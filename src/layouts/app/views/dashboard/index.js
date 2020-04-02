@@ -5,7 +5,7 @@ import { Notifications } from './components/notifications';
 import { Posts } from './components/Posts';
 import axios from 'axios';
 /*import { Projects } from './components/projects';*/
-import { ContentHeader } from '../../../../components/headers/contentHeader';
+import { ContentHeader } from '../../../../components';
 import { useStyles } from './styles';
 
 export function Dashboard() {

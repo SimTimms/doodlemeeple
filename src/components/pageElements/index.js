@@ -3,7 +3,7 @@ import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from './styles';
 
-export function ErrorBox({ errorMsg }) {
+function ErrorBox({ errorMsg }) {
   const classes = useStyles();
 
   return errorMsg === null ? null : (
@@ -20,3 +20,5 @@ export function ErrorBox({ errorMsg }) {
     </div>
   );
 }
+
+export default ErrorBox;

@@ -8,7 +8,7 @@ import { useStyles } from './styles';
 import clsx from 'clsx';
 import { ArtistCard } from './ArtistCard';
 
-export function AddSection({ setSections, sections }) {
+function AddSection({ setSections, sections }) {
   const [display, setDisplay] = React.useState(false);
   const classes = useStyles();
 
@@ -104,3 +104,5 @@ export function AddSection({ setSections, sections }) {
     </div>
   );
 }
+
+export default AddSection;

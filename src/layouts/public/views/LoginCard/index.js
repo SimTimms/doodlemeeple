@@ -1,21 +1,23 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import Divider from '@material-ui/core/Divider';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Slide from '@material-ui/core/Slide';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { Form, FormInput } from '../../../../components/form';
+import { Link } from 'react-router-dom';
 import { styles } from './styles';
+import {
+  Card,
+  Divider,
+  CardContent,
+  Button,
+  Typography,
+  Slide,
+  useMediaQuery,
+} from '@material-ui/core';
+import { Form, FormInput, ErrorBox } from '../../../../components';
 import { sharedStyles } from '../styles';
 import { Mutation } from 'react-apollo';
 import { LOGIN_MUTATION } from '../../../../data/mutations';
 import { PROFILE_EMAIL, PROFILE_PASSWORD } from '../../../../utils/dataLengths';
 import Cookies from 'js-cookie';
 import { readableErrors } from '../../../../utils/readableErrors';
-import { ErrorBox } from '../../../../components/pageElements';
-import { Link } from 'react-router-dom';
+
 import clsx from 'clsx';
 const CHECKING = 'Checking...';
 

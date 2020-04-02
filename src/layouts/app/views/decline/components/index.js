@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStyles } from './styles';
-import { FormInput } from '../../../../../components/form';
+import { FormInput } from '../../../../../components';
 
 export function ProjectComponent({ fieldValue, setFieldValue, title, width }) {
   const classes = useStyles();

@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import Cookies from 'js-cookie';
 
-export function Uploader({
+function Uploader({
   cbImage,
   styleOverride,
   className,
@@ -118,3 +118,5 @@ export function Uploader({
     </label>
   );
 }
+
+export default Uploader;

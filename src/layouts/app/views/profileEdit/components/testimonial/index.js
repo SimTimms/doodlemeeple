@@ -2,7 +2,7 @@ import React from 'react';
 import { TextField, useMediaQuery } from '@material-ui/core';
 import { DeleteButton } from './deleteButton';
 import { useStyles } from './styles';
-import { Uploader } from '../../../../../../components/uploader';
+import { Uploader } from '../../../../../../components';
 import clsx from 'clsx';
 
 export function Testimonial({

@@ -8,9 +8,9 @@ import {
   useMediaQuery,
   Icon,
 } from '@material-ui/core';
-import { Uploader } from '../../components/uploader';
+import { Uploader } from '../../components';
 
-export function MediaGallery({ items, edit, setBgImage, setImages }) {
+function MediaGallery({ items, edit, setBgImage, setImages }) {
   const seedID = Math.floor(Math.random());
   const [mediaViewer, setMediaViewer] = React.useState(null);
 
@@ -69,6 +69,7 @@ export function MediaGallery({ items, edit, setBgImage, setImages }) {
                   className={null}
                   cbDelete={null}
                   hasFile={false}
+                  setImagePosition={null}
                 />
               </div>
             </GridListTile>
@@ -101,3 +102,5 @@ export function MediaGallery({ items, edit, setBgImage, setImages }) {
     </div>
   );
 }
+
+export default MediaGallery;

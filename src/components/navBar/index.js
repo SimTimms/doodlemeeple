@@ -7,7 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import clsx from 'clsx';
 import { useStyles } from './styles';
 
-export function StyledNavBar(props) {
+function StyledNavBar(props) {
   const { children, open, menu } = props;
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
@@ -42,3 +42,5 @@ export function StyledNavBar(props) {
     </AppBar>
   );
 }
+
+export default StyledNavBar;

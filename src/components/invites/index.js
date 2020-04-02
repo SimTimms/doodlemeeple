@@ -4,7 +4,7 @@ import { useStyles } from './styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import tim from '../../assets/tim.jpg';
 
-export function InvitesWidget({ invites, setInvite, edit }) {
+function InvitesWidget({ invites, setInvite, edit }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -57,3 +57,5 @@ export function InvitesWidget({ invites, setInvite, edit }) {
     </div>
   );
 }
+
+export default InvitesWidget;

@@ -1,5 +1,6 @@
 let timer = null;
-function autosave(autosaveFunction) {
+function autosave(autosaveFunction, identifier) {
+  console.log(identifier);
   clearTimeout(timer);
   timer = setTimeout(() => {
     autosaveFunction();

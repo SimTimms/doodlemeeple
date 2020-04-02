@@ -7,9 +7,11 @@ function StyledFooter(props) {
   return <div className={clsx(classes.root)}>{props.children}</div>;
 }
 
-export const Footer = withStyles({
+const Footer = withStyles({
   root: {
     background: '#222',
     padding: 10,
   },
 })(StyledFooter);
+
+export default Footer;

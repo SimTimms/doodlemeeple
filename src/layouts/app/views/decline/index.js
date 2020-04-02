@@ -1,13 +1,15 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Slide from '@material-ui/core/Slide';
-import { useStyles } from './styles';
-import { ProjectComponent } from './components';
 import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import { CardActionArea } from '../../../../components/wrappers';
+import { useStyles } from './styles';
+import {
+  Card,
+  CardContent,
+  Typography,
+  Slide,
+  Button,
+} from '@material-ui/core';
+import { ProjectComponent } from './components';
+import { CardActionArea } from '../../../../components';
 
 export function Decline({ projectId }) {
   const classes = useStyles();
