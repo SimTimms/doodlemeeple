@@ -8,7 +8,6 @@ export function MediaGalleryObject({ images, setImages, index }) {
       style={{
         width: '100%',
         border: '1px solid #ccc',
-        borderRadius: 5,
         marginTop: 15,
       }}
     >

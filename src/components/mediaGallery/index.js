@@ -1,14 +1,8 @@
 import React from 'react';
 import { useStyles } from './styles';
-import {
-  GridList,
-  GridListTile,
-  Typography,
-  Button,
-  useMediaQuery,
-  Icon,
-} from '@material-ui/core';
+import { Typography, Button, useMediaQuery, Icon } from '@material-ui/core';
 import { Uploader } from '../../components';
+import clsx from 'clsx';
 
 function MediaGallery({ items, edit, setBgImage, setImages }) {
   const seedID = Math.floor(Math.random());
@@ -17,19 +11,16 @@ function MediaGallery({ items, edit, setBgImage, setImages }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
   return (
-    <div className={classes.root} style={{ background: 'none' }}>
+    <div className={classes.root} style={{ background: 'none', padding: 20 }}>
       {!mediaViewer ? (
-        <GridList
-          cellHeight={160}
-          className={classes.gridList}
-          cols={mobile ? 1 : 3}
-          style={{ background: 'none' }}
-        >
+        <div className={classes.gridList} style={{ background: 'none' }}>
           {items.map((tile, index) => (
-            <GridListTile
+            <div
               key={`${tile.img}_${seedID}_${index}`}
-              cols={tile.cols || 1}
-              style={{ background: 'none', position: 'relative' }}
+              className={clsx({
+                [classes.image]: true,
+                [classes.imageMobile]: mobile,
+              })}
             >
               <Button
                 className={classes.iconButton}
@@ -48,33 +39,35 @@ function MediaGallery({ items, edit, setBgImage, setImages }) {
                 src={tile.img}
                 alt={tile.title}
                 onClick={() => setMediaViewer(tile)}
+                style={{
+                  width: '100%',
+                  boxShadow: '10px 10px 10px rgba(0,0,0,0.3)',
+                }}
               />
-            </GridListTile>
+            </div>
           ))}
 
           {edit && items.length < 6 && (
-            <GridListTile key="add_tile" cols={1}>
-              <div
-                style={{
-                  height: '100%',
-                  background: '#ddd',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center ',
-                }}
-              >
-                <Uploader
-                  cbImage={setBgImage}
-                  styleOverride={null}
-                  className={null}
-                  cbDelete={null}
-                  hasFile={false}
-                  setImagePosition={null}
-                />
-              </div>
-            </GridListTile>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center ',
+                width: '33%',
+                minHeight: 200,
+              }}
+            >
+              <Uploader
+                cbImage={setBgImage}
+                styleOverride={null}
+                className={null}
+                cbDelete={null}
+                hasFile={false}
+                setImagePosition={null}
+              />
+            </div>
           )}
-        </GridList>
+        </div>
       ) : (
         <div
           style={{

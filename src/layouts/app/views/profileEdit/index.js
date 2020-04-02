@@ -12,7 +12,8 @@ import {
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE, SECTIONS } from '../../../../data/queries';
 import { UpdateUserButton } from './components/updateUserButton';
-import { Section, GallerySection, EditorSection } from './components/section';
+import { Section, EditorSection } from './components/section';
+import GallerySection from './components/section/gallerySection';
 import { UPDATE_USER_MUTATION } from '../../../../data/mutations';
 import { readableErrors } from '../../../../utils/readableErrors';
 import { ToastContainer, toast } from 'react-toastify';
@@ -99,10 +100,7 @@ export function EditProfile({ theme }) {
             profileImg: userProfile.profileImg,
             profileImgStyle: userProfile.profileImgStyle.join(':'),
             autosave: userProfile.autosave,
-            sections: [
-              { summary: 'Test Section' },
-              { summary: 'Test Section 2' },
-            ],
+            sections: [],
           }}
           update={(store, { data: { updateUser } }) => {
             const data = store.readQuery({ query: PROFILE });
@@ -284,9 +282,7 @@ export function EditProfile({ theme }) {
                           sections={sections}
                           setSections={setSections}
                           section={section}
-                          autosaveFunction={
-                            autosaveIsOn ? SignupMutation : null
-                          }
+                          autosaveIsOn={autosaveIsOn}
                         />
                       ) : section.type === 'rulebook-editor' ? (
                         <EditorSection
@@ -295,6 +291,7 @@ export function EditProfile({ theme }) {
                           sections={sections}
                           setSections={setSections}
                           section={section}
+                          autosaveIsOn={autosaveIsOn}
                         />
                       ) : section.summary !== null ? (
                         <Section
@@ -303,9 +300,6 @@ export function EditProfile({ theme }) {
                           sections={sections}
                           setSections={setSections}
                           section={section}
-                          autosaveFunction={
-                            autosaveIsOn ? SignupMutation : null
-                          }
                         />
                       ) : null,
                     )}

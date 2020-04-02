@@ -9,6 +9,7 @@ export function NotableProject({
   index,
   setNotableProjects,
   notableProjects,
+  autosave,
 }) {
   const classes = useStyles();
 
@@ -29,6 +30,7 @@ export function NotableProject({
         style={{ width: '100%' }}
         onChange={ev => {
           setChanged(true);
+          autosave && autosave();
           const newNotableProjects = Object.assign([], notableProjects);
           newNotableProjects[index].summary = ev.target.value;
           setNotableProjects(newNotableProjects);

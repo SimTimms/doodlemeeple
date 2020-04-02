@@ -9,8 +9,24 @@ export const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     padding: '5px 3px 5px 3px',
   },
+  image: {
+    background: 'none',
+    position: 'relative',
+    width: '28%',
+    margin: '2%',
+  },
+  imageMobile: {
+    background: 'none',
+    position: 'relative',
+    width: '100%',
+    margin: '2%',
+  },
   gridList: {
     width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
   },
   iconButton: {
     cursor: 'pointer',

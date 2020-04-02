@@ -34,6 +34,7 @@ export const SECTIONS = gql`
       title
       summary
       showreel
+      type
       gallery {
         id
         summary
