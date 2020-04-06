@@ -1,6 +1,7 @@
 import React from 'react';
 import { AboutLayoutFrame } from './layouts';
 import AppLayout from './layouts/app';
+import PreviewLayout from './layouts/preview';
 import { PublicLayout } from './layouts/public';
 import MessagesLayout from './layouts/messages';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -39,25 +40,31 @@ function RouterComponent(props) {
         {authToken && (
           <Route
             path="/app/:page/:pathParam?"
-            render={props => <AppLayout {...props} theme={theme} />}
+            render={(props) => <AppLayout {...props} theme={theme} />}
+          />
+        )}
+        {authToken && (
+          <Route
+            path="/preview/:pathParam?"
+            render={(props) => <PreviewLayout {...props} theme={theme} />}
           />
         )}
         {authToken && (
           <Route
             path="/messages/:page/:pathParam?"
-            render={props => <MessagesLayout {...props} />}
+            render={(props) => <MessagesLayout {...props} />}
           />
         )}
         {authToken && (
           <Route
             path="/roles/:page/:pathParam?"
-            render={props => <RolesLayout {...props} />}
+            render={(props) => <RolesLayout {...props} />}
           />
         )}
         {authToken && (
           <Route
             path="/message/:page/:pathParam?"
-            render={props => <MessageLayout {...props} />}
+            render={(props) => <MessageLayout {...props} />}
           />
         )}
         <Route path="/about">
@@ -65,10 +72,10 @@ function RouterComponent(props) {
         </Route>
         <Route
           path="/:page/:token"
-          render={props => <PublicLayout {...props} />}
+          render={(props) => <PublicLayout {...props} />}
         />
-        <Route path="/:page" render={props => <PublicLayout {...props} />} />
-        <Route path="/" render={props => <PublicLayout {...props} />} />
+        <Route path="/:page" render={(props) => <PublicLayout {...props} />} />
+        <Route path="/" render={(props) => <PublicLayout {...props} />} />
       </Switch>
     </ThemeProvider>
   );

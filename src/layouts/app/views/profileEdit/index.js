@@ -1,5 +1,13 @@
 import React from 'react';
-import { Icon, Card, Typography, Slide, TextField } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import {
+  Icon,
+  Card,
+  Typography,
+  Slide,
+  TextField,
+  Button,
+} from '@material-ui/core';
 import { useStyles } from './styles';
 import { toastStyles } from '../../../../components/toast/styles';
 import { ProfileHeader } from './components/profileHeader';
@@ -35,6 +43,7 @@ export function EditProfile({ theme }) {
   const [bgImage, setBgImage] = React.useState(null);
   const [profileImgStyle, setProfileImgStyle] = React.useState([0, 0]);
   const [userName, setUserName] = React.useState('');
+  const [userId, setUserId] = React.useState('');
   const [summary, setSummary] = React.useState('');
   const [sections, setSections] = React.useState([]);
   const [profileImg, setProfileImg] = React.useState(null);
@@ -66,10 +75,11 @@ export function EditProfile({ theme }) {
         <ToastContainer />
         <Query
           query={PROFILE}
-          onCompleted={data => {
+          onCompleted={(data) => {
             setUserName(data.profile.name);
             setSummary(data.profile.summary);
             setBgImage(data.profile.profileBG);
+            setUserId(data.profile.id);
             setAutosaveIsOn(data.profile.autosave);
             setProfileBGStyle(
               data.profile.profileBGStyle
@@ -120,11 +130,11 @@ export function EditProfile({ theme }) {
 
             store.writeQuery({ query: PROFILE, data });
           }}
-          onError={error => {
+          onError={(error) => {
             setError(readableErrors(error, errors));
           }}
         >
-          {SignupMutation => {
+          {(SignupMutation) => {
             return (
               <div className={classes.root}>
                 <ContentHeader>
@@ -146,14 +156,7 @@ export function EditProfile({ theme }) {
                     your work
                   </Typography>
                 </ContentHeader>
-                {/*}
-        <Button
-          variant="contained"
-          color="primary"
-          style={{ width: 60, margin: 10 }}
-        >
-          <Icon style={{ fontSize: 18, color: '#fff' }}>pageview</Icon>
-          </Button>*/}
+
                 <div
                   style={{
                     display: 'flex',
@@ -177,7 +180,7 @@ export function EditProfile({ theme }) {
                     </Typography>
                     <Switch
                       checked={autosaveIsOn}
-                      onChange={checked => {
+                      onChange={(checked) => {
                         setAutosaveIsOn(checked);
                         userProfile.autosave = checked;
                         SignupMutation();
@@ -203,9 +206,9 @@ export function EditProfile({ theme }) {
                       setDisabledValue={setDisabledValue}
                       toast={() => {
                         toast(<SaveIcon />, {
-                          className: classes.toast,
-                          progressClassName: classes.progress,
-                          bodyClassName: classes.toastBody,
+                          className: toastStyle.toast,
+                          progressClassName: toastStyle.progress,
+                          bodyClassName: toastStyle.toastBody,
                           autoClose: 2000,
                           draggable: false,
                           closeButton: false,
@@ -214,6 +217,20 @@ export function EditProfile({ theme }) {
                       }}
                     />
                   )}
+                  <Link
+                    to={`/preview/${userId}`}
+                    style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
+                  >
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      style={{ width: 60, marginLeft: 10 }}
+                    >
+                      <Icon style={{ fontSize: 18, color: '#fff' }}>
+                        pageview
+                      </Icon>
+                    </Button>
+                  </Link>
                 </div>
                 <Card className={classes.card}>
                   <ProfileHeader
@@ -242,7 +259,7 @@ export function EditProfile({ theme }) {
                       multiline
                       type="text"
                       value={userProfile.summary}
-                      onChange={e => {
+                      onChange={(e) => {
                         setDisabledValue(true);
                         clearTimeout(timer);
                         setTimer(
@@ -261,7 +278,7 @@ export function EditProfile({ theme }) {
                   </div>
                   <Query
                     query={SECTIONS}
-                    onCompleted={data => {
+                    onCompleted={(data) => {
                       setSections(data.getSections);
                     }}
                     fetchPolicy="network-only"

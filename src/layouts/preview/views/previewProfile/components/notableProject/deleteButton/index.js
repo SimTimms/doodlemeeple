@@ -1,39 +1,36 @@
 import React from 'react';
 import { Button, Icon } from '@material-ui/core';
 import { Mutation } from 'react-apollo';
-import { REMOVE_TESTIMONIAL_MUTATION } from '../../../../../../../data/mutations';
+import { REMOVE_NOTABLE_PROJECT_MUTATION } from '../../../../../../../data/mutations';
 
 export function DeleteButton({
   index,
-  testimonials,
-  setTestimonials,
-  testimonialId,
-  autosave,
+  notableProjects,
+  setNotableProjects,
+  notableProjectId,
 }) {
   return (
     <Mutation
-      mutation={REMOVE_TESTIMONIAL_MUTATION}
+      mutation={REMOVE_NOTABLE_PROJECT_MUTATION}
       variables={{
-        id: testimonialId,
+        id: notableProjectId,
       }}
     >
-      {(RemoveTestimonialMutation) => {
+      {RemoveNotableProjectMutation => {
         return (
           <Button
             onClick={() => {
-              testimonialId !== 'new' && RemoveTestimonialMutation();
-              let copyArr = Object.assign([], testimonials);
-              copyArr.splice(index, 1);
-              testimonialId !== 'new' &&
-                autosave &&
-                autosave(RemoveTestimonialMutation);
-              setTestimonials(copyArr);
+              notableProjectId !== 'new' && RemoveNotableProjectMutation();
+              let newNotableProjects = Object.assign([], notableProjects);
+              newNotableProjects.splice(index, 1);
+              setNotableProjects(newNotableProjects);
             }}
             variant="contained"
             style={{
               margin: 3,
               boxShadow: 'none',
               marginLeft: 10,
+              marginTop: 10,
               minWidth: 32,
               maxWidth: 32,
               minHeight: 32,
