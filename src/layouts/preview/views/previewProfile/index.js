@@ -171,13 +171,11 @@ export function PreviewProfile({ theme, profileId }) {
                 </div>
               </div>
             </animated.div>
+
             <Typography
-              variant="h5"
-              style={{ paddingLeft: 10, paddingTop: 10, width: '100%' }}
+              variant="h2"
+              style={{ padding: 30, background: '#222', color: '#fff' }}
             >
-              About Me
-            </Typography>
-            <Typography variant="body1" component="p" style={{ padding: 30 }}>
               {userProfile.summary}
             </Typography>
             {sections &&
