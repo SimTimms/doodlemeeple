@@ -2,8 +2,20 @@ import { makeStyles } from '@material-ui/core/styles';
 import smithy from '../../../../assets/smithy.jpg';
 
 export const useStyles = makeStyles((theme) => ({
+  bg: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: 100,
+    height: 100,
+    overflow: 'hidden',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    willChange: 'opacity',
+  },
   root: {
     paddingTop: 10,
+    maxWidth: 824,
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
@@ -12,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   card: { width: '100%' },
   header: {
-    minHeight: 400,
+    minHeight: 300,
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
   },

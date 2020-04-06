@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon, Card, Typography, Slide, Button } from '@material-ui/core';
 import { useStyles } from './styles';
 import { LoadIcon } from '../../../../components';
 import { Query } from 'react-apollo';
 import { PROFILE_PREVIEW, SECTIONS_PREVIEW } from '../../../../data/queries';
+import { animated, useSpring } from 'react-spring';
+import GallerySection from './components/section/gallerySection';
 
 export function PreviewProfile({ theme, profileId }) {
   const classes = useStyles();
+
   const [userProfile, setUserProfile] = React.useState({
     profileBG: null,
     profileBGStyle: [0, 0],
@@ -18,7 +21,25 @@ export function PreviewProfile({ theme, profileId }) {
     profileImg: null,
     profileImgStyle: [0, 0],
   });
+  const [sectionNames, setSectionNames] = React.useState([]);
   const [sections, setSections] = React.useState([]);
+  const [imagePos, setImagePos] = React.useState({
+    x: 0,
+    y: 0,
+  });
+  const [index, set] = useState(0);
+
+  const props = useSpring({
+    from: {
+      backgroundSize: '140%',
+    },
+    to: {
+      backgroundSize: '100%',
+    },
+    config: {
+      duration: 30000,
+    },
+  });
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -49,6 +70,10 @@ export function PreviewProfile({ theme, profileId }) {
               profileImgStyle: profileImgStyle
                 ? profileImgStyle.split(':')
                 : [0, 0],
+            });
+            setImagePos({
+              x: profileImgStyle[0] * 1,
+              y: profileImgStyle[1] * 1,
             });
           }}
         >
@@ -81,15 +106,95 @@ export function PreviewProfile({ theme, profileId }) {
             </Link>
           </div>
           <Card className={classes.card}>
-            <div
-              style={{ backgroundImage: `url(${userProfile.profileBG})` }}
-              className={classes.header}
-            ></div>
-
+            <animated.div
+              style={{
+                backgroundImage: `url(${userProfile.profileBG}`,
+                backgroundSize: '100%',
+                ...props,
+                display: 'flex',
+                alignItems: 'flex-end',
+                justifyContent: 'space-between',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: 20,
+                  background: 'rgba(0,0,0,0.5)',
+                  marginTop: 160,
+                  boxShadow: 'inset 5px 5px 10px rgba(0,0,0,0.2)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  borderLeft: 'none',
+                }}
+              >
+                <div
+                  style={{
+                    backgroundImage: `url(${userProfile.profileImg}`,
+                    width: 100,
+                    height: 100,
+                    backgroundSize: 'cover',
+                    backgroundPosition: `${-imagePos.x}px ${-imagePos.y}px`,
+                    borderRadius: '50%',
+                    border: '3px solid #fff',
+                  }}
+                ></div>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    flexDirection: 'column',
+                    marginLeft: 10,
+                  }}
+                >
+                  <Typography
+                    variant="h1"
+                    style={{
+                      color: '#fff',
+                      textShadow: '3px 3px 3px rgba(0,0,0,0.4)',
+                    }}
+                  >
+                    {userProfile.userName}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    style={{
+                      color: '#fff',
+                      textShadow: '3px 3px 3px rgba(0,0,0,0.4)',
+                    }}
+                  >
+                    {sectionNames.map((item, index) => {
+                      return index === 0 ? item : `, ${item}`;
+                    })}
+                  </Typography>
+                </div>
+              </div>
+            </animated.div>
+            <Typography
+              variant="h5"
+              style={{ paddingLeft: 10, paddingTop: 10, width: '100%' }}
+            >
+              About Me
+            </Typography>
+            <Typography variant="body1" component="p" style={{ padding: 10 }}>
+              {userProfile.summary}
+            </Typography>
+            {sections &&
+              sections.map((section, index) =>
+                section.type === 'artist' ||
+                section.type === 'graphic-artist' ||
+                section.type === '3d-artist' ? (
+                  <GallerySection section={section} />
+                ) : null,
+              )}
             <Query
               query={SECTIONS_PREVIEW}
               onCompleted={(data) => {
-                setSections(data.getSections);
+                const sections = data.sectionsPreview;
+                console.log(sections);
+                setSectionNames(sections.map((item) => item.type));
+                setSections(sections);
               }}
               variables={{ userId: profileId }}
               fetchPolicy="network-only"
