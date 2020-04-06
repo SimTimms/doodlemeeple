@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
   sectionWrapper: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -9,6 +9,16 @@ export const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     padding: '10px !important',
   },
+
+  card: {
+    background: 'grey',
+    borderRadius: '5px',
+    boxShadow: '0px 10px 30px -5px rgba(0, 0, 0, 0.3)',
+    transition: 'box-shadow 0.5s',
+    willChange: 'transform',
+    border: '15px solid white',
+  },
+
   testimonialWrapper: {
     background: '#ddd',
     width: '100%',

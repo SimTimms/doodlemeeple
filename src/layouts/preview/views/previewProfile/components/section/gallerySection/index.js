@@ -1,15 +1,39 @@
-import React, { useEffect } from 'react';
-import { Divider, TextField, Typography, Icon } from '@material-ui/core';
-import { MediaGalleryObject } from '../../mediaGalleryOject';
-import ReactPlayer from 'react-player';
-import autosave from '../../../../../../../utils/autosave';
+import React from 'react';
+import { Divider, Typography, Icon } from '@material-ui/core';
+import { useSpring, animated } from 'react-spring';
 import { ToastContainer, toast } from 'react-toastify';
 import { useStyles } from './styles';
-import { FieldTitle } from '../fieldTitle';
-import { NotableProject } from '../../notableProject';
-import { AddNotableProject } from '../../notableProject/addButton';
-import Testimonials from '../../testimonials';
-import { TYPE_HELPER } from '../../../../../../../utils';
+
+const calc = (x, y) => [
+  -(y - window.innerHeight / 2) / 20,
+  (x - window.innerWidth / 2) / 20,
+  1.1,
+];
+const trans = (x, y, s) =>
+  `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
+
+function Card({ img }) {
+  const classes = useStyles();
+  const [props, set] = useSpring(() => ({
+    xys: [0, 0, 1],
+    config: { mass: 5, tension: 350, friction: 40 },
+  }));
+  return (
+    <animated.div
+      className={classes.card}
+      onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
+      onMouseLeave={() => set({ xys: [0, 0, 1] })}
+      style={{
+        transform: props.xys.interpolate(trans),
+        margin: 20,
+        width: '40%',
+        display: 'flex',
+      }}
+    >
+      <img src={img} style={{ width: '100%', margin: 0 }} />
+    </animated.div>
+  );
+}
 
 function GallerySection({ section }) {
   const classes = useStyles();
@@ -36,12 +60,29 @@ function GallerySection({ section }) {
           <Typography variant="h5" style={{ width: '100%' }}>
             {type}
           </Typography>
-          <Typography variant="body1" component="p" style={{ paddingTop: 10 }}>
+          <Typography
+            variant="body1"
+            component="p"
+            style={{ paddingTop: 10, width: '100%' }}
+          >
             {summary}
           </Typography>
-          {gallery.images.map((item) => {
-            return <img src={`${item.img}`} />;
-          })}
+          <Typography variant="h5" style={{ width: '100%', marginTop: 20 }}>
+            Gallery
+          </Typography>
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+            }}
+          >
+            {gallery.images.map((item) => {
+              return <Card img={`${item.img}`} />;
+            })}
+          </div>
         </div>
       </div>
     </div>
