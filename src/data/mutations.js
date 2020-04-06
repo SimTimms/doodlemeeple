@@ -60,6 +60,17 @@ export const UPDATE_GALLERY_SECTION_MUTATION = gql`
   }
 `;
 
+export const UPDATE_TESTIMONIAL = gql`
+  mutation UpdateTestimonial(
+    $testimonial: TestimonialInput!
+    $sectionId: String!
+  ) {
+    updateTestimonial(testimonial: $testimonial, sectionId: $sectionId) {
+      id
+    }
+  }
+`;
+
 export const REMOVE_SECTION_MUTATION = gql`
   mutation RemoveSectionMutation($id: String!) {
     removeSection(id: $id)

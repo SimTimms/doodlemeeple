@@ -115,6 +115,7 @@ export function EditorSection({
       img: item.img,
     };
   });
+
   let sectionValues = {
     summary,
     title,

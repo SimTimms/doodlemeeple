@@ -12,8 +12,7 @@ import { DeleteButton } from '../deleteButton';
 import { FieldTitle } from '../fieldTitle';
 import { NotableProject } from '../../notableProject';
 import { AddNotableProject } from '../../notableProject/addButton';
-import { AddTestimonial } from '../../testimonial/addButton';
-import { Testimonial } from '../../testimonial';
+import Testimonials from '../../testimonials';
 import { SaveButton } from '../saveButton';
 import { TYPE_HELPER } from '../../../../../../../utils';
 
@@ -210,7 +209,6 @@ function GallerySection({
                   setShowreel(ev.target.value);
                 }}
               />
-
               {showreel ? (
                 <ReactPlayer
                   url={showreel}
@@ -234,59 +232,12 @@ function GallerySection({
                   <Icon style={{ color: '#fff' }}>videocam_off</Icon>{' '}
                 </div>
               )}
-
-              <FieldTitle
-                name="Testimonials"
-                description="Ask for some references from previous clients to add to give your profile credibility. Please ask for permission from the referee. It's imperative that DoodleMeeple showcases the best in the industry, references will be spot checked by DoodleMeeple at random, please do not be offended if yours are."
-                warning=""
+              <Testimonials
+                testimonials={testimonials}
+                setTestimonials={setTestimonials}
+                setChanged={setChanged}
+                sectionId={section.id}
               />
-              <div
-                className={classes.testimonialWrapper}
-                style={{
-                  padding: testimonials
-                    ? testimonials.length > 0
-                      ? 20
-                      : 0
-                    : 0,
-                  paddingTop: testimonials
-                    ? testimonials.length > 0
-                      ? 10
-                      : 0
-                    : 0,
-                  paddingBottom: testimonials
-                    ? testimonials.length > 0
-                      ? 10
-                      : 0
-                    : 0,
-                }}
-              >
-                {testimonials &&
-                  testimonials.map((testimonial, index) => {
-                    return (
-                      <Testimonial
-                        testimonial={testimonial}
-                        setChanged={setChanged}
-                        index={index}
-                        setTestimonials={setTestimonials}
-                        testimonials={testimonials}
-                        key={`testimonial_${index}`}
-                        autosave={
-                          autosaveIsOn
-                            ? () => {
-                                autosave(mutation, 'summary');
-                              }
-                            : null
-                        }
-                      />
-                    );
-                  })}
-              </div>
-              {testimonialsLength < 5 && (
-                <AddTestimonial
-                  testimonials={testimonials}
-                  setTestimonials={setTestimonials}
-                />
-              )}
               <div className={classes.actionWrapper}>
                 {!autosaveIsOn && (
                   <SaveButton
