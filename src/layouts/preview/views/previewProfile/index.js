@@ -71,10 +71,12 @@ export function PreviewProfile({ theme, profileId }) {
                 ? profileImgStyle.split(':')
                 : [0, 0],
             });
-            setImagePos({
-              x: profileImgStyle[0] * 1,
-              y: profileImgStyle[1] * 1,
-            });
+
+            profileImgStyle &&
+              setImagePos({
+                x: profileImgStyle[0] * 1,
+                y: profileImgStyle[1] * 1,
+              });
           }}
         >
           {({ loading, error, data }) => {
@@ -108,7 +110,10 @@ export function PreviewProfile({ theme, profileId }) {
           <Card className={classes.card}>
             <animated.div
               style={{
-                backgroundImage: `url(${userProfile.profileBG}`,
+                backgroundImage:
+                  userProfile.profileBG !== null
+                    ? `url(${userProfile.profileBG}`
+                    : 'linear-gradient(to bottom right, #fff, #555)',
                 backgroundSize: '100%',
                 ...props,
                 display: 'flex',
@@ -124,6 +129,7 @@ export function PreviewProfile({ theme, profileId }) {
                   padding: 20,
                   background: 'rgba(0,0,0,0.5)',
                   marginTop: 160,
+                  borderRadius: '0 10px 0 0',
                   boxShadow: 'inset 5px 5px 10px rgba(0,0,0,0.2)',
                   border: '1px solid rgba(255,255,255,0.1)',
                   borderLeft: 'none',
