@@ -7,7 +7,6 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     flexWrap: 'wrap',
     flexDirection: 'row',
-    padding: '10px !important',
   },
 
   card: {

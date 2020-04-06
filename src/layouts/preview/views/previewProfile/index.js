@@ -31,7 +31,7 @@ export function PreviewProfile({ theme, profileId }) {
 
   const props = useSpring({
     from: {
-      backgroundSize: '140%',
+      backgroundSize: '120%',
     },
     to: {
       backgroundSize: '100%',
@@ -177,7 +177,7 @@ export function PreviewProfile({ theme, profileId }) {
             >
               About Me
             </Typography>
-            <Typography variant="body1" component="p" style={{ padding: 10 }}>
+            <Typography variant="body1" component="p" style={{ padding: 30 }}>
               {userProfile.summary}
             </Typography>
             {sections &&
