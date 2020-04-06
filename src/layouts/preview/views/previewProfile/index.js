@@ -117,8 +117,8 @@ export function PreviewProfile({ theme, profileId }) {
                 backgroundSize: '100%',
                 ...props,
                 display: 'flex',
-                alignItems: 'flex-end',
-                justifyContent: 'space-between',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
               }}
             >
               <div
@@ -127,11 +127,12 @@ export function PreviewProfile({ theme, profileId }) {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   padding: 20,
-                  background: 'rgba(0,0,0,0.5)',
-                  marginTop: 160,
-                  borderRadius: '0 10px 0 0',
-                  boxShadow: 'inset 5px 5px 10px rgba(0,0,0,0.2)',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  background: '#fff',
+                  marginTop: 100,
+                  marginBottom: 100,
+                  borderRadius: '0 5px 5px 0',
+                  boxShadow: ' 5px 5px 10px rgba(0,0,0,0.5)',
+                  border: '1px solid rgba(0,0,0,0.1)',
                   borderLeft: 'none',
                 }}
               >
@@ -143,7 +144,7 @@ export function PreviewProfile({ theme, profileId }) {
                     backgroundSize: 'cover',
                     backgroundPosition: `${-imagePos.x}px ${-imagePos.y}px`,
                     borderRadius: '50%',
-                    border: '3px solid #fff',
+                    border: '3px solid #ddd',
                   }}
                 ></div>
                 <div
@@ -157,19 +158,12 @@ export function PreviewProfile({ theme, profileId }) {
                   <Typography
                     variant="h1"
                     style={{
-                      color: '#fff',
-                      textShadow: '3px 3px 3px rgba(0,0,0,0.4)',
+                      textShadow: '3px 3px 3px rgba(0,0,0,0.2)',
                     }}
                   >
                     {userProfile.userName}
                   </Typography>
-                  <Typography
-                    variant="h6"
-                    style={{
-                      color: '#fff',
-                      textShadow: '3px 3px 3px rgba(0,0,0,0.4)',
-                    }}
-                  >
+                  <Typography variant="h6">
                     {sectionNames.map((item, index) => {
                       return index === 0 ? item : `, ${item}`;
                     })}
