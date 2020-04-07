@@ -178,6 +178,7 @@ export function PreviewProfile({ theme, profileId }) {
             >
               {userProfile.summary}
             </Typography>
+
             {sections &&
               sections.map((section, index) =>
                 section.type === 'artist' ||

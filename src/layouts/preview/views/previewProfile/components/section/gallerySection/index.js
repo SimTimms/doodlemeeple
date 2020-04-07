@@ -3,6 +3,7 @@ import { Divider, Typography, Icon } from '@material-ui/core';
 import { useSpring, animated } from 'react-spring';
 import { ToastContainer, toast } from 'react-toastify';
 import { useStyles } from './styles';
+import ReactPlayer from 'react-player';
 
 const calc = (x, y) => [
   -(y - window.innerHeight / 2) / 20,
@@ -59,15 +60,74 @@ function GallerySection({ section }) {
         <div className={classes.sectionHeader}>
           <Typography
             variant="h5"
-            style={{ width: '100%', paddingLeft: 10, marginTop: 20 }}
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              marginTop: 10,
+            }}
           >
-            {`${type[0].toUpperCase()}${type.slice(1)}`}
+            <div
+              style={{
+                borderLeft: '20px solid #ccc',
+                height: 5,
+                marginRight: 10,
+              }}
+            ></div>
+            {`${type[0].toUpperCase()}${type.slice(1)}`}{' '}
+            <div
+              style={{
+                width: '100%',
+                background: '#ccc',
+                height: 5,
+                marginLeft: 10,
+              }}
+            ></div>
           </Typography>
-
+          <ReactPlayer
+            url={section.showreel}
+            playing
+            controls={true}
+            muted={true}
+            style={{
+              width: '100%',
+              margin: 20,
+              border: '10px solid #ddd',
+              boxShadow: '10px 10px 20px rgba(0,0,0,0.3)',
+              borderRadius: 5,
+            }}
+            config={{
+              youtube: {
+                embedOptions: { modestbranding: 1, autoplay: 0 },
+                playerVars: { modestbranding: 1, autoplay: 0 },
+              },
+            }}
+            width="100%"
+          />
+          <Typography
+            variant="h6"
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              marginTop: 10,
+            }}
+          >
+            <div
+              style={{
+                borderLeft: '20px solid #ccc',
+                height: 5,
+                marginRight: 10,
+              }}
+            ></div>
+            Summary
+          </Typography>
           <Typography
             variant="body1"
             component="p"
-            style={{ padding: '0 10px 0 10px', width: '100%' }}
+            style={{ padding: 30, width: '100%' }}
           >
             {summary}
           </Typography>
