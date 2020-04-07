@@ -38,7 +38,6 @@ function Card({ img }) {
 
 function GallerySection({ section }) {
   const classes = useStyles();
-  console.log(section);
 
   const {
     summary,
@@ -59,7 +58,7 @@ function GallerySection({ section }) {
       <div className={classes.sectionWrapper}>
         <div className={classes.sectionHeader}>
           <Typography
-            variant="h5"
+            variant="h1"
             style={{
               width: '100%',
               display: 'flex',
@@ -70,7 +69,7 @@ function GallerySection({ section }) {
           >
             <div
               style={{
-                borderLeft: '20px solid #ccc',
+                borderLeft: '20px solid #444',
                 height: 5,
                 marginRight: 10,
               }}
@@ -79,22 +78,21 @@ function GallerySection({ section }) {
             <div
               style={{
                 width: '100%',
-                background: '#ccc',
+                background: '#444',
                 height: 5,
                 marginLeft: 10,
               }}
             ></div>
           </Typography>
           <ReactPlayer
-            url={section.showreel}
+            url={showreel}
             playing
             controls={true}
             muted={true}
             style={{
-              width: '100%',
               margin: 20,
-              border: '10px solid #ddd',
-              boxShadow: '10px 10px 20px rgba(0,0,0,0.3)',
+              border: '10px solid #222',
+              boxShadow: '5px 5px 40px rgba(0,0,0,0.3)',
               borderRadius: 5,
             }}
             config={{
@@ -117,7 +115,7 @@ function GallerySection({ section }) {
           >
             <div
               style={{
-                borderLeft: '20px solid #ccc',
+                borderLeft: '20px solid #444',
                 height: 5,
                 marginRight: 10,
               }}
@@ -143,7 +141,7 @@ function GallerySection({ section }) {
           >
             <div
               style={{
-                borderLeft: '20px solid #ccc',
+                borderLeft: '20px solid #444',
                 height: 5,
                 marginRight: 10,
               }}
@@ -161,6 +159,93 @@ function GallerySection({ section }) {
           >
             {gallery.images.map((item) => {
               return <Card img={`${item.img}`} />;
+            })}
+          </div>
+          <Typography
+            variant="h6"
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              marginTop: 10,
+            }}
+          >
+            <div
+              style={{
+                borderLeft: '20px solid #444',
+                height: 5,
+                marginRight: 10,
+              }}
+            ></div>
+            Testimonials
+          </Typography>
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+            }}
+          >
+            {testimonials.map((item) => {
+              console.log(item);
+              return (
+                <div
+                  style={{
+                    maxWidth: '500px',
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  <div
+                    style={{
+                      backgroundImage: `url(${item.image}`,
+                      width: 60,
+                      height: 60,
+                      backgroundSize: 'cover',
+
+                      borderRadius: '50%',
+                      border: '3px solid #ddd',
+                    }}
+                  ></div>
+                  <div
+                    style={{
+                      borderRadius: 40,
+                      padding: 15,
+                      minWidth: 200,
+                      marginLeft: 10,
+                    }}
+                  >
+                    <Typography
+                      variant="h5"
+                      style={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {`"${item.summary}"`}
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      style={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                        textAlign: 'center',
+                      }}
+                    >
+                      {item.name}
+                    </Typography>
+                  </div>
+                </div>
+              );
             })}
           </div>
         </div>

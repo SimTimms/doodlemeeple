@@ -26,9 +26,9 @@ export function Testimonial({
         testimonial: testimonial,
         sectionId,
       }}
-      onCompleted={data => {}}
+      onCompleted={(data) => {}}
     >
-      {mutation => {
+      {(mutation) => {
         return (
           <div
             className={clsx({
@@ -48,7 +48,7 @@ export function Testimonial({
               })}
             >
               <Uploader
-                cbImage={url => {
+                cbImage={(url) => {
                   setChanged(true);
                   const copyArr = Object.assign([], testimonials);
                   copyArr[index].image = url;
@@ -85,7 +85,7 @@ export function Testimonial({
                 rowsMax={4}
                 rows={4}
                 style={{ width: '100%' }}
-                onChange={ev => {
+                onChange={(ev) => {
                   setChanged(true);
 
                   autosave(mutation, 'testimonial');
@@ -105,9 +105,9 @@ export function Testimonial({
                 margin="normal"
                 variant="outlined"
                 style={{ width: '100%' }}
-                onChange={ev => {
+                onChange={(ev) => {
                   setChanged(true);
-                  autosave && autosave();
+                  autosave && autosave(mutation);
                   const copyArr = Object.assign([], testimonials);
                   copyArr[index].name = ev.target.value;
                   setTestimonials(copyArr);
