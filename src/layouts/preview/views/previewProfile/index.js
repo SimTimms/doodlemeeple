@@ -121,6 +121,7 @@ export function PreviewProfile({ theme, profileId }) {
                 justifyContent: 'flex-start',
                 backgroundPosition: 'center center',
                 paddingTop: 200,
+                boxShadow: 'inset 0 0 10px rgba(255,255,255,0.5)',
               }}
             >
               {' '}
