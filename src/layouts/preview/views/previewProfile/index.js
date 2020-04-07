@@ -117,30 +117,30 @@ export function PreviewProfile({ theme, profileId }) {
                 backgroundSize: '100%',
                 ...props,
                 display: 'flex',
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 justifyContent: 'flex-start',
+                backgroundPosition: 'center center',
+                paddingTop: 200,
               }}
             >
+              {' '}
               <div
                 style={{
                   display: 'flex',
+                  justifyContent: 'flex-start',
+                  flexDirection: 'row',
+                  background: 'rgba(0,0,0,0.7)',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
                   padding: 20,
-                  background: '#fff',
-                  marginTop: 100,
-                  marginBottom: 100,
-                  borderRadius: '0 5px 5px 0',
-                  boxShadow: ' 5px 5px 10px rgba(0,0,0,0.5)',
-                  border: '1px solid rgba(0,0,0,0.1)',
-                  borderLeft: 'none',
                 }}
               >
                 <div
                   style={{
                     backgroundImage: `url(${userProfile.profileImg}`,
-                    width: 100,
-                    height: 100,
+                    minWidth: 100,
+                    maxWidth: 100,
+                    minHeight: 100,
+                    maxHeight: 100,
                     backgroundSize: 'cover',
                     backgroundPosition: `${-imagePos.x}px ${-imagePos.y}px`,
                     borderRadius: '50%',
@@ -152,32 +152,37 @@ export function PreviewProfile({ theme, profileId }) {
                     display: 'flex',
                     justifyContent: 'flex-start',
                     flexDirection: 'column',
-                    marginLeft: 10,
                   }}
                 >
-                  <Typography
-                    variant="h1"
+                  <div
                     style={{
-                      textShadow: '3px 3px 3px rgba(0,0,0,0.2)',
+                      display: 'flex',
+                      justifyContent: 'flex-start',
+                      flexDirection: 'row',
+                      marginLeft: 10,
+                      marginBottom: 10,
                     }}
                   >
-                    {userProfile.userName}
-                  </Typography>
-                  <Typography variant="h6">
-                    {sectionNames.map((item, index) => {
-                      return index === 0 ? item : `, ${item}`;
-                    })}
+                    <Typography
+                      variant="h1"
+                      style={{
+                        textShadow: '3px 3px 3px rgba(0,0,0,0.4)',
+                        color: '#fff',
+                        lineHeight: 0.8,
+                      }}
+                    >
+                      {userProfile.userName}
+                    </Typography>
+                  </div>
+                  <Typography
+                    variant="h2"
+                    style={{ color: '#fff', marginLeft: 10 }}
+                  >
+                    {userProfile.summary}
                   </Typography>
                 </div>
               </div>
             </animated.div>
-
-            <Typography
-              variant="h2"
-              style={{ padding: 30, background: '#222', color: '#fff' }}
-            >
-              {userProfile.summary}
-            </Typography>
 
             {sections &&
               sections.map((section, index) =>
