@@ -132,6 +132,7 @@ export default function RegisterCard({ setPage }) {
               <FormInput
                 fieldName="password"
                 fieldValue={password}
+                type="password"
                 setFieldValue={setPassword}
                 fieldTitle={`Password ${
                   password ? `(${PROFILE_PASSWORD - password.length})` : ''
@@ -146,7 +147,7 @@ export default function RegisterCard({ setPage }) {
             <Mutation
               mutation={SIGNUP_MUTATION}
               variables={{ name, email, password }}
-              onError={error => {
+              onError={(error) => {
                 setButtonStatus('Error');
                 setError(readableErrors(error, errors));
               }}
@@ -155,7 +156,7 @@ export default function RegisterCard({ setPage }) {
                 setPage();
               }}
             >
-              {SignupMutation => {
+              {(SignupMutation) => {
                 return (
                   <div>
                     <Button
