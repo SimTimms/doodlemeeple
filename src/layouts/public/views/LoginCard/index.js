@@ -81,7 +81,7 @@ export default function LoginCard({ history, forwardTo }) {
               onCompleted={async (data) => {
                 if (data.login.token) {
                   await Cookies.set('token', data.login.token);
-                  console.log(forwardTo.pathName);
+
                   if (forwardTo) {
                     history.replace(forwardTo.pathName);
                   } else {
