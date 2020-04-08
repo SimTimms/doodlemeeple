@@ -5,8 +5,10 @@ import { useStyles } from './styles';
 import { LoadIcon } from '../../../../components';
 import { Query } from 'react-apollo';
 import { PROFILE_PREVIEW, SECTIONS_PREVIEW } from '../../../../data/queries';
-import { animated, useSpring } from 'react-spring';
+import { animated, useSpring, interpolate } from 'react-spring';
 import GallerySection from './components/section/gallerySection';
+const { detect } = require('detect-browser');
+const browser = detect();
 
 export function PreviewProfile({ theme, profileId }) {
   const classes = useStyles();
@@ -29,17 +31,17 @@ export function PreviewProfile({ theme, profileId }) {
   });
   const [index, set] = useState(0);
 
-  const props = useSpring({
+  const { o } = useSpring({
     from: {
-      backgroundSize: '120%',
+      o: 130,
     },
-    to: {
-      backgroundSize: '100%',
-    },
+    o: 100,
     config: {
       duration: 30000,
     },
   });
+
+  console.log(o);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -114,12 +116,16 @@ export function PreviewProfile({ theme, profileId }) {
                   userProfile.profileBG !== null
                     ? `url(${userProfile.profileBG}`
                     : 'linear-gradient(to bottom right, #fff, #555)',
-                backgroundSize: '100%',
-                ...props,
+                backgroundSize:
+                  browser && browser.name === 'firefox'
+                    ? o.interpolate((o) => {
+                        return `${o}%`;
+                      })
+                    : '100%',
+                backgroundPosition: 'center center',
                 display: 'flex',
                 alignItems: 'flex-start',
                 justifyContent: 'flex-start',
-                backgroundPosition: 'center center',
                 paddingTop: 200,
                 boxShadow: 'inset 0 0 10px rgba(255,255,255,0.5)',
               }}
