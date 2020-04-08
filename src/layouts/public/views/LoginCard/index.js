@@ -21,7 +21,7 @@ import { readableErrors } from '../../../../utils/readableErrors';
 import clsx from 'clsx';
 const CHECKING = 'Checking...';
 
-export default function LoginCard({ history }) {
+export default function LoginCard({ history, forwardTo }) {
   const classes = { ...styles(), ...sharedStyles() };
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -78,20 +78,25 @@ export default function LoginCard({ history }) {
             <Mutation
               mutation={LOGIN_MUTATION}
               variables={{ email, password }}
-              onCompleted={async data => {
+              onCompleted={async (data) => {
                 if (data.login.token) {
                   await Cookies.set('token', data.login.token);
-                  history.replace('/app/dashboard');
+                  console.log(forwardTo.pathName);
+                  if (forwardTo) {
+                    history.replace(forwardTo.pathName);
+                  } else {
+                    history.replace('/app/dashboard');
+                  }
                 }
               }}
-              onError={error => {
+              onError={(error) => {
                 setStatus('Login');
                 setError(readableErrors(error, errors));
               }}
             >
-              {LoginMutation => {
+              {(LoginMutation) => {
                 return (
-                  <Form width={200} onSubmit={item => alert}>
+                  <Form width={200} onSubmit={(item) => alert}>
                     <FormInput
                       fieldName="emailAddress"
                       fieldValue={email}
@@ -100,7 +105,7 @@ export default function LoginCard({ history }) {
                         email ? `(${PROFILE_EMAIL - email.length})` : ''
                       }`}
                       inputProps={{ maxLength: PROFILE_EMAIL }}
-                      onKeyPress={event => {
+                      onKeyPress={(event) => {
                         if (event.key === 'Enter') {
                           loginSubmit(LoginMutation);
                         }
@@ -117,7 +122,7 @@ export default function LoginCard({ history }) {
                           : ''
                       }`}
                       inputProps={{ maxLength: PROFILE_PASSWORD }}
-                      onKeyPress={event => {
+                      onKeyPress={(event) => {
                         if (event.key === 'Enter') {
                           loginSubmit(LoginMutation);
                         }

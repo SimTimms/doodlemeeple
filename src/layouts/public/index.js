@@ -23,6 +23,7 @@ export function PublicLayout(props) {
   if (pageJump !== page) {
     setPage(pageJump);
   }
+  console.log(props);
 
   return (
     <div>
@@ -48,7 +49,7 @@ export function PublicLayout(props) {
           </div>
         ) : (
           <div className={classes.backgroundLogin}>
-            <LoginCard history={props.history} />
+            <LoginCard history={props.history} forwardTo={props.location} />
           </div>
         )}
       </Content>
