@@ -82,7 +82,7 @@ export default function LoginCard({ history, forwardTo }) {
                 if (data.login.token) {
                   await Cookies.set('token', data.login.token);
 
-                  if (forwardTo) {
+                  if (forwardTo.pathName !== undefined) {
                     history.replace(forwardTo.pathName);
                   } else {
                     history.replace('/app/dashboard');
