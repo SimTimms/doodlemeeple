@@ -126,7 +126,7 @@ export function PreviewProfile({ theme, profileId }) {
                 display: 'flex',
                 alignItems: 'flex-start',
                 justifyContent: 'flex-start',
-                paddingTop: 200,
+                paddingTop: 300,
                 boxShadow: 'inset 0 0 10px rgba(255,255,255,0.5)',
               }}
             >
