@@ -201,7 +201,7 @@ export function PreviewProfile({ theme, profileId }) {
               query={SECTIONS_PREVIEW}
               onCompleted={(data) => {
                 const sections = data.sectionsPreview;
-                console.log(sections);
+
                 setSectionNames(sections.map((item) => item.type));
                 setSections(sections);
               }}

@@ -74,7 +74,7 @@ export function Project({
                   setChanged(true);
                   const copyArr = Object.assign([], projects);
                   copyArr[index].image = url;
-                  autosaveIsOn && autosave(mutation, 'testimonial');
+                  autosaveIsOn && autosave(mutation, 'project');
                   setNotableProjects(copyArr);
                 }}
                 styleOverride={null}
@@ -82,7 +82,7 @@ export function Project({
                   setChanged(true);
                   const copyArr = Object.assign([], projects);
                   copyArr[index].image = '';
-                  autosaveIsOn && autosave(mutation, 'testimonial');
+                  autosaveIsOn && autosave(mutation, 'project');
                   setNotableProjects(copyArr);
                 }}
                 hasFile={project.image !== '' || project.image ? true : false}
@@ -114,7 +114,7 @@ export function Project({
               />
               <TextField
                 id={'testimonial'}
-                label={`Testimonial ${
+                label={`Description ${
                   project.summary ? `(${126 - project.summary.length})` : ''
                 }`}
                 inputProps={{ maxLength: 126 }}
