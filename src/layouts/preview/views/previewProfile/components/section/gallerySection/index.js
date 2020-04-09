@@ -2,7 +2,13 @@ import React from 'react';
 import { Divider, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import ReactPlayer from 'react-player';
-import { SubHeader, MainHeader, Card, Testimonials } from './components';
+import {
+  SubHeader,
+  MainHeader,
+  Card,
+  Testimonials,
+  Projects,
+} from './components';
 
 function GallerySection({ section }) {
   const classes = useStyles();
@@ -77,6 +83,18 @@ function GallerySection({ section }) {
             }}
           >
             <Testimonials testimonials={testimonials} />
+          </div>
+          {notableProjects.length > 0 && <SubHeader title="Projects" />}
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+            }}
+          >
+            <Projects projects={notableProjects} />
           </div>
         </div>
       </div>

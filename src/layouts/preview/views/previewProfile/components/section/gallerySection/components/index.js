@@ -58,7 +58,7 @@ export function Card({ img }) {
 
 export function Testimonials({ testimonials }) {
   const classes = useStyles();
-  return testimonials.map((item) => {
+  const testimonialElements = testimonials.map((item) => {
     return item.summary ? (
       <div className={classes.testimonialWrapper}>
         {item.image && (
@@ -81,4 +81,40 @@ export function Testimonials({ testimonials }) {
       </div>
     ) : null;
   });
+
+  return (
+    <div className={classes.testimonialWrapperParent}>
+      {testimonialElements}
+    </div>
+  );
+}
+
+export function Projects({ projects }) {
+  const classes = useStyles();
+  const projectElements = projects.map((item) => {
+    return item.summary ? (
+      <div className={classes.projectWrapper}>
+        {item.image && (
+          <div
+            className={classes.projectWrapperItem}
+            style={{
+              backgroundImage: `url(${item.image}`,
+            }}
+          >
+            <Typography variant="h4" className={classes.projectName}>
+              {item.name}
+            </Typography>
+          </div>
+        )}
+
+        <div className={classes.testimonialSummaryWrapper}>
+          <Typography variant="body1" className={classes.testimonialSummary}>
+            {`${item.summary}`}
+          </Typography>
+        </div>
+      </div>
+    ) : null;
+  });
+
+  return <div className={classes.projectWrapperParent}>{projectElements}</div>;
 }
