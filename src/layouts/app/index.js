@@ -15,6 +15,7 @@ import { NewProject } from './views/newProject';
 import { NewQuote } from './views/newQuote';
 import { Decline } from './views/decline';
 import { Projects } from './views/projects';
+import { ToastContainer } from 'react-toastify';
 import {
   CardActionArea,
   ActionButton,
@@ -63,6 +64,7 @@ function AppLayout(props) {
 
   return (
     <div style={{ height: '100vh', background: '#efeff5' }}>
+      <ToastContainer />
       <StyledNavBar
         open={open}
         menu={

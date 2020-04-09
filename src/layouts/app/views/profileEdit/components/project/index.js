@@ -1,0 +1,149 @@
+import React from 'react';
+import { TextField, useMediaQuery, Icon } from '@material-ui/core';
+import { DeleteButton } from './deleteButton';
+import { useStyles } from './styles';
+import { Uploader } from '../../../../../../components';
+import { UPDATE_PROJECT } from '../../../../../../data/mutations';
+import { Mutation } from 'react-apollo';
+import clsx from 'clsx';
+import autosave from '../../../../../../utils/autosave';
+import { toast } from 'react-toastify';
+import { toastStyles } from '../../../../../../components/toast/styles';
+
+function SaveIcon() {
+  const toastStyle = toastStyles();
+  return (
+    <Icon style={{ fontSize: 18 }} className={toastStyle.toastIcon}>
+      save
+    </Icon>
+  );
+}
+
+export function Project({
+  project,
+  setChanged,
+  index,
+  setNotableProjects,
+  projects,
+  sectionId,
+  autosaveIsOn,
+}) {
+  const classes = useStyles();
+  const mobile = useMediaQuery('(max-width:800px)');
+  const toastStyle = toastStyles();
+  return (
+    <Mutation
+      mutation={UPDATE_PROJECT}
+      variables={{
+        project: project,
+        sectionId,
+      }}
+      onCompleted={(data) => {
+        toast(<SaveIcon />, {
+          className: toastStyle.toast,
+          progressClassName: toastStyle.progress,
+          bodyClassName: toastStyle.toastBody,
+          autoClose: 1000,
+          draggable: false,
+          closeButton: false,
+          hideProgressBar: true,
+        });
+      }}
+    >
+      {(mutation) => {
+        return (
+          <div
+            className={clsx({
+              [classes.inputWrapper]: true,
+              [classes.inputWrapperMobile]: mobile,
+            })}
+          >
+            <div
+              style={{
+                background: project.image
+                  ? `url(${project.image}) center center/cover `
+                  : '#444',
+              }}
+              className={clsx({
+                [classes.avatarWrapper]: true,
+                [classes.avatarWrapperMobile]: mobile,
+              })}
+            >
+              <Uploader
+                cbImage={(url) => {
+                  setChanged(true);
+                  const copyArr = Object.assign([], projects);
+                  copyArr[index].image = url;
+                  autosaveIsOn && autosave(mutation, 'testimonial');
+                  setNotableProjects(copyArr);
+                }}
+                styleOverride={null}
+                cbDelete={() => {
+                  setChanged(true);
+                  const copyArr = Object.assign([], projects);
+                  copyArr[index].image = '';
+                  autosaveIsOn && autosave(mutation, 'testimonial');
+                  setNotableProjects(copyArr);
+                }}
+                hasFile={project.image !== '' || project.image ? true : false}
+                className={null}
+                setImagePosition={null}
+              />
+            </div>
+
+            <div className={classes.actionInputWrapper}>
+              <TextField
+                id={'name'}
+                label={`Project Name ${
+                  project.name ? `(${36 - project.name.length})` : ''
+                }`}
+                inputProps={{ maxLength: 36 }}
+                multiline
+                value={project.name}
+                margin="normal"
+                variant="outlined"
+                style={{ width: '100%' }}
+                onChange={(ev) => {
+                  setChanged(true);
+                  console.log(autosaveIsOn);
+                  autosaveIsOn && autosave(mutation);
+                  const copyArr = Object.assign([], projects);
+                  copyArr[index].name = ev.target.value;
+                  setNotableProjects(copyArr);
+                }}
+              />
+              <TextField
+                id={'testimonial'}
+                label={`Testimonial ${
+                  project.summary ? `(${126 - project.summary.length})` : ''
+                }`}
+                inputProps={{ maxLength: 126 }}
+                multiline
+                value={project.summary}
+                margin="normal"
+                variant="outlined"
+                rowsMax={4}
+                rows={4}
+                style={{ width: '100%' }}
+                onChange={(ev) => {
+                  setChanged(true);
+                  autosaveIsOn && autosave(mutation, 'testimonial');
+                  const copyArr = Object.assign([], projects);
+                  copyArr[index].summary = ev.target.value;
+                  setNotableProjects(copyArr);
+                }}
+              />
+            </div>
+            <DeleteButton
+              projectId={project.id}
+              projects={projects}
+              index={index}
+              setNotableProjects={setNotableProjects}
+              autosave={autosaveIsOn && autosave}
+            />
+          </div>
+        );
+      }}
+    </Mutation>
+  );
+}

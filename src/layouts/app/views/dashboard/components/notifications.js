@@ -11,7 +11,7 @@ import { NOTIFICATIONS } from '../../../../../data/queries';
 import { REMOVE_NOTIFICATION_MUTATION } from '../../../../../data/mutations';
 import { Mutation } from 'react-apollo';
 import { timeDifferenceForDate } from '../../../../../utils/dates';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function SaveIcon() {
@@ -30,7 +30,6 @@ export function Notifications() {
 
   return (
     <div className={classes.messageWrapper}>
-      <ToastContainer />
       <Typography
         color="textPrimary"
         component="p"
@@ -40,7 +39,7 @@ export function Notifications() {
       </Typography>
       <Query
         query={NOTIFICATIONS}
-        onCompleted={data => {
+        onCompleted={(data) => {
           setNotificationArray(data.getNotifications);
         }}
         fetchPolicy="network-only"
@@ -108,7 +107,7 @@ export function Notifications() {
                   });
 
                   data.getNotifications = data.getNotifications.filter(
-                    item => item.id !== removeNotification,
+                    (item) => item.id !== removeNotification,
                   );
                   console.log(data);
                   store.writeQuery({
@@ -117,14 +116,14 @@ export function Notifications() {
                   });
                 }}
               >
-                {RemoveNotificationMutation => {
+                {(RemoveNotificationMutation) => {
                   return (
                     <Button
                       color="primary"
                       onClick={() => {
                         RemoveNotificationMutation();
                         const notificationArrayFiltered = notificationArray.filter(
-                          item => item.id !== notification.id,
+                          (item) => item.id !== notification.id,
                         );
                         setNotificationArray(notificationArrayFiltered);
                       }}

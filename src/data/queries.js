@@ -61,6 +61,8 @@ export const SECTIONS_PREVIEW = gql`
       notableProjects {
         id
         summary
+        name
+        image
       }
       testimonials {
         id
@@ -90,6 +92,8 @@ export const SECTIONS = gql`
       notableProjects {
         id
         summary
+        name
+        image
       }
       testimonials {
         id

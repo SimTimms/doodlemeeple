@@ -24,7 +24,7 @@ import { Section, EditorSection } from './components/section';
 import GallerySection from './components/section/gallerySection';
 import { UPDATE_USER_MUTATION } from '../../../../data/mutations';
 import { readableErrors } from '../../../../utils/readableErrors';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Switch from 'react-switch';
 
@@ -72,7 +72,6 @@ export function EditProfile({ theme }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <ToastContainer />
         <Query
           query={PROFILE}
           onCompleted={(data) => {

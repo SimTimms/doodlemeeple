@@ -41,8 +41,6 @@ export function PreviewProfile({ theme, profileId }) {
     },
   });
 
-  console.log(o);
-
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>

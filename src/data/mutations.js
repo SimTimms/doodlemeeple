@@ -71,6 +71,14 @@ export const UPDATE_TESTIMONIAL = gql`
   }
 `;
 
+export const UPDATE_PROJECT = gql`
+  mutation UpdateProject($project: NotableProjectsInput!, $sectionId: String!) {
+    updateProject(project: $project, sectionId: $sectionId) {
+      id
+    }
+  }
+`;
+
 export const REMOVE_SECTION_MUTATION = gql`
   mutation RemoveSectionMutation($id: String!) {
     removeSection(id: $id)
@@ -86,6 +94,12 @@ export const REMOVE_NOTABLE_PROJECT_MUTATION = gql`
 export const REMOVE_TESTIMONIAL_MUTATION = gql`
   mutation RemoveTestimonialMutation($id: String!) {
     removeTestimonial(id: $id)
+  }
+`;
+
+export const REMOVE_PROJECT_MUTATION = gql`
+  mutation RemoveProjectMutation($id: String!) {
+    removeProject(id: $id)
   }
 `;
 

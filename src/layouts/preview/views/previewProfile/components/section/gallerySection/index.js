@@ -1,6 +1,5 @@
 import React from 'react';
-import { Divider, Typography, Icon } from '@material-ui/core';
-import { ToastContainer, toast } from 'react-toastify';
+import { Divider, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import ReactPlayer from 'react-player';
 import { SubHeader, MainHeader, Card, Testimonials } from './components';
@@ -20,7 +19,6 @@ function GallerySection({ section }) {
   return (
     <div>
       <Divider />
-      <ToastContainer />
 
       <div className={classes.sectionWrapper}>
         <div className={classes.sectionHeader}>
