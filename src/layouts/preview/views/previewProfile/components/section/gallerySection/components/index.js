@@ -99,9 +99,10 @@ export function Projects({ projects }) {
             className={classes.projectWrapperItem}
             style={{
               backgroundImage: `url(${item.image}`,
+              backgroundSize: 'cover',
             }}
           >
-            <Typography variant="h4" className={classes.projectName}>
+            <Typography variant="h5" className={classes.projectName}>
               {item.name}
             </Typography>
           </div>
