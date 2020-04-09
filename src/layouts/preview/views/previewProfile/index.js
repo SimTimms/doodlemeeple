@@ -138,6 +138,7 @@ export function PreviewProfile({ theme, profileId }) {
                   background: 'rgba(0,0,0,0.7)',
                   alignItems: 'center',
                   padding: 20,
+                  width: '100%',
                 }}
               >
                 <div
