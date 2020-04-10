@@ -39,6 +39,7 @@ export const useStyles = makeStyles((theme) => ({
     willChange: 'transform',
     border: '15px solid white',
   },
+  cardMobile: { width: '100% !important' },
   testimonialWrapper: {
     maxWidth: '500px',
     display: 'flex',

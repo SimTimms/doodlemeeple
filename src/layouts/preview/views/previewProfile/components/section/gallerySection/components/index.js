@@ -2,6 +2,8 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { useSpring, animated } from 'react-spring';
+import clsx from 'clsx';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 export function MainHeader({ title }) {
   const classes = useStyles();
@@ -33,6 +35,7 @@ const trans = (x, y, s) =>
   `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
 
 export function Card({ img }) {
+  const mobile = useMediaQuery('(max-width:800px)');
   const classes = useStyles();
   const [props, set] = useSpring(() => ({
     xys: [0, 0, 1],
@@ -41,9 +44,12 @@ export function Card({ img }) {
 
   return (
     <animated.div
-      className={classes.card}
       onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
       onMouseLeave={() => set({ xys: [0, 0, 1] })}
+      className={clsx({
+        [classes.card]: true,
+        [classes.cardMobile]: mobile,
+      })}
       style={{
         transform: props.xys.interpolate(trans),
         margin: 20,
@@ -51,7 +57,7 @@ export function Card({ img }) {
         display: 'flex',
       }}
     >
-      <img src={img} style={{ width: '100%', margin: 0 }} />
+      <img src={img} style={{ width: '100%', height: '100%', margin: 0 }} />
     </animated.div>
   );
 }
