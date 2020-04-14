@@ -27,6 +27,7 @@ export function Project({
   projects,
   sectionId,
   autosaveIsOn,
+  setShowAdd,
 }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
@@ -48,9 +49,14 @@ export function Project({
           closeButton: false,
           hideProgressBar: true,
         });
+
+        const copyArr = Object.assign([], projects);
+        copyArr.map((item) => (item.id = data.updateProject));
+        setNotableProjects(copyArr);
       }}
     >
       {(mutation) => {
+        console.log(project);
         return (
           <div
             className={clsx({
@@ -127,7 +133,7 @@ export function Project({
                 style={{ width: '100%' }}
                 onChange={(ev) => {
                   setChanged(true);
-                  autosaveIsOn && autosave(mutation, 'testimonial');
+                  autosaveIsOn && autosave(mutation, 'project');
                   const copyArr = Object.assign([], projects);
                   copyArr[index].summary = ev.target.value;
                   setNotableProjects(copyArr);
@@ -139,7 +145,11 @@ export function Project({
               projects={projects}
               index={index}
               setNotableProjects={setNotableProjects}
-              autosave={autosaveIsOn && autosave}
+              autosave={() => {
+                autosave(mutation, 'project delete');
+              }}
+              autosaveIsOn={autosaveIsOn}
+              setShowAdd={setShowAdd}
             />
           </div>
         );

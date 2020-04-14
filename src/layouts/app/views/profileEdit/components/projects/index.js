@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FieldTitle } from '../section/fieldTitle';
 import { useStyles } from './styles';
 import { AddProject } from '../project/addButton';
@@ -12,6 +12,12 @@ function Projects({
   autosaveIsOn,
 }) {
   const classes = useStyles();
+  const [showAdd, setShowAdd] = React.useState(true);
+
+  useEffect(() => {
+    const newProj = projects.filter((item) => item.id === 'new');
+    newProj.length === 0 && setShowAdd(true);
+  }, [projects]);
 
   return (
     <div style={{ width: '100%' }}>
@@ -34,15 +40,17 @@ function Projects({
                 key={`testimonial_${index}`}
                 sectionId={sectionId}
                 autosaveIsOn={autosaveIsOn}
+                setShowAdd={setShowAdd}
               />
             );
           })}
       </div>
 
-      {projects.length < 5 && (
+      {projects.length < 5 && showAdd && (
         <AddProject
           projects={projects}
           setNotableProjects={setNotableProjects}
+          setShowAdd={setShowAdd}
         />
       )}
     </div>

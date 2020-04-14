@@ -5,16 +5,12 @@ import { useSpring, animated } from 'react-spring';
 import clsx from 'clsx';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-function titleReplace(titleIn) {
-  const titleOut = titleIn === 'graphic-artist' ? 'Graphic Artist' : 'Artist';
-  return titleOut;
-}
 export function MainHeader({ title }) {
   const classes = useStyles();
   return (
     <Typography variant="h1" className={classes.mainHeader}>
       <div className={classes.mainHeaderBorder}></div>
-      <div className={classes.mainHeaderText}>{titleReplace(title)}</div>
+      <div className={classes.mainHeaderText}>Rules Editor</div>
       <div className={classes.mainHeaderBorderEnd}></div>
     </Typography>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 
-export function AddProject({ setNotableProjects, projects }) {
+export function AddProject({ setNotableProjects, projects, setShowAdd }) {
   return (
     <div style={{ width: '100%' }}>
       <Button
@@ -10,6 +10,7 @@ export function AddProject({ setNotableProjects, projects }) {
           const copyArr = Object.assign([], projects);
           copyArr.push(newObj);
           setNotableProjects(copyArr);
+          setShowAdd(false);
         }}
         color="primary"
         style={{ textTransform: 'none' }}

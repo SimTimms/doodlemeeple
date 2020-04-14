@@ -39,8 +39,7 @@ export const useStyles = makeStyles({
     maxHeight: 200,
     height: 200,
     padding: 0,
-    boxShadow:
-      '1px 1px 0px #333, 2px 2px 0px #333, 3px 3px 0px #333, inset 2px 2px 6px rgba(255,255,255,0.3),10px 10px 20px rgba(0,0,0,0.4)',
+    boxShadow: '10px 10px 20px rgba(0,0,0,0.4)',
     marginRight: 40,
     display: 'flex',
     alignItems: 'center',

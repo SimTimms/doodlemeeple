@@ -20,8 +20,9 @@ import {
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE, SECTIONS } from '../../../../data/queries';
 import { UpdateUserButton } from './components/updateUserButton';
-import { Section, EditorSection } from './components/section';
+import { Section } from './components/section';
 import GallerySection from './components/section/gallerySection';
+import EditorSection from './components/section/editorSection';
 import { UPDATE_USER_MUTATION } from '../../../../data/mutations';
 import { readableErrors } from '../../../../utils/readableErrors';
 import { toast } from 'react-toastify';

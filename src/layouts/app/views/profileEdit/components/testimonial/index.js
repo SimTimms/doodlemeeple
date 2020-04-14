@@ -15,6 +15,7 @@ export function Testimonial({
   setTestimonials,
   testimonials,
   sectionId,
+  setShowAdd,
 }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
@@ -120,6 +121,7 @@ export function Testimonial({
               index={index}
               setTestimonials={setTestimonials}
               autosave={autosave && autosave}
+              setShowAdd={setShowAdd}
             />
           </div>
         );

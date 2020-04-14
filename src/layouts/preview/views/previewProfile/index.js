@@ -7,6 +7,7 @@ import { Query } from 'react-apollo';
 import { PROFILE_PREVIEW, SECTIONS_PREVIEW } from '../../../../data/queries';
 import { animated, useSpring, interpolate } from 'react-spring';
 import GallerySection from './components/section/gallerySection';
+import EditorSection from './components/section/editorSection';
 const { detect } = require('detect-browser');
 const browser = detect();
 
@@ -195,8 +196,11 @@ export function PreviewProfile({ theme, profileId }) {
                 section.type === 'graphic-artist' ||
                 section.type === '3d-artist' ? (
                   <GallerySection section={section} />
-                ) : null,
+                ) : (
+                  <EditorSection section={section} />
+                ),
               )}
+
             <Query
               query={SECTIONS_PREVIEW}
               onCompleted={(data) => {

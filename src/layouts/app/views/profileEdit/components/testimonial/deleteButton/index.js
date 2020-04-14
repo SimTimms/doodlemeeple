@@ -8,7 +8,7 @@ export function DeleteButton({
   testimonials,
   setTestimonials,
   testimonialId,
-  autosave,
+  setShowAdd,
 }) {
   return (
     <Mutation
@@ -24,9 +24,7 @@ export function DeleteButton({
               testimonialId !== 'new' && RemoveTestimonialMutation();
               let copyArr = Object.assign([], testimonials);
               copyArr.splice(index, 1);
-              testimonialId !== 'new' &&
-                autosave &&
-                autosave(RemoveTestimonialMutation);
+              setShowAdd(true);
               setTestimonials(copyArr);
             }}
             variant="contained"

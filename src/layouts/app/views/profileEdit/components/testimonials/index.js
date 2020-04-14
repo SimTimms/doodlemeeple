@@ -11,6 +11,7 @@ function Testimonials({
   sectionId,
 }) {
   const classes = useStyles();
+  const [showAdd, setShowAdd] = React.useState(true);
 
   return (
     <div style={{ width: '100%' }}>
@@ -32,6 +33,7 @@ function Testimonials({
                 testimonials={testimonials}
                 key={`testimonial_${index}`}
                 sectionId={sectionId}
+                setShowAdd={setShowAdd}
               />
             );
           })}
@@ -41,6 +43,7 @@ function Testimonials({
         <AddTestimonial
           testimonials={testimonials}
           setTestimonials={setTestimonials}
+          setShowAdd={setShowAdd}
         />
       )}
     </div>

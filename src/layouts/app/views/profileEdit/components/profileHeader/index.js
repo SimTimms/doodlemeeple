@@ -56,7 +56,7 @@ export function ProfileHeader({
       })}
     >
       <div style={{ position: 'absolute', right: 0, top: 0, display: 'flex' }}>
-        {profile.bgImage && !mobile && (
+        {/*profile.bgImage && !mobile && (
           <ImagePos
             imagePosition={imagePositionBG}
             setImagePosition={setImagePositionBG}
@@ -68,9 +68,9 @@ export function ProfileHeader({
             }}
             setStyle={setProfileBGStyle}
           />
-        )}
+          )*/}
         <Uploader
-          cbImage={url => {
+          cbImage={(url) => {
             setDisabledValue(true);
             setBgImage(url);
           }}
@@ -104,7 +104,7 @@ export function ProfileHeader({
               [classes.controlsWrapperCenterMobile]: mobile,
             })}
           >
-            {profile.profileImg && !mobile && (
+            {/*profile.profileImg && !mobile && (
               <ImagePos
                 imagePosition={imagePosition}
                 setImagePosition={setImagePosition}
@@ -117,9 +117,9 @@ export function ProfileHeader({
                   }
                 }}
               />
-            )}
+              )*/}
             <Uploader
-              cbImage={url => {
+              cbImage={(url) => {
                 setDisabledValue(true);
                 setProfileImg(url);
               }}
@@ -157,7 +157,7 @@ export function ProfileHeader({
               profile.userName ? `(${26 - profile.userName.length})` : ''
             }`}
             inputProps={{ maxLength: 26 }}
-            onChange={e => {
+            onChange={(e) => {
               setDisabledValue(true);
               if (autosaveFunction) {
                 autosave(autosaveFunction, 'username');

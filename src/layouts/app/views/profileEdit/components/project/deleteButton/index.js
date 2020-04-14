@@ -8,7 +8,7 @@ export function DeleteButton({
   projects,
   setNotableProjects,
   projectId,
-  autosave,
+  setShowAdd,
 }) {
   return (
     <Mutation
@@ -24,7 +24,7 @@ export function DeleteButton({
               projectId !== 'new' && mutation();
               let copyArr = Object.assign([], projects);
               copyArr.splice(index, 1);
-              projectId !== 'new' && autosave && autosave(mutation);
+              setShowAdd(true);
               setNotableProjects(copyArr);
             }}
             variant="contained"

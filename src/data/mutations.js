@@ -73,9 +73,7 @@ export const UPDATE_TESTIMONIAL = gql`
 
 export const UPDATE_PROJECT = gql`
   mutation UpdateProject($project: NotableProjectsInput!, $sectionId: String!) {
-    updateProject(project: $project, sectionId: $sectionId) {
-      id
-    }
+    updateProject(project: $project, sectionId: $sectionId)
   }
 `;
 
