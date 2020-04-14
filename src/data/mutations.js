@@ -77,6 +77,12 @@ export const UPDATE_PROJECT = gql`
   }
 `;
 
+export const CREATE_PROJECT = gql`
+  mutation CreateProject($project: NotableProjectsInput!, $sectionId: String!) {
+    createProject(project: $project, sectionId: $sectionId)
+  }
+`;
+
 export const REMOVE_SECTION_MUTATION = gql`
   mutation RemoveSectionMutation($id: String!) {
     removeSection(id: $id)

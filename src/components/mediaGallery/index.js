@@ -27,7 +27,7 @@ function MediaGallery({ items, edit, setBgImage, setImages }) {
                 onClick={() => {
                   let imageArray = Object.assign([], items);
                   imageArray = imageArray.filter(
-                    arrItem => arrItem.img !== tile.img,
+                    (arrItem) => arrItem.img !== tile.img,
                   );
 
                   setImages(imageArray);
@@ -41,7 +41,10 @@ function MediaGallery({ items, edit, setBgImage, setImages }) {
                 onClick={() => setMediaViewer(tile)}
                 style={{
                   width: '100%',
-                  boxShadow: '10px 10px 10px rgba(0,0,0,0.3)',
+                  boxShadow: '5px 5px 20px rgba(0,0,0,0.3)',
+                  border: '10px solid #fff',
+                  borderRadius: 5,
+                  boxSizing: 'border-box',
                 }}
               />
             </div>

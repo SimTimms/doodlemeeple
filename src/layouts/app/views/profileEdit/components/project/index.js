@@ -3,7 +3,10 @@ import { TextField, useMediaQuery, Icon } from '@material-ui/core';
 import { DeleteButton } from './deleteButton';
 import { useStyles } from './styles';
 import { Uploader } from '../../../../../../components';
-import { UPDATE_PROJECT } from '../../../../../../data/mutations';
+import {
+  UPDATE_PROJECT,
+  CREATE_PROJECT,
+} from '../../../../../../data/mutations';
 import { Mutation } from 'react-apollo';
 import clsx from 'clsx';
 import autosave from '../../../../../../utils/autosave';
@@ -34,7 +37,7 @@ export function Project({
   const toastStyle = toastStyles();
   return (
     <Mutation
-      mutation={UPDATE_PROJECT}
+      mutation={project.id === 'new' ? CREATE_PROJECT : UPDATE_PROJECT}
       variables={{
         project: project,
         sectionId,
@@ -51,12 +54,19 @@ export function Project({
         });
 
         const copyArr = Object.assign([], projects);
-        copyArr.map((item) => (item.id = data.updateProject));
+
+        if (project.id === 'new') {
+          const indexProject = copyArr
+            .map((item, index) => item.id === 'new' && index)
+            .filter((item) => item != false)[0];
+
+          copyArr[indexProject].id = data.createProject;
+        }
+
         setNotableProjects(copyArr);
       }}
     >
       {(mutation) => {
-        console.log(project);
         return (
           <div
             className={clsx({
@@ -111,7 +121,6 @@ export function Project({
                 style={{ width: '100%' }}
                 onChange={(ev) => {
                   setChanged(true);
-                  console.log(autosaveIsOn);
                   autosaveIsOn && autosave(mutation);
                   const copyArr = Object.assign([], projects);
                   copyArr[index].name = ev.target.value;
@@ -145,10 +154,6 @@ export function Project({
               projects={projects}
               index={index}
               setNotableProjects={setNotableProjects}
-              autosave={() => {
-                autosave(mutation, 'project delete');
-              }}
-              autosaveIsOn={autosaveIsOn}
               setShowAdd={setShowAdd}
             />
           </div>

@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -12,7 +12,7 @@ export const useStyles = makeStyles(theme => ({
   image: {
     background: 'none',
     position: 'relative',
-    width: '28%',
+    width: '40%',
     margin: '2%',
   },
   imageMobile: {
@@ -20,6 +20,7 @@ export const useStyles = makeStyles(theme => ({
     position: 'relative',
     width: '100%',
     margin: '2%',
+    border: '5px solid #fff',
   },
   gridList: {
     width: '100%',

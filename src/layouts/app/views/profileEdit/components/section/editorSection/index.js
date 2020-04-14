@@ -138,7 +138,7 @@ function EditorSection({
                   autosaveIsOn && autosave(mutation, 'summary');
                   setSummary(ev.target.value.replace(/[^A-Za-z0-9 \n]/g, ''));
                 }}
-              />{' '}
+              />
               <FieldTitle
                 name="Featured Showreel"
                 description="Grab the attention of a client with a short video (we recommend about 30 seconds). Please enter the URL you'd like to embed,"
