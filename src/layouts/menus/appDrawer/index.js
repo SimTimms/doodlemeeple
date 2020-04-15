@@ -11,6 +11,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import HomeIcon from '@material-ui/icons/Home';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
+import WebAssetIcon from '@material-ui/icons/WebAsset';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalanceWallet';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -83,19 +84,19 @@ export function AppDrawer(props) {
         {[
           {
             name: 'Dashboard',
-            icon: <DashboardIcon />,
+            icon: <HomeIcon />,
             link: '/app/dashboard',
           },
           {
             name: 'Profile',
             icon: <ContactMailIcon />,
             link: '/app/edit-profile',
-          },
+          } /*
           {
             name: 'Account',
             icon: <AccountBalanceIcon />,
             link: '/app/account',
-          } /*
+          } 
           {
             name: 'Invites',
             icon: <MailIcon />,
@@ -108,6 +109,7 @@ export function AppDrawer(props) {
             icon: <QuestionAnswerIcon />,
             link: '/messages/conversations',
           },*/,
+          ,
         ].map((text, index) => (
           <Link
             to={text.link}
@@ -127,18 +129,20 @@ export function AppDrawer(props) {
             </ListItem>
           </Link>
         ))}
-        <ListItem button>
-          <ListItemIcon style={{ minWidth: 32 }}>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary="Website"
-            className={clsx({
-              [button]: !mobile,
-              [buttonMobile]: mobile,
-            })}
-          />
-        </ListItem>
+        <a href="https://doodlemeeple.com" style={{ textDecoration: 'none' }}>
+          <ListItem button>
+            <ListItemIcon style={{ minWidth: 32 }}>
+              <WebAssetIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Website"
+              className={clsx({
+                [button]: !mobile,
+                [buttonMobile]: mobile,
+              })}
+            />
+          </ListItem>
+        </a>
         <ListItem
           button
           onClick={() => {
