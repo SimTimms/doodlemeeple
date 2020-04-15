@@ -1,12 +1,26 @@
 import React from 'react';
-import { TextField, useMediaQuery } from '@material-ui/core';
+import { TextField, useMediaQuery, Icon } from '@material-ui/core';
 import { DeleteButton } from './deleteButton';
 import { useStyles } from './styles';
 import { Uploader } from '../../../../../../components';
-import { UPDATE_TESTIMONIAL } from '../../../../../../data/mutations';
+import {
+  UPDATE_TESTIMONIAL,
+  CREATE_TESTIMONIAL,
+} from '../../../../../../data/mutations';
 import { Mutation } from 'react-apollo';
 import clsx from 'clsx';
 import autosave from '../../../../../../utils/autosave';
+import { toast } from 'react-toastify';
+import { toastStyles } from '../../../../../../components/toast/styles';
+
+function SaveIcon() {
+  const toastStyle = toastStyles();
+  return (
+    <Icon style={{ fontSize: 18 }} className={toastStyle.toastIcon}>
+      save
+    </Icon>
+  );
+}
 
 export function Testimonial({
   testimonial,
@@ -19,15 +33,37 @@ export function Testimonial({
 }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
+  const toastStyle = toastStyles();
 
   return (
     <Mutation
-      mutation={UPDATE_TESTIMONIAL}
+      mutation={
+        testimonial.id === 'new' ? CREATE_TESTIMONIAL : UPDATE_TESTIMONIAL
+      }
       variables={{
         testimonial: testimonial,
         sectionId,
       }}
-      onCompleted={(data) => {}}
+      onCompleted={(data) => {
+        toast(<SaveIcon />, {
+          className: toastStyle.toast,
+          progressClassName: toastStyle.progress,
+          bodyClassName: toastStyle.toastBody,
+          autoClose: 1000,
+          draggable: false,
+          closeButton: false,
+          hideProgressBar: true,
+        });
+
+        const copyArr = Object.assign([], testimonials);
+        if (testimonial.id === 'new') {
+          const indexProject = copyArr
+            .map((item, index) => item.id === 'new' && index)
+            .filter((item) => item != false)[0];
+          copyArr[indexProject ? indexProject : 0].id = data.createTestimonial;
+        }
+        setTestimonials(copyArr);
+      }}
     >
       {(mutation) => {
         return (
@@ -120,7 +156,6 @@ export function Testimonial({
               testimonials={testimonials}
               index={index}
               setTestimonials={setTestimonials}
-              autosave={autosave && autosave}
               setShowAdd={setShowAdd}
             />
           </div>

@@ -52,12 +52,20 @@ function MediaGallery({ items, edit, setBgImage, setImages }) {
 
           {edit && items.length < 6 && (
             <div
+              className={clsx({
+                [classes.image]: true,
+                [classes.imageMobile]: mobile,
+              })}
               style={{
+                boxShadow: '10px 10px 20px rgba(0,0,0,0.3)',
                 display: 'flex',
+                alignItems: 'center',
                 justifyContent: 'center',
-                alignItems: 'center ',
-                width: '33%',
-                minHeight: 200,
+                padding: 20,
+                background: '#ddd',
+                border: '10px solid #fff',
+                borderRadius: 5,
+                minHeight: 150,
               }}
             >
               <Uploader

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FieldTitle } from '../section/fieldTitle';
 import { useStyles } from './styles';
 import { AddTestimonial } from '../testimonial/addButton';
@@ -12,6 +12,11 @@ function Testimonials({
 }) {
   const classes = useStyles();
   const [showAdd, setShowAdd] = React.useState(true);
+
+  useEffect(() => {
+    const newProj = testimonials.filter((item) => item.id === 'new');
+    newProj.length === 0 && setShowAdd(true);
+  }, [testimonials]);
 
   return (
     <div style={{ width: '100%' }}>
@@ -39,7 +44,7 @@ function Testimonials({
           })}
       </div>
 
-      {testimonials.length < 5 && (
+      {testimonials.length < 5 && showAdd && (
         <AddTestimonial
           testimonials={testimonials}
           setTestimonials={setTestimonials}

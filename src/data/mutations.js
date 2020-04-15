@@ -71,6 +71,15 @@ export const UPDATE_TESTIMONIAL = gql`
   }
 `;
 
+export const CREATE_TESTIMONIAL = gql`
+  mutation CreateTestimonial(
+    $testimonial: TestimonialInput!
+    $sectionId: String!
+  ) {
+    createTestimonial(testimonial: $testimonial, sectionId: $sectionId)
+  }
+`;
+
 export const UPDATE_PROJECT = gql`
   mutation UpdateProject($project: NotableProjectsInput!, $sectionId: String!) {
     updateProject(project: $project, sectionId: $sectionId)

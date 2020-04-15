@@ -37,11 +37,12 @@ export const useStyles = makeStyles((theme) => ({
     zIndex: 10,
     width: 32,
     minWidth: 32,
+    background: 'rgba(0,0,0,0.3)',
+    padding: 5,
+    margin: 5,
   },
   iconButtonIcon: {
-    color: 'rgba(0, 0, 0, 0.6)',
-    padding: 0,
-
+    color: '#fff',
     '&:hover': {
       color: '#222',
     },

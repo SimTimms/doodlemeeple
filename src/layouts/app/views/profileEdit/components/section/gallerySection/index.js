@@ -21,7 +21,7 @@ function SaveIcon() {
   const toastStyle = toastStyles();
   return (
     <Icon style={{ fontSize: 18 }} className={toastStyle.toastIcon}>
-      delete
+      save
     </Icon>
   );
 }
@@ -204,32 +204,6 @@ function GallerySection({
                 sectionId={section.id}
                 autosaveIsOn={autosaveIsOn}
               />
-              {/*notableProjects &&
-                notableProjects.map((notableProject, index) => {
-                  return (
-                    <NotableProject
-                      notableProject={notableProject}
-                      setChanged={setChanged}
-                      index={index}
-                      setNotableProjects={setNotableProjects}
-                      notableProjects={notableProjects}
-                      key={`project_${index}`}
-                      autosave={
-                        autosaveIsOn
-                          ? () => {
-                              autosave(mutation, 'summary');
-                            }
-                          : null
-                      }
-                    />
-                  );
-                })*/}
-              {/*notableProjectsLength < 5 && (
-                <AddNotableProject
-                  notableProjects={notableProjects}
-                  setNotableProjects={setNotableProjects}
-                />
-              )*/}
               <Testimonials
                 testimonials={testimonials}
                 setTestimonials={setTestimonials}

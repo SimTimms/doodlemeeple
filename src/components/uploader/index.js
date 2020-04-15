@@ -1,9 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useStyles } from './styles';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
+import { Typography, Button, Icon } from '@material-ui/core';
 import Cookies from 'js-cookie';
 
 function Uploader({
@@ -13,6 +11,7 @@ function Uploader({
   cbDelete,
   hasFile,
   setImagePosition,
+  size,
 }) {
   const classes = useStyles();
   const [statusMessage, setStatusMessage] = React.useState('');
@@ -51,7 +50,7 @@ function Uploader({
         fileSize,
         category: 'profileBG',
       })
-      .then(response => {
+      .then((response) => {
         setStatusMessage('Sending...');
         if (response.data.data) {
           setStatusMessage('Uploading...');
@@ -65,11 +64,11 @@ function Uploader({
 
           axios
             .put(signedRequest, file, options)
-            .then(result => {
+            .then((result) => {
               setStatusMessage('');
               cbImage(url);
             })
-            .catch(error => {
+            .catch((error) => {
               setStatusMessage(error);
               console.log(error);
             });
@@ -77,7 +76,7 @@ function Uploader({
           setStatusMessage(response.data.error);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         setStatusMessage('Error');
         console.log(error);
       });
@@ -88,7 +87,8 @@ function Uploader({
       className={`${classes.imageIconWrapper} ${className}`}
       style={styleOverride}
     >
-      <Typography gutterBottom>{statusMessage}</Typography>
+      {statusMessage && <Typography gutterBottom>{statusMessage}</Typography>}
+
       {hasFile ? (
         <Button
           onClick={() => {
@@ -101,7 +101,14 @@ function Uploader({
           </Icon>
         </Button>
       ) : statusMessage === '' ? (
-        <Icon className={classes.imageIcon}>add_photo_alternate</Icon>
+        <div style={{ textAlign: 'center' }}>
+          <Icon className={classes.imageIcon}>add_photo_alternate</Icon>
+          {size && (
+            <Typography variant="body1" style={{ lineHeight: 1 }}>
+              {size}
+            </Typography>
+          )}
+        </div>
       ) : (
         <Icon className={classes.imageIcon} style={{ fontSize: 20 }}>
           cancel
@@ -109,7 +116,7 @@ function Uploader({
       )}
       <input
         type="file"
-        ref={input => {
+        ref={(input) => {
           uploadInput = input;
         }}
         style={{ display: 'none' }}

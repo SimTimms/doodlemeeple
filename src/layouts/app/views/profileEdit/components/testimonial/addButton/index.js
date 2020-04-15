@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 
-export function AddTestimonial({ setTestimonials, testimonials }) {
+export function AddTestimonial({ setTestimonials, testimonials, setShowAdd }) {
   return (
     <div style={{ width: '100%' }}>
       <Button
@@ -10,6 +10,7 @@ export function AddTestimonial({ setTestimonials, testimonials }) {
           const copyArr = Object.assign([], testimonials);
           copyArr.push(newObj);
           setTestimonials(copyArr);
+          setShowAdd(false);
         }}
         color="primary"
         style={{ textTransform: 'none' }}

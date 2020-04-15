@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
   imageIconWrapper: {
     color: '#fff',
     display: 'flex',
@@ -11,10 +11,10 @@ export const useStyles = makeStyles(theme => ({
     right: 0,
     background: 'rgba(0,0,0,0.3)',
     borderRadius: '50%    ',
-    minHeight: 60,
-    maxHeight: 60,
-    minWidth: 60,
-    maxWidth: 60,
+    minHeight: 80,
+    maxHeight: 80,
+    minWidth: 80,
+    maxWidth: 80,
     cursor: 'pointer',
     '&:hover': {
       background: 'rgba(0,0,0,0.5)',

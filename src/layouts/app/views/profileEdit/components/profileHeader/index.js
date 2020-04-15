@@ -47,7 +47,8 @@ export function ProfileHeader({
     <div
       style={{
         backgroundImage: `url(${profile.bgImage})`,
-        backgroundPosition: `${-imagePositionBG.x}px ${-imagePositionBG.y}px`,
+        //  backgroundPosition: `${-imagePositionBG.x}px ${-imagePositionBG.y}px`,
+        backgroundPosition: 'center center',
       }}
       className={clsx({
         [classes.root]: true,
@@ -73,15 +74,22 @@ export function ProfileHeader({
           cbImage={(url) => {
             setDisabledValue(true);
             setBgImage(url);
+            if (autosaveFunction) {
+              autosave(autosaveFunction, 'image');
+            }
           }}
           cbDelete={() => {
             setDisabledValue(true);
             setBgImage('');
+            if (autosaveFunction) {
+              autosave(autosaveFunction, 'image');
+            }
           }}
           styleOverride={null}
           hasFile={profile.bgImage ? true : false}
           className={null}
           setImagePosition={setImagePositionBG}
+          size="700 x 400"
         />
       </div>
       <div
@@ -122,15 +130,22 @@ export function ProfileHeader({
               cbImage={(url) => {
                 setDisabledValue(true);
                 setProfileImg(url);
+                if (autosaveFunction) {
+                  autosave(autosaveFunction, 'image');
+                }
               }}
               styleOverride={null}
               cbDelete={() => {
                 setDisabledValue(true);
                 setProfileImg('');
+                if (autosaveFunction) {
+                  autosave(autosaveFunction, 'image');
+                }
               }}
               hasFile={profile.profileImg ? true : false}
               className={null}
               setImagePosition={setImagePosition}
+              size="140 x 140"
             />
           </div>
           {profile.profileImg && (

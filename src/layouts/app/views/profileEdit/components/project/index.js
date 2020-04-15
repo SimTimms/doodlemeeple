@@ -59,8 +59,7 @@ export function Project({
           const indexProject = copyArr
             .map((item, index) => item.id === 'new' && index)
             .filter((item) => item != false)[0];
-
-          copyArr[indexProject].id = data.createProject;
+          copyArr[indexProject ? indexProject : 0].id = data.createProject;
         }
 
         setNotableProjects(copyArr);
