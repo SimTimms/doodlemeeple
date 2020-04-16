@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icon, Card, Typography, Slide, Button } from '@material-ui/core';
 import { useStyles } from './styles';
 import { LoadIcon } from '../../../../components';
 import { Query } from 'react-apollo';
 import { PROFILE_PREVIEW, SECTIONS_PREVIEW } from '../../../../data/queries';
-import { animated, useSpring, interpolate } from 'react-spring';
+import { animated, useSpring } from 'react-spring';
 import GallerySection from './components/section/gallerySection';
 import EditorSection from './components/section/editorSection';
 const { detect } = require('detect-browser');
@@ -24,13 +24,11 @@ export function PreviewProfile({ theme, profileId }) {
     profileImg: null,
     profileImgStyle: [0, 0],
   });
-  const [sectionNames, setSectionNames] = React.useState([]);
   const [sections, setSections] = React.useState([]);
   const [imagePos, setImagePos] = React.useState({
     x: 0,
     y: 0,
   });
-  const [index, set] = useState(0);
 
   const { o } = useSpring({
     from: {
@@ -206,7 +204,6 @@ export function PreviewProfile({ theme, profileId }) {
               onCompleted={(data) => {
                 const sections = data.sectionsPreview;
 
-                setSectionNames(sections.map((item) => item.type));
                 setSections(sections);
               }}
               variables={{ userId: profileId }}

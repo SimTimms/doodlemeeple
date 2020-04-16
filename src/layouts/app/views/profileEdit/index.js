@@ -240,10 +240,7 @@ export function EditProfile({ theme }) {
                           }, 1000),
                         );
                         setSummary(
-                          e.target.value.replace(
-                            /[^A-Za-z0-9 ,\-\.\"\'\n]/g,
-                            '',
-                          ),
+                          e.target.value.replace(/[^A-Za-z0-9 ,\-."'\n]/g, ''),
                         );
                       }}
                       margin="normal"

@@ -1,26 +1,12 @@
 import React from 'react';
 import { Divider, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import ReactPlayer from 'react-player';
-import {
-  SubHeader,
-  MainHeader,
-  Card,
-  Testimonials,
-  Projects,
-} from './components';
+import { SubHeader, MainHeader, Testimonials, Projects } from './components';
 
 function EditorSection({ section }) {
   const classes = useStyles();
 
-  const {
-    summary,
-    gallery,
-    notableProjects,
-    testimonials,
-    showreel,
-    type,
-  } = section;
+  const { summary, notableProjects, testimonials, type } = section;
 
   return (
     <div>

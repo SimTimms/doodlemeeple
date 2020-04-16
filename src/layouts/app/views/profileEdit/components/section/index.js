@@ -1,18 +1,9 @@
 import React, { useEffect } from 'react';
-import { Divider, TextField, Typography, Icon } from '@material-ui/core';
+import { Divider, TextField } from '@material-ui/core';
 import { SaveButton } from './saveButton';
 import { DeleteButton } from './deleteButton';
-import { NotableProject } from '../notableProject';
-import { AddNotableProject } from '../notableProject/addButton';
-import { AddTestimonial } from '../testimonial/addButton';
-import { Testimonial } from '../testimonial';
 import { useStyles } from './styles';
-import {
-  UPDATE_SECTION_MUTATION,
-  UPDATE_GALLERY_SECTION_MUTATION,
-} from '../../../../../../data/mutations';
-import { FieldTitle } from './fieldTitle';
-import { TYPE_HELPER } from '../../../../../../utils';
+import { UPDATE_SECTION_MUTATION } from '../../../../../../data/mutations';
 import 'react-toastify/dist/ReactToastify.css';
 
 export function Section({ index, sections, setSections, section }) {

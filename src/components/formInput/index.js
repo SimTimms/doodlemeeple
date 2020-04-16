@@ -1,5 +1,4 @@
 import React from 'react';
-import { styles } from './styles';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
@@ -18,7 +17,7 @@ function FormInput(props) {
       id={props.fieldName}
       label={props.fieldTitle}
       value={fieldValue}
-      onChange={e => {
+      onChange={(e) => {
         props.setFieldValue(e.target.value);
       }}
       type={props.type}

@@ -9,20 +9,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import HomeIcon from '@material-ui/icons/Home';
-import DashboardIcon from '@material-ui/icons/Dashboard';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
 import WebAssetIcon from '@material-ui/icons/WebAsset';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalanceWallet';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-/*
-import MailIcon from '@material-ui/icons/Mail';
-import WorkIcon from '@material-ui/icons/Work';
-import ExtensionIcon from '@material-ui/icons/Extension';
-import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-*/
-
 import { Link } from 'react-router-dom';
 import { useStyles } from '../styles';
 import Cookies from 'js-cookie';
@@ -30,7 +22,6 @@ import clsx from 'clsx';
 
 export function AppDrawer(props) {
   const {
-    drawer,
     link,
     drawerHeader,
     drawerHeaderMobile,
@@ -109,7 +100,6 @@ export function AppDrawer(props) {
             icon: <QuestionAnswerIcon />,
             link: '/messages/conversations',
           },*/,
-          ,
         ].map((text, index) => (
           <Link
             to={text.link}

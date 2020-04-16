@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Divider, TextField, Typography, Icon } from '@material-ui/core';
-import { MediaGalleryObject } from '../../mediaGalleryOject';
 import { Mutation } from 'react-apollo';
 import autosave from '../../../../../../../utils/autosave';
 import { toaster } from '../../../../../../../utils/toaster';

@@ -61,7 +61,11 @@ export function Card({ img }) {
         display: 'flex',
       }}
     >
-      <img src={img} style={{ width: '100%', height: '100%', margin: 0 }} />
+      <img
+        src={img}
+        style={{ width: '100%', height: '100%', margin: 0 }}
+        alt="Gallery Card"
+      />
     </animated.div>
   );
 }

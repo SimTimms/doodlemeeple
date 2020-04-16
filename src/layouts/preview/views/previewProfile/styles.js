@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import smithy from '../../../../assets/smithy.jpg';
 
 export const useStyles = makeStyles((theme) => ({
   root: {

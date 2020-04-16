@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, useMediaQuery, Icon } from '@material-ui/core';
+import { TextField, useMediaQuery } from '@material-ui/core';
 import { DeleteButton } from './deleteButton';
 import { useStyles } from './styles';
 import { Uploader } from '../../../../../../components';
@@ -40,7 +40,7 @@ export function Testimonial({
         if (testimonial.id === 'new') {
           const indexProject = copyArr
             .map((item, index) => item.id === 'new' && index)
-            .filter((item) => item != false)[0];
+            .filter((item) => item !== false)[0];
           copyArr[indexProject ? indexProject : 0].id = data.createTestimonial;
         }
         setTestimonials(copyArr);
