@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
-import { toastStyles } from '../../../../../components/toast/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Query } from 'react-apollo';
@@ -11,21 +10,11 @@ import { NOTIFICATIONS } from '../../../../../data/queries';
 import { REMOVE_NOTIFICATION_MUTATION } from '../../../../../data/mutations';
 import { Mutation } from 'react-apollo';
 import { timeDifferenceForDate } from '../../../../../utils/dates';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-function SaveIcon() {
-  const toastStyle = toastStyles();
-  return (
-    <Icon style={{ fontSize: 18 }} className={toastStyle.toastIcon}>
-      delete
-    </Icon>
-  );
-}
+import { toaster } from '../../../../../utils/toaster';
 
 export function Notifications() {
   const classes = useStyles();
-  const toastStyle = toastStyles();
+
   const [notificationArray, setNotificationArray] = React.useState([]);
 
   return (
@@ -96,15 +85,7 @@ export function Notifications() {
                 }}
                 update={(store, { data: { removeNotification } }) => {
                   let data = store.readQuery({ query: NOTIFICATIONS });
-                  toast(<SaveIcon />, {
-                    className: toastStyle.toast,
-                    progressClassName: toastStyle.progress,
-                    bodyClassName: toastStyle.toastBody,
-                    autoClose: 2000,
-                    draggable: false,
-                    closeButton: false,
-                    hideProgressBar: true,
-                  });
+                  toaster('Deleted');
 
                   data.getNotifications = data.getNotifications.filter(
                     (item) => item.id !== removeNotification,

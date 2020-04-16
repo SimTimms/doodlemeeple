@@ -59,36 +59,8 @@ function AddSection({ setSections, sections }) {
           setDisplay={setDisplay}
           sections={sections}
           setSections={setSections}
-          type="Rulebook Editor"
+          type="content-editor"
         />
-
-        <Card
-          className={classes.skillCard}
-          onClick={() => {
-            setDisplay(false);
-            const newSection = {
-              id: 'new',
-              title: '',
-              summary: '',
-              gallery: {
-                images: [],
-              },
-              notableProjects: [],
-              testimonials: [],
-            };
-            const newSections = Object.assign([], sections);
-            newSections.push(newSection);
-            setSections(newSections);
-          }}
-        >
-          <Icon style={{ fontSize: 20, marginRight: 10 }}>brush</Icon>
-          <div style={{ textAlign: 'right' }}>
-            <Typography variant="h2">Content</Typography>
-            <Typography variant="body1" component="p">
-              I proof-read, analyse and/or create content
-            </Typography>
-          </div>
-        </Card>
       </div>
       <CardContent
         className={clsx({

@@ -13,6 +13,7 @@
     "axios": "^0.19.2",
     "detect-browser": "^5.0.0",
     "email-validator": "^2.0.4",
+    "glamor": "^2.20.40",
     "graphql": "^14.6.0",
     "js-cookie": "^2.2.1",
     "password-validator": "^5.0.3",

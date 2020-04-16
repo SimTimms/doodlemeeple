@@ -91,12 +91,12 @@ export function AppDrawer(props) {
             name: 'Profile',
             icon: <ContactMailIcon />,
             link: '/app/edit-profile',
-          } /*
+          },
           {
             name: 'Account',
             icon: <AccountBalanceIcon />,
             link: '/app/account',
-          } 
+          } /*
           {
             name: 'Invites',
             icon: <MailIcon />,

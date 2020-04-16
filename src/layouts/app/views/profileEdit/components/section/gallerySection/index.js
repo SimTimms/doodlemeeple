@@ -4,27 +4,15 @@ import { MediaGalleryObject } from '../../mediaGalleryOject';
 import { Mutation } from 'react-apollo';
 import ReactPlayer from 'react-player';
 import autosave from '../../../../../../../utils/autosave';
-import { toast } from 'react-toastify';
-import { toastStyles } from '../../../../../../../components/toast/styles';
+import { toaster } from '../../../../../../../utils/toaster';
 import { useStyles } from './styles';
 import { UPDATE_GALLERY_SECTION_MUTATION } from '../../../../../../../data/mutations';
 import { DeleteButton } from '../deleteButton';
 import { FieldTitle } from '../fieldTitle';
-//import { NotableProject } from '../../notableProject';
-//import { AddNotableProject } from '../../notableProject/addButton';
 import Testimonials from '../../testimonials';
 import Projects from '../../projects';
 import { SaveButton } from '../saveButton';
 import { TYPE_HELPER } from '../../../../../../../utils';
-
-function SaveIcon() {
-  const toastStyle = toastStyles();
-  return (
-    <Icon style={{ fontSize: 18 }} className={toastStyle.toastIcon}>
-      save
-    </Icon>
-  );
-}
 
 function GallerySection({
   index,
@@ -34,7 +22,6 @@ function GallerySection({
   autosaveIsOn,
 }) {
   const classes = useStyles();
-  const toastStyle = toastStyles();
   const [title, setTitle] = React.useState('loading...');
   const [type, setType] = React.useState('loading...');
   const [summary, setSummary] = React.useState('loading...');
@@ -81,15 +68,7 @@ function GallerySection({
           section: sectionValues,
         }}
         onCompleted={(data) => {
-          toast(<SaveIcon />, {
-            className: toastStyle.toast,
-            progressClassName: toastStyle.progress,
-            bodyClassName: toastStyle.toastBody,
-            autoClose: 2000,
-            draggable: false,
-            closeButton: false,
-            hideProgressBar: true,
-          });
+          toaster('Saved');
         }}
       >
         {(mutation) => {

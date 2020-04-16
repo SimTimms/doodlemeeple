@@ -2,29 +2,16 @@ import React, { useEffect } from 'react';
 import { Divider, TextField, Typography, Icon } from '@material-ui/core';
 import { MediaGalleryObject } from '../../mediaGalleryOject';
 import { Mutation } from 'react-apollo';
-import ReactPlayer from 'react-player';
 import autosave from '../../../../../../../utils/autosave';
-import { toast } from 'react-toastify';
-import { toastStyles } from '../../../../../../../components/toast/styles';
+import { toaster } from '../../../../../../../utils/toaster';
 import { useStyles } from './styles';
 import { UPDATE_GALLERY_SECTION_MUTATION } from '../../../../../../../data/mutations';
 import { DeleteButton } from '../deleteButton';
 import { FieldTitle } from '../fieldTitle';
-//import { NotableProject } from '../../notableProject';
-//import { AddNotableProject } from '../../notableProject/addButton';
 import Testimonials from '../../testimonials';
 import Projects from '../../projects';
 import { SaveButton } from '../saveButton';
 import { TYPE_HELPER } from '../../../../../../../utils';
-
-function SaveIcon() {
-  const toastStyle = toastStyles();
-  return (
-    <Icon style={{ fontSize: 18 }} className={toastStyle.toastIcon}>
-      delete
-    </Icon>
-  );
-}
 
 function EditorSection({
   index,
@@ -34,7 +21,6 @@ function EditorSection({
   autosaveIsOn,
 }) {
   const classes = useStyles();
-  const toastStyle = toastStyles();
   const [title, setTitle] = React.useState('loading...');
   const [type, setType] = React.useState('loading...');
   const [summary, setSummary] = React.useState('loading...');
@@ -81,15 +67,7 @@ function EditorSection({
           section: sectionValues,
         }}
         onCompleted={(data) => {
-          toast(<SaveIcon />, {
-            className: toastStyle.toast,
-            progressClassName: toastStyle.progress,
-            bodyClassName: toastStyle.toastBody,
-            autoClose: 2000,
-            draggable: false,
-            closeButton: false,
-            hideProgressBar: true,
-          });
+          toaster('Saved');
         }}
       >
         {(mutation) => {
@@ -143,22 +121,6 @@ function EditorSection({
                 name="Featured Showreel"
                 description="Grab the attention of a client with a short video (we recommend about 30 seconds). Please enter the URL you'd like to embed,"
                 warning=""
-              />
-              <TextField
-                id={'showreel'}
-                label={`YouTube, Vimeo URL ${
-                  showreel ? `(${256 - showreel.length})` : ''
-                }`}
-                inputProps={{ maxLength: 256 }}
-                value={showreel}
-                margin="normal"
-                variant="outlined"
-                style={{ width: '100%', marginTop: 10 }}
-                onChange={(ev) => {
-                  setChanged(true);
-                  autosaveIsOn && autosave(mutation, 'showreel');
-                  setShowreel(ev.target.value);
-                }}
               />
               <Projects
                 projects={notableProjects}

@@ -9,7 +9,6 @@ import {
   Button,
 } from '@material-ui/core';
 import { useStyles } from './styles';
-import { toastStyles } from '../../../../components/toast/styles';
 import { ProfileHeader } from './components/profileHeader';
 import {
   AddSection,
@@ -25,22 +24,11 @@ import GallerySection from './components/section/gallerySection';
 import EditorSection from './components/section/editorSection';
 import { UPDATE_USER_MUTATION } from '../../../../data/mutations';
 import { readableErrors } from '../../../../utils/readableErrors';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toaster } from '../../../../utils/toaster';
 import Switch from 'react-switch';
 
-function SaveIcon() {
-  const toastStyle = toastStyles();
-  return (
-    <Icon style={{ fontSize: 18 }} className={toastStyle.toastIcon}>
-      save
-    </Icon>
-  );
-}
 export function EditProfile({ theme }) {
   const classes = useStyles();
-  const toastStyle = toastStyles();
-
   const [bgImage, setBgImage] = React.useState(null);
   const [profileImgStyle, setProfileImgStyle] = React.useState([0, 0]);
   const [userName, setUserName] = React.useState('');
@@ -114,15 +102,7 @@ export function EditProfile({ theme }) {
           }}
           update={(store, { data: { updateUser } }) => {
             const data = store.readQuery({ query: PROFILE });
-            toast(<SaveIcon />, {
-              className: toastStyle.toast,
-              progressClassName: toastStyle.progress,
-              bodyClassName: toastStyle.toastBody,
-              autoClose: 2000,
-              draggable: false,
-              closeButton: false,
-              hideProgressBar: true,
-            });
+            toaster('Saved');
 
             const profile = data.profile;
             profile.name = updateUser.name;
@@ -205,15 +185,7 @@ export function EditProfile({ theme }) {
                       disabledValue={disabledValue}
                       setDisabledValue={setDisabledValue}
                       toast={() => {
-                        toast(<SaveIcon />, {
-                          className: toastStyle.toast,
-                          progressClassName: toastStyle.progress,
-                          bodyClassName: toastStyle.toastBody,
-                          autoClose: 2000,
-                          draggable: false,
-                          closeButton: false,
-                          hideProgressBar: true,
-                        });
+                        toaster('Saved');
                       }}
                     />
                   )}

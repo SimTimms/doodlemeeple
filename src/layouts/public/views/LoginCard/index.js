@@ -140,7 +140,7 @@ export default function LoginCard({ history, forwardTo }) {
                       }}
                       variant="contained"
                       color="primary"
-                      style={{ width: 180, marginTop: 0 }}
+                      style={{ width: 180, marginTop: 20 }}
                     >
                       {loginStatus}
                     </Button>

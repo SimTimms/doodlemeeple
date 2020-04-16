@@ -10,17 +10,7 @@ import {
 import { Mutation } from 'react-apollo';
 import clsx from 'clsx';
 import autosave from '../../../../../../utils/autosave';
-import { toast } from 'react-toastify';
-import { toastStyles } from '../../../../../../components/toast/styles';
-
-function SaveIcon() {
-  const toastStyle = toastStyles();
-  return (
-    <Icon style={{ fontSize: 18 }} className={toastStyle.toastIcon}>
-      save
-    </Icon>
-  );
-}
+import { toaster } from '../../../../../../utils/toaster';
 
 export function Project({
   project,
@@ -34,7 +24,7 @@ export function Project({
 }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
-  const toastStyle = toastStyles();
+
   return (
     <Mutation
       mutation={project.id === 'new' ? CREATE_PROJECT : UPDATE_PROJECT}
@@ -43,15 +33,7 @@ export function Project({
         sectionId,
       }}
       onCompleted={(data) => {
-        toast(<SaveIcon />, {
-          className: toastStyle.toast,
-          progressClassName: toastStyle.progress,
-          bodyClassName: toastStyle.toastBody,
-          autoClose: 1000,
-          draggable: false,
-          closeButton: false,
-          hideProgressBar: true,
-        });
+        toaster('Saved');
 
         const copyArr = Object.assign([], projects);
 
@@ -103,6 +85,7 @@ export function Project({
                 hasFile={project.image !== '' || project.image ? true : false}
                 className={null}
                 setImagePosition={null}
+                size=""
               />
             </div>
 

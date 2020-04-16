@@ -11,6 +11,7 @@ export const PROFILE = gql`
       profileImg
       profileImgStyle
       autosave
+      email
     }
   }
 `;
