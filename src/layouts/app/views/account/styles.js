@@ -13,6 +13,32 @@ export const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: 14,
   },
+  iconButton: {
+    cursor: 'pointer',
+    background: theme.palette.error.main,
+    padding: 5,
+    margin: 5,
+    color: '#fff',
+    '&:hover': {
+      background: theme.palette.error.dark,
+    },
+  },
+
+  iconButtonNo: {
+    cursor: 'pointer',
+    background: '#ddd',
+    padding: 5,
+    margin: 5,
+    '&:hover': {
+      background: '#ccc',
+    },
+  },
+  iconButtonNoIcon: {
+    color: '#444',
+  },
+  iconButtonIcon: {
+    color: '#fff',
+  },
   avatar: {
     borderRadius: '50%',
     border: '10px solid #fff',

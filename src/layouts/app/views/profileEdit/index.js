@@ -64,6 +64,7 @@ export function EditProfile({ theme }) {
         <Query
           query={PROFILE}
           onCompleted={(data) => {
+            setSections(data.profile.sections);
             setUserName(data.profile.name);
             setSummary(data.profile.summary);
             setBgImage(data.profile.profileBG);
@@ -248,6 +249,7 @@ export function EditProfile({ theme }) {
                       style={{ width: '100%' }}
                     />
                   </div>
+                  {/*}
                   <Query
                     query={SECTIONS}
                     onCompleted={(data) => {
@@ -260,7 +262,7 @@ export function EditProfile({ theme }) {
                       if (error) return <div>Error</div>;
                       return null;
                     }}
-                  </Query>
+                  </Query>*/}
                   {sections &&
                     sections.map((section, index) =>
                       section.type === 'artist' ||

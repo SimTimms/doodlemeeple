@@ -11,6 +11,18 @@ export const SIGNUP_MUTATION = gql`
   }
 `;
 
+export const UPDATE_EMAIL = gql`
+  mutation UpdateEmail($email: String!) {
+    updateEmail(email: $email)
+  }
+`;
+
+export const DELETE_ACCOUNT = gql`
+  mutation DeleteAccount {
+    deleteAccount
+  }
+`;
+
 export const UPDATE_USER_MUTATION = gql`
   mutation UpdateUserMutation(
     $name: String!

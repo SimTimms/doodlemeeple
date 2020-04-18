@@ -12,6 +12,32 @@ export const PROFILE = gql`
       profileImgStyle
       autosave
       email
+      sections {
+        id
+        title
+        summary
+        showreel
+        type
+        gallery {
+          id
+          summary
+          images {
+            img
+          }
+        }
+        notableProjects {
+          id
+          summary
+          name
+          image
+        }
+        testimonials {
+          id
+          name
+          summary
+          image
+        }
+      }
     }
   }
 `;

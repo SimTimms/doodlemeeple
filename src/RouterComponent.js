@@ -34,6 +34,11 @@ function RouterComponent(props) {
     light: '#6aebde',
     dark: '#248c82',
   };
+  theme.palette.error = {
+    ...theme.palette.error,
+    main: '#ff4081',
+    dark: '#d81b60',
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -70,6 +75,9 @@ function RouterComponent(props) {
         )}
         <Route path="/about">
           <AboutLayoutFrame />
+        </Route>
+        <Route path="/deleted">
+          <div>Your account has been deleted</div>
         </Route>
         <Route
           path="/:page/:token"

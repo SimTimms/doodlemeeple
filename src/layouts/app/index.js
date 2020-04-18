@@ -95,7 +95,7 @@ function AppLayout(props) {
           ) : page === 'edit-profile' ? (
             <EditProfile theme={props.theme} />
           ) : page === 'account' ? (
-            <Account theme={props.theme} />
+            <Account history={props.history} />
           ) : page === 'invites' ? (
             <Invites />
           ) : page === 'projects' ? (
