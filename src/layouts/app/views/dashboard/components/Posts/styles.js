@@ -30,7 +30,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     width: '100%',
     backgroundSize: 'cover',
-    backgroundPosition: 'center center',
+    backgroundPosition: 'top center',
     height: 200,
   },
   card: {
