@@ -6,6 +6,7 @@ import { StyledNavBar, Footer } from '../../components';
 import { PublicMenu, PublicFooterMenu } from '../menus';
 import { PasswordForgot } from './views/passwordForgot';
 import { PasswordReset } from './views/passwordReset';
+import Deleted from './views/deleted';
 import { useStyles } from './styles';
 
 export function PublicLayout(props) {
@@ -45,6 +46,10 @@ export function PublicLayout(props) {
         ) : page === 'password-reset' ? (
           <div className={classes.backgroundSignup}>
             <PasswordReset history={props.history} token={token} />
+          </div>
+        ) : page === 'deleted' ? (
+          <div className={classes.backgroundSignup}>
+            <Deleted />
           </div>
         ) : (
           <div className={classes.backgroundLogin}>

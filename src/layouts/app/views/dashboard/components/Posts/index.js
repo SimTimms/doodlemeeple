@@ -35,7 +35,9 @@ export function Posts({ posts }) {
           .replace(/&amp;/gi, '&')
           .replace(/\[&hellip;\]/gi, '...');
         const title = post.title.rendered;
-        const media = post._embedded['wp:featuredmedia']['0'].source_url;
+        const media = post._embedded['wp:featuredmedia']
+          ? post._embedded['wp:featuredmedia']['0'].source_url
+          : null;
 
         return (
           <Card className={classes.card} key={`conversation_${index}`}>
@@ -63,8 +65,8 @@ export function Posts({ posts }) {
                         style={{
                           color: '#fff',
                         }}
-                        variant="h4"
-                        component="h2"
+                        variant="h5"
+                        component="h4"
                       >
                         <b>{title}</b>
                       </Typography>

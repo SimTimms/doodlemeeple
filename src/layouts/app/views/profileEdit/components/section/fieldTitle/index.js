@@ -38,7 +38,7 @@ export function FieldTitle({ name, description, warning }) {
             {name}
           </Typography>
           <Icon className={classes.helpIcon}>
-            {infoOpen === 'none' ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}
+            {infoOpen === 'none' ? 'info' : 'keyboard_arrow_up'}
           </Icon>
         </div>
         <div className={classes.titleLine} style={{ width: '100%' }}></div>

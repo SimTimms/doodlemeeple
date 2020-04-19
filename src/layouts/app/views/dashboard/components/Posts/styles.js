@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
   messageWrapper: {
     display: 'flex',
     flexDirection: 'column',
@@ -21,8 +21,10 @@ export const useStyles = makeStyles(theme => ({
     color: '#fff',
     position: 'absolute',
     bottom: 0,
-    background: 'rgba(0,0,0,0.5)',
+    background: 'rgba(0,0,0,0.7)',
     padding: 10,
+    width: '100%',
+    boxSizing: 'border-box',
   },
   postImage: {
     position: 'relative',
@@ -31,7 +33,11 @@ export const useStyles = makeStyles(theme => ({
     backgroundPosition: 'center center',
     height: 200,
   },
-  card: { width: '100%', margin: '5px 0 0 0' },
+  card: {
+    width: '100%',
+    margin: '15px 0 0 0',
+    boxShadow: '10px 10px 15px rgba(0,0,0,0.2)',
+  },
   rowWrapper: {
     display: 'flex',
     flexDirection: 'row',

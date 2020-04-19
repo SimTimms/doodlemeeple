@@ -14,7 +14,7 @@ export function DeleteButton({ index, sections, setSections, sectionId }) {
         id: sectionId,
       }}
     >
-      {RemoveSectionMutation => {
+      {(RemoveSectionMutation) => {
         return confirm ? (
           <div
             style={{
@@ -38,7 +38,7 @@ export function DeleteButton({ index, sections, setSections, sectionId }) {
               }}
               variant="contained"
               className={classes.deleteButtonConfirmYes}
-              color="secondary"
+              color="primary"
             >
               Yes
             </Button>

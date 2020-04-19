@@ -40,6 +40,7 @@ function GallerySection({ section }) {
                 border: '10px solid #222',
                 boxShadow: '5px 5px 40px rgba(0,0,0,0.3)',
                 borderRadius: 5,
+                background: '#333',
               }}
               config={{
                 youtube: {
@@ -58,7 +59,7 @@ function GallerySection({ section }) {
           >
             {summary}
           </Typography>
-          <SubHeader title="Gallery" />
+          {gallery.images.length > 0 && <SubHeader title="Gallery" />}
           <div
             style={{
               width: '100%',

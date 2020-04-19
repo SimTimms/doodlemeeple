@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(theme => {
+export const useStyles = makeStyles((theme) => {
   return {
     root: {
       background: theme.palette.primary.main,
@@ -47,7 +47,7 @@ export const useStyles = makeStyles(theme => {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      flexDirection: 'row',
+      flexDirection: 'column',
       cursor: 'pointer',
       '&:hover': {
         background: theme.palette.primary.main,

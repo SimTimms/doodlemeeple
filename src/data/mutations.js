@@ -72,6 +72,12 @@ export const UPDATE_GALLERY_SECTION_MUTATION = gql`
   }
 `;
 
+export const CREATE_GALLERY_SECTION_MUTATION = gql`
+  mutation CreateGallerySectionMutation($id: String!, $section: SectionInput) {
+    createGallerySection(id: $id, section: $section)
+  }
+`;
+
 export const UPDATE_TESTIMONIAL = gql`
   mutation UpdateTestimonial(
     $testimonial: TestimonialInput!

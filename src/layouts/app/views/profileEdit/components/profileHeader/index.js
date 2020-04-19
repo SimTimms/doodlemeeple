@@ -33,7 +33,15 @@ export function ProfileHeader({
         [classes.rootDesktop]: !mobile,
       })}
     >
-      <div style={{ position: 'absolute', right: 0, top: 0, display: 'flex' }}>
+      <div
+        style={{
+          position: 'absolute',
+          right: 0,
+          top: 0,
+          display: 'flex',
+          padding: 5,
+        }}
+      >
         <Uploader
           cbImage={(url) => {
             setDisabledValue(true);

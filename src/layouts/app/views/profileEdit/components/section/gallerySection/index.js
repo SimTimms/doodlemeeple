@@ -6,7 +6,10 @@ import ReactPlayer from 'react-player';
 import autosave from '../../../../../../../utils/autosave';
 import { toaster } from '../../../../../../../utils/toaster';
 import { useStyles } from './styles';
-import { UPDATE_GALLERY_SECTION_MUTATION } from '../../../../../../../data/mutations';
+import {
+  UPDATE_GALLERY_SECTION_MUTATION,
+  CREATE_GALLERY_SECTION_MUTATION,
+} from '../../../../../../../data/mutations';
 import { DeleteButton } from '../deleteButton';
 import { FieldTitle } from '../fieldTitle';
 import Testimonials from '../../testimonials';
@@ -31,6 +34,7 @@ function GallerySection({
   const [testimonials, setTestimonials] = React.useState([]);
   const [changed, setChanged] = React.useState(false);
 
+  console.log(sections);
   const imageFilter = images.map((item) => {
     return {
       img: item.img,
@@ -60,26 +64,32 @@ function GallerySection({
   return (
     <div>
       <Divider />
-
       <Mutation
-        mutation={UPDATE_GALLERY_SECTION_MUTATION}
+        mutation={
+          section.id === 'new'
+            ? CREATE_GALLERY_SECTION_MUTATION
+            : UPDATE_GALLERY_SECTION_MUTATION
+        }
         variables={{
           id: section.id,
           section: sectionValues,
         }}
         onCompleted={(data) => {
-          toaster('Saved');
+          const copyArr = Object.assign([], sections);
+          if (section.id === 'new') {
+            const indexProject = copyArr
+              .map((item, index) => item.id === 'new' && index)
+              .filter((item) => item !== false)[0];
+            copyArr[indexProject ? indexProject : 0].id =
+              data.createGallerySection;
+          }
+          setSections(copyArr);
+          toaster('Section Created');
         }}
       >
         {(mutation) => {
           return (
             <div className={classes.sectionWrapper}>
-              <DeleteButton
-                sectionId={section.id}
-                sections={sections}
-                index={index}
-                setSections={setSections}
-              />
               <div className={classes.sectionHeader}>
                 <div className={classes.sectionHeaderTitle}>
                   <Icon
@@ -92,6 +102,12 @@ function GallerySection({
                     {TYPE_HELPER(type)}
                   </Typography>
                 </div>
+                <DeleteButton
+                  sectionId={section.id}
+                  sections={sections}
+                  index={index}
+                  setSections={setSections}
+                />
               </div>
               <FieldTitle
                 name="Description"
@@ -115,80 +131,93 @@ function GallerySection({
                 onChange={(ev) => {
                   setChanged(true);
                   autosaveIsOn && autosave(mutation, 'summary');
-                  setSummary(ev.target.value.replace(/[^A-Za-z0-9 \n]/g, ''));
+                  setSummary(
+                    ev.target.value.replace(/[^A-Za-z0-9 .,\'\n]/g, ''),
+                  );
                 }}
               />
-              <FieldTitle
-                name="Featured Showreel"
-                description="Grab the attention of a client with a short video (we recommend about 30 seconds). Please enter the URL you'd like to embed,"
-                warning=""
-              />
-              <TextField
-                id={'showreel'}
-                label={`YouTube, Vimeo URL ${
-                  showreel ? `(${256 - showreel.length})` : ''
-                }`}
-                inputProps={{ maxLength: 256 }}
-                value={showreel}
-                margin="normal"
-                variant="outlined"
-                style={{ width: '100%', marginTop: 10 }}
-                onChange={(ev) => {
-                  setChanged(true);
-                  autosaveIsOn && autosave(mutation, 'showreel');
-                  setShowreel(ev.target.value);
-                }}
-              />
-              {showreel ? (
-                <ReactPlayer
-                  url={showreel}
-                  playing
-                  controls={true}
-                  muted={true}
-                  style={{ width: '100%' }}
-                  width="100%"
-                />
+
+              {section.id !== 'new' ? (
+                <div style={{ width: '100%' }}>
+                  <FieldTitle
+                    name="Featured Showreel"
+                    description="Grab the attention of a client with a short video (we recommend about 30 seconds). Please enter the URL you'd like to embed,"
+                    warning=""
+                  />
+                  <TextField
+                    id={'showreel'}
+                    label={`YouTube, Vimeo URL ${
+                      showreel ? `(${256 - showreel.length})` : ''
+                    }`}
+                    inputProps={{ maxLength: 256 }}
+                    value={showreel}
+                    margin="normal"
+                    variant="outlined"
+                    style={{ width: '100%', marginTop: 10 }}
+                    onChange={(ev) => {
+                      setChanged(true);
+                      autosaveIsOn && autosave(mutation, 'showreel');
+                      setShowreel(ev.target.value);
+                    }}
+                  />
+                  {showreel ? (
+                    <ReactPlayer
+                      url={showreel}
+                      playing
+                      controls={true}
+                      muted={true}
+                      style={{ width: '100%' }}
+                      width="100%"
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        width: '100%',
+                        background: '#222',
+                        height: 340,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Icon style={{ color: '#fff' }}>videocam_off</Icon>{' '}
+                    </div>
+                  )}
+                  <FieldTitle
+                    name="Portfolio"
+                    description="Choose your most impressive pieces of work, and try to think about what clients are looking for, such as piece of card art, box cover or spot illustration in a manual. Consider including an image that shows your process. Show your range if you're able to provide a variety of styles"
+                    warning=""
+                  />
+                  <MediaGalleryObject
+                    images={images}
+                    setImages={(newImages) => {
+                      setChanged(true);
+                      setImages(newImages);
+                      autosaveIsOn && autosave(mutation, 'summary');
+                    }}
+                    index={index}
+                  />
+                  <Projects
+                    projects={notableProjects}
+                    setNotableProjects={setNotableProjects}
+                    setChanged={setChanged}
+                    sectionId={section.id}
+                    autosaveIsOn={autosaveIsOn}
+                  />
+                  <Testimonials
+                    testimonials={testimonials}
+                    setTestimonials={setTestimonials}
+                    setChanged={setChanged}
+                    sectionId={section.id}
+                  />
+                </div>
               ) : (
-                <div
-                  style={{
-                    width: '100%',
-                    background: '#222',
-                    height: 340,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Icon style={{ color: '#fff' }}>videocam_off</Icon>{' '}
+                <div className={classes.notify}>
+                  <Typography variant="h6">
+                    Enter a description to unlock more options
+                  </Typography>
                 </div>
               )}
-              <FieldTitle
-                name="Portfolio"
-                description="Choose your most impressive pieces of work, and try to think about what clients are looking for, such as piece of card art, box cover or spot illustration in a manual. Consider including an image that shows your process. Show your range if you're able to provide a variety of styles"
-                warning=""
-              />
-              <MediaGalleryObject
-                images={images}
-                setImages={(newImages) => {
-                  setChanged(true);
-                  setImages(newImages);
-                  autosaveIsOn && autosave(mutation, 'summary');
-                }}
-                index={index}
-              />
-              <Projects
-                projects={notableProjects}
-                setNotableProjects={setNotableProjects}
-                setChanged={setChanged}
-                sectionId={section.id}
-                autosaveIsOn={autosaveIsOn}
-              />
-              <Testimonials
-                testimonials={testimonials}
-                setTestimonials={setTestimonials}
-                setChanged={setChanged}
-                sectionId={section.id}
-              />
               <div className={classes.actionWrapper}>
                 {!autosaveIsOn && (
                   <SaveButton

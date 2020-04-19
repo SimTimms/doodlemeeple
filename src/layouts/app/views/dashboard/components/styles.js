@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
   messageCard: {
     display: 'flex',
     flexDirection: 'row',
@@ -41,7 +41,7 @@ export const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     padding: 10,
     borderRight: '1px solid #ddd',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   projectNotifications: {

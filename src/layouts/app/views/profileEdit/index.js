@@ -58,11 +58,18 @@ export function EditProfile({ theme }) {
     autosave: autosaveIsOn,
   };
 
+  function hasNew() {
+    const ids = sections.map((item) => item.id);
+    const filterIds = ids.filter((item) => item === 'new');
+    return filterIds.length;
+  }
+
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <Query
           query={PROFILE}
+          fetchPolicy="network-only"
           onCompleted={(data) => {
             setSections(data.profile.sections);
             setUserName(data.profile.name);
@@ -295,7 +302,7 @@ export function EditProfile({ theme }) {
                         />
                       ) : null,
                     )}
-                  {sections.length < 3 && (
+                  {sections.length < 3 && hasNew() === 0 && (
                     <AddSection setSections={setSections} sections={sections} />
                   )}
                 </Card>

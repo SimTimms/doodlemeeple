@@ -20,7 +20,7 @@ import { CardHeader } from '../../../../components';
 import tim from '../../../../assets/tim.jpg';
 
 export function NewProject({ gamesTemp, setGamesTestData, projectId }) {
-  let project = gamesTemp.filter(project => project.id === projectId)[0];
+  let project = gamesTemp.filter((project) => project.id === projectId)[0];
   if (!project) project = { projectName: '', invites: [] };
   const classes = useStyles();
 

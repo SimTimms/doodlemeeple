@@ -6,6 +6,9 @@ import Divider from '@material-ui/core/Divider';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import { ArtistCard } from './ArtistCard';
+import heromaster from '../../../assets/heromaster.jpg';
+import jumping from '../../../assets/jumping.jpg';
+import map from '../../../assets/map.jpg';
 
 function AddSection({ setSections, sections }) {
   const [display, setDisplay] = React.useState(false);
@@ -41,24 +44,21 @@ function AddSection({ setSections, sections }) {
           sections={sections}
           setSections={setSections}
           type="artist"
+          img={jumping}
         />
         <ArtistCard
           setDisplay={setDisplay}
           sections={sections}
           setSections={setSections}
           type="graphic-artist"
+          img={heromaster}
         />
         <ArtistCard
           setDisplay={setDisplay}
           sections={sections}
           setSections={setSections}
           type="rulebook-editor"
-        />
-        <ArtistCard
-          setDisplay={setDisplay}
-          sections={sections}
-          setSections={setSections}
-          type="content-editor"
+          img={map}
         />
       </div>
       <CardContent

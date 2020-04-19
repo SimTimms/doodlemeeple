@@ -76,9 +76,6 @@ function RouterComponent(props) {
         <Route path="/about">
           <AboutLayoutFrame />
         </Route>
-        <Route path="/deleted">
-          <div>Your account has been deleted</div>
-        </Route>
         <Route
           path="/:page/:token"
           render={(props) => <PublicLayout {...props} />}
