@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, useMediaQuery } from '@material-ui/core';
+import { TextField, useMediaQuery, Typography } from '@material-ui/core';
 import { DeleteButton } from './deleteButton';
 import { useStyles } from './styles';
 import { Uploader } from '../../../../../../components';
@@ -24,7 +24,6 @@ export function Project({
 }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
-
   return (
     <Mutation
       mutation={project.id === 'new' ? CREATE_PROJECT : UPDATE_PROJECT}
@@ -66,27 +65,33 @@ export function Project({
                 [classes.avatarWrapperMobile]: mobile,
               })}
             >
-              <Uploader
-                cbImage={(url) => {
-                  setChanged(true);
-                  const copyArr = Object.assign([], projects);
-                  copyArr[index].image = url;
-                  autosaveIsOn && autosave(mutation, 'project');
-                  setNotableProjects(copyArr);
-                }}
-                styleOverride={null}
-                cbDelete={() => {
-                  setChanged(true);
-                  const copyArr = Object.assign([], projects);
-                  copyArr[index].image = '';
-                  autosaveIsOn && autosave(mutation, 'project');
-                  setNotableProjects(copyArr);
-                }}
-                hasFile={project.image !== '' || project.image ? true : false}
-                className={null}
-                setImagePosition={null}
-                size=""
-              />
+              {project.id !== 'new' ? (
+                <Uploader
+                  cbImage={(url) => {
+                    setChanged(true);
+                    const copyArr = Object.assign([], projects);
+                    copyArr[index].image = url;
+                    autosaveIsOn && autosave(mutation, 'project');
+                    setNotableProjects(copyArr);
+                  }}
+                  styleOverride={null}
+                  cbDelete={() => {
+                    setChanged(true);
+                    const copyArr = Object.assign([], projects);
+                    copyArr[index].image = '';
+                    autosaveIsOn && autosave(mutation, 'project');
+                    setNotableProjects(copyArr);
+                  }}
+                  hasFile={project.image !== '' || project.image ? true : false}
+                  className={null}
+                  setImagePosition={null}
+                  size=""
+                />
+              ) : (
+                <Typography variant="body1" style={{ color: '#fff' }}>
+                  Project name required
+                </Typography>
+              )}
             </div>
 
             <div className={classes.actionInputWrapper}>
@@ -111,9 +116,18 @@ export function Project({
               />
               <TextField
                 id={'testimonial'}
-                label={`Description ${
-                  project.summary ? `(${126 - project.summary.length})` : ''
-                }`}
+                label={
+                  project.id !== 'new'
+                    ? `Description ${
+                        project.summary
+                          ? `(${126 - project.summary.length})`
+                          : ''
+                      }`
+                    : 'Project name required'
+                }
+                className={clsx({
+                  [classes.inputFocus]: project.id === 'new' && true,
+                })}
                 inputProps={{ maxLength: 126 }}
                 multiline
                 value={project.summary}
@@ -129,6 +143,7 @@ export function Project({
                   copyArr[index].summary = ev.target.value;
                   setNotableProjects(copyArr);
                 }}
+                disabled={project.id === 'new' ? true : false}
               />
             </div>
             <DeleteButton

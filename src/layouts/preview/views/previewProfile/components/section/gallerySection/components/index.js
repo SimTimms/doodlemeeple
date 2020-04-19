@@ -106,7 +106,7 @@ export function Testimonials({ testimonials }) {
 export function Projects({ projects }) {
   const classes = useStyles();
   const projectElements = projects.map((item) => {
-    return item.summary ? (
+    return item.name ? (
       <div className={classes.projectWrapper}>
         {item.image && (
           <div
@@ -122,9 +122,9 @@ export function Projects({ projects }) {
           </div>
         )}
 
-        <div className={classes.testimonialSummaryWrapper}>
-          <Typography variant="body1" className={classes.testimonialSummary}>
-            {`${item.summary}`}
+        <div className={classes.projectSummaryWrapper}>
+          <Typography variant="body1" className={classes.projectSummary}>
+            {`"${item.summary}"`}
           </Typography>
         </div>
       </div>

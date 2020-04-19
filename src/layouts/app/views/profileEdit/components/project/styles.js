@@ -47,6 +47,7 @@ export const useStyles = makeStyles({
     backgroundPosition: 'center center',
     backgroundSize: 'cover',
   },
+  inputFocus: { background: '#ddd' },
   avatarWrapperMobile: {
     marginRight: 0,
   },

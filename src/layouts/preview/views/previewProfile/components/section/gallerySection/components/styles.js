@@ -59,6 +59,8 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     flexDirection: 'row',
     marginTop: 30,
+    padding: 30,
+    boxSizing: 'border-box',
   },
   projectWrapperParent: {
     display: 'flex',
@@ -105,6 +107,21 @@ export const useStyles = makeStyles((theme) => ({
     padding: 15,
     minWidth: 200,
     marginLeft: 10,
+  },
+  projectSummaryWrapper: {
+    borderRadius: 40,
+    padding: 15,
+    minWidth: 200,
+    marginLeft: 10,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
+
+  projectSummary: {
+    width: '100%',
+    textAlign: 'center',
   },
   testimonialSummary: {
     width: '100%',

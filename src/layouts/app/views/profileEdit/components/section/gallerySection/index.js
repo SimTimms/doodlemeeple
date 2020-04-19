@@ -34,7 +34,6 @@ function GallerySection({
   const [testimonials, setTestimonials] = React.useState([]);
   const [changed, setChanged] = React.useState(false);
 
-  console.log(sections);
   const imageFilter = images.map((item) => {
     return {
       img: item.img,
@@ -45,8 +44,6 @@ function GallerySection({
     summary,
     title,
     gallery: { images: imageFilter },
-    notableProjects,
-    testimonials,
     showreel,
     type,
   };
@@ -160,7 +157,7 @@ function GallerySection({
                       setShowreel(ev.target.value);
                     }}
                   />
-                  {showreel ? (
+                  {showreel && (
                     <ReactPlayer
                       url={showreel}
                       playing
@@ -169,19 +166,6 @@ function GallerySection({
                       style={{ width: '100%' }}
                       width="100%"
                     />
-                  ) : (
-                    <div
-                      style={{
-                        width: '100%',
-                        background: '#222',
-                        height: 340,
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Icon style={{ color: '#fff' }}>videocam_off</Icon>{' '}
-                    </div>
                   )}
                   <FieldTitle
                     name="Portfolio"

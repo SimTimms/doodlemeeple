@@ -75,6 +75,7 @@ function MediaGallery({ items, edit, setBgImage, setImages }) {
                 cbDelete={null}
                 hasFile={false}
                 setImagePosition={null}
+                size="2MB PNG JPG"
               />
             </div>
           )}
