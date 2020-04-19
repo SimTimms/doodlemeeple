@@ -114,16 +114,19 @@ export function PreviewProfile({ theme, profileId }) {
                     ? `url(${userProfile.profileBG}`
                     : 'linear-gradient(to bottom right, #fff, #555)',
                 backgroundSize:
-                  browser && browser.name === 'firefox'
+                  browser && browser.name === 'firefoxblam'
                     ? o.interpolate((o) => {
                         return `${o}%`;
                       })
-                    : '100%',
+                    : 'cover',
                 backgroundPosition: 'center center',
+                backgroundRepeat: 'no-repeat',
                 display: 'flex',
-                alignItems: 'flex-start',
+                alignItems: 'flex-end',
                 justifyContent: 'flex-start',
-                paddingTop: 300,
+
+                minHeight: 400,
+                maxHeight: 400,
                 boxShadow: 'inset 0 0 10px rgba(255,255,255,0.5)',
               }}
             >

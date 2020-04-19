@@ -6,7 +6,6 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-
     marginTop: 10,
   },
   mainHeaderBorder: {
