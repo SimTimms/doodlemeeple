@@ -1,20 +1,16 @@
 import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import HomeIcon from '@material-ui/icons/Home';
-import ContactMailIcon from '@material-ui/icons/ContactMail';
-import WebAssetIcon from '@material-ui/icons/WebAsset';
-import AccountBalanceIcon from '@material-ui/icons/AccountBalanceWallet';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import {
+  Divider,
+  IconButton,
+  Icon,
+  Drawer,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  List,
+  useMediaQuery,
+} from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useStyles } from '../styles';
 import Cookies from 'js-cookie';
@@ -63,9 +59,9 @@ export function AppDrawer(props) {
       >
         <IconButton>
           {theme.direction === 'ltr' ? (
-            <ChevronLeftIcon />
+            <Icon>chevron_left</Icon>
           ) : (
-            <ChevronRightIcon />
+            <Icon>chevron_right</Icon>
           )}
         </IconButton>
       </div>
@@ -75,25 +71,30 @@ export function AppDrawer(props) {
         {[
           {
             name: 'Dashboard',
-            icon: <HomeIcon />,
+            icon: <Icon>home</Icon>,
             link: '/app/dashboard',
           },
           {
             name: 'Profile',
-            icon: <ContactMailIcon />,
+            icon: <Icon>contact_mail</Icon>,
             link: '/app/edit-profile',
           },
           {
             name: 'Account',
-            icon: <AccountBalanceIcon />,
+            icon: <Icon>account_balance</Icon>,
             link: '/app/account',
+          },
+          {
+            name: 'Jobs',
+            icon: <Icon>work</Icon>,
+            link: '/app/projects',
           } /*
           {
             name: 'Invites',
             icon: <MailIcon />,
             link: '/app/invites',
           },
-          { name: 'Jobs', icon: <WorkIcon />, link: '/roles/my-roles' },
+         
           { name: 'My Games', icon: <ExtensionIcon />, link: '/app/projects' },
           {
             name: 'Messages',
@@ -108,7 +109,7 @@ export function AppDrawer(props) {
             onClick={handleDrawerClose}
           >
             <ListItem button>
-              <ListItemIcon style={{ minWidth: 32 }}>{text.icon}</ListItemIcon>
+              <ListItemIcon style={{ minWidth: 32 }}>{text.icon} </ListItemIcon>
               <ListItemText
                 primary={text.name}
                 className={clsx({
@@ -122,7 +123,7 @@ export function AppDrawer(props) {
         <a href="https://doodlemeeple.com" style={{ textDecoration: 'none' }}>
           <ListItem button>
             <ListItemIcon style={{ minWidth: 32 }}>
-              <WebAssetIcon />
+              <Icon>web_asset</Icon>
             </ListItemIcon>
             <ListItemText
               primary="Website"
@@ -141,7 +142,7 @@ export function AppDrawer(props) {
           }}
         >
           <ListItemIcon style={{ minWidth: 32 }}>
-            <ExitToAppIcon />
+            <Icon>exit_to_app</Icon>
           </ListItemIcon>
           <ListItemText
             primary="Logout"

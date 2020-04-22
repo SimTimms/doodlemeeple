@@ -1,26 +1,25 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import {
   ProjectComponent,
   EmptyProjectComponent,
 } from './components/projectComponent';
 import { useStyles } from './styles';
+import { Query } from 'react-apollo';
+import { PROFILE } from '../../../../data/queries';
+import { LoadIcon, ContentHeader } from '../../../../components';
 
-export function Projects({ gamesTemp }) {
+export function Projects() {
   const classes = useStyles();
-  const projectArray = gamesTemp;
+  const [projectArray, setProjectArray] = React.useState([]);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div>
-        <Typography variant="h6" color="textPrimary">
-          My Projects
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
+      <div className={classes.root}>
+        <ContentHeader
+          title="Projects"
+          subTitle="List the projects and jobs you need help with"
+        />
         <div className={classes.cardGrid}>
           {projectArray.map((project, index) => {
             return (
@@ -29,6 +28,17 @@ export function Projects({ gamesTemp }) {
           })}
           <EmptyProjectComponent key={`project_empty`} />
         </div>
+        <Query
+          query={PROFILE}
+          fetchPolicy="network-only"
+          onCompleted={(data) => {}}
+        >
+          {({ loading, error, data }) => {
+            if (loading) return <LoadIcon />;
+            if (error) return <div>Error</div>;
+            return <div></div>;
+          }}
+        </Query>
       </div>
     </Slide>
   );

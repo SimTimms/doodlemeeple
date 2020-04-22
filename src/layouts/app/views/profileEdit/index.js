@@ -17,7 +17,7 @@ import {
   ContentHeader,
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
-import { PROFILE, SECTIONS } from '../../../../data/queries';
+import { PROFILE } from '../../../../data/queries';
 import { UpdateUserButton } from './components/updateUserButton';
 import { Section } from './components/section';
 import GallerySection from './components/section/gallerySection';
@@ -67,35 +67,6 @@ export function EditProfile({ theme }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <Query
-          query={PROFILE}
-          fetchPolicy="network-only"
-          onCompleted={(data) => {
-            setSections(data.profile.sections);
-            setUserName(data.profile.name);
-            setSummary(data.profile.summary);
-            setBgImage(data.profile.profileBG);
-            setUserId(data.profile.id);
-            setAutosaveIsOn(data.profile.autosave);
-            setProfileBGStyle(
-              data.profile.profileBGStyle
-                ? data.profile.profileBGStyle.split(':')
-                : [0, 0],
-            );
-            setProfileImg(data.profile.profileImg);
-            setProfileImgStyle(
-              data.profile.profileImgStyle
-                ? data.profile.profileImgStyle.split(':')
-                : [0, 0],
-            );
-          }}
-        >
-          {({ loading, error, data }) => {
-            if (loading) return <LoadIcon />;
-            if (error) return <div>Error</div>;
-            return <div></div>;
-          }}
-        </Query>
         <Mutation
           mutation={UPDATE_USER_MUTATION}
           variables={{
@@ -125,25 +96,11 @@ export function EditProfile({ theme }) {
           {(SignupMutation) => {
             return (
               <div className={classes.root}>
-                <ContentHeader>
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: '100%',
-                    }}
-                  >
-                    <Typography variant="h1" color="textPrimary">
-                      Profile
-                    </Typography>
-                  </div>
-                  <Typography color="textSecondary" component="p">
-                    Tell everyone about yourself, showcase the best examples of
-                    your work
-                  </Typography>
-                </ContentHeader>
+                <ContentHeader
+                  title="Profile"
+                  subTitle="Tell everyone about yourself, showcase the best examples of
+                    your work"
+                />
 
                 <div
                   style={{
@@ -256,20 +213,6 @@ export function EditProfile({ theme }) {
                       style={{ width: '100%' }}
                     />
                   </div>
-                  {/*}
-                  <Query
-                    query={SECTIONS}
-                    onCompleted={(data) => {
-                      setSections(data.getSections);
-                    }}
-                    fetchPolicy="network-only"
-                  >
-                    {({ loading, error, data }) => {
-                      if (loading) return <div>Fetching</div>;
-                      if (error) return <div>Error</div>;
-                      return null;
-                    }}
-                  </Query>*/}
                   {sections &&
                     sections.map((section, index) =>
                       section.type === 'artist' ||
@@ -310,6 +253,35 @@ export function EditProfile({ theme }) {
             );
           }}
         </Mutation>
+        <Query
+          query={PROFILE}
+          fetchPolicy="network-only"
+          onCompleted={(data) => {
+            setSections(data.profile.sections);
+            setUserName(data.profile.name);
+            setSummary(data.profile.summary);
+            setBgImage(data.profile.profileBG);
+            setUserId(data.profile.id);
+            setAutosaveIsOn(data.profile.autosave);
+            setProfileBGStyle(
+              data.profile.profileBGStyle
+                ? data.profile.profileBGStyle.split(':')
+                : [0, 0],
+            );
+            setProfileImg(data.profile.profileImg);
+            setProfileImgStyle(
+              data.profile.profileImgStyle
+                ? data.profile.profileImgStyle.split(':')
+                : [0, 0],
+            );
+          }}
+        >
+          {({ loading, error, data }) => {
+            if (loading) return <LoadIcon />;
+            if (error) return <div>Error</div>;
+            return <div></div>;
+          }}
+        </Query>
       </div>
     </Slide>
   );

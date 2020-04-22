@@ -129,7 +129,7 @@ function GallerySection({
                   setChanged(true);
                   autosaveIsOn && autosave(mutation, 'summary');
                   setSummary(
-                    ev.target.value.replace(/[^A-Za-z0-9 .,\'\n]/g, ''),
+                    ev.target.value.replace(/[^A-Za-z0-9 .,'\n]/g, ''),
                   );
                 }}
               />

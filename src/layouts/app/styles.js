@@ -2,7 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 240;
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
+  root: { height: '100vh', background: '#efeff5' },
   menuButton: {
     marginRight: theme.spacing(2),
   },

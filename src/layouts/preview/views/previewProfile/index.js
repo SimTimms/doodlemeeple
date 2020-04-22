@@ -114,7 +114,7 @@ export function PreviewProfile({ theme, profileId }) {
                     ? `url(${userProfile.profileBG}`
                     : 'linear-gradient(to bottom right, #fff, #555)',
                 backgroundSize:
-                  browser && browser.name === 'firefoxblam'
+                  browser && browser.name === 'firefox'
                     ? o.interpolate((o) => {
                         return `${o}%`;
                       })

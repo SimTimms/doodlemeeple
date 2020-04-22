@@ -23,6 +23,12 @@ export const DELETE_ACCOUNT = gql`
   }
 `;
 
+export const UPDATE_GAME = gql`
+  mutation UpdateGame($id: String!, $game: GameInput) {
+    updateUser(id: $id, game: $game)
+  }
+`;
+
 export const UPDATE_USER_MUTATION = gql`
   mutation UpdateUserMutation(
     $name: String!

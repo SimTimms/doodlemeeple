@@ -1,9 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
   card: {
     width: '30%',
-    margin: '20px auto 20px 0',
+    margin: 20,
     minWidth: 300,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',

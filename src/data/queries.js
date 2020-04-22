@@ -1,5 +1,29 @@
 import gql from 'graphql-tag';
 
+export const GAME = gql`
+  query GetGame($gameId: String!) {
+    getGame(gameId: $gameId) {
+      id
+      name
+      keywords
+      img
+      backgroundImg
+      summary
+      location
+      gallery {
+        id
+        summary
+        images {
+          img
+        }
+      }
+      showreel
+      type
+      createdAt
+    }
+  }
+`;
+
 export const PROFILE = gql`
   {
     profile {

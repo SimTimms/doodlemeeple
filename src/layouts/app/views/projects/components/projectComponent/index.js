@@ -33,7 +33,7 @@ export function ProjectComponent({ project }) {
           </Typography>
           <Divider style={{ margin: 10, width: '100%' }} />
           <Link
-            to={`/app/edit-project/${project.id}`}
+            to={`/app/edit-game/${project.id}`}
             className={classes.cardLink}
             style={{ textDecoration: 'none' }}
           >
@@ -51,7 +51,7 @@ export function EmptyProjectComponent() {
   const classes = useStyles();
   return (
     <Card className={classes.card}>
-      <Link to={`/app/new-project`} className={classes.cardLink}>
+      <Link to={`/app/edit-game/new`} className={classes.cardLink}>
         <CardContent className={classes.cardContentCenter}>
           <div className={classes.flexCenter}>
             <Icon style={{ fontSize: 50, color: '#fff' }}>add_circle</Icon>

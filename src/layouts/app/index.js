@@ -11,7 +11,7 @@ import { EditProfile } from './views/profileEdit';
 import { Account } from './views/account';
 import { Invites } from './views/invites';
 import { Project } from './views/project';
-import { NewProject } from './views/newProject';
+import { EditGame } from './views/editGame';
 import { NewQuote } from './views/newQuote';
 import { Decline } from './views/decline';
 import { Projects } from './views/projects';
@@ -22,19 +22,10 @@ import {
   ContentTop,
   StyledNavBar,
 } from '../../components';
-import {
-  projectObject,
-  projectObjectTwo,
-  projectObjectThree,
-} from '../../testData/projects';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('home');
-  const [gamesTestData, setGamesTestData] = React.useState([
-    projectObject,
-    projectObjectTwo,
-    projectObjectThree,
-  ]);
+
   const pageJump = props.match ? props.match.params.page : null;
   const mobile = useMediaQuery('(max-width:800px)');
 
@@ -63,7 +54,7 @@ function AppLayout(props) {
   };
 
   return (
-    <div style={{ height: '100vh', background: '#efeff5' }}>
+    <div className={classes.root}>
       <ToastContainer />
       <StyledNavBar
         open={open}
@@ -99,17 +90,12 @@ function AppLayout(props) {
           ) : page === 'invites' ? (
             <Invites />
           ) : page === 'projects' ? (
-            <Projects gamesTemp={gamesTestData} />
-          ) : page === 'edit-project' ? (
-            <NewProject
-              projectId={pathParam}
-              gamesTemp={gamesTestData}
-              setGamesTestData={setGamesTestData}
-            />
-          ) : page === 'view-project' ? (
+            <Projects />
+          ) : page === 'edit-game' ? (
+            <EditGame theme={props.theme} projectId={pathParam} />
+          ) : page === 'view-game' ? (
             <Project
               projectId={pathParam}
-              gamesTemp={gamesTestData}
               actionSet={
                 <CardActionArea>
                   <Link to="/app/invites">
@@ -127,12 +113,6 @@ function AppLayout(props) {
                 </CardActionArea>
               }
               edit={false}
-            />
-          ) : page === 'new-project' ? (
-            <NewProject
-              projectId={null}
-              gamesTemp={gamesTestData}
-              setGamesTestData={setGamesTestData}
             />
           ) : page === 'decline' ? (
             <Decline projectId={pathParam} />

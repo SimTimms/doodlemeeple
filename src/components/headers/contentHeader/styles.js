@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles({
-  icon: { fontSize: 20, color: '#ddd' },
   wrapper: {
     display: 'flex',
     flexDirection: 'column',
@@ -11,5 +10,12 @@ export const useStyles = makeStyles({
     borderBottom: '1px solid #ddd',
     padding: '10px 0 20px 0',
     marginBottom: 10,
+  },
+  subHeader: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
   },
 });
