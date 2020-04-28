@@ -24,6 +24,16 @@ export const GAME = gql`
   }
 `;
 
+export const GAMES = gql`
+  query GetGames {
+    getGames {
+      id
+      name
+      backgroundImg
+    }
+  }
+`;
+
 export const PROFILE = gql`
   {
     profile {
@@ -76,6 +86,14 @@ export const PROFILE_PREVIEW = gql`
       profileBGStyle
       profileImg
       profileImgStyle
+      autosave
+    }
+  }
+`;
+
+export const AUTOSAVE_IS = gql`
+  {
+    profile {
       autosave
     }
   }

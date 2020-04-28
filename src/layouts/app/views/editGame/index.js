@@ -1,15 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Icon, Card, Slide, Button } from '@material-ui/core';
+import {
+  Icon,
+  Card,
+  Slide,
+  Button,
+  TextField,
+  Typography,
+} from '@material-ui/core';
 import { useStyles } from './styles';
 import { ProfileHeader } from './components/profileHeader';
-import { LoadIcon, ErrorBox, ContentHeader } from '../../../../components';
+import { LoadIcon, ContentHeader, DeleteButton } from '../../../../components';
 import { Query } from 'react-apollo';
+import { Mutation } from 'react-apollo';
+import {
+  UPDATE_GAME,
+  CREATE_GAME,
+  REMOVE_GAME,
+} from '../../../../data/mutations';
 import { GAME } from '../../../../data/queries';
 import { UpdateGameButton } from './components/updateGameButton';
 import { toaster } from '../../../../utils/toaster';
+import autosave from '../../../../utils/autosave';
 
-export function EditGame({ theme, projectId }) {
+export function EditGame({ theme, gameId, autosaveIsOn, history }) {
   const classes = useStyles();
   const [game, setGame] = React.useState({
     name: '',
@@ -22,62 +36,147 @@ export function EditGame({ theme, projectId }) {
     },
     showreel: '',
     type: 'game',
+    id: 'new',
   });
   const [disabledValue, setDisabledValue] = React.useState(false);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <div className={classes.root}>
-          <ContentHeader
-            title={projectId === 'new' ? 'Create Project' : 'Edit Project'}
-            subTitle="Create a new game or project listing, then create jobs"
-          />
+        <ContentHeader
+          title={gameId === 'new' ? 'Create a Game' : 'Edit a Game'}
+          subTitle="Create a new game or project listing, then create jobs"
+        />
 
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              paddingBottom: 5,
-            }}
-          >
-            <UpdateGameButton
-              game={game}
-              disabledValue={disabledValue}
-              setDisabledValue={setDisabledValue}
-              toast={() => {
-                toaster('Saved');
-              }}
-            />
+        <Mutation
+          mutation={gameId === 'new' ? CREATE_GAME : UPDATE_GAME}
+          variables={{
+            id: gameId,
+            game: {
+              name: game.name,
+              img: game.img,
+              backgroundImg: game.backgroundImg,
+              summary: game.summary,
+              location: game.location,
+              gallery: game.gallery,
+              showreel: game.showreel,
+              type: game.type,
+            },
+          }}
+          onCompleted={(data) => {
+            toaster('Saved');
+            const newGameId =
+              gameId === 'new' ? data.createGame : data.updateGame;
+            setGame({ ...game, id: newGameId });
+            history.replace(`/app/edit-game/${newGameId}`);
+          }}
+        >
+          {(mutation) => {
+            return (
+              <div style={{ width: '100%' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    paddingBottom: 5,
+                  }}
+                >
+                  <UpdateGameButton
+                    game={game}
+                    disabledValue={disabledValue}
+                    setDisabledValue={setDisabledValue}
+                    toast={() => {
+                      toaster('Saved');
+                    }}
+                    mutation={mutation}
+                  />
 
-            <Link
-              to={`/preview-game/${projectId}`}
-              style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
-            >
-              <Button
-                variant="contained"
-                color="primary"
-                style={{ width: 60, marginLeft: 10 }}
-              >
-                <Icon style={{ fontSize: 18, color: '#fff' }}>pageview</Icon>
-              </Button>
-            </Link>
-          </div>
-          <Card className={classes.card}>
-            <ProfileHeader
-              game={game}
-              setGame={setGame}
-              autosaveFunction={null}
-              setDisabledValue={setDisabledValue}
-            />
-          </Card>
-        </div>
-
+                  <Link
+                    to={`/preview-game/${gameId}`}
+                    style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
+                  >
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      style={{ width: 60, marginLeft: 10 }}
+                    >
+                      <Icon style={{ fontSize: 18, color: '#fff' }}>
+                        pageview
+                      </Icon>
+                    </Button>
+                  </Link>
+                </div>
+                <Card className={classes.card}>
+                  <ProfileHeader
+                    game={game}
+                    setGame={setGame}
+                    autosaveFunction={() => {
+                      autosave && mutation();
+                    }}
+                    setDisabledValue={setDisabledValue}
+                  />
+                  <div style={{ padding: 10 }}>
+                    <TextField
+                      id={'summary'}
+                      label={`Summary ${
+                        game.summary ? `(${156 - game.summary.length})` : ''
+                      }`}
+                      inputProps={{ maxLength: 156 }}
+                      multiline
+                      type="text"
+                      value={game.summary}
+                      onChange={(e) => {
+                        setDisabledValue(true);
+                        setGame({
+                          ...game,
+                          summary: e.target.value.replace(
+                            /[^A-Za-z0-9 ,\-.!()£$"'\n]/g,
+                            '',
+                          ),
+                        });
+                        autosaveIsOn && autosave(mutation, 'image');
+                      }}
+                      margin="normal"
+                      variant="outlined"
+                      style={{ width: '100%' }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      padding: 10,
+                      borderTop: '1px dotted #ccc',
+                      background: '#eee',
+                    }}
+                  >
+                    <Typography variant="h2" component="p">
+                      Delete Game
+                    </Typography>
+                    <Mutation
+                      mutation={REMOVE_GAME}
+                      variables={{
+                        id: gameId,
+                      }}
+                      onCompleted={(data) => {}}
+                    >
+                      {(mutation) => {
+                        return (
+                          <DeleteButton mutation={mutation} theme={theme} />
+                        );
+                      }}
+                    </Mutation>
+                  </div>
+                </Card>
+              </div>
+            );
+          }}
+        </Mutation>
         <Query
           query={GAME}
-          variables={{ gameId: 'new' }}
+          variables={{ gameId: gameId }}
           fetchPolicy="network-only"
-          onCompleted={(data) => {}}
+          onCompleted={(data) => {
+            data.getGame && setGame({ ...data.getGame });
+          }}
         >
           {({ loading, error, data }) => {
             if (loading) return <LoadIcon />;

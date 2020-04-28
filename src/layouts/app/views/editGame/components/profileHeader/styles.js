@@ -64,9 +64,10 @@ export const useStyles = makeStyles((theme) => ({
   profileName: {
     display: 'flex',
     flexDirection: 'column',
-    paddingLeft: 10,
+    boxSizing: 'border-box',
     textAlign: 'left',
     width: '100%',
+    padding: 10,
   },
   profileNameMobile: {
     textAlign: 'center',

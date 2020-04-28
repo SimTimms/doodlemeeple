@@ -17,8 +17,10 @@ import { SelectTagsWidget, TagsWidget } from './tags';
 import Uploader from './uploader';
 import CardActionArea from './wrappers';
 import Footer from './footer';
+import DeleteButton from './buttons/deleteButton';
 
 export {
+  DeleteButton,
   LoadIcon,
   Content,
   ContentTop,

@@ -87,7 +87,7 @@ export function AppDrawer(props) {
           {
             name: 'Jobs',
             icon: <Icon>work</Icon>,
-            link: '/app/projects',
+            link: '/app/games',
           } /*
           {
             name: 'Invites',
@@ -109,7 +109,9 @@ export function AppDrawer(props) {
             onClick={handleDrawerClose}
           >
             <ListItem button>
-              <ListItemIcon style={{ minWidth: 32 }}>{text.icon} </ListItemIcon>
+              <ListItemIcon style={{ minWidth: 32 }}>
+                <div>{text.icon}</div>
+              </ListItemIcon>
               <ListItemText
                 primary={text.name}
                 className={clsx({
@@ -123,7 +125,7 @@ export function AppDrawer(props) {
         <a href="https://doodlemeeple.com" style={{ textDecoration: 'none' }}>
           <ListItem button>
             <ListItemIcon style={{ minWidth: 32 }}>
-              <Icon>web_asset</Icon>
+              <Icon style={{ minWidth: 32 }}>web_asset</Icon>
             </ListItemIcon>
             <ListItemText
               primary="Website"

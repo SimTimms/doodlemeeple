@@ -10,50 +10,30 @@ export function UpdateGameButton({
   disabledValue,
   setDisabledValue,
   toast,
+  mutation,
 }) {
   const validate = game.name.length < 3 ? false : disabledValue;
 
   return (
-    <Mutation
-      mutation={UPDATE_GAME}
-      variables={{
-        name: game.name,
-        img: game.img,
-        backgroundImg: game.backgroundImg,
-        summary: game.summary,
-        location: game.location,
-        gallery: game.gallery,
-        showreel: game.showreel,
-        type: game.type,
-      }}
-      onCompleted={() => {
-        toast();
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
       }}
     >
-      {(SignupMutation) => {
-        return (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              alignItems: 'center',
-            }}
-          >
-            <Button
-              onClick={() => {
-                setDisabledValue(false);
-                SignupMutation();
-              }}
-              variant="contained"
-              color="primary"
-              style={{ margin: 10 }}
-              disabled={!validate}
-            >
-              <Icon style={{ fontSize: 18, color: '#fff' }}>save</Icon>
-            </Button>
-          </div>
-        );
-      }}
-    </Mutation>
+      <Button
+        onClick={() => {
+          setDisabledValue(false);
+          mutation();
+        }}
+        variant="contained"
+        color="primary"
+        style={{ margin: 10 }}
+        disabled={!validate}
+      >
+        <Icon style={{ fontSize: 18, color: '#fff' }}>save</Icon>
+      </Button>
+    </div>
   );
 }

@@ -27,37 +27,39 @@ export function ProfileHeader({
         [classes.rootDesktop]: !mobile,
       })}
     >
-      <div
-        style={{
-          position: 'absolute',
-          right: 0,
-          top: 0,
-          display: 'flex',
-          padding: 5,
-        }}
-      >
-        <Uploader
-          cbImage={(url) => {
-            setDisabledValue(true);
-            setGame({ ...game, backgroundImg: url });
-            if (autosaveFunction) {
-              autosave(autosaveFunction, 'image');
-            }
+      {game.id !== 'new' && (
+        <div
+          style={{
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            display: 'flex',
+            padding: 5,
           }}
-          cbDelete={() => {
-            setDisabledValue(true);
-            setGame({ ...game, backgroundImg: '' });
-            if (autosaveFunction) {
-              autosave(autosaveFunction, 'image');
-            }
-          }}
-          styleOverride={null}
-          hasFile={game.backgroundImg ? true : false}
-          className={null}
-          setImagePosition={null}
-          size="700 x 400"
-        />
-      </div>
+        >
+          <Uploader
+            cbImage={(url) => {
+              setDisabledValue(true);
+              setGame({ ...game, backgroundImg: url });
+              if (autosaveFunction) {
+                autosave(autosaveFunction, 'image');
+              }
+            }}
+            cbDelete={() => {
+              setDisabledValue(true);
+              setGame({ ...game, backgroundImg: '' });
+              if (autosaveFunction) {
+                autosave(autosaveFunction, 'image');
+              }
+            }}
+            styleOverride={null}
+            hasFile={game.backgroundImg ? true : false}
+            className={null}
+            setImagePosition={null}
+            size="700 x 400"
+          />
+        </div>
+      )}
       <div
         className={clsx({
           [classes.profileWrapper]: true,
@@ -67,51 +69,6 @@ export function ProfileHeader({
       >
         <div
           className={clsx({
-            [classes.avatarWrapper]: true,
-            [classes.avatarWrapperMobile]: mobile,
-          })}
-        >
-          <div
-            className={clsx({
-              [classes.controlsWrapper]: true,
-              [classes.controlsWrapperCenter]: !game.img,
-              [classes.controlsWrapperCenterMobile]: mobile,
-            })}
-          >
-            <Uploader
-              cbImage={(url) => {
-                setDisabledValue(true);
-                setGame({ ...game, img: url });
-                if (autosaveFunction) {
-                  autosave(autosaveFunction, 'image');
-                }
-              }}
-              styleOverride={null}
-              cbDelete={() => {
-                setDisabledValue(true);
-                setGame({ ...game, img: '' });
-                if (autosaveFunction) {
-                  autosave(autosaveFunction, 'image');
-                }
-              }}
-              hasFile={game.img ? true : false}
-              className={null}
-              setImagePosition={null}
-              size="140 x 140"
-            />
-          </div>
-          {game.img && (
-            <div
-              style={{
-                backgroundSize: 'cover',
-                backgroundImage: `url(${game.img})`,
-              }}
-              className={classes.avatar}
-            ></div>
-          )}
-        </div>
-        <div
-          className={clsx({
             [classes.profileName]: true,
             [classes.profileNameMobile]: mobile,
           })}
@@ -119,8 +76,8 @@ export function ProfileHeader({
           <TextField
             id={'name'}
             value={game.name}
-            label={`Name ${game.name ? `(${126 - game.name.length})` : ''}`}
-            inputProps={{ maxLength: 126 }}
+            label={`Game Name ${game.name ? `(${86 - game.name.length})` : ''}`}
+            inputProps={{ maxLength: 86 }}
             onChange={(e) => {
               setDisabledValue(true);
               if (autosaveFunction) {
@@ -128,7 +85,7 @@ export function ProfileHeader({
               }
               setGame({
                 ...game,
-                name: e.target.value.replace(/[^A-Za-z0-9 ]/g, ''),
+                name: e.target.value.replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
               });
             }}
             margin="normal"

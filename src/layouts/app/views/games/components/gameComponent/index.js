@@ -9,19 +9,16 @@ import Divider from '@material-ui/core/Divider';
 import { useStyles } from './styles';
 import Icon from '@material-ui/core/Icon';
 
-export function ProjectComponent({ project }) {
+export function GameComponent({ game }) {
   const classes = useStyles();
   return (
     <Card
       className={classes.card}
-      style={{ backgroundImage: `url(${project.primaryImage})` }}
+      style={{ backgroundImage: `url(${game.backgroundImg})` }}
     >
       <div className={classes.cardDiv}>
         <CardContent className={classes.cardContentCenter}>
-          <ProjectHeader
-            title={project.user.name}
-            project={project.projectName}
-          />
+          <ProjectHeader title={game.name} project={game.name} />
           <Typography
             variant="body2"
             color="textSecondary"
@@ -29,16 +26,16 @@ export function ProjectComponent({ project }) {
             style={{ textAlign: 'center', width: '100%' }}
             className={classes.cardSummary}
           >
-            {project.projectSummary}
+            {game.summary}
           </Typography>
           <Divider style={{ margin: 10, width: '100%' }} />
           <Link
-            to={`/app/edit-game/${project.id}`}
+            to={`/app/edit-game/${game.id}`}
             className={classes.cardLink}
             style={{ textDecoration: 'none' }}
           >
             <Button variant="contained" color="primary">
-              Edit Project
+              Edit
             </Button>
           </Link>
         </CardContent>
@@ -47,7 +44,7 @@ export function ProjectComponent({ project }) {
   );
 }
 
-export function EmptyProjectComponent() {
+export function EmptyGameComponent() {
   const classes = useStyles();
   return (
     <Card className={classes.card}>

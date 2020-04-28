@@ -24,8 +24,20 @@ export const DELETE_ACCOUNT = gql`
 `;
 
 export const UPDATE_GAME = gql`
-  mutation UpdateGame($id: String!, $game: GameInput) {
-    updateUser(id: $id, game: $game)
+  mutation UpdateGame($id: String!, $game: GameInput!) {
+    updateGame(id: $id, game: $game)
+  }
+`;
+
+export const CREATE_GAME = gql`
+  mutation CreateGame($id: String!, $game: GameInput!) {
+    createGame(id: $id, game: $game)
+  }
+`;
+
+export const REMOVE_GAME = gql`
+  mutation RemoveGame($id: String!) {
+    removeGame(id: $id)
   }
 `;
 

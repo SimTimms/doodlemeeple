@@ -14,8 +14,11 @@ import { Project } from './views/project';
 import { EditGame } from './views/editGame';
 import { NewQuote } from './views/newQuote';
 import { Decline } from './views/decline';
-import { Projects } from './views/projects';
+import { LoadIcon } from '../../components';
+import { Games } from './views/games';
 import { ToastContainer } from 'react-toastify';
+import { Query } from 'react-apollo';
+import { AUTOSAVE_IS } from '../../data/queries';
 import {
   CardActionArea,
   ActionButton,
@@ -25,7 +28,7 @@ import {
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('home');
-
+  const [autosaveIsOn, setAutosaveIsOn] = React.useState(true);
   const pageJump = props.match ? props.match.params.page : null;
   const mobile = useMediaQuery('(max-width:800px)');
 
@@ -89,10 +92,15 @@ function AppLayout(props) {
             <Account history={props.history} />
           ) : page === 'invites' ? (
             <Invites />
-          ) : page === 'projects' ? (
-            <Projects />
+          ) : page === 'games' ? (
+            <Games />
           ) : page === 'edit-game' ? (
-            <EditGame theme={props.theme} projectId={pathParam} />
+            <EditGame
+              theme={props.theme}
+              gameId={pathParam}
+              autosaveIsOn={autosaveIsOn}
+              history={props.history}
+            />
           ) : page === 'view-game' ? (
             <Project
               projectId={pathParam}
@@ -121,6 +129,19 @@ function AppLayout(props) {
           ) : null}
         </ContentTop>
       </main>
+      <Query
+        query={AUTOSAVE_IS}
+        onCompleted={(data) => {
+          setAutosaveIsOn(data.profile.autosave);
+        }}
+        fetchPolicy="network-only"
+      >
+        {({ loading, error, data }) => {
+          if (loading) return <LoadIcon />;
+          if (error) return <div>Error</div>;
+          return <div></div>;
+        }}
+      </Query>
     </div>
   );
 }

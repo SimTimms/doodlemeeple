@@ -44,7 +44,7 @@ export function RolesDrawer(props) {
           {
             name: 'Games',
             icon: <ChevronLeft />,
-            link: '/app/projects',
+            link: '/app/games',
           },
         ];
   return (

@@ -1,37 +1,34 @@
 import React from 'react';
 import Slide from '@material-ui/core/Slide';
-import {
-  ProjectComponent,
-  EmptyProjectComponent,
-} from './components/projectComponent';
+import { GameComponent, EmptyGameComponent } from './components/gameComponent';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
-import { PROFILE } from '../../../../data/queries';
+import { GAMES } from '../../../../data/queries';
 import { LoadIcon, ContentHeader } from '../../../../components';
 
-export function Projects() {
+export function Games() {
   const classes = useStyles();
-  const [projectArray, setProjectArray] = React.useState([]);
+  const [gameArray, setGameArray] = React.useState([]);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <ContentHeader
-          title="Projects"
-          subTitle="List the projects and jobs you need help with"
+          title="Games"
+          subTitle="List the games and jobs you need help with"
         />
         <div className={classes.cardGrid}>
-          {projectArray.map((project, index) => {
-            return (
-              <ProjectComponent key={`project_${index}`} project={project} />
-            );
+          {gameArray.map((game, index) => {
+            return <GameComponent key={`project_${index}`} game={game} />;
           })}
-          <EmptyProjectComponent key={`project_empty`} />
+          <EmptyGameComponent key={`project_empty`} />
         </div>
         <Query
-          query={PROFILE}
+          query={GAMES}
           fetchPolicy="network-only"
-          onCompleted={(data) => {}}
+          onCompleted={(data) => {
+            setGameArray(data.getGames);
+          }}
         >
           {({ loading, error, data }) => {
             if (loading) return <LoadIcon />;
