@@ -1,7 +1,6 @@
 import React from 'react';
 import { AboutLayoutFrame } from './layouts';
 import AppLayout from './layouts/app';
-import { Chaos } from './layouts/chaos';
 import PreviewLayout from './layouts/preview';
 import { PublicLayout } from './layouts/public';
 import MessagesLayout from './layouts/messages';
@@ -74,9 +73,6 @@ function RouterComponent(props) {
             render={(props) => <MessageLayout {...props} />}
           />
         )}
-        <Route path="/chaos">
-          <Chaos />
-        </Route>
         <Route path="/about">
           <AboutLayoutFrame />
         </Route>
