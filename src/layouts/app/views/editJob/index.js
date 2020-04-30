@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import {
   Card,
@@ -16,10 +17,9 @@ import {
   FieldTitle,
 } from '../../../../components';
 import { Query } from 'react-apollo';
-
 import { Mutation } from 'react-apollo';
 import { UPDATE_JOB, CREATE_JOB, REMOVE_JOB } from '../../../../data/mutations';
-import { JOB, GAMES } from '../../../../data/queries';
+import { JOB, GAMES, CREATIVES } from '../../../../data/queries';
 import { UpdateJobButton } from './components/updateJobButton';
 import { toaster } from '../../../../utils/toaster';
 import autosave from '../../../../utils/autosave';
@@ -323,11 +323,89 @@ export function EditJob({ theme, jobId, autosaveIsOn, history }) {
                     )}
 
                     {job.submitted && (
-                      <FieldTitle
-                        name="5. Invite Artists"
-                        description=""
-                        warning=""
-                      />
+                      <div>
+                        <FieldTitle
+                          name="5. Invite Artists"
+                          description=""
+                          warning=""
+                        />
+                        <Query
+                          query={CREATIVES}
+                          fetchPolicy="network-only"
+                          onCompleted={(data) => {}}
+                        >
+                          {({ loading, error, data }) => {
+                            if (loading) return <LoadIcon />;
+                            if (error) return <div>Error</div>;
+
+                            return (
+                              <div>
+                                {data.getCreatives.map((item) => (
+                                  <Card
+                                    style={{
+                                      background:
+                                        item.profileBG !== ''
+                                          ? `url(${item.profileBG})`
+                                          : '#eee',
+                                      backgroundSize: 'cover',
+                                      padding: 10,
+                                      margin: 10,
+                                      marginBottom: 30,
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'flex-start',
+                                      flexDirection: 'column',
+                                      boxShadow:
+                                        item.profileBG !== ''
+                                          ? '10px 10px 10px rgba(0,0,0,0.4)'
+                                          : 'none',
+                                    }}
+                                  >
+                                    <div
+                                      style={{
+                                        background: 'rgba(255,255,255,0.9)',
+                                        padding: 10,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'flex-start',
+                                        width: '100%',
+                                        boxSizing: 'border-box',
+                                      }}
+                                    >
+                                      <div
+                                        style={{
+                                          background: `url(${item.profileImg})`,
+                                          backgroundSize: 'cover',
+                                          backgroundPosition: 'center center',
+                                          minWidth: 80,
+                                          maxWidth: 80,
+                                          minHeight: 80,
+                                          maxHeight: 80,
+                                          borderRadius: '50%',
+                                          border: '5px solid #fff',
+                                        }}
+                                      ></div>
+                                      <div style={{ padding: 20 }}>
+                                        <Typography variant="h2" component="h2">
+                                          {item.name}
+                                        </Typography>
+                                        <Typography
+                                          variant="body1"
+                                          component="p"
+                                        >
+                                          {item.summary.substring(0, 130)}
+                                        </Typography>
+                                      </div>
+                                    </div>
+                                    <button>Favourite</button>
+                                    <button>Invite</button>
+                                  </Card>
+                                ))}
+                              </div>
+                            );
+                          }}
+                        </Query>
+                      </div>
                     )}
                   </div>
 
@@ -369,7 +447,6 @@ export function EditJob({ theme, jobId, autosaveIsOn, history }) {
           variables={{ jobId: jobId }}
           fetchPolicy="network-only"
           onCompleted={(data) => {
-            console.log(data);
             data.getJob &&
               setJob({ ...data.getJob, gameId: data.getJob.game.id });
           }}

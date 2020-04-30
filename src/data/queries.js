@@ -1,5 +1,20 @@
 import gql from 'graphql-tag';
 
+export const CREATIVES = gql`
+  query GetCreatives {
+    getCreatives {
+      id
+      name
+      summary
+      profileBG
+      profileBGStyle
+      profileImg
+      profileImgStyle
+      autosave
+    }
+  }
+`;
+
 export const GAME = gql`
   query GetGame($gameId: String!) {
     getGame(gameId: $gameId) {
