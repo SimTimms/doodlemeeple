@@ -81,30 +81,17 @@ export function EditGame({ theme, gameId, autosaveIsOn, history }) {
                     paddingBottom: 5,
                   }}
                 >
-                  <UpdateGameButton
-                    game={game}
-                    disabledValue={disabledValue}
-                    setDisabledValue={setDisabledValue}
-                    toast={() => {
-                      toaster('Saved');
-                    }}
-                    mutation={mutation}
-                  />
-
-                  <Link
-                    to={`/preview-game/${gameId}`}
-                    style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
-                  >
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      style={{ width: 60, marginLeft: 10 }}
-                    >
-                      <Icon style={{ fontSize: 18, color: '#fff' }}>
-                        pageview
-                      </Icon>
-                    </Button>
-                  </Link>
+                  {!autosaveIsOn && (
+                    <UpdateGameButton
+                      game={game}
+                      disabledValue={disabledValue}
+                      setDisabledValue={setDisabledValue}
+                      toast={() => {
+                        toaster('Saved');
+                      }}
+                      mutation={mutation}
+                    />
+                  )}
                 </div>
                 <Card className={classes.card}>
                   <ProfileHeader
@@ -156,7 +143,10 @@ export function EditGame({ theme, gameId, autosaveIsOn, history }) {
                       variables={{
                         id: gameId,
                       }}
-                      onCompleted={(data) => {}}
+                      onCompleted={(data) => {
+                        toaster('Deleted');
+                        history.replace(`/app/games`);
+                      }}
                     >
                       {(mutation) => {
                         return (

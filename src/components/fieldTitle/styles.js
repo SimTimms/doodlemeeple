@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   titleLine: {
-    height: 20,
-    background: '#ddd',
+    height: 5,
+    background: theme.palette.primary.main,
   },
 }));

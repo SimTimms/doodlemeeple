@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FieldTitle } from '../section/fieldTitle';
+import { FieldTitle } from '../../../../../../components';
 import { useStyles } from './styles';
 import { AddProject } from '../project/addButton';
 import { Project } from '../project';

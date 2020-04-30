@@ -6,7 +6,7 @@ import { toaster } from '../../../../../../../utils/toaster';
 import { useStyles } from './styles';
 import { UPDATE_GALLERY_SECTION_MUTATION } from '../../../../../../../data/mutations';
 import { DeleteButton } from '../deleteButton';
-import { FieldTitle } from '../fieldTitle';
+import { FieldTitle } from '../../../../../../../components';
 import Testimonials from '../../testimonials';
 import Projects from '../../projects';
 import { SaveButton } from '../saveButton';

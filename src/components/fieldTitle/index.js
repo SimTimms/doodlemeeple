@@ -2,14 +2,14 @@ import React from 'react';
 import { Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 
-export function FieldTitle({ name, description, warning }) {
+export default function FieldTitle({ name, description, warning }) {
   const [infoOpen, setInfoOpen] = React.useState('none');
   const classes = useStyles();
   return (
     <div
       style={{
         width: '100%',
-        marginTop: 20,
+        marginTop: 40,
         display: 'flex',
         flexDirection: 'column',
       }}

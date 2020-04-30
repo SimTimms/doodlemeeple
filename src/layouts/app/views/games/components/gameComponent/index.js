@@ -51,7 +51,7 @@ export function EmptyGameComponent() {
       <Link to={`/app/edit-game/new`} className={classes.cardLink}>
         <CardContent className={classes.cardContentCenter}>
           <div className={classes.flexCenter}>
-            <Icon style={{ fontSize: 50, color: '#fff' }}>add_circle</Icon>
+            <Icon style={{ fontSize: 32, color: '#fff' }}>add_circle</Icon>
           </div>
         </CardContent>
       </Link>

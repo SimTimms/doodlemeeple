@@ -34,6 +34,52 @@ export const GAMES = gql`
   }
 `;
 
+export const JOB = gql`
+  query GetJob($jobId: String!) {
+    getJob(jobId: $jobId) {
+      id
+      name
+      keywords
+      img
+      summary
+      location
+      creativeSummary
+      submitted
+      game {
+        id
+        backgroundImg
+        name
+      }
+      gallery {
+        id
+        summary
+        images {
+          img
+        }
+      }
+      showreel
+      type
+      createdAt
+    }
+  }
+`;
+
+export const JOBS = gql`
+  query GetJobs {
+    getJobs {
+      id
+      name
+      summary
+      submitted
+      game {
+        id
+        backgroundImg
+        name
+      }
+    }
+  }
+`;
+
 export const PROFILE = gql`
   {
     profile {

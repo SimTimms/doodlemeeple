@@ -41,6 +41,24 @@ export const REMOVE_GAME = gql`
   }
 `;
 
+export const UPDATE_JOB = gql`
+  mutation UpdateJob($id: String!, $job: JobInput!) {
+    updateJob(id: $id, job: $job)
+  }
+`;
+
+export const CREATE_JOB = gql`
+  mutation CreateJob($id: String!, $job: JobInput!) {
+    createJob(id: $id, job: $job)
+  }
+`;
+
+export const REMOVE_JOB = gql`
+  mutation RemoveJob($id: String!) {
+    removeJob(id: $id)
+  }
+`;
+
 export const UPDATE_USER_MUTATION = gql`
   mutation UpdateUserMutation(
     $name: String!

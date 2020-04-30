@@ -18,9 +18,11 @@ import Uploader from './uploader';
 import CardActionArea from './wrappers';
 import Footer from './footer';
 import DeleteButton from './buttons/deleteButton';
+import FieldTitle from './fieldTitle';
 
 export {
   DeleteButton,
+  FieldTitle,
   LoadIcon,
   Content,
   ContentTop,

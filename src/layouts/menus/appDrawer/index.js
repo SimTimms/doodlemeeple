@@ -85,9 +85,14 @@ export function AppDrawer(props) {
             link: '/app/account',
           },
           {
+            name: 'Games',
+            icon: <Icon>casino</Icon>,
+            link: '/app/games',
+          },
+          {
             name: 'Jobs',
             icon: <Icon>work</Icon>,
-            link: '/app/games',
+            link: '/app/jobs',
           } /*
           {
             name: 'Invites',
