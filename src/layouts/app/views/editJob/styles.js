@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import smithy from '../../../../assets/smithy.jpg';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,7 +49,6 @@ export const useStyles = makeStyles((theme) => ({
   profileWrapper: {
     display: 'flex',
     flexDirection: 'row',
-    backgroundImage: `url(${smithy})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',

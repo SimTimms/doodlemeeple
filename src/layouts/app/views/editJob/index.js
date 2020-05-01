@@ -15,6 +15,7 @@ import {
   ContentHeader,
   DeleteButton,
   FieldTitle,
+  ProfileCard,
 } from '../../../../components';
 import { Query } from 'react-apollo';
 import { Mutation } from 'react-apollo';
@@ -341,65 +342,7 @@ export function EditJob({ theme, jobId, autosaveIsOn, history }) {
                             return (
                               <div>
                                 {data.getCreatives.map((item) => (
-                                  <Card
-                                    style={{
-                                      background:
-                                        item.profileBG !== ''
-                                          ? `url(${item.profileBG})`
-                                          : '#eee',
-                                      backgroundSize: 'cover',
-                                      padding: 10,
-                                      margin: 10,
-                                      marginBottom: 30,
-                                      display: 'flex',
-                                      alignItems: 'center',
-                                      justifyContent: 'flex-start',
-                                      flexDirection: 'column',
-                                      boxShadow:
-                                        item.profileBG !== ''
-                                          ? '10px 10px 10px rgba(0,0,0,0.4)'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div
-                                      style={{
-                                        background: 'rgba(255,255,255,0.9)',
-                                        padding: 10,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'flex-start',
-                                        width: '100%',
-                                        boxSizing: 'border-box',
-                                      }}
-                                    >
-                                      <div
-                                        style={{
-                                          background: `url(${item.profileImg})`,
-                                          backgroundSize: 'cover',
-                                          backgroundPosition: 'center center',
-                                          minWidth: 80,
-                                          maxWidth: 80,
-                                          minHeight: 80,
-                                          maxHeight: 80,
-                                          borderRadius: '50%',
-                                          border: '5px solid #fff',
-                                        }}
-                                      ></div>
-                                      <div style={{ padding: 20 }}>
-                                        <Typography variant="h2" component="h2">
-                                          {item.name}
-                                        </Typography>
-                                        <Typography
-                                          variant="body1"
-                                          component="p"
-                                        >
-                                          {item.summary.substring(0, 130)}
-                                        </Typography>
-                                      </div>
-                                    </div>
-                                    <button>Favourite</button>
-                                    <button>Invite</button>
-                                  </Card>
+                                  <ProfileCard item={item} />
                                 ))}
                               </div>
                             );

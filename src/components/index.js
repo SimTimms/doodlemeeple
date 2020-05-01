@@ -18,10 +18,16 @@ import Uploader from './uploader';
 import CardActionArea from './wrappers';
 import Footer from './footer';
 import DeleteButton from './buttons/deleteButton';
+import FavouriteButton from './buttons/favouriteButton';
+import InviteButton from './buttons/inviteButton';
 import FieldTitle from './fieldTitle';
+import ProfileCard from './profileCard';
 
 export {
   DeleteButton,
+  FavouriteButton,
+  InviteButton,
+  ProfileCard,
   FieldTitle,
   LoadIcon,
   Content,
