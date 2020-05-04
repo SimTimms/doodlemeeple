@@ -25,6 +25,10 @@ export const GAME = gql`
       backgroundImg
       summary
       location
+      jobs {
+        id
+        name
+      }
       gallery {
         id
         summary
@@ -45,6 +49,10 @@ export const GAMES = gql`
       id
       name
       backgroundImg
+      jobs {
+        id
+        name
+      }
     }
   }
 `;
@@ -156,6 +164,8 @@ export const AUTOSAVE_IS = gql`
   {
     profile {
       autosave
+      name
+      favourites
     }
   }
 `;

@@ -29,6 +29,12 @@ export const UPDATE_GAME = gql`
   }
 `;
 
+export const ADD_FAVOURITE = gql`
+  mutation AddFavourite($id: String!, $addRemove: String!) {
+    addFavourite(id: $id, addRemove: $addRemove)
+  }
+`;
+
 export const CREATE_GAME = gql`
   mutation CreateGame($id: String!, $game: GameInput!) {
     createGame(id: $id, game: $game)

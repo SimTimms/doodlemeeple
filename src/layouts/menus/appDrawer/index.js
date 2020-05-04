@@ -73,26 +73,31 @@ export function AppDrawer(props) {
             name: 'Dashboard',
             icon: <Icon>home</Icon>,
             link: '/app/dashboard',
+            color: '#444',
           },
           {
             name: 'Profile',
             icon: <Icon>contact_mail</Icon>,
             link: '/app/edit-profile',
+            color: '#444',
           },
           {
             name: 'Account',
             icon: <Icon>account_balance</Icon>,
             link: '/app/account',
+            color: '#444',
           },
           {
             name: 'Games',
             icon: <Icon>casino</Icon>,
             link: '/app/games',
+            color: '#2d80ad',
           },
           {
             name: 'Jobs',
             icon: <Icon>work</Icon>,
             link: '/app/jobs',
+            color: '#e34d4d',
           } /*
           {
             name: 'Invites',
@@ -113,9 +118,31 @@ export function AppDrawer(props) {
             key={text.name}
             onClick={handleDrawerClose}
           >
-            <ListItem button>
-              <ListItemIcon style={{ minWidth: 32 }}>
-                <div>{text.icon}</div>
+            <ListItem button style={{ paddingLeft: 10 }}>
+              <ListItemIcon
+                style={{
+                  minWidth: 32,
+                  minHeight: 32,
+                  background: text.color,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '50%',
+                  marginRight: 20,
+                }}
+              >
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '50%',
+                    marginTop: 1,
+                    color: '#fff',
+                  }}
+                >
+                  {text.icon}
+                </div>
               </ListItemIcon>
               <ListItemText
                 primary={text.name}

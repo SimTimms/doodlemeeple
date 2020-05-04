@@ -1,45 +1,70 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import { ProjectHeader } from './ProjectHeader';
-import Button from '@material-ui/core/Button';
+import { Typography, Button, Icon, Card } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Divider from '@material-ui/core/Divider';
 import { useStyles } from './styles';
-import Icon from '@material-ui/core/Icon';
 
 export function GameComponent({ game }) {
   const classes = useStyles();
+
   return (
-    <Card
-      className={classes.card}
-      style={{ backgroundImage: `url(${game.backgroundImg})` }}
-    >
-      <div className={classes.cardDiv}>
-        <CardContent className={classes.cardContentCenter}>
-          <ProjectHeader title={game.name} project={game.name} />
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            style={{ textAlign: 'center', width: '100%' }}
-            className={classes.cardSummary}
-          >
-            {game.summary}
+    <Card className={classes.card}>
+      <div
+        style={{
+          background: `url(${game.backgroundImg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          marginRight: 20,
+        }}
+        className={classes.gameImg}
+      />
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          justifyContent: 'flex-start',
+          width: '100%',
+          paddingLeft: 10,
+        }}
+      >
+        <Typography
+          variant="body1"
+          component="p"
+          style={{ width: '100%' }}
+          className={classes.cardSummary}
+        >
+          {game.name}
+        </Typography>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            flexWrap: 'nowrap',
+            background: '#e34d4d',
+            padding: 5,
+            borderRadius: 5,
+          }}
+          title={`${game.jobs.length} job${
+            game.jobs.length === 1 ? '' : 's'
+          } linked to this game`}
+        >
+          <Icon style={{ color: '#fff' }}>work</Icon>
+          <Typography variant="body1" component="p" style={{ color: '#fff' }}>
+            x {game.jobs.length}
           </Typography>
-          <Divider style={{ margin: 10, width: '100%' }} />
-          <Link
-            to={`/app/edit-game/${game.id}`}
-            className={classes.cardLink}
-            style={{ textDecoration: 'none' }}
-          >
-            <Button variant="contained" color="primary">
-              Edit
-            </Button>
-          </Link>
-        </CardContent>
+        </div>
       </div>
+
+      <Link
+        to={`/app/edit-game/${game.id}`}
+        className={classes.cardLink}
+        style={{ textDecoration: 'none' }}
+      >
+        <Button variant="contained" color="primary">
+          Edit
+        </Button>
+      </Link>
     </Card>
   );
 }
@@ -47,14 +72,18 @@ export function GameComponent({ game }) {
 export function EmptyGameComponent() {
   const classes = useStyles();
   return (
-    <Card className={classes.card}>
-      <Link to={`/app/edit-game/new`} className={classes.cardLink}>
-        <CardContent className={classes.cardContentCenter}>
-          <div className={classes.flexCenter}>
-            <Icon style={{ fontSize: 32, color: '#fff' }}>add_circle</Icon>
-          </div>
-        </CardContent>
-      </Link>
-    </Card>
+    <Link to={`/app/edit-game/new`} className={classes.cardLink}>
+      <div className={classes.flexCenter}>
+        <Icon style={{ fontSize: 32, color: '#444' }}>add_circle</Icon>
+        <Typography
+          variant="body1"
+          component="p"
+          style={{ width: '100%', paddingLeft: 10, color: '#444' }}
+          className={classes.cardSummary}
+        >
+          Add a Game
+        </Typography>
+      </div>
+    </Link>
   );
 }

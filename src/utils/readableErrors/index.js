@@ -1,3 +1,11 @@
+export const errorMessages = (messageIn) => {
+  console.log(messageIn);
+  if (messageIn.indexOf('would violate the required relation ') > -1) {
+    return 'This game cannot be deleted while there are open jobs attached';
+  }
+  return '';
+};
+
 export const readableErrors = (errorIn, errors) => {
   let errorString = errorIn.toString();
 
@@ -26,5 +34,6 @@ export const readableErrors = (errorIn, errors) => {
   } else {
     errors.passwordError = null;
   }
+
   return Object.assign({}, errors);
 };

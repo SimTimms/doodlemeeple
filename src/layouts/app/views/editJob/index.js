@@ -25,7 +25,7 @@ import { UpdateJobButton } from './components/updateJobButton';
 import { toaster } from '../../../../utils/toaster';
 import autosave from '../../../../utils/autosave';
 
-export function EditJob({ theme, jobId, autosaveIsOn, history }) {
+export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
   const classes = useStyles();
   const [games, setGames] = React.useState([]);
   const [job, setJob] = React.useState({
@@ -341,9 +341,18 @@ export function EditJob({ theme, jobId, autosaveIsOn, history }) {
 
                             return (
                               <div>
-                                {data.getCreatives.map((item) => (
-                                  <ProfileCard item={item} />
-                                ))}
+                                {data.getCreatives.map((item) => {
+                                  return (
+                                    <ProfileCard
+                                      item={item}
+                                      favourite={
+                                        favourites.indexOf(item.id) > -1
+                                          ? true
+                                          : false
+                                      }
+                                    />
+                                  );
+                                })}
                               </div>
                             );
                           }}

@@ -1,13 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import {
-  Icon,
-  Card,
-  Slide,
-  Button,
-  TextField,
-  Typography,
-} from '@material-ui/core';
+import { Icon, Card, Slide, TextField, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { ProfileHeader } from './components/profileHeader';
 import { LoadIcon, ContentHeader, DeleteButton } from '../../../../components';
@@ -22,6 +14,7 @@ import { GAME } from '../../../../data/queries';
 import { UpdateGameButton } from './components/updateGameButton';
 import { toaster } from '../../../../utils/toaster';
 import autosave from '../../../../utils/autosave';
+import { errorMessages } from '../../../../utils/readableErrors';
 
 export function EditGame({ theme, gameId, autosaveIsOn, history }) {
   const classes = useStyles();
@@ -39,6 +32,14 @@ export function EditGame({ theme, gameId, autosaveIsOn, history }) {
     id: 'new',
   });
   const [disabledValue, setDisabledValue] = React.useState(false);
+  const [deleteError, setDeleteError] = React.useState('');
+
+  function setGameImage(field, url) {
+    let gameCopy = { ...game };
+    console.log(gameCopy, field, url);
+    gameCopy[field] = url;
+    setGame({ ...gameCopy });
+  }
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -96,6 +97,7 @@ export function EditGame({ theme, gameId, autosaveIsOn, history }) {
                 <Card className={classes.card}>
                   <ProfileHeader
                     game={game}
+                    setGameImage={setGameImage}
                     setGame={setGame}
                     autosaveFunction={() => {
                       autosave && mutation();
@@ -135,25 +137,49 @@ export function EditGame({ theme, gameId, autosaveIsOn, history }) {
                       background: '#eee',
                     }}
                   >
-                    <Typography variant="h2" component="p">
-                      Delete Game
-                    </Typography>
-                    <Mutation
-                      mutation={REMOVE_GAME}
-                      variables={{
-                        id: gameId,
-                      }}
-                      onCompleted={(data) => {
-                        toaster('Deleted');
-                        history.replace(`/app/games`);
-                      }}
-                    >
-                      {(mutation) => {
-                        return (
-                          <DeleteButton mutation={mutation} theme={theme} />
-                        );
-                      }}
-                    </Mutation>
+                    {game.id !== 'new' && (
+                      <div>
+                        {' '}
+                        <Typography variant="h2" component="p">
+                          Delete Game
+                        </Typography>
+                        <Mutation
+                          mutation={REMOVE_GAME}
+                          variables={{
+                            id: gameId,
+                          }}
+                          onCompleted={(data) => {
+                            toaster('Deleted');
+                            history.replace(`/app/games`);
+                          }}
+                          onError={(error) => {
+                            const msg = errorMessages(error.toString());
+                            setDeleteError(msg);
+                            toaster('Error');
+                          }}
+                        >
+                          {(mutation) => {
+                            return (
+                              <div>
+                                {deleteError && (
+                                  <Typography
+                                    variant="body1"
+                                    component="p"
+                                    className={classes.error}
+                                  >
+                                    {deleteError}
+                                  </Typography>
+                                )}
+                                <DeleteButton
+                                  mutation={mutation}
+                                  theme={theme}
+                                />
+                              </div>
+                            );
+                          }}
+                        </Mutation>
+                      </div>
+                    )}
                   </div>
                 </Card>
               </div>

@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import smithy from '../../../../assets/smithy.jpg';
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 700,
     width: '100%',
@@ -14,6 +14,7 @@ export const useStyles = makeStyles(theme => ({
   title: {
     fontSize: 14,
   },
+  error: { background: theme.palette.error.main, color: '#fff', padding: 5 },
   avatar: {
     borderRadius: '50%',
     border: '10px solid #fff',

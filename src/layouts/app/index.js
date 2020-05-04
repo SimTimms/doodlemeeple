@@ -31,6 +31,7 @@ import {
 function AppLayout(props) {
   const [page, setPage] = React.useState('home');
   const [autosaveIsOn, setAutosaveIsOn] = React.useState(true);
+  const [favourites, setFavourites] = React.useState([]);
   const pageJump = props.match ? props.match.params.page : null;
   const mobile = useMediaQuery('(max-width:800px)');
 
@@ -111,6 +112,7 @@ function AppLayout(props) {
               jobId={pathParam}
               autosaveIsOn={autosaveIsOn}
               history={props.history}
+              favourites={favourites}
             />
           ) : page === 'view-game' ? (
             <Project
@@ -144,6 +146,8 @@ function AppLayout(props) {
         query={AUTOSAVE_IS}
         onCompleted={(data) => {
           setAutosaveIsOn(data.profile.autosave);
+          setFavourites(data.profile.favourites);
+          console.log(data);
         }}
         fetchPolicy="network-only"
       >

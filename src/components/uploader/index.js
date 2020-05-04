@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+
 import { useStyles } from './styles';
 import { Typography, Button, Icon } from '@material-ui/core';
 import Cookies from 'js-cookie';
@@ -87,6 +88,27 @@ function Uploader({
       className={`${classes.imageIconWrapper} ${className}`}
       style={styleOverride}
     >
+      {statusMessage === 'Uploading...' && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0,0,0,0.2)',
+            zIndex: 10,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Typography variant="h2" component="p">
+            Uploading....please wait
+          </Typography>
+        </div>
+      )}
+
       {statusMessage && <Typography gutterBottom>{statusMessage}</Typography>}
 
       {hasFile ? (

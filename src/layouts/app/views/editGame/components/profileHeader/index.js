@@ -9,6 +9,7 @@ import autosave from '../../../../../../utils/autosave';
 export function ProfileHeader({
   game,
   setGame,
+  setGameImage,
   autosaveFunction,
   setDisabledValue,
 }) {
@@ -40,14 +41,14 @@ export function ProfileHeader({
           <Uploader
             cbImage={(url) => {
               setDisabledValue(true);
-              setGame({ ...game, backgroundImg: url });
+              setGameImage('backgroundImg', url);
               if (autosaveFunction) {
                 autosave(autosaveFunction, 'image');
               }
             }}
             cbDelete={() => {
               setDisabledValue(true);
-              setGame({ ...game, backgroundImg: '' });
+              setGameImage('backgroundImg', '');
               if (autosaveFunction) {
                 autosave(autosaveFunction, 'image');
               }

@@ -2,9 +2,12 @@ import React from 'react';
 import { Card, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { FavouriteButton, InviteButton } from '../';
+import { Mutation } from 'react-apollo';
+import { ADD_FAVOURITE } from '../../data/mutations';
 
-export default function ProfileCard({ item }) {
+export default function ProfileCard({ item, favourite }) {
   const classes = useStyles();
+
   return (
     <Card
       className={classes.creativeCard}
@@ -39,7 +42,23 @@ export default function ProfileCard({ item }) {
         </div>
       </div>
       <div className={classes.actions}>
-        <FavouriteButton styleAdd={{ marginRight: 10 }} />
+        <Mutation
+          mutation={ADD_FAVOURITE}
+          variables={{
+            id: item.id,
+            addRemove: favourite ? 'remove' : 'add',
+          }}
+        >
+          {(mutation) => {
+            return (
+              <FavouriteButton
+                styleAdd={{ marginRight: 10 }}
+                mutation={mutation}
+                favourite={favourite}
+              />
+            );
+          }}
+        </Mutation>
         <InviteButton />
       </div>
     </Card>
