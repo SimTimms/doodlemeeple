@@ -350,6 +350,8 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                                           ? true
                                           : false
                                       }
+                                      gameId={job.game.id}
+                                      jobId={job.id}
                                     />
                                   );
                                 })}

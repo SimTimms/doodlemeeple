@@ -57,6 +57,18 @@ export const GAMES = gql`
   }
 `;
 
+export const INVITES = gql`
+  query GetInvites {
+    getInvites {
+      id
+      game {
+        id
+        name
+      }
+    }
+  }
+`;
+
 export const JOB = gql`
   query GetJob($jobId: String!) {
     getJob(jobId: $jobId) {

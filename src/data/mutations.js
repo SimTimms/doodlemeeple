@@ -23,15 +23,27 @@ export const DELETE_ACCOUNT = gql`
   }
 `;
 
-export const UPDATE_GAME = gql`
-  mutation UpdateGame($id: String!, $game: GameInput!) {
-    updateGame(id: $id, game: $game)
+export const UPDATE_INVITE = gql`
+  mutation UpdateInvite($id: String!, $invite: InviteInput!) {
+    updateInvite(id: $id, invite: $invite)
   }
 `;
 
-export const ADD_FAVOURITE = gql`
-  mutation AddFavourite($id: String!, $addRemove: String!) {
-    addFavourite(id: $id, addRemove: $addRemove)
+export const CREATE_INVITE = gql`
+  mutation CreateInvite($id: String!, $invite: InviteInput!) {
+    createInvite(id: $id, invite: $invite)
+  }
+`;
+
+export const REMOVE_INVITE = gql`
+  mutation RemoveInvite($id: String!) {
+    removeInvite(id: $id)
+  }
+`;
+
+export const UPDATE_GAME = gql`
+  mutation UpdateGame($id: String!, $game: GameInput!) {
+    updateGame(id: $id, game: $game)
   }
 `;
 
@@ -44,6 +56,12 @@ export const CREATE_GAME = gql`
 export const REMOVE_GAME = gql`
   mutation RemoveGame($id: String!) {
     removeGame(id: $id)
+  }
+`;
+
+export const ADD_FAVOURITE = gql`
+  mutation AddFavourite($id: String!, $addRemove: String!) {
+    addFavourite(id: $id, addRemove: $addRemove)
   }
 `;
 

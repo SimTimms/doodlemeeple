@@ -3,11 +3,11 @@ import { Card, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { FavouriteButton, InviteButton } from '../';
 import { Mutation } from 'react-apollo';
-import { ADD_FAVOURITE } from '../../data/mutations';
+import { ADD_FAVOURITE, CREATE_INVITE } from '../../data/mutations';
 
-export default function ProfileCard({ item, favourite }) {
+export default function ProfileCard({ item, favourite, gameId, jobId }) {
   const classes = useStyles();
-
+  console.log(item);
   return (
     <Card
       className={classes.creativeCard}
@@ -59,7 +59,23 @@ export default function ProfileCard({ item, favourite }) {
             );
           }}
         </Mutation>
-        <InviteButton />
+        <Mutation
+          mutation={CREATE_INVITE}
+          variables={{
+            id: item.id,
+            invite: {
+              gameId: gameId,
+              jobId: jobId,
+              userId: item.id,
+              title: '',
+              message: '',
+            },
+          }}
+        >
+          {(mutation) => {
+            return <InviteButton mutation={mutation} invite="" />;
+          }}
+        </Mutation>
       </div>
     </Card>
   );

@@ -91,13 +91,19 @@ export function AppDrawer(props) {
             name: 'Games',
             icon: <Icon>casino</Icon>,
             link: '/app/games',
-            color: '#2d80ad',
+            color: '#444',
           },
           {
             name: 'Jobs',
             icon: <Icon>work</Icon>,
             link: '/app/jobs',
-            color: '#e34d4d',
+            color: '#444',
+          },
+          {
+            name: 'Invites',
+            icon: <Icon>thumb_up</Icon>,
+            link: '/app/invites',
+            color: '#444',
           } /*
           {
             name: 'Invites',
