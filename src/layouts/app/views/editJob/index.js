@@ -86,14 +86,14 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                     paddingBottom: 5,
                   }}
                 >
-                  {!autosaveIsOn && (
+                  {/*!autosaveIsOn && (
                     <UpdateJobButton
                       job={job}
                       disabledValue={disabledValue}
                       setDisabledValue={setDisabledValue}
                       mutation={mutation}
                     />
-                  )}
+                  )*/}
                 </div>
                 <Card className={classes.card}>
                   <div style={{ padding: 10 }}>

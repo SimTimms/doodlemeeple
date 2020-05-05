@@ -55,7 +55,7 @@ export function EditProfile({ theme }) {
     sections,
     profileImgStyle,
     profileBGStyle,
-    autosave: autosaveIsOn,
+    autosave: true,
   };
 
   function hasNew() {
@@ -109,6 +109,7 @@ export function EditProfile({ theme }) {
                     paddingBottom: 5,
                   }}
                 >
+                  {/*
                   <label
                     htmlFor="material-switch"
                     style={{
@@ -142,7 +143,7 @@ export function EditProfile({ theme }) {
                       id="material-switch"
                     />
                   </label>
-                  {!autosaveIsOn && (
+              !autosaveIsOn && (
                     <UpdateUserButton
                       profile={userProfile}
                       setError={setError}
@@ -153,7 +154,7 @@ export function EditProfile({ theme }) {
                         toaster('Saved');
                       }}
                     />
-                  )}
+                    )*/}
                   <Link
                     to={`/preview/${userId}`}
                     style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}

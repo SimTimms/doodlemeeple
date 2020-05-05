@@ -135,7 +135,7 @@ function EditorSection({
                 sectionId={section.id}
               />
               <div className={classes.actionWrapper}>
-                {!autosaveIsOn && (
+                {/*!autosaveIsOn && (
                   <SaveButton
                     sectionId={section.id}
                     sectionValues={sectionValues}
@@ -143,7 +143,7 @@ function EditorSection({
                     setDisabledValue={setChanged}
                     mutation={UPDATE_GALLERY_SECTION_MUTATION}
                   />
-                )}
+                )*/}
               </div>
             </div>
           );

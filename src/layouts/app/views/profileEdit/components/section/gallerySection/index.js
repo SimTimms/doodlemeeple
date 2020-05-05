@@ -203,7 +203,7 @@ function GallerySection({
                 </div>
               )}
               <div className={classes.actionWrapper}>
-                {!autosaveIsOn && (
+                {/*!autosaveIsOn && (
                   <SaveButton
                     sectionId={section.id}
                     sectionValues={sectionValues}
@@ -211,7 +211,7 @@ function GallerySection({
                     setDisabledValue={setChanged}
                     mutation={UPDATE_GALLERY_SECTION_MUTATION}
                   />
-                )}
+                )*/}
               </div>
             </div>
           );

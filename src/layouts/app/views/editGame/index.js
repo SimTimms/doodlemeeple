@@ -82,7 +82,7 @@ export function EditGame({ theme, gameId, autosaveIsOn, history }) {
                     paddingBottom: 5,
                   }}
                 >
-                  {!autosaveIsOn && (
+                  {/*!autosaveIsOn && (
                     <UpdateGameButton
                       game={game}
                       disabledValue={disabledValue}
@@ -92,7 +92,7 @@ export function EditGame({ theme, gameId, autosaveIsOn, history }) {
                       }}
                       mutation={mutation}
                     />
-                  )}
+                    )*/}
                 </div>
                 <Card className={classes.card}>
                   <ProfileHeader

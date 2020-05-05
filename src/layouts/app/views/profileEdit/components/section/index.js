@@ -69,13 +69,14 @@ export function Section({ index, sections, setSections, section }) {
             index={index}
             setSections={setSections}
           />
+          {/*
           <SaveButton
             sectionId={section.id}
             sectionValues={sectionValues}
             disabledValue={changed}
             setDisabledValue={setChanged}
             mutation={UPDATE_SECTION_MUTATION}
-          />
+          />*/}
         </div>
       </div>
     </div>
