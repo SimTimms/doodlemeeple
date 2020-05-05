@@ -22,9 +22,11 @@ import FavouriteButton from './buttons/favouriteButton';
 import InviteButton from './buttons/inviteButton';
 import FieldTitle from './fieldTitle';
 import ProfileCard from './profileCard';
+import IconBox from './iconBox';
 
 export {
   DeleteButton,
+  IconBox,
   FavouriteButton,
   InviteButton,
   ProfileCard,

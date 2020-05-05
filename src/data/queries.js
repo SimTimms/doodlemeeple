@@ -64,6 +64,13 @@ export const INVITES = gql`
       game {
         id
         name
+        backgroundImg
+      }
+      user {
+        name
+      }
+      job {
+        name
       }
     }
   }

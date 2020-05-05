@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography, Button, Icon, Card } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
+import { IconBox } from '../../../../../../components';
 
 export function GameComponent({ game }) {
   const classes = useStyles();
@@ -35,25 +36,7 @@ export function GameComponent({ game }) {
         >
           {game.name}
         </Typography>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            flexWrap: 'nowrap',
-            background: '#e34d4d',
-            padding: 5,
-            borderRadius: 5,
-          }}
-          title={`${game.jobs.length} job${
-            game.jobs.length === 1 ? '' : 's'
-          } linked to this game`}
-        >
-          <Icon style={{ color: '#fff' }}>work</Icon>
-          <Typography variant="body1" component="p" style={{ color: '#fff' }}>
-            x {game.jobs.length}
-          </Typography>
-        </div>
+        <IconBox count={game.jobs.length} icon="work" />
       </div>
 
       <Link

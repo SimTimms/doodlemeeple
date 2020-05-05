@@ -1,6 +1,7 @@
+// @ts-nocheck
 import React from 'react';
 import Slide from '@material-ui/core/Slide';
-import { JobComponent, EmptyJobComponent } from './components/jobComponent';
+import { InviteComponent } from './components/inviteComponent';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { INVITES } from '../../../../data/queries';
@@ -8,23 +9,22 @@ import { LoadIcon, ContentHeader } from '../../../../components';
 
 export function Invites() {
   const classes = useStyles();
-  const [jobArray, setJobArray] = React.useState([]);
+  const [inviteArray, setInviteArray] = React.useState([]);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <ContentHeader title="Invites" subTitle="" />
         <div className={classes.cardGrid}>
-          {jobArray.map((job, index) => {
-            return <JobComponent key={`project_${index}`} job={job} />;
+          {inviteArray.map((invite, index) => {
+            return <InviteComponent key={`invite_${index}`} invite={invite} />;
           })}
-          <EmptyJobComponent key={`project_empty`} />
         </div>
         <Query
           query={INVITES}
           fetchPolicy="network-only"
           onCompleted={(data) => {
-            setJobArray(data.getJobs);
+            setInviteArray(data.getInvites);
           }}
         >
           {({ loading, error, data }) => {
