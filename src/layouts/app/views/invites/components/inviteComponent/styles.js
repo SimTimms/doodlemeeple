@@ -25,7 +25,13 @@ export const useStyles = makeStyles((theme) => ({
     height: '100%',
     paddingBottom: 20,
   },
-  cardSummary: { overflow: 'hidden' },
+  cardSummary: {
+    overflow: 'hidden',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    wrap: 'nowrap',
+  },
   cardEmpty: {
     width: '30%',
     margin: '20px auto 20px 0',

@@ -1,13 +1,15 @@
 import React from 'react';
-import { Card, Typography } from '@material-ui/core';
+import { Card, Typography, Button, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import { FavouriteButton, InviteButton } from '../';
 import { Mutation } from 'react-apollo';
 import { ADD_FAVOURITE, CREATE_INVITE } from '../../data/mutations';
 
+import { Link } from 'react-router-dom';
+
 export default function ProfileCard({ item, favourite, gameId, jobId }) {
   const classes = useStyles();
-  console.log(item);
+
   return (
     <Card
       className={classes.creativeCard}
@@ -41,24 +43,47 @@ export default function ProfileCard({ item, favourite, gameId, jobId }) {
           </Typography>
         </div>
       </div>
-      <div className={classes.actions}>
-        <Mutation
-          mutation={ADD_FAVOURITE}
-          variables={{
-            id: item.id,
-            addRemove: favourite ? 'remove' : 'add',
-          }}
-        >
-          {(mutation) => {
-            return (
-              <FavouriteButton
-                styleAdd={{ marginRight: 10 }}
-                mutation={mutation}
-                favourite={favourite}
-              />
-            );
-          }}
-        </Mutation>
+      <div className={classes.actionsWrapper}>
+        <div className={classes.actions}>
+          <Button
+            variant="contained"
+            color="secondary"
+            style={{ marginRight: 10, padding: 0, textAlign: 'center' }}
+          >
+            <Link
+              to={`/app/prei-profile`}
+              style={{
+                height: '100%',
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                textAlign: 'center',
+              }}
+            >
+              <Icon style={{ fontSize: 20, color: '#fff', margin: 'auto' }}>
+                more_horiz
+              </Icon>
+            </Link>
+          </Button>
+
+          <Mutation
+            mutation={ADD_FAVOURITE}
+            variables={{
+              id: item.id,
+              addRemove: favourite ? 'remove' : 'add',
+            }}
+          >
+            {(mutation) => {
+              return (
+                <FavouriteButton
+                  styleAdd={{ marginRight: 10 }}
+                  mutation={mutation}
+                  favourite={favourite}
+                />
+              );
+            }}
+          </Mutation>
+        </div>
         <Mutation
           mutation={CREATE_INVITE}
           variables={{

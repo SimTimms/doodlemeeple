@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   creativeCard: {
     margin: 10,
-    marginBottom: 30,
+    marginBottom: 100,
     border: '1px solid #ddd',
   },
   creativeCardWrapper: {
@@ -30,8 +30,14 @@ export const useStyles = makeStyles((theme) => ({
   },
   actions: {
     display: 'flex',
-    padding: 5,
     justifyContent: 'flex-end',
-    background: 'rgba(255,255,255,1)',
+  },
+  actionsWrapper: {
+    display: 'flex',
+    padding: 5,
+    paddingTop: 10,
+    paddingBottom: 10,
+    justifyContent: 'space-between',
+    background: 'rgba(255,255,255,0.8)',
   },
 }));

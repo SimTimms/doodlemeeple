@@ -2,9 +2,10 @@ import React from 'react';
 import { Typography, Button, Icon, Card } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
-import { IconBox } from '../../../../../../components';
+import { Mutation } from 'react-apollo';
+import { DECLINE_INVITE } from '../../../../../../data/mutations';
 
-export function InviteComponent({ invite }) {
+export function InviteComponent({ invite, removeInvite }) {
   const classes = useStyles();
 
   return (
@@ -41,24 +42,48 @@ export function InviteComponent({ invite }) {
           style={{ width: '100%', paddingLeft: 10 }}
           className={classes.cardSummary}
         >
-          for {invite.job.name} on {invite.game.name}
+          for{' '}
+          <Link
+            to={`/app/view-job/${invite.job.id}`}
+            style={{ textDecoration: 'none' }}
+          >
+            {invite.job.name}
+          </Link>{' '}
+          on{' '}
+          <Link
+            to={`/app/view-game/${invite.game.id}`}
+            style={{ textDecoration: 'none' }}
+          >
+            {invite.game.name}
+          </Link>
         </Typography>
-        <IconBox count="1" icon="work" />
-        <IconBox count="1" icon="casino" />
       </div>
 
-      <Link
-        to={`/app/edit-job/${invite.id}`}
-        className={classes.cardLink}
-        style={{ textDecoration: 'none' }}
+      <Button variant="contained" color="secondary">
+        Interested
+      </Button>
+      <Mutation
+        mutation={DECLINE_INVITE}
+        variables={{
+          id: invite.id,
+        }}
+        onCompleted={() => {
+          removeInvite(invite.id);
+        }}
       >
-        <Button variant="contained" color="secondary">
-          Accept
-        </Button>
-        <Button variant="contained" color="error">
-          Decline
-        </Button>
-      </Link>
+        {(mutation) => {
+          return (
+            <Button
+              variant="contained"
+              onClick={() => {
+                mutation();
+              }}
+            >
+              Decline
+            </Button>
+          );
+        }}
+      </Mutation>
     </Card>
   );
 }

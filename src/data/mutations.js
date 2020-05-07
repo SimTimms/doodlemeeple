@@ -41,6 +41,12 @@ export const REMOVE_INVITE = gql`
   }
 `;
 
+export const DECLINE_INVITE = gql`
+  mutation DeclineInvite($id: String!) {
+    declineInvite(id: $id)
+  }
+`;
+
 export const UPDATE_GAME = gql`
   mutation UpdateGame($id: String!, $game: GameInput!) {
     updateGame(id: $id, game: $game)

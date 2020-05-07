@@ -52,7 +52,9 @@ function RouterComponent(props) {
         {authToken && (
           <Route
             path="/preview/:pathParam?"
-            render={(props) => <PreviewLayout {...props} theme={theme} />}
+            render={(props) => (
+              <PreviewLayout {...props} theme={theme} publicView={false} />
+            )}
           />
         )}
         {authToken && (
@@ -73,6 +75,12 @@ function RouterComponent(props) {
             render={(props) => <MessageLayout {...props} />}
           />
         )}
+        <Route
+          path="/public-preview/:pathParam?"
+          render={(props) => (
+            <PreviewLayout {...props} theme={theme} public={true} />
+          )}
+        />
         <Route path="/about">
           <AboutLayoutFrame />
         </Route>

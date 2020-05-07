@@ -11,7 +11,7 @@ import EditorSection from './components/section/editorSection';
 const { detect } = require('detect-browser');
 const browser = detect();
 
-export function PreviewProfile({ theme, profileId }) {
+export function PreviewProfile({ theme, profileId, publicView }) {
   const classes = useStyles();
 
   const [userProfile, setUserProfile] = React.useState({
@@ -86,26 +86,29 @@ export function PreviewProfile({ theme, profileId }) {
         </Query>
 
         <div className={classes.root}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              paddingBottom: 5,
-            }}
-          >
-            <Link
-              to={`/app/edit-profile`}
-              style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
+          {publicView && (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                paddingBottom: 5,
+              }}
             >
-              <Button
-                variant="contained"
-                color="primary"
-                style={{ width: 60, marginLeft: 10 }}
+              <Link
+                to={`/app/edit-profile`}
+                style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
               >
-                <Icon style={{ fontSize: 18, color: '#fff' }}>edit</Icon>
-              </Button>
-            </Link>
-          </div>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ width: 60, marginLeft: 10 }}
+                >
+                  <Icon style={{ fontSize: 18, color: '#fff' }}>edit</Icon>
+                </Button>
+              </Link>
+            </div>
+          )}
+
           <Card className={classes.card}>
             <animated.div
               style={{

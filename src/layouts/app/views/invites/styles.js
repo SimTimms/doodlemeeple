@@ -18,4 +18,9 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'flex-end',
   },
+  notice: {
+    width: '100%',
+    padding: 10,
+    boxSizing: 'border-box',
+  },
 }));
