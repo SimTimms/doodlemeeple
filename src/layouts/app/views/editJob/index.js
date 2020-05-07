@@ -341,17 +341,21 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
 
                             return (
                               <div>
-                                {data.getCreatives.map((item) => {
+                                {data.getCreatives.map((creative) => {
                                   return (
                                     <ProfileCard
-                                      item={item}
+                                      creative={creative}
                                       favourite={
-                                        favourites.indexOf(item.id) > -1
+                                        favourites.indexOf(creative.id) > -1
                                           ? true
                                           : false
                                       }
                                       gameId={job.game.id}
                                       jobId={job.id}
+                                      invite={creative.invitesReceived.filter(
+                                        (filterItem) =>
+                                          filterItem.job.id === job.id,
+                                      )}
                                     />
                                   );
                                 })}

@@ -1,9 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 import smithy from '../../assets/smithy.jpg';
 import jumping from '../../assets/jumping.jpg';
-import purps from '../../assets/purps.jpg';
+import purps from '../../assets/forestgiant.jpg';
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
   root: {},
   background: {
     backgroundImage: `url(${smithy})`,

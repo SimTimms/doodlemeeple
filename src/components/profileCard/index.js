@@ -3,43 +3,56 @@ import { Card, Typography, Button, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import { FavouriteButton, InviteButton } from '../';
 import { Mutation } from 'react-apollo';
-import { ADD_FAVOURITE, CREATE_INVITE } from '../../data/mutations';
+import {
+  ADD_FAVOURITE,
+  CREATE_INVITE,
+  REMOVE_INVITE,
+} from '../../data/mutations';
 
 import { Link } from 'react-router-dom';
 
-export default function ProfileCard({ item, favourite, gameId, jobId }) {
+export default function ProfileCard({
+  creative,
+  favourite,
+  gameId,
+  jobId,
+  invite,
+}) {
   const classes = useStyles();
-
+  console.log(invite);
   return (
     <Card
       className={classes.creativeCard}
       style={{
-        background: item.profileBG !== '' ? `url(${item.profileBG})` : '#eee',
+        background:
+          creative.profileBG !== '' ? `url(${creative.profileBG})` : '#eee',
         backgroundSize: 'cover',
         backgroundPosition: 'center center',
         boxShadow:
-          item.profileBG !== '' ? '10px 10px 10px rgba(0,0,0,0.2)' : 'none',
+          creative.profileBG !== '' ? '10px 10px 10px rgba(0,0,0,0.2)' : 'none',
       }}
     >
       <div
         className={classes.creativeCardWrapper}
-        style={{ marginTop: item.profileBG !== '' ? 160 : 0 }}
+        style={{ marginTop: creative.profileBG !== '' ? 160 : 0 }}
       >
         <div
           className={classes.creativeCardBackground}
           style={{
             backgroundImage:
-              item.profileImg !== '' ? `url(${item.profileImg})` : `#ddd`,
+              creative.profileImg !== ''
+                ? `url(${creative.profileImg})`
+                : `#ddd`,
             backgroundSize: 'cover',
             backgroundPosition: 'center center',
           }}
         ></div>
         <div className={classes.creativeCardDetails}>
           <Typography variant="h2" component="h2">
-            {item.name}
+            {creative.name}
           </Typography>
           <Typography variant="body1" component="p">
-            {item.summary.substring(0, 130)}
+            {creative.summary.substring(0, 130)}
           </Typography>
         </div>
       </div>
@@ -69,7 +82,7 @@ export default function ProfileCard({ item, favourite, gameId, jobId }) {
           <Mutation
             mutation={ADD_FAVOURITE}
             variables={{
-              id: item.id,
+              id: creative.id,
               addRemove: favourite ? 'remove' : 'add',
             }}
           >
@@ -85,20 +98,27 @@ export default function ProfileCard({ item, favourite, gameId, jobId }) {
           </Mutation>
         </div>
         <Mutation
-          mutation={CREATE_INVITE}
+          mutation={invite.length === 0 ? CREATE_INVITE : REMOVE_INVITE}
           variables={{
-            id: item.id,
+            id: invite.length === 0 ? 'new' : invite[0].id,
             invite: {
               gameId: gameId,
               jobId: jobId,
-              userId: item.id,
+              userId: creative.id,
               title: '',
               message: '',
             },
           }}
         >
           {(mutation) => {
-            return <InviteButton mutation={mutation} invite="" />;
+            return (
+              <div>
+                <InviteButton
+                  mutation={mutation}
+                  invite={invite.length > 0 ? true : false}
+                />
+              </div>
+            );
           }}
         </Mutation>
       </div>

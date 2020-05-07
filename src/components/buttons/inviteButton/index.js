@@ -39,7 +39,7 @@ export default function InviteButton({ mutation, invite }) {
         component="p"
         style={{ color: '#fff', marginLeft: 10 }}
       >
-        {!on ? 'Invite' : 'Invited'}
+        {!on ? 'Select' : 'Selected'}
       </Typography>
     </Button>
   );

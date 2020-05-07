@@ -11,6 +11,21 @@ export const CREATIVES = gql`
       profileImg
       profileImgStyle
       autosave
+      invites {
+        id
+        job {
+          id
+        }
+      }
+      invitesReceived {
+        id
+        user {
+          id
+        }
+        job {
+          id
+        }
+      }
     }
   }
 `;
@@ -61,6 +76,7 @@ export const INVITES = gql`
   query GetInvites {
     getInvites {
       id
+      receiver
       game {
         id
         name
