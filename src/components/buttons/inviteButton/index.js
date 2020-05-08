@@ -31,14 +31,7 @@ export default function InviteButton({ mutation, invite }) {
         mutation();
       }}
     >
-      <Icon style={{ color: '#fff' }}>
-        {!on ? 'thumb_up' : 'sentiment_satisfied_alt'}
-      </Icon>
-      <Typography
-        variant="body1"
-        component="p"
-        style={{ color: '#fff', marginLeft: 10 }}
-      >
+      <Typography variant="body1" component="p" style={{ color: '#fff' }}>
         {!on ? 'Select' : 'Selected'}
       </Typography>
     </Button>

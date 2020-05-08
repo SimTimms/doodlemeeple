@@ -15,13 +15,11 @@ import {
   ContentHeader,
   DeleteButton,
   FieldTitle,
-  ProfileCard,
 } from '../../../../components';
 import { Query } from 'react-apollo';
 import { Mutation } from 'react-apollo';
 import { UPDATE_JOB, CREATE_JOB, REMOVE_JOB } from '../../../../data/mutations';
-import { JOB, GAMES, CREATIVES } from '../../../../data/queries';
-import { UpdateJobButton } from './components/updateJobButton';
+import { JOB, GAMES } from '../../../../data/queries';
 import { toaster } from '../../../../utils/toaster';
 import autosave from '../../../../utils/autosave';
 
@@ -289,82 +287,22 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                       description="Submit your job for approval, we'll let you know when it's live and don't worry you can still make changes."
                       warning=""
                     />
-                    {!job.submitted ? (
+
+                    <Link
+                      to={`/app/pick-artist/${job.id}`}
+                      style={{
+                        textDecoration: 'none',
+                        color: '#444',
+                      }}
+                    >
                       <Button
                         className={classes.iconButton}
-                        onClick={(e) => {
-                          toaster('Submitted');
-                          setJob({
-                            ...job,
-                            submitted: true,
-                          });
-                          autosaveIsOn && autosave(mutation, 'image');
-                        }}
-                        style={{ marginTop: 50 }}
+                        style={{ marginTop: 20 }}
                       >
-                        <Icon className={classes.iconButtonIcon}>publish</Icon>
-                        Submit Job
+                        <Icon className={classes.iconButtonIcon}>save</Icon>
+                        Continue
                       </Button>
-                    ) : (
-                      <Button
-                        className={classes.iconButton}
-                        onClick={(e) => {
-                          toaster('Unsubmitted');
-                          setJob({
-                            ...job,
-                            submitted: false,
-                          });
-                          autosaveIsOn && autosave(mutation, 'image');
-                        }}
-                        style={{ marginTop: 50 }}
-                      >
-                        <Icon className={classes.iconButtonIcon}>close</Icon>
-                        Un-Submit
-                      </Button>
-                    )}
-
-                    {job.submitted && (
-                      <div>
-                        <FieldTitle
-                          name="5. Invite Artists"
-                          description=""
-                          warning=""
-                        />
-                        <Query
-                          query={CREATIVES}
-                          fetchPolicy="network-only"
-                          onCompleted={(data) => {}}
-                        >
-                          {({ loading, error, data }) => {
-                            if (loading) return <LoadIcon />;
-                            if (error) return <div>Error</div>;
-
-                            return (
-                              <div>
-                                {data.getCreatives.map((creative) => {
-                                  return (
-                                    <ProfileCard
-                                      creative={creative}
-                                      favourite={
-                                        favourites.indexOf(creative.id) > -1
-                                          ? true
-                                          : false
-                                      }
-                                      gameId={job.game.id}
-                                      jobId={job.id}
-                                      invite={creative.invitesReceived.filter(
-                                        (filterItem) =>
-                                          filterItem.job.id === job.id,
-                                      )}
-                                    />
-                                  );
-                                })}
-                              </div>
-                            );
-                          }}
-                        </Query>
-                      </div>
-                    )}
+                    </Link>
                   </div>
 
                   <div

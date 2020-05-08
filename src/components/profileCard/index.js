@@ -19,7 +19,7 @@ export default function ProfileCard({
   invite,
 }) {
   const classes = useStyles();
-  console.log(invite);
+
   return (
     <Card
       className={classes.creativeCard}
@@ -52,7 +52,7 @@ export default function ProfileCard({
             {creative.name}
           </Typography>
           <Typography variant="body1" component="p">
-            {creative.summary.substring(0, 130)}
+            {creative.summary.substring(0, 60)}
           </Typography>
         </div>
       </div>
@@ -64,13 +64,14 @@ export default function ProfileCard({
             style={{ marginRight: 10, padding: 0, textAlign: 'center' }}
           >
             <Link
-              to={`/app/prei-profile`}
+              to={`/public-preview/${creative.id}`}
               style={{
                 height: '100%',
                 width: '100%',
                 display: 'flex',
                 alignItems: 'center',
                 textAlign: 'center',
+                textDecoration: 'none',
               }}
             >
               <Icon style={{ fontSize: 20, color: '#fff', margin: 'auto' }}>

@@ -78,7 +78,7 @@ function RouterComponent(props) {
         <Route
           path="/public-preview/:pathParam?"
           render={(props) => (
-            <PreviewLayout {...props} theme={theme} public={true} />
+            <PreviewLayout {...props} theme={theme} publicView={true} />
           )}
         />
         <Route path="/about">

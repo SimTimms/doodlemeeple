@@ -2,8 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    background: '#ccc',
-    width: 120,
+    background: '#ddd',
+    width: 100,
   },
   rootOn: {
     background: theme.palette.secondary.main,

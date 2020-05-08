@@ -13,6 +13,7 @@ import { Invites } from './views/invites';
 import { Project } from './views/project';
 import { EditGame } from './views/editGame';
 import { EditJob } from './views/editJob';
+import { PickArtist } from './views/pickArtist';
 import { NewQuote } from './views/newQuote';
 import { Decline } from './views/decline';
 import { LoadIcon } from '../../components';
@@ -114,26 +115,13 @@ function AppLayout(props) {
               history={props.history}
               favourites={favourites}
             />
-          ) : page === 'view-game' ? (
-            <Project
-              projectId={pathParam}
-              actionSet={
-                <CardActionArea>
-                  <Link to="/app/invites">
-                    <ActionButton name="Back" />
-                  </Link>
-
-                  <Link to={`/app/decline/${pathParam}`}>
-                    <ActionButton name="Decline" />
-                  </Link>
-                  <Link to={`/app/create-quote/${pathParam}`}>
-                    <Button variant="contained" color="primary">
-                      Continue
-                    </Button>
-                  </Link>
-                </CardActionArea>
-              }
-              edit={false}
+          ) : page === 'pick-artist' ? (
+            <PickArtist
+              theme={props.theme}
+              jobId={pathParam}
+              autosaveIsOn={autosaveIsOn}
+              history={props.history}
+              favourites={favourites}
             />
           ) : page === 'decline' ? (
             <Decline projectId={pathParam} />
