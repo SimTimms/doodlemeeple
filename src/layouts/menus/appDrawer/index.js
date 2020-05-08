@@ -94,7 +94,7 @@ export function AppDrawer(props) {
             color: '#444',
           },
           {
-            name: 'Jobs',
+            name: 'Briefs',
             icon: <Icon>work</Icon>,
             link: '/app/jobs',
             color: '#444',
@@ -160,7 +160,12 @@ export function AppDrawer(props) {
             </ListItem>
           </Link>
         ))}
-        <a href="https://doodlemeeple.com" style={{ textDecoration: 'none' }}>
+        <a
+          href="https://doodlemeeple.com"
+          style={{ textDecoration: 'none' }}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <ListItem button>
             <ListItemIcon style={{ minWidth: 32 }}>
               <Icon style={{ minWidth: 32 }}>web_asset</Icon>

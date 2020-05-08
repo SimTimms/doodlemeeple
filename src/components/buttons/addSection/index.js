@@ -29,7 +29,7 @@ function AddSection({ setSections, sections }) {
           component="p"
           style={{ fontSize: 16, color: '#fff', marginLeft: 10 }}
         >
-          {`Skill (${3 - sections.length})`}
+          {`Add a Skill (${3 - sections.length})`}
         </Typography>
       </CardContent>
       <Divider />

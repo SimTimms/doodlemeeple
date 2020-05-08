@@ -14,7 +14,7 @@ export function Jobs() {
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <ContentHeader
-          title="Jobs"
+          title="Briefs"
           subTitle="The jobs you've posted on DoodleMeeple"
         />
         <div className={classes.cardGrid}>

@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import smithy from '../../../../assets/smithy.jpg';
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 700,
     width: '100%',
@@ -9,6 +9,7 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'flex-end',
     flexDirection: 'column',
+    marginBottom: 50,
   },
   card: { maxWidth: 712, width: '100%' },
   title: {

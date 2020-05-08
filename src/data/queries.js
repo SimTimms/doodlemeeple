@@ -76,7 +76,9 @@ export const INVITES = gql`
   query GetInvites {
     getInvites {
       id
-      receiver
+      receiver {
+        name
+      }
       game {
         id
         name

@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { Divider, TextField } from '@material-ui/core';
-import { SaveButton } from './saveButton';
 import { DeleteButton } from './deleteButton';
 import { useStyles } from './styles';
-import { UPDATE_SECTION_MUTATION } from '../../../../../../data/mutations';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 export function Section({ index, sections, setSections, section }) {

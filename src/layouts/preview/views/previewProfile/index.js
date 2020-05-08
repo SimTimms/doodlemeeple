@@ -86,7 +86,7 @@ export function PreviewProfile({ theme, profileId, publicView }) {
         </Query>
 
         <div className={classes.root}>
-          {publicView && (
+          {!publicView && (
             <div
               style={{
                 display: 'flex',
@@ -209,7 +209,6 @@ export function PreviewProfile({ theme, profileId, publicView }) {
               query={SECTIONS_PREVIEW}
               onCompleted={(data) => {
                 const sections = data.sectionsPreview;
-
                 setSections(sections);
               }}
               variables={{ userId: profileId }}

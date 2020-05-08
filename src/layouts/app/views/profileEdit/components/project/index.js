@@ -65,33 +65,27 @@ export function Project({
                 [classes.avatarWrapperMobile]: mobile,
               })}
             >
-              {project.id !== 'new' ? (
-                <Uploader
-                  cbImage={(url) => {
-                    setChanged(true);
-                    const copyArr = Object.assign([], projects);
-                    copyArr[index].image = url;
-                    autosaveIsOn && autosave(mutation, 'project');
-                    setNotableProjects(copyArr);
-                  }}
-                  styleOverride={null}
-                  cbDelete={() => {
-                    setChanged(true);
-                    const copyArr = Object.assign([], projects);
-                    copyArr[index].image = '';
-                    autosaveIsOn && autosave(mutation, 'project');
-                    setNotableProjects(copyArr);
-                  }}
-                  hasFile={project.image !== '' || project.image ? true : false}
-                  className={null}
-                  setImagePosition={null}
-                  size=""
-                />
-              ) : (
-                <Typography variant="body1" style={{ color: '#fff' }}>
-                  Project name required
-                </Typography>
-              )}
+              <Uploader
+                cbImage={(url) => {
+                  setChanged(true);
+                  const copyArr = Object.assign([], projects);
+                  copyArr[index].image = url;
+                  autosaveIsOn && autosave(mutation, 'project');
+                  setNotableProjects(copyArr);
+                }}
+                styleOverride={null}
+                cbDelete={() => {
+                  setChanged(true);
+                  const copyArr = Object.assign([], projects);
+                  copyArr[index].image = '';
+                  autosaveIsOn && autosave(mutation, 'project');
+                  setNotableProjects(copyArr);
+                }}
+                hasFile={project.image !== '' || project.image ? true : false}
+                className={null}
+                setImagePosition={null}
+                size=""
+              />
             </div>
 
             <div className={classes.actionInputWrapper}>
@@ -116,18 +110,9 @@ export function Project({
               />
               <TextField
                 id={'testimonial'}
-                label={
-                  project.id !== 'new'
-                    ? `Description ${
-                        project.summary
-                          ? `(${126 - project.summary.length})`
-                          : ''
-                      }`
-                    : 'Project name required'
-                }
-                className={clsx({
-                  [classes.inputFocus]: project.id === 'new' && true,
-                })}
+                label={`Description ${
+                  project.summary ? `(${126 - project.summary.length})` : ''
+                }`}
                 inputProps={{ maxLength: 126 }}
                 multiline
                 value={project.summary}
@@ -143,7 +128,6 @@ export function Project({
                   copyArr[index].summary = ev.target.value;
                   setNotableProjects(copyArr);
                 }}
-                disabled={project.id === 'new' ? true : false}
               />
             </div>
             <DeleteButton

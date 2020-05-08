@@ -115,16 +115,13 @@ export function Projects({ projects }) {
               backgroundImage: `url(${item.image}`,
               backgroundSize: 'cover',
             }}
-          >
-            <Typography variant="h5" className={classes.projectName}>
-              {item.name}
-            </Typography>
-          </div>
+          ></div>
         )}
 
         <div className={classes.projectSummaryWrapper}>
+          <Typography variant="h5">{item.name}</Typography>
           <Typography variant="body1" className={classes.projectSummary}>
-            {`"${item.summary}"`}
+            {`${item.summary}`}
           </Typography>
         </div>
       </div>
