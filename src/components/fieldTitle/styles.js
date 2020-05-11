@@ -1,6 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  },
   helpIcon: {
     marginLeft: 5,
     cursor: 'pointer',
@@ -11,7 +16,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   titleLine: {
-    height: 5,
-    background: theme.palette.primary.main,
+    height: 2,
+    background: 'rgba(0,0,0,0.1)',
   },
 }));

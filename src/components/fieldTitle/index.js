@@ -6,14 +6,7 @@ export default function FieldTitle({ name, description, warning }) {
   const [infoOpen, setInfoOpen] = React.useState('none');
   const classes = useStyles();
   return (
-    <div
-      style={{
-        width: '100%',
-        marginTop: 40,
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <div className={classes.root}>
       <div
         style={{
           width: '100%',

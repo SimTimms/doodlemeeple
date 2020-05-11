@@ -19,11 +19,34 @@ export const useStyles = makeStyles((theme) => ({
       background: theme.palette.secondary.dark,
     },
   },
-
+  gameBox: {
+    padding: 5,
+    borderRadius: 5,
+    marginRight: 10,
+    marginTop: 10,
+    border: '1px solid #ddd',
+  },
+  gameBoxSelected: {
+    boxShadow: '10px 10px 10px rgb(0,0,0,0.2)',
+    border: '1px solid #444',
+    cursor: 'pointer',
+  },
+  gameBoxBG: {
+    backgroundSize: 'cover',
+    width: 160,
+    height: 90,
+    display: 'flex',
+    alignItems: 'flex-end',
+    opacity: 0.8,
+  },
+  gameBoxBGSelected: {
+    opacity: 1,
+  },
   iconButtonIcon: {
     color: '#fff',
+    marginleft: 10,
   },
-  card: { maxWidth: 712, width: '100%' },
+  card: { maxWidth: 712, width: '100%', marginBottom: 20, paddingBottom: 10 },
   title: {
     fontSize: 14,
   },

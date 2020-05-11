@@ -110,6 +110,20 @@ export const JOB = gql`
         backgroundImg
         name
       }
+      invite {
+        id
+        job {
+          id
+        }
+        game {
+          id
+        }
+        receiver {
+          name
+          id
+          profileImg
+        }
+      }
       gallery {
         id
         summary

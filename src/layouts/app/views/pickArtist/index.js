@@ -1,28 +1,17 @@
 // @ts-nocheck
-import React from 'react';
-import {
-  Card,
-  Slide,
-  TextField,
-  Typography,
-  Button,
-  Icon,
-} from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Slide, Button, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   LoadIcon,
   ContentHeader,
-  DeleteButton,
   FieldTitle,
   ProfileCard,
 } from '../../../../components';
-import { Query } from 'react-apollo';
-import { Mutation } from 'react-apollo';
-import { UPDATE_JOB, CREATE_JOB, REMOVE_JOB } from '../../../../data/mutations';
-import { JOB, GAMES, CREATIVES } from '../../../../data/queries';
-import { toaster } from '../../../../utils/toaster';
-import autosave from '../../../../utils/autosave';
+import { Link } from 'react-router-dom';
+import { Query, Mutation } from 'react-apollo';
+import { JOB, CREATIVES } from '../../../../data/queries';
+import { REMOVE_INVITE } from '../../../../data/mutations';
 
 export function PickArtist({
   theme,
@@ -32,7 +21,6 @@ export function PickArtist({
   favourites,
 }) {
   const classes = useStyles();
-  const [games, setGames] = React.useState([]);
   const [job, setJob] = React.useState({
     name: '',
     img: '',
@@ -48,15 +36,128 @@ export function PickArtist({
     gameId: '',
     submitted: false,
   });
-  const [disabledValue, setDisabledValue] = React.useState(false);
+  const [inviteList, setInviteList] = React.useState([]);
+
+  function updateInviteList(newItem, inviteId) {
+    setInviteList([
+      ...inviteList,
+      {
+        name: newItem.name,
+        img: newItem.profileImg,
+        id: newItem.id,
+        inviteId: inviteId,
+      },
+    ]);
+  }
+
+  function removeInviteList(newItem) {
+    const filteredArray = inviteList.filter((item) => item.id !== newItem.id);
+    setInviteList(filteredArray);
+  }
+
+  function Fillers({ count }) {
+    let returnArr = [];
+    for (let i = count * 1; i < 5; i++) {
+      returnArr.push(
+        <div className={classes.closeWrapper} key={`artist_blank_${i}`}>
+          <div className={classes.button}>
+            <div className={classes.miniProfileBlank}></div>
+          </div>
+        </div>,
+      );
+    }
+    return returnArr;
+  }
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <ContentHeader title="Invite Artists" subTitle="Invite Artists" />
+        <ContentHeader
+          title="Invite Artists"
+          subTitle="Invite Artists"
+          button={
+            <Button
+              onClick={() => {
+                history.goBack();
+              }}
+            >
+              <Icon>chevron_left</Icon>
+              Back
+            </Button>
+          }
+        />
 
         <div style={{ width: '100%' }}>
-          <FieldTitle name="5. Invite Artists" description="" warning="" />
+          <FieldTitle
+            name="Your Picks (5 Maximum)"
+            description="Pick up to 5 creatives that you would like to work with"
+            warning=""
+          />
+          <div className={classes.miniProfileActionWrapper}>
+            <div className={classes.miniProfileWrapper}>
+              {inviteList.map((artist, index) => (
+                <div className={classes.closeWrapper} key={`artist_${index}`}>
+                  <Mutation
+                    mutation={REMOVE_INVITE}
+                    variables={{
+                      id: artist.inviteId,
+                      invite: {
+                        gameId: '',
+                        jobId: '',
+                        userId: '',
+                        title: '',
+                        message: '',
+                      },
+                    }}
+                  >
+                    {(mutation) => {
+                      return (
+                        <Icon
+                          className={classes.closeIcon}
+                          onClick={() => {
+                            removeInviteList(artist);
+                            mutation();
+                          }}
+                        >
+                          close
+                        </Icon>
+                      );
+                    }}
+                  </Mutation>
+                  <div
+                    onClick={() => {
+                      history.push(`/public-preview/${artist.id}`);
+                    }}
+                    className={classes.button}
+                  >
+                    <div
+                      className={classes.miniProfile}
+                      style={{
+                        backgroundImage: `url(${artist.img})`,
+                      }}
+                      title={artist.name}
+                    ></div>
+                  </div>
+                </div>
+              ))}
+              <Fillers count={inviteList.length} />
+            </div>
+            <Link
+              to={`/app/pick-artist/${job.id}`}
+              style={{
+                textDecoration: 'none',
+                color: '#444',
+              }}
+            >
+              <Button className={classes.iconButton} style={{ marginTop: 20 }}>
+                Continue{' '}
+                <Icon className={classes.iconButtonIcon}>
+                  keyboard_arrow_right
+                </Icon>
+              </Button>
+            </Link>
+          </div>
+          <FieldTitle name="Invite Artists" description="" warning="" />
           <Query
             query={CREATIVES}
             fetchPolicy="network-only"
@@ -67,27 +168,23 @@ export function PickArtist({
               if (error) return <div>Error</div>;
 
               return (
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-around',
-                    width: '100%',
-                    flexWrap: 'wrap',
-                  }}
-                >
-                  {data.getCreatives.map((creative) => {
+                <div className={classes.creativeWrapper}>
+                  {data.getCreatives.map((creative, index) => {
                     return (
                       <ProfileCard
                         creative={creative}
                         favourite={
                           favourites.indexOf(creative.id) > -1 ? true : false
                         }
-                        gameId={job.game.id}
-                        jobId={job.id}
-                        invite={creative.invitesReceived.filter(
-                          (filterItem) => filterItem.job.id === job.id,
+                        gameId={job.gameId}
+                        jobId={jobId}
+                        invite={inviteList.filter(
+                          (filterItem) => filterItem.id === creative.id,
                         )}
+                        key={`creative_${index}`}
+                        updateInviteList={updateInviteList}
+                        removeInviteList={removeInviteList}
+                        disabled={inviteList.length >= 5 ? true : false}
                       />
                     );
                   })}
@@ -103,6 +200,16 @@ export function PickArtist({
           onCompleted={(data) => {
             data.getJob &&
               setJob({ ...data.getJob, gameId: data.getJob.game.id });
+            setInviteList(
+              data.getJob.invite.map((item) => {
+                return {
+                  name: item.receiver.name,
+                  img: item.receiver.profileImg,
+                  id: item.receiver.id,
+                  inviteId: item.id,
+                };
+              }),
+            );
           }}
         >
           {({ loading, error, data }) => {

@@ -2,18 +2,21 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Typography } from '@material-ui/core';
 
-function ContentHeader({ title, subTitle }) {
+function ContentHeader({ title, subTitle, button }) {
   const classes = useStyles();
   return (
     <div className={classes.wrapper}>
-      <div className={classes.subHeader}>
-        <Typography variant="h1" color="textPrimary">
-          {title}
+      {button}
+      <div className={classes.wrapperTwo}>
+        <div className={classes.subHeader}>
+          <Typography variant="h1" color="textPrimary">
+            {title}
+          </Typography>
+        </div>
+        <Typography color="textSecondary" component="p">
+          {subTitle}
         </Typography>
       </div>
-      <Typography color="textSecondary" component="p">
-        {subTitle}
-      </Typography>
     </div>
   );
 }

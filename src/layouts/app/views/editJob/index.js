@@ -22,6 +22,7 @@ import { UPDATE_JOB, CREATE_JOB, REMOVE_JOB } from '../../../../data/mutations';
 import { JOB, GAMES } from '../../../../data/queries';
 import { toaster } from '../../../../utils/toaster';
 import autosave from '../../../../utils/autosave';
+import clsx from 'clsx';
 
 export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
   const classes = useStyles();
@@ -77,22 +78,6 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
           {(mutation) => {
             return (
               <div style={{ width: '100%' }}>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    paddingBottom: 5,
-                  }}
-                >
-                  {/*!autosaveIsOn && (
-                    <UpdateJobButton
-                      job={job}
-                      disabledValue={disabledValue}
-                      setDisabledValue={setDisabledValue}
-                      mutation={mutation}
-                    />
-                  )*/}
-                </div>
                 <Card className={classes.card}>
                   <div style={{ padding: 10 }}>
                     <FieldTitle
@@ -101,39 +86,26 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                       warning=""
                     />
                     <div style={{ width: '100%', display: 'flex' }}>
-                      {games.map((item) => {
+                      {games.map((item, index) => {
                         return (
                           <div
-                            style={{
-                              padding: 5,
-                              borderRadius: 5,
-                              marginRight: 10,
-                              marginTop: 10,
-
-                              boxShadow:
-                                job.gameId === item.id
-                                  ? '10px 10px 10px rgb(0,0,0,0.2)'
-                                  : '',
-                              border:
-                                job.gameId === item.id
-                                  ? '1px solid #444'
-                                  : '1px solid #ddd',
-                              cursor: 'pointer',
-                            }}
+                            key={`item_${index}`}
+                            className={clsx({
+                              [classes.gameBox]: true,
+                              [classes.gameBoxSelected]: job.gameId === item.id,
+                            })}
                             onClick={() => {
                               setJob({ ...job, gameId: item.id });
                             }}
                           >
                             <div
+                              className={clsx({
+                                [classes.gameBoxBG]: true,
+                                [classes.gameBoxSelectedBG]:
+                                  job.gameId === item.id,
+                              })}
                               style={{
-                                background: `url(${item.backgroundImg})`,
-                                backgroundSize: 'cover',
-                                width: 160,
-                                height: 90,
-                                display: 'flex',
-                                alignItems: 'flex-end',
-
-                                opacity: job.gameId === item.id ? '100' : '0.8',
+                                backgroundImage: `url(${item.backgroundImg})`,
                               }}
                             ></div>
                             <div
@@ -162,26 +134,14 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                         }}
                       >
                         <div
-                          style={{
-                            padding: 5,
-                            borderRadius: 5,
-                            marginRight: 10,
-                            marginTop: 10,
-                            boxShadow: '',
-                            border: '1px solid #ddd',
-                            cursor: 'pointer',
-                            height: 150,
-                          }}
+                          className={clsx({
+                            [classes.gameBox]: true,
+                          })}
                         >
                           <div
-                            style={{
-                              background: '#ddd',
-                              backgroundSize: 'cover',
-                              width: 160,
-                              height: 90,
-                              display: 'flex',
-                              alignItems: 'flex-end',
-                            }}
+                            className={clsx({
+                              [classes.gameBoxBG]: true,
+                            })}
                           ></div>
                           <div
                             style={{
@@ -201,9 +161,13 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                         </div>
                       </Link>
                     </div>
+                  </div>
+                </Card>
+                <Card className={classes.card}>
+                  <div style={{ padding: 10 }}>
                     <FieldTitle
                       name="2. Job Details"
-                      description="Briefly summarise the job. Example: Images for 24 fantasy cards"
+                      description="Briefly summarise the job. Example: Images for 24 fantasy cards. Need 24 high resolution card images, each image will be full colour and in a fantasy style."
                       warning=""
                     />
                     <TextField
@@ -251,7 +215,11 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                       margin="normal"
                       variant="outlined"
                       style={{ width: '100%' }}
-                    />
+                    />{' '}
+                  </div>
+                </Card>
+                <Card className={classes.card}>
+                  <div style={{ padding: 10 }}>
                     <FieldTitle
                       name="3. Your Creative"
                       description="Start to describe your ideal creative. Example: A digital artist with a focus on high fantasy"
@@ -282,36 +250,46 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                       variant="outlined"
                       style={{ width: '100%' }}
                     />
-                    <FieldTitle
-                      name="4. Submit"
-                      description="Submit your job for approval, we'll let you know when it's live and don't worry you can still make changes."
-                      warning=""
-                    />
-
-                    <Link
-                      to={`/app/pick-artist/${job.id}`}
-                      style={{
-                        textDecoration: 'none',
-                        color: '#444',
-                      }}
-                    >
-                      <Button
-                        className={classes.iconButton}
-                        style={{ marginTop: 20 }}
-                      >
-                        <Icon className={classes.iconButtonIcon}>save</Icon>
-                        Continue
-                      </Button>
-                    </Link>
                   </div>
+                </Card>
+                {job.id !== 'new' && (
+                  <Card className={classes.card}>
+                    <div style={{ padding: 10, textAlign: 'center' }}>
+                      <FieldTitle
+                        name="4. Submit"
+                        description="Submit your job for approval, we'll let you know when it's live and don't worry you can still make changes."
+                        warning=""
+                      />
+                      <Typography
+                        variant="h2"
+                        component="p"
+                        style={{ marginTop: 30 }}
+                      >
+                        Awesome! Continue on to select your preferred artists
+                      </Typography>
+                      <Link
+                        to={`/app/pick-artist/${job.id}`}
+                        style={{
+                          textDecoration: 'none',
+                          color: '#444',
+                        }}
+                      >
+                        <Button
+                          className={classes.iconButton}
+                          style={{ marginTop: 30, marginBottom: 30 }}
+                        >
+                          Continue
+                          <Icon className={classes.iconButtonIcon}>
+                            chevron_right
+                          </Icon>
+                        </Button>
+                      </Link>
+                    </div>
+                  </Card>
+                )}
 
-                  <div
-                    style={{
-                      padding: 10,
-                      borderTop: '1px dotted #ccc',
-                      background: '#eee',
-                    }}
-                  >
+                <Card className={classes.card} style={{ background: '#eee' }}>
+                  <div style={{ padding: 10 }}>
                     <Typography variant="h2" component="p">
                       Delete Job
                     </Typography>

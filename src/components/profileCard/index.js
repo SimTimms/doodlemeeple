@@ -17,6 +17,9 @@ export default function ProfileCard({
   gameId,
   jobId,
   invite,
+  updateInviteList,
+  removeInviteList,
+  disabled,
 }) {
   const classes = useStyles();
 
@@ -91,7 +94,9 @@ export default function ProfileCard({
               return (
                 <FavouriteButton
                   styleAdd={{ marginRight: 10 }}
-                  mutation={mutation}
+                  mutation={() => {
+                    mutation();
+                  }}
                   favourite={favourite}
                 />
               );
@@ -101,7 +106,7 @@ export default function ProfileCard({
         <Mutation
           mutation={invite.length === 0 ? CREATE_INVITE : REMOVE_INVITE}
           variables={{
-            id: invite.length === 0 ? 'new' : invite[0].id,
+            id: invite.length === 0 ? 'new' : invite[0].inviteId,
             invite: {
               gameId: gameId,
               jobId: jobId,
@@ -110,13 +115,23 @@ export default function ProfileCard({
               message: '',
             },
           }}
+          onCompleted={(data) => {
+            invite.length === 0
+              ? updateInviteList(creative, data.createInvite)
+              : removeInviteList(creative);
+          }}
         >
           {(mutation) => {
             return (
               <div>
                 <InviteButton
-                  mutation={mutation}
+                  mutation={() => {
+                    !disabled
+                      ? mutation()
+                      : disabled && invite.length > 0 && mutation();
+                  }}
                   invite={invite.length > 0 ? true : false}
+                  disabled={disabled}
                 />
               </div>
             );

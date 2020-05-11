@@ -162,11 +162,14 @@ export function EditProfile({ theme }) {
                     <Button
                       variant="contained"
                       color="primary"
-                      style={{ width: 60, marginLeft: 10 }}
+                      style={{ width: 100, marginLeft: 10 }}
                     >
-                      <Icon style={{ fontSize: 18, color: '#fff' }}>
+                      <Icon
+                        style={{ fontSize: 18, color: '#fff', marginRight: 10 }}
+                      >
                         pageview
                       </Icon>
+                      Preview
                     </Button>
                   </Link>
                 </div>

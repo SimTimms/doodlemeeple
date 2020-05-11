@@ -89,15 +89,7 @@ function GallerySection({
             <div className={classes.sectionWrapper}>
               <div className={classes.sectionHeader}>
                 <div className={classes.sectionHeaderTitle}>
-                  <Icon
-                    color="primary"
-                    style={{ fontSize: 28, marginRight: 10 }}
-                  >
-                    brush
-                  </Icon>
-                  <Typography variant="h1" color="primary">
-                    {TYPE_HELPER(type)}
-                  </Typography>
+                  <Typography variant="h1">{TYPE_HELPER(type)}</Typography>
                 </div>
                 <DeleteButton
                   sectionId={section.id}

@@ -4,7 +4,7 @@ import { useStyles } from './styles';
 import { toaster } from '../../../utils/toaster';
 import clsx from 'clsx';
 
-export default function InviteButton({ mutation, invite }) {
+export default function InviteButton({ mutation, invite, disabled }) {
   const classes = useStyles();
   const [on, setOn] = React.useState(false);
 
@@ -20,19 +20,23 @@ export default function InviteButton({ mutation, invite }) {
         [classes.rootOn]: on,
       })}
       onClick={() => {
-        toaster(
-          !on ? (
-            <Icon className={classes.iconOn}>thumb_up</Icon>
-          ) : (
-            'Invite Cancelled'
-          ),
-        );
-        on === true ? setOn(false) : setOn(true);
+        disabled
+          ? toaster('5 Invites Max')
+          : toaster(
+              !on ? (
+                <Icon className={classes.iconOn}>thumb_up</Icon>
+              ) : (
+                'Invite Cancelled'
+              ),
+            );
+        if (!disabled) {
+          on === true ? setOn(false) : setOn(true);
+        }
         mutation();
       }}
     >
       <Typography variant="body1" component="p" style={{ color: '#fff' }}>
-        {!on ? 'Select' : 'Selected'}
+        {!on ? (disabled ? '5 Max' : 'Select') : 'Selected'}
       </Typography>
     </Button>
   );
