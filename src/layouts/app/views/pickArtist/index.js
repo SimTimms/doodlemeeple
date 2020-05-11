@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useEffect } from 'react';
-import { Slide, Button, Icon } from '@material-ui/core';
+import { Slide, Button, Icon, Card, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   LoadIcon,
@@ -11,6 +11,7 @@ import {
 import { Link } from 'react-router-dom';
 import { Query, Mutation } from 'react-apollo';
 import { JOB, CREATIVES } from '../../../../data/queries';
+import clsx from 'clsx';
 import { REMOVE_INVITE } from '../../../../data/mutations';
 
 export function PickArtist({
@@ -86,8 +87,7 @@ export function PickArtist({
             </Button>
           }
         />
-
-        <div style={{ width: '100%' }}>
+        <Card className={classes.card} style={{ marginTop: 50 }}>
           <FieldTitle
             name="Your Picks (5 Maximum)"
             description="Pick up to 5 creatives that you would like to work with"
@@ -142,21 +142,57 @@ export function PickArtist({
               ))}
               <Fillers count={inviteList.length} />
             </div>
-            <Link
-              to={`/app/pick-artist/${job.id}`}
-              style={{
-                textDecoration: 'none',
-                color: '#444',
-              }}
-            >
-              <Button className={classes.iconButton} style={{ marginTop: 20 }}>
-                Continue{' '}
-                <Icon className={classes.iconButtonIcon}>
-                  keyboard_arrow_right
-                </Icon>
-              </Button>
-            </Link>
           </div>
+        </Card>
+        <Card className={classes.card} style={{ marginTop: 20 }}>
+          <FieldTitle
+            name="Submit Brief"
+            description="When you submit a brief your chosen creatives will be invited to quote for the work"
+            warning=""
+          />
+          <div className={classes.miniProfileActionWrapper}>
+            <div className={classes.miniProfileWrapper}>
+              <div style={{ textAlign: 'center' }}>
+                <Typography
+                  variant="h2"
+                  component="p"
+                  style={{ marginTop: 10 }}
+                >
+                  {inviteList.length > 0
+                    ? `Submit this brief and we'll notify your chosen creatives`
+                    : `Please select at least 1 creative`}
+                </Typography>
+
+                <Link
+                  to={
+                    inviteList.length > 0
+                      ? `/app/submit-brief/${job.id}`
+                      : `/app/pick-artist/${job.id}`
+                  }
+                  style={{
+                    textDecoration: 'none',
+                    color: '#444',
+                  }}
+                >
+                  <Button
+                    className={clsx({
+                      [classes.iconButton]: true,
+                      [classes.iconButtonDisabled]:
+                        inviteList.length > 0 ? false : true,
+                    })}
+                    disabled={inviteList.length > 0 ? false : true}
+                  >
+                    Submit
+                    <Icon className={classes.iconButtonIcon}>
+                      keyboard_arrow_right
+                    </Icon>
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </Card>
+        <div style={{ width: '100%', marginTop: 50 }}>
           <FieldTitle name="Invite Artists" description="" warning="" />
           <Query
             query={CREATIVES}

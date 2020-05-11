@@ -11,12 +11,12 @@ export const useStyles = makeStyles((theme) => ({
   },
   iconButton: {
     cursor: 'pointer',
-    background: theme.palette.secondary.main,
+    background: theme.palette.primary.main,
     padding: 5,
     margin: 5,
     color: '#fff',
     '&:hover': {
-      background: theme.palette.secondary.dark,
+      background: theme.palette.primary.dark,
     },
   },
   gameBox: {

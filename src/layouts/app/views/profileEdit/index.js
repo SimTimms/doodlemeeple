@@ -100,6 +100,7 @@ export function EditProfile({ theme }) {
                   title="Profile"
                   subTitle="Tell everyone about yourself, showcase the best examples of
                     your work"
+                  button={null}
                 />
 
                 <div
