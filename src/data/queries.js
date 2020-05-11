@@ -154,6 +154,15 @@ export const JOBS = gql`
   }
 `;
 
+export const COUNTS = gql`
+  {
+    counts {
+      id
+      invites
+    }
+  }
+`;
+
 export const PROFILE = gql`
   {
     profile {

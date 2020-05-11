@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import { Query, Mutation } from 'react-apollo';
 import { JOB, CREATIVES } from '../../../../data/queries';
 import clsx from 'clsx';
-import { REMOVE_INVITE } from '../../../../data/mutations';
+import { REMOVE_INVITE, SUBMIT_BRIEF } from '../../../../data/mutations';
 
 export function PickArtist({
   theme,
@@ -163,31 +163,31 @@ export function PickArtist({
                     : `Please select at least 1 creative`}
                 </Typography>
 
-                <Link
-                  to={
-                    inviteList.length > 0
-                      ? `/app/submit-brief/${job.id}`
-                      : `/app/pick-artist/${job.id}`
-                  }
-                  style={{
-                    textDecoration: 'none',
-                    color: '#444',
+                <Mutation
+                  mutation={SUBMIT_BRIEF}
+                  variables={{
+                    jobId: job.id,
                   }}
                 >
-                  <Button
-                    className={clsx({
-                      [classes.iconButton]: true,
-                      [classes.iconButtonDisabled]:
-                        inviteList.length > 0 ? false : true,
-                    })}
-                    disabled={inviteList.length > 0 ? false : true}
-                  >
-                    Submit
-                    <Icon className={classes.iconButtonIcon}>
-                      keyboard_arrow_right
-                    </Icon>
-                  </Button>
-                </Link>
+                  {(mutation) => {
+                    return (
+                      <Button
+                        className={clsx({
+                          [classes.iconButton]: true,
+                          [classes.iconButtonDisabled]:
+                            inviteList.length > 0 ? false : true,
+                        })}
+                        disabled={inviteList.length > 0 ? false : true}
+                        onClick={() => mutation()}
+                      >
+                        Submit
+                        <Icon className={classes.iconButtonIcon}>
+                          keyboard_arrow_right
+                        </Icon>
+                      </Button>
+                    );
+                  }}
+                </Mutation>
               </div>
             </div>
           </div>

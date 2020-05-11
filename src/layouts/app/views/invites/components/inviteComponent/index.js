@@ -58,10 +58,6 @@ export function InviteComponent({ invite, removeInvite }) {
           </Link>
         </Typography>
       </div>
-
-      <Button variant="contained" color="secondary">
-        Interested
-      </Button>
       <Mutation
         mutation={DECLINE_INVITE}
         variables={{
@@ -84,6 +80,13 @@ export function InviteComponent({ invite, removeInvite }) {
           );
         }}
       </Mutation>
+      <Button
+        variant="contained"
+        color="primary"
+        style={{ marginLeft: 10, marginRight: 10, width: 140 }}
+      >
+        Interested
+      </Button>
     </Card>
   );
 }

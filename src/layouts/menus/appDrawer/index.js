@@ -10,11 +10,14 @@ import {
   ListItemText,
   List,
   useMediaQuery,
+  Typography,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useStyles } from '../styles';
 import Cookies from 'js-cookie';
 import clsx from 'clsx';
+import { Query } from 'react-apollo';
+import { COUNTS } from '../../../data/queries';
 
 export function AppDrawer(props) {
   const {
@@ -27,10 +30,12 @@ export function AppDrawer(props) {
     drawerOpenMobile,
     drawerClose,
     drawerCloseMobile,
+    countsStyle,
   } = useStyles();
   const { handleDrawerClose, open } = props;
   const theme = useTheme();
   const mobile = useMediaQuery('(max-width:800px)');
+  const [counts, setCounts] = React.useState({ invites: 0 });
 
   return (
     <Drawer
@@ -74,36 +79,42 @@ export function AppDrawer(props) {
             icon: <Icon>home</Icon>,
             link: '/app/dashboard',
             color: '#444',
+            count: null,
           },
           {
             name: 'Profile',
             icon: <Icon>contact_mail</Icon>,
             link: '/app/edit-profile',
             color: '#444',
+            count: null,
           },
           {
             name: 'Account',
             icon: <Icon>account_balance</Icon>,
             link: '/app/account',
             color: '#444',
+            count: null,
           },
           {
             name: 'Games',
             icon: <Icon>casino</Icon>,
             link: '/app/games',
             color: '#444',
+            count: null,
           },
           {
             name: 'Briefs',
             icon: <Icon>work</Icon>,
             link: '/app/jobs',
             color: '#444',
+            count: null,
           },
           {
             name: 'Invites',
             icon: <Icon>thumb_up</Icon>,
             link: '/app/invites',
             color: '#444',
+            count: counts.invites,
           } /*
           {
             name: 'Invites',
@@ -125,31 +136,42 @@ export function AppDrawer(props) {
             onClick={handleDrawerClose}
           >
             <ListItem button style={{ paddingLeft: 10 }}>
-              <ListItemIcon
+              <div
                 style={{
-                  minWidth: 32,
-                  minHeight: 32,
-                  background: text.color,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  minWidth: 32,
+                  maxWidth: 32,
+                  maxHeight: 32,
+                  minHeight: 32,
+                  background: text.color,
                   borderRadius: '50%',
                   marginRight: 20,
+                  position: 'relative',
                 }}
               >
-                <div
+                <ListItemIcon
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    borderRadius: '50%',
-                    marginTop: 1,
                     color: '#fff',
+                    position: 'relative',
                   }}
                 >
                   {text.icon}
-                </div>
-              </ListItemIcon>
+                </ListItemIcon>
+                {text.count !== null && (
+                  <Typography
+                    variant="body1"
+                    component="p"
+                    className={countsStyle}
+                  >
+                    {text.count}
+                  </Typography>
+                )}
+              </div>
               <ListItemText
                 primary={text.name}
                 className={clsx({
@@ -199,6 +221,19 @@ export function AppDrawer(props) {
         </ListItem>
       </List>
       <Divider />
+      <Query
+        query={COUNTS}
+        onCompleted={(data) => {
+          setCounts({ invites: data.counts.invites });
+        }}
+        fetchPolicy="network-only"
+      >
+        {({ loading, error, data }) => {
+          if (loading) return null;
+          if (error) return <div>Error</div>;
+          return <div></div>;
+        }}
+      </Query>
     </Drawer>
   );
 }
