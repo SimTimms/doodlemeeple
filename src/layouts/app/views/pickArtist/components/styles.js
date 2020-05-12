@@ -8,7 +8,34 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     flexDirection: 'column',
   },
+  iconButton: {
+    cursor: 'pointer',
+    background: theme.palette.primary.main,
+    padding: 5,
+    margin: 5,
+    marginTop: 20,
+    marginBottom: 20,
+    color: '#fff',
+    '&:hover': {
+      background: theme.palette.primary.dark,
+    },
+  },
+  iconButtonDisabled: {
+    cursor: 'pointer',
+    background: '#ddd',
+    padding: 5,
+    margin: 5,
+    marginTop: 20,
+    marginBottom: 20,
+    color: '#fff',
+    '&:hover': {
+      background: theme.palette.primary.dark,
+    },
+  },
   card: { maxWidth: 712, width: '100%' },
+  iconButtonIcon: {
+    color: '#fff',
+  },
   creativeWrapper: {
     display: 'flex',
     alignItems: 'center',

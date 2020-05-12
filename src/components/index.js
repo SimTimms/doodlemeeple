@@ -20,6 +20,7 @@ import Footer from './footer';
 import DeleteButton from './buttons/deleteButton';
 import FavouriteButton from './buttons/favouriteButton';
 import InviteButton from './buttons/inviteButton';
+import IconButton from './buttons/iconButton';
 import FieldTitle from './fieldTitle';
 import ProfileCard from './profileCard';
 import IconBox from './iconBox';
@@ -29,6 +30,7 @@ export {
   IconBox,
   FavouriteButton,
   InviteButton,
+  IconButton,
   ProfileCard,
   FieldTitle,
   LoadIcon,

@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
-import { Button, useMediaQuery } from '@material-ui/core';
+import { useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 import { AppMenu } from '../menus';
 import { AppDrawer } from '../menus/appDrawer';
@@ -10,12 +9,11 @@ import { Profile } from './views/profile';
 import { EditProfile } from './views/profileEdit';
 import { Account } from './views/account';
 import { Invites } from './views/invites';
-import { Project } from './views/project';
+import { Submitted } from './views/submitted';
 import { EditGame } from './views/editGame';
 import { EditJob } from './views/editJob';
 import { PickArtist } from './views/pickArtist';
 import { NewQuote } from './views/newQuote';
-import { Decline } from './views/decline';
 import { LoadIcon } from '../../components';
 import { Games } from './views/games';
 import { Jobs } from './views/jobs';
@@ -96,6 +94,8 @@ function AppLayout(props) {
             <Account history={props.history} />
           ) : page === 'invites' ? (
             <Invites />
+          ) : page === 'submitted' ? (
+            <Submitted />
           ) : page === 'games' ? (
             <Games />
           ) : page === 'jobs' ? (
@@ -123,8 +123,6 @@ function AppLayout(props) {
               history={props.history}
               favourites={favourites}
             />
-          ) : page === 'decline' ? (
-            <Decline projectId={pathParam} />
           ) : page === 'create-quote' ? (
             <NewQuote projectId={pathParam} />
           ) : null}

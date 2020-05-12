@@ -162,7 +162,7 @@ export function AppDrawer(props) {
                 >
                   {text.icon}
                 </ListItemIcon>
-                {text.count !== null && (
+                {text.count !== null && text.count > 0 && (
                   <Typography
                     variant="body1"
                     component="p"
