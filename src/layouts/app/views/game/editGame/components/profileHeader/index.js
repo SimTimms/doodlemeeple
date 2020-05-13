@@ -40,14 +40,14 @@ export function ProfileHeader({
         >
           <Uploader
             cbImage={(url) => {
-              setDisabledValue(true);
+              //  setDisabledValue(true);
               setGameImage('backgroundImg', url);
               if (autosaveFunction) {
                 autosave(autosaveFunction, 'image');
               }
             }}
             cbDelete={() => {
-              setDisabledValue(true);
+              //  setDisabledValue(true);
               setGameImage('backgroundImg', '');
               if (autosaveFunction) {
                 autosave(autosaveFunction, 'image');
