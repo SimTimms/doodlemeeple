@@ -1,11 +1,11 @@
 import React from 'react';
-import Button from '@material-ui/core/Login';
+import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 const StyledButton = withStyles({
   root: {
     borderRadius: 3,
-    background: 'none',
+    background: '#fff',
     border: '1px solid #aaa',
     color: '#aaa',
     height: 38,

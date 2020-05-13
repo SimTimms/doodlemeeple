@@ -18,10 +18,6 @@ function RouterComponent(props) {
       fontSize: 12,
     },
   });
-
-  theme.typography.h1 = { fontFamily: ['Quicksand'].join(','), fontSize: 30 };
-  theme.typography.h2 = { fontFamily: ['Quicksand'].join(','), fontSize: 18 };
-
   theme.palette.primary = {
     ...theme.palette.primary,
     main: '#57499e',
@@ -38,6 +34,15 @@ function RouterComponent(props) {
     ...theme.palette.error,
     main: '#ff4081',
     dark: '#d81b60',
+  };
+  theme.typography.h1 = { fontFamily: ['Quicksand'].join(','), fontSize: 30 };
+  theme.typography.h2 = { fontFamily: ['Quicksand'].join(','), fontSize: 18 };
+  theme.typography.button = {
+    fontFamily: ['Quicksand'].join(','),
+    fontSize: 14,
+    fontWeight: 900,
+    color: theme.palette.primary.main,
+    borderRadius: 4,
   };
 
   return (

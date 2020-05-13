@@ -24,9 +24,13 @@ import IconButton from './buttons/iconButton';
 import FieldTitle from './fieldTitle';
 import ProfileCard from './profileCard';
 import IconBox from './iconBox';
+import IconTitle from './iconTitle';
+import InlineHeader from './inlineHeader';
 
 export {
   DeleteButton,
+  InlineHeader,
+  IconTitle,
   IconBox,
   FavouriteButton,
   InviteButton,

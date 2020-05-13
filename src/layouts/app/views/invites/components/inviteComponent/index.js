@@ -1,92 +1,84 @@
 import React from 'react';
-import { Typography, Button, Icon, Card } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Typography, Button, Icon, Card, Link } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Mutation } from 'react-apollo';
 import { DECLINE_INVITE } from '../../../../../../data/mutations';
+import { IconTitle, InlineHeader } from '../../../../../../components';
 
 export function InviteComponent({ invite, removeInvite }) {
   const classes = useStyles();
 
   return (
     <Card className={classes.card}>
+      <InlineHeader>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <IconTitle icon={'thumb_up'} title={`Invite from`} />
+          <Link
+            href={`/public-preview/${invite.user.id}`}
+            style={{ textDecoration: 'none', color: '#fff' }}
+            variant="button"
+          >
+            {invite.user.name}
+          </Link>
+        </div>
+      </InlineHeader>
       <div
+        className={classes.cardSummaryWrapper}
         style={{
-          background: `url(${invite.game.backgroundImg})`,
-          backgroundPosition: 'center center',
-          backgroundSize: 'cover',
-          marginRight: 20,
-        }}
-        className={classes.gameImg}
-      />
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '100%',
+          backgroundImage: `url(${invite.game.backgroundImg})`,
         }}
       >
         <Typography
-          variant="body1"
-          component="p"
-          style={{ width: '100%', paddingLeft: 10 }}
-          className={classes.cardSummary}
-        >
-          Invite from {invite.user.name}
-        </Typography>
-        <Typography
           variant="body2"
           component="p"
-          style={{ width: '100%', paddingLeft: 10 }}
           className={classes.cardSummary}
         >
           for{' '}
           <Link
-            to={`/app/view-job/${invite.job.id}`}
+            href={`/app/view-job/${invite.job.id}`}
             style={{ textDecoration: 'none' }}
+            variant="button"
           >
             {invite.job.name}
           </Link>{' '}
           on{' '}
           <Link
-            to={`/app/view-game/${invite.game.id}`}
+            href={`/app/view-game/${invite.game.id}`}
             style={{ textDecoration: 'none' }}
+            variant="button"
           >
             {invite.game.name}
           </Link>
         </Typography>
       </div>
-      <Mutation
-        mutation={DECLINE_INVITE}
-        variables={{
-          id: invite.id,
-        }}
-        onCompleted={() => {
-          removeInvite(invite.id);
-        }}
-      >
-        {(mutation) => {
-          return (
-            <Button
-              variant="contained"
-              onClick={() => {
-                mutation();
-              }}
-            >
-              Decline
-            </Button>
-          );
-        }}
-      </Mutation>
-      <Button
-        variant="contained"
-        color="primary"
-        style={{ marginLeft: 10, marginRight: 10, width: 140 }}
-      >
-        Interested
-      </Button>
+      <div className={classes.cardActionArea}>
+        <Mutation
+          mutation={DECLINE_INVITE}
+          variables={{
+            id: invite.id,
+          }}
+          onCompleted={() => {
+            removeInvite(invite.id);
+          }}
+        >
+          {(mutation) => {
+            return (
+              <Button
+                variant="contained"
+                onClick={() => {
+                  mutation();
+                }}
+                style={{ width: 140 }}
+              >
+                Decline
+              </Button>
+            );
+          }}
+        </Mutation>
+        <Button variant="contained" color="primary" style={{ width: 140 }}>
+          Interested
+        </Button>
+      </div>
     </Card>
   );
 }

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Card, Slide, Typography, Icon } from '@material-ui/core';
+import { Card, Slide, Typography } from '@material-ui/core';
 import ReactPlayer from 'react-player';
 import { useStyles } from './styles';
-import { ContentHeader, LoadIcon } from '../../../../../components';
+import { LoadIcon, IconTitle, InlineHeader } from '../../../../../components';
 import { Query } from 'react-apollo';
 import { GAME } from '../../../../../data/queries';
 
@@ -42,48 +42,18 @@ export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
       <div className={classes.root}>
         <div style={{ width: '100%' }}>
           <Card className={classes.card}>
-            <Typography
-              variant="body1"
-              style={{
-                textAlign: 'right',
-                background: theme.palette.primary.main,
-                color: '#fff',
-                padding: 3,
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'space-between',
-                }}
-              >
-                <Icon
-                  style={{
-                    marginRight: 5,
-                  }}
-                >
-                  casino
-                </Icon>
-                {game.type}
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'space-between',
-                }}
-              >
-                <Icon
-                  style={{
-                    marginRight: 5,
-                  }}
-                >
-                  location_on
-                </Icon>
-                {game.location}
-              </div>
-            </Typography>
+            <InlineHeader>
+              <IconTitle
+                icon="casino"
+                title={game.type && game.type !== '' ? game.type : '-'}
+              />
+              <IconTitle
+                icon="location_on"
+                title={
+                  game.location && game.location !== '' ? game.location : '-'
+                }
+              />
+            </InlineHeader>
             <div style={{ padding: 10 }}>
               <Typography variant="h1" style={{ textAlign: 'center' }}>
                 {game.name}
@@ -100,14 +70,28 @@ export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
                   height: 400,
                 }}
               ></div>
-              {game.showreel !== '' && (
+            </div>
+          </Card>
+          {game.showreel !== '' && (
+            <Card className={classes.card}>
+              <InlineHeader
+                variant="body1"
+                style={{
+                  textAlign: 'right',
+                  background: theme.palette.primary.main,
+                  color: '#fff',
+                  padding: 3,
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <IconTitle
+                  icon="ondemand_video"
+                  title="Shameless Self Promotion"
+                />
+              </InlineHeader>
+              <div style={{ padding: 10 }}>
                 <div>
-                  <Typography
-                    variant="h3"
-                    style={{ textAlign: 'center', marginBottom: 20 }}
-                  >
-                    Promotional Video
-                  </Typography>
                   <ReactPlayer
                     url={game.showreel}
                     playing
@@ -122,9 +106,9 @@ export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
                     width="100%"
                   />
                 </div>
-              )}
-            </div>
-          </Card>
+              </div>
+            </Card>
+          )}
         </div>
       </div>
     </Slide>
