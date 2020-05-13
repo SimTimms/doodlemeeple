@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from 'react';
 import { Typography, Slide } from '@material-ui/core';
 import { InviteComponent } from './components/inviteComponent';

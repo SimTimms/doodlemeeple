@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, Button, Icon, Card } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
-import { IconBox } from '../../../../../../components';
+import { IconBox } from '../../../../../../../components';
 
 export function GameComponent({ game }) {
   const classes = useStyles();

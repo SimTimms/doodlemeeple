@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import smithy from '../../../../assets/smithy.jpg';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,11 +9,47 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'flex-end',
     flexDirection: 'column',
   },
-  card: { maxWidth: 712, width: '100%' },
+  iconButton: {
+    cursor: 'pointer',
+    background: theme.palette.primary.main,
+    padding: 5,
+    margin: 5,
+    color: '#fff',
+    '&:hover': {
+      background: theme.palette.primary.dark,
+    },
+  },
+  gameBox: {
+    padding: 5,
+    borderRadius: 5,
+    marginRight: 10,
+    marginTop: 10,
+    border: '1px solid #ddd',
+  },
+  gameBoxSelected: {
+    boxShadow: '10px 10px 10px rgb(0,0,0,0.2)',
+    border: '1px solid #444',
+    cursor: 'pointer',
+  },
+  gameBoxBG: {
+    backgroundSize: 'cover',
+    width: 160,
+    height: 90,
+    display: 'flex',
+    alignItems: 'flex-end',
+    opacity: 0.8,
+  },
+  gameBoxSelectedBG: {
+    opacity: 1,
+  },
+  iconButtonIcon: {
+    color: '#fff',
+    marginleft: 10,
+  },
+  card: { maxWidth: 712, width: '100%', marginBottom: 20, paddingBottom: 10 },
   title: {
     fontSize: 14,
   },
-  error: { background: theme.palette.error.main, color: '#fff', padding: 5 },
   avatar: {
     borderRadius: '50%',
     border: '10px solid #fff',
@@ -37,7 +72,6 @@ export const useStyles = makeStyles((theme) => ({
   profileWrapper: {
     display: 'flex',
     flexDirection: 'row',
-    backgroundImage: `url(${smithy})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',

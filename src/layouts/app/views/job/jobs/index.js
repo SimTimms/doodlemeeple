@@ -1,33 +1,33 @@
 import React from 'react';
 import Slide from '@material-ui/core/Slide';
-import { GameComponent, EmptyGameComponent } from './components/gameComponent';
+import { JobComponent, EmptyJobComponent } from './components/jobComponent';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
-import { GAMES } from '../../../../data/queries';
-import { LoadIcon, ContentHeader } from '../../../../components';
+import { JOBS } from '../../../../../data/queries';
+import { LoadIcon, ContentHeader } from '../../../../../components';
 
-export function Games() {
+export default function Jobs() {
   const classes = useStyles();
-  const [gameArray, setGameArray] = React.useState([]);
+  const [jobArray, setJobArray] = React.useState([]);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <ContentHeader
-          title="Games"
-          subTitle="List the games and jobs you need help with"
+          title="Briefs"
+          subTitle="The jobs you've posted on DoodleMeeple"
         />
         <div className={classes.cardGrid}>
-          {gameArray.map((game, index) => {
-            return <GameComponent key={`project_${index}`} game={game} />;
+          {jobArray.map((job, index) => {
+            return <JobComponent key={`project_${index}`} job={job} />;
           })}
-          <EmptyGameComponent key={`project_empty`} />
+          <EmptyJobComponent key={`project_empty`} />
         </div>
         <Query
-          query={GAMES}
+          query={JOBS}
           fetchPolicy="network-only"
           onCompleted={(data) => {
-            setGameArray(data.getGames);
+            setJobArray(data.getJobs);
           }}
         >
           {({ loading, error, data }) => {

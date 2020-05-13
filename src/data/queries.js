@@ -83,11 +83,14 @@ export const INVITES = gql`
         id
         name
         backgroundImg
+        summary
       }
       user {
+        id
         name
       }
       job {
+        id
         name
       }
     }
@@ -109,6 +112,7 @@ export const JOB = gql`
         id
         backgroundImg
         name
+        summary
       }
       invite {
         id

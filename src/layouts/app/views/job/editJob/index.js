@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from 'react';
 import {
   Card,
@@ -15,16 +14,26 @@ import {
   ContentHeader,
   DeleteButton,
   FieldTitle,
-} from '../../../../components';
+} from '../../../../../components';
 import { Query } from 'react-apollo';
 import { Mutation } from 'react-apollo';
-import { UPDATE_JOB, CREATE_JOB, REMOVE_JOB } from '../../../../data/mutations';
-import { JOB, GAMES } from '../../../../data/queries';
-import { toaster } from '../../../../utils/toaster';
-import autosave from '../../../../utils/autosave';
+import {
+  UPDATE_JOB,
+  CREATE_JOB,
+  REMOVE_JOB,
+} from '../../../../../data/mutations';
+import { JOB, GAMES } from '../../../../../data/queries';
+import { toaster } from '../../../../../utils/toaster';
+import autosave from '../../../../../utils/autosave';
 import clsx from 'clsx';
 
-export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
+export default function EditJob({
+  theme,
+  jobId,
+  autosaveIsOn,
+  history,
+  favourites,
+}) {
   const classes = useStyles();
   const [games, setGames] = React.useState([]);
   const [job, setJob] = React.useState({

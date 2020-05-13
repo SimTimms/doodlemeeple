@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from 'react';
 import { Slide, Button, Icon, Card, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
@@ -9,7 +8,7 @@ import {
   IconButton,
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
-import { JOB, CREATIVES } from '../../../../data/queries';
+import { JOB } from '../../../../data/queries';
 import { SUBMIT_BRIEF } from '../../../../data/mutations';
 import { ArtistLineup, Creatives } from './components';
 

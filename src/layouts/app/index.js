@@ -10,13 +10,11 @@ import { EditProfile } from './views/profileEdit';
 import { Account } from './views/account';
 import { Invites } from './views/invites';
 import { Submitted } from './views/submitted';
-import { EditGame } from './views/editGame';
-import { EditJob } from './views/editJob';
+import { EditGame, PreviewGame, Games } from './views/game';
+import { EditJob, Jobs, PreviewJob } from './views/job';
 import { PickArtist } from './views/pickArtist';
 import { NewQuote } from './views/newQuote';
 import { LoadIcon } from '../../components';
-import { Games } from './views/games';
-import { Jobs } from './views/jobs';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
 import { AUTOSAVE_IS } from '../../data/queries';
@@ -107,6 +105,13 @@ function AppLayout(props) {
               autosaveIsOn={autosaveIsOn}
               history={props.history}
             />
+          ) : page === 'view-game' ? (
+            <PreviewGame
+              theme={props.theme}
+              gameId={pathParam}
+              autosaveIsOn={autosaveIsOn}
+              history={props.history}
+            />
           ) : page === 'edit-job' ? (
             <EditJob
               theme={props.theme}
@@ -114,6 +119,12 @@ function AppLayout(props) {
               autosaveIsOn={autosaveIsOn}
               history={props.history}
               favourites={favourites}
+            />
+          ) : page === 'view-job' ? (
+            <PreviewJob
+              theme={props.theme}
+              jobId={pathParam}
+              history={props.history}
             />
           ) : page === 'pick-artist' ? (
             <PickArtist

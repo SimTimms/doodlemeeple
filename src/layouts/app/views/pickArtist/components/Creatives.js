@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';

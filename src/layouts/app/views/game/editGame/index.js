@@ -2,21 +2,24 @@ import React from 'react';
 import { Icon, Card, Slide, TextField, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { ProfileHeader } from './components/profileHeader';
-import { LoadIcon, ContentHeader, DeleteButton } from '../../../../components';
+import {
+  LoadIcon,
+  ContentHeader,
+  DeleteButton,
+} from '../../../../../components';
 import { Query } from 'react-apollo';
 import { Mutation } from 'react-apollo';
 import {
   UPDATE_GAME,
   CREATE_GAME,
   REMOVE_GAME,
-} from '../../../../data/mutations';
-import { GAME } from '../../../../data/queries';
-import { UpdateGameButton } from './components/updateGameButton';
-import { toaster } from '../../../../utils/toaster';
-import autosave from '../../../../utils/autosave';
-import { errorMessages } from '../../../../utils/readableErrors';
+} from '../../../../../data/mutations';
+import { GAME } from '../../../../../data/queries';
+import { toaster } from '../../../../../utils/toaster';
+import autosave from '../../../../../utils/autosave';
+import { errorMessages } from '../../../../../utils/readableErrors';
 
-export function EditGame({ theme, gameId, autosaveIsOn, history }) {
+export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
   const classes = useStyles();
   const [game, setGame] = React.useState({
     name: '',

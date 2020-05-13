@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from 'react';
 import { Icon } from '@material-ui/core';
 import { useStyles } from './styles';
