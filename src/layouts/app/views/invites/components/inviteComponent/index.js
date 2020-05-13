@@ -22,33 +22,39 @@ export function InviteComponent({ invite, removeInvite }) {
           </Link>
         </div>
       </InlineHeader>
-      <div
-        className={classes.cardSummaryWrapper}
-        style={{
-          backgroundImage: `url(${invite.game.backgroundImg})`,
-        }}
-      >
+      <div className={classes.cardSummaryWrapper}>
         <Typography
           variant="body2"
           component="p"
           className={classes.cardSummary}
         >
-          for{' '}
-          <Link
-            href={`/app/view-job/${invite.job.id}`}
-            style={{ textDecoration: 'none' }}
-            variant="button"
-          >
-            {invite.job.name}
-          </Link>{' '}
-          on{' '}
-          <Link
-            href={`/app/view-game/${invite.game.id}`}
-            style={{ textDecoration: 'none' }}
-            variant="button"
-          >
-            {invite.game.name}
-          </Link>
+          <div
+            style={{
+              backgroundImage: `url(${invite.game.backgroundImg})`,
+              width: 100,
+              height: 60,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center center',
+              marginRight: 20,
+            }}
+          ></div>
+          <div>
+            <Link
+              href={`/app/view-job/${invite.job.id}`}
+              style={{ textDecoration: 'none' }}
+              variant="button"
+            >
+              {invite.job.name}
+            </Link>{' '}
+            on{' '}
+            <Link
+              href={`/app/view-game/${invite.game.id}`}
+              style={{ textDecoration: 'none' }}
+              variant="button"
+            >
+              {invite.game.name}
+            </Link>
+          </div>
         </Typography>
       </div>
       <div className={classes.cardActionArea}>
