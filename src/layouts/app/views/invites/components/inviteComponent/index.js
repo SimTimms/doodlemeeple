@@ -31,14 +31,15 @@ export function InviteComponent({ invite, removeInvite }) {
           <div
             style={{
               backgroundImage: `url(${invite.game.backgroundImg})`,
-              width: 100,
-              height: 60,
+              width: 150,
+              height: 80,
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
               marginRight: 20,
+              backgroundColor: 'red',
             }}
           ></div>
-          <div>
+          <div style={{ width: '100%' }}>
             <Link
               href={`/app/view-job/${invite.job.id}`}
               style={{ textDecoration: 'none' }}

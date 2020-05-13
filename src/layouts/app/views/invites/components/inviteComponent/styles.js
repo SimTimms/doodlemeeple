@@ -27,10 +27,7 @@ export const useStyles = makeStyles((theme) => ({
     paddingBottom: 20,
   },
   cardSummary: {
-    border: '1px solid #ddd',
-    borderRadius: 5,
     background: 'rgba(255,255,255,0.9)',
-    padding: 20,
     boxSizing: 'border-box',
     display: 'flex',
     flexDirection: 'row',
@@ -45,7 +42,6 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
     background: '#fff',
-    padding: 20,
     width: '100%',
     boxSizing: 'border-box',
     backgroundPosition: 'center center',
