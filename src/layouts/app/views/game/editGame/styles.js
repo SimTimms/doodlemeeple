@@ -9,7 +9,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'flex-end',
     flexDirection: 'column',
   },
-  card: { maxWidth: 712, width: '100%' },
+  card: { maxWidth: 712, width: '100%', marginBottom: 20 },
   title: {
     fontSize: 14,
   },

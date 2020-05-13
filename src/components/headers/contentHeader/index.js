@@ -13,7 +13,11 @@ function ContentHeader({ title, subTitle, button }) {
             {title}
           </Typography>
         </div>
-        <Typography color="textSecondary" component="p">
+        <Typography
+          color="textSecondary"
+          component="p"
+          style={{ textAlign: 'center' }}
+        >
           {subTitle}
         </Typography>
       </div>

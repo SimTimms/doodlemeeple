@@ -59,6 +59,7 @@ export default function EditJob({
         <ContentHeader
           title={jobId === 'new' ? 'Create a Job' : 'Edit a Job'}
           subTitle="Create a new job"
+          button={null}
         />
         <Mutation
           mutation={jobId === 'new' ? CREATE_JOB : UPDATE_JOB}

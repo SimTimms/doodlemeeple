@@ -1,12 +1,14 @@
 import React from 'react';
-import { Icon, Card, Slide, TextField, Typography } from '@material-ui/core';
+import { Card, Slide, TextField, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { ProfileHeader } from './components/profileHeader';
 import {
   LoadIcon,
   ContentHeader,
   DeleteButton,
+  FieldTitle,
 } from '../../../../../components';
+import ReactPlayer from 'react-player';
 import { Query } from 'react-apollo';
 import { Mutation } from 'react-apollo';
 import {
@@ -31,10 +33,10 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
       images: [],
     },
     showreel: '',
-    type: 'game',
+    type: '',
     id: 'new',
   });
-  const [disabledValue, setDisabledValue] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
   const [deleteError, setDeleteError] = React.useState('');
 
   function setGameImage(field, url) {
@@ -50,6 +52,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
         <ContentHeader
           title={gameId === 'new' ? 'Create a Game' : 'Edit a Game'}
           subTitle="Create a new game or project listing, then create jobs"
+          button={null}
         />
 
         <Mutation
@@ -76,28 +79,16 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
           }}
         >
           {(mutation) => {
-            return (
+            return loading ? (
+              <LoadIcon />
+            ) : (
               <div style={{ width: '100%' }}>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    paddingBottom: 5,
-                  }}
-                >
-                  {/*!autosaveIsOn && (
-                    <UpdateGameButton
-                      game={game}
-                      disabledValue={disabledValue}
-                      setDisabledValue={setDisabledValue}
-                      toast={() => {
-                        toaster('Saved');
-                      }}
-                      mutation={mutation}
-                    />
-                    )*/}
-                </div>
-                <Card className={classes.card}>
+                <Card className={classes.card} style={{ paddingTop: 10 }}>
+                  <FieldTitle
+                    name=" 1. Primary Image"
+                    description="This image will be displayed in most places where your game is mentioned. Choose an image that represents your game and brings attention."
+                    warning=""
+                  />
                   <ProfileHeader
                     game={game}
                     setGameImage={setGameImage}
@@ -105,12 +96,63 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                     autosaveFunction={() => {
                       autosave && mutation();
                     }}
-                    setDisabledValue={setDisabledValue}
+                    setDisabledValue={null}
                   />
+                </Card>
+                <Card className={classes.card}>
                   <div style={{ padding: 10 }}>
+                    <FieldTitle
+                      name=" 2. Game Details"
+                      description="Is your project backed on Kickstarter?, is it just an idea?, is it a fantasy/sci-fi RPG hybrid? Give some detail about your game so that creatives get to know your project"
+                      warning=""
+                    />
+                    <TextField
+                      id={'name'}
+                      value={game.name}
+                      label={`What's the game called? ${
+                        game.name ? `(${86 - game.name.length})` : ''
+                      }`}
+                      inputProps={{ maxLength: 86 }}
+                      onChange={(e) => {
+                        setGame({
+                          ...game,
+                          name: e.target.value.replace(
+                            /[^A-Za-z0-9 ,\-.!()£$"'\n]/g,
+                            '',
+                          ),
+                        });
+                        autosaveIsOn && autosave(mutation, 'name');
+                      }}
+                      margin="normal"
+                      variant="outlined"
+                      style={{ width: '100%' }}
+                    />
+                    <TextField
+                      id={'type'}
+                      label={`What type of game is this? ${
+                        game.type ? `(${36 - game.type.length})` : ''
+                      }`}
+                      inputProps={{ maxLength: 36 }}
+                      multiline
+                      type="text"
+                      value={game.type}
+                      onChange={(e) => {
+                        setGame({
+                          ...game,
+                          type: e.target.value.replace(
+                            /[^A-Za-z0-9 ,\-.!()£$"'\n]/g,
+                            '',
+                          ),
+                        });
+                        autosaveIsOn && autosave(mutation, 'image');
+                      }}
+                      margin="normal"
+                      variant="outlined"
+                      style={{ width: '100%' }}
+                    />
                     <TextField
                       id={'summary'}
-                      label={`Summary ${
+                      label={`Summary of the game ${
                         game.summary ? `(${156 - game.summary.length})` : ''
                       }`}
                       inputProps={{ maxLength: 156 }}
@@ -118,7 +160,6 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                       type="text"
                       value={game.summary}
                       onChange={(e) => {
-                        setDisabledValue(true);
                         setGame({
                           ...game,
                           summary: e.target.value.replace(
@@ -132,17 +173,78 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                       variant="outlined"
                       style={{ width: '100%' }}
                     />
+                    <TextField
+                      id={'location'}
+                      label={`Where are you based? ${
+                        game.location ? `(${56 - game.location.length})` : ''
+                      }`}
+                      inputProps={{ maxLength: 56 }}
+                      multiline
+                      type="text"
+                      value={game.location}
+                      onChange={(e) => {
+                        setGame({
+                          ...game,
+                          location: e.target.value.replace(
+                            /[^A-Za-z0-9 ,\-.!()£$"'\n]/g,
+                            '',
+                          ),
+                        });
+                        autosaveIsOn && autosave(mutation, 'location');
+                      }}
+                      margin="normal"
+                      variant="outlined"
+                      style={{ width: '100%' }}
+                    />
                   </div>
+                </Card>
+                <Card className={classes.card}>
+                  <div style={{ padding: 10 }}>
+                    <FieldTitle
+                      name=" 3. Video"
+                      description="Do you have a promotional video on YouTube, Vimeo or somewhere else?"
+                      warning=""
+                    />
+                    <TextField
+                      id={'name'}
+                      value={game.showreel}
+                      label={`Video URL ${
+                        game.showreel ? `(${386 - game.showreel.length})` : ''
+                      }`}
+                      inputProps={{ maxLength: 386 }}
+                      onChange={(e) => {
+                        setGame({
+                          ...game,
+                          showreel: e.target.value,
+                        });
+                        autosaveIsOn && autosave(mutation, 'showreel');
+                      }}
+                      margin="normal"
+                      variant="outlined"
+                      style={{ width: '100%' }}
+                    />
+                    {game.showreel !== '' && (
+                      <ReactPlayer
+                        url={game.showreel}
+                        playing
+                        controls={true}
+                        muted={true}
+                        style={{ width: '100%' }}
+                        width="100%"
+                      />
+                    )}
+                  </div>
+                </Card>
+                <Card className={classes.card}>
                   <div
                     style={{
                       padding: 10,
-                      borderTop: '1px dotted #ccc',
+
                       background: '#eee',
                     }}
                   >
                     {game.id !== 'new' && (
                       <div>
-                        {' '}
                         <Typography variant="h2" component="p">
                           Delete Game
                         </Typography>
@@ -195,6 +297,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
           fetchPolicy="network-only"
           onCompleted={(data) => {
             data.getGame && setGame({ ...data.getGame });
+            setLoading(false);
           }}
         >
           {({ loading, error, data }) => {

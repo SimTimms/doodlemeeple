@@ -61,40 +61,6 @@ export function ProfileHeader({
           />
         </div>
       )}
-      <div
-        className={clsx({
-          [classes.profileWrapper]: true,
-          [classes.profileWrapperMobile]: mobile,
-          [classes.profileWrapperDesktop]: !mobile,
-        })}
-      >
-        <div
-          className={clsx({
-            [classes.profileName]: true,
-            [classes.profileNameMobile]: mobile,
-          })}
-        >
-          <TextField
-            id={'name'}
-            value={game.name}
-            label={`Game Name ${game.name ? `(${86 - game.name.length})` : ''}`}
-            inputProps={{ maxLength: 86 }}
-            onChange={(e) => {
-              setDisabledValue(true);
-              if (autosaveFunction) {
-                autosave(autosaveFunction, 'username');
-              }
-              setGame({
-                ...game,
-                name: e.target.value.replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
-              });
-            }}
-            margin="normal"
-            variant="outlined"
-            style={{ marginRight: 10 }}
-          />
-        </div>
-      </div>
     </div>
   );
 }
