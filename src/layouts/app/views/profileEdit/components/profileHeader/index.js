@@ -3,7 +3,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import TextField from '@material-ui/core/TextField';
 import { useStyles } from './styles';
 import clsx from 'clsx';
-import { Uploader } from '../../../../../../components';
+import { Uploader, FieldTitle } from '../../../../../../components';
 import autosave from '../../../../../../utils/autosave';
 
 export function ProfileHeader({
@@ -22,25 +22,18 @@ export function ProfileHeader({
   const mobile = useMediaQuery('(max-width:800px)');
 
   return (
-    <div
-      style={{
-        backgroundImage: `url(${profile.bgImage})`,
-        backgroundPosition: 'center center',
-      }}
-      className={clsx({
-        [classes.root]: true,
-        [classes.rootMobile]: mobile,
-        [classes.rootDesktop]: !mobile,
-      })}
-    >
+    <div>
       <div
         style={{
-          position: 'absolute',
-          right: 0,
-          top: 0,
-          display: 'flex',
-          padding: 5,
+          backgroundImage: `url(${profile.bgImage})`,
+          backgroundPosition: 'center center',
         }}
+        className={clsx({
+          [classes.root]: true,
+          [classes.rootImage]: profile.bgImage,
+          [classes.rootMobile]: mobile,
+          [classes.rootDesktop]: !mobile,
+        })}
       >
         <Uploader
           cbImage={(url) => {
@@ -64,6 +57,11 @@ export function ProfileHeader({
           size="700 x 400"
         />
       </div>
+      <FieldTitle
+        name="My Identity"
+        description="Your profile picture or logo and name, callsign, company name, handle, alias or whatever else you want to be know as. Keep it clean please. Image Requirements: 140 x 140px, png or jpg, less than 2MB"
+        warning=""
+      />
       <div
         className={clsx({
           [classes.profileWrapper]: true,

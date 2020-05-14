@@ -11,14 +11,18 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     marginBottom: 50,
   },
-  card: { maxWidth: 712, width: '100%' },
+  card: {
+    maxWidth: 712,
+    width: '100%',
+    marginBottom: 20,
+    boxShadow: '20px 20px 30px rgba(0,0,0,0.2)',
+  },
   title: {
     fontSize: 14,
   },
   avatar: {
     borderRadius: '50%',
     border: '10px solid #fff',
-    marginBottom: -50,
     width: 140,
   },
   cardContentCenter: {

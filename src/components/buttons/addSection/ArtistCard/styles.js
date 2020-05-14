@@ -18,7 +18,7 @@ export const useStyles = makeStyles((theme) => {
       flexDirection: 'row',
       cursor: 'pointer',
       '&:hover': {
-        background: '#444',
+        background: theme.palette.primary.main,
         color: '#fff',
       },
     },

@@ -7,6 +7,7 @@ export const useStyles = makeStyles((theme) => {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
+      borderTop: '1px solid rgba(255,255,255,0.3)',
       cursor: 'pointer',
       '&:hover': {
         background: theme.palette.primary.light,

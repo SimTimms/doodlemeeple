@@ -126,7 +126,10 @@ function Uploader({
         <div style={{ textAlign: 'center' }}>
           <Icon className={classes.imageIcon}>add_photo_alternate</Icon>
           {size && (
-            <Typography variant="body1" style={{ lineHeight: 1 }}>
+            <Typography
+              variant="body1"
+              style={{ fontSize: 10, marginTop: -10 }}
+            >
               {size}
             </Typography>
           )}

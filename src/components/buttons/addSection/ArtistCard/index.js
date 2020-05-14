@@ -40,7 +40,6 @@ export function ArtistCard({ setDisplay, sections, setSections, type, img }) {
       <div
         style={{ textAlign: 'right', display: 'flex', flexDirection: 'row' }}
       >
-        <Icon style={{ fontSize: 20, marginRight: 10 }}>add</Icon>
         <Typography variant="h2">{TYPE_HELPER(type)}</Typography>
       </div>
     </Card>

@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const galleryStyles = makeStyles((theme) => ({
   notify: {
     width: '100%',
     textAlign: 'center',
@@ -48,5 +48,6 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     width: '100%',
     marginTop: 10,
+    borderTop: '1px solid #ddd',
   },
 }));

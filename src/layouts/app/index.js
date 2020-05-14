@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { AppMenu } from '../menus';
 import { AppDrawer } from '../menus/appDrawer';
 import { Dashboard } from './views/dashboard';
-import { Profile } from './views/profile';
+//import { Profile } from './views/profile';
 import { EditProfile } from './views/profileEdit';
 import { Account } from './views/account';
 import { Invites } from './views/invites';
@@ -84,8 +84,6 @@ function AppLayout(props) {
         <ContentTop style={{ width: '100%' }}>
           {page === 'dashboard' ? (
             <Dashboard />
-          ) : page === 'profile' ? (
-            <Profile />
           ) : page === 'edit-profile' ? (
             <EditProfile theme={props.theme} />
           ) : page === 'account' ? (

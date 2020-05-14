@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icon, Card, Typography, Slide, Button } from '@material-ui/core';
 import { useStyles } from './styles';
-import { LoadIcon } from '../../../../components';
+import { LoadIcon, IconTitle, InlineHeader } from '../../../../components';
+
 import { Query } from 'react-apollo';
 import { PROFILE_PREVIEW, SECTIONS_PREVIEW } from '../../../../data/queries';
 import { animated, useSpring } from 'react-spring';
@@ -110,6 +111,9 @@ export function PreviewProfile({ theme, profileId, publicView }) {
           )}
 
           <Card className={classes.card}>
+            <InlineHeader>
+              <IconTitle icon="account_box" title="About Me" />
+            </InlineHeader>
             <animated.div
               style={{
                 backgroundImage:
@@ -127,23 +131,23 @@ export function PreviewProfile({ theme, profileId, publicView }) {
                 display: 'flex',
                 alignItems: 'flex-end',
                 justifyContent: 'flex-start',
-
                 minHeight: 400,
                 maxHeight: 400,
                 boxShadow: 'inset 0 0 10px rgba(255,255,255,0.5)',
               }}
+            ></animated.div>{' '}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'flex-start',
+                flexDirection: 'row',
+                alignItems: 'center',
+                padding: 20,
+                width: '100%',
+                borderTop: '1px solid #ddd',
+              }}
             >
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'flex-start',
-                  flexDirection: 'row',
-                  background: 'rgba(0,0,0,0.7)',
-                  alignItems: 'center',
-                  padding: 20,
-                  width: '100%',
-                }}
-              >
+              {userProfile.profileImg && (
                 <div
                   style={{
                     backgroundImage: `url(${userProfile.profileImg}`,
@@ -157,43 +161,38 @@ export function PreviewProfile({ theme, profileId, publicView }) {
                     border: '3px solid #ddd',
                   }}
                 ></div>
+              )}
+
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  flexDirection: 'column',
+                }}
+              >
                 <div
                   style={{
                     display: 'flex',
                     justifyContent: 'flex-start',
-                    flexDirection: 'column',
+                    flexDirection: 'row',
+                    marginLeft: 10,
+                    marginBottom: 10,
                   }}
                 >
-                  <div
+                  <Typography
+                    variant="h1"
                     style={{
-                      display: 'flex',
-                      justifyContent: 'flex-start',
-                      flexDirection: 'row',
-                      marginLeft: 10,
-                      marginBottom: 10,
+                      lineHeight: 0.8,
                     }}
                   >
-                    <Typography
-                      variant="h1"
-                      style={{
-                        textShadow: '3px 3px 3px rgba(0,0,0,0.4)',
-                        color: '#fff',
-                        lineHeight: 0.8,
-                      }}
-                    >
-                      {userProfile.userName}
-                    </Typography>
-                  </div>
-                  <Typography
-                    variant="h2"
-                    style={{ color: '#fff', marginLeft: 10 }}
-                  >
-                    {userProfile.summary}
+                    {userProfile.userName}
                   </Typography>
                 </div>
+                <Typography variant="h2" style={{ marginLeft: 14 }}>
+                  {userProfile.summary}
+                </Typography>
               </div>
-            </animated.div>
-
+            </div>
             {sections &&
               sections.map((section, index) =>
                 section.type === 'artist' ||
@@ -204,7 +203,6 @@ export function PreviewProfile({ theme, profileId, publicView }) {
                   <EditorSection section={section} />
                 ),
               )}
-
             <Query
               query={SECTIONS_PREVIEW}
               onCompleted={(data) => {

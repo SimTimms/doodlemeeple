@@ -10,11 +10,15 @@ import {
 } from '@material-ui/core';
 import { useStyles } from './styles';
 import { ProfileHeader } from './components/profileHeader';
+
 import {
   AddSection,
   LoadIcon,
   ErrorBox,
   ContentHeader,
+  IconTitle,
+  InlineHeader,
+  FieldTitle,
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE } from '../../../../data/queries';
@@ -102,7 +106,6 @@ export function EditProfile({ theme }) {
                     your work"
                   button={null}
                 />
-
                 <div
                   style={{
                     display: 'flex',
@@ -110,52 +113,6 @@ export function EditProfile({ theme }) {
                     paddingBottom: 5,
                   }}
                 >
-                  {/*
-                  <label
-                    htmlFor="material-switch"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Typography
-                      color="textSecondary"
-                      component="p"
-                      style={{ marginTop: -2, paddingRight: 5 }}
-                    >
-                      AUTOSAVE
-                    </Typography>
-                    <Switch
-                      checked={autosaveIsOn}
-                      onChange={(checked) => {
-                        setAutosaveIsOn(checked);
-                        userProfile.autosave = checked;
-                        SignupMutation();
-                      }}
-                      onColor={theme.palette.primary.main}
-                      handleDiameter={30}
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      offColor="#ddd"
-                      boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
-                      activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
-                      height={20}
-                      width={48}
-                      id="material-switch"
-                    />
-                  </label>
-              !autosaveIsOn && (
-                    <UpdateUserButton
-                      profile={userProfile}
-                      setError={setError}
-                      errors={errors}
-                      disabledValue={disabledValue}
-                      setDisabledValue={setDisabledValue}
-                      toast={() => {
-                        toaster('Saved');
-                      }}
-                    />
-                    )*/}
                   <Link
                     to={`/preview/${userId}`}
                     style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
@@ -175,21 +132,37 @@ export function EditProfile({ theme }) {
                   </Link>
                 </div>
                 <Card className={classes.card}>
-                  <ProfileHeader
-                    profile={userProfile}
-                    setProfileImg={setProfileImg}
-                    setProfileImgStyle={setProfileImgStyle}
-                    setBgImage={setBgImage}
-                    profileBGStyle={profileBGStyle}
-                    setProfileBGStyle={setProfileBGStyle}
-                    profileImgStyle={profileImgStyle}
-                    setUserName={setUserName}
-                    setDisabledValue={setDisabledValue}
-                    autosaveFunction={autosaveIsOn ? SignupMutation : null}
-                  />
-
-                  <ErrorBox errorMsg={errors.name} />
+                  <InlineHeader>
+                    <IconTitle icon="account_box" title="About Me" />
+                  </InlineHeader>
                   <div style={{ padding: 10 }}>
+                    <FieldTitle
+                      name="Feature Image"
+                      description="Use this space to showcase your most impressive artwork, the image should be png or jpg and uner 2MB. 
+                    700px x 400px is the optimum size"
+                      warning=""
+                    />
+
+                    <ProfileHeader
+                      profile={userProfile}
+                      setProfileImg={setProfileImg}
+                      setProfileImgStyle={setProfileImgStyle}
+                      setBgImage={setBgImage}
+                      profileBGStyle={profileBGStyle}
+                      setProfileBGStyle={setProfileBGStyle}
+                      profileImgStyle={profileImgStyle}
+                      setUserName={setUserName}
+                      setDisabledValue={setDisabledValue}
+                      autosaveFunction={autosaveIsOn ? SignupMutation : null}
+                    />
+
+                    <ErrorBox errorMsg={errors.name} />
+
+                    <FieldTitle
+                      name="Summary"
+                      description="Tell everyone about yourself. What are your influences? what's your art style? how long have you been working? Make it punchy to grab attention..."
+                      warning=""
+                    />
                     <TextField
                       id={'summary'}
                       label={`About Me ${
@@ -218,38 +191,43 @@ export function EditProfile({ theme }) {
                       style={{ width: '100%' }}
                     />
                   </div>
-                  {sections &&
-                    sections.map((section, index) =>
-                      section.type === 'artist' ||
-                      section.type === 'graphic-artist' ||
-                      section.type === '3d-artist' ? (
-                        <GallerySection
-                          key={`section_${index}`}
-                          index={index}
-                          sections={sections}
-                          setSections={setSections}
-                          section={section}
-                          autosaveIsOn={autosaveIsOn}
-                        />
-                      ) : section.type === 'rulebook-editor' ? (
-                        <EditorSection
-                          key={`section_${index}`}
-                          index={index}
-                          sections={sections}
-                          setSections={setSections}
-                          section={section}
-                          autosaveIsOn={autosaveIsOn}
-                        />
-                      ) : section.summary !== null ? (
-                        <Section
-                          key={`section_${index}`}
-                          index={index}
-                          sections={sections}
-                          setSections={setSections}
-                          section={section}
-                        />
-                      ) : null,
-                    )}
+                </Card>{' '}
+                {sections &&
+                  sections.map((section, index) =>
+                    section.type === 'artist' ||
+                    section.type === 'graphic-artist' ||
+                    section.type === '3d-artist' ? (
+                      <GallerySection
+                        key={`section_${index}`}
+                        index={index}
+                        sections={sections}
+                        setSections={setSections}
+                        section={section}
+                        autosaveIsOn={autosaveIsOn}
+                      />
+                    ) : section.type === 'rulebook-editor' ? (
+                      <EditorSection
+                        key={`section_${index}`}
+                        index={index}
+                        sections={sections}
+                        setSections={setSections}
+                        section={section}
+                        autosaveIsOn={autosaveIsOn}
+                      />
+                    ) : section.summary !== null ? (
+                      <Section
+                        key={`section_${index}`}
+                        index={index}
+                        sections={sections}
+                        setSections={setSections}
+                        section={section}
+                      />
+                    ) : null,
+                  )}
+                <Card className={classes.card}>
+                  <InlineHeader>
+                    <IconTitle icon="brush" title="Skills" />
+                  </InlineHeader>
                   {sections.length < 3 && hasNew() === 0 && (
                     <AddSection setSections={setSections} sections={sections} />
                   )}

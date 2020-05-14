@@ -1,17 +1,22 @@
 import React, { useEffect } from 'react';
-import { Divider, TextField, Typography, Icon } from '@material-ui/core';
+import { Divider, TextField, Typography, Icon, Card } from '@material-ui/core';
 import { MediaGalleryObject } from '../../mediaGalleryOject';
 import { Mutation } from 'react-apollo';
 import ReactPlayer from 'react-player';
 import autosave from '../../../../../../../utils/autosave';
 import { toaster } from '../../../../../../../utils/toaster';
-import { useStyles } from './styles';
+import { galleryStyles } from './styles';
+import { useStyles } from '../../../styles';
 import {
   UPDATE_GALLERY_SECTION_MUTATION,
   CREATE_GALLERY_SECTION_MUTATION,
 } from '../../../../../../../data/mutations';
 import { DeleteButton } from '../deleteButton';
-import { FieldTitle } from '../../../../../../../components';
+import {
+  FieldTitle,
+  IconTitle,
+  InlineHeader,
+} from '../../../../../../../components';
 import Testimonials from '../../testimonials';
 import Projects from '../../projects';
 import { SaveButton } from '../saveButton';
@@ -24,7 +29,8 @@ function GallerySection({
   section,
   autosaveIsOn,
 }) {
-  const classes = useStyles();
+  const classes = galleryStyles();
+  const parentClasses = useStyles();
   const [title, setTitle] = React.useState('loading...');
   const [type, setType] = React.useState('loading...');
   const [summary, setSummary] = React.useState('loading...');
@@ -59,8 +65,10 @@ function GallerySection({
   }, [section]);
 
   return (
-    <div>
-      <Divider />
+    <Card className={parentClasses.card}>
+      <InlineHeader>
+        <IconTitle icon="brush" title="Artist" />
+      </InlineHeader>
       <Mutation
         mutation={
           section.id === 'new'
@@ -87,17 +95,6 @@ function GallerySection({
         {(mutation) => {
           return (
             <div className={classes.sectionWrapper}>
-              <div className={classes.sectionHeader}>
-                <div className={classes.sectionHeaderTitle}>
-                  <Typography variant="h1">{TYPE_HELPER(type)}</Typography>
-                </div>
-                <DeleteButton
-                  sectionId={section.id}
-                  sections={sections}
-                  index={index}
-                  setSections={setSections}
-                />
-              </div>
               <FieldTitle
                 name="Description"
                 description=" This is an opportunity for you to shout about yourself! Describe your
@@ -187,21 +184,18 @@ function GallerySection({
               </div>
 
               <div className={classes.actionWrapper}>
-                {/*!autosaveIsOn && (
-                  <SaveButton
-                    sectionId={section.id}
-                    sectionValues={sectionValues}
-                    disabledValue={changed}
-                    setDisabledValue={setChanged}
-                    mutation={UPDATE_GALLERY_SECTION_MUTATION}
-                  />
-                )*/}
+                <DeleteButton
+                  sectionId={section.id}
+                  sections={sections}
+                  index={index}
+                  setSections={setSections}
+                />
               </div>
             </div>
           );
         }}
       </Mutation>
-    </div>
+    </Card>
   );
 }
 

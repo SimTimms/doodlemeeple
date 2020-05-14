@@ -32,7 +32,7 @@ function AddSection({ setSections, sections }) {
           {`Add a Skill (${3 - sections.length})`}
         </Typography>
       </CardContent>
-      <Divider />
+
       <div
         className={clsx({
           [classes.skillWrapper]: true,

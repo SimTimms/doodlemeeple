@@ -1,13 +1,14 @@
 import React from 'react';
-import {
-  Card,
-  CardContent,
-  Divider,
-  Typography,
-  Slide,
-} from '@material-ui/core';
+import { Card, CardContent, Divider, Slide } from '@material-ui/core';
 import { useStyles } from './styles';
-import { ContentHeader } from '../../../../components';
+import {
+  ContentHeader,
+  LoadIcon,
+  IconTitle,
+  InlineHeader,
+  IconButton,
+} from '../../../../components';
+
 import { ProfileHeader } from './components/profileHeader';
 import { MediaGallery } from '../../../../components';
 import { creativesTemp } from '../../../../testData/creatives';
@@ -18,27 +19,26 @@ export function Profile() {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div>
-        <ContentHeader>
-          <Typography variant="h1" color="textPrimary">
-            Profile
-          </Typography>
-          <Typography color="textSecondary" component="p">
-            Tell everyone about yourself, showcase the best examples of your
-            work
-          </Typography>
-        </ContentHeader>
+        <ContentHeader
+          title="Prosfile"
+          subTitle="Tell everyone about yourself, showcase the best examples of your
+            work"
+          button={null}
+        />
 
         <Card className={classes.card}>
+          <InlineHeader>
+            <IconTitle icon="casino" title="Game Details" />
+          </InlineHeader>
           <ProfileHeader bgImage={creative.profileBG} profile={creative} />
-
           {creative.gallery && (
             <div>
               <Divider />
               <CardContent>
-                <ContentHeader>TEST</ContentHeader>
                 <MediaGallery
                   items={creative.gallery}
-                  setItems={null}
+                  setImages={null}
+                  setBgImage={null}
                   edit={true}
                 />
               </CardContent>
