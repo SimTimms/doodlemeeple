@@ -22,7 +22,7 @@ export function Posts({ posts }) {
         component="p"
         style={{ textAlign: 'center' }}
       >
-        Updates
+        News
       </Typography>
 
       {posts.map((post, index) => {
@@ -61,13 +61,7 @@ export function Posts({ posts }) {
                         alignItems: 'center',
                       }}
                     >
-                      <Typography
-                        style={{
-                          color: '#fff',
-                        }}
-                        variant="h5"
-                        component="h4"
-                      >
+                      <Typography variant="h5" component="h4">
                         <b>{title}</b>
                       </Typography>
                       <Typography
@@ -82,7 +76,7 @@ export function Posts({ posts }) {
                       </Typography>
                     </div>
 
-                    <Typography style={{ color: '#fff' }} component="p">
+                    <Typography style={{ color: '#444' }} component="p">
                       {message}
                     </Typography>
                   </div>

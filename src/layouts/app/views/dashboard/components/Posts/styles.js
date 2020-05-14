@@ -18,13 +18,16 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   postHeader: {
-    color: '#fff',
+    color: theme.palette.primary.main,
     position: 'absolute',
     bottom: 0,
-    background: 'rgba(0,0,0,0.7)',
+    background: '#fff',
+    borderTop: '1px solid #ddd',
     padding: 10,
+    paddingTop: 5,
     width: '100%',
     boxSizing: 'border-box',
+    boxShadow: '0 0 10px rgba(0,0,0,0.2)',
   },
   postImage: {
     position: 'relative',
@@ -35,7 +38,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   card: {
     width: '100%',
-    margin: '15px 0 0 0',
+    margin: '5px 0 0 0',
     boxShadow: '10px 10px 15px rgba(0,0,0,0.2)',
   },
   rowWrapper: {
