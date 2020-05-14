@@ -3,7 +3,7 @@ import { Button, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 
-export default function IconButton({ disabled, onClickEvent, icon }) {
+export default function IconButton({ disabled, onClickEvent, icon, title }) {
   const classes = useStyles();
 
   return (
@@ -15,7 +15,7 @@ export default function IconButton({ disabled, onClickEvent, icon }) {
       disabled={disabled}
       onClick={() => onClickEvent()}
     >
-      Submit
+      {title}
       <Icon className={classes.iconButtonIcon}>{icon}</Icon>
     </Button>
   );
