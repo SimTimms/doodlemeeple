@@ -15,5 +15,5 @@ export const StyledButton = withStyles({
 })(Button);
 
 export const StyledLink = withStyles({
-  a: { textDecoration: 'none', color: 'red' },
+  a: { textDecoration: 'none' },
 })(Link);

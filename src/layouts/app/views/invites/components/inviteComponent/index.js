@@ -36,7 +36,6 @@ export function InviteComponent({ invite, removeInvite }) {
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
               marginRight: 20,
-              backgroundColor: 'red',
             }}
           ></div>
           <div style={{ width: '100%' }}>

@@ -36,6 +36,8 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
+  iconInvite: { color: '#fff !important' },
+  icon: { color: theme.palette.primary.main },
   notifications: {
     display: 'flex',
     flexDirection: 'column',
@@ -43,6 +45,9 @@ export const useStyles = makeStyles((theme) => ({
     borderRight: '1px solid #ddd',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  notificationInvite: {
+    background: theme.palette.secondary.main,
   },
   projectNotifications: {
     display: 'flex',
@@ -73,7 +78,7 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     justifyContent: 'flex-end',
   },
-  card: { width: '100%', margin: '5px 0 0 0' },
+  card: { width: 350, margin: '5px 0 0 0' },
   title: {
     fontSize: 14,
   },

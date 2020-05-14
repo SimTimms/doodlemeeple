@@ -11,6 +11,7 @@ import { REMOVE_NOTIFICATION_MUTATION } from '../../../../../data/mutations';
 import { Mutation } from 'react-apollo';
 import { timeDifferenceForDate } from '../../../../../utils/dates';
 import { toaster } from '../../../../../utils/toaster';
+import clsx from 'clsx';
 
 export function Notifications() {
   const classes = useStyles();
@@ -33,7 +34,7 @@ export function Notifications() {
         }}
         fetchPolicy="network-only"
       >
-        {({ loading, error, data }) => {
+        {({ data }) => {
           return null;
         }}
       </Query>
@@ -46,8 +47,21 @@ export function Notifications() {
                 className={classes.messageButton}
                 style={{ textDecoration: 'none' }}
               >
-                <div className={classes.notifications}>
-                  <Icon color="primary">{notification.icon}</Icon>
+                <div
+                  className={clsx({
+                    [classes.notifications]: true,
+                    [classes.notificationInvite]:
+                      notification.icon === 'thumb_up',
+                  })}
+                >
+                  <Icon
+                    className={clsx({
+                      [classes.icon]: true,
+                      [classes.iconInvite]: notification.icon === 'thumb_up',
+                    })}
+                  >
+                    {notification.icon}
+                  </Icon>
                 </div>
                 <div className={classes.profileWrapper}>
                   <div className={classes.wrapperOne}>
@@ -57,7 +71,7 @@ export function Notifications() {
                         style={{ justifyContent: 'space-between' }}
                       >
                         <Typography
-                          color="primary"
+                          style={{ color: '#aaa' }}
                           variant="caption"
                           component="p"
                         >
@@ -65,7 +79,7 @@ export function Notifications() {
                         </Typography>
                         <Typography
                           variant="caption"
-                          color="textPrimary"
+                          style={{ color: '#aaa' }}
                           component="p"
                         >
                           <b>{timeDifferenceForDate(notification.createdAt)}</b>
