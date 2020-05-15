@@ -11,12 +11,6 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     marginBottom: 50,
   },
-  card: {
-    maxWidth: 712,
-    width: '100%',
-    marginBottom: 20,
-    boxShadow: '10px 10px 30px rgba(0,0,0,0.2)',
-  },
   title: {
     fontSize: 14,
   },

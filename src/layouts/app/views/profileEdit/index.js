@@ -1,16 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Icon,
-  Card,
-  Typography,
-  Slide,
-  TextField,
-  Button,
-} from '@material-ui/core';
+import { Icon, Card, Slide, TextField, Button } from '@material-ui/core';
 import { useStyles } from './styles';
 import { ProfileHeader } from './components/profileHeader';
-
 import {
   AddSection,
   LoadIcon,
@@ -20,10 +12,10 @@ import {
   InlineHeader,
   FieldTitle,
   Divider,
+  DMCard,
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE } from '../../../../data/queries';
-import { UpdateUserButton } from './components/updateUserButton';
 import { Section } from './components/section';
 import GallerySection from './components/section/gallerySection';
 import EditorSection from './components/section/editorSection';
@@ -132,7 +124,7 @@ export function EditProfile({ theme }) {
                     </Button>
                   </Link>
                 </div>
-                <Card className={classes.card}>
+                <DMCard>
                   <InlineHeader>
                     <IconTitle icon="account_box" title="About Me" />
                   </InlineHeader>
@@ -192,7 +184,7 @@ export function EditProfile({ theme }) {
                       style={{ width: '100%' }}
                     />
                   </div>
-                </Card>{' '}
+                </DMCard>
                 {sections &&
                   sections.map((section, index) =>
                     section.type === 'artist' ||
@@ -225,14 +217,14 @@ export function EditProfile({ theme }) {
                       />
                     ) : null,
                   )}
-                <Card className={classes.card}>
+                <DMCard>
                   <InlineHeader>
                     <IconTitle icon="brush" title="Skills" />
                   </InlineHeader>
                   {sections.length < 3 && hasNew() === 0 && (
                     <AddSection setSections={setSections} sections={sections} />
                   )}
-                </Card>
+                </DMCard>
               </div>
             );
           }}
@@ -260,9 +252,7 @@ export function EditProfile({ theme }) {
             );
           }}
         >
-          {({ loading, error, data }) => {
-            if (loading) return <LoadIcon />;
-            if (error) return <div>Error</div>;
+          {({ data }) => {
             return <div></div>;
           }}
         </Query>

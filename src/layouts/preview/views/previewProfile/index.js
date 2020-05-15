@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Icon, Card, Typography, Slide, Button } from '@material-ui/core';
+import { Icon, Typography, Slide, Button } from '@material-ui/core';
 import { useStyles } from './styles';
-import { LoadIcon, IconTitle, InlineHeader } from '../../../../components';
+import {
+  IconTitle,
+  InlineHeader,
+  DMCard,
+  SectionWrapper,
+} from '../../../../components';
 
 import { Query } from 'react-apollo';
 import { PROFILE_PREVIEW, SECTIONS_PREVIEW } from '../../../../data/queries';
@@ -79,10 +84,8 @@ export function PreviewProfile({ theme, profileId, publicView }) {
               });
           }}
         >
-          {({ loading, error, data }) => {
-            if (loading) return <LoadIcon />;
-            if (error) return <div>Error</div>;
-            return <div></div>;
+          {({ data }) => {
+            return null;
           }}
         </Query>
 
@@ -110,7 +113,7 @@ export function PreviewProfile({ theme, profileId, publicView }) {
             </div>
           )}
 
-          <Card className={classes.card}>
+          <DMCard>
             <InlineHeader>
               <IconTitle icon="account_box" title="About Me" />
             </InlineHeader>
@@ -135,7 +138,7 @@ export function PreviewProfile({ theme, profileId, publicView }) {
                 maxHeight: 400,
                 boxShadow: 'inset 0 0 10px rgba(255,255,255,0.5)',
               }}
-            ></animated.div>{' '}
+            ></animated.div>
             <div
               style={{
                 display: 'flex',
@@ -145,6 +148,7 @@ export function PreviewProfile({ theme, profileId, publicView }) {
                 padding: 20,
                 width: '100%',
                 borderTop: '1px solid #ddd',
+                boxSizing: 'border-box',
               }}
             >
               {userProfile.profileImg && (
@@ -188,37 +192,36 @@ export function PreviewProfile({ theme, profileId, publicView }) {
                     {userProfile.userName}
                   </Typography>
                 </div>
-                <Typography variant="h2" style={{ marginLeft: 14 }}>
+                <Typography variant="body1" style={{ marginLeft: 14 }}>
                   {userProfile.summary}
                 </Typography>
               </div>
             </div>
-            {sections &&
-              sections.map((section, index) =>
-                section.type === 'artist' ||
-                section.type === 'graphic-artist' ||
-                section.type === '3d-artist' ? (
-                  <GallerySection section={section} />
-                ) : (
-                  <EditorSection section={section} />
-                ),
-              )}
-            <Query
-              query={SECTIONS_PREVIEW}
-              onCompleted={(data) => {
-                const sections = data.sectionsPreview;
-                setSections(sections);
-              }}
-              variables={{ userId: profileId }}
-              fetchPolicy="network-only"
-            >
-              {({ loading, error, data }) => {
-                if (loading) return <LoadIcon />;
-                if (error) return <div>Error</div>;
-                return null;
-              }}
-            </Query>
-          </Card>
+          </DMCard>
+
+          {sections &&
+            sections.map((section, index) =>
+              section.type === 'artist' ||
+              section.type === 'graphic-artist' ||
+              section.type === '3d-artist' ? (
+                <GallerySection section={section} />
+              ) : (
+                <EditorSection section={section} />
+              ),
+            )}
+          <Query
+            query={SECTIONS_PREVIEW}
+            onCompleted={(data) => {
+              const sections = data.sectionsPreview;
+              setSections(sections);
+            }}
+            variables={{ userId: profileId }}
+            fetchPolicy="network-only"
+          >
+            {({ data }) => {
+              return null;
+            }}
+          </Query>
         </div>
       </div>
     </Slide>

@@ -17,6 +17,7 @@ import {
   InlineHeader,
   Divider,
   SectionWrapper,
+  DMCard,
 } from '../../../../../../../components';
 import Testimonials from '../../testimonials';
 import Projects from '../../projects';
@@ -109,7 +110,7 @@ function EditorSection({
                 [classes.deleteSection]: deleting,
               })}
             >
-              <Card className={parentClasses.card}>
+              <DMCard>
                 <InlineHeader>
                   <IconTitle icon="brush" title={TYPE_HELPER(section.type)} />
                 </InlineHeader>
@@ -176,9 +177,9 @@ function EditorSection({
                     )}
                   </div>
                 </div>
-              </Card>
+              </DMCard>
 
-              <Card className={parentClasses.card}>
+              <DMCard>
                 <InlineHeader>
                   <IconTitle
                     icon="work"
@@ -194,8 +195,8 @@ function EditorSection({
                     autosaveIsOn={autosaveIsOn}
                   />
                 </div>
-              </Card>
-              <Card className={parentClasses.card}>
+              </DMCard>
+              <DMCard>
                 <InlineHeader>
                   <IconTitle
                     icon="chat"
@@ -210,7 +211,7 @@ function EditorSection({
                     sectionId={section.id}
                   />
                 </div>
-              </Card>
+              </DMCard>
             </div>
           </SectionWrapper>
         );

@@ -28,9 +28,11 @@ import IconTitle from './iconTitle';
 import InlineHeader from './inlineHeader';
 import Divider from './divider';
 import SectionWrapper from './sectionWrapper';
+import DMCard from './dmCard';
 
 export {
   DeleteButton,
+  DMCard,
   Divider,
   SectionWrapper,
   InlineHeader,

@@ -42,7 +42,6 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-
     background: '#efeff5',
   },
   contentMobile: { marginLeft: 0 },

@@ -98,6 +98,7 @@ export const useStyles = makeStyles((theme) => ({
     width: 60,
     height: 60,
     backgroundSize: 'cover',
+    backgroundPosition: 'center center',
     borderRadius: '50%',
     border: '3px solid #ddd',
   },

@@ -14,7 +14,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   actionWrapper: {
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     alignItems: 'center',
     flexWrap: 'wrap',
     flexDirection: 'row',

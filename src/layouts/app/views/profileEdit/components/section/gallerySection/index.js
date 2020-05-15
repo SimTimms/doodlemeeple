@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { TextField, Card, Typography } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { MediaGalleryObject } from '../../mediaGalleryOject';
 import { Mutation } from 'react-apollo';
 import ReactPlayer from 'react-player';
@@ -18,6 +18,7 @@ import {
   InlineHeader,
   Divider,
   SectionWrapper,
+  DMCard,
 } from '../../../../../../../components';
 import Testimonials from '../../testimonials';
 import Projects from '../../projects';
@@ -110,7 +111,7 @@ function GallerySection({
                 [classes.deleteSection]: deleting,
               })}
             >
-              <Card className={parentClasses.card}>
+              <DMCard>
                 <InlineHeader>
                   <IconTitle icon="brush" title={TYPE_HELPER(section.type)} />
                 </InlineHeader>
@@ -177,8 +178,8 @@ function GallerySection({
                     )}
                   </div>
                 </div>
-              </Card>
-              <Card className={parentClasses.card}>
+              </DMCard>
+              <DMCard>
                 <InlineHeader>
                   <IconTitle
                     icon="collections"
@@ -201,8 +202,8 @@ function GallerySection({
                     index={index}
                   />
                 </div>
-              </Card>
-              <Card className={parentClasses.card}>
+              </DMCard>
+              <DMCard>
                 <InlineHeader>
                   <IconTitle
                     icon="work"
@@ -218,8 +219,8 @@ function GallerySection({
                     autosaveIsOn={autosaveIsOn}
                   />
                 </div>
-              </Card>
-              <Card className={parentClasses.card}>
+              </DMCard>
+              <DMCard>
                 <InlineHeader>
                   <IconTitle
                     icon="chat"
@@ -234,7 +235,7 @@ function GallerySection({
                     sectionId={section.id}
                   />
                 </div>
-              </Card>
+              </DMCard>
             </div>
           </SectionWrapper>
         );

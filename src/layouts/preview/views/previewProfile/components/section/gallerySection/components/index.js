@@ -57,7 +57,7 @@ export function Card({ img }) {
       style={{
         transform: props.xys.interpolate(trans),
         margin: 20,
-        width: '40%',
+        width: '30%',
         display: 'flex',
       }}
     >
@@ -77,10 +77,10 @@ export function Testimonials({ testimonials }) {
       <div className={classes.testimonialWrapper}>
         {item.image && (
           <div
-            className={classes.testimonialWrapperItem}
             style={{
               backgroundImage: `url(${item.image}`,
             }}
+            className={classes.testimonialWrapperItem}
           ></div>
         )}
 

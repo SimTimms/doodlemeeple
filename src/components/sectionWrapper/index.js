@@ -15,7 +15,7 @@ export default function SectionWrapper({ children, header, button }) {
         >
           {TYPE_HELPER(header)}
         </Typography>
-        {button}
+        {button && button}
       </div>
       {children}
     </div>
