@@ -26,9 +26,13 @@ import ProfileCard from './profileCard';
 import IconBox from './iconBox';
 import IconTitle from './iconTitle';
 import InlineHeader from './inlineHeader';
+import Divider from './divider';
+import SectionWrapper from './sectionWrapper';
 
 export {
   DeleteButton,
+  Divider,
+  SectionWrapper,
   InlineHeader,
   IconTitle,
   IconBox,

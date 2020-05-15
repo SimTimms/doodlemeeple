@@ -3,7 +3,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import TextField from '@material-ui/core/TextField';
 import { useStyles } from './styles';
 import clsx from 'clsx';
-import { Uploader, FieldTitle } from '../../../../../../components';
+import { Uploader, FieldTitle, Divider } from '../../../../../../components';
 import autosave from '../../../../../../utils/autosave';
 
 export function ProfileHeader({
@@ -57,6 +57,7 @@ export function ProfileHeader({
           size="700 x 400"
         />
       </div>
+      <Divider />
       <FieldTitle
         name="My Identity"
         description="Your profile picture or logo and name, callsign, company name, handle, alias or whatever else you want to be know as. Keep it clean please. Image Requirements: 140 x 140px, png or jpg, less than 2MB"

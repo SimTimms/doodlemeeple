@@ -19,6 +19,7 @@ import {
   IconTitle,
   InlineHeader,
   FieldTitle,
+  Divider,
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE } from '../../../../data/queries';
@@ -157,7 +158,7 @@ export function EditProfile({ theme }) {
                     />
 
                     <ErrorBox errorMsg={errors.name} />
-
+                    <Divider />
                     <FieldTitle
                       name="Summary"
                       description="Tell everyone about yourself. What are your influences? what's your art style? how long have you been working? Make it punchy to grab attention..."

@@ -40,14 +40,6 @@ export const galleryStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
     marginTop: 20,
   },
-  actionWrapper: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    width: '100%',
-    marginTop: 10,
-    borderTop: '1px solid #ddd',
-  },
+
+  deleteSection: { opacity: 0.3 },
 }));

@@ -1,15 +1,26 @@
 import React, { useEffect } from 'react';
-import { Divider, TextField, Typography, Icon } from '@material-ui/core';
+import { TextField, Card, Typography } from '@material-ui/core';
 import { Mutation } from 'react-apollo';
+import ReactPlayer from 'react-player';
 import autosave from '../../../../../../../utils/autosave';
 import { toaster } from '../../../../../../../utils/toaster';
-import { useStyles } from './styles';
-import { UPDATE_GALLERY_SECTION_MUTATION } from '../../../../../../../data/mutations';
+import { galleryStyles } from './styles';
+import { useStyles } from '../../../styles';
+import {
+  UPDATE_GALLERY_SECTION_MUTATION,
+  CREATE_GALLERY_SECTION_MUTATION,
+} from '../../../../../../../data/mutations';
 import { DeleteButton } from '../deleteButton';
-import { FieldTitle } from '../../../../../../../components';
+import {
+  FieldTitle,
+  IconTitle,
+  InlineHeader,
+  Divider,
+  SectionWrapper,
+} from '../../../../../../../components';
 import Testimonials from '../../testimonials';
 import Projects from '../../projects';
-import { SaveButton } from '../saveButton';
+import clsx from 'clsx';
 import { TYPE_HELPER } from '../../../../../../../utils';
 
 function EditorSection({
@@ -19,7 +30,8 @@ function EditorSection({
   section,
   autosaveIsOn,
 }) {
-  const classes = useStyles();
+  const classes = galleryStyles();
+  const parentClasses = useStyles();
   const [title, setTitle] = React.useState('loading...');
   const [type, setType] = React.useState('loading...');
   const [summary, setSummary] = React.useState('loading...');
@@ -28,6 +40,7 @@ function EditorSection({
   const [notableProjects, setNotableProjects] = React.useState([]);
   const [testimonials, setTestimonials] = React.useState([]);
   const [changed, setChanged] = React.useState(false);
+  const [deleting, setDeleting] = React.useState(false);
 
   const imageFilter = images.map((item) => {
     return {
@@ -39,8 +52,6 @@ function EditorSection({
     summary,
     title,
     gallery: { images: imageFilter },
-    notableProjects,
-    testimonials,
     showreel,
     type,
   };
@@ -56,100 +67,155 @@ function EditorSection({
   }, [section]);
 
   return (
-    <div>
-      <Divider />
-
-      <Mutation
-        mutation={UPDATE_GALLERY_SECTION_MUTATION}
-        variables={{
-          id: section.id,
-          section: sectionValues,
-        }}
-        onCompleted={(data) => {
-          toaster('Saved');
-        }}
-      >
-        {(mutation) => {
-          return (
-            <div className={classes.sectionWrapper}>
+    <Mutation
+      mutation={
+        section.id === 'new'
+          ? CREATE_GALLERY_SECTION_MUTATION
+          : UPDATE_GALLERY_SECTION_MUTATION
+      }
+      variables={{
+        id: section.id,
+        section: sectionValues,
+      }}
+      onCompleted={(data) => {
+        const copyArr = Object.assign([], sections);
+        if (section.id === 'new') {
+          const indexProject = copyArr
+            .map((item, index) => item.id === 'new' && index)
+            .filter((item) => item !== false)[0];
+          copyArr[indexProject ? indexProject : 0].id =
+            data.createGallerySection;
+        }
+        setSections(copyArr);
+        toaster('Section Created');
+      }}
+    >
+      {(mutation) => {
+        return (
+          <SectionWrapper
+            header={section.type}
+            button={
               <DeleteButton
                 sectionId={section.id}
                 sections={sections}
                 index={index}
                 setSections={setSections}
+                deleteAction={setDeleting}
               />
-              <div className={classes.sectionHeader}>
-                <div className={classes.sectionHeaderTitle}>
-                  <Icon
-                    color="primary"
-                    style={{ fontSize: 28, marginRight: 10 }}
-                  >
-                    brush
-                  </Icon>
-                  <Typography variant="h1" color="primary">
-                    {TYPE_HELPER(type)}
-                  </Typography>
-                </div>
-              </div>
-              <FieldTitle
-                name="Description"
-                description=" This is an opportunity for you to shout about yourself! Describe your
+            }
+          >
+            <div
+              className={clsx({
+                [classes.deleteSection]: deleting,
+              })}
+            >
+              <Card className={parentClasses.card}>
+                <InlineHeader>
+                  <IconTitle icon="brush" title={TYPE_HELPER(section.type)} />
+                </InlineHeader>
+                <div className={classes.sectionWrapper}>
+                  <FieldTitle
+                    name="Description"
+                    description=" This is an opportunity for you to shout about yourself! Describe your
           best genres, what it's like working with you, your work ethic,
           successes, and process. "
-                warning="Please do not include any external links on your profile."
-              />
-              <TextField
-                id={'summary'}
-                label={`Description ${
-                  summary ? `(${256 - summary.length})` : ''
-                }`}
-                inputProps={{ maxLength: 256 }}
-                multiline
-                rows={3}
-                value={summary}
-                margin="normal"
-                variant="outlined"
-                style={{ width: '100%' }}
-                onChange={(ev) => {
-                  setChanged(true);
-                  autosaveIsOn && autosave(mutation, 'summary');
-                  setSummary(ev.target.value.replace(/[^A-Za-z0-9 \n]/g, ''));
-                }}
-              />
-              <FieldTitle
-                name="Featured Showreel"
-                description="Grab the attention of a client with a short video (we recommend about 30 seconds). Please enter the URL you'd like to embed,"
-                warning=""
-              />
-              <Projects
-                projects={notableProjects}
-                setNotableProjects={setNotableProjects}
-                setChanged={setChanged}
-                sectionId={section.id}
-                autosaveIsOn={autosaveIsOn}
-              />
-              <Testimonials
-                testimonials={testimonials}
-                setTestimonials={setTestimonials}
-                setChanged={setChanged}
-                sectionId={section.id}
-              />
-              <div className={classes.actionWrapper}>
-                {/*!autosaveIsOn && (
-                  <SaveButton
-                    sectionId={section.id}
-                    sectionValues={sectionValues}
-                    disabledValue={changed}
-                    setDisabledValue={setChanged}
-                    mutation={UPDATE_GALLERY_SECTION_MUTATION}
+                    warning="Please do not include any external links on your profile."
                   />
-                )*/}
-              </div>
+                  <TextField
+                    id={'summary'}
+                    label={`Description ${
+                      summary ? `(${256 - summary.length})` : ''
+                    }`}
+                    inputProps={{ maxLength: 256 }}
+                    multiline
+                    rows={3}
+                    value={summary}
+                    margin="normal"
+                    variant="outlined"
+                    style={{ width: '100%' }}
+                    onChange={(ev) => {
+                      setChanged(true);
+                      autosaveIsOn && autosave(mutation, 'summary');
+                      setSummary(
+                        ev.target.value.replace(/[^A-Za-z0-9 .,'\n]/g, ''),
+                      );
+                    }}
+                  />
+                  <div style={{ width: '100%' }}>
+                    <Divider />
+                    <FieldTitle
+                      name="Featured Showreel"
+                      description="Grab the attention of a client with a short video (we recommend about 30 seconds). Please enter the URL you'd like to embed,"
+                      warning=""
+                    />
+                    <TextField
+                      id={'showreel'}
+                      label={`YouTube, Vimeo URL ${
+                        showreel ? `(${256 - showreel.length})` : ''
+                      }`}
+                      inputProps={{ maxLength: 256 }}
+                      value={showreel}
+                      margin="normal"
+                      variant="outlined"
+                      style={{ width: '100%', marginTop: 10 }}
+                      onChange={(ev) => {
+                        setChanged(true);
+                        autosaveIsOn && autosave(mutation, 'showreel');
+                        setShowreel(ev.target.value);
+                      }}
+                    />
+                    {showreel && (
+                      <ReactPlayer
+                        url={showreel}
+                        playing
+                        controls={true}
+                        muted={true}
+                        style={{ width: '100%' }}
+                        width="100%"
+                      />
+                    )}
+                  </div>
+                </div>
+              </Card>
+
+              <Card className={parentClasses.card}>
+                <InlineHeader>
+                  <IconTitle
+                    icon="work"
+                    title={`${TYPE_HELPER(section.type)} Projects`}
+                  />
+                </InlineHeader>
+                <div className={classes.sectionWrapper}>
+                  <Projects
+                    projects={notableProjects}
+                    setNotableProjects={setNotableProjects}
+                    setChanged={setChanged}
+                    sectionId={section.id}
+                    autosaveIsOn={autosaveIsOn}
+                  />
+                </div>
+              </Card>
+              <Card className={parentClasses.card}>
+                <InlineHeader>
+                  <IconTitle
+                    icon="chat"
+                    title={`${TYPE_HELPER(section.type)} Testimonials`}
+                  />
+                </InlineHeader>
+                <div className={classes.sectionWrapper}>
+                  <Testimonials
+                    testimonials={testimonials}
+                    setTestimonials={setTestimonials}
+                    setChanged={setChanged}
+                    sectionId={section.id}
+                  />
+                </div>
+              </Card>
             </div>
-          );
-        }}
-      </Mutation>
-    </div>
+          </SectionWrapper>
+        );
+      }}
+    </Mutation>
   );
 }
 

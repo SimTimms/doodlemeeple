@@ -4,7 +4,13 @@ import { Mutation } from 'react-apollo';
 import { REMOVE_SECTION_MUTATION } from '../../../../../../../data/mutations';
 import { useStyles } from './styles';
 
-export function DeleteButton({ index, sections, setSections, sectionId }) {
+export function DeleteButton({
+  index,
+  sections,
+  setSections,
+  sectionId,
+  deleteAction,
+}) {
   const classes = useStyles();
   const [confirm, setConfirm] = React.useState(false);
   return (
@@ -35,6 +41,7 @@ export function DeleteButton({ index, sections, setSections, sectionId }) {
                 let newSections = Object.assign([], sections);
                 newSections.splice(index, 1);
                 setSections(newSections);
+                deleteAction && deleteAction(true);
               }}
               variant="contained"
               className={classes.deleteButtonConfirmYes}
@@ -45,6 +52,7 @@ export function DeleteButton({ index, sections, setSections, sectionId }) {
             <Button
               onClick={() => {
                 setConfirm(false);
+                deleteAction && deleteAction(false);
               }}
               variant="contained"
               className={classes.deleteButtonConfirmNo}
@@ -56,6 +64,7 @@ export function DeleteButton({ index, sections, setSections, sectionId }) {
           <Button
             onClick={() => {
               setConfirm(true);
+              deleteAction && deleteAction(true);
             }}
             variant="contained"
             className={classes.deleteButton}

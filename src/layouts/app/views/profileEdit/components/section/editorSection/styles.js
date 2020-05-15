@@ -1,6 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(theme => ({
+export const galleryStyles = makeStyles((theme) => ({
+  notify: {
+    width: '100%',
+    textAlign: 'center',
+    color: '#aaa',
+    padding: 20,
+  },
   sectionWrapper: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -29,19 +35,11 @@ export const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     flexWrap: 'nowrap',
     flexDirection: 'row',
-    width: '100%',
   },
   headerLeft: {
     color: theme.palette.primary.main,
     marginTop: 20,
   },
-  actionWrapper: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    width: '100%',
-    marginTop: 10,
-  },
+
+  deleteSection: { opacity: 0.3 },
 }));
