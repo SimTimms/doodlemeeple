@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Slide, Typography } from '@material-ui/core';
+import { Card, Slide, Typography, TextField } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   LoadIcon,
@@ -7,6 +7,7 @@ import {
   IconTitle,
   InlineHeader,
   IconButton,
+  FieldTitle,
 } from '../../../../../components';
 
 import { Query } from 'react-apollo';
@@ -31,6 +32,7 @@ export default function PreviewJob({ theme, jobId, history }) {
     submitted: false,
     user: { name: '', id: '' },
   });
+  const [newMessage, setNewMessage] = React.useState('');
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -78,17 +80,22 @@ export default function PreviewJob({ theme, jobId, history }) {
             </InlineHeader>
             <div style={{ padding: 10 }}>
               <Typography variant="h2">{`Is there anything you would like to ask ${job.user.name}?`}</Typography>
-
-              {job.game.id && (
-                <IconButton
-                  onClickEvent={() => {
-                    history.push(`/app/view-game/${job.game.id}`);
+              <Card className={classes.card} style={{ paddingTop: 10 }}>
+                <TextField
+                  id={'type'}
+                  label="Messaging"
+                  inputProps={{ maxLength: 36 }}
+                  multiline
+                  type="text"
+                  value={newMessage}
+                  onChange={(e) => {
+                    setNewMessage(e.target.value);
                   }}
-                  disabled={false}
-                  icon="keyboard_arrow_right"
-                  title="View Game"
+                  margin="normal"
+                  variant="outlined"
+                  style={{ width: '100%' }}
                 />
-              )}
+              </Card>
             </div>
           </Card>
         </div>
