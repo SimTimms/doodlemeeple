@@ -10,8 +10,7 @@ import {
 } from '../../../../../components';
 
 import { Query } from 'react-apollo';
-import { JOB, GAMES } from '../../../../../data/queries';
-import clsx from 'clsx';
+import { JOB } from '../../../../../data/queries';
 
 export default function PreviewJob({ theme, jobId, history }) {
   const classes = useStyles();
@@ -30,6 +29,7 @@ export default function PreviewJob({ theme, jobId, history }) {
     id: 'new',
     gameId: '',
     submitted: false,
+    user: { name: '', id: '' },
   });
 
   return (
@@ -60,6 +60,25 @@ export default function PreviewJob({ theme, jobId, history }) {
             <div style={{ padding: 10 }}>
               <Typography variant="h2">{job.game.name}</Typography>
               <Typography variant="body1">{job.game.summary}</Typography>
+              {job.game.id && (
+                <IconButton
+                  onClickEvent={() => {
+                    history.push(`/app/view-game/${job.game.id}`);
+                  }}
+                  disabled={false}
+                  icon="keyboard_arrow_right"
+                  title="View Game"
+                />
+              )}
+            </div>
+          </Card>
+          <Card className={classes.card}>
+            <InlineHeader>
+              <IconTitle icon="thumb_up" title="Interested?" />
+            </InlineHeader>
+            <div style={{ padding: 10 }}>
+              <Typography variant="h2">{`Is there anything you would like to ask ${job.user.name}?`}</Typography>
+
               {job.game.id && (
                 <IconButton
                   onClickEvent={() => {

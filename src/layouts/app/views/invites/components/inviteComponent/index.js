@@ -5,7 +5,7 @@ import { Mutation } from 'react-apollo';
 import { DECLINE_INVITE } from '../../../../../../data/mutations';
 import { IconTitle, InlineHeader } from '../../../../../../components';
 
-export function InviteComponent({ invite, removeInvite }) {
+export function InviteComponent({ invite, removeInvite, history }) {
   const classes = useStyles();
 
   return (
@@ -39,14 +39,7 @@ export function InviteComponent({ invite, removeInvite }) {
             }}
           ></div>
           <div style={{ width: '100%' }}>
-            <Link
-              href={`/app/view-job/${invite.job.id}`}
-              style={{ textDecoration: 'none' }}
-              variant="button"
-            >
-              {invite.job.name}
-            </Link>{' '}
-            on{' '}
+            {invite.job.name} for{' '}
             <Link
               href={`/app/view-game/${invite.game.id}`}
               style={{ textDecoration: 'none' }}
@@ -81,8 +74,15 @@ export function InviteComponent({ invite, removeInvite }) {
             );
           }}
         </Mutation>
-        <Button variant="contained" color="primary" style={{ width: 140 }}>
-          Interested
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ width: 140 }}
+          onClick={() => {
+            history.push(`/app/view-job/${invite.job.id}`);
+          }}
+        >
+          Find Out More
         </Button>
       </div>
     </Card>

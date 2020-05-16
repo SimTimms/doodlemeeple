@@ -115,6 +115,13 @@ export function AppDrawer(props) {
             link: '/app/invites',
             color: '#444',
             count: counts.invites,
+          },
+          {
+            name: 'Messages',
+            icon: <Icon>chat</Icon>,
+            link: '/messages/conversations',
+            color: '#444',
+            count: null,
           } /*
           {
             name: 'Invites',
@@ -123,11 +130,8 @@ export function AppDrawer(props) {
           },
          
           { name: 'My Games', icon: <ExtensionIcon />, link: '/app/projects' },
-          {
-            name: 'Messages',
-            icon: <QuestionAnswerIcon />,
-            link: '/messages/conversations',
-          },*/,
+         */,
+          ,
         ].map((text, index) => (
           <Link
             to={text.link}

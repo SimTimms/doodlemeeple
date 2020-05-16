@@ -114,6 +114,10 @@ export const JOB = gql`
         name
         summary
       }
+      user {
+        id
+        name
+      }
       invite {
         id
         job {

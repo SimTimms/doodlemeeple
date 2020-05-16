@@ -6,7 +6,7 @@ import { Query } from 'react-apollo';
 import { INVITES } from '../../../../data/queries';
 import { LoadIcon, ContentHeader } from '../../../../components';
 
-export function Invites() {
+export function Invites({ history }) {
   const classes = useStyles();
   const [inviteArray, setInviteArray] = React.useState([]);
 
@@ -18,11 +18,12 @@ export function Invites() {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <ContentHeader title="Invites" subTitle="" />
+        <ContentHeader title="Invites" subTitle="" button={null} />
         <div className={classes.cardGrid}>
           {inviteArray.map((invite, index) => {
             return (
               <InviteComponent
+                history={history}
                 key={`invite_${index}`}
                 invite={invite}
                 removeInvite={removeInvite}

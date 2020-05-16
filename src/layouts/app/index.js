@@ -89,7 +89,7 @@ function AppLayout(props) {
           ) : page === 'account' ? (
             <Account history={props.history} />
           ) : page === 'invites' ? (
-            <Invites />
+            <Invites history={props.history} />
           ) : page === 'submitted' ? (
             <Submitted />
           ) : page === 'games' ? (
