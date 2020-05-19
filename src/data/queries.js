@@ -72,6 +72,30 @@ export const GAMES = gql`
   }
 `;
 
+export const CONVERSATIONS = gql`
+  {
+    getConversations {
+      id
+      createdAt
+      messageStr
+      sender {
+        name
+        profileImg
+      }
+      receiver {
+        name
+        profileImg
+      }
+      job {
+        id
+        game {
+          backgroundImg
+        }
+      }
+    }
+  }
+`;
+
 export const MESSAGES = gql`
   query GetMessages($jobId: String!) {
     getMessages(jobId: $jobId) {

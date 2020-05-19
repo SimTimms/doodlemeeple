@@ -4,7 +4,7 @@ import { useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 import { AppMenu } from '../menus';
 import { AppDrawer } from '../menus/appDrawer';
-import { Jobs } from './views/job';
+import { Conversations, ViewConversation } from './views/messaging';
 import { ToastContainer } from 'react-toastify';
 
 import { ContentTop, StyledNavBar } from '../../components';
@@ -64,7 +64,11 @@ function MessagesLayout(props) {
         })}
       >
         <ContentTop style={{ width: '100%' }}>
-          {page === 'conversations' && <Jobs history={props.history} />}
+          {page === 'conversations' ? (
+            <Conversations history={props.history} />
+          ) : (
+            <ViewConversation history={props.history} jobId={pathParam} />
+          )}
         </ContentTop>
       </main>
     </div>

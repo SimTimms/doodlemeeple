@@ -28,6 +28,7 @@ export function Dashboard() {
           title="Dashboard"
           subTitle="Keep up to date with your projects, messages and the DoodleMeeple
             community."
+          button={null}
         />
         <div className={classes.dashboardGrid}>
           <div className={classes.gridRow}>
