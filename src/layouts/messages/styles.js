@@ -2,7 +2,27 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 240;
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
+  root: { height: '100vh', background: '#efeff5' },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  hide: {
+    display: 'none',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  link: {
+    textDecoration: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
@@ -10,6 +30,7 @@ export const useStyles = makeStyles(theme => ({
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
+
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -17,13 +38,19 @@ export const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: 0,
+    marginLeft: 48,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    background: '#efeff5',
   },
+  contentMobile: { marginLeft: 0 },
   contentShift: {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
     marginLeft: drawerWidth,
+    background: '#efeff5',
   },
 }));

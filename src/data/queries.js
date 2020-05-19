@@ -72,6 +72,21 @@ export const GAMES = gql`
   }
 `;
 
+export const MESSAGES = gql`
+  query GetMessages($jobId: String!) {
+    getMessages(jobId: $jobId) {
+      id
+      messageStr
+      sender {
+        name
+      }
+      receiver {
+        name
+      }
+    }
+  }
+`;
+
 export const INVITES = gql`
   query GetInvites {
     getInvites {
@@ -167,6 +182,7 @@ export const COUNTS = gql`
     counts {
       id
       invites
+      messages
     }
   }
 `;

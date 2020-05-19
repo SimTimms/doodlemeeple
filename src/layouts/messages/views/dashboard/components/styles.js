@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
   messageCard: {
     display: 'flex',
     flexDirection: 'row',
@@ -12,13 +12,62 @@ export const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'wrap',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  iconButton: {
+    cursor: 'pointer',
+    '&:hover': {
+      color: '#222',
+    },
+  },
+  projectImage: {
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center',
+    width: 200,
+    height: 100,
+  },
+  rowWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
     width: '100%',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  iconInvite: { color: '#fff !important' },
+  icon: { color: theme.palette.secondary.main },
+  notifications: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 10,
+    borderRight: '1px solid #ddd',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  notificationInvite: {
+    background: theme.palette.secondary.main,
+  },
+  projectNotifications: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 10,
+    borderRight: '1px solid #ddd',
+  },
+  actions: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 10,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   messageDetails: {
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    width: '100%',
   },
   messageButton: {
     maxWidth: 326,
@@ -29,7 +78,7 @@ export const useStyles = makeStyles(theme => ({
     flexWrap: 'nowrap',
     justifyContent: 'flex-end',
   },
-  card: { width: '100%', margin: '20px 0 20px 0' },
+  card: { width: 350, margin: '5px 0 0 0' },
   title: {
     fontSize: 14,
   },
@@ -52,7 +101,7 @@ export const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
-    padding: 10,
+    borderRight: '1px solid #ddd',
   },
   wrapperOne: {
     display: 'flex',
@@ -60,6 +109,7 @@ export const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
     padding: 10,
+    width: '100%',
   },
   avatarWrapper: {
     display: 'flex',
@@ -68,7 +118,12 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
     width: 100,
     padding: 10,
-    marginBottom: -50,
+  },
+  avatarResponded: {
+    border: `4px solid ${theme.palette.primary.main} !important`,
+  },
+  avatarDeclined: {
+    border: '4px solid #444 !important',
   },
   avatarRounded: {
     borderRadius: '50%',

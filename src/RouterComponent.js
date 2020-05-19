@@ -65,7 +65,7 @@ function RouterComponent(props) {
         {authToken && (
           <Route
             path="/messages/:page/:pathParam?"
-            render={(props) => <MessagesLayout {...props} />}
+            render={(props) => <MessagesLayout {...props} theme={theme} />}
           />
         )}
         {authToken && (

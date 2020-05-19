@@ -212,6 +212,12 @@ export const REMOVE_NOTIFICATION_MUTATION = gql`
   }
 `;
 
+export const CREATE_MESSAGE = gql`
+  mutation CreateMessage($id: String!, $message: MessageInput!) {
+    createMessage(id: $id, message: $message)
+  }
+`;
+
 export const LOGIN_MUTATION = gql`
   mutation LoginMutation($email: String!, $password: String!) {
     login(email: $email, password: $password) {
