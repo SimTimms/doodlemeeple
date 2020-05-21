@@ -13,6 +13,8 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
+    flexWrap: 'wrap',
+    overflow: 'hidden',
   },
   button: { textAlign: 'left' },
   buttonMobile: {
