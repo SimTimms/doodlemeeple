@@ -6,7 +6,6 @@ export const styles = makeStyles({
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center',
-    maxWidth: 900,
     width: '100%',
   },
   contentTopMobile: {

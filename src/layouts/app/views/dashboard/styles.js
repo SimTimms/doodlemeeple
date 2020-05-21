@@ -5,6 +5,7 @@ export const useStyles = makeStyles({
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
+    marginBottom: 200,
   },
   gridRow: {
     display: 'flex',

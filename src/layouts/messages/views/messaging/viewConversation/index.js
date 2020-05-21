@@ -9,6 +9,7 @@ import {
   CreateMessage,
   LoadIcon,
   DividerWithBorder,
+  Uploader,
 } from '../../../../../components';
 import Cookies from 'js-cookie';
 
@@ -101,6 +102,15 @@ export default function ViewConversation({ history, conversationId }) {
           <CreateMessage
             conversationId={conversationId}
             updateMessageArray={updateMessageArray}
+          />{' '}
+          <Uploader
+            cbImage={null}
+            styleOverride={null}
+            className={null}
+            cbDelete={null}
+            hasFile={false}
+            setImagePosition={null}
+            size="2MB PNG JPG"
           />
         </div>
         <DividerWithBorder />
