@@ -102,7 +102,8 @@ export default function ViewConversation({ history, conversationId }) {
           <CreateMessage
             conversationId={conversationId}
             updateMessageArray={updateMessageArray}
-          />{' '}
+          />
+          {/*
           <Uploader
             cbImage={null}
             styleOverride={null}
@@ -111,7 +112,7 @@ export default function ViewConversation({ history, conversationId }) {
             hasFile={false}
             setImagePosition={null}
             size="2MB PNG JPG"
-          />
+          />*/}
         </div>
         <DividerWithBorder />
         <div className={classes.cardGrid}>
