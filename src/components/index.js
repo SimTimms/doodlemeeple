@@ -20,6 +20,7 @@ import Footer from './footer';
 import DeleteButton from './buttons/deleteButton';
 import FavouriteButton from './buttons/favouriteButton';
 import InviteButton from './buttons/inviteButton';
+import CreateMessage from './buttons/createMessage';
 import IconButton from './buttons/iconButton';
 import FieldTitle from './fieldTitle';
 import ProfileCard from './profileCard';
@@ -27,6 +28,7 @@ import IconBox from './iconBox';
 import IconTitle from './iconTitle';
 import InlineHeader from './inlineHeader';
 import Divider from './divider';
+import DividerWithBorder from './dividerWithBorder';
 import SectionWrapper from './sectionWrapper';
 import DMCard from './dmCard';
 
@@ -34,6 +36,7 @@ export {
   DeleteButton,
   DMCard,
   Divider,
+  DividerWithBorder,
   SectionWrapper,
   InlineHeader,
   IconTitle,
@@ -63,4 +66,5 @@ export {
   Uploader,
   CardActionArea,
   Footer,
+  CreateMessage,
 };

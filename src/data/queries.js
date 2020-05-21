@@ -76,18 +76,54 @@ export const CONVERSATIONS = gql`
   {
     getConversations {
       id
-      createdAt
-      messageStr
-      sender {
-        name
-        profileImg
+      conversations {
+        id
+        createdAt
+        messages {
+          id
+          messageStr
+          createdAt
+        }
+        participants {
+          id
+          name
+          profileImg
+        }
+        job {
+          id
+          name
+          game {
+            backgroundImg
+          }
+        }
       }
-      receiver {
+    }
+  }
+`;
+
+export const CONVERSATION = gql`
+  query GetConversation($conversationId: String!, $page: Int!) {
+    getConversation(conversationId: $conversationId, page: $page) {
+      id
+      createdAt
+      messages {
+        id
+        messageStr
+        createdAt
+        sender {
+          id
+          name
+          profileImg
+        }
+      }
+      participants {
+        id
         name
         profileImg
       }
       job {
         id
+        name
         game {
           backgroundImg
         }
@@ -101,11 +137,16 @@ export const MESSAGES = gql`
     getMessages(jobId: $jobId) {
       id
       messageStr
+      createdAt
       sender {
+        id
         name
+        profileImg
       }
       receiver {
+        id
         name
+        profileImg
       }
     }
   }

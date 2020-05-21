@@ -9,8 +9,6 @@ export function Section({ index, sections, setSections, section }) {
   const classes = useStyles();
   const [title, setTitle] = React.useState('loading...');
   const [summary, setSummary] = React.useState(section.summary);
-  const [changed, setChanged] = React.useState(false);
-  let sectionValues = { summary, title };
 
   useEffect(() => {
     setTitle(section.title);
@@ -31,7 +29,6 @@ export function Section({ index, sections, setSections, section }) {
           variant="outlined"
           style={{ width: '100%' }}
           onChange={(ev) => {
-            setChanged(true);
             setTitle(ev.target.value);
           }}
         />
@@ -44,7 +41,6 @@ export function Section({ index, sections, setSections, section }) {
           variant="outlined"
           style={{ width: '100%' }}
           onChange={(ev) => {
-            setChanged(true);
             setSummary(ev.target.value);
           }}
         />
@@ -57,7 +53,6 @@ export function Section({ index, sections, setSections, section }) {
           variant="outlined"
           style={{ width: '100%' }}
           onChange={(ev) => {
-            setChanged(true);
             setSummary(ev.target.value);
           }}
         />
@@ -67,6 +62,7 @@ export function Section({ index, sections, setSections, section }) {
             sections={sections}
             index={index}
             setSections={setSections}
+            deleteAction={null}
           />
           {/*
           <SaveButton

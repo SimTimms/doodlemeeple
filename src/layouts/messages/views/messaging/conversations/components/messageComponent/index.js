@@ -5,12 +5,11 @@ import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import { useStyles } from './styles';
-import { timeDifferenceForDate } from '../../../../../../../utils/dates';
-import { IconButton } from '../../../../../../../components/';
+import Cookies from 'js-cookie';
 
 export function MessageComponent({ conversation, history }) {
   const classes = useStyles();
-  console.log(conversation);
+
   return (
     <Card className={classes.card}>
       <div className={classes.rowWrapper}>
@@ -20,37 +19,44 @@ export function MessageComponent({ conversation, history }) {
               [classes.notifications]: true,
             })}
           >
-            <img
+            <div
               className={clsx({
                 [classes.icon]: true,
+                [classes.iconGame]: true,
               })}
-              src={conversation.sender.profileImg}
+              style={{
+                backgroundImage: `url(${conversation.job.game.backgroundImg})`,
+              }}
             />
+            {conversation.participants.map((user) => (
+              <div
+                className={clsx({
+                  [classes.icon]: true,
+                })}
+                style={{ backgroundImage: `url(${user.profileImg})` }}
+              />
+            ))}
           </div>
           <div className={classes.profileWrapper}>
             <div className={classes.wrapperOne}>
               <div className={classes.messageDetails}>
-                <div
-                  className={classes.rowWrapper}
-                  style={{ justifyContent: 'space-between' }}
-                >
+                <div className={classes.rowWrapper}>
                   <Typography
                     style={{ color: '#aaa' }}
                     variant="caption"
                     component="p"
                   >
-                    <b>{conversation.sender.name}</b>
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    style={{ color: '#aaa' }}
-                    component="p"
-                  >
-                    <b>{timeDifferenceForDate(conversation.createdAt)}</b>
+                    <b>{conversation.job.name}</b>
                   </Typography>
                 </div>
-                <Typography color="textPrimary" component="p">
-                  {conversation.messageStr.substring(0, 24)}
+                <Typography
+                  style={{ textAlign: 'right' }}
+                  variant="body1"
+                  component="p"
+                >
+                  {conversation.participants.map(
+                    (user) => user.id !== Cookies.get('userId') && user.name,
+                  )}
                 </Typography>
               </div>
             </div>
@@ -65,9 +71,7 @@ export function MessageComponent({ conversation, history }) {
           >
             <Button
               onClick={() =>
-                history.push(
-                  `/messages/view-conversation/${conversation.job.id}`,
-                )
+                history.push(`/messages/view-conversation/${conversation.id}`)
               }
               className={classes.nextButton}
             >

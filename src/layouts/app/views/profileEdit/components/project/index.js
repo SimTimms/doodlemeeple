@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, useMediaQuery, Typography } from '@material-ui/core';
+import { TextField, useMediaQuery } from '@material-ui/core';
 import { DeleteButton } from './deleteButton';
 import { useStyles } from './styles';
 import { Uploader } from '../../../../../../components';

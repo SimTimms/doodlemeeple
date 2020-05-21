@@ -27,7 +27,7 @@ function RouterComponent(props) {
   theme.palette.secondary = {
     ...theme.palette.secondary,
     main: '#34BEB1',
-    light: '#6aebde',
+    light: '#79D1CB',
     dark: '#248c82',
   };
   theme.palette.error = {

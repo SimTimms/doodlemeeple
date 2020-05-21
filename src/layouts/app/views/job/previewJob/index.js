@@ -1,17 +1,15 @@
 import React from 'react';
-import { Card, Slide, Typography, TextField, Button } from '@material-ui/core';
+import { Card, Slide, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
-  LoadIcon,
   ContentHeader,
   IconTitle,
   InlineHeader,
   IconButton,
 } from '../../../../../components';
 
-import { Query, Mutation } from 'react-apollo';
+import { Query } from 'react-apollo';
 import { JOB, MESSAGES } from '../../../../../data/queries';
-import { CREATE_MESSAGE } from '../../../../../data/mutations';
 
 export default function PreviewJob({ theme, jobId, history }) {
   const classes = useStyles();
@@ -32,7 +30,6 @@ export default function PreviewJob({ theme, jobId, history }) {
     submitted: false,
     user: { name: '', id: '' },
   });
-  const [newMessage, setNewMessage] = React.useState('');
   const [messages, setMessages] = React.useState('');
 
   return (
@@ -109,45 +106,6 @@ export default function PreviewJob({ theme, jobId, history }) {
                     return null;
                   }}
                 </Query>
-                <Mutation
-                  mutation={CREATE_MESSAGE}
-                  variables={{
-                    id: 'new',
-                    message: {
-                      messageStr: newMessage,
-                      receiver: job.user.id,
-                      job: job.id,
-                    },
-                  }}
-                >
-                  {(mutation) => {
-                    return (
-                      <div>
-                        <TextField
-                          id={'type'}
-                          label="Messaging"
-                          inputProps={{ maxLength: 36 }}
-                          multiline
-                          type="text"
-                          value={newMessage}
-                          onChange={(e) => {
-                            setNewMessage(e.target.value);
-                          }}
-                          margin="normal"
-                          variant="outlined"
-                          style={{ width: '100%' }}
-                        />
-                        <Button
-                          onClick={() => {
-                            mutation();
-                          }}
-                        >
-                          Send
-                        </Button>
-                      </div>
-                    );
-                  }}
-                </Mutation>
               </Card>
             </div>
           </Card>

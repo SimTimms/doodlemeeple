@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Mutation } from 'react-apollo';
-import { REMOVE_INVITE, SUBMIT_BRIEF } from '../../../../../data/mutations';
+import { REMOVE_INVITE } from '../../../../../data/mutations';
 
 export default function ArtistLineup({
   history,

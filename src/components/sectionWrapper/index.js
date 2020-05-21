@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Typography } from '@material-ui/core';
 import { TYPE_HELPER } from '../../utils';
 import { useStyles } from './styles';

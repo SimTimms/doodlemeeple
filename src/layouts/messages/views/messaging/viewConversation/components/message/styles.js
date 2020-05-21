@@ -47,10 +47,13 @@ export const useStyles = makeStyles((theme) => ({
   notifications: {
     display: 'flex',
     flexDirection: 'column',
-
     borderRight: '1px solid #ddd',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  notificationsOther: {
+    borderLeft: '1px solid #ddd',
+    borderRight: 'none',
   },
   notificationInvite: {
     background: theme.palette.secondary.main,
@@ -83,7 +86,12 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     justifyContent: 'flex-end',
   },
-  card: { width: 350, margin: '5px 0 0 0' },
+  card: { margin: '5px auto 0 0', boxShadow: '3px 3px 10px rgba(0,0,0,0.2)' },
+  cardOther: {
+    margin: '5px 0 0 auto',
+  },
+  name: { color: '#aaa' },
+  nameOther: { color: theme.palette.primary.light },
   title: {
     fontSize: 14,
   },
@@ -106,7 +114,6 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
-    borderRight: '1px solid #ddd',
   },
   wrapperOne: {
     display: 'flex',

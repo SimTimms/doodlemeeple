@@ -4,7 +4,7 @@ import { MessageComponent } from './components/messageComponent';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { CONVERSATIONS } from '../../../../../data/queries';
-import { LoadIcon, ContentHeader } from '../../../../../components';
+import { ContentHeader } from '../../../../../components';
 
 export default function Conversations({ history }) {
   const classes = useStyles();
@@ -29,7 +29,8 @@ export default function Conversations({ history }) {
           query={CONVERSATIONS}
           fetchPolicy="network-only"
           onCompleted={(data) => {
-            setJobArray(data.getConversations);
+            console.log(data);
+            setJobArray(data.getConversations.conversations);
           }}
         >
           {({ data }) => {

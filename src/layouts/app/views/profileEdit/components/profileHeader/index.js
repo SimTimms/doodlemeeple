@@ -15,7 +15,6 @@ export function ProfileHeader({
   profileImgStyle,
   setProfileBGStyle,
   setUserName,
-  setDisabledValue,
   autosaveFunction,
 }) {
   const classes = useStyles();
@@ -37,14 +36,12 @@ export function ProfileHeader({
       >
         <Uploader
           cbImage={(url) => {
-            setDisabledValue(true);
             setBgImage(url);
             if (autosaveFunction) {
               autosave(autosaveFunction, 'image');
             }
           }}
           cbDelete={() => {
-            setDisabledValue(true);
             setBgImage('');
             if (autosaveFunction) {
               autosave(autosaveFunction, 'image');
@@ -85,7 +82,6 @@ export function ProfileHeader({
           >
             <Uploader
               cbImage={(url) => {
-                setDisabledValue(true);
                 setProfileImg(url);
                 if (autosaveFunction) {
                   autosave(autosaveFunction, 'image');
@@ -93,7 +89,6 @@ export function ProfileHeader({
               }}
               styleOverride={null}
               cbDelete={() => {
-                setDisabledValue(true);
                 setProfileImg('');
                 if (autosaveFunction) {
                   autosave(autosaveFunction, 'image');
@@ -129,7 +124,6 @@ export function ProfileHeader({
             }`}
             inputProps={{ maxLength: 26 }}
             onChange={(e) => {
-              setDisabledValue(true);
               if (autosaveFunction) {
                 autosave(autosaveFunction, 'username');
               }

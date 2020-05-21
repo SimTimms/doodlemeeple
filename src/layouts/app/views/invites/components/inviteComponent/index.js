@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Button, Icon, Card, Link } from '@material-ui/core';
+import { Typography, Button, Card, Link } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Mutation } from 'react-apollo';
 import { DECLINE_INVITE } from '../../../../../../data/mutations';

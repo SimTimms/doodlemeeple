@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import { TextField, Card, Typography } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { Mutation } from 'react-apollo';
 import ReactPlayer from 'react-player';
 import autosave from '../../../../../../../utils/autosave';
 import { toaster } from '../../../../../../../utils/toaster';
 import { galleryStyles } from './styles';
-import { useStyles } from '../../../styles';
 import {
   UPDATE_GALLERY_SECTION_MUTATION,
   CREATE_GALLERY_SECTION_MUTATION,
@@ -32,7 +31,6 @@ function EditorSection({
   autosaveIsOn,
 }) {
   const classes = galleryStyles();
-  const parentClasses = useStyles();
   const [title, setTitle] = React.useState('loading...');
   const [type, setType] = React.useState('loading...');
   const [summary, setSummary] = React.useState('loading...');
@@ -40,7 +38,6 @@ function EditorSection({
   const [images, setImages] = React.useState([]);
   const [notableProjects, setNotableProjects] = React.useState([]);
   const [testimonials, setTestimonials] = React.useState([]);
-  const [changed, setChanged] = React.useState(false);
   const [deleting, setDeleting] = React.useState(false);
 
   const imageFilter = images.map((item) => {
@@ -135,7 +132,6 @@ function EditorSection({
                     variant="outlined"
                     style={{ width: '100%' }}
                     onChange={(ev) => {
-                      setChanged(true);
                       autosaveIsOn && autosave(mutation, 'summary');
                       setSummary(
                         ev.target.value.replace(/[^A-Za-z0-9 .,'\n]/g, ''),
@@ -160,7 +156,6 @@ function EditorSection({
                       variant="outlined"
                       style={{ width: '100%', marginTop: 10 }}
                       onChange={(ev) => {
-                        setChanged(true);
                         autosaveIsOn && autosave(mutation, 'showreel');
                         setShowreel(ev.target.value);
                       }}
@@ -190,7 +185,6 @@ function EditorSection({
                   <Projects
                     projects={notableProjects}
                     setNotableProjects={setNotableProjects}
-                    setChanged={setChanged}
                     sectionId={section.id}
                     autosaveIsOn={autosaveIsOn}
                   />
@@ -207,7 +201,6 @@ function EditorSection({
                   <Testimonials
                     testimonials={testimonials}
                     setTestimonials={setTestimonials}
-                    setChanged={setChanged}
                     sectionId={section.id}
                   />
                 </div>

@@ -18,12 +18,7 @@ import { LoadIcon } from '../../components';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
 import { AUTOSAVE_IS } from '../../data/queries';
-import {
-  CardActionArea,
-  ActionButton,
-  ContentTop,
-  StyledNavBar,
-} from '../../components';
+import { ContentTop, StyledNavBar } from '../../components';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('home');

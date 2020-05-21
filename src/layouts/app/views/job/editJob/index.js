@@ -51,7 +51,6 @@ export default function EditJob({
     gameId: '',
     submitted: false,
   });
-  const [disabledValue, setDisabledValue] = React.useState(false);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -188,7 +187,6 @@ export default function EditJob({
                       }`}
                       inputProps={{ maxLength: 86 }}
                       onChange={(e) => {
-                        setDisabledValue(true);
                         autosaveIsOn && autosave(mutation, 'image');
                         setJob({
                           ...job,
@@ -212,7 +210,6 @@ export default function EditJob({
                       type="text"
                       value={job.summary}
                       onChange={(e) => {
-                        setDisabledValue(true);
                         setJob({
                           ...job,
                           summary: e.target.value.replace(
@@ -245,8 +242,6 @@ export default function EditJob({
                       }`}
                       inputProps={{ maxLength: 86 }}
                       onChange={(e) => {
-                        setDisabledValue(true);
-
                         setJob({
                           ...job,
                           creativeSummary: e.target.value.replace(

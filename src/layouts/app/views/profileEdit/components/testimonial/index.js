@@ -14,7 +14,6 @@ import { toaster } from '../../../../../../utils/toaster';
 
 export function Testimonial({
   testimonial,
-  setChanged,
   index,
   setTestimonials,
   testimonials,
@@ -67,7 +66,6 @@ export function Testimonial({
             >
               <Uploader
                 cbImage={(url) => {
-                  setChanged(true);
                   const copyArr = Object.assign([], testimonials);
                   copyArr[index].image = url;
 
@@ -75,7 +73,6 @@ export function Testimonial({
                 }}
                 styleOverride={null}
                 cbDelete={() => {
-                  setChanged(true);
                   const copyArr = Object.assign([], testimonials);
                   copyArr[index].image = '';
                   setTestimonials(copyArr);
@@ -104,8 +101,6 @@ export function Testimonial({
                 rows={4}
                 style={{ width: '100%' }}
                 onChange={(ev) => {
-                  setChanged(true);
-
                   autosave(mutation, 'testimonial');
                   const copyArr = Object.assign([], testimonials);
                   copyArr[index].summary = ev.target.value;
@@ -124,7 +119,6 @@ export function Testimonial({
                 variant="outlined"
                 style={{ width: '100%' }}
                 onChange={(ev) => {
-                  setChanged(true);
                   autosave && autosave(mutation);
                   const copyArr = Object.assign([], testimonials);
                   copyArr[index].name = ev.target.value;

@@ -67,7 +67,10 @@ function MessagesLayout(props) {
           {page === 'conversations' ? (
             <Conversations history={props.history} />
           ) : (
-            <ViewConversation history={props.history} jobId={pathParam} />
+            <ViewConversation
+              history={props.history}
+              conversationId={pathParam}
+            />
           )}
         </ContentTop>
       </main>

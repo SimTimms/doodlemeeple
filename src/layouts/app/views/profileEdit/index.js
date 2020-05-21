@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Icon, Card, Slide, TextField, Button } from '@material-ui/core';
+import { Icon, Slide, TextField, Button } from '@material-ui/core';
 import { useStyles } from './styles';
 import { ProfileHeader } from './components/profileHeader';
 import {
   AddSection,
-  LoadIcon,
   ErrorBox,
   ContentHeader,
   IconTitle,
@@ -22,7 +21,6 @@ import EditorSection from './components/section/editorSection';
 import { UPDATE_USER_MUTATION } from '../../../../data/mutations';
 import { readableErrors } from '../../../../utils/readableErrors';
 import { toaster } from '../../../../utils/toaster';
-import Switch from 'react-switch';
 
 export function EditProfile({ theme }) {
   const classes = useStyles();
@@ -34,7 +32,6 @@ export function EditProfile({ theme }) {
   const [sections, setSections] = React.useState([]);
   const [profileImg, setProfileImg] = React.useState(null);
   const [profileBGStyle, setProfileBGStyle] = React.useState([0, 0]);
-  const [disabledValue, setDisabledValue] = React.useState(false);
   const [autosaveIsOn, setAutosaveIsOn] = React.useState(true);
   const [timer, setTimer] = React.useState(null);
 
@@ -135,7 +132,6 @@ export function EditProfile({ theme }) {
                     700px x 400px is the optimum size"
                       warning=""
                     />
-
                     <ProfileHeader
                       profile={userProfile}
                       setProfileImg={setProfileImg}
@@ -145,7 +141,6 @@ export function EditProfile({ theme }) {
                       setProfileBGStyle={setProfileBGStyle}
                       profileImgStyle={profileImgStyle}
                       setUserName={setUserName}
-                      setDisabledValue={setDisabledValue}
                       autosaveFunction={autosaveIsOn ? SignupMutation : null}
                     />
 
@@ -168,7 +163,6 @@ export function EditProfile({ theme }) {
                       type="text"
                       value={userProfile.summary}
                       onChange={(e) => {
-                        setDisabledValue(true);
                         clearTimeout(timer);
                         setTimer(
                           setTimeout(() => {

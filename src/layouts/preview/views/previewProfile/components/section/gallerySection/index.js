@@ -1,14 +1,8 @@
 import React from 'react';
-import { Divider, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import ReactPlayer from 'react-player';
-import {
-  SubHeader,
-  MainHeader,
-  Card,
-  Testimonials,
-  Projects,
-} from './components';
+import { Card, Testimonials, Projects } from './components';
 import {
   IconTitle,
   InlineHeader,

@@ -131,7 +131,6 @@ export function AppDrawer(props) {
          
           { name: 'My Games', icon: <ExtensionIcon />, link: '/app/projects' },
          */,
-          ,
         ].map((text, index) => (
           <Link
             to={text.link}
