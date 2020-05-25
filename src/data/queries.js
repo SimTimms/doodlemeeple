@@ -76,26 +76,18 @@ export const CONVERSATIONS = gql`
   {
     getConversations {
       id
-      conversations {
+      createdAt
+      unreadMessages
+      participants {
         id
-        createdAt
-        count
-        messages {
-          id
-          messageStr
-          createdAt
-        }
-        participants {
-          id
-          name
-          profileImg
-        }
-        job {
-          id
-          name
-          game {
-            backgroundImg
-          }
+        name
+        profileImg
+      }
+      job {
+        id
+        name
+        game {
+          backgroundImg
         }
       }
     }

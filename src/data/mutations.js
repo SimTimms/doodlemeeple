@@ -17,6 +17,12 @@ export const SUBMIT_BRIEF = gql`
   }
 `;
 
+export const MARK_AS_READ = gql`
+  mutation MarkAsRead($conversationId: String!) {
+    markAsRead(conversationId: $conversationId)
+  }
+`;
+
 export const UPDATE_EMAIL = gql`
   mutation UpdateEmail($email: String!) {
     updateEmail(email: $email)

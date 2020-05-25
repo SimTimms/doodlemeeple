@@ -29,7 +29,8 @@ export default function Conversations({ history }) {
           query={CONVERSATIONS}
           fetchPolicy="network-only"
           onCompleted={(data) => {
-            setConversationArray(data.getConversations.conversations);
+            console.log(data);
+            setConversationArray(data.getConversations);
           }}
         >
           {({ data }) => {

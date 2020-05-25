@@ -235,7 +235,7 @@ export function AppDrawer(props) {
         fetchPolicy="network-only"
       >
         {({ data }) => {
-          return <div></div>;
+          return null;
         }}
       </Query>
     </Drawer>

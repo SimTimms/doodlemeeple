@@ -55,6 +55,23 @@ export const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
+  count: {
+    minWidth: 20,
+    maxWidth: 20,
+    minHeight: 20,
+    maxHeight: 20,
+    marginRight: -10,
+    borderRadius: '50%',
+    background: theme.palette.secondary.main,
+    color: '#fff',
+    border: '2px solid #fff',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  countOff: {
+    background: '#ddd',
+  },
   iconGame: {
     marginRight: -10,
   },

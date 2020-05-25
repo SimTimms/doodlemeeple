@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, Icon } from '@material-ui/core';
-
+import { Mutation } from 'react-apollo';
+import { MARK_AS_READ } from '../../../../../../../data/mutations';
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -37,6 +38,19 @@ export function MessageComponent({ conversation, history }) {
                 style={{ backgroundImage: `url(${user.profileImg})` }}
               />
             ))}
+
+            <Typography
+              variant="body1"
+              component="p"
+              className={clsx({
+                [classes.count]: true,
+                [classes.countOff]: conversation.unreadMessages < 1,
+              })}
+            >
+              {conversation.unreadMessages < 9
+                ? conversation.unreadMessages
+                : '9+'}
+            </Typography>
           </div>
           <div className={classes.profileWrapper}>
             <div className={classes.wrapperOne}>
@@ -64,20 +78,32 @@ export function MessageComponent({ conversation, history }) {
           </div>
           <div
             style={{
-              width: 44,
+              minWidth: 44,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}
           >
-            <Button
-              onClick={() =>
-                history.push(`/messages/view-conversation/${conversation.id}`)
-              }
-              className={classes.nextButton}
+            <Mutation
+              mutation={MARK_AS_READ}
+              variables={{
+                conversationId: conversation.id,
+              }}
+              onCompleted={() => {
+                history.push(`/messages/view-conversation/${conversation.id}`);
+              }}
             >
-              <Icon>chevron_right</Icon>
-            </Button>
+              {(mutation) => {
+                return (
+                  <Button
+                    onClick={() => mutation()}
+                    className={classes.nextButton}
+                  >
+                    <Icon>chevron_right</Icon>
+                  </Button>
+                );
+              }}
+            </Mutation>
           </div>
         </div>
       </div>
