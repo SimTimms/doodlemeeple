@@ -8,17 +8,17 @@ import { ContentHeader } from '../../../../../components';
 
 export default function Conversations({ history }) {
   const classes = useStyles();
-  const [jobArray, setJobArray] = React.useState([]);
+  const [conversationArray, setConversationArray] = React.useState([]);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <ContentHeader title="Conversations" subTitle="" button={null} />
         <div className={classes.cardGrid}>
-          {jobArray.map((conversation, index) => {
+          {conversationArray.map((conversation, index) => {
             return (
               <MessageComponent
-                key={`project_${index}`}
+                key={`conversationparent_${index}`}
                 conversation={conversation}
                 history={history}
               />
@@ -29,12 +29,11 @@ export default function Conversations({ history }) {
           query={CONVERSATIONS}
           fetchPolicy="network-only"
           onCompleted={(data) => {
-            console.log(data);
-            setJobArray(data.getConversations.conversations);
+            setConversationArray(data.getConversations.conversations);
           }}
         >
           {({ data }) => {
-            return <div></div>;
+            return null;
           }}
         </Query>
       </div>

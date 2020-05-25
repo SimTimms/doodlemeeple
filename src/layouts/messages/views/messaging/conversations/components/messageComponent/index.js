@@ -28,8 +28,9 @@ export function MessageComponent({ conversation, history }) {
                 backgroundImage: `url(${conversation.job.game.backgroundImg})`,
               }}
             />
-            {conversation.participants.map((user) => (
+            {conversation.participants.map((user, index) => (
               <div
+                key={`part_${index}`}
                 className={clsx({
                   [classes.icon]: true,
                 })}

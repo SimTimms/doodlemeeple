@@ -79,6 +79,7 @@ export const CONVERSATIONS = gql`
       conversations {
         id
         createdAt
+        count
         messages {
           id
           messageStr

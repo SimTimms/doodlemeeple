@@ -208,7 +208,14 @@ export const REMOVE_PROJECT_MUTATION = gql`
 
 export const REMOVE_NOTIFICATION_MUTATION = gql`
   mutation RemoveNotificationMutation($id: String!) {
-    removeNotification(id: $id)
+    removeNotification(id: $id) {
+      message
+      id
+      icon
+      title
+      createdAt
+      linkTo
+    }
   }
 `;
 

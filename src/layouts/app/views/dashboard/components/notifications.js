@@ -100,15 +100,14 @@ export function Notifications() {
                 update={(store, { data: { removeNotification } }) => {
                   let data = store.readQuery({ query: NOTIFICATIONS });
                   toaster('Deleted');
+                  console.log(removeNotification);
+                  data.getNotifications = removeNotification;
 
-                  data.getNotifications = data.getNotifications.filter(
-                    (item) => item.id !== removeNotification,
-                  );
-                  console.log(data);
                   store.writeQuery({
                     query: NOTIFICATIONS,
                     data,
                   });
+                  setNotificationArray(removeNotification);
                 }}
               >
                 {(RemoveNotificationMutation) => {
@@ -134,8 +133,6 @@ export function Notifications() {
           </Card>
         );
       })}
-
-      <Icon color="disabled">more_horizontal</Icon>
     </div>
   );
 }
