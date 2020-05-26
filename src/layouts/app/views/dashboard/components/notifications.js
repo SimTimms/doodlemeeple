@@ -100,7 +100,6 @@ export function Notifications() {
                 update={(store, { data: { removeNotification } }) => {
                   let data = store.readQuery({ query: NOTIFICATIONS });
                   toaster('Deleted');
-                  console.log(removeNotification);
                   data.getNotifications = removeNotification;
 
                   store.writeQuery({

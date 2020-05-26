@@ -6,6 +6,7 @@ import {
   IconTitle,
   InlineHeader,
   IconButton,
+  SectionWrapper,
 } from '../../../../../components';
 import ViewConversation from '../../../../messages/views/messaging/viewConversation';
 import { Query } from 'react-apollo';
@@ -35,11 +36,17 @@ export default function PreviewJob({ theme, jobId, history }) {
     user: { name: '', id: '' },
   });
   const [messages, setMessages] = React.useState('');
+  const [conversationId, setConversationId] = React.useState(null);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <ContentHeader title={job.name} subTitle="" button={null} />
+        <ContentHeader
+          title={job.name}
+          subTitle=""
+          subTitleExtra={null}
+          button={null}
+        />
         <div style={{ width: '100%' }}>
           <Card className={classes.card}>
             <InlineHeader>
@@ -76,44 +83,25 @@ export default function PreviewJob({ theme, jobId, history }) {
               )}
             </div>
           </Card>
-          <Card className={classes.card}>
-            <InlineHeader>
-              <IconTitle icon="thumb_up" title="Interested?" />
-            </InlineHeader>
-            <div style={{ padding: 10, boxSizing: 'border-box' }}>
-              <Typography variant="h2">{`Is there anything you would like to ask ${job.user.name}?`}</Typography>
-              <Card
-                className={classes.card}
-                style={{ padding: 10, boxSizing: 'border-box' }}
-              >
-                <ViewConversation history={history} conversationId={0} />
-                {messages}
-                <Query
-                  query={MESSAGES}
-                  variables={{ jobId: job.id }}
-                  fetchPolicy="network-only"
-                  onCompleted={(data) => {
-                    const messageArray = data.getMessages.map((message) => (
-                      <div style={{ display: 'flex' }}>
-                        <Typography
-                          variant="body1"
-                          className={classes.messageBox}
-                        >
-                          {message.messageStr}
-                        </Typography>
-                        <div style={{ width: '100%' }}></div>
-                      </div>
-                    ));
-                    setMessages(messageArray);
-                  }}
-                >
-                  {({ data }) => {
-                    return null;
-                  }}
-                </Query>
-              </Card>
+          <SectionWrapper header="Chat" button={null}>
+            <div
+              style={{
+                padding: 10,
+                boxSizing: 'border-box',
+                display: 'flex',
+                justifyContent: 'center',
+                background: '#efeff5',
+              }}
+            >
+              {conversationId && (
+                <ViewConversation
+                  history={history}
+                  conversationId={conversationId}
+                  titles={false}
+                />
+              )}
             </div>
-          </Card>
+          </SectionWrapper>
         </div>
 
         <Query
@@ -134,7 +122,7 @@ export default function PreviewJob({ theme, jobId, history }) {
           variables={{ jobId: jobId }}
           fetchPolicy="network-only"
           onCompleted={(data) => {
-            console.log(data);
+            setConversationId(data.determineConversationId);
           }}
         >
           {({ data }) => {

@@ -96,23 +96,7 @@ export const CONVERSATIONS = gql`
 
 export const DETERMINE_CONVERSATION_ID = gql`
   query DetermineConversationId($jobId: String!) {
-    determineConversationId(jobId: $jobId) {
-      id
-      createdAt
-      unreadMessages
-      participants {
-        id
-        name
-        profileImg
-      }
-      job {
-        id
-        name
-        game {
-          backgroundImg
-        }
-      }
-    }
+    determineConversationId(jobId: $jobId)
   }
 `;
 

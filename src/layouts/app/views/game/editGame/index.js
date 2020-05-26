@@ -41,7 +41,6 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
 
   function setGameImage(field, url) {
     let gameCopy = { ...game };
-    console.log(gameCopy, field, url);
     gameCopy[field] = url;
     setGame({ ...gameCopy });
   }

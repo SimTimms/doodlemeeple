@@ -46,7 +46,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
     marginleft: 10,
   },
-  card: { maxWidth: 712, width: '100%', marginBottom: 20, paddingBottom: 10 },
+  card: { maxWidth: 712, width: '100%', marginBottom: 20 },
   title: {
     fontSize: 14,
   },

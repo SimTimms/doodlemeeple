@@ -1,5 +1,4 @@
 export const errorMessages = (messageIn) => {
-  console.log(messageIn);
   if (messageIn.indexOf('would violate the required relation ') > -1) {
     return 'This game cannot be deleted while there are open jobs attached';
   }

@@ -137,7 +137,6 @@ function AppLayout(props) {
         onCompleted={(data) => {
           setAutosaveIsOn(data.profile.autosave);
           setFavourites(data.profile.favourites);
-          console.log(data);
         }}
         fetchPolicy="network-only"
       >

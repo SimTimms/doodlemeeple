@@ -11,11 +11,22 @@ export function InviteComponent({ invite, removeInvite, history }) {
   return (
     <Card className={classes.card}>
       <InlineHeader>
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            width: '100%',
+            alignItems: 'center',
+          }}
+        >
           <IconTitle icon={'thumb_up'} title={`Invite from`} />
           <Link
             href={`/public-preview/${invite.user.id}`}
-            style={{ textDecoration: 'none', color: '#fff' }}
+            style={{
+              textDecoration: 'none',
+              color: '#fff',
+              width: '100%',
+            }}
             variant="button"
           >
             {invite.user.name}
@@ -23,11 +34,7 @@ export function InviteComponent({ invite, removeInvite, history }) {
         </div>
       </InlineHeader>
       <div className={classes.cardSummaryWrapper}>
-        <Typography
-          variant="body2"
-          component="p"
-          className={classes.cardSummary}
-        >
+        <div className={classes.cardSummary}>
           <div
             style={{
               backgroundImage: `url(${invite.game.backgroundImg})`,
@@ -38,7 +45,7 @@ export function InviteComponent({ invite, removeInvite, history }) {
               marginRight: 20,
             }}
           ></div>
-          <div style={{ width: '100%' }}>
+          <Typography variant="body2" component="p" style={{ width: '100%' }}>
             {invite.job.name} for{' '}
             <Link
               href={`/app/view-game/${invite.game.id}`}
@@ -47,8 +54,8 @@ export function InviteComponent({ invite, removeInvite, history }) {
             >
               {invite.game.name}
             </Link>
-          </div>
-        </Typography>
+          </Typography>
+        </div>
       </div>
       <div className={classes.cardActionArea}>
         <Mutation

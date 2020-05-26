@@ -12,7 +12,7 @@ import {
 } from '../../../../../components';
 import Cookies from 'js-cookie';
 
-export default function ViewConversation({ history, conversationId }) {
+export default function ViewConversation({ history, conversationId, titles }) {
   const classes = useStyles();
   const [messageArray, setMessageArray] = React.useState([]);
   const [pageNbr, setPageNbr] = React.useState(1);
@@ -43,57 +43,63 @@ export default function ViewConversation({ history, conversationId }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <ContentHeader
-          title="Conversation"
-          subTitle={null}
-          subTitleExtra={
-            <div
-              style={{
-                display: 'flex',
-                width: '100%',
-                flexDirection: 'row',
-                flexWrap: 'nowrap',
-                justifyContent: 'center',
-              }}
-            >
-              {participantArray.map((user, index) => {
-                return (
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      flexWrap: 'nowrap',
-                      alignItems: 'center',
-                      background: '#fff',
-                      margin: 3,
-                      borderRadius: 4,
-                      padding: 3,
-                    }}
-                    key={`participant_${index}`}
-                  >
-                    <img src={user.profileImg} style={{ width: 30 }}></img>
-                    {
-                      <Typography
-                        color="textSecondary"
-                        component="p"
-                        style={{
-                          textAlign: 'center',
-                          display: 'flex',
-                          flexDirection: 'row',
-                          flexWrap: 'nowrap',
-                          alignItems: 'center',
-                        }}
-                      >
-                        {user.name}
-                      </Typography>
-                    }
-                  </div>
-                );
-              })}
-            </div>
-          }
-          button={null}
-        />
+        {titles && (
+          <ContentHeader
+            title="Chat"
+            subTitle={null}
+            subTitleExtra={
+              <div
+                style={{
+                  display: 'flex',
+                  width: '100%',
+                  flexDirection: 'row',
+                  flexWrap: 'nowrap',
+                  justifyContent: 'center',
+                }}
+              >
+                {participantArray.map((user, index) => {
+                  return (
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        flexWrap: 'nowrap',
+                        alignItems: 'center',
+                        background: '#fff',
+                        margin: 3,
+                        borderRadius: 4,
+                        padding: 3,
+                        paddingRight: 10,
+                        border: '1px solid #eee',
+                      }}
+                      key={`participant_${index}`}
+                    >
+                      <img src={user.profileImg} style={{ width: 30 }}></img>
+                      {
+                        <Typography
+                          color="textSecondary"
+                          component="p"
+                          style={{
+                            textAlign: 'center',
+                            display: 'flex',
+                            flexDirection: 'row',
+                            flexWrap: 'nowrap',
+                            alignItems: 'center',
+                            marginLeft: 10,
+                          }}
+                        >
+                          {user.name}
+                        </Typography>
+                      }
+                    </div>
+                  );
+                })}
+              </div>
+            }
+            button={null}
+          />
+        )}
+
         <div
           style={{
             padding: 20,

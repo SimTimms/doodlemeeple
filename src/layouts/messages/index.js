@@ -70,6 +70,7 @@ function MessagesLayout(props) {
             <ViewConversation
               history={props.history}
               conversationId={pathParam}
+              titles={true}
             />
           )}
         </ContentTop>

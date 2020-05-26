@@ -45,8 +45,6 @@ export function Posts({ posts }) {
           ? post._embedded['wp:featuredmedia']['0'].source_url
           : null;
 
-        console.log(post);
-
         return (
           <Card className={classes.card} key={`conversation_${index}`}>
             <div className={classes.rowWrapper}>
