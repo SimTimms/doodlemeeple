@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 500,
+    maxWidth: 900,
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
@@ -13,9 +13,9 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     maxWidth: 1024,
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    alignItems: 'flex-end',
+    alignItems: 'center',
   },
 }));

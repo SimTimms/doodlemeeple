@@ -9,6 +9,7 @@ import FormInput from './formInput';
 import Form from './form';
 import CardHeader from './headers';
 import ContentHeader from './headers/contentHeader';
+import MessageComponent from './messageComponent';
 import InvitesWidget from './invites';
 import MediaGallery from './mediaGallery';
 import StyledNavBar from './navBar';
@@ -54,6 +55,7 @@ export {
   AddSection,
   FileGallery,
   FormInput,
+  MessageComponent,
   Form,
   CardHeader,
   ContentHeader,

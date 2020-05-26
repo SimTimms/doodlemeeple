@@ -1,10 +1,11 @@
 import React from 'react';
-import Slide from '@material-ui/core/Slide';
-import { MessageComponent } from './components/messageComponent';
+import { Slide, Button, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
-import { Query } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import { CONVERSATIONS } from '../../../../../data/queries';
-import { ContentHeader } from '../../../../../components';
+import { ContentHeader, MessageComponent } from '../../../../../components';
+import { MARK_AS_READ } from '../../../../../data/mutations';
+import Cookies from 'js-cookie';
 
 export default function Conversations({ history }) {
   const classes = useStyles();
@@ -17,11 +18,38 @@ export default function Conversations({ history }) {
         <div className={classes.cardGrid}>
           {conversationArray.map((conversation, index) => {
             return (
-              <MessageComponent
-                key={`conversationparent_${index}`}
-                conversation={conversation}
-                history={history}
-              />
+              <Mutation
+                key={`mutation_${index}`}
+                mutation={MARK_AS_READ}
+                variables={{
+                  conversationId: conversation.id,
+                }}
+                onCompleted={() => {
+                  history.push(
+                    `/messages/view-conversation/${conversation.id}`,
+                  );
+                }}
+              >
+                {(mutation) => {
+                  return (
+                    <MessageComponent
+                      key={`conversationparent_${index}`}
+                      history={history}
+                      backgroundImg={conversation.job.game.backgroundImg}
+                      subtitle={conversation.participants.map(
+                        (user) =>
+                          user.id !== Cookies.get('userId') && user.name,
+                      )}
+                      profiles={conversation.participants}
+                      count={conversation.unreadMessages}
+                      title={conversation.job.name}
+                      onClickEvent={() => {
+                        mutation();
+                      }}
+                    />
+                  );
+                }}
+              </Mutation>
             );
           })}
         </div>

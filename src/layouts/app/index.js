@@ -88,7 +88,7 @@ function AppLayout(props) {
           ) : page === 'submitted' ? (
             <Submitted />
           ) : page === 'games' ? (
-            <Games />
+            <Games history={props.history} />
           ) : page === 'jobs' ? (
             <Jobs />
           ) : page === 'edit-game' ? (

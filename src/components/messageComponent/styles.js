@@ -8,6 +8,15 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     width: '100%',
   },
+  nextButton: {
+    height: '100%',
+    width: '100%',
+    minWidth: 0,
+    background: theme.palette.primary.main,
+    padding: 0,
+    borderRadius: 0,
+    color: '#fff',
+  },
   messageWrapper: {
     display: 'flex',
     flexDirection: 'column',
@@ -34,15 +43,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   iconInvite: { color: '#fff !important' },
-  nextButton: {
-    height: '100%',
-    width: '100%',
-    minWidth: 0,
-    background: theme.palette.primary.main,
-    padding: 0,
-    borderRadius: 0,
-    color: '#fff',
-  },
+
   icon: {
     minWidth: 40,
     maxWidth: 40,
