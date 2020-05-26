@@ -35,8 +35,8 @@ export default function PreviewJob({ theme, jobId, history }) {
     submitted: false,
     user: { name: '', id: '' },
   });
-  const [messages, setMessages] = React.useState('');
   const [conversationId, setConversationId] = React.useState(null);
+  const [chatOpen, setChatOpen] = React.useState(false);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -48,60 +48,70 @@ export default function PreviewJob({ theme, jobId, history }) {
           button={null}
         />
         <div style={{ width: '100%' }}>
-          <Card className={classes.card}>
-            <InlineHeader>
-              <IconTitle icon="work" title="Brief Details" />
-            </InlineHeader>
-            <div style={{ padding: 10 }}>
-              <Typography variant="body1">{job.summary}</Typography>
-            </div>
-          </Card>
-          <Card className={classes.card}>
-            <InlineHeader>
-              <IconTitle icon="account_box" title="Creative Details" />
-            </InlineHeader>
-            <div style={{ padding: 10 }}>
-              <Typography variant="body1">{job.creativeSummary}</Typography>
-            </div>
-          </Card>
-          <Card className={classes.card}>
-            <InlineHeader>
-              <IconTitle icon="casino" title="Game Details" />
-            </InlineHeader>
-            <div style={{ padding: 10 }}>
-              <Typography variant="h2">{job.game.name}</Typography>
-              <Typography variant="body1">{job.game.summary}</Typography>
-              {job.game.id && (
-                <IconButton
-                  onClickEvent={() => {
-                    history.push(`/app/view-game/${job.game.id}`);
-                  }}
-                  disabled={false}
-                  icon="keyboard_arrow_right"
-                  title="View Game"
-                />
-              )}
-            </div>
-          </Card>
-          <SectionWrapper header="Chat" button={null}>
-            <div
-              style={{
-                padding: 10,
-                boxSizing: 'border-box',
-                display: 'flex',
-                justifyContent: 'center',
-                background: '#efeff5',
-              }}
-            >
-              {conversationId && (
-                <ViewConversation
-                  history={history}
-                  conversationId={conversationId}
-                  titles={false}
-                />
-              )}
-            </div>
+          <SectionWrapper header="Job Details" button={null}>
+            <Card className={classes.card}>
+              <InlineHeader>
+                <IconTitle icon="work" title="Brief Details" />
+              </InlineHeader>
+              <div style={{ padding: 10 }}>
+                <Typography variant="body1">{job.summary}</Typography>
+              </div>
+            </Card>
+            <Card className={classes.card}>
+              <InlineHeader>
+                <IconTitle icon="account_box" title="Creative Details" />
+              </InlineHeader>
+              <div style={{ padding: 10 }}>
+                <Typography variant="body1">{job.creativeSummary}</Typography>
+              </div>
+            </Card>
+            <Card className={classes.card}>
+              <InlineHeader>
+                <IconTitle icon="casino" title="Game Details" />
+              </InlineHeader>
+              <div style={{ padding: 10 }}>
+                <Typography variant="h2">{job.game.name}</Typography>
+                <Typography variant="body1">{job.game.summary}</Typography>
+                {job.game.id && (
+                  <IconButton
+                    onClickEvent={() => {
+                      history.push(`/app/view-game/${job.game.id}`);
+                    }}
+                    disabled={false}
+                    icon="keyboard_arrow_right"
+                    title="View Game"
+                  />
+                )}
+              </div>
+            </Card>
+            <IconButton
+              disabled={false}
+              icon="chat"
+              title={chatOpen ? 'Close Chat' : 'Open Chat'}
+              onClickEvent={() => setChatOpen(chatOpen ? false : true)}
+            />
           </SectionWrapper>
+          {chatOpen && (
+            <SectionWrapper header="Chat" button={null}>
+              <div
+                style={{
+                  padding: 10,
+                  boxSizing: 'border-box',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  background: '#efeff5',
+                }}
+              >
+                {conversationId && (
+                  <ViewConversation
+                    history={history}
+                    conversationId={conversationId}
+                    titles={false}
+                  />
+                )}
+              </div>
+            </SectionWrapper>
+          )}
         </div>
 
         <Query

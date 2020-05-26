@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     paddingTop: 10,
     boxSizing: 'border-box',
     border: `1px solid #fff`,
-    marginTop: 50,
+    marginTop: 10,
     borderRadius: 10,
     marginBottom: 30,
     boxShadow: '10px 10px 30px rgba(0,0,0,0.2)',

@@ -5,7 +5,6 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     background: theme.palette.primary.main,
     padding: 5,
-
     marginTop: 10,
     marginBottom: 10,
     color: '#fff',
@@ -17,7 +16,6 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     background: '#ddd',
     padding: 5,
-
     marginTop: 10,
     marginBottom: 10,
     color: '#fff',
@@ -27,5 +25,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   iconButtonIcon: {
     color: '#fff',
+    marginLeft: 10,
   },
 }));
