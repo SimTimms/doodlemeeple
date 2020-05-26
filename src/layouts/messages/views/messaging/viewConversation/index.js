@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slide, Button, Icon } from '@material-ui/core';
+import { Slide, Button, Icon, Typography } from '@material-ui/core';
 import { Message } from './components/message';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
@@ -9,7 +9,6 @@ import {
   CreateMessage,
   LoadIcon,
   DividerWithBorder,
-  Uploader,
 } from '../../../../../components';
 import Cookies from 'js-cookie';
 
@@ -46,13 +45,15 @@ export default function ViewConversation({ history, conversationId }) {
       <div className={classes.root}>
         <ContentHeader
           title="Conversation"
-          subTitle={
+          subTitle={null}
+          subTitleExtra={
             <div
               style={{
                 display: 'flex',
                 width: '100%',
                 flexDirection: 'row',
                 flexWrap: 'nowrap',
+                justifyContent: 'center',
               }}
             >
               {participantArray.map((user, index) => {
@@ -60,7 +61,6 @@ export default function ViewConversation({ history, conversationId }) {
                   <div
                     style={{
                       display: 'flex',
-                      width: '100%',
                       flexDirection: 'row',
                       flexWrap: 'nowrap',
                       alignItems: 'center',
@@ -69,20 +69,23 @@ export default function ViewConversation({ history, conversationId }) {
                       borderRadius: 4,
                       padding: 3,
                     }}
+                    key={`participant_${index}`}
                   >
                     <img src={user.profileImg} style={{ width: 30 }}></img>
                     {
-                      <div
+                      <Typography
+                        color="textSecondary"
+                        component="p"
                         style={{
+                          textAlign: 'center',
                           display: 'flex',
-                          width: '100%',
                           flexDirection: 'row',
                           flexWrap: 'nowrap',
                           alignItems: 'center',
                         }}
                       >
                         {user.name}
-                      </div>
+                      </Typography>
                     }
                   </div>
                 );
@@ -119,7 +122,7 @@ export default function ViewConversation({ history, conversationId }) {
           {messageArray.map((message, index) => {
             return (
               message.sender && (
-                <Message key={`project_${index}`} message={message} />
+                <Message key={`message_${index}`} message={message} />
               )
             );
           })}

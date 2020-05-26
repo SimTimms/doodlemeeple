@@ -7,9 +7,13 @@ import {
   InlineHeader,
   IconButton,
 } from '../../../../../components';
-
+import ViewConversation from '../../../../messages/views/messaging/viewConversation';
 import { Query } from 'react-apollo';
-import { JOB, MESSAGES } from '../../../../../data/queries';
+import {
+  JOB,
+  MESSAGES,
+  DETERMINE_CONVERSATION_ID,
+} from '../../../../../data/queries';
 
 export default function PreviewJob({ theme, jobId, history }) {
   const classes = useStyles();
@@ -82,6 +86,7 @@ export default function PreviewJob({ theme, jobId, history }) {
                 className={classes.card}
                 style={{ padding: 10, boxSizing: 'border-box' }}
               >
+                <ViewConversation history={history} conversationId={0} />
                 {messages}
                 <Query
                   query={MESSAGES}
@@ -121,7 +126,19 @@ export default function PreviewJob({ theme, jobId, history }) {
           }}
         >
           {({ data }) => {
-            return <div></div>;
+            return null;
+          }}
+        </Query>
+        <Query
+          query={DETERMINE_CONVERSATION_ID}
+          variables={{ jobId: jobId }}
+          fetchPolicy="network-only"
+          onCompleted={(data) => {
+            console.log(data);
+          }}
+        >
+          {({ data }) => {
+            return null;
           }}
         </Query>
       </div>

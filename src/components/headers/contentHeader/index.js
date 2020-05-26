@@ -2,7 +2,7 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Typography } from '@material-ui/core';
 
-function ContentHeader({ title, subTitle, button }) {
+function ContentHeader({ title, subTitle, subTitleExtra, button }) {
   const classes = useStyles();
   return (
     <div className={classes.wrapper}>
@@ -13,13 +13,16 @@ function ContentHeader({ title, subTitle, button }) {
             {title}
           </Typography>
         </div>
-        <Typography
-          color="textSecondary"
-          component="p"
-          style={{ textAlign: 'center' }}
-        >
-          {subTitle}
-        </Typography>
+        {subTitleExtra && subTitleExtra}
+        {subTitle && (
+          <Typography
+            color="textSecondary"
+            component="p"
+            style={{ textAlign: 'center' }}
+          >
+            {subTitle}
+          </Typography>
+        )}
       </div>
     </div>
   );

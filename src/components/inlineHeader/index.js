@@ -4,9 +4,5 @@ import { useStyles } from './styles';
 
 export default function InlineHeader({ children }) {
   const classes = useStyles();
-  return (
-    <Typography variant="body1" className={classes.root}>
-      {children}
-    </Typography>
-  );
+  return <div className={classes.root}>{children}</div>;
 }
