@@ -8,6 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: '50%',
+    marginTop: 40,
   },
   messageWrapperMobile: {
     display: 'flex',
@@ -34,11 +35,11 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     backgroundSize: 'cover',
     backgroundPosition: 'top center',
-    height: 200,
+    height: 300,
   },
   card: {
     width: '100%',
-    margin: '5px 0 0 0',
+    margin: '5px 0 25px 0',
     boxShadow: '10px 10px 15px rgba(0,0,0,0.2)',
   },
   rowWrapper: {

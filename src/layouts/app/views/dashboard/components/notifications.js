@@ -22,7 +22,7 @@ export function Notifications() {
     <div className={classes.messageWrapper}>
       <Typography
         color="textPrimary"
-        component="p"
+        variant="h2"
         style={{ textAlign: 'center' }}
       >
         Notifications
@@ -133,6 +133,11 @@ export function Notifications() {
           </Card>
         );
       })}
+      {notificationArray.length === 0 && (
+        <Typography color="textPrimary" component="p">
+          Nothing Here
+        </Typography>
+      )}
     </div>
   );
 }

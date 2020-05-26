@@ -5,9 +5,9 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     background: theme.palette.primary.main,
     padding: 5,
-    margin: 5,
-    marginTop: 20,
-    marginBottom: 20,
+
+    marginTop: 10,
+    marginBottom: 10,
     color: '#fff',
     '&:hover': {
       background: theme.palette.primary.dark,
@@ -17,9 +17,9 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     background: '#ddd',
     padding: 5,
-    margin: 5,
-    marginTop: 20,
-    marginBottom: 20,
+
+    marginTop: 10,
+    marginBottom: 10,
     color: '#fff',
     '&:hover': {
       background: theme.palette.primary.dark,
