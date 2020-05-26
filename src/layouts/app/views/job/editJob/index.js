@@ -340,18 +340,17 @@ export default function EditJob({
           query={GAMES}
           fetchPolicy="network-only"
           onCompleted={(data) => {
-            data.getGames && setGames(data.getGames);
-            data.getGames &&
+            data.getGames.length > 0 && setGames(data.getGames);
+            console.log(data);
+            data.getGames.length > 0 &&
               setJob({
                 ...job,
                 gameId: job.gameId === '' ? data.getGames[0].id : job.gameId,
               });
           }}
         >
-          {({ loading, error, data }) => {
-            if (loading) return <LoadIcon />;
-            if (error) return <div>Error</div>;
-            return <div></div>;
+          {({ data }) => {
+            return null;
           }}
         </Query>
       </div>

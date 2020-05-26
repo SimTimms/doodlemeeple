@@ -10,11 +10,7 @@ import {
 } from '../../../../../components';
 import ViewConversation from '../../../../messages/views/messaging/viewConversation';
 import { Query } from 'react-apollo';
-import {
-  JOB,
-  MESSAGES,
-  DETERMINE_CONVERSATION_ID,
-} from '../../../../../data/queries';
+import { JOB, DETERMINE_CONVERSATION_ID } from '../../../../../data/queries';
 
 export default function PreviewJob({ theme, jobId, history }) {
   const classes = useStyles();

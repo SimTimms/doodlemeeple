@@ -10,6 +10,7 @@ import Form from './form';
 import CardHeader from './headers';
 import ContentHeader from './headers/contentHeader';
 import MessageComponent from './messageComponent';
+import DeclineInvite from './buttons/declineInvite';
 import InvitesWidget from './invites';
 import MediaGallery from './mediaGallery';
 import StyledNavBar from './navBar';
@@ -69,4 +70,5 @@ export {
   CardActionArea,
   Footer,
   CreateMessage,
+  DeclineInvite,
 };

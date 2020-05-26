@@ -1,9 +1,11 @@
 import React from 'react';
 import { Typography, Button, Card, Link } from '@material-ui/core';
 import { useStyles } from './styles';
-import { Mutation } from 'react-apollo';
-import { DECLINE_INVITE } from '../../../../../../data/mutations';
-import { IconTitle, InlineHeader } from '../../../../../../components';
+import {
+  InlineHeader,
+  DeclineInvite,
+  IconTitle,
+} from '../../../../../../components';
 
 export function InviteComponent({ invite, removeInvite, history }) {
   const classes = useStyles();
@@ -58,29 +60,8 @@ export function InviteComponent({ invite, removeInvite, history }) {
         </div>
       </div>
       <div className={classes.cardActionArea}>
-        <Mutation
-          mutation={DECLINE_INVITE}
-          variables={{
-            id: invite.id,
-          }}
-          onCompleted={() => {
-            removeInvite(invite.id);
-          }}
-        >
-          {(mutation) => {
-            return (
-              <Button
-                variant="contained"
-                onClick={() => {
-                  mutation();
-                }}
-                style={{ width: 140 }}
-              >
-                Decline
-              </Button>
-            );
-          }}
-        </Mutation>
+        <DeclineInvite invite={invite} removeInvite={removeInvite} />
+
         <Button
           variant="contained"
           color="primary"
