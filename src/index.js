@@ -14,7 +14,7 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 
 const wsLink = new WebSocketLink({
-  uri: `ws://${process.env.REACT_APP_API}`,
+  uri: `ws://${process.env.REACT_APP_API_SHORT}`,
   options: {
     reconnect: true,
     connectionParams: {
