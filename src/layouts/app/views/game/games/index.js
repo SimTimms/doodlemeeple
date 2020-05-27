@@ -3,11 +3,7 @@ import Slide from '@material-ui/core/Slide';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { GAMES } from '../../../../../data/queries';
-import {
-  LoadIcon,
-  ContentHeader,
-  MessageComponent,
-} from '../../../../../components';
+import { ContentHeader, MessageComponent } from '../../../../../components';
 
 export default function Games({ history }) {
   const classes = useStyles();

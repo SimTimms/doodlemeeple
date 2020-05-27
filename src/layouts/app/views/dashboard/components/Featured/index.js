@@ -3,7 +3,6 @@ import Card from '@material-ui/core/Card';
 import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
-import { timeDifferenceForDate } from '../../../../../../utils/dates';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 
@@ -20,7 +19,6 @@ export function Featured({ posts }) {
       {posts.map((post, index) => {
         const regex = /(<([^>]+)>)/gi;
         const linkTo = post.link;
-        const createdAt = post.date;
         const message = post.excerpt.rendered
           .replace(regex, '')
           .replace(/&#8217;/gi, "'")

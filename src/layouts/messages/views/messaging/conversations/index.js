@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slide, Button, Icon } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Query, Mutation } from 'react-apollo';
 import { CONVERSATIONS } from '../../../../../data/queries';

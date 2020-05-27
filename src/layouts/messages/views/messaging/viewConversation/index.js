@@ -1,17 +1,10 @@
 import React from 'react';
-import { Slide, Button, Icon, Typography } from '@material-ui/core';
-import { Message } from './components/message';
+import { Slide, Button, Icon, Typography, Link } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { CONVERSATION } from '../../../../../data/queries';
-import { NEW_MESSAGES } from '../../../../../data/subscriptions';
-import {
-  ContentHeader,
-  CreateMessage,
-  LoadIcon,
-  DividerWithBorder,
-} from '../../../../../components';
-import Cookies from 'js-cookie';
+import { ContentHeader, LoadIcon } from '../../../../../components';
+import Messages from './components/messages';
 
 export default function ViewConversation({ history, conversationId, titles }) {
   const classes = useStyles();
@@ -19,37 +12,6 @@ export default function ViewConversation({ history, conversationId, titles }) {
   const [pageNbr, setPageNbr] = React.useState(1);
   const [participantArray, setParticipantArray] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
-  const thisUserId = Cookies.get('userId');
-
-  const _subscribeToNewLinks = (messageArray, subscribeToMore) => {
-    subscribeToMore({
-      document: NEW_MESSAGES,
-      updateQuery: (prev, { subscriptionData }) => {
-        //  console.log(messageArray);
-        setMessageArray([...messageArray, subscriptionData.data.newMessage]);
-      },
-    });
-  };
-
-  function updateMessageArray(messageIn) {
-    setMessageArray([
-      {
-        messageStr: messageIn,
-        createdAt: new Date(),
-        id: 'new',
-        reciever: { id: '', name: '', profileImg: '' },
-        sender: {
-          id: thisUserId,
-          name: participantArray.filter((user) => user.id === thisUserId)[0]
-            .name,
-          profileImg: participantArray.filter(
-            (user) => user.id === thisUserId,
-          )[0].profileImg,
-        },
-      },
-      ...messageArray,
-    ]);
-  }
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -70,22 +32,17 @@ export default function ViewConversation({ history, conversationId, titles }) {
               >
                 {participantArray.map((user, index) => {
                   return (
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        flexWrap: 'nowrap',
-                        alignItems: 'center',
-                        background: '#fff',
-                        margin: 3,
-                        borderRadius: 4,
-                        padding: 3,
-                        paddingRight: 10,
-                        border: '1px solid #eee',
-                      }}
+                    <Link
+                      href={`/public-preview/${user.id}`}
+                      className={classes.participant}
                       key={`participant_${index}`}
+                      target="_blank"
                     >
-                      <img src={user.profileImg} style={{ width: 30 }}></img>
+                      <img
+                        src={user.profileImg}
+                        alt="profile"
+                        style={{ width: 30 }}
+                      />
                       {
                         <Typography
                           color="textSecondary"
@@ -102,7 +59,7 @@ export default function ViewConversation({ history, conversationId, titles }) {
                           {user.name}
                         </Typography>
                       }
-                    </div>
+                    </Link>
                   );
                 })}
               </div>
@@ -110,39 +67,31 @@ export default function ViewConversation({ history, conversationId, titles }) {
             button={null}
           />
         )}
-
-        <div
-          style={{
-            padding: 20,
-            background: '#fff',
-            borderRadius: 10,
-            marginTop: 10,
-          }}
-        >
-          <CreateMessage
-            conversationId={conversationId}
-            updateMessageArray={updateMessageArray}
-          />
-          {/*
-          <Uploader
-            cbImage={null}
-            styleOverride={null}
-            className={null}
-            cbDelete={null}
-            hasFile={false}
-            setImagePosition={null}
-            size="2MB PNG JPG"
-          />*/}
-        </div>
-        <DividerWithBorder />
-        <div className={classes.cardGrid}>
-          {messageArray.map((message, index) => {
-            return (
-              message.sender && (
-                <Message key={`message_${index}`} message={message} />
-              )
-            );
-          })}
+        <div>
+          <Query
+            query={CONVERSATION}
+            fetchPolicy="network-only"
+            variables={{ conversationId: conversationId, page: pageNbr }}
+            onCompleted={(data) => {
+              setLoading(false);
+              setParticipantArray(data.getConversation.participants);
+              setMessageArray([
+                ...messageArray,
+                ...data.getConversation.messages,
+              ]);
+            }}
+          >
+            {({ data, subscribeToMore }) => {
+              return data ? (
+                <Messages
+                  messageArrayIn={data.getConversation.messages}
+                  classes={classes}
+                  conversationId={conversationId}
+                  subscribe={subscribeToMore}
+                />
+              ) : null;
+            }}
+          </Query>
         </div>
         {loading ? (
           <LoadIcon />
@@ -156,29 +105,6 @@ export default function ViewConversation({ history, conversationId, titles }) {
             <Icon>more_horiz</Icon>
           </Button>
         )}
-        <div>
-          <Query
-            query={CONVERSATION}
-            fetchPolicy="network-only"
-            variables={{ conversationId: conversationId, page: pageNbr }}
-            onCompleted={(data) => {
-              setLoading(false);
-              setParticipantArray(data.getConversation.participants);
-              console.log(messageArray);
-              setMessageArray([
-                ...messageArray,
-                ...data.getConversation.messages,
-              ]);
-            }}
-          >
-            {({ data, subscribeToMore }) => {
-              _subscribeToNewLinks(messageArray, subscribeToMore);
-
-              return;
-              return null;
-            }}
-          </Query>
-        </div>
       </div>
     </Slide>
   );

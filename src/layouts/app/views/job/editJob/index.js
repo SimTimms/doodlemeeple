@@ -10,7 +10,6 @@ import {
 import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
 import {
-  LoadIcon,
   ContentHeader,
   DeleteButton,
   FieldTitle,
