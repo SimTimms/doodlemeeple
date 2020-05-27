@@ -22,12 +22,25 @@ export default function Messages({
     subscribe({
       document: NEW_MESSAGES,
       updateQuery: (prev, { subscriptionData }) => {
-        const messageArrayAtStart = messageArrayIn;
+        if (!subscriptionData.data) return prev;
 
-        setMessageArray([
-          subscriptionData.data.newMessage,
-          ...messageArrayAtStart,
-        ]);
+        const newMessage = subscriptionData.data.newMessage;
+        const exists = prev.getConversation.messages.find(
+          ({ id }) => id === newMessage.id,
+        );
+
+        if (exists) return prev;
+        console.log(prev.id);
+        return Object.assign({}, prev, {
+          getConversation: {
+            id: prev.getConversation.id,
+            participants: prev.getConversation.participants,
+            job: prev.getConversation.job,
+            createdAt: prev.getConversation.createdAt,
+            messages: [newMessage, ...prev.getConversation.messages],
+            __typename: prev.getConversation.__typename,
+          },
+        });
       },
     });
   }, [messageArrayIn, subscribe]);

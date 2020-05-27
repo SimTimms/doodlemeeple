@@ -12,13 +12,14 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
-
+const token = Cookies.get('token');
 const wsLink = new WebSocketLink({
   uri: `${process.env.REACT_APP_API_SHORT}`,
   options: {
     reconnect: true,
     connectionParams: {
-      authToken: localStorage.getItem(Cookies.get('token')),
+      Authorization: `Bearer ${token}`,
+      authToken: token,
     },
   },
 });
@@ -28,8 +29,6 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = Cookies.get('token');
-
   return {
     headers: {
       ...headers,
