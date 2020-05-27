@@ -14,7 +14,12 @@ export default function Conversations({ history }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <ContentHeader title="Conversations" subTitle="" button={null} />
+        <ContentHeader
+          title="Conversations"
+          subTitle=""
+          subTitleExtra={null}
+          button={null}
+        />
         <div className={classes.cardGrid}>
           {conversationArray.map((conversation, index) => {
             return (

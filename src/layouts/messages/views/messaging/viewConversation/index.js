@@ -4,6 +4,7 @@ import { Message } from './components/message';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { CONVERSATION } from '../../../../../data/queries';
+import { NEW_MESSAGES } from '../../../../../data/subscriptions';
 import {
   ContentHeader,
   CreateMessage,
@@ -19,6 +20,16 @@ export default function ViewConversation({ history, conversationId, titles }) {
   const [participantArray, setParticipantArray] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const thisUserId = Cookies.get('userId');
+
+  const _subscribeToNewLinks = (messageArray, subscribeToMore) => {
+    subscribeToMore({
+      document: NEW_MESSAGES,
+      updateQuery: (prev, { subscriptionData }) => {
+        //  console.log(messageArray);
+        setMessageArray([...messageArray, subscriptionData.data.newMessage]);
+      },
+    });
+  };
 
   function updateMessageArray(messageIn) {
     setMessageArray([
@@ -153,13 +164,17 @@ export default function ViewConversation({ history, conversationId, titles }) {
             onCompleted={(data) => {
               setLoading(false);
               setParticipantArray(data.getConversation.participants);
+              console.log(messageArray);
               setMessageArray([
                 ...messageArray,
                 ...data.getConversation.messages,
               ]);
             }}
           >
-            {({ data }) => {
+            {({ data, subscribeToMore }) => {
+              _subscribeToNewLinks(messageArray, subscribeToMore);
+
+              return;
               return null;
             }}
           </Query>
