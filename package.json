@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^7.1.2",
     "apollo-boost": "^0.4.7",
     "apollo-link-context": "^1.0.19",
+    "apollo-link-ws": "^1.0.20",
     "axios": "^0.19.2",
     "detect-browser": "^5.0.0",
     "email-validator": "^2.0.4",
@@ -26,7 +27,8 @@
     "react-spring": "^8.0.27",
     "react-switch": "^5.0.1",
     "react-toastify": "^5.5.0",
-    "styled-components": "^5.0.0"
+    "styled-components": "^5.0.0",
+    "subscriptions-transport-ws": "^0.9.16"
   },
   "scripts": {
     "start": "react-scripts start",

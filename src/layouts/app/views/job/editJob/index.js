@@ -335,10 +335,8 @@ export default function EditJob({
               setJob({ ...data.getJob, gameId: data.getJob.game.id });
           }}
         >
-          {({ loading, error, data }) => {
-            if (loading) return <LoadIcon />;
-            if (error) return <div>Error</div>;
-            return <div></div>;
+          {({ data }) => {
+            return null;
           }}
         </Query>
         <Query
