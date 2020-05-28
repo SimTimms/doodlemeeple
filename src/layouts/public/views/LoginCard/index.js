@@ -82,8 +82,11 @@ export default function LoginCard({ history, forwardTo }) {
               onCompleted={async (data) => {
                 if (data.login.token) {
                   const tokenDecode = jwtDecode(data.login.token);
-                  await Cookies.set('token', data.login.token);
-                  await Cookies.set('userId', tokenDecode.userId);
+                  await Cookies.set('token', data.login.token, { expires: 7 });
+                  await Cookies.set('userId', tokenDecode.userId, {
+                    expires: 7,
+                  });
+
                   if (
                     forwardTo !== null &&
                     forwardTo.pathname !== undefined &&

@@ -14,7 +14,6 @@ import { EditGame, PreviewGame, Games } from './views/game';
 import { EditJob, Jobs, PreviewJob } from './views/job';
 import { PickArtist } from './views/pickArtist';
 import { NewQuote } from './views/newQuote';
-import { LoadIcon } from '../../components';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
 import { AUTOSAVE_IS } from '../../data/queries';
@@ -140,10 +139,8 @@ function AppLayout(props) {
         }}
         fetchPolicy="network-only"
       >
-        {({ loading, error, data }) => {
-          if (loading) return <LoadIcon />;
-          if (error) return <div>Error</div>;
-          return <div></div>;
+        {({ data }) => {
+          return null;
         }}
       </Query>
     </div>

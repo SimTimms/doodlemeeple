@@ -21,6 +21,7 @@ export default function Messages({
 
     subscribe({
       document: NEW_MESSAGES,
+      variables: { conversationId },
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) return prev;
 
@@ -30,7 +31,6 @@ export default function Messages({
         );
 
         if (exists) return prev;
-        console.log(prev.id);
         return Object.assign({}, prev, {
           getConversation: {
             id: prev.getConversation.id,
@@ -43,7 +43,7 @@ export default function Messages({
         });
       },
     });
-  }, [messageArrayIn, subscribe]);
+  }, [messageArrayIn, subscribe, conversationId]);
 
   function updateMessageArray(messageIn) {
     setMessageArray([
