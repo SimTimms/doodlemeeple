@@ -76,6 +76,7 @@ export function PublicMenu({ history }) {
         <StyledButton
           onClick={() => {
             Cookies.remove('token');
+            Cookies.remove('userId');
             history.push(`/`);
           }}
         >

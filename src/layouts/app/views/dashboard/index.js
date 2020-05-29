@@ -7,10 +7,11 @@ import axios from 'axios';
 import { ContentHeader } from '../../../../components';
 import { useStyles } from './styles';
 
-export function Dashboard() {
+export function Dashboard({ history }) {
   const classes = useStyles();
   const [posts, setPosts] = React.useState(null);
   const [featured, setFeatured] = React.useState(null);
+  const [featuredId, setFeaturedId] = React.useState(null);
 
   useEffect(() => {
     let didCancel = false;
@@ -33,6 +34,7 @@ export function Dashboard() {
           { cancelToken: axiosCancel.token },
         )
         .then((response) => {
+          setFeaturedId(response.data[0].slug);
           setFeatured(response.data);
         })
         .catch((error) => {
@@ -57,7 +59,11 @@ export function Dashboard() {
             button={null}
           />
         ) : (
-          <Featured posts={featured ? featured : []} />
+          <Featured
+            posts={featured ? featured : []}
+            featuredId={featuredId}
+            history={history}
+          />
         )}
         <div className={classes.dashboardGrid}>
           <div className={classes.gridRow}>

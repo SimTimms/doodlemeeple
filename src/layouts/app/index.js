@@ -77,7 +77,7 @@ function AppLayout(props) {
       >
         <ContentTop style={{ width: '100%' }}>
           {page === 'dashboard' ? (
-            <Dashboard />
+            <Dashboard history={props.history} />
           ) : page === 'edit-profile' ? (
             <EditProfile theme={props.theme} />
           ) : page === 'account' ? (

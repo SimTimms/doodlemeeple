@@ -24,6 +24,7 @@ export const useStyles = makeStyles((theme) => ({
     background: 'rgba(255,255,255,0.9)',
     borderTop: '1px solid #ddd',
     padding: 30,
+    paddingBottom: 10,
     paddingTop: 25,
     width: 300,
     marginLeft: 30,
