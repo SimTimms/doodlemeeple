@@ -204,11 +204,13 @@ export function AppDrawer(props) {
             />
           </ListItem>
         </a>
+
         <ListItem
           button
           onClick={() => {
             Cookies.remove('token');
-            props.history.push(`/`);
+            Cookies.remove('userId');
+            props.history.replace(`/`);
           }}
         >
           <ListItemIcon style={{ minWidth: 32 }}>

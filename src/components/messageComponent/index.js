@@ -12,6 +12,7 @@ export default function MessageComponent({
   count,
   title,
   onClickEvent,
+  disabled,
 }) {
   const classes = useStyles();
 
@@ -81,21 +82,23 @@ export default function MessageComponent({
               </div>
             </div>
           </div>
-          <div
-            style={{
-              minWidth: 44,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Button
-              onClick={() => onClickEvent()}
-              className={classes.nextButton}
+          {!disabled && (
+            <div
+              style={{
+                minWidth: 44,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
             >
-              <Icon>chevron_right</Icon>
-            </Button>
-          </div>
+              <Button
+                onClick={() => onClickEvent()}
+                className={classes.nextButton}
+              >
+                <Icon>chevron_right</Icon>
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </Card>

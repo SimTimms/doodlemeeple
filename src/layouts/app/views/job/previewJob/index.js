@@ -73,6 +73,7 @@ export default function PreviewJob({ theme, jobId, history }) {
                     onClickEvent={() => {
                       history.push(`/app/view-game/${job.game.id}`);
                     }}
+                    secondaryColor={false}
                     disabled={false}
                     icon="keyboard_arrow_right"
                     title="View Game"
@@ -80,34 +81,47 @@ export default function PreviewJob({ theme, jobId, history }) {
                 )}
               </div>
             </Card>
-            <IconButton
-              disabled={false}
-              icon="chat"
-              title={chatOpen ? 'Close Chat' : 'Open Chat'}
-              onClickEvent={() => setChatOpen(chatOpen ? false : true)}
-            />
+            <div className={classes.actionWrapper}>
+              <IconButton
+                disabled={false}
+                secondaryColor={true}
+                icon={chatOpen ? 'keyboard_arrow_down' : 'chat'}
+                title={chatOpen ? 'Close Chat' : 'Open Chat'}
+                onClickEvent={() => setChatOpen(chatOpen ? false : true)}
+              />
+              <IconButton
+                disabled={false}
+                secondaryColor={false}
+                icon="check_circle_outline"
+                title="Accept"
+                onClickEvent={() => setChatOpen(chatOpen ? false : true)}
+              />
+            </div>
+            {chatOpen && (
+              <Card className={classes.card}>
+                <InlineHeader>
+                  <IconTitle icon="chat" title="Chat" />
+                </InlineHeader>
+                <div
+                  style={{
+                    padding: 10,
+                    boxSizing: 'border-box',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    background: '#efeff5',
+                  }}
+                >
+                  {conversationId && (
+                    <ViewConversation
+                      history={history}
+                      conversationId={conversationId}
+                      titles={false}
+                    />
+                  )}
+                </div>
+              </Card>
+            )}
           </SectionWrapper>
-          {chatOpen && (
-            <SectionWrapper header="Chat" button={null}>
-              <div
-                style={{
-                  padding: 10,
-                  boxSizing: 'border-box',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  background: '#efeff5',
-                }}
-              >
-                {conversationId && (
-                  <ViewConversation
-                    history={history}
-                    conversationId={conversationId}
-                    titles={false}
-                  />
-                )}
-              </div>
-            </SectionWrapper>
-          )}
         </div>
 
         <Query

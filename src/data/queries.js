@@ -73,8 +73,8 @@ export const GAMES = gql`
 `;
 
 export const CONVERSATIONS = gql`
-  {
-    getConversations {
+  query GetConversations($status: String!) {
+    getConversations(status: $status) {
       id
       createdAt
       unreadMessages

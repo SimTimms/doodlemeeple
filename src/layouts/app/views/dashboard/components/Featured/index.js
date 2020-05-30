@@ -65,9 +65,6 @@ export function Featured({ posts, featuredId, history }) {
                       <Query
                         query={PROFILE_FEATURED}
                         variables={{ userId: featuredId }}
-                        onCompleted={(data) => {
-                          console.log(data);
-                        }}
                         fetchPolicy="network-only"
                       >
                         {({ data }) => {

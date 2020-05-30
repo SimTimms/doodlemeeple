@@ -9,6 +9,7 @@ export default function IconButton({
   icon,
   title,
   secondaryColor,
+  warning,
 }) {
   const classes = useStyles();
 
@@ -17,13 +18,21 @@ export default function IconButton({
       className={clsx({
         [classes.iconButton]: true,
         [classes.iconButtonSecondary]: secondaryColor,
+        [classes.iconButtonWarning]: warning,
         [classes.iconButtonDisabled]: disabled,
       })}
       disabled={disabled}
       onClick={() => onClickEvent()}
     >
       {title}
-      <Icon className={classes.iconButtonIcon}>{icon}</Icon>
+      <Icon
+        className={clsx({
+          [classes.iconButtonIcon]: true,
+          [classes.iconButtonIconSecondary]: secondaryColor,
+        })}
+      >
+        {icon}
+      </Icon>
     </Button>
   );
 }

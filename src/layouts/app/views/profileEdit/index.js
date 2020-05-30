@@ -12,6 +12,7 @@ import {
   FieldTitle,
   Divider,
   DMCard,
+  IconButton,
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE } from '../../../../data/queries';
@@ -94,6 +95,7 @@ export function EditProfile({ theme }) {
                   title="Profile"
                   subTitle="Tell everyone about yourself, showcase the best examples of
                     your work"
+                  subTitleExtra={null}
                   button={null}
                 />
                 <div
@@ -107,18 +109,14 @@ export function EditProfile({ theme }) {
                     to={`/preview/${userId}`}
                     style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
                   >
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      style={{ width: 100, marginLeft: 10 }}
-                    >
-                      <Icon
-                        style={{ fontSize: 18, color: '#fff', marginRight: 10 }}
-                      >
-                        pageview
-                      </Icon>
-                      Preview
-                    </Button>
+                    <IconButton
+                      disabled={false}
+                      secondaryColor={true}
+                      warning={false}
+                      icon="pageview"
+                      title="Preview"
+                      onClickEvent={null}
+                    />
                   </Link>
                 </div>
                 <DMCard>

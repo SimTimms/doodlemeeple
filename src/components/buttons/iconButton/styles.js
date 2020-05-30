@@ -8,15 +8,24 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: 10,
     marginBottom: 10,
     boxShadow: '2px 2px 3px rgba(0,0,0,0.2)',
+    border: `1px solid #fff`,
     color: '#fff',
     '&:hover': {
       background: theme.palette.primary.dark,
     },
   },
   iconButtonSecondary: {
-    background: theme.palette.secondary.main,
+    background: '#fff',
+    color: theme.palette.primary.main,
+    border: `1px solid ${theme.palette.primary.main}`,
     '&:hover': {
-      background: theme.palette.secondary.dark,
+      background: '#eaeaea',
+    },
+  },
+  iconButtonWarning: {
+    background: theme.palette.error.main,
+    '&:hover': {
+      background: theme.palette.error.dark,
     },
   },
   iconButtonDisabled: {
@@ -32,6 +41,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   iconButtonIcon: {
     color: '#fff',
+    marginLeft: 10,
+  },
+  iconButtonIconSecondary: {
+    color: theme.palette.primary.main,
     marginLeft: 10,
   },
 }));

@@ -5,6 +5,7 @@ import {
   InlineHeader,
   DeclineInvite,
   IconTitle,
+  IconButton,
 } from '../../../../../../components';
 
 export function InviteComponent({ invite, removeInvite, history }) {
@@ -61,17 +62,14 @@ export function InviteComponent({ invite, removeInvite, history }) {
       </div>
       <div className={classes.cardActionArea}>
         <DeclineInvite invite={invite} removeInvite={removeInvite} />
-
-        <Button
-          variant="contained"
-          color="primary"
-          style={{ width: 140 }}
-          onClick={() => {
-            history.push(`/app/view-job/${invite.job.id}`);
-          }}
-        >
-          Find Out More
-        </Button>
+        <IconButton
+          disabled={false}
+          secondaryColor={false}
+          warning={false}
+          icon="more_horiz"
+          title="Find Out More"
+          onClickEvent={() => history.push(`/app/view-job/${invite.job.id}`)}
+        />
       </div>
     </Card>
   );

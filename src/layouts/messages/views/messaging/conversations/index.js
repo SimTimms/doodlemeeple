@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slide } from '@material-ui/core';
+import { Slide, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Query, Mutation } from 'react-apollo';
 import { CONVERSATIONS } from '../../../../../data/queries';
@@ -38,6 +38,7 @@ export default function Conversations({ history }) {
                 {(mutation) => {
                   return (
                     <MessageComponent
+                      disabled={false}
                       key={`conversationparent_${index}`}
                       history={history}
                       backgroundImg={conversation.job.game.backgroundImg}
@@ -60,6 +61,7 @@ export default function Conversations({ history }) {
         </div>
         <Query
           query={CONVERSATIONS}
+          variables={{ status: 'submitted' }}
           fetchPolicy="network-only"
           onCompleted={(data) => {
             setConversationArray(data.getConversations);
@@ -69,6 +71,48 @@ export default function Conversations({ history }) {
             return null;
           }}
         </Query>
+        <Typography
+          color="textSecondary"
+          component="p"
+          style={{
+            textAlign: 'center',
+            width: '100%',
+            marginTop: 10,
+            paddingBottom: 10,
+          }}
+        >
+          Declined
+        </Typography>
+        <div className={classes.cardGrid}>
+          <Query
+            query={CONVERSATIONS}
+            variables={{ status: 'declined' }}
+            fetchPolicy="network-only"
+          >
+            {({ data }) => {
+              return data
+                ? data.getConversations.map((conversation, index) => {
+                    return (
+                      <MessageComponent
+                        disabled={true}
+                        key={`conversationparent_${index}`}
+                        history={history}
+                        backgroundImg={conversation.job.game.backgroundImg}
+                        subtitle={conversation.participants.map(
+                          (user) =>
+                            user.id !== Cookies.get('userId') && user.name,
+                        )}
+                        profiles={conversation.participants}
+                        count={conversation.unreadMessages}
+                        title={conversation.job.name}
+                        onClickEvent={null}
+                      />
+                    );
+                  })
+                : null;
+            }}
+          </Query>
+        </div>
       </div>
     </Slide>
   );

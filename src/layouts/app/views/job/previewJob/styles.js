@@ -69,6 +69,16 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     textDecoration: 'none',
   },
+  actionWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
   profileWrapper: {
     display: 'flex',
     flexDirection: 'row',
