@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { IconButton } from '../../../../../../components';
 import clsx from 'clsx';
+import { Query } from 'react-apollo';
+import { PROFILE_FEATURED } from '../../../../../../data/queries';
 
 export function Featured({ posts, featuredId, history }) {
   const classes = useStyles();
@@ -54,43 +56,56 @@ export function Featured({ posts, featuredId, history }) {
                     >
                       Featured Artist
                     </Typography>
+
                     <Typography
                       variant="h5"
                       component="h4"
                       className={classes.postHeaderText}
                     >
+                      <Query
+                        query={PROFILE_FEATURED}
+                        variables={{ userId: featuredId }}
+                        onCompleted={(data) => {
+                          console.log(data);
+                        }}
+                        fetchPolicy="network-only"
+                      >
+                        {({ data }) => {
+                          return data ? (
+                            <img
+                              className={classes.profileWrapperFeatured}
+                              src={data.profilePreview.profileImg}
+                            />
+                          ) : null;
+                        }}
+                      </Query>
                       <b>{title}</b>
                     </Typography>
                   </div>
 
                   <Typography style={{ color: '#444' }} component="p">
                     {message}
+                    <a
+                      href={linkTo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        width: 100,
+                        color: '#222',
+                      }}
+                    >
+                      Read the full story
+                    </a>
                   </Typography>
                   <div
                     style={{
                       display: 'flex',
                       width: '100%',
-                      justifyContent: 'space-between',
+                      justifyContent: 'center',
                       borderTop: '1px dotted #ccc',
                       marginTop: 10,
                     }}
                   >
-                    <a
-                      href={linkTo}
-                      className={classes.messageButton}
-                      style={{
-                        textDecoration: 'none',
-                        width: 100,
-                      }}
-                    >
-                      <IconButton
-                        secondaryColor={true}
-                        disabled={false}
-                        onClickEvent={null}
-                        icon="article"
-                        title="Article"
-                      />
-                    </a>
                     <IconButton
                       secondaryColor={false}
                       disabled={false}

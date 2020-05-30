@@ -308,6 +308,16 @@ export const PROFILE_PREVIEW = gql`
   }
 `;
 
+export const PROFILE_FEATURED = gql`
+  query ProfilePreview($userId: String!) {
+    profilePreview(userId: $userId) {
+      id
+      profileImg
+      autosave
+    }
+  }
+`;
+
 export const AUTOSAVE_IS = gql`
   {
     profile {
