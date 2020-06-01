@@ -2,9 +2,12 @@ import React from 'react';
 import { TextField, Button, Icon } from '@material-ui/core';
 import { Mutation } from 'react-apollo';
 import { CREATE_MESSAGE } from '../../../data/mutations';
+import { useStyles } from './styles';
+import { IconButton } from '../../';
 
 export default function CreateMessage({ conversationId, updateMessageArray }) {
   const [newMessage, setNewMessage] = React.useState('');
+  const classes = useStyles();
 
   return (
     <Mutation
@@ -19,7 +22,7 @@ export default function CreateMessage({ conversationId, updateMessageArray }) {
     >
       {(mutation) => {
         return (
-          <div style={{ display: 'flex' }}>
+          <div className={classes.root}>
             <TextField
               id={'type'}
               label="Message"
@@ -34,18 +37,25 @@ export default function CreateMessage({ conversationId, updateMessageArray }) {
               variant="outlined"
               style={{ width: '100%', margin: 0 }}
             />
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => {
+            <IconButton
+              icon="send"
+              title="Send"
+              disabled={false}
+              secondaryColor={false}
+              warning={false}
+              onClickEvent={() => {
                 updateMessageArray(newMessage);
                 mutation();
                 setNewMessage('');
               }}
-              style={{ marginLeft: 10 }}
-            >
-              Send <Icon style={{ marginLeft: 10 }}>send</Icon>
-            </Button>
+              styleOverride={{
+                margin: 0,
+                marginLeft: 10,
+                width: 100,
+                paddingLeft: 10,
+                paddingRight: 10,
+              }}
+            />
           </div>
         );
       }}

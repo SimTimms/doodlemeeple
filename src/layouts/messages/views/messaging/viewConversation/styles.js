@@ -8,6 +8,15 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
+    boxSizing: 'border-box',
+  },
+  createWrapper: {
+    padding: 20,
+    background: '#fff',
+    borderRadius: 10,
+    marginTop: 10,
+    position: 'fixed',
+    bottom: 0,
   },
   participant: {
     display: 'flex',
@@ -29,5 +38,7 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative',
+    paddingBottom: 60,
   },
 }));

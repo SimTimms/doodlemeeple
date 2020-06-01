@@ -12,9 +12,11 @@ export default function Messages({
   messageArrayIn,
   classes,
   subscribe,
+  moreButton,
 }) {
   const thisUserId = Cookies.get('userId');
   const [messageArray, setMessageArray] = React.useState([]);
+  const [messagesEnd, setMessagesEnd] = React.useState(null);
 
   useEffect(() => {
     setMessageArray(messageArrayIn);
@@ -37,13 +39,17 @@ export default function Messages({
             participants: prev.getConversation.participants,
             job: prev.getConversation.job,
             createdAt: prev.getConversation.createdAt,
-            messages: [newMessage, ...prev.getConversation.messages],
+            messages: [newMessage, ...prev.getConversation.messages.reverse()],
             __typename: prev.getConversation.__typename,
           },
         });
       },
     });
   }, [messageArrayIn, subscribe, conversationId]);
+
+  useEffect(() => {
+    messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' });
+  });
 
   function updateMessageArray(messageIn) {
     setMessageArray([
@@ -64,21 +70,8 @@ export default function Messages({
 
   return (
     <div>
-      <div
-        style={{
-          padding: 20,
-          background: '#fff',
-          borderRadius: 10,
-          marginTop: 10,
-        }}
-      >
-        <CreateMessage
-          conversationId={conversationId}
-          updateMessageArray={updateMessageArray}
-        />
-      </div>
-      <DividerWithBorder />
       <div className={classes.cardGrid}>
+        {moreButton}
         {messageArray.map((message, index) => {
           return (
             message.sender && (
@@ -86,6 +79,20 @@ export default function Messages({
             )
           );
         })}
+        <div
+          style={{ float: 'left', clear: 'both' }}
+          ref={(el) => {
+            setMessagesEnd(el);
+          }}
+        ></div>
+      </div>
+
+      <DividerWithBorder />
+      <div className={classes.createWrapper}>
+        <CreateMessage
+          conversationId={conversationId}
+          updateMessageArray={updateMessageArray}
+        />
       </div>
     </div>
   );

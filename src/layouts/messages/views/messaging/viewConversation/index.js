@@ -8,10 +8,7 @@ import Messages from './components/messages';
 
 export default function ViewConversation({ history, conversationId, titles }) {
   const classes = useStyles();
-  const [messageArray, setMessageArray] = React.useState([]);
   const [pageNbr, setPageNbr] = React.useState(1);
-  const [participantArray, setParticipantArray] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -20,50 +17,7 @@ export default function ViewConversation({ history, conversationId, titles }) {
           <ContentHeader
             title="Chat"
             subTitle={null}
-            subTitleExtra={
-              <div
-                style={{
-                  display: 'flex',
-                  width: '100%',
-                  flexDirection: 'row',
-                  flexWrap: 'nowrap',
-                  justifyContent: 'center',
-                }}
-              >
-                {participantArray.map((user, index) => {
-                  return (
-                    <Link
-                      href={`/public-preview/${user.id}`}
-                      className={classes.participant}
-                      key={`participant_${index}`}
-                      target="_blank"
-                    >
-                      <img
-                        src={user.profileImg}
-                        alt="profile"
-                        style={{ width: 30 }}
-                      />
-                      {
-                        <Typography
-                          color="textSecondary"
-                          component="p"
-                          style={{
-                            textAlign: 'center',
-                            display: 'flex',
-                            flexDirection: 'row',
-                            flexWrap: 'nowrap',
-                            alignItems: 'center',
-                            marginLeft: 10,
-                          }}
-                        >
-                          {user.name}
-                        </Typography>
-                      }
-                    </Link>
-                  );
-                })}
-              </div>
-            }
+            subTitleExtra={null}
             button={null}
           />
         )}
@@ -72,40 +26,74 @@ export default function ViewConversation({ history, conversationId, titles }) {
             query={CONVERSATION}
             fetchPolicy="network-only"
             variables={{ conversationId: conversationId, page: pageNbr }}
-            onCompleted={(data) => {
-              setLoading(false);
-              setParticipantArray(data.getConversation.participants);
-              /*
-              setMessageArray([
-                ...messageArray,
-                ...data.getConversation.messages,
-              ]);*/
-            }}
           >
-            {({ data, subscribeToMore }) => {
+            {({ data, loading, subscribeToMore }) => {
               return data ? (
-                <Messages
-                  messageArrayIn={data.getConversation.messages}
-                  classes={classes}
-                  conversationId={conversationId}
-                  subscribe={subscribeToMore}
-                />
-              ) : null;
+                <div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      width: '100%',
+                      flexDirection: 'row',
+                      flexWrap: 'nowrap',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {data.getConversation.participants.map((user, index) => {
+                      return (
+                        <Link
+                          href={`/public-preview/${user.id}`}
+                          className={classes.participant}
+                          key={`participant_${index}`}
+                          target="_blank"
+                        >
+                          <img
+                            src={user.profileImg}
+                            alt="profile"
+                            style={{ width: 30 }}
+                          />
+                          {
+                            <Typography
+                              color="textSecondary"
+                              component="p"
+                              style={{
+                                textAlign: 'center',
+                                display: 'flex',
+                                flexDirection: 'row',
+                                flexWrap: 'nowrap',
+                                alignItems: 'center',
+                                marginLeft: 10,
+                              }}
+                            >
+                              {user.name}
+                            </Typography>
+                          }
+                        </Link>
+                      );
+                    })}
+                  </div>
+                  <Messages
+                    messageArrayIn={data.getConversation.messages.reverse()}
+                    classes={classes}
+                    conversationId={conversationId}
+                    subscribe={subscribeToMore}
+                    moreButton={
+                      <Button
+                        onClick={() => {
+                          setPageNbr(pageNbr + 1);
+                        }}
+                      >
+                        <Icon>more_horiz</Icon>
+                      </Button>
+                    }
+                  />
+                </div>
+              ) : (
+                loading && <LoadIcon />
+              );
             }}
           </Query>
         </div>
-        {loading ? (
-          <LoadIcon />
-        ) : (
-          <Button
-            onClick={() => {
-              setLoading(true);
-              setPageNbr(pageNbr + 1);
-            }}
-          >
-            <Icon>more_horiz</Icon>
-          </Button>
-        )}
       </div>
     </Slide>
   );

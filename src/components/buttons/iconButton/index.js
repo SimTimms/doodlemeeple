@@ -10,9 +10,9 @@ export default function IconButton({
   title,
   secondaryColor,
   warning,
+  styleOverride,
 }) {
   const classes = useStyles();
-
   return (
     <Button
       className={clsx({
@@ -23,6 +23,7 @@ export default function IconButton({
       })}
       disabled={disabled}
       onClick={() => onClickEvent()}
+      style={styleOverride && styleOverride}
     >
       {title}
       <Icon
