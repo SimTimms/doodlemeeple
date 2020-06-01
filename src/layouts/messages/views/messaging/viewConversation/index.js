@@ -75,10 +75,11 @@ export default function ViewConversation({ history, conversationId, titles }) {
             onCompleted={(data) => {
               setLoading(false);
               setParticipantArray(data.getConversation.participants);
+              /*
               setMessageArray([
                 ...messageArray,
                 ...data.getConversation.messages,
-              ]);
+              ]);*/
             }}
           >
             {({ data, subscribeToMore }) => {

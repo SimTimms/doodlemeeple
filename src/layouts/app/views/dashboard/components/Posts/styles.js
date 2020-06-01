@@ -17,6 +17,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: '100%',
+    marginTop: 30,
   },
   postHeader: {
     color: theme.palette.primary.main,

@@ -47,6 +47,7 @@ export default function Messages({
 
   function updateMessageArray(messageIn) {
     setMessageArray([
+      ...messageArray,
       {
         messageStr: messageIn,
         createdAt: new Date(),
@@ -58,7 +59,6 @@ export default function Messages({
           profileImg: null,
         },
       },
-      ...messageArray,
     ]);
   }
 

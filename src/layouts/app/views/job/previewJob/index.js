@@ -73,7 +73,7 @@ export default function PreviewJob({ theme, jobId, history }) {
                     onClickEvent={() => {
                       history.push(`/app/view-game/${job.game.id}`);
                     }}
-                    secondaryColor={false}
+                    secondaryColor={true}
                     disabled={false}
                     icon="keyboard_arrow_right"
                     title="View Game"
@@ -85,11 +85,13 @@ export default function PreviewJob({ theme, jobId, history }) {
               <IconButton
                 disabled={false}
                 secondaryColor={true}
+                warning={false}
                 icon={chatOpen ? 'keyboard_arrow_down' : 'chat'}
                 title={chatOpen ? 'Close Chat' : 'Open Chat'}
                 onClickEvent={() => setChatOpen(chatOpen ? false : true)}
               />
               <IconButton
+                warning={false}
                 disabled={false}
                 secondaryColor={false}
                 icon="check_circle_outline"
