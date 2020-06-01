@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
     background: '#fff',
     borderRadius: 10,
     marginTop: 10,
-    position: 'fixed',
+    position: 'absolute',
     bottom: 0,
   },
   participant: {

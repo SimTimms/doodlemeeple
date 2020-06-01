@@ -111,6 +111,7 @@ export default function PreviewJob({ theme, jobId, history }) {
                     display: 'flex',
                     justifyContent: 'center',
                     background: '#efeff5',
+                    position: 'relative',
                   }}
                 >
                   {conversationId && (
