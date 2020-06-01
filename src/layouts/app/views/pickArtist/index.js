@@ -134,6 +134,7 @@ export function PickArtist({
         <div style={{ width: '100%', marginTop: 50 }}>
           <FieldTitle name="Invite Artists" description="" warning="" />
           <Creatives
+            history={history}
             favourites={favourites}
             job={job}
             inviteList={inviteList}

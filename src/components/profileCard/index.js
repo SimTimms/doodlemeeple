@@ -12,6 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 
 export default function ProfileCard({
+  history,
   creative,
   favourite,
   gameId,
@@ -65,22 +66,11 @@ export default function ProfileCard({
             variant="contained"
             color="secondary"
             style={{ marginRight: 10, padding: 0, textAlign: 'center' }}
+            onClick={() => history.push(`/public-preview/${creative.id}`)}
           >
-            <Link
-              to={`/public-preview/${creative.id}`}
-              style={{
-                height: '100%',
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                textAlign: 'center',
-                textDecoration: 'none',
-              }}
-            >
-              <Icon style={{ fontSize: 20, color: '#fff', margin: 'auto' }}>
-                more_horiz
-              </Icon>
-            </Link>
+            <Icon style={{ fontSize: 20, color: '#fff', margin: 'auto' }}>
+              more_horiz
+            </Icon>
           </Button>
 
           <Mutation

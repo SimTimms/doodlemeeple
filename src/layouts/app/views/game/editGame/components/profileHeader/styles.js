@@ -7,14 +7,19 @@ export const useStyles = makeStyles((theme) => ({
     backgroundRepear: 'no-repeat',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '100%',
-    maxHeight: 390,
-    minHeight: 390,
-    paddingBottom: 10,
+    padding: 10,
+    boxSizing: 'border-box',
     position: 'relative',
-    borderBottom: '1px solid #ddd',
-    backgroundColor: '#ccc',
+    marginTop: 10,
+    marginBottom: 10,
+    backgroundColor: '#eee',
+  },
+  rootImage: {
+    maxHeight: 400,
+    minHeight: 400,
   },
   controlsWrapper: {
     position: 'absolute',
@@ -36,13 +41,13 @@ export const useStyles = makeStyles((theme) => ({
   rootDesktop: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
   rootMobile: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
-    paddingTop: 100,
+
     paddingBottom: 0,
   },
   profileWrapperDesktop: {
@@ -52,7 +57,6 @@ export const useStyles = makeStyles((theme) => ({
   profileWrapper: {
     width: '100%',
     background: 'rgba(255,255,255,0.8)',
-    marginBottom: 10,
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
@@ -64,10 +68,9 @@ export const useStyles = makeStyles((theme) => ({
   profileName: {
     display: 'flex',
     flexDirection: 'column',
-    boxSizing: 'border-box',
+    paddingLeft: 10,
     textAlign: 'left',
     width: '100%',
-    padding: 10,
   },
   profileNameMobile: {
     textAlign: 'center',
@@ -77,9 +80,7 @@ export const useStyles = makeStyles((theme) => ({
   avatarWrapper: {
     borderRadius: '50%',
     border: '10px solid #fff',
-    backgroundColor: '#ccc',
-    marginTop: -10,
-    marginBottom: -10,
+    backgroundColor: '#eee',
     width: 140,
     minWidth: 140,
     maxWidth: 140,
@@ -110,7 +111,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 70,
   },
   avatarWrapperMobile: {
-    marginTop: -70,
+    marginTop: 0,
   },
   avatar: {
     borderRadius: '50%',

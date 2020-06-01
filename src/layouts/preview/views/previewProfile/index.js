@@ -2,13 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icon, Typography, Slide, Button } from '@material-ui/core';
 import { useStyles } from './styles';
-import {
-  IconTitle,
-  InlineHeader,
-  DMCard,
-  SectionWrapper,
-} from '../../../../components';
-
+import { IconTitle, InlineHeader, DMCard } from '../../../../components';
 import { Query } from 'react-apollo';
 import { PROFILE_PREVIEW, SECTIONS_PREVIEW } from '../../../../data/queries';
 import { animated, useSpring } from 'react-spring';

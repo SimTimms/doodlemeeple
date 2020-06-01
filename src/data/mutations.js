@@ -17,6 +17,12 @@ export const SUBMIT_BRIEF = gql`
   }
 `;
 
+export const MARK_AS_READ = gql`
+  mutation MarkAsRead($conversationId: String!) {
+    markAsRead(conversationId: $conversationId)
+  }
+`;
+
 export const UPDATE_EMAIL = gql`
   mutation UpdateEmail($email: String!) {
     updateEmail(email: $email)
@@ -208,7 +214,20 @@ export const REMOVE_PROJECT_MUTATION = gql`
 
 export const REMOVE_NOTIFICATION_MUTATION = gql`
   mutation RemoveNotificationMutation($id: String!) {
-    removeNotification(id: $id)
+    removeNotification(id: $id) {
+      message
+      id
+      icon
+      title
+      createdAt
+      linkTo
+    }
+  }
+`;
+
+export const CREATE_MESSAGE = gql`
+  mutation CreateMessage($id: String!, $message: MessageInput!) {
+    createMessage(id: $id, message: $message)
   }
 `;
 

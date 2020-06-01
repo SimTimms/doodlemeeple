@@ -10,6 +10,7 @@ export default function Creatives({
   removeInviteList,
   updateInviteList,
   inviteList,
+  history,
 }) {
   const classes = useStyles();
 
@@ -19,15 +20,13 @@ export default function Creatives({
       fetchPolicy="network-only"
       onCompleted={(data) => {}}
     >
-      {({ loading, error, data }) => {
-        if (loading) return <LoadIcon />;
-        if (error) return <div>Error</div>;
-
+      {({ data }) => {
         return (
           <div className={classes.creativeWrapper}>
             {data.getCreatives.map((creative, index) => {
               return (
                 <ProfileCard
+                  history={history}
                   creative={creative}
                   favourite={
                     favourites.indexOf(creative.id) > -1 ? true : false

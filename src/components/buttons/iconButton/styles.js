@@ -5,21 +5,35 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     background: theme.palette.primary.main,
     padding: 5,
-    margin: 5,
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 10,
+    marginBottom: 10,
+    boxShadow: '2px 2px 3px rgba(0,0,0,0.2)',
+    border: `1px solid #fff`,
     color: '#fff',
     '&:hover': {
       background: theme.palette.primary.dark,
+    },
+  },
+  iconButtonSecondary: {
+    background: '#fff',
+    color: theme.palette.primary.main,
+    border: `1px solid ${theme.palette.primary.main}`,
+    '&:hover': {
+      background: '#eaeaea',
+    },
+  },
+  iconButtonWarning: {
+    background: theme.palette.error.main,
+    '&:hover': {
+      background: theme.palette.error.dark,
     },
   },
   iconButtonDisabled: {
     cursor: 'pointer',
     background: '#ddd',
     padding: 5,
-    margin: 5,
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 10,
+    marginBottom: 10,
     color: '#fff',
     '&:hover': {
       background: theme.palette.primary.dark,
@@ -27,5 +41,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   iconButtonIcon: {
     color: '#fff',
+    marginLeft: 10,
+  },
+  iconButtonIconSecondary: {
+    color: theme.palette.primary.main,
+    marginLeft: 10,
   },
 }));

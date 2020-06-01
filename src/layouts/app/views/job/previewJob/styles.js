@@ -46,7 +46,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
     marginleft: 10,
   },
-  card: { maxWidth: 712, width: '100%', marginBottom: 20, paddingBottom: 10 },
+  card: { maxWidth: 712, width: '100%', marginBottom: 20 },
   title: {
     fontSize: 14,
   },
@@ -69,6 +69,16 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     textDecoration: 'none',
   },
+  actionWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
   profileWrapper: {
     display: 'flex',
     flexDirection: 'row',
@@ -81,4 +91,11 @@ export const useStyles = makeStyles((theme) => ({
     height: 300,
     padding: 10,
   },
+  messageBox: {
+    background: '#ddd',
+    padding: 10,
+    borderRadius: 10,
+    margin: 5,
+  },
+  messageBoxUser: {},
 }));

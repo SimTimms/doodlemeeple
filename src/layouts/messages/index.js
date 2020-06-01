@@ -1,15 +1,20 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import clsx from 'clsx';
 import { useStyles } from './styles';
-import { ContentTop, StyledNavBar } from '../../components';
+import { useMediaQuery } from '@material-ui/core';
+import clsx from 'clsx';
 import { AppMenu } from '../menus';
-import { MessagesDrawer } from '../menus/messagesDrawer';
-import { Conversations } from './views/conversations';
+import { AppDrawer } from '../menus/appDrawer';
+import { Conversations, ViewConversation } from './views/messaging';
+import { ToastContainer } from 'react-toastify';
+
+import { ContentTop, StyledNavBar } from '../../components';
 
 function MessagesLayout(props) {
-  const [page, setPage] = React.useState('conversations');
+  const [page, setPage] = React.useState('home');
   const pageJump = props.match ? props.match.params.page : null;
+  const mobile = useMediaQuery('(max-width:800px)');
+
+  //TODO: I guess this is proper dirty
   const pathParam = props
     ? props.match
       ? props.match.params.pathParam
@@ -18,8 +23,12 @@ function MessagesLayout(props) {
       : null
     : null;
 
+  if (pageJump !== page) {
+    setPage(pageJump);
+  }
+
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -29,31 +38,41 @@ function MessagesLayout(props) {
     setOpen(false);
   };
 
-  if (pageJump !== page) {
-    setPage(pageJump);
-  }
-
   return (
-    <div>
-      <CssBaseline />
+    <div className={classes.root}>
+      <ToastContainer />
       <StyledNavBar
         open={open}
-        menu={<AppMenu handleDrawerOpen={handleDrawerOpen} open={open} />}
+        menu={
+          <AppMenu
+            handleDrawerOpen={handleDrawerOpen}
+            open={open}
+            history={props.history}
+          />
+        }
       ></StyledNavBar>
-      <MessagesDrawer handleDrawerClose={handleDrawerClose} open={open} />
-
+      <AppDrawer
+        handleDrawerClose={handleDrawerClose}
+        open={open}
+        history={props.history}
+      />
       <main
-        className={clsx(classes.content, {
+        className={clsx({
+          [classes.content]: true,
+          [classes.contentMobile]: !open && mobile,
           [classes.contentShift]: open,
         })}
       >
-        <div className={classes.drawerHeader} />
-        <ContentTop>
-          <div>
-            {page === 'conversations' ? (
-              <Conversations roleId={pathParam} />
-            ) : null}
-          </div>
+        <ContentTop style={{ width: '100%' }}>
+          {page === 'conversations' ? (
+            <Conversations history={props.history} />
+          ) : (
+            <ViewConversation
+              history={props.history}
+              conversationId={pathParam}
+              titles={true}
+            />
+          )}
         </ContentTop>
       </main>
     </div>

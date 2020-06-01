@@ -8,7 +8,6 @@ import Icon from '@material-ui/core/Icon';
 
 export function JobComponent({ job }) {
   const classes = useStyles();
-  console.log(job);
   return (
     <Card className={classes.card}>
       <div

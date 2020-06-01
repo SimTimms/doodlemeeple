@@ -10,10 +10,12 @@ import {
 import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
 import {
-  LoadIcon,
   ContentHeader,
   DeleteButton,
   FieldTitle,
+  InlineHeader,
+  IconTitle,
+  Divider,
 } from '../../../../../components';
 import { Query } from 'react-apollo';
 import { Mutation } from 'react-apollo';
@@ -51,7 +53,6 @@ export default function EditJob({
     gameId: '',
     submitted: false,
   });
-  const [disabledValue, setDisabledValue] = React.useState(false);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -59,6 +60,7 @@ export default function EditJob({
         <ContentHeader
           title={jobId === 'new' ? 'Create a Job' : 'Edit a Job'}
           subTitle="Create a new job"
+          subTitleExtra={null}
           button={null}
         />
         <Mutation
@@ -89,6 +91,9 @@ export default function EditJob({
             return (
               <div style={{ width: '100%' }}>
                 <Card className={classes.card}>
+                  <InlineHeader>
+                    <IconTitle icon="work" title="Job Details" />
+                  </InlineHeader>
                   <div style={{ padding: 10 }}>
                     <FieldTitle
                       name=" 1. Which game is this job for?"
@@ -171,10 +176,7 @@ export default function EditJob({
                         </div>
                       </Link>
                     </div>
-                  </div>
-                </Card>
-                <Card className={classes.card}>
-                  <div style={{ padding: 10 }}>
+                    <Divider />
                     <FieldTitle
                       name="2. Job Details"
                       description="Briefly summarise the job. Example: Images for 24 fantasy cards. Need 24 high resolution card images, each image will be full colour and in a fantasy style."
@@ -188,7 +190,6 @@ export default function EditJob({
                       }`}
                       inputProps={{ maxLength: 86 }}
                       onChange={(e) => {
-                        setDisabledValue(true);
                         autosaveIsOn && autosave(mutation, 'image');
                         setJob({
                           ...job,
@@ -205,14 +206,13 @@ export default function EditJob({
                     <TextField
                       id={'summary'}
                       label={`Summary ${
-                        job.summary ? `(${156 - job.summary.length})` : ''
+                        job.summary ? `(${256 - job.summary.length})` : ''
                       }`}
-                      inputProps={{ maxLength: 156 }}
+                      inputProps={{ maxLength: 256 }}
                       multiline
                       type="text"
                       value={job.summary}
                       onChange={(e) => {
-                        setDisabledValue(true);
                         setJob({
                           ...job,
                           summary: e.target.value.replace(
@@ -229,6 +229,9 @@ export default function EditJob({
                   </div>
                 </Card>
                 <Card className={classes.card}>
+                  <InlineHeader>
+                    <IconTitle icon="face" title="Creative Details" />
+                  </InlineHeader>
                   <div style={{ padding: 10 }}>
                     <FieldTitle
                       name="3. Your Creative"
@@ -240,13 +243,11 @@ export default function EditJob({
                       value={job.creativeSummary}
                       label={`Creative Summary ${
                         job.creativeSummary
-                          ? `(${86 - job.creativeSummary.length})`
+                          ? `(${186 - job.creativeSummary.length})`
                           : ''
                       }`}
-                      inputProps={{ maxLength: 86 }}
+                      inputProps={{ maxLength: 186 }}
                       onChange={(e) => {
-                        setDisabledValue(true);
-
                         setJob({
                           ...job,
                           creativeSummary: e.target.value.replace(
@@ -264,6 +265,12 @@ export default function EditJob({
                 </Card>
                 {job.id !== 'new' && (
                   <Card className={classes.card}>
+                    <InlineHeader>
+                      <IconTitle
+                        icon="assignment_turned_in"
+                        title="Submit Brief"
+                      />
+                    </InlineHeader>
                     <div style={{ padding: 10, textAlign: 'center' }}>
                       <FieldTitle
                         name="4. Submit"
@@ -299,6 +306,9 @@ export default function EditJob({
                 )}
 
                 <Card className={classes.card} style={{ background: '#eee' }}>
+                  <InlineHeader>
+                    <IconTitle icon="warning" title="Dange Zone" />
+                  </InlineHeader>
                   <div style={{ padding: 10 }}>
                     <Typography variant="h2" component="p">
                       Delete Job
@@ -335,28 +345,24 @@ export default function EditJob({
               setJob({ ...data.getJob, gameId: data.getJob.game.id });
           }}
         >
-          {({ loading, error, data }) => {
-            if (loading) return <LoadIcon />;
-            if (error) return <div>Error</div>;
-            return <div></div>;
+          {({ data }) => {
+            return null;
           }}
         </Query>
         <Query
           query={GAMES}
           fetchPolicy="network-only"
           onCompleted={(data) => {
-            data.getGames && setGames(data.getGames);
-            data.getGames &&
+            data.getGames.length > 0 && setGames(data.getGames);
+            data.getGames.length > 0 &&
               setJob({
                 ...job,
                 gameId: job.gameId === '' ? data.getGames[0].id : job.gameId,
               });
           }}
         >
-          {({ loading, error, data }) => {
-            if (loading) return <LoadIcon />;
-            if (error) return <div>Error</div>;
-            return <div></div>;
+          {({ data }) => {
+            return null;
           }}
         </Query>
       </div>

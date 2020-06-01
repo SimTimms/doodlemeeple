@@ -6,7 +6,9 @@ export const TYPE_HELPER = (typeIn) => {
       return '3d Sculptor';
     case 'rulebook-editor':
       return 'Editor';
+    case 'artist':
+      return 'Artist';
     default:
-      return ' Artist';
+      return typeIn;
   }
 };

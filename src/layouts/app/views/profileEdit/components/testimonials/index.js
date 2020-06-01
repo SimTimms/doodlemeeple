@@ -4,12 +4,7 @@ import { useStyles } from './styles';
 import { AddTestimonial } from '../testimonial/addButton';
 import { Testimonial } from '../testimonial';
 
-function Testimonials({
-  testimonials,
-  setChanged,
-  setTestimonials,
-  sectionId,
-}) {
+function Testimonials({ testimonials, setTestimonials, sectionId }) {
   const classes = useStyles();
   const [showAdd, setShowAdd] = React.useState(true);
 
@@ -32,7 +27,6 @@ function Testimonials({
             return (
               <Testimonial
                 testimonial={testimonial}
-                setChanged={setChanged}
                 index={index}
                 setTestimonials={setTestimonials}
                 testimonials={testimonials}

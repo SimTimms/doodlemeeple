@@ -17,6 +17,7 @@ import { LOGIN_MUTATION } from '../../../../data/mutations';
 import { PROFILE_EMAIL, PROFILE_PASSWORD } from '../../../../utils/dataLengths';
 import Cookies from 'js-cookie';
 import { readableErrors } from '../../../../utils/readableErrors';
+import jwtDecode from 'jwt-decode';
 
 import clsx from 'clsx';
 const CHECKING = 'Checking...';
@@ -80,7 +81,13 @@ export default function LoginCard({ history, forwardTo }) {
               variables={{ email, password }}
               onCompleted={async (data) => {
                 if (data.login.token) {
-                  await Cookies.set('token', data.login.token);
+                  const tokenDecode = jwtDecode(data.login.token);
+
+                  await Cookies.set('token', data.login.token, { expires: 7 });
+                  await Cookies.set('userId', tokenDecode.userId, {
+                    expires: 7,
+                  });
+
                   if (
                     forwardTo !== null &&
                     forwardTo.pathname !== undefined &&

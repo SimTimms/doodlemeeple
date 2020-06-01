@@ -7,6 +7,8 @@ import {
   ContentHeader,
   DeleteButton,
   FieldTitle,
+  InlineHeader,
+  IconTitle,
 } from '../../../../../components';
 import ReactPlayer from 'react-player';
 import { Query } from 'react-apollo';
@@ -41,7 +43,6 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
 
   function setGameImage(field, url) {
     let gameCopy = { ...game };
-    console.log(gameCopy, field, url);
     gameCopy[field] = url;
     setGame({ ...gameCopy });
   }
@@ -52,6 +53,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
         <ContentHeader
           title={gameId === 'new' ? 'Create a Game' : 'Edit a Game'}
           subTitle="Create a new game or project listing, then create jobs"
+          subTitleExtra={null}
           button={null}
         />
 
@@ -83,7 +85,10 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
               <LoadIcon />
             ) : (
               <div style={{ width: '100%' }}>
-                <Card className={classes.card} style={{ paddingTop: 10 }}>
+                <Card className={classes.card}>
+                  <InlineHeader>
+                    <IconTitle icon="image" title="Box Art" />
+                  </InlineHeader>
                   <FieldTitle
                     name=" 1. Primary Image"
                     description="This image will be displayed in most places where your game is mentioned. Choose an image that represents your game and brings attention."
@@ -96,10 +101,12 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                     autosaveFunction={() => {
                       autosave && mutation();
                     }}
-                    setDisabledValue={null}
                   />
                 </Card>
                 <Card className={classes.card}>
+                  <InlineHeader>
+                    <IconTitle icon="casino" title="Game Details" />
+                  </InlineHeader>
                   <div style={{ padding: 10 }}>
                     <FieldTitle
                       name=" 2. Game Details"
@@ -129,7 +136,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                     />
                     <TextField
                       id={'type'}
-                      label={`What type of game is this? ${
+                      label={`What type of game is this? Example: Fantasy, Sci-Fi, Card Game.. ${
                         game.type ? `(${36 - game.type.length})` : ''
                       }`}
                       inputProps={{ maxLength: 36 }}
@@ -152,7 +159,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                     />
                     <TextField
                       id={'summary'}
-                      label={`Summary of the game ${
+                      label={`Summary of the game? Example: Build and battle giant mechs in this sci-fi epic.... ${
                         game.summary ? `(${156 - game.summary.length})` : ''
                       }`}
                       inputProps={{ maxLength: 156 }}
@@ -199,6 +206,12 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                   </div>
                 </Card>
                 <Card className={classes.card}>
+                  <InlineHeader>
+                    <IconTitle
+                      icon="ondemand_video"
+                      title="Promotional Video"
+                    />
+                  </InlineHeader>
                   <div style={{ padding: 10 }}>
                     <FieldTitle
                       name=" 3. Video"
@@ -236,6 +249,9 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                   </div>
                 </Card>
                 <Card className={classes.card}>
+                  <InlineHeader>
+                    <IconTitle icon="warning" title="Danger Zone" />
+                  </InlineHeader>
                   <div
                     style={{
                       padding: 10,

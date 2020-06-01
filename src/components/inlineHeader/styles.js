@@ -7,6 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
     width: '100%',
     paddingLeft: 5,
     paddingTop: 3,

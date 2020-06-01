@@ -1,12 +1,11 @@
 import React from 'react';
 import Slide from '@material-ui/core/Slide';
-import { GameComponent, EmptyGameComponent } from './components/gameComponent';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { GAMES } from '../../../../../data/queries';
-import { LoadIcon, ContentHeader } from '../../../../../components';
+import { ContentHeader, MessageComponent } from '../../../../../components';
 
-export default function Games() {
+export default function Games({ history }) {
   const classes = useStyles();
   const [gameArray, setGameArray] = React.useState([]);
 
@@ -16,12 +15,37 @@ export default function Games() {
         <ContentHeader
           title="Games"
           subTitle="List the games and jobs you need help with"
+          button={null}
         />
         <div className={classes.cardGrid}>
           {gameArray.map((game, index) => {
-            return <GameComponent key={`project_${index}`} game={game} />;
+            return (
+              <MessageComponent
+                key={`game_${index}`}
+                history={history}
+                backgroundImg={game.backgroundImg}
+                profiles={null}
+                subtitle={game.name}
+                count={game.jobs.length}
+                title={null}
+                onClickEvent={() => {
+                  history.push(`/app/edit-game/${game.id}`);
+                }}
+              />
+            );
           })}
-          <EmptyGameComponent key={`project_empty`} />
+          <MessageComponent
+            key={`game_new`}
+            history={history}
+            backgroundImg={null}
+            profiles={null}
+            subtitle="New Game"
+            count={null}
+            title="Create a new game"
+            onClickEvent={() => {
+              history.push(`/app/edit-game/new`);
+            }}
+          />
         </div>
         <Query
           query={GAMES}
@@ -30,10 +54,8 @@ export default function Games() {
             setGameArray(data.getGames);
           }}
         >
-          {({ loading, error, data }) => {
-            if (loading) return <LoadIcon />;
-            if (error) return <div>Error</div>;
-            return <div></div>;
+          {({ data }) => {
+            return null;
           }}
         </Query>
       </div>

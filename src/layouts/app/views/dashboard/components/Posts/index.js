@@ -4,6 +4,12 @@ import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
 import { timeDifferenceForDate } from '../../../../../../utils/dates';
+import {
+  IconTitle,
+  InlineHeader,
+  IconButton,
+} from '../../../../../../components';
+
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 
@@ -19,7 +25,7 @@ export function Posts({ posts }) {
     >
       <Typography
         color="textPrimary"
-        component="p"
+        variant="h2"
         style={{ textAlign: 'center' }}
       >
         News
@@ -47,6 +53,12 @@ export function Posts({ posts }) {
                 className={classes.messageButton}
                 style={{ textDecoration: 'none' }}
               >
+                <InlineHeader>
+                  <IconTitle icon={'textsms'} title={`Post`} />
+                  <Typography variant="caption" component="p">
+                    <b>{timeDifferenceForDate(post.date)}</b>
+                  </Typography>
+                </InlineHeader>
                 <div
                   className={classes.postImage}
                   style={{ backgroundImage: `url(${media})` }}
@@ -79,6 +91,22 @@ export function Posts({ posts }) {
                     <Typography style={{ color: '#444' }} component="p">
                       {message}
                     </Typography>
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        width: '100%',
+                        justifyContent: 'flex-end',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <IconButton
+                        disabled={false}
+                        onClickEvent={false}
+                        icon="more_horiz"
+                        title="Read more "
+                      />
+                    </div>
                   </div>
                 </div>
               </a>

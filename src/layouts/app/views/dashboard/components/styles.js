@@ -14,6 +14,7 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    marginTop: 40,
   },
   iconButton: {
     cursor: 'pointer',
@@ -37,7 +38,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   iconInvite: { color: '#fff !important' },
-  icon: { color: theme.palette.primary.main },
+  icon: { color: theme.palette.secondary.main },
   notifications: {
     display: 'flex',
     flexDirection: 'column',

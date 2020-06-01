@@ -35,7 +35,7 @@ export function AppDrawer(props) {
   const { handleDrawerClose, open } = props;
   const theme = useTheme();
   const mobile = useMediaQuery('(max-width:800px)');
-  const [counts, setCounts] = React.useState({ invites: 0 });
+  const [counts, setCounts] = React.useState({ invites: 0, messages: 0 });
 
   return (
     <Drawer
@@ -121,7 +121,7 @@ export function AppDrawer(props) {
             icon: <Icon>chat</Icon>,
             link: '/messages/conversations',
             color: '#444',
-            count: null,
+            count: counts.messages,
           } /*
           {
             name: 'Invites',
@@ -131,7 +131,6 @@ export function AppDrawer(props) {
          
           { name: 'My Games', icon: <ExtensionIcon />, link: '/app/projects' },
          */,
-          ,
         ].map((text, index) => (
           <Link
             to={text.link}
@@ -205,11 +204,13 @@ export function AppDrawer(props) {
             />
           </ListItem>
         </a>
+
         <ListItem
           button
           onClick={() => {
             Cookies.remove('token');
-            props.history.push(`/`);
+            Cookies.remove('userId');
+            props.history.replace(`/`);
           }}
         >
           <ListItemIcon style={{ minWidth: 32 }}>
@@ -228,14 +229,15 @@ export function AppDrawer(props) {
       <Query
         query={COUNTS}
         onCompleted={(data) => {
-          setCounts({ invites: data.counts.invites });
+          setCounts({
+            invites: data.counts.invites,
+            messages: data.counts.messages,
+          });
         }}
         fetchPolicy="network-only"
       >
-        {({ loading, error, data }) => {
-          if (loading) return null;
-          if (error) return <div>Error</div>;
-          return <div></div>;
+        {({ data }) => {
+          return null;
         }}
       </Query>
     </Drawer>

@@ -22,7 +22,7 @@ export function Notifications() {
     <div className={classes.messageWrapper}>
       <Typography
         color="textPrimary"
-        component="p"
+        variant="h2"
         style={{ textAlign: 'center' }}
       >
         Notifications
@@ -100,15 +100,13 @@ export function Notifications() {
                 update={(store, { data: { removeNotification } }) => {
                   let data = store.readQuery({ query: NOTIFICATIONS });
                   toaster('Deleted');
+                  data.getNotifications = removeNotification;
 
-                  data.getNotifications = data.getNotifications.filter(
-                    (item) => item.id !== removeNotification,
-                  );
-                  console.log(data);
                   store.writeQuery({
                     query: NOTIFICATIONS,
                     data,
                   });
+                  setNotificationArray(removeNotification);
                 }}
               >
                 {(RemoveNotificationMutation) => {
@@ -134,8 +132,11 @@ export function Notifications() {
           </Card>
         );
       })}
-
-      <Icon color="disabled">more_horizontal</Icon>
+      {notificationArray.length === 0 && (
+        <Typography color="textPrimary" component="p">
+          Nothing Here
+        </Typography>
+      )}
     </div>
   );
 }

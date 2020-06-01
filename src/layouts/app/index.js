@@ -14,16 +14,10 @@ import { EditGame, PreviewGame, Games } from './views/game';
 import { EditJob, Jobs, PreviewJob } from './views/job';
 import { PickArtist } from './views/pickArtist';
 import { NewQuote } from './views/newQuote';
-import { LoadIcon } from '../../components';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
 import { AUTOSAVE_IS } from '../../data/queries';
-import {
-  CardActionArea,
-  ActionButton,
-  ContentTop,
-  StyledNavBar,
-} from '../../components';
+import { ContentTop, StyledNavBar } from '../../components';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('home');
@@ -83,7 +77,7 @@ function AppLayout(props) {
       >
         <ContentTop style={{ width: '100%' }}>
           {page === 'dashboard' ? (
-            <Dashboard />
+            <Dashboard history={props.history} />
           ) : page === 'edit-profile' ? (
             <EditProfile theme={props.theme} />
           ) : page === 'account' ? (
@@ -93,7 +87,7 @@ function AppLayout(props) {
           ) : page === 'submitted' ? (
             <Submitted />
           ) : page === 'games' ? (
-            <Games />
+            <Games history={props.history} />
           ) : page === 'jobs' ? (
             <Jobs />
           ) : page === 'edit-game' ? (
@@ -142,14 +136,11 @@ function AppLayout(props) {
         onCompleted={(data) => {
           setAutosaveIsOn(data.profile.autosave);
           setFavourites(data.profile.favourites);
-          console.log(data);
         }}
         fetchPolicy="network-only"
       >
-        {({ loading, error, data }) => {
-          if (loading) return <LoadIcon />;
-          if (error) return <div>Error</div>;
-          return <div></div>;
+        {({ data }) => {
+          return null;
         }}
       </Query>
     </div>

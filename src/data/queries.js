@@ -72,6 +72,85 @@ export const GAMES = gql`
   }
 `;
 
+export const CONVERSATIONS = gql`
+  query GetConversations($status: String!) {
+    getConversations(status: $status) {
+      id
+      createdAt
+      unreadMessages
+      participants {
+        id
+        name
+        profileImg
+      }
+      job {
+        id
+        name
+        game {
+          backgroundImg
+        }
+      }
+    }
+  }
+`;
+
+export const DETERMINE_CONVERSATION_ID = gql`
+  query DetermineConversationId($jobId: String!) {
+    determineConversationId(jobId: $jobId)
+  }
+`;
+
+export const CONVERSATION = gql`
+  query GetConversation($conversationId: String!, $page: Int!) {
+    getConversation(conversationId: $conversationId, page: $page) {
+      id
+      createdAt
+      messages {
+        id
+        messageStr
+        createdAt
+        sender {
+          id
+          name
+          profileImg
+        }
+      }
+      participants {
+        id
+        name
+        profileImg
+      }
+      job {
+        id
+        name
+        game {
+          backgroundImg
+        }
+      }
+    }
+  }
+`;
+
+export const MESSAGES = gql`
+  query GetMessages($jobId: String!) {
+    getMessages(jobId: $jobId) {
+      id
+      messageStr
+      createdAt
+      sender {
+        id
+        name
+        profileImg
+      }
+      receiver {
+        id
+        name
+        profileImg
+      }
+    }
+  }
+`;
+
 export const INVITES = gql`
   query GetInvites {
     getInvites {
@@ -167,6 +246,7 @@ export const COUNTS = gql`
     counts {
       id
       invites
+      messages
     }
   }
 `;
@@ -223,6 +303,16 @@ export const PROFILE_PREVIEW = gql`
       profileBGStyle
       profileImg
       profileImgStyle
+      autosave
+    }
+  }
+`;
+
+export const PROFILE_FEATURED = gql`
+  query ProfilePreview($userId: String!) {
+    profilePreview(userId: $userId) {
+      id
+      profileImg
       autosave
     }
   }
