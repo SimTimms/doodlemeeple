@@ -7,7 +7,6 @@ import {
   InlineHeader,
   IconButton,
   SectionWrapper,
-  DeclineInvite,
 } from '../../../../../components';
 import ViewConversation from '../../../../messages/views/messaging/viewConversation';
 import { Query } from 'react-apollo';

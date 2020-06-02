@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slide, TextField, Typography } from '@material-ui/core';
+import { Slide, TextField, Typography, Button } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   ContentHeader,
@@ -7,11 +7,14 @@ import {
   FieldTitleWrapper,
   CurrencySelector,
 } from '../../../../../../../components';
+import PaymentTerm from './components';
 import autosave from '../../../../../../../utils/autosave';
 
 export default function ProposalForm() {
   const classes = useStyles();
   const mutation = () => {};
+  const [wholeFigures, setWholeFigures] = React.useState(false);
+  const [totalPercentage, setTotalPercentage] = React.useState(0);
 
   const [contract, setContract] = React.useState({
     notes: '',
@@ -19,8 +22,16 @@ export default function ProposalForm() {
     cost: '',
     deposit: '',
     item: '',
+    paymentTerms: [],
     currency: 'GBP',
   });
+
+  function addPaymentTerm(newValue) {
+    setContract({
+      ...contract,
+      paymentTerms: [...contract.paymentTerms, { ...newValue }],
+    });
+  }
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -59,17 +70,22 @@ export default function ProposalForm() {
           <FieldTitle
             name=" 2. Total Cost"
             description="The expected date of when you will you finish this project and provide the client with all the specified works. Please be specific about whether this deadline is a rough estimate or a definite finishing time."
-            warning="Example: 1020.00"
+            warning="Example: 1020"
             inline={true}
           />
           <TextField
             id={'cost'}
             value={contract.cost}
-            label={`Total Cost `}
+            label={contract.cost !== '' ? `Cost ${contract.cost}.00` : `00.00`}
             inputProps={{ maxLength: 12 }}
             onChange={(e) => {
+              e.target.value.indexOf('.') > -1
+                ? setWholeFigures(true)
+                : setWholeFigures(false);
+              const message = e.target.value.replace(/[^0-9]/gi, '');
+
+              setContract({ ...contract, cost: message });
               autosave(mutation, 'notes');
-              setContract({ ...contract, cost: e.target.value });
             }}
             multiline
             margin="normal"
@@ -78,55 +94,42 @@ export default function ProposalForm() {
           />
           <CurrencySelector selectedCurrency={contract.currency} />
         </FieldTitleWrapper>
+        {wholeFigures && (
+          <Typography color="error">Whole figures only please</Typography>
+        )}
+        <div style={{ marginTop: 20, width: '100%' }} />
         <FieldTitle
           name=" 3. Payment Terms"
-          description=""
-          warning=""
+          description="Go into detail about how and when you would like to be paid, be very specific about your terms to decrease the chance of a dispute further down the line."
+          warning="Example: The Creative shall receive 10% upon commencement of the project, The Creative shall receive 20% upon delivery of 24 full resolution jgeg images, the Creative shall receive 70% upon delivery of all remaining specified items"
           inline={false}
         />
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}
+
+        {contract.paymentTerms.map((term, index) => (
+          <PaymentTerm
+            contract={contract}
+            setContract={setContract}
+            term={term}
+            index={index}
+            key={`term_${index}`}
+            mutation={mutation}
+            availablePercent={70}
+          />
+        ))}
+
+        <Button
+          color="primary"
+          style={{ textTransform: 'none' }}
+          onClick={() =>
+            addPaymentTerm({
+              id: 'new',
+              percent: '0',
+              description: 'completion',
+            })
+          }
         >
-          <Typography>The Creative shall receive </Typography>
-          <TextField
-            id={'deposit'}
-            value={contract.deposit}
-            label={`£0.00 ${
-              contract.deposit ? `(${10 - contract.deposit.length})` : ''
-            }`}
-            inputProps={{ maxLength: 10 }}
-            onChange={(e) => {
-              autosave(mutation, 'notes');
-              setContract({ ...contract, deposit: e.target.value });
-            }}
-            multiline
-            margin="normal"
-            variant="outlined"
-            style={{ marginRight: 10, marginLeft: 10, width: 70, marginTop: 8 }}
-          />
-          <Typography>upon delivery of </Typography>
-          {'  '}
-          <TextField
-            id={'item'}
-            value={contract.item}
-            label={`Item (example: 24 cards) ${
-              contract.item ? `(${86 - contract.item.length})` : ''
-            }`}
-            inputProps={{ maxLength: 86 }}
-            onChange={(e) => {
-              autosave(mutation, 'item');
-              setContract({ ...contract, item: e.target.value });
-            }}
-            multiline
-            margin="normal"
-            variant="outlined"
-            style={{ marginLeft: 10, marginTop: 8 }}
-          />
-        </div>
+          + Add another payment term
+        </Button>
         <FieldTitle
           name=" 3. Additional Notes"
           description="Record any other clauses or notes that should be attached with this contract."

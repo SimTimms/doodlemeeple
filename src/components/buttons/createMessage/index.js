@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Button, Icon } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { Mutation } from 'react-apollo';
 import { CREATE_MESSAGE } from '../../../data/mutations';
 import { useStyles } from './styles';

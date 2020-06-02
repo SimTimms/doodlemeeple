@@ -4,7 +4,7 @@ import { InviteComponent } from './components/inviteComponent';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { INVITES } from '../../../../data/queries';
-import { LoadIcon, ContentHeader } from '../../../../components';
+import { ContentHeader } from '../../../../components';
 
 export function Invites({ history }) {
   const classes = useStyles();

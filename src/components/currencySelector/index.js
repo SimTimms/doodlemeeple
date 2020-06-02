@@ -20,8 +20,12 @@ export default function CurrencySelector({ selectedCurrency }) {
         onChange={() => {}}
         label="Age"
       >
-        {currencyArray.map((item) => {
-          return <MenuItem value={item}>{item}</MenuItem>;
+        {currencyArray.map((item, index) => {
+          return (
+            <MenuItem key={`currency_${index}`} value={item}>
+              {item}
+            </MenuItem>
+          );
         })}
       </Select>
     </div>

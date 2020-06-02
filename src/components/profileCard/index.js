@@ -9,8 +9,6 @@ import {
   REMOVE_INVITE,
 } from '../../data/mutations';
 
-import { Link } from 'react-router-dom';
-
 export default function ProfileCard({
   history,
   creative,

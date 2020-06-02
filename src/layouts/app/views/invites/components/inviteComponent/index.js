@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Button, Card, Link } from '@material-ui/core';
+import { Typography, Card, Link } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   InlineHeader,

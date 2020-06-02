@@ -1,6 +1,5 @@
 import React from 'react';
 import { Mutation } from 'react-apollo';
-import { Button } from '@material-ui/core';
 import { DECLINE_INVITE } from '../../../data/mutations';
 import { IconButton } from '../../';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { CREATIVES } from '../../../../../data/queries';
-import { LoadIcon, ProfileCard } from '../../../../../components';
+import { ProfileCard } from '../../../../../components';
 
 export default function Creatives({
   favourites,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Icon, Slide, TextField, Button } from '@material-ui/core';
+import { Slide, TextField } from '@material-ui/core';
 import { useStyles } from './styles';
 import { ProfileHeader } from './components/profileHeader';
 import {

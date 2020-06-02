@@ -72,6 +72,7 @@ export function Featured({ posts, featuredId, history }) {
                             <img
                               className={classes.profileWrapperFeatured}
                               src={data.profilePreview.profileImg}
+                              alt=""
                             />
                           ) : null;
                         }}
