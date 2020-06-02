@@ -10,18 +10,12 @@ export default function PaymentTerm({
   index,
   mutation,
   availablePercent,
+  percentLock,
 }) {
   const [values, setValues] = React.useState({
-    percentage: '',
+    percent: '',
     description: '',
   });
-
-  useEffect(() => {
-    setValues({
-      percentage: availablePercent.toString(),
-      description: '',
-    });
-  }, [availablePercent]);
 
   return (
     <div
@@ -35,11 +29,9 @@ export default function PaymentTerm({
       <Typography>The Creative shall receive </Typography>
       <TextField
         id={'deposit'}
-        value={values.percentage}
-        label={`100% ${
-          values.percentage ? `(${3 - values.percentage.length})` : ''
-        }`}
-        inputProps={{ maxLength: 3 }}
+        value={values.percent}
+        label={`${availablePercent.toString()}%`}
+        inputProps={{ maxLength: availablePercent.toString().length }}
         onChange={(e) => {
           let message = e.target.value.replace(/[^0-9]/gi, '');
           const messageToInt = parseInt(message);
@@ -50,12 +42,10 @@ export default function PaymentTerm({
           if (messageToInt < 0) {
             message = '0';
           }
-
-          console.log(message.length);
-          setValues({ ...values, percentage: message });
-          autosave(mutation, 'notes');
+          setValues({ ...values, percent: message });
+          !percentLock && autosave(mutation, 'notes');
           let paymentTermsArray = [...contract.paymentTerms];
-          paymentTermsArray[index].percentage = message;
+          paymentTermsArray[index].percent = message;
           setContract({ ...contract, paymentTerms: [...paymentTermsArray] });
         }}
         multiline

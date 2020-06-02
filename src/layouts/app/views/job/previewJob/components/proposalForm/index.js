@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Slide, TextField, Typography, Button } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
@@ -14,8 +14,7 @@ export default function ProposalForm() {
   const classes = useStyles();
   const mutation = () => {};
   const [wholeFigures, setWholeFigures] = React.useState(false);
-  const [totalPercentage, setTotalPercentage] = React.useState(0);
-
+  const [percentLock, setPercentLock] = React.useState(false);
   const [contract, setContract] = React.useState({
     notes: '',
     deadline: '',
@@ -25,6 +24,18 @@ export default function ProposalForm() {
     paymentTerms: [],
     currency: 'GBP',
   });
+
+  useEffect(() => {
+    console.log('ADS');
+    let percentSum = 0;
+    for (let i = 0; i < contract.paymentTerms.length; i++) {
+      let numberVal = contract.paymentTerms[i].percent;
+
+      percentSum += parseInt(numberVal === '' ? 0 : numberVal);
+    }
+    percentSum > 100 && percentLock === false && setPercentLock(true);
+    percentSum <= 100 && percentLock === true && setPercentLock(false);
+  }, [contract, percentLock]);
 
   function addPaymentTerm(newValue) {
     setContract({
@@ -113,23 +124,28 @@ export default function ProposalForm() {
             index={index}
             key={`term_${index}`}
             mutation={mutation}
-            availablePercent={70}
+            availablePercent={100}
+            percentLock={percentLock}
           />
         ))}
+        {percentLock ? (
+          'DONE'
+        ) : (
+          <Button
+            color="primary"
+            style={{ textTransform: 'none' }}
+            onClick={() =>
+              addPaymentTerm({
+                id: 'new',
+                percent: '0',
+                description: 'completion',
+              })
+            }
+          >
+            + Add another payment term
+          </Button>
+        )}
 
-        <Button
-          color="primary"
-          style={{ textTransform: 'none' }}
-          onClick={() =>
-            addPaymentTerm({
-              id: 'new',
-              percent: '0',
-              description: 'completion',
-            })
-          }
-        >
-          + Add another payment term
-        </Button>
         <FieldTitle
           name=" 3. Additional Notes"
           description="Record any other clauses or notes that should be attached with this contract."
