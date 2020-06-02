@@ -116,6 +116,7 @@ export function EditProfile({ theme }) {
                       icon="pageview"
                       title="Preview"
                       onClickEvent={null}
+                      styleOverride={null}
                     />
                   </Link>
                 </div>

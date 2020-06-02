@@ -1,39 +1,32 @@
 import React from 'react';
-import { Button, Icon, Typography } from '@material-ui/core';
+import { Button, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 
-export default function DeleteButton({ mutation }) {
+export default function DeleteButtonSmall({ mutation }) {
   const classes = useStyles();
   const [confirm, setConfirm] = React.useState(false);
 
   return confirm ? (
     <div className={classes.root}>
-      <Typography variant="body1" color="textPrimary">
-        Confirm?
-      </Typography>
       <Button
         onClick={() => {
           mutation();
         }}
         variant="contained"
         className={classes.deleteButtonConfirmYes}
+        title="Confirm Deletion"
       >
-        <Icon style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)' }}>
-          warning
-        </Icon>
-        <div style={{ marginLeft: 10, marginRight: 10 }}>Yes</div>
-        <Icon style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)' }}>
-          warning
-        </Icon>
+        <Icon style={{ fontSize: 14, color: '#fff' }}>delete</Icon>
       </Button>
       <Button
         onClick={() => {
           setConfirm(false);
         }}
         variant="contained"
+        title="Cancel"
         className={classes.deleteButtonConfirmNo}
       >
-        Cancel
+        <Icon style={{ fontSize: 14, color: '#fff' }}>cancel</Icon>
       </Button>
     </div>
   ) : (

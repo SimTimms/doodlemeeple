@@ -21,6 +21,7 @@ import Uploader from './uploader';
 import CardActionArea from './wrappers';
 import Footer from './footer';
 import DeleteButton from './buttons/deleteButton';
+import DeleteButtonSmall from './buttons/deleteButtonSmall';
 import FavouriteButton from './buttons/favouriteButton';
 import InviteButton from './buttons/inviteButton';
 import CreateMessage from './buttons/createMessage';
@@ -75,4 +76,5 @@ export {
   CreateMessage,
   DeclineInvite,
   FieldTitleWrapper,
+  DeleteButtonSmall,
 };

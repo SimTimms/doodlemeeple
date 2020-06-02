@@ -53,6 +53,24 @@ export const REMOVE_INVITE = gql`
   }
 `;
 
+export const UPDATE_CONTRACT = gql`
+  mutation UpdateContract($id: String!, $contract: ContractInput!) {
+    updateContract(id: $id, contract: $contract)
+  }
+`;
+
+export const CREATE_CONTRACT = gql`
+  mutation CreateContract($id: String!, $contract: ContractInput!) {
+    createContract(id: $id, contract: $contract)
+  }
+`;
+
+export const REMOVE_CONTRACT = gql`
+  mutation RemoveContract($id: String!) {
+    removeContract(id: $id)
+  }
+`;
+
 export const DECLINE_INVITE = gql`
   mutation DeclineInvite($id: String!) {
     declineInvite(id: $id)

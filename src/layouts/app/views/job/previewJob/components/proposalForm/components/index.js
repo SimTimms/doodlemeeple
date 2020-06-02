@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-
+import React from 'react';
+import { DeleteButtonSmall } from '../../../../../../../../components';
 import { TextField, Typography } from '@material-ui/core';
 import autosave from '../../../../../../../../utils/autosave';
 
@@ -24,9 +24,15 @@ export default function PaymentTerm({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
+        width: '100%',
+        paddingLeft: 30,
+        paddingRight: 30,
+        boxSizing: 'border-box',
       }}
     >
-      <Typography>The Creative shall receive </Typography>
+      <Typography>{`Clause 3.${
+        index + 1
+      }: The Creative shall receive `}</Typography>
       <TextField
         id={'deposit'}
         value={values.percent}
@@ -46,7 +52,10 @@ export default function PaymentTerm({
           !percentLock && autosave(mutation, 'notes');
           let paymentTermsArray = [...contract.paymentTerms];
           paymentTermsArray[index].percent = message;
-          setContract({ ...contract, paymentTerms: [...paymentTermsArray] });
+          setContract({
+            ...contract,
+            paymentTerms: [...paymentTermsArray],
+          });
         }}
         multiline
         margin="normal"
@@ -76,6 +85,8 @@ export default function PaymentTerm({
         variant="outlined"
         style={{ marginLeft: 10, marginTop: 8 }}
       />
+
+      <DeleteButtonSmall mutation={() => {}} />
     </div>
   );
 }

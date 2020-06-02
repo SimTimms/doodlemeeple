@@ -241,6 +241,22 @@ export const JOBS = gql`
   }
 `;
 
+export const GET_CONTRACT = gql`
+  query GetContract($inviteId: String!) {
+    getContract(inviteId: $inviteId) {
+      id
+      notes
+      deadline
+      cost
+      currency
+      paymentTerms {
+        percent
+        description
+      }
+    }
+  }
+`;
+
 export const COUNTS = gql`
   {
     counts {

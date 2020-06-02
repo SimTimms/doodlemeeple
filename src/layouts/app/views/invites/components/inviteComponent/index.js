@@ -68,7 +68,9 @@ export function InviteComponent({ invite, removeInvite, history }) {
           warning={false}
           icon="more_horiz"
           title="Find Out More"
-          onClickEvent={() => history.push(`/app/view-job/${invite.job.id}`)}
+          onClickEvent={() =>
+            history.push(`/app/view-job/${invite.job.id}/${invite.id}`)
+          }
           styleOverride={null}
         />
       </div>

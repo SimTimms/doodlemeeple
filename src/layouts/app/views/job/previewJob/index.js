@@ -13,7 +13,7 @@ import { Query } from 'react-apollo';
 import { JOB, DETERMINE_CONVERSATION_ID } from '../../../../../data/queries';
 import ProposalForm from './components/proposalForm';
 
-export default function PreviewJob({ theme, jobId, history }) {
+export default function PreviewJob({ theme, jobId, history, inviteId }) {
   const classes = useStyles();
   const [job, setJob] = React.useState({
     name: '',
@@ -137,7 +137,7 @@ export default function PreviewJob({ theme, jobId, history }) {
                 <InlineHeader>
                   <IconTitle icon="fact_check" title="Proposal" />
                 </InlineHeader>
-                <ProposalForm />
+                <ProposalForm inviteId={inviteId} />
               </Card>
             )}
           </SectionWrapper>
