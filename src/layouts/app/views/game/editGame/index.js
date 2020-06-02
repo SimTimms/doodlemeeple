@@ -93,6 +93,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                     name=" 1. Primary Image"
                     description="This image will be displayed in most places where your game is mentioned. Choose an image that represents your game and brings attention."
                     warning=""
+                    inline={false}
                   />
                   <ProfileHeader
                     game={game}
@@ -112,6 +113,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                       name=" 2. Game Details"
                       description="Is your project backed on Kickstarter?, is it just an idea?, is it a fantasy/sci-fi RPG hybrid? Give some detail about your game so that creatives get to know your project"
                       warning=""
+                      inline={false}
                     />
                     <TextField
                       id={'name'}
@@ -217,6 +219,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                       name=" 3. Video"
                       description="Do you have a promotional video on YouTube, Vimeo or somewhere else?"
                       warning=""
+                      inline={false}
                     />
                     <TextField
                       id={'name'}

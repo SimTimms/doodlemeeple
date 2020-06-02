@@ -129,6 +129,7 @@ export function EditProfile({ theme }) {
                       description="Use this space to showcase your most impressive artwork, the image should be png or jpg and uner 2MB. 
                     700px x 400px is the optimum size"
                       warning=""
+                      inline={false}
                     />
                     <ProfileHeader
                       profile={userProfile}
@@ -148,6 +149,7 @@ export function EditProfile({ theme }) {
                       name="Summary"
                       description="Tell everyone about yourself. What are your influences? what's your art style? how long have you been working? Make it punchy to grab attention..."
                       warning=""
+                      inline={false}
                     />
                     <TextField
                       id={'summary'}

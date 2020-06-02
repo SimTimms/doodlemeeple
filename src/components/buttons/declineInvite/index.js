@@ -24,6 +24,7 @@ export default function DeclineInvite({ invite, removeInvite }) {
             icon="thumb_down_alt"
             title="Decline"
             onClickEvent={() => mutation()}
+            styleOverride={null}
           />
         );
       }}

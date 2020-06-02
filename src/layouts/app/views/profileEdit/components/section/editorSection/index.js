@@ -118,6 +118,7 @@ function EditorSection({
           best genres, what it's like working with you, your work ethic,
           successes, and process. "
                     warning="Please do not include any external links on your profile."
+                    inline={false}
                   />
                   <TextField
                     id={'summary'}
@@ -144,6 +145,7 @@ function EditorSection({
                       name="Featured Showreel"
                       description="Grab the attention of a client with a short video (we recommend about 30 seconds). Please enter the URL you'd like to embed,"
                       warning=""
+                      inline={false}
                     />
                     <TextField
                       id={'showreel'}

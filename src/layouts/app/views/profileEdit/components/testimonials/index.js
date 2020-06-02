@@ -19,6 +19,7 @@ function Testimonials({ testimonials, setTestimonials, sectionId }) {
         name="Testimonials"
         description="Ask for some references from previous clients to add to give your profile credibility. Please ask for permission from the referee. It's imperative that DoodleMeeple showcases the best in the industry, references will be spot checked by DoodleMeeple at random, please do not be offended if yours are."
         warning=""
+        inline={false}
       />
 
       <div className={classes.testimonialWrapper}>

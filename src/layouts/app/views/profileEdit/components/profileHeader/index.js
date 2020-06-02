@@ -59,6 +59,7 @@ export function ProfileHeader({
         name="My Identity"
         description="Your profile picture or logo and name, callsign, company name, handle, alias or whatever else you want to be know as. Keep it clean please. Image Requirements: 140 x 140px, png or jpg, less than 2MB"
         warning=""
+        inline={false}
       />
       <div
         className={clsx({

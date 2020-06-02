@@ -105,12 +105,14 @@ export function Featured({ posts, featuredId, history }) {
                   >
                     <IconButton
                       secondaryColor={false}
+                      warning={false}
                       disabled={false}
                       onClickEvent={() => {
                         history.push(`/public-preview/${featuredId}`);
                       }}
                       icon="portrait"
                       title="Profile"
+                      styleOverride={null}
                     />
                   </div>
                 </div>

@@ -25,6 +25,7 @@ function Projects({
         name="Projects"
         description="What have you worked on in the industry that will impress clients? Please specify your role within the project."
         warning=""
+        inline={false}
       />
 
       <div className={classes.testimonialWrapper}>

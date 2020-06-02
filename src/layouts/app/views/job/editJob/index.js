@@ -99,6 +99,7 @@ export default function EditJob({
                       name=" 1. Which game is this job for?"
                       description="Each job must be attached to a game, you can create a game if you haven't already."
                       warning=""
+                      inline={false}
                     />
                     <div style={{ width: '100%', display: 'flex' }}>
                       {games.map((item, index) => {
@@ -181,6 +182,7 @@ export default function EditJob({
                       name="2. Job Details"
                       description="Briefly summarise the job. Example: Images for 24 fantasy cards. Need 24 high resolution card images, each image will be full colour and in a fantasy style."
                       warning=""
+                      inline={false}
                     />
                     <TextField
                       id={'name'}
@@ -237,6 +239,7 @@ export default function EditJob({
                       name="3. Your Creative"
                       description="Start to describe your ideal creative. Example: A digital artist with a focus on high fantasy"
                       warning=""
+                      inline={false}
                     />
                     <TextField
                       id={'creative-summary'}
@@ -276,6 +279,7 @@ export default function EditJob({
                         name="4. Submit"
                         description="Submit your job for approval, we'll let you know when it's live and don't worry you can still make changes."
                         warning=""
+                        inline={false}
                       />
                       <Typography
                         variant="h2"

@@ -10,6 +10,7 @@ import Form from './form';
 import CardHeader from './headers';
 import ContentHeader from './headers/contentHeader';
 import MessageComponent from './messageComponent';
+import CurrencySelector from './currencySelector';
 import DeclineInvite from './buttons/declineInvite';
 import InvitesWidget from './invites';
 import MediaGallery from './mediaGallery';
@@ -25,6 +26,7 @@ import InviteButton from './buttons/inviteButton';
 import CreateMessage from './buttons/createMessage';
 import IconButton from './buttons/iconButton';
 import FieldTitle from './fieldTitle';
+import FieldTitleWrapper from './fieldTitle/FieldTitleWrapper';
 import ProfileCard from './profileCard';
 import IconBox from './iconBox';
 import IconTitle from './iconTitle';
@@ -48,6 +50,7 @@ export {
   IconButton,
   ProfileCard,
   FieldTitle,
+  CurrencySelector,
   LoadIcon,
   Content,
   ContentTop,
@@ -71,4 +74,5 @@ export {
   Footer,
   CreateMessage,
   DeclineInvite,
+  FieldTitleWrapper,
 };

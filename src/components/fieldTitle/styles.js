@@ -6,6 +6,18 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  descriptionBox: {
+    background: '#f1f1f1',
+    padding: 10,
+    borderRadius: 5,
+  },
+  infoBox: {
+    marginTop: 10,
+    background: theme.palette.primary.main,
+    color: '#fff',
+    padding: 10,
+    borderRadius: 5,
+  },
   helpIcon: {
     marginLeft: 5,
     cursor: 'pointer',

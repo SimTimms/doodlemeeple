@@ -7,10 +7,12 @@ import {
   InlineHeader,
   IconButton,
   SectionWrapper,
+  DeclineInvite,
 } from '../../../../../components';
 import ViewConversation from '../../../../messages/views/messaging/viewConversation';
 import { Query } from 'react-apollo';
 import { JOB, DETERMINE_CONVERSATION_ID } from '../../../../../data/queries';
+import ProposalForm from './components/proposalForm';
 
 export default function PreviewJob({ theme, jobId, history }) {
   const classes = useStyles();
@@ -33,6 +35,7 @@ export default function PreviewJob({ theme, jobId, history }) {
   });
   const [conversationId, setConversationId] = React.useState(null);
   const [chatOpen, setChatOpen] = React.useState(false);
+  const [proposalOpen, setProposalOpen] = React.useState(true);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -75,30 +78,14 @@ export default function PreviewJob({ theme, jobId, history }) {
                     }}
                     secondaryColor={true}
                     disabled={false}
+                    warning={false}
                     icon="keyboard_arrow_right"
                     title="View Game"
+                    styleOverride={null}
                   />
                 )}
               </div>
             </Card>
-            <div className={classes.actionWrapper}>
-              <IconButton
-                disabled={false}
-                secondaryColor={true}
-                warning={false}
-                icon={chatOpen ? 'keyboard_arrow_down' : 'chat'}
-                title={chatOpen ? 'Close Chat' : 'Open Chat'}
-                onClickEvent={() => setChatOpen(chatOpen ? false : true)}
-              />
-              <IconButton
-                warning={false}
-                disabled={false}
-                secondaryColor={false}
-                icon="check_circle_outline"
-                title="Accept"
-                onClickEvent={() => setChatOpen(chatOpen ? false : true)}
-              />
-            </div>
             {chatOpen && (
               <Card className={classes.card}>
                 <InlineHeader>
@@ -122,6 +109,36 @@ export default function PreviewJob({ theme, jobId, history }) {
                     />
                   )}
                 </div>
+              </Card>
+            )}
+            <div className={classes.actionWrapper}>
+              <IconButton
+                disabled={false}
+                secondaryColor={true}
+                warning={false}
+                icon={chatOpen ? 'keyboard_arrow_up' : 'chat'}
+                title={chatOpen ? 'Close Chat' : 'Open Chat'}
+                onClickEvent={() => setChatOpen(chatOpen ? false : true)}
+                styleOverride={null}
+              />
+              <IconButton
+                warning={false}
+                disabled={false}
+                secondaryColor={false}
+                icon={proposalOpen ? 'keyboard_arrow_down' : 'fact_check'}
+                title={proposalOpen ? 'Minimise Proposal' : 'Create Proposal'}
+                onClickEvent={() =>
+                  setProposalOpen(proposalOpen ? false : true)
+                }
+                styleOverride={null}
+              />
+            </div>
+            {proposalOpen && (
+              <Card className={classes.card} style={{ marginTop: 20 }}>
+                <InlineHeader>
+                  <IconTitle icon="fact_check" title="Proposal" />
+                </InlineHeader>
+                <ProposalForm />
               </Card>
             )}
           </SectionWrapper>

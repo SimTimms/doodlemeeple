@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 
-export default function FieldTitle({ name, description, warning }) {
+export default function FieldTitle({ name, description, warning, inline }) {
   const [infoOpen, setInfoOpen] = React.useState('none');
   const classes = useStyles();
   return (
@@ -15,7 +15,7 @@ export default function FieldTitle({ name, description, warning }) {
           alignItems: 'center',
         }}
       >
-        <div className={classes.titleLine} style={{ width: 30 }}></div>
+        <div className={classes.titleLine} style={{ minWidth: 30 }}></div>
         <div
           style={{
             display: 'flex',
@@ -34,7 +34,9 @@ export default function FieldTitle({ name, description, warning }) {
             {infoOpen === 'none' ? 'info' : 'keyboard_arrow_up'}
           </Icon>
         </div>
-        <div className={classes.titleLine} style={{ width: '100%' }}></div>
+        {!inline && (
+          <div className={classes.titleLine} style={{ width: '100%' }}></div>
+        )}
       </div>
       <div
         style={{
@@ -47,10 +49,14 @@ export default function FieldTitle({ name, description, warning }) {
           boxShadow: '5px 5px 5px rgba(0,0,0,0.05)',
         }}
       >
-        <Typography variant="body1" color="textPrimary">
-          "{description} {warning}"
+        <Typography variant="body1" className={classes.descriptionBox}>
+          {description}
         </Typography>
-        <Typography variant="body1" color="textPrimary"></Typography>
+        {warning !== '' && (
+          <Typography variant="body1" className={classes.infoBox}>
+            {warning}
+          </Typography>
+        )}
       </div>
     </div>
   );
