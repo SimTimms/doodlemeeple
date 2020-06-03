@@ -12,10 +12,13 @@ import PaymentTerm from './components';
 import autosave from '../../../../../../../utils/autosave';
 import { toaster } from '../../../../../../../utils/toaster';
 import { Mutation, Query } from 'react-apollo';
-import { CREATE_CONTRACT } from '../../../../../../../data/mutations';
+import {
+  CREATE_CONTRACT,
+  UPDATE_CONTRACT,
+} from '../../../../../../../data/mutations';
 import { GET_CONTRACT } from '../../../../../../../data/queries';
 
-export default function ProposalForm({ inviteId }) {
+export default function ProposalForm({ jobId }) {
   const classes = useStyles();
 
   const [wholeFigures, setWholeFigures] = React.useState(false);
@@ -26,6 +29,7 @@ export default function ProposalForm({ inviteId }) {
   const [detailsLock, setDetailsLock] = React.useState(false);
 
   const [contract, setContract] = React.useState({
+    id: 'new',
     notes: '',
     deadline: '',
     cost: '',
@@ -35,12 +39,12 @@ export default function ProposalForm({ inviteId }) {
 
   useEffect(() => {
     let percentSum = 0;
-    /*
+
     for (let i = 0; i < contract.paymentTerms.length; i++) {
       let numberVal = contract.paymentTerms[i].percent;
       percentSum += parseInt(numberVal === '' ? 0 : numberVal);
     }
-*/
+
     percentSum > 100 &&
       percentLock.status === false &&
       setPercentLock({
@@ -74,23 +78,29 @@ export default function ProposalForm({ inviteId }) {
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <Mutation
-          mutation={CREATE_CONTRACT}
+          mutation={contract.id === 'new' ? CREATE_CONTRACT : UPDATE_CONTRACT}
           variables={{
-            id: 'new',
+            id: contract.id,
             contract: {
-              ...contract,
+              notes: contract.notes,
+              deadline: contract.deadline,
+              paymentTerms: contract.paymentTerms,
+              currency: contract.currency,
               cost: parseInt(contract.cost),
-              inviteId,
+              jobId,
             },
           }}
-          onCompleted={() => {
+          onCompleted={(data) => {
             toaster('Saved');
             setDetailsLock(false);
+            const updatedId =
+              contract.id === 'new' ? data.createContract : data.updateContract;
+            setContract({ ...contract, id: updatedId });
           }}
         >
           {(mutation) => {
             return (
-              <div>
+              <div className={classes.root}>
                 <ContentHeader
                   title="Proposal"
                   subTitle="Create a new contract proposal"
@@ -126,7 +136,7 @@ export default function ProposalForm({ inviteId }) {
                 <FieldTitleWrapper>
                   <FieldTitle
                     name=" 2. Total Cost"
-                    description="The expected date of when you will you finish this project and provide the client with all the specified works. Please be specific about whether this deadline is a rough estimate or a definite finishing time."
+                    description="The total amount you will be paid upon completion of this job, please take into consideration that Doodle Meeple fees will be subtracted from this amount"
                     warning="Example: 1020"
                     inline={true}
                   />
@@ -144,7 +154,6 @@ export default function ProposalForm({ inviteId }) {
                         ? setWholeFigures(true)
                         : setWholeFigures(false);
                       const message = e.target.value.replace(/[^0-9]/gi, '');
-
                       setContract({ ...contract, cost: message });
                       autosave(mutation, 'notes');
                     }}
@@ -167,15 +176,14 @@ export default function ProposalForm({ inviteId }) {
                   warning="Example: The Creative shall receive 10% upon commencement of the project, The Creative shall receive 20% upon delivery of 10 full resolution SVG files, the Creative shall receive 70% upon delivery of all remaining specified items"
                   inline={false}
                 />
-
-                {contract.paymentTerms.map((term, index) => (
+                <Divider />
+                {contract.paymentTerms.map((paymentTerm, index) => (
                   <PaymentTerm
                     contract={contract}
                     setContract={setContract}
-                    term={term}
+                    paymentTerm={paymentTerm}
                     index={index}
                     key={`term_${index}`}
-                    mutation={mutation}
                     availablePercent={100}
                     percentLock={percentLock}
                   />
@@ -215,8 +223,8 @@ export default function ProposalForm({ inviteId }) {
                       setDetailsLock(true);
                       addPaymentTerm({
                         id: 'new',
-                        percent: '0',
-                        description: 'completion',
+                        percent: 0,
+                        description: '',
                       });
                     }}
                   >
@@ -262,18 +270,21 @@ export default function ProposalForm({ inviteId }) {
         </Mutation>
         <Query
           query={GET_CONTRACT}
-          variables={{ inviteId: inviteId }}
+          variables={{ jobId }}
           onCompleted={(data) => {
-            const contract = data.getContract[0];
-            const paymentTerms = data.getContract[0].paymentTerms;
-            console.log(contract);
-            setContract({
-              paymentTerms: paymentTerms,
-              notes: contract.notes,
-              deadline: contract.deadline,
-              cost: contract.cost ? contract.cost : 0,
-              currency: contract.currency,
-            });
+            if (data.getContract.length > 0) {
+              const contract = data.getContract[0];
+              const paymentTerms = data.getContract[0].paymentTerms;
+
+              setContract({
+                id: contract.id,
+                paymentTerms: paymentTerms,
+                notes: contract.notes,
+                deadline: contract.deadline,
+                cost: contract.cost ? contract.cost : 0,
+                currency: contract.currency,
+              });
+            }
           }}
           fetchPolicy="network-only"
         >

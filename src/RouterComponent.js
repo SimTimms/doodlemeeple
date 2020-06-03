@@ -100,7 +100,7 @@ function RouterComponent(props) {
         <Switch>
           {authToken && (
             <Route
-              path="/app/:page/:pathParam?/:pathParam2?"
+              path="/app/:page/:pathParam?"
               render={(props) => <AppLayout {...props} theme={theme} />}
             />
           )}

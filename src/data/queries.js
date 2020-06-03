@@ -241,15 +241,26 @@ export const JOBS = gql`
   }
 `;
 
+export const GET_PAYMENT_TERMS = gql`
+  query GetPaymentTerms($contractId: String!) {
+    getPaymentTerms(contractId: $contractId) {
+      id
+      description
+      percent
+    }
+  }
+`;
+
 export const GET_CONTRACT = gql`
-  query GetContract($inviteId: String!) {
-    getContract(inviteId: $inviteId) {
+  query GetContract($jobId: String!) {
+    getContract(jobId: $jobId) {
       id
       notes
       deadline
       cost
       currency
       paymentTerms {
+        id
         percent
         description
       }

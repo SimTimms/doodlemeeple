@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 
-export default function DeleteButtonSmall({ mutation }) {
+export default function DeleteButtonSmall({ mutation, disabled }) {
   const classes = useStyles();
   const [confirm, setConfirm] = React.useState(false);
 
@@ -15,6 +15,7 @@ export default function DeleteButtonSmall({ mutation }) {
         variant="contained"
         className={classes.deleteButtonConfirmYes}
         title="Confirm Deletion"
+        disabled={disabled}
       >
         <Icon style={{ fontSize: 14, color: '#fff' }}>delete</Icon>
       </Button>
@@ -36,6 +37,7 @@ export default function DeleteButtonSmall({ mutation }) {
       }}
       variant="contained"
       className={classes.deleteButton}
+      disabled={disabled}
     >
       <Icon style={{ fontSize: 18, color: '#fff' }}>delete</Icon>
     </Button>
