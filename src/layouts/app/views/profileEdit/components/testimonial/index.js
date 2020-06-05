@@ -103,7 +103,7 @@ export function Testimonial({
                 onChange={(ev) => {
                   autosave(mutation, 'testimonial');
                   const copyArr = Object.assign([], testimonials);
-                  copyArr[index].summary = ev.target.value;
+                  copyArr[index].summary = ev.target.value.substring(0, 126);
                   setTestimonials(copyArr);
                 }}
               />
@@ -121,7 +121,7 @@ export function Testimonial({
                 onChange={(ev) => {
                   autosave && autosave(mutation);
                   const copyArr = Object.assign([], testimonials);
-                  copyArr[index].name = ev.target.value;
+                  copyArr[index].name = ev.target.value.substring(0, 36);
                   setTestimonials(copyArr);
                 }}
               />

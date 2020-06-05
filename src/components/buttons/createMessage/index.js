@@ -31,7 +31,7 @@ export default function CreateMessage({ conversationId, updateMessageArray }) {
               type="text"
               value={newMessage}
               onChange={(e) => {
-                setNewMessage(e.target.value);
+                setNewMessage(e.target.value.substring(0, 512));
               }}
               margin="normal"
               variant="outlined"

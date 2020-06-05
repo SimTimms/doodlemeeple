@@ -14,7 +14,6 @@ import { toaster } from '../../../../../../utils/toaster';
 
 export function Project({
   project,
-  setChanged,
   index,
   setNotableProjects,
   projects,
@@ -67,7 +66,6 @@ export function Project({
             >
               <Uploader
                 cbImage={(url) => {
-                  setChanged(true);
                   const copyArr = Object.assign([], projects);
                   copyArr[index].image = url;
                   autosaveIsOn && autosave(mutation, 'project');
@@ -75,7 +73,6 @@ export function Project({
                 }}
                 styleOverride={null}
                 cbDelete={() => {
-                  setChanged(true);
                   const copyArr = Object.assign([], projects);
                   copyArr[index].image = '';
                   autosaveIsOn && autosave(mutation, 'project');
@@ -101,10 +98,9 @@ export function Project({
                 variant="outlined"
                 style={{ width: '100%' }}
                 onChange={(ev) => {
-                  setChanged(true);
                   autosaveIsOn && autosave(mutation);
                   const copyArr = Object.assign([], projects);
-                  copyArr[index].name = ev.target.value;
+                  copyArr[index].name = ev.target.value.substring(0, 36);
                   setNotableProjects(copyArr);
                 }}
               />
@@ -122,10 +118,9 @@ export function Project({
                 rows={4}
                 style={{ width: '100%' }}
                 onChange={(ev) => {
-                  setChanged(true);
                   autosaveIsOn && autosave(mutation, 'project');
                   const copyArr = Object.assign([], projects);
-                  copyArr[index].summary = ev.target.value;
+                  copyArr[index].summary = ev.target.value.substring(0, 126);
                   setNotableProjects(copyArr);
                 }}
               />

@@ -10,6 +10,7 @@ export default function DeleteButtonSmall({ mutation, disabled }) {
     <div className={classes.root}>
       <Button
         onClick={() => {
+          setConfirm(false);
           mutation();
         }}
         variant="contained"

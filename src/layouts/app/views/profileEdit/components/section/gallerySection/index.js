@@ -136,7 +136,9 @@ function GallerySection({
                     onChange={(ev) => {
                       autosaveIsOn && autosave(mutation, 'summary');
                       setSummary(
-                        ev.target.value.replace(/[^A-Za-z0-9 .,'\n]/g, ''),
+                        ev.target.value
+                          .substring(0, 256)
+                          .replace(/[^A-Za-z0-9 .,'\n]/g, ''),
                       );
                     }}
                   />
@@ -160,7 +162,7 @@ function GallerySection({
                       style={{ width: '100%', marginTop: 10 }}
                       onChange={(ev) => {
                         autosaveIsOn && autosave(mutation, 'showreel');
-                        setShowreel(ev.target.value);
+                        setShowreel(ev.target.value.substring(0, 256));
                       }}
                     />
                     {showreel && (

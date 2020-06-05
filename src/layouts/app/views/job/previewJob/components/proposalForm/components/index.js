@@ -3,6 +3,7 @@ import { DeleteButtonSmall } from '../../../../../../../../components';
 import { TextField, Typography } from '@material-ui/core';
 import autosave from '../../../../../../../../utils/autosave';
 import { Mutation } from 'react-apollo';
+import { useStyles } from './styles';
 import {
   CREATE_TERM,
   UPDATE_TERM,
@@ -16,8 +17,12 @@ export default function PaymentTerm({
   paymentTerm,
   index,
   availablePercent,
-  percentLock,
+  calculatePercent,
+  setPercentLock,
+  saveLock,
+  setSaveLock,
 }) {
+  const classes = useStyles();
   const [values, setValues] = React.useState({
     id: 'new',
     percent: 0,
@@ -25,16 +30,11 @@ export default function PaymentTerm({
     contractId: '',
   });
 
-  const [wait, setWait] = React.useState(false);
-
   useEffect(() => {
-    values !== paymentTerm && setValues(paymentTerm);
-  }, [values, paymentTerm]);
+    setValues(paymentTerm);
+  }, [paymentTerm]);
 
-  console.log(values);
-  return wait ? (
-    'ADs'
-  ) : (
+  return (
     <Mutation
       mutation={values.id === 'new' ? CREATE_TERM : UPDATE_TERM}
       variables={{
@@ -47,27 +47,16 @@ export default function PaymentTerm({
       }}
       onCompleted={(data) => {
         toaster('Saved');
-        setWait(false);
         const updatedId =
           values.id === 'new' ? data.createPaymentTerm : data.updatePaymentTerm;
+        let paymentTermsArray = [...contract.paymentTerms];
+        paymentTermsArray[index] = values;
         setValues({ ...values, id: updatedId });
       }}
     >
       {(mutation, { loading }) => {
         return (
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-              width: '100%',
-              paddingLeft: 30,
-              paddingRight: 30,
-              boxSizing: 'border-box',
-            }}
-          >
-            {values.id}
+          <div className={classes.root}>
             <Typography>{`Clause 3.${
               index + 1
             }: The Creative shall receive `}</Typography>
@@ -83,21 +72,19 @@ export default function PaymentTerm({
                 setValues({ ...values, percent: messageToInt });
                 let paymentTermsArray = [...contract.paymentTerms];
                 paymentTermsArray[index].percent = messageToInt;
-                setContract({
-                  ...contract,
-                  paymentTerms: [...paymentTermsArray],
-                });
-                percentLock.status && autosave(mutation, 'item');
+                const percentLock = calculatePercent(paymentTermsArray);
+                setPercentLock(percentLock);
+                percentLock.sum >= 0 ? setSaveLock(false) : setSaveLock(true);
+                console.log(percentLock.sum);
+                percentLock.sum >= 0 &&
+                  autosave(() => {
+                    mutation();
+                  });
               }}
               multiline
               margin="normal"
               variant="outlined"
-              style={{
-                marginRight: 10,
-                marginLeft: 10,
-                width: 70,
-                marginTop: 8,
-              }}
+              className={classes.wrapper}
             />
             <Typography>upon </Typography>
             <TextField
@@ -108,15 +95,14 @@ export default function PaymentTerm({
               }`}
               inputProps={{ maxLength: 86 }}
               onChange={(e) => {
-                const description = e.target.value;
+                const description = e.target.value.substring(0, 86);
                 setValues({ ...values, description: description });
                 let paymentTermsArray = [...contract.paymentTerms];
                 paymentTermsArray[index].description = description;
-                setContract({
-                  ...contract,
-                  paymentTerms: [...paymentTermsArray],
+
+                autosave(() => {
+                  mutation();
                 });
-                autosave(mutation, 'item');
               }}
               multiline
               margin="normal"
@@ -130,7 +116,6 @@ export default function PaymentTerm({
               }}
               onCompleted={(data) => {
                 toaster('Deleted');
-
                 setContract({
                   ...contract,
                   paymentTerms: [

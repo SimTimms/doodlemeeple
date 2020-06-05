@@ -13,6 +13,7 @@ import {
   Divider,
   DMCard,
   IconButton,
+  LoadIcon,
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE } from '../../../../data/queries';
@@ -35,7 +36,7 @@ export function EditProfile({ theme }) {
   const [profileBGStyle, setProfileBGStyle] = React.useState([0, 0]);
   const [autosaveIsOn, setAutosaveIsOn] = React.useState(true);
   const [timer, setTimer] = React.useState(null);
-
+  const [loading, setLoading] = React.useState(true);
   const [errors, setError] = React.useState({
     name: null,
     email: null,
@@ -98,128 +99,145 @@ export function EditProfile({ theme }) {
                   subTitleExtra={null}
                   button={null}
                 />
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    paddingBottom: 5,
-                  }}
-                >
-                  <Link
-                    to={`/preview/${userId}`}
-                    style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
-                  >
-                    <IconButton
-                      disabled={false}
-                      secondaryColor={true}
-                      warning={false}
-                      icon="pageview"
-                      title="Preview"
-                      onClickEvent={null}
-                      styleOverride={null}
-                    />
-                  </Link>
-                </div>
-                <DMCard>
-                  <InlineHeader>
-                    <IconTitle icon="account_box" title="About Me" />
-                  </InlineHeader>
-                  <div style={{ padding: 10 }}>
-                    <FieldTitle
-                      name="Feature Image"
-                      description="Use this space to showcase your most impressive artwork, the image should be png or jpg and uner 2MB. 
-                    700px x 400px is the optimum size"
-                      warning=""
-                      inline={false}
-                    />
-                    <ProfileHeader
-                      profile={userProfile}
-                      setProfileImg={setProfileImg}
-                      setProfileImgStyle={setProfileImgStyle}
-                      setBgImage={setBgImage}
-                      profileBGStyle={profileBGStyle}
-                      setProfileBGStyle={setProfileBGStyle}
-                      profileImgStyle={profileImgStyle}
-                      setUserName={setUserName}
-                      autosaveFunction={autosaveIsOn ? SignupMutation : null}
-                    />
-
-                    <ErrorBox errorMsg={errors.name} />
-                    <Divider />
-                    <FieldTitle
-                      name="Summary"
-                      description="Tell everyone about yourself. What are your influences? what's your art style? how long have you been working? Make it punchy to grab attention..."
-                      warning=""
-                      inline={false}
-                    />
-                    <TextField
-                      id={'summary'}
-                      label={`About Me ${
-                        userProfile.summary
-                          ? `(${256 - userProfile.summary.length})`
-                          : ''
-                      }`}
-                      inputProps={{ maxLength: 256 }}
-                      multiline
-                      type="text"
-                      value={userProfile.summary}
-                      onChange={(e) => {
-                        clearTimeout(timer);
-                        setTimer(
-                          setTimeout(() => {
-                            SignupMutation();
-                          }, 1000),
-                        );
-                        setSummary(
-                          e.target.value.replace(/[^A-Za-z0-9 ,\-."'\n]/g, ''),
-                        );
+                {loading ? (
+                  <LoadIcon />
+                ) : (
+                  <div className={classes.root}>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        paddingBottom: 5,
                       }}
-                      margin="normal"
-                      variant="outlined"
-                      style={{ width: '100%' }}
-                    />
+                    >
+                      <Link
+                        to={`/preview/${userId}`}
+                        style={{
+                          maxWidth: 326,
+                          width: '100%',
+                          lineHeight: 0.6,
+                        }}
+                      >
+                        <IconButton
+                          disabled={false}
+                          secondaryColor={true}
+                          warning={false}
+                          icon="pageview"
+                          title="Preview"
+                          onClickEvent={() => {}}
+                          styleOverride={null}
+                        />
+                      </Link>
+                    </div>
+                    <DMCard>
+                      <InlineHeader>
+                        <IconTitle icon="account_box" title="About Me" />
+                      </InlineHeader>
+                      <div style={{ padding: 10 }}>
+                        <FieldTitle
+                          name="Feature Image"
+                          description="Use this space to showcase your most impressive artwork, the image should be png or jpg and uner 2MB. 
+                    700px x 400px is the optimum size"
+                          warning=""
+                          inline={false}
+                        />
+                        <ProfileHeader
+                          profile={userProfile}
+                          setProfileImg={setProfileImg}
+                          setProfileImgStyle={setProfileImgStyle}
+                          setBgImage={setBgImage}
+                          profileBGStyle={profileBGStyle}
+                          setProfileBGStyle={setProfileBGStyle}
+                          profileImgStyle={profileImgStyle}
+                          setUserName={setUserName}
+                          autosaveFunction={
+                            autosaveIsOn ? SignupMutation : null
+                          }
+                        />
+
+                        <ErrorBox errorMsg={errors.name} />
+                        <Divider />
+                        <FieldTitle
+                          name="Summary"
+                          description="Tell everyone about yourself. What are your influences? what's your art style? how long have you been working? Make it punchy to grab attention..."
+                          warning=""
+                          inline={false}
+                        />
+                        <TextField
+                          id={'summary'}
+                          label={`About Me ${
+                            userProfile.summary
+                              ? `(${256 - userProfile.summary.length})`
+                              : ''
+                          }`}
+                          inputProps={{ maxLength: 256 }}
+                          multiline
+                          type="text"
+                          value={userProfile.summary}
+                          onChange={(e) => {
+                            clearTimeout(timer);
+                            setTimer(
+                              setTimeout(() => {
+                                SignupMutation();
+                              }, 1000),
+                            );
+                            setSummary(
+                              e.target.value
+                                .substring(0, 256)
+                                .replace(/[^A-Za-z0-9 ,\-."'\n]/g, ''),
+                            );
+                          }}
+                          margin="normal"
+                          variant="outlined"
+                          style={{ width: '100%' }}
+                        />
+                      </div>
+                    </DMCard>
+                    {sections &&
+                      sections.map((section, index) =>
+                        section.type === 'artist' ||
+                        section.type === 'graphic-artist' ||
+                        section.type === '3d-artist' ? (
+                          <GallerySection
+                            key={`section_${index}`}
+                            index={index}
+                            sections={sections}
+                            setSections={setSections}
+                            section={section}
+                            autosaveIsOn={autosaveIsOn}
+                          />
+                        ) : section.type === 'rulebook-editor' ? (
+                          <EditorSection
+                            key={`section_${index}`}
+                            index={index}
+                            sections={sections}
+                            setSections={setSections}
+                            section={section}
+                            autosaveIsOn={autosaveIsOn}
+                          />
+                        ) : section.summary !== null ? (
+                          <Section
+                            key={`section_${index}`}
+                            index={index}
+                            sections={sections}
+                            setSections={setSections}
+                            section={section}
+                          />
+                        ) : null,
+                      )}
+                    <DMCard>
+                      <InlineHeader>
+                        <IconTitle icon="brush" title="Skills" />
+                      </InlineHeader>
+                      {sections.length < 3 && hasNew() === 0 && (
+                        <AddSection
+                          setSections={setSections}
+                          sections={sections}
+                        />
+                      )}
+                    </DMCard>
                   </div>
-                </DMCard>
-                {sections &&
-                  sections.map((section, index) =>
-                    section.type === 'artist' ||
-                    section.type === 'graphic-artist' ||
-                    section.type === '3d-artist' ? (
-                      <GallerySection
-                        key={`section_${index}`}
-                        index={index}
-                        sections={sections}
-                        setSections={setSections}
-                        section={section}
-                        autosaveIsOn={autosaveIsOn}
-                      />
-                    ) : section.type === 'rulebook-editor' ? (
-                      <EditorSection
-                        key={`section_${index}`}
-                        index={index}
-                        sections={sections}
-                        setSections={setSections}
-                        section={section}
-                        autosaveIsOn={autosaveIsOn}
-                      />
-                    ) : section.summary !== null ? (
-                      <Section
-                        key={`section_${index}`}
-                        index={index}
-                        sections={sections}
-                        setSections={setSections}
-                        section={section}
-                      />
-                    ) : null,
-                  )}
-                <DMCard>
-                  <InlineHeader>
-                    <IconTitle icon="brush" title="Skills" />
-                  </InlineHeader>
-                  {sections.length < 3 && hasNew() === 0 && (
-                    <AddSection setSections={setSections} sections={sections} />
-                  )}
-                </DMCard>
+                )}
               </div>
             );
           }}
@@ -228,6 +246,7 @@ export function EditProfile({ theme }) {
           query={PROFILE}
           fetchPolicy="network-only"
           onCompleted={(data) => {
+            setLoading(false);
             setSections(data.profile.sections);
             setUserName(data.profile.name);
             setSummary(data.profile.summary);
@@ -247,8 +266,8 @@ export function EditProfile({ theme }) {
             );
           }}
         >
-          {({ data }) => {
-            return <div></div>;
+          {() => {
+            return null;
           }}
         </Query>
       </div>

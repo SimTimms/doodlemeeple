@@ -128,7 +128,9 @@ export function ProfileHeader({
               if (autosaveFunction) {
                 autosave(autosaveFunction, 'username');
               }
-              setUserName(e.target.value.replace(/[^A-Za-z0-9 ]/g, ''));
+              setUserName(
+                e.target.value.substring(0, 26).replace(/[^A-Za-z0-9 ]/g, ''),
+              );
             }}
             margin="normal"
             variant="outlined"

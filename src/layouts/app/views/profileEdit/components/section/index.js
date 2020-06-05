@@ -41,7 +41,7 @@ export function Section({ index, sections, setSections, section }) {
           variant="outlined"
           style={{ width: '100%' }}
           onChange={(ev) => {
-            setSummary(ev.target.value);
+            setSummary(ev.target.value.substring(0, 46));
           }}
         />
         <TextField
@@ -53,7 +53,7 @@ export function Section({ index, sections, setSections, section }) {
           variant="outlined"
           style={{ width: '100%' }}
           onChange={(ev) => {
-            setSummary(ev.target.value);
+            setSummary(ev.target.value.substring(0, 46));
           }}
         />
         <div className={classes.actionWrapper}>
@@ -69,7 +69,6 @@ export function Section({ index, sections, setSections, section }) {
             sectionId={section.id}
             sectionValues={sectionValues}
             disabledValue={changed}
-            setDisabledValue={setChanged}
             mutation={UPDATE_SECTION_MUTATION}
           />*/}
         </div>

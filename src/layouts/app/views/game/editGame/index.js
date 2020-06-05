@@ -125,10 +125,9 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                       onChange={(e) => {
                         setGame({
                           ...game,
-                          name: e.target.value.replace(
-                            /[^A-Za-z0-9 ,\-.!()£$"'\n]/g,
-                            '',
-                          ),
+                          name: e.target.value
+                            .substring(0, 86)
+                            .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
                         });
                         autosaveIsOn && autosave(mutation, 'name');
                       }}
@@ -148,10 +147,9 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                       onChange={(e) => {
                         setGame({
                           ...game,
-                          type: e.target.value.replace(
-                            /[^A-Za-z0-9 ,\-.!()£$"'\n]/g,
-                            '',
-                          ),
+                          type: e.target.value
+                            .substring(0, 36)
+                            .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
                         });
                         autosaveIsOn && autosave(mutation, 'image');
                       }}
@@ -171,10 +169,9 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                       onChange={(e) => {
                         setGame({
                           ...game,
-                          summary: e.target.value.replace(
-                            /[^A-Za-z0-9 ,\-.!()£$"'\n]/g,
-                            '',
-                          ),
+                          summary: e.target.value
+                            .substring(0, 156)
+                            .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
                         });
                         autosaveIsOn && autosave(mutation, 'image');
                       }}
@@ -194,10 +191,9 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                       onChange={(e) => {
                         setGame({
                           ...game,
-                          location: e.target.value.replace(
-                            /[^A-Za-z0-9 ,\-.!()£$"'\n]/g,
-                            '',
-                          ),
+                          location: e.target.value
+                            .substring(0, 56)
+                            .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
                         });
                         autosaveIsOn && autosave(mutation, 'location');
                       }}
@@ -231,7 +227,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                       onChange={(e) => {
                         setGame({
                           ...game,
-                          showreel: e.target.value,
+                          showreel: e.target.value.substring(0, 386),
                         });
                         autosaveIsOn && autosave(mutation, 'showreel');
                       }}

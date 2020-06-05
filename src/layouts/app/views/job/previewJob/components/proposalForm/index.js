@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Slide, TextField, Typography, Button } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
@@ -24,9 +24,11 @@ export default function ProposalForm({ jobId }) {
   const [wholeFigures, setWholeFigures] = React.useState(false);
   const [percentLock, setPercentLock] = React.useState({
     status: false,
+    sum: 0,
     message: '100',
   });
   const [detailsLock, setDetailsLock] = React.useState(false);
+  const [saveLock, setSaveLock] = React.useState(false);
 
   const [contract, setContract] = React.useState({
     id: 'new',
@@ -37,41 +39,52 @@ export default function ProposalForm({ jobId }) {
     currency: 'GBP',
   });
 
-  useEffect(() => {
-    let percentSum = 0;
-
-    for (let i = 0; i < contract.paymentTerms.length; i++) {
-      let numberVal = contract.paymentTerms[i].percent;
-      percentSum += parseInt(numberVal === '' ? 0 : numberVal);
-    }
-
-    percentSum > 100 &&
-      percentLock.status === false &&
-      setPercentLock({
-        status: true,
-        message:
-          'Although it would be nice, your payment terms cannot exceed 100%',
-      });
-    percentSum === 100 &&
-      percentLock.status === false &&
-      setPercentLock({
-        status: true,
-        message: '',
-      });
-
-    percentSum < 100 &&
-      percentLock.message !== (100 - percentSum).toString() &&
-      setPercentLock({
-        status: false,
-        message: `${(100 - percentSum).toString()}`,
-      });
-  }, [contract, percentLock]);
-
   function addPaymentTerm(newValue) {
     setContract({
       ...contract,
       paymentTerms: [...contract.paymentTerms, { ...newValue }],
     });
+  }
+
+  function updateContract() {}
+  function calculatePercent(paymentTermsArray) {
+    let response = {
+      status: false,
+      sum: 0,
+      message: '',
+    };
+    let percentSum = 0;
+
+    for (let i = 0; i < paymentTermsArray.length; i++) {
+      let numberVal = paymentTermsArray[i].percent;
+      percentSum += parseInt(numberVal === '' ? 0 : numberVal);
+    }
+
+    response =
+      percentSum > 100
+        ? {
+            status: true,
+            sum: 100 - percentSum,
+            message:
+              'Although it would be nice, your payment terms cannot exceed 100%',
+          }
+        : percentSum === 100
+        ? {
+            status: false,
+            sum: 100 - percentSum,
+            message: '',
+          }
+        : percentSum < 100 && {
+            status: false,
+            sum: 100 - percentSum,
+            message: `Clause 3.${
+              paymentTermsArray.length + 1
+            }: The Creative shall receive ${
+              percentSum !== 100 ? 'the remaining' : ''
+            } ${100 - percentSum}% of the total cost
+upon completion of this contract.`,
+          };
+    return response;
   }
 
   return (
@@ -125,7 +138,10 @@ export default function ProposalForm({ jobId }) {
                     inputProps={{ maxLength: 86 }}
                     onChange={(e) => {
                       autosave(mutation, 'notes');
-                      setContract({ ...contract, deadline: e.target.value });
+                      setContract({
+                        ...contract,
+                        deadline: e.target.value.substring(0, 86),
+                      });
                     }}
                     multiline
                     margin="normal"
@@ -153,7 +169,9 @@ export default function ProposalForm({ jobId }) {
                       e.target.value.indexOf('.') > -1
                         ? setWholeFigures(true)
                         : setWholeFigures(false);
-                      const message = e.target.value.replace(/[^0-9]/gi, '');
+                      const message = e.target.value
+                        .substring(0, 12)
+                        .replace(/[^0-9]/gi, '');
                       setContract({ ...contract, cost: message });
                       autosave(mutation, 'notes');
                     }}
@@ -185,36 +203,26 @@ export default function ProposalForm({ jobId }) {
                     index={index}
                     key={`term_${index}`}
                     availablePercent={100}
-                    percentLock={percentLock}
+                    calculatePercent={calculatePercent}
+                    setPercentLock={setPercentLock}
+                    saveLock={saveLock}
+                    setSaveLock={setSaveLock}
                   />
                 ))}
 
-                {parseInt(percentLock.message) > 0 && (
-                  <Typography
-                    style={{
-                      paddingLeft: 30,
-                      marginTop: 10,
-                      marginBottom: 10,
-                      width: '100%',
-                      boxSizing: 'border-box',
-                    }}
-                  >
-                    {`Clause 3.${
-                      contract.paymentTerms && contract.paymentTerms.length + 1
-                    }: The Creative shall receive ${
-                      percentLock.message !== '100' ? 'the remaining' : ''
-                    } ${percentLock.message}% of the total cost
-            upon completion of this contract.`}
-                  </Typography>
-                )}
-                {percentLock.status ? (
-                  <Typography
-                    color="error"
-                    style={{ marginTop: 10, marginBottom: 10 }}
-                  >
-                    {percentLock.message}
-                  </Typography>
-                ) : (
+                <Typography
+                  style={{
+                    paddingLeft: 30,
+                    marginTop: 10,
+                    marginBottom: 10,
+                    width: '100%',
+                    boxSizing: 'border-box',
+                  }}
+                >
+                  {percentLock.message}
+                </Typography>
+
+                {percentLock.sum > 0 && (
                   <Button
                     disabled={detailsLock}
                     color="primary"
@@ -254,7 +262,10 @@ export default function ProposalForm({ jobId }) {
                     inputProps={{ maxLength: 586 }}
                     onChange={(e) => {
                       autosave(mutation, 'notes');
-                      setContract({ ...contract, notes: e.target.value });
+                      setContract({
+                        ...contract,
+                        notes: e.target.value.substring(0, 586),
+                      });
                     }}
                     multiline
                     margin="normal"
@@ -284,6 +295,9 @@ export default function ProposalForm({ jobId }) {
                 cost: contract.cost ? contract.cost : 0,
                 currency: contract.currency,
               });
+              const percentLockCalc = calculatePercent(paymentTerms);
+              setPercentLock(percentLockCalc);
+              percentLockCalc.sum >= 0 ? setSaveLock(false) : setSaveLock(true);
             }
           }}
           fetchPolicy="network-only"

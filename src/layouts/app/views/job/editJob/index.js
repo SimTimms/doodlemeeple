@@ -195,10 +195,9 @@ export default function EditJob({
                         autosaveIsOn && autosave(mutation, 'image');
                         setJob({
                           ...job,
-                          name: e.target.value.replace(
-                            /[^A-Za-z0-9 ,\-.!()£$"'\n]/g,
-                            '',
-                          ),
+                          name: e.target.value
+                            .substring(0, 86)
+                            .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
                         });
                       }}
                       margin="normal"
@@ -217,10 +216,9 @@ export default function EditJob({
                       onChange={(e) => {
                         setJob({
                           ...job,
-                          summary: e.target.value.replace(
-                            /[^A-Za-z0-9 ,\-.!()£$"'\n]/g,
-                            '',
-                          ),
+                          summary: e.target.value
+                            .substring(0, 256)
+                            .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
                         });
                         autosaveIsOn && autosave(mutation, 'image');
                       }}
@@ -253,10 +251,9 @@ export default function EditJob({
                       onChange={(e) => {
                         setJob({
                           ...job,
-                          creativeSummary: e.target.value.replace(
-                            /[^A-Za-z0-9 ,\-.!()£$"'\n]/g,
-                            '',
-                          ),
+                          creativeSummary: e.target
+                            .substring(0, 186)
+                            .value.replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
                         });
                         autosaveIsOn && autosave(mutation, 'image');
                       }}
