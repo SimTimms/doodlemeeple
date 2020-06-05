@@ -205,6 +205,7 @@ upon completion of this contract.`,
                     availablePercent={100}
                     calculatePercent={calculatePercent}
                     setPercentLock={setPercentLock}
+                    percentLock={percentLock}
                     saveLock={saveLock}
                     setSaveLock={setSaveLock}
                   />

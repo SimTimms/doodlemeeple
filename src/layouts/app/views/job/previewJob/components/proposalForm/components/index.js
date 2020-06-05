@@ -19,6 +19,7 @@ export default function PaymentTerm({
   availablePercent,
   calculatePercent,
   setPercentLock,
+  percentLock,
   saveLock,
   setSaveLock,
 }) {
@@ -57,6 +58,7 @@ export default function PaymentTerm({
       {(mutation, { loading }) => {
         return (
           <div className={classes.root}>
+            {percentLock.sum}
             <Typography>{`Clause 3.${
               index + 1
             }: The Creative shall receive `}</Typography>
@@ -69,14 +71,19 @@ export default function PaymentTerm({
                 let message = e.target.value.replace(/[^0-9]/gi, '');
                 message = message === '' ? '0' : message;
                 const messageToInt = parseInt(message);
-                setValues({ ...values, percent: messageToInt });
+
                 let paymentTermsArray = [...contract.paymentTerms];
                 paymentTermsArray[index].percent = messageToInt;
-                const percentLock = calculatePercent(paymentTermsArray);
-                setPercentLock(percentLock);
-                percentLock.sum >= 0 ? setSaveLock(false) : setSaveLock(true);
-                console.log(percentLock.sum);
-                percentLock.sum >= 0 &&
+                const percentLockCalc = calculatePercent(paymentTermsArray);
+
+                setPercentLock(percentLockCalc);
+                percentLockCalc.sum >= 0
+                  ? setSaveLock(false)
+                  : setSaveLock(true);
+
+                setValues({ ...values, percent: messageToInt });
+
+                percentLockCalc.sum >= 0 &&
                   autosave(() => {
                     mutation();
                   });
@@ -116,13 +123,14 @@ export default function PaymentTerm({
               }}
               onCompleted={(data) => {
                 toaster('Deleted');
+                const updatedArray = contract.paymentTerms.filter(
+                  (item) => item.id !== values.id,
+                );
+                const percentLockCalc = calculatePercent(updatedArray);
+                setPercentLock(percentLockCalc);
                 setContract({
                   ...contract,
-                  paymentTerms: [
-                    ...contract.paymentTerms.filter(
-                      (item) => item.id !== values.id,
-                    ),
-                  ],
+                  paymentTerms: [...updatedArray],
                 });
               }}
             >
