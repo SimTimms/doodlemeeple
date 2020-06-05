@@ -105,9 +105,9 @@ export function Testimonials({ testimonials }) {
 
 export function Projects({ projects }) {
   const classes = useStyles();
-  const projectElements = projects.map((item) => {
+  const projectElements = projects.map((item, index) => {
     return item.name ? (
-      <div className={classes.projectWrapper}>
+      <div className={classes.projectWrapper} key={`project_${index}`}>
         {item.image && (
           <div
             className={classes.projectWrapperItem}

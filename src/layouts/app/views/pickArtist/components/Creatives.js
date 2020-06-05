@@ -21,7 +21,7 @@ export default function Creatives({
       onCompleted={(data) => {}}
     >
       {({ data }) => {
-        return (
+        return data ? (
           <div className={classes.creativeWrapper}>
             {data.getCreatives.map((creative, index) => {
               return (
@@ -44,7 +44,7 @@ export default function Creatives({
               );
             })}
           </div>
-        );
+        ) : null;
       }}
     </Query>
   );
