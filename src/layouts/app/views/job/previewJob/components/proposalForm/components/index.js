@@ -22,6 +22,7 @@ export default function PaymentTerm({
   percentLock,
   saveLock,
   setSaveLock,
+  setDetailsLock,
 }) {
   const classes = useStyles();
   const [values, setValues] = React.useState({
@@ -58,7 +59,6 @@ export default function PaymentTerm({
       {(mutation, { loading }) => {
         return (
           <div className={classes.root}>
-            {percentLock.sum}
             <Typography>{`Clause 3.${
               index + 1
             }: The Creative shall receive `}</Typography>
@@ -75,7 +75,7 @@ export default function PaymentTerm({
                 let paymentTermsArray = [...contract.paymentTerms];
                 paymentTermsArray[index].percent = messageToInt;
                 const percentLockCalc = calculatePercent(paymentTermsArray);
-
+                setDetailsLock(false);
                 setPercentLock(percentLockCalc);
                 percentLockCalc.sum >= 0
                   ? setSaveLock(false)
@@ -102,6 +102,7 @@ export default function PaymentTerm({
               }`}
               inputProps={{ maxLength: 86 }}
               onChange={(e) => {
+                setDetailsLock(false);
                 const description = e.target.value.substring(0, 86);
                 setValues({ ...values, description: description });
                 let paymentTermsArray = [...contract.paymentTerms];

@@ -1,11 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const sharedStyles = makeStyles(theme => ({
+export const sharedStyles = makeStyles((theme) => ({
   card: {
-    margin: 10,
     maxWidth: 312,
     padding: 30,
     minWidth: 312,
+    boxShadow: '0 0 60px rgba(0,0,0,1)',
+    margin: '40px 0 40px 0',
   },
   cardMobile: {
     margin: 0,

@@ -24,7 +24,7 @@ export default function ProposalForm({ jobId }) {
   const [wholeFigures, setWholeFigures] = React.useState(false);
   const [percentLock, setPercentLock] = React.useState({
     status: false,
-    sum: 0,
+    sum: null,
     message: '100',
   });
   const [detailsLock, setDetailsLock] = React.useState(false);
@@ -208,6 +208,7 @@ upon completion of this contract.`,
                     percentLock={percentLock}
                     saveLock={saveLock}
                     setSaveLock={setSaveLock}
+                    setDetailsLock={setDetailsLock}
                   />
                 ))}
 
@@ -223,23 +224,22 @@ upon completion of this contract.`,
                   {percentLock.message}
                 </Typography>
 
-                {percentLock.sum > 0 && (
-                  <Button
-                    disabled={detailsLock}
-                    color="primary"
-                    style={{ textTransform: 'none' }}
-                    onClick={() => {
-                      setDetailsLock(true);
-                      addPaymentTerm({
-                        id: 'new',
-                        percent: 0,
-                        description: '',
-                      });
-                    }}
-                  >
-                    {`+ Add a payment term `}
-                  </Button>
-                )}
+                <Button
+                  disabled={detailsLock || percentLock.sum < 0}
+                  color="primary"
+                  style={{ textTransform: 'none' }}
+                  onClick={() => {
+                    setDetailsLock(true);
+                    addPaymentTerm({
+                      id: 'new',
+                      percent: 0,
+                      description: '',
+                    });
+                  }}
+                >
+                  {`+ Add a payment term `}
+                </Button>
+
                 <Divider />
                 <FieldTitle
                   name=" 3. Additional Notes"
@@ -278,6 +278,31 @@ upon completion of this contract.`,
                 </div>
               </div>
             );
+          }}
+        </Mutation>
+        <Mutation
+          mutation={contract.id === 'new' ? CREATE_CONTRACT : UPDATE_CONTRACT}
+          variables={{
+            id: contract.id,
+            contract: {
+              notes: contract.notes,
+              deadline: contract.deadline,
+              paymentTerms: contract.paymentTerms,
+              currency: contract.currency,
+              cost: parseInt(contract.cost),
+              jobId,
+            },
+          }}
+          onCompleted={(data) => {
+            toaster('Saved');
+            setDetailsLock(false);
+            const updatedId =
+              contract.id === 'new' ? data.createContract : data.updateContract;
+            setContract({ ...contract, id: updatedId });
+          }}
+        >
+          {(mutation) => {
+            return <div>das</div>;
           }}
         </Mutation>
         <Query

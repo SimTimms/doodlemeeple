@@ -97,17 +97,6 @@ export function Notifications() {
                 variables={{
                   id: notification.id,
                 }}
-                update={(store, { data: { removeNotification } }) => {
-                  let data = store.readQuery({ query: NOTIFICATIONS });
-                  toaster('Deleted');
-                  data.getNotifications = removeNotification;
-
-                  store.writeQuery({
-                    query: NOTIFICATIONS,
-                    data,
-                  });
-                  setNotificationArray(removeNotification);
-                }}
               >
                 {(RemoveNotificationMutation) => {
                   return (

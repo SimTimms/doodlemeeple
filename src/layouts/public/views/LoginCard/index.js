@@ -10,7 +10,7 @@ import {
   Slide,
   useMediaQuery,
 } from '@material-ui/core';
-import { Form, FormInput, ErrorBox } from '../../../../components';
+import { Form, FormInput, ErrorBox, IconButton } from '../../../../components';
 import { sharedStyles } from '../styles';
 import { Mutation } from 'react-apollo';
 import { LOGIN_MUTATION } from '../../../../data/mutations';
@@ -140,16 +140,16 @@ export default function LoginCard({ history, forwardTo }) {
                     />
                     <ErrorBox errorMsg={errors.passwordError} />
                     <ErrorBox errorMsg={errors.noUserError} />
-                    <Button
-                      onClick={() => {
+                    <IconButton
+                      title={loginStatus}
+                      icon="login"
+                      disabled={false}
+                      color="primary"
+                      onClickEvent={() => {
                         loginSubmit(LoginMutation);
                       }}
-                      variant="contained"
-                      color="primary"
-                      style={{ width: 180, marginTop: 20 }}
-                    >
-                      {loginStatus}
-                    </Button>
+                      styleOverride={null}
+                    />
                   </Form>
                 );
               }}
@@ -159,7 +159,7 @@ export default function LoginCard({ history, forwardTo }) {
               onClick={() => {
                 history.push('/password-forgot');
               }}
-              style={{ color: '#aaa', textTransform: 'none' }}
+              style={{ color: '#aaa', textTransform: 'none', marginTop: 10 }}
             >
               Forgot Password
             </Button>
