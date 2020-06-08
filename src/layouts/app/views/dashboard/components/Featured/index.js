@@ -8,6 +8,7 @@ import { IconButton } from '../../../../../../components';
 import clsx from 'clsx';
 import { Query } from 'react-apollo';
 import { PROFILE_FEATURED } from '../../../../../../data/queries';
+import device from '../../../../../../assets/device.svg';
 
 export function Featured({ posts, featuredId, history }) {
   const classes = useStyles();
@@ -49,13 +50,19 @@ export function Featured({ posts, featuredId, history }) {
                       alignItems: 'center',
                     }}
                   >
-                    <Typography
-                      variant="h5"
-                      component="h4"
-                      className={classes.featuredText}
-                    >
-                      Featured Artist
-                    </Typography>
+                    <div className={classes.featuredText}>
+                      <img
+                        src={device}
+                        style={{ width: 20, marginRight: 10 }}
+                      />
+                      <Typography
+                        variant="body1"
+                        component="h4"
+                        style={{ color: 'rgba(255,255,255,0.6)' }}
+                      >
+                        Recommended
+                      </Typography>
+                    </div>
 
                     <Typography
                       variant="h5"
@@ -81,7 +88,14 @@ export function Featured({ posts, featuredId, history }) {
                     </Typography>
                   </div>
 
-                  <Typography style={{ color: '#444' }} component="p">
+                  <Typography
+                    style={{
+                      color: '#fff',
+                      marginTop: 20,
+                      textAlign: 'center',
+                    }}
+                    component="p"
+                  >
                     {message}
                     <a
                       href={linkTo}
@@ -89,10 +103,10 @@ export function Featured({ posts, featuredId, history }) {
                       rel="noopener noreferrer"
                       style={{
                         width: 100,
-                        color: '#222',
+                        color: '#fff',
                       }}
                     >
-                      Read the full story
+                      Read our interview
                     </a>
                   </Typography>
                   <div
@@ -100,13 +114,11 @@ export function Featured({ posts, featuredId, history }) {
                       display: 'flex',
                       width: '100%',
                       justifyContent: 'center',
-                      borderTop: '1px dotted #ccc',
                       marginTop: 10,
                     }}
                   >
                     <IconButton
-                      secondaryColor={false}
-                      warning={false}
+                      color="primary"
                       disabled={false}
                       onClickEvent={() => {
                         history.push(`/public-preview/${featuredId}`);

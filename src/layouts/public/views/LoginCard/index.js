@@ -18,6 +18,7 @@ import { PROFILE_EMAIL, PROFILE_PASSWORD } from '../../../../utils/dataLengths';
 import Cookies from 'js-cookie';
 import { readableErrors } from '../../../../utils/readableErrors';
 import jwtDecode from 'jwt-decode';
+import device from '../../../../assets/device.svg';
 
 import clsx from 'clsx';
 const CHECKING = 'Checking...';
@@ -53,22 +54,23 @@ export default function LoginCard({ history, forwardTo }) {
             [classes.cardMobile]: mobile,
           })}
         >
-          <CardContent>
-            <Typography
-              variant="h1"
-              color="textPrimary"
-              style={{ textAlign: 'center' }}
+          <CardContent style={{ paddingTop: 0, paddingBottom: 30 }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
             >
-              Welcome
-            </Typography>
-            <Typography
-              variant="body1"
-              component="p"
-              style={{ textAlign: 'center' }}
-              className={classes.description}
-            >
-              Please login
-            </Typography>
+              <img src={device} style={{ width: 40, marginRight: 10 }} />
+              <Typography
+                variant="h1"
+                color="textPrimary"
+                style={{ textAlign: 'center' }}
+              >
+                Login
+              </Typography>
+            </div>
           </CardContent>
           <Divider />
           <CardContent className={classes.cardContentCenter}></CardContent>
