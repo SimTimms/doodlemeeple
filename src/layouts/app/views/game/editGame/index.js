@@ -9,6 +9,7 @@ import {
   FieldTitle,
   InlineHeader,
   IconTitle,
+  IconButton,
 } from '../../../../../components';
 import ReactPlayer from 'react-player';
 import { Query } from 'react-apollo';
@@ -51,16 +52,16 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <ContentHeader
-          title={gameId === 'new' ? 'Create a Game' : 'Edit a Game'}
+          title={game.id === 'new' ? 'Create a Game' : 'Edit a Game'}
           subTitle="Create a new game or project listing, then create jobs"
           subTitleExtra={null}
           button={null}
         />
 
         <Mutation
-          mutation={gameId === 'new' ? CREATE_GAME : UPDATE_GAME}
+          mutation={game.id === 'new' ? CREATE_GAME : UPDATE_GAME}
           variables={{
-            id: gameId,
+            id: game.id,
             game: {
               name: game.name,
               img: game.img,
@@ -75,14 +76,60 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
           onCompleted={(data) => {
             toaster('Saved');
             const newGameId =
-              gameId === 'new' ? data.createGame : data.updateGame;
-            setGame({ ...game, id: newGameId });
-            history.replace(`/app/edit-game/${newGameId}`);
+              game.id === 'new' ? data.createGame : data.updateGame;
+            game.id === 'new' && setGame({ ...game, id: newGameId });
+
+            game.id === 'new' && history.replace(`/app/edit-game/${newGameId}`);
+            setLoading(false);
           }}
         >
           {(mutation) => {
             return loading ? (
               <LoadIcon />
+            ) : game.id === 'new' ? (
+              <Card className={classes.card}>
+                <InlineHeader>
+                  <IconTitle icon="casino" title="Create a Game" />
+                </InlineHeader>
+                <div style={{ padding: 10 }}>
+                  <FieldTitle
+                    name=" 1. Game Name"
+                    description="What is your game/project called."
+                    warning="Example: Doodle Meeple The Game"
+                    inline={false}
+                  />
+                  <TextField
+                    id={'name'}
+                    value={game.name}
+                    label={`What's the game called? ${
+                      game.name ? `(${86 - game.name.length})` : ''
+                    }`}
+                    inputProps={{ maxLength: 86 }}
+                    onChange={(e) => {
+                      setGame({
+                        ...game,
+                        name: e.target.value
+                          .substring(0, 86)
+                          .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
+                      });
+                    }}
+                    margin="normal"
+                    variant="outlined"
+                    style={{ width: '100%' }}
+                  />
+                  <IconButton
+                    title="Create"
+                    icon="add"
+                    color="primary"
+                    disabled={false}
+                    onClickEvent={() => {
+                      setLoading(true);
+                      mutation();
+                    }}
+                    styleOverride={null}
+                  />
+                </div>
+              </Card>
             ) : (
               <div style={{ width: '100%' }}>
                 <Card className={classes.card}>
@@ -91,7 +138,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                   </InlineHeader>
                   <FieldTitle
                     name=" 1. Primary Image"
-                    description="This image will be displayed in most places where your game is mentioned. Choose an image that represents your game and brings attention."
+                    description="JPG or PNG, 2MB max, 700 x 400px (optimum size)"
                     warning=""
                     inline={false}
                   />
@@ -112,7 +159,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                     <FieldTitle
                       name=" 2. Game Details"
                       description="Is your project backed on Kickstarter?, is it just an idea?, is it a fantasy/sci-fi RPG hybrid? Give some detail about your game so that creatives get to know your project"
-                      warning=""
+                      warning="Example: Doodle Meeple the Game, Fantasy card game, Build a deck then throw it at your opponent for maximum damage, Based in Worthing"
                       inline={false}
                     />
                     <TextField
@@ -266,7 +313,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                         <Mutation
                           mutation={REMOVE_GAME}
                           variables={{
-                            id: gameId,
+                            id: game.id,
                           }}
                           onCompleted={(data) => {
                             toaster('Deleted');

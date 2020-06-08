@@ -38,7 +38,7 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
     type: 'job',
     creativeSummary: '',
     id: 'new',
-    gameId: '',
+    gameId: null,
     submitted: false,
   });
   const [disabledValue, setDisabledValue] = React.useState(false);
@@ -49,6 +49,7 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
         <ContentHeader
           title={jobId === 'new' ? 'Create a Job' : 'Edit a Job'}
           subTitle="Create a new job"
+          subTitleExtra={null}
           button={null}
         />
         <Mutation
