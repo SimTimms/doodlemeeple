@@ -5,12 +5,12 @@ import autosave from '../../../../../../../../utils/autosave';
 import { Mutation } from 'react-apollo';
 import { useStyles } from './styles';
 import {
-  CREATE_TERM,
   UPDATE_TERM,
   REMOVE_TERM,
 } from '../../../../../../../../data/mutations';
 import { toaster } from '../../../../../../../../utils/toaster';
 
+//TODO: This component is bullshit, I got stuck in a massive loop and I hate it so it needs redoing by someone else.
 export default function PaymentTerm({
   contract,
   setContract,
@@ -33,27 +33,22 @@ export default function PaymentTerm({
   });
 
   useEffect(() => {
-    setValues(paymentTerm);
+    setValues({ ...paymentTerm, contractId: contract.id });
   }, [paymentTerm]);
 
   return (
     <Mutation
-      mutation={values.id === 'new' ? CREATE_TERM : UPDATE_TERM}
+      mutation={UPDATE_TERM}
       variables={{
         id: values.id,
         paymentTerm: {
+          contractId: contract.id,
           percent: values.percent,
           description: values.description,
-          contractId: contract.id,
         },
       }}
       onCompleted={(data) => {
         toaster('Saved');
-        const updatedId =
-          values.id === 'new' ? data.createPaymentTerm : data.updatePaymentTerm;
-        let paymentTermsArray = [...contract.paymentTerms];
-        paymentTermsArray[index] = values;
-        setValues({ ...values, id: updatedId });
       }}
     >
       {(mutation, { loading }) => {

@@ -259,6 +259,7 @@ export const GET_CONTRACT = gql`
       deadline
       cost
       currency
+      status
       paymentTerms {
         id
         percent

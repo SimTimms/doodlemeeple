@@ -7,6 +7,7 @@ export default function CurrencySelector({
   selectedCurrency,
   onChangeEvent,
   contract,
+  mutation,
 }) {
   const [currency, setCurrency] = React.useState(0);
   const currencyArray = ['GBP', 'USD'];
@@ -23,6 +24,7 @@ export default function CurrencySelector({
         id="demo-simple-select-outlined"
         value={currency}
         onChange={(e) => {
+          autosave(mutation, 'currency');
           onChangeEvent({ ...contract, currency: e.target.value });
         }}
         label="Age"

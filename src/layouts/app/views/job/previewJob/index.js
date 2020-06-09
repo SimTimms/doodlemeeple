@@ -75,9 +75,8 @@ export default function PreviewJob({ theme, jobId, history }) {
                     onClickEvent={() => {
                       history.push(`/app/view-game/${job.game.id}`);
                     }}
-                    secondaryColor={true}
+                    color="secondary"
                     disabled={false}
-                    warning={false}
                     icon="keyboard_arrow_right"
                     title="View Game"
                     styleOverride={null}
