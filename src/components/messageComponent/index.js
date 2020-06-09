@@ -25,18 +25,6 @@ export default function MessageComponent({
               [classes.notifications]: true,
             })}
           >
-            {backgroundImg && (
-              <div
-                className={clsx({
-                  [classes.icon]: true,
-                  [classes.iconGame]: true,
-                })}
-                style={{
-                  backgroundImage: `url(${backgroundImg})`,
-                }}
-              />
-            )}
-
             {profiles &&
               profiles.map((user, index) => (
                 <div
@@ -64,12 +52,27 @@ export default function MessageComponent({
             <div className={classes.wrapperOne}>
               <div className={classes.messageDetails}>
                 <div className={classes.rowWrapper}>
+                  {backgroundImg && (
+                    <div
+                      className={clsx({
+                        [classes.icon]: true,
+                        [classes.iconGame]: true,
+                      })}
+                      style={{
+                        backgroundImage: `url(${backgroundImg})`,
+                      }}
+                    />
+                  )}
                   <Typography
                     style={{ color: '#aaa' }}
                     variant="caption"
                     component="p"
                   >
-                    <b>{title}</b>
+                    <b>
+                      {title.length > 30
+                        ? `${title.substring(0, 30)}...`
+                        : title}
+                    </b>
                   </Typography>
                 </div>
                 <Typography

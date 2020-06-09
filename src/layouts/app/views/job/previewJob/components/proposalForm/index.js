@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slide, TextField, Typography, Button } from '@material-ui/core';
+import { Slide, TextField, Typography, Card } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   ContentHeader,
@@ -7,6 +7,9 @@ import {
   FieldTitleWrapper,
   CurrencySelector,
   Divider,
+  IconButton,
+  IconTitle,
+  InlineHeader,
 } from '../../../../../../../components';
 import PaymentTerm from './components';
 import autosave from '../../../../../../../utils/autosave';
@@ -25,7 +28,7 @@ export default function ProposalForm({ jobId }) {
   const [percentLock, setPercentLock] = React.useState({
     status: false,
     sum: null,
-    message: '100',
+    message: '',
   });
   const [detailsLock, setDetailsLock] = React.useState(false);
   const [saveLock, setSaveLock] = React.useState(false);
@@ -46,7 +49,6 @@ export default function ProposalForm({ jobId }) {
     });
   }
 
-  function updateContract() {}
   function calculatePercent(paymentTermsArray) {
     let response = {
       status: false,
@@ -79,9 +81,7 @@ export default function ProposalForm({ jobId }) {
             sum: 100 - percentSum,
             message: `Clause 3.${
               paymentTermsArray.length + 1
-            }: The Creative shall receive ${
-              percentSum !== 100 ? 'the remaining' : ''
-            } ${100 - percentSum}% of the total cost
+            }: The Creative shall receive ${100 - percentSum}% of the total cost
 upon completion of this contract.`,
           };
     return response;
@@ -180,7 +180,11 @@ upon completion of this contract.`,
                     variant="outlined"
                     style={{ marginRight: 10 }}
                   />
-                  <CurrencySelector selectedCurrency={contract.currency} />
+                  <CurrencySelector
+                    selectedCurrency={contract.currency}
+                    onChangeEvent={setContract}
+                    contract={contract}
+                  />
                 </FieldTitleWrapper>
                 {wholeFigures && (
                   <Typography color="error">
@@ -188,13 +192,19 @@ upon completion of this contract.`,
                   </Typography>
                 )}
                 <div style={{ marginTop: 20, width: '100%' }} />
+                <Card style={{ marginTop: 20 }}>
+                  <InlineHeader>
+                    <IconTitle icon="fact_check" title="Proposal" />
+                  </InlineHeader>
+                  <ProposalForm jobId={jobId} />
+                </Card>
                 <FieldTitle
                   name=" 3. Payment Terms"
                   description="Go into detail about how and when you would like to be paid, be very specific about your terms to decrease the chance of a dispute further down the line."
                   warning="Example: The Creative shall receive 10% upon commencement of the project, The Creative shall receive 20% upon delivery of 10 full resolution SVG files, the Creative shall receive 70% upon delivery of all remaining specified items"
                   inline={false}
                 />
-                <Divider />
+
                 {contract.paymentTerms.map((paymentTerm, index) => (
                   <PaymentTerm
                     contract={contract}
@@ -211,24 +221,26 @@ upon completion of this contract.`,
                     setDetailsLock={setDetailsLock}
                   />
                 ))}
+                {percentLock.message !== '' && (
+                  <Typography
+                    style={{
+                      paddingLeft: 30,
+                      marginTop: 10,
+                      marginBottom: 10,
+                      width: '100%',
+                      boxSizing: 'border-box',
+                    }}
+                  >
+                    {percentLock.message}
+                  </Typography>
+                )}
 
-                <Typography
-                  style={{
-                    paddingLeft: 30,
-                    marginTop: 10,
-                    marginBottom: 10,
-                    width: '100%',
-                    boxSizing: 'border-box',
-                  }}
-                >
-                  {percentLock.message}
-                </Typography>
-
-                <Button
+                <IconButton
                   disabled={detailsLock || percentLock.sum < 0}
                   color="primary"
-                  style={{ textTransform: 'none' }}
-                  onClick={() => {
+                  title="Payment Term"
+                  icon="add"
+                  onClickEvent={() => {
                     setDetailsLock(true);
                     addPaymentTerm({
                       id: 'new',
@@ -236,9 +248,8 @@ upon completion of this contract.`,
                       description: '',
                     });
                   }}
-                >
-                  {`+ Add a payment term `}
-                </Button>
+                  styleOverride={null}
+                />
 
                 <Divider />
                 <FieldTitle

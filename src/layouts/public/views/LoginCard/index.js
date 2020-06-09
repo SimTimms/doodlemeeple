@@ -63,13 +63,6 @@ export default function LoginCard({ history, forwardTo }) {
               }}
             >
               <img src={device} style={{ width: 40, marginRight: 10 }} />
-              <Typography
-                variant="h1"
-                color="textPrimary"
-                style={{ textAlign: 'center' }}
-              >
-                Login
-              </Typography>
             </div>
           </CardContent>
           <Divider />
