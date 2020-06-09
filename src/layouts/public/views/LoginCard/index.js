@@ -62,7 +62,11 @@ export default function LoginCard({ history, forwardTo }) {
                 alignItems: 'center',
               }}
             >
-              <img src={device} style={{ width: 40, marginRight: 10 }} />
+              <img
+                src={device}
+                style={{ width: 40, marginRight: 10 }}
+                alt="Doodle Meeple Device"
+              />
             </div>
           </CardContent>
           <Divider />

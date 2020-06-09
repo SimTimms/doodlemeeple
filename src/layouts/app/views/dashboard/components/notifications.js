@@ -10,7 +10,6 @@ import { NOTIFICATIONS } from '../../../../../data/queries';
 import { REMOVE_NOTIFICATION_MUTATION } from '../../../../../data/mutations';
 import { Mutation } from 'react-apollo';
 import { timeDifferenceForDate } from '../../../../../utils/dates';
-import { toaster } from '../../../../../utils/toaster';
 import clsx from 'clsx';
 
 export function Notifications() {

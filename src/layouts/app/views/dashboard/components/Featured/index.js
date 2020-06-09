@@ -54,6 +54,7 @@ export function Featured({ posts, featuredId, history }) {
                       <img
                         src={device}
                         style={{ width: 20, marginRight: 10 }}
+                        alt=""
                       />
                       <Typography
                         variant="body1"

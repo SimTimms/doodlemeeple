@@ -34,7 +34,7 @@ export default function PaymentTerm({
 
   useEffect(() => {
     setValues({ ...paymentTerm, contractId: contract.id });
-  }, [paymentTerm]);
+  }, [paymentTerm, contract]);
 
   return (
     <Mutation
