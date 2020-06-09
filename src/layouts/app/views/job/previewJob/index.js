@@ -34,7 +34,7 @@ export default function PreviewJob({ theme, jobId, history }) {
   });
   const [conversationId, setConversationId] = React.useState(null);
   const [chatOpen, setChatOpen] = React.useState(false);
-  const [proposalOpen, setProposalOpen] = React.useState(true);
+  const [proposalOpen, setProposalOpen] = React.useState(false);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -113,17 +113,15 @@ export default function PreviewJob({ theme, jobId, history }) {
             <div className={classes.actionWrapper}>
               <IconButton
                 disabled={false}
-                secondaryColor={true}
-                warning={false}
+                color="secondary"
                 icon={chatOpen ? 'keyboard_arrow_up' : 'chat'}
                 title={chatOpen ? 'Close Chat' : 'Open Chat'}
                 onClickEvent={() => setChatOpen(chatOpen ? false : true)}
                 styleOverride={null}
               />
               <IconButton
-                warning={false}
+                color="primary"
                 disabled={false}
-                secondaryColor={false}
                 icon={proposalOpen ? 'keyboard_arrow_down' : 'fact_check'}
                 title={proposalOpen ? 'Minimise Proposal' : 'Create Proposal'}
                 onClickEvent={() =>

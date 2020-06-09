@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slide, TextField, Typography, Card } from '@material-ui/core';
+import { Slide, TextField, Typography, Button } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   ContentHeader,
@@ -8,8 +8,6 @@ import {
   CurrencySelector,
   Divider,
   IconButton,
-  IconTitle,
-  InlineHeader,
 } from '../../../../../../../components';
 import PaymentTerm from './components';
 import autosave from '../../../../../../../utils/autosave';
@@ -192,12 +190,7 @@ upon completion of this contract.`,
                   </Typography>
                 )}
                 <div style={{ marginTop: 20, width: '100%' }} />
-                <Card style={{ marginTop: 20 }}>
-                  <InlineHeader>
-                    <IconTitle icon="fact_check" title="Proposal" />
-                  </InlineHeader>
-                  <ProposalForm jobId={jobId} />
-                </Card>
+
                 <FieldTitle
                   name=" 3. Payment Terms"
                   description="Go into detail about how and when you would like to be paid, be very specific about your terms to decrease the chance of a dispute further down the line."

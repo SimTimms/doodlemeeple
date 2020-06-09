@@ -59,7 +59,7 @@ export default function PaymentTerm({
       {(mutation, { loading }) => {
         return (
           <div className={classes.root}>
-            <Typography>{`Clause 3.${
+            <Typography variant="body1" style={{ width: 200 }}>{`3.${
               index + 1
             }: The Creative shall receive `}</Typography>
             <TextField
@@ -75,25 +75,27 @@ export default function PaymentTerm({
                 let paymentTermsArray = [...contract.paymentTerms];
                 paymentTermsArray[index].percent = messageToInt;
                 const percentLockCalc = calculatePercent(paymentTermsArray);
-                setDetailsLock(false);
-                setPercentLock(percentLockCalc);
-                percentLockCalc.sum >= 0
-                  ? setSaveLock(false)
-                  : setSaveLock(true);
+                if (percentLockCalc.sum >= 0) {
+                  setDetailsLock(false);
+                  setPercentLock(percentLockCalc);
+                  percentLockCalc.sum >= 0
+                    ? setSaveLock(false)
+                    : setSaveLock(true);
 
-                setValues({ ...values, percent: messageToInt });
+                  setValues({ ...values, percent: messageToInt });
 
-                percentLockCalc.sum >= 0 &&
-                  autosave(() => {
-                    mutation();
-                  });
+                  percentLockCalc.sum >= 0 &&
+                    autosave(() => {
+                      mutation();
+                    });
+                }
               }}
               multiline
               margin="normal"
               variant="outlined"
               className={classes.wrapper}
             />
-            <Typography>upon </Typography>
+            <Typography style={{ width: 60 }}>% upon</Typography>
             <TextField
               id={'item'}
               value={values.description}
