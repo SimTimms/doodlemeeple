@@ -36,10 +36,12 @@ import Divider from './divider';
 import DividerWithBorder from './dividerWithBorder';
 import SectionWrapper from './sectionWrapper';
 import DMCard from './dmCard';
+import ActionWrapper from './actionWrapper';
 
 export {
   DeleteButton,
   DMCard,
+  ActionWrapper,
   Divider,
   DividerWithBorder,
   SectionWrapper,

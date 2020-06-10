@@ -134,7 +134,7 @@ export default function PreviewJob({ theme, jobId, history }) {
                 <InlineHeader>
                   <IconTitle icon="fact_check" title="Proposal" />
                 </InlineHeader>
-                <ProposalForm jobId={jobId} />
+                <ProposalForm jobId={jobId} history={history} />
               </Card>
             )}
           </SectionWrapper>

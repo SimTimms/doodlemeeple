@@ -20,7 +20,11 @@ import {
   CREATE_TERM,
 } from '../../../../../../../../data/mutations';
 
-export default function EditProposalForm({ jobId, contractData }) {
+export default function EditProposalForm({
+  jobId,
+  contractData,
+  setContractParent,
+}) {
   const classes = useStyles();
 
   const [wholeFigures, setWholeFigures] = React.useState(false);
@@ -39,6 +43,8 @@ export default function EditProposalForm({ jobId, contractData }) {
     paymentTerms: [],
     currency: 'GBP',
     status: '',
+    job: {},
+    user: {},
   });
 
   useEffect(() => {
@@ -52,6 +58,8 @@ export default function EditProposalForm({ jobId, contractData }) {
       cost: contractData.cost ? contractData.cost : '0',
       currency: contractData.currency,
       status: contractData.status,
+      job: contractData.job,
+      user: contractData.user,
     });
     const percentLockCalc = calculatePercent(paymentTerms);
     setPercentLock(percentLockCalc);
@@ -334,23 +342,30 @@ upon completion of this contract.`,
             }}
           </Mutation>
           <Mutation
-            mutation={SUBMIT_CONTRACT}
+            mutation={UPDATE_CONTRACT}
             variables={{
               id: contract.id,
+              contract: {
+                notes: contract.notes,
+                deadline: contract.deadline,
+                currency: contract.currency,
+                cost: parseInt(contract.cost),
+                jobId,
+              },
             }}
             onCompleted={(data) => {
               toaster('Submitted');
               setDetailsLock(true);
-              setContract({ ...contract, status: 'submitted' });
+              setContractParent({ ...contract, status: 'submitted' });
             }}
           >
             {(mutation) => {
               return (
                 <IconButton
-                  title="Submit"
-                  icon="send"
+                  title="Preview"
+                  icon="preview"
                   color="primary"
-                  styleOverride={null}
+                  styleOverride={{ marginBottom: 30 }}
                   disabled={false}
                   onClickEvent={() => mutation()}
                 />

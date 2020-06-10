@@ -260,6 +260,54 @@ export const GET_CONTRACT = gql`
       cost
       currency
       status
+      updatedAt
+      user {
+        email
+        id
+      }
+      job {
+        id
+        name
+        summary
+        creativeSummary
+        user {
+          id
+          email
+        }
+      }
+      paymentTerms {
+        id
+        percent
+        description
+      }
+    }
+  }
+`;
+
+export const PREVIEW_CONTRACT = gql`
+  query PreviewContract($contractId: String!) {
+    previewContract(contractId: $contractId) {
+      id
+      notes
+      deadline
+      cost
+      currency
+      status
+      updatedAt
+      user {
+        email
+        id
+      }
+      job {
+        id
+        name
+        summary
+        creativeSummary
+        user {
+          id
+          email
+        }
+      }
       paymentTerms {
         id
         percent
