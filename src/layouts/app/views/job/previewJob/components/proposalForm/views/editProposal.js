@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Slide, TextField, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
@@ -12,16 +12,15 @@ import {
 import PaymentTerm from '../components';
 import autosave from '../../../../../../../../utils/autosave';
 import { toaster } from '../../../../../../../../utils/toaster';
-import { Mutation, Query } from 'react-apollo';
+import { Mutation } from 'react-apollo';
 import {
   CREATE_CONTRACT,
   UPDATE_CONTRACT,
   SUBMIT_CONTRACT,
   CREATE_TERM,
 } from '../../../../../../../../data/mutations';
-import { GET_CONTRACT } from '../../../../../../../../data/queries';
 
-export default function EditProposalForm({ jobId }) {
+export default function EditProposalForm({ jobId, contractData }) {
   const classes = useStyles();
 
   const [wholeFigures, setWholeFigures] = React.useState(false);
@@ -32,7 +31,6 @@ export default function EditProposalForm({ jobId }) {
   });
   const [detailsLock, setDetailsLock] = React.useState(false);
   const [saveLock, setSaveLock] = React.useState(false);
-
   const [contract, setContract] = React.useState({
     id: 'new',
     notes: '',
@@ -42,6 +40,23 @@ export default function EditProposalForm({ jobId }) {
     currency: 'GBP',
     status: '',
   });
+
+  useEffect(() => {
+    const paymentTerms = contractData.paymentTerms;
+
+    setContract({
+      id: contractData.id,
+      paymentTerms: paymentTerms,
+      notes: contractData.notes,
+      deadline: contractData.deadline,
+      cost: contractData.cost ? contractData.cost : '0',
+      currency: contractData.currency,
+      status: contractData.status,
+    });
+    const percentLockCalc = calculatePercent(paymentTerms);
+    setPercentLock(percentLockCalc);
+    percentLockCalc.sum >= 0 ? setSaveLock(false) : setSaveLock(true);
+  }, [contractData]);
 
   function addPaymentTerm(newValue) {
     setContract({
@@ -342,36 +357,6 @@ upon completion of this contract.`,
               );
             }}
           </Mutation>
-          <Query
-            query={GET_CONTRACT}
-            variables={{ jobId }}
-            onCompleted={(data) => {
-              if (data.getContract.length > 0) {
-                const contract = data.getContract[0];
-                const paymentTerms = data.getContract[0].paymentTerms;
-
-                setContract({
-                  id: contract.id,
-                  paymentTerms: paymentTerms,
-                  notes: contract.notes,
-                  deadline: contract.deadline,
-                  cost: contract.cost ? contract.cost : 0,
-                  currency: contract.currency,
-                  status: contract.status,
-                });
-                const percentLockCalc = calculatePercent(paymentTerms);
-                setPercentLock(percentLockCalc);
-                percentLockCalc.sum >= 0
-                  ? setSaveLock(false)
-                  : setSaveLock(true);
-              }
-            }}
-            fetchPolicy="network-only"
-          >
-            {({ data }) => {
-              return null;
-            }}
-          </Query>
         </div>
       )}
     </Slide>
