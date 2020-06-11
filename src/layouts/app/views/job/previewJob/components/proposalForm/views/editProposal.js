@@ -16,7 +16,6 @@ import { Mutation } from 'react-apollo';
 import {
   CREATE_CONTRACT,
   UPDATE_CONTRACT,
-  SUBMIT_CONTRACT,
   CREATE_TERM,
 } from '../../../../../../../../data/mutations';
 

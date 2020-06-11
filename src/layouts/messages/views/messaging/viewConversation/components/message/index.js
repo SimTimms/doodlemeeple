@@ -3,6 +3,7 @@ import { Typography, Card } from '@material-ui/core';
 import clsx from 'clsx';
 import { useStyles } from './styles';
 import { timeDifferenceForDate } from '../../../../../../../utils/dates';
+import { IconButton } from '../../../../../../../components';
 import Cookies from 'js-cookie';
 
 export function Message({ message, history }) {
@@ -62,15 +63,18 @@ export function Message({ message, history }) {
                   {message.messageStr.indexOf('QUOTE SUBMITTED:') === -1 ? (
                     message.messageStr
                   ) : (
-                    <button
-                      onClick={() =>
+                    <IconButton
+                      title="View Quote"
+                      icon="request_quote"
+                      color="warning"
+                      disabled={false}
+                      styleOverride={null}
+                      onClickEvent={() =>
                         history.push(
                           message.messageStr.replace('QUOTE SUBMITTED:', ''),
                         )
                       }
-                    >
-                      View Quote
-                    </button>
+                    />
                   )}
                 </Typography>
               </div>
