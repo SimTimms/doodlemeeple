@@ -95,8 +95,8 @@ export const CONVERSATIONS = gql`
 `;
 
 export const DETERMINE_CONVERSATION_ID = gql`
-  query DetermineConversationId($jobId: String!) {
-    determineConversationId(jobId: $jobId)
+  query DetermineConversationId($jobId: String!, $userId: String) {
+    determineConversationId(jobId: $jobId, userId: $userId)
   }
 `;
 
@@ -295,6 +295,7 @@ export const PREVIEW_CONTRACT = gql`
       status
       updatedAt
       user {
+        name
         email
         id
       }

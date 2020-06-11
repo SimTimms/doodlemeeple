@@ -16,6 +16,7 @@ import ProposalForm from './components/proposalForm';
 export default function PreviewJob({ theme, jobId, history }) {
   const classes = useStyles();
   const [job, setJob] = React.useState({
+    id: null,
     name: '',
     img: '',
     summary: '',
@@ -27,7 +28,6 @@ export default function PreviewJob({ theme, jobId, history }) {
     showreel: '',
     type: 'job',
     creativeSummary: '',
-    id: 'new',
     gameId: '',
     submitted: false,
     user: { name: '', id: '' },
@@ -153,18 +153,21 @@ export default function PreviewJob({ theme, jobId, history }) {
             return null;
           }}
         </Query>
-        <Query
-          query={DETERMINE_CONVERSATION_ID}
-          variables={{ jobId: jobId }}
-          fetchPolicy="network-only"
-          onCompleted={(data) => {
-            setConversationId(data.determineConversationId);
-          }}
-        >
-          {({ data }) => {
-            return null;
-          }}
-        </Query>
+        {job.id && (
+          <Query
+            query={DETERMINE_CONVERSATION_ID}
+            variables={{ jobId: jobId, userId: job.user.id }}
+            fetchPolicy="network-only"
+            onCompleted={(data) => {
+              console.log(data);
+              setConversationId(data.determineConversationId);
+            }}
+          >
+            {({ data }) => {
+              return null;
+            }}
+          </Query>
+        )}
       </div>
     </Slide>
   );

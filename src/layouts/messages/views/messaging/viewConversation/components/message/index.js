@@ -5,7 +5,7 @@ import { useStyles } from './styles';
 import { timeDifferenceForDate } from '../../../../../../../utils/dates';
 import Cookies from 'js-cookie';
 
-export function Message({ message }) {
+export function Message({ message, history }) {
   const classes = useStyles();
   const isUserMessage = message.sender.id !== Cookies.get('userId');
 
@@ -59,7 +59,19 @@ export function Message({ message }) {
                   </Typography>
                 </div>
                 <Typography color="textPrimary" component="p">
-                  {message.messageStr}
+                  {message.messageStr.indexOf('QUOTE SUBMITTED:') === -1 ? (
+                    message.messageStr
+                  ) : (
+                    <button
+                      onClick={() =>
+                        history.push(
+                          message.messageStr.replace('QUOTE SUBMITTED:', ''),
+                        )
+                      }
+                    >
+                      View Quote
+                    </button>
+                  )}
                 </Typography>
               </div>
             </div>

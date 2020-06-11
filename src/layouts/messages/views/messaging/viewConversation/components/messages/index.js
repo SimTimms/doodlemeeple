@@ -13,6 +13,7 @@ export default function Messages({
   classes,
   subscribe,
   moreButton,
+  history,
 }) {
   const thisUserId = Cookies.get('userId');
   const [messageArray, setMessageArray] = React.useState([]);
@@ -69,13 +70,17 @@ export default function Messages({
   }
 
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <div className={classes.cardGrid}>
         {moreButton}
         {messageArray.map((message, index) => {
           return (
             message.sender && (
-              <Message key={`message_${index}`} message={message} />
+              <Message
+                key={`message_${index}`}
+                message={message}
+                history={history}
+              />
             )
           );
         })}

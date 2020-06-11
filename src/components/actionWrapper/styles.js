@@ -8,5 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     flexDirection: 'row',
     width: '100%',
+    borderTop: '1px dotted #ddd',
+    marginTop: 10,
   },
 }));

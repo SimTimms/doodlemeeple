@@ -1,7 +1,6 @@
 import React from 'react';
 import { Slide, Typography } from '@material-ui/core';
 import { Divider, ActionWrapper } from '../../../../../../../../components';
-import { EditButton, SubmitButton } from './components';
 import moment from 'moment';
 
 export default function ViewProposal({ jobId, contractData, setContract }) {
@@ -10,9 +9,7 @@ export default function ViewProposal({ jobId, contractData, setContract }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div style={{ padding: 20, boxSizing: 'border-box' }}>
-        <Typography variant="h4" style={{ textAlign: 'center' }}>
-          General Service Agreement | DRAFT
-        </Typography>
+        <Typography variant="h3">General Service Agreement </Typography>
         <Divider />
         <Typography>
           <b>

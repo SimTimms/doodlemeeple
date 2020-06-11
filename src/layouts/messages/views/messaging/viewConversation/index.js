@@ -21,7 +21,7 @@ export default function ViewConversation({ history, conversationId, titles }) {
             button={null}
           />
         )}
-        <div>
+        <div style={{ width: '100%' }}>
           <Query
             query={CONVERSATION}
             fetchPolicy="network-only"
@@ -29,7 +29,7 @@ export default function ViewConversation({ history, conversationId, titles }) {
           >
             {({ data, loading, subscribeToMore }) => {
               return data ? (
-                <div>
+                <div style={{ width: '100%' }}>
                   <div
                     style={{
                       display: 'flex',
@@ -75,6 +75,7 @@ export default function ViewConversation({ history, conversationId, titles }) {
                   <Messages
                     messageArrayIn={data.getConversation.messages.reverse()}
                     classes={classes}
+                    history={history}
                     conversationId={conversationId}
                     subscribe={subscribeToMore}
                     moreButton={
