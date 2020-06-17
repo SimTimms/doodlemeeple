@@ -264,6 +264,8 @@ export const GET_CONTRACT = gql`
       user {
         email
         id
+        name
+        profileImg
       }
       job {
         id
@@ -297,6 +299,8 @@ export const PREVIEW_CONTRACT = gql`
       user {
         name
         email
+        summary
+        profileImg
         id
       }
       job {

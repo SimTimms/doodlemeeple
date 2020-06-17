@@ -113,16 +113,17 @@ export default function PreviewJob({ theme, jobId, history }) {
               <IconButton
                 disabled={false}
                 color="secondary"
-                icon={chatOpen ? 'keyboard_arrow_up' : 'chat'}
-                title={chatOpen ? 'Close Chat' : 'Open Chat'}
+                icon={chatOpen ? 'chat' : 'chat'}
+                title={chatOpen ? 'Hide' : 'Chat'}
                 onClickEvent={() => setChatOpen(chatOpen ? false : true)}
                 styleOverride={null}
               />
+
               <IconButton
                 color="primary"
                 disabled={false}
-                icon={proposalOpen ? 'keyboard_arrow_down' : 'fact_check'}
-                title={proposalOpen ? 'Minimise Proposal' : 'Create Proposal'}
+                icon={proposalOpen ? 'fact_check' : 'fact_check'}
+                title={proposalOpen ? 'Close' : 'Quote'}
                 onClickEvent={() =>
                   setProposalOpen(proposalOpen ? false : true)
                 }
@@ -132,9 +133,9 @@ export default function PreviewJob({ theme, jobId, history }) {
             {proposalOpen && (
               <Card className={classes.card} style={{ marginTop: 20 }}>
                 <InlineHeader>
-                  <IconTitle icon="fact_check" title="Proposal" />
+                  <IconTitle icon="fact_check" title="Quote" />
                 </InlineHeader>
-                <ProposalForm jobId={jobId} history={history} />
+                <ProposalForm jobId={jobId} />
               </Card>
             )}
           </SectionWrapper>

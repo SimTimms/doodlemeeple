@@ -1,13 +1,15 @@
 import React from 'react';
-import { IconButton } from '../../../../../../../../../components';
+import { IconButton } from '../';
 import { Mutation } from 'react-apollo';
-import { toaster } from '../../../../../../../../../utils/toaster';
-import {
-  UPDATE_CONTRACT,
-  SUBMIT_CONTRACT,
-} from '../../../../../../../../../data/mutations';
+import { toaster } from '../../utils/toaster';
+import { UPDATE_CONTRACT } from '../../data/mutations';
 
-export function EditButton({ contract, jobId, setContract }) {
+export default function EditContractButton({
+  contract,
+  jobId,
+  setContract,
+  title,
+}) {
   return (
     <Mutation
       mutation={UPDATE_CONTRACT}
@@ -30,40 +32,10 @@ export function EditButton({ contract, jobId, setContract }) {
       {(mutation) => {
         return (
           <IconButton
-            title="Edit Proposal"
+            title={title}
             icon="edit"
             styleOverride={null}
             color="secondary"
-            disabled={false}
-            onClickEvent={() => {
-              mutation();
-            }}
-          />
-        );
-      }}
-    </Mutation>
-  );
-}
-
-export function SubmitButton({ contract, jobId, setContract }) {
-  return (
-    <Mutation
-      mutation={SUBMIT_CONTRACT}
-      variables={{
-        id: contract.id,
-      }}
-      onCompleted={(data) => {
-        toaster('Submitting...');
-        setContract({ ...contract, status: 'submitted' });
-      }}
-    >
-      {(mutation) => {
-        return (
-          <IconButton
-            title="Submit Proposal"
-            icon="send"
-            styleOverride={null}
-            color="primary"
             disabled={false}
             onClickEvent={() => {
               mutation();

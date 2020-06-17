@@ -82,6 +82,12 @@ export const SUBMIT_CONTRACT = gql`
   }
 `;
 
+export const SIGN_CONTRACT = gql`
+  mutation SignContract($contractId: String!) {
+    signContract(contractId: $contractId)
+  }
+`;
+
 export const CREATE_CONTRACT = gql`
   mutation CreateContract($id: String!, $contract: ContractInput!) {
     createContract(id: $id, contract: $contract)

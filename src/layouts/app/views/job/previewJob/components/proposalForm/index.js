@@ -1,15 +1,17 @@
 import React from 'react';
 import { GET_CONTRACT } from '../../../../../../../data/queries';
 import { Query } from 'react-apollo';
-import { Typography } from '@material-ui/core';
 import EditProposalForm from './views/editProposal';
-import ViewProposal from './views/viewProposal';
-import { ActionWrapper } from '../../../../../../../components';
-import { EditButton, ViewButton } from './views/components';
 
-import { LoadIcon } from '../../../../../../../components';
+import {
+  LoadIcon,
+  ContractSummary,
+  ActionWrapper,
+  EditContractButton,
+  SubmitContractButton,
+} from '../../../../../../../components';
 
-export default function ProposalForm({ jobId, history }) {
+export default function ProposalForm({ jobId }) {
   const [contract, setContract] = React.useState({
     id: '',
     notes: '',
@@ -22,27 +24,36 @@ export default function ProposalForm({ jobId, history }) {
   });
 
   return (
-    <div>
+    <div style={{ padding: 10 }}>
       {contract.status === 'loading' ? (
         <LoadIcon />
       ) : contract.status === 'submitted' ? (
-        <ViewProposal
-          contractData={contract}
-          jobId={jobId}
-          setContract={setContract}
-        />
-      ) : contract.status === 'sent' ? (
         <div>
-          <Typography variant="h1" component="h2">
-            Proposal Sent
-          </Typography>
+          <ContractSummary contractId={contract.id} />
           <ActionWrapper>
-            <EditButton
+            <EditContractButton
+              contract={contract}
+              jobId={jobId}
+              setContract={setContract}
+              title="Retract & Edit Quote"
+            />
+          </ActionWrapper>
+        </div>
+      ) : contract.status === 'preview' ? (
+        <div>
+          <ContractSummary contractId={contract.id} />
+          <ActionWrapper>
+            <EditContractButton
+              contract={contract}
+              jobId={jobId}
+              setContract={setContract}
+              title="Edit Quote"
+            />
+            <SubmitContractButton
               contract={contract}
               jobId={jobId}
               setContract={setContract}
             />
-            <ViewButton history={history} contractId={contract.id} />
           </ActionWrapper>
         </div>
       ) : (
@@ -57,7 +68,6 @@ export default function ProposalForm({ jobId, history }) {
         variables={{ jobId }}
         fetchPolicy="network-only"
         onCompleted={(data) => {
-          console.log(data);
           data.getContract.length > 0
             ? setContract({ ...data.getContract[0] })
             : setContract({ ...contract, status: '' });

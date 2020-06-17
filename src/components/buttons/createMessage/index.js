@@ -41,8 +41,7 @@ export default function CreateMessage({ conversationId, updateMessageArray }) {
               icon="send"
               title="Send"
               disabled={false}
-              secondaryColor={false}
-              warning={false}
+              color="secondary"
               onClickEvent={() => {
                 updateMessageArray(newMessage);
                 mutation();

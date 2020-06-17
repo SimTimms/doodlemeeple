@@ -9,6 +9,7 @@ import Messages from './components/messages';
 export default function ViewConversation({ history, conversationId, titles }) {
   const classes = useStyles();
   const [pageNbr, setPageNbr] = React.useState(1);
+  const [messages, setMessages] = React.useState([]);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -26,6 +27,12 @@ export default function ViewConversation({ history, conversationId, titles }) {
             query={CONVERSATION}
             fetchPolicy="network-only"
             variables={{ conversationId: conversationId, page: pageNbr }}
+            onCompleted={(data) =>
+              setMessages([
+                ...data.getConversation.messages.reverse(),
+                ...messages,
+              ])
+            }
           >
             {({ data, loading, subscribeToMore }) => {
               return data ? (
@@ -73,7 +80,7 @@ export default function ViewConversation({ history, conversationId, titles }) {
                     })}
                   </div>
                   <Messages
-                    messageArrayIn={data.getConversation.messages.reverse()}
+                    messageArrayIn={messages}
                     classes={classes}
                     history={history}
                     conversationId={conversationId}

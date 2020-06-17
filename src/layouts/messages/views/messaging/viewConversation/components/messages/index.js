@@ -53,6 +53,7 @@ export default function Messages({
   });
 
   function updateMessageArray(messageIn) {
+    console.log(messageIn);
     setMessageArray([
       ...messageArray,
       {
