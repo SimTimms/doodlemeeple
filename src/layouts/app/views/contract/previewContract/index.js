@@ -24,6 +24,7 @@ export default function PreviewContract({ contractId, history }) {
   const [contract, setContract] = React.useState({
     id: null,
     user: { id: null },
+    signedDate: null,
   });
   const [job, setJob] = React.useState({ id: null, user: { id: '' } });
   const [openContract, setOpenContract] = React.useState(false);
@@ -44,9 +45,13 @@ export default function PreviewContract({ contractId, history }) {
           }}
         >
           {({ loading, data }) => {
-            const contractData = data && data.previewContract;
+            const contractData = data ? data.previewContract : null;
+            const signed =
+              contractData && contractData.signedBy.length > 0 ? true : false;
 
-            return !contractData ? (
+            return loading ? (
+              <LoadIcon />
+            ) : !contractData ? (
               <Typography
                 variant="h6"
                 style={{ textAlign: 'center', marginTop: 30 }}
@@ -54,8 +59,6 @@ export default function PreviewContract({ contractId, history }) {
                 This quote no longer exists, it may have been retracted or
                 supersceded
               </Typography>
-            ) : loading ? (
-              <LoadIcon />
             ) : (
               data && (
                 <div className={classes.fullWidth}>
@@ -64,6 +67,15 @@ export default function PreviewContract({ contractId, history }) {
                       <IconTitle icon="request_quote" title="Quote" />
                     </InlineHeader>
                     <div className={classes.wrapper}>
+                      {signed && (
+                        <div className={classes.accepted}>
+                          <Typography variant="h4">Accepted</Typography>
+                          <Typography variant="body1">
+                            This quote was accepted by the Client on{' '}
+                            {moment(contractData.signedDate).format('LLLL')}
+                          </Typography>
+                        </div>
+                      )}
                       <ContractSummary contractId={contractId} />
                       {chatOpen && (
                         <Card className={classes.root}>
@@ -91,14 +103,16 @@ export default function PreviewContract({ contractId, history }) {
                         </Card>
                       )}
                       <ActionWrapper>
-                        <IconButton
-                          title="Decline"
-                          color="warning"
-                          icon="thumb_down"
-                          disabled={false}
-                          onClickEvent={() => {}}
-                          styleOverride={null}
-                        />
+                        {!signed && (
+                          <IconButton
+                            title="Decline"
+                            color="warning"
+                            icon="thumb_down"
+                            disabled={false}
+                            onClickEvent={() => {}}
+                            styleOverride={null}
+                          />
+                        )}
                         <IconButton
                           color="secondary"
                           icon={chatOpen ? 'keyboard_arrow_up' : 'chat'}
@@ -109,16 +123,18 @@ export default function PreviewContract({ contractId, history }) {
                           disabled={false}
                           styleOverride={null}
                         />
-                        <IconButton
-                          title="Accept"
-                          color="primary"
-                          icon="thumb_up"
-                          disabled={false}
-                          onClickEvent={() => {
-                            setOpenContract(true);
-                          }}
-                          styleOverride={null}
-                        />
+                        {!signed && (
+                          <IconButton
+                            title="Accept"
+                            color="primary"
+                            icon="thumb_up"
+                            disabled={false}
+                            onClickEvent={() => {
+                              setOpenContract(true);
+                            }}
+                            styleOverride={null}
+                          />
+                        )}
                       </ActionWrapper>
                     </div>
                   </Card>

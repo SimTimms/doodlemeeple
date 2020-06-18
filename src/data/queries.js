@@ -296,6 +296,11 @@ export const PREVIEW_CONTRACT = gql`
       currency
       status
       updatedAt
+      signedBy {
+        id
+        name
+      }
+      signedDate
       user {
         name
         email

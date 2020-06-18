@@ -11,8 +11,17 @@ export const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
   },
   fullWidth: { width: '100%' },
+  accepted: {
+    width: '100%',
+    background: theme.palette.secondary.main,
+    color: '#fff',
+    textAlign: 'center',
+    padding: '15px 0 15px 0',
+    marginBottom: 20,
+  },
   wrapper: {
     padding: 40,
+    paddingTop: 20,
     boxSizing: 'border-box',
     width: '100%',
     background: '#fff',

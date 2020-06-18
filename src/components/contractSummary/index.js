@@ -28,16 +28,16 @@ export default function ContractSummary({ contractId }) {
               <Typography variant="body1" style={{ marginTop: 10 }}>
                 <b>Subject to the following payment terms:</b>
               </Typography>
-              <Typography variant="body1">
-                {contractData.paymentTerms.map((term) => {
-                  paymentTermsSum = paymentTermsSum - term.percent;
-                  return (
-                    <Typography variant="body1">
-                      {`${term.percent}% upon ${term.description}`}
-                    </Typography>
-                  );
-                })}
-              </Typography>
+
+              {contractData.paymentTerms.map((term, index) => {
+                paymentTermsSum = paymentTermsSum - term.percent;
+                return (
+                  <Typography variant="body1" key={`term_summary_${index}`}>
+                    {`${term.percent}% upon ${term.description}`}
+                  </Typography>
+                );
+              })}
+
               {paymentTermsSum > 0 && (
                 <Typography variant="body1">
                   {`${paymentTermsSum}% of the Payment upon completion of the Services`}

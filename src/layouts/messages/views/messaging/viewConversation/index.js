@@ -79,22 +79,24 @@ export default function ViewConversation({ history, conversationId, titles }) {
                       );
                     })}
                   </div>
-                  <Messages
-                    messageArrayIn={messages}
-                    classes={classes}
-                    history={history}
-                    conversationId={conversationId}
-                    subscribe={subscribeToMore}
-                    moreButton={
-                      <Button
-                        onClick={() => {
-                          setPageNbr(pageNbr + 1);
-                        }}
-                      >
-                        <Icon>more_horiz</Icon>
-                      </Button>
-                    }
-                  />
+                  {messages.length > 0 && (
+                    <Messages
+                      messageArrayIn={messages}
+                      classes={classes}
+                      history={history}
+                      conversationId={conversationId}
+                      subscribe={subscribeToMore}
+                      moreButton={
+                        <Button
+                          onClick={() => {
+                            setPageNbr(pageNbr + 1);
+                          }}
+                        >
+                          <Icon>more_horiz</Icon>
+                        </Button>
+                      }
+                    />
+                  )}
                 </div>
               ) : (
                 loading && <LoadIcon />
