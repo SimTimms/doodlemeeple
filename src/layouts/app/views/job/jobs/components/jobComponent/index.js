@@ -79,7 +79,7 @@ export function EmptyJobComponent() {
           style={{ width: '100%', paddingLeft: 10, color: '#444' }}
           className={classes.cardSummary}
         >
-          Add a Job
+          Create a Brief
         </Typography>
       </div>
     </Link>

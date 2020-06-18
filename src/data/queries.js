@@ -237,6 +237,7 @@ export const JOBS = gql`
         backgroundImg
         name
       }
+      contract
     }
   }
 `;

@@ -16,6 +16,8 @@ export default function Jobs() {
         <ContentHeader
           title="Briefs"
           subTitle="The jobs you've posted on DoodleMeeple"
+          subTitleExtra=""
+          button={null}
         />
         <div className={classes.cardGrid}>
           {jobArray.map((job, index) => {
