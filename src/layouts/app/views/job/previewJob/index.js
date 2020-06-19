@@ -11,10 +11,12 @@ import {
 import ViewConversation from '../../../../messages/views/messaging/viewConversation';
 import { Query } from 'react-apollo';
 import { JOB, DETERMINE_CONVERSATION_ID } from '../../../../../data/queries';
+import ProposalForm from './components/proposalForm';
 
 export default function PreviewJob({ theme, jobId, history }) {
   const classes = useStyles();
   const [job, setJob] = React.useState({
+    id: null,
     name: '',
     img: '',
     summary: '',
@@ -26,13 +28,13 @@ export default function PreviewJob({ theme, jobId, history }) {
     showreel: '',
     type: 'job',
     creativeSummary: '',
-    id: 'new',
     gameId: '',
     submitted: false,
     user: { name: '', id: '' },
   });
   const [conversationId, setConversationId] = React.useState(null);
   const [chatOpen, setChatOpen] = React.useState(false);
+  const [proposalOpen, setProposalOpen] = React.useState(false);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -73,32 +75,15 @@ export default function PreviewJob({ theme, jobId, history }) {
                     onClickEvent={() => {
                       history.push(`/app/view-game/${job.game.id}`);
                     }}
-                    secondaryColor={true}
+                    color="secondary"
                     disabled={false}
                     icon="keyboard_arrow_right"
                     title="View Game"
+                    styleOverride={null}
                   />
                 )}
               </div>
             </Card>
-            <div className={classes.actionWrapper}>
-              <IconButton
-                disabled={false}
-                secondaryColor={true}
-                warning={false}
-                icon={chatOpen ? 'keyboard_arrow_down' : 'chat'}
-                title={chatOpen ? 'Close Chat' : 'Open Chat'}
-                onClickEvent={() => setChatOpen(chatOpen ? false : true)}
-              />
-              <IconButton
-                warning={false}
-                disabled={false}
-                secondaryColor={false}
-                icon="check_circle_outline"
-                title="Accept"
-                onClickEvent={() => setChatOpen(chatOpen ? false : true)}
-              />
-            </div>
             {chatOpen && (
               <Card className={classes.card}>
                 <InlineHeader>
@@ -124,6 +109,35 @@ export default function PreviewJob({ theme, jobId, history }) {
                 </div>
               </Card>
             )}
+            <div className={classes.actionWrapper}>
+              <IconButton
+                disabled={false}
+                color="secondary"
+                icon={chatOpen ? 'chat' : 'chat'}
+                title={chatOpen ? 'Hide' : 'Chat'}
+                onClickEvent={() => setChatOpen(chatOpen ? false : true)}
+                styleOverride={null}
+              />
+
+              <IconButton
+                color="primary"
+                disabled={false}
+                icon={proposalOpen ? 'fact_check' : 'fact_check'}
+                title={proposalOpen ? 'Close' : 'Quote'}
+                onClickEvent={() =>
+                  setProposalOpen(proposalOpen ? false : true)
+                }
+                styleOverride={null}
+              />
+            </div>
+            {proposalOpen && (
+              <Card className={classes.card} style={{ marginTop: 20 }}>
+                <InlineHeader>
+                  <IconTitle icon="fact_check" title="Quote" />
+                </InlineHeader>
+                <ProposalForm jobId={jobId} />
+              </Card>
+            )}
           </SectionWrapper>
         </div>
 
@@ -140,18 +154,21 @@ export default function PreviewJob({ theme, jobId, history }) {
             return null;
           }}
         </Query>
-        <Query
-          query={DETERMINE_CONVERSATION_ID}
-          variables={{ jobId: jobId }}
-          fetchPolicy="network-only"
-          onCompleted={(data) => {
-            setConversationId(data.determineConversationId);
-          }}
-        >
-          {({ data }) => {
-            return null;
-          }}
-        </Query>
+        {job.id && (
+          <Query
+            query={DETERMINE_CONVERSATION_ID}
+            variables={{ jobId: jobId, userId: job.user.id }}
+            fetchPolicy="network-only"
+            onCompleted={(data) => {
+              console.log(data);
+              setConversationId(data.determineConversationId);
+            }}
+          >
+            {({ data }) => {
+              return null;
+            }}
+          </Query>
+        )}
       </div>
     </Slide>
   );

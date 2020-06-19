@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Button, Icon } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { Mutation } from 'react-apollo';
 import { CREATE_MESSAGE } from '../../../data/mutations';
 import { useStyles } from './styles';
@@ -31,7 +31,7 @@ export default function CreateMessage({ conversationId, updateMessageArray }) {
               type="text"
               value={newMessage}
               onChange={(e) => {
-                setNewMessage(e.target.value);
+                setNewMessage(e.target.value.substring(0, 512));
               }}
               margin="normal"
               variant="outlined"
@@ -41,8 +41,7 @@ export default function CreateMessage({ conversationId, updateMessageArray }) {
               icon="send"
               title="Send"
               disabled={false}
-              secondaryColor={false}
-              warning={false}
+              color="secondary"
               onClickEvent={() => {
                 updateMessageArray(newMessage);
                 mutation();

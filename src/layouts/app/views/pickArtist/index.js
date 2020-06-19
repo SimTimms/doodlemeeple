@@ -79,6 +79,7 @@ export function PickArtist({
             name="Your Picks (5 Maximum)"
             description="Pick up to 5 creatives that you would like to work with"
             warning=""
+            inline={false}
           />
           <ArtistLineup
             removeInviteList={removeInviteList}
@@ -91,6 +92,7 @@ export function PickArtist({
             name="Submit Brief"
             description="When you submit a brief your chosen creatives will be invited to quote for the work"
             warning=""
+            inline={false}
           />
           <div className={classes.miniProfileActionWrapper}>
             <div className={classes.miniProfileWrapper}>
@@ -132,7 +134,12 @@ export function PickArtist({
           </div>
         </Card>
         <div style={{ width: '100%', marginTop: 50 }}>
-          <FieldTitle name="Invite Artists" description="" warning="" />
+          <FieldTitle
+            name="Invite Artists"
+            description=""
+            warning=""
+            inline={false}
+          />
           <Creatives
             history={history}
             favourites={favourites}

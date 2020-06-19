@@ -74,7 +74,11 @@ export const useStyles = makeStyles((theme) => ({
     background: '#ddd',
   },
   iconGame: {
-    marginRight: -10,
+    marginRight: 10,
+    minWidth: 20,
+    maxWidth: 20,
+    minHeight: 20,
+    maxHeight: 20,
   },
   notifications: {
     display: 'flex',

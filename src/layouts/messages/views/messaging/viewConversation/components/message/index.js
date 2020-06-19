@@ -3,9 +3,10 @@ import { Typography, Card } from '@material-ui/core';
 import clsx from 'clsx';
 import { useStyles } from './styles';
 import { timeDifferenceForDate } from '../../../../../../../utils/dates';
+import { IconButton } from '../../../../../../../components';
 import Cookies from 'js-cookie';
 
-export function Message({ message }) {
+export function Message({ message, history }) {
   const classes = useStyles();
   const isUserMessage = message.sender.id !== Cookies.get('userId');
 
@@ -59,7 +60,22 @@ export function Message({ message }) {
                   </Typography>
                 </div>
                 <Typography color="textPrimary" component="p">
-                  {message.messageStr}
+                  {message.messageStr.indexOf('QUOTE SUBMITTED:') === -1 ? (
+                    message.messageStr
+                  ) : (
+                    <IconButton
+                      title="View Quote"
+                      icon="request_quote"
+                      color="warning"
+                      disabled={false}
+                      styleOverride={null}
+                      onClickEvent={() =>
+                        history.push(
+                          message.messageStr.replace('QUOTE SUBMITTED:', ''),
+                        )
+                      }
+                    />
+                  )}
                 </Typography>
               </div>
             </div>

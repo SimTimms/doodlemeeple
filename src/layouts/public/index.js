@@ -12,6 +12,7 @@ import { useStyles } from './styles';
 export function PublicLayout(props) {
   const [page, setPage] = React.useState('home');
   const classes = useStyles();
+  console.log(page);
 
   const pageJump = props.match ? props.match.params.page : null;
   const token = props

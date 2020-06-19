@@ -59,6 +59,7 @@ export function ProfileHeader({
         name="My Identity"
         description="Your profile picture or logo and name, callsign, company name, handle, alias or whatever else you want to be know as. Keep it clean please. Image Requirements: 140 x 140px, png or jpg, less than 2MB"
         warning=""
+        inline={false}
       />
       <div
         className={clsx({
@@ -127,7 +128,9 @@ export function ProfileHeader({
               if (autosaveFunction) {
                 autosave(autosaveFunction, 'username');
               }
-              setUserName(e.target.value.replace(/[^A-Za-z0-9 ]/g, ''));
+              setUserName(
+                e.target.value.substring(0, 26).replace(/[^A-Za-z0-9 ]/g, ''),
+              );
             }}
             margin="normal"
             variant="outlined"

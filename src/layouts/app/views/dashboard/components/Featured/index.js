@@ -8,6 +8,7 @@ import { IconButton } from '../../../../../../components';
 import clsx from 'clsx';
 import { Query } from 'react-apollo';
 import { PROFILE_FEATURED } from '../../../../../../data/queries';
+import device from '../../../../../../assets/device.svg';
 
 export function Featured({ posts, featuredId, history }) {
   const classes = useStyles();
@@ -35,86 +36,99 @@ export function Featured({ posts, featuredId, history }) {
         return (
           <Card className={classes.card} key={`conversation_${index}`}>
             <div className={classes.rowWrapper}>
+              <div className={classes.postHeader}>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '100%',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <div className={classes.featuredText}>
+                    <img
+                      src={device}
+                      style={{ width: 20, marginRight: 10 }}
+                      alt=""
+                    />
+                    <Typography
+                      variant="body1"
+                      component="h4"
+                      style={{ color: 'rgba(0,0,0,0.6)' }}
+                    >
+                      Featured Creative
+                    </Typography>
+                  </div>
+                  <Typography
+                    variant="h5"
+                    component="h4"
+                    className={classes.postHeaderText}
+                  >
+                    <Query
+                      query={PROFILE_FEATURED}
+                      variables={{ userId: featuredId }}
+                      fetchPolicy="network-only"
+                    >
+                      {({ data }) => {
+                        return data ? (
+                          <img
+                            className={classes.profileWrapperFeatured}
+                            src={data.profilePreview.profileImg}
+                            alt=""
+                          />
+                        ) : null;
+                      }}
+                    </Query>
+                    <b>{title}</b>
+                  </Typography>
+                </div>
+
+                <Typography
+                  style={{
+                    color: '#222',
+                    marginTop: 5,
+                    textAlign: 'center',
+                  }}
+                  component="p"
+                >
+                  {message}
+                  <a
+                    href={linkTo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      width: 100,
+                      color: '#222',
+                    }}
+                  >
+                    Read our interview
+                  </a>
+                </Typography>
+                <div
+                  style={{
+                    display: 'flex',
+                    width: '100%',
+                    justifyContent: 'center',
+                    marginTop: 10,
+                  }}
+                >
+                  <IconButton
+                    color="primary"
+                    disabled={false}
+                    onClickEvent={() => {
+                      history.push(`/public-preview/${featuredId}`);
+                    }}
+                    icon="portrait"
+                    title="Profile"
+                    styleOverride={null}
+                  />
+                </div>
+              </div>
               <div
                 className={classes.postImage}
                 style={{ backgroundImage: `url(${media})` }}
-              >
-                <div className={classes.postHeader}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '100%',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Typography
-                      variant="h5"
-                      component="h4"
-                      className={classes.featuredText}
-                    >
-                      Featured Artist
-                    </Typography>
-
-                    <Typography
-                      variant="h5"
-                      component="h4"
-                      className={classes.postHeaderText}
-                    >
-                      <Query
-                        query={PROFILE_FEATURED}
-                        variables={{ userId: featuredId }}
-                        fetchPolicy="network-only"
-                      >
-                        {({ data }) => {
-                          return data ? (
-                            <img
-                              className={classes.profileWrapperFeatured}
-                              src={data.profilePreview.profileImg}
-                            />
-                          ) : null;
-                        }}
-                      </Query>
-                      <b>{title}</b>
-                    </Typography>
-                  </div>
-
-                  <Typography style={{ color: '#444' }} component="p">
-                    {message}
-                    <a
-                      href={linkTo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        width: 100,
-                        color: '#222',
-                      }}
-                    >
-                      Read the full story
-                    </a>
-                  </Typography>
-                  <div
-                    style={{
-                      display: 'flex',
-                      width: '100%',
-                      justifyContent: 'center',
-                      borderTop: '1px dotted #ccc',
-                      marginTop: 10,
-                    }}
-                  >
-                    <IconButton
-                      secondaryColor={false}
-                      disabled={false}
-                      onClickEvent={() => {
-                        history.push(`/public-preview/${featuredId}`);
-                      }}
-                      icon="portrait"
-                      title="Profile"
-                    />
-                  </div>
-                </div>
-              </div>
+              ></div>
             </div>
           </Card>
         );

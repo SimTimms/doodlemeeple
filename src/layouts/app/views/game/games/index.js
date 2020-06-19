@@ -15,10 +15,12 @@ export default function Games({ history }) {
         <ContentHeader
           title="Games"
           subTitle="List the games and jobs you need help with"
+          subTitleExtra=""
           button={null}
         />
         <div className={classes.cardGrid}>
           {gameArray.map((game, index) => {
+            console.log(game);
             return (
               <MessageComponent
                 key={`game_${index}`}
@@ -26,8 +28,10 @@ export default function Games({ history }) {
                 backgroundImg={game.backgroundImg}
                 profiles={null}
                 subtitle={game.name}
+                miniProfile={false}
                 count={game.jobs.length}
-                title={null}
+                title={''}
+                disabled={false}
                 onClickEvent={() => {
                   history.push(`/app/edit-game/${game.id}`);
                 }}
@@ -40,11 +44,13 @@ export default function Games({ history }) {
             backgroundImg={null}
             profiles={null}
             subtitle="New Game"
+            miniProfile={false}
             count={null}
             title="Create a new game"
             onClickEvent={() => {
               history.push(`/app/edit-game/new`);
             }}
+            disabled={false}
           />
         </div>
         <Query

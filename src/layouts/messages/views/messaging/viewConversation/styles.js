@@ -12,11 +12,17 @@ export const useStyles = makeStyles((theme) => ({
   },
   createWrapper: {
     padding: 20,
+    width: '100%',
+    textAlign: 'center',
+    boxSizing: 'border-box',
     background: '#fff',
-    borderRadius: 10,
+    borderRadius: '10px 10px 0 0',
     marginTop: 10,
     position: 'absolute',
     bottom: 0,
+    left: 0,
+    paddingLeft: 80,
+    paddingRight: 80,
   },
   participant: {
     display: 'flex',
@@ -32,7 +38,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   cardGrid: {
     width: '100%',
-    maxWidth: 424,
+    maxWidth: 500,
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'wrap',

@@ -8,8 +8,7 @@ export default function IconButton({
   onClickEvent,
   icon,
   title,
-  secondaryColor,
-  warning,
+  color,
   styleOverride,
 }) {
   const classes = useStyles();
@@ -17,8 +16,8 @@ export default function IconButton({
     <Button
       className={clsx({
         [classes.iconButton]: true,
-        [classes.iconButtonSecondary]: secondaryColor,
-        [classes.iconButtonWarning]: warning,
+        [classes.iconButtonSecondary]: color === 'secondary',
+        [classes.iconButtonWarning]: color === 'warning',
         [classes.iconButtonDisabled]: disabled,
       })}
       disabled={disabled}
@@ -29,7 +28,7 @@ export default function IconButton({
       <Icon
         className={clsx({
           [classes.iconButtonIcon]: true,
-          [classes.iconButtonIconSecondary]: secondaryColor,
+          [classes.iconButtonIconSecondary]: color === 'secondary',
         })}
       >
         {icon}

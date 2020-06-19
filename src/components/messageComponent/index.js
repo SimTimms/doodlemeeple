@@ -11,6 +11,7 @@ export default function MessageComponent({
   subtitle,
   count,
   title,
+  miniProfile,
   onClickEvent,
   disabled,
 }) {
@@ -25,19 +26,7 @@ export default function MessageComponent({
               [classes.notifications]: true,
             })}
           >
-            {backgroundImg && (
-              <div
-                className={clsx({
-                  [classes.icon]: true,
-                  [classes.iconGame]: true,
-                })}
-                style={{
-                  backgroundImage: `url(${backgroundImg})`,
-                }}
-              />
-            )}
-
-            {profiles &&
+            {profiles ? (
               profiles.map((user, index) => (
                 <div
                   key={`part_${index}`}
@@ -46,8 +35,16 @@ export default function MessageComponent({
                   })}
                   style={{ backgroundImage: `url(${user.profileImg})` }}
                 />
-              ))}
-            {count && (
+              ))
+            ) : (
+              <div
+                className={clsx({
+                  [classes.icon]: true,
+                })}
+                style={{ backgroundImage: `url(${backgroundImg})` }}
+              />
+            )}
+            {count ? (
               <Typography
                 variant="body1"
                 component="p"
@@ -58,18 +55,33 @@ export default function MessageComponent({
               >
                 {count < 9 ? count : '9+'}
               </Typography>
-            )}
+            ) : null}
           </div>
           <div className={classes.profileWrapper}>
             <div className={classes.wrapperOne}>
               <div className={classes.messageDetails}>
                 <div className={classes.rowWrapper}>
+                  {backgroundImg && miniProfile && (
+                    <div
+                      className={clsx({
+                        [classes.icon]: true,
+                        [classes.iconGame]: true,
+                      })}
+                      style={{
+                        backgroundImage: `url(${backgroundImg})`,
+                      }}
+                    />
+                  )}
                   <Typography
                     style={{ color: '#aaa' }}
                     variant="caption"
                     component="p"
                   >
-                    <b>{title}</b>
+                    <b>
+                      {title.length > 30
+                        ? `${title.substring(0, 30)}...`
+                        : title}
+                    </b>
                   </Typography>
                 </div>
                 <Typography

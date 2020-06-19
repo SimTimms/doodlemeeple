@@ -95,8 +95,8 @@ export const CONVERSATIONS = gql`
 `;
 
 export const DETERMINE_CONVERSATION_ID = gql`
-  query DetermineConversationId($jobId: String!) {
-    determineConversationId(jobId: $jobId)
+  query DetermineConversationId($jobId: String!, $userId: String) {
+    determineConversationId(jobId: $jobId, userId: $userId)
   }
 `;
 
@@ -236,6 +236,93 @@ export const JOBS = gql`
         id
         backgroundImg
         name
+      }
+      contract
+    }
+  }
+`;
+
+export const GET_PAYMENT_TERMS = gql`
+  query GetPaymentTerms($contractId: String!) {
+    getPaymentTerms(contractId: $contractId) {
+      id
+      description
+      percent
+    }
+  }
+`;
+
+export const GET_CONTRACT = gql`
+  query GetContract($jobId: String!) {
+    getContract(jobId: $jobId) {
+      id
+      notes
+      deadline
+      cost
+      currency
+      status
+      updatedAt
+      user {
+        email
+        id
+        name
+        profileImg
+      }
+      job {
+        id
+        name
+        summary
+        creativeSummary
+        user {
+          id
+          email
+        }
+      }
+      paymentTerms {
+        id
+        percent
+        description
+      }
+    }
+  }
+`;
+
+export const PREVIEW_CONTRACT = gql`
+  query PreviewContract($contractId: String!) {
+    previewContract(contractId: $contractId) {
+      id
+      notes
+      deadline
+      cost
+      currency
+      status
+      updatedAt
+      signedBy {
+        id
+        name
+      }
+      signedDate
+      user {
+        name
+        email
+        summary
+        profileImg
+        id
+      }
+      job {
+        id
+        name
+        summary
+        creativeSummary
+        user {
+          id
+          email
+        }
+      }
+      paymentTerms {
+        id
+        percent
+        description
       }
     }
   }

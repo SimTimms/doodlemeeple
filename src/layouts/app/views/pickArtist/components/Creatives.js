@@ -2,7 +2,7 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { CREATIVES } from '../../../../../data/queries';
-import { LoadIcon, ProfileCard } from '../../../../../components';
+import { ProfileCard } from '../../../../../components';
 
 export default function Creatives({
   favourites,
@@ -21,7 +21,7 @@ export default function Creatives({
       onCompleted={(data) => {}}
     >
       {({ data }) => {
-        return (
+        return data ? (
           <div className={classes.creativeWrapper}>
             {data.getCreatives.map((creative, index) => {
               return (
@@ -44,7 +44,7 @@ export default function Creatives({
               );
             })}
           </div>
-        );
+        ) : null;
       }}
     </Query>
   );

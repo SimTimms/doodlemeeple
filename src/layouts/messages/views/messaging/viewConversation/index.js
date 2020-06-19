@@ -9,6 +9,7 @@ import Messages from './components/messages';
 export default function ViewConversation({ history, conversationId, titles }) {
   const classes = useStyles();
   const [pageNbr, setPageNbr] = React.useState(1);
+  const [messages, setMessages] = React.useState([]);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -21,15 +22,21 @@ export default function ViewConversation({ history, conversationId, titles }) {
             button={null}
           />
         )}
-        <div>
+        <div style={{ width: '100%' }}>
           <Query
             query={CONVERSATION}
             fetchPolicy="network-only"
             variables={{ conversationId: conversationId, page: pageNbr }}
+            onCompleted={(data) =>
+              setMessages([
+                ...data.getConversation.messages.reverse(),
+                ...messages,
+              ])
+            }
           >
             {({ data, loading, subscribeToMore }) => {
               return data ? (
-                <div>
+                <div style={{ width: '100%' }}>
                   <div
                     style={{
                       display: 'flex',
@@ -72,21 +79,24 @@ export default function ViewConversation({ history, conversationId, titles }) {
                       );
                     })}
                   </div>
-                  <Messages
-                    messageArrayIn={data.getConversation.messages.reverse()}
-                    classes={classes}
-                    conversationId={conversationId}
-                    subscribe={subscribeToMore}
-                    moreButton={
-                      <Button
-                        onClick={() => {
-                          setPageNbr(pageNbr + 1);
-                        }}
-                      >
-                        <Icon>more_horiz</Icon>
-                      </Button>
-                    }
-                  />
+                  {messages.length > 0 && (
+                    <Messages
+                      messageArrayIn={messages}
+                      classes={classes}
+                      history={history}
+                      conversationId={conversationId}
+                      subscribe={subscribeToMore}
+                      moreButton={
+                        <Button
+                          onClick={() => {
+                            setPageNbr(pageNbr + 1);
+                          }}
+                        >
+                          <Icon>more_horiz</Icon>
+                        </Button>
+                      }
+                    />
+                  )}
                 </div>
               ) : (
                 loading && <LoadIcon />

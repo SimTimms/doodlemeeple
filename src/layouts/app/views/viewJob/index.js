@@ -38,7 +38,7 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
     type: 'job',
     creativeSummary: '',
     id: 'new',
-    gameId: '',
+    gameId: null,
     submitted: false,
   });
   const [disabledValue, setDisabledValue] = React.useState(false);
@@ -49,6 +49,7 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
         <ContentHeader
           title={jobId === 'new' ? 'Create a Job' : 'Edit a Job'}
           subTitle="Create a new job"
+          subTitleExtra={null}
           button={null}
         />
         <Mutation
@@ -84,6 +85,7 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                       name=" 1. Which game is this job for?"
                       description="Each job must be attached to a game, you can create a game if you haven't already."
                       warning=""
+                      inline={false}
                     />
                     <div style={{ width: '100%', display: 'flex' }}>
                       {games.map((item, index) => {
@@ -169,6 +171,7 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                       name="2. Job Details"
                       description="Briefly summarise the job. Example: Images for 24 fantasy cards. Need 24 high resolution card images, each image will be full colour and in a fantasy style."
                       warning=""
+                      inline={false}
                     />
                     <TextField
                       id={'name'}
@@ -182,10 +185,9 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                         autosaveIsOn && autosave(mutation, 'image');
                         setJob({
                           ...job,
-                          name: e.target.value.replace(
-                            /[^A-Za-z0-9 ,\-.!()£$"'\n]/g,
-                            '',
-                          ),
+                          name: e.target.value
+                            .substring(0, 86)
+                            .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
                         });
                       }}
                       margin="normal"
@@ -205,10 +207,9 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                         setDisabledValue(true);
                         setJob({
                           ...job,
-                          summary: e.target.value.replace(
-                            /[^A-Za-z0-9 ,\-.!()£$"'\n]/g,
-                            '',
-                          ),
+                          summary: e.target.value
+                            .substring(0, 156)
+                            .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
                         });
                         autosaveIsOn && autosave(mutation, 'image');
                       }}
@@ -224,6 +225,7 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                       name="3. Your Creative"
                       description="Start to describe your ideal creative. Example: A digital artist with a focus on high fantasy"
                       warning=""
+                      inline={false}
                     />
                     <TextField
                       id={'creative-summary'}
@@ -239,10 +241,9 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
 
                         setJob({
                           ...job,
-                          creativeSummary: e.target.value.replace(
-                            /[^A-Za-z0-9 ,\-.!()£$"'\n]/g,
-                            '',
-                          ),
+                          creativeSummary: e.target.value
+                            .substring(0, 86)
+                            .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
                         });
                         autosaveIsOn && autosave(mutation, 'image');
                       }}
@@ -259,6 +260,7 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                         name="4. Submit"
                         description="Submit your job for approval, we'll let you know when it's live and don't worry you can still make changes."
                         warning=""
+                        inline={false}
                       />
                       <Typography
                         variant="h2"

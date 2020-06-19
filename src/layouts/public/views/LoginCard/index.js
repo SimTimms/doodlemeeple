@@ -10,7 +10,7 @@ import {
   Slide,
   useMediaQuery,
 } from '@material-ui/core';
-import { Form, FormInput, ErrorBox } from '../../../../components';
+import { Form, FormInput, ErrorBox, IconButton } from '../../../../components';
 import { sharedStyles } from '../styles';
 import { Mutation } from 'react-apollo';
 import { LOGIN_MUTATION } from '../../../../data/mutations';
@@ -18,6 +18,7 @@ import { PROFILE_EMAIL, PROFILE_PASSWORD } from '../../../../utils/dataLengths';
 import Cookies from 'js-cookie';
 import { readableErrors } from '../../../../utils/readableErrors';
 import jwtDecode from 'jwt-decode';
+import device from '../../../../assets/device.svg';
 
 import clsx from 'clsx';
 const CHECKING = 'Checking...';
@@ -53,22 +54,20 @@ export default function LoginCard({ history, forwardTo }) {
             [classes.cardMobile]: mobile,
           })}
         >
-          <CardContent>
-            <Typography
-              variant="h1"
-              color="textPrimary"
-              style={{ textAlign: 'center' }}
+          <CardContent style={{ paddingTop: 0, paddingBottom: 30 }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
             >
-              Welcome
-            </Typography>
-            <Typography
-              variant="body1"
-              component="p"
-              style={{ textAlign: 'center' }}
-              className={classes.description}
-            >
-              Please login
-            </Typography>
+              <img
+                src={device}
+                style={{ width: 40, marginRight: 10 }}
+                alt="Doodle Meeple Device"
+              />
+            </div>
           </CardContent>
           <Divider />
           <CardContent className={classes.cardContentCenter}></CardContent>
@@ -140,16 +139,16 @@ export default function LoginCard({ history, forwardTo }) {
                     />
                     <ErrorBox errorMsg={errors.passwordError} />
                     <ErrorBox errorMsg={errors.noUserError} />
-                    <Button
-                      onClick={() => {
+                    <IconButton
+                      title={loginStatus}
+                      icon="login"
+                      disabled={false}
+                      color="primary"
+                      onClickEvent={() => {
                         loginSubmit(LoginMutation);
                       }}
-                      variant="contained"
-                      color="primary"
-                      style={{ width: 180, marginTop: 20 }}
-                    >
-                      {loginStatus}
-                    </Button>
+                      styleOverride={null}
+                    />
                   </Form>
                 );
               }}
@@ -159,7 +158,7 @@ export default function LoginCard({ history, forwardTo }) {
               onClick={() => {
                 history.push('/password-forgot');
               }}
-              style={{ color: '#aaa', textTransform: 'none' }}
+              style={{ color: '#aaa', textTransform: 'none', marginTop: 10 }}
             >
               Forgot Password
             </Button>

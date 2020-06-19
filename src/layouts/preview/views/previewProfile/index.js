@@ -198,9 +198,9 @@ export function PreviewProfile({ theme, profileId, publicView }) {
               section.type === 'artist' ||
               section.type === 'graphic-artist' ||
               section.type === '3d-artist' ? (
-                <GallerySection section={section} />
+                <GallerySection section={section} key={`section_${index}`} />
               ) : (
-                <EditorSection section={section} />
+                <EditorSection section={section} key={`section_${index}`} />
               ),
             )}
           <Query

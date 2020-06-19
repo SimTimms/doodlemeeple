@@ -13,39 +13,40 @@ export default function Messages({
   classes,
   subscribe,
   moreButton,
+  history,
 }) {
   const thisUserId = Cookies.get('userId');
   const [messageArray, setMessageArray] = React.useState([]);
   const [messagesEnd, setMessagesEnd] = React.useState(null);
+  const [subscribed, setSubscribed] = React.useState(false);
 
   useEffect(() => {
     setMessageArray(messageArrayIn);
+    !subscribed &&
+      subscribe({
+        document: NEW_MESSAGES,
+        variables: { conversationId },
+        updateQuery: (prev, { subscriptionData }) => {
+          if (!subscriptionData.data) return prev;
 
-    subscribe({
-      document: NEW_MESSAGES,
-      variables: { conversationId },
-      updateQuery: (prev, { subscriptionData }) => {
-        if (!subscriptionData.data) return prev;
+          const newMessage = subscriptionData.data.newMessage;
 
-        const newMessage = subscriptionData.data.newMessage;
-        const exists = prev.getConversation.messages.find(
-          ({ id }) => id === newMessage.id,
-        );
+          setMessageArray([...prev.getConversation.messages, newMessage]);
 
-        if (exists) return prev;
-        return Object.assign({}, prev, {
-          getConversation: {
-            id: prev.getConversation.id,
-            participants: prev.getConversation.participants,
-            job: prev.getConversation.job,
-            createdAt: prev.getConversation.createdAt,
-            messages: [newMessage, ...prev.getConversation.messages.reverse()],
-            __typename: prev.getConversation.__typename,
-          },
-        });
-      },
-    });
-  }, [messageArrayIn, subscribe, conversationId]);
+          return Object.assign({}, prev, {
+            getConversation: {
+              id: prev.getConversation.id,
+              participants: prev.getConversation.participants,
+              job: prev.getConversation.job,
+              createdAt: prev.getConversation.createdAt,
+              messages: [...prev.getConversation.messages, newMessage],
+              __typename: prev.getConversation.__typename,
+            },
+          });
+        },
+      });
+    setSubscribed(true);
+  }, [messageArrayIn, subscribe, conversationId, setSubscribed, subscribed]);
 
   useEffect(() => {
     messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' });
@@ -69,13 +70,17 @@ export default function Messages({
   }
 
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <div className={classes.cardGrid}>
         {moreButton}
         {messageArray.map((message, index) => {
           return (
             message.sender && (
-              <Message key={`message_${index}`} message={message} />
+              <Message
+                key={`message_${index}`}
+                message={message}
+                history={history}
+              />
             )
           );
         })}

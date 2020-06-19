@@ -46,7 +46,9 @@ export default function Conversations({ history }) {
                         (user) =>
                           user.id !== Cookies.get('userId') && user.name,
                       )}
-                      profiles={conversation.participants}
+                      profiles={conversation.participants.filter(
+                        (item) => item.id !== Cookies.get('userId'),
+                      )}
                       count={conversation.unreadMessages}
                       title={conversation.job.name}
                       onClickEvent={() => {
@@ -81,7 +83,7 @@ export default function Conversations({ history }) {
             paddingBottom: 10,
           }}
         >
-          Declined
+          History
         </Typography>
         <div className={classes.cardGrid}>
           <Query

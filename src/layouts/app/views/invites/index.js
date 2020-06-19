@@ -4,7 +4,7 @@ import { InviteComponent } from './components/inviteComponent';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { INVITES } from '../../../../data/queries';
-import { LoadIcon, ContentHeader } from '../../../../components';
+import { ContentHeader } from '../../../../components';
 
 export function Invites({ history }) {
   const classes = useStyles();
@@ -18,7 +18,12 @@ export function Invites({ history }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <ContentHeader title="Invites" subTitle="" button={null} />
+        <ContentHeader
+          title="Invites"
+          subTitle=""
+          subTitleExtra={null}
+          button={null}
+        />
         <div className={classes.cardGrid}>
           {inviteArray.map((invite, index) => {
             return (
@@ -38,32 +43,26 @@ export function Invites({ history }) {
             setInviteArray(data.getInvites);
           }}
         >
-          {({ loading, error, data }) => {
-            if (loading) return <LoadIcon />;
-            if (error) return <div>Error</div>;
-
-            if (data.getInvites.length === 0) {
-              return (
-                <div>
-                  <Typography
-                    variant="h6"
-                    component="h6"
-                    className={classes.notice}
-                  >
-                    No invites?
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    component="p"
-                    className={classes.notice}
-                  >
-                    Keep your profile fresh and up-to-date for the best chance
-                    of getting noticed.
-                  </Typography>
-                </div>
-              );
-            }
-            return <div></div>;
+          {({ data }) => {
+            return data && data.getInvites.length === 0 ? (
+              <div>
+                <Typography
+                  variant="h6"
+                  component="h6"
+                  className={classes.notice}
+                >
+                  No invites?
+                </Typography>
+                <Typography
+                  variant="body1"
+                  component="p"
+                  className={classes.notice}
+                >
+                  Keep your profile fresh and up-to-date for the best chance of
+                  getting noticed.
+                </Typography>
+              </div>
+            ) : null;
           }}
         </Query>
       </div>

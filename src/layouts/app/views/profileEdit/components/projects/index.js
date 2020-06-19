@@ -4,13 +4,7 @@ import { useStyles } from './styles';
 import { AddProject } from '../project/addButton';
 import { Project } from '../project';
 
-function Projects({
-  projects,
-  setChanged,
-  setNotableProjects,
-  sectionId,
-  autosaveIsOn,
-}) {
+function Projects({ projects, setNotableProjects, sectionId, autosaveIsOn }) {
   const classes = useStyles();
   const [showAdd, setShowAdd] = React.useState(true);
 
@@ -25,6 +19,7 @@ function Projects({
         name="Projects"
         description="What have you worked on in the industry that will impress clients? Please specify your role within the project."
         warning=""
+        inline={false}
       />
 
       <div className={classes.testimonialWrapper}>
@@ -33,7 +28,6 @@ function Projects({
             return (
               <Project
                 project={project}
-                setChanged={setChanged}
                 index={index}
                 setNotableProjects={setNotableProjects}
                 projects={projects}

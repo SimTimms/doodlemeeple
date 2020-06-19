@@ -5,7 +5,6 @@ import { useStyles } from './styles';
 
 export function NotableProject({
   notableProject,
-  setChanged,
   index,
   setNotableProjects,
   notableProjects,
@@ -28,11 +27,10 @@ export function NotableProject({
         margin="normal"
         variant="outlined"
         style={{ width: '100%' }}
-        onChange={ev => {
-          setChanged(true);
+        onChange={(ev) => {
           autosave && autosave();
           const newNotableProjects = Object.assign([], notableProjects);
-          newNotableProjects[index].summary = ev.target.value;
+          newNotableProjects[index].summary = ev.target.value.substring(0, 56);
           setNotableProjects(newNotableProjects);
         }}
       />

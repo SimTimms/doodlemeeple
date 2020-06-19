@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Button, Card, Link } from '@material-ui/core';
+import { Typography, Card, Link } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   InlineHeader,
@@ -69,6 +69,7 @@ export function InviteComponent({ invite, removeInvite, history }) {
           icon="more_horiz"
           title="Find Out More"
           onClickEvent={() => history.push(`/app/view-job/${invite.job.id}`)}
+          styleOverride={null}
         />
       </div>
     </Card>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Icon, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 
-export default function DeleteButton({ mutation, theme }) {
+export default function DeleteButton({ mutation }) {
   const classes = useStyles();
   const [confirm, setConfirm] = React.useState(false);
 

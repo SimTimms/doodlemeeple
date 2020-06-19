@@ -120,7 +120,7 @@ export function Account({ history }) {
                 type="text"
                 value={email}
                 onChange={(e) => {
-                  setEmail(e.target.value);
+                  setEmail(e.target.value.substring(0, 256));
                 }}
                 margin="normal"
                 variant="outlined"

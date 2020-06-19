@@ -52,6 +52,53 @@ export const REMOVE_INVITE = gql`
     removeInvite(id: $id)
   }
 `;
+export const UPDATE_TERM = gql`
+  mutation UpdatePaymentTerm($id: String!, $paymentTerm: PaymentTermInput!) {
+    updatePaymentTerm(id: $id, paymentTerm: $paymentTerm)
+  }
+`;
+
+export const CREATE_TERM = gql`
+  mutation CreatePaymentTerm($id: String!, $paymentTerm: PaymentTermInput!) {
+    createPaymentTerm(id: $id, paymentTerm: $paymentTerm)
+  }
+`;
+
+export const REMOVE_TERM = gql`
+  mutation RemovePaymentTerm($id: String!) {
+    removePaymentTerm(id: $id)
+  }
+`;
+
+export const UPDATE_CONTRACT = gql`
+  mutation UpdateContract($id: String!, $contract: ContractInput!) {
+    updateContract(id: $id, contract: $contract)
+  }
+`;
+
+export const SUBMIT_CONTRACT = gql`
+  mutation SubmitContract($id: String!) {
+    submitContract(id: $id)
+  }
+`;
+
+export const SIGN_CONTRACT = gql`
+  mutation SignContract($contractId: String!) {
+    signContract(contractId: $contractId)
+  }
+`;
+
+export const CREATE_CONTRACT = gql`
+  mutation CreateContract($id: String!, $contract: ContractInput!) {
+    createContract(id: $id, contract: $contract)
+  }
+`;
+
+export const REMOVE_CONTRACT = gql`
+  mutation RemoveContract($id: String!) {
+    removeContract(id: $id)
+  }
+`;
 
 export const DECLINE_INVITE = gql`
   mutation DeclineInvite($id: String!) {

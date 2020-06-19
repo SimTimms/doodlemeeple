@@ -15,6 +15,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
     marginTop: 40,
+    width: 400,
   },
   iconButton: {
     cursor: 'pointer',

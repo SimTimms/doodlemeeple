@@ -10,7 +10,6 @@ import { NOTIFICATIONS } from '../../../../../data/queries';
 import { REMOVE_NOTIFICATION_MUTATION } from '../../../../../data/mutations';
 import { Mutation } from 'react-apollo';
 import { timeDifferenceForDate } from '../../../../../utils/dates';
-import { toaster } from '../../../../../utils/toaster';
 import clsx from 'clsx';
 
 export function Notifications() {
@@ -96,17 +95,6 @@ export function Notifications() {
                 mutation={REMOVE_NOTIFICATION_MUTATION}
                 variables={{
                   id: notification.id,
-                }}
-                update={(store, { data: { removeNotification } }) => {
-                  let data = store.readQuery({ query: NOTIFICATIONS });
-                  toaster('Deleted');
-                  data.getNotifications = removeNotification;
-
-                  store.writeQuery({
-                    query: NOTIFICATIONS,
-                    data,
-                  });
-                  setNotificationArray(removeNotification);
                 }}
               >
                 {(RemoveNotificationMutation) => {
