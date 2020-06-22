@@ -19,6 +19,11 @@ import { split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe('pk_test_xjjTUtg7riy4i2F9NYvuSkmF00fMcYOlZk');
+
 function RouterComponent(props) {
   const token = Cookies.get('token');
 
@@ -97,58 +102,60 @@ function RouterComponent(props) {
   return (
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
-        <Switch>
-          {authToken && (
+        <Elements stripe={stripePromise}>
+          <Switch>
+            {authToken && (
+              <Route
+                path="/app/:page/:pathParam?"
+                render={(props) => <AppLayout {...props} theme={theme} />}
+              />
+            )}
+            {authToken && (
+              <Route
+                path="/preview/:pathParam?"
+                render={(props) => (
+                  <PreviewLayout {...props} theme={theme} publicView={false} />
+                )}
+              />
+            )}
+            {authToken && (
+              <Route
+                path="/messages/:page/:pathParam?"
+                render={(props) => <MessagesLayout {...props} theme={theme} />}
+              />
+            )}
+            {authToken && (
+              <Route
+                path="/roles/:page/:pathParam?"
+                render={(props) => <RolesLayout {...props} />}
+              />
+            )}
+            {authToken && (
+              <Route
+                path="/message/:page/:pathParam?"
+                render={(props) => <MessageLayout {...props} />}
+              />
+            )}
             <Route
-              path="/app/:page/:pathParam?"
-              render={(props) => <AppLayout {...props} theme={theme} />}
-            />
-          )}
-          {authToken && (
-            <Route
-              path="/preview/:pathParam?"
+              path="/public-preview/:pathParam?"
               render={(props) => (
-                <PreviewLayout {...props} theme={theme} publicView={false} />
+                <PreviewLayout {...props} theme={theme} publicView={true} />
               )}
             />
-          )}
-          {authToken && (
+            <Route path="/about">
+              <AboutLayoutFrame />
+            </Route>
             <Route
-              path="/messages/:page/:pathParam?"
-              render={(props) => <MessagesLayout {...props} theme={theme} />}
+              path="/:page/:token"
+              render={(props) => <PublicLayout {...props} />}
             />
-          )}
-          {authToken && (
             <Route
-              path="/roles/:page/:pathParam?"
-              render={(props) => <RolesLayout {...props} />}
+              path="/:page"
+              render={(props) => <PublicLayout {...props} />}
             />
-          )}
-          {authToken && (
-            <Route
-              path="/message/:page/:pathParam?"
-              render={(props) => <MessageLayout {...props} />}
-            />
-          )}
-          <Route
-            path="/public-preview/:pathParam?"
-            render={(props) => (
-              <PreviewLayout {...props} theme={theme} publicView={true} />
-            )}
-          />
-          <Route path="/about">
-            <AboutLayoutFrame />
-          </Route>
-          <Route
-            path="/:page/:token"
-            render={(props) => <PublicLayout {...props} />}
-          />
-          <Route
-            path="/:page"
-            render={(props) => <PublicLayout {...props} />}
-          />
-          <Route path="/" render={(props) => <PublicLayout {...props} />} />
-        </Switch>
+            <Route path="/" render={(props) => <PublicLayout {...props} />} />
+          </Switch>
+        </Elements>
       </ApolloProvider>
     </ThemeProvider>
   );

@@ -10,10 +10,12 @@ export default function IconButton({
   title,
   color,
   styleOverride,
+  type,
 }) {
   const classes = useStyles();
   return (
     <Button
+      type={type}
       className={clsx({
         [classes.iconButton]: true,
         [classes.iconButtonSecondary]: color === 'secondary',

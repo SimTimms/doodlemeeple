@@ -11,6 +11,12 @@ export const SIGNUP_MUTATION = gql`
   }
 `;
 
+export const MAKE_PAYMENT = gql`
+  mutation MakePayment($amount: String!) {
+    makePayment(amount: $amount)
+  }
+`;
+
 export const SUBMIT_BRIEF = gql`
   mutation SubmitBrief($jobId: String!) {
     submitBrief(jobId: $jobId)

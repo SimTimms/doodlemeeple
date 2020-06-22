@@ -123,6 +123,7 @@ export default function PreviewContract({ contractId, history }) {
                           disabled={false}
                           styleOverride={null}
                         />
+
                         {!signed && (
                           <IconButton
                             title="Accept"

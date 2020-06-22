@@ -16,6 +16,19 @@ export const useStyles = makeStyles((theme) => ({
     border: '4px solid #fff',
     marginRight: 20,
   },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    justifyContent: 'space-between',
+    borderTop: '1px dotted #ddd',
+    borderBottom: '1px dotted #ddd',
+    marginTop: 5,
+    '&:first-child': {
+      borderTop: 'none',
+    },
+  },
   profileWrapper: {
     display: 'flex',
     flexDirection: 'row',
