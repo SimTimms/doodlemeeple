@@ -25,6 +25,7 @@ export default function PreviewContract({ contractId, history }) {
     id: null,
     user: { id: null },
     signedDate: null,
+    job: null,
   });
   const [job, setJob] = React.useState({ id: null, user: { id: '' } });
   const [openContract, setOpenContract] = React.useState(false);
@@ -76,7 +77,7 @@ export default function PreviewContract({ contractId, history }) {
                           </Typography>
                         </div>
                       )}
-                      <ContractSummary contractId={contractId} />
+                      <ContractSummary contractData={contractData} />
                       {chatOpen && (
                         <Card className={classes.root}>
                           <InlineHeader>
@@ -111,6 +112,7 @@ export default function PreviewContract({ contractId, history }) {
                             disabled={false}
                             onClickEvent={() => {}}
                             styleOverride={null}
+                            type="button"
                           />
                         )}
                         <IconButton
@@ -122,6 +124,7 @@ export default function PreviewContract({ contractId, history }) {
                           }
                           disabled={false}
                           styleOverride={null}
+                          type="button"
                         />
 
                         {!signed && (
@@ -134,6 +137,7 @@ export default function PreviewContract({ contractId, history }) {
                               setOpenContract(true);
                             }}
                             styleOverride={null}
+                            type="button"
                           />
                         )}
                       </ActionWrapper>
@@ -345,6 +349,7 @@ export default function PreviewContract({ contractId, history }) {
                                   setOpenContract(false);
                                 }}
                                 styleOverride={null}
+                                type="button"
                               />
                               <Mutation
                                 mutation={SIGN_CONTRACT}
@@ -363,6 +368,7 @@ export default function PreviewContract({ contractId, history }) {
                                         mutation();
                                       }}
                                       styleOverride={null}
+                                      type="button"
                                     />
                                   );
                                 }}

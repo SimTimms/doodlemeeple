@@ -12,8 +12,12 @@ export const SIGNUP_MUTATION = gql`
 `;
 
 export const MAKE_PAYMENT = gql`
-  mutation MakePayment($amount: String!) {
-    makePayment(amount: $amount)
+  mutation MakePayment(
+    $amount: String!
+    $currency: String!
+    $contractId: String!
+  ) {
+    makePayment(amount: $amount, currency: $currency, contractId: $contractId)
   }
 `;
 

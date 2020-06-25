@@ -264,6 +264,22 @@ export const GET_CONTRACT = gql`
       currency
       status
       updatedAt
+      payments {
+        id
+        amount
+        currency
+        status
+        paidBy {
+          id
+          name
+        }
+        contract {
+          id
+        }
+        paymentId
+        createdAt
+        updatedAt
+      }
       user {
         email
         id
@@ -299,6 +315,22 @@ export const PREVIEW_CONTRACT = gql`
       currency
       status
       updatedAt
+      payments {
+        id
+        amount
+        currency
+        status
+        paidBy {
+          id
+          name
+        }
+        contract {
+          id
+        }
+        paymentId
+        createdAt
+        updatedAt
+      }
       signedBy {
         id
         name

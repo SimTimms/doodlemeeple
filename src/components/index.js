@@ -10,6 +10,7 @@ import Form from './form';
 import CardHeader from './headers';
 import ContentHeader from './headers/contentHeader';
 import StripeCheckout from './stripeCheckout';
+import Payments from './payments';
 import MessageComponent from './messageComponent';
 import CurrencySelector from './currencySelector';
 import DeclineInvite from './buttons/declineInvite';
@@ -89,4 +90,5 @@ export {
   DeclineInvite,
   FieldTitleWrapper,
   DeleteButtonSmall,
+  Payments,
 };

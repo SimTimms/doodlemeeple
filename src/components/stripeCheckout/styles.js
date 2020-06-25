@@ -29,4 +29,13 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.error.main,
     color: '#fff',
   },
+  notify: {
+    padding: 5,
+    borderRadius: 5,
+    background: theme.palette.secondary.main,
+    color: '#fff',
+    textAlign: 'center',
+    marginTop: 10,
+    width: '100%',
+  },
 }));

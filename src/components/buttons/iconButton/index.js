@@ -20,6 +20,7 @@ export default function IconButton({
         [classes.iconButton]: true,
         [classes.iconButtonSecondary]: color === 'secondary',
         [classes.iconButtonWarning]: color === 'warning',
+        [classes.iconButtonText]: color === 'text',
         [classes.iconButtonDisabled]: disabled,
       })}
       disabled={disabled}
@@ -31,6 +32,7 @@ export default function IconButton({
         className={clsx({
           [classes.iconButtonIcon]: true,
           [classes.iconButtonIconSecondary]: color === 'secondary',
+          [classes.iconButtonIconText]: color === 'text',
         })}
       >
         {icon}

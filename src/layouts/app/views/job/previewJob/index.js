@@ -160,7 +160,6 @@ export default function PreviewJob({ theme, jobId, history }) {
             variables={{ jobId: jobId, userId: job.user.id }}
             fetchPolicy="network-only"
             onCompleted={(data) => {
-              console.log(data);
               setConversationId(data.determineConversationId);
             }}
           >

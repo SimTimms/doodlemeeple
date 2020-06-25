@@ -6,16 +6,24 @@ import stripeLogo from '../../assets/stripe.png';
 import { IconButton } from '../';
 import clsx from 'clsx';
 
-export default function CheckoutForm({ paymentIntent }) {
+export default function CheckoutForm({ paymentIntent, setPaymentIntent }) {
   const classes = useStyles();
   const stripe = useStripe();
   const elements = useElements();
   const [status, setStatus] = React.useState({
     complete: false,
+    errorMsg: '',
     error: null,
+    success: false,
   });
 
   const handleSubmit = async (event) => {
+    setStatus({
+      complete: false,
+      errorMsg: 'Sending Payment',
+      error: false,
+      success: false,
+    });
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault();
@@ -29,29 +37,52 @@ export default function CheckoutForm({ paymentIntent }) {
     const result = await stripe.confirmCardPayment(paymentIntent, {
       payment_method: {
         card: elements.getElement(CardElement),
-        billing_details: {
-          name: 'Jenny Rosen',
-        },
       },
     });
-
+    console.log(result);
     if (result.error) {
-      // Show error to your customer (e.g., insufficient funds)
-      console.log(result.error.message);
+      setStatus({
+        complete: false,
+        error: true,
+        errorMsg: result.error.message,
+        success: false,
+      });
     } else {
-      console.log(result);
-      // The payment has been processed!
       if (result.paymentIntent.status === 'succeeded') {
-        // Show a success message to your customer
-        // There's a risk of the customer closing the window before callback
-        // execution. Set up a webhook or plugin to listen for the
-        // payment_intent.succeeded event that handles any business critical
-        // post-payment actions.
+        setStatus({
+          complete: false,
+          error: false,
+          errorMsg: 'Completed',
+          success: true,
+        });
       }
     }
   };
 
-  return (
+  return status.success ? (
+    <div
+      className={classes.row}
+      style={{
+        flexDirection: 'column',
+        marginBottom: 20,
+      }}
+    >
+      <Typography variant="h4" className={classes.notify}>
+        Payment Sent
+      </Typography>
+      <IconButton
+        title="Make Another Payment"
+        icon="payment"
+        color="text"
+        disabled={false}
+        type="button"
+        onClickEvent={() => {
+          setPaymentIntent(null);
+        }}
+        styleOverride={null}
+      />
+    </div>
+  ) : (
     <form onSubmit={handleSubmit} className={classes.card}>
       <div
         className={classes.row}
@@ -61,30 +92,35 @@ export default function CheckoutForm({ paymentIntent }) {
           paddingBottom: 20,
         }}
       >
-        <img src={stripeLogo} style={{ width: 60 }} />
+        <img src={stripeLogo} style={{ width: 60 }} alt="Stripe Logo" />
         <div
           style={{ display: 'flex', alignItems: 'center' }}
           className={clsx({
             [classes.noerror]: true,
-            [classes.error]: status.error !== null,
+            [classes.error]: status.error,
           })}
         >
           {status.error ? (
             <Typography style={{ display: 'flex', alignItems: 'center' }}>
               <Icon style={{ marginRight: 10 }}>warning</Icon>
-              {status.error}
+              {status.errorMsg}
             </Typography>
           ) : (
-            <Typography>Please enter your card details</Typography>
+            <Typography>
+              {status.errorMsg === ''
+                ? 'Please enter your card details'
+                : status.errorMsg}
+            </Typography>
           )}
         </div>
       </div>
       <CardElement
         onChange={(e) => {
-          console.log(e);
           setStatus({
             complete: e.complete,
-            error: e.error !== undefined ? e.error.message : null,
+            errorMsg: e.error !== undefined ? e.error.message : null,
+            error: e.error !== undefined ? true : false,
+            success: false,
           });
         }}
         options={{
