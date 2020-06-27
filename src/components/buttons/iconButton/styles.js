@@ -36,6 +36,15 @@ export const useStyles = makeStyles((theme) => ({
       background: '#eaeaea',
     },
   },
+  iconButtonTextWhite: {
+    background: 'rgba(0,0,0,0)',
+    color: '#fff',
+    border: 'none',
+    boxShadow: 'none',
+    '&:hover': {
+      background: '#eaeaea',
+    },
+  },
   iconButtonWarning: {
     background: theme.palette.error.main,
     '&:hover': {
@@ -59,6 +68,11 @@ export const useStyles = makeStyles((theme) => ({
   },
   iconButtonIconText: {
     color: '#aaa',
+    marginLeft: 10,
+  },
+
+  iconButtonIconWhite: {
+    color: '#fff',
     marginLeft: 10,
   },
   iconButtonIconSecondary: {

@@ -21,6 +21,7 @@ export default function IconButton({
         [classes.iconButtonSecondary]: color === 'secondary',
         [classes.iconButtonWarning]: color === 'warning',
         [classes.iconButtonText]: color === 'text',
+        [classes.iconButtonTextWhite]: color === 'text-white',
         [classes.iconButtonDisabled]: disabled,
       })}
       disabled={disabled}
@@ -33,6 +34,7 @@ export default function IconButton({
           [classes.iconButtonIcon]: true,
           [classes.iconButtonIconSecondary]: color === 'secondary',
           [classes.iconButtonIconText]: color === 'text',
+          [classes.iconButtonIconTextWhite]: color === 'text-white',
         })}
       >
         {icon}

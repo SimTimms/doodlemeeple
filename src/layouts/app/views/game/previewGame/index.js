@@ -44,45 +44,16 @@ export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <div style={{ width: '100%' }}>
-          <div
-            style={{
-              width: '100%',
-              height: 500,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              position: 'relative',
-            }}
-          >
+          <div className={classes.wrapperOne}>
             <div
+              className={classes.wrapperTwo}
               style={{
-                background: `url(${game.backgroundImg})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center center',
-                width: '100%',
-                height: 500,
-                position: 'absolute',
-                filter: 'brightness(0.5)',
+                backgroundImage: `url(${game.backgroundImg})`,
               }}
             ></div>
-            <div
-              style={{
-                padding: 30,
-                maxWidth: 500,
-                background: 'rgba(0,0,0,0.5)',
-                filter: 'brightness(1)',
-              }}
-            >
-              <div
-                style={{
-                  textAlign: 'center',
-                  color: '#fff',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: '100%',
-                }}
-              >
+            <div className={classes.cover}></div>
+            <div className={classes.wrapperThree}>
+              <div className={classes.wrapperFour}>
                 <Typography variant="body1">{`${game.user.name}`}</Typography>
                 <Typography
                   variant="body1"
@@ -113,40 +84,15 @@ export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
               </Typography>
             </div>
           </div>
-          <div
-            style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexDirection: 'column',
-            }}
-          >
+          <div className={classes.wrapperFive}>
             <div style={{ maxWidth: 900, width: '100%' }}>
               <Typography variant="h1" className={classes.info}>
                 Game Info
               </Typography>
             </div>
 
-            <div
-              style={{
-                maxWidth: 900,
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'flex-start',
-              }}
-            >
-              <div
-                style={{
-                  maxWidth: 900,
-                  width: '50%',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-start',
-                  flexDirection: 'column',
-                }}
-              >
+            <div className={classes.columnWrapper}>
+              <div className={classes.column}>
                 <Typography variant="h3" className={classes.descriptionTitle}>
                   Description
                 </Typography>
@@ -158,31 +104,24 @@ export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
             </div>
           </div>
           {game.showreel !== '' && (
-            <Card className={classes.card}>
-              <InlineHeader>
-                <IconTitle
-                  icon="ondemand_video"
-                  title="Shameless Self Promotion"
+            <div className={classes.wrapperFive}>
+              <div className={classes.columnWrapper}>
+                <ReactPlayer
+                  url={game.showreel}
+                  playing
+                  controls={true}
+                  muted={true}
+                  style={{
+                    width: '100%',
+                    padding: 10,
+                    boxSizing: 'border-box',
+                    background: '#ddd',
+                    marginTop: 40,
+                  }}
+                  width="100%"
                 />
-              </InlineHeader>
-              <div style={{ padding: 10 }}>
-                <div>
-                  <ReactPlayer
-                    url={game.showreel}
-                    playing
-                    controls={true}
-                    muted={true}
-                    style={{
-                      width: '100%',
-                      padding: 10,
-                      boxSizing: 'border-box',
-                      background: '#ddd',
-                    }}
-                    width="100%"
-                  />
-                </div>
               </div>
-            </Card>
+            </div>
           )}
         </div>
       </div>

@@ -10,7 +10,7 @@ import { Query } from 'react-apollo';
 import { PROFILE_FEATURED } from '../../../../../../data/queries';
 import device from '../../../../../../assets/device.svg';
 
-export function Featured({ posts, featuredId, history }) {
+export function FeaturedMini({ posts, featuredId, history }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
   return (
@@ -37,71 +37,40 @@ export function Featured({ posts, featuredId, history }) {
           <Card className={classes.card} key={`conversation_${index}`}>
             <div
               className={classes.postImage}
-              style={{
-                backgroundImage: `url(${media})`,
-                filter: 'grayscale(90%)',
-              }}
+              style={{ backgroundImage: `url(${media})` }}
             >
               <div className={classes.cover}></div>
-              <div className={classes.rowWrapper}>
-                <div className={classes.postHeader}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '100%',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}
-                  >
-                    {/*}
-                  <div className={classes.featuredText}>
-                    <img
-                      src={device}
-                      style={{ width: 20, marginRight: 10 }}
-                      alt=""
-                    />
-                    <Typography
-                      variant="body1"
-                      component="h4"
-                      style={{ color: 'rgba(0,0,0,0.6)' }}
-                    >
-                      Featured Creative
-                    </Typography>
-                </div>*/}
-                    <Typography
-                      variant="h5"
-                      component="h4"
-                      className={classes.postHeaderText}
-                    >
-                      <Query
-                        query={PROFILE_FEATURED}
-                        variables={{ userId: featuredId }}
-                        fetchPolicy="network-only"
-                      >
-                        {({ data }) => {
-                          return data ? (
-                            <img
-                              className={classes.profileWrapperFeatured}
-                              src={data.profilePreview.profileImg}
-                              alt=""
-                            />
-                          ) : null;
-                        }}
-                      </Query>
-                      <b>{title}</b>
-                    </Typography>
-                  </div>
-
+              <div className={classes.postHeader}>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '100%',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
                   <Typography
-                    style={{
-                      color: '#222',
-                      marginTop: 5,
-                      textAlign: 'center',
-                    }}
-                    component="p"
+                    variant="h5"
+                    component="h4"
+                    className={classes.postHeaderText}
                   >
-                    {/*message*/}
+                    <Query
+                      query={PROFILE_FEATURED}
+                      variables={{ userId: featuredId }}
+                      fetchPolicy="network-only"
+                    >
+                      {({ data }) => {
+                        return data ? (
+                          <img
+                            className={classes.profileWrapperFeatured}
+                            src={data.profilePreview.profileImg}
+                            alt=""
+                          />
+                        ) : null;
+                      }}
+                    </Query>
+                    <b>{title}</b>
                   </Typography>
                   <div
                     style={{
@@ -109,26 +78,27 @@ export function Featured({ posts, featuredId, history }) {
                       width: '100%',
                       justifyContent: 'space-between',
                       marginTop: 10,
+                      zIndex: 1,
                     }}
                   >
                     <IconButton
-                      color="primary"
+                      color="text-white"
                       disabled={false}
                       onClickEvent={() => {
                         history.push(`/public-preview/${featuredId}`);
                       }}
                       icon="portrait"
-                      title="Create Profile"
+                      title="Profile"
                       styleOverride={null}
                       type="button"
                     />
                     <a href={linkTo} target="_blank" rel="noopener noreferrer">
                       <IconButton
-                        color="secondary"
+                        color="text-white"
                         disabled={false}
                         onClickEvent={() => {}}
                         icon="article"
-                        title="Post a Job"
+                        title="More"
                         styleOverride={null}
                         type="button"
                       />

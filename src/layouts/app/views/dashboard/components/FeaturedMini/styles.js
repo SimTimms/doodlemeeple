@@ -8,6 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: '100%',
+    maxWidth: 500,
   },
   messageWrapperMobile: {
     display: 'flex',
@@ -16,13 +17,6 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: '100%',
-  },
-  cover: {
-    background: 'rgba(0, 0, 0,0.7)',
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-    zIndex: 0,
   },
   profileWrapperFeatured: {
     minWidth: 120,
@@ -47,6 +41,7 @@ export const useStyles = makeStyles((theme) => ({
     paddingTop: 20,
     width: 350,
     boxSizing: 'border-box',
+    zIndex: 1,
   },
   featuredText: {
     fontSize: 16,
@@ -61,23 +56,23 @@ export const useStyles = makeStyles((theme) => ({
     paddingBottom: 5,
   },
   postHeaderText: {
-    color: '#222',
+    color: '#fff',
     width: '100%',
     height: '100%',
     alignSelf: 'flex-start',
-
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
     fontSize: 34,
+    textTransform: 'uppercase',
   },
   postImage: {
     position: 'relative',
     width: '100%',
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
-    height: 400,
+    height: 300,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -85,6 +80,15 @@ export const useStyles = makeStyles((theme) => ({
   card: {
     width: '100%',
     borderRadius: 0,
+    position: 'relative',
+    boxShadow: '5px 5px 30px rgba(0,0,0,0.3)',
+  },
+  cover: {
+    background: 'rgba(87, 73, 158,0.5)',
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    zIndex: 0,
   },
   rowWrapper: {
     display: 'flex',
