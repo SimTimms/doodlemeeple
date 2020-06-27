@@ -2,16 +2,37 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 700,
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-end',
     flexDirection: 'column',
+    marginBottom: 100,
   },
   card: { maxWidth: 712, width: '100%', marginTop: 10 },
   title: {
     fontSize: 14,
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  descriptionTitle: { fontSize: 30, marginTop: 20 },
+  description: {
+    fontSize: 16,
+    marginTop: 20,
+    paddingRight: 20,
+    boxSizing: 'border-box',
+  },
+  info: {
+    background: theme.palette.secondary.main,
+    color: '#fff',
+    padding: 20,
+    width: '100%',
+    textTransform: 'uppercase',
+    boxSizing: 'border-box',
+  },
+  subTitle: {
+    color: theme.palette.secondary.main,
+    fontSize: 20,
   },
   error: { background: theme.palette.error.main, color: '#fff', padding: 5 },
   avatar: {

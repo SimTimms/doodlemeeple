@@ -207,9 +207,9 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                     <TextField
                       id={'summary'}
                       label={`Summary of the game? Example: Build and battle giant mechs in this sci-fi epic.... ${
-                        game.summary ? `(${156 - game.summary.length})` : ''
+                        game.summary ? `(${256 - game.summary.length})` : ''
                       }`}
-                      inputProps={{ maxLength: 156 }}
+                      inputProps={{ maxLength: 256 }}
                       multiline
                       type="text"
                       value={game.summary}
@@ -217,7 +217,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                         setGame({
                           ...game,
                           summary: e.target.value
-                            .substring(0, 156)
+                            .substring(0, 256)
                             .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
                         });
                         autosaveIsOn && autosave(mutation, 'image');

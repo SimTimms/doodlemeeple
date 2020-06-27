@@ -40,8 +40,12 @@ export const GAME = gql`
       backgroundImg
       summary
       location
+      createdAt
       jobs {
         id
+        name
+      }
+      user {
         name
       }
       gallery {
