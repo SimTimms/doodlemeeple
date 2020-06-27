@@ -8,14 +8,6 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     background: '#fff',
   },
-  profileImg: {
-    width: 60,
-    minWidth: 60,
-    borderRadius: '50%',
-    boxShadow: '5px 5px 10px rgba(0,0,0,0.2)',
-    border: '4px solid #fff',
-    marginRight: 20,
-  },
   row: {
     display: 'flex',
     flexDirection: 'row',
@@ -28,21 +20,5 @@ export const useStyles = makeStyles((theme) => ({
     '&:first-child': {
       borderTop: 'none',
     },
-  },
-  profileWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingTop: 10,
-    paddingBottom: 10,
-    marginTop: 10,
-    marginBottom: 10,
-    borderTop: '1px dotted #ddd',
-  },
-  profileWrapperDetails: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
   },
 }));

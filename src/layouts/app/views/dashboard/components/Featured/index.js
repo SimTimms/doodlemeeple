@@ -35,17 +35,22 @@ export function Featured({ posts, featuredId, history }) {
 
         return (
           <Card className={classes.card} key={`conversation_${index}`}>
-            <div className={classes.rowWrapper}>
-              <div className={classes.postHeader}>
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    width: '100%',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                  }}
-                >
+            <div
+              className={classes.postImage}
+              style={{ backgroundImage: `url(${media})` }}
+            >
+              <div className={classes.rowWrapper}>
+                <div className={classes.postHeader}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '100%',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    {/*}
                   <div className={classes.featuredText}>
                     <img
                       src={device}
@@ -59,76 +64,76 @@ export function Featured({ posts, featuredId, history }) {
                     >
                       Featured Creative
                     </Typography>
-                  </div>
-                  <Typography
-                    variant="h5"
-                    component="h4"
-                    className={classes.postHeaderText}
-                  >
-                    <Query
-                      query={PROFILE_FEATURED}
-                      variables={{ userId: featuredId }}
-                      fetchPolicy="network-only"
+                </div>*/}
+                    <Typography
+                      variant="h5"
+                      component="h4"
+                      className={classes.postHeaderText}
                     >
-                      {({ data }) => {
-                        return data ? (
-                          <img
-                            className={classes.profileWrapperFeatured}
-                            src={data.profilePreview.profileImg}
-                            alt=""
-                          />
-                        ) : null;
-                      }}
-                    </Query>
-                    <b>{title}</b>
-                  </Typography>
-                </div>
+                      <Query
+                        query={PROFILE_FEATURED}
+                        variables={{ userId: featuredId }}
+                        fetchPolicy="network-only"
+                      >
+                        {({ data }) => {
+                          return data ? (
+                            <img
+                              className={classes.profileWrapperFeatured}
+                              src={data.profilePreview.profileImg}
+                              alt=""
+                            />
+                          ) : null;
+                        }}
+                      </Query>
+                      <b>{title}</b>
+                    </Typography>
+                  </div>
 
-                <Typography
-                  style={{
-                    color: '#222',
-                    marginTop: 5,
-                    textAlign: 'center',
-                  }}
-                  component="p"
-                >
-                  {message}
-                  <a
-                    href={linkTo}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Typography
                     style={{
-                      width: 100,
                       color: '#222',
+                      marginTop: 5,
+                      textAlign: 'center',
+                    }}
+                    component="p"
+                  >
+                    {/*message*/}
+                  </Typography>
+                  <div
+                    style={{
+                      display: 'flex',
+                      width: '100%',
+                      justifyContent: 'space-between',
+                      marginTop: 10,
                     }}
                   >
-                    Read our interview
-                  </a>
-                </Typography>
-                <div
-                  style={{
-                    display: 'flex',
-                    width: '100%',
-                    justifyContent: 'center',
-                    marginTop: 10,
-                  }}
-                >
-                  <IconButton
-                    color="primary"
-                    disabled={false}
-                    onClickEvent={() => {
-                      history.push(`/public-preview/${featuredId}`);
-                    }}
-                    icon="portrait"
-                    title="Profile"
-                    styleOverride={null}
-                  />
+                    <IconButton
+                      color="primary"
+                      disabled={false}
+                      onClickEvent={() => {
+                        history.push(`/public-preview/${featuredId}`);
+                      }}
+                      icon="portrait"
+                      title="Profile"
+                      styleOverride={null}
+                      type="button"
+                    />
+                    <a href={linkTo} target="_blank" rel="noopener noreferrer">
+                      <IconButton
+                        color="secondary"
+                        disabled={false}
+                        onClickEvent={() => {
+                          history.push(`/public-preview/${featuredId}`);
+                        }}
+                        icon="article"
+                        title="Article"
+                        styleOverride={null}
+                        type="button"
+                      />
+                    </a>
+                  </div>
                 </div>
               </div>
-              <div
-                className={classes.postImage}
-                style={{ backgroundImage: `url(${media})` }}
-              ></div>
             </div>
           </Card>
         );

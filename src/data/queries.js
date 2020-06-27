@@ -342,6 +342,7 @@ export const PREVIEW_CONTRACT = gql`
         summary
         profileImg
         id
+        profileBG
       }
       job {
         id

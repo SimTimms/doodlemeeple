@@ -3,12 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    maxWidth: 700,
-    background: '#fff',
-    marginTop: 30,
-    boxShadow: '10px 10px 30px rgba(0,0,0,0.2)',
-    borderRadius: 5,
-    overflow: 'hidden',
+  },
+  hide: {
+    display: 'none',
   },
   fullWidth: { width: '100%' },
   accepted: {

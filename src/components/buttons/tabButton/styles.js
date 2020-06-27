@@ -4,16 +4,10 @@ export const useStyles = makeStyles((theme) => ({
   iconButton: {
     cursor: 'pointer',
     background: theme.palette.primary.main,
-    padding: '10px 20px 10px 20px',
+    padding: 5,
     marginTop: 10,
-    marginBottom: 10,
+    borderRadius: '5px 5px 0 0',
     marginLeft: 2,
-    marginRight: 2,
-    fontSize: 14,
-    letterSpacing: 1,
-    boxShadow: '2px 2px 3px rgba(0,0,0,0.2)',
-    border: `1px solid ${theme.palette.primary.main}`,
-    borderRadius: 2,
     color: '#fff',
     '&:hover': {
       background: theme.palette.primary.dark,
@@ -22,7 +16,7 @@ export const useStyles = makeStyles((theme) => ({
   iconButtonSecondary: {
     background: '#fff',
     color: theme.palette.primary.main,
-    border: `1px solid ${theme.palette.primary.main}`,
+
     '&:hover': {
       background: '#eaeaea',
     },

@@ -27,7 +27,18 @@ export default function Payments({ data }) {
                 <TableCell>
                   {`${payment.amount / 100} ${payment.currency}`}
                 </TableCell>
-                <TableCell align="right">{`${payment.status}`}</TableCell>
+                <TableCell align="right">
+                  <div
+                    style={{
+                      background: '#ccc',
+                      color: '#fff',
+                      textAlign: 'center',
+                      paddingTop: 3,
+                      paddingBottom: 3,
+                      borderRadius: 4,
+                    }}
+                  >{`${payment.status}`}</div>
+                </TableCell>
                 <TableCell align="right">
                   {moment(payment.updatedAt).format('LLLL')}
                 </TableCell>
