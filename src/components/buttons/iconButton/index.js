@@ -29,7 +29,6 @@ export default function IconButton({
       style={styleOverride && styleOverride}
     >
       {title}
-          [classes.iconButtonIconSecondary]: color === 'secondary',
       {icon !== '' && (
         <Icon
           className={clsx({

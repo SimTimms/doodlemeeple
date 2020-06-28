@@ -42,6 +42,8 @@ export const useStyles = makeStyles((theme) => ({
     width: 350,
     boxSizing: 'border-box',
     zIndex: 1,
+
+    height: '100%',
   },
   featuredText: {
     fontSize: 16,
@@ -68,10 +70,16 @@ export const useStyles = makeStyles((theme) => ({
     textTransform: 'uppercase',
   },
   postImage: {
-    position: 'relative',
+    position: 'absolute',
     width: '100%',
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
+    height: 300,
+    filter: 'grayscale(80%)',
+  },
+  postImageWrapper: {
+    position: 'relative',
+    width: '100%',
     height: 300,
     display: 'flex',
     alignItems: 'center',
@@ -84,11 +92,11 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: '5px 5px 30px rgba(0,0,0,0.3)',
   },
   cover: {
-    background: 'rgba(87, 73, 158,0.5)',
     width: '100%',
     height: '100%',
     position: 'absolute',
     zIndex: 0,
+    background: 'rgba(32, 116, 108, 0.6)',
   },
   rowWrapper: {
     display: 'flex',

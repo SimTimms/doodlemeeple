@@ -41,6 +41,8 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
     border: 'none',
     boxShadow: 'none',
+    textTransform: 'uppercase',
+    letterSpacing: 1.3,
     '&:hover': {
       background: 'rgba(255,255,255,0.4)',
     },
@@ -71,7 +73,7 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 10,
   },
   iconButtonIconTextWhite: {
-    color: '#aaa',
+    color: '#fff',
     marginLeft: 10,
   },
   iconButtonIconWhite: {

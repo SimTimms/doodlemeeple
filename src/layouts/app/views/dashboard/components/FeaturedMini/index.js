@@ -35,10 +35,11 @@ export function FeaturedMini({ posts, featuredId, history }) {
 
         return (
           <Card className={classes.card} key={`conversation_${index}`}>
-            <div
-              className={classes.postImage}
-              style={{ backgroundImage: `url(${media})` }}
-            >
+            <div className={classes.postImageWrapper}>
+              <div
+                className={classes.postImage}
+                style={{ backgroundImage: `url(${media})` }}
+              ></div>
               <div className={classes.cover}></div>
               <div className={classes.postHeader}>
                 <div
@@ -79,6 +80,7 @@ export function FeaturedMini({ posts, featuredId, history }) {
                       justifyContent: 'space-between',
                       marginTop: 10,
                       zIndex: 1,
+                      alignItems: 'center',
                     }}
                   >
                     <IconButton
@@ -87,18 +89,21 @@ export function FeaturedMini({ posts, featuredId, history }) {
                       onClickEvent={() => {
                         history.push(`/public-preview/${featuredId}`);
                       }}
-                      icon="portrait"
-                      title="Profile"
+                      icon=""
+                      title="profile"
                       styleOverride={null}
                       type="button"
                     />
+                    <div
+                      style={{ height: 20, borderLeft: '1px solid #fff' }}
+                    ></div>
                     <a href={linkTo} target="_blank" rel="noopener noreferrer">
                       <IconButton
                         color="text-white"
                         disabled={false}
                         onClickEvent={() => {}}
-                        icon="article"
-                        title="More"
+                        icon=""
+                        title="article"
                         styleOverride={null}
                         type="button"
                       />

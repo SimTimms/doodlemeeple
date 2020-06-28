@@ -62,7 +62,7 @@ export function Featured({ posts, history }) {
                     component="h1"
                     variant="h1"
                   >
-                    Doodle Meeple
+                    doodle meeple
                   </Typography>
                   <Typography
                     style={{
