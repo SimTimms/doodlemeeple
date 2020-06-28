@@ -89,8 +89,36 @@ function RouterComponent(props) {
     main: '#ff4081',
     dark: '#d81b60',
   };
-  theme.typography.h1 = { fontFamily: ['Quicksand'].join(','), fontSize: 30 };
-  theme.typography.h2 = { fontFamily: ['Quicksand'].join(','), fontSize: 18 };
+  theme.typography.h1 = {
+    fontFamily: ['Quicksand'].join(','),
+    fontSize: 38,
+    margin: 0,
+  };
+  theme.typography.h2 = {
+    fontFamily: ['Quicksand'].join(','),
+    fontSize: 32,
+    margin: 0,
+  };
+  theme.typography.h3 = {
+    fontFamily: ['Quicksand'].join(','),
+    fontSize: 28,
+    margin: 0,
+  };
+  theme.typography.h4 = {
+    fontFamily: ['Quicksand'].join(','),
+    fontSize: 24,
+    margin: 0,
+  };
+  theme.typography.h5 = {
+    fontFamily: ['Quicksand'].join(','),
+    fontSize: 20,
+    margin: 0,
+  };
+  theme.typography.h6 = {
+    fontFamily: ['Quicksand'].join(','),
+    fontSize: 16,
+    margin: 0,
+  };
   theme.typography.button = {
     fontFamily: ['Quicksand'].join(','),
     fontSize: 14,

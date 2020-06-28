@@ -18,7 +18,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   cover: {
-    background: 'rgba(0, 0, 0,0.7)',
+    background: 'rgba(87, 73, 158, 0.6)',
     width: '100%',
     height: '100%',
     position: 'absolute',
@@ -45,7 +45,8 @@ export const useStyles = makeStyles((theme) => ({
     paddingRight: 40,
     paddingBottom: 20,
     paddingTop: 20,
-    width: 350,
+    maxWidth: 550,
+    width: '100%',
     boxSizing: 'border-box',
   },
   featuredText: {
@@ -72,7 +73,7 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     fontSize: 34,
   },
-  postImage: {
+  postImageWrapper: {
     position: 'relative',
     width: '100%',
     backgroundSize: 'cover',
@@ -81,6 +82,17 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  postImage: {
+    position: 'absolute',
+    width: '100%',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
+    height: 400,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    filter: 'grayscale(90%) brightness(60%)',
   },
   card: {
     width: '100%',
@@ -92,6 +104,7 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    zIndex: 1,
   },
   wrapperOne: {
     display: 'flex',

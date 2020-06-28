@@ -29,16 +29,19 @@ export default function IconButton({
       style={styleOverride && styleOverride}
     >
       {title}
-      <Icon
-        className={clsx({
-          [classes.iconButtonIcon]: true,
           [classes.iconButtonIconSecondary]: color === 'secondary',
-          [classes.iconButtonIconText]: color === 'text',
-          [classes.iconButtonIconTextWhite]: color === 'text-white',
-        })}
-      >
-        {icon}
-      </Icon>
+      {icon !== '' && (
+        <Icon
+          className={clsx({
+            [classes.iconButtonIcon]: true,
+            [classes.iconButtonIconSecondary]: color === 'secondary',
+            [classes.iconButtonIconText]: color === 'text',
+            [classes.iconButtonIconTextWhite]: color === 'text-white',
+          })}
+        >
+          {icon}
+        </Icon>
+      )}
     </Button>
   );
 }

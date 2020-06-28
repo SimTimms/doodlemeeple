@@ -42,7 +42,7 @@ export const useStyles = makeStyles((theme) => ({
     border: 'none',
     boxShadow: 'none',
     '&:hover': {
-      background: '#eaeaea',
+      background: 'rgba(255,255,255,0.4)',
     },
   },
   iconButtonWarning: {
@@ -70,7 +70,10 @@ export const useStyles = makeStyles((theme) => ({
     color: '#aaa',
     marginLeft: 10,
   },
-
+  iconButtonIconTextWhite: {
+    color: '#aaa',
+    marginLeft: 10,
+  },
   iconButtonIconWhite: {
     color: '#fff',
     marginLeft: 10,

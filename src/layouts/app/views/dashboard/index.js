@@ -44,7 +44,7 @@ export function Dashboard({ history }) {
         });
       axios
         .get(
-          'https://doodlemeeple.com/wp-json/wp/v2/posts?_embed&categories=3',
+          'https://doodlemeeple.com/wp-json/wp/v2/posts?_embed&categories=4',
           { cancelToken: axiosCancel.token },
         )
         .then((response) => {
@@ -72,11 +72,7 @@ export function Dashboard({ history }) {
             button={null}
           />
         ) : (
-          <Featured
-            posts={home ? home : []}
-            featuredId={featuredId}
-            history={history}
-          />
+          <Featured posts={home ? home : []} history={history} />
         )}
         <div className={classes.dashboardGrid}>
           <div className={classes.gridRow}>
