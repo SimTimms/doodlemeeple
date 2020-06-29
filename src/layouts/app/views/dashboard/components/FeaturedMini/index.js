@@ -38,7 +38,9 @@ export function FeaturedMini({ posts, featuredId, history }) {
             <div className={classes.postImageWrapper}>
               <div
                 className={classes.postImage}
-                style={{ backgroundImage: `url(${media})` }}
+                style={{
+                  backgroundImage: `url(${media})`,
+                }}
               ></div>
               <div className={classes.cover}></div>
               <div className={classes.postHeader}>

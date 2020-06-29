@@ -75,7 +75,6 @@ export const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
     height: 300,
-    filter: 'grayscale(80%)',
   },
   postImageWrapper: {
     position: 'relative',
@@ -96,7 +95,6 @@ export const useStyles = makeStyles((theme) => ({
     height: '100%',
     position: 'absolute',
     zIndex: 0,
-    background: 'rgba(32, 116, 108, 0.6)',
   },
   rowWrapper: {
     display: 'flex',

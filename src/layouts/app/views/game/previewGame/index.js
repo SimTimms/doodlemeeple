@@ -43,34 +43,32 @@ export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
   ) : (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <div style={{ width: '100%' }}>
-          <div className={classes.wrapperOne}>
-            <div
-              className={classes.wrapperTwo}
-              style={{
-                backgroundImage: `url(${game.backgroundImg})`,
-              }}
-            ></div>
-            <div className={classes.cover}></div>
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <div
+            className={classes.wrapperTwo}
+            style={{
+              backgroundImage: `url(${game.backgroundImg})`,
+            }}
+          ></div>
+          <div
+            className={classes.inset}
+            style={{
+              backgroundImage: `url(${game.backgroundImg})`,
+            }}
+          ></div>
+          <div className={classes.wrapperFive}>
             <div className={classes.wrapperThree}>
-              <div className={classes.wrapperFour}>
-                <Typography variant="body1">{`${game.user.name}`}</Typography>
-                <Typography
-                  variant="body1"
-                  style={{ marginLeft: 5, marginRight: 5 }}
-                >{` | `}</Typography>
-                <Typography variant="body1">{`${game.location}`}</Typography>{' '}
-                <Typography
-                  variant="body1"
-                  style={{ marginLeft: 5, marginRight: 5 }}
-                >{` | `}</Typography>{' '}
-                <Typography variant="body1">{`${moment(game.createdAt).format(
-                  'LLLL',
-                )}`}</Typography>
-              </div>
               <Typography
                 variant="h1"
-                style={{ textAlign: 'center', color: '#fff', fontSize: 40 }}
+                style={{ textAlign: 'center', fontSize: 40 }}
                 className={classes.title}
               >
                 {game.name}
@@ -83,15 +81,11 @@ export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
                 {game.type && game.type !== '' ? game.type : '-'}
               </Typography>
             </div>
-          </div>
-          <div className={classes.wrapperFive}>
-            <div style={{ maxWidth: 900, width: '100%' }}>
-              <Typography variant="h1" className={classes.info}>
-                Game Info
-              </Typography>
-            </div>
 
-            <div className={classes.columnWrapper}>
+            <div
+              className={classes.columnWrapper}
+              style={{ borderTop: '1px dotted #ccc', marginTop: 40 }}
+            >
               <div className={classes.column}>
                 <Typography variant="h3" className={classes.descriptionTitle}>
                   Description
@@ -100,7 +94,6 @@ export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
                   {game.summary}
                 </Typography>
               </div>
-              <img src={game.backgroundImg} style={{ width: '50%' }} />
             </div>
           </div>
           {game.showreel !== '' && (
