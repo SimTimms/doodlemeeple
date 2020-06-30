@@ -28,6 +28,21 @@ export const useStyles = makeStyles((theme) => ({
     border: '4px solid #fff',
     boxShadow: '0px 0px 20px rgba(0,0,0,0.3)',
   },
+
+  iconWrapperFeatured: {
+    minWidth: 120,
+    maxWidth: 120,
+    minHeight: 120,
+    maxHeight: 120,
+    borderRadius: 20,
+    marginBottom: 5,
+    border: '4px solid #fff',
+    boxShadow: '0px 0px 20px rgba(0,0,0,0.3)',
+    background: theme.palette.primary.main,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   postHeader: {
     bottom: 0,
     display: 'flex',
@@ -78,6 +93,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 0,
     position: 'relative',
     boxShadow: '5px 5px 30px rgba(0,0,0,0.3)',
+    marginBottom: 40,
   },
   cover: {
     width: '100%',

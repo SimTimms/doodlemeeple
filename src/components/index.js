@@ -47,8 +47,10 @@ import ViewContractButton from './viewContractButton';
 import SubmitContractButton from './submitContractButton';
 import NoticeBox from './noticeBox';
 import Contract from './contract';
+import FeatureCard from './featureCard';
 
 export {
+  FeatureCard,
   SubmitContractButton,
   NoticeBox,
   Contract,

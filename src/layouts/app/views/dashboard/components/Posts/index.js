@@ -8,6 +8,7 @@ import {
   IconTitle,
   InlineHeader,
   IconButton,
+  FeatureCard,
 } from '../../../../../../components';
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -45,73 +46,33 @@ export function Posts({ posts }) {
           ? post._embedded['wp:featuredmedia']['0'].source_url
           : null;
 
+        console.log(post);
         return (
-          <Card className={classes.card} key={`conversation_${index}`}>
-            <div className={classes.rowWrapper}>
+          <FeatureCard
+            key={`news_${index}`}
+            background={media}
+            thumbnail="news"
+            title={title}
+            subtitle={message}
+            buttonOne={
               <a
                 href={linkTo}
                 className={classes.messageButton}
                 style={{ textDecoration: 'none' }}
               >
-                <InlineHeader>
-                  <IconTitle icon={'textsms'} title={`Post`} />
-                  <Typography variant="caption" component="p">
-                    <b>{timeDifferenceForDate(post.date)}</b>
-                  </Typography>
-                </InlineHeader>
-                <div
-                  className={classes.postImage}
-                  style={{ backgroundImage: `url(${media})` }}
-                >
-                  <div className={classes.postHeader}>
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        width: '100%',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Typography variant="h5" component="h4">
-                        <b>{title}</b>
-                      </Typography>
-                      <Typography
-                        style={{
-                          color: '#fff',
-                          display: 'flex',
-                          flexDirection: 'row',
-                        }}
-                        component="p"
-                      >
-                        <b>{timeDifferenceForDate(createdAt)}</b>
-                      </Typography>
-                    </div>
-
-                    <Typography style={{ color: '#444' }} component="p">
-                      {message}
-                    </Typography>
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        width: '100%',
-                        justifyContent: 'flex-end',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <IconButton
-                        disabled={false}
-                        onClickEvent={false}
-                        icon="more_horiz"
-                        title="Read more "
-                      />
-                    </div>
-                  </div>
-                </div>
+                <IconButton
+                  disabled={false}
+                  onClickEvent={false}
+                  icon="more_horiz"
+                  title="Read more"
+                  color="text-dark"
+                  type="button"
+                  styleOverride={null}
+                />
               </a>
-            </div>
-          </Card>
+            }
+            buttonTwo={null}
+          />
         );
       })}
 
