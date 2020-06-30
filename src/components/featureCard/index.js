@@ -66,11 +66,9 @@ export default function FeatureCard({
           >
             {buttonOne}
             {buttonTwo && (
-              <div>
-                <div style={{ height: 20, borderLeft: '1px solid #222' }}></div>
-                {buttonTwo}
-              </div>
+              <div style={{ height: 20, borderLeft: '1px solid #222' }}></div>
             )}
+            {buttonTwo && buttonTwo}
           </div>
         </div>
       </div>
