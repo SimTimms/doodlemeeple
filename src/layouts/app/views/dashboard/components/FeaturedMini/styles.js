@@ -8,7 +8,8 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: '100%',
-    maxWidth: 500,
+    padding: 0,
+    boxSizing: 'border-box',
   },
   messageWrapperMobile: {
     display: 'flex',

@@ -19,8 +19,8 @@ import Cookies from 'js-cookie';
 import { readableErrors } from '../../../../utils/readableErrors';
 import jwtDecode from 'jwt-decode';
 import device from '../../../../assets/device.svg';
-
 import clsx from 'clsx';
+
 const CHECKING = 'Checking...';
 
 export default function LoginCard({ history, forwardTo }) {

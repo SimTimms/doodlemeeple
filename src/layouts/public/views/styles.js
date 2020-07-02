@@ -21,6 +21,8 @@ export const sharedStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
+    zIndex: 2,
+    position: 'relative',
   },
   description: {
     paddingTop: 10,

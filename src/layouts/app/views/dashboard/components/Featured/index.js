@@ -117,8 +117,6 @@ export function Featured({ posts, history }) {
           </Card>
         );
       })}
-
-      <Icon color="disabled">more_horizontal</Icon>
     </div>
   );
 }

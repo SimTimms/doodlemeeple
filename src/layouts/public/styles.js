@@ -23,6 +23,15 @@ export const useStyles = makeStyles((theme) => ({
     minHeight: 400,
     padding: 10,
   },
+  cover: {
+    background: 'rgba(87, 73, 158, 0.6)',
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    zIndex: 0,
+    top: 0,
+    left: 0,
+  },
   backgroundLogin: {
     backgroundImage: `url(${purps})`,
     backgroundSize: 'cover',

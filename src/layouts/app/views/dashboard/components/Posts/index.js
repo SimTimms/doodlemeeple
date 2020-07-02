@@ -1,18 +1,13 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
 import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
-import Typography from '@material-ui/core/Typography';
-import { timeDifferenceForDate } from '../../../../../../utils/dates';
 import {
-  IconTitle,
-  InlineHeader,
   IconButton,
-  FeatureCard,
+  FeatureCardHorizontal,
 } from '../../../../../../components';
-
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
+import { timeDifferenceForDate } from '../../../../../../utils/dates';
 
 export function Posts({ posts }) {
   const classes = useStyles();
@@ -24,18 +19,9 @@ export function Posts({ posts }) {
         [classes.messageWrapperMobile]: mobile,
       })}
     >
-      <Typography
-        color="textPrimary"
-        variant="h2"
-        style={{ textAlign: 'center' }}
-      >
-        News
-      </Typography>
-
       {posts.map((post, index) => {
         const regex = /(<([^>]+)>)/gi;
         const linkTo = post.link;
-        const createdAt = post.date;
         const message = post.excerpt.rendered
           .replace(regex, '')
           .replace(/&#8217;/gi, "'")
@@ -45,26 +31,28 @@ export function Posts({ posts }) {
         const media = post._embedded['wp:featuredmedia']
           ? post._embedded['wp:featuredmedia']['0'].source_url
           : null;
-
-        console.log(post);
+        const author = post._embedded.author[0].name;
+        const createdAt = post.date;
         return (
-          <FeatureCard
+          <FeatureCardHorizontal
             key={`news_${index}`}
             background={media}
-            thumbnail="news"
             title={title}
             subtitle={message}
+            meta={`${author} - ${timeDifferenceForDate(createdAt)}`}
             buttonOne={
               <a
                 href={linkTo}
                 className={classes.messageButton}
                 style={{ textDecoration: 'none' }}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <IconButton
                   disabled={false}
-                  onClickEvent={false}
-                  icon="more_horiz"
-                  title="Read more"
+                  onClickEvent={() => {}}
+                  icon=""
+                  title="Read"
                   color="text-dark"
                   type="button"
                   styleOverride={null}

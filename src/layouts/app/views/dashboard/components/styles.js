@@ -14,9 +14,13 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: 40,
-    width: 400,
+    boxSizing: 'border-box',
+    width: '100%',
   },
+  messageWrapperMobile: {
+    width: '100%',
+  },
+  shadow: { boxShadow: '10px 10px 30px rgba(0,0,0,0.2)', width: '100%' },
   iconButton: {
     cursor: 'pointer',
     '&:hover': {
@@ -72,7 +76,6 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   messageButton: {
-    maxWidth: 326,
     width: '100%',
     lineHeight: 0.6,
     display: 'flex',
@@ -80,7 +83,7 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     justifyContent: 'flex-end',
   },
-  card: { width: 350, margin: '5px 0 0 0' },
+  card: { width: '100%', margin: 0, borderRadius: 0, boxShadow: 'none' },
   title: {
     fontSize: 14,
   },

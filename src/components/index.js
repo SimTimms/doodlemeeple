@@ -48,9 +48,11 @@ import SubmitContractButton from './submitContractButton';
 import NoticeBox from './noticeBox';
 import Contract from './contract';
 import FeatureCard from './featureCard';
+import FeatureCardHorizontal from './featureCardHorizontal';
 
 export {
   FeatureCard,
+  FeatureCardHorizontal,
   SubmitContractButton,
   NoticeBox,
   Contract,

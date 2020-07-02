@@ -33,6 +33,7 @@ export function PublicLayout(props) {
       <Content>
         {page === 'login' ? (
           <div className={classes.backgroundLogin}>
+            <div className={classes.cover}></div>
             <LoginCard history={props.history} forwardTo={null} />
           </div>
         ) : page === 'register' ? (
@@ -53,6 +54,7 @@ export function PublicLayout(props) {
           </div>
         ) : (
           <div className={classes.backgroundLogin}>
+            <div className={classes.cover}></div>
             <LoginCard history={props.history} forwardTo={props.location} />
           </div>
         )}

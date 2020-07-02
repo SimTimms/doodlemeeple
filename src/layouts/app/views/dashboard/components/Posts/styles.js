@@ -7,8 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    width: '50%',
-    marginTop: 40,
+    width: '100%',
   },
   messageWrapperMobile: {
     display: 'flex',
@@ -17,7 +16,6 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: '100%',
-    marginTop: 30,
   },
   postHeader: {
     color: theme.palette.primary.main,

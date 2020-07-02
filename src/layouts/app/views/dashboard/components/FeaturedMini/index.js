@@ -1,5 +1,4 @@
 import React from 'react';
-import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {
@@ -22,13 +21,7 @@ export function FeaturedMini({ posts, featuredId, history }) {
       })}
     >
       {posts.map((post, index) => {
-        const regex = /(<([^>]+)>)/gi;
         const linkTo = post.link;
-        const message = post.excerpt.rendered
-          .replace(regex, '')
-          .replace(/&#8217;/gi, "'")
-          .replace(/&amp;/gi, '&')
-          .replace(/\[&hellip;\]/gi, '...');
         const title = post.title.rendered;
         const media = post._embedded['wp:featuredmedia']
           ? post._embedded['wp:featuredmedia']['0'].source_url
@@ -87,8 +80,6 @@ export function FeaturedMini({ posts, featuredId, history }) {
           </div>
         );
       })}
-
-      <Icon color="disabled">more_horizontal</Icon>
     </div>
   );
 }
