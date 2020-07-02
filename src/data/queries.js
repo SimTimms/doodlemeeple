@@ -171,10 +171,12 @@ export const INVITES = gql`
       user {
         id
         name
+        profileImg
       }
       job {
         id
         name
+        summary
       }
     }
   }

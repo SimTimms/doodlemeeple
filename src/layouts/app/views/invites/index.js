@@ -40,6 +40,7 @@ export function Invites({ history }) {
           query={INVITES}
           fetchPolicy="network-only"
           onCompleted={(data) => {
+            console.log(data);
             setInviteArray(data.getInvites);
           }}
         >

@@ -48,6 +48,7 @@ import SubmitContractButton from './submitContractButton';
 import NoticeBox from './noticeBox';
 import Contract from './contract';
 import FeatureCard from './featureCard';
+import FeatureCardInvite from './featureCardInvite';
 import FeatureCardHorizontal from './featureCardHorizontal';
 import {
   Header,
@@ -59,6 +60,7 @@ import {
 } from './textParts';
 
 export {
+  FeatureCardInvite,
   ColumnWrapperFull,
   ColumnWrapper,
   FeatureCard,

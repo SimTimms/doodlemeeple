@@ -6,6 +6,7 @@ import {
   DeclineInvite,
   IconTitle,
   IconButton,
+  FeatureCardInvite,
 } from '../../../../../../components';
 
 export function InviteComponent({ invite, removeInvite, history }) {
@@ -13,6 +14,40 @@ export function InviteComponent({ invite, removeInvite, history }) {
 
   return (
     <Card className={classes.card}>
+      <FeatureCardInvite
+        background={invite.game.backgroundImg}
+        thumbnail={invite.user.profileImg}
+        job={invite.job.name}
+        summary={invite.job.summary}
+        game="game"
+        author={invite.user.name}
+        buttonOne={
+          <IconButton
+            color="text-dark"
+            disabled={false}
+            onClickEvent={() => {
+              history.push(`/app/public-preview/adsas`);
+            }}
+            icon=""
+            title="Decline"
+            styleOverride={null}
+            type="button"
+          />
+        }
+        buttonTwo={
+          <a href={'sad'} target="_blank" rel="noopener noreferrer">
+            <IconButton
+              color="text-dark"
+              disabled={false}
+              onClickEvent={() => {}}
+              icon=""
+              title="View"
+              styleOverride={null}
+              type="button"
+            />
+          </a>
+        }
+      />
       <InlineHeader>
         <div
           style={{
@@ -64,12 +99,12 @@ export function InviteComponent({ invite, removeInvite, history }) {
         <DeclineInvite invite={invite} removeInvite={removeInvite} />
         <IconButton
           disabled={false}
-          secondaryColor={false}
-          warning={false}
+          color="primary"
           icon="more_horiz"
           title="Find Out More"
           onClickEvent={() => history.push(`/app/view-job/${invite.job.id}`)}
           styleOverride={null}
+          type="button"
         />
       </div>
     </Card>
