@@ -9,9 +9,11 @@ export default function FeatureCardInvite({
   job,
   game,
   author,
+  authorId,
   summary,
   buttonOne,
   buttonTwo,
+  history,
 }) {
   const classes = useStyles();
   return (
@@ -47,6 +49,9 @@ export default function FeatureCardInvite({
             <Typography
               variant="h6"
               className={classes.link}
+              onClick={() => {
+                history.push(`/public-preview/${authorId}`);
+              }}
             >{`${game}`}</Typography>
             <Typography
               variant="h6"
@@ -58,6 +63,7 @@ export default function FeatureCardInvite({
             >{`${author}`}</Typography>
             <Typography variant="h6">{`${summary}`}</Typography>
           </div>
+
           <div
             style={{
               display: 'flex',
@@ -69,11 +75,32 @@ export default function FeatureCardInvite({
               alignItems: 'center',
             }}
           >
-            {buttonOne}
             {buttonTwo && (
-              <div style={{ height: 20, borderLeft: '1px solid #222' }}></div>
+              <div
+                style={{
+                  width: '50%',
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                }}
+              >
+                {buttonOne}
+              </div>
             )}
-            {buttonTwo && buttonTwo}
+            {!buttonTwo && { buttonOne }}
+            {buttonTwo && (
+              <div style={{ height: 20, borderLeft: '1px solid #ddd' }}></div>
+            )}
+            {buttonTwo && (
+              <div
+                style={{
+                  width: '50%',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                }}
+              >
+                {buttonTwo}
+              </div>
+            )}
           </div>
         </div>
       </div>

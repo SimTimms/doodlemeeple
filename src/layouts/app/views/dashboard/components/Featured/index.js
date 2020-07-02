@@ -81,35 +81,57 @@ export function Featured({ posts, history }) {
                       width: '100%',
                       justifyContent: 'space-between',
                       marginTop: 40,
-                      maxWidth: 320,
                       fontSize: 20,
                       color: '#fff',
                       alignItems: 'center',
                     }}
                   >
-                    <IconButton
-                      color="text-white"
-                      disabled={false}
-                      onClickEvent={() => {}}
-                      icon=""
-                      title="Create Profile"
-                      styleOverride={null}
-                      type="button"
-                    />
                     <div
-                      style={{ height: 20, borderLeft: '1px solid #fff' }}
-                    ></div>
-                    <a href={linkTo} target="_blank" rel="noopener noreferrer">
+                      style={{
+                        display: 'flex',
+                        width: '50%',
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                      }}
+                    >
                       <IconButton
                         color="text-white"
                         disabled={false}
                         onClickEvent={() => {}}
                         icon=""
-                        title="Post a Job"
+                        title="Create Profile"
                         styleOverride={null}
                         type="button"
                       />
-                    </a>
+                    </div>
+
+                    <div
+                      style={{ height: 20, borderLeft: '1px solid #fff' }}
+                    ></div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        width: '50%',
+                        alignItems: 'center',
+                        justifyContent: 'flex-start',
+                      }}
+                    >
+                      <a
+                        href={linkTo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <IconButton
+                          color="text-white"
+                          disabled={false}
+                          onClickEvent={() => {}}
+                          icon=""
+                          title="Post a Job"
+                          styleOverride={null}
+                          type="button"
+                        />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>

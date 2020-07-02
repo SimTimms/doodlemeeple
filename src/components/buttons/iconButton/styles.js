@@ -49,13 +49,15 @@ export const useStyles = makeStyles((theme) => ({
   },
   iconButtonTextDark: {
     background: 'rgba(0,0,0,0)',
-    color: '#222',
+    color: theme.palette.primary.main,
     border: 'none',
     boxShadow: 'none',
     textTransform: 'uppercase',
     letterSpacing: 1.3,
+    textShadow: '3px 3px 4px rgba(0,0,0,0.1)',
     '&:hover': {
       background: 'rgba(0,0,0,0.2)',
+      color: '#444',
     },
   },
   iconButtonWarning: {

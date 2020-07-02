@@ -21,12 +21,14 @@ export function InviteComponent({ invite, removeInvite, history }) {
         summary={invite.job.summary}
         game="game"
         author={invite.user.name}
+        authorId={invite.user.id}
+        history={history}
         buttonOne={
           <IconButton
             color="text-dark"
             disabled={false}
             onClickEvent={() => {
-              history.push(`/app/public-preview/adsas`);
+              history.push(`/app/view-game/${invite.game.id}`);
             }}
             icon=""
             title="Decline"
@@ -39,7 +41,9 @@ export function InviteComponent({ invite, removeInvite, history }) {
             <IconButton
               color="text-dark"
               disabled={false}
-              onClickEvent={() => {}}
+              onClickEvent={() => {
+                history.push(`/public-preview/${invite.user.id}`);
+              }}
               icon=""
               title="View"
               styleOverride={null}
