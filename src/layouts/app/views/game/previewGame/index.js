@@ -1,11 +1,17 @@
 import React from 'react';
-import { Card, Slide, Typography } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import ReactPlayer from 'react-player';
 import { useStyles } from './styles';
-import { LoadIcon, IconTitle, InlineHeader } from '../../../../../components';
+import {
+  LoadIcon,
+  Header,
+  SubHeader,
+  HeaderTwo,
+  Text,
+  ColumnWrapper,
+} from '../../../../../components';
 import { Query } from 'react-apollo';
 import { GAME } from '../../../../../data/queries';
-import moment from 'moment';
 
 export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
   const classes = useStyles();
@@ -66,35 +72,15 @@ export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
           ></div>
           <div className={classes.wrapperFive}>
             <div className={classes.wrapperThree}>
-              <Typography
-                variant="h1"
-                style={{ textAlign: 'center', fontSize: 40 }}
-                className={classes.title}
-              >
-                {game.name}
-              </Typography>
-              <Typography
-                variant="body1"
-                style={{ textAlign: 'center' }}
-                className={classes.subTitle}
-              >
-                {game.type && game.type !== '' ? game.type : '-'}
-              </Typography>
+              <Header str={game.name} />
+              <SubHeader
+                str={game.type && game.type !== '' ? game.type : '-'}
+              />
             </div>
-
-            <div
-              className={classes.columnWrapper}
-              style={{ borderTop: '1px dotted #ccc', marginTop: 40 }}
-            >
-              <div className={classes.column}>
-                <Typography variant="h3" className={classes.descriptionTitle}>
-                  Description
-                </Typography>
-                <Typography variant="body1" className={classes.description}>
-                  {game.summary}
-                </Typography>
-              </div>
-            </div>
+            <ColumnWrapper>
+              <HeaderTwo str="Description" />
+              <Text str={game.summary} />
+            </ColumnWrapper>
           </div>
           {game.showreel !== '' && (
             <div className={classes.wrapperFive}>

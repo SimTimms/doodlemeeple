@@ -46,7 +46,7 @@ export function FeaturedMini({ posts, featuredId, history }) {
                         color="text-dark"
                         disabled={false}
                         onClickEvent={() => {
-                          history.push(`/public-preview/${featuredId}`);
+                          history.push(`/app/public-preview/${featuredId}`);
                         }}
                         icon=""
                         title="profile"

@@ -19,6 +19,7 @@ import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
 import { AUTOSAVE_IS } from '../../data/queries';
 import { ContentTop, StyledNavBar } from '../../components';
+import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('home');
@@ -121,6 +122,12 @@ function AppLayout(props) {
             />
           ) : page === 'view-contract' ? (
             <PreviewContract contractId={pathParam} history={props.history} />
+          ) : page === 'public-preview' ? (
+            <PreviewProfile
+              profileId={pathParam}
+              theme={props.theme}
+              publicView={true}
+            />
           ) : page === 'pick-artist' ? (
             <PickArtist
               theme={props.theme}

@@ -49,9 +49,23 @@ import NoticeBox from './noticeBox';
 import Contract from './contract';
 import FeatureCard from './featureCard';
 import FeatureCardHorizontal from './featureCardHorizontal';
+import {
+  Header,
+  SubHeader,
+  HeaderTwo,
+  Text,
+  ColumnWrapper,
+  ColumnWrapperFull,
+} from './textParts';
 
 export {
+  ColumnWrapperFull,
+  ColumnWrapper,
   FeatureCard,
+  Text,
+  Header,
+  HeaderTwo,
+  SubHeader,
   FeatureCardHorizontal,
   SubmitContractButton,
   NoticeBox,

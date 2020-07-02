@@ -120,7 +120,7 @@ export function EditProfile({ theme }) {
                       >
                         <IconButton
                           disabled={false}
-                          secondaryColor={true}
+                          color="secondary"
                           warning={false}
                           icon="pageview"
                           title="Preview"

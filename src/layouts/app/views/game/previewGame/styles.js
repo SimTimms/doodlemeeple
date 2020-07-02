@@ -98,6 +98,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     borderBottom: '1px dotted #ccc',
+    flexDirection: 'column',
     paddingBottom: 40,
   },
 }));

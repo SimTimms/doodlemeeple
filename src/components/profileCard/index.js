@@ -50,7 +50,7 @@ export default function ProfileCard({
           }}
         ></div>
         <div className={classes.creativeCardDetails}>
-          <Typography variant="h2" component="h2">
+          <Typography variant="h6" component="h6">
             {creative.name}
           </Typography>
           <Typography variant="body1" component="p">
