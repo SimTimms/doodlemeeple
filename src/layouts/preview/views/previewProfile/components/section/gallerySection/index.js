@@ -65,7 +65,7 @@ function GallerySection({ section }) {
             style={{
               width: '100%',
               display: 'flex',
-              justifyContent: 'space-around',
+              justifyContent: 'center',
               alignItems: 'flex-start',
               flexWrap: 'wrap',
               paddingLeft: 40,

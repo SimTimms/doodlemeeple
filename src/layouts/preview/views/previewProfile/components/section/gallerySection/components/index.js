@@ -50,7 +50,7 @@ export function Card({ img }) {
     <div
       style={{
         display: 'flex',
-        width: '25%',
+        width: '33.3%',
         height: 300,
         boxSizing: 'border-box',
         position: 'relative',
@@ -58,7 +58,7 @@ export function Card({ img }) {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center center',
-        border: '10px solid rgba(255,255,255,0.4)',
+        border: '20px solid rgba(255,255,255,1)',
         backgroundColor: 'rgba(255,255,255,0.5)',
       }}
     >
