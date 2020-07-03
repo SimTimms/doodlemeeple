@@ -21,13 +21,15 @@ export default function SubmitContractButton({ contract, jobId, setContract }) {
           <IconButton
             title="Send Quote"
             icon="send"
-            styleOverride={null}
+            styleOverride={{ width: '100%' }}
             color="primary"
             disabled={false}
             onClickEvent={() => {
               toaster('Sending...');
               mutation();
             }}
+            iconPos="right"
+            type="button"
           />
         );
       }}

@@ -2,12 +2,20 @@ import React from 'react';
 import { Card, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
+import {
+  ColumnWrapper,
+  ColumnWrapperFull,
+  HeaderTwo,
+  Text,
+  TextDivider,
+} from '../';
 
 export default function FeatureCardInvite({
   background,
   thumbnail,
   job,
   game,
+  gameId,
   author,
   authorId,
   summary,
@@ -39,31 +47,39 @@ export default function FeatureCardInvite({
             src={thumbnail}
             alt=""
           />
+          <HeaderTwo str={job} />
+          <Text
+            str={
+              <div
+                style={{
+                  display: 'flex',
+                  width: '100%',
+                  justifyContent: 'center',
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  className={classes.link}
+                  onClick={() => {
+                    history.push(`/app/view-game/${gameId}`);
+                  }}
+                >{`${game}`}</Typography>
+                <Typography
+                  variant="h6"
+                  style={{ marginLeft: 5, marginRight: 5 }}
+                >{` by `}</Typography>
+                <Typography
+                  variant="h6"
+                  className={classes.link}
+                  onClick={() => {
+                    history.push(`/public-preview/${authorId}`);
+                  }}
+                >{`${author}`}</Typography>
+              </div>
+            }
+          />
 
-          <Typography variant="h5" className={classes.postHeaderText}>
-            <b>{job}</b>
-          </Typography>
-          <div
-            style={{ display: 'flex', width: '100%', justifyContent: 'center' }}
-          >
-            <Typography
-              variant="h6"
-              className={classes.link}
-              onClick={() => {
-                history.push(`/public-preview/${authorId}`);
-              }}
-            >{`${game}`}</Typography>
-            <Typography
-              variant="h6"
-              style={{ marginLeft: 5, marginRight: 5 }}
-            >{` by `}</Typography>
-            <Typography
-              variant="h6"
-              className={classes.link}
-            >{`${author}`}</Typography>
-            <Typography variant="h6">{`${summary}`}</Typography>
-          </div>
-
+          <TextDivider />
           <div
             style={{
               display: 'flex',

@@ -103,37 +103,37 @@ export function PreviewProfile({ theme, profileId, publicView }) {
               width: '100%',
             }}
           ></div>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              flexDirection: 'column',
-              alignItems: 'center',
-              width: '100%',
-              marginTop: -70,
-            }}
-          >
-            {userProfile.profileImg && (
-              <div
-                style={{
-                  backgroundImage: `url(${userProfile.profileImg}`,
-                  minWidth: 140,
-                  maxWidth: 140,
-                  minHeight: 140,
-                  maxHeight: 140,
-                  backgroundSize: 'cover',
-                  backgroundPosition: `center center`,
-                  borderRadius: 20,
-                  border: '4px solid #fff',
-                  boxShadow: '0 0 30px rgba(0,0,0,0.2)',
-                }}
-              ></div>
-            )}
-          </div>
-
-          <Header str={userProfile.userName} />
-          <SubHeader str="Artist" />
-
+          <ColumnWrapper>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                alignItems: 'center',
+                width: '100%',
+                marginTop: -70,
+              }}
+            >
+              {userProfile.profileImg && (
+                <div
+                  style={{
+                    backgroundImage: `url(${userProfile.profileImg}`,
+                    minWidth: 140,
+                    maxWidth: 140,
+                    minHeight: 140,
+                    maxHeight: 140,
+                    backgroundSize: 'cover',
+                    backgroundPosition: `center center`,
+                    borderRadius: 20,
+                    border: '4px solid #fff',
+                    boxShadow: '0 0 30px rgba(0,0,0,0.2)',
+                  }}
+                ></div>
+              )}
+              <Header str={userProfile.userName} />
+              <SubHeader str="Artist" />
+            </div>
+          </ColumnWrapper>
           <ColumnWrapper>
             <HeaderTwo str="About Me" />
             <Text

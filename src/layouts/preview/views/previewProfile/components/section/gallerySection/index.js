@@ -71,7 +71,6 @@ function GallerySection({ section }) {
               paddingLeft: 40,
               paddingRight: 40,
               boxSizing: 'border-box',
-              border: '5px solid #efeff5',
             }}
           >
             {gallery.images.map((item, index) => {
@@ -90,6 +89,7 @@ function GallerySection({ section }) {
               justifyContent: 'space-around',
               alignItems: 'center',
               flexWrap: 'wrap',
+              marginTop: 20,
             }}
           >
             <Testimonials testimonials={testimonials} />

@@ -1,13 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  actionWrapper: {
+  root: {
     display: 'flex',
-    flexDirection: 'column',
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'column',
     width: '100%',
-    maxWidth: 300,
-    margin: 'auto',
   },
 }));

@@ -12,7 +12,7 @@ import { Invites } from './views/invites';
 import { Submitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
 import { EditJob, Jobs, PreviewJob } from './views/job';
-import { PreviewContract } from './views/contract';
+import { PreviewContract, EditContract } from './views/contract';
 import { PickArtist } from './views/pickArtist';
 import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
@@ -122,6 +122,8 @@ function AppLayout(props) {
             />
           ) : page === 'view-contract' ? (
             <PreviewContract contractId={pathParam} history={props.history} />
+          ) : page === 'edit-contract' ? (
+            <EditContract contractId={pathParam} history={props.history} />
           ) : page === 'public-preview' ? (
             <PreviewProfile
               profileId={pathParam}

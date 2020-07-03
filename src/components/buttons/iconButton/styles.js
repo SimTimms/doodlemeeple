@@ -22,7 +22,7 @@ export const useStyles = makeStyles((theme) => ({
   iconButtonSecondary: {
     background: '#fff',
     color: theme.palette.primary.main,
-    border: `1px solid ${theme.palette.primary.main}`,
+    border: `1px solid #fff`,
     '&:hover': {
       background: '#eaeaea',
     },
@@ -57,11 +57,25 @@ export const useStyles = makeStyles((theme) => ({
     textShadow: '3px 3px 4px rgba(0,0,0,0.1)',
     '&:hover': {
       background: 'rgba(0,0,0,0.2)',
+    },
+  },
+  iconButtonTextError: {
+    background: 'rgba(0,0,0,0)',
+    color: theme.palette.error.main,
+    border: 'none',
+    boxShadow: 'none',
+    textTransform: 'uppercase',
+    letterSpacing: 1.3,
+    textShadow: '3px 3px 4px rgba(0,0,0,0.1)',
+    '&:hover': {
+      background: 'rgba(0,0,0,0.2)',
       color: '#444',
     },
   },
   iconButtonWarning: {
     background: theme.palette.error.main,
+    border: `1px solid ${theme.palette.error.main}`,
+
     '&:hover': {
       background: theme.palette.error.dark,
     },
@@ -79,26 +93,26 @@ export const useStyles = makeStyles((theme) => ({
   },
   iconButtonIcon: {
     color: '#fff',
-    marginLeft: 10,
+    fontSize: 12,
   },
   iconButtonIconText: {
     color: '#aaa',
-    marginLeft: 10,
   },
   iconButtonIconTextWhite: {
     color: '#fff',
-    marginLeft: 10,
   },
   iconButtonIconTextDark: {
-    color: '#222',
-    marginLeft: 10,
+    color: theme.palette.primary.main,
   },
   iconButtonIconWhite: {
     color: '#fff',
-    marginLeft: 10,
   },
   iconButtonIconSecondary: {
     color: theme.palette.primary.main,
-    marginLeft: 10,
   },
+  iconButtonIconTextError: {
+    color: theme.palette.error.main,
+  },
+  iconRight: { marginLeft: 10 },
+  iconLeft: { marginRight: 10 },
 }));

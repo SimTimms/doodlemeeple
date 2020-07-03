@@ -311,6 +311,57 @@ export const GET_CONTRACT = gql`
   }
 `;
 
+export const GET_CONTRACT_ID = gql`
+  query GetContractId($contractId: String!) {
+    getContractId(contractId: $contractId) {
+      id
+      notes
+      deadline
+      cost
+      currency
+      status
+      updatedAt
+      payments {
+        id
+        amount
+        currency
+        status
+        paidBy {
+          id
+          name
+        }
+        contract {
+          id
+        }
+        paymentId
+        createdAt
+        updatedAt
+      }
+      user {
+        email
+        id
+        name
+        profileImg
+      }
+      job {
+        id
+        name
+        summary
+        creativeSummary
+        user {
+          id
+          email
+        }
+      }
+      paymentTerms {
+        id
+        percent
+        description
+      }
+    }
+  }
+`;
+
 export const PREVIEW_CONTRACT = gql`
   query PreviewContract($contractId: String!) {
     previewContract(contractId: $contractId) {

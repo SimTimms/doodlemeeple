@@ -6,7 +6,6 @@ export const useStyles = makeStyles((theme) => ({
   wrapper: {
     boxSizing: 'border-box',
     width: '100%',
-    background: '#fff',
   },
   row: {
     display: 'flex',

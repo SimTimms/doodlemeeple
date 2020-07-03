@@ -7,7 +7,7 @@ export function Header({ str }) {
   return (
     <Typography
       variant="h1"
-      style={{ textAlign: 'center', fontSize: 40 }}
+      style={{ textAlign: 'center', fontSize: 40, width: '100%' }}
       className={classes.title}
     >
       {str}
@@ -33,7 +33,7 @@ export function HeaderTwo({ str }) {
   return (
     <div className={classes.headerWrapper}>
       <div className={classes.headerLine}></div>
-      <Typography variant="h5" className={classes.descriptionTitle}>
+      <Typography variant="h6" className={classes.descriptionTitle}>
         {str}
       </Typography>
       <div className={classes.headerLine}></div>
@@ -48,6 +48,33 @@ export function Text({ str }) {
       {str}
     </Typography>
   );
+}
+
+export function TextLink({ str, onClickEvent }) {
+  const classes = useStyles();
+  return (
+    <Typography
+      variant="body1"
+      className={classes.descriptionLink}
+      onClick={() => onClickEvent()}
+    >
+      {str}
+    </Typography>
+  );
+}
+
+export function Meta({ str }) {
+  const classes = useStyles();
+  return (
+    <Typography variant="body1" className={classes.meta}>
+      {str}
+    </Typography>
+  );
+}
+
+export function TextDivider() {
+  const classes = useStyles();
+  return <div className={classes.headerLine} style={{ marginTop: 20 }}></div>;
 }
 
 export function ColumnWrapper({ children }) {

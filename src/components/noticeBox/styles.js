@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
     textAlign: 'center',
     padding: '15px 0 15px 0',
-    marginBottom: 20,
+    marginTop: 20,
   },
   primary: {
     width: '100%',

@@ -1,13 +1,19 @@
-import React from 'react';
-import { Card, Slide, Typography } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { Card, Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
-  ContentHeader,
   IconTitle,
   InlineHeader,
   IconButton,
-  SectionWrapper,
+  ColumnWrapper,
+  HeaderTwo,
+  Text,
+  TextDivider,
+  TextLink,
+  Meta,
+  Header,
 } from '../../../../../components';
+import { timeDifferenceForDate } from '../../../../../utils/dates';
 import ViewConversation from '../../../../messages/views/messaging/viewConversation';
 import { Query } from 'react-apollo';
 import { JOB, DETERMINE_CONVERSATION_ID } from '../../../../../data/queries';
@@ -21,6 +27,7 @@ export default function PreviewJob({ theme, jobId, history }) {
     img: '',
     summary: '',
     location: '',
+    createdAt: '',
     gallery: {
       images: [],
     },
@@ -35,138 +42,156 @@ export default function PreviewJob({ theme, jobId, history }) {
   const [conversationId, setConversationId] = React.useState(null);
   const [chatOpen, setChatOpen] = React.useState(false);
   const [proposalOpen, setProposalOpen] = React.useState(false);
+  const [messagesEnd, setMessagesEnd] = React.useState(null);
+  useEffect(() => {
+    messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' });
+  });
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div className={classes.root}>
-        <ContentHeader
-          title={job.name}
-          subTitle=""
-          subTitleExtra={null}
-          button={null}
-        />
-        <div style={{ width: '100%' }}>
-          <SectionWrapper header="Job Details" button={null}>
-            <Card className={classes.card}>
-              <InlineHeader>
-                <IconTitle icon="work" title="Brief Details" />
-              </InlineHeader>
-              <div style={{ padding: 10 }}>
-                <Typography variant="body1">{job.summary}</Typography>
-              </div>
-            </Card>
-            <Card className={classes.card}>
-              <InlineHeader>
-                <IconTitle icon="account_box" title="Creative Details" />
-              </InlineHeader>
-              <div style={{ padding: 10 }}>
-                <Typography variant="body1">{job.creativeSummary}</Typography>
-              </div>
-            </Card>
-            <Card className={classes.card}>
-              <InlineHeader>
-                <IconTitle icon="casino" title="Game Details" />
-              </InlineHeader>
-              <div style={{ padding: 10 }}>
-                <Typography variant="h2">{job.game.name}</Typography>
-                <Typography variant="body1">{job.game.summary}</Typography>
-                {job.game.id && (
-                  <IconButton
-                    onClickEvent={() => {
-                      history.push(`/app/view-game/${job.game.id}`);
-                    }}
-                    color="secondary"
-                    disabled={false}
-                    icon="keyboard_arrow_right"
-                    title="View Game"
-                    styleOverride={null}
+      <div className={classes.rootRow}>
+        <div className={classes.root}>
+          <ColumnWrapper>
+            <Header str="Job Details" />
+            <HeaderTwo str={job.name} />
+            <Meta
+              str={`${timeDifferenceForDate(job.createdAt)} | ${job.user.name}`}
+            />
+            <Text str={job.summary} />
+          </ColumnWrapper>
+          <ColumnWrapper>
+            <HeaderTwo str="Ideal Creative" />
+            <Text str={job.creativeSummary} />
+          </ColumnWrapper>
+          <ColumnWrapper>
+            <HeaderTwo str="The Project" />
+            <TextLink
+              str={job.game.name}
+              onClickEvent={() => {
+                history.push(`/app/view-game/${job.game.id}`);
+              }}
+            />
+            <Text str={job.game.summary} />
+          </ColumnWrapper>
+          <ColumnWrapper>
+            <HeaderTwo str="Discuss" />
+            <Text
+              str={`You've probably got some questions, please feel free to start a discussion with ${job.user.name}`}
+            />
+            <div
+              style={{
+                display: 'flex',
+                width: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <IconButton
+                disabled={false}
+                color="text-dark"
+                icon={chatOpen ? 'chat' : 'chat'}
+                title={chatOpen ? 'Minimise Chat' : 'Chat'}
+                onClickEvent={() => setChatOpen(chatOpen ? false : true)}
+                styleOverride={null}
+                type="button"
+                iconPos="left"
+              />
+            </div>
+            {chatOpen && (
+              <div
+                style={{
+                  padding: 10,
+                  boxSizing: 'border-box',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  background: '#efeff5',
+                  position: 'relative',
+                  width: '100%',
+                }}
+              >
+                {conversationId && (
+                  <ViewConversation
+                    history={history}
+                    conversationId={conversationId}
+                    titles={false}
                   />
                 )}
               </div>
-            </Card>
-            {chatOpen && (
-              <Card className={classes.card}>
-                <InlineHeader>
-                  <IconTitle icon="chat" title="Chat" />
-                </InlineHeader>
-                <div
-                  style={{
-                    padding: 10,
-                    boxSizing: 'border-box',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    background: '#efeff5',
-                    position: 'relative',
-                  }}
-                >
-                  {conversationId && (
-                    <ViewConversation
-                      history={history}
-                      conversationId={conversationId}
-                      titles={false}
-                    />
-                  )}
-                </div>
-              </Card>
             )}
+            <TextDivider />
             <div className={classes.actionWrapper}>
-              <IconButton
-                disabled={false}
-                color="secondary"
-                icon={chatOpen ? 'chat' : 'chat'}
-                title={chatOpen ? 'Hide' : 'Chat'}
-                onClickEvent={() => setChatOpen(chatOpen ? false : true)}
-                styleOverride={null}
-              />
-
               <IconButton
                 color="primary"
                 disabled={false}
                 icon={proposalOpen ? 'fact_check' : 'fact_check'}
-                title={proposalOpen ? 'Close' : 'Quote'}
+                title={proposalOpen ? 'Minimise Quote' : 'Create a Quote'}
                 onClickEvent={() =>
                   setProposalOpen(proposalOpen ? false : true)
                 }
-                styleOverride={null}
+                styleOverride={{ width: '100%' }}
+                type="button"
+                iconPos="right"
               />
             </div>
-            {proposalOpen && (
-              <Card className={classes.card} style={{ marginTop: 20 }}>
-                <InlineHeader>
-                  <IconTitle icon="fact_check" title="Quote" />
-                </InlineHeader>
-                <ProposalForm jobId={jobId} />
-              </Card>
-            )}
-          </SectionWrapper>
-        </div>
 
-        <Query
-          query={JOB}
-          variables={{ jobId: jobId }}
-          fetchPolicy="network-only"
-          onCompleted={(data) => {
-            data.getJob &&
-              setJob({ ...data.getJob, gameId: data.getJob.game.id });
-          }}
-        >
-          {({ data }) => {
-            return null;
-          }}
-        </Query>
-        {job.id && (
+            <div className={classes.actionWrapper}>
+              <IconButton
+                color="warning"
+                disabled={false}
+                icon={proposalOpen ? 'fact_check' : 'fact_check'}
+                title="Decline"
+                onClickEvent={() =>
+                  setProposalOpen(proposalOpen ? false : true)
+                }
+                styleOverride={{ width: '100%' }}
+                type="button"
+                iconPos="right"
+              />
+            </div>
+          </ColumnWrapper>
+
           <Query
-            query={DETERMINE_CONVERSATION_ID}
-            variables={{ jobId: jobId, userId: job.user.id }}
+            query={JOB}
+            variables={{ jobId: jobId }}
             fetchPolicy="network-only"
             onCompleted={(data) => {
-              setConversationId(data.determineConversationId);
+              data.getJob &&
+                setJob({ ...data.getJob, gameId: data.getJob.game.id });
             }}
           >
             {({ data }) => {
               return null;
             }}
           </Query>
+          {job.id && (
+            <Query
+              query={DETERMINE_CONVERSATION_ID}
+              variables={{ jobId: jobId, userId: job.user.id }}
+              fetchPolicy="network-only"
+              onCompleted={(data) => {
+                setConversationId(data.determineConversationId);
+              }}
+            >
+              {({ data }) => {
+                return null;
+              }}
+            </Query>
+          )}
+        </div>
+        {proposalOpen && (
+          <div className={classes.root}>
+            <div
+              ref={(ele) => {
+                setMessagesEnd(ele);
+              }}
+              style={{ marginTop: -60, paddingTop: 60 }}
+            ></div>
+            <ColumnWrapper>
+              <Header str="Quote" />
+              <Meta str="Create a quote for this job" />
+              <ProposalForm jobId={jobId} setProposalOpen={setProposalOpen} />
+            </ColumnWrapper>
+          </div>
         )}
       </div>
     </Slide>

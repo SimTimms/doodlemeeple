@@ -11,6 +11,7 @@ export default function IconButton({
   color,
   styleOverride,
   type,
+  iconPos,
 }) {
   const classes = useStyles();
   return (
@@ -23,14 +24,14 @@ export default function IconButton({
         [classes.iconButtonText]: color === 'text',
         [classes.iconButtonTextWhite]: color === 'text-white',
         [classes.iconButtonTextDark]: color === 'text-dark',
+        [classes.iconButtonTextError]: color === 'text-error',
         [classes.iconButtonDisabled]: disabled,
       })}
       disabled={disabled}
       onClick={() => onClickEvent()}
       style={styleOverride && styleOverride}
     >
-      {title}
-      {icon !== '' && (
+      {icon !== '' && iconPos !== 'right' && (
         <Icon
           className={clsx({
             [classes.iconButtonIcon]: true,
@@ -38,6 +39,24 @@ export default function IconButton({
             [classes.iconButtonIconText]: color === 'text',
             [classes.iconButtonIconTextWhite]: color === 'text-white',
             [classes.iconButtonIconTextDark]: color === 'text-dark',
+            [classes.iconButtonIconTextError]: color === 'text-error',
+            [classes.iconLeft]: iconPos !== 'right',
+          })}
+        >
+          {icon}
+        </Icon>
+      )}
+      {title}
+      {icon !== '' && iconPos === 'right' && (
+        <Icon
+          className={clsx({
+            [classes.iconButtonIcon]: true,
+            [classes.iconButtonIconSecondary]: color === 'secondary',
+            [classes.iconButtonIconText]: color === 'text',
+            [classes.iconButtonIconTextWhite]: color === 'text-white',
+            [classes.iconButtonIconTextDark]: color === 'text-dark',
+            [classes.iconButtonIconTextError]: color === 'text-error',
+            [classes.iconRight]: iconPos === 'right',
           })}
         >
           {icon}

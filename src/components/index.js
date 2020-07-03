@@ -57,10 +57,16 @@ import {
   Text,
   ColumnWrapper,
   ColumnWrapperFull,
+  TextDivider,
+  TextLink,
+  Meta,
 } from './textParts';
 
 export {
   FeatureCardInvite,
+  Meta,
+  TextLink,
+  TextDivider,
   ColumnWrapperFull,
   ColumnWrapper,
   FeatureCard,

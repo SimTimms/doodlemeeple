@@ -1,15 +1,13 @@
 import React from 'react';
-import { IconButton } from '../';
+import { IconButton } from '../../../../../../../../../components';
 import { Mutation } from 'react-apollo';
-import { toaster } from '../../utils/toaster';
-import { UPDATE_CONTRACT } from '../../data/mutations';
+import { toaster } from '../../../../../../../../../utils/toaster';
+import {
+  UPDATE_CONTRACT,
+  SUBMIT_CONTRACT,
+} from '../../../../../../../../../data/mutations';
 
-export default function EditContractButton({
-  contract,
-  jobId,
-  setContract,
-  title,
-}) {
+export function EditButton({ contract, jobId, setContract }) {
   return (
     <Mutation
       mutation={UPDATE_CONTRACT}
@@ -32,16 +30,44 @@ export default function EditContractButton({
       {(mutation) => {
         return (
           <IconButton
-            title={title}
+            title="Edit Proposal"
             icon="edit"
-            styleOverride={{ width: '100%' }}
+            styleOverride={null}
             color="secondary"
             disabled={false}
             onClickEvent={() => {
               mutation();
             }}
-            iconPos="right"
-            type="button"
+          />
+        );
+      }}
+    </Mutation>
+  );
+}
+
+export function SubmitButton({ contract, jobId, setContract }) {
+  return (
+    <Mutation
+      mutation={SUBMIT_CONTRACT}
+      variables={{
+        id: contract.id,
+      }}
+      onCompleted={(data) => {
+        toaster('Submitting...');
+        setContract({ ...contract, status: 'submitted' });
+      }}
+    >
+      {(mutation) => {
+        return (
+          <IconButton
+            title="Submit Proposal"
+            icon="send"
+            styleOverride={null}
+            color="primary"
+            disabled={false}
+            onClickEvent={() => {
+              mutation();
+            }}
           />
         );
       }}
@@ -60,8 +86,6 @@ export function ViewButton({ history, contractId }) {
       onClickEvent={() => {
         history.push(`/app/view-contract/${contractId}`);
       }}
-      iconPos="right"
-      type="button"
     />
   );
 }

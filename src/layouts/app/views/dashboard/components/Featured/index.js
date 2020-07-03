@@ -97,7 +97,9 @@ export function Featured({ posts, history }) {
                       <IconButton
                         color="text-white"
                         disabled={false}
-                        onClickEvent={() => {}}
+                        onClickEvent={() => {
+                          history.push('/app/edit-profile');
+                        }}
                         icon=""
                         title="Create Profile"
                         styleOverride={null}
@@ -116,21 +118,17 @@ export function Featured({ posts, history }) {
                         justifyContent: 'flex-start',
                       }}
                     >
-                      <a
-                        href={linkTo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <IconButton
-                          color="text-white"
-                          disabled={false}
-                          onClickEvent={() => {}}
-                          icon=""
-                          title="Post a Job"
-                          styleOverride={null}
-                          type="button"
-                        />
-                      </a>
+                      <IconButton
+                        color="text-white"
+                        disabled={false}
+                        onClickEvent={() => {
+                          history.push('/app/jobs');
+                        }}
+                        icon=""
+                        title="Post a Job"
+                        styleOverride={null}
+                        type="button"
+                      />
                     </div>
                   </div>
                 </div>
