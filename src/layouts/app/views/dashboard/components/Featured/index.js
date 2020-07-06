@@ -123,13 +123,13 @@ export function Featured({ posts, history }) {
                     >
                       <IconButton
                         color="text-dark"
-                        disabled={false}
+                        disabled={true}
                         onClickEvent={() => {
                           history.push('/app/jobs');
                         }}
                         icon=""
-                        title="Post a Job"
-                        styleOverride={null}
+                        title="Post Job (Coming Soon)"
+                        styleOverride={{ background: 'none' }}
                         iconPos="right"
                         type="button"
                       />

@@ -9,8 +9,8 @@ export const useStyles = makeStyles((theme) => ({
     border: '1px solid #ddd',
     minWidth: 270,
     maxWidth: 270,
-    minHeight: 300,
-    maxHeight: 300,
+    minHeight: 250,
+    maxHeight: 250,
   },
   creativeCardWrapper: {
     background: '#fafafa',

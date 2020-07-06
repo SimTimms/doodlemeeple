@@ -36,7 +36,7 @@ export default function InviteButton({ mutation, invite, disabled }) {
       }}
     >
       <Typography variant="body1" component="p" style={{ color: '#fff' }}>
-        {!on ? (disabled ? '5 Max' : 'Select') : 'Selected'}
+        {!on ? (disabled ? '5 Max' : 'Invite') : 'Selected'}
       </Typography>
     </Button>
   );
