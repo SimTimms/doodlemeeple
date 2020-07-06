@@ -124,7 +124,7 @@ export default function PreviewJob({ theme, jobId, history }) {
                 color="primary"
                 disabled={false}
                 icon={proposalOpen ? 'fact_check' : 'fact_check'}
-                title={proposalOpen ? 'Minimise Quote' : 'Create a Quote'}
+                title={proposalOpen ? 'Minimise Quote' : 'Quote'}
                 onClickEvent={() =>
                   setProposalOpen(proposalOpen ? false : true)
                 }
@@ -138,7 +138,7 @@ export default function PreviewJob({ theme, jobId, history }) {
               <IconButton
                 color="warning"
                 disabled={false}
-                icon={proposalOpen ? 'fact_check' : 'fact_check'}
+                icon="thumb_down"
                 title="Decline"
                 onClickEvent={() =>
                   setProposalOpen(proposalOpen ? false : true)
@@ -187,8 +187,6 @@ export default function PreviewJob({ theme, jobId, history }) {
               style={{ marginTop: -60, paddingTop: 60 }}
             ></div>
             <ColumnWrapper>
-              <Header str="Quote" />
-              <Meta str="Create a quote for this job" />
               <ProposalForm jobId={jobId} setProposalOpen={setProposalOpen} />
             </ColumnWrapper>
           </div>

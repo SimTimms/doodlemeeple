@@ -13,13 +13,22 @@ export const useStyles = makeStyles((theme) => {
     deleteButton: {
       margin: 3,
       boxShadow: 'none',
-      marginLeft: 'auto',
+      display: 'flex',
+      alignItems: 'center',
+    },
+    deleteButtonIcon: {
+      margin: 3,
+      boxShadow: 'none',
+      marginLeft: 20,
       minWidth: 32,
       maxWidth: 32,
       minHeight: 32,
       maxHeight: 32,
       borderRadius: '50%',
       background: theme.palette.error.main,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     deleteButtonConfirmYes: {
       marginLeft: 5,

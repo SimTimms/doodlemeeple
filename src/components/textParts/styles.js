@@ -65,7 +65,7 @@ export const useStyles = makeStyles((theme) => ({
     paddingBottom: 30,
     boxSizing: 'border-box',
     flexDirection: 'column',
-    background: 'rgba(255,255,255,0.4)',
+    background: 'rgba(255,255,255,0.1)',
   },
   columnWrapperFull: { width: '100%', maxWidth: 2000 },
 }));

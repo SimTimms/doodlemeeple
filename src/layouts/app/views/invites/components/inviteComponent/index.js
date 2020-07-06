@@ -43,7 +43,7 @@ export function InviteComponent({ invite, removeInvite, history }) {
           disabled={false}
           onClickEvent={() => history.push(`/app/view-job/${invite.job.id}`)}
           icon="chevron_right"
-          title="View"
+          title="Details"
           iconPos="right"
           styleOverride={null}
           type="button"

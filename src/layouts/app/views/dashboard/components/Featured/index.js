@@ -36,6 +36,7 @@ export function Featured({ posts, history }) {
                 className={classes.postImage}
                 style={{
                   backgroundImage: `url(${media})`,
+                  filter: 'brightness(200%) saturate(136%)',
                 }}
               ></div>
               <div className={classes.cover}></div>
@@ -43,7 +44,7 @@ export function Featured({ posts, history }) {
                 <div className={classes.postHeader}>
                   <Typography
                     style={{
-                      color: 'rgba(255,255,255,0.6',
+                      color: 'rgba(0,0,0,0.6',
                       marginTop: 5,
                       textAlign: 'center',
                     }}
@@ -54,7 +55,7 @@ export function Featured({ posts, history }) {
                   </Typography>
                   <Typography
                     style={{
-                      color: '#fff',
+                      color: '#111',
                       marginTop: 5,
                       textAlign: 'center',
                       fontSize: 60,
@@ -62,18 +63,19 @@ export function Featured({ posts, history }) {
                     component="h1"
                     variant="h1"
                   >
-                    doodle meeple
+                    <span style={{ fontWeight: 900 }}>doodle</span>
+                    <span>meeple</span>
                   </Typography>
                   <Typography
                     style={{
-                      color: 'rgba(255,255,255,0.8',
+                      color: 'rgba(0,0,0,0.8)',
                       marginTop: 5,
                       textAlign: 'center',
                     }}
                     component="h4"
                     variant="h4"
                   >
-                    Tagline here, tagline here
+                    Professional Creative Talent
                   </Typography>
                   <div
                     style={{
@@ -95,7 +97,7 @@ export function Featured({ posts, history }) {
                       }}
                     >
                       <IconButton
-                        color="text-white"
+                        color="primary"
                         disabled={false}
                         onClickEvent={() => {
                           history.push('/app/edit-profile');
@@ -104,6 +106,7 @@ export function Featured({ posts, history }) {
                         title="Create Profile"
                         styleOverride={null}
                         type="button"
+                        iconPos="right"
                       />
                     </div>
 
@@ -119,7 +122,7 @@ export function Featured({ posts, history }) {
                       }}
                     >
                       <IconButton
-                        color="text-white"
+                        color="text-dark"
                         disabled={false}
                         onClickEvent={() => {
                           history.push('/app/jobs');
@@ -127,6 +130,7 @@ export function Featured({ posts, history }) {
                         icon=""
                         title="Post a Job"
                         styleOverride={null}
+                        iconPos="right"
                         type="button"
                       />
                     </div>

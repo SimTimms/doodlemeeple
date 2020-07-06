@@ -14,14 +14,6 @@ export default function ViewConversation({ history, conversationId, titles }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        {titles && (
-          <ContentHeader
-            title="Chat"
-            subTitle={null}
-            subTitleExtra={null}
-            button={null}
-          />
-        )}
         <div style={{ width: '100%' }}>
           <Query
             query={CONVERSATION}
@@ -95,7 +87,6 @@ export default function ViewConversation({ history, conversationId, titles }) {
                       </Button>
                     }
                   />
-                  }
                 </div>
               ) : (
                 loading && <LoadIcon />

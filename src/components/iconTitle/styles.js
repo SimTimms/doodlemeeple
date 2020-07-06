@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   root: {
     textAlign: 'right',
-    background: theme.palette.primary.light,
     color: '#fff',
     display: 'flex',
     justifyContent: 'flex-start',

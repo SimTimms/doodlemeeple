@@ -32,7 +32,8 @@ export function PublicLayout(props) {
       </StyledNavBar>
       <Content>
         {page === 'login' ? (
-          <div className={classes.backgroundLogin}>
+          <div className={classes.backgroundWrapper}>
+            <div className={classes.backgroundLogin}> </div>
             <div className={classes.cover}></div>
             <LoginCard history={props.history} forwardTo={null} />
           </div>
@@ -53,7 +54,8 @@ export function PublicLayout(props) {
             <Deleted />
           </div>
         ) : (
-          <div className={classes.backgroundLogin}>
+          <div className={classes.backgroundWrapper}>
+            <div className={classes.backgroundLogin}> </div>
             <div className={classes.cover}></div>
             <LoginCard history={props.history} forwardTo={props.location} />
           </div>

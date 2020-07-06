@@ -13,6 +13,7 @@ export const useStyles = makeStyles((theme) => ({
     letterSpacing: 1,
     boxShadow: '2px 2px 3px rgba(0,0,0,0.2)',
     border: `1px solid ${theme.palette.primary.main}`,
+    textTransform: 'uppercase',
     borderRadius: 2,
     color: '#fff',
     '&:hover': {

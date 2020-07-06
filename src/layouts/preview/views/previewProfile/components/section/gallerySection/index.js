@@ -19,9 +19,11 @@ function GallerySection({ section }) {
     testimonials,
     showreel,
     type,
+    id,
   } = section;
-
-  return (
+  return section.id === 'new' ? (
+    <div>New</div>
+  ) : (
     <div
       style={{
         width: '100%',

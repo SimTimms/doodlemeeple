@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { styles } from './styles';
 import {
   Card,
   Divider,
@@ -24,7 +23,7 @@ import clsx from 'clsx';
 const CHECKING = 'Checking...';
 
 export default function LoginCard({ history, forwardTo }) {
-  const classes = { ...styles(), ...sharedStyles() };
+  const classes = sharedStyles();
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [errors, setError] = React.useState({
@@ -148,6 +147,8 @@ export default function LoginCard({ history, forwardTo }) {
                         loginSubmit(LoginMutation);
                       }}
                       styleOverride={null}
+                      type="button"
+                      iconPos="right"
                     />
                   </Form>
                 );

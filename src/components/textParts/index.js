@@ -33,7 +33,7 @@ export function HeaderTwo({ str }) {
   return (
     <div className={classes.headerWrapper}>
       <div className={classes.headerLine}></div>
-      <Typography variant="h6" className={classes.descriptionTitle}>
+      <Typography variant="h5" className={classes.descriptionTitle}>
         {str}
       </Typography>
       <div className={classes.headerLine}></div>
@@ -48,6 +48,11 @@ export function Text({ str }) {
       {str}
     </Typography>
   );
+}
+
+export function TextArray({ str }) {
+  const classes = useStyles();
+  return <div className={classes.description}>{str}</div>;
 }
 
 export function TextLink({ str, onClickEvent }) {

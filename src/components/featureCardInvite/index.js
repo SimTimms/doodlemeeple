@@ -1,14 +1,8 @@
 import React from 'react';
-import { Card, Icon } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
-import {
-  ColumnWrapper,
-  ColumnWrapperFull,
-  HeaderTwo,
-  Text,
-  TextDivider,
-} from '../';
+import { HeaderTwo, TextArray, TextDivider } from '../';
 
 export default function FeatureCardInvite({
   background,
@@ -48,7 +42,7 @@ export default function FeatureCardInvite({
             alt=""
           />
           <HeaderTwo str={job} />
-          <Text
+          <TextArray
             str={
               <div
                 style={{

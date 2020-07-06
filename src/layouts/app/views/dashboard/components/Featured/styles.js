@@ -18,7 +18,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   cover: {
-    background: 'rgba(87, 73, 158, 0.6)',
+    background: 'rgba(255, 255, 255, 0.8)',
     width: '100%',
     height: '100%',
     position: 'absolute',

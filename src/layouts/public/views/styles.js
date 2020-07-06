@@ -5,8 +5,8 @@ export const sharedStyles = makeStyles((theme) => ({
     maxWidth: 312,
     padding: 30,
     minWidth: 312,
-    boxShadow: '0 0 60px rgba(0,0,0,1)',
-    margin: '80px 0 80px 0',
+    boxShadow: '0 0 30px rgba(0,0,0,0.2)',
+    margin: '80px 0 180px 0',
   },
   cardMobile: {
     margin: 0,

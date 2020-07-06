@@ -43,7 +43,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   iconInvite: { color: '#fff !important' },
-  icon: { color: theme.palette.secondary.main },
+  icon: { color: '#fff', paddingLeft: 10, paddingRight: 10 },
   notifications: {
     display: 'flex',
     flexDirection: 'column',
@@ -51,9 +51,10 @@ export const useStyles = makeStyles((theme) => ({
     borderRight: '1px solid #ddd',
     justifyContent: 'center',
     alignItems: 'center',
+    background: theme.palette.primary.main,
   },
   notificationInvite: {
-    background: theme.palette.secondary.main,
+    background: theme.palette.primary.main,
   },
   projectNotifications: {
     display: 'flex',
@@ -83,7 +84,12 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     justifyContent: 'flex-end',
   },
-  card: { width: '100%', margin: 0, borderRadius: 0, boxShadow: 'none' },
+  card: {
+    width: '100%',
+    margin: 0,
+    borderRadius: 0,
+    boxShadow: 'none',
+  },
   title: {
     fontSize: 14,
   },
@@ -107,6 +113,8 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     width: '100%',
     borderRight: '1px solid #ddd',
+    paddingTop: 5,
+    paddingBottom: 5,
   },
   wrapperOne: {
     display: 'flex',

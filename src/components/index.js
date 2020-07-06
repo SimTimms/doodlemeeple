@@ -35,7 +35,7 @@ import FieldTitleWrapper from './fieldTitle/FieldTitleWrapper';
 import ProfileCard from './profileCard';
 import IconBox from './iconBox';
 import IconTitle from './iconTitle';
-import InlineHeader from './inlineHeader';
+import { InlineHeader, InlineHeaderWarning } from './inlineHeader';
 import Divider from './divider';
 import DividerWithBorder from './dividerWithBorder';
 import SectionWrapper from './sectionWrapper';
@@ -60,9 +60,14 @@ import {
   TextDivider,
   TextLink,
   Meta,
+  TextArray,
 } from './textParts';
+import { Column, Row } from './blocks';
 
 export {
+  Column,
+  Row,
+  InlineHeaderWarning,
   FeatureCardInvite,
   Meta,
   TextLink,
@@ -70,6 +75,7 @@ export {
   ColumnWrapperFull,
   ColumnWrapper,
   FeatureCard,
+  TextArray,
   Text,
   Header,
   HeaderTwo,

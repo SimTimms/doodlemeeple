@@ -137,7 +137,7 @@ export function EditProfile({ theme }) {
                         <FieldTitle
                           name="Feature Image"
                           description="Use this space to showcase your most impressive artwork, "
-                          warning="PNG or JPG | optimum size 1920 x 300px | 2MB Max"
+                          warning="PNG or JPG | optimum size 1920 x 300px | 1MB Max"
                           inline={false}
                         />
                         <ProfileHeader

@@ -58,7 +58,7 @@ export function Card({ img }) {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center center',
-        border: '20px solid rgba(255,255,255,1)',
+        border: '10px solid rgba(255,255,255,1)',
         backgroundColor: 'rgba(255,255,255,0.5)',
       }}
     >

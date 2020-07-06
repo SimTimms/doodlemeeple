@@ -9,7 +9,7 @@ function ContentHeader({ title, subTitle, subTitleExtra, button }) {
       {button}
       <div className={classes.wrapperTwo}>
         <div className={classes.subHeader}>
-          <Typography variant="h1" color="textPrimary">
+          <Typography variant="h4" color="textPrimary">
             {title}
           </Typography>
         </div>

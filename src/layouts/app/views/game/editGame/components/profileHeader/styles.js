@@ -18,8 +18,8 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: '#eee',
   },
   rootImage: {
-    maxHeight: 400,
-    minHeight: 400,
+    maxHeight: 300,
+    minHeight: 300,
   },
   controlsWrapper: {
     position: 'absolute',

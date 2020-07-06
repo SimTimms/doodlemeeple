@@ -54,6 +54,7 @@ export default function Conversations({ history }) {
                       onClickEvent={() => {
                         mutation();
                       }}
+                      miniProfile={null}
                     />
                   );
                 }}
@@ -108,6 +109,7 @@ export default function Conversations({ history }) {
                         count={conversation.unreadMessages}
                         title={conversation.job.name}
                         onClickEvent={null}
+                        miniProfile={null}
                       />
                     );
                   })

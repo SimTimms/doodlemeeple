@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import moment from 'moment';
 import { useStyles } from './styles';
-import { NoticeBox, ColumnWrapperFull } from '../';
+import { NoticeBox, LoadIcon } from '../';
 import clsx from 'clsx';
 import { ActionWrapper, HeaderTwo, Text, ColumnWrapper } from '../';
 
@@ -30,13 +30,14 @@ export default function ContractSummary({ contractData }) {
           subTitle="This quote has been submitted to the Client"
         />
       )}
-      {contractData.status === '' && (
-        <NoticeBox
-          title="Draft"
-          color="warning"
-          subTitle="This quote has not been submitted"
-        />
-      )}
+      {contractData.status === '' ||
+        (contractData.status === 'preview' && (
+          <NoticeBox
+            title="Draft"
+            color="primary"
+            subTitle="This quote has not been submitted"
+          />
+        ))}
       {contractData.status === 'declined' && (
         <NoticeBox
           title="Declined"
@@ -45,6 +46,7 @@ export default function ContractSummary({ contractData }) {
           color="warning"
         />
       )}
+
       <ColumnWrapper>
         <HeaderTwo str={`Quote for ${contractData.job.name}`} />
         <Text str={`${contractData.cost}.00 ${contractData.currency}`} />
