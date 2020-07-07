@@ -78,10 +78,10 @@ export default function LoginCard({ history, forwardTo }) {
               mutation={LOGIN_MUTATION}
               variables={{ email, password }}
               onCompleted={async (data) => {
-                if (data.login.token) {
-                  const tokenDecode = jwtDecode(data.login.token);
-
-                  await Cookies.set('token', data.login.token, { expires: 7 });
+                const { token } = data.userLogin;
+                if (token) {
+                  const tokenDecode = jwtDecode(token);
+                  await Cookies.set('token', token, { expires: 7 });
                   await Cookies.set('userId', tokenDecode.userId, {
                     expires: 7,
                   });

@@ -474,7 +474,7 @@ export const PROFILE = gql`
 
 export const PROFILE_PREVIEW = gql`
   query ProfilePreview($userId: String!) {
-    profilePreview(userId: $userId) {
+    userById(_id: $userId) {
       id
       name
       summary
@@ -488,9 +488,9 @@ export const PROFILE_PREVIEW = gql`
 `;
 
 export const PROFILE_FEATURED = gql`
-  query ProfilePreview($userId: String!) {
-    profilePreview(userId: $userId) {
-      id
+  query ProfilePreview($userId: MongoID!) {
+    userById(_id: $userId) {
+      _id
       profileImg
       autosave
     }
