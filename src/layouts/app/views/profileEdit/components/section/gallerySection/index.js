@@ -61,7 +61,7 @@ function GallerySection({
     setSummary(section.summary);
     setType(section.type);
     setShowreel(section.showreel);
-    setImages(section.gallery.images);
+    setImages(section.gallery.length > 0 ? section.gallery.images : []);
     setNotableProjects(section.notableProjects);
     setTestimonials(section.testimonials);
   }, [section]);
@@ -74,8 +74,7 @@ function GallerySection({
           : UPDATE_GALLERY_SECTION_MUTATION
       }
       variables={{
-        id: section.id,
-        section: sectionValues,
+        ...sectionValues,
       }}
       onCompleted={(data) => {
         const copyArr = Object.assign([], sections);
@@ -139,7 +138,7 @@ function GallerySection({
                       setSummary(
                         ev.target.value
                           .substring(0, 256)
-                          .replace(/[^A-Za-z0-9 .,'\n]/g, ''),
+                          .replace(/[^A-Za-z0-9 .,'\n]/g, '')
                       );
                     }}
                   />
@@ -201,7 +200,7 @@ function GallerySection({
                         images={images}
                         setImages={(newImages) => {
                           setImages(newImages);
-                          autosaveIsOn && autosave(mutation, 'summary');
+                          // autosave(mutation, 'summary');
                         }}
                         index={index}
                       />

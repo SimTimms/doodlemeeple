@@ -128,7 +128,7 @@ upon completion of this contract.`,
                 },
               }}
               onCompleted={(data) => {
-                toaster('Saved');
+                toaster('Autosave');
                 const updatedId = data.createContract;
                 setLoading(false);
                 setContract({ ...contract, id: updatedId });
@@ -180,7 +180,7 @@ upon completion of this contract.`,
                 },
               }}
               onCompleted={(data) => {
-                toaster('Saved');
+                toaster('Autosave');
                 setDetailsLock(false);
                 setLoading(false);
                 const updatedId = data.updateContract;

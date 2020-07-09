@@ -34,7 +34,7 @@ function Uploader({
       'Content-Type': 'image/jpeg',
     };
 
-    const uploadURL = `${process.env.REACT_APP_API}/sign_s3`;
+    const uploadURL = `${process.env.REACT_APP_API_S3}/sign_s3`;
     const token = Cookies.get('token');
     let config = {
       headers: {

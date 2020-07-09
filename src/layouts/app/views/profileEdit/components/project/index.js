@@ -31,7 +31,7 @@ export function Project({
         sectionId,
       }}
       onCompleted={(data) => {
-        toaster('Saved');
+        toaster('Autosave');
 
         const copyArr = Object.assign([], projects);
 

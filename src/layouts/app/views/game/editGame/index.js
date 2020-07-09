@@ -76,7 +76,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
             },
           }}
           onCompleted={(data) => {
-            toaster('Saved');
+            toaster('Autosave');
             const newGameId =
               game.id === 'new' ? data.createGame : data.updateGame;
             game.id === 'new' && setGame({ ...game, id: newGameId });

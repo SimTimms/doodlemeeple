@@ -70,7 +70,7 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
             },
           }}
           onCompleted={(data) => {
-            toaster('Saved');
+            toaster('Autosave');
             const newjobId = jobId === 'new' ? data.createJob : data.updateJob;
             setJob({ ...job, id: newjobId });
             history.replace(`/app/edit-job/${newjobId}`);

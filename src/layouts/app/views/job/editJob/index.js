@@ -86,7 +86,7 @@ export default function EditJob({
               },
             }}
             onCompleted={(data) => {
-              toaster('Saved');
+              toaster('Autosave');
               const newjobId =
                 jobId === 'new' ? data.createJob : data.updateJob;
               history.replace(`/app/edit-job/${newjobId}`);

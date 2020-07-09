@@ -48,7 +48,7 @@ export default function PaymentTerm({
         },
       }}
       onCompleted={(data) => {
-        toaster('Saved');
+        toaster('Autosave');
       }}
     >
       {(mutation, { loading }) => {

@@ -166,53 +166,50 @@ export const UPDATE_USER_MUTATION = gql`
     $name: String!
     $summary: String
     $profileBG: String
-    $profileBGStyle: String
     $profileImg: String
-    $profileImgStyle: String
-    $sections: [SectionInput]
-    $autosave: Boolean
   ) {
-    updateUser(
+    updateProfile(
       name: $name
       summary: $summary
       profileBG: $profileBG
-      profileBGStyle: $profileBGStyle
       profileImg: $profileImg
-      profileImgStyle: $profileImgStyle
-      sections: $sections
-      autosave: $autosave
     ) {
-      id
+      _id
       name
       summary
       profileBG
-      profileBGStyle
       profileImg
-      profileImgStyle
-      autosave
     }
   }
 `;
 
 export const UPDATE_SECTION_MUTATION = gql`
-  mutation UpdateSectionMutation($id: String!, $section: SectionInput) {
-    updateSection(id: $id, section: $section) {
+  mutation UpdateSectionMutation($section: Section) {
+    updateSection(section: $section) {
       id
     }
   }
 `;
 
 export const UPDATE_GALLERY_SECTION_MUTATION = gql`
-  mutation UpdateGallerySectionMutation($id: String!, $section: SectionInput) {
-    updateGallerySection(id: $id, section: $section) {
+  mutation UpdateGallerySectionMutation($section: Section) {
+    updateGallerySection(section: $section) {
       id
     }
   }
 `;
 
 export const CREATE_GALLERY_SECTION_MUTATION = gql`
-  mutation CreateGallerySectionMutation($id: String!, $section: SectionInput) {
-    createGallerySection(id: $id, section: $section)
+  mutation CreateGallerySectionMutation(
+    $summary: String
+    $showreel: String
+    $type: String
+  ) {
+    sectionCreateOne(
+      record: { summary: $summary, showreel: $showreel, type: $type }
+    ) {
+      recordId
+    }
   }
 `;
 

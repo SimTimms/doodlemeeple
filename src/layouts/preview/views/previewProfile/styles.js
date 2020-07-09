@@ -8,6 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
+    position: 'relative',
   },
   card: { width: '100%' },
   header: {

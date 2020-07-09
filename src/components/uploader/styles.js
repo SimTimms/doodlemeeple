@@ -22,7 +22,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   imageIcon: {
-    fontSize: 30,
+    fontSize: 20,
   },
   imageIconLabel: {},
 }));

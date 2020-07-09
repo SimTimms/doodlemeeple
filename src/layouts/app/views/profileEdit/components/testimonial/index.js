@@ -33,7 +33,7 @@ export function Testimonial({
         sectionId,
       }}
       onCompleted={(data) => {
-        toaster('Saved');
+        toaster('Autosave');
 
         const copyArr = Object.assign([], testimonials);
         if (testimonial.id === 'new') {

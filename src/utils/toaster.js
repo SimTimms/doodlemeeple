@@ -4,11 +4,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
 
 export function toaster(msg) {
-  toast(<div style={{ color: '#222' }}>{msg}</div>, {
+  toast(<div style={{ color: '#fff', fontSize: 20 }}>{msg}</div>, {
     className: css({
       fontSize: 14,
       width: 100,
       marginLeft: 'auto',
+      background: '#ff4081',
     }),
     progressClassName: css({
       background: `#eee`,

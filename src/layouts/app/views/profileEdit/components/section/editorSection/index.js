@@ -72,8 +72,7 @@ function EditorSection({
           : UPDATE_GALLERY_SECTION_MUTATION
       }
       variables={{
-        id: section.id,
-        section: sectionValues,
+        ...sectionValues,
       }}
       onCompleted={(data) => {
         const copyArr = Object.assign([], sections);

@@ -34,7 +34,6 @@ export function EditProfile({ theme }) {
   const [sections, setSections] = React.useState([]);
   const [profileImg, setProfileImg] = React.useState(null);
   const [profileBGStyle, setProfileBGStyle] = React.useState([0, 0]);
-  const [autosaveIsOn, setAutosaveIsOn] = React.useState(true);
   const [timer, setTimer] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [errors, setError] = React.useState({
@@ -69,15 +68,11 @@ export function EditProfile({ theme }) {
             name: userProfile.userName,
             summary: userProfile.summary,
             profileBG: userProfile.bgImage,
-            profileBGStyle: userProfile.profileBGStyle.join(':'),
             profileImg: userProfile.profileImg,
-            profileImgStyle: userProfile.profileImgStyle.join(':'),
-            autosave: userProfile.autosave,
-            sections: [],
           }}
           update={(store, { data: { updateUser } }) => {
             const data = store.readQuery({ query: PROFILE });
-            toaster('Saved');
+            toaster('Autosave');
 
             const profile = data.profile;
             profile.name = updateUser.name;
@@ -121,11 +116,12 @@ export function EditProfile({ theme }) {
                         <IconButton
                           disabled={false}
                           color="secondary"
-                          warning={false}
                           icon="pageview"
                           title="Preview"
                           onClickEvent={() => {}}
                           styleOverride={null}
+                          type="button"
+                          iconPos="right"
                         />
                       </Link>
                     </div>
@@ -149,9 +145,7 @@ export function EditProfile({ theme }) {
                           setProfileBGStyle={setProfileBGStyle}
                           profileImgStyle={profileImgStyle}
                           setUserName={setUserName}
-                          autosaveFunction={
-                            autosaveIsOn ? SignupMutation : null
-                          }
+                          autosaveFunction={SignupMutation}
                         />
 
                         <ErrorBox errorMsg={errors.name} />
@@ -178,12 +172,12 @@ export function EditProfile({ theme }) {
                             setTimer(
                               setTimeout(() => {
                                 SignupMutation();
-                              }, 1000),
+                              }, 1000)
                             );
                             setSummary(
                               e.target.value
                                 .substring(0, 256)
-                                .replace(/[^A-Za-z0-9 ,\-."'\n]/g, ''),
+                                .replace(/[^A-Za-z0-9 ,\-."'\n]/g, '')
                             );
                           }}
                           margin="normal"
@@ -203,7 +197,7 @@ export function EditProfile({ theme }) {
                             sections={sections}
                             setSections={setSections}
                             section={section}
-                            autosaveIsOn={autosaveIsOn}
+                            autosaveIsOn={true}
                           />
                         ) : section.type === 'rulebook-editor' ? (
                           <EditorSection
@@ -212,7 +206,7 @@ export function EditProfile({ theme }) {
                             sections={sections}
                             setSections={setSections}
                             section={section}
-                            autosaveIsOn={autosaveIsOn}
+                            autosaveIsOn={true}
                           />
                         ) : section.summary !== null ? (
                           <Section
@@ -222,7 +216,7 @@ export function EditProfile({ theme }) {
                             setSections={setSections}
                             section={section}
                           />
-                        ) : null,
+                        ) : null
                       )}
                     <DMCard>
                       <InlineHeader>
@@ -250,18 +244,8 @@ export function EditProfile({ theme }) {
             setUserName(data.profile.name);
             setSummary(data.profile.summary);
             setBgImage(data.profile.profileBG);
-            setUserId(data.profile.id);
-            setProfileBGStyle(
-              data.profile.profileBGStyle
-                ? data.profile.profileBGStyle.split(':')
-                : [0, 0],
-            );
+            setUserId(data.profile._id);
             setProfileImg(data.profile.profileImg);
-            setProfileImgStyle(
-              data.profile.profileImgStyle
-                ? data.profile.profileImgStyle.split(':')
-                : [0, 0],
-            );
           }}
         >
           {() => {

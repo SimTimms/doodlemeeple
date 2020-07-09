@@ -22,20 +22,16 @@ export function UpdateUserButton({
         name: profile.userName,
         summary: profile.summary,
         profileBG: profile.bgImage,
-        profileBGStyle: profile.profileBGStyle.join(':'),
         profileImg: profile.profileImg,
-        profileImgStyle: profile.profileImgStyle.join(':'),
-        autosave: profile.autosave,
-        sections: [{ summary: 'Test Section' }, { summary: 'Test Section 2' }],
       }}
       onCompleted={() => {
         toast();
       }}
-      onError={error => {
+      onError={(error) => {
         setError(readableErrors(error, errors));
       }}
     >
-      {SignupMutation => {
+      {(SignupMutation) => {
         return (
           <div
             style={{

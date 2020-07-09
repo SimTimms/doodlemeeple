@@ -449,7 +449,6 @@ export const PROFILE = gql`
       email
       sections {
         _id
-        title
         summary
         showreel
         type
@@ -478,16 +477,13 @@ export const PROFILE = gql`
 `;
 
 export const PROFILE_PREVIEW = gql`
-  query ProfilePreview($userId: String!) {
+  query ProfilePreview($userId: MongoID!) {
     userById(_id: $userId) {
-      id
+      _id
       name
       summary
       profileBG
-      profileBGStyle
       profileImg
-      profileImgStyle
-      autosave
     }
   }
 `;

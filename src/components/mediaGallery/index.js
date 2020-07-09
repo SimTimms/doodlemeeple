@@ -3,6 +3,8 @@ import { useStyles } from './styles';
 import { Typography, Button, useMediaQuery, Icon } from '@material-ui/core';
 import { Uploader } from '../../components';
 import clsx from 'clsx';
+import { UPDATE_GALLERY_SECTION_MUTATION } from '../../data/mutations';
+import { Mutation } from 'react-apollo';
 
 function MediaGallery({ items, edit, setBgImage, setImages }) {
   const seedID = Math.floor(Math.random());
@@ -27,7 +29,7 @@ function MediaGallery({ items, edit, setBgImage, setImages }) {
                 onClick={() => {
                   let imageArray = Object.assign([], items);
                   imageArray = imageArray.filter(
-                    (arrItem) => arrItem.img !== tile.img,
+                    (arrItem) => arrItem.img !== tile.img
                   );
 
                   setImages(imageArray);
@@ -68,14 +70,26 @@ function MediaGallery({ items, edit, setBgImage, setImages }) {
                 minHeight: 150,
               }}
             >
-              <Uploader
-                cbImage={setBgImage}
-                styleOverride={null}
-                className={null}
-                cbDelete={null}
-                hasFile={false}
-                size="1MB PNG JPG"
-              />
+              <Mutation
+                mutation={UPDATE_GALLERY_SECTION_MUTATION}
+                variables={{}}
+                onCompleted={(data) => {
+                  console.log('Done');
+                }}
+              >
+                {(mutation) => {
+                  return (
+                    <Uploader
+                      cbImage={setBgImage}
+                      styleOverride={null}
+                      className={null}
+                      cbDelete={null}
+                      hasFile={false}
+                      size="1MB PNG JPG"
+                    />
+                  );
+                }}
+              </Mutation>
             </div>
           )}
         </div>
