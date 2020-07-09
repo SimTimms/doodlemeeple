@@ -202,6 +202,7 @@ ${contractData.currency} `}
                     }}
                     styleOverride={{ paddingTop: 10, paddingBottom: 10 }}
                     type="button"
+                    iconPos="right"
                   />
                 );
               }}
