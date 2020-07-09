@@ -47,26 +47,44 @@ export function Card({ img }) {
   }));
 
   return (
-    <animated.div
-      onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
-      onMouseLeave={() => set({ xys: [0, 0, 1] })}
-      className={clsx({
-        [classes.card]: true,
-        [classes.cardMobile]: mobile,
-      })}
+    <div
       style={{
-        transform: props.xys.interpolate(trans),
-        margin: 20,
-        width: '30%',
         display: 'flex',
+        width: '33.3%',
+        height: 300,
+        boxSizing: 'border-box',
+        position: 'relative',
+        backgroundImage: `url(${img})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center',
+        border: '10px solid rgba(255,255,255,1)',
+        backgroundColor: 'rgba(255,255,255,0.5)',
       }}
     >
-      <img
-        src={img}
-        style={{ width: '100%', height: '100%', margin: 0 }}
-        alt="Gallery Card"
-      />
-    </animated.div>
+      {/*
+      <animated.div
+        onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
+        onMouseLeave={() => {
+          set({ xys: [0, 0, 1] });
+        }}
+        className={clsx({
+          [classes.card]: true,
+          [classes.cardMobile]: mobile,
+        })}
+        style={{
+          transform: props.xys.interpolate(trans),
+          margin: 20,
+          height: '100%',
+        }}
+      >
+        <img
+          src={img}
+          style={{ width: '100%', margin: 0 }}
+          alt="Gallery Card"
+        />
+      </animated.div>*/}
+    </div>
   );
 }
 
@@ -119,7 +137,7 @@ export function Projects({ projects }) {
         )}
 
         <div className={classes.projectSummaryWrapper}>
-          <Typography variant="h5">{item.name}</Typography>
+          <Typography variant="h6">{item.name}</Typography>
           <Typography variant="body1" className={classes.projectSummary}>
             {`${item.summary}`}
           </Typography>

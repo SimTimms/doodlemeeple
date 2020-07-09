@@ -8,8 +8,10 @@ import {
   DeleteButton,
   FieldTitle,
   InlineHeader,
+  InlineHeaderWarning,
   IconTitle,
   IconButton,
+  Column,
 } from '../../../../../components';
 import ReactPlayer from 'react-player';
 import { Query } from 'react-apollo';
@@ -127,18 +129,37 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                       mutation();
                     }}
                     styleOverride={null}
+                    type="button"
+                    iconPos="right"
                   />
                 </div>
               </Card>
             ) : (
-              <div style={{ width: '100%' }}>
+              <Column>
+                <IconButton
+                  title="Preview"
+                  icon="preview"
+                  color="text-dark"
+                  disabled={false}
+                  onClickEvent={() => {
+                    history.push(`/app/view-game/${game.id}`);
+                  }}
+                  styleOverride={{
+                    marginLeft: 'auto',
+                    marginTop: 0,
+                    marginBottom: 0,
+                    paddingRight: 0,
+                  }}
+                  type="button"
+                  iconPos="right"
+                />
                 <Card className={classes.card}>
                   <InlineHeader>
                     <IconTitle icon="image" title="Box Art" />
                   </InlineHeader>
                   <FieldTitle
                     name=" 1. Primary Image"
-                    description="JPG or PNG, 2MB max, 700 x 400px (optimum size)"
+                    description="JPG or PNG, 1MB max, 1920 x 300px (optimum size)"
                     warning=""
                     inline={false}
                   />
@@ -207,9 +228,9 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                     <TextField
                       id={'summary'}
                       label={`Summary of the game? Example: Build and battle giant mechs in this sci-fi epic.... ${
-                        game.summary ? `(${156 - game.summary.length})` : ''
+                        game.summary ? `(${256 - game.summary.length})` : ''
                       }`}
-                      inputProps={{ maxLength: 156 }}
+                      inputProps={{ maxLength: 256 }}
                       multiline
                       type="text"
                       value={game.summary}
@@ -217,7 +238,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                         setGame({
                           ...game,
                           summary: e.target.value
-                            .substring(0, 156)
+                            .substring(0, 256)
                             .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
                         });
                         autosaveIsOn && autosave(mutation, 'image');
@@ -295,9 +316,9 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                   </div>
                 </Card>
                 <Card className={classes.card}>
-                  <InlineHeader>
+                  <InlineHeaderWarning>
                     <IconTitle icon="warning" title="Danger Zone" />
-                  </InlineHeader>
+                  </InlineHeaderWarning>
                   <div
                     style={{
                       padding: 10,
@@ -307,9 +328,6 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                   >
                     {game.id !== 'new' && (
                       <div>
-                        <Typography variant="h2" component="p">
-                          Delete Game
-                        </Typography>
                         <Mutation
                           mutation={REMOVE_GAME}
                           variables={{
@@ -339,7 +357,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                                 )}
                                 <DeleteButton
                                   mutation={mutation}
-                                  theme={theme}
+                                  str="Delete this game?"
                                 />
                               </div>
                             );
@@ -349,7 +367,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                     )}
                   </div>
                 </Card>
-              </div>
+              </Column>
             );
           }}
         </Mutation>
@@ -362,10 +380,8 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
             setLoading(false);
           }}
         >
-          {({ loading, error, data }) => {
-            if (loading) return <LoadIcon />;
-            if (error) return <div>Error</div>;
-            return <div></div>;
+          {({ data }) => {
+            return null;
           }}
         </Query>
       </div>

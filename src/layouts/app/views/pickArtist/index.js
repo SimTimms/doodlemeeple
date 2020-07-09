@@ -63,6 +63,7 @@ export function PickArtist({
         <ContentHeader
           title="Invite Artists"
           subTitle="Invite Artists"
+          subTitleExtra={null}
           button={
             <Button
               onClick={() => {
@@ -98,7 +99,7 @@ export function PickArtist({
             <div className={classes.miniProfileWrapper}>
               <div style={{ textAlign: 'center' }}>
                 <Typography
-                  variant="h2"
+                  variant="h6"
                   component="p"
                   style={{ marginTop: 10 }}
                 >
@@ -124,7 +125,12 @@ export function PickArtist({
                           mutation();
                         }}
                         disabled={inviteList.length > 0 ? false : true}
-                        icon="keyboard_arrow_right"
+                        icon="chevron_right"
+                        title="Submit"
+                        iconPos="right"
+                        styleOverride={null}
+                        type="button"
+                        color="primary"
                       />
                     );
                   }}
@@ -168,10 +174,8 @@ export function PickArtist({
             );
           }}
         >
-          {({ loading, error, data }) => {
-            if (loading) return <LoadIcon />;
-            if (error) return <div>Error</div>;
-            return <div></div>;
+          {({ data }) => {
+            return null;
           }}
         </Query>
       </div>

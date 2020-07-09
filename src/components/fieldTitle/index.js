@@ -27,7 +27,7 @@ export default function FieldTitle({ name, description, warning, inline }) {
             infoOpen === 'block' ? setInfoOpen('none') : setInfoOpen('block')
           }
         >
-          <Typography variant="h6" color="textPrimary" noWrap={true}>
+          <Typography variant="h6" noWrap={true} className={classes.title}>
             {name}
           </Typography>
           <Icon className={classes.helpIcon}>

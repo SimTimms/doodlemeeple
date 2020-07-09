@@ -3,15 +3,21 @@ import Slide from '@material-ui/core/Slide';
 import { Notifications } from './components/notifications';
 import { Posts } from './components/Posts';
 import { Featured } from './components/Featured';
+import { FeaturedMini } from './components/FeaturedMini';
 import axios from 'axios';
 import { ContentHeader } from '../../../../components';
 import { useStyles } from './styles';
+import { Typography } from '@material-ui/core';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import clsx from 'clsx';
 
 export function Dashboard({ history }) {
   const classes = useStyles();
   const [posts, setPosts] = React.useState(null);
   const [featured, setFeatured] = React.useState(null);
+  const [home, setHome] = React.useState(null);
   const [featuredId, setFeaturedId] = React.useState(null);
+  const mobile = useMediaQuery('(max-width:800px)');
 
   useEffect(() => {
     let didCancel = false;
@@ -40,6 +46,17 @@ export function Dashboard({ history }) {
         .catch((error) => {
           console.log(error);
         });
+      axios
+        .get(
+          'https://doodlemeeple.com/wp-json/wp/v2/posts?_embed&categories=4',
+          { cancelToken: axiosCancel.token },
+        )
+        .then((response) => {
+          setHome(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
     return () => {
       didCancel = true;
@@ -59,16 +76,59 @@ export function Dashboard({ history }) {
             button={null}
           />
         ) : (
-          <Featured
-            posts={featured ? featured : []}
-            featuredId={featuredId}
-            history={history}
-          />
+          <Featured posts={home ? home : []} history={history} />
         )}
         <div className={classes.dashboardGrid}>
           <div className={classes.gridRow}>
-            <Notifications />
-            <Posts posts={posts ? posts : []} />
+            <div
+              className={`${clsx({
+                [classes.column]: true,
+                [classes.columnMobile]: mobile,
+              })}`}
+            >
+              <Typography
+                variant="h6"
+                className={`${clsx({
+                  [classes.dashboardHeader]: true,
+                  [classes.dashboardHeaderMobile]: mobile,
+                })}`}
+              >
+                Notifications
+              </Typography>
+              <Notifications />
+              <Typography
+                variant="h6"
+                className={`${clsx({
+                  [classes.dashboardHeader]: true,
+                  [classes.dashboardHeaderMobile]: mobile,
+                })}`}
+              >
+                News
+              </Typography>
+              <Posts posts={posts ? posts : []} />
+            </div>
+            <div
+              className={`${clsx({
+                [classes.columnRight]: true,
+                [classes.columnMobile]: mobile,
+              })}`}
+            >
+              <Typography
+                variant="h6"
+                className={`${clsx({
+                  [classes.dashboardHeader]: true,
+                  [classes.right]: true,
+                  [classes.dashboardHeaderMobile]: mobile,
+                })}`}
+              >
+                Featured Artist
+              </Typography>
+              <FeaturedMini
+                posts={featured ? featured : []}
+                featuredId={featuredId}
+                history={history}
+              />
+            </div>
           </div>
         </div>
       </div>

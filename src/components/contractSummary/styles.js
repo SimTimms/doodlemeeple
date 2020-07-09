@@ -6,30 +6,18 @@ export const useStyles = makeStyles((theme) => ({
   wrapper: {
     boxSizing: 'border-box',
     width: '100%',
-    background: '#fff',
   },
-  profileImg: {
-    width: 60,
-    minWidth: 60,
-    borderRadius: '50%',
-    boxShadow: '5px 5px 10px rgba(0,0,0,0.2)',
-    border: '4px solid #fff',
-    marginRight: 20,
-  },
-  profileWrapper: {
+  row: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 10,
-    paddingBottom: 10,
-    marginTop: 10,
-    marginBottom: 10,
+    width: '100%',
+    justifyContent: 'space-between',
     borderTop: '1px dotted #ddd',
-  },
-  profileWrapperDetails: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
+    borderBottom: '1px dotted #ddd',
+    marginTop: 5,
+    '&:first-child': {
+      borderTop: 'none',
+    },
   },
 }));

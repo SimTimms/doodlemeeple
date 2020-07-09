@@ -9,7 +9,14 @@ import {
   Button,
   Slide,
 } from '@material-ui/core';
-import { Form, FormInput, ErrorBox } from '../../../../../components';
+import {
+  Form,
+  FormInput,
+  ErrorBox,
+  IconButton,
+  Meta,
+  Text,
+} from '../../../../../components';
 import { styles } from './styles';
 import { sharedStyles } from '../../styles';
 import { Mutation } from 'react-apollo';
@@ -142,7 +149,6 @@ export default function RegisterCard({ setPage }) {
               <ErrorBox errorMsg={errors.password} />
             </Form>
           </CardContent>
-
           <CardContent className={classes.cardContentCenter}>
             <Mutation
               mutation={SIGNUP_MUTATION}
@@ -159,20 +165,46 @@ export default function RegisterCard({ setPage }) {
               {(SignupMutation) => {
                 return (
                   <div>
-                    <Button
-                      onClick={() => {
+                    <IconButton
+                      onClickEvent={() => {
                         setButtonStatus('Checking...');
                         submitChecks(SignupMutation);
                       }}
-                      variant="contained"
+                      title={buttonStatus}
+                      disabled={false}
+                      icon=""
+                      iconPos="right"
+                      type="button"
                       color="primary"
-                    >
-                      {buttonStatus}
-                    </Button>
+                      styleOverride={null}
+                    />
                   </div>
                 );
               }}
             </Mutation>
+            <Meta str={`By registering you agree to the DoodleMeeple`} />
+            <Meta
+              str={
+                <a
+                  href="https://doodlemeeple.com/terms-of-service/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Terms of Service
+                </a>
+              }
+            />
+            <Meta
+              str={
+                <a
+                  href="https://doodlemeeple.com/privacy-policy-2/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Privacy Policy
+                </a>
+              }
+            />
           </CardContent>
           <Divider />
           <CardContent

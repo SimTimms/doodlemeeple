@@ -62,6 +62,24 @@ export function Message({ message, history }) {
                 <Typography color="textPrimary" component="p">
                   {message.messageStr.indexOf('QUOTE SUBMITTED:') === -1 ? (
                     message.messageStr
+                  ) : !isUserMessage ? (
+                    <IconButton
+                      title="Quote Submitted"
+                      icon="request_quote"
+                      color="p"
+                      disabled={false}
+                      styleOverride={null}
+                      onClickEvent={() =>
+                        history.push(
+                          `/app/edit-contract/${message.messageStr.replace(
+                            'QUOTE SUBMITTED:',
+                            '',
+                          )}`,
+                        )
+                      }
+                      type="button"
+                      iconPos="right"
+                    />
                   ) : (
                     <IconButton
                       title="View Quote"
@@ -71,9 +89,14 @@ export function Message({ message, history }) {
                       styleOverride={null}
                       onClickEvent={() =>
                         history.push(
-                          message.messageStr.replace('QUOTE SUBMITTED:', ''),
+                          `/app/view-contract/${message.messageStr.replace(
+                            'QUOTE SUBMITTED:',
+                            '',
+                          )}`,
                         )
                       }
+                      type="button"
+                      iconPos="right"
                     />
                   )}
                 </Typography>

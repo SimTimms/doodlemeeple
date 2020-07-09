@@ -40,8 +40,12 @@ export const GAME = gql`
       backgroundImg
       summary
       location
+      createdAt
       jobs {
         id
+        name
+      }
+      user {
         name
       }
       gallery {
@@ -167,10 +171,12 @@ export const INVITES = gql`
       user {
         id
         name
+        profileImg
       }
       job {
         id
         name
+        summary
       }
     }
   }
@@ -237,7 +243,9 @@ export const JOBS = gql`
         backgroundImg
         name
       }
-      contract
+      contracts {
+        id
+      }
     }
   }
 `;
@@ -262,6 +270,73 @@ export const GET_CONTRACT = gql`
       currency
       status
       updatedAt
+      payments {
+        id
+        amount
+        currency
+        status
+        paidBy {
+          id
+          name
+        }
+        contract {
+          id
+        }
+        paymentId
+        createdAt
+        updatedAt
+      }
+      user {
+        email
+        id
+        name
+        profileImg
+      }
+      job {
+        id
+        name
+        summary
+        creativeSummary
+        user {
+          id
+          email
+        }
+      }
+      paymentTerms {
+        id
+        percent
+        description
+      }
+    }
+  }
+`;
+
+export const GET_CONTRACT_ID = gql`
+  query GetContractId($contractId: String!) {
+    getContractId(contractId: $contractId) {
+      id
+      notes
+      deadline
+      cost
+      currency
+      status
+      updatedAt
+      payments {
+        id
+        amount
+        currency
+        status
+        paidBy {
+          id
+          name
+        }
+        contract {
+          id
+        }
+        paymentId
+        createdAt
+        updatedAt
+      }
       user {
         email
         id
@@ -297,6 +372,22 @@ export const PREVIEW_CONTRACT = gql`
       currency
       status
       updatedAt
+      payments {
+        id
+        amount
+        currency
+        status
+        paidBy {
+          id
+          name
+        }
+        contract {
+          id
+        }
+        paymentId
+        createdAt
+        updatedAt
+      }
       signedBy {
         id
         name
@@ -308,6 +399,7 @@ export const PREVIEW_CONTRACT = gql`
         summary
         profileImg
         id
+        profileBG
       }
       job {
         id

@@ -19,6 +19,11 @@ import { split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe('pk_test_xjjTUtg7riy4i2F9NYvuSkmF00fMcYOlZk');
+
 function RouterComponent(props) {
   const token = Cookies.get('token');
 
@@ -70,7 +75,7 @@ function RouterComponent(props) {
   theme.palette.primary = {
     ...theme.palette.primary,
     main: '#57499e',
-    light: '#8474d3',
+    light: '#b5a8f7',
     dark: '#433878',
   };
   theme.palette.secondary = {
@@ -84,8 +89,42 @@ function RouterComponent(props) {
     main: '#ff4081',
     dark: '#d81b60',
   };
-  theme.typography.h1 = { fontFamily: ['Quicksand'].join(','), fontSize: 30 };
-  theme.typography.h2 = { fontFamily: ['Quicksand'].join(','), fontSize: 18 };
+  theme.typography.h1 = {
+    fontFamily: ['Quicksand'].join(','),
+    fontSize: 38,
+    margin: 0,
+    fontWeight: 200,
+  };
+  theme.typography.h2 = {
+    fontFamily: ['Quicksand'].join(','),
+    fontSize: 32,
+    margin: 0,
+    fontWeight: 200,
+  };
+  theme.typography.h3 = {
+    fontFamily: ['Quicksand'].join(','),
+    fontSize: 28,
+    margin: 0,
+    fontWeight: 200,
+  };
+  theme.typography.h4 = {
+    fontFamily: ['Quicksand'].join(','),
+    fontSize: 24,
+    margin: 0,
+    fontWeight: 200,
+  };
+  theme.typography.h5 = {
+    fontFamily: ['Quicksand'].join(','),
+    fontSize: 20,
+    margin: 0,
+    fontWeight: 200,
+  };
+  theme.typography.h6 = {
+    fontFamily: ['Quicksand'].join(','),
+    fontSize: 16,
+    margin: 0,
+    fontWeight: 200,
+  };
   theme.typography.button = {
     fontFamily: ['Quicksand'].join(','),
     fontSize: 14,
@@ -97,58 +136,60 @@ function RouterComponent(props) {
   return (
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
-        <Switch>
-          {authToken && (
+        <Elements stripe={stripePromise}>
+          <Switch>
+            {authToken && (
+              <Route
+                path="/app/:page/:pathParam?"
+                render={(props) => <AppLayout {...props} theme={theme} />}
+              />
+            )}
+            {authToken && (
+              <Route
+                path="/preview/:pathParam?"
+                render={(props) => (
+                  <PreviewLayout {...props} theme={theme} publicView={false} />
+                )}
+              />
+            )}
+            {authToken && (
+              <Route
+                path="/messages/:page/:pathParam?"
+                render={(props) => <MessagesLayout {...props} theme={theme} />}
+              />
+            )}
+            {authToken && (
+              <Route
+                path="/roles/:page/:pathParam?"
+                render={(props) => <RolesLayout {...props} />}
+              />
+            )}
+            {authToken && (
+              <Route
+                path="/message/:page/:pathParam?"
+                render={(props) => <MessageLayout {...props} />}
+              />
+            )}
             <Route
-              path="/app/:page/:pathParam?"
-              render={(props) => <AppLayout {...props} theme={theme} />}
-            />
-          )}
-          {authToken && (
-            <Route
-              path="/preview/:pathParam?"
+              path="/public-preview/:pathParam?"
               render={(props) => (
-                <PreviewLayout {...props} theme={theme} publicView={false} />
+                <PreviewLayout {...props} theme={theme} publicView={true} />
               )}
             />
-          )}
-          {authToken && (
+            <Route path="/about">
+              <AboutLayoutFrame />
+            </Route>
             <Route
-              path="/messages/:page/:pathParam?"
-              render={(props) => <MessagesLayout {...props} theme={theme} />}
+              path="/:page/:token"
+              render={(props) => <PublicLayout {...props} />}
             />
-          )}
-          {authToken && (
             <Route
-              path="/roles/:page/:pathParam?"
-              render={(props) => <RolesLayout {...props} />}
+              path="/:page"
+              render={(props) => <PublicLayout {...props} />}
             />
-          )}
-          {authToken && (
-            <Route
-              path="/message/:page/:pathParam?"
-              render={(props) => <MessageLayout {...props} />}
-            />
-          )}
-          <Route
-            path="/public-preview/:pathParam?"
-            render={(props) => (
-              <PreviewLayout {...props} theme={theme} publicView={true} />
-            )}
-          />
-          <Route path="/about">
-            <AboutLayoutFrame />
-          </Route>
-          <Route
-            path="/:page/:token"
-            render={(props) => <PublicLayout {...props} />}
-          />
-          <Route
-            path="/:page"
-            render={(props) => <PublicLayout {...props} />}
-          />
-          <Route path="/" render={(props) => <PublicLayout {...props} />} />
-        </Switch>
+            <Route path="/" render={(props) => <PublicLayout {...props} />} />
+          </Switch>
+        </Elements>
       </ApolloProvider>
     </ThemeProvider>
   );

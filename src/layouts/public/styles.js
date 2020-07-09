@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import smithy from '../../assets/smithy.jpg';
 import jumping from '../../assets/jumping.jpg';
 import purps from '../../assets/dm_cover.jpg';
+import dragon from '../../assets/dragon.jpg';
 
 export const useStyles = makeStyles((theme) => ({
   root: {},
@@ -23,14 +24,32 @@ export const useStyles = makeStyles((theme) => ({
     minHeight: 400,
     padding: 10,
   },
-  backgroundLogin: {
-    backgroundImage: `url(${purps})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'top center',
+  backgroundWrapper: {
     width: '100%',
     minHeight: 400,
     padding: 10,
+    position: 'relative',
+  },
+  cover: {
+    background: 'rgba(255, 255, 255, 0.8)',
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    zIndex: 0,
+    top: 0,
+    left: 0,
+  },
+  backgroundLogin: {
+    backgroundImage: `url(${dragon})`,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'top center',
+    filter: 'grayscale(100%)',
+    width: '100%',
+    minHeight: '100%',
+    position: 'absolute',
+    top: 0,
+    left: 0,
   },
   bgOverlay: {
     background: '#fff',

@@ -45,7 +45,7 @@ export function ProfileHeader({
           hasFile={game.backgroundImg ? true : false}
           className={null}
           setImagePosition={null}
-          size="700 x 400"
+          size="1920 x 300"
         />
       </div>
     </div>

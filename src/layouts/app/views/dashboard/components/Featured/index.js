@@ -6,11 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { IconButton } from '../../../../../../components';
 import clsx from 'clsx';
-import { Query } from 'react-apollo';
-import { PROFILE_FEATURED } from '../../../../../../data/queries';
-import device from '../../../../../../assets/device.svg';
 
-export function Featured({ posts, featuredId, history }) {
+export function Featured({ posts, history }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
   return (
@@ -28,113 +25,122 @@ export function Featured({ posts, featuredId, history }) {
           .replace(/&#8217;/gi, "'")
           .replace(/&amp;/gi, '&')
           .replace(/\[&hellip;\]/gi, '...');
-        const title = post.title.rendered;
         const media = post._embedded['wp:featuredmedia']
           ? post._embedded['wp:featuredmedia']['0'].source_url
           : null;
 
         return (
           <Card className={classes.card} key={`conversation_${index}`}>
-            <div className={classes.rowWrapper}>
-              <div className={classes.postHeader}>
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    width: '100%',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                  }}
-                >
-                  <div className={classes.featuredText}>
-                    <img
-                      src={device}
-                      style={{ width: 20, marginRight: 10 }}
-                      alt=""
-                    />
-                    <Typography
-                      variant="body1"
-                      component="h4"
-                      style={{ color: 'rgba(0,0,0,0.6)' }}
-                    >
-                      Featured Creative
-                    </Typography>
-                  </div>
-                  <Typography
-                    variant="h5"
-                    component="h4"
-                    className={classes.postHeaderText}
-                  >
-                    <Query
-                      query={PROFILE_FEATURED}
-                      variables={{ userId: featuredId }}
-                      fetchPolicy="network-only"
-                    >
-                      {({ data }) => {
-                        return data ? (
-                          <img
-                            className={classes.profileWrapperFeatured}
-                            src={data.profilePreview.profileImg}
-                            alt=""
-                          />
-                        ) : null;
-                      }}
-                    </Query>
-                    <b>{title}</b>
-                  </Typography>
-                </div>
-
-                <Typography
-                  style={{
-                    color: '#222',
-                    marginTop: 5,
-                    textAlign: 'center',
-                  }}
-                  component="p"
-                >
-                  {message}
-                  <a
-                    href={linkTo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      width: 100,
-                      color: '#222',
-                    }}
-                  >
-                    Read our interview
-                  </a>
-                </Typography>
-                <div
-                  style={{
-                    display: 'flex',
-                    width: '100%',
-                    justifyContent: 'center',
-                    marginTop: 10,
-                  }}
-                >
-                  <IconButton
-                    color="primary"
-                    disabled={false}
-                    onClickEvent={() => {
-                      history.push(`/public-preview/${featuredId}`);
-                    }}
-                    icon="portrait"
-                    title="Profile"
-                    styleOverride={null}
-                  />
-                </div>
-              </div>
+            <div className={classes.postImageWrapper}>
               <div
                 className={classes.postImage}
-                style={{ backgroundImage: `url(${media})` }}
+                style={{
+                  backgroundImage: `url(${media})`,
+                  filter: 'brightness(200%) saturate(136%)',
+                }}
               ></div>
+              <div className={classes.cover}></div>
+              <div className={classes.rowWrapper}>
+                <div className={classes.postHeader}>
+                  <Typography
+                    style={{
+                      color: 'rgba(0,0,0,0.6',
+                      marginTop: 5,
+                      textAlign: 'center',
+                    }}
+                    component="h6"
+                    variant="h6"
+                  >
+                    Welcome to
+                  </Typography>
+                  <Typography
+                    style={{
+                      color: '#111',
+                      marginTop: 5,
+                      textAlign: 'center',
+                      fontSize: 60,
+                    }}
+                    component="h1"
+                    variant="h1"
+                  >
+                    <span style={{ fontWeight: 900 }}>doodle</span>
+                    <span>meeple</span>
+                  </Typography>
+                  <Typography
+                    style={{
+                      color: 'rgba(0,0,0,0.8)',
+                      marginTop: 5,
+                      textAlign: 'center',
+                    }}
+                    component="h4"
+                    variant="h4"
+                  >
+                    Professional Creative Talent
+                  </Typography>
+                  <div
+                    style={{
+                      display: 'flex',
+                      width: '100%',
+                      justifyContent: 'space-between',
+                      marginTop: 40,
+                      fontSize: 20,
+                      color: '#fff',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: 'flex',
+                        width: '50%',
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                      }}
+                    >
+                      <IconButton
+                        color="primary"
+                        disabled={false}
+                        onClickEvent={() => {
+                          history.push('/app/edit-profile');
+                        }}
+                        icon=""
+                        title="Create Profile"
+                        styleOverride={null}
+                        type="button"
+                        iconPos="right"
+                      />
+                    </div>
+
+                    <div
+                      style={{ height: 20, borderLeft: '1px solid #fff' }}
+                    ></div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        width: '50%',
+                        alignItems: 'center',
+                        justifyContent: 'flex-start',
+                      }}
+                    >
+                      <IconButton
+                        color="text-dark"
+                        disabled={true}
+                        onClickEvent={() => {
+                          history.push('/app/jobs');
+                        }}
+                        icon=""
+                        title="Post Job (Coming Soon)"
+                        styleOverride={{ background: 'none' }}
+                        iconPos="right"
+                        type="button"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </Card>
         );
       })}
-
-      <Icon color="disabled">more_horizontal</Icon>
     </div>
   );
 }

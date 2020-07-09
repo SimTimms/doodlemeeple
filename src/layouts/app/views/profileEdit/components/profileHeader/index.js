@@ -50,15 +50,14 @@ export function ProfileHeader({
           styleOverride={null}
           hasFile={profile.bgImage ? true : false}
           className={null}
-          setImagePosition={null}
-          size="700 x 400"
+          size="1920 x 300"
         />
       </div>
       <Divider />
       <FieldTitle
         name="My Identity"
-        description="Your profile picture or logo and name, callsign, company name, handle, alias or whatever else you want to be know as. Keep it clean please. Image Requirements: 140 x 140px, png or jpg, less than 2MB"
-        warning=""
+        description="Your profile picture or logo and name, callsign, company name, handle, alias or whatever else you want to be know as. Keep it clean please. "
+        warning="Image Requirements: 140 x 140px, png or jpg, less than 1MB"
         inline={false}
       />
       <div

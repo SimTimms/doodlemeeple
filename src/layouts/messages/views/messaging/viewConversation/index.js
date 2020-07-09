@@ -14,14 +14,6 @@ export default function ViewConversation({ history, conversationId, titles }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        {titles && (
-          <ContentHeader
-            title="Chat"
-            subTitle={null}
-            subTitleExtra={null}
-            button={null}
-          />
-        )}
         <div style={{ width: '100%' }}>
           <Query
             query={CONVERSATION}
@@ -79,24 +71,22 @@ export default function ViewConversation({ history, conversationId, titles }) {
                       );
                     })}
                   </div>
-                  {messages.length > 0 && (
-                    <Messages
-                      messageArrayIn={messages}
-                      classes={classes}
-                      history={history}
-                      conversationId={conversationId}
-                      subscribe={subscribeToMore}
-                      moreButton={
-                        <Button
-                          onClick={() => {
-                            setPageNbr(pageNbr + 1);
-                          }}
-                        >
-                          <Icon>more_horiz</Icon>
-                        </Button>
-                      }
-                    />
-                  )}
+                  <Messages
+                    messageArrayIn={messages}
+                    classes={classes}
+                    history={history}
+                    conversationId={conversationId}
+                    subscribe={subscribeToMore}
+                    moreButton={
+                      <Button
+                        onClick={() => {
+                          setPageNbr(pageNbr + 1);
+                        }}
+                      >
+                        <Icon>more_horiz</Icon>
+                      </Button>
+                    }
+                  />
                 </div>
               ) : (
                 loading && <LoadIcon />

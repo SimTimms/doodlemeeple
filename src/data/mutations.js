@@ -11,6 +11,16 @@ export const SIGNUP_MUTATION = gql`
   }
 `;
 
+export const MAKE_PAYMENT = gql`
+  mutation MakePayment(
+    $amount: String!
+    $currency: String!
+    $contractId: String!
+  ) {
+    makePayment(amount: $amount, currency: $currency, contractId: $contractId)
+  }
+`;
+
 export const SUBMIT_BRIEF = gql`
   mutation SubmitBrief($jobId: String!) {
     submitBrief(jobId: $jobId)
@@ -85,6 +95,12 @@ export const SUBMIT_CONTRACT = gql`
 export const SIGN_CONTRACT = gql`
   mutation SignContract($contractId: String!) {
     signContract(contractId: $contractId)
+  }
+`;
+
+export const DECLINE_CONTRACT = gql`
+  mutation DeclineContract($contractId: String!) {
+    declineContract(contractId: $contractId)
   }
 `;
 

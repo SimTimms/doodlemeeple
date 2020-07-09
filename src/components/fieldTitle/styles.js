@@ -6,6 +6,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  title: { color: theme.palette.primary.dark, fontSize: 14 },
   descriptionBox: {
     background: '#f1f1f1',
     padding: 10,
@@ -21,7 +22,8 @@ export const useStyles = makeStyles((theme) => ({
   helpIcon: {
     marginLeft: 5,
     cursor: 'pointer',
-    color: '#aaa',
+    color: theme.palette.primary.light,
+    fontSize: 16,
     lineHeight: 1.1,
     '&:hover': {
       color: theme.palette.primary.main,
@@ -29,6 +31,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   titleLine: {
     height: 2,
-    background: 'rgba(0,0,0,0.1)',
+    borderTop: '1px dashed #ccc',
   },
 }));

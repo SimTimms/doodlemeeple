@@ -1,8 +1,15 @@
 import React from 'react';
-import { Card, Slide, Typography } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import ReactPlayer from 'react-player';
 import { useStyles } from './styles';
-import { LoadIcon, IconTitle, InlineHeader } from '../../../../../components';
+import {
+  LoadIcon,
+  Header,
+  SubHeader,
+  HeaderTwo,
+  Text,
+  ColumnWrapper,
+} from '../../../../../components';
 import { Query } from 'react-apollo';
 import { GAME } from '../../../../../data/queries';
 
@@ -20,6 +27,8 @@ export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
     showreel: '',
     type: 'game',
     id: 'new',
+    user: { name: '' },
+    createdAt: '',
   });
   const [loading, setLoading] = React.useState(true);
 
@@ -40,74 +49,58 @@ export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
   ) : (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <div style={{ width: '100%' }}>
-          <Card className={classes.card}>
-            <InlineHeader>
-              <IconTitle
-                icon="casino"
-                title={game.type && game.type !== '' ? game.type : '-'}
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <div
+            className={classes.wrapperTwo}
+            style={{
+              backgroundImage: `url(${game.backgroundImg})`,
+            }}
+          ></div>
+          <div
+            className={classes.inset}
+            style={{
+              backgroundImage: `url(${game.backgroundImg})`,
+            }}
+          ></div>
+          <div className={classes.wrapperFive}>
+            <div className={classes.wrapperThree}>
+              <Header str={game.name} />
+              <SubHeader
+                str={game.type && game.type !== '' ? game.type : '-'}
               />
-              <IconTitle
-                icon="location_on"
-                title={
-                  game.location && game.location !== '' ? game.location : '-'
-                }
-              />
-            </InlineHeader>
-            <div style={{ padding: 10 }}>
-              <Typography variant="h1" style={{ textAlign: 'center' }}>
-                {game.name}
-              </Typography>
-              <Typography variant="body1" style={{ textAlign: 'center' }}>
-                {game.summary}
-              </Typography>
-              <div
-                style={{
-                  background: `url(${game.backgroundImg})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center center',
-                  width: '100%',
-                  height: 400,
-                }}
-              ></div>
             </div>
-          </Card>
+            <ColumnWrapper>
+              <HeaderTwo str="Description" />
+              <Text str={game.summary} />
+            </ColumnWrapper>
+          </div>
           {game.showreel !== '' && (
-            <Card className={classes.card}>
-              <InlineHeader
-                variant="body1"
-                style={{
-                  textAlign: 'right',
-                  background: theme.palette.primary.main,
-                  color: '#fff',
-                  padding: 3,
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <IconTitle
-                  icon="ondemand_video"
-                  title="Shameless Self Promotion"
+            <div className={classes.wrapperFive}>
+              <div className={classes.columnWrapper}>
+                <ReactPlayer
+                  url={game.showreel}
+                  playing
+                  controls={true}
+                  muted={true}
+                  style={{
+                    width: '100%',
+                    padding: 10,
+                    boxSizing: 'border-box',
+                    background: '#ddd',
+                    marginTop: 40,
+                  }}
+                  width="100%"
                 />
-              </InlineHeader>
-              <div style={{ padding: 10 }}>
-                <div>
-                  <ReactPlayer
-                    url={game.showreel}
-                    playing
-                    controls={true}
-                    muted={true}
-                    style={{
-                      width: '100%',
-                      padding: 10,
-                      boxSizing: 'border-box',
-                      background: '#ddd',
-                    }}
-                    width="100%"
-                  />
-                </div>
               </div>
-            </Card>
+            </div>
           )}
         </div>
       </div>

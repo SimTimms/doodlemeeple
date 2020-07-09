@@ -34,12 +34,14 @@ export default function EditContractButton({
           <IconButton
             title={title}
             icon="edit"
-            styleOverride={null}
+            styleOverride={{ width: '100%' }}
             color="secondary"
             disabled={false}
             onClickEvent={() => {
               mutation();
             }}
+            iconPos="right"
+            type="button"
           />
         );
       }}
@@ -58,6 +60,8 @@ export function ViewButton({ history, contractId }) {
       onClickEvent={() => {
         history.push(`/app/view-contract/${contractId}`);
       }}
+      iconPos="right"
+      type="button"
     />
   );
 }

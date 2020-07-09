@@ -3,12 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   actionWrapper: {
     display: 'flex',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
     alignItems: 'center',
-    flexWrap: 'nowrap',
-    flexDirection: 'row',
+    justifyContent: 'center',
     width: '100%',
-    borderTop: '1px dotted #ddd',
-    marginTop: 10,
+    maxWidth: 300,
+    margin: 'auto',
   },
 }));

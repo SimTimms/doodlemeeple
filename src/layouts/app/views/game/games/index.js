@@ -20,7 +20,6 @@ export default function Games({ history }) {
         />
         <div className={classes.cardGrid}>
           {gameArray.map((game, index) => {
-            console.log(game);
             return (
               <MessageComponent
                 key={`game_${index}`}

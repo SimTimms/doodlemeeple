@@ -104,12 +104,12 @@ export function PublicFooterMenu() {
       >
         <StyledButtonFooter>Terms of Service</StyledButtonFooter>
       </a>
-      <Link to="/login" style={{ textDecoration: 'none' }}>
-        <StyledButtonFooter>Privacy (Coming Soon)</StyledButtonFooter>
-      </Link>
-      <Link to="/login" style={{ textDecoration: 'none' }}>
-        <StyledButtonFooter>Data (Coming Soon)</StyledButtonFooter>
-      </Link>
+      <a
+        href="https://doodlemeeple.com/privacy-policy-2/"
+        style={{ textDecoration: 'none' }}
+      >
+        <StyledButtonFooter>Privacy Policy</StyledButtonFooter>
+      </a>
       <a href="mailto:info@doodlemeeplecom" style={{ textDecoration: 'none' }}>
         <StyledButtonFooter>info@doodlemeeple.com</StyledButtonFooter>
       </a>

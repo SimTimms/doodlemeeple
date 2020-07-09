@@ -56,7 +56,7 @@ export function Testimonial({
             <div
               style={{
                 background: testimonial.image
-                  ? `url(${testimonial.image}) center center/100% `
+                  ? `url(${testimonial.image}) center center/cover`
                   : '#ddd',
               }}
               className={clsx({

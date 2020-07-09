@@ -1,17 +1,13 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
 import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
-import Typography from '@material-ui/core/Typography';
-import { timeDifferenceForDate } from '../../../../../../utils/dates';
 import {
-  IconTitle,
-  InlineHeader,
   IconButton,
+  FeatureCardHorizontal,
 } from '../../../../../../components';
-
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
+import { timeDifferenceForDate } from '../../../../../../utils/dates';
 
 export function Posts({ posts }) {
   const classes = useStyles();
@@ -23,18 +19,9 @@ export function Posts({ posts }) {
         [classes.messageWrapperMobile]: mobile,
       })}
     >
-      <Typography
-        color="textPrimary"
-        variant="h2"
-        style={{ textAlign: 'center' }}
-      >
-        News
-      </Typography>
-
       {posts.map((post, index) => {
         const regex = /(<([^>]+)>)/gi;
         const linkTo = post.link;
-        const createdAt = post.date;
         const message = post.excerpt.rendered
           .replace(regex, '')
           .replace(/&#8217;/gi, "'")
@@ -44,74 +31,36 @@ export function Posts({ posts }) {
         const media = post._embedded['wp:featuredmedia']
           ? post._embedded['wp:featuredmedia']['0'].source_url
           : null;
-
+        const author = post._embedded.author[0].name;
+        const createdAt = post.date;
         return (
-          <Card className={classes.card} key={`conversation_${index}`}>
-            <div className={classes.rowWrapper}>
+          <FeatureCardHorizontal
+            key={`news_${index}`}
+            background={media}
+            title={title}
+            subtitle={message}
+            meta={`${author} - ${timeDifferenceForDate(createdAt)}`}
+            buttonOne={
               <a
                 href={linkTo}
                 className={classes.messageButton}
                 style={{ textDecoration: 'none' }}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <InlineHeader>
-                  <IconTitle icon={'textsms'} title={`Post`} />
-                  <Typography variant="caption" component="p">
-                    <b>{timeDifferenceForDate(post.date)}</b>
-                  </Typography>
-                </InlineHeader>
-                <div
-                  className={classes.postImage}
-                  style={{ backgroundImage: `url(${media})` }}
-                >
-                  <div className={classes.postHeader}>
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        width: '100%',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Typography variant="h5" component="h4">
-                        <b>{title}</b>
-                      </Typography>
-                      <Typography
-                        style={{
-                          color: '#fff',
-                          display: 'flex',
-                          flexDirection: 'row',
-                        }}
-                        component="p"
-                      >
-                        <b>{timeDifferenceForDate(createdAt)}</b>
-                      </Typography>
-                    </div>
-
-                    <Typography style={{ color: '#444' }} component="p">
-                      {message}
-                    </Typography>
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        width: '100%',
-                        justifyContent: 'flex-end',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <IconButton
-                        disabled={false}
-                        onClickEvent={false}
-                        icon="more_horiz"
-                        title="Read more "
-                      />
-                    </div>
-                  </div>
-                </div>
+                <IconButton
+                  disabled={false}
+                  onClickEvent={() => {}}
+                  icon=""
+                  title="Read"
+                  color="text-dark"
+                  type="button"
+                  styleOverride={null}
+                />
               </a>
-            </div>
-          </Card>
+            }
+            buttonTwo={null}
+          />
         );
       })}
 

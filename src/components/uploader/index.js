@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-
 import { useStyles } from './styles';
 import { Typography, Button, Icon } from '@material-ui/core';
 import Cookies from 'js-cookie';
@@ -11,7 +10,6 @@ function Uploader({
   className,
   cbDelete,
   hasFile,
-  setImagePosition,
   size,
 }) {
   const classes = useStyles();
@@ -20,13 +18,15 @@ function Uploader({
   let uploadInput = null;
 
   async function handleUpload(ev) {
-    let file = uploadInput.files[0];
     // Split the filename to get the name and type
     if (!uploadInput.files[0]) {
       return null;
     }
+    let file = uploadInput.files[0];
     let fileParts = uploadInput.files[0].name.split('.');
-    let fileName = fileParts[0];
+    let fileName = `${fileParts[0]}${Date.now()}`
+      .replace(/[^a-z0-9]/gi, '_')
+      .toLowerCase();
     let fileType = fileParts[1];
     let fileSize = uploadInput.files[0].size;
 
@@ -41,8 +41,8 @@ function Uploader({
         Authorization: 'Bearer ' + token,
       },
     };
-
     setStatusMessage('Loading...');
+
     await axios
       .post(uploadURL, {
         ...config,
@@ -53,6 +53,7 @@ function Uploader({
       })
       .then((response) => {
         setStatusMessage('Sending...');
+        console.log(response);
         if (response.data.data) {
           setStatusMessage('Uploading...');
           const returnData = response.data.data.returnData;

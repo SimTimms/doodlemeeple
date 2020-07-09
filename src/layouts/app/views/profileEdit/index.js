@@ -120,7 +120,7 @@ export function EditProfile({ theme }) {
                       >
                         <IconButton
                           disabled={false}
-                          secondaryColor={true}
+                          color="secondary"
                           warning={false}
                           icon="pageview"
                           title="Preview"
@@ -136,9 +136,8 @@ export function EditProfile({ theme }) {
                       <div style={{ padding: 10 }}>
                         <FieldTitle
                           name="Feature Image"
-                          description="Use this space to showcase your most impressive artwork, the image should be png or jpg and uner 2MB. 
-                    700px x 400px is the optimum size"
-                          warning=""
+                          description="Use this space to showcase your most impressive artwork, "
+                          warning="PNG or JPG | optimum size 1920 x 300px | 1MB Max"
                           inline={false}
                         />
                         <ProfileHeader

@@ -35,12 +35,12 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: 10,
   },
   card: {
-    background: 'grey',
-    borderRadius: '5px',
     boxShadow: '0px 10px 30px -5px rgba(0, 0, 0, 0.3)',
     transition: 'box-shadow 0.5s',
     willChange: 'transform',
-    border: '15px solid white',
+    maxWidth: 500,
+    marginBottom: 20,
+    boxSizing: 'border-box',
   },
   cardMobile: { width: '100% !important' },
   testimonialWrapper: {
@@ -58,7 +58,6 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     flexDirection: 'row',
     marginTop: 30,
-    padding: 30,
     boxSizing: 'border-box',
   },
   projectWrapperParent: {
@@ -77,7 +76,6 @@ export const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     boxShadow: '10px 10px 30px rgba(0,0,0,0.4)',
-    padding: 10,
   },
   projectName: {
     width: '100%',
@@ -113,6 +111,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: 15,
     minWidth: 200,
     marginLeft: 10,
+
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -123,6 +122,7 @@ export const useStyles = makeStyles((theme) => ({
   projectSummary: {
     width: '100%',
     textAlign: 'center',
+    paddingTop: 10,
   },
   testimonialSummary: {
     width: '100%',

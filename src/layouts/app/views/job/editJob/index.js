@@ -89,7 +89,6 @@ export default function EditJob({
               toaster('Saved');
               const newjobId =
                 jobId === 'new' ? data.createJob : data.updateJob;
-              setJob({ ...job, id: newjobId });
               history.replace(`/app/edit-job/${newjobId}`);
             }}
           >
@@ -264,13 +263,13 @@ export default function EditJob({
                           }`}
                           inputProps={{ maxLength: 86, width: '100%' }}
                           onChange={(e) => {
-                            autosaveIsOn && autosave(mutation, 'image');
                             setJob({
                               ...job,
                               name: e.target.value
                                 .substring(0, 86)
                                 .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
                             });
+                            autosaveIsOn && autosave(mutation, 'image');
                           }}
                           margin="normal"
                           variant="outlined"

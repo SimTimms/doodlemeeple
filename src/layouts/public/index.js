@@ -12,7 +12,6 @@ import { useStyles } from './styles';
 export function PublicLayout(props) {
   const [page, setPage] = React.useState('home');
   const classes = useStyles();
-  console.log(page);
 
   const pageJump = props.match ? props.match.params.page : null;
   const token = props
@@ -33,7 +32,9 @@ export function PublicLayout(props) {
       </StyledNavBar>
       <Content>
         {page === 'login' ? (
-          <div className={classes.backgroundLogin}>
+          <div className={classes.backgroundWrapper}>
+            <div className={classes.backgroundLogin}> </div>
+            <div className={classes.cover}></div>
             <LoginCard history={props.history} forwardTo={null} />
           </div>
         ) : page === 'register' ? (
@@ -53,7 +54,9 @@ export function PublicLayout(props) {
             <Deleted />
           </div>
         ) : (
-          <div className={classes.backgroundLogin}>
+          <div className={classes.backgroundWrapper}>
+            <div className={classes.backgroundLogin}> </div>
+            <div className={classes.cover}></div>
             <LoginCard history={props.history} forwardTo={props.location} />
           </div>
         )}

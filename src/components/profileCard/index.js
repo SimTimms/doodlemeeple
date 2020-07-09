@@ -23,21 +23,22 @@ export default function ProfileCard({
   const classes = useStyles();
 
   return (
-    <Card
-      className={classes.creativeCard}
-      style={{
-        background:
-          creative.profileBG !== '' ? `url(${creative.profileBG})` : '#eee',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center',
-        boxShadow:
-          creative.profileBG !== '' ? '10px 10px 10px rgba(0,0,0,0.2)' : 'none',
-      }}
-    >
+    <Card className={classes.creativeCard}>
       <div
-        className={classes.creativeCardWrapper}
-        style={{ marginTop: creative.profileBG !== '' ? 160 : 0 }}
-      >
+        style={{
+          backgroundImage:
+            creative.profileBG !== '' ? `url(${creative.profileBG})` : '#eee',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          boxShadow:
+            creative.profileBG !== ''
+              ? '10px 10px 10px rgba(0,0,0,0.2)'
+              : 'none',
+          height: 100,
+          width: '100%',
+        }}
+      ></div>
+      <div className={classes.creativeCardWrapper}>
         <div
           className={classes.creativeCardBackground}
           style={{
@@ -50,7 +51,7 @@ export default function ProfileCard({
           }}
         ></div>
         <div className={classes.creativeCardDetails}>
-          <Typography variant="h2" component="h2">
+          <Typography variant="h6" component="h6">
             {creative.name}
           </Typography>
           <Typography variant="body1" component="p">
@@ -67,7 +68,7 @@ export default function ProfileCard({
             onClick={() => history.push(`/public-preview/${creative.id}`)}
           >
             <Icon style={{ fontSize: 20, color: '#fff', margin: 'auto' }}>
-              more_horiz
+              pageview
             </Icon>
           </Button>
 
