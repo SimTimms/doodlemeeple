@@ -423,9 +423,16 @@ export const PREVIEW_CONTRACT = gql`
 export const COUNTS = gql`
   {
     counts {
-      id
       invites
       messages
+    }
+  }
+`;
+
+export const FAVOURITES = gql`
+  {
+    profile {
+      favourites
     }
   }
 `;
@@ -433,36 +440,34 @@ export const COUNTS = gql`
 export const PROFILE = gql`
   {
     profile {
-      id
+      _id
       name
       summary
       profileBG
-      profileBGStyle
       profileImg
-      profileImgStyle
       autosave
       email
       sections {
-        id
+        _id
         title
         summary
         showreel
         type
         gallery {
-          id
+          _id
           summary
           images {
             img
           }
         }
         notableProjects {
-          id
+          _id
           summary
           name
           image
         }
         testimonials {
-          id
+          _id
           name
           summary
           image
@@ -509,9 +514,8 @@ export const AUTOSAVE_IS = gql`
 
 export const NOTIFICATIONS = gql`
   {
-    getNotifications {
+    notificationSecure {
       message
-      id
       icon
       title
       createdAt

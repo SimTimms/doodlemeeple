@@ -30,7 +30,8 @@ export function Notifications() {
         <Query
           query={NOTIFICATIONS}
           onCompleted={(data) => {
-            setNotificationArray(data.getNotifications);
+            console.log(data);
+            setNotificationArray(data.notificationSecure);
           }}
           fetchPolicy="network-only"
         >

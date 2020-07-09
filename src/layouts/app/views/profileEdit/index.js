@@ -251,7 +251,6 @@ export function EditProfile({ theme }) {
             setSummary(data.profile.summary);
             setBgImage(data.profile.profileBG);
             setUserId(data.profile.id);
-            setAutosaveIsOn(data.profile.autosave);
             setProfileBGStyle(
               data.profile.profileBGStyle
                 ? data.profile.profileBGStyle.split(':')

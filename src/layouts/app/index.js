@@ -17,13 +17,12 @@ import { PickArtist } from './views/pickArtist';
 import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
-import { AUTOSAVE_IS } from '../../data/queries';
+import { FAVOURITES } from '../../data/queries';
 import { ContentTop, StyledNavBar } from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('home');
-  const [autosaveIsOn, setAutosaveIsOn] = React.useState(true);
   const [favourites, setFavourites] = React.useState([]);
   const pageJump = props.match ? props.match.params.page : null;
   const mobile = useMediaQuery('(max-width:800px)');
@@ -96,21 +95,21 @@ function AppLayout(props) {
             <EditGame
               theme={props.theme}
               gameId={pathParam}
-              autosaveIsOn={autosaveIsOn}
+              autosaveIsOn={true}
               history={props.history}
             />
           ) : page === 'view-game' ? (
             <PreviewGame
               theme={props.theme}
               gameId={pathParam}
-              autosaveIsOn={autosaveIsOn}
+              autosaveIsOn={true}
               history={props.history}
             />
           ) : page === 'edit-job' ? (
             <EditJob
               theme={props.theme}
               jobId={pathParam}
-              autosaveIsOn={autosaveIsOn}
+              autosaveIsOn={true}
               history={props.history}
               favourites={favourites}
             />
@@ -134,7 +133,7 @@ function AppLayout(props) {
             <PickArtist
               theme={props.theme}
               jobId={pathParam}
-              autosaveIsOn={autosaveIsOn}
+              autosaveIsOn={true}
               history={props.history}
               favourites={favourites}
             />
@@ -144,9 +143,8 @@ function AppLayout(props) {
         </ContentTop>
       </main>
       <Query
-        query={AUTOSAVE_IS}
+        query={FAVOURITES}
         onCompleted={(data) => {
-          setAutosaveIsOn(data.profile.autosave);
           setFavourites(data.profile.favourites);
         }}
         fetchPolicy="network-only"
