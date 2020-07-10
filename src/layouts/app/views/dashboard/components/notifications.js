@@ -98,7 +98,7 @@ export function Notifications() {
                 <Mutation
                   mutation={REMOVE_NOTIFICATION_MUTATION}
                   variables={{
-                    id: notification.id,
+                    id: notification._id,
                   }}
                 >
                   {(RemoveNotificationMutation) => {
@@ -108,7 +108,7 @@ export function Notifications() {
                         onClick={() => {
                           RemoveNotificationMutation();
                           const notificationArrayFiltered = notificationArray.filter(
-                            (item) => item.id !== notification.id,
+                            (item) => item._id !== notification._id
                           );
                           setNotificationArray(notificationArrayFiltered);
                         }}

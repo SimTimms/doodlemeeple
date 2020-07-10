@@ -10,17 +10,7 @@ import {
 } from '../../../../../../../components';
 
 function GallerySection({ section }) {
-  const classes = useStyles();
-
-  const {
-    summary,
-    gallery,
-    notableProjects,
-    testimonials,
-    showreel,
-    type,
-    id,
-  } = section;
+  const { summary, gallery, notableProjects, testimonials, showreel } = section;
   return section.id === 'new' ? (
     <div>New</div>
   ) : (

@@ -14,9 +14,8 @@ import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
-//import * as serviceWorker from './serviceWorker';
 import { split } from 'apollo-link';
-import { WebSocketLink } from 'apollo-link-ws';
+//import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 
 import { Elements } from '@stripe/react-stripe-js';
@@ -26,7 +25,7 @@ const stripePromise = loadStripe('pk_test_xjjTUtg7riy4i2F9NYvuSkmF00fMcYOlZk');
 
 function RouterComponent(props) {
   const token = Cookies.get('token');
-
+  /*
   const wsLink = new WebSocketLink({
     uri: `${process.env.REACT_APP_API_SHORT}`,
     options: {
@@ -37,7 +36,7 @@ function RouterComponent(props) {
       },
     },
   });
-
+*/
   const httpLink = createHttpLink({
     uri: process.env.REACT_APP_API,
   });
@@ -56,8 +55,8 @@ function RouterComponent(props) {
       const { kind, operation } = getMainDefinition(query);
       return kind === 'OperationDefinition' && operation === 'subscription';
     },
-    wsLink,
-    authLink.concat(httpLink),
+    //wsLink,
+    authLink.concat(httpLink)
   );
 
   const client = new ApolloClient({

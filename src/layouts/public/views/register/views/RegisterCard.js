@@ -15,7 +15,6 @@ import {
   ErrorBox,
   IconButton,
   Meta,
-  Text,
 } from '../../../../../components';
 import { styles } from './styles';
 import { sharedStyles } from '../../styles';
