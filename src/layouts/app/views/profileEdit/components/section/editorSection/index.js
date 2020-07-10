@@ -40,11 +40,14 @@ function EditorSection({
   const [testimonials, setTestimonials] = React.useState([]);
   const [deleting, setDeleting] = React.useState(false);
 
-  const imageFilter = images.map((item) => {
-    return {
-      img: item.img,
-    };
-  });
+  const imageFilter =
+    images !== undefined
+      ? images.map((item) => {
+          return {
+            img: item.img,
+          };
+        })
+      : [];
 
   let sectionValues = {
     summary,
@@ -136,7 +139,7 @@ function EditorSection({
                       setSummary(
                         ev.target.value
                           .substring(0, 256)
-                          .replace(/[^A-Za-z0-9 .,'\n]/g, ''),
+                          .replace(/[^A-Za-z0-9 .,'\n]/g, '')
                       );
                     }}
                   />

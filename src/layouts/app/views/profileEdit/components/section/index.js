@@ -57,8 +57,9 @@ export function Section({ index, sections, setSections, section }) {
           }}
         />
         <div className={classes.actionWrapper}>
+          {`${section._id} asdas`}
           <DeleteButton
-            sectionId={section.id}
+            sectionId={section._id}
             sections={sections}
             index={index}
             setSections={setSections}

@@ -3,12 +3,13 @@ import { useStyles } from './styles';
 import { Typography, Button, useMediaQuery, Icon } from '@material-ui/core';
 import { Uploader } from '../../components';
 import clsx from 'clsx';
-import { UPDATE_GALLERY_SECTION_MUTATION } from '../../data/mutations';
+import { UPLOAD_IMAGE } from '../../data/mutations';
 import { Mutation } from 'react-apollo';
 
-function MediaGallery({ items, edit, setBgImage, setImages }) {
+function MediaGallery({ items, edit, setBgImage, setImages, galleryId }) {
   const seedID = Math.floor(Math.random());
   const [mediaViewer, setMediaViewer] = React.useState(null);
+  const [saveImage, setSaveImage] = React.useState(null);
 
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
@@ -71,8 +72,8 @@ function MediaGallery({ items, edit, setBgImage, setImages }) {
               }}
             >
               <Mutation
-                mutation={UPDATE_GALLERY_SECTION_MUTATION}
-                variables={{}}
+                mutation={UPLOAD_IMAGE}
+                variables={{ img: saveImage, galleryId: galleryId }}
                 onCompleted={(data) => {
                   console.log('Done');
                 }}
@@ -80,7 +81,11 @@ function MediaGallery({ items, edit, setBgImage, setImages }) {
                 {(mutation) => {
                   return (
                     <Uploader
-                      cbImage={setBgImage}
+                      cbImage={(url) => {
+                        setSaveImage(url);
+                        setBgImage(url);
+                        mutation();
+                      }}
                       styleOverride={null}
                       className={null}
                       cbDelete={null}

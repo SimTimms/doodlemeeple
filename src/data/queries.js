@@ -456,6 +456,7 @@ export const PROFILE = gql`
           _id
           summary
           images {
+            _id
             img
           }
         }

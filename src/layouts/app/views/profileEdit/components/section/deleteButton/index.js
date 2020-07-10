@@ -40,6 +40,7 @@ export function DeleteButton({
                 sectionId !== 'new' && RemoveSectionMutation();
                 let newSections = Object.assign([], sections);
                 newSections.splice(index, 1);
+                console.log(newSections);
                 setSections(newSections);
                 deleteAction && deleteAction(true);
               }}

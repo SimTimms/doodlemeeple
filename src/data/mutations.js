@@ -192,9 +192,29 @@ export const UPDATE_SECTION_MUTATION = gql`
 `;
 
 export const UPDATE_GALLERY_SECTION_MUTATION = gql`
-  mutation UpdateGallerySectionMutation($section: Section) {
-    updateGallerySection(section: $section) {
-      id
+  mutation UpdateGallerySectionMutation(
+    $summary: String
+    $showreel: String
+    $type: String
+    $galleryId: MongoID!
+  ) {
+    sectionUpdateById(
+      record: {
+        _id: $galleryId
+        summary: $summary
+        showreel: $showreel
+        type: $type
+      }
+    ) {
+      recordId
+    }
+  }
+`;
+
+export const UPLOAD_IMAGE = gql`
+  mutation UploadImage($img: String!, $galleryId: MongoID!) {
+    imageCreateOne(record: { img: $img, gallery: { _id: $galleryId } }) {
+      recordId
     }
   }
 `;
@@ -246,13 +266,15 @@ export const CREATE_PROJECT = gql`
 `;
 
 export const REMOVE_SECTION_MUTATION = gql`
-  mutation RemoveSectionMutation($id: String!) {
-    removeSection(id: $id)
+  mutation RemoveSectionMutation($id: MongoID!) {
+    sectionRemoveById(_id: $id) {
+      recordId
+    }
   }
 `;
 
 export const REMOVE_NOTABLE_PROJECT_MUTATION = gql`
-  mutation RemoveNotableProjectMutation($id: String!) {
+  mutation RemoveNotableProjectMutation($id: MongoID!) {
     removeNotableProject(id: $id)
   }
 `;

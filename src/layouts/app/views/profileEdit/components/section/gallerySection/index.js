@@ -42,12 +42,14 @@ function GallerySection({
   const [testimonials, setTestimonials] = React.useState([]);
   const [deleting, setDeleting] = React.useState(false);
 
-  const imageFilter = images.map((item) => {
-    return {
-      img: item.img,
-    };
-  });
-
+  const imageFilter =
+    images !== undefined
+      ? images.map((item) => {
+          return {
+            img: item.img,
+          };
+        })
+      : [];
   let sectionValues = {
     summary,
     title,
@@ -61,7 +63,7 @@ function GallerySection({
     setSummary(section.summary);
     setType(section.type);
     setShowreel(section.showreel);
-    setImages(section.gallery.length > 0 ? section.gallery.images : []);
+    setImages(section.gallery.images.length > 0 ? section.gallery.images : []);
     setNotableProjects(section.notableProjects);
     setTestimonials(section.testimonials);
   }, [section]);
@@ -69,24 +71,25 @@ function GallerySection({
   return (
     <Mutation
       mutation={
-        section.id === 'new'
+        section._id === 'new'
           ? CREATE_GALLERY_SECTION_MUTATION
           : UPDATE_GALLERY_SECTION_MUTATION
       }
       variables={{
         ...sectionValues,
+        galleryId: section._id,
       }}
       onCompleted={(data) => {
         const copyArr = Object.assign([], sections);
-        if (section.id === 'new') {
+        if (section._id === 'new') {
           const indexProject = copyArr
-            .map((item, index) => item.id === 'new' && index)
-            .filter((item) => item !== false)[0];
-          copyArr[indexProject ? indexProject : 0].id =
+            .map((section, index) => section._id === 'new' && index)
+            .filter((section) => section !== false)[0];
+          copyArr[indexProject ? indexProject : 0]._id =
             data.createGallerySection;
         }
         setSections(copyArr);
-        toaster('Section Created');
+        toaster('Saved');
       }}
     >
       {(mutation) => {
@@ -95,7 +98,7 @@ function GallerySection({
             header={section.type}
             button={
               <DeleteButton
-                sectionId={section.id}
+                sectionId={section._id}
                 sections={sections}
                 index={index}
                 setSections={setSections}
@@ -142,7 +145,7 @@ function GallerySection({
                       );
                     }}
                   />
-                  {section.id !== 'new' && (
+                  {section._id !== 'new' && (
                     <div style={{ width: '100%' }}>
                       <Divider />
                       <FieldTitle
@@ -180,7 +183,7 @@ function GallerySection({
                   )}
                 </div>
               </DMCard>
-              {section.id !== 'new' && (
+              {section._id !== 'new' && (
                 <Column>
                   <DMCard>
                     <InlineHeader>
@@ -203,6 +206,7 @@ function GallerySection({
                           // autosave(mutation, 'summary');
                         }}
                         index={index}
+                        galleryId={section.gallery._id}
                       />
                     </div>
                   </DMCard>
@@ -217,7 +221,7 @@ function GallerySection({
                       <Projects
                         projects={notableProjects}
                         setNotableProjects={setNotableProjects}
-                        sectionId={section.id}
+                        sectionId={section._id}
                         autosaveIsOn={autosaveIsOn}
                       />
                     </div>
@@ -233,7 +237,7 @@ function GallerySection({
                       <Testimonials
                         testimonials={testimonials}
                         setTestimonials={setTestimonials}
-                        sectionId={section.id}
+                        sectionId={section._id}
                       />
                     </div>
                   </DMCard>
