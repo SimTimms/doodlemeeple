@@ -46,6 +46,9 @@ export const useStyles = makeStyles({
     justifyContent: 'center',
     backgroundPosition: 'center center',
     backgroundSize: 'cover',
+    border: '10px solid #fff',
+    borderRadius: 5,
+    boxSizing: 'border-box',
   },
   inputFocus: { background: '#ddd' },
   avatarWrapperMobile: {

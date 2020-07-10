@@ -1,8 +1,12 @@
 import React from 'react';
 import { TextField, useMediaQuery } from '@material-ui/core';
-import { DeleteButton } from './deleteButton';
 import { useStyles } from './styles';
-import { Uploader } from '../../../../../../components';
+import {
+  Uploader,
+  IconButton,
+  Row,
+  ActionWrapper,
+} from '../../../../../../components';
 import {
   UPDATE_PROJECT,
   CREATE_PROJECT,
@@ -11,6 +15,7 @@ import { Mutation } from 'react-apollo';
 import clsx from 'clsx';
 import autosave from '../../../../../../utils/autosave';
 import { toaster } from '../../../../../../utils/toaster';
+import DeleteButtonProject from './deleteButton';
 
 export function Project({
   project,
@@ -23,9 +28,9 @@ export function Project({
 }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
-  return (
+  return project.id === 'new' ? (
     <Mutation
-      mutation={project.id === 'new' ? CREATE_PROJECT : UPDATE_PROJECT}
+      mutation={CREATE_PROJECT}
       variables={{
         project: project,
         sectionId,
@@ -47,6 +52,54 @@ export function Project({
     >
       {(mutation) => {
         return (
+          <Row>
+            <TextField
+              id={'name'}
+              label={`Project Name ${
+                project.name ? `(${36 - project.name.length})` : ''
+              }`}
+              inputProps={{ maxLength: 36 }}
+              multiline
+              value={project.name}
+              margin="normal"
+              variant="outlined"
+              style={{ width: '100%' }}
+              onChange={(ev) => {
+                const copyArr = Object.assign([], projects);
+                copyArr[index].name = ev.target.value.substring(0, 36);
+                setNotableProjects(copyArr);
+              }}
+            />
+            <IconButton
+              title="Create"
+              onClickEvent={mutation}
+              styleOverride={{ marginTop: 16 }}
+              icon="chevron_right"
+              iconPos="right"
+              disabled={false}
+              color="primary"
+              type="button"
+            />
+          </Row>
+        );
+      }}
+    </Mutation>
+  ) : (
+    <Mutation
+      mutation={UPDATE_PROJECT}
+      variables={{
+        project: project,
+        sectionId,
+      }}
+      onCompleted={(data) => {
+        toaster('Saved');
+
+        const copyArr = Object.assign([], projects);
+        setNotableProjects(copyArr);
+      }}
+    >
+      {(mutation) => {
+        return (
           <div
             className={clsx({
               [classes.inputWrapper]: true,
@@ -55,9 +108,7 @@ export function Project({
           >
             <div
               style={{
-                background: project.image
-                  ? `url(${project.image}) center center/cover `
-                  : '#444',
+                backgroundImage: project.image && `url(${project.image}) `,
               }}
               className={clsx({
                 [classes.avatarWrapper]: true,
@@ -80,8 +131,7 @@ export function Project({
                 }}
                 hasFile={project.image !== '' || project.image ? true : false}
                 className={null}
-                setImagePosition={null}
-                size=""
+                size="1MB PNG JPG"
               />
             </div>
 
@@ -125,12 +175,14 @@ export function Project({
                 }}
               />
             </div>
-            <DeleteButton
+            <DeleteButtonProject
+              onClickEvent={() => {
+                let copyArr = Object.assign([], projects);
+                copyArr.splice(index, 1);
+                setShowAdd(true);
+                setNotableProjects(copyArr);
+              }}
               projectId={project.id}
-              projects={projects}
-              index={index}
-              setNotableProjects={setNotableProjects}
-              setShowAdd={setShowAdd}
             />
           </div>
         );
