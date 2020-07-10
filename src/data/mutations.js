@@ -207,13 +207,18 @@ export const UPDATE_GALLERY_SECTION_MUTATION = gql`
       }
     ) {
       recordId
+      record {
+        gallery {
+          _id
+        }
+      }
     }
   }
 `;
 
 export const UPLOAD_IMAGE = gql`
   mutation UploadImage($img: String!, $galleryId: MongoID!) {
-    imageCreateOne(record: { img: $img, gallery: { _id: $galleryId } }) {
+    imageCreateOne(record: { img: $img, gallery: $galleryId }) {
       recordId
     }
   }
@@ -229,39 +234,87 @@ export const CREATE_GALLERY_SECTION_MUTATION = gql`
       record: { summary: $summary, showreel: $showreel, type: $type }
     ) {
       recordId
+      record {
+        gallery {
+          _id
+        }
+      }
     }
   }
 `;
 
 export const UPDATE_TESTIMONIAL = gql`
-  mutation UpdateTestimonial(
-    $testimonial: TestimonialInput!
-    $sectionId: String!
+  mutation UpdatePaymentTestimonial(
+    $summary: String
+    $name: String
+    $image: String
+    $testimonialId: MongoID!
   ) {
-    updateTestimonial(testimonial: $testimonial, sectionId: $sectionId) {
-      id
+    testimonialUpdateById(
+      record: {
+        _id: $testimonialId
+        summary: $summary
+        name: $name
+        image: $image
+      }
+    ) {
+      recordId
     }
   }
 `;
 
 export const CREATE_TESTIMONIAL = gql`
   mutation CreateTestimonial(
-    $testimonial: TestimonialInput!
-    $sectionId: String!
+    $name: String
+    $summary: String
+    $image: String
+    $sectionId: MongoID!
   ) {
-    createTestimonial(testimonial: $testimonial, sectionId: $sectionId)
+    testimonialCreateOne(
+      record: {
+        summary: $summary
+        name: $name
+        image: $image
+        section: $sectionId
+      }
+    ) {
+      recordId
+    }
   }
 `;
 
 export const UPDATE_PROJECT = gql`
-  mutation UpdateProject($project: NotableProjectsInput!, $sectionId: String!) {
-    updateProject(project: $project, sectionId: $sectionId)
+  mutation UpdateProject(
+    $summary: String
+    $name: String
+    $image: String
+    $projectId: MongoID!
+  ) {
+    notableProjectUpdateById(
+      record: { _id: $projectId, summary: $summary, name: $name, image: $image }
+    ) {
+      recordId
+    }
   }
 `;
 
 export const CREATE_PROJECT = gql`
-  mutation CreateProject($project: NotableProjectsInput!, $sectionId: String!) {
-    createProject(project: $project, sectionId: $sectionId)
+  mutation CreateProject(
+    $summary: String
+    $name: String
+    $image: String
+    $sectionId: MongoID!
+  ) {
+    notableProjectCreateOne(
+      record: {
+        summary: $summary
+        name: $name
+        image: $image
+        section: $sectionId
+      }
+    ) {
+      recordId
+    }
   }
 `;
 
@@ -280,14 +333,18 @@ export const REMOVE_NOTABLE_PROJECT_MUTATION = gql`
 `;
 
 export const REMOVE_TESTIMONIAL_MUTATION = gql`
-  mutation RemoveTestimonialMutation($id: String!) {
-    removeTestimonial(id: $id)
+  mutation RemoveTestimonialMutation($id: MongoID!) {
+    testimonialRemoveById(_id: $id) {
+      recordId
+    }
   }
 `;
 
 export const REMOVE_PROJECT_MUTATION = gql`
-  mutation RemoveProjectMutation($id: String!) {
-    removeProject(id: $id)
+  mutation RemoveProjectMutation($id: MongoID!) {
+    notableProjectRemoveById(_id: $id) {
+      recordId
+    }
   }
 `;
 

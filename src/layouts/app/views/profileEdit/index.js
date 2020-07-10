@@ -239,6 +239,7 @@ export function EditProfile({ theme }) {
           query={PROFILE}
           fetchPolicy="network-only"
           onCompleted={(data) => {
+            console.log(data);
             setLoading(false);
             setSections(data.profile.sections);
             setUserName(data.profile.name);

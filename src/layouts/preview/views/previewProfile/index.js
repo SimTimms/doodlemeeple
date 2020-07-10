@@ -143,12 +143,12 @@ export function PreviewProfile({ theme, profileId, publicView }) {
                 <GallerySection section={section} key={`section_${index}`} />
               ) : (
                 <EditorSection section={section} key={`section_${index}`} />
-              ),
+              )
             )}
           <Query
             query={SECTIONS_PREVIEW}
             onCompleted={(data) => {
-              const sections = data.sectionsPreview;
+              const sections = data.sectionMany;
               setSections(sections);
             }}
             variables={{ userId: profileId }}

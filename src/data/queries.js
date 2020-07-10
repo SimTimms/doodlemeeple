@@ -522,28 +522,27 @@ export const NOTIFICATIONS = gql`
 `;
 
 export const SECTIONS_PREVIEW = gql`
-  query SectionsPreview($userId: String!) {
-    sectionsPreview(userId: $userId) {
-      id
-      title
+  query SectionsPreview($userId: MongoID!) {
+    sectionMany(filter: { user: $userId }) {
+      _id
       summary
       showreel
       type
       gallery {
-        id
+        _id
         summary
         images {
           img
         }
       }
       notableProjects {
-        id
+        _id
         summary
         name
         image
       }
       testimonials {
-        id
+        _id
         name
         summary
         image

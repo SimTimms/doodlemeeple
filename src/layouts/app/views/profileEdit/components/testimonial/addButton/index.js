@@ -6,7 +6,7 @@ export function AddTestimonial({ setTestimonials, testimonials, setShowAdd }) {
     <div style={{ width: '100%' }}>
       <Button
         onClick={() => {
-          const newObj = { summary: '', id: 'new', image: '' };
+          const newObj = { summary: '', _id: 'new', image: '' };
           const copyArr = Object.assign([], testimonials);
           copyArr.push(newObj);
           setTestimonials(copyArr);

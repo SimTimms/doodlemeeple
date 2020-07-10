@@ -1,8 +1,8 @@
 import React from 'react';
 import { TextField, useMediaQuery } from '@material-ui/core';
-import { DeleteButton } from './deleteButton';
+import DeleteButtonTestimonial from './deleteButton';
 import { useStyles } from './styles';
-import { Uploader } from '../../../../../../components';
+import { Uploader, Row, IconButton } from '../../../../../../components';
 import {
   UPDATE_TESTIMONIAL,
   CREATE_TESTIMONIAL,
@@ -23,26 +23,74 @@ export function Testimonial({
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
 
-  return (
+  return testimonial._id === 'new' ? (
     <Mutation
-      mutation={
-        testimonial.id === 'new' ? CREATE_TESTIMONIAL : UPDATE_TESTIMONIAL
-      }
+      mutation={CREATE_TESTIMONIAL}
       variables={{
-        testimonial: testimonial,
+        name: testimonial.name,
+        summary: testimonial.summary,
+        image: testimonial.image,
         sectionId,
       }}
       onCompleted={(data) => {
         toaster('Autosave');
 
         const copyArr = Object.assign([], testimonials);
-        if (testimonial.id === 'new') {
+        if (testimonial._id === 'new') {
           const indexProject = copyArr
-            .map((item, index) => item.id === 'new' && index)
+            .map((item, index) => item._id === 'new' && index)
             .filter((item) => item !== false)[0];
-          copyArr[indexProject ? indexProject : 0].id = data.createTestimonial;
+          copyArr[indexProject ? indexProject : 0]._id =
+            data.testimonialCreateOne.recordId;
         }
         setTestimonials(copyArr);
+      }}
+    >
+      {(mutation) => {
+        return (
+          <Row>
+            <TextField
+              id={'name'}
+              label={`Who recommended you? ${
+                testimonial.name ? `(${56 - testimonial.name.length})` : ''
+              }`}
+              inputProps={{ maxLength: 56 }}
+              multiline
+              value={testimonial.name}
+              margin="normal"
+              variant="outlined"
+              style={{ width: '100%' }}
+              onChange={(ev) => {
+                const copyArr = Object.assign([], testimonials);
+                copyArr[index].name = ev.target.value.substring(0, 36);
+                setTestimonials(copyArr);
+              }}
+            />
+            <IconButton
+              title="Create"
+              onClickEvent={mutation}
+              styleOverride={{ marginTop: 16 }}
+              icon="chevron_right"
+              iconPos="right"
+              disabled={false}
+              color="primary"
+              type="button"
+            />
+          </Row>
+        );
+      }}
+    </Mutation>
+  ) : (
+    <Mutation
+      mutation={UPDATE_TESTIMONIAL}
+      variables={{
+        name: testimonial.name,
+        summary: testimonial.summary,
+        image: testimonial.image,
+        testimonialId: testimonial._id,
+      }}
+      onCompleted={(data) => {
+        toaster('Autosave');
       }}
     >
       {(mutation) => {
@@ -68,20 +116,21 @@ export function Testimonial({
                 cbImage={(url) => {
                   const copyArr = Object.assign([], testimonials);
                   copyArr[index].image = url;
-
+                  autosave(mutation, 'project');
                   setTestimonials(copyArr);
                 }}
                 styleOverride={null}
                 cbDelete={() => {
                   const copyArr = Object.assign([], testimonials);
                   copyArr[index].image = '';
+                  autosave(mutation, 'project');
                   setTestimonials(copyArr);
                 }}
                 hasFile={
                   testimonial.image !== '' || testimonial.image ? true : false
                 }
                 className={null}
-                setImagePosition={null}
+                size="1MB PNG JPG"
               />
             </div>
             <div className={classes.actionInputWrapper}>
@@ -126,12 +175,14 @@ export function Testimonial({
                 }}
               />
             </div>
-            <DeleteButton
-              testimonialId={testimonial.id}
-              testimonials={testimonials}
-              index={index}
-              setTestimonials={setTestimonials}
-              setShowAdd={setShowAdd}
+            <DeleteButtonTestimonial
+              onClickEvent={() => {
+                let copyArr = Object.assign([], testimonials);
+                copyArr.splice(index, 1);
+                setShowAdd(true);
+                setTestimonials(copyArr);
+              }}
+              testimonialId={testimonial._id}
             />
           </div>
         );

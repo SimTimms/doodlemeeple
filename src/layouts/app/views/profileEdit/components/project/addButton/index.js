@@ -6,7 +6,7 @@ export function AddProject({ setNotableProjects, projects, setShowAdd }) {
     <div style={{ width: '100%' }}>
       <Button
         onClick={() => {
-          const newObj = { summary: '', id: 'new', image: '', name: '' };
+          const newObj = { summary: '', _id: 'new', image: '', name: '' };
           const copyArr = Object.assign([], projects);
           copyArr.push(newObj);
           setNotableProjects(copyArr);

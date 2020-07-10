@@ -63,7 +63,7 @@ function GallerySection({
     setSummary(section.summary);
     setType(section.type);
     setShowreel(section.showreel);
-    setImages(section.gallery.images.length > 0 ? section.gallery.images : []);
+    setImages(section.gallery.images ? section.gallery.images : []);
     setNotableProjects(section.notableProjects);
     setTestimonials(section.testimonials);
   }, [section]);
@@ -86,7 +86,9 @@ function GallerySection({
             .map((section, index) => section._id === 'new' && index)
             .filter((section) => section !== false)[0];
           copyArr[indexProject ? indexProject : 0]._id =
-            data.createGallerySection;
+            data.sectionCreateOne.recordId;
+          copyArr[indexProject ? indexProject : 0].gallery._id =
+            data.sectionCreateOne.record.gallery._id;
         }
         setSections(copyArr);
         toaster('Saved');
@@ -117,7 +119,7 @@ function GallerySection({
                 </InlineHeader>
                 <div className={classes.sectionWrapper}>
                   <FieldTitle
-                    name="Description"
+                    name="About you & your art"
                     description=" This is an opportunity for you to shout about yourself! Describe your
           best genres, what it's like working with you, your work ethic,
           successes, and process. "
@@ -165,7 +167,7 @@ function GallerySection({
                         variant="outlined"
                         style={{ width: '100%', marginTop: 10 }}
                         onChange={(ev) => {
-                          autosaveIsOn && autosave(mutation, 'showreel');
+                          autosave(mutation, 'showreel');
                           setShowreel(ev.target.value.substring(0, 256));
                         }}
                       />
@@ -203,7 +205,6 @@ function GallerySection({
                         images={images}
                         setImages={(newImages) => {
                           setImages(newImages);
-                          // autosave(mutation, 'summary');
                         }}
                         index={index}
                         galleryId={section.gallery._id}

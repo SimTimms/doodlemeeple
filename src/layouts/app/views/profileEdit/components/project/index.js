@@ -1,12 +1,7 @@
 import React from 'react';
 import { TextField, useMediaQuery } from '@material-ui/core';
 import { useStyles } from './styles';
-import {
-  Uploader,
-  IconButton,
-  Row,
-  ActionWrapper,
-} from '../../../../../../components';
+import { Uploader, IconButton, Row } from '../../../../../../components';
 import {
   UPDATE_PROJECT,
   CREATE_PROJECT,
@@ -28,23 +23,25 @@ export function Project({
 }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
-  return project.id === 'new' ? (
+  return project._id === 'new' ? (
     <Mutation
       mutation={CREATE_PROJECT}
       variables={{
-        project: project,
-        sectionId,
+        summary: project.summary,
+        name: project.name,
+        image: project.image,
+        sectionId: sectionId,
       }}
       onCompleted={(data) => {
         toaster('Autosave');
 
         const copyArr = Object.assign([], projects);
-
-        if (project.id === 'new') {
+        if (project._id === 'new') {
           const indexProject = copyArr
-            .map((item, index) => item.id === 'new' && index)
-            .filter((item) => item !== false)[0];
-          copyArr[indexProject ? indexProject : 0].id = data.createProject;
+            .map((project, index) => project._id === 'new' && index)
+            .filter((project) => project !== false)[0];
+          copyArr[indexProject ? indexProject : 0]._id =
+            data.notableProjectCreateOne.recordId;
         }
 
         setNotableProjects(copyArr);
@@ -56,9 +53,9 @@ export function Project({
             <TextField
               id={'name'}
               label={`Project Name ${
-                project.name ? `(${36 - project.name.length})` : ''
+                project.name ? `(${56 - project.name.length})` : ''
               }`}
-              inputProps={{ maxLength: 36 }}
+              inputProps={{ maxLength: 56 }}
               multiline
               value={project.name}
               margin="normal"
@@ -88,8 +85,10 @@ export function Project({
     <Mutation
       mutation={UPDATE_PROJECT}
       variables={{
-        project: project,
-        sectionId,
+        summary: project.summary,
+        name: project.name,
+        image: project.image,
+        projectId: project._id,
       }}
       onCompleted={(data) => {
         toaster('Saved');
@@ -119,14 +118,14 @@ export function Project({
                 cbImage={(url) => {
                   const copyArr = Object.assign([], projects);
                   copyArr[index].image = url;
-                  autosaveIsOn && autosave(mutation, 'project');
+                  autosave(mutation, 'project');
                   setNotableProjects(copyArr);
                 }}
                 styleOverride={null}
                 cbDelete={() => {
                   const copyArr = Object.assign([], projects);
                   copyArr[index].image = '';
-                  autosaveIsOn && autosave(mutation, 'project');
+                  autosave(mutation, 'project');
                   setNotableProjects(copyArr);
                 }}
                 hasFile={project.image !== '' || project.image ? true : false}
@@ -139,9 +138,9 @@ export function Project({
               <TextField
                 id={'name'}
                 label={`Project Name ${
-                  project.name ? `(${36 - project.name.length})` : ''
+                  project.name ? `(${56 - project.name.length})` : ''
                 }`}
-                inputProps={{ maxLength: 36 }}
+                inputProps={{ maxLength: 56 }}
                 multiline
                 value={project.name}
                 margin="normal"
@@ -182,7 +181,7 @@ export function Project({
                 setShowAdd(true);
                 setNotableProjects(copyArr);
               }}
-              projectId={project.id}
+              projectId={project._id}
             />
           </div>
         );

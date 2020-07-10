@@ -9,7 +9,7 @@ function Testimonials({ testimonials, setTestimonials, sectionId }) {
   const [showAdd, setShowAdd] = React.useState(true);
 
   useEffect(() => {
-    const newProj = testimonials.filter((item) => item.id === 'new');
+    const newProj = testimonials.filter((item) => item._id === 'new');
     newProj.length === 0 && setShowAdd(true);
   }, [testimonials]);
 
