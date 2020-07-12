@@ -4,7 +4,6 @@ import {
   IconButton,
   ActionWrapper,
   Contract,
-  LoadIcon,
 } from '../../../../../../components';
 import { toaster } from '../../../../../../utils/toaster';
 import { DECLINE_CONTRACT } from '../../../../../../data/mutations';

@@ -107,10 +107,7 @@ export function AppDrawer(props) {
             icon: <MailIcon />,
             link: '/app/invites',
           },
-         
           { name: 'My Games', icon: <ExtensionIcon />, link: '/app/projects' },
-         */,
-          /*
           {
             name: 'Briefs (Beta)',
             icon: <Icon>work</Icon>,
@@ -131,8 +128,7 @@ export function AppDrawer(props) {
             link: '/messages/conversations',
             color: '#444',
             count: counts.messages,
-          }*/
-          ,
+          }*/,
         ].map((text, index) => (
           <Link
             to={text.link}

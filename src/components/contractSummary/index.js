@@ -1,10 +1,9 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
 import moment from 'moment';
 import { useStyles } from './styles';
-import { NoticeBox, LoadIcon } from '../';
+import { NoticeBox } from '../';
 import clsx from 'clsx';
-import { ActionWrapper, HeaderTwo, Text, ColumnWrapper } from '../';
+import { HeaderTwo, Text, ColumnWrapper } from '../';
 
 export default function ContractSummary({ contractData }) {
   let paymentTermsSum = 100;

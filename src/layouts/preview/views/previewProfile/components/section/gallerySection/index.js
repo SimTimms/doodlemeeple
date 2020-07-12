@@ -1,5 +1,4 @@
 import React from 'react';
-import { useStyles } from './styles';
 import ReactPlayer from 'react-player';
 import { Card, Testimonials, Projects } from './components';
 import {

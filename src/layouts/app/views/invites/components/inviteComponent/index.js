@@ -1,17 +1,7 @@
 import React from 'react';
-import { Typography, Card, Link } from '@material-ui/core';
-import { useStyles } from './styles';
-import {
-  InlineHeader,
-  DeclineInvite,
-  IconTitle,
-  IconButton,
-  FeatureCardInvite,
-} from '../../../../../../components';
+import { IconButton, FeatureCardInvite } from '../../../../../../components';
 
 export function InviteComponent({ invite, removeInvite, history }) {
-  const classes = useStyles();
-
   return (
     <FeatureCardInvite
       background={invite.game.backgroundImg}
@@ -28,7 +18,7 @@ export function InviteComponent({ invite, removeInvite, history }) {
           color="text-dark"
           disabled={false}
           onClickEvent={() => {
-            history.push(`/app/view-game/${invite.game.id}`);
+            removeInvite();
           }}
           icon="close"
           iconPos="left"

@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
-import { Card, Slide } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
-  IconTitle,
-  InlineHeader,
   IconButton,
   ColumnWrapper,
   HeaderTwo,

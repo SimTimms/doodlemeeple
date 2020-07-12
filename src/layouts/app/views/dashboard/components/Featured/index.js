@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -18,13 +17,6 @@ export function Featured({ posts, history }) {
       })}
     >
       {posts.map((post, index) => {
-        const regex = /(<([^>]+)>)/gi;
-        const linkTo = post.link;
-        const message = post.excerpt.rendered
-          .replace(regex, '')
-          .replace(/&#8217;/gi, "'")
-          .replace(/&amp;/gi, '&')
-          .replace(/\[&hellip;\]/gi, '...');
         const media = post._embedded['wp:featuredmedia']
           ? post._embedded['wp:featuredmedia']['0'].source_url
           : null;

@@ -1,9 +1,6 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { useSpring, animated } from 'react-spring';
-import clsx from 'clsx';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 function titleReplace(titleIn) {
   const titleOut = titleIn === 'graphic-artist' ? 'Graphic Artist' : 'Artist';
@@ -30,22 +27,7 @@ export function SubHeader({ title }) {
   );
 }
 
-const calc = (x, y) => [
-  -(y - window.innerHeight / 2) / 20,
-  (x - window.innerWidth / 2) / 20,
-  1.1,
-];
-const trans = (x, y, s) =>
-  `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
-
 export function Card({ img }) {
-  const mobile = useMediaQuery('(max-width:800px)');
-  const classes = useStyles();
-  const [props, set] = useSpring(() => ({
-    xys: [0, 0, 1],
-    config: { mass: 5, tension: 350, friction: 40 },
-  }));
-
   return (
     <div
       style={{

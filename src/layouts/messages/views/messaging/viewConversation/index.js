@@ -3,7 +3,7 @@ import { Slide, Button, Icon, Typography, Link } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { CONVERSATION } from '../../../../../data/queries';
-import { ContentHeader, LoadIcon } from '../../../../../components';
+import { LoadIcon } from '../../../../../components';
 import Messages from './components/messages';
 
 export default function ViewConversation({ history, conversationId, titles }) {
