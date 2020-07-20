@@ -52,7 +52,7 @@ export function EditProfile({ theme }) {
     profileBGStyle,
     autosave: true,
   };
-
+  console.log(userProfile);
   function hasNew() {
     const ids = sections.map((item) => item.id);
     const filterIds = ids.filter((item) => item === 'new');
@@ -187,37 +187,16 @@ export function EditProfile({ theme }) {
                       </div>
                     </DMCard>
                     {sections &&
-                      sections.map((section, index) =>
-                        section.type === 'artist' ||
-                        section.type === 'graphic-artist' ||
-                        section.type === '3d-artist' ? (
-                          <GallerySection
-                            key={`section_${index}`}
-                            index={index}
-                            sections={sections}
-                            setSections={setSections}
-                            section={section}
-                            autosaveIsOn={true}
-                          />
-                        ) : section.type === 'rulebook-editor' ? (
-                          <EditorSection
-                            key={`section_${index}`}
-                            index={index}
-                            sections={sections}
-                            setSections={setSections}
-                            section={section}
-                            autosaveIsOn={true}
-                          />
-                        ) : section.summary !== null ? (
-                          <Section
-                            key={`section_${index}`}
-                            index={index}
-                            sections={sections}
-                            setSections={setSections}
-                            section={section}
-                          />
-                        ) : null
-                      )}
+                      sections.map((section, index) => (
+                        <GallerySection
+                          key={`section_${index}`}
+                          index={index}
+                          sections={sections}
+                          setSections={setSections}
+                          section={section}
+                          autosaveIsOn={true}
+                        />
+                      ))}
                     <DMCard>
                       <InlineHeader>
                         <IconTitle icon="brush" title="Skills" />

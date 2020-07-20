@@ -38,7 +38,9 @@ export const UPDATE_EMAIL = gql`
 
 export const DELETE_ACCOUNT = gql`
   mutation DeleteAccount {
-    deleteAccount
+    deleteAccount {
+      _id
+    }
   }
 `;
 

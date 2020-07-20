@@ -135,15 +135,9 @@ export function PreviewProfile({ theme, profileId, publicView }) {
           </ColumnWrapper>
 
           {sections &&
-            sections.map((section, index) =>
-              section.type === 'artist' ||
-              section.type === 'graphic-artist' ||
-              section.type === '3d-artist' ? (
-                <GallerySection section={section} key={`section_${index}`} />
-              ) : (
-                <EditorSection section={section} key={`section_${index}`} />
-              )
-            )}
+            sections.map((section, index) => (
+              <GallerySection section={section} key={`section_${index}`} />
+            ))}
           <Query
             query={SECTIONS_PREVIEW}
             onCompleted={(data) => {
