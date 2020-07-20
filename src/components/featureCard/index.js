@@ -12,7 +12,6 @@ export default function FeatureCard({
   buttonTwo,
 }) {
   const classes = useStyles();
-  console.log(thumbnail);
   return (
     <Card className={classes.card}>
       <div

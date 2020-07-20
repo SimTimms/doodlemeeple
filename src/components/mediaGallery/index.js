@@ -74,9 +74,7 @@ function MediaGallery({ items, edit, setBgImage, setImages, galleryId }) {
               <Mutation
                 mutation={UPLOAD_IMAGE}
                 variables={{ img: saveImage, galleryId: galleryId }}
-                onCompleted={(data) => {
-                  console.log('Done');
-                }}
+                onCompleted={(data) => {}}
               >
                 {(mutation) => {
                   return (

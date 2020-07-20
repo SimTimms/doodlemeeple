@@ -35,7 +35,6 @@ export function PreviewProfile({ theme, profileId, publicView }) {
           query={PROFILE_PREVIEW}
           variables={{ userId: profileId }}
           onCompleted={(data) => {
-            console.log(data);
             const { name, summary, profileBG, _id, profileImg } = data.userById;
             setUserProfile({
               profileBG: profileBG,

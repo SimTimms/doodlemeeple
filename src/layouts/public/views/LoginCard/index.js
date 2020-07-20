@@ -38,6 +38,7 @@ export default function LoginCard({ history, forwardTo }) {
       setStatus('Try Again');
       return;
     }
+
     if (loginStatus !== CHECKING) {
       setStatus('Checking...');
       LoginMutation();
@@ -79,6 +80,7 @@ export default function LoginCard({ history, forwardTo }) {
               variables={{ email, password }}
               onCompleted={async (data) => {
                 const { token } = data.userLogin;
+
                 if (token) {
                   const tokenDecode = jwtDecode(token);
                   await Cookies.set('token', token, { expires: 7 });
@@ -98,7 +100,8 @@ export default function LoginCard({ history, forwardTo }) {
                 }
               }}
               onError={(error) => {
-                setStatus('Login');
+                console.log(error);
+                setStatus(`Try Again`);
                 setError(readableErrors(error, errors));
               }}
             >

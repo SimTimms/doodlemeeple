@@ -39,7 +39,6 @@ export default function CheckoutForm({ paymentIntent, setPaymentIntent }) {
         card: elements.getElement(CardElement),
       },
     });
-    console.log(result);
     if (result.error) {
       setStatus({
         complete: false,

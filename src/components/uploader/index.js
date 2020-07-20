@@ -53,7 +53,6 @@ function Uploader({
       })
       .then((response) => {
         setStatusMessage('Sending...');
-        console.log(response);
         if (response.data.data) {
           setStatusMessage('Uploading...');
           const returnData = response.data.data.returnData;
