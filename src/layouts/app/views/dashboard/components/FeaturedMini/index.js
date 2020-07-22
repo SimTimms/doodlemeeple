@@ -35,10 +35,11 @@ export function FeaturedMini({ posts, featuredId, history }) {
               fetchPolicy="network-only"
             >
               {({ data }) => {
+                console.log(data);
                 return data ? (
                   <FeatureCard
                     background={media}
-                    thumbnail={data.profilePreview.profileImg}
+                    thumbnail={data.userById.profileImg}
                     title={title}
                     subtitle="Featured Artist"
                     buttonOne={
