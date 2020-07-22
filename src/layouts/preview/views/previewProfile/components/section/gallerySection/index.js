@@ -47,7 +47,7 @@ function GallerySection({ section }) {
       )}
 
       <ColumnWrapper>
-        <HeaderTwo str="About my Art" />
+        <HeaderTwo str="About Me" />
         <Text str={summary} />
       </ColumnWrapper>
       {gallery.images.length > 0 && (

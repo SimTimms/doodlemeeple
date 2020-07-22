@@ -177,7 +177,10 @@ export function EditProfile({ theme }) {
                             setSummary(
                               e.target.value
                                 .substring(0, 256)
-                                .replace(/[^A-Za-z0-9 ,\-."'\n]/g, '')
+                                .replace(
+                                  /[^A-Za-z0-9&:;|/\\?!@£$%*\(\)_ ,\-."'\n]/g,
+                                  ''
+                                )
                             );
                           }}
                           margin="normal"
@@ -198,9 +201,11 @@ export function EditProfile({ theme }) {
                         />
                       ))}
                     <DMCard>
-                      <InlineHeader>
-                        <IconTitle icon="brush" title="Skills" />
-                      </InlineHeader>
+                      {sections.length < 3 && hasNew() === 0 && (
+                        <InlineHeader>
+                          <IconTitle icon="brush" title="Skills" />
+                        </InlineHeader>
+                      )}
                       {sections.length < 3 && hasNew() === 0 && (
                         <AddSection
                           setSections={setSections}

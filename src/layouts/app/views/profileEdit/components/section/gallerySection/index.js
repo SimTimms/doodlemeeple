@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, Typography, Icon } from '@material-ui/core';
 import { MediaGalleryObject } from '../../mediaGalleryOject';
 import { Mutation } from 'react-apollo';
 import ReactPlayer from 'react-player';
@@ -119,7 +119,7 @@ function GallerySection({
                 </InlineHeader>
                 <div className={classes.sectionWrapper}>
                   <FieldTitle
-                    name="About you & your art"
+                    name="About you"
                     description=" This is an opportunity for you to shout about yourself! Describe your
           best genres, what it's like working with you, your work ethic,
           successes, and process. "
@@ -128,7 +128,7 @@ function GallerySection({
                   />
                   <TextField
                     id={'summary'}
-                    label={`Description ${
+                    label={`Summary ${
                       summary ? `(${256 - summary.length})` : ''
                     }`}
                     inputProps={{ maxLength: 256 }}
@@ -147,6 +147,14 @@ function GallerySection({
                       );
                     }}
                   />
+                  {section._id === 'new' && (
+                    <div className={classes.more}>
+                      <Icon style={{ marginRight: 10 }}>lock</Icon>
+                      <Typography>
+                        Start typing a summary to unlock more options
+                      </Typography>
+                    </div>
+                  )}
                   {section._id !== 'new' && (
                     <div style={{ width: '100%' }}>
                       <Divider />
