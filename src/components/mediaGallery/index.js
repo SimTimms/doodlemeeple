@@ -14,7 +14,7 @@ function MediaGallery({ items, edit, setBgImage, setImages, galleryId }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
   return (
-    <div className={classes.root} style={{ background: 'none', padding: 20 }}>
+    <div className={classes.root} style={{ background: 'none', padding: 0 }}>
       {!mediaViewer ? (
         <div className={classes.gridList} style={{ background: 'none' }}>
           {items.map((tile, index) => (
@@ -24,6 +24,12 @@ function MediaGallery({ items, edit, setBgImage, setImages, galleryId }) {
                 [classes.image]: true,
                 [classes.imageMobile]: mobile,
               })}
+              style={{
+                backgroundImage: `url(${tile.img})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center center',
+                border: '5px solid #fff',
+              }}
             >
               <Button
                 className={classes.iconButton}
@@ -38,18 +44,6 @@ function MediaGallery({ items, edit, setBgImage, setImages, galleryId }) {
               >
                 <Icon className={classes.iconButtonIcon}>delete</Icon>
               </Button>
-              <img
-                src={tile.img}
-                alt={tile.title}
-                onClick={() => setMediaViewer(tile)}
-                style={{
-                  width: '100%',
-                  boxShadow: '5px 5px 20px rgba(0,0,0,0.3)',
-                  border: '10px solid #fff',
-                  borderRadius: 5,
-                  boxSizing: 'border-box',
-                }}
-              />
             </div>
           ))}
 
@@ -60,15 +54,10 @@ function MediaGallery({ items, edit, setBgImage, setImages, galleryId }) {
                 [classes.imageMobile]: mobile,
               })}
               style={{
-                boxShadow: '10px 10px 20px rgba(0,0,0,0.3)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                padding: 20,
-                background: '#ddd',
-                border: '10px solid #fff',
-                borderRadius: 5,
-                minHeight: 150,
+                marginBottom: 20,
               }}
             >
               <Mutation

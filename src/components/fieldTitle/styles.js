@@ -8,7 +8,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   title: { color: theme.palette.primary.dark, fontSize: 14 },
   descriptionBox: {
-    background: '#f1f1f1',
     padding: 10,
     borderRadius: 5,
   },

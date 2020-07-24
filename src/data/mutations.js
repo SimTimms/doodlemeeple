@@ -196,17 +196,15 @@ export const UPDATE_USER_MUTATION = gql`
     $profileBG: String
     $profileImg: String
   ) {
-    updateProfile(
-      name: $name
-      summary: $summary
-      profileBG: $profileBG
-      profileImg: $profileImg
+    userUpdateOne(
+      record: {
+        name: $name
+        summary: $summary
+        profileBG: $profileBG
+        profileImg: $profileImg
+      }
     ) {
-      _id
-      name
-      summary
-      profileBG
-      profileImg
+      recordId
     }
   }
 `;

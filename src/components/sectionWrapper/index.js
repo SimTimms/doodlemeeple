@@ -9,7 +9,7 @@ export default function SectionWrapper({ children, header, button }) {
     <div className={classes.sectionWrapperMain}>
       <div className={classes.actionWrapper}>
         <Typography
-          variant="h1"
+          variant="h5"
           component="h2"
           className={classes.actionWrapperHeader}
         >

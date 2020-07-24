@@ -155,6 +155,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                       setGameImage={setGameImage}
                       setGame={setGame}
                       autosaveFunction={() => {
+                        toaster('Autosaved');
                         autosave && mutation();
                       }}
                     />

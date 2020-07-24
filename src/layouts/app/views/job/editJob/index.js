@@ -17,6 +17,7 @@ import {
   IconTitle,
   IconButton,
   LoadIcon,
+  FieldBox,
   InfoBox,
 } from '../../../../../components';
 import { Query } from 'react-apollo';
@@ -70,21 +71,18 @@ export default function EditJob({
           <LoadIcon />
         ) : jobId === 'new' ? (
           <Mutation
-            mutation={jobId === 'new' ? CREATE_JOB : UPDATE_JOB}
+            mutation={CREATE_JOB}
             variables={{
-              id: jobId,
-              job: {
-                name: job.name,
-                img: job.img,
-                summary: job.summary,
-                location: job.location,
-                gallery: job.gallery,
-                showreel: job.showreel,
-                type: job.type,
-                gameId: job.gameId,
-                creativeSummary: job.creativeSummary,
-                submitted: job.submitted,
-              },
+              name: job.name,
+              img: job.img,
+              summary: job.summary,
+              location: job.location,
+              gallery: job.gallery,
+              showreel: job.showreel,
+              type: job.type,
+              gameId: job.gameId,
+              creativeSummary: job.creativeSummary,
+              submitted: job.submitted,
             }}
             onCompleted={(data) => {
               toaster('Autosave');
@@ -98,36 +96,27 @@ export default function EditJob({
                 <div style={{ width: '100%' }}>
                   {job.id === 'new' && (
                     <Card className={classes.card}>
-                      <div style={{ padding: 10 }}>
-                        <div style={{ width: '100%', display: 'flex' }}>
-                          <Typography>Project Title</Typography>
-                          <input />
-                          <InfoBox
-                            name=""
-                            description="Give the job a title that instantly describes the work"
-                            warning="Example: 24 full colour fantasy images for cards"
-                            inline={false}
-                          />
-                        </div>
-
-                        <TextField
-                          id={'name'}
+                      <div
+                        style={{
+                          width: '100%',
+                          padding: 10,
+                          boxSizing: 'border-box',
+                        }}
+                      >
+                        <FieldBox
+                          title="Project Title"
                           value={job.name}
-                          label={`Job Name ${
-                            job.name ? `(${86 - job.name.length})` : ''
-                          }`}
-                          inputProps={{ maxLength: 86 }}
-                          onChange={(e) => {
+                          maxLength={86}
+                          placeholder="placeholder"
+                          onChangeEvent={(e) => {
                             setJob({
                               ...job,
-                              name: e.target.value
-                                .substring(0, 86)
-                                .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
+                              name: e,
                             });
                           }}
-                          margin="normal"
-                          variant="outlined"
-                          style={{ marginRight: 10, width: '100%' }}
+                          replaceMode="loose"
+                          info="Give the job a title that instantly describes the work."
+                          warning="Example: 24 full colour fantasy images for cards"
                         />
                       </div>
                       <IconButton
@@ -139,6 +128,8 @@ export default function EditJob({
                           mutation();
                         }}
                         styleOverride={{ marginLeft: 10 }}
+                        type="button"
+                        iconPos="right"
                       />
                     </Card>
                   )}

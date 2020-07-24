@@ -31,6 +31,8 @@ import InviteButton from './buttons/inviteButton';
 import CreateMessage from './buttons/createMessage';
 import IconButton from './buttons/iconButton';
 import FieldTitle from './fieldTitle';
+import FieldBox from './fieldBox';
+import InfoBox from './infoBox';
 import FieldTitleWrapper from './fieldTitle/FieldTitleWrapper';
 import ProfileCard from './profileCard';
 import IconBox from './iconBox';
@@ -77,6 +79,8 @@ export {
   ColumnWrapper,
   FeatureCard,
   TextArray,
+  FieldBox,
+  InfoBox,
   Text,
   UnlockInfo,
   Header,

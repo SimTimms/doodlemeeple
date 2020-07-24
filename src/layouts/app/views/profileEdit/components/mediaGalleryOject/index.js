@@ -7,7 +7,6 @@ export function MediaGalleryObject({ images, setImages, index, galleryId }) {
     <div
       style={{
         width: '100%',
-        border: '1px solid #ccc',
         marginTop: 15,
       }}
     >

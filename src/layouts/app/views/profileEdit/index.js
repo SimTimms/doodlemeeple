@@ -14,6 +14,7 @@ import {
   DMCard,
   IconButton,
   LoadIcon,
+  FieldBox,
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE } from '../../../../data/queries';
@@ -23,6 +24,7 @@ import EditorSection from './components/section/editorSection';
 import { UPDATE_USER_MUTATION } from '../../../../data/mutations';
 import { readableErrors } from '../../../../utils/readableErrors';
 import { toaster } from '../../../../utils/toaster';
+import autosave from '../../../../utils/autosave';
 
 export function EditProfile({ theme }) {
   const classes = useStyles();
@@ -70,10 +72,11 @@ export function EditProfile({ theme }) {
             profileBG: userProfile.bgImage,
             profileImg: userProfile.profileImg,
           }}
+          onCompleted={() => {
+            toaster('Autosave');
+          }}
           update={(store, { data: { updateUser } }) => {
             const data = store.readQuery({ query: PROFILE });
-            toaster('Autosave');
-
             const profile = data.profile;
             profile.name = updateUser.name;
             profile.summary = updateUser.summary;
@@ -81,6 +84,7 @@ export function EditProfile({ theme }) {
             store.writeQuery({ query: PROFILE, data });
           }}
           onError={(error) => {
+            toaster('Error');
             setError(readableErrors(error, errors));
           }}
         >
@@ -147,45 +151,42 @@ export function EditProfile({ theme }) {
                           setUserName={setUserName}
                           autosaveFunction={SignupMutation}
                         />
-
-                        <ErrorBox errorMsg={errors.name} />
-                        <Divider />
                         <FieldTitle
-                          name="Summary"
-                          description="Tell everyone about yourself. What are your influences? what's your art style? how long have you been working? Make it punchy to grab attention..."
+                          name="About You"
+                          description="Your name and a brief summary of what you do"
                           warning=""
                           inline={false}
                         />
-                        <TextField
-                          id={'summary'}
-                          label={`About Me ${
-                            userProfile.summary
-                              ? `(${256 - userProfile.summary.length})`
-                              : ''
-                          }`}
-                          inputProps={{ maxLength: 256 }}
-                          multiline
-                          type="text"
-                          value={userProfile.summary}
-                          onChange={(e) => {
-                            clearTimeout(timer);
-                            setTimer(
-                              setTimeout(() => {
-                                SignupMutation();
-                              }, 1000)
-                            );
-                            setSummary(
-                              e.target.value
-                                .substring(0, 256)
-                                .replace(
-                                  /[^A-Za-z0-9&:;|/\\?!@£$%*\(\)_ ,\-."'\n]/g,
-                                  ''
-                                )
-                            );
+                        <FieldBox
+                          value={userProfile.userName}
+                          title="Name"
+                          maxLength={26}
+                          onChangeEvent={(e) => {
+                            autosave(SignupMutation, 'username');
+                            setUserName(e);
                           }}
-                          margin="normal"
-                          variant="outlined"
-                          style={{ width: '100%' }}
+                          replaceMode="loose"
+                          placeholder="Example: David Jones"
+                          info="Your name, callsign, company name, handle, alias or whatever else you want to be know as."
+                          warning=""
+                          size="s"
+                          multiline={false}
+                        />
+                        <ErrorBox errorMsg={errors.name} />
+                        <FieldBox
+                          value={userProfile.summary}
+                          title="Summary"
+                          maxLength={256}
+                          onChangeEvent={(e) => {
+                            autosave(SignupMutation, 'summary');
+                            setSummary(e);
+                          }}
+                          replaceMode="loose"
+                          placeholder="Example: Digital artist with 12 years experience..."
+                          info="Coming Soon"
+                          warning=""
+                          size="s"
+                          multiline={true}
                         />
                       </div>
                     </DMCard>
