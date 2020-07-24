@@ -50,6 +50,7 @@ import Contract from './contract';
 import FeatureCard from './featureCard';
 import FeatureCardInvite from './featureCardInvite';
 import FeatureCardHorizontal from './featureCardHorizontal';
+import UnlockInfo from './unlockInfo';
 import {
   Header,
   SubHeader,
@@ -77,6 +78,7 @@ export {
   FeatureCard,
   TextArray,
   Text,
+  UnlockInfo,
   Header,
   HeaderTwo,
   SubHeader,

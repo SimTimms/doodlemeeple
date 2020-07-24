@@ -31,29 +31,17 @@ export const CREATIVES = gql`
 `;
 
 export const GAME = gql`
-  query GetGame($gameId: String!) {
-    getGame(gameId: $gameId) {
-      id
+  query GetGame($gameId: MongoID!) {
+    gameById(_id: $gameId) {
+      _id
       name
       keywords
       img
       backgroundImg
       summary
       location
-      createdAt
-      jobs {
-        id
-        name
-      }
       user {
         name
-      }
-      gallery {
-        id
-        summary
-        images {
-          img
-        }
       }
       showreel
       type
@@ -64,14 +52,10 @@ export const GAME = gql`
 
 export const GAMES = gql`
   query GetGames {
-    getGames {
-      id
+    gamesByUser {
+      _id
       name
       backgroundImg
-      jobs {
-        id
-        name
-      }
     }
   }
 `;

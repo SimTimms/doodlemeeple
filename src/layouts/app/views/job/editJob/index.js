@@ -17,6 +17,7 @@ import {
   IconTitle,
   IconButton,
   LoadIcon,
+  InfoBox,
 } from '../../../../../components';
 import { Query } from 'react-apollo';
 import { Mutation } from 'react-apollo';
@@ -39,7 +40,7 @@ export default function EditJob({
 }) {
   const classes = useStyles();
   const [games, setGames] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(jobId === 'new' ? false : true);
   const [job, setJob] = React.useState({
     name: '',
     img: '',
@@ -67,6 +68,355 @@ export default function EditJob({
         />
         {loading ? (
           <LoadIcon />
+        ) : jobId === 'new' ? (
+          <Mutation
+            mutation={jobId === 'new' ? CREATE_JOB : UPDATE_JOB}
+            variables={{
+              id: jobId,
+              job: {
+                name: job.name,
+                img: job.img,
+                summary: job.summary,
+                location: job.location,
+                gallery: job.gallery,
+                showreel: job.showreel,
+                type: job.type,
+                gameId: job.gameId,
+                creativeSummary: job.creativeSummary,
+                submitted: job.submitted,
+              },
+            }}
+            onCompleted={(data) => {
+              toaster('Autosave');
+              const newjobId =
+                jobId === 'new' ? data.createJob : data.updateJob;
+              history.replace(`/app/edit-job/${newjobId}`);
+            }}
+          >
+            {(mutation) => {
+              return (
+                <div style={{ width: '100%' }}>
+                  {job.id === 'new' && (
+                    <Card className={classes.card}>
+                      <div style={{ padding: 10 }}>
+                        <div style={{ width: '100%', display: 'flex' }}>
+                          <Typography>Project Title</Typography>
+                          <input />
+                          <InfoBox
+                            name=""
+                            description="Give the job a title that instantly describes the work"
+                            warning="Example: 24 full colour fantasy images for cards"
+                            inline={false}
+                          />
+                        </div>
+
+                        <TextField
+                          id={'name'}
+                          value={job.name}
+                          label={`Job Name ${
+                            job.name ? `(${86 - job.name.length})` : ''
+                          }`}
+                          inputProps={{ maxLength: 86 }}
+                          onChange={(e) => {
+                            setJob({
+                              ...job,
+                              name: e.target.value
+                                .substring(0, 86)
+                                .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
+                            });
+                          }}
+                          margin="normal"
+                          variant="outlined"
+                          style={{ marginRight: 10, width: '100%' }}
+                        />
+                      </div>
+                      <IconButton
+                        title="Create Job"
+                        icon="add"
+                        disabled={false}
+                        color="primary"
+                        onClickEvent={() => {
+                          mutation();
+                        }}
+                        styleOverride={{ marginLeft: 10 }}
+                      />
+                    </Card>
+                  )}
+
+                  {job.id !== 'new' && (
+                    <Card className={classes.card}>
+                      <InlineHeader>
+                        <IconTitle icon="casino" title="Choose a Game" />
+                      </InlineHeader>
+                      <div style={{ padding: 10 }}>
+                        <FieldTitle
+                          name=" 1. Which game is this job for?"
+                          description="Each job must be attached to a game, this allows you to create multiple jobs for the same game/project, you can create a game if you haven't already."
+                          warning=""
+                          inline={false}
+                        />
+                        <div style={{ width: '100%', display: 'flex' }}>
+                          {games.map((item, index) => {
+                            return (
+                              <div
+                                key={`item_${index}`}
+                                className={clsx({
+                                  [classes.gameBox]: true,
+                                  [classes.gameBoxSelected]:
+                                    job.gameId === item.id,
+                                })}
+                                onClick={() => {
+                                  setJob({ ...job, gameId: item.id });
+                                }}
+                              >
+                                <div
+                                  className={clsx({
+                                    [classes.gameBoxBG]: true,
+                                    [classes.gameBoxSelectedBG]:
+                                      job.gameId === item.id,
+                                  })}
+                                  style={{
+                                    backgroundImage: `url(${item.backgroundImg})`,
+                                  }}
+                                ></div>
+                                <div
+                                  style={{
+                                    width: 160,
+                                    padding: 5,
+                                    boxSizing: 'border-box',
+                                  }}
+                                >
+                                  <Typography
+                                    variant="body1"
+                                    component="p"
+                                    style={{ textAlign: 'center' }}
+                                  >
+                                    {item.name}
+                                  </Typography>
+                                </div>
+                              </div>
+                            );
+                          })}
+                          <Link
+                            to="/app/edit-game/new"
+                            style={{
+                              textDecoration: 'none',
+                              color: '#444',
+                            }}
+                          >
+                            <div
+                              className={clsx({
+                                [classes.gameBox]: true,
+                              })}
+                            >
+                              <div
+                                className={clsx({
+                                  [classes.gameBoxBG]: true,
+                                })}
+                              ></div>
+                              <div
+                                style={{
+                                  width: 160,
+                                  padding: 5,
+                                  boxSizing: 'border-box',
+                                }}
+                              >
+                                <Typography
+                                  variant="body1"
+                                  component="p"
+                                  style={{ textAlign: 'center' }}
+                                >
+                                  New Game
+                                </Typography>
+                              </div>
+                            </div>
+                          </Link>
+                        </div>
+                      </div>
+                    </Card>
+                  )}
+
+                  {!job.gameId && (
+                    <Card
+                      className={classes.card}
+                      style={{ textAlign: 'center', paddingTop: 10 }}
+                    >
+                      <Typography>
+                        Please select or create a game to continue
+                      </Typography>
+                    </Card>
+                  )}
+                  {job.gameId && job.id !== 'new' && (
+                    <Card className={classes.card}>
+                      <InlineHeader>
+                        <IconTitle icon="work" title="Job Details" />
+                      </InlineHeader>
+                      <div style={{ padding: 10 }}>
+                        <FieldTitle
+                          name="2. Job Details"
+                          description="Briefly summarise the job so that your chosen creatives will know what you expect."
+                          warning=" Example: Images for 24 fantasy cards. Need 24 high resolution card images, each image will be full colour and in a fantasy style."
+                          inline={false}
+                        />
+                        <TextField
+                          id={'name'}
+                          value={job.name}
+                          label={`Job Name ${
+                            job.name ? `(${86 - job.name.length})` : ''
+                          }`}
+                          inputProps={{ maxLength: 86, width: '100%' }}
+                          onChange={(e) => {
+                            setJob({
+                              ...job,
+                              name: e.target.value
+                                .substring(0, 86)
+                                .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
+                            });
+                            autosaveIsOn && autosave(mutation, 'image');
+                          }}
+                          margin="normal"
+                          variant="outlined"
+                          style={{ marginRight: 10, width: '100%' }}
+                        />
+                        <TextField
+                          id={'summary'}
+                          label={`Summary ${
+                            job.summary ? `(${256 - job.summary.length})` : ''
+                          }`}
+                          inputProps={{ maxLength: 256 }}
+                          multiline
+                          type="text"
+                          value={job.summary}
+                          onChange={(e) => {
+                            setJob({
+                              ...job,
+                              summary: e.target.value
+                                .substring(0, 256)
+                                .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
+                            });
+                            autosaveIsOn && autosave(mutation, 'image');
+                          }}
+                          margin="normal"
+                          variant="outlined"
+                          style={{ width: '100%' }}
+                        />{' '}
+                      </div>
+                    </Card>
+                  )}
+                  {job.gameId && job.id !== 'new' && (
+                    <Card className={classes.card}>
+                      <InlineHeader>
+                        <IconTitle icon="face" title="Creative Details" />
+                      </InlineHeader>
+                      <div style={{ padding: 10 }}>
+                        <FieldTitle
+                          name="3. Your Creative"
+                          description="Describe the creative you would like to work with. "
+                          warning="Example: A digital artist with a focus on high fantasy, based in Worthing with lots of experience"
+                          inline={false}
+                        />
+                        <TextField
+                          id={'creative-summary'}
+                          value={job.creativeSummary}
+                          label={`Creative Summary ${
+                            job.creativeSummary
+                              ? `(${186 - job.creativeSummary.length})`
+                              : ''
+                          }`}
+                          inputProps={{ maxLength: 186 }}
+                          onChange={(e) => {
+                            setJob({
+                              ...job,
+                              creativeSummary: e.target.value
+                                .substring(0, 186)
+                                .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
+                            });
+                            autosaveIsOn && autosave(mutation, 'image');
+                          }}
+                          margin="normal"
+                          variant="outlined"
+                          style={{ width: '100%' }}
+                        />
+                      </div>
+                    </Card>
+                  )}
+                  {job.id !== 'new' && job.id !== 'new' && (
+                    <Card className={classes.card}>
+                      <InlineHeader>
+                        <IconTitle
+                          icon="assignment_turned_in"
+                          title="Submit Brief"
+                        />
+                      </InlineHeader>
+                      <div style={{ padding: 10, textAlign: 'center' }}>
+                        <FieldTitle
+                          name="4. Submit"
+                          description="Submit your job for approval, we'll let you know when it's live and don't worry you can still make changes."
+                          warning=""
+                          inline={false}
+                        />
+                        <Typography
+                          variant="h2"
+                          component="p"
+                          style={{ marginTop: 30 }}
+                        >
+                          Awesome! Continue on to select your preferred artists
+                        </Typography>
+                        <Link
+                          to={`/app/pick-artist/${job.id}`}
+                          style={{
+                            textDecoration: 'none',
+                            color: '#444',
+                          }}
+                        >
+                          <Button
+                            className={classes.iconButton}
+                            style={{ marginTop: 30, marginBottom: 30 }}
+                          >
+                            Continue
+                            <Icon className={classes.iconButtonIcon}>
+                              chevron_right
+                            </Icon>
+                          </Button>
+                        </Link>
+                      </div>
+                    </Card>
+                  )}
+                  {job.gameId && job.id !== 'new' && (
+                    <Card
+                      className={classes.card}
+                      style={{ background: '#eee' }}
+                    >
+                      <InlineHeader>
+                        <IconTitle icon="warning" title="Dange Zone" />
+                      </InlineHeader>
+                      <div style={{ padding: 10 }}>
+                        <Typography variant="h2" component="p">
+                          Delete Job
+                        </Typography>
+                        <Mutation
+                          mutation={REMOVE_JOB}
+                          variables={{
+                            id: jobId,
+                          }}
+                          onCompleted={(data) => {
+                            toaster('Deleted');
+                            history.replace(`/app/jobs`);
+                          }}
+                        >
+                          {(mutation) => {
+                            return (
+                              <DeleteButton mutation={mutation} theme={theme} />
+                            );
+                          }}
+                        </Mutation>
+                      </div>
+                    </Card>
+                  )}
+                </div>
+              );
+            }}
+          </Mutation>
         ) : (
           <Mutation
             mutation={jobId === 'new' ? CREATE_JOB : UPDATE_JOB}
@@ -97,9 +447,6 @@ export default function EditJob({
                 <div style={{ width: '100%' }}>
                   {job.id === 'new' && (
                     <Card className={classes.card}>
-                      <InlineHeader>
-                        <IconTitle icon="work" title="Create a Job" />
-                      </InlineHeader>
                       <div style={{ padding: 10 }}>
                         <FieldTitle
                           name=" 1. Job Title"
@@ -415,29 +762,31 @@ export default function EditJob({
             }}
           </Mutation>
         )}
-        <Query
-          query={JOB}
-          variables={{ jobId: jobId }}
-          fetchPolicy="network-only"
-          onCompleted={(data) => {
-            setLoading(false);
-            data.getJob &&
-              setJob({ ...data.getJob, gameId: data.getJob.game.id });
-          }}
-        >
-          {({ data }) => {
-            return null;
-          }}
-        </Query>
+        {jobId !== 'new' && (
+          <Query
+            query={JOB}
+            variables={{ jobId: jobId }}
+            fetchPolicy="network-only"
+            onCompleted={(data) => {
+              setLoading(false);
+              data.getJob &&
+                setJob({ ...data.getJob, gameId: data.getJob.game.id });
+            }}
+          >
+            {({ data }) => {
+              return null;
+            }}
+          </Query>
+        )}
         <Query
           query={GAMES}
           fetchPolicy="network-only"
           onCompleted={(data) => {
-            data.getGames.length > 0 && setGames(data.getGames);
-            data.getGames.length > 0 &&
+            data.gamesByUser.length > 0 && setGames(data.gamesByUser);
+            data.gamesByUser.length > 0 &&
               setJob({
                 ...job,
-                gameId: job.gameId === '' ? data.getGames[0].id : job.gameId,
+                gameId: job.gameId === '' ? data.gamesByUser[0].id : job.gameId,
               });
           }}
         >

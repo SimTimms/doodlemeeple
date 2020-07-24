@@ -15,14 +15,7 @@ export const galleryStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     padding: '10px !important',
   },
-  more: {
-    padding: 20,
-    color: theme.palette.primary.main,
-    margin: 'auto',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
   testimonialWrapper: {
     background: '#ddd',
     width: '100%',

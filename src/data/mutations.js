@@ -122,20 +122,46 @@ export const DECLINE_INVITE = gql`
 `;
 
 export const UPDATE_GAME = gql`
-  mutation UpdateGame($id: String!, $game: GameInput!) {
-    updateGame(id: $id, game: $game)
+  mutation UpdateGame(
+    $id: MongoID!
+    $name: String
+    $img: String
+    $backgroundImg: String
+    $summary: String
+    $location: String
+    $showreel: String
+    $type: String
+  ) {
+    gameUpdateById(
+      record: {
+        _id: $id
+        name: $name
+        img: $img
+        backgroundImg: $backgroundImg
+        summary: $summary
+        location: $location
+        showreel: $showreel
+        type: $type
+      }
+    ) {
+      recordId
+    }
   }
 `;
 
 export const CREATE_GAME = gql`
-  mutation CreateGame($id: String!, $game: GameInput!) {
-    createGame(id: $id, game: $game)
+  mutation CreateGame($name: String!) {
+    gameCreateOne(record: { name: $name }) {
+      recordId
+    }
   }
 `;
 
 export const REMOVE_GAME = gql`
-  mutation RemoveGame($id: String!) {
-    removeGame(id: $id)
+  mutation RemoveGame($id: MongoID!) {
+    gameRemoveById(_id: $id) {
+      recordId
+    }
   }
 `;
 

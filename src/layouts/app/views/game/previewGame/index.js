@@ -38,7 +38,7 @@ export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
       variables={{ gameId: gameId }}
       fetchPolicy="network-only"
       onCompleted={(data) => {
-        data.getGame && setGame({ ...data.getGame });
+        data.gameById && setGame({ ...data.gameById });
         setLoading(false);
       }}
     >

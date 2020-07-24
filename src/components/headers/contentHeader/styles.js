@@ -7,7 +7,6 @@ export const useStyles = makeStyles({
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
-    borderBottom: '1px solid #ddd',
     padding: '10px 0 10px 0',
     marginBottom: 10,
   },

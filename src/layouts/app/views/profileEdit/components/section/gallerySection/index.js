@@ -19,6 +19,7 @@ import {
   SectionWrapper,
   Column,
   DMCard,
+  UnlockInfo,
 } from '../../../../../../../components';
 import Testimonials from '../../testimonials';
 import Projects from '../../projects';
@@ -148,12 +149,7 @@ function GallerySection({
                     }}
                   />
                   {section._id === 'new' && (
-                    <div className={classes.more}>
-                      <Icon style={{ marginRight: 10 }}>lock</Icon>
-                      <Typography>
-                        Start typing a summary to unlock more options
-                      </Typography>
-                    </div>
+                    <UnlockInfo str=" Start typing a summary to unlock more options" />
                   )}
                   {section._id !== 'new' && (
                     <div style={{ width: '100%' }}>

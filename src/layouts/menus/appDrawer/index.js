@@ -94,14 +94,14 @@ export function AppDrawer(props) {
             link: '/app/account',
             color: '#444',
             count: null,
-          } /*
+          },
           {
             name: 'Games',
             icon: <Icon>casino</Icon>,
             link: '/app/games',
             color: '#444',
             count: null,
-          }
+          } /*
           {
             name: 'Invites',
             icon: <MailIcon />,
@@ -129,7 +129,6 @@ export function AppDrawer(props) {
             color: '#444',
             count: counts.messages,
           }*/,
-          ,
         ].map((text, index) => (
           <Link
             to={text.link}
