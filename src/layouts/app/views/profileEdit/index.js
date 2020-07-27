@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Slide, TextField } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import { ProfileHeader } from './components/profileHeader';
 import {
@@ -10,7 +10,6 @@ import {
   IconTitle,
   InlineHeader,
   FieldTitle,
-  Divider,
   DMCard,
   IconButton,
   LoadIcon,
@@ -18,9 +17,7 @@ import {
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE } from '../../../../data/queries';
-import { Section } from './components/section';
 import GallerySection from './components/section/gallerySection';
-import EditorSection from './components/section/editorSection';
 import { UPDATE_USER_MUTATION } from '../../../../data/mutations';
 import { readableErrors } from '../../../../utils/readableErrors';
 import { toaster } from '../../../../utils/toaster';
@@ -36,7 +33,6 @@ export function EditProfile({ theme }) {
   const [sections, setSections] = React.useState([]);
   const [profileImg, setProfileImg] = React.useState(null);
   const [profileBGStyle, setProfileBGStyle] = React.useState([0, 0]);
-  const [timer, setTimer] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [errors, setError] = React.useState({
     name: null,
@@ -54,7 +50,6 @@ export function EditProfile({ theme }) {
     profileBGStyle,
     autosave: true,
   };
-  console.log(userProfile);
   function hasNew() {
     const ids = sections.map((item) => item.id);
     const filterIds = ids.filter((item) => item === 'new');

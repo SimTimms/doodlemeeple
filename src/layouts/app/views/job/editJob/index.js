@@ -18,7 +18,6 @@ import {
   IconButton,
   LoadIcon,
   FieldBox,
-  InfoBox,
 } from '../../../../../components';
 import { Query } from 'react-apollo';
 import { Mutation } from 'react-apollo';

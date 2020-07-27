@@ -13,7 +13,6 @@ import {
 import { Query } from 'react-apollo';
 import { PROFILE_PREVIEW, SECTIONS_PREVIEW } from '../../../../data/queries';
 import GallerySection from './components/section/gallerySection';
-import EditorSection from './components/section/editorSection';
 
 export function PreviewProfile({ theme, profileId, publicView }) {
   const classes = useStyles();

@@ -35,7 +35,6 @@ export function FeaturedMini({ posts, featuredId, history }) {
               fetchPolicy="network-only"
             >
               {({ data }) => {
-                console.log(data);
                 return data ? (
                   <FeatureCard
                     background={media}

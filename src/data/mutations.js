@@ -44,6 +44,14 @@ export const DELETE_ACCOUNT = gql`
   }
 `;
 
+export const DELETE_IMAGE = gql`
+  mutation DeleteImage($id: MongoID!) {
+    imageRemoveById(_id: $id) {
+      recordId
+    }
+  }
+`;
+
 export const UPDATE_INVITE = gql`
   mutation UpdateInvite($id: String!, $invite: InviteInput!) {
     updateInvite(id: $id, invite: $invite)
@@ -246,6 +254,9 @@ export const UPLOAD_IMAGE = gql`
   mutation UploadImage($img: String!, $galleryId: MongoID!) {
     imageCreateOne(record: { img: $img, gallery: $galleryId }) {
       recordId
+      record {
+        img
+      }
     }
   }
 `;

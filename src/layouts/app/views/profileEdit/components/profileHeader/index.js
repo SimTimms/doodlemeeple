@@ -1,14 +1,8 @@
 import React from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import TextField from '@material-ui/core/TextField';
 import { useStyles } from './styles';
 import clsx from 'clsx';
-import {
-  Uploader,
-  FieldTitle,
-  Divider,
-  FieldBox,
-} from '../../../../../../components';
+import { Uploader, FieldTitle } from '../../../../../../components';
 import autosave from '../../../../../../utils/autosave';
 
 export function ProfileHeader({

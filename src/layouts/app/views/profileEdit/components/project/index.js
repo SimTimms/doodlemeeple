@@ -1,7 +1,13 @@
 import React from 'react';
-import { TextField, useMediaQuery } from '@material-ui/core';
+import { useMediaQuery } from '@material-ui/core';
 import { useStyles } from './styles';
-import { Uploader, IconButton, Row } from '../../../../../../components';
+import {
+  Uploader,
+  IconButton,
+  Row,
+  Column,
+  FieldBox,
+} from '../../../../../../components';
 import {
   UPDATE_PROJECT,
   CREATE_PROJECT,
@@ -19,7 +25,7 @@ export function Project({
   projects,
   sectionId,
   autosaveIsOn,
-  setShowAdd,
+  setDisabled,
 }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
@@ -49,35 +55,47 @@ export function Project({
     >
       {(mutation) => {
         return (
-          <Row>
-            <TextField
-              id={'name'}
-              label={`Project Name ${
-                project.name ? `(${56 - project.name.length})` : ''
-              }`}
-              inputProps={{ maxLength: 56 }}
-              multiline
-              value={project.name}
-              margin="normal"
-              variant="outlined"
-              style={{ width: '100%' }}
-              onChange={(ev) => {
-                const copyArr = Object.assign([], projects);
-                copyArr[index].name = ev.target.value.substring(0, 36);
-                setNotableProjects(copyArr);
-              }}
-            />
-            <IconButton
-              title="Create"
-              onClickEvent={mutation}
-              styleOverride={{ marginTop: 16 }}
-              icon="chevron_right"
-              iconPos="right"
-              disabled={false}
-              color="primary"
-              type="button"
-            />
-          </Row>
+          <div
+            style={{
+              width: '100%',
+              background: '#fff',
+              padding: 5,
+              boxSizing: 'border-box',
+            }}
+          >
+            <Column align="center" justify="center">
+              <FieldBox
+                value={project.name}
+                title="Project Name"
+                maxLength={86}
+                onChangeEvent={(e) => {
+                  const copyArr = Object.assign([], projects);
+                  copyArr[index].name = e;
+                  setNotableProjects(copyArr);
+                }}
+                replaceMode="none"
+                placeholder="Example: Settlers of Catan"
+                info="What is the game/project called?"
+                warning=""
+                size="s"
+                multiline={false}
+              />
+              <IconButton
+                title="Create"
+                onClickEvent={mutation}
+                icon="check"
+                iconPos="right"
+                disabled={project.name.length < 1}
+                color="primary"
+                type="button"
+                styleOverride={{
+                  width: 200,
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                }}
+              />
+            </Column>
+          </div>
         );
       }}
     </Mutation>
@@ -100,89 +118,89 @@ export function Project({
       {(mutation) => {
         return (
           <div
-            className={clsx({
-              [classes.inputWrapper]: true,
-              [classes.inputWrapperMobile]: mobile,
-            })}
+            style={{
+              width: '100%',
+              background: '#fff',
+              padding: 5,
+              boxSizing: 'border-box',
+              marginBottom: 5,
+              marginTop: 5,
+            }}
           >
-            <div
-              style={{
-                backgroundImage: project.image && `url(${project.image}) `,
-              }}
-              className={clsx({
-                [classes.avatarWrapper]: true,
-                [classes.avatarWrapperMobile]: mobile,
-              })}
-            >
-              <Uploader
-                cbImage={(url) => {
-                  const copyArr = Object.assign([], projects);
-                  copyArr[index].image = url;
-                  autosave(mutation, 'project');
+            <Row>
+              <Column align="center" justify="center">
+                <FieldBox
+                  value={project.name}
+                  title="Title"
+                  maxLength={86}
+                  onChangeEvent={(e) => {
+                    const copyArr = Object.assign([], projects);
+                    copyArr[index].name = e;
+                    setNotableProjects(copyArr);
+                  }}
+                  replaceMode="none"
+                  placeholder="Example: Settlers of Catan"
+                  info="What is the game/project called?"
+                  warning=""
+                  size="s"
+                  multiline={false}
+                />
+                <FieldBox
+                  value={project.summary}
+                  title="Description"
+                  maxLength={126}
+                  onChangeEvent={(e) => {
+                    autosave(mutation, 'project');
+                    const copyArr = Object.assign([], projects);
+                    copyArr[index].summary = e;
+                    setNotableProjects(copyArr);
+                  }}
+                  replaceMode="none"
+                  placeholder="Example: Created box art and rules cover."
+                  info="What was your role/achievement on this Project?"
+                  warning=""
+                  size="s"
+                  multiline={true}
+                />
+              </Column>
+              <div
+                style={{
+                  backgroundImage: project.image && `url(${project.image}) `,
+                }}
+                className={clsx({
+                  [classes.avatarWrapper]: true,
+                  [classes.avatarWrapperMobile]: mobile,
+                })}
+              >
+                <Uploader
+                  cbImage={(url) => {
+                    const copyArr = Object.assign([], projects);
+                    copyArr[index].image = url;
+                    autosave(mutation, 'project');
+                    setNotableProjects(copyArr);
+                  }}
+                  styleOverride={null}
+                  cbDelete={() => {
+                    const copyArr = Object.assign([], projects);
+                    copyArr[index].image = '';
+                    autosave(mutation, 'project');
+                    setNotableProjects(copyArr);
+                  }}
+                  hasFile={project.image !== '' || project.image ? true : false}
+                  className={null}
+                  size="1MB PNG JPG"
+                />
+              </div>
+              <DeleteButtonProject
+                onClickEvent={() => {
+                  let copyArr = Object.assign([], projects);
+                  copyArr.splice(index, 1);
+                  setDisabled(true);
                   setNotableProjects(copyArr);
                 }}
-                styleOverride={null}
-                cbDelete={() => {
-                  const copyArr = Object.assign([], projects);
-                  copyArr[index].image = '';
-                  autosave(mutation, 'project');
-                  setNotableProjects(copyArr);
-                }}
-                hasFile={project.image !== '' || project.image ? true : false}
-                className={null}
-                size="1MB PNG JPG"
+                projectId={project._id}
               />
-            </div>
-
-            <div className={classes.actionInputWrapper}>
-              <TextField
-                id={'name'}
-                label={`Project Name ${
-                  project.name ? `(${56 - project.name.length})` : ''
-                }`}
-                inputProps={{ maxLength: 56 }}
-                multiline
-                value={project.name}
-                margin="normal"
-                variant="outlined"
-                style={{ width: '100%' }}
-                onChange={(ev) => {
-                  autosaveIsOn && autosave(mutation);
-                  const copyArr = Object.assign([], projects);
-                  copyArr[index].name = ev.target.value.substring(0, 36);
-                  setNotableProjects(copyArr);
-                }}
-              />
-              <TextField
-                id={'testimonial'}
-                label={`Description ${
-                  project.summary ? `(${126 - project.summary.length})` : ''
-                }`}
-                inputProps={{ maxLength: 126 }}
-                multiline
-                value={project.summary}
-                margin="normal"
-                variant="outlined"
-                rowsMax={4}
-                rows={4}
-                style={{ width: '100%' }}
-                onChange={(ev) => {
-                  autosaveIsOn && autosave(mutation, 'project');
-                  const copyArr = Object.assign([], projects);
-                  copyArr[index].summary = ev.target.value.substring(0, 126);
-                  setNotableProjects(copyArr);
-                }}
-              />
-            </div>
-            <DeleteButtonProject
-              onClickEvent={() => {
-                let copyArr = Object.assign([], projects);
-                copyArr.splice(index, 1);
-                setShowAdd(true);
-                setNotableProjects(copyArr);
-              }}
-              projectId={project._id}
-            />
+            </Row>
           </div>
         );
       }}

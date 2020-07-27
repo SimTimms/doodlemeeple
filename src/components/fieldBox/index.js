@@ -1,7 +1,6 @@
 import React from 'react';
 import { Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
-import { InfoBox } from '../';
 import clsx from 'clsx';
 
 export default function FieldBox({
@@ -24,7 +23,8 @@ export default function FieldBox({
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
-        marginTop: 10,
+        marginTop: 3,
+        marginBottom: 3,
       }}
     >
       <div
@@ -32,7 +32,7 @@ export default function FieldBox({
           width: '100%',
           display: 'flex',
           whiteSpace: 'nowrap',
-          alignItems: 'center',
+          alignItems: multiline ? 'flex-start' : 'center',
         }}
       >
         <Typography
@@ -64,7 +64,7 @@ export default function FieldBox({
               const eReplaced =
                 replaceMode === 'loose'
                   ? e.target.value.replace(
-                      /[^A-Za-z0-9&:;|/\\?!@£$%*\(\)_ ,\-."'\n]/g,
+                      /[^A-Za-z0-9&:;|/\\?!@£$%*()_ ,-."'\n]/g,
                       ''
                     )
                   : e.target.value;
@@ -91,7 +91,7 @@ export default function FieldBox({
               const eReplaced =
                 replaceMode === 'loose'
                   ? e.target.value.replace(
-                      /[^A-Za-z0-9&:;|/\\?!@£$%*\(\)_ ,\-."'\n]/g,
+                      /[^A-Za-z0-9&:;|/\\?!@£$%*()_ ,-."'\n]/g,
                       ''
                     )
                   : e.target.value;

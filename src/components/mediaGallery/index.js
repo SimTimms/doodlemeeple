@@ -3,14 +3,13 @@ import { useStyles } from './styles';
 import { Typography, Button, useMediaQuery, Icon } from '@material-ui/core';
 import { Uploader } from '../../components';
 import clsx from 'clsx';
-import { UPLOAD_IMAGE } from '../../data/mutations';
+import { UPLOAD_IMAGE, DELETE_IMAGE } from '../../data/mutations';
 import { Mutation } from 'react-apollo';
 
 function MediaGallery({ items, edit, setBgImage, setImages, galleryId }) {
   const seedID = Math.floor(Math.random());
   const [mediaViewer, setMediaViewer] = React.useState(null);
   const [saveImage, setSaveImage] = React.useState(null);
-
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
   return (
@@ -31,19 +30,30 @@ function MediaGallery({ items, edit, setBgImage, setImages, galleryId }) {
                 border: '5px solid #fff',
               }}
             >
-              <Button
-                className={classes.iconButton}
-                onClick={() => {
+              <Mutation
+                mutation={DELETE_IMAGE}
+                variables={{ id: tile._id }}
+                onCompleted={(data) => {
                   let imageArray = Object.assign([], items);
                   imageArray = imageArray.filter(
                     (arrItem) => arrItem.img !== tile.img
                   );
-
                   setImages(imageArray);
                 }}
               >
-                <Icon className={classes.iconButtonIcon}>delete</Icon>
-              </Button>
+                {(mutation) => {
+                  return (
+                    <Button
+                      className={classes.iconButton}
+                      onClick={() => {
+                        mutation();
+                      }}
+                    >
+                      <Icon className={classes.iconButtonIcon}>delete</Icon>
+                    </Button>
+                  );
+                }}
+              </Mutation>
             </div>
           ))}
 
@@ -57,20 +67,30 @@ function MediaGallery({ items, edit, setBgImage, setImages, galleryId }) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: 20,
+                border: '5px solid #fff',
               }}
             >
               <Mutation
                 mutation={UPLOAD_IMAGE}
                 variables={{ img: saveImage, galleryId: galleryId }}
-                onCompleted={(data) => {}}
+                onCompleted={(data) => {
+                  let imageArray = Object.assign([], items);
+                  imageArray = [
+                    ...imageArray,
+                    {
+                      _id: data.imageCreateOne.recordId,
+                      img: data.imageCreateOne.record.img,
+                    },
+                  ];
+                  setImages(imageArray);
+                }}
               >
                 {(mutation) => {
                   return (
                     <Uploader
                       cbImage={(url) => {
                         setSaveImage(url);
-                        setBgImage(url);
+
                         mutation();
                       }}
                       styleOverride={null}

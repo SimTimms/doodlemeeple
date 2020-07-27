@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { TextField, Typography, Icon } from '@material-ui/core';
 import { MediaGalleryObject } from '../../mediaGalleryOject';
 import { Mutation } from 'react-apollo';
 import ReactPlayer from 'react-player';
@@ -13,19 +12,13 @@ import {
 import { DeleteButton } from '../deleteButton';
 import {
   FieldTitle,
-  IconTitle,
-  InlineHeader,
-  Divider,
   SectionWrapper,
-  Column,
-  DMCard,
   UnlockInfo,
   FieldBox,
 } from '../../../../../../../components';
 import Testimonials from '../../testimonials';
 import Projects from '../../projects';
 import clsx from 'clsx';
-import { TYPE_HELPER } from '../../../../../../../utils';
 
 function GallerySection({
   index,

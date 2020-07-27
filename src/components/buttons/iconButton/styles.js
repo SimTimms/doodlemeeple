@@ -56,7 +56,7 @@ export const useStyles = makeStyles((theme) => ({
     letterSpacing: 1.3,
     textShadow: '3px 3px 4px rgba(0,0,0,0.1)',
     '&:hover': {
-      background: 'rgba(0,0,0,0.2)',
+      background: '#efeff5',
     },
   },
   iconButtonTextError: {
@@ -83,9 +83,6 @@ export const useStyles = makeStyles((theme) => ({
   iconButtonDisabled: {
     cursor: 'pointer',
     background: '#ddd',
-    padding: 5,
-    marginTop: 10,
-    marginBottom: 10,
     color: '#fff',
     '&:hover': {
       background: theme.palette.primary.dark,

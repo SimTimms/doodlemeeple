@@ -12,7 +12,6 @@ import {
   IconTitle,
   IconButton,
   Column,
-  UnlockInfo,
 } from '../../../../../components';
 import ReactPlayer from 'react-player';
 import { Query } from 'react-apollo';

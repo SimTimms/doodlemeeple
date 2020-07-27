@@ -118,18 +118,15 @@ function Uploader({
           }}
           style={{ color: '#fff', left: 0 }}
         >
-          <Icon className={classes.imageIcon} style={{ fontSize: 20 }}>
-            delete
+          <Icon className={classes.imageIconDelete} style={{ fontSize: 20 }}>
+            close
           </Icon>
         </Button>
       ) : statusMessage === '' ? (
         <div style={{ textAlign: 'center' }}>
           <Icon className={classes.imageIcon}>add_photo_alternate</Icon>
           {size && (
-            <Typography
-              variant="body1"
-              style={{ fontSize: 10, marginTop: -10 }}
-            >
+            <Typography variant="body1" style={{ fontSize: 10, lineHeight: 1 }}>
               {size}
             </Typography>
           )}

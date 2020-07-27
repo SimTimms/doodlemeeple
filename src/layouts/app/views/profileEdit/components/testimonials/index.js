@@ -6,11 +6,11 @@ import { Testimonial } from '../testimonial';
 
 function Testimonials({ testimonials, setTestimonials, sectionId }) {
   const classes = useStyles();
-  const [showAdd, setShowAdd] = React.useState(true);
+  const [disabled, setDisabled] = React.useState(true);
 
   useEffect(() => {
     const newProj = testimonials.filter((item) => item._id === 'new');
-    newProj.length === 0 && setShowAdd(true);
+    newProj.length === 0 && setDisabled(false);
   }, [testimonials]);
 
   return (
@@ -33,17 +33,18 @@ function Testimonials({ testimonials, setTestimonials, sectionId }) {
                 testimonials={testimonials}
                 key={`testimonial_${index}`}
                 sectionId={sectionId}
-                setShowAdd={setShowAdd}
+                setDisabled={setDisabled}
               />
             );
           })}
       </div>
 
-      {testimonials.length < 5 && showAdd && (
+      {testimonials.length < 5 && !disabled && (
         <AddTestimonial
           testimonials={testimonials}
           setTestimonials={setTestimonials}
-          setShowAdd={setShowAdd}
+          setDisabled={setDisabled}
+          disabled={disabled}
         />
       )}
     </div>
