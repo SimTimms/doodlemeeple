@@ -11,12 +11,17 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: 2,
     fontSize: 14,
     letterSpacing: 1,
+    display: 'block',
     boxShadow: '2px 2px 3px rgba(0,0,0,0.2)',
     textTransform: 'uppercase',
+    textDecoration: 'none',
     borderRadius: 2,
     color: '#fff',
     '&:hover': {
       background: theme.palette.primary.dark,
+    },
+    '&:visited': {
+      background: 'red',
     },
   },
   iconButtonSecondary: {
@@ -32,6 +37,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#aaa',
     border: 'none',
     boxShadow: 'none',
+
     '&:hover': {
       background: '#eaeaea',
     },

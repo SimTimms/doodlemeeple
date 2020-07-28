@@ -23,7 +23,7 @@ import { readableErrors } from '../../../../utils/readableErrors';
 import { toaster } from '../../../../utils/toaster';
 import autosave from '../../../../utils/autosave';
 
-export function EditProfile({ theme }) {
+export function EditProfile({ theme, history }) {
   const classes = useStyles();
   const [bgImage, setBgImage] = React.useState(null);
   const [profileImgStyle, setProfileImgStyle] = React.useState([0, 0]);
@@ -104,25 +104,18 @@ export function EditProfile({ theme }) {
                         paddingBottom: 5,
                       }}
                     >
-                      <Link
-                        to={`/preview/${userId}`}
-                        style={{
-                          maxWidth: 326,
-                          width: '100%',
-                          lineHeight: 0.6,
+                      <IconButton
+                        disabled={false}
+                        color="secondary"
+                        icon="pageview"
+                        title="Preview"
+                        onClickEvent={() => {
+                          history.push(`/preview/${userId}`);
                         }}
-                      >
-                        <IconButton
-                          disabled={false}
-                          color="secondary"
-                          icon="pageview"
-                          title="Preview"
-                          onClickEvent={() => {}}
-                          styleOverride={null}
-                          type="button"
-                          iconPos="right"
-                        />
-                      </Link>
+                        styleOverride={null}
+                        type="button"
+                        iconPos="right"
+                      />
                     </div>
                     <DMCard>
                       <InlineHeader>

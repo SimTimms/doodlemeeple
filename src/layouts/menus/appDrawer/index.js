@@ -31,8 +31,10 @@ export function AppDrawer(props) {
     drawerClose,
     drawerCloseMobile,
     countsStyle,
+    wrapperFour,
   } = useStyles();
-  const { handleDrawerClose, open } = props;
+
+  const { handleDrawerClose, open, page } = props;
   const theme = useTheme();
   const mobile = useMediaQuery('(max-width:800px)');
   const [counts, setCounts] = React.useState({ invites: 0, messages: 0 });
@@ -70,8 +72,59 @@ export function AppDrawer(props) {
           )}
         </IconButton>
       </div>
-      <Divider />
-
+      {page === 'edit-game' && <Divider />}
+      {page === 'edit-game' && (
+        <List>
+          {[
+            {
+              name: 'Games',
+              icon: <Icon>chevron_left</Icon>,
+              link: '/app/games',
+              color: '#444',
+              count: null,
+            },
+          ].map((text, index) => (
+            <Link
+              to={text.link}
+              className={link}
+              key={text.name}
+              onClick={handleDrawerClose}
+            >
+              <ListItem button style={{ paddingLeft: 10 }}>
+                <div className={wrapperFour}>
+                  <ListItemIcon
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#fff',
+                      position: 'relative',
+                    }}
+                  >
+                    {text.icon}
+                  </ListItemIcon>
+                  {text.count !== null && text.count > 0 && (
+                    <Typography
+                      variant="body1"
+                      component="p"
+                      className={countsStyle}
+                    >
+                      {text.count}
+                    </Typography>
+                  )}
+                </div>
+                <ListItemText
+                  primary={text.name}
+                  className={clsx({
+                    [button]: !mobile,
+                    [buttonMobile]: mobile,
+                  })}
+                />
+              </ListItem>
+            </Link>
+          ))}
+        </List>
+      )}
       <List>
         {[
           {

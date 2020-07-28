@@ -64,10 +64,12 @@ function AppLayout(props) {
           />
         }
       ></StyledNavBar>
+
       <AppDrawer
         handleDrawerClose={handleDrawerClose}
         open={open}
         history={props.history}
+        page={page}
       />
       <main
         className={clsx({
@@ -80,7 +82,7 @@ function AppLayout(props) {
           {page === 'dashboard' ? (
             <Dashboard history={props.history} />
           ) : page === 'edit-profile' ? (
-            <EditProfile theme={props.theme} />
+            <EditProfile theme={props.theme} history={props.history} />
           ) : page === 'account' ? (
             <Account history={props.history} />
           ) : page === 'invites' ? (
