@@ -143,8 +143,8 @@ export default function EditJob({
           <Mutation
             mutation={UPDATE_JOB}
             variables={{
-              id: jobId,
               job: {
+                _id: jobId,
                 name: job.name,
                 img: job.img,
                 summary: job.summary,
@@ -263,64 +263,50 @@ export default function EditJob({
                   </Card>
                             */}
 
-                  {job.gameId && job._id !== 'new' && (
+                  {job._id !== 'new' && (
                     <Card className={classes.card}>
                       <InlineHeader>
                         <IconTitle icon="work" title="Job Details" />
                       </InlineHeader>
                       <div style={{ padding: 10 }}>
-                        <FieldTitle
-                          name="2. Job Details"
-                          description="Briefly summarise the job so that your chosen creatives will know what you expect."
-                          warning=" Example: Images for 24 fantasy cards. Need 24 high resolution card images, each image will be full colour and in a fantasy style."
-                          inline={false}
-                        />
-                        <TextField
-                          id={'name'}
+                        <FieldBox
+                          title="Project Title"
                           value={job.name}
-                          label={`Job Name ${
-                            job.name ? `(${86 - job.name.length})` : ''
-                          }`}
-                          inputProps={{ maxLength: 86, width: '100%' }}
-                          onChange={(e) => {
+                          maxLength={86}
+                          placeholder="placeholder"
+                          onChangeEvent={(e) => {
                             setJob({
                               ...job,
-                              name: e.target.value
-                                .substring(0, 86)
-                                .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
+                              name: e,
                             });
-                            autosaveIsOn && autosave(mutation, 'image');
                           }}
-                          margin="normal"
-                          variant="outlined"
-                          style={{ marginRight: 10, width: '100%' }}
+                          replaceMode="loose"
+                          info="Give the job a title that describes the work."
+                          warning="Example: 24 full colour fantasy images for cards"
+                          size="s"
+                          multiline={false}
                         />
-                        <TextField
-                          id={'summary'}
-                          label={`Summary ${
-                            job.summary ? `(${256 - job.summary.length})` : ''
-                          }`}
-                          inputProps={{ maxLength: 256 }}
-                          multiline
-                          type="text"
+                        <FieldBox
+                          title="Project Summary"
                           value={job.summary}
-                          onChange={(e) => {
+                          maxLength={356}
+                          placeholder="placeholder"
+                          onChangeEvent={(e) => {
                             setJob({
                               ...job,
-                              summary: e.target.value
-                                .substring(0, 256)
-                                .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
+                              summary: e,
                             });
-                            autosaveIsOn && autosave(mutation, 'image');
                           }}
-                          margin="normal"
-                          variant="outlined"
-                          style={{ width: '100%' }}
-                        />{' '}
+                          replaceMode="loose"
+                          info="Describe the job and what's expected, include as much detail as possible."
+                          warning=""
+                          size="s"
+                          multiline={true}
+                        />
                       </div>
                     </Card>
                   )}
-                  {job.gameId && job._id !== 'new' && (
+                  {job._id !== 'new' && (
                     <Card className={classes.card}>
                       <InlineHeader>
                         <IconTitle icon="face" title="Creative Details" />
@@ -454,6 +440,7 @@ export default function EditJob({
             }}
           </Query>
         )}
+        {/*
         <Query
           query={GAMES}
           fetchPolicy="network-only"
@@ -469,7 +456,7 @@ export default function EditJob({
           {({ data }) => {
             return null;
           }}
-        </Query>
+        </Query>*/}
       </div>
     </Slide>
   );
