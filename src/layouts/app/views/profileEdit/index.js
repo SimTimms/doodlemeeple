@@ -138,12 +138,7 @@ export function EditProfile({ theme }) {
                         <ProfileHeader
                           profile={userProfile}
                           setProfileImg={setProfileImg}
-                          setProfileImgStyle={setProfileImgStyle}
                           setBgImage={setBgImage}
-                          profileBGStyle={profileBGStyle}
-                          setProfileBGStyle={setProfileBGStyle}
-                          profileImgStyle={profileImgStyle}
-                          setUserName={setUserName}
                           autosaveFunction={SignupMutation}
                         />
                         <FieldTitle

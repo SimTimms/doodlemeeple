@@ -127,8 +127,9 @@ export function Testimonial({
                   title="Testimonial"
                   maxLength={126}
                   onChangeEvent={(e) => {
+                    autosave(mutation, 'project');
                     const copyArr = Object.assign([], testimonials);
-                    copyArr[index].name = e;
+                    copyArr[index].summary = e;
                     setTestimonials(copyArr);
                   }}
                   replaceMode="loose"
@@ -143,6 +144,7 @@ export function Testimonial({
                   title="From Who?"
                   maxLength={66}
                   onChangeEvent={(e) => {
+                    autosave(mutation, 'project');
                     const copyArr = Object.assign([], testimonials);
                     copyArr[index].name = e;
                     setTestimonials(copyArr);

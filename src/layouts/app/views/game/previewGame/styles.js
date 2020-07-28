@@ -48,6 +48,12 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: 300,
   },
+
+  wrapperTwoMissing: {
+    background: theme.palette.primary.main,
+    width: '100%',
+    height: 300,
+  },
   inset: {
     width: 120,
     height: 120,

@@ -11,6 +11,7 @@ import {
   InlineHeaderWarning,
   IconTitle,
   IconButton,
+  FieldBox,
   Column,
 } from '../../../../../components';
 import ReactPlayer from 'react-player';
@@ -52,8 +53,8 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <ContentHeader
-          title={game._id === 'new' ? 'Create a Game' : 'Edit a Game'}
-          subTitle="Create a new game or project listing, then create jobs"
+          title={game._id === 'new' ? 'Create a Project' : 'Edit a Project'}
+          subTitle="Create a new project listing that can be used for multiple jobs"
           subTitleExtra={null}
           button={null}
         />
@@ -74,125 +75,44 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
             {(mutation) => {
               return loading ? (
                 <LoadIcon />
-              ) : game._id === 'new' ? (
-                <Card className={classes.card}>
-                  <InlineHeader>
-                    <IconTitle icon="casino" title="Create a Game" />
-                  </InlineHeader>
-                  <div style={{ padding: 10 }}>
-                    <FieldTitle
-                      name=" 1. Game Name"
-                      description="What is your game/project called."
-                      warning="Example: Doodle Meeple The Game"
-                      inline={false}
-                    />
-                    <TextField
-                      id={'name'}
-                      value={game.name}
-                      label={`What's the game called? ${
-                        game.name ? `(${86 - game.name.length})` : ''
-                      }`}
-                      inputProps={{ maxLength: 86 }}
-                      onChange={(e) => {
-                        setGame({
-                          ...game,
-                          name: e.target.value
-                            .substring(0, 86)
-                            .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
-                        });
-                      }}
-                      margin="normal"
-                      variant="outlined"
-                      style={{ width: '100%' }}
-                    />
-                    <IconButton
-                      title="Create"
-                      icon="add"
-                      color="primary"
-                      disabled={false}
-                      onClickEvent={() => {
-                        setLoading(true);
-                        mutation();
-                      }}
-                      styleOverride={null}
-                      type="button"
-                      iconPos="right"
-                    />
-                  </div>
-                </Card>
               ) : (
-                <Column>
-                  <IconButton
-                    title="Preview"
-                    icon="preview"
-                    color="text-dark"
-                    disabled={false}
-                    onClickEvent={() => {
-                      history.push(`/app/view-game/${game._id}`);
-                    }}
-                    styleOverride={{
-                      marginLeft: 'auto',
-                      marginTop: 0,
-                      marginBottom: 0,
-                      paddingRight: 0,
-                    }}
-                    type="button"
-                    iconPos="right"
-                  />
-                  <Card className={classes.card}>
-                    <InlineHeader>
-                      <IconTitle icon="image" title="Box Art" />
-                    </InlineHeader>
-                    <FieldTitle
-                      name=" 1. Primary Image"
-                      description="JPG or PNG, 1MB max, 1920 x 300px (optimum size)"
-                      warning=""
-                      inline={false}
-                    />
-                    <ProfileHeader
-                      game={game}
-                      setGameImage={setGameImage}
-                      setGame={setGame}
-                      autosaveFunction={() => {
-                        toaster('Autosaved');
-                        autosave && mutation();
-                      }}
-                    />
-                  </Card>
-                  <Card className={classes.card}>
-                    <InlineHeader>
-                      <IconTitle icon="casino" title="Game Details" />
-                    </InlineHeader>
-                    <div style={{ padding: 10 }}>
-                      <FieldTitle
-                        name=" 2. Game Details"
-                        description="Is your project backed on Kickstarter?, is it just an idea?, is it a fantasy/sci-fi RPG hybrid? Give some detail about your game so that creatives get to know your project"
-                        warning="Example: Doodle Meeple the Game, Fantasy card game, Build a deck then throw it at your opponent for maximum damage, Based in Worthing"
-                        inline={false}
-                      />
-                      <TextField
-                        id={'name'}
+                <Card className={classes.card}>
+                  <div style={{ padding: 10 }}>
+                    <Column align="center" justify="center">
+                      <FieldBox
                         value={game.name}
-                        label={`What's the game called? ${
-                          game.name ? `(${86 - game.name.length})` : ''
-                        }`}
-                        inputProps={{ maxLength: 86 }}
-                        onChange={(e) => {
+                        title="Project Name"
+                        maxLength={86}
+                        onChangeEvent={(e) => {
                           setGame({
                             ...game,
-                            name: e.target.value
-                              .substring(0, 86)
-                              .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
+                            name: e,
                           });
-                          autosaveIsOn && autosave(mutation, 'name');
                         }}
-                        margin="normal"
-                        variant="outlined"
-                        style={{ width: '100%' }}
+                        replaceMode="loose"
+                        placeholder="Example: Mouse Stompa"
+                        info="What's this project or game called?"
+                        warning=""
+                        size="s"
+                        multiline={false}
                       />
-                    </div>
-                  </Card>
-                </Column>
+
+                      <IconButton
+                        title="Create"
+                        icon="add"
+                        color="primary"
+                        disabled={false}
+                        onClickEvent={() => {
+                          setLoading(true);
+                          mutation();
+                        }}
+                        styleOverride={null}
+                        type="button"
+                        iconPos="right"
+                      />
+                    </Column>
+                  </div>
+                </Card>
               );
             }}
           </Mutation>
@@ -218,7 +138,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
               return loading ? (
                 <LoadIcon />
               ) : (
-                <Column>
+                <Column align="center" justify="center">
                   <IconButton
                     title="Preview"
                     icon="preview"
@@ -238,14 +158,8 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                   />
                   <Card className={classes.card}>
                     <InlineHeader>
-                      <IconTitle icon="image" title="Box Art" />
+                      <IconTitle icon="image" title="Artwork" />
                     </InlineHeader>
-                    <FieldTitle
-                      name=" 1. Primary Image"
-                      description="JPG or PNG, 1MB max, 1920 x 300px (optimum size)"
-                      warning=""
-                      inline={false}
-                    />
                     <ProfileHeader
                       game={game}
                       setGameImage={setGameImage}
@@ -257,134 +171,98 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                   </Card>
                   <Card className={classes.card}>
                     <InlineHeader>
-                      <IconTitle icon="casino" title="Game Details" />
+                      <IconTitle icon="casino" title="Project Details" />
                     </InlineHeader>
                     <div style={{ padding: 10 }}>
-                      <FieldTitle
-                        name=" 2. Game Details"
-                        description="Is your project backed on Kickstarter?, is it just an idea?, is it a fantasy/sci-fi RPG hybrid? Give some detail about your game so that creatives get to know your project"
-                        warning="Example: Doodle Meeple the Game, Fantasy card game, Build a deck then throw it at your opponent for maximum damage, Based in Worthing"
-                        inline={false}
-                      />
-                      <TextField
-                        id={'name'}
+                      <FieldBox
                         value={game.name}
-                        label={`What's the game called? ${
-                          game.name ? `(${86 - game.name.length})` : ''
-                        }`}
-                        inputProps={{ maxLength: 86 }}
-                        onChange={(e) => {
+                        title="Project Name"
+                        maxLength={86}
+                        onChangeEvent={(e) => {
                           setGame({
                             ...game,
-                            name: e.target.value
-                              .substring(0, 86)
-                              .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
+                            name: e,
                           });
-                          autosaveIsOn && autosave(mutation, 'name');
+                          autosave(mutation);
                         }}
-                        margin="normal"
-                        variant="outlined"
-                        style={{ width: '100%' }}
-                      />
-                      <TextField
-                        id={'type'}
-                        label={`What type of game is this? Example: Fantasy, Sci-Fi, Card Game.. ${
-                          game.type ? `(${36 - game.type.length})` : ''
-                        }`}
-                        inputProps={{ maxLength: 36 }}
-                        multiline
-                        type="text"
-                        value={game.type}
-                        onChange={(e) => {
-                          setGame({
-                            ...game,
-                            type: e.target.value
-                              .substring(0, 36)
-                              .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
-                          });
-                          autosaveIsOn && autosave(mutation, 'image');
-                        }}
-                        margin="normal"
-                        variant="outlined"
-                        style={{ width: '100%' }}
-                      />
-                      <TextField
-                        id={'summary'}
-                        label={`Summary of the game? Example: Build and battle giant mechs in this sci-fi epic.... ${
-                          game.summary ? `(${256 - game.summary.length})` : ''
-                        }`}
-                        inputProps={{ maxLength: 256 }}
-                        multiline
-                        type="text"
-                        value={game.summary}
-                        onChange={(e) => {
-                          setGame({
-                            ...game,
-                            summary: e.target.value
-                              .substring(0, 256)
-                              .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
-                          });
-                          autosaveIsOn && autosave(mutation, 'image');
-                        }}
-                        margin="normal"
-                        variant="outlined"
-                        style={{ width: '100%' }}
-                      />
-                      <TextField
-                        id={'location'}
-                        label={`Where are you based? ${
-                          game.location ? `(${56 - game.location.length})` : ''
-                        }`}
-                        inputProps={{ maxLength: 56 }}
-                        multiline
-                        type="text"
-                        value={game.location}
-                        onChange={(e) => {
-                          setGame({
-                            ...game,
-                            location: e.target.value
-                              .substring(0, 56)
-                              .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
-                          });
-                          autosaveIsOn && autosave(mutation, 'location');
-                        }}
-                        margin="normal"
-                        variant="outlined"
-                        style={{ width: '100%' }}
-                      />
-                    </div>
-                  </Card>
-                  <Card className={classes.card}>
-                    <InlineHeader>
-                      <IconTitle
-                        icon="ondemand_video"
-                        title="Promotional Video"
-                      />
-                    </InlineHeader>
-                    <div style={{ padding: 10 }}>
-                      <FieldTitle
-                        name=" 3. Video"
-                        description="Do you have a promotional video on YouTube, Vimeo or somewhere else?"
+                        replaceMode="loose"
+                        placeholder="Example: Mech Stompa"
+                        info="What's this project or game called?"
                         warning=""
-                        inline={false}
+                        size="s"
+                        multiline={false}
                       />
-                      <TextField
-                        id={'name'}
-                        value={game.showreel}
-                        label={`Video URL ${
-                          game.showreel ? `(${386 - game.showreel.length})` : ''
-                        }`}
-                        inputProps={{ maxLength: 386 }}
-                        onChange={(e) => {
+                      <FieldBox
+                        value={game.type}
+                        title="Genre"
+                        maxLength={36}
+                        onChangeEvent={(e) => {
                           setGame({
                             ...game,
-                            showreel: e.target.value.substring(0, 386),
+                            type: e,
                           });
-                          autosaveIsOn && autosave(mutation, 'showreel');
+                          autosave(mutation);
                         }}
-                        margin="normal"
-                        variant="outlined"
-                        style={{ width: '100%' }}
+                        replaceMode="loose"
+                        placeholder="Example: Sci-fi Card-Game"
+                        info="Use a few keywords to describe the project genre"
+                        warning=""
+                        size="s"
+                        multiline={false}
+                      />
+                      <FieldBox
+                        value={game.summary}
+                        title="Description"
+                        maxLength={256}
+                        onChangeEvent={(e) => {
+                          setGame({
+                            ...game,
+                            summary: e,
+                          });
+                          autosave(mutation);
+                        }}
+                        replaceMode="loose"
+                        placeholder="Example: Stomp around in huge mechs in the epic sci-fi card game..."
+                        info="Use this space to give a more detailed description of your project; is it a kickstarter project?, is it funded? What's the project concept."
+                        warning=""
+                        size="s"
+                        multiline={true}
+                      />
+                      <FieldBox
+                        value={game.location}
+                        title="Location"
+                        maxLength={36}
+                        onChangeEvent={(e) => {
+                          setGame({
+                            ...game,
+                            location: e,
+                          });
+                          autosave(mutation);
+                        }}
+                        replaceMode="loose"
+                        placeholder="Example: Worthing"
+                        info="Where is this project team based?"
+                        warning=""
+                        size="s"
+                        multiline={false}
+                      />
+                      <FieldBox
+                        value={game.showreel}
+                        title="Video"
+                        maxLength={156}
+                        onChangeEvent={(e) => {
+                          setGame({
+                            ...game,
+                            showreel: e,
+                          });
+                          autosave(mutation);
+                        }}
+                        replaceMode="loose"
+                        placeholder="Example: https://www.youtube.com/watch?v=xh86tuEAT-0"
+                        info="If you have a promotional video on YouTube, Vimeo or somewhere else, enter the URL here."
+                        warning=""
+                        size="s"
+                        multiline={false}
                       />
                       {game.showreel !== '' && (
                         <ReactPlayer
@@ -392,12 +270,20 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                           playing
                           controls={true}
                           muted={true}
-                          style={{ width: '100%' }}
+                          style={{
+                            width: '100%',
+                            marginTop: 20,
+                            marginBottom: 20,
+                            border: '10px solid #eee',
+                            borderRadius: 10,
+                            boxSizing: 'border-box',
+                          }}
                           width="100%"
                         />
                       )}
                     </div>
                   </Card>
+
                   <Card className={classes.card}>
                     <InlineHeaderWarning>
                       <IconTitle icon="warning" title="Danger Zone" />

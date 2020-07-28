@@ -69,13 +69,17 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: 30,
   },
   projectWrapperItem: {
-    minWidth: 300,
-    maxWidth: 300,
+    minWidth: 200,
+    maxWidth: 200,
     maxHeight: 200,
     minHeight: 200,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     boxShadow: '10px 10px 30px rgba(0,0,0,0.4)',
+  },
+  projectWrapperItemMissing: {
+    background: theme.palette.primary.main,
+    color: '#fff',
   },
   projectName: {
     width: '100%',

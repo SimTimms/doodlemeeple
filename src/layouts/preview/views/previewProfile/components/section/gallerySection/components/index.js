@@ -73,6 +73,7 @@ export function Card({ img }) {
 export function Testimonials({ testimonials }) {
   const classes = useStyles();
   const testimonialElements = testimonials.map((item) => {
+    console.log(item);
     return item.summary ? (
       <div className={classes.testimonialWrapper}>
         {item.image && (
@@ -108,7 +109,7 @@ export function Projects({ projects }) {
   const projectElements = projects.map((item, index) => {
     return item.name ? (
       <div className={classes.projectWrapper} key={`project_${index}`}>
-        {item.image && (
+        {item.image ? (
           <div
             className={classes.projectWrapperItem}
             style={{
@@ -116,6 +117,17 @@ export function Projects({ projects }) {
               backgroundSize: 'cover',
             }}
           ></div>
+        ) : (
+          <div
+            className={`${classes.projectWrapperItem} ${classes.projectWrapperItemMissing}`}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography variant="h5">{item.name}</Typography>
+          </div>
         )}
 
         <div className={classes.projectSummaryWrapper}>

@@ -8,12 +8,7 @@ import autosave from '../../../../../../utils/autosave';
 export function ProfileHeader({
   profile,
   setProfileImg,
-  setProfileImgStyle,
   setBgImage,
-  profileBGStyle,
-  profileImgStyle,
-  setProfileBGStyle,
-  setUserName,
   autosaveFunction,
 }) {
   const classes = useStyles();
