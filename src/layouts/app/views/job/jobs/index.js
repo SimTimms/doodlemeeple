@@ -4,7 +4,7 @@ import { JobComponent, EmptyJobComponent } from './components/jobComponent';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { JOBS } from '../../../../../data/queries';
-import { LoadIcon, ContentHeader } from '../../../../../components';
+import { ContentHeader, Column } from '../../../../../components';
 
 export default function Jobs() {
   const classes = useStyles();
@@ -13,31 +13,37 @@ export default function Jobs() {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <ContentHeader
-          title="Briefs"
-          subTitle="The jobs you've posted on DoodleMeeple"
-          subTitleExtra=""
-          button={null}
-        />
-        <div className={classes.cardGrid}>
-          {jobArray.map((job, index) => {
-            return <JobComponent key={`project_${index}`} job={job} />;
-          })}
+        <Column align="center" justify="flex-start">
+          <ContentHeader
+            title="Projects"
+            subTitle="The jobs you've posted on DoodleMeeple"
+            subTitleExtra=""
+            button={null}
+          />
+
+          <Query
+            query={JOBS}
+            fetchPolicy="network-only"
+            onCompleted={(data) => {
+              setJobArray(data.jobsByUser);
+            }}
+          >
+            {({ data }) => {
+              return data
+                ? data.jobsByUser.map((job, index) => {
+                    return (
+                      <JobComponent
+                        key={`project_${index}`}
+                        job={job}
+                        game={job.game ? job.game : { name: '' }}
+                      />
+                    );
+                  })
+                : null;
+            }}
+          </Query>
           <EmptyJobComponent key={`project_empty`} />
-        </div>
-        <Query
-          query={JOBS}
-          fetchPolicy="network-only"
-          onCompleted={(data) => {
-            setJobArray(data.getJobs);
-          }}
-        >
-          {({ loading, error, data }) => {
-            if (loading) return <LoadIcon />;
-            if (error) return <div>Error</div>;
-            return <div></div>;
-          }}
-        </Query>
+        </Column>
       </div>
     </Slide>
   );

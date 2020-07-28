@@ -167,9 +167,9 @@ export const INVITES = gql`
 `;
 
 export const JOB = gql`
-  query GetJob($jobId: String!) {
-    getJob(jobId: $jobId) {
-      id
+  query GetJob($jobId: MongoID!) {
+    jobById(_id: $jobId) {
+      _id
       name
       keywords
       img
@@ -178,35 +178,14 @@ export const JOB = gql`
       creativeSummary
       submitted
       game {
-        id
+        _id
         backgroundImg
         name
         summary
       }
       user {
-        id
+        _id
         name
-      }
-      invite {
-        id
-        job {
-          id
-        }
-        game {
-          id
-        }
-        receiver {
-          name
-          id
-          profileImg
-        }
-      }
-      gallery {
-        id
-        summary
-        images {
-          img
-        }
       }
       showreel
       type
@@ -217,18 +196,14 @@ export const JOB = gql`
 
 export const JOBS = gql`
   query GetJobs {
-    getJobs {
-      id
+    jobsByUser {
+      _id
       name
-      summary
-      submitted
+      backgroundImg
       game {
-        id
-        backgroundImg
+        _id
         name
-      }
-      contracts {
-        id
+        backgroundImg
       }
     }
   }

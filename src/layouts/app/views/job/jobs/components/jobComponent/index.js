@@ -6,13 +6,15 @@ import Card from '@material-ui/core/Card';
 import { useStyles } from './styles';
 import Icon from '@material-ui/core/Icon';
 
-export function JobComponent({ job }) {
+export function JobComponent({ job, game }) {
   const classes = useStyles();
   return (
     <Card className={classes.card}>
       <div
         style={{
-          background: `url(${job.game.backgroundImg})`,
+          backgroundImage: game.backgroundImg
+            ? `url(${game.backgroundImg})`
+            : '',
           backgroundSize: 'cover',
           marginRight: 20,
         }}
@@ -35,14 +37,13 @@ export function JobComponent({ job }) {
         >
           {job.name}
         </Typography>
-
         <Typography
           variant="body2"
           component="p"
           style={{ width: '100%', paddingLeft: 10 }}
           className={classes.cardSummary}
         >
-          {job.game.name}
+          {game.name}
         </Typography>
         <Typography
           variant="body2"
@@ -55,7 +56,7 @@ export function JobComponent({ job }) {
       </div>
 
       <Link
-        to={`/app/edit-job/${job.id}`}
+        to={`/app/edit-job/${job._id}`}
         className={classes.cardLink}
         style={{ textDecoration: 'none' }}
       >

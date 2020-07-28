@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   card: {
     width: '100%',
-    margin: 20,
+    marginBottom: 5,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
@@ -14,7 +14,11 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  gameImg: { width: 180, height: '100%' },
+  gameImg: {
+    width: 180,
+    height: '100%',
+    background: theme.palette.primary.main,
+  },
   cardContentCenter: {
     display: 'flex',
     flexDirection: 'row',

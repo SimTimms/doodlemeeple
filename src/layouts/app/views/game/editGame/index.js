@@ -101,7 +101,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
                         title="Create"
                         icon="add"
                         color="primary"
-                        disabled={false}
+                        disabled={game.name.length < 1}
                         onClickEvent={() => {
                           setLoading(true);
                           mutation();

@@ -186,11 +186,12 @@ export const UPDATE_JOB = gql`
 `;
 
 export const CREATE_JOB = gql`
-  mutation CreateJob($id: String!, $job: JobInput!) {
-    createJob(id: $id, job: $job)
+  mutation CreateJob($name: String!) {
+    jobCreateOne(record: { name: $name }) {
+      recordId
+    }
   }
 `;
-
 export const REMOVE_JOB = gql`
   mutation RemoveJob($id: String!) {
     removeJob(id: $id)
