@@ -3,14 +3,12 @@ export const useStyles = makeStyles((theme) => ({
   creativeCard: {
     margin: 10,
     display: 'flex',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'column',
     border: '1px solid #ddd',
     minWidth: 270,
     maxWidth: 270,
-    minHeight: 250,
-    maxHeight: 250,
   },
   creativeCardWrapper: {
     background: '#fafafa',
@@ -22,6 +20,8 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
     borderBottom: '1px solid #ddd',
   },
+  noBG: { minHeight: 0, maxHeight: 0, height: 0 },
+  noProfile: { display: 'none' },
   creativeCardBackground: {
     minWidth: 80,
     maxWidth: 80,
@@ -29,6 +29,7 @@ export const useStyles = makeStyles((theme) => ({
     maxHeight: 80,
     borderRadius: '50%',
     border: '5px solid #fff',
+    marginTop: -50,
   },
   creativeCardDetails: {
     padding: 20,

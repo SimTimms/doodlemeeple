@@ -160,18 +160,18 @@ export function PickArtist({
           variables={{ jobId: jobId }}
           fetchPolicy="network-only"
           onCompleted={(data) => {
-            data.getJob &&
-              setJob({ ...data.getJob, gameId: data.getJob.game.id });
+            data.jobById && setJob({ ...data.jobById });
+            /*
             setInviteList(
-              data.getJob.invite.map((item) => {
+              data.jobById.invite.map((item) => {
                 return {
                   name: item.receiver.name,
                   img: item.receiver.profileImg,
                   id: item.receiver.id,
                   inviteId: item.id,
                 };
-              }),
-            );
+              })
+            );*/
           }}
         >
           {({ data }) => {

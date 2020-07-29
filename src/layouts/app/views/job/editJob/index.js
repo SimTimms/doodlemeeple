@@ -14,11 +14,13 @@ import {
   DeleteButton,
   FieldTitle,
   InlineHeader,
+  InlineHeaderWarning,
   IconTitle,
   IconButton,
   LoadIcon,
   FieldBox,
   Column,
+  UnlockInfo,
   Row,
 } from '../../../../../components';
 import { Query } from 'react-apollo';
@@ -28,10 +30,10 @@ import {
   CREATE_JOB,
   REMOVE_JOB,
 } from '../../../../../data/mutations';
-import { JOB, GAMES } from '../../../../../data/queries';
+import { JOB } from '../../../../../data/queries';
 import { toaster } from '../../../../../utils/toaster';
 import autosave from '../../../../../utils/autosave';
-import clsx from 'clsx';
+import { errorMessages } from '../../../../../utils/readableErrors';
 
 export default function EditJob({
   theme,
@@ -41,8 +43,8 @@ export default function EditJob({
   favourites,
 }) {
   const classes = useStyles();
-  const [games, setGames] = React.useState([]);
   const [loading, setLoading] = React.useState(jobId === 'new' ? false : true);
+  const [deleteError, setDeleteError] = React.useState('');
   const [job, setJob] = React.useState({
     name: '',
     img: '',
@@ -58,13 +60,14 @@ export default function EditJob({
     gameId: '',
     submitted: false,
   });
+  const [screen, setScreen] = React.useState(1);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <ContentHeader
-          title={jobId === 'new' ? 'Create a Job' : 'Edit a Job'}
-          subTitle="Create a new job"
+          title="Project Details"
+          subTitle="Create a new project"
           subTitleExtra={null}
           button={null}
         />
@@ -75,14 +78,12 @@ export default function EditJob({
             mutation={CREATE_JOB}
             variables={{
               name: job.name,
-              img: job.img,
-              summary: job.summary,
+              summary: '',
               location: job.location,
-              gallery: job.gallery,
               showreel: job.showreel,
               type: job.type,
               gameId: job.gameId,
-              creativeSummary: job.creativeSummary,
+              creativeSummary: '',
               submitted: job.submitted,
             }}
             onCompleted={(data) => {
@@ -95,7 +96,7 @@ export default function EditJob({
               return (
                 <div style={{ width: '100%' }}>
                   <Card className={classes.card}>
-                    <Column align="center" justify="center">
+                    <Column a="center" j="center">
                       <div
                         style={{
                           width: '100%',
@@ -107,7 +108,7 @@ export default function EditJob({
                           title="Project Title"
                           value={job.name}
                           maxLength={86}
-                          placeholder="placeholder"
+                          placeholder="24 full colour images..."
                           onChangeEvent={(e) => {
                             setJob({
                               ...job,
@@ -143,24 +144,21 @@ export default function EditJob({
           <Mutation
             mutation={UPDATE_JOB}
             variables={{
-              job: {
-                _id: jobId,
-                name: job.name,
-                img: job.img,
-                summary: job.summary,
-                location: job.location,
-                gallery: job.gallery,
-                showreel: job.showreel,
-                type: job.type,
-                gameId: job.gameId,
-                creativeSummary: job.creativeSummary,
-                submitted: job.submitted,
-              },
+              _id: jobId,
+              name: job.name,
+              img: job.img,
+              summary: job.summary,
+              location: job.location,
+              gallery: job.gallery,
+              showreel: job.showreel,
+              type: job.type,
+              gameId: job.gameId,
+              creativeSummary: job.creativeSummary,
+              submitted: job.submitted,
             }}
             onCompleted={(data) => {
               toaster('Autosave');
               const newjobId = data.updateJob;
-              history.replace(`/app/edit-job/${newjobId}`);
             }}
           >
             {(mutation) => {
@@ -265,154 +263,195 @@ export default function EditJob({
 
                   {job._id !== 'new' && (
                     <Card className={classes.card}>
-                      <InlineHeader>
-                        <IconTitle icon="work" title="Job Details" />
-                      </InlineHeader>
-                      <div style={{ padding: 10 }}>
-                        <FieldBox
-                          title="Project Title"
-                          value={job.name}
-                          maxLength={86}
-                          placeholder="placeholder"
-                          onChangeEvent={(e) => {
-                            setJob({
-                              ...job,
-                              name: e,
-                            });
-                          }}
-                          replaceMode="loose"
-                          info="Give the job a title that describes the work."
-                          warning="Example: 24 full colour fantasy images for cards"
-                          size="s"
-                          multiline={false}
-                        />
-                        <FieldBox
-                          title="Project Summary"
-                          value={job.summary}
-                          maxLength={356}
-                          placeholder="placeholder"
-                          onChangeEvent={(e) => {
-                            setJob({
-                              ...job,
-                              summary: e,
-                            });
-                          }}
-                          replaceMode="loose"
-                          info="Describe the job and what's expected, include as much detail as possible."
-                          warning=""
-                          size="s"
-                          multiline={true}
-                        />
+                      <div style={{ padding: '10px 10px 0 10px' }}>
+                        {screen === 1 ? (
+                          <Column a="center" j="center">
+                            <FieldBox
+                              title="Project Title"
+                              value={job.name}
+                              maxLength={90}
+                              placeholder="24 Fantasy Images for Card Game"
+                              onChangeEvent={(e) => {
+                                autosave(mutation);
+                                setJob({
+                                  ...job,
+                                  name: e,
+                                });
+                              }}
+                              replaceMode="loose"
+                              info="Give the job a title that describes the work."
+                              warning="Example: 24 full colour fantasy images for cards"
+                              size="s"
+                              multiline={false}
+                            />
+                            <FieldBox
+                              title="Job Summary"
+                              value={job.summary}
+                              maxLength={500}
+                              placeholder="24 unique images of monsters and heroes to be delivered by end of July....."
+                              onChangeEvent={(e) => {
+                                autosave(mutation);
+                                setJob({
+                                  ...job,
+                                  summary: e,
+                                });
+                              }}
+                              replaceMode="loose"
+                              info="Describe the job and what's expected, include as much detail as possible."
+                              warning=""
+                              size="s"
+                              multiline={true}
+                            />
+                            <FieldBox
+                              title="Video Message"
+                              value={job.showreel}
+                              maxLength={200}
+                              placeholder="https://www.youtube.com/watch?v=zdDox2o7G1g"
+                              onChangeEvent={(e) => {
+                                autosave(mutation);
+                                setJob({
+                                  ...job,
+                                  showreel: e,
+                                });
+                              }}
+                              replaceMode="loose"
+                              info="Add a video message to describe the project in more detail"
+                              warning=""
+                              size="s"
+                              multiline={false}
+                            />
+                            {job.name.length < 4 ? (
+                              <UnlockInfo str="Enter more detail to continue" />
+                            ) : job.summary.length < 20 ? (
+                              <UnlockInfo str="Enter more detail to continue" />
+                            ) : null}
+                            <IconButton
+                              title="Continue"
+                              icon="chevron_right"
+                              disabled={
+                                job.name.length < 4 || !job.summary
+                                  ? true
+                                  : job.summary.length < 20
+                              }
+                              color="primary"
+                              onClickEvent={() => {
+                                setScreen(2);
+                              }}
+                              styleOverride={{ marginLeft: 10 }}
+                              type="button"
+                              iconPos="right"
+                            />
+                          </Column>
+                        ) : (
+                          <Column a="center" j="center">
+                            <FieldBox
+                              title="Creative Summary"
+                              value={job.creativeSummary}
+                              maxLength={500}
+                              placeholder="A digital artist with a focus on high fantasy...."
+                              onChangeEvent={(e) => {
+                                autosave(mutation);
+                                setJob({
+                                  ...job,
+                                  creativeSummary: e,
+                                });
+                              }}
+                              replaceMode="loose"
+                              info="Describe your ideal creative, what art style you're looking for, where they should be based...."
+                              warning=""
+                              size="m"
+                              multiline={true}
+                            />
+                            {job.creativeSummary.length < 20 && (
+                              <UnlockInfo str="Enter at least 20 characters to continue" />
+                            )}
+                            <Row a="center" j="center">
+                              <IconButton
+                                title="Back"
+                                icon="chevron_left"
+                                disabled={false}
+                                color="text-dark"
+                                onClickEvent={() => {
+                                  setScreen(1);
+                                }}
+                                styleOverride={{
+                                  marginLeft: 5,
+                                  marginRight: 5,
+                                }}
+                                type="button"
+                                iconPos="left"
+                              />
+                              <IconButton
+                                title="Next"
+                                icon="chevron_right"
+                                disabled={
+                                  !job.creativeSummary
+                                    ? true
+                                    : job.creativeSummary.length < 20
+                                }
+                                color="primary"
+                                onClickEvent={() => {
+                                  history.push(`/app/pick-artist/${jobId}`);
+                                }}
+                                styleOverride={{
+                                  marginLeft: 5,
+                                  marginRight: 5,
+                                }}
+                                type="button"
+                                iconPos="right"
+                              />
+                            </Row>
+                          </Column>
+                        )}
                       </div>
                     </Card>
                   )}
-                  {job._id !== 'new' && (
-                    <Card className={classes.card}>
-                      <InlineHeader>
-                        <IconTitle icon="face" title="Creative Details" />
-                      </InlineHeader>
-                      <div style={{ padding: 10 }}>
-                        <FieldTitle
-                          name="3. Your Creative"
-                          description="Describe the creative you would like to work with. "
-                          warning="Example: A digital artist with a focus on high fantasy, based in Worthing with lots of experience"
-                          inline={false}
-                        />
-                        <TextField
-                          id={'creative-summary'}
-                          value={job.creativeSummary}
-                          label={`Creative Summary ${
-                            job.creativeSummary
-                              ? `(${186 - job.creativeSummary.length})`
-                              : ''
-                          }`}
-                          inputProps={{ maxLength: 186 }}
-                          onChange={(e) => {
-                            setJob({
-                              ...job,
-                              creativeSummary: e.target.value
-                                .substring(0, 186)
-                                .replace(/[^A-Za-z0-9 ,\-.!()£$"'\n]/g, ''),
-                            });
-                            autosaveIsOn && autosave(mutation, 'image');
-                          }}
-                          margin="normal"
-                          variant="outlined"
-                          style={{ width: '100%' }}
-                        />
-                      </div>
-                    </Card>
-                  )}
-                  {job._id !== 'new' && job._id !== 'new' && (
-                    <Card className={classes.card}>
-                      <InlineHeader>
-                        <IconTitle
-                          icon="assignment_turned_in"
-                          title="Submit Brief"
-                        />
-                      </InlineHeader>
-                      <div style={{ padding: 10, textAlign: 'center' }}>
-                        <FieldTitle
-                          name="4. Submit"
-                          description="Submit your job for approval, we'll let you know when it's live and don't worry you can still make changes."
-                          warning=""
-                          inline={false}
-                        />
-                        <Typography
-                          variant="h2"
-                          component="p"
-                          style={{ marginTop: 30 }}
-                        >
-                          Awesome! Continue on to select your preferred artists
-                        </Typography>
-                        <Link
-                          to={`/app/pick-artist/${job._id}`}
-                          style={{
-                            textDecoration: 'none',
-                            color: '#444',
-                          }}
-                        >
-                          <Button
-                            className={classes.iconButton}
-                            style={{ marginTop: 30, marginBottom: 30 }}
+
+                  {job._id !== 'new' && screen === 1 && (
+                    <Card className={classes.card} style={{ paddingBottom: 0 }}>
+                      <div
+                        style={{
+                          padding: 10,
+                          background: '#eee',
+                        }}
+                      >
+                        <div>
+                          <Mutation
+                            mutation={REMOVE_JOB}
+                            variables={{
+                              id: job._id,
+                            }}
+                            onCompleted={(data) => {
+                              toaster('Deleted');
+                              history.replace(`/app/jobs`);
+                            }}
+                            onError={(error) => {
+                              const msg = errorMessages(error.toString());
+                              setDeleteError(msg);
+                              toaster('Error');
+                            }}
                           >
-                            Continue
-                            <Icon className={classes.iconButtonIcon}>
-                              chevron_right
-                            </Icon>
-                          </Button>
-                        </Link>
-                      </div>
-                    </Card>
-                  )}
-                  {job.gameId && job._id !== 'new' && (
-                    <Card
-                      className={classes.card}
-                      style={{ background: '#eee' }}
-                    >
-                      <InlineHeader>
-                        <IconTitle icon="warning" title="Dange Zone" />
-                      </InlineHeader>
-                      <div style={{ padding: 10 }}>
-                        <Typography variant="h2" component="p">
-                          Delete Job
-                        </Typography>
-                        <Mutation
-                          mutation={REMOVE_JOB}
-                          variables={{
-                            id: jobId,
-                          }}
-                          onCompleted={(data) => {
-                            toaster('Deleted');
-                            history.replace(`/app/jobs`);
-                          }}
-                        >
-                          {(mutation) => {
-                            return (
-                              <DeleteButton mutation={mutation} theme={theme} />
-                            );
-                          }}
-                        </Mutation>
+                            {(mutation) => {
+                              return (
+                                <div>
+                                  {deleteError && (
+                                    <Typography
+                                      variant="body1"
+                                      component="p"
+                                      className={classes.error}
+                                    >
+                                      {deleteError}
+                                    </Typography>
+                                  )}
+                                  <DeleteButton
+                                    mutation={mutation}
+                                    str="Delete this game?"
+                                  />
+                                </div>
+                              );
+                            }}
+                          </Mutation>
+                        </div>
                       </div>
                     </Card>
                   )}
@@ -421,6 +460,7 @@ export default function EditJob({
             }}
           </Mutation>
         )}
+
         {jobId !== 'new' && (
           <Query
             query={JOB}
@@ -428,9 +468,15 @@ export default function EditJob({
             fetchPolicy="network-only"
             onCompleted={(data) => {
               setLoading(false);
+              console.log(data);
               data.jobById &&
                 setJob({
                   ...data.jobById,
+                  name: data.jobById.name ? data.jobById.name : '',
+                  summary: data.jobById.summary ? data.jobById.summary : '',
+                  creativeSummary: data.jobById.creativeSummary
+                    ? data.jobById.creativeSummary
+                    : '',
                   gameId: data.jobById.game ? data.jobById.game._id : null,
                 });
             }}

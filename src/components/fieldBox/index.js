@@ -17,6 +17,7 @@ export default function FieldBox({
 }) {
   const [infoOpen, setInfoOpen] = React.useState(false);
   const classes = useStyles();
+  value = value ? value : '';
   return (
     <div
       style={{

@@ -29,12 +29,12 @@ export default function Creatives({
                   history={history}
                   creative={creative}
                   favourite={
-                    favourites.indexOf(creative.id) > -1 ? true : false
+                    favourites.indexOf(creative._id) > -1 ? true : false
                   }
                   gameId={job.gameId}
                   jobId={job.id}
                   invite={inviteList.filter(
-                    (filterItem) => filterItem.id === creative.id,
+                    (filterItem) => filterItem.id === creative._id
                   )}
                   key={`creative_${index}`}
                   updateInviteList={updateInviteList}

@@ -180,11 +180,34 @@ export const ADD_FAVOURITE = gql`
 `;
 
 export const UPDATE_JOB = gql`
-  mutation UpdateJob($id: String!, $job: JobInput!) {
-    updateJob(id: $id, job: $job)
+  mutation UpdateJob(
+    $_id: MongoID!
+    $name: String
+    $img: String
+    $summary: String
+    $location: String
+    $showreel: String
+    $type: String
+    $creativeSummary: String
+    $submitted: String
+  ) {
+    jobUpdateById(
+      record: {
+        _id: $_id
+        name: $name
+        img: $img
+        summary: $summary
+        location: $location
+        showreel: $showreel
+        type: $type
+        creativeSummary: $creativeSummary
+        submitted: $submitted
+      }
+    ) {
+      recordId
+    }
   }
 `;
-
 export const CREATE_JOB = gql`
   mutation CreateJob($name: String!) {
     jobCreateOne(record: { name: $name }) {
@@ -192,9 +215,12 @@ export const CREATE_JOB = gql`
     }
   }
 `;
+
 export const REMOVE_JOB = gql`
-  mutation RemoveJob($id: String!) {
-    removeJob(id: $id)
+  mutation RemoveJob($id: MongoID!) {
+    jobRemoveById(_id: $id) {
+      recordId
+    }
   }
 `;
 

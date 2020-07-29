@@ -8,6 +8,7 @@ import {
   CREATE_INVITE,
   REMOVE_INVITE,
 } from '../../data/mutations';
+import clsx from 'clsx';
 
 export default function ProfileCard({
   history,
@@ -23,7 +24,11 @@ export default function ProfileCard({
   const classes = useStyles();
 
   return (
-    <Card className={classes.creativeCard}>
+    <Card
+      className={clsx({
+        [classes.creativeCard]: true,
+      })}
+    >
       <div
         style={{
           backgroundImage:
@@ -37,25 +42,26 @@ export default function ProfileCard({
           height: 100,
           width: '100%',
         }}
+        className={clsx({
+          [classes.noBG]: !creative.profileBG,
+        })}
+      ></div>
+      <div
+        className={clsx({
+          [classes.creativeCardBackground]: true,
+          [classes.noProfile]: !creative.profileImg,
+        })}
+        style={{
+          backgroundImage:
+            creative.profileImg !== '' ? `url(${creative.profileImg})` : `#ddd`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+        }}
       ></div>
       <div className={classes.creativeCardWrapper}>
-        <div
-          className={classes.creativeCardBackground}
-          style={{
-            backgroundImage:
-              creative.profileImg !== ''
-                ? `url(${creative.profileImg})`
-                : `#ddd`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center center',
-          }}
-        ></div>
         <div className={classes.creativeCardDetails}>
           <Typography variant="h6" component="h6">
             {creative.name}
-          </Typography>
-          <Typography variant="body1" component="p">
-            {creative.summary.substring(0, 60)}
           </Typography>
         </div>
       </div>
@@ -65,7 +71,7 @@ export default function ProfileCard({
             variant="contained"
             color="secondary"
             style={{ marginRight: 10, padding: 0, textAlign: 'center' }}
-            onClick={() => history.push(`/public-preview/${creative.id}`)}
+            onClick={() => history.push(`/public-preview/${creative._id}`)}
           >
             <Icon style={{ fontSize: 20, color: '#fff', margin: 'auto' }}>
               pageview
@@ -75,7 +81,7 @@ export default function ProfileCard({
           <Mutation
             mutation={ADD_FAVOURITE}
             variables={{
-              id: creative.id,
+              id: creative._id,
               addRemove: favourite ? 'remove' : 'add',
             }}
           >
@@ -99,7 +105,7 @@ export default function ProfileCard({
             invite: {
               gameId: gameId,
               jobId: jobId,
-              userId: creative.id,
+              userId: creative._id,
               title: '',
               message: '',
             },

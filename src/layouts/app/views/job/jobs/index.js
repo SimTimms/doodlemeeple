@@ -13,7 +13,7 @@ export default function Jobs() {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <Column align="center" justify="flex-start">
+        <Column a="center" j="flex-start">
           <ContentHeader
             title="Projects"
             subTitle="The jobs you've posted on DoodleMeeple"

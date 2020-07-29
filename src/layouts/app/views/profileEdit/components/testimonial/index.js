@@ -63,7 +63,7 @@ export function Testimonial({
               marginTop: 5,
             }}
           >
-            <Column align="center" justify="center">
+            <Column a="center" j="center">
               <FieldBox
                 value={testimonial.name}
                 title="From Who?"
@@ -120,8 +120,8 @@ export function Testimonial({
               [classes.inputWrapperMobile]: mobile,
             })}
           >
-            <Row>
-              <Column justify="center" align="center">
+            <Row a="" j="">
+              <Column a="center" j="center">
                 <FieldBox
                   value={testimonial.summary}
                   title="Testimonial"

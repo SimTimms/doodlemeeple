@@ -19,7 +19,7 @@ export default function ArtistLineup({
           <div className={classes.button}>
             <div className={classes.miniProfileBlank}></div>
           </div>
-        </div>,
+        </div>
       );
     }
     return returnArr;
@@ -33,7 +33,7 @@ export default function ArtistLineup({
             <Mutation
               mutation={REMOVE_INVITE}
               variables={{
-                id: artist.inviteId,
+                _id: artist.inviteId,
                 invite: {
                   gameId: '',
                   jobId: '',
@@ -59,7 +59,7 @@ export default function ArtistLineup({
             </Mutation>
             <div
               onClick={() => {
-                history.push(`/public-preview/${artist.id}`);
+                history.push(`/public-preview/${artist._id}`);
               }}
               className={classes.button}
             >

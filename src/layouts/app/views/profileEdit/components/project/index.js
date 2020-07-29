@@ -63,7 +63,7 @@ export function Project({
               boxSizing: 'border-box',
             }}
           >
-            <Column align="center" justify="center">
+            <Column a="center" j="center">
               <FieldBox
                 value={project.name}
                 title="Project Name"
@@ -127,8 +127,8 @@ export function Project({
               marginTop: 5,
             }}
           >
-            <Row>
-              <Column align="center" justify="center">
+            <Row a="" j="">
+              <Column a="center" j="center">
                 <FieldBox
                   value={project.name}
                   title="Title"

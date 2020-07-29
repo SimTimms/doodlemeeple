@@ -78,7 +78,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
               ) : (
                 <Card className={classes.card}>
                   <div style={{ padding: 10 }}>
-                    <Column align="center" justify="center">
+                    <Column a="center" j="center">
                       <FieldBox
                         value={game.name}
                         title="Project Name"
@@ -138,7 +138,7 @@ export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
               return loading ? (
                 <LoadIcon />
               ) : (
-                <Column align="center" justify="center">
+                <Column a="center" j="center">
                   <IconButton
                     title="Preview"
                     icon="preview"

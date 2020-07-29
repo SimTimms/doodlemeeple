@@ -3,28 +3,14 @@ import gql from 'graphql-tag';
 export const CREATIVES = gql`
   query GetCreatives {
     getCreatives {
-      id
+      _id
       name
       summary
       profileBG
-      profileBGStyle
       profileImg
-      profileImgStyle
-      autosave
       invites {
-        id
-        job {
-          id
-        }
-      }
-      invitesReceived {
-        id
-        user {
-          id
-        }
-        job {
-          id
-        }
+        _id
+        job
       }
     }
   }
