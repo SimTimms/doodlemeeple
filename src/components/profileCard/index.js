@@ -88,6 +88,9 @@ export default function ProfileCard({
                 marginBottom: 5,
                 position: 'absolute',
                 right: 0,
+                top: 0,
+                background: 'rgba(255,255,255,0.4)',
+                paddingLeft: 5,
               }}
             >
               <Icon
@@ -128,8 +131,6 @@ export default function ProfileCard({
             boxSizing: 'border-box',
             paddingRight: 0,
             paddingLeft: 0,
-            margin: 0,
-            marginBottom: 10,
           }}
           type="button"
         />
