@@ -88,6 +88,9 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     padding: 10,
     boxSizing: 'border-box',
+    position: 'fixed',
+    top: 60,
+    zIndex: 50,
   },
   closeIcon: {
     background: '#fff',

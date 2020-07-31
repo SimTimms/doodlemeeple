@@ -468,7 +468,6 @@ export default function EditJob({
             fetchPolicy="network-only"
             onCompleted={(data) => {
               setLoading(false);
-              console.log(data);
               data.jobById &&
                 setJob({
                   ...data.jobById,

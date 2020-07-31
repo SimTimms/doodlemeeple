@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
 import { Card, Typography, Button, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
-import { FavouriteButton, InviteButton } from '../';
+import { FavouriteButton, InviteButton, IconButton, Row, Column } from '../';
 import { Mutation } from 'react-apollo';
-import {
-  ADD_FAVOURITE,
-  CREATE_INVITE,
-  REMOVE_INVITE,
-} from '../../data/mutations';
+import { ADD_FAVOURITE, CREATE_INVITE } from '../../data/mutations';
 import clsx from 'clsx';
+import Cookies from 'js-cookie';
 
 export default function ProfileCard({
   history,
@@ -22,11 +20,27 @@ export default function ProfileCard({
   disabled,
 }) {
   const classes = useStyles();
+  const [isFav, setIsFav] = React.useState(false);
+  const [favCount, setFavCount] = React.useState(0);
+
+  useEffect(() => {
+    const length = creative.favourites.filter((fav) => {
+      return (
+        fav.user._id === Cookies.get('userId') &&
+        fav.receiver._id === creative._id
+      );
+    });
+    setIsFav(length.length > 0);
+    setFavCount(creative.likedMe.length);
+  }, [creative]);
 
   return (
     <Card
       className={clsx({
         [classes.creativeCard]: true,
+        [classes.creativeCardNoShadow]: !creative.profileBG,
+        [classes.creativeCardNoShadow]: !creative.profileBG,
+        [classes.creativeCardInvited]: invite.length > 0,
       })}
     >
       <div
@@ -58,61 +72,81 @@ export default function ProfileCard({
           backgroundPosition: 'center center',
         }}
       ></div>
-      <div className={classes.creativeCardWrapper}>
-        <div className={classes.creativeCardDetails}>
-          <Typography variant="h6" component="h6">
-            {creative.name}
-          </Typography>
-        </div>
-      </div>
-      <div className={classes.actionsWrapper}>
-        <div className={classes.actions}>
-          <Button
-            variant="contained"
-            color="secondary"
-            style={{ marginRight: 10, padding: 0, textAlign: 'center' }}
-            onClick={() => history.push(`/public-preview/${creative._id}`)}
-          >
-            <Icon style={{ fontSize: 20, color: '#fff', margin: 'auto' }}>
-              pageview
-            </Icon>
-          </Button>
-
-          <Mutation
-            mutation={ADD_FAVOURITE}
-            variables={{
-              id: creative._id,
-              addRemove: favourite ? 'remove' : 'add',
-            }}
-          >
-            {(mutation) => {
-              return (
-                <FavouriteButton
-                  styleAdd={{ marginRight: 10 }}
-                  mutation={() => {
-                    mutation();
-                  }}
-                  favourite={favourite}
-                />
-              );
-            }}
-          </Mutation>
-        </div>
-        <Mutation
-          mutation={invite.length === 0 ? CREATE_INVITE : REMOVE_INVITE}
-          variables={{
-            id: invite.length === 0 ? 'new' : invite[0].inviteId,
-            invite: {
-              gameId: gameId,
-              jobId: jobId,
-              userId: creative._id,
-              title: '',
-              message: '',
-            },
+      <Mutation
+        mutation={ADD_FAVOURITE}
+        variables={{
+          id: creative._id,
+        }}
+      >
+        {(mutation) => {
+          return (
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginBottom: 5,
+                position: 'absolute',
+                right: 0,
+              }}
+            >
+              <Icon
+                onClick={() => {
+                  setIsFav(isFav ? false : true);
+                  setFavCount(isFav ? favCount - 1 : favCount + 1);
+                  mutation();
+                }}
+                style={{
+                  fontSize: 12,
+                  padding: 10,
+                  paddingTop: 3,
+                  paddingBottom: 3,
+                  margin: 0,
+                  marginLeft: -10,
+                  cursor: 'pointer',
+                }}
+              >
+                {isFav ? 'favorite' : 'favorite_border'}
+              </Icon>
+              <div style={{ fontSize: 10, marginRight: 10, marginTop: 2 }}>
+                {favCount}
+              </div>
+            </div>
+          );
+        }}
+      </Mutation>
+      <Column j="center" a="center">
+        <IconButton
+          title={creative.name}
+          onClickEvent={() => history.push(`/public-preview/${creative._id}`)}
+          color="text-dark"
+          disabled={false}
+          iconPos="right"
+          icon="chevron_right"
+          styleOverride={{
+            color: '#222',
+            boxSizing: 'border-box',
+            paddingRight: 0,
+            paddingLeft: 0,
+            margin: 0,
+            marginBottom: 10,
           }}
-          onCompleted={(data) => {
+          type="button"
+        />
+      </Column>
+      <div className={classes.actionsWrapper}>
+        <Mutation
+          mutation={CREATE_INVITE}
+          variables={{
+            _id: invite._id,
+            jobId: jobId,
+            receiverId: creative._id,
+            title: '',
+            message: '',
+          }}
+          onCompleted={(data, error) => {
             invite.length === 0
-              ? updateInviteList(creative, data.createInvite)
+              ? updateInviteList(creative, data.inviteCreateOne.recordId)
               : removeInviteList(creative);
           }}
         >
@@ -126,7 +160,7 @@ export default function ProfileCard({
                       : disabled && invite.length > 0 && mutation();
                   }}
                   invite={invite.length > 0 ? true : false}
-                  disabled={disabled}
+                  disabled={invite.length > 0 ? false : disabled}
                 />
               </div>
             );

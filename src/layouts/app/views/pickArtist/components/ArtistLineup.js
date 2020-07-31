@@ -34,13 +34,6 @@ export default function ArtistLineup({
               mutation={REMOVE_INVITE}
               variables={{
                 _id: artist.inviteId,
-                invite: {
-                  gameId: '',
-                  jobId: '',
-                  userId: '',
-                  title: '',
-                  message: '',
-                },
               }}
             >
               {(mutation) => {

@@ -73,7 +73,6 @@ export function Card({ img }) {
 export function Testimonials({ testimonials }) {
   const classes = useStyles();
   const testimonialElements = testimonials.map((item) => {
-    console.log(item);
     return item.summary ? (
       <div className={classes.testimonialWrapper}>
         {item.image && (

@@ -34,7 +34,7 @@ export function AppDrawer(props) {
     wrapperFour,
   } = useStyles();
 
-  const { handleDrawerClose, open, page } = props;
+  const { handleDrawerClose, open, page, history } = props;
   const theme = useTheme();
   const mobile = useMediaQuery('(max-width:800px)');
   const [counts, setCounts] = React.useState({ invites: 0, messages: 0 });
@@ -73,92 +73,97 @@ export function AppDrawer(props) {
         </IconButton>
       </div>
       {page === 'edit-game' && <Divider />}
-      {page === 'edit-game' && (
-        <List>
-          {[
-            {
-              name: 'Games',
-              icon: <Icon>chevron_left</Icon>,
-              link: '/app/games',
-              color: '#444',
-              count: null,
-            },
-          ].map((text, index) => (
-            <Link
-              to={text.link}
-              className={link}
-              key={text.name}
-              onClick={handleDrawerClose}
-            >
-              <ListItem button style={{ paddingLeft: 10 }}>
-                <div className={wrapperFour}>
-                  <ListItemIcon
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: '#fff',
-                      position: 'relative',
-                    }}
-                  >
-                    {text.icon}
-                  </ListItemIcon>
-                  {text.count !== null && text.count > 0 && (
-                    <Typography
-                      variant="body1"
-                      component="p"
-                      className={countsStyle}
+      {page === 'edit-game' ||
+        (page === 'pick-artist' && (
+          <List>
+            {[
+              {
+                name: 'Back',
+                icon: <Icon>chevron_left</Icon>,
+                link: () => {
+                  history.goBack();
+                },
+                color: '#444',
+                count: null,
+              },
+            ].map((text, index) => (
+              <div
+                className={link}
+                key={text.name}
+                onClick={() => {
+                  text.link();
+                  handleDrawerClose();
+                }}
+              >
+                <ListItem button style={{ paddingLeft: 10 }}>
+                  <div className={wrapperFour}>
+                    <ListItemIcon
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#fff',
+                        position: 'relative',
+                      }}
                     >
-                      {text.count}
-                    </Typography>
-                  )}
-                </div>
-                <ListItemText
-                  primary={text.name}
-                  className={clsx({
-                    [button]: !mobile,
-                    [buttonMobile]: mobile,
-                  })}
-                />
-              </ListItem>
-            </Link>
-          ))}
-        </List>
-      )}
+                      {text.icon}
+                    </ListItemIcon>
+                    {text.count !== null && text.count > 0 && (
+                      <Typography
+                        variant="body1"
+                        component="p"
+                        className={countsStyle}
+                      >
+                        {text.count}
+                      </Typography>
+                    )}
+                  </div>
+                  <ListItemText
+                    primary={text.name}
+                    className={clsx({
+                      [button]: !mobile,
+                      [buttonMobile]: mobile,
+                    })}
+                  />
+                </ListItem>
+              </div>
+            ))}
+          </List>
+        ))}
       <List>
         {[
           {
             name: 'Dashboard',
             icon: <Icon>home</Icon>,
-            link: '/app/dashboard',
+            link: () => history.push('/app/dashboard'),
             color: '#444',
             count: null,
           },
           {
             name: 'Profile',
             icon: <Icon>contact_mail</Icon>,
-            link: '/app/edit-profile',
+            link: () => history.push('/app/edit-profile'),
             color: '#444',
             count: null,
           },
           {
             name: 'Account',
             icon: <Icon>account_balance</Icon>,
-            link: '/app/account',
+            link: () => history.push('/app/account'),
             color: '#444',
             count: null,
           },
           {
             name: 'Games',
             icon: <Icon>casino</Icon>,
-            link: '/app/games',
+            link: () => history.push('/app/games'),
             color: '#444',
             count: null,
           },
           {
             name: 'Projects',
             icon: <Icon>work</Icon>,
-            link: '/app/jobs',
+            link: () => history.push('/app/jobs'),
             color: '#444',
             count: null,
           } /*
@@ -185,11 +190,13 @@ export function AppDrawer(props) {
           }*/,
           ,
         ].map((text, index) => (
-          <Link
-            to={text.link}
+          <div
             className={link}
             key={text.name}
-            onClick={handleDrawerClose}
+            onClick={() => {
+              text.link();
+              handleDrawerClose();
+            }}
           >
             <ListItem button style={{ paddingLeft: 10 }}>
               <div
@@ -236,7 +243,7 @@ export function AppDrawer(props) {
                 })}
               />
             </ListItem>
-          </Link>
+          </div>
         ))}
         <a
           href="https://doodlemeeple.com"

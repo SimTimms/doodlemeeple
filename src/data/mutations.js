@@ -59,14 +59,30 @@ export const UPDATE_INVITE = gql`
 `;
 
 export const CREATE_INVITE = gql`
-  mutation CreateInvite($id: String!, $invite: InviteInput!) {
-    createInvite(id: $id, invite: $invite)
+  mutation CreateInvite(
+    $title: String
+    $message: String
+    $receiverId: MongoID!
+    $jobId: MongoID!
+  ) {
+    inviteCreateOne(
+      record: {
+        receiver: $receiverId
+        message: $message
+        title: $title
+        job: $jobId
+      }
+    ) {
+      recordId
+    }
   }
 `;
 
 export const REMOVE_INVITE = gql`
-  mutation RemoveInvite($id: String!) {
-    removeInvite(id: $id)
+  mutation RemoveInvite($_id: MongoID!) {
+    inviteRemoveById(_id: $_id) {
+      recordId
+    }
   }
 `;
 export const UPDATE_TERM = gql`
@@ -174,8 +190,10 @@ export const REMOVE_GAME = gql`
 `;
 
 export const ADD_FAVOURITE = gql`
-  mutation AddFavourite($id: String!, $addRemove: String!) {
-    addFavourite(id: $id, addRemove: $addRemove)
+  mutation AddFavourite($id: MongoID!) {
+    favouriteCreateOne(record: { receiver: $id }) {
+      recordId
+    }
   }
 `;
 

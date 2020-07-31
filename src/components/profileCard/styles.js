@@ -9,7 +9,10 @@ export const useStyles = makeStyles((theme) => ({
     border: '1px solid #ddd',
     minWidth: 270,
     maxWidth: 270,
+    position: 'relative',
+    boxShadow: '10px 10px 30px rgba(0,0,0,0.2)',
   },
+  creativeCardNoShadow: { boxShadow: 'none' },
   creativeCardWrapper: {
     background: '#fafafa',
     padding: 5,
@@ -47,7 +50,12 @@ export const useStyles = makeStyles((theme) => ({
     paddingTop: 10,
     paddingBottom: 10,
     boxSizing: 'border-box',
-    justifyContent: 'space-between',
-    background: 'rgba(255,255,255,0.8)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    background: '#fafafc',
+  },
+  creativeCardInvited: {
+    boxShadow: `0 0 30px ${theme.palette.primary.light}`,
+    border: `1px solid ${theme.palette.primary.light}`,
   },
 }));

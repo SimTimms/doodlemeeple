@@ -18,7 +18,9 @@ export default function Creatives({
     <Query
       query={CREATIVES}
       fetchPolicy="network-only"
-      onCompleted={(data) => {}}
+      onCompleted={(data) => {
+        console.log(data);
+      }}
     >
       {({ data }) => {
         return data ? (
@@ -32,10 +34,10 @@ export default function Creatives({
                     favourites.indexOf(creative._id) > -1 ? true : false
                   }
                   gameId={job.gameId}
-                  jobId={job.id}
-                  invite={inviteList.filter(
-                    (filterItem) => filterItem.id === creative._id
-                  )}
+                  jobId={job._id}
+                  invite={inviteList.filter((filterItem) => {
+                    return filterItem._id === creative._id;
+                  })}
                   key={`creative_${index}`}
                   updateInviteList={updateInviteList}
                   removeInviteList={removeInviteList}

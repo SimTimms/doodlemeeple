@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Button, Icon, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { toaster } from '../../../utils/toaster';
+import { IconButton } from '../../';
 import clsx from 'clsx';
 
 export default function InviteButton({ mutation, invite, disabled }) {
@@ -13,6 +14,19 @@ export default function InviteButton({ mutation, invite, disabled }) {
   }, [invite]);
 
   return (
+    <IconButton
+      title={on ? 'Invited' : disabled ? ' 5 Max' : 'invite'}
+      color={on ? 'primary' : 'text-dark'}
+      disabled={disabled}
+      styleOverride={{ margin: 0 }}
+      type="button"
+      iconPos="right"
+      onClickEvent={() => {
+        mutation();
+      }}
+      icon={disabled ? '' : on ? 'thumb_up' : ''}
+    />
+    /*
     <Button
       variant="contained"
       className={clsx({
@@ -27,7 +41,7 @@ export default function InviteButton({ mutation, invite, disabled }) {
                 <Icon className={classes.iconOn}>thumb_up</Icon>
               ) : (
                 'Invite Cancelled'
-              ),
+              )
             );
         if (!disabled) {
           on === true ? setOn(false) : setOn(true);
@@ -38,6 +52,6 @@ export default function InviteButton({ mutation, invite, disabled }) {
       <Typography variant="body1" component="p" style={{ color: '#fff' }}>
         {!on ? (disabled ? '5 Max' : 'Invite') : 'Selected'}
       </Typography>
-    </Button>
+    </Button>*/
   );
 }

@@ -38,7 +38,7 @@ export function FeaturedMini({ posts, featuredId, history }) {
                 return data ? (
                   <FeatureCard
                     background={media}
-                    thumbnail={data.userById.profileImg}
+                    thumbnail={data.userById && data.userById.profileImg}
                     title={title}
                     subtitle="Featured Artist"
                     buttonOne={
@@ -52,6 +52,7 @@ export function FeaturedMini({ posts, featuredId, history }) {
                         title="profile"
                         styleOverride={null}
                         type="button"
+                        iconPos="right"
                       />
                     }
                     buttonTwo={

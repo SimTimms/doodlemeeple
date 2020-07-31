@@ -8,9 +8,23 @@ export const CREATIVES = gql`
       summary
       profileBG
       profileImg
-      invites {
+      likedMe {
         _id
-        job
+        receiver {
+          _id
+        }
+        user {
+          _id
+        }
+      }
+      favourites {
+        _id
+        receiver {
+          _id
+        }
+        user {
+          _id
+        }
       }
     }
   }
@@ -172,6 +186,14 @@ export const JOB = gql`
       user {
         _id
         name
+      }
+      invites {
+        _id
+        receiver {
+          _id
+          name
+          profileImg
+        }
       }
       showreel
       type
@@ -377,7 +399,9 @@ export const COUNTS = gql`
 export const FAVOURITES = gql`
   {
     profile {
-      favourites
+      favourites {
+        _id
+      }
     }
   }
 `;
@@ -392,6 +416,9 @@ export const PROFILE = gql`
       profileImg
       autosave
       email
+      favourites {
+        reciever
+      }
       sections {
         _id
         summary
