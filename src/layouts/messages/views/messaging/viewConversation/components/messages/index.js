@@ -59,7 +59,7 @@ export default function Messages({
         messageStr: messageIn,
         createdAt: new Date(),
         id: 'new',
-        reciever: { id: '', name: '', profileImg: '' },
+        receiver: { id: '', name: '', profileImg: '' },
         sender: {
           id: thisUserId,
           name: 'sending...',
