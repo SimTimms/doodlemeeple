@@ -417,7 +417,9 @@ export const PROFILE = gql`
       autosave
       email
       favourites {
-        receiver
+        receiver {
+          _id
+        }
       }
       sections {
         _id
