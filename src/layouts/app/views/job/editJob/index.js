@@ -1,21 +1,9 @@
 import React from 'react';
-import {
-  Card,
-  Slide,
-  TextField,
-  Typography,
-  Button,
-  Icon,
-} from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Card, Slide, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   ContentHeader,
   DeleteButton,
-  FieldTitle,
-  InlineHeader,
-  InlineHeaderWarning,
-  IconTitle,
   IconButton,
   LoadIcon,
   FieldBox,
@@ -164,106 +152,13 @@ export default function EditJob({
             {(mutation) => {
               return (
                 <div style={{ width: '100%' }}>
-                  {/*
-                  <Card className={classes.card}>
-                    <div style={{ padding: 10 }}>
-                      <FieldTitle
-                        name=" 1. Which game is this job for?"
-                        description="Each job must be attached to a game, this allows you to create multiple jobs for the same game/project, you can create a game if you haven't already."
-                        warning=""
-                        inline={false}
-                      />
-                      <div
-                        style={{
-                          width: '100%',
-                          display: 'flex',
-                          flexWrap: 'wrap',
-                          justifyContent: 'center',
-                        }}
-                      >
-                        {games.map((item, index) => {
-                          return (
-                            <div
-                              key={`item_${index}`}
-                              className={clsx({
-                                [classes.gameBox]: true,
-                                [classes.gameBoxSelected]:
-                                  job.gameId === item._id,
-                              })}
-                              onClick={() => {
-                                setJob({ ...job, gameId: item._id });
-                              }}
-                            >
-                              <div
-                                className={clsx({
-                                  [classes.gameBoxBG]: true,
-                                  [classes.gameBoxSelectedBG]:
-                                    job.gameId === item._id,
-                                })}
-                                style={{
-                                  backgroundImage: `url(${item.backgroundImg})`,
-                                }}
-                              ></div>
-                              <div
-                                style={{
-                                  width: 160,
-                                  padding: 5,
-                                  boxSizing: 'border-box',
-                                }}
-                              >
-                                <Typography
-                                  variant="body1"
-                                  component="p"
-                                  style={{ textAlign: 'center' }}
-                                >
-                                  {item.name}
-                                </Typography>
-                              </div>
-                            </div>
-                          );
-                        })}
-                        <Link
-                          to="/app/edit-game/new"
-                          style={{
-                            textDecoration: 'none',
-                            color: '#444',
-                          }}
-                        >
-                          <div
-                            className={clsx({
-                              [classes.gameBox]: true,
-                            })}
-                          >
-                            <div
-                              className={clsx({
-                                [classes.gameBoxBG]: true,
-                              })}
-                            ></div>
-                            <div
-                              style={{
-                                width: 160,
-                                padding: 5,
-                                boxSizing: 'border-box',
-                              }}
-                            >
-                              <Typography
-                                variant="body1"
-                                component="p"
-                                style={{ textAlign: 'center' }}
-                              >
-                                New Game
-                              </Typography>
-                            </div>
-                          </div>
-                        </Link>
-                      </div>
-                    </div>
-                  </Card>
-                            */}
-
                   {job._id !== 'new' && (
                     <Card className={classes.card}>
                       <div style={{ padding: '10px 10px 0 10px' }}>
+                        {job.submitted && (
+                          <UnlockInfo str="This project has been submitted and can't be modified" />
+                        )}
+
                         {screen === 1 ? (
                           <Column a="center" j="center">
                             <FieldBox

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Slide } from '@material-ui/core';
+import { Slide, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   IconButton,
@@ -7,20 +7,24 @@ import {
   HeaderTwo,
   Text,
   TextDivider,
-  TextLink,
   Meta,
-  Header,
+  UnlockInfoReverse,
 } from '../../../../../components';
 import { timeDifferenceForDate } from '../../../../../utils/dates';
 import ViewConversation from '../../../../messages/views/messaging/viewConversation';
 import { Query } from 'react-apollo';
 import { JOB, DETERMINE_CONVERSATION_ID } from '../../../../../data/queries';
 import ProposalForm from './components/proposalForm';
+import Cookies from 'js-cookie';
+import { Mutation } from 'react-apollo';
+import { toaster } from '../../../../../utils/toaster';
+
+import { UPDATE_JOB } from '../../../../../data/mutations';
 
 export default function PreviewJob({ theme, jobId, history }) {
   const classes = useStyles();
   const [job, setJob] = React.useState({
-    id: null,
+    _id: null,
     name: '',
     img: '',
     summary: '',
@@ -29,18 +33,21 @@ export default function PreviewJob({ theme, jobId, history }) {
     gallery: {
       images: [],
     },
-    game: { name: '', id: '', backgroundImg: '', summary: '' },
+    game: { name: '', _id: '', backgroundImg: '', summary: '' },
     showreel: '',
     type: 'job',
     creativeSummary: '',
     gameId: '',
-    submitted: false,
-    user: { name: '', id: '' },
+    submitted: '',
+    user: { name: '', _id: '' },
   });
   const [conversationId, setConversationId] = React.useState(null);
   const [chatOpen, setChatOpen] = React.useState(false);
   const [proposalOpen, setProposalOpen] = React.useState(false);
   const [messagesEnd, setMessagesEnd] = React.useState(null);
+  const [closeConfirm, setCloseConfirm] = React.useState(false);
+  const loggedInUser = Cookies.get('userId');
+
   useEffect(() => {
     messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' });
   });
@@ -50,7 +57,9 @@ export default function PreviewJob({ theme, jobId, history }) {
       <div className={classes.rootRow}>
         <div className={classes.root}>
           <ColumnWrapper>
-            <Header str="Job Details" />
+            {job.submitted === 'closed' && (
+              <UnlockInfoReverse str="This project has been closed by the owner" />
+            )}
             <HeaderTwo str={job.name} />
             <Meta
               str={`${timeDifferenceForDate(job.createdAt)} | ${job.user.name}`}
@@ -61,91 +70,167 @@ export default function PreviewJob({ theme, jobId, history }) {
             <HeaderTwo str="Ideal Creative" />
             <Text str={job.creativeSummary} />
           </ColumnWrapper>
+          {/*
           <ColumnWrapper>
             <HeaderTwo str="The Project" />
             <TextLink
               str={job.game.name}
               onClickEvent={() => {
-                history.push(`/app/view-game/${job.game.id}`);
+                history.push(`/app/view-game/${job.game._id}`);
               }}
             />
             <Text str={job.game.summary} />
-          </ColumnWrapper>
+            </ColumnWrapper>*/}
           <ColumnWrapper>
-            <HeaderTwo str="Discuss" />
-            <Text
-              str={`You've probably got some questions, please feel free to start a discussion with ${job.user.name}`}
-            />
-            <div
-              style={{
-                display: 'flex',
-                width: '100%',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <IconButton
-                disabled={false}
-                color="text-dark"
-                icon={chatOpen ? 'chat' : 'chat'}
-                title={chatOpen ? 'Minimise Chat' : 'Chat'}
-                onClickEvent={() => setChatOpen(chatOpen ? false : true)}
-                styleOverride={null}
-                type="button"
-                iconPos="left"
-              />
-            </div>
-            {chatOpen && (
-              <div
-                style={{
-                  padding: 10,
-                  boxSizing: 'border-box',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  background: '#efeff5',
-                  position: 'relative',
-                  width: '100%',
-                }}
-              >
-                {conversationId && (
-                  <ViewConversation
-                    history={history}
-                    conversationId={conversationId}
-                    titles={false}
+            {job.submitted !== 'closed' && (
+              <div>
+                <HeaderTwo str="Discuss" />
+                <Text
+                  str={`You've probably got some questions, please feel free to start a discussion with ${job.user.name}`}
+                />
+                <div
+                  style={{
+                    display: 'flex',
+                    width: '100%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <IconButton
+                    disabled={false}
+                    color="text-dark"
+                    icon={chatOpen ? 'chat' : 'chat'}
+                    title={chatOpen ? 'Minimise Chat' : 'Chat'}
+                    onClickEvent={() => setChatOpen(chatOpen ? false : true)}
+                    styleOverride={null}
+                    type="button"
+                    iconPos="left"
                   />
+                </div>
+                {chatOpen && (
+                  <div
+                    style={{
+                      padding: 10,
+                      boxSizing: 'border-box',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      background: '#efeff5',
+                      position: 'relative',
+                      width: '100%',
+                    }}
+                  >
+                    {conversationId && (
+                      <ViewConversation
+                        history={history}
+                        conversationId={conversationId}
+                        titles={false}
+                      />
+                    )}
+                  </div>
                 )}
               </div>
             )}
             <TextDivider />
-            <div className={classes.actionWrapper}>
-              <IconButton
-                color="primary"
-                disabled={false}
-                icon={proposalOpen ? 'fact_check' : 'fact_check'}
-                title={proposalOpen ? 'Minimise Quote' : 'Quote'}
-                onClickEvent={() =>
-                  setProposalOpen(proposalOpen ? false : true)
-                }
-                styleOverride={{ width: '100%' }}
-                type="button"
-                iconPos="right"
-              />
-            </div>
+            {job.submitted === 'closed' ? null : loggedInUser ===
+              job.user._id ? (
+              <div className={classes.actionWrapper}>
+                {!closeConfirm ? (
+                  <IconButton
+                    color="warning"
+                    disabled={false}
+                    icon="close"
+                    title="Close Job"
+                    onClickEvent={() => setCloseConfirm(true)}
+                    styleOverride={{ width: '100%' }}
+                    type="button"
+                    iconPos="right"
+                  />
+                ) : (
+                  <div
+                    style={{
+                      background: '#fff',
+                      padding: 20,
+                      textAlign: 'center',
+                    }}
+                  >
+                    <Typography variant="h6" style={{ marginBottom: 20 }}>
+                      This will permanently close the project. Your chosen
+                      creatives will be unable to send a quote or discuss this
+                      job further.
+                    </Typography>
+                    <Typography variant="h6">
+                      Do you want to continue?
+                    </Typography>
+                    <Mutation
+                      mutation={UPDATE_JOB}
+                      variables={{
+                        _id: jobId,
+                        submitted: 'closed',
+                      }}
+                      onCompleted={(data) => {
+                        toaster('Project Closed');
+                      }}
+                    >
+                      {(mutation) => {
+                        return (
+                          <IconButton
+                            color="warning"
+                            disabled={false}
+                            icon="warning"
+                            title="Confirm"
+                            onClickEvent={() => {
+                              setJob({ ...job, submitted: 'closed' });
+                              mutation();
+                            }}
+                            styleOverride={{ width: '100%' }}
+                            type="button"
+                            iconPos="right"
+                          />
+                        );
+                      }}
+                    </Mutation>
+                    <IconButton
+                      color="text-mini"
+                      disabled={false}
+                      icon=""
+                      title="Cancel"
+                      onClickEvent={() => setCloseConfirm(false)}
+                      styleOverride={{ width: '100%' }}
+                      type="button"
+                      iconPos="right"
+                    />
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className={classes.actionWrapper}>
+                <IconButton
+                  color="primary"
+                  disabled={false}
+                  icon={proposalOpen ? 'fact_check' : 'fact_check'}
+                  title={proposalOpen ? 'Minimise Quote' : 'Quote'}
+                  onClickEvent={() =>
+                    setProposalOpen(proposalOpen ? false : true)
+                  }
+                  styleOverride={{ width: '100%' }}
+                  type="button"
+                  iconPos="right"
+                />
 
-            <div className={classes.actionWrapper}>
-              <IconButton
-                color="warning"
-                disabled={false}
-                icon="thumb_down"
-                title="Decline"
-                onClickEvent={() =>
-                  setProposalOpen(proposalOpen ? false : true)
-                }
-                styleOverride={{ width: '100%' }}
-                type="button"
-                iconPos="right"
-              />
-            </div>
+                <IconButton
+                  color="warning"
+                  disabled={false}
+                  icon="thumb_down"
+                  title="Decline"
+                  onClickEvent={() =>
+                    setProposalOpen(proposalOpen ? false : true)
+                  }
+                  styleOverride={{ width: '100%' }}
+                  type="button"
+                  iconPos="right"
+                />
+              </div>
+            )}
           </ColumnWrapper>
 
           <Query
@@ -153,18 +238,18 @@ export default function PreviewJob({ theme, jobId, history }) {
             variables={{ jobId: jobId }}
             fetchPolicy="network-only"
             onCompleted={(data) => {
-              data.getJob &&
-                setJob({ ...data.getJob, gameId: data.getJob.game.id });
+              console.log(data);
+              data.jobById && setJob({ ...data.jobById });
             }}
           >
             {({ data }) => {
               return null;
             }}
           </Query>
-          {job.id && (
+          {job._id && (
             <Query
               query={DETERMINE_CONVERSATION_ID}
-              variables={{ jobId: jobId, userId: job.user.id }}
+              variables={{ jobId: jobId, userId: job.user._id }}
               fetchPolicy="network-only"
               onCompleted={(data) => {
                 setConversationId(data.determineConversationId);

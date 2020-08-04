@@ -141,24 +141,18 @@ export const MESSAGES = gql`
 
 export const INVITES = gql`
   query GetInvites {
-    getInvites {
-      id
+    invitesByUser {
+      _id
       receiver {
         name
       }
-      game {
-        id
-        name
-        backgroundImg
-        summary
-      }
       user {
-        id
+        _id
         name
         profileImg
       }
       job {
-        id
+        _id
         name
         summary
       }
@@ -207,6 +201,7 @@ export const JOBS = gql`
     jobsByUser {
       _id
       name
+      submitted
       backgroundImg
       game {
         _id
@@ -401,6 +396,9 @@ export const FAVOURITES = gql`
     profile {
       favourites {
         _id
+        receiver {
+          _id
+        }
       }
     }
   }

@@ -38,7 +38,7 @@ export const useStyles = makeStyles((theme) => ({
     paddingLeft: 40,
     paddingRight: 40,
     paddingBottom: 20,
-    marginTop: -70,
+    marginTop: 20,
     width: '100%',
     boxSizing: 'border-box',
     zIndex: 1,

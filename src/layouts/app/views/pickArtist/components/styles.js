@@ -89,7 +89,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: 10,
     boxSizing: 'border-box',
     position: 'fixed',
-    top: 60,
+    top: 80,
     zIndex: 50,
   },
   closeIcon: {

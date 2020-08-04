@@ -1,12 +1,12 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import { useStyles } from './styles';
 import Icon from '@material-ui/core/Icon';
+import { IconButton } from '../../../../../../../components';
 
-export function JobComponent({ job, game }) {
+export function JobComponent({ job, game, history }) {
   const classes = useStyles();
   return (
     <Card className={classes.card}>
@@ -51,19 +51,36 @@ export function JobComponent({ job, game }) {
           style={{ width: '100%', paddingLeft: 10 }}
           className={classes.cardSummary}
         >
-          {job.submitted ? 'Submitted' : 'Draft'}
+          {job.submitted === 'submitted'
+            ? 'Submitted'
+            : job.submitted === 'closed'
+            ? 'closed'
+            : 'Draft'}
         </Typography>
       </div>
 
-      <Link
-        to={`/app/edit-job/${job._id}`}
-        className={classes.cardLink}
-        style={{ textDecoration: 'none' }}
-      >
-        <Button variant="contained" color="primary">
-          Edit
-        </Button>
-      </Link>
+      <IconButton
+        disabled={false}
+        title={
+          job.submitted === 'submitted' || job.submitted === 'closed'
+            ? 'View'
+            : 'Edit'
+        }
+        color="primary"
+        type="button"
+        iconPos="right"
+        icon={
+          job.submitted === 'submitted' || job.submitted === 'closed'
+            ? 'preview'
+            : 'edit'
+        }
+        styleOverride={{ marginRight: 10 }}
+        onClickEvent={() => {
+          job.submitted
+            ? history.push(`/app/view-job/${job._id}`)
+            : history.push(`/app/edit-job/${job._id}`);
+        }}
+      />
     </Card>
   );
 }

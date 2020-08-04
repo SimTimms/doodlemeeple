@@ -1,18 +1,15 @@
 import React from 'react';
-import { Slide, Button, Icon, Card, Typography } from '@material-ui/core';
+import { Slide, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   LoadIcon,
-  ContentHeader,
   FieldTitle,
-  IconButton,
   UnlockInfo,
   Column,
 } from '../../../../components';
-import { Query, Mutation } from 'react-apollo';
+import { Query } from 'react-apollo';
 import { JOB } from '../../../../data/queries';
-import { SUBMIT_BRIEF } from '../../../../data/mutations';
-import { ArtistLineup, Creatives } from './components';
+import { ArtistLineup, Creatives, SubmitBrief } from './components';
 
 export function PickArtist({
   theme,
@@ -69,44 +66,17 @@ export function PickArtist({
         />
 
         <Column j="center" a="center">
-          <div style={{ marginTop: 90 }}>
+          <div style={{ marginTop: 80 }}>
+            <SubmitBrief job={job} history={history} inviteList={inviteList} />{' '}
             {inviteList.length < 1 && (
               <UnlockInfo str="Please select at least 1 creative" />
             )}
-            <Typography variant="h6" component="p"></Typography>
           </div>
-          <Mutation
-            mutation={SUBMIT_BRIEF}
-            variables={{
-              jobId: job._id,
-            }}
-            onCompleted={() => {
-              history.push('/app/submitted');
-            }}
-          >
-            {(mutation) => {
-              return (
-                <IconButton
-                  onClickEvent={() => {
-                    setLoading(true);
-                    mutation();
-                  }}
-                  disabled={inviteList.length > 0 ? false : true}
-                  icon="chevron_right"
-                  title="Submit"
-                  iconPos="right"
-                  styleOverride={null}
-                  type="button"
-                  color="primary"
-                />
-              );
-            }}
-          </Mutation>
         </Column>
 
         <div style={{ width: '100%', marginTop: 50 }}>
           <FieldTitle
-            name="Invite Artists"
+            name="Invite Creatives"
             description=""
             warning=""
             inline={false}
@@ -126,7 +96,6 @@ export function PickArtist({
           fetchPolicy="network-only"
           onCompleted={(data) => {
             data.jobById && setJob({ ...data.jobById });
-
             setInviteList(
               data.jobById.invites.map((invite) => {
                 return {

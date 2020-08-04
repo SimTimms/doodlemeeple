@@ -53,6 +53,7 @@ import FeatureCard from './featureCard';
 import FeatureCardInvite from './featureCardInvite';
 import FeatureCardHorizontal from './featureCardHorizontal';
 import UnlockInfo from './unlockInfo';
+import UnlockInfoReverse from './unlockInfoReverse';
 import {
   Header,
   SubHeader,
@@ -68,6 +69,7 @@ import {
 import { Column, Row } from './blocks';
 
 export {
+  UnlockInfoReverse,
   Column,
   Row,
   InlineHeaderWarning,

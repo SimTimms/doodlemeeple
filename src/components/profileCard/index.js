@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 
-import { Card, Typography, Button, Icon } from '@material-ui/core';
+import { Card, Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
-import { FavouriteButton, InviteButton, IconButton, Row, Column } from '../';
+import { InviteButton, IconButton, Row, Column } from '../';
 import { Mutation } from 'react-apollo';
 import { ADD_FAVOURITE, CREATE_INVITE } from '../../data/mutations';
 import clsx from 'clsx';
@@ -30,9 +30,9 @@ export default function ProfileCard({
         fav.receiver._id === creative._id
       );
     });
-    setIsFav(length.length > 0);
+    setIsFav(favourite);
     setFavCount(creative.likedMe.length);
-  }, [creative]);
+  }, [favourite]);
 
   return (
     <Card
@@ -55,6 +55,7 @@ export default function ProfileCard({
               : 'none',
           height: 100,
           width: '100%',
+          position: 'relative',
         }}
         className={clsx({
           [classes.noBG]: !creative.profileBG,
@@ -70,6 +71,7 @@ export default function ProfileCard({
             creative.profileImg !== '' ? `url(${creative.profileImg})` : `#ddd`,
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
+          position: 'relative',
         }}
       ></div>
       <Mutation
@@ -80,44 +82,25 @@ export default function ProfileCard({
       >
         {(mutation) => {
           return (
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginBottom: 5,
-                position: 'absolute',
-                right: 0,
-                top: 0,
-                background: 'rgba(255,255,255,0.4)',
-                paddingLeft: 5,
-              }}
-            >
+            <div className={`${classes.smallActionWrapper} ${classes.top}`}>
               <Icon
                 onClick={() => {
                   setIsFav(isFav ? false : true);
                   setFavCount(isFav ? favCount - 1 : favCount + 1);
                   mutation();
                 }}
-                style={{
-                  fontSize: 12,
-                  padding: 10,
-                  paddingTop: 3,
-                  paddingBottom: 3,
-                  margin: 0,
-                  marginLeft: -10,
-                  cursor: 'pointer',
-                }}
+                className={classes.favIcon}
               >
                 {isFav ? 'favorite' : 'favorite_border'}
               </Icon>
-              <div style={{ fontSize: 10, marginRight: 10, marginTop: 2 }}>
+              <Typography className={classes.actionText} style={{}}>
                 {favCount}
-              </div>
+              </Typography>
             </div>
           );
         }}
       </Mutation>
+
       <Column j="center" a="center">
         <IconButton
           title={creative.name}
@@ -125,15 +108,35 @@ export default function ProfileCard({
           color="text-dark"
           disabled={false}
           iconPos="right"
-          icon="chevron_right"
+          icon=""
           styleOverride={{
             color: '#222',
             boxSizing: 'border-box',
             paddingRight: 0,
             paddingLeft: 0,
+            textDecoration: 'underline',
+            marginTop: 0,
+            marginBottom: 0,
           }}
           type="button"
         />
+        <div>
+          <Icon onClick={() => {}} className={classes.favIconStar}>
+            {isFav ? 'star_border' : 'star_border'}
+          </Icon>
+          <Icon onClick={() => {}} className={classes.favIconStar}>
+            {isFav ? 'star_border' : 'star_border'}
+          </Icon>
+          <Icon onClick={() => {}} className={classes.favIconStar}>
+            {isFav ? 'star_border' : 'star_border'}
+          </Icon>
+          <Icon onClick={() => {}} className={classes.favIconStar}>
+            {isFav ? 'star_border' : 'star_border'}
+          </Icon>
+          <Icon onClick={() => {}} className={classes.favIconStar}>
+            {isFav ? 'star_border' : 'star_border'}
+          </Icon>
+        </div>
       </Column>
       <div className={classes.actionsWrapper}>
         <Mutation

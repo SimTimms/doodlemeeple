@@ -13,15 +13,8 @@ export default function Creatives({
   history,
 }) {
   const classes = useStyles();
-
   return (
-    <Query
-      query={CREATIVES}
-      fetchPolicy="network-only"
-      onCompleted={(data) => {
-        console.log(data);
-      }}
-    >
+    <Query query={CREATIVES} fetchPolicy="network-only">
       {({ data }) => {
         return data ? (
           <div className={classes.creativeWrapper}>

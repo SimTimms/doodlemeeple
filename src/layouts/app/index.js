@@ -9,7 +9,7 @@ import { Dashboard } from './views/dashboard';
 import { EditProfile } from './views/profileEdit';
 import { Account } from './views/account';
 import { Invites } from './views/invites';
-import { Submitted } from './views/submitted';
+import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
 import { EditJob, Jobs, PreviewJob } from './views/job';
 import { PreviewContract, EditContract } from './views/contract';
@@ -88,11 +88,11 @@ function AppLayout(props) {
           ) : page === 'invites' ? (
             <Invites history={props.history} />
           ) : page === 'submitted' ? (
-            <Submitted />
+            <ProjectSubmitted history={props.history} />
           ) : page === 'games' ? (
             <Games history={props.history} />
           ) : page === 'jobs' ? (
-            <Jobs />
+            <Jobs history={props.history} />
           ) : page === 'edit-game' ? (
             <EditGame
               theme={props.theme}
@@ -147,7 +147,7 @@ function AppLayout(props) {
       <Query
         query={FAVOURITES}
         onCompleted={(data) => {
-          setFavourites(data.profile.favourites);
+          setFavourites(data.profile.favourites.map((fav) => fav.receiver._id));
         }}
         fetchPolicy="network-only"
       >

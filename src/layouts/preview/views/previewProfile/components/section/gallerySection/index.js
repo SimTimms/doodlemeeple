@@ -7,9 +7,18 @@ import {
   HeaderTwo,
   Text,
 } from '../../../../../../../components';
+import { TYPE_HELPER } from '../../../../../../../utils';
 
 function GallerySection({ section }) {
-  const { summary, gallery, notableProjects, testimonials, showreel } = section;
+  const {
+    summary,
+    gallery,
+    notableProjects,
+    testimonials,
+    showreel,
+    type,
+  } = section;
+  console.log(section);
   return section.id === 'new' ? (
     <div>New</div>
   ) : (
@@ -47,7 +56,7 @@ function GallerySection({ section }) {
       )}
 
       <ColumnWrapper>
-        <HeaderTwo str="About Me" />
+        <HeaderTwo str={TYPE_HELPER(type)} />
         <Text str={summary} />
       </ColumnWrapper>
       {gallery.images.length > 0 && (

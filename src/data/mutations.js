@@ -19,8 +19,10 @@ export const MAKE_PAYMENT = gql`
 `;
 
 export const SUBMIT_BRIEF = gql`
-  mutation SubmitBrief($jobId: String!) {
-    submitBrief(jobId: $jobId)
+  mutation SubmitBrief($jobId: MongoID!) {
+    submitBrief(_id: $jobId) {
+      _id
+    }
   }
 `;
 

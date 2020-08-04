@@ -6,9 +6,8 @@ import { Query } from 'react-apollo';
 import { JOBS } from '../../../../../data/queries';
 import { ContentHeader, Column } from '../../../../../components';
 
-export default function Jobs() {
+export default function Jobs({ history }) {
   const classes = useStyles();
-  const [jobArray, setJobArray] = React.useState([]);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -21,13 +20,7 @@ export default function Jobs() {
             button={null}
           />
 
-          <Query
-            query={JOBS}
-            fetchPolicy="network-only"
-            onCompleted={(data) => {
-              setJobArray(data.jobsByUser);
-            }}
-          >
+          <Query query={JOBS} fetchPolicy="network-only">
             {({ data }) => {
               return data
                 ? data.jobsByUser.map((job, index) => {
@@ -36,6 +29,7 @@ export default function Jobs() {
                         key={`project_${index}`}
                         job={job}
                         game={job.game ? job.game : { name: '' }}
+                        history={history}
                       />
                     );
                   })

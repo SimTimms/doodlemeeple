@@ -40,11 +40,11 @@ export function Invites({ history }) {
           query={INVITES}
           fetchPolicy="network-only"
           onCompleted={(data) => {
-            setInviteArray(data.getInvites);
+            setInviteArray(data.invitesByUser);
           }}
         >
           {({ data }) => {
-            return data && data.getInvites.length === 0 ? (
+            return data && data.invitesByUser.length === 0 ? (
               <div>
                 <Typography
                   variant="h6"

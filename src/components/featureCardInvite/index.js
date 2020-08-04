@@ -5,11 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import { HeaderTwo, TextArray, TextDivider } from '../';
 
 export default function FeatureCardInvite({
-  background,
   thumbnail,
   job,
-  game,
-  gameId,
   author,
   authorId,
   summary,
@@ -20,12 +17,6 @@ export default function FeatureCardInvite({
   const classes = useStyles();
   return (
     <Card className={classes.card}>
-      <div
-        className={classes.postImage}
-        style={{
-          backgroundImage: `url(${background})`,
-        }}
-      ></div>
       <div className={classes.postHeader}>
         <div
           style={{
@@ -51,17 +42,6 @@ export default function FeatureCardInvite({
                   justifyContent: 'center',
                 }}
               >
-                <Typography
-                  variant="h6"
-                  className={classes.link}
-                  onClick={() => {
-                    history.push(`/app/view-game/${gameId}`);
-                  }}
-                >{`${game}`}</Typography>
-                <Typography
-                  variant="h6"
-                  style={{ marginLeft: 5, marginRight: 5 }}
-                >{` by `}</Typography>
                 <Typography
                   variant="h6"
                   className={classes.link}

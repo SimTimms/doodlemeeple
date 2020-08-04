@@ -11,11 +11,12 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: 2,
     fontSize: 14,
     letterSpacing: 1,
-    display: 'block',
     boxShadow: '2px 2px 3px rgba(0,0,0,0.2)',
     textTransform: 'uppercase',
     textDecoration: 'none',
     borderRadius: 2,
+    display: 'flex',
+    flexWrap: 'nowrap',
     color: '#fff',
     '&:hover': {
       background: theme.palette.primary.dark,
@@ -59,6 +60,18 @@ export const useStyles = makeStyles((theme) => ({
     border: 'none',
     boxShadow: 'none',
     textTransform: 'uppercase',
+    letterSpacing: 1.3,
+    textShadow: '3px 3px 4px rgba(0,0,0,0.1)',
+    '&:hover': {
+      background: '#efeff5',
+    },
+  },
+  iconButtonTextMini: {
+    background: 'rgba(0,0,0,0)',
+    color: '#222',
+    border: 'none',
+    boxShadow: 'none',
+    margin: 0,
     letterSpacing: 1.3,
     textShadow: '3px 3px 4px rgba(0,0,0,0.1)',
     '&:hover': {
@@ -115,6 +128,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   iconButtonIconTextError: {
     color: theme.palette.error.main,
+  },
+
+  iconButtonIconTextMini: {
+    color: '#222',
   },
   iconRight: { marginLeft: 10 },
   iconLeft: { marginRight: 10 },

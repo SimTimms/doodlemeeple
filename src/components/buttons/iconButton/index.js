@@ -25,6 +25,7 @@ export default function IconButton({
         [classes.iconButtonTextWhite]: color === 'text-white',
         [classes.iconButtonTextDark]: color === 'text-dark',
         [classes.iconButtonTextError]: color === 'text-error',
+        [classes.iconButtonTextMini]: color === 'text-mini',
         [classes.iconButtonDisabled]: disabled,
       })}
       disabled={disabled}
@@ -40,6 +41,7 @@ export default function IconButton({
             [classes.iconButtonIconTextWhite]: color === 'text-white',
             [classes.iconButtonIconTextDark]: color === 'text-dark',
             [classes.iconButtonIconTextError]: color === 'text-error',
+            [classes.iconButtonIconTextMini]: color === 'text-mini',
             [classes.iconLeft]: iconPos !== 'right',
           })}
         >
