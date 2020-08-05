@@ -7,10 +7,7 @@ import {
   TabWrapper,
   TabButton,
 } from '../../../../../components';
-import {
-  PREVIEW_CONTRACT,
-  DETERMINE_CONVERSATION_ID,
-} from '../../../../../data/queries';
+import { PREVIEW_CONTRACT, GET_MESSAGES } from '../../../../../data/queries';
 import { Query } from 'react-apollo';
 import { useStyles } from './styles';
 import Quote from './views/quote';
@@ -143,7 +140,7 @@ export default function PreviewContract({ contractId, history }) {
         </Query>
         {job.id && conversationId === null && (
           <Query
-            query={DETERMINE_CONVERSATION_ID}
+            query={GET_MESSAGES}
             variables={{ jobId: job.id, userId: contract.user.id }}
             fetchPolicy="network-only"
             onCompleted={(data) => {

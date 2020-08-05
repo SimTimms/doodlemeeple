@@ -9,9 +9,54 @@ import { IconButton } from '../../../../../../../components';
 export function JobComponent({ job, game, history }) {
   const classes = useStyles();
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} style={{ paddingLeft: 10 }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          marginLeft: 20,
+        }}
+      >
+        <Typography
+          variant="body1"
+          component="p"
+          style={{ width: '100%' }}
+          className={classes.cardSummary}
+        >
+          {job.name}
+        </Typography>
+        <Typography
+          variant="body2"
+          component="p"
+          style={{ width: '100%' }}
+          className={classes.cardSummary}
+        >
+          {game.name}
+        </Typography>
+        <Typography
+          variant="body2"
+          component="p"
+          style={{ width: '100%' }}
+          className={classes.cardSummary}
+        >
+          {job.submitted === 'submitted'
+            ? 'Submitted'
+            : job.submitted === 'closed'
+            ? 'closed'
+            : 'Draft'}
+        </Typography>
+      </div>
       {job.invites.map((invite, index) => (
-        <div key={`invite_${index}`}>
+        <div
+          key={`invite_${index}`}
+          style={{ marginRight: -10 }}
+          title={`${invite.receiver.name} ${
+            invite.status === 'declined' ? '(declined)' : ''
+          }`}
+        >
           <div
             style={{
               backgroundImage: `url(${invite.receiver.profileImg})`,
@@ -24,45 +69,6 @@ export function JobComponent({ job, game, history }) {
           </div>
         </div>
       ))}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '100%',
-        }}
-      >
-        <Typography
-          variant="body1"
-          component="p"
-          style={{ width: '100%', paddingLeft: 10 }}
-          className={classes.cardSummary}
-        >
-          {job.name}
-        </Typography>
-        <Typography
-          variant="body2"
-          component="p"
-          style={{ width: '100%', paddingLeft: 10 }}
-          className={classes.cardSummary}
-        >
-          {game.name}
-        </Typography>
-        <Typography
-          variant="body2"
-          component="p"
-          style={{ width: '100%', paddingLeft: 10 }}
-          className={classes.cardSummary}
-        >
-          {job.submitted === 'submitted'
-            ? 'Submitted'
-            : job.submitted === 'closed'
-            ? 'closed'
-            : 'Draft'}
-        </Typography>
-      </div>
-
       <IconButton
         disabled={false}
         title={
@@ -78,7 +84,7 @@ export function JobComponent({ job, game, history }) {
             ? 'preview'
             : 'edit'
         }
-        styleOverride={{ marginRight: 10 }}
+        styleOverride={{ marginRight: 10, marginLeft: 30 }}
         onClickEvent={() => {
           job.submitted
             ? history.push(`/app/view-job/${job._id}`)

@@ -15,7 +15,7 @@ import {
 import { timeDifferenceForDate } from '../../../../../utils/dates';
 import ViewConversation from '../../../../messages/views/messaging/viewConversation';
 import { Query } from 'react-apollo';
-import { JOB, DETERMINE_CONVERSATION_ID } from '../../../../../data/queries';
+import { JOB, GET_MESSAGES } from '../../../../../data/queries';
 import ProposalForm from './components/proposalForm';
 import Cookies from 'js-cookie';
 import { Mutation } from 'react-apollo';
@@ -25,6 +25,7 @@ import { UPDATE_JOB } from '../../../../../data/mutations';
 
 export default function PreviewJob({ theme, jobId, history }) {
   const classes = useStyles();
+  const [conversationUser, setConversationUser] = React.useState(null);
   const [job, setJob] = React.useState({
     _id: null,
     name: '',
@@ -53,7 +54,6 @@ export default function PreviewJob({ theme, jobId, history }) {
       },
     ],
   });
-  const [conversationId, setConversationId] = React.useState(null);
   const [chatOpen, setChatOpen] = React.useState(false);
   const [proposalOpen, setProposalOpen] = React.useState(false);
   const [messagesEnd, setMessagesEnd] = React.useState(null);
@@ -87,7 +87,7 @@ export default function PreviewJob({ theme, jobId, history }) {
               <Column j="center" a="center">
                 <HeaderTwo str="Invites" />
                 {job.invites.map((invite, index) => (
-                  <div style={{ width: '100%' }}>
+                  <div style={{ width: '100%' }} key={`invite-${index}`}>
                     <Row j="flex-start" a="center">
                       <Row j="flex-start" a="center">
                         <div
@@ -113,9 +113,10 @@ export default function PreviewJob({ theme, jobId, history }) {
                         }
                         icon="chat"
                         title="Discuss"
-                        onClickEvent={() =>
-                          setChatOpen(chatOpen ? false : true)
-                        }
+                        onClickEvent={() => {
+                          setConversationUser(invite.receiver);
+                          setChatOpen(chatOpen ? false : true);
+                        }}
                         styleOverride={{
                           color: invite.status === 'declined' && '#fff',
                         }}
@@ -166,29 +167,47 @@ export default function PreviewJob({ theme, jobId, history }) {
                     iconPos="left"
                   />
                 </div>
-                {chatOpen && (
-                  <div
-                    style={{
-                      padding: 10,
-                      boxSizing: 'border-box',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      background: '#efeff5',
-                      position: 'relative',
-                      width: '100%',
-                    }}
-                  >
-                    {conversationId && (
-                      <ViewConversation
-                        history={history}
-                        conversationId={conversationId}
-                        titles={false}
-                      />
-                    )}
-                  </div>
-                )}
               </div>
             )}
+            <div>
+              {chatOpen && conversationUser && (
+                <Query
+                  query={GET_MESSAGES}
+                  variables={{ jobId: jobId, userId: conversationUser._id }}
+                  fetchPolicy="network-only"
+                >
+                  {({ data }) => {
+                    return data ? (
+                      <div
+                        style={{
+                          padding: 10,
+                          boxSizing: 'border-box',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          background: 'rgba(0,0,0,0.3)',
+                          position: 'fixed',
+                          zIndex: 10,
+                          top: 0,
+                          left: 0,
+                          width: '100%',
+                          height: '100%',
+                          overflow: 'auto',
+                        }}
+                      >
+                        {conversationUser && (
+                          <ViewConversation
+                            history={history}
+                            receiver={conversationUser}
+                            jobId={job._id}
+                            messages={data.getMessages}
+                          />
+                        )}
+                      </div>
+                    ) : null;
+                  }}
+                </Query>
+              )}
+            </div>
             <TextDivider />
             {job.submitted === 'closed' ? null : loggedInUser ===
               job.user._id ? (
@@ -303,20 +322,6 @@ export default function PreviewJob({ theme, jobId, history }) {
               return null;
             }}
           </Query>
-          {job._id && (
-            <Query
-              query={DETERMINE_CONVERSATION_ID}
-              variables={{ jobId: jobId, userId: job.user._id }}
-              fetchPolicy="network-only"
-              onCompleted={(data) => {
-                setConversationId(data.determineConversationId);
-              }}
-            >
-              {({ data }) => {
-                return null;
-              }}
-            </Query>
-          )}
         </div>
         {proposalOpen && (
           <div className={classes.root}>

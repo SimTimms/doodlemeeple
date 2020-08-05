@@ -5,20 +5,18 @@ import { CREATE_MESSAGE } from '../../../data/mutations';
 import { useStyles } from './styles';
 import { IconButton } from '../../';
 
-export default function CreateMessage({ conversationId, updateMessageArray }) {
+export default function CreateMessage({ updateMessageArray, jobId, receiver }) {
   const [newMessage, setNewMessage] = React.useState('');
   const classes = useStyles();
-
   return (
     <Mutation
       mutation={CREATE_MESSAGE}
       variables={{
-        id: 'new',
-        message: {
-          messageStr: newMessage,
-          conversationId: conversationId,
-        },
+        receiverId: receiver._id,
+        jobId: jobId,
+        message: newMessage,
       }}
+      onCompleted={(data) => updateMessageArray(data.messageCreateOne.record)}
     >
       {(mutation) => {
         return (
@@ -43,7 +41,6 @@ export default function CreateMessage({ conversationId, updateMessageArray }) {
               disabled={false}
               color="secondary"
               onClickEvent={() => {
-                updateMessageArray(newMessage);
                 mutation();
                 setNewMessage('');
               }}
@@ -54,6 +51,8 @@ export default function CreateMessage({ conversationId, updateMessageArray }) {
                 paddingLeft: 10,
                 paddingRight: 10,
               }}
+              type="button"
+              iconPos="right"
             />
           </div>
         );

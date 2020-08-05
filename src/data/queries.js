@@ -82,9 +82,27 @@ export const CONVERSATIONS = gql`
   }
 `;
 
-export const DETERMINE_CONVERSATION_ID = gql`
-  query DetermineConversationId($jobId: String!, $userId: String) {
-    determineConversationId(jobId: $jobId, userId: $userId)
+export const GET_MESSAGES = gql`
+  query getMessages($jobId: MongoID!, $userId: MongoID!) {
+    getMessages(jobId: $jobId, userId: $userId) {
+      _id
+      messageStr
+      createdAt
+      sender {
+        _id
+        name
+        profileImg
+      }
+      receiver {
+        _id
+        name
+        profileImg
+      }
+      job {
+        _id
+        name
+      }
+    }
   }
 `;
 

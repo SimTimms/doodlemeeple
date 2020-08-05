@@ -72,64 +72,67 @@ export function AppDrawer(props) {
           )}
         </IconButton>
       </div>
-      {page === 'edit-game' && <Divider />}
-      {page === 'edit-game' ||
-        (page === 'pick-artist' && (
-          <List>
-            {[
-              {
-                name: 'Back',
-                icon: <Icon>chevron_left</Icon>,
-                link: () => {
-                  history.goBack();
-                },
-                color: '#444',
-                count: null,
+      {(page === 'edit-game' ||
+        page === 'pick-artist' ||
+        page === 'view-job') && <Divider />}
+      {(page === 'edit-game' ||
+        page === 'pick-artist' ||
+        page === 'view-job') && (
+        <List>
+          {[
+            {
+              name: 'Back',
+              icon: <Icon>chevron_left</Icon>,
+              link: () => {
+                history.goBack();
               },
-            ].map((text, index) => (
-              <div
-                className={link}
-                key={text.name}
-                onClick={() => {
-                  text.link();
-                  handleDrawerClose();
-                }}
-              >
-                <ListItem button style={{ paddingLeft: 10 }}>
-                  <div className={wrapperFour}>
-                    <ListItemIcon
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#fff',
-                        position: 'relative',
-                      }}
+              color: '#444',
+              count: null,
+            },
+          ].map((text, index) => (
+            <div
+              className={link}
+              key={text.name}
+              onClick={() => {
+                text.link();
+                handleDrawerClose();
+              }}
+            >
+              <ListItem button style={{ paddingLeft: 10 }}>
+                <div className={wrapperFour}>
+                  <ListItemIcon
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#fff',
+                      position: 'relative',
+                    }}
+                  >
+                    {text.icon}
+                  </ListItemIcon>
+                  {text.count !== null && text.count > 0 && (
+                    <Typography
+                      variant="body1"
+                      component="p"
+                      className={countsStyle}
                     >
-                      {text.icon}
-                    </ListItemIcon>
-                    {text.count !== null && text.count > 0 && (
-                      <Typography
-                        variant="body1"
-                        component="p"
-                        className={countsStyle}
-                      >
-                        {text.count}
-                      </Typography>
-                    )}
-                  </div>
-                  <ListItemText
-                    primary={text.name}
-                    className={clsx({
-                      [button]: !mobile,
-                      [buttonMobile]: mobile,
-                    })}
-                  />
-                </ListItem>
-              </div>
-            ))}
-          </List>
-        ))}
+                      {text.count}
+                    </Typography>
+                  )}
+                </div>
+                <ListItemText
+                  primary={text.name}
+                  className={clsx({
+                    [button]: !mobile,
+                    [buttonMobile]: mobile,
+                  })}
+                />
+              </ListItem>
+            </div>
+          ))}
+        </List>
+      )}
       <List>
         {[
           {

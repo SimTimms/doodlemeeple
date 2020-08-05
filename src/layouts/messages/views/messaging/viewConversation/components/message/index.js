@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 
 export function Message({ message, history }) {
   const classes = useStyles();
-  const isUserMessage = message.sender.id !== Cookies.get('userId');
+  const isUserMessage = message.sender._id !== Cookies.get('userId');
 
   return (
     <Card
@@ -73,8 +73,8 @@ export function Message({ message, history }) {
                         history.push(
                           `/app/edit-contract/${message.messageStr.replace(
                             'QUOTE SUBMITTED:',
-                            '',
-                          )}`,
+                            ''
+                          )}`
                         )
                       }
                       type="button"
@@ -91,8 +91,8 @@ export function Message({ message, history }) {
                         history.push(
                           `/app/view-contract/${message.messageStr.replace(
                             'QUOTE SUBMITTED:',
-                            '',
-                          )}`,
+                            ''
+                          )}`
                         )
                       }
                       type="button"

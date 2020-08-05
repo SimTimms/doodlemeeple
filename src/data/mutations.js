@@ -443,8 +443,24 @@ export const REMOVE_NOTIFICATION_MUTATION = gql`
 `;
 
 export const CREATE_MESSAGE = gql`
-  mutation CreateMessage($id: String!, $message: MessageInput!) {
-    createMessage(id: $id, message: $message)
+  mutation CreateMessage(
+    $receiverId: MongoID!
+    $message: String!
+    $jobId: MongoID!
+  ) {
+    messageCreateOne(
+      record: { messageStr: $message, receiver: $receiverId, job: $jobId }
+    ) {
+      recordId
+      record {
+        messageStr
+        sender {
+          name
+          _id
+          profileImg
+        }
+      }
+    }
   }
 `;
 

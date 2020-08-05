@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Slide from '@material-ui/core/Slide';
 import { JobComponent, EmptyJobComponent } from './components/jobComponent';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { JOBS } from '../../../../../data/queries';
-import { ContentHeader, Column } from '../../../../../components';
+import { ContentHeader, Column, LoadIcon } from '../../../../../components';
 
 export default function Jobs({ history }) {
   const classes = useStyles();
+  const [loading, setLoading] = React.useState(true);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -19,8 +20,12 @@ export default function Jobs({ history }) {
             subTitleExtra=""
             button={null}
           />
-
-          <Query query={JOBS} fetchPolicy="network-only">
+          {loading && <LoadIcon />}
+          <Query
+            query={JOBS}
+            fetchPolicy="network-only"
+            onCompleted={() => setLoading(false)}
+          >
             {({ data }) => {
               return data
                 ? data.jobsByUser.map((job, index) => {
