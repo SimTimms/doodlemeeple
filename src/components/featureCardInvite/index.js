@@ -32,7 +32,6 @@ export default function FeatureCardInvite({
             src={thumbnail}
             alt=""
           />
-          <HeaderTwo str={job} />
           <TextArray
             str={
               <div
@@ -48,12 +47,11 @@ export default function FeatureCardInvite({
                   onClick={() => {
                     history.push(`/public-preview/${authorId}`);
                   }}
-                >{`${author}`}</Typography>
+                >{`Invite from ${author}`}</Typography>
               </div>
             }
           />
-
-          <TextDivider />
+          <HeaderTwo str={job} />
           <div
             style={{
               display: 'flex',

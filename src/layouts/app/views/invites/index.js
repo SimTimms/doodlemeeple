@@ -11,7 +11,7 @@ export function Invites({ history }) {
   const [inviteArray, setInviteArray] = React.useState([]);
 
   const removeInvite = (id) => {
-    const newArray = inviteArray.filter((item) => item.id !== id);
+    const newArray = inviteArray.filter((item) => item._id !== id);
     setInviteArray(newArray);
   };
 

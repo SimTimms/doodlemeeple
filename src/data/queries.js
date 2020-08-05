@@ -155,6 +155,7 @@ export const INVITES = gql`
         _id
         name
         summary
+        submitted
       }
     }
   }

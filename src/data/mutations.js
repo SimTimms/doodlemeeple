@@ -55,8 +55,10 @@ export const DELETE_IMAGE = gql`
 `;
 
 export const UPDATE_INVITE = gql`
-  mutation UpdateInvite($id: String!, $invite: InviteInput!) {
-    updateInvite(id: $id, invite: $invite)
+  mutation UpdateInvite($_id: MongoID!) {
+    declineInvite(_id: $_id) {
+      _id
+    }
   }
 `;
 

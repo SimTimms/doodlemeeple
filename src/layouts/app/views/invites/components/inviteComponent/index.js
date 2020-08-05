@@ -1,5 +1,7 @@
 import React from 'react';
 import { IconButton, FeatureCardInvite } from '../../../../../../components';
+import { Mutation } from 'react-apollo';
+import { UPDATE_INVITE } from '../../../../../../data/mutations';
 
 export function InviteComponent({ invite, removeInvite, history }) {
   return (
@@ -11,18 +13,30 @@ export function InviteComponent({ invite, removeInvite, history }) {
       authorId={invite.user._id}
       history={history}
       buttonOne={
-        <IconButton
-          color="text-dark"
-          disabled={false}
-          onClickEvent={() => {
-            removeInvite();
+        <Mutation
+          mutation={UPDATE_INVITE}
+          variables={{
+            _id: invite._id,
           }}
-          icon="close"
-          iconPos="left"
-          title="Decline"
-          styleOverride={null}
-          type="button"
-        />
+        >
+          {(mutation) => {
+            return (
+              <IconButton
+                color="text-dark"
+                disabled={false}
+                onClickEvent={() => {
+                  mutation();
+                  removeInvite(invite._id);
+                }}
+                icon="close"
+                iconPos="left"
+                title="Decline"
+                styleOverride={null}
+                type="button"
+              />
+            );
+          }}
+        </Mutation>
       }
       buttonTwo={
         <IconButton
