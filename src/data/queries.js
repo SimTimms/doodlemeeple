@@ -167,6 +167,14 @@ export const JOB = gql`
       _id
       name
       keywords
+      invites {
+        status
+        receiver {
+          _id
+          name
+          profileImg
+        }
+      }
       img
       summary
       location
@@ -208,6 +216,14 @@ export const JOBS = gql`
         _id
         name
         backgroundImg
+      }
+      invites {
+        status
+        receiver {
+          _id
+          name
+          profileImg
+        }
       }
     }
   }

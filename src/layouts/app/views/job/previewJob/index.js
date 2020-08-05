@@ -5,10 +5,12 @@ import {
   IconButton,
   ColumnWrapper,
   HeaderTwo,
+  Column,
   Text,
   TextDivider,
   Meta,
   UnlockInfoReverse,
+  Row,
 } from '../../../../../components';
 import { timeDifferenceForDate } from '../../../../../utils/dates';
 import ViewConversation from '../../../../messages/views/messaging/viewConversation';
@@ -40,6 +42,16 @@ export default function PreviewJob({ theme, jobId, history }) {
     gameId: '',
     submitted: '',
     user: { name: '', _id: '' },
+    invites: [
+      {
+        status: '',
+        receiver: {
+          _id: '',
+          name: '',
+          profileImg: '',
+        },
+      },
+    ],
   });
   const [conversationId, setConversationId] = React.useState(null);
   const [chatOpen, setChatOpen] = React.useState(false);
@@ -57,9 +69,6 @@ export default function PreviewJob({ theme, jobId, history }) {
       <div className={classes.rootRow}>
         <div className={classes.root}>
           <ColumnWrapper>
-            {job.submitted === 'closed' && (
-              <UnlockInfoReverse str="This project has been closed by the owner" />
-            )}
             <HeaderTwo str={job.name} />
             <Meta
               str={`${timeDifferenceForDate(job.createdAt)} | ${job.user.name}`}
@@ -70,6 +79,56 @@ export default function PreviewJob({ theme, jobId, history }) {
             <HeaderTwo str="Ideal Creative" />
             <Text str={job.creativeSummary} />
           </ColumnWrapper>
+          <ColumnWrapper>
+            {job.submitted === 'closed' && (
+              <UnlockInfoReverse str="This project has been closed by the owner" />
+            )}
+            {loggedInUser === job.user._id && (
+              <Column j="center" a="center">
+                <HeaderTwo str="Invites" />
+                {job.invites.map((invite, index) => (
+                  <div style={{ width: '100%' }}>
+                    <Row j="flex-start" a="center">
+                      <Row j="flex-start" a="center">
+                        <div
+                          style={{
+                            backgroundImage: `url(${invite.receiver.profileImg})`,
+                          }}
+                          className={classes.profileThumb}
+                          key={`profile_${index}`}
+                        ></div>
+                        <Typography>
+                          {invite.receiver.name}{' '}
+                          {invite.status
+                            ? `(${invite.status})`
+                            : '(no response)'}
+                        </Typography>
+                      </Row>
+                      <IconButton
+                        disabled={invite.status === 'declined'}
+                        color={
+                          invite.status === 'declined'
+                            ? 'text-white'
+                            : 'text-dark'
+                        }
+                        icon="chat"
+                        title="Discuss"
+                        onClickEvent={() =>
+                          setChatOpen(chatOpen ? false : true)
+                        }
+                        styleOverride={{
+                          color: invite.status === 'declined' && '#fff',
+                        }}
+                        type="button"
+                        iconPos="left"
+                      />
+                    </Row>
+                  </div>
+                ))}
+              </Column>
+            )}
+          </ColumnWrapper>
+
           {/*
           <ColumnWrapper>
             <HeaderTwo str="The Project" />
@@ -82,7 +141,7 @@ export default function PreviewJob({ theme, jobId, history }) {
             <Text str={job.game.summary} />
             </ColumnWrapper>*/}
           <ColumnWrapper>
-            {job.submitted !== 'closed' && (
+            {job.submitted !== 'closed' && loggedInUser !== job.user._id && (
               <div>
                 <HeaderTwo str="Discuss" />
                 <Text
@@ -232,13 +291,11 @@ export default function PreviewJob({ theme, jobId, history }) {
               </div>
             )}
           </ColumnWrapper>
-
           <Query
             query={JOB}
             variables={{ jobId: jobId }}
             fetchPolicy="network-only"
             onCompleted={(data) => {
-              console.log(data);
               data.jobById && setJob({ ...data.jobById });
             }}
           >

@@ -10,16 +10,20 @@ export function JobComponent({ job, game, history }) {
   const classes = useStyles();
   return (
     <Card className={classes.card}>
-      <div
-        style={{
-          backgroundImage: game.backgroundImg
-            ? `url(${game.backgroundImg})`
-            : '',
-          backgroundSize: 'cover',
-          marginRight: 20,
-        }}
-        className={classes.gameImg}
-      />
+      {job.invites.map((invite, index) => (
+        <div key={`invite_${index}`}>
+          <div
+            style={{
+              backgroundImage: `url(${invite.receiver.profileImg})`,
+            }}
+            className={classes.profileThumb}
+          >
+            {invite.status === 'declined' && (
+              <div className={classes.declined}></div>
+            )}
+          </div>
+        </div>
+      ))}
       <div
         style={{
           display: 'flex',
