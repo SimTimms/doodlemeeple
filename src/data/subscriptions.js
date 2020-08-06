@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const NEW_MESSAGES = gql`
-  subscription newMessage($conversationId: String!) {
-    newMessage(conversationId: $conversationId) {
+  subscription newMessage($jobId: MongoID!, $userId: MongoID!, $pageNbr: Int!) {
+    messageSub(jobId: $jobId, userId: $userId, pageNbr: $pageNbr) {
       id
       messageStr
       createdAt

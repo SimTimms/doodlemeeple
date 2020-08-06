@@ -64,7 +64,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: theme.palette.secondary.main,
+    background: theme.palette.error.main,
     color: '#fff',
   },
   drawerOpenMobile: {

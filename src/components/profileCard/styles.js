@@ -34,6 +34,7 @@ export const useStyles = makeStyles((theme) => ({
     border: '5px solid #fff',
     marginTop: -50,
   },
+  profileNoBG: { marginTop: 10 },
   creativeCardDetails: {
     padding: 20,
     paddingTop: 0,

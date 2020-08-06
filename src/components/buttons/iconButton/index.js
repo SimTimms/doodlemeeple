@@ -57,6 +57,7 @@ export default function IconButton({
             [classes.iconButtonIconText]: color === 'text',
             [classes.iconButtonIconTextWhite]: color === 'text-white',
             [classes.iconButtonIconTextDark]: color === 'text-dark',
+            [classes.iconButtonIconTextMini]: color === 'text-mini',
             [classes.iconButtonIconTextError]: color === 'text-error',
             [classes.iconRight]: iconPos === 'right',
           })}

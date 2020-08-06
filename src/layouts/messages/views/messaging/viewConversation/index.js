@@ -2,33 +2,42 @@ import React from 'react';
 import { Button, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import Messages from './components/messages';
+import { IconButton } from '../../../../../components';
 
 export default function ViewConversation({
   history,
   receiver,
   jobId,
   messages,
+  pageNbr,
+  setPageNbr,
+  setMessages,
 }) {
   const classes = useStyles();
-  const [pageNbr, setPageNbr] = React.useState(1);
 
   return (
     <div className={classes.root}>
       <Messages
-        messageArrayIn={messages}
+        messages={messages}
         classes={classes}
         history={history}
         receiver={receiver}
         jobId={jobId}
         pageNbr={pageNbr}
+        setMessages={setMessages}
         moreButton={
-          <Button
-            onClick={() => {
+          <IconButton
+            icon="more_horiz"
+            title=""
+            iconPos="right"
+            color="text-mini"
+            disabled={false}
+            type="button"
+            styleOverride={null}
+            onClickEvent={() => {
               setPageNbr(pageNbr + 1);
             }}
-          >
-            <Icon>more_horiz</Icon>
-          </Button>
+          />
         }
       />
     </div>

@@ -74,6 +74,7 @@ export const useStyles = makeStyles((theme) => ({
     margin: 0,
     letterSpacing: 1.3,
     textShadow: '3px 3px 4px rgba(0,0,0,0.1)',
+    textTransform: 'none',
     '&:hover': {
       background: '#efeff5',
     },

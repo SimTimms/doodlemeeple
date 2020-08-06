@@ -31,7 +31,7 @@ export default function Conversations({ history }) {
                 }}
                 onCompleted={() => {
                   history.push(
-                    `/messages/view-conversation/${conversation.id}`,
+                    `/messages/view-conversation/${conversation.id}`
                   );
                 }}
               >
@@ -41,14 +41,9 @@ export default function Conversations({ history }) {
                       disabled={false}
                       key={`conversationparent_${index}`}
                       history={history}
-                      backgroundImg={conversation.job.game.backgroundImg}
-                      subtitle={conversation.participants.map(
-                        (user) =>
-                          user.id !== Cookies.get('userId') && user.name,
-                      )}
-                      profiles={conversation.participants.filter(
-                        (item) => item.id !== Cookies.get('userId'),
-                      )}
+                      backgroundImg=""
+                      subtitle={`${conversation.sender.name}, ${conversation.receiver.name}`}
+                      profiles={[conversation.sender, conversation.receiver]}
                       count={conversation.unreadMessages}
                       title={conversation.job.name}
                       onClickEvent={() => {
@@ -74,49 +69,6 @@ export default function Conversations({ history }) {
             return null;
           }}
         </Query>
-        <Typography
-          color="textSecondary"
-          component="p"
-          style={{
-            textAlign: 'center',
-            width: '100%',
-            marginTop: 10,
-            paddingBottom: 10,
-          }}
-        >
-          History
-        </Typography>
-        <div className={classes.cardGrid}>
-          <Query
-            query={CONVERSATIONS}
-            variables={{ status: 'declined' }}
-            fetchPolicy="network-only"
-          >
-            {({ data }) => {
-              return data
-                ? data.getConversations.map((conversation, index) => {
-                    return (
-                      <MessageComponent
-                        disabled={true}
-                        key={`conversationparent_${index}`}
-                        history={history}
-                        backgroundImg={conversation.job.game.backgroundImg}
-                        subtitle={conversation.participants.map(
-                          (user) =>
-                            user.id !== Cookies.get('userId') && user.name,
-                        )}
-                        profiles={conversation.participants}
-                        count={conversation.unreadMessages}
-                        title={conversation.job.name}
-                        onClickEvent={null}
-                        miniProfile={null}
-                      />
-                    );
-                  })
-                : null;
-            }}
-          </Query>
-        </div>
       </div>
     </Slide>
   );

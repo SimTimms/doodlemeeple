@@ -20,7 +20,6 @@ import ProposalForm from './components/proposalForm';
 import Cookies from 'js-cookie';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../../../../utils/toaster';
-
 import { UPDATE_JOB } from '../../../../../data/mutations';
 
 export default function PreviewJob({ theme, jobId, history }) {
@@ -42,7 +41,7 @@ export default function PreviewJob({ theme, jobId, history }) {
     creativeSummary: '',
     gameId: '',
     submitted: '',
-    user: { name: '', _id: '' },
+    user: { name: '', _id: '', profileImg: '' },
     invites: [
       {
         status: '',
@@ -59,6 +58,8 @@ export default function PreviewJob({ theme, jobId, history }) {
   const [messagesEnd, setMessagesEnd] = React.useState(null);
   const [closeConfirm, setCloseConfirm] = React.useState(false);
   const loggedInUser = Cookies.get('userId');
+  const [pageNbr, setPageNbr] = React.useState(0);
+  const [messages, setMessages] = React.useState([]);
 
   useEffect(() => {
     messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' });
@@ -79,11 +80,14 @@ export default function PreviewJob({ theme, jobId, history }) {
             <HeaderTwo str="Ideal Creative" />
             <Text str={job.creativeSummary} />
           </ColumnWrapper>
-          <ColumnWrapper>
-            {job.submitted === 'closed' && (
+
+          {job.submitted === 'closed' && (
+            <ColumnWrapper>
               <UnlockInfoReverse str="This project has been closed by the owner" />
-            )}
-            {loggedInUser === job.user._id && (
+            </ColumnWrapper>
+          )}
+          {loggedInUser === job.user._id && (
+            <ColumnWrapper>
               <Column j="center" a="center">
                 <HeaderTwo str="Invites" />
                 {job.invites.map((invite, index) => (
@@ -127,54 +131,54 @@ export default function PreviewJob({ theme, jobId, history }) {
                   </div>
                 ))}
               </Column>
-            )}
-          </ColumnWrapper>
-
-          {/*
-          <ColumnWrapper>
-            <HeaderTwo str="The Project" />
-            <TextLink
-              str={job.game.name}
-              onClickEvent={() => {
-                history.push(`/app/view-game/${job.game._id}`);
-              }}
-            />
-            <Text str={job.game.summary} />
-            </ColumnWrapper>*/}
-          <ColumnWrapper>
-            {job.submitted !== 'closed' && loggedInUser !== job.user._id && (
-              <div>
-                <HeaderTwo str="Discuss" />
-                <Text
-                  str={`You've probably got some questions, please feel free to start a discussion with ${job.user.name}`}
-                />
-                <div
-                  style={{
-                    display: 'flex',
-                    width: '100%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
+            </ColumnWrapper>
+          )}
+          {loggedInUser !== job.user._id && (
+            <ColumnWrapper>
+              <Column j="center" a="center">
+                <HeaderTwo str="Project Creator" />
+                <Row j="flex-start" a="center">
+                  <Row j="flex-start" a="center">
+                    <div
+                      style={{
+                        backgroundImage: `url(${job.user.profileImg})`,
+                      }}
+                      className={classes.profileThumb}
+                    ></div>
+                    <Typography>{job.user.name}</Typography>
+                  </Row>
                   <IconButton
                     disabled={false}
                     color="text-dark"
-                    icon={chatOpen ? 'chat' : 'chat'}
-                    title={chatOpen ? 'Minimise Chat' : 'Chat'}
-                    onClickEvent={() => setChatOpen(chatOpen ? false : true)}
+                    icon="chat"
+                    title="Discuss"
+                    onClickEvent={() => {
+                      setConversationUser(job.user);
+                      setChatOpen(chatOpen ? false : true);
+                    }}
                     styleOverride={null}
                     type="button"
                     iconPos="left"
                   />
-                </div>
-              </div>
-            )}
+                </Row>
+              </Column>
+            </ColumnWrapper>
+          )}
+
+          <ColumnWrapper>
             <div>
               {chatOpen && conversationUser && (
                 <Query
                   query={GET_MESSAGES}
-                  variables={{ jobId: jobId, userId: conversationUser._id }}
+                  variables={{
+                    jobId: jobId,
+                    userId: conversationUser._id,
+                    pageNbr: pageNbr,
+                  }}
                   fetchPolicy="network-only"
+                  onCompleted={(data) =>
+                    setMessages([...data.getMessages.reverse(), ...messages])
+                  }
                 >
                   {({ data }) => {
                     return data ? (
@@ -184,7 +188,7 @@ export default function PreviewJob({ theme, jobId, history }) {
                           boxSizing: 'border-box',
                           display: 'flex',
                           justifyContent: 'center',
-                          background: 'rgba(0,0,0,0.3)',
+                          background: '#efeff5',
                           position: 'fixed',
                           zIndex: 10,
                           top: 0,
@@ -194,12 +198,31 @@ export default function PreviewJob({ theme, jobId, history }) {
                           overflow: 'auto',
                         }}
                       >
+                        <IconButton
+                          title="Close"
+                          icon=""
+                          iconPos="right"
+                          color="warning"
+                          type="button"
+                          styleOverride={{
+                            top: 60,
+                            position: 'fixed',
+                            zIndex: 10,
+                          }}
+                          disabled={false}
+                          onClickEvent={() => {
+                            setChatOpen(false);
+                          }}
+                        />
                         {conversationUser && (
                           <ViewConversation
                             history={history}
                             receiver={conversationUser}
                             jobId={job._id}
-                            messages={data.getMessages}
+                            messages={messages}
+                            pageNbr={pageNbr}
+                            setPageNbr={setPageNbr}
+                            setMessages={setMessages}
                           />
                         )}
                       </div>
@@ -315,6 +338,7 @@ export default function PreviewJob({ theme, jobId, history }) {
             variables={{ jobId: jobId }}
             fetchPolicy="network-only"
             onCompleted={(data) => {
+              console.log(data);
               data.jobById && setJob({ ...data.jobById });
             }}
           >

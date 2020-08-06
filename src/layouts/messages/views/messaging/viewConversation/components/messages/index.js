@@ -1,39 +1,29 @@
 import React, { useEffect } from 'react';
 import { Message } from '../message';
-import { Button, Icon } from '@material-ui/core';
-
-import { NEW_MESSAGES } from '../../../../../../../data/subscriptions';
 import {
   CreateMessage,
   DividerWithBorder,
 } from '../../../../../../../components';
-import Cookies from 'js-cookie';
 
 export default function Messages({
-  messageArrayIn,
+  messages,
   classes,
   moreButton,
   history,
   jobId,
   receiver,
   pageNbr,
+  setMessages,
 }) {
-  const thisUserId = Cookies.get('userId');
-  const [messageArray, setMessageArray] = React.useState([]);
   const [messagesEnd, setMessagesEnd] = React.useState(null);
-  const [pageNbr, setPageNbr] = React.useState(1);
-
-  useEffect(() => {
-    setMessageArray(messageArrayIn);
-  }, [messageArrayIn]);
 
   useEffect(() => {
     messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' });
   });
 
   function updateMessageArray(messageIn) {
-    setMessageArray([
-      ...messageArray,
+    setMessages([
+      ...messages,
       {
         messageStr: messageIn.messageStr,
         createdAt: new Date(),
@@ -51,14 +41,8 @@ export default function Messages({
   return (
     <div style={{ width: '100%' }}>
       <div className={classes.cardGrid}>
-        <Button
-          onClick={() => {
-            setPageNbr(pageNbr + 1);
-          }}
-        >
-          <Icon>more_horiz</Icon>
-        </Button>
-        {messageArray.map((message, index) => {
+        {moreButton}
+        {messages.map((message, index) => {
           return (
             message.sender && (
               <Message
@@ -76,7 +60,6 @@ export default function Messages({
           }}
         ></div>
       </div>
-      <DividerWithBorder />
       <div className={classes.createWrapper}>
         <CreateMessage
           updateMessageArray={updateMessageArray}

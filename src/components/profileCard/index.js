@@ -65,6 +65,7 @@ export default function ProfileCard({
         className={clsx({
           [classes.creativeCardBackground]: true,
           [classes.noProfile]: !creative.profileImg,
+          [classes.profileNoBG]: !creative.profileBG,
         })}
         style={{
           backgroundImage:

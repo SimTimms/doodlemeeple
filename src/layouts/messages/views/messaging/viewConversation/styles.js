@@ -5,8 +5,8 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: 500,
     width: '100%',
     boxSizing: 'border-box',
-    paddingTop: 60,
-    paddingBottom: 60,
+    paddingTop: 120,
+    paddingBottom: 120,
   },
   createWrapper: {
     padding: 20,
@@ -43,6 +43,6 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
-    paddingBottom: 60,
+    paddingBottom: 120,
   },
 }));

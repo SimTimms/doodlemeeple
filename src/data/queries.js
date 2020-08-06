@@ -61,30 +61,30 @@ export const GAMES = gql`
 `;
 
 export const CONVERSATIONS = gql`
-  query GetConversations($status: String!) {
-    getConversations(status: $status) {
-      id
-      createdAt
-      unreadMessages
-      participants {
-        id
+  query GetConversations {
+    getConversations {
+      _id
+      job {
+        _id
         name
+      }
+      receiver {
+        name
+        _id
         profileImg
       }
-      job {
-        id
+      sender {
+        _id
         name
-        game {
-          backgroundImg
-        }
+        profileImg
       }
     }
   }
 `;
 
 export const GET_MESSAGES = gql`
-  query getMessages($jobId: MongoID!, $userId: MongoID!) {
-    getMessages(jobId: $jobId, userId: $userId) {
+  query getMessages($jobId: MongoID!, $userId: MongoID!, $pageNbr: Int!) {
+    getMessages(jobId: $jobId, userId: $userId, pageNbr: $pageNbr) {
       _id
       messageStr
       createdAt
@@ -207,6 +207,7 @@ export const JOB = gql`
       user {
         _id
         name
+        profileImg
       }
       invites {
         _id

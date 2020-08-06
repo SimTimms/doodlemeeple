@@ -12,7 +12,6 @@ import {
   useMediaQuery,
   Typography,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import { useStyles } from '../styles';
 import Cookies from 'js-cookie';
 import clsx from 'clsx';
@@ -169,6 +168,13 @@ export function AppDrawer(props) {
             link: () => history.push('/app/jobs'),
             color: '#444',
             count: null,
+          },
+          {
+            name: 'Messages',
+            icon: <Icon>chat</Icon>,
+            link: () => history.push('/messages/conversations'),
+            color: '#444',
+            count: counts.messages,
           } /*
           {
             name: 'Invites',
@@ -184,13 +190,7 @@ export function AppDrawer(props) {
             color: '#444',
             count: counts.invites,
           },
-          {
-            name: 'Messages (Beta)',
-            icon: <Icon>chat</Icon>,
-            link: '/messages/conversations',
-            color: '#444',
-            count: counts.messages,
-          }*/,
+         */,
           ,
         ].map((text, index) => (
           <div
