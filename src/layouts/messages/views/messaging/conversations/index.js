@@ -4,13 +4,12 @@ import { useStyles } from './styles';
 import { Query, Mutation } from 'react-apollo';
 import { CONVERSATIONS } from '../../../../../data/queries';
 import { ContentHeader, MessageComponent } from '../../../../../components';
-import { MARK_AS_READ } from '../../../../../data/mutations';
 import Cookies from 'js-cookie';
 
-export default function Conversations({ history }) {
+export default function Conversations({ history, setConversationArgs }) {
   const classes = useStyles();
   const [conversationArray, setConversationArray] = React.useState([]);
-
+  const userId = Cookies.get('userId');
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -23,37 +22,30 @@ export default function Conversations({ history }) {
         <div className={classes.cardGrid}>
           {conversationArray.map((conversation, index) => {
             return (
-              <Mutation
-                key={`mutation_${index}`}
-                mutation={MARK_AS_READ}
-                variables={{
-                  conversationId: conversation.id,
-                }}
-                onCompleted={() => {
-                  history.push(
-                    `/messages/view-conversation/${conversation.id}`
+              <MessageComponent
+                disabled={false}
+                key={`conversationparent_${index}`}
+                history={history}
+                backgroundImg=""
+                subtitle={`${conversation.sender.name}, ${conversation.receiver.name}`}
+                profiles={[conversation.sender, conversation.receiver]}
+                count={conversation.count}
+                title={conversation.job.name}
+                onClickEvent={() => {
+                  history.replace(
+                    `/messages/conversations/${conversation.job._id}`
                   );
+                  setConversationArgs({
+                    jobId: conversation.job._id,
+                    conversationUser:
+                      conversation.sender._id !== userId
+                        ? conversation.sender._id
+                        : conversation.receiver._id,
+                    pageNbr: 0,
+                  });
                 }}
-              >
-                {(mutation) => {
-                  return (
-                    <MessageComponent
-                      disabled={false}
-                      key={`conversationparent_${index}`}
-                      history={history}
-                      backgroundImg=""
-                      subtitle={`${conversation.sender.name}, ${conversation.receiver.name}`}
-                      profiles={[conversation.sender, conversation.receiver]}
-                      count={conversation.unreadMessages}
-                      title={conversation.job.name}
-                      onClickEvent={() => {
-                        mutation();
-                      }}
-                      miniProfile={null}
-                    />
-                  );
-                }}
-              </Mutation>
+                miniProfile={null}
+              />
             );
           })}
         </div>

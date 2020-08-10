@@ -64,6 +64,7 @@ export const CONVERSATIONS = gql`
   query GetConversations {
     getConversations {
       _id
+      count
       job {
         _id
         name
