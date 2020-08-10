@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react';
 import { Message } from '../message';
-import {
-  CreateMessage,
-  DividerWithBorder,
-} from '../../../../../../../components';
+import { CreateMessage } from '../../../../../../../components';
 
 export default function Messages({
   messages,
@@ -16,6 +13,7 @@ export default function Messages({
   setMessages,
 }) {
   const [messagesEnd, setMessagesEnd] = React.useState(null);
+  const [viewer, setViewer] = React.useState(null);
 
   useEffect(() => {
     messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' });
@@ -27,6 +25,7 @@ export default function Messages({
       {
         messageStr: messageIn.messageStr,
         createdAt: new Date(),
+        type: messageIn.type,
         _id: 'new',
         receiver: { _id: '', name: '', profileImg: '' },
         sender: {
@@ -40,6 +39,30 @@ export default function Messages({
 
   return (
     <div style={{ width: '100%' }}>
+      {viewer && (
+        <div
+          style={{
+            position: 'fixed',
+            width: '100%',
+            height: '100%',
+            top: 0,
+            left: 0,
+            background: 'rgba(0,0,0,0.8)',
+            zIndex: 11,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+          onClick={() => {
+            setViewer(null);
+          }}
+        >
+          <img
+            src={viewer}
+            style={{ marginLeft: 20, marginRight: 20, width: '100%' }}
+          />
+        </div>
+      )}
       <div className={classes.cardGrid}>
         {moreButton}
         {messages.map((message, index) => {
@@ -49,6 +72,7 @@ export default function Messages({
                 key={`message_${index}`}
                 message={message}
                 history={history}
+                setViewer={setViewer}
               />
             )
           );

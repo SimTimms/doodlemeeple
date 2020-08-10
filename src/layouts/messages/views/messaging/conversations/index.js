@@ -39,8 +39,8 @@ export default function Conversations({ history, setConversationArgs }) {
                     jobId: conversation.job._id,
                     conversationUser:
                       conversation.sender._id !== userId
-                        ? conversation.sender._id
-                        : conversation.receiver._id,
+                        ? conversation.sender
+                        : conversation.receiver,
                     pageNbr: 0,
                   });
                 }}

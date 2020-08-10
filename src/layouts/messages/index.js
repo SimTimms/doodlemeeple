@@ -88,7 +88,7 @@ function MessagesLayout(props) {
         })}
       >
         <ContentTop style={{ width: '100%' }}>
-          {!pathParam ? (
+          {!pathParam || !conversationArgs.jobId ? (
             <Conversations
               history={props.history}
               setConversationArgs={setConversationArgs}
@@ -98,7 +98,7 @@ function MessagesLayout(props) {
               query={GET_MESSAGES}
               variables={{
                 jobId: conversationArgs.jobId,
-                userId: conversationArgs.conversationUser,
+                userId: conversationArgs.conversationUser._id,
                 pageNbr: conversationArgs.pageNbr,
               }}
               fetchPolicy="network-only"
@@ -124,17 +124,15 @@ function MessagesLayout(props) {
                       overflow: 'auto',
                     }}
                   >
-                    {conversationArgs.conversationUser && (
-                      <ViewConversation
-                        history={props.history}
-                        receiver={conversationArgs.conversationUser}
-                        jobId={conversationArgs.jobId}
-                        messages={messages}
-                        pageNbr={conversationArgs.pageNbr}
-                        setPageNbr={setPageNbr}
-                        setMessages={setMessages}
-                      />
-                    )}
+                    <ViewConversation
+                      history={props.history}
+                      receiver={conversationArgs.conversationUser}
+                      jobId={conversationArgs.jobId}
+                      messages={messages}
+                      pageNbr={conversationArgs.pageNbr}
+                      setPageNbr={setPageNbr}
+                      setMessages={setMessages}
+                    />
                   </div>
                 ) : null;
               }}

@@ -447,13 +447,20 @@ export const CREATE_MESSAGE = gql`
     $receiverId: MongoID!
     $message: String!
     $jobId: MongoID!
+    $type: String
   ) {
     messageCreateOne(
-      record: { messageStr: $message, receiver: $receiverId, job: $jobId }
+      record: {
+        messageStr: $message
+        receiver: $receiverId
+        job: $jobId
+        type: $type
+      }
     ) {
       recordId
       record {
         messageStr
+        type
         sender {
           name
           _id

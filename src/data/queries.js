@@ -89,6 +89,7 @@ export const GET_MESSAGES = gql`
       _id
       messageStr
       createdAt
+      type
       sender {
         _id
         name
