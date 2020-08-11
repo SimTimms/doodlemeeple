@@ -18,7 +18,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   cover: {
-    background: 'rgba(255, 255, 255, 0.8)',
+    background: 'rgba(255, 255, 255, 0.9)',
     width: '100%',
     height: '100%',
     position: 'absolute',
@@ -45,7 +45,7 @@ export const useStyles = makeStyles((theme) => ({
     paddingRight: 40,
     paddingBottom: 20,
     paddingTop: 20,
-    maxWidth: 550,
+    maxWidth: 650,
     width: '100%',
     boxSizing: 'border-box',
   },
@@ -92,7 +92,6 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    filter: 'grayscale(90%) brightness(60%)',
   },
   card: {
     width: '100%',
@@ -102,9 +101,10 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'nowrap',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1,
+    width: '100%',
   },
   wrapperOne: {
     display: 'flex',

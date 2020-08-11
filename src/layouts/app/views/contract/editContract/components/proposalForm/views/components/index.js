@@ -12,15 +12,13 @@ export function EditButton({ contract, jobId, setContract }) {
     <Mutation
       mutation={UPDATE_CONTRACT}
       variables={{
-        id: contract.id,
-        contract: {
-          notes: contract.notes,
-          deadline: contract.deadline,
-          currency: contract.currency,
-          cost: parseInt(contract.cost),
-          jobId,
-          status: '',
-        },
+        _id: contract._id,
+        notes: contract.notes,
+        deadline: contract.deadline,
+        currency: contract.currency,
+        cost: contract.cost,
+        jobId,
+        status: '',
       }}
       onCompleted={(data) => {
         toaster('Editing');
@@ -38,6 +36,8 @@ export function EditButton({ contract, jobId, setContract }) {
             onClickEvent={() => {
               mutation();
             }}
+            type="button"
+            iconPos="right"
           />
         );
       }}
@@ -50,7 +50,7 @@ export function SubmitButton({ contract, jobId, setContract }) {
     <Mutation
       mutation={SUBMIT_CONTRACT}
       variables={{
-        id: contract.id,
+        _id: contract._id,
       }}
       onCompleted={(data) => {
         toaster('Submitting...');
@@ -68,6 +68,8 @@ export function SubmitButton({ contract, jobId, setContract }) {
             onClickEvent={() => {
               mutation();
             }}
+            type="button"
+            iconPos="right"
           />
         );
       }}
@@ -86,6 +88,8 @@ export function ViewButton({ history, contractId }) {
       onClickEvent={() => {
         history.push(`/app/view-contract/${contractId}`);
       }}
+      type="button"
+      iconPos="right"
     />
   );
 }

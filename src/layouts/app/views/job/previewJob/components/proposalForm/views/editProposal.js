@@ -8,6 +8,8 @@ import {
   Divider,
   IconButton,
   ActionWrapper,
+  FieldBox,
+  Column,
 } from '../../../../../../../../components';
 import PaymentTerm from '../components';
 import autosave from '../../../../../../../../utils/autosave';
@@ -35,10 +37,10 @@ export default function EditProposalForm({
   const [saveLock, setSaveLock] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [contract, setContract] = React.useState({
-    id: '',
+    _id: '',
     notes: '',
     deadline: '',
-    cost: '',
+    cost: '100',
     paymentTerms: [],
     currency: 'GBP',
     status: '',
@@ -50,7 +52,7 @@ export default function EditProposalForm({
     const paymentTerms = contractData.paymentTerms;
 
     setContract({
-      id: contractData.id,
+      _id: contractData._id,
       paymentTerms: paymentTerms,
       notes: contractData.notes,
       deadline: contractData.deadline,
@@ -113,25 +115,20 @@ upon completion of this contract.`,
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div>
-        {contract.id === '' ? (
+        {contract._id === '' ? (
           <ActionWrapper>
             <Mutation
               mutation={CREATE_CONTRACT}
               variables={{
-                id: contract.id,
-                contract: {
-                  notes: '',
-                  deadline: '',
-                  currency: 'GBP',
-                  cost: 0,
-                  jobId,
-                },
+                currency: 'GBP',
+                cost: '0',
+                jobId,
               }}
               onCompleted={(data) => {
                 toaster('Autosave');
-                const updatedId = data.createContract;
+                const updatedId = data.contractCreateOne.recordId;
                 setLoading(false);
-                setContract({ ...contract, id: updatedId });
+                setContract({ ...contract, _id: updatedId });
               }}
             >
               {(mutation) => {
@@ -170,93 +167,96 @@ upon completion of this contract.`,
             <Mutation
               mutation={UPDATE_CONTRACT}
               variables={{
-                id: contract.id,
-                contract: {
-                  notes: contract.notes,
-                  deadline: contract.deadline,
-                  currency: contract.currency,
-                  cost: parseInt(contract.cost),
-                  jobId,
-                },
+                _id: contract._id,
+                notes: contract.notes,
+                deadline: contract.deadline,
+                currency: contract.currency,
+                cost: contract.cost,
               }}
               onCompleted={(data) => {
                 toaster('Autosave');
                 setDetailsLock(false);
                 setLoading(false);
-                const updatedId = data.updateContract;
-                setContract({ ...contract, id: updatedId });
               }}
             >
               {(mutation) => {
                 return (
                   <div className={classes.root}>
-                    <FieldTitleWrapper>
+                    <Column a="flex-start" j="flex-start">
                       <FieldTitle
-                        name=" 1. Expected Delivery Date"
-                        description="The expected date of when you will you finish this project and provide the client with all the specified works. Please be specific about whether this deadline is a rough estimate or a definite finishing time."
-                        warning={`Example: "Around the 21st May, give or take 2-3 days"`}
+                        name=" 1. Quote Details"
+                        description="Be precise, this will form the basis of the contractual obligations between you and the client."
+                        warning=""
                         inline={true}
                       />
-                      <TextField
-                        id={'deadline'}
+                      <FieldBox
                         value={contract.deadline}
-                        label={`Delivery Date ${
-                          contract.deadline
-                            ? `(${86 - contract.deadline.length})`
-                            : ''
-                        }`}
-                        inputProps={{ maxLength: 86 }}
-                        onChange={(e) => {
-                          autosave(mutation, null);
+                        title="Delivery Date"
+                        maxLength={86}
+                        onChangeEvent={(e) => {
+                          autosave(mutation, 'username');
                           setContract({
                             ...contract,
-                            deadline: e.target.value.substring(0, 86),
+                            deadline: e,
                           });
                         }}
-                        multiline
-                        margin="normal"
-                        variant="outlined"
-                        style={{ marginRight: 10, width: '100%' }}
+                        replaceMode="loose"
+                        placeholder="Example: End of May"
+                        info="The expected date of when you will you finish this project and provide the client with all the specified works. Please be specific about whether this deadline is a rough estimate or a definite finishing time."
+                        warning="Example: Around the 21st May, give or take 2-3 days"
+                        size="s"
+                        multiline={false}
                       />
-                    </FieldTitleWrapper>
-                    <FieldTitleWrapper>
-                      <FieldTitle
-                        name=" 2. Total Cost"
-                        description="The total amount you will be paid upon completion of this job, please take into consideration that Doodle Meeple fees will be subtracted from this amount"
-                        warning="Example: 1020"
-                        inline={true}
-                      />
-                      <TextField
-                        id={'cost'}
+                      <FieldBox
                         value={contract.cost}
-                        label={
-                          contract.cost !== ''
-                            ? `Cost ${contract.cost}.00`
-                            : `00.00`
-                        }
-                        inputProps={{ maxLength: 12 }}
-                        onChange={(e) => {
-                          e.target.value.indexOf('.') > -1
+                        title="Total Cost"
+                        maxLength={12}
+                        onChangeEvent={(e) => {
+                          e.indexOf('.') > -1
                             ? setWholeFigures(true)
                             : setWholeFigures(false);
-                          const message = e.target.value
-                            .substring(0, 12)
-                            .replace(/[^0-9]/gi, '');
-                          setContract({ ...contract, cost: message });
+
+                          setContract({ ...contract, cost: e });
                           autosave(mutation, null);
                         }}
-                        multiline
-                        margin="normal"
-                        variant="outlined"
-                        style={{ marginRight: 10 }}
+                        replaceMode="number"
+                        placeholder="Example: 1050"
+                        info="The total amount you will be paid upon completion of this job, please take into consideration that Doodle Meeple fees will be subtracted from this amount"
+                        warning="Example: 1050"
+                        size="s"
+                        multiline={false}
                       />
-                      <CurrencySelector
-                        selectedCurrency={contract.currency}
-                        onChangeEvent={setContract}
-                        mutation={mutation}
-                        contract={contract}
+                      <FieldBox
+                        value={contract.currency}
+                        title="Currency"
+                        maxLength={0}
+                        onChangeEvent={(e) => {
+                          setContract({ ...contract, currency: e });
+                          autosave(mutation, null);
+                        }}
+                        replaceMode="currency"
+                        placeholder="Example: GBP"
+                        info=""
+                        warning=""
+                        size="s"
+                        multiline={false}
                       />
-                    </FieldTitleWrapper>
+                      <FieldBox
+                        value={contract.notes}
+                        title="Notes"
+                        maxLength={1024}
+                        onChangeEvent={(e) => {
+                          setContract({ ...contract, notes: e });
+                          autosave(mutation, null);
+                        }}
+                        replaceMode="loose"
+                        placeholder="Example: This quote is valid for 7 days"
+                        info="Add more information to your quote, show you understand the project and what's required by tailoring the content to this specific job"
+                        warning=""
+                        size="s"
+                        multiline={true}
+                      />
+                    </Column>
                     {wholeFigures && (
                       <Typography color="error">
                         Whole figures only please
@@ -303,21 +303,18 @@ upon completion of this contract.`,
                     <Mutation
                       mutation={CREATE_TERM}
                       variables={{
-                        id: 'new',
-                        paymentTerm: {
-                          percent: 0,
-                          description: '',
-                          contractId: contract.id,
-                        },
+                        percent: 0,
+                        description: '',
+                        contractId: contract._id,
                       }}
                       onCompleted={(data) => {
                         toaster('Created');
                         setDetailsLock(true);
                         addPaymentTerm({
-                          id: data.createPaymentTerm,
+                          _id: data.paymentTermsCreateOne.recordId,
                           percent: 0,
                           description: '',
-                          contractId: contract.id,
+                          contractId: contract._id,
                         });
                       }}
                     >
@@ -340,43 +337,6 @@ upon completion of this contract.`,
                     </Mutation>
 
                     <Divider />
-                    <FieldTitle
-                      name=" 3. Additional Notes"
-                      description="Record any other clauses or notes that should be attached with this contract."
-                      warning="Example: Work will continue after payment is received according to each clause. Payment should be made within 3 days. This quote is valid for 7 days."
-                      inline={false}
-                    />
-                    <div
-                      style={{
-                        width: '100%',
-                        padding: '0 10px 20px 10px',
-                        boxSizing: 'border-box',
-                      }}
-                    >
-                      <TextField
-                        id={'notes'}
-                        value={contract.notes}
-                        label={`Notes ${
-                          contract.notes
-                            ? `(${586 - contract.notes.length})`
-                            : ''
-                        }`}
-                        inputProps={{ maxLength: 586 }}
-                        onChange={(e) => {
-                          autosave(mutation, 'notes');
-                          setContract({
-                            ...contract,
-                            notes: e.target.value.substring(0, 586),
-                          });
-                        }}
-                        multiline
-                        margin="normal"
-                        variant="outlined"
-                        style={{
-                          width: '100%',
-                        }}
-                      />
-                    </div>
                   </div>
                 );
               }}
@@ -384,15 +344,13 @@ upon completion of this contract.`,
             <Mutation
               mutation={UPDATE_CONTRACT}
               variables={{
-                id: contract.id,
-                contract: {
-                  notes: contract.notes,
-                  deadline: contract.deadline,
-                  currency: contract.currency,
-                  cost: parseInt(contract.cost),
-                  jobId,
-                  status: 'preview',
-                },
+                _id: contract._id,
+                notes: contract.notes,
+                deadline: contract.deadline,
+                currency: contract.currency,
+                cost: contract.cost,
+                jobId,
+                status: 'preview',
               }}
               onCompleted={(data) => {
                 toaster('Submitted');

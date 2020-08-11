@@ -81,8 +81,8 @@ export default function ProposalForm({ jobId, setProposalOpen }) {
         variables={{ jobId }}
         fetchPolicy="network-only"
         onCompleted={(data) => {
-          data.getContract.length > 0
-            ? setContract({ ...data.getContract[0] })
+          data.contractByJob
+            ? setContract({ ...data.contractByJob })
             : setContract({ ...contract, status: '' });
         }}
       >

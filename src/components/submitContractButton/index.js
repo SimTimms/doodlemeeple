@@ -9,7 +9,7 @@ export default function SubmitContractButton({ contract, jobId, setContract }) {
     <Mutation
       mutation={SUBMIT_CONTRACT}
       variables={{
-        id: contract.id,
+        _id: contract._id,
       }}
       onCompleted={(data) => {
         setContract({ ...contract, status: 'submitted' });

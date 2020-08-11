@@ -26,26 +26,24 @@ export default function PaymentTerm({
 }) {
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    id: 'new',
+    _id: 'new',
     percent: 0,
     description: '',
     contractId: '',
   });
 
   useEffect(() => {
-    setValues({ ...paymentTerm, contractId: contract.id });
+    setValues({ ...paymentTerm, contractId: contract._id });
   }, [paymentTerm, contract]);
 
   return (
     <Mutation
       mutation={UPDATE_TERM}
       variables={{
-        id: values.id,
-        paymentTerm: {
-          contractId: contract.id,
-          percent: values.percent,
-          description: values.description,
-        },
+        _id: values._id,
+        contractId: contract._id,
+        percent: values.percent,
+        description: values.description,
       }}
       onCompleted={(data) => {
         toaster('Autosave');
@@ -117,12 +115,12 @@ export default function PaymentTerm({
             <Mutation
               mutation={REMOVE_TERM}
               variables={{
-                id: values.id,
+                _id: values._id,
               }}
               onCompleted={(data) => {
                 toaster('Deleted');
                 const updatedArray = contract.paymentTerms.filter(
-                  (item) => item.id !== values.id,
+                  (item) => item._id !== values._id
                 );
                 const percentLockCalc = calculatePercent(updatedArray);
                 setPercentLock(percentLockCalc);
@@ -136,7 +134,7 @@ export default function PaymentTerm({
                 return (
                   <DeleteButtonSmall
                     mutation={mutation}
-                    disabled={values.id === 'new' ? true : false}
+                    disabled={values._id === 'new' ? true : false}
                   />
                 );
               }}

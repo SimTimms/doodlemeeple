@@ -90,32 +90,50 @@ export const REMOVE_INVITE = gql`
   }
 `;
 export const UPDATE_TERM = gql`
-  mutation UpdatePaymentTerm($id: String!, $paymentTerm: PaymentTermInput!) {
-    updatePaymentTerm(id: $id, paymentTerm: $paymentTerm)
+  mutation UpdatePaymentTerm(
+    $_id: MongoID!
+    $percent: Float
+    $description: String
+  ) {
+    paymentTermsUpdateById(
+      record: { _id: $_id, percent: $percent, description: $description }
+    ) {
+      recordId
+    }
   }
 `;
 
 export const CREATE_TERM = gql`
-  mutation CreatePaymentTerm($id: String!, $paymentTerm: PaymentTermInput!) {
-    createPaymentTerm(id: $id, paymentTerm: $paymentTerm)
+  mutation CreatePaymentTerm(
+    $percent: Float
+    $description: String
+    $contractId: MongoID!
+  ) {
+    paymentTermsCreateOne(
+      record: {
+        percent: $percent
+        description: $description
+        contract: $contractId
+      }
+    ) {
+      recordId
+    }
   }
 `;
 
 export const REMOVE_TERM = gql`
-  mutation RemovePaymentTerm($id: String!) {
-    removePaymentTerm(id: $id)
-  }
-`;
-
-export const UPDATE_CONTRACT = gql`
-  mutation UpdateContract($id: String!, $contract: ContractInput!) {
-    updateContract(id: $id, contract: $contract)
+  mutation RemovePaymentTerm($_id: MongoID!) {
+    paymentTermsRemoveById(_id: $_id) {
+      recordId
+    }
   }
 `;
 
 export const SUBMIT_CONTRACT = gql`
-  mutation SubmitContract($id: String!) {
-    submitContract(id: $id)
+  mutation SubmitContract($_id: MongoID!) {
+    submitContract(_id: $_id) {
+      _id
+    }
   }
 `;
 
@@ -132,8 +150,38 @@ export const DECLINE_CONTRACT = gql`
 `;
 
 export const CREATE_CONTRACT = gql`
-  mutation CreateContract($id: String!, $contract: ContractInput!) {
-    createContract(id: $id, contract: $contract)
+  mutation CreateContract(
+    $currency: String!
+    $cost: String!
+    $jobId: MongoID!
+  ) {
+    contractCreateOne(
+      record: { currency: $currency, cost: $cost, job: $jobId }
+    ) {
+      recordId
+    }
+  }
+`;
+
+export const UPDATE_CONTRACT = gql`
+  mutation UpdateContract(
+    $_id: MongoID!
+    $notes: String
+    $deadline: String
+    $currency: String
+    $cost: String
+  ) {
+    contractUpdateById(
+      record: {
+        _id: $_id
+        notes: $notes
+        deadline: $deadline
+        currency: $currency
+        cost: $cost
+      }
+    ) {
+      recordId
+    }
   }
 `;
 

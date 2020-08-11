@@ -54,7 +54,7 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.primary.main,
   },
   notificationInvite: {
-    background: theme.palette.primary.main,
+    background: '#499e90',
   },
   projectNotifications: {
     display: 'flex',

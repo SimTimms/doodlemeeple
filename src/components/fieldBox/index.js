@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
+import { CurrencySelector } from '../';
 import clsx from 'clsx';
 
 export default function FieldBox({
@@ -72,6 +73,11 @@ export default function FieldBox({
               onChangeEvent(eReplaced.substring(0, maxLength));
             }}
           />
+        ) : replaceMode === 'currency' ? (
+          <CurrencySelector
+            selectedCurrency={value}
+            onChangeEvent={onChangeEvent}
+          />
         ) : (
           <input
             style={{
@@ -95,22 +101,28 @@ export default function FieldBox({
                       /[^A-Za-z0-9&:;|/\\?!@£$%*()_ ,-."'\n]/g,
                       ''
                     )
+                  : replaceMode === 'number'
+                  ? e.target.value.replace(/[^0-9'\n]/g, '')
                   : e.target.value;
               onChangeEvent(eReplaced.substring(0, maxLength));
             }}
           />
         )}
-        <Typography style={{ marginLeft: 5, fontSize: 12, width: 30 }}>{`${
-          maxLength - value.length
-        }`}</Typography>
-        <Icon
-          className={classes.helpIcon}
-          onClick={() => {
-            infoOpen === false ? setInfoOpen(true) : setInfoOpen(false);
-          }}
-        >
-          {infoOpen === false ? 'info' : 'keyboard_arrow_up'}
-        </Icon>
+        {maxLength > 0 && (
+          <Typography style={{ marginLeft: 5, fontSize: 12, width: 30 }}>{`${
+            maxLength - value.length
+          }`}</Typography>
+        )}
+        {(warning !== '' || info !== '') && (
+          <Icon
+            className={classes.helpIcon}
+            onClick={() => {
+              infoOpen === false ? setInfoOpen(true) : setInfoOpen(false);
+            }}
+          >
+            {infoOpen === false ? 'info' : 'keyboard_arrow_up'}
+          </Icon>
+        )}
       </div>
       <div
         className={clsx({
@@ -120,6 +132,7 @@ export default function FieldBox({
       >
         <Typography variant="body1" className={classes.descriptionBox}>
           {info} <br />
+          <br />
           {warning !== '' && <span style={{ fontWeight: 900 }}>{warning}</span>}
         </Typography>
       </div>

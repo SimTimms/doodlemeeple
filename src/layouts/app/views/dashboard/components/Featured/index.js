@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { IconButton } from '../../../../../../components';
 import clsx from 'clsx';
+import logo from '../../../../../../assets/logo.svg';
 
 export function Featured({ posts, history }) {
   const classes = useStyles();
@@ -22,13 +23,13 @@ export function Featured({ posts, history }) {
           : null;
 
         return (
-          <Card className={classes.card} key={`conversation_${index}`}>
+          <div className={classes.card} key={`conversation_${index}`}>
             <div className={classes.postImageWrapper}>
               <div
                 className={classes.postImage}
                 style={{
                   backgroundImage: `url(${media})`,
-                  filter: 'brightness(200%) saturate(136%)',
+                  filter: 'saturate(40%)',
                 }}
               ></div>
               <div className={classes.cover}></div>
@@ -39,33 +40,23 @@ export function Featured({ posts, history }) {
                       color: 'rgba(0,0,0,0.6',
                       marginTop: 5,
                       textAlign: 'center',
+                      marginBottom: 30,
                     }}
-                    component="h6"
-                    variant="h6"
+                    component="h5"
+                    variant="h5"
                   >
                     Welcome to
                   </Typography>
+                  <img src={logo} style={{ maxWidth: 400 }} />
+
                   <Typography
                     style={{
-                      color: '#111',
-                      marginTop: 5,
-                      textAlign: 'center',
-                      fontSize: 60,
-                    }}
-                    component="h1"
-                    variant="h1"
-                  >
-                    <span style={{ fontWeight: 900 }}>doodle</span>
-                    <span>meeple</span>
-                  </Typography>
-                  <Typography
-                    style={{
-                      color: 'rgba(0,0,0,0.8)',
-                      marginTop: 5,
+                      color: 'rgba(0,0,0,0.4)',
+                      marginTop: 0,
                       textAlign: 'center',
                     }}
-                    component="h4"
-                    variant="h4"
+                    component="h6"
+                    variant="h6"
                   >
                     Professional Creative Talent
                   </Typography>
@@ -130,7 +121,7 @@ export function Featured({ posts, history }) {
                 </div>
               </div>
             </div>
-          </Card>
+          </div>
         );
       })}
     </div>

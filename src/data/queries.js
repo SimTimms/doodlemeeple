@@ -263,7 +263,7 @@ export const GET_PAYMENT_TERMS = gql`
 export const GET_CONTRACT = gql`
   query GetContract($jobId: MongoID!) {
     contractByJob(jobId: $jobId) {
-      id
+      _id
       notes
       deadline
       cost
@@ -271,16 +271,16 @@ export const GET_CONTRACT = gql`
       status
       updatedAt
       payments {
-        id
+        _id
         amount
         currency
         status
         paidBy {
-          id
+          _id
           name
         }
         contract {
-          id
+          _id
         }
         paymentId
         createdAt
@@ -288,22 +288,22 @@ export const GET_CONTRACT = gql`
       }
       user {
         email
-        id
+        _id
         name
         profileImg
       }
       job {
-        id
+        _id
         name
         summary
         creativeSummary
         user {
-          id
+          _id
           email
         }
       }
       paymentTerms {
-        id
+        _id
         percent
         description
       }
