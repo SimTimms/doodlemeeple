@@ -261,8 +261,8 @@ export const GET_PAYMENT_TERMS = gql`
 `;
 
 export const GET_CONTRACT = gql`
-  query GetContract($jobId: String!) {
-    getContract(jobId: $jobId) {
+  query GetContract($jobId: MongoID!) {
+    contractByJob(jobId: $jobId) {
       id
       notes
       deadline
