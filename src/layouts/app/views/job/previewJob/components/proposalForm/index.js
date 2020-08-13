@@ -14,14 +14,14 @@ import {
 
 export default function ProposalForm({ jobId, setProposalOpen }) {
   const [contract, setContract] = React.useState({
-    id: '',
+    _id: '',
     notes: '',
     deadline: '',
     cost: '',
     paymentTerms: [],
     currency: 'GBP',
     status: 'loading',
-    job: { id: '', user: { id: '', email: '' } },
+    job: { _id: '', user: { _id: '', email: '' } },
   });
 
   return (

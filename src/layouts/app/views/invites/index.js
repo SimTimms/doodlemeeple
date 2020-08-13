@@ -4,7 +4,7 @@ import { InviteComponent } from './components/inviteComponent';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { INVITES } from '../../../../data/queries';
-import { ContentHeader } from '../../../../components';
+import { ContentHeader, IconButton, Column } from '../../../../components';
 
 export function Invites({ history }) {
   const classes = useStyles();
@@ -45,7 +45,7 @@ export function Invites({ history }) {
         >
           {({ data }) => {
             return data && data.invitesByUser.length === 0 ? (
-              <div>
+              <Column a="center" j="center">
                 <Typography
                   variant="h6"
                   component="h6"
@@ -61,7 +61,19 @@ export function Invites({ history }) {
                   Keep your profile fresh and up-to-date for the best chance of
                   getting noticed.
                 </Typography>
-              </div>
+                <IconButton
+                  title="Profile"
+                  icon="contact_mail"
+                  color="primary"
+                  styleOverride={null}
+                  iconPos="right"
+                  disabled={false}
+                  type="button"
+                  onClickEvent={() => {
+                    history.push('/app/edit-profile');
+                  }}
+                />
+              </Column>
             ) : null;
           }}
         </Query>

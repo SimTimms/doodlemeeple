@@ -20,7 +20,7 @@ import ProposalForm from './components/proposalForm';
 import Cookies from 'js-cookie';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../../../../utils/toaster';
-import { UPDATE_JOB } from '../../../../../data/mutations';
+import { CLOSE_JOB } from '../../../../../data/mutations';
 
 export default function PreviewJob({ theme, jobId, history }) {
   const classes = useStyles();
@@ -41,6 +41,7 @@ export default function PreviewJob({ theme, jobId, history }) {
     creativeSummary: '',
     gameId: '',
     submitted: '',
+    contracts: [],
     user: { name: '', _id: '', profileImg: '' },
     invites: [
       {
@@ -54,6 +55,7 @@ export default function PreviewJob({ theme, jobId, history }) {
     ],
   });
   const [chatOpen, setChatOpen] = React.useState(false);
+  const [contracts, setContracts] = React.useState([]);
   const [proposalOpen, setProposalOpen] = React.useState(false);
   const [messagesEnd, setMessagesEnd] = React.useState(null);
   const [closeConfirm, setCloseConfirm] = React.useState(false);
@@ -100,23 +102,49 @@ export default function PreviewJob({ theme, jobId, history }) {
                           }}
                           className={classes.profileThumb}
                           key={`profile_${index}`}
-                        ></div>
+                        >
+                          {contracts.indexOf(invite.receiver._id) > -1 && (
+                            <Typography
+                              variant="body1"
+                              component="p"
+                              className={classes.countsStyle}
+                            >
+                              1
+                            </Typography>
+                          )}
+                        </div>
                         <Typography>
                           {invite.receiver.name}{' '}
-                          {invite.status
-                            ? `(${invite.status})`
-                            : '(no response)'}
+                          {invite.status ? `(${invite.status})` : '(pending)'}
                         </Typography>
                       </Row>
+                      {contracts.indexOf(invite.receiver._id) > -1 && (
+                        <IconButton
+                          disabled={invite.status === 'declined'}
+                          color="primary"
+                          icon="request_quote"
+                          title="Quote"
+                          onClickEvent={() => {
+                            setConversationUser(invite.receiver);
+                            setChatOpen(chatOpen ? false : true);
+                          }}
+                          styleOverride={{
+                            color: invite.status === 'declined' && '#fff',
+                          }}
+                          type="button"
+                          iconPos="left"
+                        />
+                      )}
+
                       <IconButton
                         disabled={invite.status === 'declined'}
                         color={
                           invite.status === 'declined'
                             ? 'text-white'
-                            : 'text-dark'
+                            : 'primary'
                         }
                         icon="chat"
-                        title="Discuss"
+                        title="Chat"
                         onClickEvent={() => {
                           setConversationUser(invite.receiver);
                           setChatOpen(chatOpen ? false : true);
@@ -263,7 +291,7 @@ export default function PreviewJob({ theme, jobId, history }) {
                       Do you want to continue?
                     </Typography>
                     <Mutation
-                      mutation={UPDATE_JOB}
+                      mutation={CLOSE_JOB}
                       variables={{
                         _id: jobId,
                         submitted: 'closed',
@@ -338,7 +366,10 @@ export default function PreviewJob({ theme, jobId, history }) {
             variables={{ jobId: jobId }}
             fetchPolicy="network-only"
             onCompleted={(data) => {
-              console.log(data);
+              const contractIds = data.jobById.contracts.map(
+                (contract) => contract.user._id
+              );
+              setContracts(contractIds);
               data.jobById && setJob({ ...data.jobById });
             }}
           >

@@ -195,6 +195,12 @@ export const JOB = gql`
           profileImg
         }
       }
+      contracts {
+        _id
+        user {
+          _id
+        }
+      }
       img
       summary
       location
@@ -233,6 +239,12 @@ export const JOBS = gql`
       name
       submitted
       backgroundImg
+      contracts {
+        _id
+        user {
+          _id
+        }
+      }
       game {
         _id
         name
@@ -425,6 +437,7 @@ export const COUNTS = gql`
     counts {
       invites
       messages
+      quotes
     }
   }
 `;

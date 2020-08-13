@@ -1,9 +1,13 @@
 import React from 'react';
-import { Slide, Typography } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
-import { Query, Mutation } from 'react-apollo';
+import { Query } from 'react-apollo';
 import { CONVERSATIONS } from '../../../../../data/queries';
-import { ContentHeader, MessageComponent } from '../../../../../components';
+import {
+  ContentHeader,
+  MessageComponent,
+  LoadIcon,
+} from '../../../../../components';
 import Cookies from 'js-cookie';
 
 export default function Conversations({ history, setConversationArgs }) {
@@ -57,8 +61,8 @@ export default function Conversations({ history, setConversationArgs }) {
             setConversationArray(data.getConversations);
           }}
         >
-          {({ data }) => {
-            return null;
+          {({ data, loading }) => {
+            return loading ? <LoadIcon /> : null;
           }}
         </Query>
       </div>

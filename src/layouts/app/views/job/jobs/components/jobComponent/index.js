@@ -8,6 +8,8 @@ import { IconButton } from '../../../../../../../components';
 
 export function JobComponent({ job, game, history }) {
   const classes = useStyles();
+  const contractsArr = job.contracts.map((contract) => contract.user._id);
+
   return (
     <Card className={classes.card} style={{ paddingLeft: 10 }}>
       <div
@@ -49,26 +51,38 @@ export function JobComponent({ job, game, history }) {
             : 'Draft'}
         </Typography>
       </div>
-      {job.invites.map((invite, index) => (
-        <div
-          key={`invite_${index}`}
-          style={{ marginRight: -10 }}
-          title={`${invite.receiver.name} ${
-            invite.status === 'declined' ? '(declined)' : ''
-          }`}
-        >
+      {job.invites.map((invite, index) => {
+        console.log(invite, contractsArr);
+        return (
           <div
-            style={{
-              backgroundImage: `url(${invite.receiver.profileImg})`,
-            }}
-            className={classes.profileThumb}
+            key={`invite_${index}`}
+            style={{ marginRight: -10 }}
+            title={`${invite.receiver.name} ${
+              invite.status === 'declined' ? '(declined)' : ''
+            }`}
           >
-            {invite.status === 'declined' && (
-              <div className={classes.declined}></div>
-            )}
+            <div
+              style={{
+                backgroundImage: `url(${invite.receiver.profileImg})`,
+              }}
+              className={classes.profileThumb}
+            >
+              {invite.status === 'declined' && (
+                <div className={classes.declined}></div>
+              )}
+              {contractsArr.indexOf(invite.receiver._id) > -1 && (
+                <Typography
+                  variant="body1"
+                  component="p"
+                  className={classes.countsStyle}
+                >
+                  1
+                </Typography>
+              )}
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
       <IconButton
         disabled={false}
         title={

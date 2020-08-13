@@ -36,7 +36,11 @@ export function AppDrawer(props) {
   const { handleDrawerClose, open, page, history } = props;
   const theme = useTheme();
   const mobile = useMediaQuery('(max-width:800px)');
-  const [counts, setCounts] = React.useState({ invites: 0, messages: 0 });
+  const [counts, setCounts] = React.useState({
+    invites: 0,
+    messages: 0,
+    quotes: 0,
+  });
 
   return (
     <Drawer
@@ -160,7 +164,7 @@ export function AppDrawer(props) {
             icon: <Icon>work</Icon>,
             link: () => history.push('/app/jobs'),
             color: '#469958',
-            count: null,
+            count: counts.quotes,
           },
           {
             name: 'Profile',
@@ -286,6 +290,7 @@ export function AppDrawer(props) {
           setCounts({
             invites: data.counts.invites,
             messages: data.counts.messages,
+            quotes: data.counts.quotes,
           });
         }}
         fetchPolicy="network-only"
