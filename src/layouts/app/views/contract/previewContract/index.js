@@ -35,12 +35,12 @@ export default function PreviewContract({ contractId, history }) {
           variables={{ contractId }}
           fetchPolicy="network-only"
           onCompleted={(data) => {
-            data.previewContract && setContract(data.previewContract);
-            data.previewContract && setJob(data.previewContract.job);
+            data.contractById && setContract(data.contractById);
+            data.contractById && setJob(data.contractById.job);
           }}
         >
           {({ loading, data }) => {
-            const contractData = data ? data.previewContract : null;
+            const contractData = data ? data.contractById : null;
 
             return loading ? (
               <LoadIcon />

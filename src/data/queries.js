@@ -375,9 +375,9 @@ export const GET_CONTRACT_ID = gql`
 `;
 
 export const PREVIEW_CONTRACT = gql`
-  query PreviewContract($contractId: String!) {
-    previewContract(contractId: $contractId) {
-      id
+  query PreviewContract($contractId: MongoID!) {
+    contractById(_id: $contractId) {
+      _id
       notes
       deadline
       cost
@@ -385,23 +385,23 @@ export const PREVIEW_CONTRACT = gql`
       status
       updatedAt
       payments {
-        id
+        _id
         amount
         currency
         status
         paidBy {
-          id
+          _id
           name
         }
         contract {
-          id
+          _id
         }
         paymentId
         createdAt
         updatedAt
       }
       signedBy {
-        id
+        _id
         name
       }
       signedDate
@@ -410,21 +410,21 @@ export const PREVIEW_CONTRACT = gql`
         email
         summary
         profileImg
-        id
+        _id
         profileBG
       }
       job {
-        id
+        _id
         name
         summary
         creativeSummary
         user {
-          id
+          _id
           email
         }
       }
       paymentTerms {
-        id
+        _id
         percent
         description
       }

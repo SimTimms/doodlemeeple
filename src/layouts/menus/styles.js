@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-const drawerWidth = 240;
+const drawerWidth = 160;
 
 export const useStyles = makeStyles((theme) => ({
   menuWrapper: {
@@ -29,7 +29,7 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     overflow: 'hidden',
   },
-  button: { textAlign: 'left' },
+  button: { textAlign: 'right' },
   buttonMobile: {
     padding: 5,
     textAlign: 'center',

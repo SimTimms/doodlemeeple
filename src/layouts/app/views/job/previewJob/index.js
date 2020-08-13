@@ -123,10 +123,9 @@ export default function PreviewJob({ theme, jobId, history }) {
                           disabled={invite.status === 'declined'}
                           color="primary"
                           icon="request_quote"
-                          title="Quote"
+                          title="View Quote"
                           onClickEvent={() => {
-                            setConversationUser(invite.receiver);
-                            setChatOpen(chatOpen ? false : true);
+                            history.push(`/app/view-contract/${'contractid'}`);
                           }}
                           styleOverride={{
                             color: invite.status === 'declined' && '#fff',

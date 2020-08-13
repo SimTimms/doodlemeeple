@@ -20,7 +20,7 @@ export const useStyles = makeStyles((theme) => ({
   messageWrapperMobile: {
     width: '100%',
   },
-  shadow: { boxShadow: '10px 10px 30px rgba(0,0,0,0.2)', width: '100%' },
+  shadow: { width: '100%' },
   iconButton: {
     cursor: 'pointer',
     '&:hover': {
@@ -42,19 +42,33 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  iconInvite: { color: '#fff !important' },
-  icon: { color: '#fff', paddingLeft: 10, paddingRight: 10 },
+  icon: { paddingLeft: 10, paddingRight: 10 },
   notifications: {
     display: 'flex',
     flexDirection: 'column',
-    padding: 10,
-    borderRight: '1px solid #ddd',
     justifyContent: 'center',
     alignItems: 'center',
-    background: theme.palette.primary.main,
+    border: `2px solid ${theme.palette.primary.main}`,
+    borderRadius: '50%',
+    minHeight: 30,
+    maxHeight: 30,
+    minWidth: 30,
+    maxWidth: 30,
+    marginLeft: 10,
+    textShadow: ' 1px 1px 3px rgba(0,0,0,0.1)',
+    boxShadow: 'inset 0 0 5px rgba(0,0,0,0.2)',
   },
   notificationInvite: {
-    background: '#499e90',
+    color: theme.palette.secondary.main,
+    border: `2px solid ${theme.palette.secondary.main}`,
+  },
+  notificationBad: {
+    color: theme.palette.error.main,
+    border: `2px solid ${theme.palette.error.main}`,
+  },
+  notificationGood: {
+    color: theme.palette.secondary.main,
+    border: `2px solid ${theme.palette.secondary.main}`,
   },
   projectNotifications: {
     display: 'flex',
@@ -83,12 +97,14 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     flexWrap: 'nowrap',
     justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   card: {
     width: '100%',
     margin: 0,
     borderRadius: 0,
-    boxShadow: 'none',
+    boxShadow: '3px 3px 5px rgba(0,0,0,0.2)',
+    marginBottom: 5,
   },
   title: {
     fontSize: 14,

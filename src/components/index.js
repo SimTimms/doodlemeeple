@@ -31,6 +31,7 @@ import InviteButton from './buttons/inviteButton';
 import CreateMessage from './buttons/createMessage';
 import IconButton from './buttons/iconButton';
 import FieldTitle from './fieldTitle';
+import FieldTitleDashboard from './fieldTitleDashboard';
 import FieldBox from './fieldBox';
 import InfoBox from './infoBox';
 import FieldTitleWrapper from './fieldTitle/FieldTitleWrapper';
@@ -106,6 +107,7 @@ export {
   IconTitle,
   TabButton,
   IconBox,
+  FieldTitleDashboard,
   FavouriteButton,
   InviteButton,
   IconButton,
