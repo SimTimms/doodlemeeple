@@ -36,6 +36,8 @@ import FieldBox from './fieldBox';
 import InfoBox from './infoBox';
 import FieldTitleWrapper from './fieldTitle/FieldTitleWrapper';
 import ProfileCard from './profileCard';
+import ProfileCardBasic from './profileCardBasic';
+import BorderBox from './borderBox';
 import IconBox from './iconBox';
 import IconTitle from './iconTitle';
 import { InlineHeader, InlineHeaderWarning } from './inlineHeader';
@@ -66,6 +68,8 @@ import {
   TextLink,
   Meta,
   TextArray,
+  HeaderThree,
+  TextLeft,
 } from './textParts';
 import { Column, Row } from './blocks';
 
@@ -77,6 +81,7 @@ export {
   FeatureCardInvite,
   Meta,
   TextLink,
+  TextLeft,
   TextDivider,
   ColumnWrapperFull,
   ColumnWrapper,
@@ -112,6 +117,7 @@ export {
   InviteButton,
   IconButton,
   ProfileCard,
+  ProfileCardBasic,
   FieldTitle,
   CurrencySelector,
   LoadIcon,
@@ -141,4 +147,6 @@ export {
   FieldTitleWrapper,
   DeleteButtonSmall,
   Payments,
+  BorderBox,
+  HeaderThree,
 };

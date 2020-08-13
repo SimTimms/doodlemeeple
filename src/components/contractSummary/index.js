@@ -2,18 +2,16 @@ import React from 'react';
 import moment from 'moment';
 import { useStyles } from './styles';
 import { NoticeBox } from '../';
-import clsx from 'clsx';
-import { HeaderTwo, Text, ColumnWrapper } from '../';
+import { HeaderThree, Text, Column, Divider, TextLeft } from '../';
+import Cookies from 'js-cookie';
+import { timeDifferenceForDate } from '../../utils/dates';
 
 export default function ContractSummary({ contractData }) {
   let paymentTermsSum = 100;
   const classes = useStyles();
+  const userId = Cookies.get('userId');
   return (
-    <div
-      className={clsx({
-        [classes.root]: true,
-      })}
-    >
+    <div className={classes.root}>
       {contractData.status === 'accepted' && (
         <NoticeBox
           title="Accepted"
@@ -46,31 +44,39 @@ export default function ContractSummary({ contractData }) {
         />
       )}
 
-      <ColumnWrapper>
-        <HeaderTwo str={`Quote for ${contractData.job.name}`} />
-        <Text str={`${contractData.cost}.00 ${contractData.currency}`} />
-      </ColumnWrapper>
-      <ColumnWrapper>
-        <HeaderTwo str="Payment Schedule" />
+      <Column a="center" j="center">
+        <HeaderThree
+          str={`Quote for ${contractData.job.name} (${timeDifferenceForDate(
+            contractData.updatedAt
+          )})`}
+        />
+        <TextLeft
+          str={`${contractData.user.name} estimates they can complete this job for a total cost of ${contractData.cost}.00 ${contractData.currency}`}
+        />
+        <Divider />
+        <HeaderThree str="Payment Schedule" />
         {contractData.paymentTerms.map((term, index) => {
           paymentTermsSum = paymentTermsSum - term.percent;
           return (
-            <Text
+            <TextLeft
               key={`term_summary_${index}`}
               str={`${term.percent}% upon ${term.description}`}
             />
           );
         })}
         {paymentTermsSum > 0 && (
-          <Text str={`${paymentTermsSum}% upon completion`} />
+          <TextLeft str={`${paymentTermsSum}% upon completion`} />
         )}
-      </ColumnWrapper>
-      <ColumnWrapper>
-        <HeaderTwo str="Additional Notes" />
-        <Text
-          str={contractData.notes ? ` ${contractData.notes}` : ` No Notes`}
+        <Divider />
+        <HeaderThree str="Additional Notes" />
+        <TextLeft
+          str={
+            contractData.notes
+              ? ` ${contractData.notes}`
+              : `There are no addition notes`
+          }
         />
-      </ColumnWrapper>
+      </Column>
     </div>
   );
 }

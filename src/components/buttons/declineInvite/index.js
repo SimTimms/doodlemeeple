@@ -24,6 +24,8 @@ export default function DeclineInvite({ invite, removeInvite }) {
             title="Decline"
             onClickEvent={() => mutation()}
             styleOverride={null}
+            iconPos="right"
+            type="button"
           />
         );
       }}

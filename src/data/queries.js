@@ -412,6 +412,24 @@ export const PREVIEW_CONTRACT = gql`
         profileImg
         _id
         profileBG
+        favourites {
+          _id
+          receiver {
+            _id
+          }
+          user {
+            _id
+          }
+        }
+        likedMe {
+          _id
+          receiver {
+            _id
+          }
+          user {
+            _id
+          }
+        }
       }
       job {
         _id

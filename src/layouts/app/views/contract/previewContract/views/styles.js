@@ -3,7 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    background: '#fff',
+    boxShadow: '10px 10px 30px rgba(0,0,0,0.2)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexWrap: 'nowrap',
+    flexDirection: 'column',
   },
+
   hide: {
     display: 'none',
   },
@@ -20,13 +28,9 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.error.main,
   },
   wrapper: {
-    margin: 40,
     padding: 20,
     boxSizing: 'border-box',
     textAlign: 'center',
-    background: '#fff',
-    boxShadow: '10px 10px 30px rgba(0,0,0,0.3)',
-    borderRadius: 5,
   },
   profileWrapper: {
     display: 'flex',

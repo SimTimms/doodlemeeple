@@ -18,6 +18,14 @@ export const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
     color: theme.palette.primary.dark,
   },
+  descriptionTitleTwo: {
+    textAlign: 'center',
+    whiteSpace: 'nowrap',
+    color: theme.palette.primary.dark,
+    fontSize: 14,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
   headerWrapper: {
     display: 'flex',
     alignItems: 'center',
@@ -26,7 +34,15 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: 20,
   },
   headerLine: {
-    borderTop: `1px dashed #ddd`,
+    borderTop: `1px dashed #ccc`,
+    width: '100%',
+  },
+  headerLineTwo: {
+    borderTop: `1px dotted #ccc`,
+    width: 40,
+  },
+  headerLineTwoFull: {
+    borderTop: `1px dotted #ccc`,
     width: '100%',
   },
   description: {
@@ -36,6 +52,15 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     textAlign: 'center',
     letterSpacing: -0.3,
+  },
+  descriptionLeft: {
+    fontSize: 16,
+    marginTop: 10,
+    boxSizing: 'border-box',
+    width: '100%',
+    textAlign: 'left',
+    letterSpacing: -0.3,
+    paddingLeft: 44,
   },
   meta: {
     fontSize: 12,

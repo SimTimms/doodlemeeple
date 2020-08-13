@@ -168,6 +168,14 @@ ${contractData.currency} `}
           this Agreement and the Doodle Meeple Terms & Conditions the Doodle
           Meeple Terms and conditions will take precedence.
         </Typography>
+        <Divider />
+        <Typography>
+          <b>10. SIGNATURES:</b>
+        </Typography>
+        <Typography style={{ marginLeft: 40, paddingBottom: 10 }}>
+          <b>10.1</b> By clicking "I Accept" the Client will enter into a
+          binding contract with the Creative:
+        </Typography>
         <ActionWrapper>
           <div
             style={{
@@ -177,13 +185,6 @@ ${contractData.currency} `}
               width: '100%',
             }}
           >
-            <Typography>
-              <b>10. SIGNATURES:</b>
-            </Typography>
-            <Typography style={{ marginLeft: 40, paddingBottom: 10 }}>
-              <b>10.1</b> By clicking "I Accept" the Client will enter into a
-              binding contract with the Creative:
-            </Typography>
             <Mutation
               mutation={SIGN_CONTRACT}
               variables={{
