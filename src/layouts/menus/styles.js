@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-const drawerWidth = 240;
+const drawerWidth = 160;
 
 export const useStyles = makeStyles((theme) => ({
   menuWrapper: {
@@ -9,6 +9,19 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
+  wrapperFour: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: 32,
+    maxWidth: 32,
+    maxHeight: 32,
+    minHeight: 32,
+    background: theme.palette.primary.main,
+    borderRadius: '50%',
+    marginRight: 20,
+    position: 'relative',
+  },
   menuWrapperMobile: {
     display: 'flex',
     flexDirection: 'row',
@@ -16,7 +29,7 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     overflow: 'hidden',
   },
-  button: { textAlign: 'left' },
+  button: { textAlign: 'right' },
   buttonMobile: {
     padding: 5,
     textAlign: 'center',
@@ -51,7 +64,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: theme.palette.secondary.main,
+    background: theme.palette.error.main,
     color: '#fff',
   },
   drawerOpenMobile: {

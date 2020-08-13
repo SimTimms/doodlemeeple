@@ -5,7 +5,7 @@ import { TYPE_HELPER } from '../../../../utils';
 
 export function ArtistCard({ setDisplay, sections, setSections, type, img }) {
   const newSectionTemplate = {
-    id: 'new',
+    _id: 'new',
     title: '',
     summary: '',
     gallery: {

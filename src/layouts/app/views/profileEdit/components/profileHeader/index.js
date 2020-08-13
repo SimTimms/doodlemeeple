@@ -1,20 +1,14 @@
 import React from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import TextField from '@material-ui/core/TextField';
 import { useStyles } from './styles';
 import clsx from 'clsx';
-import { Uploader, FieldTitle, Divider } from '../../../../../../components';
+import { Uploader, FieldTitle } from '../../../../../../components';
 import autosave from '../../../../../../utils/autosave';
 
 export function ProfileHeader({
   profile,
   setProfileImg,
-  setProfileImgStyle,
   setBgImage,
-  profileBGStyle,
-  profileImgStyle,
-  setProfileBGStyle,
-  setUserName,
   autosaveFunction,
 }) {
   const classes = useStyles();
@@ -53,11 +47,10 @@ export function ProfileHeader({
           size="1920 x 300"
         />
       </div>
-      <Divider />
       <FieldTitle
-        name="My Identity"
-        description="Your profile picture or logo and name, callsign, company name, handle, alias or whatever else you want to be know as. Keep it clean please. "
-        warning="Image Requirements: 140 x 140px, png or jpg, less than 1MB"
+        name="Profile Image"
+        description="Your mugshot or logo"
+        warning="PNG or JPG | optimum size 140 x 140 | 1MB Max"
         inline={false}
       />
       <div
@@ -96,7 +89,6 @@ export function ProfileHeader({
               }}
               hasFile={profile.profileImg ? true : false}
               className={null}
-              setImagePosition={null}
               size="140 x 140"
             />
           </div>
@@ -115,27 +107,7 @@ export function ProfileHeader({
             [classes.profileName]: true,
             [classes.profileNameMobile]: mobile,
           })}
-        >
-          <TextField
-            id={'userName'}
-            value={profile.userName}
-            label={`Name ${
-              profile.userName ? `(${26 - profile.userName.length})` : ''
-            }`}
-            inputProps={{ maxLength: 26 }}
-            onChange={(e) => {
-              if (autosaveFunction) {
-                autosave(autosaveFunction, 'username');
-              }
-              setUserName(
-                e.target.value.substring(0, 26).replace(/[^A-Za-z0-9 ]/g, ''),
-              );
-            }}
-            margin="normal"
-            variant="outlined"
-            style={{ marginRight: 10 }}
-          />
-        </div>
+        ></div>
       </div>
     </div>
   );

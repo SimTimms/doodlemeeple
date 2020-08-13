@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
 

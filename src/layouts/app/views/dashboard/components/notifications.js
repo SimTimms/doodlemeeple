@@ -30,7 +30,7 @@ export function Notifications() {
         <Query
           query={NOTIFICATIONS}
           onCompleted={(data) => {
-            setNotificationArray(data.getNotifications);
+            setNotificationArray(data.notificationSecure);
           }}
           fetchPolicy="network-only"
         >
@@ -52,12 +52,15 @@ export function Notifications() {
                       [classes.notifications]: true,
                       [classes.notificationInvite]:
                         notification.icon === 'thumb_up',
+                      [classes.notificationBad]:
+                        notification.icon === 'thumb_down',
+                      [classes.notificationGood]:
+                        notification.icon === 'request_quote',
                     })}
                   >
                     <Icon
                       className={clsx({
                         [classes.icon]: true,
-                        [classes.iconInvite]: notification.icon === 'thumb_up',
                       })}
                     >
                       {notification.icon}
@@ -97,7 +100,7 @@ export function Notifications() {
                 <Mutation
                   mutation={REMOVE_NOTIFICATION_MUTATION}
                   variables={{
-                    id: notification.id,
+                    id: notification._id,
                   }}
                 >
                   {(RemoveNotificationMutation) => {
@@ -107,7 +110,7 @@ export function Notifications() {
                         onClick={() => {
                           RemoveNotificationMutation();
                           const notificationArrayFiltered = notificationArray.filter(
-                            (item) => item.id !== notification.id,
+                            (item) => item._id !== notification._id
                           );
                           setNotificationArray(notificationArrayFiltered);
                         }}
@@ -124,16 +127,14 @@ export function Notifications() {
           );
         })}
         {notificationArray.length === 0 && (
-          <Card
-            className={classes.card}
-            style={{ background: 'rgba(0,0,0,0),' }}
-          >
+          <Card className={classes.card}>
             <div className={classes.rowWrapper}>
               <div className={classes.messageButton}>
                 <div
                   className={clsx({
                     [classes.notifications]: true,
                   })}
+                  style={{ border: '2px solid #ccc' }}
                 >
                   <Icon style={{ color: '#ccc' }}>more_horiz</Icon>
                 </div>

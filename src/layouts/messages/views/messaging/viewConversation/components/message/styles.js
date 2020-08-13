@@ -43,7 +43,13 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 0,
     color: '#fff',
   },
-  icon: { width: 40 },
+  icon: {
+    width: 40,
+    borderRadius: '50%',
+    border: '2px solid #ddd',
+    marginLeft: 2,
+    marginRight: 2,
+  },
   notifications: {
     display: 'flex',
     flexDirection: 'column',

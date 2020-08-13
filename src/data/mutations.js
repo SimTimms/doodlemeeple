@@ -2,11 +2,8 @@ import gql from 'graphql-tag';
 
 export const SIGNUP_MUTATION = gql`
   mutation SignupMutation($name: String!, $email: String!, $password: String!) {
-    signup(name: $name, email: $email, password: $password) {
-      token
-      user {
-        id
-      }
+    userCreateOne(record: { name: $name, email: $email, password: $password }) {
+      recordId
     }
   }
 `;
@@ -22,8 +19,10 @@ export const MAKE_PAYMENT = gql`
 `;
 
 export const SUBMIT_BRIEF = gql`
-  mutation SubmitBrief($jobId: String!) {
-    submitBrief(jobId: $jobId)
+  mutation SubmitBrief($jobId: MongoID!) {
+    submitBrief(_id: $jobId) {
+      _id
+    }
   }
 `;
 
@@ -41,54 +40,100 @@ export const UPDATE_EMAIL = gql`
 
 export const DELETE_ACCOUNT = gql`
   mutation DeleteAccount {
-    deleteAccount
+    deleteAccount {
+      _id
+    }
+  }
+`;
+
+export const DELETE_IMAGE = gql`
+  mutation DeleteImage($id: MongoID!) {
+    imageRemoveById(_id: $id) {
+      recordId
+    }
   }
 `;
 
 export const UPDATE_INVITE = gql`
-  mutation UpdateInvite($id: String!, $invite: InviteInput!) {
-    updateInvite(id: $id, invite: $invite)
+  mutation UpdateInvite($_id: MongoID!) {
+    declineInvite(_id: $_id) {
+      _id
+    }
   }
 `;
 
 export const CREATE_INVITE = gql`
-  mutation CreateInvite($id: String!, $invite: InviteInput!) {
-    createInvite(id: $id, invite: $invite)
+  mutation CreateInvite(
+    $title: String
+    $message: String
+    $receiverId: MongoID!
+    $jobId: MongoID!
+  ) {
+    inviteCreateOne(
+      record: {
+        receiver: $receiverId
+        message: $message
+        title: $title
+        job: $jobId
+      }
+    ) {
+      recordId
+    }
   }
 `;
 
 export const REMOVE_INVITE = gql`
-  mutation RemoveInvite($id: String!) {
-    removeInvite(id: $id)
+  mutation RemoveInvite($_id: MongoID!) {
+    inviteRemoveById(_id: $_id) {
+      recordId
+    }
   }
 `;
 export const UPDATE_TERM = gql`
-  mutation UpdatePaymentTerm($id: String!, $paymentTerm: PaymentTermInput!) {
-    updatePaymentTerm(id: $id, paymentTerm: $paymentTerm)
+  mutation UpdatePaymentTerm(
+    $_id: MongoID!
+    $percent: Float
+    $description: String
+  ) {
+    paymentTermsUpdateById(
+      record: { _id: $_id, percent: $percent, description: $description }
+    ) {
+      recordId
+    }
   }
 `;
 
 export const CREATE_TERM = gql`
-  mutation CreatePaymentTerm($id: String!, $paymentTerm: PaymentTermInput!) {
-    createPaymentTerm(id: $id, paymentTerm: $paymentTerm)
+  mutation CreatePaymentTerm(
+    $percent: Float
+    $description: String
+    $contractId: MongoID!
+  ) {
+    paymentTermsCreateOne(
+      record: {
+        percent: $percent
+        description: $description
+        contract: $contractId
+      }
+    ) {
+      recordId
+    }
   }
 `;
 
 export const REMOVE_TERM = gql`
-  mutation RemovePaymentTerm($id: String!) {
-    removePaymentTerm(id: $id)
-  }
-`;
-
-export const UPDATE_CONTRACT = gql`
-  mutation UpdateContract($id: String!, $contract: ContractInput!) {
-    updateContract(id: $id, contract: $contract)
+  mutation RemovePaymentTerm($_id: MongoID!) {
+    paymentTermsRemoveById(_id: $_id) {
+      recordId
+    }
   }
 `;
 
 export const SUBMIT_CONTRACT = gql`
-  mutation SubmitContract($id: String!) {
-    submitContract(id: $id)
+  mutation SubmitContract($_id: MongoID!) {
+    submitContract(_id: $_id) {
+      _id
+    }
   }
 `;
 
@@ -105,8 +150,38 @@ export const DECLINE_CONTRACT = gql`
 `;
 
 export const CREATE_CONTRACT = gql`
-  mutation CreateContract($id: String!, $contract: ContractInput!) {
-    createContract(id: $id, contract: $contract)
+  mutation CreateContract(
+    $currency: String!
+    $cost: String!
+    $jobId: MongoID!
+  ) {
+    contractCreateOne(
+      record: { currency: $currency, cost: $cost, job: $jobId }
+    ) {
+      recordId
+    }
+  }
+`;
+
+export const UPDATE_CONTRACT = gql`
+  mutation UpdateContract(
+    $_id: MongoID!
+    $notes: String
+    $deadline: String
+    $currency: String
+    $cost: String
+  ) {
+    contractUpdateById(
+      record: {
+        _id: $_id
+        notes: $notes
+        deadline: $deadline
+        currency: $currency
+        cost: $cost
+      }
+    ) {
+      recordId
+    }
   }
 `;
 
@@ -123,44 +198,108 @@ export const DECLINE_INVITE = gql`
 `;
 
 export const UPDATE_GAME = gql`
-  mutation UpdateGame($id: String!, $game: GameInput!) {
-    updateGame(id: $id, game: $game)
+  mutation UpdateGame(
+    $id: MongoID!
+    $name: String
+    $img: String
+    $backgroundImg: String
+    $summary: String
+    $location: String
+    $showreel: String
+    $type: String
+  ) {
+    gameUpdateById(
+      record: {
+        _id: $id
+        name: $name
+        img: $img
+        backgroundImg: $backgroundImg
+        summary: $summary
+        location: $location
+        showreel: $showreel
+        type: $type
+      }
+    ) {
+      recordId
+    }
   }
 `;
 
 export const CREATE_GAME = gql`
-  mutation CreateGame($id: String!, $game: GameInput!) {
-    createGame(id: $id, game: $game)
+  mutation CreateGame($name: String!) {
+    gameCreateOne(record: { name: $name }) {
+      recordId
+    }
   }
 `;
 
 export const REMOVE_GAME = gql`
-  mutation RemoveGame($id: String!) {
-    removeGame(id: $id)
+  mutation RemoveGame($id: MongoID!) {
+    gameRemoveById(_id: $id) {
+      recordId
+    }
   }
 `;
 
 export const ADD_FAVOURITE = gql`
-  mutation AddFavourite($id: String!, $addRemove: String!) {
-    addFavourite(id: $id, addRemove: $addRemove)
+  mutation AddFavourite($id: MongoID!) {
+    favouriteCreateOne(record: { receiver: $id }) {
+      recordId
+    }
   }
 `;
 
 export const UPDATE_JOB = gql`
-  mutation UpdateJob($id: String!, $job: JobInput!) {
-    updateJob(id: $id, job: $job)
+  mutation UpdateJob(
+    $_id: MongoID!
+    $name: String
+    $img: String
+    $summary: String
+    $location: String
+    $showreel: String
+    $type: String
+    $creativeSummary: String
+    $submitted: String
+  ) {
+    jobUpdateById(
+      record: {
+        _id: $_id
+        name: $name
+        img: $img
+        summary: $summary
+        location: $location
+        showreel: $showreel
+        type: $type
+        creativeSummary: $creativeSummary
+        submitted: $submitted
+      }
+    ) {
+      recordId
+    }
+  }
+`;
+
+export const CLOSE_JOB = gql`
+  mutation closeJob($_id: MongoID!) {
+    closeJob(_id: $_id) {
+      _id
+    }
   }
 `;
 
 export const CREATE_JOB = gql`
-  mutation CreateJob($id: String!, $job: JobInput!) {
-    createJob(id: $id, job: $job)
+  mutation CreateJob($name: String!) {
+    jobCreateOne(record: { name: $name }) {
+      recordId
+    }
   }
 `;
 
 export const REMOVE_JOB = gql`
-  mutation RemoveJob($id: String!) {
-    removeJob(id: $id)
+  mutation RemoveJob($id: MongoID!) {
+    jobRemoveById(_id: $id) {
+      recordId
+    }
   }
 `;
 
@@ -169,138 +308,230 @@ export const UPDATE_USER_MUTATION = gql`
     $name: String!
     $summary: String
     $profileBG: String
-    $profileBGStyle: String
     $profileImg: String
-    $profileImgStyle: String
-    $sections: [SectionInput]
-    $autosave: Boolean
   ) {
-    updateUser(
-      name: $name
-      summary: $summary
-      profileBG: $profileBG
-      profileBGStyle: $profileBGStyle
-      profileImg: $profileImg
-      profileImgStyle: $profileImgStyle
-      sections: $sections
-      autosave: $autosave
+    userUpdateOne(
+      record: {
+        name: $name
+        summary: $summary
+        profileBG: $profileBG
+        profileImg: $profileImg
+      }
     ) {
-      id
-      name
-      summary
-      profileBG
-      profileBGStyle
-      profileImg
-      profileImgStyle
-      autosave
+      recordId
     }
   }
 `;
 
 export const UPDATE_SECTION_MUTATION = gql`
-  mutation UpdateSectionMutation($id: String!, $section: SectionInput) {
-    updateSection(id: $id, section: $section) {
+  mutation UpdateSectionMutation($section: Section) {
+    updateSection(section: $section) {
       id
     }
   }
 `;
 
 export const UPDATE_GALLERY_SECTION_MUTATION = gql`
-  mutation UpdateGallerySectionMutation($id: String!, $section: SectionInput) {
-    updateGallerySection(id: $id, section: $section) {
-      id
+  mutation UpdateGallerySectionMutation(
+    $summary: String
+    $showreel: String
+    $type: String
+    $galleryId: MongoID!
+  ) {
+    sectionUpdateById(
+      record: {
+        _id: $galleryId
+        summary: $summary
+        showreel: $showreel
+        type: $type
+      }
+    ) {
+      recordId
+      record {
+        gallery {
+          _id
+        }
+      }
+    }
+  }
+`;
+
+export const UPLOAD_IMAGE = gql`
+  mutation UploadImage($img: String!, $galleryId: MongoID!) {
+    imageCreateOne(record: { img: $img, gallery: $galleryId }) {
+      recordId
+      record {
+        img
+      }
     }
   }
 `;
 
 export const CREATE_GALLERY_SECTION_MUTATION = gql`
-  mutation CreateGallerySectionMutation($id: String!, $section: SectionInput) {
-    createGallerySection(id: $id, section: $section)
+  mutation CreateGallerySectionMutation(
+    $summary: String
+    $showreel: String
+    $type: String
+  ) {
+    sectionCreateOne(
+      record: { summary: $summary, showreel: $showreel, type: $type }
+    ) {
+      recordId
+      record {
+        gallery {
+          _id
+        }
+      }
+    }
   }
 `;
 
 export const UPDATE_TESTIMONIAL = gql`
-  mutation UpdateTestimonial(
-    $testimonial: TestimonialInput!
-    $sectionId: String!
+  mutation UpdatePaymentTestimonial(
+    $summary: String
+    $name: String
+    $image: String
+    $testimonialId: MongoID!
   ) {
-    updateTestimonial(testimonial: $testimonial, sectionId: $sectionId) {
-      id
+    testimonialUpdateById(
+      record: {
+        _id: $testimonialId
+        summary: $summary
+        name: $name
+        image: $image
+      }
+    ) {
+      recordId
     }
   }
 `;
 
 export const CREATE_TESTIMONIAL = gql`
   mutation CreateTestimonial(
-    $testimonial: TestimonialInput!
-    $sectionId: String!
+    $name: String
+    $summary: String
+    $image: String
+    $sectionId: MongoID!
   ) {
-    createTestimonial(testimonial: $testimonial, sectionId: $sectionId)
+    testimonialCreateOne(
+      record: {
+        summary: $summary
+        name: $name
+        image: $image
+        section: $sectionId
+      }
+    ) {
+      recordId
+    }
   }
 `;
 
 export const UPDATE_PROJECT = gql`
-  mutation UpdateProject($project: NotableProjectsInput!, $sectionId: String!) {
-    updateProject(project: $project, sectionId: $sectionId)
+  mutation UpdateProject(
+    $summary: String
+    $name: String
+    $image: String
+    $projectId: MongoID!
+  ) {
+    notableProjectUpdateById(
+      record: { _id: $projectId, summary: $summary, name: $name, image: $image }
+    ) {
+      recordId
+    }
   }
 `;
 
 export const CREATE_PROJECT = gql`
-  mutation CreateProject($project: NotableProjectsInput!, $sectionId: String!) {
-    createProject(project: $project, sectionId: $sectionId)
+  mutation CreateProject(
+    $summary: String
+    $name: String
+    $image: String
+    $sectionId: MongoID!
+  ) {
+    notableProjectCreateOne(
+      record: {
+        summary: $summary
+        name: $name
+        image: $image
+        section: $sectionId
+      }
+    ) {
+      recordId
+    }
   }
 `;
 
 export const REMOVE_SECTION_MUTATION = gql`
-  mutation RemoveSectionMutation($id: String!) {
-    removeSection(id: $id)
+  mutation RemoveSectionMutation($id: MongoID!) {
+    sectionRemoveById(_id: $id) {
+      recordId
+    }
   }
 `;
 
 export const REMOVE_NOTABLE_PROJECT_MUTATION = gql`
-  mutation RemoveNotableProjectMutation($id: String!) {
+  mutation RemoveNotableProjectMutation($id: MongoID!) {
     removeNotableProject(id: $id)
   }
 `;
 
 export const REMOVE_TESTIMONIAL_MUTATION = gql`
-  mutation RemoveTestimonialMutation($id: String!) {
-    removeTestimonial(id: $id)
+  mutation RemoveTestimonialMutation($id: MongoID!) {
+    testimonialRemoveById(_id: $id) {
+      recordId
+    }
   }
 `;
 
 export const REMOVE_PROJECT_MUTATION = gql`
-  mutation RemoveProjectMutation($id: String!) {
-    removeProject(id: $id)
+  mutation RemoveProjectMutation($id: MongoID!) {
+    notableProjectRemoveById(_id: $id) {
+      recordId
+    }
   }
 `;
 
 export const REMOVE_NOTIFICATION_MUTATION = gql`
-  mutation RemoveNotificationMutation($id: String!) {
-    removeNotification(id: $id) {
-      message
-      id
-      icon
-      title
-      createdAt
-      linkTo
+  mutation RemoveNotificationMutation($id: MongoID!) {
+    notificationRemoveById(_id: $id) {
+      recordId
     }
   }
 `;
 
 export const CREATE_MESSAGE = gql`
-  mutation CreateMessage($id: String!, $message: MessageInput!) {
-    createMessage(id: $id, message: $message)
+  mutation CreateMessage(
+    $receiverId: MongoID!
+    $message: String!
+    $jobId: MongoID!
+    $type: String
+  ) {
+    messageCreateOne(
+      record: {
+        messageStr: $message
+        receiver: $receiverId
+        job: $jobId
+        type: $type
+      }
+    ) {
+      recordId
+      record {
+        messageStr
+        type
+        sender {
+          name
+          _id
+          profileImg
+        }
+      }
+    }
   }
 `;
 
 export const LOGIN_MUTATION = gql`
   mutation LoginMutation($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
+    userLogin(email: $email, password: $password) {
       token
-      user {
-        id
-      }
     }
   }
 `;

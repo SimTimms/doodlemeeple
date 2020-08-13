@@ -1,23 +1,17 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import { useStyles } from './styles';
 import Icon from '@material-ui/core/Icon';
+import { IconButton } from '../../../../../../../components';
 
-export function JobComponent({ job }) {
+export function JobComponent({ job, game, history }) {
   const classes = useStyles();
+  const contractsArr = job.contracts.map((contract) => contract.user._id);
+
   return (
-    <Card className={classes.card}>
-      <div
-        style={{
-          background: `url(${job.game.backgroundImg})`,
-          backgroundSize: 'cover',
-          marginRight: 20,
-        }}
-        className={classes.gameImg}
-      />
+    <Card className={classes.card} style={{ paddingLeft: 10 }}>
       <div
         style={{
           display: 'flex',
@@ -25,44 +19,92 @@ export function JobComponent({ job }) {
           alignItems: 'center',
           justifyContent: 'center',
           width: '100%',
+          marginLeft: 20,
         }}
       >
         <Typography
           variant="body1"
           component="p"
-          style={{ width: '100%', paddingLeft: 10 }}
+          style={{ width: '100%' }}
           className={classes.cardSummary}
         >
           {job.name}
         </Typography>
-
         <Typography
           variant="body2"
           component="p"
-          style={{ width: '100%', paddingLeft: 10 }}
+          style={{ width: '100%' }}
           className={classes.cardSummary}
         >
-          {job.game.name}
+          {game.name}
         </Typography>
         <Typography
           variant="body2"
           component="p"
-          style={{ width: '100%', paddingLeft: 10 }}
+          style={{ width: '100%' }}
           className={classes.cardSummary}
         >
-          {job.submitted ? 'Submitted' : 'Draft'}
+          {job.submitted === 'submitted'
+            ? 'Submitted'
+            : job.submitted === 'closed'
+            ? 'closed'
+            : 'Draft'}
         </Typography>
       </div>
-
-      <Link
-        to={`/app/edit-job/${job.id}`}
-        className={classes.cardLink}
-        style={{ textDecoration: 'none' }}
-      >
-        <Button variant="contained" color="primary">
-          Edit
-        </Button>
-      </Link>
+      {job.invites.map((invite, index) => {
+        console.log(invite, contractsArr);
+        return (
+          <div
+            key={`invite_${index}`}
+            style={{ marginRight: -10 }}
+            title={`${invite.receiver.name} ${
+              invite.status === 'declined' ? '(declined)' : ''
+            }`}
+          >
+            <div
+              style={{
+                backgroundImage: `url(${invite.receiver.profileImg})`,
+              }}
+              className={classes.profileThumb}
+            >
+              {invite.status === 'declined' && (
+                <div className={classes.declined}></div>
+              )}
+              {contractsArr.indexOf(invite.receiver._id) > -1 && (
+                <Typography
+                  variant="body1"
+                  component="p"
+                  className={classes.countsStyle}
+                >
+                  1
+                </Typography>
+              )}
+            </div>
+          </div>
+        );
+      })}
+      <IconButton
+        disabled={false}
+        title={
+          job.submitted === 'submitted' || job.submitted === 'closed'
+            ? 'View'
+            : 'Edit'
+        }
+        color="primary"
+        type="button"
+        iconPos="right"
+        icon={
+          job.submitted === 'submitted' || job.submitted === 'closed'
+            ? 'preview'
+            : 'edit'
+        }
+        styleOverride={{ marginRight: 10, marginLeft: 30 }}
+        onClickEvent={() => {
+          job.submitted
+            ? history.push(`/app/view-job/${job._id}`)
+            : history.push(`/app/edit-job/${job._id}`);
+        }}
+      />
     </Card>
   );
 }

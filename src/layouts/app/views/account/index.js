@@ -91,7 +91,7 @@ export function Account({ history }) {
                 setError(readableErrors(error, errors));
               }}
               onCompleted={() => {
-                toaster('Saved');
+                toaster('Autosave');
               }}
             >
               {(mutation) => {

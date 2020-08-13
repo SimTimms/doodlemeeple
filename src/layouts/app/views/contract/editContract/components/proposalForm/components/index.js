@@ -48,7 +48,7 @@ export default function PaymentTerm({
         },
       }}
       onCompleted={(data) => {
-        toaster('Saved');
+        toaster('Autosave');
       }}
     >
       {(mutation, { loading }) => {
@@ -122,7 +122,7 @@ export default function PaymentTerm({
               onCompleted={(data) => {
                 toaster('Deleted');
                 const updatedArray = contract.paymentTerms.filter(
-                  (item) => item.id !== values.id,
+                  (item) => item.id !== values.id
                 );
                 const percentLockCalc = calculatePercent(updatedArray);
                 setPercentLock(percentLockCalc);

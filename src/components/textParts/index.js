@@ -41,10 +41,31 @@ export function HeaderTwo({ str }) {
   );
 }
 
+export function HeaderThree({ str }) {
+  const classes = useStyles();
+  return (
+    <div className={classes.headerWrapper}>
+      <div className={classes.headerLineTwo}></div>
+      <Typography variant="h6" className={classes.descriptionTitleTwo}>
+        {str}
+      </Typography>
+      <div className={classes.headerLineTwoFull}></div>
+    </div>
+  );
+}
 export function Text({ str }) {
   const classes = useStyles();
   return (
     <Typography variant="body1" className={classes.description}>
+      {str}
+    </Typography>
+  );
+}
+
+export function TextLeft({ str }) {
+  const classes = useStyles();
+  return (
+    <Typography variant="body1" className={classes.descriptionLeft}>
       {str}
     </Typography>
   );

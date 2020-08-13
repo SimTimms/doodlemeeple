@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Icon, Typography, Slide, Button } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   Header,
@@ -8,24 +8,22 @@ import {
   ColumnWrapper,
   HeaderTwo,
   Text,
+  IconButton,
 } from '../../../../components';
 import { Query } from 'react-apollo';
 import { PROFILE_PREVIEW, SECTIONS_PREVIEW } from '../../../../data/queries';
 import GallerySection from './components/section/gallerySection';
-import EditorSection from './components/section/editorSection';
 
 export function PreviewProfile({ theme, profileId, publicView }) {
   const classes = useStyles();
 
   const [userProfile, setUserProfile] = React.useState({
     profileBG: null,
-    profileBGStyle: [0, 0],
     userName: '',
     userId: '',
     summary: '',
     sections: [],
     profileImg: null,
-    profileImgStyle: [0, 0],
   });
   const [sections, setSections] = React.useState([]);
 
@@ -36,28 +34,14 @@ export function PreviewProfile({ theme, profileId, publicView }) {
           query={PROFILE_PREVIEW}
           variables={{ userId: profileId }}
           onCompleted={(data) => {
-            const {
-              name,
-              summary,
-              profileBG,
-              id,
-              profileBGStyle,
-              profileImg,
-              profileImgStyle,
-            } = data.profilePreview;
+            const { name, summary, profileBG, _id, profileImg } = data.userById;
             setUserProfile({
               profileBG: profileBG,
-              profileBGStyle: profileBGStyle
-                ? profileBGStyle.split(':')
-                : [0, 0],
               userName: name,
-              userId: id,
+              userId: _id,
               summary,
               sections: [],
               profileImg,
-              profileImgStyle: profileImgStyle
-                ? profileImgStyle.split(':')
-                : [0, 0],
             });
           }}
         >
@@ -72,20 +56,24 @@ export function PreviewProfile({ theme, profileId, publicView }) {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                paddingBottom: 5,
+                top: 0,
+                position: 'absolute',
               }}
             >
               <Link
                 to={`/app/edit-profile`}
                 style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
               >
-                <Button
-                  variant="contained"
-                  color="primary"
-                  style={{ width: 60, marginLeft: 10 }}
-                >
-                  <Icon style={{ fontSize: 18, color: '#fff' }}>edit</Icon>
-                </Button>
+                <IconButton
+                  title="Edit"
+                  icon="edit"
+                  iconPos="right"
+                  disabled={false}
+                  color="secondary"
+                  styleOverride={null}
+                  type="button"
+                  onClickEvent={() => {}}
+                ></IconButton>
               </Link>
             </div>
           )}
@@ -146,19 +134,13 @@ export function PreviewProfile({ theme, profileId, publicView }) {
           </ColumnWrapper>
 
           {sections &&
-            sections.map((section, index) =>
-              section.type === 'artist' ||
-              section.type === 'graphic-artist' ||
-              section.type === '3d-artist' ? (
-                <GallerySection section={section} key={`section_${index}`} />
-              ) : (
-                <EditorSection section={section} key={`section_${index}`} />
-              ),
-            )}
+            sections.map((section, index) => (
+              <GallerySection section={section} key={`section_${index}`} />
+            ))}
           <Query
             query={SECTIONS_PREVIEW}
             onCompleted={(data) => {
-              const sections = data.sectionsPreview;
+              const sections = data.sectionMany;
               setSections(sections);
             }}
             variables={{ userId: profileId }}

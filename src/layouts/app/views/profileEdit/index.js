@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Slide, TextField } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import { ProfileHeader } from './components/profileHeader';
 import {
@@ -10,21 +10,20 @@ import {
   IconTitle,
   InlineHeader,
   FieldTitle,
-  Divider,
   DMCard,
   IconButton,
   LoadIcon,
+  FieldBox,
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE } from '../../../../data/queries';
-import { Section } from './components/section';
 import GallerySection from './components/section/gallerySection';
-import EditorSection from './components/section/editorSection';
 import { UPDATE_USER_MUTATION } from '../../../../data/mutations';
 import { readableErrors } from '../../../../utils/readableErrors';
 import { toaster } from '../../../../utils/toaster';
+import autosave from '../../../../utils/autosave';
 
-export function EditProfile({ theme }) {
+export function EditProfile({ theme, history }) {
   const classes = useStyles();
   const [bgImage, setBgImage] = React.useState(null);
   const [profileImgStyle, setProfileImgStyle] = React.useState([0, 0]);
@@ -34,8 +33,6 @@ export function EditProfile({ theme }) {
   const [sections, setSections] = React.useState([]);
   const [profileImg, setProfileImg] = React.useState(null);
   const [profileBGStyle, setProfileBGStyle] = React.useState([0, 0]);
-  const [autosaveIsOn, setAutosaveIsOn] = React.useState(true);
-  const [timer, setTimer] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [errors, setError] = React.useState({
     name: null,
@@ -53,7 +50,6 @@ export function EditProfile({ theme }) {
     profileBGStyle,
     autosave: true,
   };
-
   function hasNew() {
     const ids = sections.map((item) => item.id);
     const filterIds = ids.filter((item) => item === 'new');
@@ -69,16 +65,13 @@ export function EditProfile({ theme }) {
             name: userProfile.userName,
             summary: userProfile.summary,
             profileBG: userProfile.bgImage,
-            profileBGStyle: userProfile.profileBGStyle.join(':'),
             profileImg: userProfile.profileImg,
-            profileImgStyle: userProfile.profileImgStyle.join(':'),
-            autosave: userProfile.autosave,
-            sections: [],
+          }}
+          onCompleted={() => {
+            toaster('Autosave');
           }}
           update={(store, { data: { updateUser } }) => {
             const data = store.readQuery({ query: PROFILE });
-            toaster('Saved');
-
             const profile = data.profile;
             profile.name = updateUser.name;
             profile.summary = updateUser.summary;
@@ -86,6 +79,7 @@ export function EditProfile({ theme }) {
             store.writeQuery({ query: PROFILE, data });
           }}
           onError={(error) => {
+            toaster('Error');
             setError(readableErrors(error, errors));
           }}
         >
@@ -110,24 +104,18 @@ export function EditProfile({ theme }) {
                         paddingBottom: 5,
                       }}
                     >
-                      <Link
-                        to={`/preview/${userId}`}
-                        style={{
-                          maxWidth: 326,
-                          width: '100%',
-                          lineHeight: 0.6,
+                      <IconButton
+                        disabled={false}
+                        color="secondary"
+                        icon="pageview"
+                        title="Preview"
+                        onClickEvent={() => {
+                          history.push(`/preview/${userId}`);
                         }}
-                      >
-                        <IconButton
-                          disabled={false}
-                          color="secondary"
-                          warning={false}
-                          icon="pageview"
-                          title="Preview"
-                          onClickEvent={() => {}}
-                          styleOverride={null}
-                        />
-                      </Link>
+                        styleOverride={null}
+                        type="button"
+                        iconPos="right"
+                      />
                     </div>
                     <DMCard>
                       <InlineHeader>
@@ -143,91 +131,65 @@ export function EditProfile({ theme }) {
                         <ProfileHeader
                           profile={userProfile}
                           setProfileImg={setProfileImg}
-                          setProfileImgStyle={setProfileImgStyle}
                           setBgImage={setBgImage}
-                          profileBGStyle={profileBGStyle}
-                          setProfileBGStyle={setProfileBGStyle}
-                          profileImgStyle={profileImgStyle}
-                          setUserName={setUserName}
-                          autosaveFunction={
-                            autosaveIsOn ? SignupMutation : null
-                          }
+                          autosaveFunction={SignupMutation}
                         />
-
-                        <ErrorBox errorMsg={errors.name} />
-                        <Divider />
                         <FieldTitle
-                          name="Summary"
-                          description="Tell everyone about yourself. What are your influences? what's your art style? how long have you been working? Make it punchy to grab attention..."
+                          name="About You"
+                          description="Your name and a brief summary of what you do"
                           warning=""
                           inline={false}
                         />
-                        <TextField
-                          id={'summary'}
-                          label={`About Me ${
-                            userProfile.summary
-                              ? `(${256 - userProfile.summary.length})`
-                              : ''
-                          }`}
-                          inputProps={{ maxLength: 256 }}
-                          multiline
-                          type="text"
-                          value={userProfile.summary}
-                          onChange={(e) => {
-                            clearTimeout(timer);
-                            setTimer(
-                              setTimeout(() => {
-                                SignupMutation();
-                              }, 1000),
-                            );
-                            setSummary(
-                              e.target.value
-                                .substring(0, 256)
-                                .replace(/[^A-Za-z0-9 ,\-."'\n]/g, ''),
-                            );
+                        <FieldBox
+                          value={userProfile.userName}
+                          title="Name"
+                          maxLength={26}
+                          onChangeEvent={(e) => {
+                            autosave(SignupMutation, 'username');
+                            setUserName(e);
                           }}
-                          margin="normal"
-                          variant="outlined"
-                          style={{ width: '100%' }}
+                          replaceMode="loose"
+                          placeholder="Example: David Jones"
+                          info="Your name, callsign, company name, handle, alias or whatever else you want to be know as."
+                          warning=""
+                          size="s"
+                          multiline={false}
+                        />
+                        <ErrorBox errorMsg={errors.name} />
+                        <FieldBox
+                          value={userProfile.summary}
+                          title="Summary"
+                          maxLength={256}
+                          onChangeEvent={(e) => {
+                            autosave(SignupMutation, 'summary');
+                            setSummary(e);
+                          }}
+                          replaceMode="loose"
+                          placeholder="Example: Digital artist with 12 years experience..."
+                          info="Coming Soon"
+                          warning=""
+                          size="s"
+                          multiline={true}
                         />
                       </div>
                     </DMCard>
                     {sections &&
-                      sections.map((section, index) =>
-                        section.type === 'artist' ||
-                        section.type === 'graphic-artist' ||
-                        section.type === '3d-artist' ? (
-                          <GallerySection
-                            key={`section_${index}`}
-                            index={index}
-                            sections={sections}
-                            setSections={setSections}
-                            section={section}
-                            autosaveIsOn={autosaveIsOn}
-                          />
-                        ) : section.type === 'rulebook-editor' ? (
-                          <EditorSection
-                            key={`section_${index}`}
-                            index={index}
-                            sections={sections}
-                            setSections={setSections}
-                            section={section}
-                            autosaveIsOn={autosaveIsOn}
-                          />
-                        ) : section.summary !== null ? (
-                          <Section
-                            key={`section_${index}`}
-                            index={index}
-                            sections={sections}
-                            setSections={setSections}
-                            section={section}
-                          />
-                        ) : null,
-                      )}
+                      sections.map((section, index) => (
+                        <GallerySection
+                          key={`section_${index}`}
+                          index={index}
+                          sections={sections}
+                          setSections={setSections}
+                          section={section}
+                          autosaveIsOn={true}
+                        />
+                      ))}
                     <DMCard>
-                      <InlineHeader>
-                        <IconTitle icon="brush" title="Skills" />
-                      </InlineHeader>
+                      {sections.length < 3 && hasNew() === 0 && (
+                        <InlineHeader>
+                          <IconTitle icon="brush" title="Skills" />
+                        </InlineHeader>
+                      )}
                       {sections.length < 3 && hasNew() === 0 && (
                         <AddSection
                           setSections={setSections}
@@ -250,19 +212,8 @@ export function EditProfile({ theme }) {
             setUserName(data.profile.name);
             setSummary(data.profile.summary);
             setBgImage(data.profile.profileBG);
-            setUserId(data.profile.id);
-            setAutosaveIsOn(data.profile.autosave);
-            setProfileBGStyle(
-              data.profile.profileBGStyle
-                ? data.profile.profileBGStyle.split(':')
-                : [0, 0],
-            );
+            setUserId(data.profile._id);
             setProfileImg(data.profile.profileImg);
-            setProfileImgStyle(
-              data.profile.profileImgStyle
-                ? data.profile.profileImgStyle.split(':')
-                : [0, 0],
-            );
           }}
         >
           {() => {

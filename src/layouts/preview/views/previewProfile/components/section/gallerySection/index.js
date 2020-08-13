@@ -1,5 +1,4 @@
 import React from 'react';
-import { useStyles } from './styles';
 import ReactPlayer from 'react-player';
 import { Card, Testimonials, Projects } from './components';
 import {
@@ -8,10 +7,9 @@ import {
   HeaderTwo,
   Text,
 } from '../../../../../../../components';
+import { TYPE_HELPER } from '../../../../../../../utils';
 
 function GallerySection({ section }) {
-  const classes = useStyles();
-
   const {
     summary,
     gallery,
@@ -19,8 +17,8 @@ function GallerySection({ section }) {
     testimonials,
     showreel,
     type,
-    id,
   } = section;
+  console.log(section);
   return section.id === 'new' ? (
     <div>New</div>
   ) : (
@@ -58,7 +56,7 @@ function GallerySection({ section }) {
       )}
 
       <ColumnWrapper>
-        <HeaderTwo str="About my Art" />
+        <HeaderTwo str={TYPE_HELPER(type)} />
         <Text str={summary} />
       </ColumnWrapper>
       {gallery.images.length > 0 && (

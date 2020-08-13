@@ -6,9 +6,9 @@ import { timeDifferenceForDate } from '../../../../../../../utils/dates';
 import { IconButton } from '../../../../../../../components';
 import Cookies from 'js-cookie';
 
-export function Message({ message, history }) {
+export function Message({ message, history, setViewer }) {
   const classes = useStyles();
-  const isUserMessage = message.sender.id !== Cookies.get('userId');
+  const isUserMessage = message.sender._id !== Cookies.get('userId');
 
   return (
     <Card
@@ -59,47 +59,55 @@ export function Message({ message, history }) {
                     <b>{timeDifferenceForDate(message.createdAt)}</b>
                   </Typography>
                 </div>
-                <Typography color="textPrimary" component="p">
-                  {message.messageStr.indexOf('QUOTE SUBMITTED:') === -1 ? (
-                    message.messageStr
-                  ) : !isUserMessage ? (
-                    <IconButton
-                      title="Quote Submitted"
-                      icon="request_quote"
-                      color="p"
-                      disabled={false}
-                      styleOverride={null}
-                      onClickEvent={() =>
-                        history.push(
-                          `/app/edit-contract/${message.messageStr.replace(
-                            'QUOTE SUBMITTED:',
-                            '',
-                          )}`,
-                        )
-                      }
-                      type="button"
-                      iconPos="right"
-                    />
-                  ) : (
-                    <IconButton
-                      title="View Quote"
-                      icon="request_quote"
-                      color="warning"
-                      disabled={false}
-                      styleOverride={null}
-                      onClickEvent={() =>
-                        history.push(
-                          `/app/view-contract/${message.messageStr.replace(
-                            'QUOTE SUBMITTED:',
-                            '',
-                          )}`,
-                        )
-                      }
-                      type="button"
-                      iconPos="right"
-                    />
-                  )}
-                </Typography>
+                {message.type !== 'upload' ? (
+                  <Typography color="textPrimary" component="p">
+                    {message.messageStr.indexOf('QUOTE SUBMITTED:') === -1 ? (
+                      message.messageStr
+                    ) : !isUserMessage ? (
+                      <IconButton
+                        title="Quote Submitted"
+                        icon="request_quote"
+                        color="p"
+                        disabled={false}
+                        styleOverride={null}
+                        onClickEvent={() =>
+                          history.push(
+                            `/app/edit-contract/${message.messageStr.replace(
+                              'QUOTE SUBMITTED:',
+                              ''
+                            )}`
+                          )
+                        }
+                        type="button"
+                        iconPos="right"
+                      />
+                    ) : (
+                      <IconButton
+                        title="View Quote"
+                        icon="request_quote"
+                        color="warning"
+                        disabled={false}
+                        styleOverride={null}
+                        onClickEvent={() =>
+                          history.push(
+                            `/app/view-contract/${message.messageStr.replace(
+                              'QUOTE SUBMITTED:',
+                              ''
+                            )}`
+                          )
+                        }
+                        type="button"
+                        iconPos="right"
+                      />
+                    )}
+                  </Typography>
+                ) : (
+                  <img
+                    src={message.messageStr}
+                    style={{ maxWidth: 300, cursor: 'pointer' }}
+                    onClick={() => setViewer(message.messageStr)}
+                  />
+                )}
               </div>
             </div>
           </div>

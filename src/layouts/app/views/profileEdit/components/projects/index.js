@@ -6,11 +6,11 @@ import { Project } from '../project';
 
 function Projects({ projects, setNotableProjects, sectionId, autosaveIsOn }) {
   const classes = useStyles();
-  const [showAdd, setShowAdd] = React.useState(true);
+  const [disabled, setDisabled] = React.useState(true);
 
   useEffect(() => {
-    const newProj = projects.filter((item) => item.id === 'new');
-    newProj.length === 0 && setShowAdd(true);
+    const newProj = projects.filter((item) => item._id === 'new');
+    newProj.length === 0 && setDisabled(false);
   }, [projects]);
 
   return (
@@ -34,17 +34,18 @@ function Projects({ projects, setNotableProjects, sectionId, autosaveIsOn }) {
                 key={`testimonial_${index}`}
                 sectionId={sectionId}
                 autosaveIsOn={autosaveIsOn}
-                setShowAdd={setShowAdd}
+                setDisabled={setDisabled}
               />
             );
           })}
       </div>
 
-      {projects.length < 5 && showAdd && (
+      {projects.length < 5 && !disabled && (
         <AddProject
           projects={projects}
           setNotableProjects={setNotableProjects}
-          setShowAdd={setShowAdd}
+          setDisabled={setDisabled}
+          disabled={disabled}
         />
       )}
     </div>

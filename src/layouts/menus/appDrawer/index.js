@@ -12,7 +12,6 @@ import {
   useMediaQuery,
   Typography,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import { useStyles } from '../styles';
 import Cookies from 'js-cookie';
 import clsx from 'clsx';
@@ -31,11 +30,17 @@ export function AppDrawer(props) {
     drawerClose,
     drawerCloseMobile,
     countsStyle,
+    wrapperFour,
   } = useStyles();
-  const { handleDrawerClose, open } = props;
+
+  const { handleDrawerClose, open, page, history } = props;
   const theme = useTheme();
   const mobile = useMediaQuery('(max-width:800px)');
-  const [counts, setCounts] = React.useState({ invites: 0, messages: 0 });
+  const [counts, setCounts] = React.useState({
+    invites: 0,
+    messages: 0,
+    quotes: 0,
+  });
 
   return (
     <Drawer
@@ -70,75 +75,126 @@ export function AppDrawer(props) {
           )}
         </IconButton>
       </div>
-      <Divider />
-
+      {(page === 'edit-game' ||
+        page === 'pick-artist' ||
+        page === 'view-job') && <Divider />}
+      {(page === 'edit-game' ||
+        page === 'pick-artist' ||
+        page === 'view-job') && (
+        <List>
+          {[
+            {
+              name: 'Back',
+              icon: <Icon>chevron_left</Icon>,
+              link: () => {
+                history.goBack();
+              },
+              color: '#444',
+              count: null,
+            },
+          ].map((text, index) => (
+            <div
+              className={link}
+              key={text.name}
+              onClick={() => {
+                text.link();
+                handleDrawerClose();
+              }}
+            >
+              <ListItem button style={{ paddingLeft: 10 }}>
+                <div className={wrapperFour}>
+                  <ListItemIcon
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#fff',
+                      position: 'relative',
+                    }}
+                  >
+                    {text.icon}
+                  </ListItemIcon>
+                  {text.count !== null && text.count > 0 && (
+                    <Typography
+                      variant="body1"
+                      component="p"
+                      className={countsStyle}
+                    >
+                      {text.count}
+                    </Typography>
+                  )}
+                </div>
+                <ListItemText
+                  primary={text.name}
+                  className={clsx({
+                    [button]: !mobile,
+                    [buttonMobile]: mobile,
+                  })}
+                />
+              </ListItem>
+            </div>
+          ))}
+        </List>
+      )}
       <List>
         {[
           {
             name: 'Dashboard',
             icon: <Icon>home</Icon>,
-            link: '/app/dashboard',
-            color: '#444',
+            link: () => history.push('/app/dashboard'),
+            color: '#57499e',
             count: null,
+          },
+          {
+            name: 'Messages',
+            icon: <Icon>chat</Icon>,
+            link: () => history.push('/messages/conversations'),
+            color: '#497b9e',
+            count: counts.messages,
+          },
+          {
+            name: 'Invites',
+            icon: <Icon>thumb_up</Icon>,
+            link: () => history.push('/app/invites'),
+            color: '#499e90',
+            count: counts.invites,
+          },
+          {
+            name: 'Projects',
+            icon: <Icon>work</Icon>,
+            link: () => history.push('/app/jobs'),
+            color: '#469958',
+            count: counts.quotes,
           },
           {
             name: 'Profile',
             icon: <Icon>contact_mail</Icon>,
-            link: '/app/edit-profile',
-            color: '#444',
+            link: () => history.push('/app/edit-profile'),
+            color: '#aebd53',
             count: null,
           },
           {
             name: 'Account',
             icon: <Icon>account_balance</Icon>,
-            link: '/app/account',
-            color: '#444',
+            link: () => history.push('/app/account'),
+            color: '#cca14b',
             count: null,
           },
           {
             name: 'Games',
             icon: <Icon>casino</Icon>,
-            link: '/app/games',
-            color: '#444',
-            count: null,
-          } /*
-          {
-            name: 'Invites',
-            icon: <MailIcon />,
-            link: '/app/invites',
-          },
-         
-          { name: 'My Games', icon: <ExtensionIcon />, link: '/app/projects' },
-         */,
-          /*
-          {
-            name: 'Briefs (Beta)',
-            icon: <Icon>work</Icon>,
-            link: '/app/jobs',
-            color: '#444',
+            link: () => history.push('/app/games'),
+            color: '#c76a48',
             count: null,
           },
-          {
-            name: 'Invites (Beta)',
-            icon: <Icon>thumb_up</Icon>,
-            link: '/app/invites',
-            color: '#444',
-            count: counts.invites,
-          },
-          {
-            name: 'Messages (Beta)',
-            icon: <Icon>chat</Icon>,
-            link: '/messages/conversations',
-            color: '#444',
-            count: counts.messages,
-          }*/
-          ,
         ].map((text, index) => (
-          <Link
-            to={text.link}
+          <div
             className={link}
             key={text.name}
-            onClick={handleDrawerClose}
+            onClick={() => {
+              text.link();
+              handleDrawerClose();
+            }}
           >
             <ListItem button style={{ paddingLeft: 10 }}>
               <div
@@ -185,7 +241,7 @@ export function AppDrawer(props) {
                 })}
               />
             </ListItem>
-          </Link>
+          </div>
         ))}
         <a
           href="https://doodlemeeple.com"
@@ -234,6 +290,7 @@ export function AppDrawer(props) {
           setCounts({
             invites: data.counts.invites,
             messages: data.counts.messages,
+            quotes: data.counts.quotes,
           });
         }}
         fetchPolicy="network-only"

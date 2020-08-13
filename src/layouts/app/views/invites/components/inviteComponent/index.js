@@ -1,47 +1,48 @@
 import React from 'react';
-import { Typography, Card, Link } from '@material-ui/core';
-import { useStyles } from './styles';
-import {
-  InlineHeader,
-  DeclineInvite,
-  IconTitle,
-  IconButton,
-  FeatureCardInvite,
-} from '../../../../../../components';
+import { IconButton, FeatureCardInvite } from '../../../../../../components';
+import { Mutation } from 'react-apollo';
+import { UPDATE_INVITE } from '../../../../../../data/mutations';
 
 export function InviteComponent({ invite, removeInvite, history }) {
-  const classes = useStyles();
-
   return (
     <FeatureCardInvite
-      background={invite.game.backgroundImg}
       thumbnail={invite.user.profileImg}
       job={invite.job.name}
       summary={invite.job.summary}
-      game="game"
-      gameId={invite.game.id}
       author={invite.user.name}
-      authorId={invite.user.id}
+      authorId={invite.user._id}
       history={history}
       buttonOne={
-        <IconButton
-          color="text-dark"
-          disabled={false}
-          onClickEvent={() => {
-            history.push(`/app/view-game/${invite.game.id}`);
+        <Mutation
+          mutation={UPDATE_INVITE}
+          variables={{
+            _id: invite._id,
           }}
-          icon="close"
-          iconPos="left"
-          title="Decline"
-          styleOverride={null}
-          type="button"
-        />
+        >
+          {(mutation) => {
+            return (
+              <IconButton
+                color="text-dark"
+                disabled={false}
+                onClickEvent={() => {
+                  mutation();
+                  removeInvite(invite._id);
+                }}
+                icon="close"
+                iconPos="left"
+                title="Decline"
+                styleOverride={null}
+                type="button"
+              />
+            );
+          }}
+        </Mutation>
       }
       buttonTwo={
         <IconButton
           color="text-dark"
           disabled={false}
-          onClickEvent={() => history.push(`/app/view-job/${invite.job.id}`)}
+          onClickEvent={() => history.push(`/app/view-job/${invite.job._id}`)}
           icon="chevron_right"
           title="Details"
           iconPos="right"

@@ -31,8 +31,13 @@ import InviteButton from './buttons/inviteButton';
 import CreateMessage from './buttons/createMessage';
 import IconButton from './buttons/iconButton';
 import FieldTitle from './fieldTitle';
+import FieldTitleDashboard from './fieldTitleDashboard';
+import FieldBox from './fieldBox';
+import InfoBox from './infoBox';
 import FieldTitleWrapper from './fieldTitle/FieldTitleWrapper';
 import ProfileCard from './profileCard';
+import ProfileCardBasic from './profileCardBasic';
+import BorderBox from './borderBox';
 import IconBox from './iconBox';
 import IconTitle from './iconTitle';
 import { InlineHeader, InlineHeaderWarning } from './inlineHeader';
@@ -50,6 +55,8 @@ import Contract from './contract';
 import FeatureCard from './featureCard';
 import FeatureCardInvite from './featureCardInvite';
 import FeatureCardHorizontal from './featureCardHorizontal';
+import UnlockInfo from './unlockInfo';
+import UnlockInfoReverse from './unlockInfoReverse';
 import {
   Header,
   SubHeader,
@@ -61,22 +68,29 @@ import {
   TextLink,
   Meta,
   TextArray,
+  HeaderThree,
+  TextLeft,
 } from './textParts';
 import { Column, Row } from './blocks';
 
 export {
+  UnlockInfoReverse,
   Column,
   Row,
   InlineHeaderWarning,
   FeatureCardInvite,
   Meta,
   TextLink,
+  TextLeft,
   TextDivider,
   ColumnWrapperFull,
   ColumnWrapper,
   FeatureCard,
   TextArray,
+  FieldBox,
+  InfoBox,
   Text,
+  UnlockInfo,
   Header,
   HeaderTwo,
   SubHeader,
@@ -98,10 +112,12 @@ export {
   IconTitle,
   TabButton,
   IconBox,
+  FieldTitleDashboard,
   FavouriteButton,
   InviteButton,
   IconButton,
   ProfileCard,
+  ProfileCardBasic,
   FieldTitle,
   CurrencySelector,
   LoadIcon,
@@ -131,4 +147,6 @@ export {
   FieldTitleWrapper,
   DeleteButtonSmall,
   Payments,
+  BorderBox,
+  HeaderThree,
 };

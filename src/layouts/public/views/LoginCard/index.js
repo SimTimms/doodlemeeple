@@ -38,6 +38,7 @@ export default function LoginCard({ history, forwardTo }) {
       setStatus('Try Again');
       return;
     }
+
     if (loginStatus !== CHECKING) {
       setStatus('Checking...');
       LoginMutation();
@@ -78,10 +79,11 @@ export default function LoginCard({ history, forwardTo }) {
               mutation={LOGIN_MUTATION}
               variables={{ email, password }}
               onCompleted={async (data) => {
-                if (data.login.token) {
-                  const tokenDecode = jwtDecode(data.login.token);
+                const { token } = data.userLogin;
 
-                  await Cookies.set('token', data.login.token, { expires: 7 });
+                if (token) {
+                  const tokenDecode = jwtDecode(token);
+                  await Cookies.set('token', token, { expires: 7 });
                   await Cookies.set('userId', tokenDecode.userId, {
                     expires: 7,
                   });
@@ -98,7 +100,8 @@ export default function LoginCard({ history, forwardTo }) {
                 }
               }}
               onError={(error) => {
-                setStatus('Login');
+                console.log(error);
+                setStatus(`Try Again`);
                 setError(readableErrors(error, errors));
               }}
             >

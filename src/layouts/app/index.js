@@ -9,7 +9,7 @@ import { Dashboard } from './views/dashboard';
 import { EditProfile } from './views/profileEdit';
 import { Account } from './views/account';
 import { Invites } from './views/invites';
-import { Submitted } from './views/submitted';
+import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
 import { EditJob, Jobs, PreviewJob } from './views/job';
 import { PreviewContract, EditContract } from './views/contract';
@@ -17,13 +17,12 @@ import { PickArtist } from './views/pickArtist';
 import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
-import { AUTOSAVE_IS } from '../../data/queries';
+import { FAVOURITES } from '../../data/queries';
 import { ContentTop, StyledNavBar } from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('home');
-  const [autosaveIsOn, setAutosaveIsOn] = React.useState(true);
   const [favourites, setFavourites] = React.useState([]);
   const pageJump = props.match ? props.match.params.page : null;
   const mobile = useMediaQuery('(max-width:800px)');
@@ -65,10 +64,12 @@ function AppLayout(props) {
           />
         }
       ></StyledNavBar>
+
       <AppDrawer
         handleDrawerClose={handleDrawerClose}
         open={open}
         history={props.history}
+        page={page}
       />
       <main
         className={clsx({
@@ -81,36 +82,36 @@ function AppLayout(props) {
           {page === 'dashboard' ? (
             <Dashboard history={props.history} />
           ) : page === 'edit-profile' ? (
-            <EditProfile theme={props.theme} />
+            <EditProfile theme={props.theme} history={props.history} />
           ) : page === 'account' ? (
             <Account history={props.history} />
           ) : page === 'invites' ? (
             <Invites history={props.history} />
           ) : page === 'submitted' ? (
-            <Submitted />
+            <ProjectSubmitted history={props.history} />
           ) : page === 'games' ? (
             <Games history={props.history} />
           ) : page === 'jobs' ? (
-            <Jobs />
+            <Jobs history={props.history} />
           ) : page === 'edit-game' ? (
             <EditGame
               theme={props.theme}
               gameId={pathParam}
-              autosaveIsOn={autosaveIsOn}
+              autosaveIsOn={true}
               history={props.history}
             />
           ) : page === 'view-game' ? (
             <PreviewGame
               theme={props.theme}
               gameId={pathParam}
-              autosaveIsOn={autosaveIsOn}
+              autosaveIsOn={true}
               history={props.history}
             />
           ) : page === 'edit-job' ? (
             <EditJob
               theme={props.theme}
               jobId={pathParam}
-              autosaveIsOn={autosaveIsOn}
+              autosaveIsOn={true}
               history={props.history}
               favourites={favourites}
             />
@@ -134,7 +135,7 @@ function AppLayout(props) {
             <PickArtist
               theme={props.theme}
               jobId={pathParam}
-              autosaveIsOn={autosaveIsOn}
+              autosaveIsOn={true}
               history={props.history}
               favourites={favourites}
             />
@@ -144,10 +145,9 @@ function AppLayout(props) {
         </ContentTop>
       </main>
       <Query
-        query={AUTOSAVE_IS}
+        query={FAVOURITES}
         onCompleted={(data) => {
-          setAutosaveIsOn(data.profile.autosave);
-          setFavourites(data.profile.favourites);
+          setFavourites(data.profile.favourites.map((fav) => fav.receiver._id));
         }}
         fetchPolicy="network-only"
       >

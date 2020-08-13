@@ -1,69 +1,37 @@
 import React, { useEffect } from 'react';
 import { Message } from '../message';
-import { NEW_MESSAGES } from '../../../../../../../data/subscriptions';
-import {
-  CreateMessage,
-  DividerWithBorder,
-} from '../../../../../../../components';
-import Cookies from 'js-cookie';
+import { CreateMessage } from '../../../../../../../components';
 
 export default function Messages({
-  conversationId,
-  messageArrayIn,
+  messages,
   classes,
-  subscribe,
   moreButton,
   history,
+  jobId,
+  receiver,
+  pageNbr,
+  setMessages,
 }) {
-  const thisUserId = Cookies.get('userId');
-  const [messageArray, setMessageArray] = React.useState([]);
   const [messagesEnd, setMessagesEnd] = React.useState(null);
-  const [subscribed, setSubscribed] = React.useState(false);
-
-  useEffect(() => {
-    setMessageArray(messageArrayIn);
-    !subscribed &&
-      subscribe({
-        document: NEW_MESSAGES,
-        variables: { conversationId },
-        updateQuery: (prev, { subscriptionData }) => {
-          if (!subscriptionData.data) return prev;
-
-          const newMessage = subscriptionData.data.newMessage;
-
-          setMessageArray([...prev.getConversation.messages, newMessage]);
-
-          return Object.assign({}, prev, {
-            getConversation: {
-              id: prev.getConversation.id,
-              participants: prev.getConversation.participants,
-              job: prev.getConversation.job,
-              createdAt: prev.getConversation.createdAt,
-              messages: [...prev.getConversation.messages, newMessage],
-              __typename: prev.getConversation.__typename,
-            },
-          });
-        },
-      });
-    setSubscribed(true);
-  }, [messageArrayIn, subscribe, conversationId, setSubscribed, subscribed]);
+  const [viewer, setViewer] = React.useState(null);
 
   useEffect(() => {
     messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' });
   });
 
   function updateMessageArray(messageIn) {
-    setMessageArray([
-      ...messageArray,
+    setMessages([
+      ...messages,
       {
-        messageStr: messageIn,
+        messageStr: messageIn.messageStr,
         createdAt: new Date(),
-        id: 'new',
-        reciever: { id: '', name: '', profileImg: '' },
+        type: messageIn.type,
+        _id: 'new',
+        receiver: { _id: '', name: '', profileImg: '' },
         sender: {
-          id: thisUserId,
-          name: 'sending...',
-          profileImg: null,
+          _id: messageIn.sender._id,
+          name: messageIn.sender.name,
+          profileImg: messageIn.sender.profileImg,
         },
       },
     ]);
@@ -71,15 +39,40 @@ export default function Messages({
 
   return (
     <div style={{ width: '100%' }}>
+      {viewer && (
+        <div
+          style={{
+            position: 'fixed',
+            width: '100%',
+            height: '100%',
+            top: 0,
+            left: 0,
+            background: 'rgba(0,0,0,0.8)',
+            zIndex: 11,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+          onClick={() => {
+            setViewer(null);
+          }}
+        >
+          <img
+            src={viewer}
+            style={{ marginLeft: 20, marginRight: 20, width: '100%' }}
+          />
+        </div>
+      )}
       <div className={classes.cardGrid}>
         {moreButton}
-        {messageArray.map((message, index) => {
+        {messages.map((message, index) => {
           return (
             message.sender && (
               <Message
                 key={`message_${index}`}
                 message={message}
                 history={history}
+                setViewer={setViewer}
               />
             )
           );
@@ -91,12 +84,11 @@ export default function Messages({
           }}
         ></div>
       </div>
-
-      <DividerWithBorder />
       <div className={classes.createWrapper}>
         <CreateMessage
-          conversationId={conversationId}
           updateMessageArray={updateMessageArray}
+          jobId={jobId}
+          receiver={receiver}
         />
       </div>
     </div>

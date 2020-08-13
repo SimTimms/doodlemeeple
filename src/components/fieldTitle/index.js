@@ -30,23 +30,26 @@ export default function FieldTitle({ name, description, warning, inline }) {
           <Typography variant="h6" noWrap={true} className={classes.title}>
             {name}
           </Typography>
-          <Icon className={classes.helpIcon}>
-            {infoOpen === 'none' ? 'info' : 'keyboard_arrow_up'}
-          </Icon>
+          {(description !== '' || warning !== '') && (
+            <Icon className={classes.helpIcon}>
+              {infoOpen === 'none' ? 'info' : 'keyboard_arrow_up'}
+            </Icon>
+          )}
         </div>
         {!inline && (
           <div className={classes.titleLine} style={{ width: '100%' }}></div>
         )}
       </div>
+
       <div
         style={{
           display: infoOpen,
           background: '#fff',
-          border: '1px solid #ddd',
-          borderRadius: 5,
-          padding: 10,
-          margin: 10,
-          boxShadow: '5px 5px 5px rgba(0,0,0,0.05)',
+          border: '2px dotted #ddd',
+          borderRadius: 10,
+          padding: 20,
+          marginTop: 20,
+          marginBottom: 20,
         }}
       >
         <Typography variant="body1" className={classes.descriptionBox}>

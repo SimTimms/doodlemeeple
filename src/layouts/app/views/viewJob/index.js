@@ -70,7 +70,7 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
             },
           }}
           onCompleted={(data) => {
-            toaster('Saved');
+            toaster('Autosave');
             const newjobId = jobId === 'new' ? data.createJob : data.updateJob;
             setJob({ ...job, id: newjobId });
             history.replace(`/app/edit-job/${newjobId}`);
@@ -337,11 +337,11 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
           query={GAMES}
           fetchPolicy="network-only"
           onCompleted={(data) => {
-            data.getGames && setGames(data.getGames);
-            data.getGames &&
+            data.gamesByUser && setGames(data.gamesByUser);
+            data.gamesByUser &&
               setJob({
                 ...job,
-                gameId: job.gameId === '' ? data.getGames[0].id : job.gameId,
+                gameId: job.gameId === '' ? data.gamesByUser[0].id : job.gameId,
               });
           }}
         >

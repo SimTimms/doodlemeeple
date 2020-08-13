@@ -4,11 +4,9 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 500,
     width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
     boxSizing: 'border-box',
+    paddingTop: 120,
+    paddingBottom: 120,
   },
   createWrapper: {
     padding: 20,
@@ -18,7 +16,7 @@ export const useStyles = makeStyles((theme) => ({
     background: '#fff',
     borderRadius: '10px 10px 0 0',
     marginTop: 10,
-    position: 'absolute',
+    position: 'fixed',
     bottom: 0,
     left: 0,
     paddingLeft: 80,
@@ -45,6 +43,6 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
-    paddingBottom: 60,
+    paddingBottom: 120,
   },
 }));

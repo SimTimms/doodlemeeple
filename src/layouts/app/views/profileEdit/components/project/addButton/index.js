@@ -1,22 +1,30 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import { IconButton } from '../../../../../../../components';
 
-export function AddProject({ setNotableProjects, projects, setShowAdd }) {
+export function AddProject({
+  setNotableProjects,
+  projects,
+  setDisabled,
+  disabled,
+}) {
   return (
-    <div style={{ width: '100%' }}>
-      <Button
-        onClick={() => {
-          const newObj = { summary: '', id: 'new', image: '', name: '' };
+    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+      <IconButton
+        title={`Add a Project (${5 - projects.length})`}
+        icon="add"
+        styleOverride={{ marginBottom: 20 }}
+        color="text-dark"
+        disabled={disabled}
+        onClickEvent={() => {
+          setDisabled(true);
+          const newObj = { summary: '', _id: 'new', image: '', name: '' };
           const copyArr = Object.assign([], projects);
           copyArr.push(newObj);
           setNotableProjects(copyArr);
-          setShowAdd(false);
         }}
-        color="primary"
-        style={{ textTransform: 'none' }}
-      >
-        {`+ Add a Project (${5 - projects.length})`}
-      </Button>
+        iconPos="right"
+        type="button"
+      />
     </div>
   );
 }

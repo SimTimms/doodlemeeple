@@ -3,27 +3,27 @@ import gql from 'graphql-tag';
 export const CREATIVES = gql`
   query GetCreatives {
     getCreatives {
-      id
+      _id
       name
       summary
       profileBG
-      profileBGStyle
       profileImg
-      profileImgStyle
-      autosave
-      invites {
-        id
-        job {
-          id
+      likedMe {
+        _id
+        receiver {
+          _id
+        }
+        user {
+          _id
         }
       }
-      invitesReceived {
-        id
-        user {
-          id
+      favourites {
+        _id
+        receiver {
+          _id
         }
-        job {
-          id
+        user {
+          _id
         }
       }
     }
@@ -31,29 +31,17 @@ export const CREATIVES = gql`
 `;
 
 export const GAME = gql`
-  query GetGame($gameId: String!) {
-    getGame(gameId: $gameId) {
-      id
+  query GetGame($gameId: MongoID!) {
+    gameById(_id: $gameId) {
+      _id
       name
       keywords
       img
       backgroundImg
       summary
       location
-      createdAt
-      jobs {
-        id
-        name
-      }
       user {
         name
-      }
-      gallery {
-        id
-        summary
-        images {
-          img
-        }
       }
       showreel
       type
@@ -64,43 +52,59 @@ export const GAME = gql`
 
 export const GAMES = gql`
   query GetGames {
-    getGames {
-      id
+    gamesByUser {
+      _id
       name
       backgroundImg
-      jobs {
-        id
-        name
-      }
     }
   }
 `;
 
 export const CONVERSATIONS = gql`
-  query GetConversations($status: String!) {
-    getConversations(status: $status) {
-      id
-      createdAt
-      unreadMessages
-      participants {
-        id
+  query GetConversations {
+    getConversations {
+      _id
+      count
+      job {
+        _id
         name
+      }
+      receiver {
+        name
+        _id
         profileImg
       }
-      job {
-        id
+      sender {
+        _id
         name
-        game {
-          backgroundImg
-        }
+        profileImg
       }
     }
   }
 `;
 
-export const DETERMINE_CONVERSATION_ID = gql`
-  query DetermineConversationId($jobId: String!, $userId: String) {
-    determineConversationId(jobId: $jobId, userId: $userId)
+export const GET_MESSAGES = gql`
+  query getMessages($jobId: MongoID!, $userId: MongoID!, $pageNbr: Int!) {
+    getMessages(jobId: $jobId, userId: $userId, pageNbr: $pageNbr) {
+      _id
+      messageStr
+      createdAt
+      type
+      sender {
+        _id
+        name
+        profileImg
+      }
+      receiver {
+        _id
+        name
+        profileImg
+      }
+      job {
+        _id
+        name
+      }
+    }
   }
 `;
 
@@ -157,71 +161,68 @@ export const MESSAGES = gql`
 
 export const INVITES = gql`
   query GetInvites {
-    getInvites {
-      id
+    invitesByUser {
+      _id
       receiver {
         name
       }
-      game {
-        id
-        name
-        backgroundImg
-        summary
-      }
       user {
-        id
+        _id
         name
         profileImg
       }
       job {
-        id
+        _id
         name
         summary
+        submitted
       }
     }
   }
 `;
 
 export const JOB = gql`
-  query GetJob($jobId: String!) {
-    getJob(jobId: $jobId) {
-      id
+  query GetJob($jobId: MongoID!) {
+    jobById(_id: $jobId) {
+      _id
       name
       keywords
+      invites {
+        status
+        receiver {
+          _id
+          name
+          profileImg
+        }
+      }
+      contracts {
+        _id
+        user {
+          _id
+        }
+      }
       img
       summary
       location
       creativeSummary
       submitted
       game {
-        id
+        _id
         backgroundImg
         name
         summary
       }
       user {
-        id
+        _id
         name
+        profileImg
       }
-      invite {
-        id
-        job {
-          id
-        }
-        game {
-          id
-        }
+      invites {
+        _id
         receiver {
+          _id
           name
-          id
           profileImg
-        }
-      }
-      gallery {
-        id
-        summary
-        images {
-          img
         }
       }
       showreel
@@ -233,18 +234,29 @@ export const JOB = gql`
 
 export const JOBS = gql`
   query GetJobs {
-    getJobs {
-      id
+    jobsByUser {
+      _id
       name
-      summary
       submitted
-      game {
-        id
-        backgroundImg
-        name
-      }
+      backgroundImg
       contracts {
-        id
+        _id
+        user {
+          _id
+        }
+      }
+      game {
+        _id
+        name
+        backgroundImg
+      }
+      invites {
+        status
+        receiver {
+          _id
+          name
+          profileImg
+        }
       }
     }
   }
@@ -261,9 +273,9 @@ export const GET_PAYMENT_TERMS = gql`
 `;
 
 export const GET_CONTRACT = gql`
-  query GetContract($jobId: String!) {
-    getContract(jobId: $jobId) {
-      id
+  query GetContract($jobId: MongoID!) {
+    contractByJob(jobId: $jobId) {
+      _id
       notes
       deadline
       cost
@@ -271,16 +283,16 @@ export const GET_CONTRACT = gql`
       status
       updatedAt
       payments {
-        id
+        _id
         amount
         currency
         status
         paidBy {
-          id
+          _id
           name
         }
         contract {
-          id
+          _id
         }
         paymentId
         createdAt
@@ -288,22 +300,22 @@ export const GET_CONTRACT = gql`
       }
       user {
         email
-        id
+        _id
         name
         profileImg
       }
       job {
-        id
+        _id
         name
         summary
         creativeSummary
         user {
-          id
+          _id
           email
         }
       }
       paymentTerms {
-        id
+        _id
         percent
         description
       }
@@ -363,9 +375,9 @@ export const GET_CONTRACT_ID = gql`
 `;
 
 export const PREVIEW_CONTRACT = gql`
-  query PreviewContract($contractId: String!) {
-    previewContract(contractId: $contractId) {
-      id
+  query PreviewContract($contractId: MongoID!) {
+    contractById(_id: $contractId) {
+      _id
       notes
       deadline
       cost
@@ -373,23 +385,23 @@ export const PREVIEW_CONTRACT = gql`
       status
       updatedAt
       payments {
-        id
+        _id
         amount
         currency
         status
         paidBy {
-          id
+          _id
           name
         }
         contract {
-          id
+          _id
         }
         paymentId
         createdAt
         updatedAt
       }
       signedBy {
-        id
+        _id
         name
       }
       signedDate
@@ -398,21 +410,39 @@ export const PREVIEW_CONTRACT = gql`
         email
         summary
         profileImg
-        id
+        _id
         profileBG
+        favourites {
+          _id
+          receiver {
+            _id
+          }
+          user {
+            _id
+          }
+        }
+        likedMe {
+          _id
+          receiver {
+            _id
+          }
+          user {
+            _id
+          }
+        }
       }
       job {
-        id
+        _id
         name
         summary
         creativeSummary
         user {
-          id
+          _id
           email
         }
       }
       paymentTerms {
-        id
+        _id
         percent
         description
       }
@@ -423,9 +453,22 @@ export const PREVIEW_CONTRACT = gql`
 export const COUNTS = gql`
   {
     counts {
-      id
       invites
       messages
+      quotes
+    }
+  }
+`;
+
+export const FAVOURITES = gql`
+  {
+    profile {
+      favourites {
+        _id
+        receiver {
+          _id
+        }
+      }
     }
   }
 `;
@@ -433,36 +476,39 @@ export const COUNTS = gql`
 export const PROFILE = gql`
   {
     profile {
-      id
+      _id
       name
       summary
       profileBG
-      profileBGStyle
       profileImg
-      profileImgStyle
       autosave
       email
+      favourites {
+        receiver {
+          _id
+        }
+      }
       sections {
-        id
-        title
+        _id
         summary
         showreel
         type
         gallery {
-          id
+          _id
           summary
           images {
+            _id
             img
           }
         }
         notableProjects {
-          id
+          _id
           summary
           name
           image
         }
         testimonials {
-          id
+          _id
           name
           summary
           image
@@ -473,24 +519,21 @@ export const PROFILE = gql`
 `;
 
 export const PROFILE_PREVIEW = gql`
-  query ProfilePreview($userId: String!) {
-    profilePreview(userId: $userId) {
-      id
+  query ProfilePreview($userId: MongoID!) {
+    userById(_id: $userId) {
+      _id
       name
       summary
       profileBG
-      profileBGStyle
       profileImg
-      profileImgStyle
-      autosave
     }
   }
 `;
 
 export const PROFILE_FEATURED = gql`
-  query ProfilePreview($userId: String!) {
-    profilePreview(userId: $userId) {
-      id
+  query ProfilePreview($userId: MongoID!) {
+    userById(_id: $userId) {
+      _id
       profileImg
       autosave
     }
@@ -509,9 +552,9 @@ export const AUTOSAVE_IS = gql`
 
 export const NOTIFICATIONS = gql`
   {
-    getNotifications {
+    notificationSecure {
+      _id
       message
-      id
       icon
       title
       createdAt
@@ -521,28 +564,27 @@ export const NOTIFICATIONS = gql`
 `;
 
 export const SECTIONS_PREVIEW = gql`
-  query SectionsPreview($userId: String!) {
-    sectionsPreview(userId: $userId) {
-      id
-      title
+  query SectionsPreview($userId: MongoID!) {
+    sectionMany(filter: { user: $userId }) {
+      _id
       summary
       showreel
       type
       gallery {
-        id
+        _id
         summary
         images {
           img
         }
       }
       notableProjects {
-        id
+        _id
         summary
         name
         image
       }
       testimonials {
-        id
+        _id
         name
         summary
         image

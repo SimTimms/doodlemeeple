@@ -19,7 +19,9 @@ export function Project({ projectId, gamesTemp, actionSet, edit }) {
 
   //TODO move to DB driven
   const projectArray = gamesTemp;
-  const project = projectArray.filter(project => project.id === projectId)[0];
+  const project = projectArray.filter(
+    (project) => project._id === projectId
+  )[0];
   if (!project) {
     return (
       <Slide direction="left" in={true} mountOnEnter unmountOnExit>

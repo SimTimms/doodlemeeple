@@ -1,16 +1,15 @@
 import React from 'react';
-import { Slide, Button, Icon, Card, Typography } from '@material-ui/core';
+import { Slide, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   LoadIcon,
-  ContentHeader,
   FieldTitle,
-  IconButton,
+  UnlockInfo,
+  Column,
 } from '../../../../components';
-import { Query, Mutation } from 'react-apollo';
+import { Query } from 'react-apollo';
 import { JOB } from '../../../../data/queries';
-import { SUBMIT_BRIEF } from '../../../../data/mutations';
-import { ArtistLineup, Creatives } from './components';
+import { ArtistLineup, Creatives, SubmitBrief } from './components';
 
 export function PickArtist({
   theme,
@@ -31,7 +30,7 @@ export function PickArtist({
     showreel: '',
     type: 'job',
     creativeSummary: '',
-    id: 'new',
+    _id: 'new',
     gameId: '',
     submitted: false,
   });
@@ -44,14 +43,14 @@ export function PickArtist({
       {
         name: newItem.name,
         img: newItem.profileImg,
-        id: newItem.id,
+        _id: newItem._id,
         inviteId: inviteId,
       },
     ]);
   }
 
   function removeInviteList(newItem) {
-    const filteredArray = inviteList.filter((item) => item.id !== newItem.id);
+    const filteredArray = inviteList.filter((item) => item._id !== newItem._id);
     setInviteList(filteredArray);
   }
 
@@ -60,88 +59,24 @@ export function PickArtist({
   ) : (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <ContentHeader
-          title="Invite Artists"
-          subTitle="Invite Artists"
-          subTitleExtra={null}
-          button={
-            <Button
-              onClick={() => {
-                history.goBack();
-              }}
-            >
-              <Icon>chevron_left</Icon>
-              Back
-            </Button>
-          }
+        <ArtistLineup
+          removeInviteList={removeInviteList}
+          inviteList={inviteList}
+          history={history}
         />
-        <Card className={classes.card} style={{ marginTop: 50 }}>
-          <FieldTitle
-            name="Your Picks (5 Maximum)"
-            description="Pick up to 5 creatives that you would like to work with"
-            warning=""
-            inline={false}
-          />
-          <ArtistLineup
-            removeInviteList={removeInviteList}
-            inviteList={inviteList}
-            history={history}
-          />
-        </Card>
-        <Card className={classes.card} style={{ marginTop: 20 }}>
-          <FieldTitle
-            name="Submit Brief"
-            description="When you submit a brief your chosen creatives will be invited to quote for the work"
-            warning=""
-            inline={false}
-          />
-          <div className={classes.miniProfileActionWrapper}>
-            <div className={classes.miniProfileWrapper}>
-              <div style={{ textAlign: 'center' }}>
-                <Typography
-                  variant="h6"
-                  component="p"
-                  style={{ marginTop: 10 }}
-                >
-                  {inviteList.length > 0
-                    ? `Submit this brief and we'll notify your chosen creatives`
-                    : `Please select at least 1 creative`}
-                </Typography>
 
-                <Mutation
-                  mutation={SUBMIT_BRIEF}
-                  variables={{
-                    jobId: job.id,
-                  }}
-                  onCompleted={() => {
-                    history.push('/app/submitted');
-                  }}
-                >
-                  {(mutation) => {
-                    return (
-                      <IconButton
-                        onClickEvent={() => {
-                          setLoading(true);
-                          mutation();
-                        }}
-                        disabled={inviteList.length > 0 ? false : true}
-                        icon="chevron_right"
-                        title="Submit"
-                        iconPos="right"
-                        styleOverride={null}
-                        type="button"
-                        color="primary"
-                      />
-                    );
-                  }}
-                </Mutation>
-              </div>
-            </div>
+        <Column j="center" a="center">
+          <div style={{ marginTop: 80 }}>
+            <SubmitBrief job={job} history={history} inviteList={inviteList} />{' '}
+            {inviteList.length < 1 && (
+              <UnlockInfo str="Please select at least 1 creative" />
+            )}
           </div>
-        </Card>
+        </Column>
+
         <div style={{ width: '100%', marginTop: 50 }}>
           <FieldTitle
-            name="Invite Artists"
+            name="Invite Creatives"
             description=""
             warning=""
             inline={false}
@@ -160,17 +95,16 @@ export function PickArtist({
           variables={{ jobId: jobId }}
           fetchPolicy="network-only"
           onCompleted={(data) => {
-            data.getJob &&
-              setJob({ ...data.getJob, gameId: data.getJob.game.id });
+            data.jobById && setJob({ ...data.jobById });
             setInviteList(
-              data.getJob.invite.map((item) => {
+              data.jobById.invites.map((invite) => {
                 return {
-                  name: item.receiver.name,
-                  img: item.receiver.profileImg,
-                  id: item.receiver.id,
-                  inviteId: item.id,
+                  name: invite.receiver.name,
+                  img: invite.receiver.profileImg,
+                  _id: invite.receiver._id,
+                  inviteId: invite._id,
                 };
-              }),
+              })
             );
           }}
         >

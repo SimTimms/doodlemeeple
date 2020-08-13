@@ -1,19 +1,18 @@
 import React from 'react';
 import { MediaGallery } from '../../../../../../components';
 
-export function MediaGalleryObject({ images, setImages, index }) {
+export function MediaGalleryObject({ images, setImages, index, galleryId }) {
   images = images ? images : [];
   return (
     <div
       style={{
         width: '100%',
-        border: '1px solid #ccc',
         marginTop: 15,
       }}
     >
       <MediaGallery
         items={images}
-        setBgImage={url => {
+        setBgImage={(url) => {
           let imageArray = Object.assign([], images);
           imageArray.push({
             img: url,
@@ -22,6 +21,7 @@ export function MediaGalleryObject({ images, setImages, index }) {
         }}
         edit={true}
         setImages={setImages}
+        galleryId={galleryId}
       />
     </div>
   );

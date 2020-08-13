@@ -15,6 +15,7 @@ export const galleryStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     padding: '10px !important',
   },
+
   testimonialWrapper: {
     background: '#ddd',
     width: '100%',

@@ -6,6 +6,8 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     marginBottom: 200,
+    padding: 20,
+    boxSizing: 'border-box',
   },
   gridRow: {
     display: 'flex',

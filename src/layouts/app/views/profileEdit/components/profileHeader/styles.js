@@ -47,8 +47,6 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
-
-    paddingBottom: 0,
   },
   profileWrapperDesktop: {
     display: 'flex',

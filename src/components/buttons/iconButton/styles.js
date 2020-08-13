@@ -13,10 +13,16 @@ export const useStyles = makeStyles((theme) => ({
     letterSpacing: 1,
     boxShadow: '2px 2px 3px rgba(0,0,0,0.2)',
     textTransform: 'uppercase',
+    textDecoration: 'none',
     borderRadius: 2,
+    display: 'flex',
+    flexWrap: 'nowrap',
     color: '#fff',
     '&:hover': {
       background: theme.palette.primary.dark,
+    },
+    '&:visited': {
+      background: 'red',
     },
   },
   iconButtonSecondary: {
@@ -32,6 +38,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#aaa',
     border: 'none',
     boxShadow: 'none',
+
     '&:hover': {
       background: '#eaeaea',
     },
@@ -56,7 +63,20 @@ export const useStyles = makeStyles((theme) => ({
     letterSpacing: 1.3,
     textShadow: '3px 3px 4px rgba(0,0,0,0.1)',
     '&:hover': {
-      background: 'rgba(0,0,0,0.2)',
+      background: '#efeff5',
+    },
+  },
+  iconButtonTextMini: {
+    background: 'rgba(0,0,0,0)',
+    color: '#222',
+    border: 'none',
+    boxShadow: 'none',
+    margin: 0,
+    letterSpacing: 1.3,
+    textShadow: '3px 3px 4px rgba(0,0,0,0.1)',
+    textTransform: 'none',
+    '&:hover': {
+      background: '#efeff5',
     },
   },
   iconButtonTextError: {
@@ -83,9 +103,6 @@ export const useStyles = makeStyles((theme) => ({
   iconButtonDisabled: {
     cursor: 'pointer',
     background: '#ddd',
-    padding: 5,
-    marginTop: 10,
-    marginBottom: 10,
     color: '#fff',
     '&:hover': {
       background: theme.palette.primary.dark,
@@ -112,6 +129,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   iconButtonIconTextError: {
     color: theme.palette.error.main,
+  },
+
+  iconButtonIconTextMini: {
+    color: '#222',
   },
   iconRight: { marginLeft: 10 },
   iconLeft: { marginRight: 10 },

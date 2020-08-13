@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStyles } from './styles';
 import { useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
@@ -6,13 +6,27 @@ import { AppMenu } from '../menus';
 import { AppDrawer } from '../menus/appDrawer';
 import { Conversations, ViewConversation } from './views/messaging';
 import { ToastContainer } from 'react-toastify';
-
-import { ContentTop, StyledNavBar } from '../../components';
+import { Query } from 'react-apollo';
+import { GET_MESSAGES } from '../../data/queries';
+import { ContentTop, StyledNavBar, LoadIcon } from '../../components';
 
 function MessagesLayout(props) {
   const [page, setPage] = React.useState('home');
   const pageJump = props.match ? props.match.params.page : null;
   const mobile = useMediaQuery('(max-width:800px)');
+  const [messages, setMessages] = React.useState([]);
+  const [conversationArgs, setConversationArgs] = React.useState({
+    jobId: null,
+    conversationUser: null,
+    pageNbr: 0,
+  });
+
+  function setPageNbr(nbr) {
+    setConversationArgs({
+      ...conversationArgs,
+      pageNbr: nbr,
+    });
+  }
 
   //TODO: I guess this is proper dirty
   const pathParam = props
@@ -22,6 +36,16 @@ function MessagesLayout(props) {
         : null
       : null
     : null;
+
+  useEffect(() => {
+    !pathParam &&
+      setConversationArgs({
+        jobId: null,
+        conversationUser: null,
+        pageNbr: 0,
+      });
+    !pathParam && setMessages([]);
+  }, [pathParam]);
 
   if (pageJump !== page) {
     setPage(pageJump);
@@ -64,14 +88,57 @@ function MessagesLayout(props) {
         })}
       >
         <ContentTop style={{ width: '100%' }}>
-          {page === 'conversations' ? (
-            <Conversations history={props.history} />
-          ) : (
-            <ViewConversation
+          {!pathParam || !conversationArgs.jobId ? (
+            <Conversations
               history={props.history}
-              conversationId={pathParam}
-              titles={true}
+              setConversationArgs={setConversationArgs}
             />
+          ) : (
+            <Query
+              query={GET_MESSAGES}
+              variables={{
+                jobId: conversationArgs.jobId,
+                userId: conversationArgs.conversationUser._id,
+                pageNbr: conversationArgs.pageNbr,
+              }}
+              fetchPolicy="network-only"
+              onCompleted={(data) =>
+                setMessages([...data.getMessages.reverse(), ...messages])
+              }
+            >
+              {({ data, loading }) => {
+                return loading ? (
+                  <LoadIcon />
+                ) : data ? (
+                  <div
+                    style={{
+                      padding: 10,
+                      boxSizing: 'border-box',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      background: '#efeff5',
+                      position: 'fixed',
+                      zIndex: 10,
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      overflow: 'auto',
+                    }}
+                  >
+                    <ViewConversation
+                      history={props.history}
+                      receiver={conversationArgs.conversationUser}
+                      jobId={conversationArgs.jobId}
+                      messages={messages}
+                      pageNbr={conversationArgs.pageNbr}
+                      setPageNbr={setPageNbr}
+                      setMessages={setMessages}
+                    />
+                  </div>
+                ) : null;
+              }}
+            </Query>
           )}
         </ContentTop>
       </main>

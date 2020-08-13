@@ -1,16 +1,19 @@
 import React from 'react';
-import { Slide, Typography } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
-import { Query, Mutation } from 'react-apollo';
+import { Query } from 'react-apollo';
 import { CONVERSATIONS } from '../../../../../data/queries';
-import { ContentHeader, MessageComponent } from '../../../../../components';
-import { MARK_AS_READ } from '../../../../../data/mutations';
+import {
+  ContentHeader,
+  MessageComponent,
+  LoadIcon,
+} from '../../../../../components';
 import Cookies from 'js-cookie';
 
-export default function Conversations({ history }) {
+export default function Conversations({ history, setConversationArgs }) {
   const classes = useStyles();
   const [conversationArray, setConversationArray] = React.useState([]);
-
+  const userId = Cookies.get('userId');
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -23,42 +26,30 @@ export default function Conversations({ history }) {
         <div className={classes.cardGrid}>
           {conversationArray.map((conversation, index) => {
             return (
-              <Mutation
-                key={`mutation_${index}`}
-                mutation={MARK_AS_READ}
-                variables={{
-                  conversationId: conversation.id,
-                }}
-                onCompleted={() => {
-                  history.push(
-                    `/messages/view-conversation/${conversation.id}`,
+              <MessageComponent
+                disabled={false}
+                key={`conversationparent_${index}`}
+                history={history}
+                backgroundImg=""
+                subtitle={`${conversation.sender.name}, ${conversation.receiver.name}`}
+                profiles={[conversation.sender, conversation.receiver]}
+                count={conversation.count}
+                title={conversation.job.name}
+                onClickEvent={() => {
+                  history.replace(
+                    `/messages/conversations/${conversation.job._id}`
                   );
+                  setConversationArgs({
+                    jobId: conversation.job._id,
+                    conversationUser:
+                      conversation.sender._id !== userId
+                        ? conversation.sender
+                        : conversation.receiver,
+                    pageNbr: 0,
+                  });
                 }}
-              >
-                {(mutation) => {
-                  return (
-                    <MessageComponent
-                      disabled={false}
-                      key={`conversationparent_${index}`}
-                      history={history}
-                      backgroundImg={conversation.job.game.backgroundImg}
-                      subtitle={conversation.participants.map(
-                        (user) =>
-                          user.id !== Cookies.get('userId') && user.name,
-                      )}
-                      profiles={conversation.participants.filter(
-                        (item) => item.id !== Cookies.get('userId'),
-                      )}
-                      count={conversation.unreadMessages}
-                      title={conversation.job.name}
-                      onClickEvent={() => {
-                        mutation();
-                      }}
-                      miniProfile={null}
-                    />
-                  );
-                }}
-              </Mutation>
+                miniProfile={null}
+              />
             );
           })}
         </div>
@@ -70,53 +61,10 @@ export default function Conversations({ history }) {
             setConversationArray(data.getConversations);
           }}
         >
-          {({ data }) => {
-            return null;
+          {({ data, loading }) => {
+            return loading ? <LoadIcon /> : null;
           }}
         </Query>
-        <Typography
-          color="textSecondary"
-          component="p"
-          style={{
-            textAlign: 'center',
-            width: '100%',
-            marginTop: 10,
-            paddingBottom: 10,
-          }}
-        >
-          History
-        </Typography>
-        <div className={classes.cardGrid}>
-          <Query
-            query={CONVERSATIONS}
-            variables={{ status: 'declined' }}
-            fetchPolicy="network-only"
-          >
-            {({ data }) => {
-              return data
-                ? data.getConversations.map((conversation, index) => {
-                    return (
-                      <MessageComponent
-                        disabled={true}
-                        key={`conversationparent_${index}`}
-                        history={history}
-                        backgroundImg={conversation.job.game.backgroundImg}
-                        subtitle={conversation.participants.map(
-                          (user) =>
-                            user.id !== Cookies.get('userId') && user.name,
-                        )}
-                        profiles={conversation.participants}
-                        count={conversation.unreadMessages}
-                        title={conversation.job.name}
-                        onClickEvent={null}
-                        miniProfile={null}
-                      />
-                    );
-                  })
-                : null;
-            }}
-          </Query>
-        </div>
       </div>
     </Slide>
   );

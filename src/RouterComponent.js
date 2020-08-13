@@ -30,7 +30,7 @@ function RouterComponent(props) {
   const wsLink = new WebSocketLink({
     uri: `${process.env.REACT_APP_API_SHORT}`,
     options: {
-      reconnect: true,
+      reconnect: false,
       connectionParams: {
         Authorization: `Bearer ${token}`,
         authToken: token,
@@ -57,7 +57,7 @@ function RouterComponent(props) {
       return kind === 'OperationDefinition' && operation === 'subscription';
     },
     wsLink,
-    authLink.concat(httpLink),
+    authLink.concat(httpLink)
   );
 
   const client = new ApolloClient({

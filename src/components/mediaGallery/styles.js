@@ -4,7 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
     padding: '5px 3px 5px 3px',
@@ -12,8 +12,8 @@ export const useStyles = makeStyles((theme) => ({
   image: {
     background: 'none',
     position: 'relative',
-    width: '40%',
-    margin: '2%',
+    width: 300,
+    height: 300,
   },
   imageMobile: {
     background: 'none',
@@ -25,7 +25,7 @@ export const useStyles = makeStyles((theme) => ({
   gridList: {
     width: '100%',
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     flexWrap: 'wrap',
   },

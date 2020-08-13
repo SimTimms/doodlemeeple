@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import smithy from '../../assets/smithy.jpg';
 import jumping from '../../assets/jumping.jpg';
-import purps from '../../assets/dm_cover.jpg';
 import dragon from '../../assets/dragon.jpg';
 
 export const useStyles = makeStyles((theme) => ({

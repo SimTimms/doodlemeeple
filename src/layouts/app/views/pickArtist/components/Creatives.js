@@ -13,13 +13,8 @@ export default function Creatives({
   history,
 }) {
   const classes = useStyles();
-
   return (
-    <Query
-      query={CREATIVES}
-      fetchPolicy="network-only"
-      onCompleted={(data) => {}}
-    >
+    <Query query={CREATIVES} fetchPolicy="network-only">
       {({ data }) => {
         return data ? (
           <div className={classes.creativeWrapper}>
@@ -29,13 +24,13 @@ export default function Creatives({
                   history={history}
                   creative={creative}
                   favourite={
-                    favourites.indexOf(creative.id) > -1 ? true : false
+                    favourites.indexOf(creative._id) > -1 ? true : false
                   }
                   gameId={job.gameId}
-                  jobId={job.id}
-                  invite={inviteList.filter(
-                    (filterItem) => filterItem.id === creative.id,
-                  )}
+                  jobId={job._id}
+                  invite={inviteList.filter((filterItem) => {
+                    return filterItem._id === creative._id;
+                  })}
                   key={`creative_${index}`}
                   updateInviteList={updateInviteList}
                   removeInviteList={removeInviteList}

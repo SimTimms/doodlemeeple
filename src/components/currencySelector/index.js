@@ -3,12 +3,7 @@ import { MenuItem, Select } from '@material-ui/core';
 import { useStyles } from './styles';
 import autosave from '../../utils/autosave';
 
-export default function CurrencySelector({
-  selectedCurrency,
-  onChangeEvent,
-  contract,
-  mutation,
-}) {
+export default function CurrencySelector({ selectedCurrency, onChangeEvent }) {
   const [currency, setCurrency] = React.useState(0);
   const currencyArray = ['GBP', 'USD'];
 
@@ -24,10 +19,10 @@ export default function CurrencySelector({
         id="demo-simple-select-outlined"
         value={currency}
         onChange={(e) => {
-          autosave(mutation, 'currency');
-          onChangeEvent({ ...contract, currency: e.target.value });
+          onChangeEvent(e.target.value);
         }}
         label="Age"
+        style={{ borderRadius: 5, marginLeft: 10 }}
       >
         {currencyArray.map((item, index) => {
           return (

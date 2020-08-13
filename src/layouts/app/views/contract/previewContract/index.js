@@ -1,16 +1,7 @@
 import React from 'react';
 import { Slide, Typography, Card } from '@material-ui/core';
-import {
-  LoadIcon,
-  InlineHeader,
-  IconTitle,
-  TabWrapper,
-  TabButton,
-} from '../../../../../components';
-import {
-  PREVIEW_CONTRACT,
-  DETERMINE_CONVERSATION_ID,
-} from '../../../../../data/queries';
+import { LoadIcon, IconButton, Column, Row } from '../../../../../components';
+import { PREVIEW_CONTRACT, GET_MESSAGES } from '../../../../../data/queries';
 import { Query } from 'react-apollo';
 import { useStyles } from './styles';
 import Quote from './views/quote';
@@ -33,17 +24,49 @@ export default function PreviewContract({ contractId, history }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div style={{ width: '700px', marginBottom: 50 }}>
+        <Row j="center" a="center">
+          <IconButton
+            color="secondary"
+            icon="request_quote"
+            title="Quote"
+            onClickEvent={() => setTabs([true, false, false])}
+            disabled={false}
+            styleOverride={null}
+            type="button"
+            iconPos="left"
+          />
+          <IconButton
+            color="secondary"
+            icon="chat"
+            title="Chat"
+            onClickEvent={() => setTabs([false, true, false])}
+            disabled={false}
+            styleOverride={null}
+            type="button"
+            iconPos="left"
+          />
+          <IconButton
+            title="Payments"
+            icon="payment"
+            disabled={false}
+            color="secondary"
+            styleOverride={null}
+            type="button"
+            onClickEvent={() => setTabs([false, false, true])}
+            iconPos="left"
+          />
+        </Row>
         <Query
           query={PREVIEW_CONTRACT}
           variables={{ contractId }}
           fetchPolicy="network-only"
           onCompleted={(data) => {
-            data.previewContract && setContract(data.previewContract);
-            data.previewContract && setJob(data.previewContract.job);
+            data.contractById && setContract(data.contractById);
+            data.contractById && setJob(data.contractById.job);
           }}
         >
           {({ loading, data }) => {
-            const contractData = data ? data.previewContract : null;
+            const contractData = data ? data.contractById : null;
 
             return loading ? (
               <LoadIcon />
@@ -57,74 +80,13 @@ export default function PreviewContract({ contractId, history }) {
               </Typography>
             ) : (
               data && (
-                <div className={classes.fullWidth}>
-                  <Card className={classes.root}>
-                    <InlineHeader>
-                      <IconTitle icon="request_quote" title="Quote" />
-                    </InlineHeader>
-                    <div
-                      style={{
-                        width: '100%',
-                        height: 200,
-                        background: `url(${contractData.user.profileBG})`,
-                        backgroundSize: 'cover',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <div className={classes.profileWrapper}>
-                        <img
-                          src={contractData.user.profileImg}
-                          className={classes.profileImg}
-                          alt=""
-                        />
-                        <div className={classes.profileWrapperDetails}>
-                          <Typography variant="h6">
-                            You've got a quote from
-                          </Typography>
-                          <Typography
-                            variant="h5"
-                            style={{ textAlign: 'center', width: '100%' }}
-                          >
-                            {contractData.user.name}
-                          </Typography>
-                        </div>
-                      </div>
-                    </div>
-                    <TabWrapper>
-                      <TabButton
-                        color="secondary"
-                        icon="request_quote"
-                        title="Quote"
-                        onClickEvent={() => setTabs([true, false, false])}
-                        disabled={false}
-                        styleOverride={null}
-                        type="button"
-                      />
-                      <TabButton
-                        color="secondary"
-                        icon="chat"
-                        title="Chat"
-                        onClickEvent={() => setTabs([false, true, false])}
-                        disabled={false}
-                        styleOverride={null}
-                        type="button"
-                      />
-                      <TabButton
-                        title="Payments"
-                        icon="payment"
-                        disabled={false}
-                        color="secondary"
-                        styleOverride={null}
-                        type="button"
-                        onClickEvent={() => setTabs([false, false, true])}
-                      />
-                    </TabWrapper>
+                <Column a="center" j="center">
+                  <div style={{ width: '100%' }}>
                     <Quote
                       display={tabs[0]}
                       contractData={contractData}
                       setContract={setContract}
+                      history={history}
                     />
                     <Chat
                       display={tabs[1]}
@@ -135,15 +97,15 @@ export default function PreviewContract({ contractId, history }) {
                       display={tabs[2]}
                       contractData={contractData}
                     />
-                  </Card>
-                </div>
+                  </div>
+                </Column>
               )
             );
           }}
         </Query>
         {job.id && conversationId === null && (
           <Query
-            query={DETERMINE_CONVERSATION_ID}
+            query={GET_MESSAGES}
             variables={{ jobId: job.id, userId: contract.user.id }}
             fetchPolicy="network-only"
             onCompleted={(data) => {

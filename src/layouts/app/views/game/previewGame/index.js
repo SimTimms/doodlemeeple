@@ -12,6 +12,7 @@ import {
 } from '../../../../../components';
 import { Query } from 'react-apollo';
 import { GAME } from '../../../../../data/queries';
+import clsx from 'clsx';
 
 export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
   const classes = useStyles();
@@ -38,7 +39,7 @@ export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
       variables={{ gameId: gameId }}
       fetchPolicy="network-only"
       onCompleted={(data) => {
-        data.getGame && setGame({ ...data.getGame });
+        data.gameById && setGame({ ...data.gameById });
         setLoading(false);
       }}
     >
@@ -59,7 +60,10 @@ export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
           }}
         >
           <div
-            className={classes.wrapperTwo}
+            className={clsx({
+              [classes.wrapperTwo]: true,
+              [classes.wrapperTwoMissing]: !game.backgroundImg,
+            })}
             style={{
               backgroundImage: `url(${game.backgroundImg})`,
             }}
@@ -72,7 +76,7 @@ export default function PreviewGame({ theme, gameId, autosaveIsOn, history }) {
           ></div>
           <div className={classes.wrapperFive}>
             <div className={classes.wrapperThree}>
-              <Header str={game.name} />
+              <Header str={game.name ? game.name : 'Untitled Project'} />
               <SubHeader
                 str={game.type && game.type !== '' ? game.type : '-'}
               />

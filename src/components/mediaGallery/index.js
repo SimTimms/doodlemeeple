@@ -3,15 +3,17 @@ import { useStyles } from './styles';
 import { Typography, Button, useMediaQuery, Icon } from '@material-ui/core';
 import { Uploader } from '../../components';
 import clsx from 'clsx';
+import { UPLOAD_IMAGE, DELETE_IMAGE } from '../../data/mutations';
+import { Mutation } from 'react-apollo';
 
-function MediaGallery({ items, edit, setBgImage, setImages }) {
+function MediaGallery({ items, edit, setBgImage, setImages, galleryId }) {
   const seedID = Math.floor(Math.random());
   const [mediaViewer, setMediaViewer] = React.useState(null);
-
+  const [saveImage, setSaveImage] = React.useState(null);
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
   return (
-    <div className={classes.root} style={{ background: 'none', padding: 20 }}>
+    <div className={classes.root} style={{ background: 'none', padding: 0 }}>
       {!mediaViewer ? (
         <div className={classes.gridList} style={{ background: 'none' }}>
           {items.map((tile, index) => (
@@ -21,32 +23,37 @@ function MediaGallery({ items, edit, setBgImage, setImages }) {
                 [classes.image]: true,
                 [classes.imageMobile]: mobile,
               })}
+              style={{
+                backgroundImage: `url(${tile.img})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center center',
+                border: '5px solid #fff',
+              }}
             >
-              <Button
-                className={classes.iconButton}
-                onClick={() => {
+              <Mutation
+                mutation={DELETE_IMAGE}
+                variables={{ id: tile._id }}
+                onCompleted={(data) => {
                   let imageArray = Object.assign([], items);
                   imageArray = imageArray.filter(
-                    (arrItem) => arrItem.img !== tile.img,
+                    (arrItem) => arrItem.img !== tile.img
                   );
-
                   setImages(imageArray);
                 }}
               >
-                <Icon className={classes.iconButtonIcon}>delete</Icon>
-              </Button>
-              <img
-                src={tile.img}
-                alt={tile.title}
-                onClick={() => setMediaViewer(tile)}
-                style={{
-                  width: '100%',
-                  boxShadow: '5px 5px 20px rgba(0,0,0,0.3)',
-                  border: '10px solid #fff',
-                  borderRadius: 5,
-                  boxSizing: 'border-box',
+                {(mutation) => {
+                  return (
+                    <Button
+                      className={classes.iconButton}
+                      onClick={() => {
+                        mutation();
+                      }}
+                    >
+                      <Icon className={classes.iconButtonIcon}>delete</Icon>
+                    </Button>
+                  );
                 }}
-              />
+              </Mutation>
             </div>
           ))}
 
@@ -57,25 +64,44 @@ function MediaGallery({ items, edit, setBgImage, setImages }) {
                 [classes.imageMobile]: mobile,
               })}
               style={{
-                boxShadow: '10px 10px 20px rgba(0,0,0,0.3)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                padding: 20,
-                background: '#ddd',
-                border: '10px solid #fff',
-                borderRadius: 5,
-                minHeight: 150,
+                border: '5px solid #fff',
               }}
             >
-              <Uploader
-                cbImage={setBgImage}
-                styleOverride={null}
-                className={null}
-                cbDelete={null}
-                hasFile={false}
-                size="1MB PNG JPG"
-              />
+              <Mutation
+                mutation={UPLOAD_IMAGE}
+                variables={{ img: saveImage, galleryId: galleryId }}
+                onCompleted={(data) => {
+                  let imageArray = Object.assign([], items);
+                  imageArray = [
+                    ...imageArray,
+                    {
+                      _id: data.imageCreateOne.recordId,
+                      img: data.imageCreateOne.record.img,
+                    },
+                  ];
+                  setImages(imageArray);
+                }}
+              >
+                {(mutation) => {
+                  return (
+                    <Uploader
+                      cbImage={(url) => {
+                        setSaveImage(url);
+
+                        mutation();
+                      }}
+                      styleOverride={null}
+                      className={null}
+                      cbDelete={null}
+                      hasFile={false}
+                      size="1MB PNG JPG"
+                    />
+                  );
+                }}
+              </Mutation>
             </div>
           )}
         </div>

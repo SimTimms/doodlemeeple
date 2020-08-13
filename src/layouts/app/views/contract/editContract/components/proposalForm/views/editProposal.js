@@ -128,7 +128,7 @@ upon completion of this contract.`,
                 },
               }}
               onCompleted={(data) => {
-                toaster('Saved');
+                toaster('Autosave');
                 const updatedId = data.createContract;
                 setLoading(false);
                 setContract({ ...contract, id: updatedId });
@@ -175,12 +175,12 @@ upon completion of this contract.`,
                   notes: contract.notes,
                   deadline: contract.deadline,
                   currency: contract.currency,
-                  cost: parseInt(contract.cost),
+                  cost: contract.cost,
                   jobId,
                 },
               }}
               onCompleted={(data) => {
-                toaster('Saved');
+                toaster('Autosave');
                 setDetailsLock(false);
                 setLoading(false);
                 const updatedId = data.updateContract;
@@ -389,7 +389,7 @@ upon completion of this contract.`,
                   notes: contract.notes,
                   deadline: contract.deadline,
                   currency: contract.currency,
-                  cost: parseInt(contract.cost),
+                  cost: contract.cost,
                   jobId,
                   status: 'preview',
                 },

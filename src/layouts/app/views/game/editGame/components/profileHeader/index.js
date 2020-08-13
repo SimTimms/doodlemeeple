@@ -44,8 +44,7 @@ export function ProfileHeader({
           styleOverride={null}
           hasFile={game.backgroundImg ? true : false}
           className={null}
-          setImagePosition={null}
-          size="1920 x 300"
+          size="1920 x 300 PNG JPG 1MB"
         />
       </div>
     </div>

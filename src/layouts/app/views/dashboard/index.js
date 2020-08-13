@@ -5,7 +5,11 @@ import { Posts } from './components/Posts';
 import { Featured } from './components/Featured';
 import { FeaturedMini } from './components/FeaturedMini';
 import axios from 'axios';
-import { ContentHeader } from '../../../../components';
+import {
+  ContentHeader,
+  FieldTitleDashboard,
+  Divider,
+} from '../../../../components';
 import { useStyles } from './styles';
 import { Typography } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -26,7 +30,7 @@ export function Dashboard({ history }) {
       axios
         .get(
           'https://doodlemeeple.com/wp-json/wp/v2/posts?_embed&categories=1',
-          { cancelToken: axiosCancel.token },
+          { cancelToken: axiosCancel.token }
         )
         .then((response) => {
           setPosts(response.data);
@@ -37,7 +41,7 @@ export function Dashboard({ history }) {
       axios
         .get(
           'https://doodlemeeple.com/wp-json/wp/v2/posts?_embed&categories=2',
-          { cancelToken: axiosCancel.token },
+          { cancelToken: axiosCancel.token }
         )
         .then((response) => {
           setFeaturedId(response.data[0].slug);
@@ -49,7 +53,7 @@ export function Dashboard({ history }) {
       axios
         .get(
           'https://doodlemeeple.com/wp-json/wp/v2/posts?_embed&categories=4',
-          { cancelToken: axiosCancel.token },
+          { cancelToken: axiosCancel.token }
         )
         .then((response) => {
           setHome(response.data);
@@ -86,26 +90,9 @@ export function Dashboard({ history }) {
                 [classes.columnMobile]: mobile,
               })}`}
             >
-              <Typography
-                variant="h6"
-                className={`${clsx({
-                  [classes.dashboardHeader]: true,
-                  [classes.dashboardHeaderMobile]: mobile,
-                })}`}
-              >
-                Notifications
-              </Typography>
+              <FieldTitleDashboard name="Notifications" inline={false} />
+              <Divider />
               <Notifications />
-              <Typography
-                variant="h6"
-                className={`${clsx({
-                  [classes.dashboardHeader]: true,
-                  [classes.dashboardHeaderMobile]: mobile,
-                })}`}
-              >
-                News
-              </Typography>
-              <Posts posts={posts ? posts : []} />
             </div>
             <div
               className={`${clsx({
@@ -113,21 +100,16 @@ export function Dashboard({ history }) {
                 [classes.columnMobile]: mobile,
               })}`}
             >
-              <Typography
-                variant="h6"
-                className={`${clsx({
-                  [classes.dashboardHeader]: true,
-                  [classes.right]: true,
-                  [classes.dashboardHeaderMobile]: mobile,
-                })}`}
-              >
-                Featured Artist
-              </Typography>
+              <FieldTitleDashboard name="Featured Artist" inline={false} />
+              <Divider />
               <FeaturedMini
                 posts={featured ? featured : []}
                 featuredId={featuredId}
                 history={history}
               />
+              <FieldTitleDashboard name="Updates" inline={false} />
+              <Divider />
+              <Posts posts={posts ? posts : []} />
             </div>
           </div>
         </div>

@@ -34,7 +34,7 @@ function Uploader({
       'Content-Type': 'image/jpeg',
     };
 
-    const uploadURL = `${process.env.REACT_APP_API}/sign_s3`;
+    const uploadURL = `${process.env.REACT_APP_API_S3}/sign_s3`;
     const token = Cookies.get('token');
     let config = {
       headers: {
@@ -53,7 +53,6 @@ function Uploader({
       })
       .then((response) => {
         setStatusMessage('Sending...');
-        console.log(response);
         if (response.data.data) {
           setStatusMessage('Uploading...');
           const returnData = response.data.data.returnData;
@@ -119,18 +118,15 @@ function Uploader({
           }}
           style={{ color: '#fff', left: 0 }}
         >
-          <Icon className={classes.imageIcon} style={{ fontSize: 20 }}>
-            delete
+          <Icon className={classes.imageIconDelete} style={{ fontSize: 20 }}>
+            close
           </Icon>
         </Button>
       ) : statusMessage === '' ? (
         <div style={{ textAlign: 'center' }}>
           <Icon className={classes.imageIcon}>add_photo_alternate</Icon>
           {size && (
-            <Typography
-              variant="body1"
-              style={{ fontSize: 10, marginTop: -10 }}
-            >
+            <Typography variant="body1" style={{ fontSize: 10, lineHeight: 1 }}>
               {size}
             </Typography>
           )}
