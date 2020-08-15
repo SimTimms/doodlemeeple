@@ -47,12 +47,13 @@ export function JobComponent({ job, game, history }) {
           {job.submitted === 'submitted'
             ? 'Submitted'
             : job.submitted === 'closed'
-            ? 'closed'
+            ? 'Closed'
+            : job.submitted === 'accepted'
+            ? 'Awaiting Payment'
             : 'Draft'}
         </Typography>
       </div>
       {job.invites.map((invite, index) => {
-        console.log(invite, contractsArr);
         return (
           <div
             key={`invite_${index}`}
@@ -86,7 +87,9 @@ export function JobComponent({ job, game, history }) {
       <IconButton
         disabled={false}
         title={
-          job.submitted === 'submitted' || job.submitted === 'closed'
+          job.submitted === 'submitted' ||
+          job.submitted === 'closed' ||
+          job.submitted === 'accepted'
             ? 'View'
             : 'Edit'
         }

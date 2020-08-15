@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   ContractSummary,
   IconButton,
@@ -9,6 +9,7 @@ import {
   Divider,
   Column,
   Meta,
+  Text,
   BorderBox,
 } from '../../../../../../components';
 import { toaster } from '../../../../../../utils/toaster';
@@ -19,10 +20,21 @@ import { Mutation, Query } from 'react-apollo';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 
-export default function Quote({ display, contractData, setContract, history }) {
+export default function QuoteSummary({
+  display,
+  contractData,
+  setContract,
+  history,
+}) {
   const classes = useStyles();
   const [openContract, setOpenContract] = React.useState(false);
+  const [contractStatus, setContractStatus] = React.useState(null);
+  const [declineWarning, setDeclineWarning] = React.useState(false);
   const [favourites, setFavourites] = React.useState([]);
+
+  useEffect(() => {
+    setContractStatus(contractData.status);
+  }, [contractData]);
 
   return (
     <div
@@ -57,64 +69,117 @@ export default function Quote({ display, contractData, setContract, history }) {
 
       <Divider />
       <div className={classes.root}>
-        <ContractSummary contractData={contractData} />
+        {!openContract && (
+          <ContractSummary
+            contractData={contractData}
+            contractStatus={contractStatus}
+          />
+        )}
         {openContract && (
           <Contract
             contractData={contractData}
             setOpenContract={setOpenContract}
+            setContractStatus={setContractStatus}
           />
         )}
         {!openContract && (
           <ActionWrapper>
-            <BorderBox>
-              <Meta
-                str={`Choose to read the full details or decline this offer`}
-              />
-              {contractData.status !== 'accepted' && (
+            {contractStatus === 'submitted' ? (
+              <BorderBox>
+                <Meta
+                  str={`Choose to read the full details or decline this offer`}
+                />
+                {contractData.status !== 'accepted' && (
+                  <IconButton
+                    title="Continue"
+                    color="primary"
+                    icon="chevron_right"
+                    disabled={false}
+                    onClickEvent={() => {
+                      setOpenContract(true);
+                    }}
+                    styleOverride={{ width: '100%' }}
+                    type="button"
+                    iconPos="right"
+                  />
+                )}
+                {declineWarning && (
+                  <Column j="center" a="center">
+                    <Text str="You will be unable to continue conversations with this Creative about this particular job." />{' '}
+                    <Text str="Do you wish to continue?" />
+                  </Column>
+                )}
+                {contractData.status !== 'accepted' && (
+                  <Mutation
+                    mutation={DECLINE_CONTRACT}
+                    variables={{
+                      contractId: contractData._id,
+                    }}
+                    onCompleted={(data) => {
+                      toaster('Declined');
+                      setContractStatus('declined');
+                    }}
+                  >
+                    {(mutation) => {
+                      return (
+                        <IconButton
+                          title="Decline"
+                          color="warning"
+                          icon="thumb_down"
+                          disabled={false}
+                          onClickEvent={() => {
+                            declineWarning === false
+                              ? setDeclineWarning(true)
+                              : mutation();
+                          }}
+                          styleOverride={{ width: '100%' }}
+                          type="button"
+                          iconPos="right"
+                        />
+                      );
+                    }}
+                  </Mutation>
+                )}
+                {declineWarning && (
+                  <IconButton
+                    title="Cancel"
+                    color="text-dark"
+                    icon="cancel"
+                    disabled={false}
+                    onClickEvent={() => {
+                      setDeclineWarning(false);
+                    }}
+                    styleOverride={{ width: '100%' }}
+                    type="button"
+                    iconPos="right"
+                  />
+                )}
+              </BorderBox>
+            ) : contractStatus === 'declined' ? (
+              <BorderBox>
+                <Meta
+                  str={`You have rejected this quote, ${contractData.user.name} has been notified`}
+                />
+              </BorderBox>
+            ) : (
+              <BorderBox>
+                <Meta
+                  str={`You have Accepted this quote, ${contractData.user.name} has been notified. Please continue to Payment`}
+                />
                 <IconButton
-                  title="Continue"
-                  color="primary"
-                  icon="chevron_right"
+                  title="Payment"
+                  color="text-dark"
+                  icon="payment"
                   disabled={false}
                   onClickEvent={() => {
-                    setOpenContract(true);
+                    //setDeclineWarning(false);
                   }}
                   styleOverride={{ width: '100%' }}
                   type="button"
                   iconPos="right"
                 />
-              )}
-              {contractData.status !== 'accepted' && (
-                <Mutation
-                  mutation={DECLINE_CONTRACT}
-                  variables={{
-                    contractId: contractData.id,
-                  }}
-                  onCompleted={(data) => {
-                    toaster('Declined');
-                    setContract({
-                      ...contractData,
-                      status: 'declined',
-                    });
-                  }}
-                >
-                  {(mutation) => {
-                    return (
-                      <IconButton
-                        title="Decline"
-                        color="warning"
-                        icon="thumb_down"
-                        disabled={false}
-                        onClickEvent={mutation}
-                        styleOverride={{ width: '100%' }}
-                        type="button"
-                        iconPos="right"
-                      />
-                    );
-                  }}
-                </Mutation>
-              )}
-            </BorderBox>
+              </BorderBox>
+            )}
           </ActionWrapper>
         )}
       </div>

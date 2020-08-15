@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 
-export default function FieldTitleDashboard({ name, inline }) {
+export default function FieldTitleDashboard({ name, inline, a }) {
   const [infoOpen, setInfoOpen] = React.useState('none');
   const classes = useStyles();
   return (
@@ -15,7 +15,11 @@ export default function FieldTitleDashboard({ name, inline }) {
           alignItems: 'center',
         }}
       >
-        <div className={classes.titleLine} style={{ minWidth: 30 }}></div>
+        {a !== 'c' ? (
+          <div className={classes.titleLine} style={{ minWidth: 30 }}></div>
+        ) : (
+          <div className={classes.titleLine} style={{ width: '100%' }}></div>
+        )}
         <div
           style={{
             display: 'flex',

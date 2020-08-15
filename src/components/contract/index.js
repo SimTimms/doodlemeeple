@@ -1,12 +1,23 @@
 import React from 'react';
 import { SIGN_CONTRACT, DECLINE_CONTRACT } from '../../data/mutations';
 import { Typography } from '@material-ui/core';
-import { Divider, IconButton, ActionWrapper, NoticeBox } from '../';
+import {
+  Divider,
+  IconButton,
+  ActionWrapper,
+  NoticeBox,
+  BorderBox,
+  Meta,
+} from '../';
 import { Mutation } from 'react-apollo';
 import moment from 'moment';
 import { useStyles } from './styles';
 
-export default function Contract({ contractData, setOpenContract }) {
+export default function Contract({
+  contractData,
+  setOpenContract,
+  setContractStatus,
+}) {
   let paymentTermsSum = 100;
   const classes = useStyles();
 
@@ -29,27 +40,34 @@ export default function Contract({ contractData, setOpenContract }) {
           </b>
         </Typography>
         <Divider />
+        {/*
         <Typography>
-          <b>Contract ID:</b> {`DMID-${contractData.id}`}
-        </Typography>
+          <b>Contract ID:</b>
+          <span className={classes.id}> {`DMID-${contractData._id}`}</span>
+        </Typography>*/}
         <Typography>
           <b>Project:</b>
           {` ${contractData.job.name} `}
-          <span className={classes.id}>{` (DMID-${contractData.job.id})`}</span>
+          {/*
+          <span
+            className={classes.id}
+           >{` (DMID-${contractData.job._id})`}</span>*/}
         </Typography>
         <Typography>
           <b>Client:</b>
-          {` ${contractData.job.user.email}`}
+          {` ${contractData.job.user.name}`}
+          {/*
           <span className={classes.id}>
-            {` (DMID-${contractData.job.user.id})`}
-          </span>
+          {` (DMID-${contractData.job.user._id})`}
+          </span>*/}
         </Typography>
         <Typography>
           <b>Creative:</b>
-          {` ${contractData.user.email}`}
+          {` ${contractData.user.name}`}
+          {/*
           <span className={classes.id}>
-            {` (DMID-${contractData.user.id})`}
-          </span>
+            {` (DMID-${contractData.user._id})`}
+            </span>*/}
         </Typography>
         <Divider />
         <Typography variant="h5">
@@ -110,7 +128,7 @@ export default function Contract({ contractData, setOpenContract }) {
           <b>6. PAYMENT:</b>
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
-          <b>6.1</b> The Creative will charge the Client a flat fee of{' '}
+          <b>6.1</b> The Creative will charge the Client a total fee of{' '}
           {`${contractData.cost}
 ${contractData.currency} `}
           for the Services (the "Payment")
@@ -121,7 +139,7 @@ ${contractData.currency} `}
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
           <b>7.1</b> The Client agrees to pay the Creative the Payment according
-          to the payment terms as follows:
+          to the payment terms as follows (The Payment Schedule):
         </Typography>
         {contractData.paymentTerms.map((term, index) => {
           paymentTermsSum = paymentTermsSum - term.percent;
@@ -141,6 +159,16 @@ ${contractData.currency} `}
             {`${paymentTermsSum}% of the Payment upon completion of the Services`}
           </Typography>
         )}
+        <Typography style={{ marginLeft: 40 }}>
+          <b>7.2</b> The Creative will commence and/or continue to fulfil the
+          Services upon notification of payment(s) to DoodleMeeple according to
+          the Payment Schedule.
+        </Typography>
+        <Typography style={{ marginLeft: 40 }}>
+          <b>7.3</b> DoodleMeeple will release funds to the Creative upon
+          approval from both Parties that the Services have been completed
+          according to the Payment Schedule
+        </Typography>
         <Divider />
         <Typography>
           <b>8. ADDITIONAL TERMS & NOTES:</b>
@@ -150,7 +178,10 @@ ${contractData.currency} `}
           notes set out by the Creative as follows:
         </Typography>
         <Typography style={{ marginLeft: 80 }}>
-          <b>8.1.1</b> {contractData.notes}
+          <b>8.1.1</b>{' '}
+          {contractData.notes === ''
+            ? 'No additional notes'
+            : contractData.notes}
         </Typography>
         <Divider />
         <Typography>
@@ -174,76 +205,86 @@ ${contractData.currency} `}
         </Typography>
         <Typography style={{ marginLeft: 40, paddingBottom: 10 }}>
           <b>10.1</b> By clicking "I Accept" the Client will enter into a
-          binding contract with the Creative:
+          binding contract with the Creative.
         </Typography>
         <ActionWrapper>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              paddingTop: 20,
-              width: '100%',
+          <BorderBox>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+              }}
+            >
+              <Meta str="By clicking Accept you will enter into a binding contract with the Creative." />
+              <Mutation
+                mutation={SIGN_CONTRACT}
+                variables={{
+                  contractId: contractData._id,
+                }}
+                onCompleted={() => {
+                  setContractStatus('accepted');
+                  setOpenContract(false);
+                }}
+              >
+                {(mutation) => {
+                  return (
+                    <IconButton
+                      title="I Accept"
+                      color="primary"
+                      icon="thumb_up"
+                      disabled={false}
+                      onClickEvent={() => {
+                        mutation();
+                      }}
+                      styleOverride={null}
+                      type="button"
+                      iconPos="right"
+                    />
+                  );
+                }}
+              </Mutation>
+              <Mutation
+                mutation={DECLINE_CONTRACT}
+                variables={{
+                  contractId: contractData._id,
+                }}
+                onCompleted={() => {
+                  setContractStatus('declined');
+                  setOpenContract(false);
+                }}
+              >
+                {(mutation) => {
+                  return (
+                    <IconButton
+                      title="I Decline"
+                      color="warning"
+                      icon="thumb_down"
+                      disabled={false}
+                      onClickEvent={() => {
+                        mutation();
+                      }}
+                      styleOverride={null}
+                      type="button"
+                      iconPos="right"
+                    />
+                  );
+                }}
+              </Mutation>
+            </div>
+          </BorderBox>
+          <IconButton
+            title="Close"
+            color="text"
+            icon="close"
+            disabled={false}
+            onClickEvent={() => {
+              setOpenContract(false);
             }}
-          >
-            <Mutation
-              mutation={SIGN_CONTRACT}
-              variables={{
-                contractId: contractData.id,
-              }}
-            >
-              {(mutation) => {
-                return (
-                  <IconButton
-                    title="I Accept"
-                    color="primary"
-                    icon="thumb_up"
-                    disabled={false}
-                    onClickEvent={() => {
-                      mutation();
-                    }}
-                    styleOverride={{ paddingTop: 10, paddingBottom: 10 }}
-                    type="button"
-                    iconPos="right"
-                  />
-                );
-              }}
-            </Mutation>
-            <Mutation
-              mutation={DECLINE_CONTRACT}
-              variables={{
-                contractId: contractData.id,
-              }}
-            >
-              {(mutation) => {
-                return (
-                  <IconButton
-                    title="I Decline"
-                    color="warning"
-                    icon="thumb_down"
-                    disabled={false}
-                    onClickEvent={() => {
-                      setOpenContract(false);
-                      mutation();
-                    }}
-                    styleOverride={{ paddingTop: 10, paddingBottom: 10 }}
-                    type="button"
-                  />
-                );
-              }}
-            </Mutation>
-
-            <IconButton
-              title="Close"
-              color="text"
-              icon="close"
-              disabled={false}
-              onClickEvent={() => {
-                setOpenContract(false);
-              }}
-              styleOverride={null}
-              type="button"
-            />
-          </div>
+            styleOverride={null}
+            type="button"
+            iconPos="right"
+          />
         </ActionWrapper>
       </div>
     </div>

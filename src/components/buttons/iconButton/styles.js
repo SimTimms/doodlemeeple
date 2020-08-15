@@ -17,6 +17,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 2,
     display: 'flex',
     flexWrap: 'nowrap',
+    justifyContent: 'space-between',
     color: '#fff',
     '&:hover': {
       background: theme.palette.primary.dark,
@@ -38,7 +39,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#aaa',
     border: 'none',
     boxShadow: 'none',
-
+    justifyContent: 'center',
     '&:hover': {
       background: '#eaeaea',
     },
@@ -49,6 +50,7 @@ export const useStyles = makeStyles((theme) => ({
     border: 'none',
     boxShadow: 'none',
     textTransform: 'uppercase',
+    justifyContent: 'center',
     letterSpacing: 1.3,
     '&:hover': {
       background: 'rgba(255,255,255,0.4)',
@@ -60,6 +62,7 @@ export const useStyles = makeStyles((theme) => ({
     border: 'none',
     boxShadow: 'none',
     textTransform: 'uppercase',
+    justifyContent: 'center',
     letterSpacing: 1.3,
     textShadow: '3px 3px 4px rgba(0,0,0,0.1)',
     '&:hover': {
@@ -73,6 +76,7 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: 'none',
     margin: 0,
     letterSpacing: 1.3,
+    justifyContent: 'center',
     textShadow: '3px 3px 4px rgba(0,0,0,0.1)',
     textTransform: 'none',
     '&:hover': {
@@ -85,6 +89,7 @@ export const useStyles = makeStyles((theme) => ({
     border: 'none',
     boxShadow: 'none',
     textTransform: 'uppercase',
+    justifyContent: 'center',
     letterSpacing: 1.3,
     textShadow: '3px 3px 4px rgba(0,0,0,0.1)',
     '&:hover': {

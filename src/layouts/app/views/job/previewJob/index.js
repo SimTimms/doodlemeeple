@@ -88,6 +88,7 @@ export default function PreviewJob({ theme, jobId, history }) {
               <UnlockInfoReverse str="This project has been closed by the owner" />
             </ColumnWrapper>
           )}
+
           {loggedInUser === job.user._id && (
             <ColumnWrapper>
               <Column j="center" a="center">
@@ -134,7 +135,22 @@ export default function PreviewJob({ theme, jobId, history }) {
                           iconPos="left"
                         />
                       )}
-
+                      {job.submitted === 'accepted' && (
+                        <IconButton
+                          disabled={invite.status === 'declined'}
+                          color="primary"
+                          icon="request_quote"
+                          title="Contract"
+                          onClickEvent={() => {
+                            history.push(`/app/view-contract/${'contractid'}`);
+                          }}
+                          styleOverride={{
+                            color: invite.status === 'declined' && '#fff',
+                          }}
+                          type="button"
+                          iconPos="left"
+                        />
+                      )}
                       <IconButton
                         disabled={invite.status === 'declined'}
                         color={
@@ -259,8 +275,8 @@ export default function PreviewJob({ theme, jobId, history }) {
               )}
             </div>
             <TextDivider />
-            {job.submitted === 'closed' ? null : loggedInUser ===
-              job.user._id ? (
+            {job.submitted === 'closed' ? null : job.submitted ===
+              'accepted' ? null : loggedInUser === job.user._id ? (
               <div className={classes.actionWrapper}>
                 {!closeConfirm ? (
                   <IconButton

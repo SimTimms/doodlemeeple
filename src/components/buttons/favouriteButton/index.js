@@ -3,7 +3,6 @@ import { Button, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import { toaster } from '../../../utils/toaster';
-import { IconButton } from '../';
 
 export default function FavouriteButton({ styleAdd, mutation, favourite }) {
   const classes = useStyles();

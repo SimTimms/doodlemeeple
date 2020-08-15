@@ -4,15 +4,15 @@ import { LoadIcon, IconButton, Column, Row } from '../../../../../components';
 import { PREVIEW_CONTRACT, GET_MESSAGES } from '../../../../../data/queries';
 import { Query } from 'react-apollo';
 import { useStyles } from './styles';
-import Quote from './views/quote';
+import QuoteSummary from './views/quote';
 import Chat from './views/chat';
 import PaymentElement from './views/payments';
 
 export default function PreviewContract({ contractId, history }) {
   const [tabs, setTabs] = React.useState([true, false, false]);
   const [contract, setContract] = React.useState({
-    id: null,
-    user: { id: null },
+    _id: null,
+    user: { _id: null },
     signedDate: null,
     job: null,
     status: '',
@@ -20,7 +20,6 @@ export default function PreviewContract({ contractId, history }) {
   const [job, setJob] = React.useState({ id: null, user: { id: '' } });
   const [conversationId, setConversationId] = React.useState(null);
 
-  const classes = useStyles();
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div style={{ width: '700px', marginBottom: 50 }}>
@@ -82,7 +81,7 @@ export default function PreviewContract({ contractId, history }) {
               data && (
                 <Column a="center" j="center">
                   <div style={{ width: '100%' }}>
-                    <Quote
+                    <QuoteSummary
                       display={tabs[0]}
                       contractData={contractData}
                       setContract={setContract}

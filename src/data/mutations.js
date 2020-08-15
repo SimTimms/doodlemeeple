@@ -138,14 +138,18 @@ export const SUBMIT_CONTRACT = gql`
 `;
 
 export const SIGN_CONTRACT = gql`
-  mutation SignContract($contractId: String!) {
-    signContract(contractId: $contractId)
+  mutation SignContract($contractId: MongoID!) {
+    signContract(_id: $contractId) {
+      _id
+    }
   }
 `;
 
 export const DECLINE_CONTRACT = gql`
-  mutation DeclineContract($contractId: String!) {
-    declineContract(contractId: $contractId)
+  mutation DeclineContract($contractId: MongoID!) {
+    declineContract(_id: $contractId) {
+      _id
+    }
   }
 `;
 

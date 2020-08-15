@@ -233,8 +233,8 @@ export const JOB = gql`
 `;
 
 export const JOBS = gql`
-  query GetJobs {
-    jobsByUser {
+  query GetJobs($status: String) {
+    jobsByUser(status: $status) {
       _id
       name
       submitted
@@ -439,6 +439,7 @@ export const PREVIEW_CONTRACT = gql`
         user {
           _id
           email
+          name
         }
       }
       paymentTerms {

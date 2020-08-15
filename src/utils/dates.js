@@ -18,7 +18,10 @@ function timeDifference(current, previous) {
   } else if (elapsed < milliSecondsPerDay) {
     return Math.round(elapsed / milliSecondsPerHour) + ' h ago';
   } else if (elapsed < milliSecondsPerMonth) {
-    return Math.round(elapsed / milliSecondsPerDay) + ' days ago';
+    return (
+      Math.round(elapsed / milliSecondsPerDay) +
+      ` ${Math.round(elapsed / milliSecondsPerDay) === 1 ? 'day' : 'days'} ago`
+    );
   } else if (elapsed < milliSecondsPerYear) {
     return Math.round(elapsed / milliSecondsPerMonth) + ' mo ago';
   } else {
