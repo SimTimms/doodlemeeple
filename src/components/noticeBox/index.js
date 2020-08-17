@@ -1,11 +1,12 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
+import { IconButton, Column } from '../';
 import clsx from 'clsx';
 
-export default function NoticeBox({ title, subTitle, color }) {
+export default function NoticeBox(props) {
   const classes = useStyles();
-
+  const { title, subTitle, color, actionTitle, actionEvent } = props;
   return (
     <div
       className={clsx({
@@ -16,7 +17,29 @@ export default function NoticeBox({ title, subTitle, color }) {
       })}
     >
       <Typography variant="h4">{title}</Typography>
-      <Typography variant="body1">{subTitle}</Typography>
+      <Typography
+        variant="body1"
+        style={{
+          background: 'rgba(0,0,0,0.5)',
+          marginTop: 10,
+          marginBottom: 6,
+          padding: 20,
+          borderRadius: 10,
+          fontSize: 16,
+        }}
+      >
+        {subTitle}
+      </Typography>
+      <Column>
+        {actionTitle && (
+          <IconButton
+            title={actionTitle}
+            icon="payment"
+            color="secondary"
+            onClickEvent={actionEvent}
+          />
+        )}
+      </Column>
     </div>
   );
 }

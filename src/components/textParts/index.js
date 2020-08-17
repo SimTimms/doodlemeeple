@@ -89,12 +89,15 @@ export function TextLink({ str, onClickEvent }) {
   );
 }
 
-export function Meta({ str }) {
+export function Meta(props) {
+  const { str, children } = props;
   const classes = useStyles();
-  return (
+  return str ? (
     <Typography variant="body1" className={classes.meta}>
       {str}
     </Typography>
+  ) : (
+    children
   );
 }
 

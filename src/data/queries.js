@@ -187,6 +187,10 @@ export const JOB = gql`
       _id
       name
       keywords
+      assignedCreative {
+        _id
+        name
+      }
       invites {
         status
         receiver {

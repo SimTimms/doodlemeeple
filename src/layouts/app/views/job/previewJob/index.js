@@ -9,8 +9,11 @@ import {
   Text,
   TextDivider,
   Meta,
+  Divider,
   UnlockInfoReverse,
   Row,
+  NoticeBox,
+  PaymentElement,
 } from '../../../../../components';
 import { timeDifferenceForDate } from '../../../../../utils/dates';
 import ViewConversation from '../../../../messages/views/messaging/viewConversation';
@@ -21,7 +24,6 @@ import Cookies from 'js-cookie';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../../../../utils/toaster';
 import { CLOSE_JOB } from '../../../../../data/mutations';
-
 export default function PreviewJob({ theme, jobId, history }) {
   const classes = useStyles();
   const [conversationUser, setConversationUser] = React.useState(null);
@@ -72,6 +74,18 @@ export default function PreviewJob({ theme, jobId, history }) {
       <div className={classes.rootRow}>
         <div className={classes.root}>
           <ColumnWrapper>
+            {job.submitted === 'accepted' && (
+              <NoticeBox
+                title="Payment Required"
+                color="primary"
+                subTitle="Your Creative cannot start work until the deposit has been paid"
+                actionTitle="Deposit Funds"
+                actionEvent={() => {
+                  history.push(`/app/view-contract/${job.contracts[0]._id}`);
+                }}
+              />
+            )}
+            {/*  <PaymentElement display={true} contractData={job.contracts[0]} />*/}
             <HeaderTwo str={job.name} />
             <Meta
               str={`${timeDifferenceForDate(job.createdAt)} | ${job.user.name}`}
@@ -82,14 +96,12 @@ export default function PreviewJob({ theme, jobId, history }) {
             <HeaderTwo str="Ideal Creative" />
             <Text str={job.creativeSummary} />
           </ColumnWrapper>
-
           {job.submitted === 'closed' && (
             <ColumnWrapper>
               <UnlockInfoReverse str="This project has been closed by the owner" />
             </ColumnWrapper>
           )}
-
-          {loggedInUser === job.user._id && (
+          {job.submitted !== 'accepted' && loggedInUser === job.user._id && (
             <ColumnWrapper>
               <Column j="center" a="center">
                 <HeaderTwo str="Invites" />
@@ -135,22 +147,81 @@ export default function PreviewJob({ theme, jobId, history }) {
                           iconPos="left"
                         />
                       )}
-                      {job.submitted === 'accepted' && (
-                        <IconButton
-                          disabled={invite.status === 'declined'}
-                          color="primary"
-                          icon="request_quote"
-                          title="Contract"
-                          onClickEvent={() => {
-                            history.push(`/app/view-contract/${'contractid'}`);
+
+                      <IconButton
+                        disabled={invite.status === 'declined'}
+                        color={
+                          invite.status === 'declined'
+                            ? 'text-white'
+                            : 'primary'
+                        }
+                        icon="chat"
+                        title="Chat"
+                        onClickEvent={() => {
+                          setConversationUser(invite.receiver);
+                          setChatOpen(chatOpen ? false : true);
+                        }}
+                        styleOverride={{
+                          color: invite.status === 'declined' && '#fff',
+                        }}
+                        type="button"
+                        iconPos="left"
+                      />
+                    </Row>
+                  </div>
+                ))}
+              </Column>
+            </ColumnWrapper>
+          )}
+          {job.submitted === 'accepted' && loggedInUser === job.user._id && (
+            <ColumnWrapper>
+              <Column j="center" a="center">
+                <HeaderTwo str="Your Creative" />
+                <Divider />
+                {job.invites.map((invite, index) => (
+                  <div style={{ width: '100%' }} key={`invite-${index}`}>
+                    <Row j="flex-start" a="center">
+                      <Row j="flex-start" a="center">
+                        <div
+                          style={{
+                            backgroundImage: `url(${invite.receiver.profileImg})`,
                           }}
-                          styleOverride={{
-                            color: invite.status === 'declined' && '#fff',
-                          }}
-                          type="button"
-                          iconPos="left"
-                        />
-                      )}
+                          className={classes.profileThumb}
+                          key={`profile_${index}`}
+                        >
+                          {contracts.indexOf(invite.receiver._id) > -1 && (
+                            <Typography
+                              variant="body1"
+                              component="p"
+                              className={classes.countsStyle}
+                            >
+                              1
+                            </Typography>
+                          )}
+                        </div>
+                        <Typography>
+                          {invite.receiver.name}{' '}
+                          {invite.status ? `(${invite.status})` : '(pending)'}
+                        </Typography>
+                      </Row>
+
+                      <IconButton
+                        disabled={false}
+                        color="primary"
+                        icon="request_quote"
+                        title="Contract"
+                        onClickEvent={() => {
+                          history.push(
+                            `/app/view-contract/${job.contracts[0]._id}`
+                          );
+                        }}
+                        styleOverride={{
+                          color: invite.status === 'declined' && '#fff',
+                        }}
+                        type="button"
+                        iconPos="left"
+                      />
+
                       <IconButton
                         disabled={invite.status === 'declined'}
                         color={
@@ -207,7 +278,6 @@ export default function PreviewJob({ theme, jobId, history }) {
               </Column>
             </ColumnWrapper>
           )}
-
           <ColumnWrapper>
             <div>
               {chatOpen && conversationUser && (

@@ -3,7 +3,6 @@ import { Slide, Typography, Card } from '@material-ui/core';
 import { LoadIcon, IconButton, Column, Row } from '../../../../../components';
 import { PREVIEW_CONTRACT, GET_MESSAGES } from '../../../../../data/queries';
 import { Query } from 'react-apollo';
-import { useStyles } from './styles';
 import QuoteSummary from './views/quote';
 import Chat from './views/chat';
 import PaymentElement from './views/payments';

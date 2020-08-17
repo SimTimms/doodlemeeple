@@ -3,17 +3,18 @@ import { Button, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 
-export default function IconButton({
-  disabled,
-  onClickEvent,
-  icon,
-  title,
-  color,
-  styleOverride,
-  type,
-  iconPos,
-}) {
+export default function IconButton(props) {
   const classes = useStyles();
+  const {
+    disabled,
+    onClickEvent,
+    icon,
+    title,
+    color,
+    styleOverride,
+    type,
+    iconPos,
+  } = props;
   return (
     <Button
       type={type}
@@ -43,6 +44,7 @@ export default function IconButton({
             [classes.iconButtonIconTextError]: color === 'text-error',
             [classes.iconButtonIconTextMini]: color === 'text-mini',
             [classes.iconLeft]: iconPos !== 'right',
+            [classes.noTitle]: title === '',
           })}
         >
           {icon}
@@ -60,6 +62,7 @@ export default function IconButton({
             [classes.iconButtonIconTextMini]: color === 'text-mini',
             [classes.iconButtonIconTextError]: color === 'text-error',
             [classes.iconRight]: iconPos === 'right',
+            [classes.noTitle]: title === '',
           })}
         >
           {icon}

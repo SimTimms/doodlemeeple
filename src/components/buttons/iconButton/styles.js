@@ -17,6 +17,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 2,
     display: 'flex',
     flexWrap: 'nowrap',
+    minWidth: 'auto',
     justifyContent: 'space-between',
     color: '#fff',
     '&:hover': {
@@ -26,6 +27,7 @@ export const useStyles = makeStyles((theme) => ({
       background: 'red',
     },
   },
+
   iconButtonSecondary: {
     background: '#fff',
     color: theme.palette.primary.main,
@@ -141,4 +143,5 @@ export const useStyles = makeStyles((theme) => ({
   },
   iconRight: { marginLeft: 10 },
   iconLeft: { marginRight: 10 },
+  noTitle: { marginLeft: 0, marginRight: 0 },
 }));

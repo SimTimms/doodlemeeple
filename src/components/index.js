@@ -12,6 +12,7 @@ import ContentHeader from './headers/contentHeader';
 import StripeCheckout from './stripeCheckout';
 import Payments from './payments';
 import MessageComponent from './messageComponent';
+import PaymentElement from './paymentElement';
 import CurrencySelector from './currencySelector';
 import DeclineInvite from './buttons/declineInvite';
 import TabButton from './buttons/tabButton';
@@ -149,4 +150,5 @@ export {
   Payments,
   BorderBox,
   HeaderThree,
+  PaymentElement,
 };

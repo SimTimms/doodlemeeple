@@ -11,6 +11,7 @@ import {
   Meta,
   Text,
   BorderBox,
+  PaymentElement,
 } from '../../../../../../components';
 import { toaster } from '../../../../../../utils/toaster';
 import { DECLINE_CONTRACT } from '../../../../../../data/mutations';
@@ -31,6 +32,7 @@ export default function QuoteSummary({
   const [contractStatus, setContractStatus] = React.useState(null);
   const [declineWarning, setDeclineWarning] = React.useState(false);
   const [favourites, setFavourites] = React.useState([]);
+  const [displayPayment, setDisplayPayment] = React.useState(false);
 
   useEffect(() => {
     setContractStatus(contractData.status);
@@ -164,7 +166,7 @@ export default function QuoteSummary({
             ) : (
               <BorderBox>
                 <Meta
-                  str={`You have Accepted this quote, ${contractData.user.name} has been notified. Please continue to Payment`}
+                  str={`You have accepted this quote, ${contractData.user.name} has been notified. Please continue to Payment`}
                 />
                 <IconButton
                   title="Payment"
@@ -172,7 +174,7 @@ export default function QuoteSummary({
                   icon="payment"
                   disabled={false}
                   onClickEvent={() => {
-                    //setDeclineWarning(false);
+                    setDisplayPayment(true);
                   }}
                   styleOverride={{ width: '100%' }}
                   type="button"
@@ -180,6 +182,10 @@ export default function QuoteSummary({
                 />
               </BorderBox>
             )}
+            <PaymentElement
+              display={displayPayment}
+              contractData={contractData}
+            />
           </ActionWrapper>
         )}
       </div>

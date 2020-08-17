@@ -9,7 +9,9 @@ export const useStyles = makeStyles((theme) => ({
     paddingLeft: 20,
     paddingRight: 20,
     paddingBottom: 20,
-    border: `4px solid ${theme.palette.secondary.main}`,
+    width: '100%',
+    border: `4px solid #6872e6`,
+    maxWidth: 340,
   },
   row: {
     display: 'flex',

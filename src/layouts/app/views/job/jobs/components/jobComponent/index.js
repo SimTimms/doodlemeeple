@@ -87,10 +87,10 @@ export function JobComponent({ job, game, history }) {
       <IconButton
         disabled={false}
         title={
-          job.submitted === 'submitted' ||
-          job.submitted === 'closed' ||
-          job.submitted === 'accepted'
+          job.submitted === 'submitted' || job.submitted === 'closed'
             ? 'View'
+            : job.submitted === 'accepted'
+            ? ''
             : 'Edit'
         }
         color="primary"
@@ -99,6 +99,8 @@ export function JobComponent({ job, game, history }) {
         icon={
           job.submitted === 'submitted' || job.submitted === 'closed'
             ? 'preview'
+            : job.submitted === 'accepted'
+            ? 'chevron_right'
             : 'edit'
         }
         styleOverride={{ marginRight: 10, marginLeft: 30 }}
