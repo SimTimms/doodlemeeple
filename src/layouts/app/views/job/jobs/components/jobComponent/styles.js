@@ -69,6 +69,8 @@ export const useStyles = makeStyles((theme) => ({
     paddingBottom: 20,
   },
   cardSummary: { overflow: 'hidden' },
+  cardSummaryGood: { color: theme.palette.secondary.main },
+  cardSummaryWarning: { color: theme.palette.error.main },
   cardEmpty: {
     width: '30%',
     margin: '20px auto 20px 0',

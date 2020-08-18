@@ -20,7 +20,7 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     background: '#fff',
     borderRadius: 10,
-    minWidth: 400,
+    minWidth: 500,
   },
   hide: {
     display: 'none',

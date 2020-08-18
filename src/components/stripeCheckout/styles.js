@@ -2,16 +2,19 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   card: {
-    boxShadow: '10px 10px 30px rgba(0,0,0,0.2)',
     marginTop: 30,
     marginBottom: 20,
     paddingTop: 20,
     paddingLeft: 20,
     paddingRight: 20,
     paddingBottom: 20,
+    marginLeft: 20,
+    marginRight: 20,
     width: '100%',
-    border: `4px solid #6872e6`,
-    maxWidth: 340,
+    border: `1px dashed #6872e6`,
+    borderRadius: 10,
+    maxWidth: 500,
+    boxSizing: 'border-box',
   },
   row: {
     display: 'flex',

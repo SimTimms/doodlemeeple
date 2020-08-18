@@ -13,7 +13,6 @@ import {
   UnlockInfoReverse,
   Row,
   NoticeBox,
-  PaymentElement,
 } from '../../../../../components';
 import { timeDifferenceForDate } from '../../../../../utils/dates';
 import ViewConversation from '../../../../messages/views/messaging/viewConversation';

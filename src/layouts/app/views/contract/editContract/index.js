@@ -8,6 +8,7 @@ import {
   ActionWrapper,
   LoadIcon,
   IconButton,
+  HeaderThree,
 } from '../../../../../components';
 import { GET_CONTRACT_ID } from '../../../../../data/queries';
 import { Query } from 'react-apollo';
@@ -46,7 +47,8 @@ export default function EditContract({ contractId, history }) {
                   ) : (
                     data && (
                       <div>
-                        <ContractSummary contractData={contract} />
+                        <ContractSummary contractData={contract} />{' '}
+                        <HeaderThree str="Additional Notes" />
                         <ActionWrapper>
                           {contract.status === 'submitted' && (
                             <EditContractButton

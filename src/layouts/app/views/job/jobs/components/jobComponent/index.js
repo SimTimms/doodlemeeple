@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card';
 import { useStyles } from './styles';
 import Icon from '@material-ui/core/Icon';
 import { IconButton } from '../../../../../../../components';
+import clsx from 'clsx';
 
 export function JobComponent({ job, game, history }) {
   const classes = useStyles();
@@ -42,7 +43,11 @@ export function JobComponent({ job, game, history }) {
           variant="body2"
           component="p"
           style={{ width: '100%' }}
-          className={classes.cardSummary}
+          className={clsx({
+            [classes.cardSummary]: true,
+            [classes.cardSummaryWarning]: job.submitted === 'accepted',
+            [classes.cardSummaryGood]: job.submitted === 'paid',
+          })}
         >
           {job.submitted === 'submitted'
             ? 'Submitted'
@@ -50,6 +55,8 @@ export function JobComponent({ job, game, history }) {
             ? 'Closed'
             : job.submitted === 'accepted'
             ? 'Awaiting Payment'
+            : job.submitted === 'paid'
+            ? 'Paid & Active'
             : 'Draft'}
         </Typography>
       </div>
@@ -89,7 +96,7 @@ export function JobComponent({ job, game, history }) {
         title={
           job.submitted === 'submitted' || job.submitted === 'closed'
             ? 'View'
-            : job.submitted === 'accepted'
+            : job.submitted === 'accepted' || job.submitted === 'paid'
             ? ''
             : 'Edit'
         }
@@ -99,7 +106,7 @@ export function JobComponent({ job, game, history }) {
         icon={
           job.submitted === 'submitted' || job.submitted === 'closed'
             ? 'preview'
-            : job.submitted === 'accepted'
+            : job.submitted === 'accepted' || job.submitted === 'paid'
             ? 'chevron_right'
             : 'edit'
         }

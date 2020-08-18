@@ -12,6 +12,7 @@ import {
   Text,
   BorderBox,
   PaymentElement,
+  HeaderThree,
 } from '../../../../../../components';
 import { toaster } from '../../../../../../utils/toaster';
 import { DECLINE_CONTRACT } from '../../../../../../data/mutations';
@@ -70,6 +71,7 @@ export default function QuoteSummary({
       <HeaderTwo str="Quote" />
 
       <Divider />
+
       <div className={classes.root}>
         {!openContract && (
           <ContractSummary
@@ -85,108 +87,133 @@ export default function QuoteSummary({
           />
         )}
         {!openContract && (
-          <ActionWrapper>
-            {contractStatus === 'submitted' ? (
-              <BorderBox>
-                <Meta
-                  str={`Choose to read the full details or decline this offer`}
-                />
-                {contractData.status !== 'accepted' && (
-                  <IconButton
-                    title="Continue"
-                    color="primary"
-                    icon="chevron_right"
-                    disabled={false}
-                    onClickEvent={() => {
-                      setOpenContract(true);
-                    }}
-                    styleOverride={{ width: '100%' }}
-                    type="button"
-                    iconPos="right"
+          <Column>
+            <Divider />
+            <HeaderThree str="Payment" />
+            <ActionWrapper>
+              {contractStatus === 'submitted' ? (
+                <BorderBox>
+                  <Meta
+                    str={`Choose to read the full details or decline this offer`}
                   />
-                )}
-                {declineWarning && (
-                  <Column j="center" a="center">
-                    <Text str="You will be unable to continue conversations with this Creative about this particular job." />{' '}
-                    <Text str="Do you wish to continue?" />
-                  </Column>
-                )}
-                {contractData.status !== 'accepted' && (
-                  <Mutation
-                    mutation={DECLINE_CONTRACT}
-                    variables={{
-                      contractId: contractData._id,
-                    }}
-                    onCompleted={(data) => {
-                      toaster('Declined');
-                      setContractStatus('declined');
-                    }}
-                  >
-                    {(mutation) => {
-                      return (
-                        <IconButton
-                          title="Decline"
-                          color="warning"
-                          icon="thumb_down"
-                          disabled={false}
-                          onClickEvent={() => {
-                            declineWarning === false
-                              ? setDeclineWarning(true)
-                              : mutation();
-                          }}
-                          styleOverride={{ width: '100%' }}
-                          type="button"
-                          iconPos="right"
-                        />
-                      );
-                    }}
-                  </Mutation>
-                )}
-                {declineWarning && (
+                  {contractData.status !== 'accepted' && (
+                    <IconButton
+                      title="Continue"
+                      color="primary"
+                      icon="chevron_right"
+                      disabled={false}
+                      onClickEvent={() => {
+                        setOpenContract(true);
+                      }}
+                      styleOverride={{ width: '100%' }}
+                      type="button"
+                      iconPos="right"
+                    />
+                  )}
+                  {declineWarning && (
+                    <Column j="center" a="center">
+                      <Text str="You will be unable to continue conversations with this Creative about this particular job." />{' '}
+                      <Text str="Do you wish to continue?" />
+                    </Column>
+                  )}
+                  {contractData.status !== 'accepted' && (
+                    <Mutation
+                      mutation={DECLINE_CONTRACT}
+                      variables={{
+                        contractId: contractData._id,
+                      }}
+                      onCompleted={(data) => {
+                        toaster('Declined');
+                        setContractStatus('declined');
+                      }}
+                    >
+                      {(mutation) => {
+                        return (
+                          <IconButton
+                            title="Decline"
+                            color="warning"
+                            icon="thumb_down"
+                            disabled={false}
+                            onClickEvent={() => {
+                              declineWarning === false
+                                ? setDeclineWarning(true)
+                                : mutation();
+                            }}
+                            styleOverride={{ width: '100%' }}
+                            type="button"
+                            iconPos="right"
+                          />
+                        );
+                      }}
+                    </Mutation>
+                  )}
+                  {declineWarning && (
+                    <IconButton
+                      title="Cancel"
+                      color="text-dark"
+                      icon="cancel"
+                      disabled={false}
+                      onClickEvent={() => {
+                        setDeclineWarning(false);
+                      }}
+                      styleOverride={{ width: '100%' }}
+                      type="button"
+                      iconPos="right"
+                    />
+                  )}
+                </BorderBox>
+              ) : contractStatus === 'declined' ? (
+                <BorderBox>
+                  <Meta
+                    str={`You have rejected this quote, ${contractData.user.name} has been notified`}
+                  />
+                </BorderBox>
+              ) : contractStatus === 'paid' ? (
+                <BorderBox>
+                  <Meta
+                    str={`You have deposited the payment for this contract, ${contractData.user.name} has been notified`}
+                  />
                   <IconButton
-                    title="Cancel"
+                    title="Payment"
                     color="text-dark"
-                    icon="cancel"
+                    icon="payment"
                     disabled={false}
                     onClickEvent={() => {
-                      setDeclineWarning(false);
+                      setDisplayPayment(true);
                     }}
                     styleOverride={{ width: '100%' }}
                     type="button"
                     iconPos="right"
                   />
-                )}
-              </BorderBox>
-            ) : contractStatus === 'declined' ? (
-              <BorderBox>
-                <Meta
-                  str={`You have rejected this quote, ${contractData.user.name} has been notified`}
-                />
-              </BorderBox>
-            ) : (
-              <BorderBox>
-                <Meta
-                  str={`You have accepted this quote, ${contractData.user.name} has been notified. Please continue to Payment`}
-                />
-                <IconButton
-                  title="Payment"
-                  color="text-dark"
-                  icon="payment"
-                  disabled={false}
-                  onClickEvent={() => {
-                    setDisplayPayment(true);
-                  }}
-                  styleOverride={{ width: '100%' }}
-                  type="button"
-                  iconPos="right"
-                />
-              </BorderBox>
-            )}
-            <PaymentElement
-              display={displayPayment}
-              contractData={contractData}
-            />
-          </ActionWrapper>
+                </BorderBox>
+              ) : (
+                <BorderBox>
+                  <Meta
+                    str={`You have accepted this quote, ${contractData.user.name} has been notified. Please continue to Payment`}
+                  />
+                  <IconButton
+                    title="Payment"
+                    color="text-dark"
+                    icon="payment"
+                    disabled={false}
+                    onClickEvent={() => {
+                      setDisplayPayment(true);
+                    }}
+                    styleOverride={{ width: '100%' }}
+                    type="button"
+                    iconPos="right"
+                  />
+                </BorderBox>
+              )}
+
+              <PaymentElement
+                display={displayPayment}
+                setDisplayPayment={setDisplayPayment}
+                contractData={contractData}
+                setContractStatus={setContractStatus}
+              />
+            </ActionWrapper>
+          </Column>
         )}
       </div>
     </div>
