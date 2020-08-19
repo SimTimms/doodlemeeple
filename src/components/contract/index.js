@@ -13,21 +13,30 @@ import { Mutation } from 'react-apollo';
 import moment from 'moment';
 import { useStyles } from './styles';
 
-export default function Contract({
+export default function ContractComponent({
   contractData,
   setOpenContract,
   setContractStatus,
+  history,
 }) {
   let paymentTermsSum = 100;
   const classes = useStyles();
 
   return (
     <div style={{ width: '100%' }}>
-      <NoticeBox
-        title="Read Me"
-        subTitle={`Please read the following General Service Agreement and Click "I Agree" to appoint this creative.`}
-        color="primary"
-      />
+      {contractData.status === 'paid' ? (
+        <NoticeBox
+          title="In Progress"
+          subTitle={`This contract has been fully deposited and is considered to be active & binding`}
+          color="secondary"
+        />
+      ) : (
+        <NoticeBox
+          title="Read Me"
+          subTitle={`Please read the following General Service Agreement and Click "I Agree" to appoint this creative.`}
+          color="primary"
+        />
+      )}
       <div className={classes.wrapper}>
         <Typography variant="h5" style={{ textAlign: 'center' }}>
           General Service Agreement
@@ -208,82 +217,98 @@ ${contractData.currency} `}
           binding contract with the Creative.
         </Typography>
         <ActionWrapper>
-          <BorderBox>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                width: '100%',
-              }}
-            >
-              <Meta str="By clicking Accept you will enter into a binding contract with the Creative." />
-              <Mutation
-                mutation={SIGN_CONTRACT}
-                variables={{
-                  contractId: contractData._id,
-                }}
-                onCompleted={() => {
-                  setContractStatus('accepted');
-                  setOpenContract(false);
+          {contractData.status !== 'paid' ? (
+            <BorderBox>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  width: '100%',
                 }}
               >
-                {(mutation) => {
-                  return (
-                    <IconButton
-                      title="I Accept"
-                      color="primary"
-                      icon="thumb_up"
-                      disabled={false}
-                      onClickEvent={() => {
-                        mutation();
-                      }}
-                      styleOverride={null}
-                      type="button"
-                      iconPos="right"
-                    />
-                  );
-                }}
-              </Mutation>
-              <Mutation
-                mutation={DECLINE_CONTRACT}
-                variables={{
-                  contractId: contractData._id,
-                }}
-                onCompleted={() => {
-                  setContractStatus('declined');
-                  setOpenContract(false);
-                }}
-              >
-                {(mutation) => {
-                  return (
-                    <IconButton
-                      title="I Decline"
-                      color="warning"
-                      icon="thumb_down"
-                      disabled={false}
-                      onClickEvent={() => {
-                        mutation();
-                      }}
-                      styleOverride={null}
-                      type="button"
-                      iconPos="right"
-                    />
-                  );
-                }}
-              </Mutation>
-            </div>
-          </BorderBox>
+                <Meta str="By clicking Accept you will enter into a binding contract with the Creative." />
+                <Mutation
+                  mutation={SIGN_CONTRACT}
+                  variables={{
+                    contractId: contractData._id,
+                  }}
+                  onCompleted={() => {
+                    setContractStatus('accepted');
+                    setOpenContract(false);
+                  }}
+                >
+                  {(mutation) => {
+                    return (
+                      <IconButton
+                        title="I Accept"
+                        color="primary"
+                        icon="thumb_up"
+                        disabled={false}
+                        onClickEvent={() => {
+                          mutation();
+                        }}
+                        styleOverride={null}
+                        type="button"
+                        iconPos="right"
+                      />
+                    );
+                  }}
+                </Mutation>
+                <Mutation
+                  mutation={DECLINE_CONTRACT}
+                  variables={{
+                    contractId: contractData._id,
+                  }}
+                  onCompleted={() => {
+                    setContractStatus('declined');
+                    setOpenContract(false);
+                  }}
+                >
+                  {(mutation) => {
+                    return (
+                      <IconButton
+                        title="I Decline"
+                        color="warning"
+                        icon="thumb_down"
+                        disabled={false}
+                        onClickEvent={() => {
+                          mutation();
+                        }}
+                        styleOverride={null}
+                        type="button"
+                        iconPos="right"
+                      />
+                    );
+                  }}
+                </Mutation>
+              </div>
+            </BorderBox>
+          ) : (
+            <BorderBox>
+              <Meta
+                str={`Agreed & Signed by ${
+                  contractData.signedBy.name
+                } (the "Client") on ${moment(contractData.signedDate).format(
+                  'LLLL'
+                )} GMT and ${
+                  contractData.user.name
+                } (the "Creative") on ${moment(
+                  contractData.signedcreatedAtDate
+                ).format('LLLL')} GMT`}
+              />
+            </BorderBox>
+          )}
+
           <IconButton
-            title="Close"
-            color="text"
-            icon="close"
-            disabled={false}
+            title={contractData.status === 'paid' ? 'Back to Project' : 'Close'}
+            color="text-dark"
+            icon={contractData.status === 'paid' ? 'chevron_left' : 'close'}
             onClickEvent={() => {
-              setOpenContract(false);
+              contractData.status === 'paid'
+                ? history.push(`/app/view-job/${contractData.job._id}`)
+                : setOpenContract(false);
             }}
-            styleOverride={null}
-            type="button"
-            iconPos="right"
+            iconPos={contractData.status === 'paid' ? 'left' : 'right'}
           />
         </ActionWrapper>
       </div>

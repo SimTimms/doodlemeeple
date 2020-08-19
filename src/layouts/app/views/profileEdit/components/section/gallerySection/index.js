@@ -26,6 +26,7 @@ function GallerySection({
   setSections,
   section,
   autosaveIsOn,
+  ...props
 }) {
   const classes = galleryStyles();
   const [title, setTitle] = React.useState('loading...');
@@ -36,7 +37,7 @@ function GallerySection({
   const [notableProjects, setNotableProjects] = React.useState([]);
   const [testimonials, setTestimonials] = React.useState([]);
   const [deleting, setDeleting] = React.useState(false);
-
+  const { setChanges } = props;
   const imageFilter =
     images !== undefined
       ? images.map((item) => {
@@ -86,6 +87,7 @@ function GallerySection({
             data.sectionCreateOne.record.gallery._id;
         }
         setSections(copyArr);
+        setChanges();
         toaster('Saved');
       }}
     >

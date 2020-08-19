@@ -1,5 +1,5 @@
 import React from 'react';
-import { AboutLayoutFrame } from './layouts';
+import { AboutLayout } from './layouts';
 import AppLayout from './layouts/app';
 import PreviewLayout from './layouts/preview';
 import { PublicLayout } from './layouts/public';
@@ -161,13 +161,13 @@ function RouterComponent(props) {
             {authToken && (
               <Route
                 path="/roles/:page/:pathParam?"
-                render={(props) => <RolesLayout {...props} />}
+                render={(props) => <RolesLayout {...props} theme={theme} />}
               />
             )}
             {authToken && (
               <Route
                 path="/message/:page/:pathParam?"
-                render={(props) => <MessageLayout {...props} />}
+                render={(props) => <MessageLayout {...props} theme={theme} />}
               />
             )}
             <Route
@@ -177,17 +177,20 @@ function RouterComponent(props) {
               )}
             />
             <Route path="/about">
-              <AboutLayoutFrame />
+              <AboutLayout theme={theme} />
             </Route>
             <Route
               path="/:page/:token"
-              render={(props) => <PublicLayout {...props} />}
+              render={(props) => <PublicLayout {...props} theme={theme} />}
             />
             <Route
               path="/:page"
-              render={(props) => <PublicLayout {...props} />}
+              render={(props) => <PublicLayout {...props} theme={theme} />}
             />
-            <Route path="/" render={(props) => <PublicLayout {...props} />} />
+            <Route
+              path="/"
+              render={(props) => <PublicLayout {...props} theme={theme} />}
+            />
           </Switch>
         </Elements>
       </ApolloProvider>

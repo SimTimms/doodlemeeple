@@ -5,7 +5,6 @@ import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { JOBS } from '../../../../../data/queries';
 import {
-  ContentHeader,
   Column,
   LoadIcon,
   FieldTitleDashboard,

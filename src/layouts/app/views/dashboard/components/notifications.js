@@ -52,6 +52,9 @@ export function Notifications() {
                       [classes.notifications]: true,
                       [classes.notificationInvite]:
                         notification.icon === 'thumb_up',
+                      [classes.notificationProfile]:
+                        notification.icon === 'contact_mail',
+                      [classes.notificationWork]: notification.icon === 'work',
                       [classes.notificationBad]:
                         notification.icon === 'thumb_down',
                       [classes.notificationGood]:

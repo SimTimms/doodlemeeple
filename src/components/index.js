@@ -31,6 +31,7 @@ import FavouriteButton from './buttons/favouriteButton';
 import InviteButton from './buttons/inviteButton';
 import CreateMessage from './buttons/createMessage';
 import IconButton from './buttons/iconButton';
+import MenuButton from './buttons/menuButton';
 import FieldTitle from './fieldTitle';
 import FieldTitleDashboard from './fieldTitleDashboard';
 import FieldBox from './fieldBox';
@@ -52,7 +53,7 @@ import EditContractButton from './editContractButton';
 import ViewContractButton from './viewContractButton';
 import SubmitContractButton from './submitContractButton';
 import NoticeBox from './noticeBox';
-import Contract from './contract';
+import ContractComponent from './contract';
 import FeatureCard from './featureCard';
 import FeatureCardInvite from './featureCardInvite';
 import FeatureCardHorizontal from './featureCardHorizontal';
@@ -98,7 +99,7 @@ export {
   FeatureCardHorizontal,
   SubmitContractButton,
   NoticeBox,
-  Contract,
+  ContractComponent,
   ViewContractButton,
   EditContractButton,
   ContractSummary,
@@ -151,4 +152,5 @@ export {
   BorderBox,
   HeaderThree,
   PaymentElement,
+  MenuButton,
 };

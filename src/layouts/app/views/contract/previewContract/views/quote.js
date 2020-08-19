@@ -3,7 +3,7 @@ import {
   ContractSummary,
   IconButton,
   ActionWrapper,
-  Contract,
+  ContractComponent,
   ProfileCardBasic,
   HeaderTwo,
   Divider,
@@ -47,7 +47,12 @@ export default function QuoteSummary({
       })}
     >
       <HeaderTwo str={`Creative`} />
-
+      <PaymentElement
+        display={displayPayment}
+        setDisplayPayment={setDisplayPayment}
+        contractData={contractData}
+        setContractStatus={setContractStatus}
+      />
       <Query
         query={FAVOURITES}
         onCompleted={(data) => {
@@ -68,25 +73,31 @@ export default function QuoteSummary({
           }
         />
       </Column>
-      <HeaderTwo str="Quote" />
+      {contractData.status !== 'paid' ? (
+        <HeaderTwo str="Quote" />
+      ) : (
+        <HeaderTwo str="Contract" />
+      )}
 
       <Divider />
 
       <div className={classes.root}>
-        {!openContract && (
+        {!openContract && contractData.status !== 'paid' && (
           <ContractSummary
             contractData={contractData}
             contractStatus={contractStatus}
           />
         )}
-        {openContract && (
-          <Contract
-            contractData={contractData}
-            setOpenContract={setOpenContract}
-            setContractStatus={setContractStatus}
-          />
-        )}
-        {!openContract && (
+        {openContract ||
+          (contractData.status === 'paid' && (
+            <ContractComponent
+              contractData={contractData}
+              setOpenContract={setOpenContract}
+              setContractStatus={setContractStatus}
+              history={history}
+            />
+          ))}
+        {!openContract && contractData.status !== 'paid' && (
           <Column>
             <Divider />
             <HeaderThree str="Payment" />
@@ -174,12 +185,12 @@ export default function QuoteSummary({
                     str={`You have deposited the payment for this contract, ${contractData.user.name} has been notified`}
                   />
                   <IconButton
-                    title="Payment"
-                    color="text-dark"
-                    icon="payment"
+                    title="Back to Project"
+                    color="primary"
+                    icon="work"
                     disabled={false}
                     onClickEvent={() => {
-                      setDisplayPayment(true);
+                      history.push(`/app/view-job/${contractData.job._id}`);
                     }}
                     styleOverride={{ width: '100%' }}
                     type="button"

@@ -12,16 +12,19 @@ export default function ProfileCard({
   history,
   creative,
   favourite,
-  gameId,
-  jobId,
-  invite,
-  updateInviteList,
-  removeInviteList,
-  disabled,
+  ...props
 }) {
   const classes = useStyles();
   const [isFav, setIsFav] = React.useState(false);
   const [favCount, setFavCount] = React.useState(0);
+  const {
+    gameId,
+    jobId,
+    invite,
+    updateInviteList,
+    removeInviteList,
+    disabled,
+  } = props;
 
   useEffect(() => {
     const length = creative.favourites.filter((fav) => {
@@ -40,7 +43,7 @@ export default function ProfileCard({
         [classes.creativeCard]: true,
         [classes.creativeCardNoShadow]: !creative.profileBG,
         [classes.creativeCardNoShadow]: !creative.profileBG,
-        [classes.creativeCardInvited]: invite.length > 0,
+        [classes.creativeCardInvited]: invite && invite.length > 0,
       })}
     >
       <div
@@ -139,39 +142,41 @@ export default function ProfileCard({
           </Icon>
         </div>
       </Column>
-      <div className={classes.actionsWrapper}>
-        <Mutation
-          mutation={CREATE_INVITE}
-          variables={{
-            _id: invite._id,
-            jobId: jobId,
-            receiverId: creative._id,
-            title: '',
-            message: '',
-          }}
-          onCompleted={(data, error) => {
-            invite.length === 0
-              ? updateInviteList(creative, data.inviteCreateOne.recordId)
-              : removeInviteList(creative);
-          }}
-        >
-          {(mutation) => {
-            return (
-              <div>
-                <InviteButton
-                  mutation={() => {
-                    !disabled
-                      ? mutation()
-                      : disabled && invite.length > 0 && mutation();
-                  }}
-                  invite={invite.length > 0 ? true : false}
-                  disabled={invite.length > 0 ? false : disabled}
-                />
-              </div>
-            );
-          }}
-        </Mutation>
-      </div>
+      {updateInviteList && (
+        <div className={classes.actionsWrapper}>
+          <Mutation
+            mutation={CREATE_INVITE}
+            variables={{
+              _id: invite._id,
+              jobId: jobId,
+              receiverId: creative._id,
+              title: '',
+              message: '',
+            }}
+            onCompleted={(data, error) => {
+              invite.length === 0
+                ? updateInviteList(creative, data.inviteCreateOne.recordId)
+                : removeInviteList(creative);
+            }}
+          >
+            {(mutation) => {
+              return (
+                <div>
+                  <InviteButton
+                    mutation={() => {
+                      !disabled
+                        ? mutation()
+                        : disabled && invite.length > 0 && mutation();
+                    }}
+                    invite={invite.length > 0 ? true : false}
+                    disabled={invite.length > 0 ? false : disabled}
+                  />
+                </div>
+              );
+            }}
+          </Mutation>
+        </div>
+      )}
     </Card>
   );
 }

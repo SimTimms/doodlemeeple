@@ -27,7 +27,7 @@ export function PublicLayout(props) {
 
   return (
     <div>
-      <StyledNavBar title="" open={false}>
+      <StyledNavBar title="" open={false} theme={props.theme}>
         <PublicMenu history={props.history} />
       </StyledNavBar>
       <Content>

@@ -2,7 +2,8 @@ import React from 'react';
 import { Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 
-export default function FieldTitleDashboard({ name, inline, a }) {
+export default function FieldTitleDashboard({ name, ...props }) {
+  const { inline, a, menu } = props;
   const [infoOpen, setInfoOpen] = React.useState('none');
   const classes = useStyles();
   return (
@@ -38,6 +39,7 @@ export default function FieldTitleDashboard({ name, inline, a }) {
         {!inline && (
           <div className={classes.titleLine} style={{ width: '100%' }}></div>
         )}
+        {menu && menu}
       </div>
     </div>
   );

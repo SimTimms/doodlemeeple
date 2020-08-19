@@ -159,6 +159,22 @@ export const MESSAGES = gql`
   }
 `;
 
+export const PAYMENTS = gql`
+  query GetPayments($contractId: MongoID!) {
+    paymentMany(filter: { contract: $contractId }) {
+      amount
+      currency
+      status
+      paidBy {
+        _id
+      }
+      contract {
+        _id
+      }
+    }
+  }
+`;
+
 export const INVITES = gql`
   query GetInvites {
     invitesByUser {
@@ -409,6 +425,7 @@ export const PREVIEW_CONTRACT = gql`
         name
       }
       signedDate
+      createdAt
       user {
         name
         email

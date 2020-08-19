@@ -18,7 +18,6 @@ function GallerySection({ section }) {
     showreel,
     type,
   } = section;
-  console.log(section);
   return section.id === 'new' ? (
     <div>New</div>
   ) : (

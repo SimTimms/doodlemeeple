@@ -134,4 +134,18 @@ export const useStyles = makeStyles((theme) => ({
     margin: 5,
   },
   messageBoxUser: {},
+  wrapperTen: {
+    padding: 10,
+    boxSizing: 'border-box',
+    display: 'flex',
+    justifyContent: 'center',
+    background: '#efeff5',
+    position: 'fixed',
+    zIndex: 10,
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    overflow: 'auto',
+  },
 }));

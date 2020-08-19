@@ -3,23 +3,30 @@ const drawerWidth = 160;
 export const useStyles = makeStyles((theme) => ({
   root: {
     background: '#fff',
+    zIndex: 9,
+    color: theme.palette.primary.main,
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     height: 64,
+    position: 'relative',
+    paddingLeft: 48,
+    boxSizing: 'border-box',
+    boxShadow: 'none',
+    borderBottom: '1px solid #ddd',
   },
   appBarMobile: {
-    zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     height: 94,
     paddingTop: 14,
+    paddingLeft: 48,
+    boxSizing: 'border-box',
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -39,9 +46,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   appBarChild: {
     width: '100%',
+    height: '100%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   appBarChildMobile: {

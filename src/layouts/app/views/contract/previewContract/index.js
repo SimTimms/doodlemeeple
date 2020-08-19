@@ -22,38 +22,6 @@ export default function PreviewContract({ contractId, history }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div style={{ width: '700px', marginBottom: 50 }}>
-        <Row j="center" a="center">
-          <IconButton
-            color="secondary"
-            icon="request_quote"
-            title="Quote"
-            onClickEvent={() => setTabs([true, false, false])}
-            disabled={false}
-            styleOverride={null}
-            type="button"
-            iconPos="left"
-          />
-          <IconButton
-            color="secondary"
-            icon="chat"
-            title="Chat"
-            onClickEvent={() => setTabs([false, true, false])}
-            disabled={false}
-            styleOverride={null}
-            type="button"
-            iconPos="left"
-          />
-          <IconButton
-            title="Payments"
-            icon="payment"
-            disabled={false}
-            color="secondary"
-            styleOverride={null}
-            type="button"
-            onClickEvent={() => setTabs([false, false, true])}
-            iconPos="left"
-          />
-        </Row>
         <Query
           query={PREVIEW_CONTRACT}
           variables={{ contractId }}

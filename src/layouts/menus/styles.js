@@ -67,9 +67,13 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.error.main,
     color: '#fff',
   },
+  drawerRoot: {
+    paddingTop: 16,
+    position: 'fixed',
+    zIndex: 10,
+  },
   drawerOpenMobile: {
     width: '100%',
-    marginTop: 32,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,

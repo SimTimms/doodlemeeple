@@ -1,12 +1,14 @@
 import React from 'react';
 import { useStyles } from './styles';
-import { useMediaQuery } from '@material-ui/core';
+import { useMediaQuery, Typography } from '@material-ui/core';
 import clsx from 'clsx';
-import { AppMenu } from '../menus';
 import { AppDrawer } from '../menus/appDrawer';
 import { Dashboard } from './views/dashboard';
 //import { Profile } from './views/profile';
 import { EditProfile } from './views/profileEdit';
+import Help from './views/help';
+import Beta from './views/beta';
+import CreativeRoster from './views/creativeRoster';
 import { Account } from './views/account';
 import { Invites } from './views/invites';
 import { ProjectSubmitted } from './views/submitted';
@@ -20,6 +22,7 @@ import { Query } from 'react-apollo';
 import { FAVOURITES } from '../../data/queries';
 import { ContentTop, StyledNavBar } from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
+import pageHeaders from './pageHeaders';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('home');
@@ -54,19 +57,12 @@ function AppLayout(props) {
   return (
     <div className={classes.root}>
       <ToastContainer />
-      <StyledNavBar
-        open={open}
-        menu={
-          <AppMenu
-            handleDrawerOpen={handleDrawerOpen}
-            open={open}
-            history={props.history}
-          />
-        }
-      ></StyledNavBar>
-
+      <StyledNavBar open={open} history={props.history} theme={props.theme}>
+        <Typography variant="h5">{pageHeaders(page)}</Typography>
+      </StyledNavBar>
       <AppDrawer
         handleDrawerClose={handleDrawerClose}
+        handleDrawerOpen={handleDrawerOpen}
         open={open}
         history={props.history}
         page={page}
@@ -81,8 +77,18 @@ function AppLayout(props) {
         <ContentTop style={{ width: '100%' }}>
           {page === 'dashboard' ? (
             <Dashboard history={props.history} />
+          ) : page === 'help' ? (
+            <Help history={props.history} />
+          ) : page === 'beta' ? (
+            <Beta history={props.history} />
           ) : page === 'edit-profile' ? (
             <EditProfile theme={props.theme} history={props.history} />
+          ) : page === 'creative-roster' ? (
+            <CreativeRoster
+              theme={props.theme}
+              history={props.history}
+              favourites={favourites}
+            />
           ) : page === 'account' ? (
             <Account history={props.history} />
           ) : page === 'invites' ? (
@@ -130,6 +136,7 @@ function AppLayout(props) {
               profileId={pathParam}
               theme={props.theme}
               publicView={true}
+              history={props.history}
             />
           ) : page === 'pick-artist' ? (
             <PickArtist
@@ -147,6 +154,7 @@ function AppLayout(props) {
       <Query
         query={FAVOURITES}
         onCompleted={(data) => {
+          console.log(data);
           setFavourites(data.profile.favourites.map((fav) => fav.receiver._id));
         }}
         fetchPolicy="network-only"

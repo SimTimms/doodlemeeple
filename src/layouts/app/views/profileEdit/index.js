@@ -1,12 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Slide } from '@material-ui/core';
+import { Slide, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import { ProfileHeader } from './components/profileHeader';
 import {
   AddSection,
   ErrorBox,
-  ContentHeader,
   IconTitle,
   InlineHeader,
   FieldTitle,
@@ -14,6 +12,10 @@ import {
   IconButton,
   LoadIcon,
   FieldBox,
+  FieldTitleDashboard,
+  Meta,
+  Divider,
+  MenuButton,
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE } from '../../../../data/queries';
@@ -34,6 +36,7 @@ export function EditProfile({ theme, history }) {
   const [profileImg, setProfileImg] = React.useState(null);
   const [profileBGStyle, setProfileBGStyle] = React.useState([0, 0]);
   const [loading, setLoading] = React.useState(true);
+  const [changes, setChanges] = React.useState(0);
   const [errors, setError] = React.useState({
     name: null,
     email: null,
@@ -56,6 +59,9 @@ export function EditProfile({ theme, history }) {
     return filterIds.length;
   }
 
+  function addChanges() {
+    setChanges(changes + 1);
+  }
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -69,6 +75,7 @@ export function EditProfile({ theme, history }) {
           }}
           onCompleted={() => {
             toaster('Autosave');
+            setChanges(changes + 1);
           }}
           update={(store, { data: { updateUser } }) => {
             const data = store.readQuery({ query: PROFILE });
@@ -86,37 +93,30 @@ export function EditProfile({ theme, history }) {
           {(SignupMutation) => {
             return (
               <div className={classes.root}>
-                <ContentHeader
-                  title="Profile"
-                  subTitle="Tell everyone about yourself, showcase the best examples of
-                    your work"
-                  subTitleExtra={null}
-                  button={null}
+                <Divider />
+                <FieldTitleDashboard
+                  name="Profile"
+                  inline={false}
+                  a="l"
+                  menu={
+                    <MenuButton
+                      text={{
+                        name: '',
+                        color: theme.palette.primary.main,
+                        icon: <Icon>preview</Icon>,
+                        count: changes,
+                      }}
+                      onClickEvent={() => {
+                        history.push(`/preview/${userId}`);
+                      }}
+                    />
+                  }
                 />
+
                 {loading ? (
                   <LoadIcon />
                 ) : (
                   <div className={classes.root}>
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        paddingBottom: 5,
-                      }}
-                    >
-                      <IconButton
-                        disabled={false}
-                        color="secondary"
-                        icon="pageview"
-                        title="Preview"
-                        onClickEvent={() => {
-                          history.push(`/preview/${userId}`);
-                        }}
-                        styleOverride={null}
-                        type="button"
-                        iconPos="right"
-                      />
-                    </div>
                     <DMCard>
                       <InlineHeader>
                         <IconTitle icon="account_box" title="About Me" />
@@ -182,6 +182,7 @@ export function EditProfile({ theme, history }) {
                           setSections={setSections}
                           section={section}
                           autosaveIsOn={true}
+                          setChanges={addChanges}
                         />
                       ))}
                     <DMCard>

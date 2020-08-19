@@ -34,6 +34,7 @@ export default function PaymentElement({
   useEffect(() => {
     setAmount(contractData.cost);
     setVisible(display);
+    setPaymentStatus(contractData.status);
   }, [contractData, display]);
 
   return (
