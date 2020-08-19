@@ -36,36 +36,33 @@ export function Card({ img }) {
         height: 300,
         boxSizing: 'border-box',
         position: 'relative',
-        backgroundImage: `url(${img})`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center center',
-        border: '10px solid rgba(255,255,255,1)',
-        backgroundColor: 'rgba(255,255,255,0.5)',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
-      {/*
-      <animated.div
-        onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
-        onMouseLeave={() => {
-          set({ xys: [0, 0, 1] });
-        }}
-        className={clsx({
-          [classes.card]: true,
-          [classes.cardMobile]: mobile,
-        })}
+      <div
         style={{
-          transform: props.xys.interpolate(trans),
-          margin: 20,
+          backgroundImage: `url(${img})`,
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center center',
+          backgroundColor: 'rgba(255,255,255,0.5)',
+          filter: 'blur(10px)',
+          opacity: 0.8,
           height: '100%',
+          width: '100%',
+          position: 'absolute',
         }}
-      >
-        <img
-          src={img}
-          style={{ width: '100%', margin: 0 }}
-          alt="Gallery Card"
-        />
-      </animated.div>*/}
+      ></div>
+      <img
+        src={img}
+        style={{
+          maxHeight: '100%',
+          maxWidth: '100%',
+          zIndex: 2,
+          position: 'relative',
+        }}
+      />
     </div>
   );
 }
