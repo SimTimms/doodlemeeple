@@ -6,7 +6,6 @@ import { ProfileCard } from '../../../../../components';
 
 export default function Creatives({ favourites, history, ...props }) {
   const classes = useStyles();
-  const { job, removeInviteList, updateInviteList, inviteList } = props;
   return (
     <Query query={CREATIVES} fetchPolicy="network-only">
       {({ data }) => {
