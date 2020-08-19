@@ -29,7 +29,14 @@ export default function MenuButton({ text, onClickEvent }) {
             border: `1px solid ${text.color}`,
           }}
         >
-          <ListItemIcon className={classes.iconIcon}>{text.icon}</ListItemIcon>
+          <ListItemIcon
+            className={clsx({
+              [classes.iconIcon]: true,
+              [classes.dark]: text.color === 'white',
+            })}
+          >
+            {text.icon}
+          </ListItemIcon>
           {text.count !== null && text.count > 0 && (
             <Typography
               variant="body1"

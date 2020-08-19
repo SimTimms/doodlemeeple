@@ -58,7 +58,7 @@ function AppLayout(props) {
     name: 'Help',
     icon: <Icon>contact_support</Icon>,
     link: () => props.history.push('/app/help'),
-    color: props.theme.palette.primary.main,
+    color: 'white',
     count: 0,
   };
   const alphaButton = {
@@ -72,7 +72,7 @@ function AppLayout(props) {
     name: 'Creatives',
     icon: <Icon>brush</Icon>,
     link: () => props.history.push('/app/creative-roster'),
-    color: props.theme.palette.secondary.main,
+    color: 'white',
     count: 0,
   };
 
@@ -130,7 +130,7 @@ function AppLayout(props) {
           ) : page === 'games' ? (
             <Games history={props.history} />
           ) : page === 'jobs' ? (
-            <Jobs history={props.history} />
+            <Jobs history={props.history} theme={props.theme} />
           ) : page === 'edit-game' ? (
             <EditGame
               theme={props.theme}

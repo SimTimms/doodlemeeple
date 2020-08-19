@@ -100,7 +100,7 @@ export function JobComponent({ job, game, history }) {
             ? ''
             : 'Edit'
         }
-        color="primary"
+        color="text-dark"
         type="button"
         iconPos="right"
         icon={

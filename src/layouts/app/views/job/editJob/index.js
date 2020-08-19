@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Slide, Typography } from '@material-ui/core';
+import { Card, Slide, Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   ContentHeader,
@@ -10,6 +10,9 @@ import {
   Column,
   UnlockInfo,
   Row,
+  Divider,
+  FieldTitleDashboard,
+  MenuButton,
 } from '../../../../../components';
 import { Query } from 'react-apollo';
 import { Mutation } from 'react-apollo';
@@ -49,16 +52,19 @@ export default function EditJob({
     submitted: false,
   });
   const [screen, setScreen] = React.useState(1);
+  const [count, setCount] = React.useState(0);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <ContentHeader
-          title="Project Details"
-          subTitle="Create a new project"
-          subTitleExtra={null}
-          button={null}
+        <Divider />
+        <FieldTitleDashboard
+          name="New Project"
+          inline={false}
+          a="l"
+          menu={null}
         />
+        <Divider />
         {loading ? (
           <LoadIcon />
         ) : jobId === 'new' ? (
@@ -298,55 +304,6 @@ export default function EditJob({
                             </Row>
                           </Column>
                         )}
-                      </div>
-                    </Card>
-                  )}
-
-                  {job._id !== 'new' && screen === 1 && (
-                    <Card className={classes.card} style={{ paddingBottom: 0 }}>
-                      <div
-                        style={{
-                          padding: 10,
-                          background: '#eee',
-                        }}
-                      >
-                        <div>
-                          <Mutation
-                            mutation={REMOVE_JOB}
-                            variables={{
-                              id: job._id,
-                            }}
-                            onCompleted={(data) => {
-                              toaster('Deleted');
-                              history.replace(`/app/jobs`);
-                            }}
-                            onError={(error) => {
-                              const msg = errorMessages(error.toString());
-                              setDeleteError(msg);
-                              toaster('Error');
-                            }}
-                          >
-                            {(mutation) => {
-                              return (
-                                <div>
-                                  {deleteError && (
-                                    <Typography
-                                      variant="body1"
-                                      component="p"
-                                      className={classes.error}
-                                    >
-                                      {deleteError}
-                                    </Typography>
-                                  )}
-                                  <DeleteButton
-                                    mutation={mutation}
-                                    str="Delete this game?"
-                                  />
-                                </div>
-                              );
-                            }}
-                          </Mutation>
-                        </div>
                       </div>
                     </Card>
                   )}
