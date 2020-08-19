@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStyles } from './styles';
-import { useMediaQuery, Typography } from '@material-ui/core';
+import { useMediaQuery, Typography, Icon } from '@material-ui/core';
 import clsx from 'clsx';
 import { AppDrawer } from '../menus/appDrawer';
 import { Dashboard } from './views/dashboard';
@@ -20,7 +20,7 @@ import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
 import { FAVOURITES } from '../../data/queries';
-import { ContentTop, StyledNavBar } from '../../components';
+import { ContentTop, StyledNavBar, MenuButton, Row } from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 import pageHeaders from './pageHeaders';
 
@@ -54,11 +54,43 @@ function AppLayout(props) {
     setOpen(false);
   };
 
+  const helpButton = {
+    name: 'Help',
+    icon: <Icon>contact_support</Icon>,
+    link: () => props.history.push('/app/help'),
+    color: props.theme.palette.primary.main,
+    count: 0,
+  };
+  const alphaButton = {
+    name: 'Closed Beta',
+    icon: <Icon>construction</Icon>,
+    link: () => props.history.push('/app/beta'),
+    color: props.theme.palette.error.main,
+    count: 0,
+  };
+  const creativeRoster = {
+    name: 'Creatives',
+    icon: <Icon>brush</Icon>,
+    link: () => props.history.push('/app/creative-roster'),
+    color: props.theme.palette.secondary.main,
+    count: 0,
+  };
+
   return (
     <div className={classes.root}>
       <ToastContainer />
       <StyledNavBar open={open} history={props.history} theme={props.theme}>
         <Typography variant="h5">{pageHeaders(page)}</Typography>
+        <div>
+          <Row>
+            <MenuButton text={alphaButton} onClickEvent={alphaButton.link} />
+            <MenuButton
+              text={creativeRoster}
+              onClickEvent={creativeRoster.link}
+            />
+            <MenuButton text={helpButton} onClickEvent={helpButton.link} />
+          </Row>
+        </div>
       </StyledNavBar>
       <AppDrawer
         handleDrawerClose={handleDrawerClose}

@@ -18,6 +18,9 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: 'none',
     borderBottom: '1px solid #ddd',
   },
+  appBarNoSidebar: {
+    paddingLeft: 0,
+  },
   appBarMobile: {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
@@ -25,7 +28,6 @@ export const useStyles = makeStyles((theme) => ({
     }),
     height: 94,
     paddingTop: 14,
-    paddingLeft: 48,
     boxSizing: 'border-box',
   },
   appBarShift: {
