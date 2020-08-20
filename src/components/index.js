@@ -33,6 +33,7 @@ import CreateMessage from './buttons/createMessage';
 import IconButton from './buttons/iconButton';
 import MenuButton from './buttons/menuButton';
 import FieldTitle from './fieldTitle';
+import { JobComponent, InviteComponent } from './jobComponent';
 import FieldTitleDashboard from './fieldTitleDashboard';
 import FieldBox from './fieldBox';
 import InfoBox from './infoBox';
@@ -54,6 +55,8 @@ import ViewContractButton from './viewContractButton';
 import SubmitContractButton from './submitContractButton';
 import NoticeBox from './noticeBox';
 import ContractComponent from './contract';
+import CardComponent from './cardComponent';
+import ProfileAvatar from './profileAvatar';
 import FeatureCard from './featureCard';
 import FeatureCardInvite from './featureCardInvite';
 import FeatureCardHorizontal from './featureCardHorizontal';
@@ -76,6 +79,7 @@ import {
 import { Column, Row } from './blocks';
 
 export {
+  ProfileAvatar,
   UnlockInfoReverse,
   Column,
   Row,
@@ -90,6 +94,7 @@ export {
   FeatureCard,
   TextArray,
   FieldBox,
+  CardComponent,
   InfoBox,
   Text,
   UnlockInfo,
@@ -153,4 +158,6 @@ export {
   HeaderThree,
   PaymentElement,
   MenuButton,
+  JobComponent,
+  InviteComponent,
 };

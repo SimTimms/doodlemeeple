@@ -21,9 +21,12 @@ export default function MenuButton({ text, onClickEvent }) {
         onClickEvent();
       }}
     >
-      <ListItem button style={{ paddingLeft: 7 }}>
+      <ListItem button style={{ paddingLeft: 5, paddingRight: 5 }}>
         <div
-          className={classes.iconButton}
+          className={clsx({
+            [classes.iconButton]: true,
+            [classes.iconButtonOnly]: text.name === '',
+          })}
           style={{
             background: text.color,
             border: `1px solid ${text.color}`,

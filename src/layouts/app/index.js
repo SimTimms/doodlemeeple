@@ -58,21 +58,21 @@ function AppLayout(props) {
     name: 'Help',
     icon: <Icon>contact_support</Icon>,
     link: () => props.history.push('/app/help'),
-    color: 'white',
+    color: props.theme.palette.secondary.main,
     count: 0,
   };
   const alphaButton = {
     name: 'Closed Beta',
     icon: <Icon>construction</Icon>,
     link: () => props.history.push('/app/beta'),
-    color: props.theme.palette.error.main,
+    color: props.theme.palette.secondary.main,
     count: 0,
   };
   const creativeRoster = {
     name: 'Creatives',
     icon: <Icon>brush</Icon>,
     link: () => props.history.push('/app/creative-roster'),
-    color: 'white',
+    color: props.theme.palette.secondary.main,
     count: 0,
   };
 
@@ -124,7 +124,7 @@ function AppLayout(props) {
           ) : page === 'account' ? (
             <Account history={props.history} />
           ) : page === 'invites' ? (
-            <Invites history={props.history} />
+            <Invites history={props.history} theme={props.theme} />
           ) : page === 'submitted' ? (
             <ProjectSubmitted history={props.history} />
           ) : page === 'games' ? (

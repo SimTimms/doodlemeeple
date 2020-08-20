@@ -1,6 +1,5 @@
 import React from 'react';
 import { Slide, Icon } from '@material-ui/core';
-import { JobComponent, EmptyJobComponent } from './components/jobComponent';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { JOBS } from '../../../../../data/queries';
@@ -10,12 +9,13 @@ import {
   FieldTitleDashboard,
   MenuButton,
   Divider,
+  JobComponent,
 } from '../../../../../components';
 
 export default function Jobs({ history, theme }) {
   const classes = useStyles();
   const [loading, setLoading] = React.useState(true);
-
+  const [drafts, setDrafts] = React.useState([]);
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -27,7 +27,7 @@ export default function Jobs({ history, theme }) {
           menu={
             <MenuButton
               text={{
-                name: 'Create',
+                name: '',
                 color: theme.palette.primary.main,
                 icon: <Icon>add</Icon>,
                 count: 0,
@@ -44,7 +44,46 @@ export default function Jobs({ history, theme }) {
             query={JOBS}
             fetchPolicy="network-only"
             variables={{ status: '' }}
-            onCompleted={() => setLoading(false)}
+            onCompleted={() => {
+              setLoading(false);
+            }}
+          >
+            {({ data }) => {
+              const activeJobs = data
+                ? data.jobsByUser.map((job, index) => {
+                    return (
+                      job.submitted && (
+                        <JobComponent
+                          key={`project_${index}`}
+                          job={job}
+                          game={job.game ? job.game : { name: '' }}
+                          history={history}
+                        />
+                      )
+                    );
+                  })
+                : null;
+
+              return activeJobs ? (
+                activeJobs.length > 0 ? (
+                  <Column a="center" j="flex-start">
+                    <Divider />
+                    {activeJobs}
+                  </Column>
+                ) : null
+              ) : null;
+            }}
+          </Query>
+        </Column>
+        <Column a="center" j="flex-start">
+          {loading && <LoadIcon />}
+          <Query
+            query={JOBS}
+            fetchPolicy="network-only"
+            variables={{ status: null }}
+            onCompleted={() => {
+              setLoading(false);
+            }}
           >
             {({ data }) => {
               const activeJobs = data
@@ -63,6 +102,8 @@ export default function Jobs({ history, theme }) {
               return activeJobs ? (
                 activeJobs.length > 0 ? (
                   <Column a="center" j="flex-start">
+                    <Divider />
+                    <FieldTitleDashboard name="Drafts" inline={false} a="l" />
                     <Divider />
                     {activeJobs}
                   </Column>

@@ -2,8 +2,6 @@ import React from 'react';
 import { Card, Slide, Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
-  ContentHeader,
-  DeleteButton,
   IconButton,
   LoadIcon,
   FieldBox,
@@ -12,7 +10,7 @@ import {
   Row,
   Divider,
   FieldTitleDashboard,
-  MenuButton,
+  DeleteButton,
 } from '../../../../../components';
 import { Query } from 'react-apollo';
 import { Mutation } from 'react-apollo';
@@ -52,18 +50,33 @@ export default function EditJob({
     submitted: false,
   });
   const [screen, setScreen] = React.useState(1);
-  const [count, setCount] = React.useState(0);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <Divider />
-        <FieldTitleDashboard
-          name="New Project"
-          inline={false}
-          a="l"
-          menu={null}
-        />
+        <Mutation
+          mutation={REMOVE_JOB}
+          variables={{
+            id: jobId,
+          }}
+          onCompleted={(data) => {
+            toaster('Deleted');
+            history.replace(`/app/jobs`);
+          }}
+        >
+          {(mutation) => {
+            return (
+              <FieldTitleDashboard
+                name="Edit Project"
+                inline={false}
+                a="l"
+                menu={<DeleteButton mutation={mutation} str="" />}
+              />
+            );
+          }}
+        </Mutation>
+
         <Divider />
         {loading ? (
           <LoadIcon />
@@ -239,8 +252,6 @@ export default function EditJob({
                                 setScreen(2);
                               }}
                               styleOverride={{ marginLeft: 10 }}
-                              type="button"
-                              iconPos="right"
                             />
                           </Column>
                         ) : (
@@ -337,23 +348,6 @@ export default function EditJob({
             }}
           </Query>
         )}
-        {/*
-        <Query
-          query={GAMES}
-          fetchPolicy="network-only"
-          onCompleted={(data) => {
-            data.gamesByUser.length > 0 && setGames(data.gamesByUser);
-            data.gamesByUser.length > 0 &&
-              setJob({
-                ...job,
-                gameId: job.gameId === '' ? data.gamesByUser[0].id : job.gameId,
-              });
-          }}
-        >
-          {({ data }) => {
-            return null;
-          }}
-        </Query>*/}
       </div>
     </Slide>
   );

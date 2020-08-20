@@ -11,17 +11,15 @@ export const useStyles = makeStyles((theme) => ({
     minHeight: 32,
     borderRadius: '50%',
     marginRight: 10,
-    boxShadow:
-      'inset 1px 1px 1px rgba(255,255,255,0.4), inset -1px -1px 1px rgba(0,0,0,0.2)',
     position: 'relative',
     '&:hover': {
-      background: theme.palette.primary.dark,
+      background: 'theme.palette.primary.dark',
     },
     '&:visited': {
-      background: 'red',
+      background: 'none',
     },
   },
-
+  iconButtonOnly: { marginRight: 0 },
   iconIcon: {
     display: 'flex',
     alignItems: 'center',

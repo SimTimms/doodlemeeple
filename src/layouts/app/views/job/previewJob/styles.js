@@ -141,7 +141,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     background: '#efeff5',
     position: 'fixed',
-    zIndex: 10,
+    zIndex: 1,
     top: 0,
     left: 0,
     width: '100%',

@@ -1,18 +1,17 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
-import Card from '@material-ui/core/Card';
 import { useStyles } from './styles';
 import Icon from '@material-ui/core/Icon';
-import { IconButton } from '../../../../../../../components';
+import { IconButton, CardComponent } from '../';
 import clsx from 'clsx';
 
-export function JobComponent({ job, game, history }) {
+export default function JobComponent({ job, game, history }) {
   const classes = useStyles();
   const contractsArr = job.contracts.map((contract) => contract.user._id);
 
   return (
-    <Card className={classes.card} style={{ paddingLeft: 10 }}>
+    <CardComponent>
       <div
         style={{
           display: 'flex',
@@ -118,7 +117,7 @@ export function JobComponent({ job, game, history }) {
             : history.push(`/app/edit-job/${job._id}`);
         }}
       />
-    </Card>
+    </CardComponent>
   );
 }
 
