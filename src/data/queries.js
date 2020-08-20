@@ -197,6 +197,29 @@ export const INVITES = gql`
   }
 `;
 
+export const INVITE_BY_ID = gql`
+  query inviteById($_id: MongoID!) {
+    inviteById(_id: $_id) {
+      _id
+      status
+      receiver {
+        name
+      }
+      user {
+        _id
+        name
+        profileImg
+      }
+      job {
+        _id
+        name
+        summary
+        submitted
+      }
+    }
+  }
+`;
+
 export const JOB = gql`
   query GetJob($jobId: MongoID!) {
     jobById(_id: $jobId) {

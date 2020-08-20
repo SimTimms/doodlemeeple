@@ -192,8 +192,10 @@ export const REMOVE_CONTRACT = gql`
 `;
 
 export const DECLINE_INVITE = gql`
-  mutation DeclineInvite($id: String!) {
-    declineInvite(id: $id)
+  mutation DeclineInvite($id: MongoID!) {
+    declineInvite(_id: $id) {
+      _id
+    }
   }
 `;
 

@@ -18,6 +18,7 @@ export default function CreativeView({
   setConversationUser,
   setChatOpen,
   chatOpen,
+  displayChat,
 }) {
   const classes = useStyles();
 
@@ -41,20 +42,21 @@ export default function CreativeView({
 
                   <Typography>{job.user.name}</Typography>
                 </Row>
-
-                <IconButton
-                  disabled={false}
-                  color="primary"
-                  icon="chat"
-                  title="Chat"
-                  onClickEvent={() => {
-                    setConversationUser(job.user);
-                    setChatOpen(chatOpen ? false : true);
-                  }}
-                  styleOverride={null}
-                  type="button"
-                  iconPos="left"
-                />
+                {displayChat && (
+                  <IconButton
+                    disabled={false}
+                    color="primary"
+                    icon="chat"
+                    title="Chat"
+                    onClickEvent={() => {
+                      setConversationUser(job.user);
+                      setChatOpen(chatOpen ? false : true);
+                    }}
+                    styleOverride={null}
+                    type="button"
+                    iconPos="left"
+                  />
+                )}
               </Row>
             </CardComponent>
           </Column>

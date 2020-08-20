@@ -39,7 +39,6 @@ export default function InviteComponent({ removeInvite, invite, history }) {
           </Typography>
         </Column>
       </Row>
-
       <IconButton
         disabled={false}
         title={'View'}
@@ -55,7 +54,7 @@ export default function InviteComponent({ removeInvite, invite, history }) {
         }
         styleOverride={{ marginLeft: 30 }}
         onClickEvent={() => {
-          history.push(`/app/view-job/${invite.job._id}`);
+          history.push(`/app/view-job/${invite.job._id}/${invite._id}`);
         }}
       />
     </CardComponent>
