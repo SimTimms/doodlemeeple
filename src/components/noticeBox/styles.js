@@ -5,14 +5,14 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     color: '#fff',
     textAlign: 'center',
-    padding: '15px 0 15px 0',
+    padding: 15,
+    boxSizing: 'border-box',
   },
   primary: {
     width: '100%',
     background: theme.palette.primary.main,
     color: '#fff',
     textAlign: 'center',
-    padding: '15px 0 15px 0',
     marginBottom: 20,
   },
   warning: {
@@ -20,7 +20,6 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.error.main,
     color: '#fff',
     textAlign: 'center',
-    padding: '15px 0 15px 0',
     marginBottom: 20,
   },
   secondary: {
@@ -28,7 +27,6 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.secondary.main,
     color: '#fff',
     textAlign: 'center',
-    padding: '15px 0 15px 0',
     marginBottom: 20,
   },
 }));

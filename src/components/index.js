@@ -12,6 +12,7 @@ import ContentHeader from './headers/contentHeader';
 import StripeCheckout from './stripeCheckout';
 import Payments from './payments';
 import MessageComponent from './messageComponent';
+import PaymentElement from './paymentElement';
 import CurrencySelector from './currencySelector';
 import DeclineInvite from './buttons/declineInvite';
 import TabButton from './buttons/tabButton';
@@ -30,7 +31,9 @@ import FavouriteButton from './buttons/favouriteButton';
 import InviteButton from './buttons/inviteButton';
 import CreateMessage from './buttons/createMessage';
 import IconButton from './buttons/iconButton';
+import MenuButton from './buttons/menuButton';
 import FieldTitle from './fieldTitle';
+import { JobComponent, InviteComponent } from './jobComponent';
 import FieldTitleDashboard from './fieldTitleDashboard';
 import FieldBox from './fieldBox';
 import InfoBox from './infoBox';
@@ -51,7 +54,9 @@ import EditContractButton from './editContractButton';
 import ViewContractButton from './viewContractButton';
 import SubmitContractButton from './submitContractButton';
 import NoticeBox from './noticeBox';
-import Contract from './contract';
+import ContractComponent from './contract';
+import CardComponent from './cardComponent';
+import ProfileAvatar from './profileAvatar';
 import FeatureCard from './featureCard';
 import FeatureCardInvite from './featureCardInvite';
 import FeatureCardHorizontal from './featureCardHorizontal';
@@ -74,6 +79,7 @@ import {
 import { Column, Row } from './blocks';
 
 export {
+  ProfileAvatar,
   UnlockInfoReverse,
   Column,
   Row,
@@ -88,6 +94,7 @@ export {
   FeatureCard,
   TextArray,
   FieldBox,
+  CardComponent,
   InfoBox,
   Text,
   UnlockInfo,
@@ -97,7 +104,7 @@ export {
   FeatureCardHorizontal,
   SubmitContractButton,
   NoticeBox,
-  Contract,
+  ContractComponent,
   ViewContractButton,
   EditContractButton,
   ContractSummary,
@@ -149,4 +156,8 @@ export {
   Payments,
   BorderBox,
   HeaderThree,
+  PaymentElement,
+  MenuButton,
+  JobComponent,
+  InviteComponent,
 };

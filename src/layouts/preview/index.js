@@ -14,14 +14,13 @@ function PreviewLayout(props) {
 
   return (
     <div>
-      <StyledNavBar title="" open={false}>
-        <PublicMenu history={props.history} />
-      </StyledNavBar>
+      <StyledNavBar title="" open={false} theme={props.theme}></StyledNavBar>
       <Content>
         <PreviewProfile
           profileId={pathParam}
           theme={props.theme}
           publicView={props.publicView}
+          history={props.history}
         />
       </Content>
     </div>

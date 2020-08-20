@@ -1,12 +1,17 @@
 import React from 'react';
-import { Typography, Slide } from '@material-ui/core';
-import { InviteComponent } from './components/inviteComponent';
+import { Typography, Slide, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { INVITES } from '../../../../data/queries';
-import { ContentHeader, IconButton, Column } from '../../../../components';
+import {
+  FieldTitleDashboard,
+  IconButton,
+  Column,
+  Divider,
+  InviteComponent,
+} from '../../../../components';
 
-export function Invites({ history }) {
+export function Invites({ history, theme }) {
   const classes = useStyles();
   const [inviteArray, setInviteArray] = React.useState([]);
 
@@ -18,12 +23,9 @@ export function Invites({ history }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <ContentHeader
-          title="Invites"
-          subTitle=""
-          subTitleExtra={null}
-          button={null}
-        />
+        <Divider />
+        <FieldTitleDashboard name="Invites" inline={false} a="l" />
+        <Divider />
         <div className={classes.cardGrid}>
           {inviteArray.map((invite, index) => {
             return (

@@ -4,20 +4,18 @@ import { useStyles } from './styles';
 import { CurrencySelector } from '../';
 import clsx from 'clsx';
 
-export default function FieldBox({
-  title,
-  value,
-  onChangeEvent,
-  maxLength,
-  replaceMode,
-  placeholder,
-  info,
-  warning,
-  size,
-  multiline,
-}) {
+export default function FieldBox({ title, value, onChangeEvent, ...props }) {
   const [infoOpen, setInfoOpen] = React.useState(false);
   const classes = useStyles();
+  const {
+    maxLength,
+    replaceMode,
+    placeholder,
+    info,
+    warning,
+    size,
+    multiline,
+  } = props;
   value = value ? value : '';
   return (
     <div

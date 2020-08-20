@@ -2,17 +2,15 @@ import React from 'react';
 import moment from 'moment';
 import { useStyles } from './styles';
 import { NoticeBox } from '../';
-import { HeaderThree, Text, Column, Divider, TextLeft } from '../';
-import Cookies from 'js-cookie';
+import { HeaderThree, Column, Divider, TextLeft } from '../';
 import { timeDifferenceForDate } from '../../utils/dates';
 
-export default function ContractSummary({ contractData }) {
+export default function ContractSummary({ contractData, contractStatus }) {
   let paymentTermsSum = 100;
   const classes = useStyles();
-  const userId = Cookies.get('userId');
   return (
     <div className={classes.root}>
-      {contractData.status === 'accepted' && (
+      {contractStatus === 'accepted' && (
         <NoticeBox
           title="Accepted"
           color="secondary"
@@ -20,26 +18,25 @@ export default function ContractSummary({ contractData }) {
         ${moment(contractData.signedDate).format('LLLL')}`}
         />
       )}
-      {contractData.status === 'submitted' && (
+      {contractStatus === 'submitted' && (
         <NoticeBox
           title="Submitted"
           color="secondary"
           subTitle="This quote has been submitted to the Client"
         />
       )}
-      {contractData.status === '' ||
-        (contractData.status === 'preview' && (
+      {contractStatus === '' ||
+        (contractStatus === 'preview' && (
           <NoticeBox
             title="Draft"
             color="primary"
             subTitle="This quote has not been submitted"
           />
         ))}
-      {contractData.status === 'declined' && (
+      {contractStatus === 'declined' && (
         <NoticeBox
           title="Declined"
-          subTitle={`This quote was declined by the Client on 
-            ${moment(contractData.signedDate).format('LLLL')}`}
+          subTitle={`This quote was declined by the Client`}
           color="warning"
         />
       )}

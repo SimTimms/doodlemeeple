@@ -3,11 +3,12 @@ import LoginCard from './views/LoginCard';
 import Registry from './views/register';
 import { Content } from '../../components';
 import { StyledNavBar, Footer } from '../../components';
-import { PublicMenu, PublicFooterMenu } from '../menus';
+import { PublicFooterMenu } from '../menus';
 import { PasswordForgot } from './views/passwordForgot';
 import { PasswordReset } from './views/passwordReset';
 import Deleted from './views/deleted';
 import { useStyles } from './styles';
+import logo from '../../assets/logo.svg';
 
 export function PublicLayout(props) {
   const [page, setPage] = React.useState('home');
@@ -27,8 +28,14 @@ export function PublicLayout(props) {
 
   return (
     <div>
-      <StyledNavBar title="" open={false}>
-        <PublicMenu history={props.history} />
+      <StyledNavBar
+        open={false}
+        history={props.history}
+        theme={props.theme}
+        center={true}
+        sidebarMissing={true}
+      >
+        <img src={logo} style={{ height: 40 }} />
       </StyledNavBar>
       <Content>
         {page === 'login' ? (

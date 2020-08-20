@@ -1,14 +1,18 @@
 import React from 'react';
 
-export function Column({ children, a, j }) {
+export function Column(props) {
+  const { children, a, j } = props;
+  const align = a ? a : 'center';
+  const justify = j ? j : 'center';
+
   return (
     <div
       style={{
         display: 'flex',
         width: '100%',
         flexDirection: 'column',
-        alignItems: a ? a : 'center',
-        justifyContent: j ? j : 'flex-start',
+        alignItems: align,
+        justifyContent: justify,
       }}
     >
       {children}
@@ -16,15 +20,19 @@ export function Column({ children, a, j }) {
   );
 }
 
-export function Row({ children, a, j }) {
+export function Row(props) {
+  const { children, a, j } = props;
+  const align = a ? a : 'center';
+  const justify = j ? j : 'center';
+
   return (
     <div
       style={{
         display: 'flex',
         width: '100%',
         flexDirection: 'row',
-        alignItems: a ? a : 'center',
-        justifyContent: j ? j : 'flex-start',
+        alignItems: align,
+        justifyContent: justify,
       }}
     >
       {children}

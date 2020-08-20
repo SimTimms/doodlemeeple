@@ -15,17 +15,11 @@ export default function DeleteButton({ mutation, str }) {
         variant="contained"
         className={classes.deleteButtonConfirmYes}
       >
-        <Icon style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)' }}>
-          warning
-        </Icon>
         <Icon
           className={classes.deleteButtonIcon}
           style={{ fontSize: 18, color: '#fff' }}
         >
           delete
-        </Icon>
-        <Icon style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)' }}>
-          warning
         </Icon>
       </Button>
       <Button
@@ -35,7 +29,12 @@ export default function DeleteButton({ mutation, str }) {
         variant="contained"
         className={classes.deleteButtonConfirmNo}
       >
-        Cancel
+        <Icon
+          className={classes.deleteButtonIcon}
+          style={{ fontSize: 18, color: '#fff', background: 'rgba(0,0,0,0)' }}
+        >
+          close
+        </Icon>
       </Button>
     </div>
   ) : (

@@ -1,15 +1,16 @@
 import React from 'react';
-import { Card, Slide, Typography } from '@material-ui/core';
+import { Card, Slide, Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
-  ContentHeader,
-  DeleteButton,
   IconButton,
   LoadIcon,
   FieldBox,
   Column,
   UnlockInfo,
   Row,
+  Divider,
+  FieldTitleDashboard,
+  DeleteButton,
 } from '../../../../../components';
 import { Query } from 'react-apollo';
 import { Mutation } from 'react-apollo';
@@ -53,12 +54,30 @@ export default function EditJob({
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <ContentHeader
-          title="Project Details"
-          subTitle="Create a new project"
-          subTitleExtra={null}
-          button={null}
-        />
+        <Divider />
+        <Mutation
+          mutation={REMOVE_JOB}
+          variables={{
+            id: jobId,
+          }}
+          onCompleted={(data) => {
+            toaster('Deleted');
+            history.replace(`/app/jobs`);
+          }}
+        >
+          {(mutation) => {
+            return (
+              <FieldTitleDashboard
+                name="Edit Project"
+                inline={false}
+                a="l"
+                menu={<DeleteButton mutation={mutation} str="" />}
+              />
+            );
+          }}
+        </Mutation>
+
+        <Divider />
         {loading ? (
           <LoadIcon />
         ) : jobId === 'new' ? (
@@ -233,8 +252,6 @@ export default function EditJob({
                                 setScreen(2);
                               }}
                               styleOverride={{ marginLeft: 10 }}
-                              type="button"
-                              iconPos="right"
                             />
                           </Column>
                         ) : (
@@ -301,55 +318,6 @@ export default function EditJob({
                       </div>
                     </Card>
                   )}
-
-                  {job._id !== 'new' && screen === 1 && (
-                    <Card className={classes.card} style={{ paddingBottom: 0 }}>
-                      <div
-                        style={{
-                          padding: 10,
-                          background: '#eee',
-                        }}
-                      >
-                        <div>
-                          <Mutation
-                            mutation={REMOVE_JOB}
-                            variables={{
-                              id: job._id,
-                            }}
-                            onCompleted={(data) => {
-                              toaster('Deleted');
-                              history.replace(`/app/jobs`);
-                            }}
-                            onError={(error) => {
-                              const msg = errorMessages(error.toString());
-                              setDeleteError(msg);
-                              toaster('Error');
-                            }}
-                          >
-                            {(mutation) => {
-                              return (
-                                <div>
-                                  {deleteError && (
-                                    <Typography
-                                      variant="body1"
-                                      component="p"
-                                      className={classes.error}
-                                    >
-                                      {deleteError}
-                                    </Typography>
-                                  )}
-                                  <DeleteButton
-                                    mutation={mutation}
-                                    str="Delete this game?"
-                                  />
-                                </div>
-                              );
-                            }}
-                          </Mutation>
-                        </div>
-                      </div>
-                    </Card>
-                  )}
                 </div>
               );
             }}
@@ -380,23 +348,6 @@ export default function EditJob({
             }}
           </Query>
         )}
-        {/*
-        <Query
-          query={GAMES}
-          fetchPolicy="network-only"
-          onCompleted={(data) => {
-            data.gamesByUser.length > 0 && setGames(data.gamesByUser);
-            data.gamesByUser.length > 0 &&
-              setJob({
-                ...job,
-                gameId: job.gameId === '' ? data.gamesByUser[0].id : job.gameId,
-              });
-          }}
-        >
-          {({ data }) => {
-            return null;
-          }}
-        </Query>*/}
       </div>
     </Slide>
   );

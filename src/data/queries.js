@@ -159,6 +159,22 @@ export const MESSAGES = gql`
   }
 `;
 
+export const PAYMENTS = gql`
+  query GetPayments($contractId: MongoID!) {
+    paymentMany(filter: { contract: $contractId }) {
+      amount
+      currency
+      status
+      paidBy {
+        _id
+      }
+      contract {
+        _id
+      }
+    }
+  }
+`;
+
 export const INVITES = gql`
   query GetInvites {
     invitesByUser {
@@ -187,6 +203,10 @@ export const JOB = gql`
       _id
       name
       keywords
+      assignedCreative {
+        _id
+        name
+      }
       invites {
         status
         receiver {
@@ -233,8 +253,8 @@ export const JOB = gql`
 `;
 
 export const JOBS = gql`
-  query GetJobs {
-    jobsByUser {
+  query GetJobs($status: String) {
+    jobsByUser(status: $status) {
       _id
       name
       submitted
@@ -405,6 +425,7 @@ export const PREVIEW_CONTRACT = gql`
         name
       }
       signedDate
+      createdAt
       user {
         name
         email
@@ -439,6 +460,7 @@ export const PREVIEW_CONTRACT = gql`
         user {
           _id
           email
+          name
         }
       }
       paymentTerms {

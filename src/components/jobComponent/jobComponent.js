@@ -1,17 +1,17 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
-import Card from '@material-ui/core/Card';
 import { useStyles } from './styles';
 import Icon from '@material-ui/core/Icon';
-import { IconButton } from '../../../../../../../components';
+import { IconButton, CardComponent } from '../';
+import clsx from 'clsx';
 
-export function JobComponent({ job, game, history }) {
+export default function JobComponent({ job, game, history }) {
   const classes = useStyles();
   const contractsArr = job.contracts.map((contract) => contract.user._id);
 
   return (
-    <Card className={classes.card} style={{ paddingLeft: 10 }}>
+    <CardComponent>
       <div
         style={{
           display: 'flex',
@@ -42,17 +42,25 @@ export function JobComponent({ job, game, history }) {
           variant="body2"
           component="p"
           style={{ width: '100%' }}
-          className={classes.cardSummary}
+          className={clsx({
+            [classes.cardSummary]: true,
+            [classes.cardSummaryWarning]: job.submitted === 'accepted',
+            [classes.cardSummaryGood]:
+              job.submitted === 'paid' || job.submitted === 'submitted',
+          })}
         >
           {job.submitted === 'submitted'
-            ? 'Submitted'
+            ? 'Invites sent'
             : job.submitted === 'closed'
-            ? 'closed'
+            ? 'Closed'
+            : job.submitted === 'accepted'
+            ? 'Awaiting Payment'
+            : job.submitted === 'paid'
+            ? 'Paid & Active'
             : 'Draft'}
         </Typography>
       </div>
       {job.invites.map((invite, index) => {
-        console.log(invite, contractsArr);
         return (
           <div
             key={`invite_${index}`}
@@ -88,14 +96,18 @@ export function JobComponent({ job, game, history }) {
         title={
           job.submitted === 'submitted' || job.submitted === 'closed'
             ? 'View'
+            : job.submitted === 'accepted' || job.submitted === 'paid'
+            ? ''
             : 'Edit'
         }
-        color="primary"
+        color="text-dark"
         type="button"
         iconPos="right"
         icon={
           job.submitted === 'submitted' || job.submitted === 'closed'
             ? 'preview'
+            : job.submitted === 'accepted' || job.submitted === 'paid'
+            ? 'chevron_right'
             : 'edit'
         }
         styleOverride={{ marginRight: 10, marginLeft: 30 }}
@@ -105,7 +117,7 @@ export function JobComponent({ job, game, history }) {
             : history.push(`/app/edit-job/${job._id}`);
         }}
       />
-    </Card>
+    </CardComponent>
   );
 }
 

@@ -8,8 +8,12 @@ import {
   TableRow,
 } from '@material-ui/core';
 import moment from 'moment';
+import { useStyles } from './styles';
+import clsx from 'clsx';
 
 export default function Payments({ data }) {
+  const classes = useStyles();
+
   return (
     <TableContainer>
       <Table aria-label="simple table">
@@ -29,15 +33,15 @@ export default function Payments({ data }) {
                 </TableCell>
                 <TableCell align="right">
                   <div
-                    style={{
-                      background: '#ccc',
-                      color: '#fff',
-                      textAlign: 'center',
-                      paddingTop: 3,
-                      paddingBottom: 3,
-                      borderRadius: 4,
-                    }}
-                  >{`${payment.status}`}</div>
+                    className={clsx({
+                      [classes.paymentStatus]: true,
+                      [classes.good]: payment.status === 'charge_succeeded',
+                    })}
+                  >{`${
+                    payment.status === 'charg_succeeded'
+                      ? 'Payment Received'
+                      : payment.status
+                  }`}</div>
                 </TableCell>
                 <TableCell align="right">
                   {moment(payment.updatedAt).format('LLLL')}

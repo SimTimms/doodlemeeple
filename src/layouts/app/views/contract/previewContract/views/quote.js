@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   ContractSummary,
   IconButton,
   ActionWrapper,
-  Contract,
+  ContractComponent,
   ProfileCardBasic,
   HeaderTwo,
   Divider,
   Column,
   Meta,
+  Text,
   BorderBox,
+  PaymentElement,
+  HeaderThree,
 } from '../../../../../../components';
 import { toaster } from '../../../../../../utils/toaster';
 import { DECLINE_CONTRACT } from '../../../../../../data/mutations';
@@ -19,10 +22,22 @@ import { Mutation, Query } from 'react-apollo';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 
-export default function Quote({ display, contractData, setContract, history }) {
+export default function QuoteSummary({
+  display,
+  contractData,
+  setContract,
+  history,
+}) {
   const classes = useStyles();
   const [openContract, setOpenContract] = React.useState(false);
+  const [contractStatus, setContractStatus] = React.useState(null);
+  const [declineWarning, setDeclineWarning] = React.useState(false);
   const [favourites, setFavourites] = React.useState([]);
+  const [displayPayment, setDisplayPayment] = React.useState(false);
+
+  useEffect(() => {
+    setContractStatus(contractData.status);
+  }, [contractData]);
 
   return (
     <div
@@ -32,7 +47,12 @@ export default function Quote({ display, contractData, setContract, history }) {
       })}
     >
       <HeaderTwo str={`Creative`} />
-
+      <PaymentElement
+        display={displayPayment}
+        setDisplayPayment={setDisplayPayment}
+        contractData={contractData}
+        setContractStatus={setContractStatus}
+      />
       <Query
         query={FAVOURITES}
         onCompleted={(data) => {
@@ -53,69 +73,158 @@ export default function Quote({ display, contractData, setContract, history }) {
           }
         />
       </Column>
-      <HeaderTwo str="Quote" />
+      {contractData.status !== 'paid' ? (
+        <HeaderTwo str="Quote" />
+      ) : (
+        <HeaderTwo str="Contract" />
+      )}
 
       <Divider />
+
       <div className={classes.root}>
-        <ContractSummary contractData={contractData} />
-        {openContract && (
-          <Contract
+        {!openContract && contractData.status !== 'paid' && (
+          <ContractSummary
             contractData={contractData}
-            setOpenContract={setOpenContract}
+            contractStatus={contractStatus}
           />
         )}
-        {!openContract && (
-          <ActionWrapper>
-            <BorderBox>
-              <Meta
-                str={`Choose to read the full details or decline this offer`}
+        {openContract ||
+          (contractData.status === 'paid' && (
+            <ContractComponent
+              contractData={contractData}
+              setOpenContract={setOpenContract}
+              setContractStatus={setContractStatus}
+              history={history}
+            />
+          ))}
+        {!openContract && contractData.status !== 'paid' && (
+          <Column>
+            <Divider />
+            <HeaderThree str="Payment" />
+            <ActionWrapper>
+              {contractStatus === 'submitted' ? (
+                <BorderBox>
+                  <Meta
+                    str={`Choose to read the full details or decline this offer`}
+                  />
+                  {contractData.status !== 'accepted' && (
+                    <IconButton
+                      title="Continue"
+                      color="primary"
+                      icon="chevron_right"
+                      disabled={false}
+                      onClickEvent={() => {
+                        setOpenContract(true);
+                      }}
+                      styleOverride={{ width: '100%' }}
+                      type="button"
+                      iconPos="right"
+                    />
+                  )}
+                  {declineWarning && (
+                    <Column j="center" a="center">
+                      <Text str="You will be unable to continue conversations with this Creative about this particular job." />{' '}
+                      <Text str="Do you wish to continue?" />
+                    </Column>
+                  )}
+                  {contractData.status !== 'accepted' && (
+                    <Mutation
+                      mutation={DECLINE_CONTRACT}
+                      variables={{
+                        contractId: contractData._id,
+                      }}
+                      onCompleted={(data) => {
+                        toaster('Declined');
+                        setContractStatus('declined');
+                      }}
+                    >
+                      {(mutation) => {
+                        return (
+                          <IconButton
+                            title="Decline"
+                            color="warning"
+                            icon="thumb_down"
+                            disabled={false}
+                            onClickEvent={() => {
+                              declineWarning === false
+                                ? setDeclineWarning(true)
+                                : mutation();
+                            }}
+                            styleOverride={{ width: '100%' }}
+                            type="button"
+                            iconPos="right"
+                          />
+                        );
+                      }}
+                    </Mutation>
+                  )}
+                  {declineWarning && (
+                    <IconButton
+                      title="Cancel"
+                      color="text-dark"
+                      icon="cancel"
+                      disabled={false}
+                      onClickEvent={() => {
+                        setDeclineWarning(false);
+                      }}
+                      styleOverride={{ width: '100%' }}
+                      type="button"
+                      iconPos="right"
+                    />
+                  )}
+                </BorderBox>
+              ) : contractStatus === 'declined' ? (
+                <BorderBox>
+                  <Meta
+                    str={`You have rejected this quote, ${contractData.user.name} has been notified`}
+                  />
+                </BorderBox>
+              ) : contractStatus === 'paid' ? (
+                <BorderBox>
+                  <Meta
+                    str={`You have deposited the payment for this contract, ${contractData.user.name} has been notified`}
+                  />
+                  <IconButton
+                    title="Back to Project"
+                    color="primary"
+                    icon="work"
+                    disabled={false}
+                    onClickEvent={() => {
+                      history.push(`/app/view-job/${contractData.job._id}`);
+                    }}
+                    styleOverride={{ width: '100%' }}
+                    type="button"
+                    iconPos="right"
+                  />
+                </BorderBox>
+              ) : (
+                <BorderBox>
+                  <Meta
+                    str={`You have accepted this quote, ${contractData.user.name} has been notified. Please continue to Payment`}
+                  />
+                  <IconButton
+                    title="Payment"
+                    color="text-dark"
+                    icon="payment"
+                    disabled={false}
+                    onClickEvent={() => {
+                      setDisplayPayment(true);
+                    }}
+                    styleOverride={{ width: '100%' }}
+                    type="button"
+                    iconPos="right"
+                  />
+                </BorderBox>
+              )}
+
+              <PaymentElement
+                display={displayPayment}
+                setDisplayPayment={setDisplayPayment}
+                contractData={contractData}
+                setContractStatus={setContractStatus}
               />
-              {contractData.status !== 'accepted' && (
-                <IconButton
-                  title="Continue"
-                  color="primary"
-                  icon="chevron_right"
-                  disabled={false}
-                  onClickEvent={() => {
-                    setOpenContract(true);
-                  }}
-                  styleOverride={{ width: '100%' }}
-                  type="button"
-                  iconPos="right"
-                />
-              )}
-              {contractData.status !== 'accepted' && (
-                <Mutation
-                  mutation={DECLINE_CONTRACT}
-                  variables={{
-                    contractId: contractData.id,
-                  }}
-                  onCompleted={(data) => {
-                    toaster('Declined');
-                    setContract({
-                      ...contractData,
-                      status: 'declined',
-                    });
-                  }}
-                >
-                  {(mutation) => {
-                    return (
-                      <IconButton
-                        title="Decline"
-                        color="warning"
-                        icon="thumb_down"
-                        disabled={false}
-                        onClickEvent={mutation}
-                        styleOverride={{ width: '100%' }}
-                        type="button"
-                        iconPos="right"
-                      />
-                    );
-                  }}
-                </Mutation>
-              )}
-            </BorderBox>
-          </ActionWrapper>
+            </ActionWrapper>
+          </Column>
         )}
       </div>
     </div>

@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
+import logo from '../../../../assets/logo.svg';
+import logoDevice from '../../../../assets/dm_device.png';
 import {
   Header,
   SubHeader,
@@ -14,7 +15,7 @@ import { Query } from 'react-apollo';
 import { PROFILE_PREVIEW, SECTIONS_PREVIEW } from '../../../../data/queries';
 import GallerySection from './components/section/gallerySection';
 
-export function PreviewProfile({ theme, profileId, publicView }) {
+export function PreviewProfile({ history, theme, profileId, publicView }) {
   const classes = useStyles();
 
   const [userProfile, setUserProfile] = React.useState({
@@ -60,37 +61,37 @@ export function PreviewProfile({ theme, profileId, publicView }) {
                 position: 'absolute',
               }}
             >
-              <Link
-                to={`/app/edit-profile`}
-                style={{ maxWidth: 326, width: '100%', lineHeight: 0.6 }}
-              >
-                <IconButton
-                  title="Edit"
-                  icon="edit"
-                  iconPos="right"
-                  disabled={false}
-                  color="secondary"
-                  styleOverride={null}
-                  type="button"
-                  onClickEvent={() => {}}
-                ></IconButton>
-              </Link>
+              <IconButton
+                title="Edit"
+                icon="edit"
+                color="primary"
+                onClickEvent={() => {
+                  history.push('/app/edit-profile');
+                }}
+              ></IconButton>
             </div>
           )}
 
           <div
             style={{
-              backgroundImage:
+              background:
                 userProfile.profileBG !== null
                   ? `url(${userProfile.profileBG}`
-                  : 'linear-gradient(to bottom right, #fff, #555)',
+                  : '#fafafa',
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
               minHeight: 300,
               maxHeight: 300,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               width: '100%',
             }}
-          ></div>
+          >
+            {userProfile.profileBG === null && (
+              <img src={logo} style={{ width: 500 }} />
+            )}
+          </div>
           <ColumnWrapper>
             <div
               style={{
@@ -102,22 +103,24 @@ export function PreviewProfile({ theme, profileId, publicView }) {
                 marginTop: -70,
               }}
             >
-              {userProfile.profileImg && (
-                <div
-                  style={{
-                    backgroundImage: `url(${userProfile.profileImg}`,
-                    minWidth: 140,
-                    maxWidth: 140,
-                    minHeight: 140,
-                    maxHeight: 140,
-                    backgroundSize: 'cover',
-                    backgroundPosition: `center center`,
-                    borderRadius: 20,
-                    border: '4px solid #fff',
-                    boxShadow: '0 0 30px rgba(0,0,0,0.2)',
-                  }}
-                ></div>
-              )}
+              <div
+                style={{
+                  backgroundColor: theme.palette.primary.main,
+                  backgroundImage: userProfile.profileImg
+                    ? `url(${userProfile.profileImg}`
+                    : `url(${logoDevice})`,
+                  minWidth: 140,
+                  maxWidth: 140,
+                  minHeight: 140,
+                  maxHeight: 140,
+                  backgroundSize: 'cover',
+                  backgroundPosition: `center center`,
+                  borderRadius: 20,
+                  border: '4px solid #fff',
+                  boxShadow: '0 0 30px rgba(0,0,0,0.2)',
+                }}
+              ></div>
+
               <Header str={userProfile.userName} />
               <SubHeader str="Artist" />
             </div>
