@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     marginRight: 10,
     boxShadow:
-      '1px 1px 3px rgba(0,0,0,0.2), inset 1px 1px 2px rgba(255,255,255,0.4)',
+      'inset 1px 1px 1px rgba(255,255,255,0.4), inset -1px -1px 1px rgba(0,0,0,0.2)',
     position: 'relative',
     '&:hover': {
       background: theme.palette.primary.dark,

@@ -46,11 +46,12 @@ export function JobComponent({ job, game, history }) {
           className={clsx({
             [classes.cardSummary]: true,
             [classes.cardSummaryWarning]: job.submitted === 'accepted',
-            [classes.cardSummaryGood]: job.submitted === 'paid',
+            [classes.cardSummaryGood]:
+              job.submitted === 'paid' || job.submitted === 'submitted',
           })}
         >
           {job.submitted === 'submitted'
-            ? 'Submitted'
+            ? 'Invites sent'
             : job.submitted === 'closed'
             ? 'Closed'
             : job.submitted === 'accepted'
