@@ -17,13 +17,6 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     width: '100%',
   },
-  cover: {
-    background: 'rgba(255, 255, 255, 0.1)',
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-    zIndex: 0,
-  },
   profileWrapperFeatured: {
     minWidth: 120,
     maxWidth: 120,
@@ -106,7 +99,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     zIndex: 0,
     width: '100%',
-    background: 'rgba(255,255,255,0.8)',
+    background: 'rgba(255,255,255,0)',
   },
   wrapperOne: {
     display: 'flex',

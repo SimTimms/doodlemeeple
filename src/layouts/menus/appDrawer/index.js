@@ -108,7 +108,7 @@ export function AppDrawer(props) {
               color: theme.palette.secondary.main,
               count: null,
             },
-            /*
+
             {
               name: 'Messages',
               icon: <Icon>chat</Icon>,
@@ -129,7 +129,7 @@ export function AppDrawer(props) {
               link: () => history.push('/app/jobs'),
               color: theme.palette.primary.main,
               count: null,
-            },*/
+            },
             {
               name: 'Profile',
               icon: <Icon>contact_mail</Icon>,
@@ -144,14 +144,13 @@ export function AppDrawer(props) {
               color: theme.palette.primary.main,
               count: null,
             },
-            /*
             {
               name: 'Games',
               icon: <Icon>casino</Icon>,
               link: () => history.push('/app/games'),
               color: theme.palette.primary.main,
               count: null,
-            },*/
+            },
           ].map((text, index) => (
             <MenuButton
               text={text}

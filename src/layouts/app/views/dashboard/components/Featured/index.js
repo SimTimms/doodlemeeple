@@ -10,6 +10,8 @@ import animalsFG from '../../../../../../assets/animals_fg.png';
 import animalsBG from '../../../../../../assets/animals_bg.png';
 import dwarfFG from '../../../../../../assets/dwarf_fg.png';
 import dwarfBG from '../../../../../../assets/dwarf_bg.png';
+import soldierFG from '../../../../../../assets/soldier_fg.png';
+import soldierBG from '../../../../../../assets/soldier_bg.png';
 import dmBack from '../../../../../../assets/dm_back.jpg';
 
 export function Featured({ posts, history }) {
@@ -154,6 +156,32 @@ export function Featured({ posts, history }) {
                   marginRight: -mouseX / 10,
                   marginTop: 40 + -(mouseY + 40) / 10,
                   width: 200,
+                  right: 0,
+                }}
+              ></div>
+              <div
+                ref={myRef}
+                className={classes.postImage}
+                style={{
+                  backgroundImage: `url(${soldierBG})`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'bottom right',
+                  opacity: 0.2,
+                  marginRight: 60 + mouseX / 5,
+                  marginTop: 90 + mouseY / 5,
+                  width: 500,
+                  right: 0,
+                }}
+              ></div>
+              <div
+                className={classes.postImage}
+                style={{
+                  backgroundImage: `url(${soldierFG})`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'bottom right',
+                  marginRight: 50 + -(mouseX / 20),
+                  marginTop: 40 + -(mouseY + 40) / 20,
+                  width: 500,
                   right: 0,
                 }}
               ></div>
