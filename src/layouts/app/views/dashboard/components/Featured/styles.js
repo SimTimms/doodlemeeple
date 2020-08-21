@@ -18,7 +18,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   cover: {
-    background: 'rgba(0, 0, 0, 0)',
+    background: 'rgba(255, 255, 255, 0.1)',
     width: '100%',
     height: '100%',
     position: 'absolute',
@@ -82,11 +82,12 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    overflow: 'hidden',
   },
   postImage: {
     position: 'absolute',
     width: '100%',
-    backgroundSize: 'cover',
+    backgroundSize: 'contain',
     backgroundPosition: 'center center',
     height: 400,
     display: 'flex',
@@ -103,8 +104,9 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 1,
+    zIndex: 0,
     width: '100%',
+    background: 'rgba(255,255,255,0.8)',
   },
   wrapperOne: {
     display: 'flex',
