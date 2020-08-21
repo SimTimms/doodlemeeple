@@ -5,7 +5,9 @@ import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { IconButton } from '../../../../../../components';
 import clsx from 'clsx';
-import logo from '../../../../../../assets/logo.svg';
+import logo from '../../../../../../assets/dm_white.png';
+import animalsFG from '../../../../../../assets/animals_fg.png';
+import animalsBG from '../../../../../../assets/animals_bg.png';
 
 export function Featured({ posts, history }) {
   const classes = useStyles();
@@ -28,8 +30,15 @@ export function Featured({ posts, history }) {
               <div
                 className={classes.postImage}
                 style={{
-                  backgroundImage: `url(${media})`,
-                  filter: 'saturate(40%)',
+                  backgroundImage: `url(${animalsFG})`,
+                  filter: 'saturate(100%)',
+                }}
+              ></div>{' '}
+              <div
+                className={classes.postImage}
+                style={{
+                  backgroundImage: `url(${animalsBG})`,
+                  filter: 'saturate(100%)',
                 }}
               ></div>
               <div className={classes.cover}></div>
