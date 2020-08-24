@@ -31,7 +31,10 @@ export default function ProposalForm({ jobId, setProposalOpen }) {
         <LoadIcon />
       ) : contract.status === 'submitted' ? (
         <div style={{ width: '100%' }}>
-          <ContractSummary contractData={contract} />
+          <ContractSummary
+            contractData={contract}
+            contractStatus={contract.status}
+          />
           <ActionWrapper>
             <EditContractButton
               contract={contract}
@@ -43,7 +46,10 @@ export default function ProposalForm({ jobId, setProposalOpen }) {
         </div>
       ) : contract.status === 'preview' ? (
         <div style={{ width: '100%' }}>
-          <ContractSummary contractData={contract} />
+          <ContractSummary
+            contractData={contract}
+            contractStatus={contract.status}
+          />
           <ActionWrapper>
             <EditContractButton
               contract={contract}

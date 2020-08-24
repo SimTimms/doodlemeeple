@@ -29,7 +29,7 @@ export default function CreativeView({
           <Column j="center" a="center">
             <HeaderTwo str="Project Creator" />
             <Divider />
-            <CardComponent>
+            <CardComponent styleOverride={{ width: 400 }}>
               <Row j="flex-start" a="center">
                 <Row j="flex-start" a="center">
                   <ProfileAvatar

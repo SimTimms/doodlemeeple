@@ -48,7 +48,10 @@ export default function EditContract({ contractId, history }) {
                   ) : (
                     data && (
                       <div>
-                        <ContractSummary contractData={contract} />{' '}
+                        <ContractSummary
+                          contractData={contract}
+                          contractStatus={contract.status}
+                        />
                         <HeaderThree str="Additional Notes" />
                         <ActionWrapper>
                           {contract.status === 'submitted' && (

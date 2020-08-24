@@ -8,7 +8,6 @@ export const useStyles = makeStyles((theme) => ({
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
     backgroundColor: '#fff',
-    height: 80,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
