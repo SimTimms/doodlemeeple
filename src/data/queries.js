@@ -205,7 +205,7 @@ export const INVITE_BY_ID = gql`
       receiver {
         name
       }
-      user {
+      sender {
         _id
         name
         profileImg

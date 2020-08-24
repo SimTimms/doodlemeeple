@@ -7,6 +7,7 @@ import {
   ContentHeader,
   MessageComponent,
   LoadIcon,
+  HeaderTwo,
 } from '../../../../../components';
 import Cookies from 'js-cookie';
 
@@ -17,12 +18,7 @@ export default function Conversations({ history, setConversationArgs }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <ContentHeader
-          title="Conversations"
-          subTitle=""
-          subTitleExtra={null}
-          button={null}
-        />
+        <HeaderTwo str="Conversations" />
         <div className={classes.cardGrid}>
           {conversationArray.map((conversation, index) => {
             return (

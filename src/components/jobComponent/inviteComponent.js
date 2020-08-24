@@ -11,9 +11,9 @@ export default function InviteComponent({ invite, history }) {
     <CardComponent>
       <Row>
         <ProfileAvatar
-          profilePage={`/app/public-preview/${invite.user._id}`}
-          title={invite.user.name}
-          bgImg={invite.user.profileImg}
+          profilePage={`/app/public-preview/${invite.sender._id}`}
+          title={invite.sender.name}
+          bgImg={invite.sender.profileImg}
           history={history}
           declined={invite.status === 'declined'}
         />

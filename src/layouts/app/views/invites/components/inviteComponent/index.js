@@ -6,11 +6,11 @@ import { UPDATE_INVITE } from '../../../../../../data/mutations';
 export function InviteComponent({ invite, removeInvite, history }) {
   return (
     <FeatureCardInvite
-      thumbnail={invite.user.profileImg}
+      thumbnail={invite.sender.profileImg}
       job={invite.job.name}
       summary={invite.job.summary}
-      author={invite.user.name}
-      authorId={invite.user._id}
+      author={invite.sender.name}
+      authorId={invite.sender._id}
       history={history}
       buttonOne={
         <Mutation

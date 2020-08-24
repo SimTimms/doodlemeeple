@@ -15,11 +15,6 @@ export function Invites({ history, theme }) {
   const classes = useStyles();
   const [inviteArray, setInviteArray] = React.useState([]);
 
-  const removeInvite = (id) => {
-    const newArray = inviteArray.filter((item) => item._id !== id);
-    setInviteArray(newArray);
-  };
-
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -33,7 +28,6 @@ export function Invites({ history, theme }) {
                 history={history}
                 key={`invite_${index}`}
                 invite={invite}
-                removeInvite={removeInvite}
               />
             );
           })}
