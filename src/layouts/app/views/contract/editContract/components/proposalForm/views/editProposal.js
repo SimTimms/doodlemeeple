@@ -38,6 +38,7 @@ export default function EditProposalForm({
     id: '',
     notes: '',
     deadline: '',
+    startDate: '',
     cost: '',
     paymentTerms: [],
     currency: 'GBP',
@@ -54,6 +55,7 @@ export default function EditProposalForm({
       paymentTerms: paymentTerms,
       notes: contractData.notes,
       deadline: contractData.deadline,
+      startDate: contractData.startDate,
       cost: contractData.cost ? contractData.cost : '0',
       currency: contractData.currency,
       status: contractData.status,
@@ -122,6 +124,7 @@ upon completion of this contract.`,
                 contract: {
                   notes: '',
                   deadline: '',
+                  startDate: '',
                   currency: 'GBP',
                   cost: 0,
                   jobId,
@@ -174,6 +177,7 @@ upon completion of this contract.`,
                 contract: {
                   notes: contract.notes,
                   deadline: contract.deadline,
+                  startDate: contract.startDate,
                   currency: contract.currency,
                   cost: contract.cost,
                   jobId,
@@ -191,6 +195,33 @@ upon completion of this contract.`,
                 return (
                   <div className={classes.root}>
                     <FieldTitleWrapper>
+                      <FieldTitle
+                        name=" 1. Start Date"
+                        description="The expected date of when you will you start this project. Please be specific about whether this is a rough estimate or a definite start date."
+                        warning={`Example: "1st May 2020"`}
+                        inline={true}
+                      />
+                      <TextField
+                        id={'deadline'}
+                        value={contract.startDate}
+                        label={`Start Date ${
+                          contract.startDate
+                            ? `(${86 - contract.startDate.length})`
+                            : ''
+                        }`}
+                        inputProps={{ maxLength: 86 }}
+                        onChange={(e) => {
+                          autosave(mutation, null);
+                          setContract({
+                            ...contract,
+                            deadline: e.target.value.substring(0, 86),
+                          });
+                        }}
+                        multiline
+                        margin="normal"
+                        variant="outlined"
+                        style={{ marginRight: 10, width: '100%' }}
+                      />
                       <FieldTitle
                         name=" 1. Expected Delivery Date"
                         description="The expected date of when you will you finish this project and provide the client with all the specified works. Please be specific about whether this deadline is a rough estimate or a definite finishing time."
@@ -253,8 +284,6 @@ upon completion of this contract.`,
                       <CurrencySelector
                         selectedCurrency={contract.currency}
                         onChangeEvent={setContract}
-                        mutation={mutation}
-                        contract={contract}
                       />
                     </FieldTitleWrapper>
                     {wholeFigures && (

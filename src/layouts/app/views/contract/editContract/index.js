@@ -19,6 +19,7 @@ export default function EditContract({ contractId, history }) {
     id: '',
     notes: '',
     deadline: '',
+    startDate: '',
     cost: '',
     paymentTerms: [],
     currency: 'GBP',
@@ -47,7 +48,10 @@ export default function EditContract({ contractId, history }) {
                   ) : (
                     data && (
                       <div>
-                        <ContractSummary contractData={contract} />{' '}
+                        <ContractSummary
+                          contractData={contract}
+                          contractStatus={contract.status}
+                        />
                         <HeaderThree str="Additional Notes" />
                         <ActionWrapper>
                           {contract.status === 'submitted' && (

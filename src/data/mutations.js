@@ -168,6 +168,7 @@ export const UPDATE_CONTRACT = gql`
     $_id: MongoID!
     $notes: String
     $deadline: String
+    $startDate: String
     $currency: String
     $cost: String
   ) {
@@ -176,6 +177,7 @@ export const UPDATE_CONTRACT = gql`
         _id: $_id
         notes: $notes
         deadline: $deadline
+        startDate: $startDate
         currency: $currency
         cost: $cost
       }
@@ -192,8 +194,10 @@ export const REMOVE_CONTRACT = gql`
 `;
 
 export const DECLINE_INVITE = gql`
-  mutation DeclineInvite($id: String!) {
-    declineInvite(id: $id)
+  mutation DeclineInvite($id: MongoID!) {
+    declineInvite(_id: $id) {
+      _id
+    }
   }
 `;
 

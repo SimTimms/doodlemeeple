@@ -1,8 +1,13 @@
 import React from 'react';
 import { useStyles } from '../styles';
-import { IconButton } from '../../../../../../components';
+import { IconButton, DeclineInvite } from '../../../../../../components';
 
-export default function CreativeActions({ proposalOpen, setProposalOpen }) {
+export default function CreativeActions({
+  proposalOpen,
+  setProposalOpen,
+  inviteId,
+  setInviteStatus,
+}) {
   const classes = useStyles();
 
   return (
@@ -15,14 +20,9 @@ export default function CreativeActions({ proposalOpen, setProposalOpen }) {
         styleOverride={{ width: '100%' }}
         iconPos="right"
       />
-
-      <IconButton
-        color="warning"
-        icon="thumb_down"
-        title="Decline"
-        onClickEvent={() => setProposalOpen(proposalOpen ? false : true)}
-        styleOverride={{ width: '100%' }}
-        iconPos="right"
+      <DeclineInvite
+        inviteId={inviteId}
+        onCompleted={() => setInviteStatus('declined')}
       />
     </div>
   );

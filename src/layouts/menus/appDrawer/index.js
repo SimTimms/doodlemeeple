@@ -108,7 +108,6 @@ export function AppDrawer(props) {
               color: theme.palette.secondary.main,
               count: null,
             },
-
             {
               name: 'Messages',
               icon: <Icon>chat</Icon>,

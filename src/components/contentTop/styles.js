@@ -8,7 +8,6 @@ export const styles = makeStyles({
     width: '100%',
   },
   contentTopMobile: {
-    marginTop: 74,
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center',

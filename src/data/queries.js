@@ -197,6 +197,29 @@ export const INVITES = gql`
   }
 `;
 
+export const INVITE_BY_ID = gql`
+  query inviteById($_id: MongoID!) {
+    inviteById(_id: $_id) {
+      _id
+      status
+      receiver {
+        name
+      }
+      user {
+        _id
+        name
+        profileImg
+      }
+      job {
+        _id
+        name
+        summary
+        submitted
+      }
+    }
+  }
+`;
+
 export const JOB = gql`
   query GetJob($jobId: MongoID!) {
     jobById(_id: $jobId) {
@@ -298,6 +321,7 @@ export const GET_CONTRACT = gql`
       _id
       notes
       deadline
+      startDate
       cost
       currency
       status
@@ -349,6 +373,7 @@ export const GET_CONTRACT_ID = gql`
       id
       notes
       deadline
+      startDate
       cost
       currency
       status
@@ -400,6 +425,7 @@ export const PREVIEW_CONTRACT = gql`
       _id
       notes
       deadline
+      startDate
       cost
       currency
       status

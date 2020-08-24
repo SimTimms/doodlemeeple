@@ -39,6 +39,14 @@ function AppLayout(props) {
       : null
     : null;
 
+  const pathParam2 = props
+    ? props.match
+      ? props.match.params.pathParam2
+        ? props.match.params.pathParam2
+        : null
+      : null
+    : null;
+
   if (pageJump !== page) {
     setPage(pageJump);
   }
@@ -157,6 +165,7 @@ function AppLayout(props) {
             <PreviewJob
               theme={props.theme}
               jobId={pathParam}
+              inviteId={pathParam2}
               history={props.history}
             />
           ) : page === 'view-contract' ? (

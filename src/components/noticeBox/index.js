@@ -4,9 +4,9 @@ import { useStyles } from './styles';
 import { IconButton, Column } from '../';
 import clsx from 'clsx';
 
-export default function NoticeBox(props) {
+export default function NoticeBox({ title, ...props }) {
   const classes = useStyles();
-  const { title, subTitle, color, actionTitle, actionEvent } = props;
+  const { subTitle, color, actionTitle, actionEvent } = props;
   return (
     <div
       className={clsx({
