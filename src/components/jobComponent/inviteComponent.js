@@ -4,7 +4,7 @@ import { useStyles } from './styles';
 import { IconButton, CardComponent, Column, Row, ProfileAvatar } from '../';
 import clsx from 'clsx';
 
-export default function InviteComponent({ removeInvite, invite, history }) {
+export default function InviteComponent({ invite, history }) {
   const classes = useStyles();
 
   return (
