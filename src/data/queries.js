@@ -321,6 +321,7 @@ export const GET_CONTRACT = gql`
       _id
       notes
       deadline
+      startDate
       cost
       currency
       status
@@ -372,6 +373,7 @@ export const GET_CONTRACT_ID = gql`
       id
       notes
       deadline
+      startDate
       cost
       currency
       status
@@ -423,6 +425,7 @@ export const PREVIEW_CONTRACT = gql`
       _id
       notes
       deadline
+      startDate
       cost
       currency
       status

@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
-import { Slide, TextField, Typography } from '@material-ui/core';
+import { Slide, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   FieldTitle,
-  FieldTitleWrapper,
-  CurrencySelector,
   Divider,
   IconButton,
   ActionWrapper,
   FieldBox,
   Column,
+  NoticeBox,
 } from '../../../../../../../../components';
 import PaymentTerm from '../components';
 import autosave from '../../../../../../../../utils/autosave';
@@ -33,6 +32,7 @@ export default function EditProposalForm({
     sum: null,
     message: '',
   });
+  const commissionRate = 0.125;
   const [detailsLock, setDetailsLock] = React.useState(false);
   const [saveLock, setSaveLock] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
@@ -184,11 +184,12 @@ upon completion of this contract.`,
                   <div className={classes.root}>
                     <Column a="flex-start" j="flex-start">
                       <FieldTitle
-                        name=" 1. Quote Details"
+                        name="1. Quote Details"
                         description="Be precise, this will form the basis of the contractual obligations between you and the client."
                         warning=""
                         inline={true}
                       />
+                      <Divider />
                       <FieldBox
                         value={contract.deadline}
                         title="Delivery Date"
@@ -226,6 +227,7 @@ upon completion of this contract.`,
                         size="s"
                         multiline={false}
                       />
+
                       <FieldBox
                         value={contract.currency}
                         title="Currency"
@@ -256,6 +258,23 @@ upon completion of this contract.`,
                         size="s"
                         multiline={true}
                       />
+                      <Divider />
+                      <FieldTitle
+                        name="2. Commission Deductions"
+                        description="Be precise, this will form the basis of the contractual obligations between you and the client."
+                        warning=""
+                        inline={true}
+                      />
+                      <Divider />
+                      <NoticeBox
+                        title="Please Note"
+                        subTitle={`After the DoodleMeeple commission fee of ${
+                          commissionRate * 100
+                        }% you will receive ${
+                          contract.cost - contract.cost * commissionRate
+                        } ${contract.currency}`}
+                        color="primary"
+                      />
                     </Column>
                     {wholeFigures && (
                       <Typography color="error">
@@ -265,10 +284,10 @@ upon completion of this contract.`,
                     <div style={{ marginTop: 20, width: '100%' }} />
 
                     <FieldTitle
-                      name=" 3. Payment Terms"
+                      name="3. Payment Terms"
                       description="Go into detail about how and when you would like to be paid, be very specific about your terms to decrease the chance of a dispute further down the line."
                       warning="Example: The Creative shall receive 10% upon commencement of the project, The Creative shall receive 20% upon delivery of 10 full resolution SVG files, the Creative shall receive 70% upon delivery of all remaining specified items"
-                      inline={false}
+                      inline={true}
                     />
 
                     {contract.paymentTerms.map((paymentTerm, index) => (

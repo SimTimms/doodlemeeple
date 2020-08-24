@@ -38,6 +38,7 @@ export function Dashboard({ history }) {
         .catch((error) => {
           console.log(error);
         });
+
       axios
         .get(
           'https://doodlemeeple.com/wp-json/wp/v2/posts?_embed&categories=2',
@@ -71,17 +72,7 @@ export function Dashboard({ history }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div style={{ width: '100%' }}>
-        {!featured ? (
-          <ContentHeader
-            title="Dashboard"
-            subTitle="Keep up to date with your projects, messages and the DoodleMeeple
-            community."
-            subTitleExtra={null}
-            button={null}
-          />
-        ) : (
-          <Featured posts={home ? home : []} history={history} />
-        )}
+        <Featured posts={home ? home : []} history={history} />
         <div className={classes.dashboardGrid}>
           <div className={classes.gridRow}>
             <div

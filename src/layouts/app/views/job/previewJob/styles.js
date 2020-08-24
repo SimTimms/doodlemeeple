@@ -13,7 +13,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    flexDirection: 'row',
+    flexDirection: 'column',
   },
   countsStyle: {
     position: 'absolute',

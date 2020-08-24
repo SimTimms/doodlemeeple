@@ -19,6 +19,7 @@ export default function EditContract({ contractId, history }) {
     id: '',
     notes: '',
     deadline: '',
+    startDate: '',
     cost: '',
     paymentTerms: [],
     currency: 'GBP',

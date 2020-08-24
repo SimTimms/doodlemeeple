@@ -1,17 +1,16 @@
 import React, { useRef, useEffect } from 'react';
-import Card from '@material-ui/core/Card';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { IconButton } from '../../../../../../components';
 import clsx from 'clsx';
-import logo from '../../../../../../assets/logo.svg';
 import animalsFG from '../../../../../../assets/animals_fg.png';
 import animalsBG from '../../../../../../assets/animals_bg.png';
 import dwarfFG from '../../../../../../assets/dwarf_fg.png';
 import dwarfBG from '../../../../../../assets/dwarf_bg.png';
 import soldierFG from '../../../../../../assets/soldier_fg.png';
 import soldierBG from '../../../../../../assets/soldier_bg.png';
+import logoFG from '../../../../../../assets/logo_fg.png';
+import logoBG from '../../../../../../assets/logo_bg.png';
 import dmBack from '../../../../../../assets/dm_back.jpg';
 
 export function Featured({ posts, history }) {
@@ -90,23 +89,44 @@ export function Featured({ posts, history }) {
                 }}
               ></div>
               <div className={classes.rowWrapper}>
-                <div className={classes.postHeader}>
-                  <img src={logo} style={{ maxWidth: 400, marginTop: 30 }} />
+                <div
+                  ref={myRef}
+                  className={classes.postImageLogo}
+                  style={{
+                    backgroundImage: `url(${logoBG})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'bottom left',
+                    width: 400,
+                    opacity: 0.2,
+                    marginLeft: 10 + mouseX / 10,
+                    marginTop: 10 + mouseY / 10,
+                  }}
+                ></div>
+                <div
+                  className={classes.postImageLogo}
+                  style={{
+                    backgroundImage: `url(${logoFG})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'bottom left',
+                    width: 400,
 
-                  <Typography
-                    style={{
-                      color: 'rgba(0,0,0,0.4)',
-                      marginTop: 0,
-                      textAlign: 'center',
-                      paddingBottom: 30,
-                    }}
-                    component="h6"
-                    variant="h6"
-                  >
-                    Professional Creative Talent
-                  </Typography>
-                </div>
+                    zIndex: 10,
+                  }}
+                ></div>
+                <Typography
+                  style={{
+                    color: 'rgba(0,0,0,0.4)',
+                    marginTop: 0,
+                    textAlign: 'center',
+                    paddingBottom: 30,
+                  }}
+                  component="h6"
+                  variant="h6"
+                >
+                  Professional Creative Talent
+                </Typography>
               </div>
+
               <div
                 ref={myRef}
                 className={classes.postImage}
@@ -143,7 +163,7 @@ export function Featured({ posts, history }) {
                   opacity: 0.2,
                   marginRight: mouseX / 10,
                   marginTop: 40 + mouseY / 10,
-                  width: 200,
+                  width: 120,
                   right: 0,
                 }}
               ></div>
@@ -155,7 +175,7 @@ export function Featured({ posts, history }) {
                   backgroundPosition: 'bottom right',
                   marginRight: -mouseX / 10,
                   marginTop: 40 + -(mouseY + 40) / 10,
-                  width: 200,
+                  width: 120,
                   right: 0,
                 }}
               ></div>
