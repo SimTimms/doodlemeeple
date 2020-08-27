@@ -1,17 +1,10 @@
 import React from 'react';
-import { SIGN_CONTRACT, DECLINE_CONTRACT } from '../../data/mutations';
 import { Typography } from '@material-ui/core';
-import {
-  Divider,
-  IconButton,
-  ActionWrapper,
-  NoticeBox,
-  BorderBox,
-  Meta,
-} from '../';
-import { Mutation } from 'react-apollo';
-import moment from 'moment';
+import { Divider } from '../';
 import { useStyles } from './styles';
+import Notices from './notices';
+import Signature from './signature';
+import moment from 'moment';
 
 export default function ContractComponent({ contractData, history, ...props }) {
   let paymentTermsSum = 100;
@@ -20,19 +13,7 @@ export default function ContractComponent({ contractData, history, ...props }) {
 
   return (
     <div style={{ width: '100%' }}>
-      {contractData.status === 'paid' ? (
-        <NoticeBox
-          title="In Progress"
-          subTitle={`This contract has been fully deposited and is considered to be active & binding`}
-          color="secondary"
-        />
-      ) : (
-        <NoticeBox
-          title="Read Me"
-          subTitle={`Please read the following General Service Agreement and Click "I Agree" to appoint this creative.`}
-          color="primary"
-        />
-      )}
+      {!readOnly && <Notices status={contractData.status} />}
       <div className={classes.wrapper}>
         <Typography variant="h5" style={{ textAlign: 'center' }}>
           General Service Agreement
@@ -133,10 +114,22 @@ export default function ContractComponent({ contractData, history, ...props }) {
           <b>6. PAYMENT:</b>
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
-          <b>6.1</b> The Creative will charge the Client a total fee of{' '}
+          <b>6.1</b> The Client will be charged a total fee of{' '}
           {`${contractData.cost}
 ${contractData.currency} `}
           for the Services (the "Payment")
+        </Typography>
+        <Typography style={{ marginLeft: 40 }}>
+          <b>6.2</b> The Creative will receive 87.5% of the total payment, an
+          amount equating to{' '}
+          {`${contractData.cost * 0.875}
+${contractData.currency} `}
+        </Typography>
+        <Typography style={{ marginLeft: 40 }}>
+          <b>6.3</b> DoodleMeeple will retain 12.5% of the total payment, an
+          amount equating to{' '}
+          {`${contractData.cost * 0.125}
+${contractData.currency} `}
         </Typography>
         <Divider />
         <Typography>
@@ -212,101 +205,15 @@ ${contractData.currency} `}
           <b>10.1</b> By clicking "I Accept" the Client will enter into a
           binding contract with the Creative.
         </Typography>
-        <ActionWrapper>
-          {contractData.status !== 'paid' ? (
-            <BorderBox>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  width: '100%',
-                }}
-              >
-                <Meta str="By clicking Accept you will enter into a binding contract with the Creative." />
-                <Mutation
-                  mutation={SIGN_CONTRACT}
-                  variables={{
-                    contractId: contractData._id,
-                  }}
-                  onCompleted={() => {
-                    setContractStatus && setContractStatus('accepted');
-                    setOpenContract && setOpenContract(false);
-                  }}
-                >
-                  {(mutation) => {
-                    return (
-                      <IconButton
-                        title="I Accept"
-                        color="primary"
-                        icon="thumb_up"
-                        disabled={false}
-                        onClickEvent={() => {
-                          mutation();
-                        }}
-                        styleOverride={null}
-                        type="button"
-                        iconPos="right"
-                      />
-                    );
-                  }}
-                </Mutation>
-                <Mutation
-                  mutation={DECLINE_CONTRACT}
-                  variables={{
-                    contractId: contractData._id,
-                  }}
-                  onCompleted={() => {
-                    setContractStatus && setContractStatus('declined');
-                    setOpenContract && setOpenContract(false);
-                  }}
-                >
-                  {(mutation) => {
-                    return (
-                      <IconButton
-                        title="I Decline"
-                        color="warning"
-                        icon="thumb_down"
-                        disabled={false}
-                        onClickEvent={() => {
-                          mutation();
-                        }}
-                        styleOverride={null}
-                        type="button"
-                        iconPos="right"
-                      />
-                    );
-                  }}
-                </Mutation>
-              </div>
-            </BorderBox>
-          ) : (
-            <BorderBox>
-              <Meta
-                str={`Agreed & Signed by ${
-                  contractData.signedBy.name
-                } (the "Client") on ${moment(contractData.signedDate).format(
-                  'LLLL'
-                )} GMT and ${
-                  contractData.user.name
-                } (the "Creative") on ${moment(
-                  contractData.signedcreatedAtDate
-                ).format('LLLL')} GMT`}
-              />
-            </BorderBox>
-          )}
-
-          <IconButton
-            title={contractData.status === 'paid' ? 'Back to Project' : 'Close'}
-            color="text-dark"
-            icon={contractData.status === 'paid' ? 'chevron_left' : 'close'}
-            onClickEvent={() => {
-              contractData.status === 'paid'
-                ? history.push(`/app/view-job/${contractData.job._id}`)
-                : setOpenContract && setOpenContract(false);
-            }}
-            iconPos={contractData.status === 'paid' ? 'left' : 'right'}
+        {!readOnly && (
+          <Signature
+            status={contractData.status}
+            setOpenContract={setOpenContract}
+            setContractStatus={setContractStatus}
+            contractData={contractData}
+            history={history}
           />
-        </ActionWrapper>
+        )}
       </div>
     </div>
   );

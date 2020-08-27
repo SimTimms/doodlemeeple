@@ -8,6 +8,7 @@ import FileGallery from './fileGallery';
 import FormInput from './formInput';
 import Form from './form';
 import CardHeader from './headers';
+import Paper from './paper';
 import ContentHeader from './headers/contentHeader';
 import StripeCheckout from './stripeCheckout';
 import Payments from './payments';
@@ -105,6 +106,7 @@ export {
   SubmitContractButton,
   NoticeBox,
   ContractComponent,
+  Paper,
   ViewContractButton,
   EditContractButton,
   ContractSummary,

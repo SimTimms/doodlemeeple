@@ -4,6 +4,7 @@ export const styles = makeStyles({
   root: {
     width: '100%',
     display: 'flex',
+    margin: 'auto',
   },
   borderBox: {
     margin: 30,

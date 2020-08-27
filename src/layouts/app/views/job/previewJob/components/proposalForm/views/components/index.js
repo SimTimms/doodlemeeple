@@ -2,7 +2,11 @@ import React from 'react';
 import { IconButton } from '../../../../../../../../../components';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../../../../../../../../utils/toaster';
-import { CREATE_TERM } from '../../../../../../../../../data/mutations';
+import {
+  CREATE_TERM,
+  UPDATE_CONTRACT,
+} from '../../../../../../../../../data/mutations';
+import { useStyles } from './styles';
 
 export function AddPaymentTerm({
   contractId,
@@ -34,7 +38,7 @@ export function AddPaymentTerm({
         return (
           <IconButton
             disabled={detailsLock || percentLock.sum < 0}
-            color="primary"
+            color="secondary"
             title="Create Payment Terms"
             icon=""
             onClickEvent={() => {
@@ -44,6 +48,41 @@ export function AddPaymentTerm({
             type="button"
             iconPos="right"
           />
+        );
+      }}
+    </Mutation>
+  );
+}
+
+export function NextButton({ setDetailsLock, contract, setContractParent }) {
+  const classes = useStyles();
+  return (
+    <Mutation
+      mutation={UPDATE_CONTRACT}
+      variables={{
+        ...contract,
+        status: 'preview',
+      }}
+      onCompleted={(data) => {
+        toaster('Submitted');
+        setDetailsLock(true);
+        setContractParent({ ...contract, status: 'preview' });
+      }}
+    >
+      {(mutation) => {
+        return (
+          <div className={classes.actionWrapper}>
+            <IconButton
+              title="Next"
+              icon="chevron_right"
+              color="primary"
+              styleOverride={{ width: '100%' }}
+              disabled={false}
+              onClickEvent={() => mutation()}
+              type="button"
+              iconPos="right"
+            />
+          </div>
         );
       }}
     </Mutation>

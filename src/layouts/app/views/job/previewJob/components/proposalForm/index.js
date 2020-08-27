@@ -80,7 +80,7 @@ export default function ProposalForm({ jobId, setProposalOpen, history }) {
           contractData={contract}
           jobId={jobId}
           setContractParent={setContract}
-          history={history}
+          setProposalOpen={setProposalOpen}
         />
       )}
       <Query

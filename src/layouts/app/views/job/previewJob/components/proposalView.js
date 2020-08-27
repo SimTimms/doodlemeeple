@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
-import { Slide } from '@material-ui/core';
 import { useStyles } from '../styles';
 import {
   ColumnWrapper,
   HeaderTwo,
   Divider,
-  IconButton,
   Column,
 } from '../../../../../../components';
 import ProposalForm from '../components/proposalForm';
@@ -39,13 +37,6 @@ export default function ProposalView({
             jobId={jobId}
             setProposalOpen={setProposalOpen}
             history={history}
-          />
-          <IconButton
-            title="Back"
-            icon="chevron_left"
-            iconPos="left"
-            color="text-dark"
-            onClickEvent={() => setProposalOpen(false)}
           />
         </Column>
       </ColumnWrapper>
