@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
-import { DeleteButtonSmall } from '../../../../../../../../components';
-import { TextField, Typography } from '@material-ui/core';
+import {
+  DeleteButtonSmall,
+  Column,
+  Row,
+  FieldBox,
+  Divider,
+} from '../../../../../../../../components';
 import autosave from '../../../../../../../../utils/autosave';
 import { Mutation } from 'react-apollo';
 import { useStyles } from './styles';
@@ -51,95 +56,88 @@ export default function PaymentTerm({
     >
       {(mutation, { loading }) => {
         return (
-          <div className={classes.root}>
-            <Typography variant="body1" style={{ width: 200 }}>{`3.${
-              index + 1
-            }: The Creative shall receive `}</Typography>
-            <TextField
-              id={'deposit'}
-              value={values.percent}
-              label={`${availablePercent.toString()}%`}
-              inputProps={{ maxLength: availablePercent.toString().length }}
-              onChange={(e) => {
-                let message = e.target.value.replace(/[^0-9]/gi, '');
-                message = message === '' ? '0' : message;
-                const messageToInt = parseInt(message);
+          <Column>
+            <Row>
+              <FieldBox
+                value={values.percent ? values.percent.toString() : '0'}
+                title="Percent:"
+                maxLength={3}
+                onChangeEvent={(e) => {
+                  const messageToInt = parseInt(e === '' ? 0 : e);
+                  console.log(messageToInt);
+                  let paymentTermsArray = [...contract.paymentTerms];
+                  paymentTermsArray[index].percent = messageToInt;
 
-                let paymentTermsArray = [...contract.paymentTerms];
-                paymentTermsArray[index].percent = messageToInt;
-                const percentLockCalc = calculatePercent(paymentTermsArray);
-                if (percentLockCalc.sum >= 0) {
-                  setDetailsLock(false);
+                  const percentLockCalc = calculatePercent(paymentTermsArray);
+                  if (percentLockCalc.sum >= 0) {
+                    setDetailsLock(false);
+                    setPercentLock(percentLockCalc);
+                    percentLockCalc.sum >= 0
+                      ? setSaveLock(false)
+                      : setSaveLock(true);
+                    setValues({ ...values, percent: messageToInt });
+                    percentLockCalc.sum >= 0 &&
+                      autosave(() => {
+                        mutation();
+                      });
+                  }
+                }}
+                replaceMode="number"
+                placeholder="Example: 20"
+                info=""
+                warning=""
+                size="xs"
+              />{' '}
+              <Mutation
+                mutation={REMOVE_TERM}
+                variables={{
+                  _id: values._id,
+                }}
+                onCompleted={(data) => {
+                  toaster('Deleted');
+                  const updatedArray = contract.paymentTerms.filter(
+                    (item) => item._id !== values._id
+                  );
+                  const percentLockCalc = calculatePercent(updatedArray);
                   setPercentLock(percentLockCalc);
-                  percentLockCalc.sum >= 0
-                    ? setSaveLock(false)
-                    : setSaveLock(true);
+                  setContract({
+                    ...contract,
+                    paymentTerms: [...updatedArray],
+                  });
+                }}
+              >
+                {(mutation) => {
+                  return (
+                    <DeleteButtonSmall
+                      mutation={mutation}
+                      disabled={values._id === 'new' ? true : false}
+                    />
+                  );
+                }}
+              </Mutation>
+            </Row>
 
-                  setValues({ ...values, percent: messageToInt });
-
-                  percentLockCalc.sum >= 0 &&
-                    autosave(() => {
-                      mutation();
-                    });
-                }
-              }}
-              multiline
-              margin="normal"
-              variant="outlined"
-              className={classes.wrapper}
-            />
-            <Typography style={{ width: 60 }}>% upon</Typography>
-            <TextField
-              id={'item'}
+            <FieldBox
               value={values.description}
-              label={`Completion Term ${
-                values.description ? `(${86 - values.description.length})` : ''
-              }`}
-              inputProps={{ maxLength: 86 }}
-              onChange={(e) => {
+              title="Clause"
+              maxLength={86}
+              onChangeEvent={(e) => {
                 setDetailsLock(false);
-                const description = e.target.value.substring(0, 86);
-                setValues({ ...values, description: description });
+                setValues({ ...values, description: e });
                 let paymentTermsArray = [...contract.paymentTerms];
-                paymentTermsArray[index].description = description;
-
+                paymentTermsArray[index].description = e;
                 autosave(() => {
                   mutation();
                 });
               }}
-              multiline
-              margin="normal"
-              variant="outlined"
-              style={{ marginLeft: 10, marginTop: 8, marginRight: 10 }}
+              replaceMode="loose"
+              placeholder="Example: starting the project"
+              info="Split the total payment into pre-determined milestones, example: 50% upfront, 50% upon completion"
+              warning=""
+              size="s"
             />
-            <Mutation
-              mutation={REMOVE_TERM}
-              variables={{
-                _id: values._id,
-              }}
-              onCompleted={(data) => {
-                toaster('Deleted');
-                const updatedArray = contract.paymentTerms.filter(
-                  (item) => item._id !== values._id
-                );
-                const percentLockCalc = calculatePercent(updatedArray);
-                setPercentLock(percentLockCalc);
-                setContract({
-                  ...contract,
-                  paymentTerms: [...updatedArray],
-                });
-              }}
-            >
-              {(mutation) => {
-                return (
-                  <DeleteButtonSmall
-                    mutation={mutation}
-                    disabled={values._id === 'new' ? true : false}
-                  />
-                );
-              }}
-            </Mutation>
-          </div>
+            <Divider />
+          </Column>
         );
       }}
     </Mutation>

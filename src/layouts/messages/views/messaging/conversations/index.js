@@ -4,7 +4,7 @@ import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { CONVERSATIONS } from '../../../../../data/queries';
 import {
-  ContentHeader,
+  Divider,
   MessageComponent,
   LoadIcon,
   HeaderTwo,
@@ -19,6 +19,7 @@ export default function Conversations({ history, setConversationArgs }) {
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <HeaderTwo str="Conversations" />
+        <Divider />
         <div className={classes.cardGrid}>
           {conversationArray.map((conversation, index) => {
             return (

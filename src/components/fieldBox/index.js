@@ -37,6 +37,7 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
       >
         <Typography
           className={clsx({
+            [classes.tiny]: size === 'xs',
             [classes.small]: true,
             [classes.medium]: size === 'm',
             [classes.large]: size === 'l',
@@ -46,21 +47,11 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
         {multiline ? (
           <textarea
             rows={3}
-            style={{
-              width: '100%',
-              marginLeft: 10,
-              padding: 10,
-              borderRadius: 5,
-              boxShadow: 'inset 3px 3px 10px rgba(0,0,0,0.05)',
-              border: '1px solid #ddd',
-              background: 'rgba(0,0,0,0.025)',
-              outline: 'none',
-              fontSize: 14,
-            }}
             className={classes.root}
             placeholder={placeholder}
             value={value.substring(0, maxLength)}
             onChange={(e) => {
+              console.log(e.target.value);
               const eReplaced =
                 replaceMode === 'loose'
                   ? e.target.value.replace(
@@ -68,6 +59,7 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
                       ''
                     )
                   : e.target.value;
+
               onChangeEvent(eReplaced.substring(0, maxLength));
             }}
           />
@@ -78,18 +70,10 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
           />
         ) : (
           <input
-            style={{
-              width: '100%',
-              marginLeft: 10,
-              padding: 10,
-              borderRadius: 5,
-              boxShadow: 'inset 3px 3px 10px rgba(0,0,0,0.05)',
-              border: '1px solid #ddd',
-              background: 'rgba(0,0,0,0.025)',
-              outline: 'none',
-              fontSize: 14,
-            }}
-            className={classes.root}
+            className={clsx({
+              [classes.root]: true,
+              [classes.tiny]: size === 'xs',
+            })}
             placeholder={placeholder}
             value={value.substring(0, maxLength)}
             onChange={(e) => {

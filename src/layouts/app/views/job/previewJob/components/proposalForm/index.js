@@ -12,7 +12,7 @@ import {
   IconButton,
 } from '../../../../../../../components';
 
-export default function ProposalForm({ jobId, setProposalOpen }) {
+export default function ProposalForm({ jobId, setProposalOpen, history }) {
   const [contract, setContract] = React.useState({
     _id: '',
     notes: '',
@@ -80,6 +80,7 @@ export default function ProposalForm({ jobId, setProposalOpen }) {
           contractData={contract}
           jobId={jobId}
           setContractParent={setContract}
+          history={history}
         />
       )}
       <Query

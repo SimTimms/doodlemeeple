@@ -11,6 +11,7 @@ import {
   NoticeBox,
 } from '../../../../../../../../components';
 import PaymentTerm from '../components';
+import { AddPaymentTerm } from './components';
 import autosave from '../../../../../../../../utils/autosave';
 import { calculatePercent } from '../../../../../../../../utils';
 import { toaster } from '../../../../../../../../utils/toaster';
@@ -18,13 +19,13 @@ import { Mutation } from 'react-apollo';
 import {
   CREATE_CONTRACT,
   UPDATE_CONTRACT,
-  CREATE_TERM,
 } from '../../../../../../../../data/mutations';
 
 export default function EditProposalForm({
   jobId,
   contractData,
   setContractParent,
+  history,
 }) {
   const classes = useStyles();
   const [wholeFigures, setWholeFigures] = React.useState(false);
@@ -143,7 +144,7 @@ export default function EditProposalForm({
               {(mutation) => {
                 return (
                   <div className={classes.root}>
-                    <Column a="flex-start" j="flex-start">
+                    <Column>
                       <FieldTitle
                         name="1. Quote Details"
                         description="Be precise, this will form the basis of the contractual obligations between you and the client."
@@ -206,7 +207,6 @@ export default function EditProposalForm({
                         size="s"
                         multiline={false}
                       />
-
                       <FieldBox
                         value={contract.currency}
                         title="Currency"
@@ -222,6 +222,7 @@ export default function EditProposalForm({
                         size="s"
                         multiline={false}
                       />
+
                       <FieldBox
                         value={contract.notes}
                         title="Notes"
@@ -239,7 +240,50 @@ export default function EditProposalForm({
                       />
                       <Divider />
                       <FieldTitle
-                        name="2. Commission Deductions"
+                        name="2. Payment Terms"
+                        description="Go into detail about how and when you would like to be paid, be very specific about your terms to decrease the chance of a dispute further down the line."
+                        warning="Example: The Creative shall receive 10% upon commencement of the project, The Creative shall receive 20% upon delivery of 10 full resolution SVG files, the Creative shall receive 70% upon delivery of all remaining specified items"
+                        inline={true}
+                      />
+                      <Divider />
+                      {contract.paymentTerms.map((paymentTerm, index) => (
+                        <PaymentTerm
+                          contract={contract}
+                          setContract={setContract}
+                          paymentTerm={paymentTerm}
+                          index={index}
+                          key={`term_${index}`}
+                          availablePercent={100}
+                          calculatePercent={calculatePercent}
+                          setPercentLock={setPercentLock}
+                          percentLock={percentLock}
+                          saveLock={saveLock}
+                          setSaveLock={setSaveLock}
+                          setDetailsLock={setDetailsLock}
+                        />
+                      ))}
+                      {percentLock.message !== '' && (
+                        <Typography
+                          style={{
+                            marginTop: 10,
+                            marginBottom: 10,
+                            boxSizing: 'border-box',
+                          }}
+                        >
+                          {percentLock.message}
+                        </Typography>
+                      )}
+                      <Typography variant="h6">or</Typography>
+                      <AddPaymentTerm
+                        contractId={contract._id}
+                        setDetailsLock={setDetailsLock}
+                        detailsLock={detailsLock}
+                        percentLock={percentLock}
+                        addPaymentTerm={addPaymentTerm}
+                      />
+                      <Divider />
+                      <FieldTitle
+                        name="3. Contract"
                         description="Be precise, this will form the basis of the contractual obligations between you and the client."
                         warning=""
                         inline={true}
@@ -254,85 +298,20 @@ export default function EditProposalForm({
                         } ${contract.currency}`}
                         color="primary"
                       />
+                      <IconButton
+                        title="Contract"
+                        onClickEvent={() => {
+                          history.push(
+                            `/app/view-full-contract/${contract._id}`
+                          );
+                        }}
+                      />
                     </Column>
                     {wholeFigures && (
                       <Typography color="error">
                         Whole figures only please
                       </Typography>
                     )}
-                    <div style={{ marginTop: 20, width: '100%' }} />
-
-                    <FieldTitle
-                      name="3. Payment Terms"
-                      description="Go into detail about how and when you would like to be paid, be very specific about your terms to decrease the chance of a dispute further down the line."
-                      warning="Example: The Creative shall receive 10% upon commencement of the project, The Creative shall receive 20% upon delivery of 10 full resolution SVG files, the Creative shall receive 70% upon delivery of all remaining specified items"
-                      inline={true}
-                    />
-
-                    {contract.paymentTerms.map((paymentTerm, index) => (
-                      <PaymentTerm
-                        contract={contract}
-                        setContract={setContract}
-                        paymentTerm={paymentTerm}
-                        index={index}
-                        key={`term_${index}`}
-                        availablePercent={100}
-                        calculatePercent={calculatePercent}
-                        setPercentLock={setPercentLock}
-                        percentLock={percentLock}
-                        saveLock={saveLock}
-                        setSaveLock={setSaveLock}
-                        setDetailsLock={setDetailsLock}
-                      />
-                    ))}
-                    {percentLock.message !== '' && (
-                      <Typography
-                        style={{
-                          paddingLeft: 30,
-                          marginTop: 10,
-                          marginBottom: 10,
-                          width: '100%',
-                          boxSizing: 'border-box',
-                        }}
-                      >
-                        {percentLock.message}
-                      </Typography>
-                    )}
-                    <Mutation
-                      mutation={CREATE_TERM}
-                      variables={{
-                        percent: 0,
-                        description: '',
-                        contractId: contract._id,
-                      }}
-                      onCompleted={(data) => {
-                        toaster('Created');
-                        setDetailsLock(true);
-                        addPaymentTerm({
-                          _id: data.paymentTermsCreateOne.recordId,
-                          percent: 0,
-                          description: '',
-                          contractId: contract._id,
-                        });
-                      }}
-                    >
-                      {(mutation, { loading }) => {
-                        return (
-                          <IconButton
-                            disabled={detailsLock || percentLock.sum < 0}
-                            color="secondary"
-                            title="Payment Term"
-                            icon="add"
-                            onClickEvent={() => {
-                              mutation();
-                            }}
-                            styleOverride={null}
-                            type="button"
-                            iconPos="right"
-                          />
-                        );
-                      }}
-                    </Mutation>
 
                     <Divider />
                   </div>

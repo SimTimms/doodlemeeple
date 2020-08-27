@@ -15,6 +15,7 @@ export default function ProposalView({
   messagesEnd,
   setProposalOpen,
   setMessagesEnd,
+  history,
 }) {
   const classes = useStyles();
 
@@ -34,7 +35,11 @@ export default function ProposalView({
         <Column>
           <HeaderTwo str="Quote" />
           <Divider />
-          <ProposalForm jobId={jobId} setProposalOpen={setProposalOpen} />
+          <ProposalForm
+            jobId={jobId}
+            setProposalOpen={setProposalOpen}
+            history={history}
+          />
           <IconButton
             title="Back"
             icon="chevron_left"

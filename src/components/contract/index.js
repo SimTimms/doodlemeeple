@@ -13,14 +13,10 @@ import { Mutation } from 'react-apollo';
 import moment from 'moment';
 import { useStyles } from './styles';
 
-export default function ContractComponent({
-  contractData,
-  setOpenContract,
-  setContractStatus,
-  history,
-}) {
+export default function ContractComponent({ contractData, history, ...props }) {
   let paymentTermsSum = 100;
   const classes = useStyles();
+  const { setOpenContract, setContractStatus, readOnly } = props;
 
   return (
     <div style={{ width: '100%' }}>
@@ -233,8 +229,8 @@ ${contractData.currency} `}
                     contractId: contractData._id,
                   }}
                   onCompleted={() => {
-                    setContractStatus('accepted');
-                    setOpenContract(false);
+                    setContractStatus && setContractStatus('accepted');
+                    setOpenContract && setOpenContract(false);
                   }}
                 >
                   {(mutation) => {
@@ -260,8 +256,8 @@ ${contractData.currency} `}
                     contractId: contractData._id,
                   }}
                   onCompleted={() => {
-                    setContractStatus('declined');
-                    setOpenContract(false);
+                    setContractStatus && setContractStatus('declined');
+                    setOpenContract && setOpenContract(false);
                   }}
                 >
                   {(mutation) => {
@@ -306,7 +302,7 @@ ${contractData.currency} `}
             onClickEvent={() => {
               contractData.status === 'paid'
                 ? history.push(`/app/view-job/${contractData.job._id}`)
-                : setOpenContract(false);
+                : setOpenContract && setOpenContract(false);
             }}
             iconPos={contractData.status === 'paid' ? 'left' : 'right'}
           />

@@ -69,6 +69,7 @@ export default function PreviewJob({ theme, jobId, history, inviteId }) {
               messagesEnd={messagesEnd}
               setProposalOpen={setProposalOpen}
               setMessagesEnd={setMessagesEnd}
+              history={history}
             />
           )}
           <Query

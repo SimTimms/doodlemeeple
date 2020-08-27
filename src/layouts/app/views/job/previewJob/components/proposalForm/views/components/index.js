@@ -2,94 +2,50 @@ import React from 'react';
 import { IconButton } from '../../../../../../../../../components';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../../../../../../../../utils/toaster';
-import {
-  UPDATE_CONTRACT,
-  SUBMIT_CONTRACT,
-} from '../../../../../../../../../data/mutations';
+import { CREATE_TERM } from '../../../../../../../../../data/mutations';
 
-export function EditButton({ contract, jobId, setContract }) {
+export function AddPaymentTerm({
+  contractId,
+  setDetailsLock,
+  detailsLock,
+  percentLock,
+  addPaymentTerm,
+}) {
   return (
     <Mutation
-      mutation={UPDATE_CONTRACT}
+      mutation={CREATE_TERM}
       variables={{
-        _id: contract._id,
-        notes: contract.notes,
-        deadline: contract.deadline,
-        currency: contract.currency,
-        cost: contract.cost,
-        jobId,
-        status: '',
+        percent: 0,
+        description: '',
+        contractId: contractId,
       }}
       onCompleted={(data) => {
-        toaster('Editing');
-        setContract({ ...contract, status: '' });
+        toaster('Created');
+        setDetailsLock(true);
+        addPaymentTerm({
+          _id: data.paymentTermsCreateOne.recordId,
+          percent: 0,
+          description: '',
+          contractId: contractId,
+        });
       }}
     >
-      {(mutation) => {
+      {(mutation, { loading }) => {
         return (
           <IconButton
-            title="Edit Proposal"
-            icon="edit"
-            styleOverride={null}
-            color="secondary"
-            disabled={false}
-            onClickEvent={() => {
-              mutation();
-            }}
-            type="button"
-            iconPos="right"
-          />
-        );
-      }}
-    </Mutation>
-  );
-}
-
-export function SubmitButton({ contract, jobId, setContract }) {
-  return (
-    <Mutation
-      mutation={SUBMIT_CONTRACT}
-      variables={{
-        _id: contract._id,
-      }}
-      onCompleted={(data) => {
-        toaster('Submitting...');
-        setContract({ ...contract, status: 'submitted' });
-      }}
-    >
-      {(mutation) => {
-        return (
-          <IconButton
-            title="Submit Proposal"
-            icon="send"
-            styleOverride={null}
+            disabled={detailsLock || percentLock.sum < 0}
             color="primary"
-            disabled={false}
+            title="Create Payment Terms"
+            icon=""
             onClickEvent={() => {
               mutation();
             }}
+            styleOverride={null}
             type="button"
             iconPos="right"
           />
         );
       }}
     </Mutation>
-  );
-}
-
-export function ViewButton({ history, contractId }) {
-  return (
-    <IconButton
-      title="View"
-      icon="view"
-      styleOverride={null}
-      color="primary"
-      disabled={false}
-      onClickEvent={() => {
-        history.push(`/app/view-contract/${contractId}`);
-      }}
-      type="button"
-      iconPos="right"
-    />
   );
 }

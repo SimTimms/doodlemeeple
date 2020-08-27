@@ -46,20 +46,3 @@ export default function EditContractButton({
     </Mutation>
   );
 }
-
-export function ViewButton({ history, contractId }) {
-  return (
-    <IconButton
-      title="View"
-      icon="view"
-      styleOverride={null}
-      color="primary"
-      disabled={false}
-      onClickEvent={() => {
-        history.push(`/app/view-contract/${contractId}`);
-      }}
-      iconPos="right"
-      type="button"
-    />
-  );
-}
