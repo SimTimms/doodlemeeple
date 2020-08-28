@@ -8,7 +8,12 @@ import {
 import autosave from '../../../../../../../../utils/autosave';
 import { Typography } from '@material-ui/core';
 
-export default function QuoteDetails({ contract, setContract, mutation }) {
+export default function QuoteDetails({
+  contract,
+  setContract,
+  mutation,
+  menu,
+}) {
   const [wholeFigures, setWholeFigures] = React.useState(false);
 
   return (
@@ -106,6 +111,7 @@ export default function QuoteDetails({ contract, setContract, mutation }) {
         size="s"
         multiline={true}
       />
+      {menu}
     </Column>
   );
 }

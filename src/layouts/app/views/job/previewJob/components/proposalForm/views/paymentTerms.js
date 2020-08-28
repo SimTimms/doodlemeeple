@@ -3,9 +3,6 @@ import {
   FieldTitle,
   Divider,
   Column,
-  NoticeBox,
-  ContractComponent,
-  BorderBox,
 } from '../../../../../../../../components';
 import { Typography } from '@material-ui/core';
 import { AddPaymentTerm } from './components';
@@ -21,6 +18,7 @@ export default function PaymentTerms({
   setSaveLock,
   setDetailsLock,
   detailsLock,
+  menu,
 }) {
   function addPaymentTerm(newValue) {
     setContract({
@@ -30,9 +28,8 @@ export default function PaymentTerms({
   }
   return (
     <Column>
-      <Divider />
       <FieldTitle
-        name="2. Payment Terms"
+        name="2. Payment Milestones"
         description="Go into detail about how and when you would like to be paid, be very specific about your terms to decrease the chance of a dispute further down the line."
         warning="Example: The Creative shall receive 10% upon commencement of the project, The Creative shall receive 20% upon delivery of 10 full resolution SVG files, the Creative shall receive 70% upon delivery of all remaining specified items"
         inline={true}
@@ -54,6 +51,13 @@ export default function PaymentTerms({
           setDetailsLock={setDetailsLock}
         />
       ))}
+      <AddPaymentTerm
+        contractId={contract._id}
+        setDetailsLock={setDetailsLock}
+        detailsLock={detailsLock}
+        percentLock={percentLock}
+        addPaymentTerm={addPaymentTerm}
+      />
       {percentLock.message !== '' && (
         <Typography
           style={{
@@ -65,14 +69,7 @@ export default function PaymentTerms({
           {percentLock.message}
         </Typography>
       )}
-      <Typography variant="h6">or</Typography>
-      <AddPaymentTerm
-        contractId={contract._id}
-        setDetailsLock={setDetailsLock}
-        detailsLock={detailsLock}
-        percentLock={percentLock}
-        addPaymentTerm={addPaymentTerm}
-      />
+      {menu}
     </Column>
   );
 }

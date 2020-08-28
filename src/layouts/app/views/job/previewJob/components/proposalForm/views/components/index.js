@@ -39,7 +39,7 @@ export function AddPaymentTerm({
           <IconButton
             disabled={detailsLock || percentLock.sum < 0}
             color="secondary"
-            title="Create Payment Terms"
+            title="Create Milestone"
             icon=""
             onClickEvent={() => {
               mutation();
@@ -54,7 +54,7 @@ export function AddPaymentTerm({
   );
 }
 
-export function NextButton({ setDetailsLock, contract, setContractParent }) {
+export function SubmitButton({ setDetailsLock, contract, setContractParent }) {
   const classes = useStyles();
   return (
     <Mutation
@@ -73,7 +73,7 @@ export function NextButton({ setDetailsLock, contract, setContractParent }) {
         return (
           <div className={classes.actionWrapper}>
             <IconButton
-              title="Next"
+              title="Submit"
               icon="chevron_right"
               color="primary"
               styleOverride={{ width: '100%' }}

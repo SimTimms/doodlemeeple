@@ -33,6 +33,7 @@ import InviteButton from './buttons/inviteButton';
 import CreateMessage from './buttons/createMessage';
 import IconButton from './buttons/iconButton';
 import MenuButton from './buttons/menuButton';
+import MenuButtonShortcut from './buttons/menuButtonShortcut';
 import FieldTitle from './fieldTitle';
 import { JobComponent, InviteComponent } from './jobComponent';
 import FieldTitleDashboard from './fieldTitleDashboard';
@@ -160,6 +161,7 @@ export {
   HeaderThree,
   PaymentElement,
   MenuButton,
+  MenuButtonShortcut,
   JobComponent,
   InviteComponent,
 };

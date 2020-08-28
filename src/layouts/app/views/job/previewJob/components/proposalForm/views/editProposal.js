@@ -3,14 +3,19 @@ import { Slide, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   Divider,
-  IconButton,
   ActionWrapper,
   BorderBox,
   Paper,
   Column,
   Meta,
+  Row,
+  MenuButtonShortcut,
+  ContractSummary,
+  SubmitContractButton,
+  EditContractButton,
+  IconButton,
 } from '../../../../../../../../components';
-import { NextButton } from './components';
+import { SubmitButton } from './components';
 import QuoteDetails from './quoteDetails';
 import PaymentTerms from './paymentTerms';
 import { calculatePercent } from '../../../../../../../../utils';
@@ -28,7 +33,7 @@ export default function EditProposalForm({
   setProposalOpen,
 }) {
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
+
   const [percentLock, setPercentLock] = React.useState({
     status: false,
     sum: null,
@@ -38,11 +43,13 @@ export default function EditProposalForm({
   const [saveLock, setSaveLock] = React.useState(false);
   const [showContract, setShowContract] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [page, setPage] = React.useState(0);
   const [contract, setContract] = React.useState({
     _id: '',
     notes: '',
     deadline: '',
     startDate: '',
+    updatedAt: '',
     cost: '100',
     paymentTerms: [],
     currency: 'GBP',
@@ -60,6 +67,7 @@ export default function EditProposalForm({
       notes: contractData.notes,
       deadline: contractData.deadline,
       startDate: contractData.startDate,
+      updatedAt: contractData.updatedAt,
       cost: contractData.cost ? contractData.cost : '0',
       currency: contractData.currency,
       status: contractData.status,
@@ -74,6 +82,44 @@ export default function EditProposalForm({
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div style={{ width: '100%' }}>
+        <Row j="space-between">
+          <MenuButtonShortcut
+            text={{
+              name: 'Details',
+              color: '#222',
+              icon: 'chevron_right',
+              count: 0,
+            }}
+            onClickEvent={() => {
+              setPage(0);
+            }}
+            active={page === 0}
+          />
+          <MenuButtonShortcut
+            text={{
+              name: 'Milestones',
+              color: '#222',
+              icon: 'chevron_right',
+              count: 0,
+            }}
+            onClickEvent={() => {
+              setPage(1);
+            }}
+            active={page === 1}
+          />
+          <MenuButtonShortcut
+            text={{
+              name: 'Submit',
+              color: '#222',
+              icon: 'chevron_right',
+              count: 0,
+            }}
+            onClickEvent={() => {
+              setPage(2);
+            }}
+            active={page === 2}
+          />
+        </Row>
         <Paper>
           {contract._id === '' ? (
             <ActionWrapper>
@@ -141,6 +187,18 @@ export default function EditProposalForm({
                           setContract={setContract}
                           contract={contract}
                           mutation={mutation}
+                          menu={
+                            <BorderBox w={300}>
+                              <Meta str="Continue onto payment milestones" />
+                              <IconButton
+                                title="Next"
+                                onClickEvent={() => setPage(1)}
+                                styleOverride={{ width: '100%' }}
+                                icon="chevron_right"
+                                iconPos="right"
+                              />
+                            </BorderBox>
+                          }
                         />
                       )}
 
@@ -155,9 +213,63 @@ export default function EditProposalForm({
                           setSaveLock={setSaveLock}
                           setDetailsLock={setDetailsLock}
                           detailsLock={detailsLock}
+                          menu={
+                            <BorderBox w={300}>
+                              <Meta str="Continue to Confirmation" />
+                              <IconButton
+                                title="Next"
+                                onClickEvent={() => setPage(2)}
+                                styleOverride={{ width: '100%' }}
+                                icon="chevron_right"
+                                iconPos="right"
+                              />
+                              <IconButton
+                                title="Back"
+                                icon=""
+                                iconPos="left"
+                                color="text-dark"
+                                onClickEvent={() => {
+                                  setPage(0);
+                                }}
+                                styleOverride={{ width: '100%' }}
+                              />
+                            </BorderBox>
+                          }
                         />
                       )}
-
+                      {page === 2 && (
+                        <div style={{ width: '100%' }}>
+                          <ContractSummary
+                            contractData={contract}
+                            contractStatus={contract.status}
+                          />
+                          <ActionWrapper>
+                            <EditContractButton
+                              contract={contract}
+                              jobId={jobId}
+                              setContract={setContract}
+                              title="Edit Quote"
+                            />
+                            <SubmitContractButton
+                              contract={contract}
+                              jobId={jobId}
+                              setContract={setContract}
+                            />
+                            <IconButton
+                              title="Minimise"
+                              color="text-dark"
+                              icon=""
+                              disabled={false}
+                              iconPos="right"
+                              styleOverride={null}
+                              type="button"
+                              onClickEvent={() => {
+                                setProposalOpen(false);
+                              }}
+                            />
+                          </ActionWrapper>
+                        </div>
+                      )}
                       {/*
                       <Divider />
                       <FieldTitle
@@ -188,23 +300,6 @@ export default function EditProposalForm({
                   );
                 }}
               </Mutation>
-              <BorderBox w={300}>
-                <Meta str="Continue onto payment milestones" />
-                <NextButton
-                  contract={contract}
-                  setContractParent={setContractParent}
-                  setDetailsLock={setDetailsLock}
-                />
-              </BorderBox>
-              <IconButton
-                title="Back"
-                icon="chevron_left"
-                iconPos="left"
-                color="text-dark"
-                onClickEvent={() => {
-                  setProposalOpen(false);
-                }}
-              />
             </Column>
           )}
         </Paper>

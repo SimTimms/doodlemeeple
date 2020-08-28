@@ -43,7 +43,7 @@ export function calculatePercent(paymentTermsArray) {
       : percentSum < 100 && {
           status: false,
           sum: 100 - percentSum,
-          message: `Payment Term: The Creative shall receive ${
+          message: `Payment Term: The Creative shall receive the remaining ${
             100 - percentSum
           }%
 upon completion of this contract.`,

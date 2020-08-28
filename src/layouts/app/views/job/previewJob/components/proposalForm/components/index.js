@@ -60,7 +60,8 @@ export default function PaymentTerm({
             <Row>
               <FieldBox
                 value={values.percent ? values.percent.toString() : '0'}
-                title="Percent:"
+                title="%"
+                titlePos="right"
                 maxLength={3}
                 onChangeEvent={(e) => {
                   const messageToInt = parseInt(e === '' ? 0 : e);
@@ -87,7 +88,27 @@ export default function PaymentTerm({
                 info=""
                 warning=""
                 size="xs"
-              />{' '}
+                width={50}
+              />
+              <FieldBox
+                value={values.description}
+                title=""
+                maxLength={86}
+                onChangeEvent={(e) => {
+                  setDetailsLock(false);
+                  setValues({ ...values, description: e });
+                  let paymentTermsArray = [...contract.paymentTerms];
+                  paymentTermsArray[index].description = e;
+                  autosave(() => {
+                    mutation();
+                  });
+                }}
+                replaceMode="loose"
+                placeholder="Example: initial deposit"
+                info="Split the total payment into pre-determined milestones, example: 50% upfront, 50% upon completion"
+                warning=""
+                size="s"
+              />
               <Mutation
                 mutation={REMOVE_TERM}
                 variables={{
@@ -108,34 +129,17 @@ export default function PaymentTerm({
               >
                 {(mutation) => {
                   return (
-                    <DeleteButtonSmall
-                      mutation={mutation}
-                      disabled={values._id === 'new' ? true : false}
-                    />
+                    <div style={{ marginLeft: 10 }}>
+                      <DeleteButtonSmall
+                        mutation={mutation}
+                        disabled={values._id === 'new' ? true : false}
+                      />
+                    </div>
                   );
                 }}
               </Mutation>
             </Row>
 
-            <FieldBox
-              value={values.description}
-              title="Clause"
-              maxLength={86}
-              onChangeEvent={(e) => {
-                setDetailsLock(false);
-                setValues({ ...values, description: e });
-                let paymentTermsArray = [...contract.paymentTerms];
-                paymentTermsArray[index].description = e;
-                autosave(() => {
-                  mutation();
-                });
-              }}
-              replaceMode="loose"
-              placeholder="Example: starting the project"
-              info="Split the total payment into pre-determined milestones, example: 50% upfront, 50% upon completion"
-              warning=""
-              size="s"
-            />
             <Divider />
           </Column>
         );

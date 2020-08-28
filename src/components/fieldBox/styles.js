@@ -16,6 +16,13 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: 14,
     width: '100%',
   },
+  one: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: 3,
+    marginBottom: 3,
+  },
+  two: { width: '100%', display: 'flex', whiteSpace: 'nowrap' },
   descriptionBox: {
     background: '#fff',
     color: '#222',
@@ -27,10 +34,11 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 10,
     width: '100%',
   },
-  tiny: { maxWidth: 30 },
+
   small: { minWidth: 100 },
   medium: { minWidth: 150 },
   large: { minWidth: 200 },
+  tiny: { maxWidth: 30, minWidth: 30 },
   openClose: {
     width: '100%',
     marginTop: 10,
