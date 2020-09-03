@@ -14,7 +14,6 @@ export default function PaymentTerms({
   setPercentLock,
   percentLock,
   calculatePercent,
-  saveLock,
   setSaveLock,
   setDetailsLock,
   detailsLock,
@@ -26,6 +25,7 @@ export default function PaymentTerms({
       paymentTerms: [...contract.paymentTerms, { ...newValue }],
     });
   }
+
   return (
     <Column>
       <FieldTitle
@@ -42,11 +42,8 @@ export default function PaymentTerms({
           paymentTerm={paymentTerm}
           index={index}
           key={`term_${index}`}
-          availablePercent={100}
           calculatePercent={calculatePercent}
           setPercentLock={setPercentLock}
-          percentLock={percentLock}
-          saveLock={saveLock}
           setSaveLock={setSaveLock}
           setDetailsLock={setDetailsLock}
         />

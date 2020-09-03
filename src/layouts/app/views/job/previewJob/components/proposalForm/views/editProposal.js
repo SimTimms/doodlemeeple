@@ -12,10 +12,9 @@ import {
   MenuButtonShortcut,
   ContractSummary,
   SubmitContractButton,
-  EditContractButton,
   IconButton,
+  UnlockInfo,
 } from '../../../../../../../../components';
-import { SubmitButton } from './components';
 import QuoteDetails from './quoteDetails';
 import PaymentTerms from './paymentTerms';
 import { calculatePercent } from '../../../../../../../../utils';
@@ -26,12 +25,7 @@ import {
   UPDATE_CONTRACT,
 } from '../../../../../../../../data/mutations';
 
-export default function EditProposalForm({
-  jobId,
-  contractData,
-  setContractParent,
-  setProposalOpen,
-}) {
+export default function EditProposalForm({ jobId, contractData, setContract }) {
   const classes = useStyles();
 
   const [percentLock, setPercentLock] = React.useState({
@@ -41,40 +35,15 @@ export default function EditProposalForm({
   });
   const [detailsLock, setDetailsLock] = React.useState(false);
   const [saveLock, setSaveLock] = React.useState(false);
-  const [showContract, setShowContract] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [page, setPage] = React.useState(0);
-  const [contract, setContract] = React.useState({
-    _id: '',
-    notes: '',
-    deadline: '',
-    startDate: '',
-    updatedAt: '',
-    cost: '100',
-    paymentTerms: [],
-    currency: 'GBP',
-    status: '',
-    job: {},
-    user: {},
-  });
 
   useEffect(() => {
-    const paymentTerms = contractData.paymentTerms;
-
-    setContract({
-      _id: contractData._id,
-      paymentTerms: paymentTerms,
-      notes: contractData.notes,
-      deadline: contractData.deadline,
-      startDate: contractData.startDate,
-      updatedAt: contractData.updatedAt,
-      cost: contractData.cost ? contractData.cost : '0',
-      currency: contractData.currency,
-      status: contractData.status,
-      job: contractData.job,
-      user: contractData.user,
-    });
-    const percentLockCalc = calculatePercent(paymentTerms);
+    const percentLockCalc = calculatePercent(
+      contractData.paymentTerms,
+      contractData.cost,
+      contractData.currency
+    );
     setPercentLock(percentLockCalc);
     percentLockCalc.sum >= 0 ? setSaveLock(false) : setSaveLock(true);
   }, [contractData]);
@@ -121,7 +90,7 @@ export default function EditProposalForm({
           />
         </Row>
         <Paper>
-          {contract._id === '' ? (
+          {contractData._id === '' ? (
             <ActionWrapper>
               <Mutation
                 mutation={CREATE_CONTRACT}
@@ -134,7 +103,7 @@ export default function EditProposalForm({
                   toaster('Autosave');
                   const updatedId = data.contractCreateOne.recordId;
                   setLoading(false);
-                  setContract({ ...contract, _id: updatedId });
+                  setContract({ ...contractData, _id: updatedId });
                 }}
               >
                 {(mutation) => {
@@ -158,7 +127,7 @@ export default function EditProposalForm({
                 }}
               </Mutation>
             </ActionWrapper>
-          ) : contract.status === 'submitted' ? (
+          ) : contractData.status === 'submitted' ? (
             <div>
               <Typography>
                 Submitted - this should display a view of the contract and allow
@@ -171,7 +140,7 @@ export default function EditProposalForm({
               <Mutation
                 mutation={UPDATE_CONTRACT}
                 variables={{
-                  ...contract,
+                  ...contractData,
                 }}
                 onCompleted={(data) => {
                   toaster('Autosave');
@@ -185,7 +154,7 @@ export default function EditProposalForm({
                       {page === 0 && (
                         <QuoteDetails
                           setContract={setContract}
-                          contract={contract}
+                          contract={contractData}
                           mutation={mutation}
                           menu={
                             <BorderBox w={300}>
@@ -206,10 +175,9 @@ export default function EditProposalForm({
                         <PaymentTerms
                           percentLock={percentLock}
                           setPercentLock={setPercentLock}
-                          contract={contract}
+                          contract={contractData}
                           setContract={setContract}
                           calculatePercent={calculatePercent}
-                          saveLock={saveLock}
                           setSaveLock={setSaveLock}
                           setDetailsLock={setDetailsLock}
                           detailsLock={detailsLock}
@@ -240,34 +208,37 @@ export default function EditProposalForm({
                       {page === 2 && (
                         <div style={{ width: '100%' }}>
                           <ContractSummary
-                            contractData={contract}
-                            contractStatus={contract.status}
+                            contractData={contractData}
+                            contractStatus={contractData.status}
                           />
-                          <ActionWrapper>
-                            <EditContractButton
-                              contract={contract}
-                              jobId={jobId}
-                              setContract={setContract}
-                              title="Edit Quote"
-                            />
-                            <SubmitContractButton
-                              contract={contract}
-                              jobId={jobId}
-                              setContract={setContract}
-                            />
-                            <IconButton
-                              title="Minimise"
-                              color="text-dark"
-                              icon=""
-                              disabled={false}
-                              iconPos="right"
-                              styleOverride={null}
-                              type="button"
-                              onClickEvent={() => {
-                                setProposalOpen(false);
-                              }}
-                            />
-                          </ActionWrapper>
+                          {percentLock.status && (
+                            <UnlockInfo str="WARNING! Your milestone payments exceed the contract total, please adjust to continue." />
+                          )}
+                          <BorderBox w={300}>
+                            {!percentLock.status && (
+                              <Meta str="Continue to Confirmation" />
+                            )}
+
+                            {!percentLock.status && (
+                              <SubmitContractButton
+                                percentLock={percentLock}
+                                contract={contractData}
+                                setContract={setContract}
+                              />
+                            )}
+                            {percentLock.status && (
+                              <IconButton
+                                title="Adjust Milestones"
+                                icon=""
+                                iconPos="left"
+                                color="warning"
+                                onClickEvent={() => {
+                                  setPage(1);
+                                }}
+                                styleOverride={{ width: '100%' }}
+                              />
+                            )}
+                          </BorderBox>
                         </div>
                       )}
                       {/*

@@ -4,7 +4,8 @@ import {
   IconButton,
   ActionWrapper,
   ContractComponent,
-  ProfileCardBasic,
+  ProfileCardCreative,
+  ProfileCardCreator,
   HeaderTwo,
   Divider,
   Column,
@@ -17,10 +18,10 @@ import {
 import { toaster } from '../../../../../../utils/toaster';
 import { DECLINE_CONTRACT } from '../../../../../../data/mutations';
 import { FAVOURITES } from '../../../../../../data/queries';
-
 import { Mutation, Query } from 'react-apollo';
 import { useStyles } from './styles';
 import clsx from 'clsx';
+import Cookies from 'js-cookie';
 
 export default function QuoteSummary({
   display,
@@ -34,7 +35,7 @@ export default function QuoteSummary({
   const [declineWarning, setDeclineWarning] = React.useState(false);
   const [favourites, setFavourites] = React.useState([]);
   const [displayPayment, setDisplayPayment] = React.useState(false);
-
+  const userId = Cookies.get('userId');
   useEffect(() => {
     setContractStatus(contractData.status);
   }, [contractData]);
@@ -65,13 +66,17 @@ export default function QuoteSummary({
         }}
       </Query>
       <Column j="center" a="center">
-        <ProfileCardBasic
-          history={history}
-          creative={contractData.user}
-          favourite={
-            favourites.indexOf(contractData.user._id) > -1 ? true : false
-          }
-        />
+        {userId !== contractData.user._id ? (
+          <ProfileCardCreative
+            history={history}
+            creative={contractData.user}
+            favourite={
+              favourites.indexOf(contractData.user._id) > -1 ? true : false
+            }
+          />
+        ) : (
+          <ProfileCardCreator history={history} user={contractData.job.user} />
+        )}
       </Column>
       {contractData.status !== 'paid' ? (
         <HeaderTwo str="Quote" />
@@ -88,15 +93,14 @@ export default function QuoteSummary({
             contractStatus={contractStatus}
           />
         )}
-        {openContract ||
-          (contractData.status === 'paid' && (
-            <ContractComponent
-              contractData={contractData}
-              setOpenContract={setOpenContract}
-              setContractStatus={setContractStatus}
-              history={history}
-            />
-          ))}
+        {(openContract || contractData.status === 'paid') && (
+          <ContractComponent
+            contractData={contractData}
+            setOpenContract={setOpenContract}
+            setContractStatus={setContractStatus}
+            history={history}
+          />
+        )}
         {!openContract && contractData.status !== 'paid' && (
           <Column>
             <Divider />

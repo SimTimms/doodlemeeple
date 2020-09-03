@@ -8,7 +8,12 @@ import { Conversations, ViewConversation } from './views/messaging';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
 import { GET_MESSAGES } from '../../data/queries';
-import { ContentTop, StyledNavBar, LoadIcon } from '../../components';
+import {
+  ContentTop,
+  StyledNavBar,
+  LoadIcon,
+  IconButton,
+} from '../../components';
 
 function MessagesLayout(props) {
   const [page, setPage] = React.useState('home');
@@ -53,6 +58,8 @@ function MessagesLayout(props) {
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  //TODO this is sooooo dirty, but until I can reliably product subscriptions this is the way it will have to be
+  const [refreshCount, setRefreshCount] = React.useState(0);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -100,9 +107,11 @@ function MessagesLayout(props) {
                 jobId: conversationArgs.jobId,
                 userId: conversationArgs.conversationUser._id,
                 pageNbr: conversationArgs.pageNbr,
+                count: refreshCount,
               }}
               fetchPolicy="network-only"
               onCompleted={(data) =>
+                data.getMessages !== null &&
                 setMessages([...data.getMessages.reverse(), ...messages])
               }
             >
@@ -134,6 +143,8 @@ function MessagesLayout(props) {
                       pageNbr={conversationArgs.pageNbr}
                       setPageNbr={setPageNbr}
                       setMessages={setMessages}
+                      refreshCount={refreshCount}
+                      setRefreshCount={setRefreshCount}
                     />
                   </div>
                 ) : null;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStyles } from './styles';
 import Messages from './components/messages';
-import { IconButton } from '../../../../../components';
+import { IconButton, Row } from '../../../../../components';
 
 export default function ViewConversation({
   history,
@@ -11,6 +11,8 @@ export default function ViewConversation({
   pageNbr,
   setPageNbr,
   setMessages,
+  setRefreshCount,
+  refreshCount,
 }) {
   const classes = useStyles();
 
@@ -25,18 +27,27 @@ export default function ViewConversation({
         pageNbr={pageNbr}
         setMessages={setMessages}
         moreButton={
-          <IconButton
-            icon="more_horiz"
-            title=""
-            iconPos="right"
-            color="text-mini"
-            disabled={false}
-            type="button"
-            styleOverride={null}
-            onClickEvent={() => {
-              setPageNbr(pageNbr + 1);
-            }}
-          />
+          <Row>
+            <IconButton
+              icon="more_horiz"
+              title=""
+              iconPos="right"
+              color="text-mini"
+              onClickEvent={() => {
+                setPageNbr(pageNbr + 1);
+              }}
+            />
+            <IconButton
+              icon="refresh"
+              title=""
+              iconPos="right"
+              color="text-mini"
+              onClickEvent={() => {
+                setMessages([]);
+                setRefreshCount(refreshCount + 1);
+              }}
+            />
+          </Row>
         }
       />
     </div>

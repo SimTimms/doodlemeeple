@@ -376,6 +376,8 @@ export const GET_CONTRACT_ID = gql`
       startDate
       cost
       currency
+      signedDate
+      signedBy
       status
       updatedAt
       payments {

@@ -13,7 +13,8 @@ export const TYPE_HELPER = (typeIn) => {
   }
 };
 
-export function calculatePercent(paymentTermsArray) {
+export function calculatePercent(paymentTermsArray, contractTotal, currency) {
+  const totalInt = parseInt(contractTotal);
   let response = {
     status: false,
     sum: 0,
@@ -26,26 +27,26 @@ export function calculatePercent(paymentTermsArray) {
     percentSum += parseInt(numberVal === '' ? 0 : numberVal);
   }
 
+  console.log(percentSum, totalInt);
   response =
-    percentSum > 100
+    percentSum > totalInt
       ? {
           status: true,
-          sum: 100 - percentSum,
-          message:
-            'Although it would be nice, your payment terms cannot exceed 100%',
+          sum: totalInt - percentSum,
+          message: `Although it would be nice, your payment terms cannot exceed your total cost of ${contractTotal} ${currency}`,
         }
-      : percentSum === 100
+      : percentSum === totalInt
       ? {
           status: false,
-          sum: 100 - percentSum,
-          message: '',
+          sum: totalInt,
+          message: `Perfect!`,
         }
-      : percentSum < 100 && {
+      : percentSum <= totalInt && {
           status: false,
-          sum: 100 - percentSum,
+          sum: totalInt - percentSum,
           message: `Payment Term: The Creative shall receive the remaining ${
-            100 - percentSum
-          }%
+            totalInt - percentSum
+          } ${currency}
 upon completion of this contract.`,
         };
   return response;

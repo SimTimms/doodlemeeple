@@ -1,6 +1,6 @@
 import React from 'react';
-import { Slide, Typography, Card } from '@material-ui/core';
-import { LoadIcon, IconButton, Column, Row } from '../../../../../components';
+import { Slide, Typography } from '@material-ui/core';
+import { LoadIcon, Column, Row } from '../../../../../components';
 import { PREVIEW_CONTRACT, GET_MESSAGES } from '../../../../../data/queries';
 import { Query } from 'react-apollo';
 import QuoteSummary from './views/quote';

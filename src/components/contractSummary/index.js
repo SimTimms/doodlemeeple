@@ -6,7 +6,7 @@ import { HeaderThree, Column, Divider, TextLeft } from '../';
 import { timeDifferenceForDate } from '../../utils/dates';
 
 export default function ContractSummary({ contractData, contractStatus }) {
-  let paymentTermsSum = 100;
+  let paymentTermsSum = contractData.cost;
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -14,7 +14,7 @@ export default function ContractSummary({ contractData, contractStatus }) {
         <NoticeBox
           title="Accepted"
           color="secondary"
-          subTitle={`This quote was accepted by the Client on 
+          subTitle={`This quote was accepted & signed by the Client on 
         ${moment(contractData.signedDate).format('LLLL')}`}
         />
       )}
@@ -57,12 +57,14 @@ export default function ContractSummary({ contractData, contractStatus }) {
           return (
             <TextLeft
               key={`term_summary_${index}`}
-              str={`${term.percent}% upon ${term.description}`}
+              str={`${term.percent} ${contractData.currency} ${term.description}`}
             />
           );
         })}
         {paymentTermsSum > 0 && (
-          <TextLeft str={`${paymentTermsSum}% upon completion`} />
+          <TextLeft
+            str={`${paymentTermsSum} ${contractData.currency} upon completion`}
+          />
         )}
         <Divider />
         <HeaderThree str="Additional Notes" />

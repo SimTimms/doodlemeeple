@@ -21,22 +21,17 @@ export default function PaymentTerm({
   setContract,
   paymentTerm,
   index,
-  availablePercent,
   calculatePercent,
   setPercentLock,
-  percentLock,
-  saveLock,
   setSaveLock,
   setDetailsLock,
 }) {
-  const classes = useStyles();
   const [values, setValues] = React.useState({
     _id: 'new',
     percent: 0,
     description: '',
     contractId: '',
   });
-
   useEffect(() => {
     setValues({ ...paymentTerm, contractId: contract._id });
   }, [paymentTerm, contract]);
@@ -60,28 +55,35 @@ export default function PaymentTerm({
             <Row>
               <FieldBox
                 value={values.percent ? values.percent.toString() : '0'}
-                title="%"
+                title={contract.currency}
                 titlePos="right"
-                maxLength={3}
+                maxLength={10}
                 onChangeEvent={(e) => {
                   const messageToInt = parseInt(e === '' ? 0 : e);
-                  console.log(messageToInt);
+
                   let paymentTermsArray = [...contract.paymentTerms];
                   paymentTermsArray[index].percent = messageToInt;
 
-                  const percentLockCalc = calculatePercent(paymentTermsArray);
+                  const percentLockCalc = calculatePercent(
+                    paymentTermsArray,
+                    contract.cost,
+                    contract.currency
+                  );
+
+                  console.log(messageToInt, percentLockCalc);
+
+                  setDetailsLock(false);
+                  setPercentLock(percentLockCalc);
+                  percentLockCalc.sum >= 0
+                    ? setSaveLock(false)
+                    : setSaveLock(true);
                   if (percentLockCalc.sum >= 0) {
-                    setDetailsLock(false);
-                    setPercentLock(percentLockCalc);
-                    percentLockCalc.sum >= 0
-                      ? setSaveLock(false)
-                      : setSaveLock(true);
-                    setValues({ ...values, percent: messageToInt });
                     percentLockCalc.sum >= 0 &&
                       autosave(() => {
                         mutation();
                       });
                   }
+                  setValues({ ...values, percent: messageToInt });
                 }}
                 replaceMode="number"
                 placeholder="Example: 20"
@@ -119,7 +121,11 @@ export default function PaymentTerm({
                   const updatedArray = contract.paymentTerms.filter(
                     (item) => item._id !== values._id
                   );
-                  const percentLockCalc = calculatePercent(updatedArray);
+                  const percentLockCalc = calculatePercent(
+                    updatedArray,
+                    contract.cost,
+                    contract.currency
+                  );
                   setPercentLock(percentLockCalc);
                   setContract({
                     ...contract,

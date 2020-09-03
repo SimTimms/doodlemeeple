@@ -72,7 +72,6 @@ export function AppDrawer(props) {
         }}
         alt="DoodleMeeple Man"
       />
-      <Divider />
       {page !== 'dashboard' && <Divider />}
       <List>
         {page !== 'dashboard' && <Divider /> && (
@@ -150,6 +149,17 @@ export function AppDrawer(props) {
               color: theme.palette.primary.main,
               count: null,
             },
+            {
+              name: 'Logout',
+              icon: <Icon>exit_to_app</Icon>,
+              link: () => {
+                Cookies.remove('token');
+                Cookies.remove('userId');
+                props.history.replace(`/`);
+              },
+              color: theme.palette.error.main,
+              count: null,
+            },
           ].map((text, index) => (
             <MenuButton
               text={text}
@@ -160,49 +170,11 @@ export function AppDrawer(props) {
               }}
             />
           ))}
-          <a
-            href="https://doodlemeeple.com"
-            style={{ textDecoration: 'none' }}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <ListItem button>
-              <ListItemIcon style={{ minWidth: 32 }}>
-                <Icon style={{ minWidth: 32 }}>web_asset</Icon>
-              </ListItemIcon>
-              <ListItemText
-                primary="Website"
-                className={clsx({
-                  [button]: !mobile,
-                  [buttonMobile]: mobile,
-                })}
-              />
-            </ListItem>
-          </a>
 
           <ListItem
             button
-            onClick={() => {
-              Cookies.remove('token');
-              Cookies.remove('userId');
-              props.history.replace(`/`);
-            }}
-          >
-            <ListItemIcon style={{ minWidth: 32 }}>
-              <Icon>exit_to_app</Icon>
-            </ListItemIcon>
-            <ListItemText
-              primary="Logout"
-              className={clsx({
-                [button]: !mobile,
-                [buttonMobile]: mobile,
-              })}
-            />
-          </ListItem>
-          <Divider />
-          <ListItem
-            button
             onClick={open ? handleDrawerClose : handleDrawerOpen}
+            style={{ paddingLeft: 14 }}
           >
             <ListItemIcon style={{ minWidth: 32 }}>
               <Icon>{open ? 'chevron_left' : 'chevron_right'}</Icon>

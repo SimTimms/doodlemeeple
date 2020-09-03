@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react';
-import { Button, Icon, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { toaster } from '../../../utils/toaster';
 import { IconButton } from '../../';
-import clsx from 'clsx';
 
 export default function InviteButton({ mutation, invite, disabled }) {
   const classes = useStyles();

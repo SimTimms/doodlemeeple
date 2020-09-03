@@ -19,8 +19,6 @@ export default function PaymentTerm({
   availablePercent,
   calculatePercent,
   setPercentLock,
-  percentLock,
-  saveLock,
   setSaveLock,
   setDetailsLock,
 }) {
@@ -69,7 +67,11 @@ export default function PaymentTerm({
 
                 let paymentTermsArray = [...contract.paymentTerms];
                 paymentTermsArray[index].percent = messageToInt;
-                const percentLockCalc = calculatePercent(paymentTermsArray);
+                const percentLockCalc = calculatePercent(
+                  paymentTermsArray,
+                  contract.cost,
+                  contract.currency
+                );
                 if (percentLockCalc.sum >= 0) {
                   setDetailsLock(false);
                   setPercentLock(percentLockCalc);
@@ -124,7 +126,11 @@ export default function PaymentTerm({
                 const updatedArray = contract.paymentTerms.filter(
                   (item) => item.id !== values.id
                 );
-                const percentLockCalc = calculatePercent(updatedArray);
+                const percentLockCalc = calculatePercent(
+                  updatedArray,
+                  contract.cost,
+                  contract.currency
+                );
                 setPercentLock(percentLockCalc);
                 setContract({
                   ...contract,

@@ -67,7 +67,6 @@ export default function QuoteDetails({
         maxLength={12}
         onChangeEvent={(e) => {
           e.indexOf('.') > -1 ? setWholeFigures(true) : setWholeFigures(false);
-
           setContract({ ...contract, cost: e });
           autosave(mutation, null);
         }}

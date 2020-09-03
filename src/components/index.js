@@ -41,7 +41,7 @@ import FieldBox from './fieldBox';
 import InfoBox from './infoBox';
 import FieldTitleWrapper from './fieldTitle/FieldTitleWrapper';
 import ProfileCard from './profileCard';
-import ProfileCardBasic from './profileCardBasic';
+import { ProfileCardCreative, ProfileCardCreator } from './profileCardBasic';
 import BorderBox from './borderBox';
 import IconBox from './iconBox';
 import IconTitle from './iconTitle';
@@ -127,7 +127,8 @@ export {
   InviteButton,
   IconButton,
   ProfileCard,
-  ProfileCardBasic,
+  ProfileCardCreative,
+  ProfileCardCreator,
   FieldTitle,
   CurrencySelector,
   LoadIcon,

@@ -37,7 +37,7 @@ export function AddPaymentTerm({
       {(mutation, { loading }) => {
         return (
           <IconButton
-            disabled={detailsLock || percentLock.sum < 0}
+            disabled={detailsLock || percentLock.sum < 0 || percentLock.status}
             color="secondary"
             title="Create Milestone"
             icon=""
