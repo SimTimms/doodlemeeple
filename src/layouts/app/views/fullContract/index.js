@@ -1,6 +1,10 @@
 import React from 'react';
 import { Slide, Typography } from '@material-ui/core';
-import { ContractComponent, LoadIcon, Column } from '../../../../components';
+import {
+  ContractComponentForCreator,
+  LoadIcon,
+  Column,
+} from '../../../../components';
 import { PREVIEW_CONTRACT } from '../../../../data/queries';
 import { Query } from 'react-apollo';
 
@@ -36,7 +40,7 @@ export default function FullContract({ history, contractId }) {
                 </Typography>
               ) : (
                 data && (
-                  <ContractComponent
+                  <ContractComponentForCreator
                     contractData={contractData}
                     history={history}
                     readOnly={true}

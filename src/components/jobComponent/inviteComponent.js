@@ -35,7 +35,7 @@ export default function InviteComponent({ invite, history }) {
               [classes.cardSummaryWarning]: true,
             })}
           >
-            Waiting
+            {invite.status === 'paid' ? 'Active ' : 'Waiting'}
           </Typography>
         </Column>
       </Row>

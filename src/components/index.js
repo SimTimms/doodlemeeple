@@ -56,7 +56,10 @@ import EditContractButton from './editContractButton';
 import ViewContractButton from './viewContractButton';
 import SubmitContractButton from './submitContractButton';
 import NoticeBox from './noticeBox';
-import ContractComponent from './contract';
+import {
+  ContractComponentForCreative,
+  ContractComponentForCreator,
+} from './contract';
 import CardComponent from './cardComponent';
 import ProfileAvatar from './profileAvatar';
 import FeatureCard from './featureCard';
@@ -106,7 +109,8 @@ export {
   FeatureCardHorizontal,
   SubmitContractButton,
   NoticeBox,
-  ContractComponent,
+  ContractComponentForCreative,
+  ContractComponentForCreator,
   Paper,
   ViewContractButton,
   EditContractButton,

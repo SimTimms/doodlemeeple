@@ -8,7 +8,7 @@ import { ADD_FAVOURITE } from '../../data/mutations';
 import clsx from 'clsx';
 import Cookies from 'js-cookie';
 
-export default function ProfileCardCreative({ history, user }) {
+export default function ProfileCardCreator({ history, user }) {
   const classes = useStyles();
   const [isFav, setIsFav] = React.useState(false);
 

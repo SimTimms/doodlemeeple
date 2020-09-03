@@ -3,9 +3,11 @@ import { Slide, Typography } from '@material-ui/core';
 import { LoadIcon, Column, Row } from '../../../../../components';
 import { PREVIEW_CONTRACT, GET_MESSAGES } from '../../../../../data/queries';
 import { Query } from 'react-apollo';
-import QuoteSummary from './views/quote';
+import QuoteSummaryCreative from './views/quoteSummaryForCreative';
+import QuoteSummaryCreator from './views/quoteSummaryForCreator';
 import Chat from './views/chat';
 import PaymentElement from './views/payments';
+import Cookies from 'js-cookie';
 
 export default function PreviewContract({ contractId, history }) {
   const [tabs, setTabs] = React.useState([true, false, false]);
@@ -18,6 +20,7 @@ export default function PreviewContract({ contractId, history }) {
   });
   const [job, setJob] = React.useState({ id: null, user: { id: '' } });
   const [conversationId, setConversationId] = React.useState(null);
+  const userId = Cookies.get('userId');
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -48,12 +51,21 @@ export default function PreviewContract({ contractId, history }) {
               data && (
                 <Column a="center" j="center">
                   <div style={{ width: '100%' }}>
-                    <QuoteSummary
-                      display={tabs[0]}
-                      contractData={contractData}
-                      setContract={setContract}
-                      history={history}
-                    />
+                    {userId === contractData.user._id ? (
+                      <QuoteSummaryCreative
+                        display={tabs[0]}
+                        contractData={contractData}
+                        history={history}
+                      />
+                    ) : (
+                      <QuoteSummaryCreator
+                        display={tabs[0]}
+                        contractData={contractData}
+                        setContract={setContract}
+                        history={history}
+                      />
+                    )}
+
                     <Chat
                       display={tabs[1]}
                       conversationId={conversationId}

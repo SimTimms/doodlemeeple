@@ -10,14 +10,6 @@ export default function ContractSummary({ contractData, contractStatus }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      {contractStatus === 'accepted' && (
-        <NoticeBox
-          title="Accepted"
-          color="secondary"
-          subTitle={`This quote was accepted & signed by the Client on 
-        ${moment(contractData.signedDate).format('LLLL')}`}
-        />
-      )}
       {contractStatus === 'submitted' && (
         <NoticeBox
           title="Submitted"

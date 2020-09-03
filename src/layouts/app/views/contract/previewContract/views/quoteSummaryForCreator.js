@@ -3,7 +3,7 @@ import {
   ContractSummary,
   IconButton,
   ActionWrapper,
-  ContractComponent,
+  ContractComponentForCreator,
   ProfileCardCreative,
   ProfileCardCreator,
   HeaderTwo,
@@ -14,6 +14,7 @@ import {
   BorderBox,
   PaymentElement,
   HeaderThree,
+  NoticeBox,
 } from '../../../../../../components';
 import { toaster } from '../../../../../../utils/toaster';
 import { DECLINE_CONTRACT } from '../../../../../../data/mutations';
@@ -21,9 +22,10 @@ import { FAVOURITES } from '../../../../../../data/queries';
 import { Mutation, Query } from 'react-apollo';
 import { useStyles } from './styles';
 import clsx from 'clsx';
+import moment from 'moment';
 import Cookies from 'js-cookie';
 
-export default function QuoteSummary({
+export default function QuoteSummaryCreative({
   display,
   contractData,
   setContract,
@@ -47,7 +49,6 @@ export default function QuoteSummary({
         [classes.hide]: !display,
       })}
     >
-      <HeaderTwo str={`Creative`} />
       <PaymentElement
         display={displayPayment}
         setDisplayPayment={setDisplayPayment}
@@ -67,15 +68,24 @@ export default function QuoteSummary({
       </Query>
       <Column j="center" a="center">
         {userId !== contractData.user._id ? (
-          <ProfileCardCreative
-            history={history}
-            creative={contractData.user}
-            favourite={
-              favourites.indexOf(contractData.user._id) > -1 ? true : false
-            }
-          />
+          <Column>
+            <HeaderTwo str={`Creative`} />
+            <ProfileCardCreative
+              history={history}
+              creative={contractData.user}
+              favourite={
+                favourites.indexOf(contractData.user._id) > -1 ? true : false
+              }
+            />
+          </Column>
         ) : (
-          <ProfileCardCreator history={history} user={contractData.job.user} />
+          <Column>
+            <HeaderTwo str={`Creator`} />
+            <ProfileCardCreator
+              history={history}
+              user={contractData.job.user}
+            />
+          </Column>
         )}
       </Column>
       {contractData.status !== 'paid' ? (
@@ -87,6 +97,20 @@ export default function QuoteSummary({
       <Divider />
 
       <div className={classes.root}>
+        {contractStatus === 'accepted' && (
+          <NoticeBox
+            title="Payment Required"
+            color="warning"
+            subTitle={`This quote was accepted & signed by the Client on 
+        ${moment(contractData.signedDate).format(
+          'LLLL'
+        )}. Payment is required to continue.`}
+            actionTitle="Pay Now"
+            actionEvent={() => {
+              setDisplayPayment(true);
+            }}
+          />
+        )}
         {!openContract && contractData.status !== 'paid' && (
           <ContractSummary
             contractData={contractData}
@@ -94,7 +118,7 @@ export default function QuoteSummary({
           />
         )}
         {(openContract || contractData.status === 'paid') && (
-          <ContractComponent
+          <ContractComponentForCreator
             contractData={contractData}
             setOpenContract={setOpenContract}
             setContractStatus={setContractStatus}
@@ -125,6 +149,7 @@ export default function QuoteSummary({
                       iconPos="right"
                     />
                   )}
+
                   {declineWarning && (
                     <Column j="center" a="center">
                       <Text str="You will be unable to continue conversations with this Creative about this particular job." />{' '}
@@ -210,13 +235,10 @@ export default function QuoteSummary({
                     title="Payment"
                     color="text-dark"
                     icon="payment"
-                    disabled={false}
                     onClickEvent={() => {
                       setDisplayPayment(true);
                     }}
                     styleOverride={{ width: '100%' }}
-                    type="button"
-                    iconPos="right"
                   />
                 </BorderBox>
               )}
