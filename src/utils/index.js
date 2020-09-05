@@ -8,6 +8,8 @@ export const TYPE_HELPER = (typeIn) => {
       return 'Editor';
     case 'artist':
       return 'Artist';
+    case 'creator':
+      return 'Creator';
     default:
       return typeIn;
   }

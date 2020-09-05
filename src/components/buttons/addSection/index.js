@@ -8,6 +8,7 @@ import { ArtistCard } from './ArtistCard';
 import heromaster from '../../../assets/heromaster.jpg';
 import jumping from '../../../assets/jumping.jpg';
 import map from '../../../assets/map.jpg';
+import boxes from '../../../assets/boxes.jpg';
 
 function AddSection({ setSections, sections }) {
   const [display, setDisplay] = React.useState(false);
@@ -28,7 +29,7 @@ function AddSection({ setSections, sections }) {
           component="p"
           style={{ fontSize: 16, color: '#fff', marginLeft: 10 }}
         >
-          {`Add a Skill (${3 - sections.length})`}
+          {`Add a Section (${3 - sections.length})`}
         </Typography>
       </CardContent>
 
@@ -58,6 +59,13 @@ function AddSection({ setSections, sections }) {
           setSections={setSections}
           type="rulebook-editor"
           img={map}
+        />
+        <ArtistCard
+          setDisplay={setDisplay}
+          sections={sections}
+          setSections={setSections}
+          type="creator"
+          img={boxes}
         />
       </div>
       <CardContent
