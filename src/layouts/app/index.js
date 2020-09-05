@@ -72,7 +72,7 @@ function AppLayout(props) {
     count: 0,
   };
   const alphaButton = {
-    name: 'Closed Beta',
+    name: 'Open Beta',
     icon: <Icon>construction</Icon>,
     link: () => history.push('/app/beta'),
     color: props.theme.palette.secondary.main,

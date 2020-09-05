@@ -1,15 +1,8 @@
 import React from 'react';
-import { Slide, Typography } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
-import {
-  LoadIcon,
-  FieldTitle,
-  UnlockInfo,
-  Column,
-} from '../../../../components';
-import { Query } from 'react-apollo';
-import { JOB } from '../../../../data/queries';
-import { ArtistLineup, Creatives, SubmitBrief } from './components';
+import { LoadIcon } from '../../../../components';
+import { Creatives } from './components';
 
 export default function CreativeRoster({ theme, history, favourites }) {
   const classes = useStyles();
