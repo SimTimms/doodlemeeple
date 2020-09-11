@@ -19,14 +19,20 @@ export const useStyles = makeStyles((theme) => ({
       background: 'none',
     },
   },
+
   iconButtonOnly: { marginRight: 0 },
   iconIcon: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: '#fff',
+    color: '#222',
     position: 'relative',
     fontSize: 12,
+  },
+  active: {
+    background: theme.palette.secondary.main,
+    color: '#fff',
+    borderRadius: '50%',
   },
   dark: { color: theme.palette.primary.light },
   link: {

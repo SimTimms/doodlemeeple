@@ -5,11 +5,31 @@ export const TYPE_HELPER = (typeIn) => {
     case '3d-artist':
       return '3d Sculptor';
     case 'rulebook-editor':
-      return 'Editor';
+      return 'Rules Editor';
     case 'artist':
       return 'Artist';
     case 'creator':
       return 'Creator';
+    case 'reviewer':
+      return 'Reviewer';
+    case 'marketing':
+      return 'Marketing';
+    case 'games-developer':
+      return 'Games Developer';
+    case 'voice-actor':
+      return 'Voice Actor';
+    case 'video-editor':
+      return 'Video Editor';
+    case 'social':
+      return 'Social Media/Campaign Manager';
+    case 'proof-reader':
+      return 'Proof-Reader';
+    case 'translator':
+      return 'Translator';
+    case 'world-builder':
+      return 'World Builder/Creative Writer';
+    case 'play-tester':
+      return 'Play Tester';
     default:
       return typeIn;
   }
@@ -29,7 +49,6 @@ export function calculatePercent(paymentTermsArray, contractTotal, currency) {
     percentSum += parseInt(numberVal === '' ? 0 : numberVal);
   }
 
-  console.log(percentSum, totalInt);
   response =
     percentSum > totalInt
       ? {

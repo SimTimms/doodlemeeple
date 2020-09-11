@@ -12,7 +12,7 @@ export default function ContractComponentForCreative({
 }) {
   let paymentTermsSum = 100;
   const classes = useStyles();
-  const { setOpenContract, setContractStatus, readOnly } = props;
+  const { setOpenContract } = props;
 
   return (
     <div style={{ width: '100%' }}>

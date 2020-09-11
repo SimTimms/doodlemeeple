@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Slide, Icon } from '@material-ui/core';
+import { Typography, Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { INVITES } from '../../../../data/queries';

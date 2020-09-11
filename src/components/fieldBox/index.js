@@ -46,7 +46,6 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
             placeholder={placeholder}
             value={value.substring(0, maxLength)}
             onChange={(e) => {
-              console.log(e.target.value);
               const eReplaced =
                 replaceMode === 'loose'
                   ? e.target.value.replace(

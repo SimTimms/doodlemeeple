@@ -9,11 +9,9 @@ import {
   InlineHeader,
   FieldTitle,
   DMCard,
-  IconButton,
   LoadIcon,
   FieldBox,
   FieldTitleDashboard,
-  Meta,
   Divider,
   MenuButton,
 } from '../../../../components';
@@ -28,13 +26,11 @@ import autosave from '../../../../utils/autosave';
 export function EditProfile({ theme, history }) {
   const classes = useStyles();
   const [bgImage, setBgImage] = React.useState(null);
-  const [profileImgStyle, setProfileImgStyle] = React.useState([0, 0]);
   const [userName, setUserName] = React.useState('');
   const [userId, setUserId] = React.useState('');
   const [summary, setSummary] = React.useState('');
   const [sections, setSections] = React.useState([]);
   const [profileImg, setProfileImg] = React.useState(null);
-  const [profileBGStyle, setProfileBGStyle] = React.useState([0, 0]);
   const [loading, setLoading] = React.useState(true);
   const [changes, setChanges] = React.useState(0);
   const [errors, setError] = React.useState({
@@ -49,8 +45,6 @@ export function EditProfile({ theme, history }) {
     profileImg,
     bgImage,
     sections,
-    profileImgStyle,
-    profileBGStyle,
     autosave: true,
   };
   function hasNew() {

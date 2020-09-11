@@ -8,7 +8,6 @@ import {
 } from '../../../../../../../../components';
 import autosave from '../../../../../../../../utils/autosave';
 import { Mutation } from 'react-apollo';
-import { useStyles } from './styles';
 import {
   UPDATE_TERM,
   REMOVE_TERM,
@@ -70,19 +69,18 @@ export default function PaymentTerm({
                     contract.currency
                   );
 
-                  console.log(messageToInt, percentLockCalc);
-
                   setDetailsLock(false);
                   setPercentLock(percentLockCalc);
+                  console.log(percentLockCalc.sum);
                   percentLockCalc.sum >= 0
                     ? setSaveLock(false)
                     : setSaveLock(true);
-                  if (percentLockCalc.sum >= 0) {
-                    percentLockCalc.sum >= 0 &&
-                      autosave(() => {
-                        mutation();
-                      });
-                  }
+
+                  percentLockCalc.sum >= 0 &&
+                    autosave(() => {
+                      mutation();
+                    });
+
                   setValues({ ...values, percent: messageToInt });
                 }}
                 replaceMode="number"

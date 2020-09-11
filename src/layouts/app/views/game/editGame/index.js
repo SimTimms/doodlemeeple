@@ -1,12 +1,11 @@
 import React from 'react';
-import { Card, Slide, TextField, Typography } from '@material-ui/core';
+import { Card, Slide, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { ProfileHeader } from './components/profileHeader';
 import {
   LoadIcon,
   ContentHeader,
   DeleteButton,
-  FieldTitle,
   InlineHeader,
   InlineHeaderWarning,
   IconTitle,

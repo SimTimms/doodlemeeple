@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import { useStyles } from './styles';
 import { NoticeBox } from '../';
 import { HeaderThree, Column, Divider, TextLeft } from '../';

@@ -27,10 +27,8 @@ export default function MenuButtonShortcut({ text, onClickEvent, active }) {
             className={clsx({
               [classes.iconIcon]: true,
               [classes.dark]: text.color === 'white',
+              [classes.active]: active,
             })}
-            style={{
-              color: text.color,
-            }}
           >
             {active ? 'keyboard_arrow_down' : text.icon}
           </Icon>

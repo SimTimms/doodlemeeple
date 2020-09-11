@@ -9,7 +9,6 @@ import {
   ListItemText,
   List,
   useMediaQuery,
-  Typography,
 } from '@material-ui/core';
 import { useStyles } from '../styles';
 import Cookies from 'js-cookie';
@@ -19,21 +18,24 @@ import { COUNTS } from '../../../data/queries';
 import logo from '../../../assets/dm_device.png';
 import { MenuButton } from '../../../components';
 
-export function AppDrawer(props) {
+export function AppDrawer({
+  history,
+  handleDrawerClose,
+  handleDrawerOpen,
+  open,
+  ...props
+}) {
   const {
-    link,
     button,
     buttonMobile,
     drawerOpen,
     drawerOpenMobile,
     drawerClose,
     drawerCloseMobile,
-    countsStyle,
-    wrapperFour,
     drawerRoot,
   } = useStyles();
 
-  const { handleDrawerClose, handleDrawerOpen, open, page, history } = props;
+  const { page, profile } = props;
   const theme = useTheme();
   const mobile = useMediaQuery('(max-width:800px)');
   const [counts, setCounts] = React.useState({
@@ -107,6 +109,7 @@ export function AppDrawer(props) {
               color: theme.palette.secondary.main,
               count: null,
             },
+            /*
             {
               name: 'Messages',
               icon: <Icon>chat</Icon>,
@@ -127,13 +130,13 @@ export function AppDrawer(props) {
               link: () => history.push('/app/jobs'),
               color: theme.palette.primary.main,
               count: null,
-            },
+            },*/
             {
               name: 'Profile',
               icon: <Icon>contact_mail</Icon>,
               link: () => history.push('/app/edit-profile'),
               color: theme.palette.primary.main,
-              count: null,
+              count: profile.profileBG ? null : 1,
             },
             {
               name: 'Account',

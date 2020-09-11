@@ -7,7 +7,6 @@ import {
   Divider,
   Column,
   BorderBox,
-  Meta,
   IconButton,
   NoticeBox,
 } from '../../../../../../components';

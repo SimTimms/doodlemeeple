@@ -38,6 +38,7 @@ export const useStyles = makeStyles((theme) => {
       flexWrap: 'wrap',
       boxSizing: 'border-box',
       padding: 20,
+      paddingTop: 0,
     },
     skillCard: {
       padding: 10,

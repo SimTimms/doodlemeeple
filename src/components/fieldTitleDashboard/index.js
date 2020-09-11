@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Icon } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 
 export default function FieldTitleDashboard({ name, ...props }) {

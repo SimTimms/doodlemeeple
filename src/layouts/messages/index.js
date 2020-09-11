@@ -8,12 +8,7 @@ import { Conversations, ViewConversation } from './views/messaging';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
 import { GET_MESSAGES } from '../../data/queries';
-import {
-  ContentTop,
-  StyledNavBar,
-  LoadIcon,
-  IconButton,
-} from '../../components';
+import { ContentTop, StyledNavBar, LoadIcon } from '../../components';
 
 function MessagesLayout(props) {
   const [page, setPage] = React.useState('home');

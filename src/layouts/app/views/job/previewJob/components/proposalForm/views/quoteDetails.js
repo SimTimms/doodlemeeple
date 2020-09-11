@@ -64,7 +64,7 @@ export default function QuoteDetails({
       <FieldBox
         value={contract.cost}
         title="Total Cost"
-        maxLength={12}
+        maxLength={5}
         onChangeEvent={(e) => {
           e.indexOf('.') > -1 ? setWholeFigures(true) : setWholeFigures(false);
           setContract({ ...contract, cost: e });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useStyles } from '../styles';
 import {
   ColumnWrapper,
   HeaderTwo,
@@ -10,8 +9,6 @@ import { Query } from 'react-apollo';
 import { PAYMENTS } from '../../../../../../data/queries';
 
 export default function PaymentsView({ job }) {
-  const classes = useStyles();
-
   return (
     <ColumnWrapper>
       <Column j="center" a="center">
@@ -22,7 +19,6 @@ export default function PaymentsView({ job }) {
           fetchPolicy="network-only"
         >
           {({ data }) => {
-            data && console.log(data);
             return data ? <Payments data={data.paymentMany.reverse()} /> : null;
           }}
         </Query>

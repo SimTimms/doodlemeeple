@@ -20,7 +20,7 @@ import { PickArtist } from './views/pickArtist';
 import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
-import { FAVOURITES } from '../../data/queries';
+import { FAVOURITES, PROFILE } from '../../data/queries';
 import { ContentTop, StyledNavBar, MenuButton, Row } from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 import pageHeaders from './pageHeaders';
@@ -28,6 +28,7 @@ import pageHeaders from './pageHeaders';
 function AppLayout(props) {
   const [page, setPage] = React.useState('home');
   const [favourites, setFavourites] = React.useState([]);
+  const [profile, setProfile] = React.useState(null);
   const pageJump = props.match ? props.match.params.page : null;
   const mobile = useMediaQuery('(max-width:800px)');
   const { history } = props;
@@ -102,13 +103,16 @@ function AppLayout(props) {
           </Row>
         </div>
       </StyledNavBar>
-      <AppDrawer
-        handleDrawerClose={handleDrawerClose}
-        handleDrawerOpen={handleDrawerOpen}
-        open={open}
-        history={history}
-        page={page}
-      />
+      {profile && (
+        <AppDrawer
+          handleDrawerClose={handleDrawerClose}
+          handleDrawerOpen={handleDrawerOpen}
+          open={open}
+          history={history}
+          page={page}
+          profile={profile}
+        />
+      )}
       <main
         className={clsx({
           [classes.content]: true,
@@ -199,8 +203,18 @@ function AppLayout(props) {
       <Query
         query={FAVOURITES}
         onCompleted={(data) => {
-          console.log(data);
           setFavourites(data.profile.favourites.map((fav) => fav.receiver._id));
+        }}
+        fetchPolicy="network-only"
+      >
+        {({ data }) => {
+          return null;
+        }}
+      </Query>
+      <Query
+        query={PROFILE}
+        onCompleted={(data) => {
+          setProfile(data.profile);
         }}
         fetchPolicy="network-only"
       >
