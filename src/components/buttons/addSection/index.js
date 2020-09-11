@@ -54,7 +54,7 @@ function AddSection({ setSections, sections }) {
             />
             <MenuButtonShortcut
               text={{
-                name: 'Artist',
+                name: 'Project Creators',
                 color: '#222',
                 icon: 'chevron_right',
                 count: 0,
@@ -66,7 +66,7 @@ function AddSection({ setSections, sections }) {
             />
             <MenuButtonShortcut
               text={{
-                name: 'Editor',
+                name: 'Creative',
                 color: '#222',
                 icon: 'chevron_right',
                 count: 0,
@@ -78,7 +78,7 @@ function AddSection({ setSections, sections }) {
             />
             <MenuButtonShortcut
               text={{
-                name: 'Development',
+                name: 'Marketing/Campaign',
                 color: '#222',
                 icon: 'chevron_right',
                 count: 0,
@@ -90,7 +90,7 @@ function AddSection({ setSections, sections }) {
             />
             <MenuButtonShortcut
               text={{
-                name: 'Marketing',
+                name: 'Development',
                 color: '#222',
                 icon: 'chevron_right',
                 count: 0,
@@ -103,7 +103,19 @@ function AddSection({ setSections, sections }) {
           </Row>
           {(page === 0 || page === 1) && (
             <Column>
-              <HeaderTwo str="Artists" />
+              <HeaderTwo str="Project Creators" />
+              <Divider />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="creator"
+              />
+            </Column>
+          )}
+          {(page === 0 || page === 2) && (
+            <Column>
+              <HeaderTwo str="Visual Art and Creative Writing" />
               <Divider />
               <ArtistCard
                 setDisplay={setDisplay}
@@ -127,13 +139,49 @@ function AddSection({ setSections, sections }) {
                 setDisplay={setDisplay}
                 sections={sections}
                 setSections={setSections}
-                type="voice-actor"
+                type="world-builder"
               />
             </Column>
           )}
-          {(page === 0 || page === 2) && (
+          {(page === 0 || page === 3) && (
             <Column>
-              <HeaderTwo str="Editors" />
+              <HeaderTwo str="Marketing and Campaign Management" />
+              <Divider />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="marketing"
+              />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="social"
+              />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="voice-actor"
+              />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="video-editor"
+              />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="reviewer"
+              />
+            </Column>
+          )}
+          {(page === 0 || page === 4) && (
+            <Column>
+              <HeaderTwo str="Development" />
               <Divider />
               <ArtistCard
                 setDisplay={setDisplay}
@@ -157,61 +205,14 @@ function AddSection({ setSections, sections }) {
                 setDisplay={setDisplay}
                 sections={sections}
                 setSections={setSections}
-                type="video-editor"
-              />
-            </Column>
-          )}
-          {(page === 0 || page === 3) && (
-            <Column>
-              <HeaderTwo str="Development" />
-              <Divider />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
                 type="games-developer"
-              />{' '}
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="world-builder"
               />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="creator"
-              />
+
               <ArtistCard
                 setDisplay={setDisplay}
                 sections={sections}
                 setSections={setSections}
                 type="play-tester"
-              />
-            </Column>
-          )}
-          {(page === 0 || page === 4) && (
-            <Column>
-              <HeaderTwo str="Marketing" />
-              <Divider />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="marketing"
-              />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="reviewer"
-              />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="social"
               />
             </Column>
           )}
