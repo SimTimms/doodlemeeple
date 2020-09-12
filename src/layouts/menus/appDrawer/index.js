@@ -158,7 +158,7 @@ export function AppDrawer({
               link: () => {
                 Cookies.remove('token');
                 Cookies.remove('userId');
-                props.history.replace(`/`);
+                history.replace(`/`);
               },
               color: theme.palette.error.main,
               count: null,
