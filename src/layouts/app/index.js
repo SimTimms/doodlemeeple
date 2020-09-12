@@ -203,7 +203,11 @@ function AppLayout(props) {
       <Query
         query={FAVOURITES}
         onCompleted={(data) => {
-          setFavourites(data.profile.favourites.map((fav) => fav.receiver._id));
+          setFavourites(
+            data.profile.favourites.map(
+              (fav) => fav.receiver && fav.receiver._id
+            )
+          );
         }}
         fetchPolicy="network-only"
       >
