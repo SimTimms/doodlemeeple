@@ -111,7 +111,7 @@ ${contractData.currency} `}
 ${contractData.currency} `}
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
-          <b>6.3</b> DoodleMeeple will retain 12.5% of the total payment, an
+          <b>6.3</b> DoodleMeeple will retain 10% of the total payment, an
           amount equating to{' '}
           {`${contractData.cost * 0.125}
 ${contractData.currency} `}

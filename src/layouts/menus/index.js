@@ -105,7 +105,7 @@ export function PublicFooterMenu() {
         <StyledButtonFooter>Terms of Service</StyledButtonFooter>
       </a>
       <a
-        href="https://doodlemeeple.com/privacy-policy-2/"
+        href="https://doodlemeeple.com/privacy-policy/"
         style={{ textDecoration: 'none' }}
       >
         <StyledButtonFooter>Privacy Policy</StyledButtonFooter>
