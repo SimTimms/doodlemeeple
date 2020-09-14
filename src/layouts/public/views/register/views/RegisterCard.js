@@ -72,7 +72,6 @@ export default function RegisterCard({ setPage }) {
       .not()
       .oneOf(['Passw0rd', 'Password123']);
 
-      
     const passwordPass = passwordSchema.validate(password);
     !passwordPass && (passed = false);
 
@@ -197,7 +196,7 @@ export default function RegisterCard({ setPage }) {
             <Meta
               str={
                 <a
-                  href="https://doodlemeeple.com/privacy-policy-2/"
+                  href="https://doodlemeeple.com/privacy-policy/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
