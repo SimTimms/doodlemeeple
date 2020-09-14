@@ -188,7 +188,7 @@ export function Project({
                   }}
                   hasFile={project.image !== '' || project.image ? true : false}
                   className={null}
-                  size="1MB PNG JPG"
+                  size="1MB PNG GIF JPG"
                 />
               </div>
               <DeleteButtonProject

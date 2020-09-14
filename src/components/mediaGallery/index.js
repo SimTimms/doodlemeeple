@@ -97,7 +97,7 @@ function MediaGallery({ items, edit, setBgImage, setImages, galleryId }) {
                       className={null}
                       cbDelete={null}
                       hasFile={false}
-                      size="1MB PNG JPG"
+                      size="1MB PNG JPG GIF"
                     />
                   );
                 }}
