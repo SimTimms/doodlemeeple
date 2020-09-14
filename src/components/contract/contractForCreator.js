@@ -124,15 +124,15 @@ ${contractData.currency} `}
           for the Services (the "Payment")
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
-          <b>6.2</b> The Creative will receive 87.5% of the total payment, an
+          <b>6.2</b> The Creative will receive 90% of the total payment, an
           amount equating to{' '}
-          {`${contractData.cost * 0.875}
+          {`${contractData.cost * 0.9}
 ${contractData.currency} `}
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
-          <b>6.3</b> DoodleMeeple will retain 12.5% of the total payment, an
+          <b>6.3</b> DoodleMeeple will retain 10% of the total payment, an
           amount equating to{' '}
-          {`${contractData.cost * 0.125}
+          {`${contractData.cost * 0.1}
 ${contractData.currency} `}
         </Typography>
         <Divider />
