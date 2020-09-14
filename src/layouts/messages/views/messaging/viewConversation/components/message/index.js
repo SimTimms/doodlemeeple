@@ -106,6 +106,7 @@ export function Message({ message, history, setViewer }) {
                     src={message.messageStr}
                     style={{ maxWidth: 300, cursor: 'pointer' }}
                     onClick={() => setViewer(message.messageStr)}
+                    alt=""
                   />
                 )}
               </div>

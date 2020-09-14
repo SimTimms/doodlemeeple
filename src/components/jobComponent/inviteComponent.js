@@ -4,16 +4,16 @@ import { useStyles } from './styles';
 import { IconButton, CardComponent, Column, Row, ProfileAvatar } from '../';
 import clsx from 'clsx';
 
-export default function InviteComponent({ removeInvite, invite, history }) {
+export default function InviteComponent({ invite, history }) {
   const classes = useStyles();
 
   return (
     <CardComponent>
       <Row>
         <ProfileAvatar
-          profilePage={`/app/public-preview/${invite.user._id}`}
-          title={invite.user.name}
-          bgImg={invite.user.profileImg}
+          profilePage={`/app/public-preview/${invite.sender._id}`}
+          title={invite.sender.name}
+          bgImg={invite.sender.profileImg}
           history={history}
           declined={invite.status === 'declined'}
         />
@@ -35,7 +35,7 @@ export default function InviteComponent({ removeInvite, invite, history }) {
               [classes.cardSummaryWarning]: true,
             })}
           >
-            Waiting
+            {invite.status === 'paid' ? 'Active ' : 'Waiting'}
           </Typography>
         </Column>
       </Row>

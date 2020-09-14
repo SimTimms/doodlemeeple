@@ -10,6 +10,7 @@ import Help from './views/help';
 import Beta from './views/beta';
 import CreativeRoster from './views/creativeRoster';
 import { Account } from './views/account';
+import FullContract from './views/fullContract';
 import { Invites } from './views/invites';
 import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
@@ -19,7 +20,7 @@ import { PickArtist } from './views/pickArtist';
 import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
-import { FAVOURITES } from '../../data/queries';
+import { FAVOURITES, PROFILE } from '../../data/queries';
 import { ContentTop, StyledNavBar, MenuButton, Row } from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 import pageHeaders from './pageHeaders';
@@ -27,8 +28,10 @@ import pageHeaders from './pageHeaders';
 function AppLayout(props) {
   const [page, setPage] = React.useState('home');
   const [favourites, setFavourites] = React.useState([]);
+  const [profile, setProfile] = React.useState(null);
   const pageJump = props.match ? props.match.params.page : null;
   const mobile = useMediaQuery('(max-width:800px)');
+  const { history } = props;
 
   //TODO: I guess this is proper dirty
   const pathParam = props
@@ -65,21 +68,21 @@ function AppLayout(props) {
   const helpButton = {
     name: 'Help',
     icon: <Icon>contact_support</Icon>,
-    link: () => props.history.push('/app/help'),
+    link: () => history.push('/app/help'),
     color: props.theme.palette.secondary.main,
     count: 0,
   };
   const alphaButton = {
-    name: 'Closed Beta',
+    name: 'Open Beta',
     icon: <Icon>construction</Icon>,
-    link: () => props.history.push('/app/beta'),
+    link: () => history.push('/app/beta'),
     color: props.theme.palette.secondary.main,
     count: 0,
   };
   const creativeRoster = {
     name: 'Creatives',
     icon: <Icon>brush</Icon>,
-    link: () => props.history.push('/app/creative-roster'),
+    link: () => history.push('/app/creative-roster'),
     color: props.theme.palette.secondary.main,
     count: 0,
   };
@@ -87,7 +90,7 @@ function AppLayout(props) {
   return (
     <div className={classes.root}>
       <ToastContainer />
-      <StyledNavBar open={open} history={props.history} theme={props.theme}>
+      <StyledNavBar open={open} history={history} theme={props.theme}>
         <Typography variant="h5">{pageHeaders(page)}</Typography>
         <div>
           <Row>
@@ -100,13 +103,16 @@ function AppLayout(props) {
           </Row>
         </div>
       </StyledNavBar>
-      <AppDrawer
-        handleDrawerClose={handleDrawerClose}
-        handleDrawerOpen={handleDrawerOpen}
-        open={open}
-        history={props.history}
-        page={page}
-      />
+      {profile && (
+        <AppDrawer
+          handleDrawerClose={handleDrawerClose}
+          handleDrawerOpen={handleDrawerOpen}
+          open={open}
+          history={history}
+          page={page}
+          profile={profile}
+        />
+      )}
       <main
         className={clsx({
           [classes.content]: true,
@@ -116,49 +122,49 @@ function AppLayout(props) {
       >
         <ContentTop style={{ width: '100%' }}>
           {page === 'dashboard' ? (
-            <Dashboard history={props.history} />
+            <Dashboard history={history} />
           ) : page === 'help' ? (
-            <Help history={props.history} />
+            <Help history={history} />
           ) : page === 'beta' ? (
-            <Beta history={props.history} />
+            <Beta history={history} />
           ) : page === 'edit-profile' ? (
-            <EditProfile theme={props.theme} history={props.history} />
+            <EditProfile theme={props.theme} history={history} />
           ) : page === 'creative-roster' ? (
             <CreativeRoster
               theme={props.theme}
-              history={props.history}
+              history={history}
               favourites={favourites}
             />
           ) : page === 'account' ? (
-            <Account history={props.history} />
+            <Account history={history} />
           ) : page === 'invites' ? (
-            <Invites history={props.history} theme={props.theme} />
+            <Invites history={history} theme={props.theme} />
           ) : page === 'submitted' ? (
-            <ProjectSubmitted history={props.history} />
+            <ProjectSubmitted history={history} />
           ) : page === 'games' ? (
-            <Games history={props.history} />
+            <Games history={history} />
           ) : page === 'jobs' ? (
-            <Jobs history={props.history} theme={props.theme} />
+            <Jobs history={history} theme={props.theme} />
           ) : page === 'edit-game' ? (
             <EditGame
               theme={props.theme}
               gameId={pathParam}
               autosaveIsOn={true}
-              history={props.history}
+              history={history}
             />
           ) : page === 'view-game' ? (
             <PreviewGame
               theme={props.theme}
               gameId={pathParam}
               autosaveIsOn={true}
-              history={props.history}
+              history={history}
             />
           ) : page === 'edit-job' ? (
             <EditJob
               theme={props.theme}
               jobId={pathParam}
               autosaveIsOn={true}
-              history={props.history}
+              history={history}
               favourites={favourites}
             />
           ) : page === 'view-job' ? (
@@ -166,25 +172,27 @@ function AppLayout(props) {
               theme={props.theme}
               jobId={pathParam}
               inviteId={pathParam2}
-              history={props.history}
+              history={history}
             />
           ) : page === 'view-contract' ? (
-            <PreviewContract contractId={pathParam} history={props.history} />
+            <PreviewContract contractId={pathParam} history={history} />
+          ) : page === 'view-full-contract' ? (
+            <FullContract contractId={pathParam} history={history} />
           ) : page === 'edit-contract' ? (
-            <EditContract contractId={pathParam} history={props.history} />
+            <EditContract contractId={pathParam} history={history} />
           ) : page === 'public-preview' ? (
             <PreviewProfile
               profileId={pathParam}
               theme={props.theme}
               publicView={true}
-              history={props.history}
+              history={history}
             />
           ) : page === 'pick-artist' ? (
             <PickArtist
               theme={props.theme}
               jobId={pathParam}
               autosaveIsOn={true}
-              history={props.history}
+              history={history}
               favourites={favourites}
             />
           ) : page === 'create-quote' ? (
@@ -195,8 +203,22 @@ function AppLayout(props) {
       <Query
         query={FAVOURITES}
         onCompleted={(data) => {
-          console.log(data);
-          setFavourites(data.profile.favourites.map((fav) => fav.receiver._id));
+          setFavourites(
+            data.profile.favourites.map(
+              (fav) => fav.receiver && fav.receiver._id
+            )
+          );
+        }}
+        fetchPolicy="network-only"
+      >
+        {({ data }) => {
+          return null;
+        }}
+      </Query>
+      <Query
+        query={PROFILE}
+        onCompleted={(data) => {
+          setProfile(data.profile);
         }}
         fetchPolicy="network-only"
       >

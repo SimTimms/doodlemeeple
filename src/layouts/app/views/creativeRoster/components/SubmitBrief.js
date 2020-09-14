@@ -6,7 +6,6 @@ import { SUBMIT_BRIEF } from '../../../../../data/mutations';
 import { IconButton, Column } from '../../../../../components';
 
 export default function SubmitBrief({ job, history, inviteList }) {
-  const classes = useStyles();
   const [page, setPage] = React.useState(0);
 
   return page === 0 ? (

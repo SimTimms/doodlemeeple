@@ -126,7 +126,7 @@ export function Featured({ posts, history }) {
                   Professional Creative Talent
                 </Typography>
               </div>
-
+              {/*
               <div
                 ref={myRef}
                 className={classes.postImage}
@@ -204,7 +204,7 @@ export function Featured({ posts, history }) {
                   width: 500,
                   right: 0,
                 }}
-              ></div>
+              ></div>*/}
             </div>
           </div>
         );

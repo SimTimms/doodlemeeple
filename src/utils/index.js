@@ -5,15 +5,38 @@ export const TYPE_HELPER = (typeIn) => {
     case '3d-artist':
       return '3d Sculptor';
     case 'rulebook-editor':
-      return 'Editor';
+      return 'Rules Editor';
     case 'artist':
       return 'Artist';
+    case 'creator':
+      return 'Creator';
+    case 'reviewer':
+      return 'Reviewer';
+    case 'marketing':
+      return 'Marketing';
+    case 'games-developer':
+      return 'Games Developer';
+    case 'voice-actor':
+      return 'Voice Actor';
+    case 'video-editor':
+      return 'Video Editor';
+    case 'social':
+      return 'Social Media/Campaign Manager';
+    case 'proof-reader':
+      return 'Proof-Reader';
+    case 'translator':
+      return 'Translator';
+    case 'world-builder':
+      return 'World Builder/Creative Writer';
+    case 'play-tester':
+      return 'Play Tester';
     default:
       return typeIn;
   }
 };
 
-export function calculatePercent(paymentTermsArray) {
+export function calculatePercent(paymentTermsArray, contractTotal, currency) {
+  const totalInt = parseInt(contractTotal);
   let response = {
     status: false,
     sum: 0,
@@ -27,25 +50,24 @@ export function calculatePercent(paymentTermsArray) {
   }
 
   response =
-    percentSum > 100
+    percentSum > totalInt
       ? {
           status: true,
-          sum: 100 - percentSum,
-          message:
-            'Although it would be nice, your payment terms cannot exceed 100%',
+          sum: totalInt - percentSum,
+          message: `Although it would be nice, your payment terms cannot exceed your total cost of ${contractTotal} ${currency}`,
         }
-      : percentSum === 100
+      : percentSum === totalInt
       ? {
           status: false,
-          sum: 100 - percentSum,
-          message: '',
+          sum: totalInt,
+          message: `Perfect!`,
         }
-      : percentSum < 100 && {
+      : percentSum <= totalInt && {
           status: false,
-          sum: 100 - percentSum,
-          message: `3.${
-            paymentTermsArray.length + 1
-          }: The Creative shall receive ${100 - percentSum}% of the total cost
+          sum: totalInt - percentSum,
+          message: `Payment Term: The Creative shall receive the remaining ${
+            totalInt - percentSum
+          } ${currency}
 upon completion of this contract.`,
         };
   return response;

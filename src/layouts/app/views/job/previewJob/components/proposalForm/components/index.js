@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
-import { DeleteButtonSmall } from '../../../../../../../../components';
-import { TextField, Typography } from '@material-ui/core';
+import {
+  DeleteButtonSmall,
+  Column,
+  Row,
+  FieldBox,
+  Divider,
+} from '../../../../../../../../components';
 import autosave from '../../../../../../../../utils/autosave';
 import { Mutation } from 'react-apollo';
-import { useStyles } from './styles';
 import {
   UPDATE_TERM,
   REMOVE_TERM,
@@ -16,22 +20,17 @@ export default function PaymentTerm({
   setContract,
   paymentTerm,
   index,
-  availablePercent,
   calculatePercent,
   setPercentLock,
-  percentLock,
-  saveLock,
   setSaveLock,
   setDetailsLock,
 }) {
-  const classes = useStyles();
   const [values, setValues] = React.useState({
     _id: 'new',
     percent: 0,
     description: '',
     contractId: '',
   });
-
   useEffect(() => {
     setValues({ ...paymentTerm, contractId: contract._id });
   }, [paymentTerm, contract]);
@@ -51,95 +50,102 @@ export default function PaymentTerm({
     >
       {(mutation, { loading }) => {
         return (
-          <div className={classes.root}>
-            <Typography variant="body1" style={{ width: 200 }}>{`3.${
-              index + 1
-            }: The Creative shall receive `}</Typography>
-            <TextField
-              id={'deposit'}
-              value={values.percent}
-              label={`${availablePercent.toString()}%`}
-              inputProps={{ maxLength: availablePercent.toString().length }}
-              onChange={(e) => {
-                let message = e.target.value.replace(/[^0-9]/gi, '');
-                message = message === '' ? '0' : message;
-                const messageToInt = parseInt(message);
+          <Column>
+            <Row>
+              <FieldBox
+                value={values.percent ? values.percent.toString() : '0'}
+                title={contract.currency}
+                titlePos="right"
+                maxLength={10}
+                onChangeEvent={(e) => {
+                  const messageToInt = parseInt(e === '' ? 0 : e);
 
-                let paymentTermsArray = [...contract.paymentTerms];
-                paymentTermsArray[index].percent = messageToInt;
-                const percentLockCalc = calculatePercent(paymentTermsArray);
-                if (percentLockCalc.sum >= 0) {
+                  let paymentTermsArray = [...contract.paymentTerms];
+                  paymentTermsArray[index].percent = messageToInt;
+
+                  const percentLockCalc = calculatePercent(
+                    paymentTermsArray,
+                    contract.cost,
+                    contract.currency
+                  );
+
                   setDetailsLock(false);
                   setPercentLock(percentLockCalc);
+                  console.log(percentLockCalc.sum);
                   percentLockCalc.sum >= 0
                     ? setSaveLock(false)
                     : setSaveLock(true);
-
-                  setValues({ ...values, percent: messageToInt });
 
                   percentLockCalc.sum >= 0 &&
                     autosave(() => {
                       mutation();
                     });
-                }
-              }}
-              multiline
-              margin="normal"
-              variant="outlined"
-              className={classes.wrapper}
-            />
-            <Typography style={{ width: 60 }}>% upon</Typography>
-            <TextField
-              id={'item'}
-              value={values.description}
-              label={`Completion Term ${
-                values.description ? `(${86 - values.description.length})` : ''
-              }`}
-              inputProps={{ maxLength: 86 }}
-              onChange={(e) => {
-                setDetailsLock(false);
-                const description = e.target.value.substring(0, 86);
-                setValues({ ...values, description: description });
-                let paymentTermsArray = [...contract.paymentTerms];
-                paymentTermsArray[index].description = description;
 
-                autosave(() => {
-                  mutation();
-                });
-              }}
-              multiline
-              margin="normal"
-              variant="outlined"
-              style={{ marginLeft: 10, marginTop: 8, marginRight: 10 }}
-            />
-            <Mutation
-              mutation={REMOVE_TERM}
-              variables={{
-                _id: values._id,
-              }}
-              onCompleted={(data) => {
-                toaster('Deleted');
-                const updatedArray = contract.paymentTerms.filter(
-                  (item) => item._id !== values._id
-                );
-                const percentLockCalc = calculatePercent(updatedArray);
-                setPercentLock(percentLockCalc);
-                setContract({
-                  ...contract,
-                  paymentTerms: [...updatedArray],
-                });
-              }}
-            >
-              {(mutation) => {
-                return (
-                  <DeleteButtonSmall
-                    mutation={mutation}
-                    disabled={values._id === 'new' ? true : false}
-                  />
-                );
-              }}
-            </Mutation>
-          </div>
+                  setValues({ ...values, percent: messageToInt });
+                }}
+                replaceMode="number"
+                placeholder="Example: 20"
+                info=""
+                warning=""
+                size="xs"
+                width={50}
+              />
+              <FieldBox
+                value={values.description}
+                title=""
+                maxLength={86}
+                onChangeEvent={(e) => {
+                  setDetailsLock(false);
+                  setValues({ ...values, description: e });
+                  let paymentTermsArray = [...contract.paymentTerms];
+                  paymentTermsArray[index].description = e;
+                  autosave(() => {
+                    mutation();
+                  });
+                }}
+                replaceMode="loose"
+                placeholder="Example: initial deposit"
+                info="Split the total payment into pre-determined milestones, example: 50% upfront, 50% upon completion"
+                warning=""
+                size="s"
+              />
+              <Mutation
+                mutation={REMOVE_TERM}
+                variables={{
+                  _id: values._id,
+                }}
+                onCompleted={(data) => {
+                  toaster('Deleted');
+                  const updatedArray = contract.paymentTerms.filter(
+                    (item) => item._id !== values._id
+                  );
+                  const percentLockCalc = calculatePercent(
+                    updatedArray,
+                    contract.cost,
+                    contract.currency
+                  );
+                  setPercentLock(percentLockCalc);
+                  setContract({
+                    ...contract,
+                    paymentTerms: [...updatedArray],
+                  });
+                }}
+              >
+                {(mutation) => {
+                  return (
+                    <div style={{ marginLeft: 10 }}>
+                      <DeleteButtonSmall
+                        mutation={mutation}
+                        disabled={values._id === 'new' ? true : false}
+                      />
+                    </div>
+                  );
+                }}
+              </Mutation>
+            </Row>
+
+            <Divider />
+          </Column>
         );
       }}
     </Mutation>

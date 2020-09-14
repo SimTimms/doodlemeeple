@@ -542,7 +542,9 @@ export const LOGIN_MUTATION = gql`
 
 export const PASSWORD_FORGOT_MUTATION = gql`
   mutation PasswordForgotMutation($email: String!) {
-    passwordForgot(email: $email)
+    passwordForgot(email: $email) {
+      _id
+    }
   }
 `;
 

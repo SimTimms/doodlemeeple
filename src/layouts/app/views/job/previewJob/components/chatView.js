@@ -17,7 +17,7 @@ export default function ChatView({
   history,
 }) {
   const classes = useStyles();
-
+  const [refreshCount, setRefreshCount] = React.useState(0);
   return (
     <Query
       query={GET_MESSAGES}
@@ -25,6 +25,7 @@ export default function ChatView({
         jobId: jobId,
         userId: conversationUser._id,
         pageNbr: pageNbr,
+        count: refreshCount,
       }}
       fetchPolicy="network-only"
       onCompleted={(data) =>
@@ -59,6 +60,8 @@ export default function ChatView({
                 pageNbr={pageNbr}
                 setPageNbr={setPageNbr}
                 setMessages={setMessages}
+                refreshCount={refreshCount}
+                setRefreshCount={setRefreshCount}
               />
             )}
           </div>

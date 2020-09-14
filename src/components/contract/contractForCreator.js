@@ -1,42 +1,63 @@
 import React from 'react';
-import { Slide, Typography } from '@material-ui/core';
-import { Divider, ActionWrapper } from '../../../../../../../../components';
-import { EditButton, SubmitButton } from './components';
+import { Typography } from '@material-ui/core';
+import { Divider } from '../';
+import { useStyles } from './styles';
+import Notices from './notices';
+import Signature from './signature';
 import moment from 'moment';
 
-export default function ViewProposal({ jobId, contractData, setContract }) {
+export default function ContractComponentForCreator({
+  contractData,
+  history,
+  ...props
+}) {
   let paymentTermsSum = 100;
+  const classes = useStyles();
+  const { setOpenContract, setContractStatus, readOnly } = props;
 
   return (
-    <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div style={{ padding: 20, boxSizing: 'border-box' }}>
-        <Typography variant="h4" style={{ textAlign: 'center' }}>
-          General Service Agreement | DRAFT
+    <div style={{ width: '100%' }}>
+      {!readOnly && <Notices status={contractData.status} />}
+      <div className={classes.wrapper}>
+        <Typography variant="h5" style={{ textAlign: 'center' }}>
+          General Service Agreement
         </Typography>
         <Divider />
         <Typography>
           <b>
             {`THIS GENERAL SERVICE AGREEMENT (the
-          “Agreement”) is dated: ${moment(contractData.updatedAt).format(
-            'LLLL',
-          )} GMT.`}
+“Agreement”) is dated: ${moment(contractData.updatedAt).format('LLLL')} GMT.`}
           </b>
         </Typography>
         <Divider />
+        {/*
         <Typography>
-          <b>Contract Id:</b> {contractData.id}
-        </Typography>
+          <b>Contract ID:</b>
+          <span className={classes.id}> {`DMID-${contractData._id}`}</span>
+        </Typography>*/}
         <Typography>
           <b>Project:</b>
-          {` ${contractData.job.name} (ID: ${contractData.job.id})`}
+          {` ${contractData.job.name} `}
+          {/*
+          <span
+            className={classes.id}
+           >{` (DMID-${contractData.job._id})`}</span>*/}
         </Typography>
         <Typography>
           <b>Client:</b>
-          {` ${contractData.job.user.email} (ID: ${contractData.job.user.id})`}
+          {` ${contractData.job.user.name}`}
+          {/*
+          <span className={classes.id}>
+          {` (DMID-${contractData.job.user._id})`}
+          </span>*/}
         </Typography>
         <Typography>
           <b>Creative:</b>
-          {` ${contractData.user.email} (ID: ${contractData.user.id})`}
+          {` ${contractData.user.name}`}
+          {/*
+          <span className={classes.id}>
+            {` (DMID-${contractData.user._id})`}
+            </span>*/}
         </Typography>
         <Divider />
         <Typography variant="h5">
@@ -64,7 +85,7 @@ export default function ViewProposal({ jobId, contractData, setContract }) {
           Client with the following services (the "Services"):
         </Typography>
         <Typography style={{ marginLeft: 40, marginTop: 20 }}>
-          <b>{contractData.job.name}:</b>
+          <b>{contractData.job.name}</b>
           {` ${contractData.job.summary}`}
         </Typography>
         <Divider />
@@ -97,10 +118,22 @@ export default function ViewProposal({ jobId, contractData, setContract }) {
           <b>6. PAYMENT:</b>
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
-          <b>6.1</b> The Creative will charge the Client a flat fee of{' '}
+          <b>6.1</b> The Client will be charged a total fee of{' '}
           {`${contractData.cost}
-           ${contractData.currency} `}
+${contractData.currency} `}
           for the Services (the "Payment")
+        </Typography>
+        <Typography style={{ marginLeft: 40 }}>
+          <b>6.2</b> The Creative will receive 90% of the total payment, an
+          amount equating to{' '}
+          {`${contractData.cost * 0.9}
+${contractData.currency} `}
+        </Typography>
+        <Typography style={{ marginLeft: 40 }}>
+          <b>6.3</b> DoodleMeeple will retain 10% of the total payment, an
+          amount equating to{' '}
+          {`${contractData.cost * 0.1}
+${contractData.currency} `}
         </Typography>
         <Divider />
         <Typography>
@@ -108,7 +141,7 @@ export default function ViewProposal({ jobId, contractData, setContract }) {
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
           <b>7.1</b> The Client agrees to pay the Creative the Payment according
-          to the payment terms as follows:
+          to the payment terms as follows (The Payment Schedule):
         </Typography>
         {contractData.paymentTerms.map((term, index) => {
           paymentTermsSum = paymentTermsSum - term.percent;
@@ -128,6 +161,16 @@ export default function ViewProposal({ jobId, contractData, setContract }) {
             {`${paymentTermsSum}% of the Payment upon completion of the Services`}
           </Typography>
         )}
+        <Typography style={{ marginLeft: 40 }}>
+          <b>7.2</b> The Creative will commence and/or continue to fulfil the
+          Services upon notification of payment(s) to DoodleMeeple according to
+          the Payment Schedule.
+        </Typography>
+        <Typography style={{ marginLeft: 40 }}>
+          <b>7.3</b> DoodleMeeple will release funds to the Creative upon
+          approval from both Parties that the Services have been completed
+          according to the Payment Schedule
+        </Typography>
         <Divider />
         <Typography>
           <b>8. ADDITIONAL TERMS & NOTES:</b>
@@ -137,7 +180,10 @@ export default function ViewProposal({ jobId, contractData, setContract }) {
           notes set out by the Creative as follows:
         </Typography>
         <Typography style={{ marginLeft: 80 }}>
-          <b>8.1.1</b> {contractData.notes}
+          <b>8.1.1</b>{' '}
+          {contractData.notes === ''
+            ? 'No additional notes'
+            : contractData.notes}
         </Typography>
         <Divider />
         <Typography>
@@ -156,19 +202,23 @@ export default function ViewProposal({ jobId, contractData, setContract }) {
           Meeple Terms and conditions will take precedence.
         </Typography>
         <Divider />
-        <ActionWrapper>
-          <EditButton
-            contract={contractData}
-            jobId={jobId}
-            setContract={setContract}
+        <Typography>
+          <b>10. SIGNATURES:</b>
+        </Typography>
+        <Typography style={{ marginLeft: 40, paddingBottom: 10 }}>
+          <b>10.1</b> By clicking "I Accept" the Client will enter into a
+          binding contract with the Creative.
+        </Typography>
+        {!readOnly && (
+          <Signature
+            status={contractData.status}
+            setOpenContract={setOpenContract}
+            setContractStatus={setContractStatus}
+            contractData={contractData}
+            history={history}
           />
-          <SubmitButton
-            contract={contractData}
-            jobId={jobId}
-            setContract={setContract}
-          />
-        </ActionWrapper>
+        )}
       </div>
-    </Slide>
+    </div>
   );
 }

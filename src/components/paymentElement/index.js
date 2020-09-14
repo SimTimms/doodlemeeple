@@ -29,7 +29,7 @@ export default function PaymentElement({
   const [paymentIntent, setPaymentIntent] = React.useState(null);
   const [visible, setVisible] = React.useState(null);
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
-  const [paymentStatus, setPaymentStatus] = React.useState('initiated');
+  const [paymentStatus, setPaymentStatus] = React.useState('');
 
   useEffect(() => {
     setAmount(contractData.cost);
@@ -49,7 +49,7 @@ export default function PaymentElement({
           [classes.wrapper]: true,
         })}
       >
-        {paymentStatus === 'initiated' && (
+        {paymentStatus === 'accepted' && (
           <Column>
             <FieldTitleDashboard name="DEPOSIT PAYMENT" inline={false} a="c" />
             <Meta str="The full amount must be deposited into the DoodleMeeple holding account before work can progress" />
@@ -118,7 +118,6 @@ export default function PaymentElement({
             />
           </Column>
         )}
-
         {paymentStatus === 'stripe' && (
           <Column>
             <FieldTitleDashboard name="CARD PAYMENT" inline={false} a="c" />

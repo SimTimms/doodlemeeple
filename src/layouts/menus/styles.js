@@ -92,7 +92,8 @@ export const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: 48,
+    width: 44,
+    height: '100%',
   },
   drawerCloseMobile: {
     transition: theme.transitions.create('width', {

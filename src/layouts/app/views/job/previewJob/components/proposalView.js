@@ -1,47 +1,24 @@
-import React, { useEffect } from 'react';
-import { Slide } from '@material-ui/core';
+import React from 'react';
 import { useStyles } from '../styles';
 import {
   ColumnWrapper,
-  HeaderTwo,
   Divider,
-  IconButton,
+  FieldTitleDashboard,
+  MenuButtonShortcut,
   Column,
+  Row,
 } from '../../../../../../components';
 import ProposalForm from '../components/proposalForm';
 
-export default function ProposalView({
-  jobId,
-  messagesEnd,
-  setProposalOpen,
-  setMessagesEnd,
-}) {
+export default function ProposalView({ jobId, setProposalOpen }) {
   const classes = useStyles();
-
-  useEffect(() => {
-    messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' });
-  });
 
   return (
     <div className={classes.root}>
-      <div
-        ref={(ele) => {
-          setMessagesEnd(ele);
-        }}
-        style={{ marginTop: -60, paddingTop: 60 }}
-      ></div>
       <ColumnWrapper>
         <Column>
-          <HeaderTwo str="Quote" />
-          <Divider />
+          <FieldTitleDashboard name="Quote" inline={false} a="c" />
           <ProposalForm jobId={jobId} setProposalOpen={setProposalOpen} />
-          <IconButton
-            title="Back"
-            icon="chevron_left"
-            iconPos="left"
-            color="text-dark"
-            onClickEvent={() => setProposalOpen(false)}
-          />
         </Column>
       </ColumnWrapper>
     </div>

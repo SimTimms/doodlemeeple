@@ -3,7 +3,7 @@ import { Typography, Card } from '@material-ui/core';
 import { useStyles } from './styles';
 import { TYPE_HELPER } from '../../../../utils';
 
-export function ArtistCard({ setDisplay, sections, setSections, type, img }) {
+export function ArtistCard({ setDisplay, sections, setSections, type }) {
   const newSectionTemplate = {
     _id: 'new',
     title: '',
@@ -30,18 +30,10 @@ export function ArtistCard({ setDisplay, sections, setSections, type, img }) {
         newSections.push(newSection);
         setSections(newSections);
       }}
-      style={{
-        backgroundImage: `url(${img})`,
-        backgroundPosition: 'right center',
-        backgroundSize: '150px',
-        backgroundRepeat: 'no-repeat',
-      }}
     >
-      <div
-        style={{ textAlign: 'right', display: 'flex', flexDirection: 'row' }}
-      >
-        <Typography variant="h5">{TYPE_HELPER(type)}</Typography>
-      </div>
+      <Typography variant="body1" align="center" style={{ width: '100%' }}>
+        {TYPE_HELPER(type)}
+      </Typography>
     </Card>
   );
 }

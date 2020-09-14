@@ -8,7 +8,7 @@ import {
   Button,
 } from '@material-ui/core';
 import { useStyles } from './styles';
-import { LoadIcon, ErrorBox, ContentHeader } from '../../../../components';
+import { ErrorBox, ContentHeader } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE } from '../../../../data/queries';
 import { UPDATE_EMAIL, DELETE_ACCOUNT } from '../../../../data/mutations';
@@ -48,10 +48,8 @@ export function Account({ history }) {
           }}
           fetchPolicy="network-only"
         >
-          {({ loading, error, data }) => {
-            if (loading) return <LoadIcon />;
-            if (error) return <div>Error</div>;
-            return <div></div>;
+          {({ data }) => {
+            return null;
           }}
         </Query>
 

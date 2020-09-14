@@ -15,7 +15,6 @@ import {
 export default function Jobs({ history, theme }) {
   const classes = useStyles();
   const [loading, setLoading] = React.useState(true);
-  const [drafts, setDrafts] = React.useState([]);
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>

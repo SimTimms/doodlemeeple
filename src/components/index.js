@@ -8,6 +8,7 @@ import FileGallery from './fileGallery';
 import FormInput from './formInput';
 import Form from './form';
 import CardHeader from './headers';
+import Paper from './paper';
 import ContentHeader from './headers/contentHeader';
 import StripeCheckout from './stripeCheckout';
 import Payments from './payments';
@@ -32,6 +33,7 @@ import InviteButton from './buttons/inviteButton';
 import CreateMessage from './buttons/createMessage';
 import IconButton from './buttons/iconButton';
 import MenuButton from './buttons/menuButton';
+import MenuButtonShortcut from './buttons/menuButtonShortcut';
 import FieldTitle from './fieldTitle';
 import { JobComponent, InviteComponent } from './jobComponent';
 import FieldTitleDashboard from './fieldTitleDashboard';
@@ -39,7 +41,7 @@ import FieldBox from './fieldBox';
 import InfoBox from './infoBox';
 import FieldTitleWrapper from './fieldTitle/FieldTitleWrapper';
 import ProfileCard from './profileCard';
-import ProfileCardBasic from './profileCardBasic';
+import { ProfileCardCreative, ProfileCardCreator } from './profileCardBasic';
 import BorderBox from './borderBox';
 import IconBox from './iconBox';
 import IconTitle from './iconTitle';
@@ -54,7 +56,10 @@ import EditContractButton from './editContractButton';
 import ViewContractButton from './viewContractButton';
 import SubmitContractButton from './submitContractButton';
 import NoticeBox from './noticeBox';
-import ContractComponent from './contract';
+import {
+  ContractComponentForCreative,
+  ContractComponentForCreator,
+} from './contract';
 import CardComponent from './cardComponent';
 import ProfileAvatar from './profileAvatar';
 import FeatureCard from './featureCard';
@@ -104,7 +109,9 @@ export {
   FeatureCardHorizontal,
   SubmitContractButton,
   NoticeBox,
-  ContractComponent,
+  ContractComponentForCreative,
+  ContractComponentForCreator,
+  Paper,
   ViewContractButton,
   EditContractButton,
   ContractSummary,
@@ -124,7 +131,8 @@ export {
   InviteButton,
   IconButton,
   ProfileCard,
-  ProfileCardBasic,
+  ProfileCardCreative,
+  ProfileCardCreator,
   FieldTitle,
   CurrencySelector,
   LoadIcon,
@@ -158,6 +166,7 @@ export {
   HeaderThree,
   PaymentElement,
   MenuButton,
+  MenuButtonShortcut,
   JobComponent,
   InviteComponent,
 };

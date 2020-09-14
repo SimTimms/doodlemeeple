@@ -5,12 +5,11 @@ import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import { ArtistCard } from './ArtistCard';
-import heromaster from '../../../assets/heromaster.jpg';
-import jumping from '../../../assets/jumping.jpg';
-import map from '../../../assets/map.jpg';
+import { Divider, Column, Row, HeaderTwo, MenuButtonShortcut } from '../../';
 
 function AddSection({ setSections, sections }) {
   const [display, setDisplay] = React.useState(false);
+  const [page, setPage] = React.useState(0);
   const classes = useStyles();
 
   return (
@@ -28,7 +27,7 @@ function AddSection({ setSections, sections }) {
           component="p"
           style={{ fontSize: 16, color: '#fff', marginLeft: 10 }}
         >
-          {`Add a Skill (${3 - sections.length})`}
+          {`Add a Section (${3 - sections.length})`}
         </Typography>
       </CardContent>
 
@@ -38,27 +37,186 @@ function AddSection({ setSections, sections }) {
           [classes.skillWrapperOpen]: display,
         })}
       >
-        <ArtistCard
-          setDisplay={setDisplay}
-          sections={sections}
-          setSections={setSections}
-          type="artist"
-          img={jumping}
-        />
-        <ArtistCard
-          setDisplay={setDisplay}
-          sections={sections}
-          setSections={setSections}
-          type="graphic-artist"
-          img={heromaster}
-        />
-        <ArtistCard
-          setDisplay={setDisplay}
-          sections={sections}
-          setSections={setSections}
-          type="rulebook-editor"
-          img={map}
-        />
+        <Divider />
+        <Column>
+          <Row j="space-between">
+            <MenuButtonShortcut
+              text={{
+                name: 'Show All',
+                color: '#222',
+                icon: 'chevron_right',
+                count: 0,
+              }}
+              onClickEvent={() => {
+                setPage(0);
+              }}
+              active={page === 0}
+            />
+            <MenuButtonShortcut
+              text={{
+                name: 'Project Creators',
+                color: '#222',
+                icon: 'chevron_right',
+                count: 0,
+              }}
+              onClickEvent={() => {
+                setPage(1);
+              }}
+              active={page === 1}
+            />
+            <MenuButtonShortcut
+              text={{
+                name: 'Creative',
+                color: '#222',
+                icon: 'chevron_right',
+                count: 0,
+              }}
+              onClickEvent={() => {
+                setPage(2);
+              }}
+              active={page === 2}
+            />
+            <MenuButtonShortcut
+              text={{
+                name: 'Marketing/Campaign',
+                color: '#222',
+                icon: 'chevron_right',
+                count: 0,
+              }}
+              onClickEvent={() => {
+                setPage(3);
+              }}
+              active={page === 3}
+            />
+            <MenuButtonShortcut
+              text={{
+                name: 'Development',
+                color: '#222',
+                icon: 'chevron_right',
+                count: 0,
+              }}
+              onClickEvent={() => {
+                setPage(4);
+              }}
+              active={page === 4}
+            />
+          </Row>
+          {(page === 0 || page === 1) && (
+            <Column>
+              <HeaderTwo str="Project Creators" />
+              <Divider />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="creator"
+              />
+            </Column>
+          )}
+          {(page === 0 || page === 2) && (
+            <Column>
+              <HeaderTwo str="Visual Art and Creative Writing" />
+              <Divider />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="artist"
+              />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="3d-artist"
+              />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="graphic-artist"
+              />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="world-builder"
+              />
+            </Column>
+          )}
+          {(page === 0 || page === 3) && (
+            <Column>
+              <HeaderTwo str="Marketing and Campaign Management" />
+              <Divider />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="marketing"
+              />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="social"
+              />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="voice-actor"
+              />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="video-editor"
+              />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="reviewer"
+              />
+            </Column>
+          )}
+          {(page === 0 || page === 4) && (
+            <Column>
+              <HeaderTwo str="Development" />
+              <Divider />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="rulebook-editor"
+              />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="proof-reader"
+              />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="translator"
+              />
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="games-developer"
+              />
+
+              <ArtistCard
+                setDisplay={setDisplay}
+                sections={sections}
+                setSections={setSections}
+                type="play-tester"
+              />
+            </Column>
+          )}
+        </Column>
       </div>
       <CardContent
         className={clsx({

@@ -3,93 +3,88 @@ import { IconButton } from '../../../../../../../../../components';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../../../../../../../../utils/toaster';
 import {
+  CREATE_TERM,
   UPDATE_CONTRACT,
-  SUBMIT_CONTRACT,
 } from '../../../../../../../../../data/mutations';
+import { useStyles } from './styles';
 
-export function EditButton({ contract, jobId, setContract }) {
+export function AddPaymentTerm({
+  contractId,
+  setDetailsLock,
+  detailsLock,
+  percentLock,
+  addPaymentTerm,
+}) {
+  return (
+    <Mutation
+      mutation={CREATE_TERM}
+      variables={{
+        percent: 0,
+        description: '',
+        contractId: contractId,
+      }}
+      onCompleted={(data) => {
+        toaster('Created');
+        setDetailsLock(true);
+        addPaymentTerm({
+          _id: data.paymentTermsCreateOne.recordId,
+          percent: 0,
+          description: '',
+          contractId: contractId,
+        });
+      }}
+    >
+      {(mutation, { loading }) => {
+        return (
+          <IconButton
+            disabled={detailsLock || percentLock.sum < 0 || percentLock.status}
+            color="secondary"
+            title="Create Milestone"
+            icon=""
+            onClickEvent={() => {
+              mutation();
+            }}
+            styleOverride={null}
+            type="button"
+            iconPos="right"
+          />
+        );
+      }}
+    </Mutation>
+  );
+}
+
+export function SubmitButton({ setDetailsLock, contract, setContractParent }) {
+  const classes = useStyles();
   return (
     <Mutation
       mutation={UPDATE_CONTRACT}
       variables={{
-        _id: contract._id,
-        notes: contract.notes,
-        deadline: contract.deadline,
-        currency: contract.currency,
-        cost: contract.cost,
-        jobId,
-        status: '',
+        ...contract,
+        status: 'preview',
       }}
       onCompleted={(data) => {
-        toaster('Editing');
-        setContract({ ...contract, status: '' });
+        toaster('Submitted');
+        setDetailsLock(true);
+        setContractParent({ ...contract, status: 'preview' });
       }}
     >
       {(mutation) => {
         return (
-          <IconButton
-            title="Edit Proposal"
-            icon="edit"
-            styleOverride={null}
-            color="secondary"
-            disabled={false}
-            onClickEvent={() => {
-              mutation();
-            }}
-            type="button"
-            iconPos="right"
-          />
+          <div className={classes.actionWrapper}>
+            <IconButton
+              title="Submit"
+              icon="chevron_right"
+              color="primary"
+              styleOverride={{ width: '100%' }}
+              disabled={false}
+              onClickEvent={() => mutation()}
+              type="button"
+              iconPos="right"
+            />
+          </div>
         );
       }}
     </Mutation>
-  );
-}
-
-export function SubmitButton({ contract, jobId, setContract }) {
-  return (
-    <Mutation
-      mutation={SUBMIT_CONTRACT}
-      variables={{
-        _id: contract._id,
-      }}
-      onCompleted={(data) => {
-        toaster('Submitting...');
-        setContract({ ...contract, status: 'submitted' });
-      }}
-    >
-      {(mutation) => {
-        return (
-          <IconButton
-            title="Submit Proposal"
-            icon="send"
-            styleOverride={null}
-            color="primary"
-            disabled={false}
-            onClickEvent={() => {
-              mutation();
-            }}
-            type="button"
-            iconPos="right"
-          />
-        );
-      }}
-    </Mutation>
-  );
-}
-
-export function ViewButton({ history, contractId }) {
-  return (
-    <IconButton
-      title="View"
-      icon="view"
-      styleOverride={null}
-      color="primary"
-      disabled={false}
-      onClickEvent={() => {
-        history.push(`/app/view-contract/${contractId}`);
-      }}
-      type="button"
-      iconPos="right"
-    />
   );
 }

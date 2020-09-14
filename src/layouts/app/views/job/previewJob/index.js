@@ -1,6 +1,5 @@
 import React from 'react';
 import { Slide } from '@material-ui/core';
-import { useStyles } from './styles';
 import { Column } from '../../../../../components';
 import SummaryView from './components/summaryView';
 import ProposalView from './components/proposalView';
@@ -8,7 +7,6 @@ import { Query } from 'react-apollo';
 import { JOB, INVITE_BY_ID } from '../../../../../data/queries';
 
 export default function PreviewJob({ theme, jobId, history, inviteId }) {
-  const classes = useStyles();
   const [job, setJob] = React.useState({
     _id: null,
     name: '',
@@ -69,6 +67,8 @@ export default function PreviewJob({ theme, jobId, history, inviteId }) {
               messagesEnd={messagesEnd}
               setProposalOpen={setProposalOpen}
               setMessagesEnd={setMessagesEnd}
+              history={history}
+              theme={theme}
             />
           )}
           <Query

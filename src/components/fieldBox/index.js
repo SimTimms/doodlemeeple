@@ -15,48 +15,33 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
     warning,
     size,
     multiline,
+    titlePos,
+    width,
   } = props;
   value = value ? value : '';
   return (
-    <div
-      style={{
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        marginTop: 3,
-        marginBottom: 3,
-      }}
-    >
+    <div className={classes.one} style={{ width: width ? '' : '100%' }}>
       <div
+        className={classes.two}
         style={{
-          width: '100%',
-          display: 'flex',
-          whiteSpace: 'nowrap',
           alignItems: multiline ? 'flex-start' : 'center',
         }}
       >
-        <Typography
-          className={clsx({
-            [classes.small]: true,
-            [classes.medium]: size === 'm',
-            [classes.large]: size === 'l',
-          })}
-        >{`${title}`}</Typography>
+        {(!titlePos || titlePos === 'left') && (
+          <Typography
+            className={clsx({
+              [classes.tiny]: size === 'xs',
+              [classes.small]: true,
+              [classes.medium]: size === 'm',
+              [classes.large]: size === 'l',
+            })}
+            style={{ display: title === '' ? 'none' : '' }}
+          >{`${title}`}</Typography>
+        )}
 
         {multiline ? (
           <textarea
             rows={3}
-            style={{
-              width: '100%',
-              marginLeft: 10,
-              padding: 10,
-              borderRadius: 5,
-              boxShadow: 'inset 3px 3px 10px rgba(0,0,0,0.05)',
-              border: '1px solid #ddd',
-              background: 'rgba(0,0,0,0.025)',
-              outline: 'none',
-              fontSize: 14,
-            }}
             className={classes.root}
             placeholder={placeholder}
             value={value.substring(0, maxLength)}
@@ -68,6 +53,7 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
                       ''
                     )
                   : e.target.value;
+
               onChangeEvent(eReplaced.substring(0, maxLength));
             }}
           />
@@ -78,18 +64,11 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
           />
         ) : (
           <input
-            style={{
-              width: '100%',
-              marginLeft: 10,
-              padding: 10,
-              borderRadius: 5,
-              boxShadow: 'inset 3px 3px 10px rgba(0,0,0,0.05)',
-              border: '1px solid #ddd',
-              background: 'rgba(0,0,0,0.025)',
-              outline: 'none',
-              fontSize: 14,
-            }}
-            className={classes.root}
+            className={clsx({
+              [classes.root]: true,
+              [classes.tiny]: size === 'xs',
+            })}
+            style={{ width: width ? width : '100%' }}
             placeholder={placeholder}
             value={value.substring(0, maxLength)}
             onChange={(e) => {
@@ -106,7 +85,8 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
             }}
           />
         )}
-        {maxLength > 0 && (
+
+        {maxLength > 0 && titlePos !== 'right' && (
           <Typography style={{ marginLeft: 5, fontSize: 12, width: 30 }}>{`${
             maxLength - value.length
           }`}</Typography>
@@ -120,6 +100,17 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
           >
             {infoOpen === false ? 'info' : 'keyboard_arrow_up'}
           </Icon>
+        )}
+        {titlePos === 'right' && (
+          <Typography
+            style={{ marginLeft: 5 }}
+            className={clsx({
+              [classes.tiny]: size === 'xs',
+              [classes.small]: true,
+              [classes.medium]: size === 'm',
+              [classes.large]: size === 'l',
+            })}
+          >{`${title}`}</Typography>
         )}
       </div>
       <div

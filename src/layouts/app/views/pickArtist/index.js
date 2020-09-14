@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slide, Typography } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   LoadIcon,
@@ -35,7 +35,6 @@ export function PickArtist({
     submitted: false,
   });
   const [inviteList, setInviteList] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
 
   function updateInviteList(newItem, inviteId) {
     setInviteList([
@@ -54,9 +53,7 @@ export function PickArtist({
     setInviteList(filteredArray);
   }
 
-  return loading ? (
-    <LoadIcon />
-  ) : (
+  return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <ArtistLineup

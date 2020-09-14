@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Slide, Typography, Icon } from '@material-ui/core';
+import { Card, Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   IconButton,
@@ -22,7 +22,6 @@ import {
 import { JOB } from '../../../../../data/queries';
 import { toaster } from '../../../../../utils/toaster';
 import autosave from '../../../../../utils/autosave';
-import { errorMessages } from '../../../../../utils/readableErrors';
 
 export default function EditJob({
   theme,
@@ -33,7 +32,6 @@ export default function EditJob({
 }) {
   const classes = useStyles();
   const [loading, setLoading] = React.useState(jobId === 'new' ? false : true);
-  const [deleteError, setDeleteError] = React.useState('');
   const [job, setJob] = React.useState({
     name: '',
     img: '',
@@ -165,7 +163,6 @@ export default function EditJob({
             }}
             onCompleted={(data) => {
               toaster('Autosave');
-              const newjobId = data.updateJob;
             }}
           >
             {(mutation) => {

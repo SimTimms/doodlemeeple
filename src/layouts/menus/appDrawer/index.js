@@ -9,7 +9,6 @@ import {
   ListItemText,
   List,
   useMediaQuery,
-  Typography,
 } from '@material-ui/core';
 import { useStyles } from '../styles';
 import Cookies from 'js-cookie';
@@ -19,21 +18,24 @@ import { COUNTS } from '../../../data/queries';
 import logo from '../../../assets/dm_device.png';
 import { MenuButton } from '../../../components';
 
-export function AppDrawer(props) {
+export function AppDrawer({
+  history,
+  handleDrawerClose,
+  handleDrawerOpen,
+  open,
+  ...props
+}) {
   const {
-    link,
     button,
     buttonMobile,
     drawerOpen,
     drawerOpenMobile,
     drawerClose,
     drawerCloseMobile,
-    countsStyle,
-    wrapperFour,
     drawerRoot,
   } = useStyles();
 
-  const { handleDrawerClose, handleDrawerOpen, open, page, history } = props;
+  const { page, profile } = props;
   const theme = useTheme();
   const mobile = useMediaQuery('(max-width:800px)');
   const [counts, setCounts] = React.useState({
@@ -72,7 +74,6 @@ export function AppDrawer(props) {
         }}
         alt="DoodleMeeple Man"
       />
-      <Divider />
       {page !== 'dashboard' && <Divider />}
       <List>
         {page !== 'dashboard' && <Divider /> && (
@@ -108,6 +109,7 @@ export function AppDrawer(props) {
               color: theme.palette.secondary.main,
               count: null,
             },
+            /*
             {
               name: 'Messages',
               icon: <Icon>chat</Icon>,
@@ -128,13 +130,13 @@ export function AppDrawer(props) {
               link: () => history.push('/app/jobs'),
               color: theme.palette.primary.main,
               count: null,
-            },
+            },*/
             {
               name: 'Profile',
               icon: <Icon>contact_mail</Icon>,
               link: () => history.push('/app/edit-profile'),
               color: theme.palette.primary.main,
-              count: null,
+              count: profile.profileBG ? null : 1,
             },
             {
               name: 'Account',
@@ -150,6 +152,17 @@ export function AppDrawer(props) {
               color: theme.palette.primary.main,
               count: null,
             },
+            {
+              name: 'Logout',
+              icon: <Icon>exit_to_app</Icon>,
+              link: () => {
+                Cookies.remove('token');
+                Cookies.remove('userId');
+                history.replace(`/`);
+              },
+              color: theme.palette.error.main,
+              count: null,
+            },
           ].map((text, index) => (
             <MenuButton
               text={text}
@@ -160,49 +173,11 @@ export function AppDrawer(props) {
               }}
             />
           ))}
-          <a
-            href="https://doodlemeeple.com"
-            style={{ textDecoration: 'none' }}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <ListItem button>
-              <ListItemIcon style={{ minWidth: 32 }}>
-                <Icon style={{ minWidth: 32 }}>web_asset</Icon>
-              </ListItemIcon>
-              <ListItemText
-                primary="Website"
-                className={clsx({
-                  [button]: !mobile,
-                  [buttonMobile]: mobile,
-                })}
-              />
-            </ListItem>
-          </a>
 
           <ListItem
             button
-            onClick={() => {
-              Cookies.remove('token');
-              Cookies.remove('userId');
-              props.history.replace(`/`);
-            }}
-          >
-            <ListItemIcon style={{ minWidth: 32 }}>
-              <Icon>exit_to_app</Icon>
-            </ListItemIcon>
-            <ListItemText
-              primary="Logout"
-              className={clsx({
-                [button]: !mobile,
-                [buttonMobile]: mobile,
-              })}
-            />
-          </ListItem>
-          <Divider />
-          <ListItem
-            button
             onClick={open ? handleDrawerClose : handleDrawerOpen}
+            style={{ paddingLeft: 14 }}
           >
             <ListItemIcon style={{ minWidth: 32 }}>
               <Icon>{open ? 'chevron_left' : 'chevron_right'}</Icon>

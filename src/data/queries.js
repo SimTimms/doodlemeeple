@@ -182,7 +182,7 @@ export const INVITES = gql`
       receiver {
         name
       }
-      user {
+      sender {
         _id
         name
         profileImg
@@ -205,7 +205,7 @@ export const INVITE_BY_ID = gql`
       receiver {
         name
       }
-      user {
+      sender {
         _id
         name
         profileImg
@@ -376,6 +376,8 @@ export const GET_CONTRACT_ID = gql`
       startDate
       cost
       currency
+      signedDate
+      signedBy
       status
       updatedAt
       payments {

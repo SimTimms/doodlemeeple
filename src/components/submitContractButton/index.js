@@ -3,8 +3,13 @@ import { IconButton } from '../';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../utils/toaster';
 import { SUBMIT_CONTRACT } from '../../data/mutations';
+import { UnlockInfo } from '../../components';
 
-export default function SubmitContractButton({ contract, jobId, setContract }) {
+export default function SubmitContractButton({
+  contract,
+  setContract,
+  percentLock,
+}) {
   return (
     <Mutation
       mutation={SUBMIT_CONTRACT}
@@ -23,13 +28,10 @@ export default function SubmitContractButton({ contract, jobId, setContract }) {
             icon="send"
             styleOverride={{ width: '100%' }}
             color="primary"
-            disabled={false}
             onClickEvent={() => {
               toaster('Sending...');
               mutation();
             }}
-            iconPos="right"
-            type="button"
           />
         );
       }}
