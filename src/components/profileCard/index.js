@@ -27,12 +27,6 @@ export default function ProfileCard({
   } = props;
 
   useEffect(() => {
-    const length = creative.favourites.filter((fav) => {
-      return (
-        fav.user._id === Cookies.get('userId') &&
-        fav.receiver._id === creative._id
-      );
-    });
     setIsFav(favourite);
     setFavCount(creative.likedMe.length);
   }, [favourite]);

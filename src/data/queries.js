@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const CREATIVES = gql`
-  query GetCreatives {
-    getCreatives {
+  query GetCreatives($type: String) {
+    getCreatives(type: $type) {
       _id
       name
       summary

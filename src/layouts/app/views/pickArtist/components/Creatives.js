@@ -18,7 +18,7 @@ export default function Creatives({
       {({ data }) => {
         return data ? (
           <div className={classes.creativeWrapper}>
-            {data.getCreatives.map((creative, index) => {
+            {data.section.map((creative, index) => {
               return (
                 <ProfileCard
                   history={history}
