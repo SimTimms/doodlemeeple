@@ -19,16 +19,15 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   profileWrapperFeatured: {
-    minWidth: 120,
-    maxWidth: 120,
-    minHeight: 120,
-    maxHeight: 120,
-    borderRadius: 20,
+    minWidth: 60,
+    maxWidth: 60,
+    minHeight: 60,
+    maxHeight: 60,
+    borderRadius: 5,
     marginBottom: 5,
-    border: '4px solid #fff',
+    border: '3px solid #fff',
     boxShadow: '0px 0px 20px rgba(0,0,0,0.3)',
   },
-
   iconWrapperFeatured: {
     minWidth: 120,
     maxWidth: 120,
@@ -79,7 +78,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    fontSize: 34,
+    fontSize: 20,
   },
   postImage: {
     width: '100%',

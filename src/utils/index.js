@@ -35,6 +35,27 @@ export const TYPE_HELPER = (typeIn) => {
   }
 };
 
+export const ARTIST_TYPES = [
+  'graphic-artist',
+  '3d-artist',
+  'artist',
+  'world-builder',
+];
+export const MARKETING_TYPES = [
+  'reviewer',
+  'marketing',
+  'voice-actor',
+  'video-editor',
+  'social',
+];
+export const DEVELOPMENT_TYPES = [
+  'rulebook-editor',
+  'games-developer',
+  'proof-reader',
+  'translator',
+  'play-tester',
+  ,
+];
 export function calculatePercent(paymentTermsArray, contractTotal, currency) {
   const totalInt = parseInt(contractTotal);
   let response = {

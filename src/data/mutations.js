@@ -264,6 +264,7 @@ export const UPDATE_JOB = gql`
     $type: String
     $creativeSummary: String
     $submitted: String
+    $keywords: [String]
   ) {
     jobUpdateById(
       record: {
@@ -276,6 +277,7 @@ export const UPDATE_JOB = gql`
         type: $type
         creativeSummary: $creativeSummary
         submitted: $submitted
+        keywords: $keywords
       }
     ) {
       recordId

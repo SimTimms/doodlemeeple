@@ -10,13 +10,15 @@ export default function InviteComponent({ invite, history }) {
   return (
     <CardComponent>
       <Row>
-        <ProfileAvatar
-          profilePage={`/app/public-preview/${invite.sender._id}`}
-          title={invite.sender.name}
-          bgImg={invite.sender.profileImg}
-          history={history}
-          declined={invite.status === 'declined'}
-        />
+        {invite.sender && (
+          <ProfileAvatar
+            profilePage={`/app/public-preview/${invite.sender._id}`}
+            title={invite.sender.name}
+            bgImg={invite.sender.profileImg}
+            history={history}
+            declined={invite.status === 'declined'}
+          />
+        )}
         <Column>
           <Typography
             variant="body1"

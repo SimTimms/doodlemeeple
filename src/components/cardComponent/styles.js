@@ -14,5 +14,6 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     padding: 10,
     boxShadow: '5px 5px 10px rgba(0,0,0,0.1)',
+    boxSizing: 'border-box',
   },
 }));

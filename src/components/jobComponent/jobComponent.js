@@ -61,7 +61,14 @@ export default function JobComponent({ job, game, history }) {
         </Typography>
       </div>
       {job.invites.map((invite, index) => {
-        return (
+        return !invite.receiver ? (
+          <div
+            className={classes.profileThumb}
+            title="User account no longer available"
+          >
+            X
+          </div>
+        ) : (
           <div
             key={`invite_${index}`}
             style={{ marginRight: -10 }}

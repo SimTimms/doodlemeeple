@@ -21,7 +21,7 @@ export function Column(props) {
 }
 
 export function Row(props) {
-  const { children, a, j } = props;
+  const { children, a, j, wrap } = props;
   const align = a ? a : 'center';
   const justify = j ? j : 'center';
 
@@ -33,6 +33,7 @@ export function Row(props) {
         flexDirection: 'row',
         alignItems: align,
         justifyContent: justify,
+        flexWrap: wrap,
       }}
     >
       {children}

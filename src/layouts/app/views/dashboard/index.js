@@ -91,6 +91,10 @@ export function Dashboard({ history }) {
                 [classes.columnMobile]: mobile,
               })}`}
             >
+              <FieldTitleDashboard name="Updates" inline={false} />
+              <Divider />
+              <Posts posts={posts ? posts : []} />
+              <Divider />
               <FieldTitleDashboard name="Featured Artist" inline={false} />
               <Divider />
               <FeaturedMini
@@ -98,9 +102,6 @@ export function Dashboard({ history }) {
                 featuredId={featuredId}
                 history={history}
               />
-              <FieldTitleDashboard name="Updates" inline={false} />
-              <Divider />
-              <Posts posts={posts ? posts : []} />
             </div>
           </div>
         </div>

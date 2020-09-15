@@ -48,9 +48,6 @@ export default function FeatureCard({
           >
             <b>{title}</b>
           </Typography>
-          <Typography variant="h6" style={{ textAlign: 'center' }}>
-            {subtitle}
-          </Typography>
 
           <div
             style={{

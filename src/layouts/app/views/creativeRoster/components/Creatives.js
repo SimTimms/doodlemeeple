@@ -6,6 +6,7 @@ import { ProfileCard } from '../../../../../components';
 
 export default function Creatives({ favourites, history, filter, ...props }) {
   const classes = useStyles();
+  console.log(filter);
   return (
     <Query
       query={CREATIVES}

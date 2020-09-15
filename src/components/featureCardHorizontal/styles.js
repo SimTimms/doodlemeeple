@@ -2,13 +2,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   profileWrapperFeatured: {
-    minWidth: 80,
-    maxWidth: 80,
-    minHeight: 80,
-    maxHeight: 80,
+    minWidth: 50,
+    maxWidth: 50,
+    minHeight: 50,
+    maxHeight: 50,
     borderRadius: '50%',
     border: '4px solid #fff',
-    boxShadow: '0px 0px 20px rgba(0,0,0,0.3)',
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
     marginRight: 20,

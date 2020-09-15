@@ -60,6 +60,7 @@ export function FeaturedMini({ posts, featuredId, history }) {
                         href={linkTo}
                         target="_blank"
                         rel="noopener noreferrer"
+                        style={{ textDecoration: 'none' }}
                       >
                         <IconButton
                           color="text-dark"

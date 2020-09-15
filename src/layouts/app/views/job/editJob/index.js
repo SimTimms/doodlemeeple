@@ -9,8 +9,10 @@ import {
   UnlockInfo,
   Row,
   Divider,
+  FieldTitle,
   FieldTitleDashboard,
   DeleteButton,
+  MenuButtonShortcut,
 } from '../../../../../components';
 import { Query } from 'react-apollo';
 import { Mutation } from 'react-apollo';
@@ -22,20 +24,22 @@ import {
 import { JOB } from '../../../../../data/queries';
 import { toaster } from '../../../../../utils/toaster';
 import autosave from '../../../../../utils/autosave';
+import {
+  ARTIST_TYPES,
+  MARKETING_TYPES,
+  DEVELOPMENT_TYPES,
+  TYPE_HELPER,
+} from '../../../../../utils';
 
-export default function EditJob({
-  theme,
-  jobId,
-  autosaveIsOn,
-  history,
-  favourites,
-}) {
+export default function EditJob({ theme, jobId, history, favourites }) {
   const classes = useStyles();
   const [loading, setLoading] = React.useState(jobId === 'new' ? false : true);
+  const [page, setPage] = React.useState(1);
   const [job, setJob] = React.useState({
     name: '',
     img: '',
     summary: '',
+    keywords: [],
     location: '',
     gallery: {
       images: [],
@@ -160,6 +164,7 @@ export default function EditJob({
               gameId: job.gameId,
               creativeSummary: job.creativeSummary,
               submitted: job.submitted,
+              keywords: job.keywords,
             }}
             onCompleted={(data) => {
               toaster('Autosave');
@@ -271,9 +276,186 @@ export default function EditJob({
                               size="m"
                               multiline={true}
                             />
-                            {job.creativeSummary.length < 20 && (
-                              <UnlockInfo str="Enter at least 20 characters to continue" />
+                            <Divider />
+                            <FieldTitle
+                              name="Keywords"
+                              description="Choose the skills that you're looking for, we'll automatically filter the Creative Roster based on these keywords"
+                              warning=""
+                              inline={false}
+                            />
+                            <Divider />
+                            <div style={{ width: 350 }}>
+                              <Column>
+                                <Row j="space-between">
+                                  <MenuButtonShortcut
+                                    text={{
+                                      name: 'Show All',
+                                      color: '#222',
+                                      icon: 'chevron_right',
+                                      count: 0,
+                                    }}
+                                    onClickEvent={() => {
+                                      setPage(-1);
+                                    }}
+                                    active={page === -1}
+                                  />
+                                  <MenuButtonShortcut
+                                    text={{
+                                      name: 'Creative',
+                                      color: '#222',
+                                      icon: 'chevron_right',
+                                      count: 0,
+                                    }}
+                                    onClickEvent={() => {
+                                      setPage(1);
+                                    }}
+                                    active={page === 1}
+                                  />{' '}
+                                  <MenuButtonShortcut
+                                    text={{
+                                      name: 'Marketing',
+                                      color: '#222',
+                                      icon: 'chevron_right',
+                                      count: 0,
+                                    }}
+                                    onClickEvent={() => {
+                                      setPage(2);
+                                    }}
+                                    active={page === 2}
+                                  />
+                                  <MenuButtonShortcut
+                                    text={{
+                                      name: 'Development',
+                                      color: '#222',
+                                      icon: 'chevron_right',
+                                      count: 0,
+                                    }}
+                                    onClickEvent={() => {
+                                      setPage(3);
+                                    }}
+                                    active={page === 3}
+                                  />
+                                </Row>
+                                <Divider />
+                                {(page === -1 || page === 1) &&
+                                  ARTIST_TYPES.map((type) => (
+                                    <IconButton
+                                      title={TYPE_HELPER(type)}
+                                      icon={
+                                        job.keywords.indexOf(type) > -1
+                                          ? 'thumb_up'
+                                          : 'add'
+                                      }
+                                      color={
+                                        job.keywords.indexOf(type) > -1
+                                          ? 'primary'
+                                          : 'text-dark'
+                                      }
+                                      onClickEvent={() => {
+                                        setJob({
+                                          ...job,
+                                          keywords:
+                                            job.keywords.indexOf(type) === -1
+                                              ? [...job.keywords, type]
+                                              : job.keywords.filter(
+                                                  (item) => item !== type
+                                                ),
+                                        });
+                                        autosave(mutation);
+                                      }}
+                                      styleOverride={{
+                                        width: '100%',
+                                        margin: 0,
+                                        marginBottom: 5,
+                                      }}
+                                      iconPos="right"
+                                    />
+                                  ))}
+                                {(page === -1 || page === 2) &&
+                                  MARKETING_TYPES.map((type) => (
+                                    <IconButton
+                                      title={TYPE_HELPER(type)}
+                                      icon={
+                                        job.keywords.indexOf(type) > -1
+                                          ? 'thumb_up'
+                                          : 'add'
+                                      }
+                                      color={
+                                        job.keywords.indexOf(type) > -1
+                                          ? 'primary'
+                                          : 'text-dark'
+                                      }
+                                      onClickEvent={() => {
+                                        setJob({
+                                          ...job,
+                                          keywords:
+                                            job.keywords.indexOf(type) === -1
+                                              ? [...job.keywords, type]
+                                              : job.keywords.filter(
+                                                  (item) => item !== type
+                                                ),
+                                        });
+                                        autosave(mutation);
+                                      }}
+                                      styleOverride={{
+                                        width: '100%',
+                                        margin: 0,
+                                        marginBottom: 5,
+                                      }}
+                                      iconPos="right"
+                                    />
+                                  ))}{' '}
+                                {(page === -1 || page === 3) &&
+                                  DEVELOPMENT_TYPES.map((type) => (
+                                    <IconButton
+                                      title={TYPE_HELPER(type)}
+                                      icon={
+                                        job.keywords.indexOf(type) > -1
+                                          ? 'thumb_up'
+                                          : 'add'
+                                      }
+                                      color={
+                                        job.keywords.indexOf(type) > -1
+                                          ? 'primary'
+                                          : 'text-dark'
+                                      }
+                                      onClickEvent={() => {
+                                        setJob({
+                                          ...job,
+                                          keywords:
+                                            job.keywords.indexOf(type) === -1
+                                              ? [...job.keywords, type]
+                                              : job.keywords.filter(
+                                                  (item) => item !== type
+                                                ),
+                                        });
+                                        autosave(mutation);
+                                      }}
+                                      styleOverride={{
+                                        width: '100%',
+                                        margin: 0,
+                                        marginBottom: 5,
+                                      }}
+                                      iconPos="right"
+                                    />
+                                  ))}
+                              </Column>
+                            </div>
+                            {(job.creativeSummary.length < 20 ||
+                              job.keywords.length === 0) && (
+                              <UnlockInfo
+                                str={`Enter another ${
+                                  20 - job.creativeSummary.length
+                                } character${
+                                  20 - job.creativeSummary.length > 1 ? 's' : ''
+                                } ${
+                                  job.keywords.length === 0
+                                    ? `and at least 1 keyword`
+                                    : ''
+                                } to continue`}
+                              />
                             )}
+
                             <Row a="center" j="center">
                               <IconButton
                                 title="Back"
@@ -295,6 +477,8 @@ export default function EditJob({
                                 icon="chevron_right"
                                 disabled={
                                   !job.creativeSummary
+                                    ? true
+                                    : job.keywords.length === 0
                                     ? true
                                     : job.creativeSummary.length < 20
                                 }
