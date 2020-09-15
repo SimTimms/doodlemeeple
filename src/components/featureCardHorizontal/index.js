@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from '@material-ui/core';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
+import Divider from '../divider';
 
 export default function FeatureCardHorizontal({
   background,
@@ -57,7 +58,7 @@ export default function FeatureCardHorizontal({
               </Typography>
             </div>
             <Typography variant="body1">{subtitle}</Typography>
-            <Typography variant="h6" component="h6" className={classes.meta}>
+            <Typography variant="body1" component="p" className={classes.meta}>
               <b>{meta}</b>
             </Typography>
           </div>
