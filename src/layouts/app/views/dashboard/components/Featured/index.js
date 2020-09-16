@@ -30,11 +30,11 @@ export function Featured({ posts, history }) {
 
   useEffect(() => {
     const handleResize = () => {
-      setDimensions(getDimensions());
+      //  setDimensions(getDimensions());
     };
 
     if (myRef.current) {
-      setDimensions(getDimensions());
+      //  setDimensions(getDimensions());
     }
 
     window.addEventListener('resize', handleResize);

@@ -136,7 +136,7 @@ export default function ProfileCard({
           </Icon>
         </div>
       </Column>
-      {updateInviteList && (
+      {updateInviteList && Cookies.get('userId') !== creative._id && (
         <div className={classes.actionsWrapper}>
           <Mutation
             mutation={CREATE_INVITE}

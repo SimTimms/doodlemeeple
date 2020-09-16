@@ -276,6 +276,15 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                               size="m"
                               multiline={true}
                             />
+                            {job.creativeSummary.length < 20 && (
+                              <UnlockInfo
+                                str={`Enter another ${
+                                  20 - job.creativeSummary.length
+                                } character${
+                                  20 - job.creativeSummary.length > 1 ? 's' : ''
+                                } to continue`}
+                              />
+                            )}
                             <Divider />
                             <FieldTitle
                               name="Keywords"
@@ -441,21 +450,13 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                                   ))}
                               </Column>
                             </div>
-                            {(job.creativeSummary.length < 20 ||
-                              job.keywords.length === 0) && (
+                            {job.keywords.length === 0 && (
                               <UnlockInfo
-                                str={`Enter another ${
-                                  20 - job.creativeSummary.length
-                                } character${
-                                  20 - job.creativeSummary.length > 1 ? 's' : ''
-                                } ${
-                                  job.keywords.length === 0
-                                    ? `and at least 1 keyword`
-                                    : ''
-                                } to continue`}
+                                str={`Choose and at least 1 keyword to continue`}
                               />
                             )}
-
+                            <Divider />
+                            <FieldTitleDashboard name="" inline={false} a="l" />
                             <Row a="center" j="center">
                               <IconButton
                                 title="Back"
