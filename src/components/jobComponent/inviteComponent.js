@@ -37,18 +37,25 @@ export default function InviteComponent({ invite, history }) {
               [classes.cardSummaryWarning]: true,
             })}
           >
-            {invite.status === 'paid' ? 'Active ' : 'Waiting'}
+            {!invite.sender
+              ? 'Creator no longer exists'
+              : invite.status === 'paid'
+              ? 'Active '
+              : 'Waiting'}
           </Typography>
         </Column>
       </Row>
+
       <IconButton
-        disabled={false}
-        title={'View'}
+        title={invite.sender ? 'View' : 'Not Available'}
         color="text-dark"
+        disabled={!invite.sender}
         type="button"
         iconPos="right"
         icon={
-          invite.status === 'submitted' || invite.status === 'closed'
+          !invite.sender
+            ? ''
+            : invite.status === 'submitted' || invite.status === 'closed'
             ? 'preview'
             : invite.status === 'accepted' || invite.status === 'paid'
             ? 'chevron_right'

@@ -31,7 +31,7 @@ export default function PaymentTerms({
       <FieldTitle
         name="2. Payment Milestones"
         description="Go into detail about how and when you would like to be paid, be very specific about your terms to decrease the chance of a dispute further down the line."
-        warning="Example: The Creative shall receive 10% upon commencement of the project, The Creative shall receive 20% upon delivery of 10 full resolution SVG files, the Creative shall receive 70% upon delivery of all remaining specified items"
+        warning="Example: The Creative shall receive 100 GBP upon commencement of the project, The Creative shall receive 200 GBP upon delivery of 10 full resolution SVG files, the Creative shall receive 500GBP upon delivery of all remaining specified items"
         inline={true}
       />
       <Divider />

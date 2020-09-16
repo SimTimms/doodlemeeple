@@ -17,6 +17,7 @@ export default function Signature({
   setContractStatus,
   contractData,
   history,
+  setContract,
 }) {
   return (
     <ActionWrapper>
@@ -35,7 +36,12 @@ export default function Signature({
               variables={{
                 contractId: contractData._id,
               }}
-              onCompleted={() => {
+              onCompleted={(data) => {
+                setContract({
+                  ...contractData,
+                  signedDate: data.signContract.signedDate,
+                  status: 'accepted',
+                });
                 setContractStatus && setContractStatus('accepted');
                 setOpenContract && setOpenContract(false);
               }}

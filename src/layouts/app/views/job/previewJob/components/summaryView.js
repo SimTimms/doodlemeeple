@@ -64,6 +64,7 @@ export default function SummaryView({
                 <CreativeNotifications
                   inviteStatus={inviteStatus}
                   history={history}
+                  jobStatus={job.submitted}
                 />
               )}
 
@@ -96,6 +97,7 @@ export default function SummaryView({
                   contracts={job.contracts}
                 />
               )}
+
             {(job.submitted === 'accepted' || job.submitted === 'paid') &&
               loggedInUser === job.user._id && (
                 <ChosenCreative

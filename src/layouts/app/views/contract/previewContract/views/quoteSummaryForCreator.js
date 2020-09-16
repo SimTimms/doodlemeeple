@@ -25,7 +25,7 @@ import clsx from 'clsx';
 import moment from 'moment';
 import Cookies from 'js-cookie';
 
-export default function QuoteSummaryCreative({
+export default function QuoteSummaryCreator({
   display,
   contractData,
   setContract,
@@ -58,7 +58,11 @@ export default function QuoteSummaryCreative({
       <Query
         query={FAVOURITES}
         onCompleted={(data) => {
-          setFavourites(data.profile.favourites.map((fav) => fav.receiver._id));
+          setFavourites(
+            data.profile.favourites.map(
+              (fav) => fav.receiver && fav.receiver._id
+            )
+          );
         }}
         fetchPolicy="network-only"
       >
@@ -123,6 +127,7 @@ export default function QuoteSummaryCreative({
             setOpenContract={setOpenContract}
             setContractStatus={setContractStatus}
             history={history}
+            setContract={setContract}
           />
         )}
         {!openContract && contractData.status !== 'paid' && (
@@ -228,18 +233,20 @@ export default function QuoteSummaryCreative({
                 </BorderBox>
               ) : (
                 <BorderBox>
-                  <Meta
-                    str={`You have accepted this quote, ${contractData.user.name} has been notified. Please continue to Payment`}
-                  />
-                  <IconButton
-                    title="Payment"
-                    color="text-dark"
-                    icon="payment"
-                    onClickEvent={() => {
-                      setDisplayPayment(true);
-                    }}
-                    styleOverride={{ width: '100%' }}
-                  />
+                  <Column>
+                    <Meta
+                      str={`You have accepted this quote, ${contractData.user.name} has been notified. Please continue to Payment`}
+                    />
+
+                    <IconButton
+                      title="Pay Now"
+                      color="text-dark"
+                      icon="payment"
+                      onClickEvent={() => {
+                        setDisplayPayment(true);
+                      }}
+                    />
+                  </Column>
                 </BorderBox>
               )}
 

@@ -11,8 +11,10 @@ import moment from 'moment';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 
-export default function Payments({ data }) {
+export default function Payments({ data, type }) {
   const classes = useStyles();
+  const creativeCommission = 0.9;
+  const creatorCommission = 1.1;
 
   return (
     <TableContainer>
@@ -28,9 +30,19 @@ export default function Payments({ data }) {
           {data.map((payment, index) => {
             return (
               <TableRow key={`payment_summary_${index}`}>
-                <TableCell>
-                  {`${payment.amount / 100} ${payment.currency}`}
-                </TableCell>
+                {type === 'creative' ? (
+                  <TableCell>
+                    {`${(payment.amount / 100) * creativeCommission} ${
+                      payment.currency
+                    }`}
+                  </TableCell>
+                ) : (
+                  <TableCell>
+                    {`${(payment.amount / 100) * creatorCommission} ${
+                      payment.currency
+                    }`}
+                  </TableCell>
+                )}
                 <TableCell align="right">
                   <div
                     className={clsx({
@@ -38,7 +50,7 @@ export default function Payments({ data }) {
                       [classes.good]: payment.status === 'charge_succeeded',
                     })}
                   >{`${
-                    payment.status === 'charg_succeeded'
+                    payment.status === 'charge_succeeded'
                       ? 'Payment Received'
                       : payment.status
                   }`}</div>

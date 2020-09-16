@@ -109,7 +109,6 @@ export function AppDrawer({
               color: theme.palette.secondary.main,
               count: null,
             },
-            /*
             {
               name: 'Messages',
               icon: <Icon>chat</Icon>,
@@ -130,7 +129,7 @@ export function AppDrawer({
               link: () => history.push('/app/jobs'),
               color: theme.palette.primary.main,
               count: null,
-            },*/
+            },
             {
               name: 'Profile',
               icon: <Icon>contact_mail</Icon>,

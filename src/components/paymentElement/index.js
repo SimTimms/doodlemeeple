@@ -25,14 +25,12 @@ export default function PaymentElement({
   setContractStatus,
 }) {
   const classes = useStyles();
-  const [amount, setAmount] = React.useState('0');
   const [paymentIntent, setPaymentIntent] = React.useState(null);
   const [visible, setVisible] = React.useState(null);
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [paymentStatus, setPaymentStatus] = React.useState('');
 
   useEffect(() => {
-    setAmount(contractData.cost);
     setVisible(display);
     setPaymentStatus(contractData.status);
   }, [contractData, display]);
@@ -56,16 +54,7 @@ export default function PaymentElement({
             <Meta
               str={
                 <span>
-                  Please refer to your{' '}
-                  <span
-                    style={{ textDecoration: 'underline', cursor: 'pointer' }}
-                    onClick={() => {
-                      setVisible(false);
-                    }}
-                  >
-                    Contract
-                  </span>{' '}
-                  & our{' '}
+                  Please refer to the DoodleMeeple{' '}
                   <a href="https://doodlemeeple.com/terms-of-service/">
                     Terms of Service
                   </a>
@@ -76,7 +65,10 @@ export default function PaymentElement({
             <div>
               <Divider />
               <Typography variant="h6">{`You have agreed to pay:`}</Typography>
-              <Typography variant="h5">{`${contractData.cost} ${contractData.currency}`}</Typography>
+              <Typography variant="h5">{`${
+                parseInt(contractData.cost) + parseInt(contractData.cost) * 0.1
+              } ${contractData.currency}`}</Typography>
+              <Divider />
               <Mutation
                 mutation={MAKE_PAYMENT}
                 variables={{
@@ -98,7 +90,7 @@ export default function PaymentElement({
                       title="Deposit Now"
                       icon="payment"
                       color="primary"
-                      styleOverride={null}
+                      styleOverride={{ margin: 'auto' }}
                       type="button"
                     />
                   );

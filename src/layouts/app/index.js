@@ -91,7 +91,9 @@ function AppLayout(props) {
     <div className={classes.root}>
       <ToastContainer />
       <StyledNavBar open={open} history={history} theme={props.theme}>
-        <Typography variant="h5">{pageHeaders(page)}</Typography>
+        <Typography variant="h6">{`${pageHeaders(page)} ${
+          profile ? profile.name : ''
+        }`}</Typography>
         <div>
           <Row>
             <MenuButton text={alphaButton} onClickEvent={alphaButton.link} />
@@ -163,7 +165,6 @@ function AppLayout(props) {
             <EditJob
               theme={props.theme}
               jobId={pathParam}
-              autosaveIsOn={true}
               history={history}
               favourites={favourites}
             />

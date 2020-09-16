@@ -137,6 +137,7 @@ export const SIGN_CONTRACT = gql`
   mutation SignContract($contractId: MongoID!) {
     signContract(_id: $contractId) {
       _id
+      signedDate
     }
   }
 `;
@@ -159,6 +160,17 @@ export const CREATE_CONTRACT = gql`
       record: { currency: $currency, cost: $cost, job: $jobId }
     ) {
       recordId
+      record {
+        user {
+          name
+        }
+        job {
+          _id
+          name
+        }
+        createdAt
+        updatedAt
+      }
     }
   }
 `;

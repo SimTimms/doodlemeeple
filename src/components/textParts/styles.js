@@ -54,7 +54,7 @@ export const useStyles = makeStyles((theme) => ({
     letterSpacing: -0.3,
   },
   descriptionLeft: {
-    fontSize: 16,
+    fontSize: 14,
     marginTop: 10,
     boxSizing: 'border-box',
     width: '100%',

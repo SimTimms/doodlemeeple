@@ -86,7 +86,7 @@ export default function PaymentElement({ display, contractData }) {
           />
         </Elements>
       )}
-      <Payments data={contractData.payments} />
+      <Payments data={contractData.payments} type="creative" />
     </div>
   );
 }

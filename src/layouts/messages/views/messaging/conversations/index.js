@@ -22,7 +22,8 @@ export default function Conversations({ history, setConversationArgs }) {
         <Divider />
         <div className={classes.cardGrid}>
           {conversationArray.map((conversation, index) => {
-            return (
+            return conversation.sender === null ||
+              conversation.receiver === null ? null : (
               <MessageComponent
                 disabled={false}
                 key={`conversationparent_${index}`}
@@ -59,6 +60,7 @@ export default function Conversations({ history, setConversationArgs }) {
           }}
         >
           {({ data, loading }) => {
+            console.log(data);
             return loading ? <LoadIcon /> : null;
           }}
         </Query>

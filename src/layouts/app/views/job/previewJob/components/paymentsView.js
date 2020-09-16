@@ -19,7 +19,9 @@ export default function PaymentsView({ job }) {
           fetchPolicy="network-only"
         >
           {({ data }) => {
-            return data ? <Payments data={data.paymentMany.reverse()} /> : null;
+            return data ? (
+              <Payments data={data.paymentMany.reverse()} type="creative" />
+            ) : null;
           }}
         </Query>
       </Column>

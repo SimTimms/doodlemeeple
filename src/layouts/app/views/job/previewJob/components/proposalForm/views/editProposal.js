@@ -103,7 +103,13 @@ export default function EditProposalForm({ jobId, contractData, setContract }) {
                   toaster('Autosave');
                   const updatedId = data.contractCreateOne.recordId;
                   setLoading(false);
-                  setContract({ ...contractData, _id: updatedId });
+                  setContract({
+                    ...contractData,
+                    _id: updatedId,
+                    updatedAt: data.contractCreateOne.record.updatedAt,
+                    user: data.contractCreateOne.record.user,
+                    job: data.contractCreateOne.record.job,
+                  });
                 }}
               >
                 {(mutation) => {
@@ -241,30 +247,6 @@ export default function EditProposalForm({ jobId, contractData, setContract }) {
                           </BorderBox>
                         </div>
                       )}
-                      {/*
-                      <Divider />
-                      <FieldTitle
-                        name="3. Contract Preview"
-                        description="Be precise, this will form the basis of the contractual obligations between you and the client."
-                        warning=""
-                        inline={true}
-                      />
-                      <Divider />
-                      <IconButton
-                        title="Contract"
-                        icon="fact_check"
-                        color="secondary"
-                        onClickEvent={() => {
-                          setShowContract(true);
-                        }}
-                      />
-                      {showContract && (
-                        <ContractComponent
-                          contractData={contract}
-                          history={history}
-                          readOnly={true}
-                        />
-                      )}*/}
 
                       <Divider />
                     </div>

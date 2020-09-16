@@ -90,10 +90,10 @@ export function TextLink({ str, onClickEvent }) {
 }
 
 export function Meta(props) {
-  const { str, children } = props;
+  const { str, children, a } = props;
   const classes = useStyles();
   return str ? (
-    <Typography variant="body1" className={classes.meta}>
+    <Typography variant="body1" className={classes.meta} style={{}}>
       {str}
     </Typography>
   ) : (

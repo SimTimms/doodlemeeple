@@ -105,15 +105,15 @@ ${contractData.currency} `}
           for the Services (the "Payment")
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
-          <b>6.2</b> The Creative will receive 87.5% of the total payment, an
+          <b>6.2</b> The Creative will receive 90% of the total payment, an
           amount equating to{' '}
-          {`${contractData.cost * 0.875}
+          {`${contractData.cost * 0.9}
 ${contractData.currency} `}
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
           <b>6.3</b> DoodleMeeple will retain 10% of the total payment, an
           amount equating to{' '}
-          {`${contractData.cost * 0.125}
+          {`${contractData.cost * 0.1}
 ${contractData.currency} `}
         </Typography>
         <Divider />
@@ -172,13 +172,16 @@ ${contractData.currency} `}
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
           <b>9.1</b> This agreement is subject to the Doodle Meeple terms and
-          conditions as follows:
+          conditions & privacy policy as follows:
         </Typography>
         <Typography style={{ marginLeft: 80 }}>
-          <b>9.1.1</b> [link to terms]
+          <b>9.1.1</b> <a href="https://doodlemeeple.com/terms-of-service/"></a>
         </Typography>
         <Typography style={{ marginLeft: 80 }}>
-          <b>9.1.2</b> Where ambiguity or conflict arises between the terms of
+          <b>9.1.2</b> <a href="https://doodlemeeple.com/privacy-policy/"></a>
+        </Typography>
+        <Typography style={{ marginLeft: 80 }}>
+          <b>9.1.3</b> Where ambiguity or conflict arises between the terms of
           this Agreement and the Doodle Meeple Terms & Conditions the Doodle
           Meeple Terms and conditions will take precedence.
         </Typography>

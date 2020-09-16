@@ -17,6 +17,7 @@ export default function ProposalForm({ jobId, setProposalOpen }) {
     cost: '',
     paymentTerms: [],
     updatedAt: '',
+    user: { name: '' },
     currency: 'GBP',
     status: 'loading',
     job: { _id: '', user: { _id: '', email: '' } },

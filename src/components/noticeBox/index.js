@@ -35,8 +35,13 @@ export default function NoticeBox({ title, ...props }) {
           <IconButton
             title={actionTitle}
             icon="payment"
-            color="secondary"
+            color="text-white"
             onClickEvent={actionEvent}
+            styleOverride={{
+              border: '1px solid #fff',
+              borderRadius: 10,
+              boxShadow: '5px 5px 10px rgba(0,0,0,0.2)',
+            }}
           />
         )}
       </Column>

@@ -10,6 +10,20 @@ export const useStyles = makeStyles((theme) => ({
   hide: {
     display: 'none',
   },
+  wrapper4: {
+    padding: 10,
+    boxSizing: 'border-box',
+    display: 'flex',
+    justifyContent: 'center',
+    background: '#efeff5',
+    position: 'fixed',
+    zIndex: 1,
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    overflow: 'auto',
+  },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
