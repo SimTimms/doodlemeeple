@@ -71,7 +71,7 @@ export default function PaymentTerm({
 
                   setDetailsLock(false);
                   setPercentLock(percentLockCalc);
-                  console.log(percentLockCalc.sum);
+
                   percentLockCalc.sum >= 0
                     ? setSaveLock(false)
                     : setSaveLock(true);
@@ -99,6 +99,8 @@ export default function PaymentTerm({
                   setValues({ ...values, description: e });
                   let paymentTermsArray = [...contract.paymentTerms];
                   paymentTermsArray[index].description = e;
+
+                  setContract({ ...contract, paymentTerms: paymentTermsArray });
                   autosave(() => {
                     mutation();
                   });

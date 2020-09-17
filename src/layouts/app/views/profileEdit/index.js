@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slide, Icon } from '@material-ui/core';
+import { Slide, Icon, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { ProfileHeader } from './components/profileHeader';
 import {
@@ -12,7 +12,10 @@ import {
   LoadIcon,
   FieldBox,
   FieldTitleDashboard,
+  IconButton,
+  Row,
   Divider,
+  Column,
   MenuButton,
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
@@ -25,10 +28,15 @@ import autosave from '../../../../utils/autosave';
 
 export function EditProfile({ theme, history }) {
   const classes = useStyles();
-  const [bgImage, setBgImage] = React.useState(null);
-  const [userName, setUserName] = React.useState('');
+  const [profile, setProfile] = React.useState({
+    name: '',
+    summary: '',
+    profileBG: '',
+    profileImg: '',
+    creativeTrue: false,
+    creatorTrue: false,
+  });
   const [userId, setUserId] = React.useState('');
-  const [summary, setSummary] = React.useState('');
   const [sections, setSections] = React.useState([]);
   const [profileImg, setProfileImg] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
@@ -39,14 +47,6 @@ export function EditProfile({ theme, history }) {
     password: null,
   });
 
-  const userProfile = {
-    userName,
-    summary,
-    profileImg,
-    bgImage,
-    sections,
-    autosave: true,
-  };
   function hasNew() {
     const ids = sections.map((item) => item.id);
     const filterIds = ids.filter((item) => item === 'new');
@@ -62,22 +62,16 @@ export function EditProfile({ theme, history }) {
         <Mutation
           mutation={UPDATE_USER_MUTATION}
           variables={{
-            name: userProfile.userName,
-            summary: userProfile.summary,
-            profileBG: userProfile.bgImage,
-            profileImg: userProfile.profileImg,
+            name: profile.name,
+            summary: profile.summary,
+            profileBG: profile.profileBG,
+            profileImg: profile.profileImg,
+            creativeTrue: profile.creativeTrue,
+            creatorTrue: profile.creatorTrue,
           }}
           onCompleted={() => {
             toaster('Autosave');
             setChanges(changes + 1);
-          }}
-          update={(store, { data: { updateUser } }) => {
-            const data = store.readQuery({ query: PROFILE });
-            const profile = data.profile;
-            profile.name = updateUser.name;
-            profile.summary = updateUser.summary;
-
-            store.writeQuery({ query: PROFILE, data });
           }}
           onError={(error) => {
             toaster('Error');
@@ -109,6 +103,63 @@ export function EditProfile({ theme, history }) {
 
                 {loading ? (
                   <LoadIcon />
+                ) : (profile.creativeTrue === null &&
+                    profile.creatorTrue === null) ||
+                  (profile.creativeTrue === false &&
+                    profile.creatorTrue === false) ? (
+                  <div className={classes.root}>
+                    <DMCard>
+                      <InlineHeader>
+                        <IconTitle icon="help" title="What are you here for?" />
+                      </InlineHeader>
+                      <Column>
+                        <div style={{ width: 300 }}>
+                          <IconButton
+                            title="I'm here to offer my skills"
+                            icon="brush"
+                            styleOverride={{ width: '100%' }}
+                            iconPos="right"
+                            onClickEvent={() => {
+                              setProfile({
+                                ...profile,
+                                creativeTrue: true,
+                                creatorTrue: false,
+                              });
+                              autosave(SignupMutation, 'username');
+                            }}
+                          />
+                          <IconButton
+                            title="I'm here to hire professionals"
+                            icon="work"
+                            iconPos="right"
+                            styleOverride={{ width: '100%' }}
+                            onClickEvent={() => {
+                              setProfile({
+                                ...profile,
+                                creativeTrue: false,
+                                creatorTrue: true,
+                              });
+                              autosave(SignupMutation, 'username');
+                            }}
+                          />
+                          <IconButton
+                            title="Both"
+                            icon="work"
+                            iconPos="right"
+                            styleOverride={{ width: '100%' }}
+                            onClickEvent={() => {
+                              setProfile({
+                                ...profile,
+                                creativeTrue: true,
+                                creatorTrue: true,
+                              });
+                              autosave(SignupMutation, 'username');
+                            }}
+                          />
+                        </div>
+                      </Column>
+                    </DMCard>
+                  </div>
                 ) : (
                   <div className={classes.root}>
                     <DMCard>
@@ -123,9 +174,13 @@ export function EditProfile({ theme, history }) {
                           inline={false}
                         />
                         <ProfileHeader
-                          profile={userProfile}
-                          setProfileImg={setProfileImg}
-                          setBgImage={setBgImage}
+                          profile={profile}
+                          setProfileImg={(url) => {
+                            setProfile({ ...profile, profileImg: url });
+                          }}
+                          setBgImage={(url) => {
+                            setProfile({ ...profile, profileBG: url });
+                          }}
                           autosaveFunction={SignupMutation}
                         />
                         <FieldTitle
@@ -135,12 +190,12 @@ export function EditProfile({ theme, history }) {
                           inline={false}
                         />
                         <FieldBox
-                          value={userProfile.userName}
+                          value={profile.name}
                           title="Name"
                           maxLength={26}
                           onChangeEvent={(e) => {
+                            setProfile({ ...profile, name: e });
                             autosave(SignupMutation, 'username');
-                            setUserName(e);
                           }}
                           replaceMode="loose"
                           placeholder="Example: David Jones"
@@ -151,12 +206,12 @@ export function EditProfile({ theme, history }) {
                         />
                         <ErrorBox errorMsg={errors.name} />
                         <FieldBox
-                          value={userProfile.summary}
+                          value={profile.summary}
                           title="Summary"
                           maxLength={256}
                           onChangeEvent={(e) => {
+                            setProfile({ ...profile, summary: e });
                             autosave(SignupMutation, 'summary');
-                            setSummary(e);
                           }}
                           replaceMode="loose"
                           placeholder="Example: Digital artist with 12 years experience..."
@@ -165,6 +220,36 @@ export function EditProfile({ theme, history }) {
                           size="s"
                           multiline={true}
                         />
+                        <Divider />
+                        <FieldTitle
+                          name="Your Role"
+                          description="Define what you are looking for on DoodleMeeple"
+                          warning=""
+                          inline={false}
+                        />
+                        <Row j="space-between">
+                          <Typography>{`You're registered as a ${
+                            profile.creativeTrue && profile.creatorTrue
+                              ? 'Creative and a Creator'
+                              : profile.creativeTrue
+                              ? 'Creative'
+                              : 'Creator'
+                          } `}</Typography>
+                          <IconButton
+                            title="Change"
+                            icon=""
+                            iconPos="right"
+                            color="primary"
+                            onClickEvent={() => {
+                              setProfile({
+                                ...profile,
+                                creativeTrue: false,
+                                creatorTrue: false,
+                              });
+                              autosave(SignupMutation, 'username');
+                            }}
+                          />
+                        </Row>
                       </div>
                     </DMCard>
                     {sections &&
@@ -202,13 +287,15 @@ export function EditProfile({ theme, history }) {
           query={PROFILE}
           fetchPolicy="network-only"
           onCompleted={(data) => {
+            setProfile({ ...data.profile });
             setLoading(false);
+            /*
             setSections(data.profile.sections);
             setUserName(data.profile.name);
             setSummary(data.profile.summary);
             setBgImage(data.profile.profileBG);
             setUserId(data.profile._id);
-            setProfileImg(data.profile.profileImg);
+            setProfileImg(data.profile.profileImg);*/
           }}
         >
           {() => {

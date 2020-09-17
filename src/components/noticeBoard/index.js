@@ -3,11 +3,16 @@ import { useMediaQuery, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Column, Row, IconButton, LoadIcon } from '../';
 import { Mutation, Query } from 'react-apollo';
-import { SKIP_ONBOARDING } from '../../data/mutations';
+import { SKIP_ONBOARDING, SET_AS_CREATOR } from '../../data/mutations';
 import { PROFILE_FEATURED } from '../../data/queries';
 import device from '../../assets/device.svg';
 
-export default function NoticeBoard({ profile, history, featuredArticle }) {
+export default function NoticeBoard({
+  profile,
+  history,
+  featuredArticle,
+  setProfile,
+}) {
   const mobile = useMediaQuery('(max-width:800px)');
   const classes = useStyles();
   console.log(featuredArticle);
@@ -56,11 +61,95 @@ export default function NoticeBoard({ profile, history, featuredArticle }) {
 
                 return data ? (
                   <Row>
-                    <Column>
-                      <Typography variant="h4" style={{ color: '#fff' }}>
-                        Welcome to DoodleMeeple
-                      </Typography>
-                    </Column>
+                    {profile.sections.length === 0 &&
+                    profile.creatorTrue !== true ? (
+                      <Column>
+                        <Typography
+                          variant="h5"
+                          style={{
+                            color: '#fff',
+                            textAlign: 'center',
+                            paddingLeft: 20,
+                            paddingRight: 20,
+                            marginBottom: 10,
+                          }}
+                        >
+                          Your profile isn't complete.
+                        </Typography>
+                        <Typography
+                          variant="h6"
+                          style={{
+                            color: '#fff',
+                            textAlign: 'center',
+                            paddingLeft: 20,
+                            paddingRight: 20,
+                            marginBottom: 10,
+                            maxWidth: 300,
+                          }}
+                        >
+                          You'll need to add at least 1 skill section to be
+                          listed on the Creative Roster.
+                        </Typography>
+                        <IconButton
+                          title="Add a Skill"
+                          color="text-white"
+                          icon="brush"
+                          styleOverride={{ marginBottom: 10 }}
+                          onClickEvent={() =>
+                            history.push('/app/edit-profile/')
+                          }
+                        />
+                        <Mutation
+                          mutation={SET_AS_CREATOR}
+                          variables={{ creatorTrue: true }}
+                          onCompleted={(data) => {
+                            setProfile({ ...profile, creatorTrue: true });
+                          }}
+                        >
+                          {(mutation) => {
+                            return (
+                              <IconButton
+                                title="I'm a CREATOR"
+                                color="text-white-mini"
+                                icon=""
+                                onClickEvent={() => mutation()}
+                              />
+                            );
+                          }}
+                        </Mutation>
+                      </Column>
+                    ) : (
+                      <Column>
+                        <Typography variant="h4" style={{ color: '#fff' }}>
+                          Welcome to DoodleMeeple
+                        </Typography>
+                        <IconButton
+                          color="text-white"
+                          disabled={false}
+                          onClickEvent={() => {
+                            history.push(`/app/jobs`);
+                          }}
+                          icon=""
+                          title="Post a Job"
+                          styleOverride={null}
+                          type="button"
+                          iconPos="right"
+                        />{' '}
+                        <IconButton
+                          color="text-white-mini"
+                          disabled={false}
+                          onClickEvent={() => {
+                            history.push(`/app/creative-roster`);
+                          }}
+                          icon=""
+                          title="Browse"
+                          styleOverride={null}
+                          type="button"
+                          iconPos="right"
+                        />
+                      </Column>
+                    )}
+
                     <Column>
                       <div
                         style={{

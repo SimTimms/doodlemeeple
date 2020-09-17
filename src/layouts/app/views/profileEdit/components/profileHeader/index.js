@@ -18,12 +18,12 @@ export function ProfileHeader({
     <div>
       <div
         style={{
-          backgroundImage: `url(${profile.bgImage})`,
+          backgroundImage: `url(${profile.profileBG})`,
           backgroundPosition: 'center center',
         }}
         className={clsx({
           [classes.root]: true,
-          [classes.rootImage]: profile.bgImage,
+          [classes.rootImage]: profile.profileBG,
           [classes.rootMobile]: mobile,
           [classes.rootDesktop]: !mobile,
         })}
@@ -42,7 +42,7 @@ export function ProfileHeader({
             }
           }}
           styleOverride={null}
-          hasFile={profile.bgImage ? true : false}
+          hasFile={profile.profileBG ? true : false}
           className={null}
           size="1920 x 300"
         />

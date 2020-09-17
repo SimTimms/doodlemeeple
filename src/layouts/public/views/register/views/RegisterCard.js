@@ -10,12 +10,9 @@ import {
   Slide,
 } from '@material-ui/core';
 import {
-  Form,
-  FormInput,
   ErrorBox,
   IconButton,
   Meta,
-  FieldTitle,
   FieldBox,
 } from '../../../../../components';
 import { styles } from './styles';
@@ -99,7 +96,7 @@ export default function RegisterCard({ setPage }) {
         >
           <CardContent style={{ padding: 5 }}>
             <Typography
-              variant="h1"
+              variant="h2"
               color="textPrimary"
               style={{ textAlign: 'center' }}
             >

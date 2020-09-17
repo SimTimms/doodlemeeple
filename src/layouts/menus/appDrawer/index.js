@@ -115,7 +115,7 @@ export function AppDrawer({
               link: () => history.push('/messages/conversations'),
               color: theme.palette.primary.main,
               count: counts.messages,
-            },
+            },*/,
             {
               name: 'Invites',
               icon: <Icon>thumb_up</Icon>,
@@ -125,12 +125,12 @@ export function AppDrawer({
             },
 
             {
-              name: 'Projects',
+              name: profile.creatorTrue ? 'Projects' : 'hide',
               icon: <Icon>work</Icon>,
               link: () => history.push('/app/jobs'),
               color: theme.palette.primary.main,
               count: null,
-            },*/,
+            },
             {
               name: 'Profile',
               icon: <Icon>contact_mail</Icon>,
@@ -163,16 +163,19 @@ export function AppDrawer({
               color: theme.palette.error.main,
               count: null,
             },
-          ].map((text, index) => (
-            <MenuButton
-              text={text}
-              key={text.name}
-              onClickEvent={() => {
-                text.link();
-                handleDrawerClose();
-              }}
-            />
-          ))}
+          ].map(
+            (text, index) =>
+              text.name !== 'hide' && (
+                <MenuButton
+                  text={text}
+                  key={text.name}
+                  onClickEvent={() => {
+                    text.link();
+                    handleDrawerClose();
+                  }}
+                />
+              )
+          )}
 
           <ListItem
             button

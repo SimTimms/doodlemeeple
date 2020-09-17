@@ -7,7 +7,6 @@ import { IconButton, BorderBox } from '../';
 
 export default function ContractComponentForCreative({
   contractData,
-  history,
   ...props
 }) {
   let paymentTermsSum = 100;
@@ -129,7 +128,7 @@ ${contractData.currency} `}
           return (
             <Typography key={`term_${index}`} style={{ marginLeft: 80 }}>
               <b>{`7.1.${index + 1}: `}</b>
-              {`The Creative shall receive ${term.percent}% of the Payment upon ${term.description}`}
+              {`The Creative shall receive ${term.percent} ${contractData.currency} upon ${term.description}`}
             </Typography>
           );
         })}
@@ -139,7 +138,7 @@ ${contractData.currency} `}
             style={{ marginLeft: 80 }}
           >
             <b>{`7.1.${contractData.paymentTerms.length + 1}: `}</b>
-            {`${paymentTermsSum}% of the Payment upon completion of the Services`}
+            {`${paymentTermsSum} ${contractData.currency} upon completion of the Services`}
           </Typography>
         )}
         <Typography style={{ marginLeft: 40 }}>

@@ -1,9 +1,12 @@
 import React from 'react';
 import { Slide, Typography } from '@material-ui/core';
-import { LoadIcon, Column, Row } from '../../../../../components';
+import {
+  LoadIcon,
+  Column,
+  ContractSummaryForCreative,
+} from '../../../../../components';
 import { PREVIEW_CONTRACT, GET_MESSAGES } from '../../../../../data/queries';
 import { Query } from 'react-apollo';
-import QuoteSummaryCreative from './views/quoteSummaryForCreative';
 import QuoteSummaryCreator from './views/quoteSummaryForCreator';
 import Chat from './views/chat';
 import PaymentElement from './views/payments';
@@ -52,7 +55,7 @@ export default function PreviewContract({ contractId, history }) {
                 <Column a="center" j="center">
                   <div style={{ width: '100%' }}>
                     {userId === contractData.user._id ? (
-                      <QuoteSummaryCreative
+                      <ContractSummaryForCreative
                         display={tabs[0]}
                         contractData={contractData}
                         history={history}

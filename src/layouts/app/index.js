@@ -125,7 +125,11 @@ function AppLayout(props) {
       >
         <ContentTop style={{ width: '100%' }}>
           {page === 'dashboard' && profile ? (
-            <Dashboard history={history} profile={profile} />
+            <Dashboard
+              history={history}
+              profile={profile}
+              setProfile={setProfile}
+            />
           ) : page === 'help' ? (
             <Help history={history} />
           ) : page === 'beta' ? (

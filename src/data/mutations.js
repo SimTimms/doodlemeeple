@@ -333,6 +333,8 @@ export const UPDATE_USER_MUTATION = gql`
     $summary: String
     $profileBG: String
     $profileImg: String
+    $creativeTrue: Boolean
+    $creatorTrue: Boolean
   ) {
     userUpdateOne(
       record: {
@@ -340,8 +342,18 @@ export const UPDATE_USER_MUTATION = gql`
         summary: $summary
         profileBG: $profileBG
         profileImg: $profileImg
+        creativeTrue: $creativeTrue
+        creatorTrue: $creatorTrue
       }
     ) {
+      recordId
+    }
+  }
+`;
+
+export const SET_AS_CREATOR = gql`
+  mutation SetAsCreator($creatorTrue: Boolean!) {
+    userUpdateOne(record: { creatorTrue: $creatorTrue }) {
       recordId
     }
   }

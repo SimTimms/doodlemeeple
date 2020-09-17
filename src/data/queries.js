@@ -533,6 +533,8 @@ export const PROFILE = gql`
       profileImg
       autosave
       email
+      creatorTrue
+      creativeTrue
       onboarding
       favourites {
         receiver {

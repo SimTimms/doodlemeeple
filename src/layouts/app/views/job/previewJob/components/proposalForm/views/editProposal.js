@@ -10,7 +10,7 @@ import {
   Meta,
   Row,
   MenuButtonShortcut,
-  ContractSummary,
+  ContractComponentForCreative,
   SubmitContractButton,
   IconButton,
   UnlockInfo,
@@ -187,6 +187,7 @@ export default function EditProposalForm({ jobId, contractData, setContract }) {
                           setSaveLock={setSaveLock}
                           setDetailsLock={setDetailsLock}
                           detailsLock={detailsLock}
+                          mutation={mutation}
                           menu={
                             <BorderBox w={300}>
                               <Meta str="Continue to Confirmation" />
@@ -213,9 +214,8 @@ export default function EditProposalForm({ jobId, contractData, setContract }) {
                       )}
                       {page === 2 && (
                         <div style={{ width: '100%' }}>
-                          <ContractSummary
+                          <ContractComponentForCreative
                             contractData={contractData}
-                            contractStatus={contractData.status}
                           />
                           {percentLock.status && (
                             <UnlockInfo str="WARNING! Your milestone payments exceed the contract total, please adjust to continue." />

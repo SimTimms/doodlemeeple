@@ -9,12 +9,12 @@ import {
   BorderBox,
   IconButton,
   NoticeBox,
-} from '../../../../../../components';
+} from '../';
 import { useStyles } from './styles';
 import moment from 'moment';
 import clsx from 'clsx';
 
-export default function QuoteSummaryCreative({
+export default function ContractSummaryCreative({
   display,
   contractData,
   history,

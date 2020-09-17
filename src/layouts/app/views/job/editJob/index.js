@@ -130,11 +130,14 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                           size="s"
                           multiline={false}
                         />
+                        {job.name.length < 10 && (
+                          <UnlockInfo str="Provide a title that summarises the job" />
+                        )}
                       </div>
                       <IconButton
                         title="Create Job"
                         icon="add"
-                        disabled={job.name.length < 4}
+                        disabled={job.name.length < 10}
                         color="primary"
                         onClickEvent={() => {
                           mutation();
@@ -200,6 +203,9 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                               size="s"
                               multiline={false}
                             />
+                            {job.name.length < 10 && (
+                              <UnlockInfo str="Provide a title that summarises the job" />
+                            )}
                             <FieldBox
                               title="Job Summary"
                               value={job.summary}
@@ -241,11 +247,12 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                             ) : job.summary.length < 20 ? (
                               <UnlockInfo str="Enter more detail to continue" />
                             ) : null}
+
                             <IconButton
                               title="Continue"
                               icon="chevron_right"
                               disabled={
-                                job.name.length < 4 || !job.summary
+                                job.name.length < 10 || !job.summary
                                   ? true
                                   : job.summary.length < 20
                               }

@@ -13,7 +13,7 @@ import { useStyles } from './styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 
-export function Dashboard({ history, profile }) {
+export function Dashboard({ history, profile, setProfile }) {
   const classes = useStyles();
   const [posts, setPosts] = React.useState(null);
   const [home, setHome] = React.useState(null);
@@ -80,6 +80,7 @@ export function Dashboard({ history, profile }) {
       <div style={{ width: '100%' }}>
         <NoticeBoard
           profile={profile}
+          setProfile={setProfile}
           history={history}
           featuredArticle={featuredArticle}
         />

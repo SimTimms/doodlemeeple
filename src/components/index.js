@@ -56,6 +56,8 @@ import ContractSummary from './contractSummary';
 import EditContractButton from './editContractButton';
 import ViewContractButton from './viewContractButton';
 import SubmitContractButton from './submitContractButton';
+import ContractSummaryForCreative from './ContractSummaryForCreative';
+
 import NoticeBox from './noticeBox';
 import {
   ContractComponentForCreative,
@@ -92,6 +94,7 @@ export {
   InlineHeaderWarning,
   FeatureCardInvite,
   Meta,
+  ContractSummaryForCreative,
   TextLink,
   TextLeft,
   TextDivider,
