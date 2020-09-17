@@ -76,14 +76,15 @@ export default function NoticeBoard({ profile, history, featuredArticle }) {
                       <img
                         src={data.userById ? data.userById.profileImg : device}
                         style={{
-                          minWidth: 60,
-                          maxWidth: 60,
-                          minHeight: 60,
-                          maxHeight: 60,
-                          padding: 10,
-                          marginTop: -100,
+                          minWidth: 80,
+                          maxWidth: 80,
+                          minHeight: 80,
+                          maxHeight: 80,
+                          padding: 3,
+                          marginTop: -120,
                           borderRadius: '50%',
                           backgroundColor: '#fff',
+                          boxShadow: '5px 5px 10px rgba(0,0,0,0.2)',
                         }}
                       />
                       <Typography variant="h6" style={{ color: '#fff' }}>
