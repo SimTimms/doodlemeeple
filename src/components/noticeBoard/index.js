@@ -14,7 +14,7 @@ export default function NoticeBoard({ profile, history, featuredArticle }) {
   return (
     <div className={classes.root}>
       <Row>
-        {profile.onboarding !== 'complete' && !profile.bgImg ? (
+        {profile.onboarding !== 'complete' && !profile.profileBG ? (
           <Column>
             <Typography variant="h5" style={{ color: '#fff' }}>
               Welcome to DoodleMeeple, let's get started
