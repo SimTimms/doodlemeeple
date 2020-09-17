@@ -15,6 +15,8 @@ import {
   ErrorBox,
   IconButton,
   Meta,
+  FieldTitle,
+  FieldBox,
 } from '../../../../../components';
 import { styles } from './styles';
 import { sharedStyles } from '../../styles';
@@ -114,39 +116,52 @@ export default function RegisterCard({ setPage }) {
           </CardContent>
           <Divider />
           <CardContent className={classes.cardContentCenter}>
-            <Form width={200}>
-              <FormInput
-                fieldName="name"
-                fieldValue={name}
-                setFieldValue={setName}
-                fieldTitle={`Name ${
-                  name ? `(${PROFILE_NAME - name.length})` : ''
-                }`}
-                inputProps={{ maxLength: PROFILE_NAME }}
-              />
-              <ErrorBox errorMsg={errors.name} />
-              <FormInput
-                fieldName="emailAddress"
-                fieldValue={email}
-                setFieldValue={setEmail}
-                fieldTitle={`Email ${
-                  email ? `(${PROFILE_EMAIL - email.length})` : ''
-                }`}
-                inputProps={{ maxLength: PROFILE_EMAIL }}
-              />
-              <ErrorBox errorMsg={errors.email} />
-              <FormInput
-                fieldName="password"
-                fieldValue={password}
-                type="password"
-                setFieldValue={setPassword}
-                fieldTitle={`Password ${
-                  password ? `(${PROFILE_PASSWORD - password.length})` : ''
-                }`}
-                inputProps={{ maxLength: PROFILE_PASSWORD }}
-              />
-              <ErrorBox errorMsg={errors.password} />
-            </Form>
+            <FieldBox
+              value={name}
+              title="Name"
+              maxLength={26}
+              onChangeEvent={(e) => {
+                setName(e);
+              }}
+              replaceMode="tight"
+              placeholder="Example: David Jones"
+              info="Your name, callsign, company name, handle, alias or whatever else you want to be know as."
+              warning=""
+              size="s"
+              multiline={false}
+            />
+            <ErrorBox errorMsg={errors.name} />
+            <FieldBox
+              value={email}
+              title="Email"
+              maxLength={226}
+              onChangeEvent={(e) => {
+                setEmail(e);
+              }}
+              replaceMode=""
+              placeholder="Example: info@doodlemeeple.com"
+              info="Your email address, used for logging into your account"
+              warning=""
+              size="s"
+              multiline={false}
+            />
+            <ErrorBox errorMsg={errors.email} />
+            <FieldBox
+              value={password}
+              title="Password"
+              maxLength={20}
+              onChangeEvent={(e) => {
+                setPassword(e);
+              }}
+              replaceMode=""
+              placeholder="Example: *********"
+              info="The password you will use for logging into your account"
+              warning=""
+              size="s"
+              type="password"
+              multiline={false}
+            />
+            <ErrorBox errorMsg={errors.password} />
           </CardContent>
           <CardContent className={classes.cardContentCenter}>
             <Mutation

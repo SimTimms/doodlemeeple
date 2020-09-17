@@ -3,6 +3,6 @@ export default function pageHeaders(inStr) {
     case 'edit-profile':
       return 'Profile';
     default:
-      return 'Welcome to DoodleMeeple';
+      return '';
   }
 }

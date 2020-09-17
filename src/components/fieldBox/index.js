@@ -17,6 +17,7 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
     multiline,
     titlePos,
     width,
+    type,
   } = props;
   value = value ? value : '';
   return (
@@ -52,6 +53,8 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
                       /[^A-Za-z0-9&:;|/\\?!@£$%*()_ ,-."`'\[\]\n]/g,
                       ''
                     )
+                  : replaceMode === 'tight'
+                  ? e.target.value.replace(/[^A-Za-z -0-9]/g, '')
                   : e.target.value;
 
               onChangeEvent(eReplaced.substring(0, maxLength));
@@ -71,15 +74,18 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
             style={{ width: width ? width : '100%' }}
             placeholder={placeholder}
             value={value.substring(0, maxLength)}
+            type={type ? type : 'text'}
             onChange={(e) => {
               const eReplaced =
                 replaceMode === 'loose'
                   ? e.target.value.replace(
-                      /[^A-Za-z0-9&:;|/\\?!@£$%*()_ ,-."'\n]/g,
+                      /[^A-Za-z0-9&:;|/\\?!@£$%*()_ ,-."`'\[\]\n]/g,
                       ''
                     )
                   : replaceMode === 'number'
                   ? e.target.value.replace(/[^0-9'\n]/g, '')
+                  : replaceMode === 'tight'
+                  ? e.target.value.replace(/[^A-Za-z \-0-9]/g, '')
                   : e.target.value;
               onChangeEvent(eReplaced.substring(0, maxLength));
             }}

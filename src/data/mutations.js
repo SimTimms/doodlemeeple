@@ -99,6 +99,12 @@ export const UPDATE_TERM = gql`
   }
 `;
 
+export const SKIP_ONBOARDING = gql`
+  mutation SkipOnboarding {
+    skipOnboarding
+  }
+`;
+
 export const CREATE_TERM = gql`
   mutation CreatePaymentTerm(
     $percent: Float

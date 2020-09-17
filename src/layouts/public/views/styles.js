@@ -2,9 +2,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const sharedStyles = makeStyles((theme) => ({
   card: {
-    maxWidth: 312,
+    maxWidth: 512,
     padding: 30,
-    minWidth: 312,
+    minWidth: 512,
     boxShadow: '0 0 30px rgba(0,0,0,0.2)',
     margin: '80px 0 180px 0',
   },

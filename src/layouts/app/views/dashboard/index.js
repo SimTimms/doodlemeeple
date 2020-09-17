@@ -2,26 +2,26 @@ import React, { useEffect } from 'react';
 import Slide from '@material-ui/core/Slide';
 import { Notifications } from './components/notifications';
 import { Posts } from './components/Posts';
-import { Featured } from './components/Featured';
 import { FeaturedMini } from './components/FeaturedMini';
 import axios from 'axios';
 import {
-  ContentHeader,
   FieldTitleDashboard,
   Divider,
+  NoticeBoard,
 } from '../../../../components';
 import { useStyles } from './styles';
-import { Typography } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 
-export function Dashboard({ history }) {
+export function Dashboard({ history, profile }) {
   const classes = useStyles();
   const [posts, setPosts] = React.useState(null);
-  const [featured, setFeatured] = React.useState(null);
   const [home, setHome] = React.useState(null);
-  const [featuredId, setFeaturedId] = React.useState(null);
   const mobile = useMediaQuery('(max-width:800px)');
+  const [featuredArticle, setFeaturedArticle] = React.useState({
+    id: null,
+    article: null,
+  });
 
   useEffect(() => {
     let didCancel = false;
@@ -45,8 +45,14 @@ export function Dashboard({ history }) {
           { cancelToken: axiosCancel.token }
         )
         .then((response) => {
-          setFeaturedId(response.data[0].slug);
-          setFeatured(response.data);
+          setFeaturedArticle({
+            id: response.data[0].slug,
+            article: {
+              title: response.data[0].title.rendered,
+              image: response.data[0]._embedded,
+              linkTo: response.data[0].link,
+            },
+          });
         })
         .catch((error) => {
           console.log(error);
@@ -72,7 +78,11 @@ export function Dashboard({ history }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div style={{ width: '100%' }}>
-        <Featured posts={home ? home : []} history={history} />
+        <NoticeBoard
+          profile={profile}
+          history={history}
+          featuredArticle={featuredArticle}
+        />
         <div className={classes.dashboardGrid}>
           <div className={classes.gridRow}>
             <div
@@ -94,14 +104,16 @@ export function Dashboard({ history }) {
               <FieldTitleDashboard name="Updates" inline={false} />
               <Divider />
               <Posts posts={posts ? posts : []} />
+              {/*
               <Divider />
               <FieldTitleDashboard name="Featured Artist" inline={false} />
               <Divider />
+            
               <FeaturedMini
-                posts={featured ? featured : []}
-                featuredId={featuredId}
+                posts={featuredArticle.article ? featuredArticle.article : []}
+                featuredId={featuredArticle.id}
                 history={history}
-              />
+            />*/}
             </div>
           </div>
         </div>

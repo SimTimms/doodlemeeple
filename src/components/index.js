@@ -24,6 +24,7 @@ import ErrorBox from './pageElements';
 import { SelectTagsWidget, TagsWidget } from './tags';
 import Uploader from './uploader';
 import CardActionArea from './wrappers';
+import NoticeBoard from './noticeBoard';
 import Footer from './footer';
 import DeleteButton from './buttons/deleteButton';
 import TabWrapper from './tabWrapper';
@@ -129,6 +130,7 @@ export {
   FieldTitleDashboard,
   FavouriteButton,
   InviteButton,
+  NoticeBoard,
   IconButton,
   ProfileCard,
   ProfileCardCreative,

@@ -2,7 +2,7 @@ import React from 'react';
 import { useStyles } from '../styles';
 import { NoticeBox } from '../../../../../../components';
 
-export default function CreativeNotification({
+export default function CreativeNotifications({
   inviteStatus,
   history,
   jobStatus,
@@ -22,7 +22,7 @@ export default function CreativeNotification({
       subTitle="You may request payments from the holding account according to your payment schedule"
       actionTitle="Withdraw"
       actionEvent={() => {
-        history.push('/app/withdraw/');
+        history.push(`/app/withdraw/${'dd'}}`);
       }}
     />
   ) : null;

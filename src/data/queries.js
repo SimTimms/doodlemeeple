@@ -533,6 +533,7 @@ export const PROFILE = gql`
       profileImg
       autosave
       email
+      onboarding
       favourites {
         receiver {
           _id

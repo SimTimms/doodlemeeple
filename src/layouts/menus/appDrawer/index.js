@@ -85,7 +85,7 @@ export function AppDrawer({
                 link: () => {
                   history.goBack();
                 },
-                color: theme.palette.secondary.main,
+                color: '#444',
                 count: null,
               },
             ].map((text, index) => (
@@ -106,7 +106,7 @@ export function AppDrawer({
               name: 'Dashboard',
               icon: <Icon>home</Icon>,
               link: () => history.push('/app/dashboard'),
-              color: theme.palette.secondary.main,
+              color: theme.palette.primary.main,
               count: null,
             },
             {
@@ -123,6 +123,7 @@ export function AppDrawer({
               color: theme.palette.primary.main,
               count: counts.invites,
             },
+
             {
               name: 'Projects',
               icon: <Icon>work</Icon>,
@@ -143,14 +144,14 @@ export function AppDrawer({
               link: () => history.push('/app/account'),
               color: theme.palette.primary.main,
               count: null,
-            },
+            } /*
             {
               name: 'Games',
               icon: <Icon>casino</Icon>,
               link: () => history.push('/app/games'),
               color: theme.palette.primary.main,
               count: null,
-            },
+            },*/,
             {
               name: 'Logout',
               icon: <Icon>exit_to_app</Icon>,

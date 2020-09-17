@@ -16,6 +16,7 @@ import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
 import { EditJob, Jobs, PreviewJob } from './views/job';
 import { PreviewContract, EditContract } from './views/contract';
+import Withdraw from './views/withdraw';
 import { PickArtist } from './views/pickArtist';
 import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
@@ -123,8 +124,8 @@ function AppLayout(props) {
         })}
       >
         <ContentTop style={{ width: '100%' }}>
-          {page === 'dashboard' ? (
-            <Dashboard history={history} />
+          {page === 'dashboard' && profile ? (
+            <Dashboard history={history} profile={profile} />
           ) : page === 'help' ? (
             <Help history={history} />
           ) : page === 'beta' ? (
@@ -154,6 +155,8 @@ function AppLayout(props) {
               autosaveIsOn={true}
               history={history}
             />
+          ) : page === 'withdraw' ? (
+            <Withdraw contractId={pathParam} history={history} />
           ) : page === 'view-game' ? (
             <PreviewGame
               theme={props.theme}
