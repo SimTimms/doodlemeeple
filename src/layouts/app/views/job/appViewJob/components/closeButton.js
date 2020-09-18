@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from '../styles';
-import { IconButton } from '../../../../../../components';
+import { IconButton, BorderBox } from '../../../../../../components';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../../../../../utils/toaster';
 import { CLOSE_JOB } from '../../../../../../data/mutations';
@@ -13,14 +13,16 @@ export default function CloseButton({ job, jobId, setJob }) {
   return (
     <div className={classes.actionWrapper}>
       {!closeConfirm ? (
-        <IconButton
-          color="warning"
-          icon="close"
-          title="Close Job"
-          onClickEvent={() => setCloseConfirm(true)}
-          styleOverride={{ width: '100%' }}
-          iconPos="right"
-        />
+        <BorderBox w={300}>
+          <IconButton
+            color="warning"
+            icon="close"
+            title="Close Job"
+            onClickEvent={() => setCloseConfirm(true)}
+            styleOverride={{ width: '100%' }}
+            iconPos="right"
+          />
+        </BorderBox>
       ) : (
         <div
           style={{

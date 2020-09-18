@@ -19,8 +19,6 @@ export function Invites({ history, theme }) {
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <Divider />
-        <FieldTitleDashboard name="Invites" inline={false} a="l" />
-        <Divider />
         <div className={classes.cardGrid}>
           {inviteArray.map((invite, index) => {
             return (

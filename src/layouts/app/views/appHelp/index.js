@@ -9,7 +9,7 @@ import {
   Divider,
 } from '../../../../components';
 
-export default function Help({ history }) {
+export default function AppHelp({ history }) {
   const classes = useStyles();
 
   return (

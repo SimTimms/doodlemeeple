@@ -55,11 +55,7 @@ export default function PreviewContract({ contractId, history }) {
                 <Column a="center" j="center">
                   <div style={{ width: '100%' }}>
                     {userId === contractData.user._id ? (
-                      <ContractSummaryForCreative
-                        display={tabs[0]}
-                        contractData={contractData}
-                        history={history}
-                      />
+                      <ContractSummaryForCreative contractData={contractData} />
                     ) : (
                       <QuoteSummaryCreator
                         display={tabs[0]}

@@ -18,7 +18,7 @@ import { COUNTS } from '../../../data/queries';
 import logo from '../../../assets/dm_device.png';
 import { MenuButton } from '../../../components';
 
-export function AppDrawer({
+export default function AppDrawer({
   history,
   handleDrawerClose,
   handleDrawerOpen,

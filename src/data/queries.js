@@ -240,6 +240,7 @@ export const JOB = gql`
       }
       contracts {
         _id
+        status
         user {
           _id
         }
@@ -326,6 +327,7 @@ export const GET_CONTRACT = gql`
       currency
       status
       updatedAt
+
       payments {
         _id
         amount
@@ -352,10 +354,13 @@ export const GET_CONTRACT = gql`
         _id
         name
         summary
+        createdAt
         creativeSummary
+        keywords
         user {
           _id
           email
+          name
         }
       }
       paymentTerms {
@@ -485,6 +490,7 @@ export const PREVIEW_CONTRACT = gql`
         name
         summary
         creativeSummary
+        keywords
         user {
           _id
           email

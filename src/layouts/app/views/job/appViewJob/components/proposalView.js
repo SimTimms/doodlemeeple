@@ -10,15 +10,18 @@ import {
 } from '../../../../../../components';
 import ProposalForm from '../components/proposalForm';
 
-export default function ProposalView({ jobId, setProposalOpen }) {
+export default function ProposalView({ jobId, setProposalOpen, history }) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <ColumnWrapper>
         <Column>
-          <FieldTitleDashboard name="Quote" inline={false} a="c" />
-          <ProposalForm jobId={jobId} setProposalOpen={setProposalOpen} />
+          <ProposalForm
+            jobId={jobId}
+            setProposalOpen={setProposalOpen}
+            history={history}
+          />
         </Column>
       </ColumnWrapper>
     </div>

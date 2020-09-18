@@ -3,7 +3,7 @@ import { useStyles } from './styles';
 import { useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 import { AppMenu } from '../menus';
-import { AppDrawer } from '../menus/appDrawer';
+import AppDrawer from '../menus/appDrawer';
 import { Conversations, ViewConversation } from './views/messaging';
 import { ToastContainer } from 'react-toastify';
 import { GET_MESSAGES, PROFILE } from '../../data/queries';

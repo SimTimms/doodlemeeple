@@ -8,7 +8,11 @@ export default function InviteComponent({ invite, history }) {
   const classes = useStyles();
 
   return (
-    <CardComponent>
+    <CardComponent
+      onClickEvent={() => {
+        history.push(`/app/view-job/${invite.job._id}/${invite._id}`);
+      }}
+    >
       <Row>
         {invite.sender && (
           <ProfileAvatar
@@ -45,27 +49,6 @@ export default function InviteComponent({ invite, history }) {
           </Typography>
         </Column>
       </Row>
-
-      <IconButton
-        title={invite.sender ? 'View' : 'Not Available'}
-        color="text-dark"
-        disabled={!invite.sender}
-        type="button"
-        iconPos="right"
-        icon={
-          !invite.sender
-            ? ''
-            : invite.status === 'submitted' || invite.status === 'closed'
-            ? 'preview'
-            : invite.status === 'accepted' || invite.status === 'paid'
-            ? 'chevron_right'
-            : 'edit'
-        }
-        styleOverride={{ marginLeft: 30 }}
-        onClickEvent={() => {
-          history.push(`/app/view-job/${invite.job._id}/${invite._id}`);
-        }}
-      />
     </CardComponent>
   );
 }

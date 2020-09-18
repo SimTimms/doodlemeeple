@@ -38,13 +38,13 @@ export function AddPaymentTerm({
         return (
           <IconButton
             disabled={detailsLock || percentLock.sum < 0 || percentLock.status}
-            color="secondary"
-            title="Create Milestone"
+            color="primary"
+            title="Add"
             icon=""
             onClickEvent={() => {
               mutation();
             }}
-            styleOverride={null}
+            styleOverride={{ alignSelf: 'flex-end' }}
             type="button"
             iconPos="right"
           />

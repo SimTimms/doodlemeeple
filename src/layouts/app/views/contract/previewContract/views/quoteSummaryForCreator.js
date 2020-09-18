@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import {
-  ContractSummary,
+  Paper,
   IconButton,
   ActionWrapper,
   ContractComponentForCreator,
+  ContractSummaryForCreative,
   ProfileCardCreative,
   ProfileCardCreator,
   HeaderTwo,
@@ -100,7 +101,7 @@ export default function QuoteSummaryCreator({
 
       <Divider />
 
-      <div className={classes.root}>
+      <Paper>
         {contractStatus === 'accepted' && (
           <NoticeBox
             title="Payment Required"
@@ -116,10 +117,7 @@ export default function QuoteSummaryCreator({
           />
         )}
         {!openContract && contractData.status !== 'paid' && (
-          <ContractSummary
-            contractData={contractData}
-            contractStatus={contractStatus}
-          />
+          <ContractSummaryForCreative contractData={contractData} />
         )}
         {(openContract || contractData.status === 'paid') && (
           <ContractComponentForCreator
@@ -259,7 +257,7 @@ export default function QuoteSummaryCreator({
             </ActionWrapper>
           </Column>
         )}
-      </div>
+      </Paper>
     </div>
   );
 }

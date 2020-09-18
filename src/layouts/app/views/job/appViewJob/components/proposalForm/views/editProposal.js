@@ -1,5 +1,14 @@
 import React, { useEffect } from 'react';
-import { Slide, Typography } from '@material-ui/core';
+import {
+  Slide,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   Divider,
@@ -11,10 +20,12 @@ import {
   Row,
   MenuButtonShortcut,
   ContractComponentForCreative,
+  ContractSummaryForCreative,
   SubmitContractButton,
   IconButton,
   UnlockInfo,
 } from '../../../../../../../../components';
+
 import QuoteDetails from './quoteDetails';
 import PaymentTerms from './paymentTerms';
 import { calculatePercent } from '../../../../../../../../utils';
@@ -25,7 +36,12 @@ import {
   UPDATE_CONTRACT,
 } from '../../../../../../../../data/mutations';
 
-export default function EditProposalForm({ jobId, contractData, setContract }) {
+export default function EditProposalForm({
+  jobId,
+  contractData,
+  setContract,
+  history,
+}) {
   const classes = useStyles();
 
   const [percentLock, setPercentLock] = React.useState({
@@ -37,7 +53,6 @@ export default function EditProposalForm({ jobId, contractData, setContract }) {
   const [saveLock, setSaveLock] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [page, setPage] = React.useState(0);
-
   useEffect(() => {
     const percentLockCalc = calculatePercent(
       contractData.paymentTerms,
@@ -66,7 +81,7 @@ export default function EditProposalForm({ jobId, contractData, setContract }) {
           />
           <MenuButtonShortcut
             text={{
-              name: 'Milestones',
+              name: 'Payment',
               color: '#222',
               icon: 'chevron_right',
               count: 0,
@@ -89,6 +104,7 @@ export default function EditProposalForm({ jobId, contractData, setContract }) {
             active={page === 2}
           />
         </Row>
+        <Divider />
         <Paper>
           {contractData._id === '' ? (
             <ActionWrapper>
@@ -163,8 +179,8 @@ export default function EditProposalForm({ jobId, contractData, setContract }) {
                           contract={contractData}
                           mutation={mutation}
                           menu={
-                            <BorderBox w={300}>
-                              <Meta str="Continue onto payment milestones" />
+                            <BorderBox w={300} mb={0}>
+                              <Meta str="Continue onto payment & milestones" />
                               <IconButton
                                 title="Next"
                                 onClickEvent={() => setPage(1)}
@@ -189,37 +205,57 @@ export default function EditProposalForm({ jobId, contractData, setContract }) {
                           detailsLock={detailsLock}
                           mutation={mutation}
                           menu={
-                            <BorderBox w={300}>
-                              <Meta str="Continue to Confirmation" />
-                              <IconButton
-                                title="Next"
-                                onClickEvent={() => setPage(2)}
-                                styleOverride={{ width: '100%' }}
-                                icon="chevron_right"
-                                iconPos="right"
-                              />
-                              <IconButton
-                                title="Back"
-                                icon=""
-                                iconPos="left"
-                                color="text-dark"
-                                onClickEvent={() => {
-                                  setPage(0);
-                                }}
-                                styleOverride={{ width: '100%' }}
-                              />
+                            <BorderBox w={300} mb={0}>
+                              <Column>
+                                <Meta str="Continue to Confirmation" />
+                                <IconButton
+                                  title="Next"
+                                  onClickEvent={() => setPage(2)}
+                                  styleOverride={{ width: '100%' }}
+                                  icon="chevron_right"
+                                  iconPos="right"
+                                />
+                                <IconButton
+                                  title="Back"
+                                  icon=""
+                                  color="text-dark"
+                                  onClickEvent={() => {
+                                    setPage(0);
+                                  }}
+                                  styleOverride={{ margin: 0, padding: 0 }}
+                                />
+                              </Column>
                             </BorderBox>
                           }
                         />
                       )}
                       {page === 2 && (
                         <div style={{ width: '100%' }}>
+                          <ContractSummaryForCreative
+                            contractData={contractData}
+                          />
+
+                          {percentLock.status ? (
+                            <UnlockInfo str="WARNING! Your milestone payments exceed the contract total, please adjust to continue." />
+                          ) : (
+                            <BorderBox w={300}>
+                              {!percentLock.status && (
+                                <Meta str="Submit this proposal to the client?" />
+                              )}
+                              <SubmitContractButton
+                                contract={contractData}
+                                history={history}
+                              />
+                            </BorderBox>
+                          )}
+                        </div>
+                      )}
+                      {page === 3 && (
+                        <div style={{ width: '100%' }}>
                           <ContractComponentForCreative
                             contractData={contractData}
                           />
-                          {percentLock.status && (
-                            <UnlockInfo str="WARNING! Your milestone payments exceed the contract total, please adjust to continue." />
-                          )}
+
                           <BorderBox w={300}>
                             {!percentLock.status && (
                               <Meta str="Continue to Confirmation" />

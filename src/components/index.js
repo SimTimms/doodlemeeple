@@ -57,7 +57,7 @@ import EditContractButton from './editContractButton';
 import ViewContractButton from './viewContractButton';
 import SubmitContractButton from './submitContractButton';
 import ContractSummaryForCreative from './ContractSummaryForCreative';
-
+import PaymentSchedule from './paymentSchedule';
 import NoticeBox from './noticeBox';
 import {
   ContractComponentForCreative,
@@ -91,6 +91,7 @@ export {
   UnlockInfoReverse,
   Column,
   Row,
+  PaymentSchedule,
   InlineHeaderWarning,
   FeatureCardInvite,
   Meta,

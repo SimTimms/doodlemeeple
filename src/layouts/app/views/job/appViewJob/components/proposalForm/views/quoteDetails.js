@@ -4,7 +4,6 @@ import {
   FieldTitle,
   Divider,
   FieldBox,
-  BorderBox,
 } from '../../../../../../../../components';
 import autosave from '../../../../../../../../utils/autosave';
 
@@ -20,7 +19,7 @@ export default function QuoteDetails({
         name="1. Quote Details"
         description="Be precise, this will form the basis of the contractual obligations between you and the client."
         warning=""
-        inline={true}
+        inline={false}
       />
       <Divider />
       <FieldBox

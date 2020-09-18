@@ -31,7 +31,6 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    marginTop: 20,
   },
   headerLine: {
     borderTop: `1px dashed #ccc`,
@@ -46,7 +45,6 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   description: {
-    fontSize: 16,
     marginTop: 10,
     boxSizing: 'border-box',
     width: '100%',

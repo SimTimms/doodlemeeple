@@ -9,7 +9,7 @@ import {
   EditContractButton,
 } from '../../../../../../../components';
 
-export default function ProposalForm({ jobId, setProposalOpen }) {
+export default function ProposalForm({ jobId, setProposalOpen, history }) {
   const [contract, setContract] = React.useState({
     _id: '',
     notes: '',
@@ -38,7 +38,6 @@ export default function ProposalForm({ jobId, setProposalOpen }) {
           <ActionWrapper>
             <EditContractButton
               contract={contract}
-              jobId={jobId}
               setContract={setContract}
               title="Retract & Edit Quote"
             />
@@ -48,8 +47,8 @@ export default function ProposalForm({ jobId, setProposalOpen }) {
         <EditProposalForm
           contractData={contract}
           jobId={jobId}
-          setProposalOpen={setProposalOpen}
           setContract={setContract}
+          history={history}
         />
       )}
       <Query

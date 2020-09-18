@@ -6,7 +6,7 @@ import ProposalView from './components/proposalView';
 import { Query } from 'react-apollo';
 import { JOB, INVITE_BY_ID } from '../../../../../data/queries';
 
-export default function PreviewJob({ theme, jobId, history, inviteId }) {
+export default function AppViewJob({ theme, jobId, history, inviteId }) {
   const [job, setJob] = React.useState({
     _id: null,
     name: '',
@@ -64,11 +64,8 @@ export default function PreviewJob({ theme, jobId, history, inviteId }) {
           {proposalOpen && (
             <ProposalView
               jobId={jobId}
-              messagesEnd={messagesEnd}
               setProposalOpen={setProposalOpen}
-              setMessagesEnd={setMessagesEnd}
               history={history}
-              theme={theme}
             />
           )}
           <Query

@@ -26,7 +26,7 @@ import { readableErrors } from '../../../../utils/readableErrors';
 import { toaster } from '../../../../utils/toaster';
 import autosave from '../../../../utils/autosave';
 
-export function EditProfile({ theme, history }) {
+export default function AppProfileEdit({ theme, history }) {
   const classes = useStyles();
   const [profile, setProfile] = React.useState({
     name: '',

@@ -1,96 +1,83 @@
-import React, { useEffect } from 'react';
-import {
-  ContractSummary,
-  ContractComponentForCreative,
-  ProfileCardCreator,
-  HeaderTwo,
-  Divider,
-  Column,
-  BorderBox,
-  IconButton,
-  NoticeBox,
-} from '../';
+import React from 'react';
 import { useStyles } from './styles';
+import { Row, Divider, PaymentSchedule } from '../';
 import moment from 'moment';
-import clsx from 'clsx';
+import { Typography } from '@material-ui/core';
 
-export default function ContractSummaryCreative({
-  display,
-  contractData,
-  history,
-}) {
+export default function ContractSummaryForCreative({ contractData }) {
   const classes = useStyles();
-  const [openContract, setOpenContract] = React.useState(false);
-  const [contractStatus, setContractStatus] = React.useState(null);
-  useEffect(() => {
-    setContractStatus(contractData.status);
-  }, [contractData]);
-
+  const { job } = contractData;
   return (
-    <div
-      className={clsx({
-        [classes.wrapper]: true,
-        [classes.hide]: !display,
-      })}
-    >
-      <Column j="center" a="center">
-        <HeaderTwo str={`Creator`} />
-        <ProfileCardCreator history={history} user={contractData.job.user} />
-      </Column>
-      {contractData.status !== 'paid' ? (
-        <HeaderTwo str="Quote" />
-      ) : (
-        <HeaderTwo str="Contract" />
-      )}
-
+    <div className={classes.root}>
+      <Typography variant="h4">About The Job</Typography>
       <Divider />
-
-      <div className={classes.root}>
-        {contractData.status === 'accepted' && (
-          <NoticeBox
-            title="Accepted - Awaiting Payment"
-            color="secondary"
-            subTitle={`This quote was accepted & signed by the Client on 
-        ${moment(contractData.signedDate).format(
-          'LLLL'
-        )}. We will notify you when we receive the payment.`}
-          />
+      <Row j="flex-start">
+        <Typography className={classes.alignLeft}>{`Name: `}</Typography>
+        <Typography className={classes.alignLeftOnly}>{job.name}</Typography>
+      </Row>
+      <Row j="flex-start">
+        <Typography className={classes.alignLeft}>{`Posted by: `}</Typography>
+        <Typography className={classes.alignLeftOnly}>
+          {job.user.name}
+        </Typography>
+      </Row>
+      <Row j="flex-start" a="flex-start">
+        <Typography className={classes.alignLeft}>{`Summary: `}</Typography>
+        <Typography className={classes.alignLeftOnly}>{job.summary}</Typography>
+      </Row>
+      <Row j="flex-start" a="flex-start">
+        <Typography className={classes.alignLeft}>{`Date: `}</Typography>
+        <Typography>{moment(job.createdAt).format('LLLL')}</Typography>
+      </Row>
+      <Row j="flex-start" a="flex-start">
+        <Typography
+          className={classes.alignLeft}
+        >{`Creative Skills: `}</Typography>
+        <Typography>
+          {job.keywords.map((keyword, index) => {
+            return index === 0 ? keyword : `, ${keyword}`;
+          })}
+        </Typography>
+      </Row>
+      <Divider />
+      <Divider />
+      <Typography variant="h4">Creative Terms</Typography>
+      <Divider />
+      <Row j="flex-start" a="flex-start">
+        <Typography className={classes.alignLeft}>{`Total Cost: `}</Typography>
+        <Typography>{`${contractData.cost} ${contractData.currency}`}</Typography>
+      </Row>
+      <Row j="flex-start" a="flex-start">
+        <Typography className={classes.alignLeft}>{`Start Date: `}</Typography>
+        {contractData.startDate !== '' ? (
+          <Typography>{`${contractData.startDate}`}</Typography>
+        ) : (
+          <Typography className={classes.warning}>Not Provided</Typography>
         )}
-        {contractData.status === 'paid' && (
-          <NoticeBox
-            title="Paid & Active"
-            color="secondary"
-            subTitle={`Congratulations! The client has paid the requested fee and you may now begin work.`}
-          />
+      </Row>
+      <Row j="flex-start" a="flex-start">
+        <Typography
+          className={classes.alignLeft}
+        >{`Delivery Date: `}</Typography>
+        {contractData.deadline !== '' ? (
+          <Typography>{`${contractData.deadline}`}</Typography>
+        ) : (
+          <Typography className={classes.warning}>Not Provided</Typography>
         )}
-        {!openContract && contractData.status !== 'paid' && (
-          <ContractSummary
-            contractData={contractData}
-            contractStatus={contractStatus}
-          />
+      </Row>
+      <Row j="flex-start" a="flex-start">
+        <Typography className={classes.alignLeft}>{`Description: `}</Typography>
+        {contractData.notes !== '' ? (
+          <Typography>{`${contractData.notes}`}</Typography>
+        ) : (
+          <Typography className={classes.warning}>Not Provided</Typography>
         )}
-        {!openContract && contractData.status !== 'paid' && (
-          <BorderBox>
-            <IconButton
-              title="View Contract"
-              color="text-dark"
-              icon="preview"
-              onClickEvent={() => {
-                setOpenContract(true);
-              }}
-              styleOverride={{ width: '100%' }}
-            />
-          </BorderBox>
-        )}
-        {(openContract || contractData.status === 'paid') && (
-          <ContractComponentForCreative
-            contractData={contractData}
-            setOpenContract={setOpenContract}
-            setContractStatus={setContractStatus}
-            history={history}
-          />
-        )}
-      </div>
+      </Row>
+      <Divider />
+      <Divider />
+      <Typography variant="h4">Payment Schedule</Typography>
+      <Divider />
+      <PaymentSchedule contractData={contractData} />
     </div>
   );
 }

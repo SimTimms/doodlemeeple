@@ -6,10 +6,13 @@ import {
   HeaderTwo,
   Column,
   Text,
-  TextDivider,
   Meta,
   UnlockInfoReverse,
+  LoadIcon,
   BorderBox,
+  Paper,
+  IconButton,
+  Divider,
 } from '../../../../../../components';
 import CreativeView from '../components/creativeView';
 import CreativeActions from '../components/creativeActions';
@@ -50,36 +53,31 @@ export default function SummaryView({
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <Column>
-          <div className={classes.root}>
-            <ColumnWrapper>
-              {loggedInUser === job.user._id && (
-                <ClientNotifications
-                  jobStatus={job.submitted}
-                  job={job}
-                  history={history}
-                />
-              )}
-              {loggedInUser !== job.user._id && (
-                <CreativeNotifications
-                  inviteStatus={inviteStatus}
-                  history={history}
-                  jobStatus={job.submitted}
-                />
-              )}
-
-              <HeaderTwo str={job.name} />
-              <Meta
-                str={`${timeDifferenceForDate(job.createdAt)} | ${
-                  job.user.name
-                }`}
+        <Paper>
+          <Column>
+            {loggedInUser === job.user._id && (
+              <ClientNotifications
+                jobStatus={job.submitted}
+                job={job}
+                history={history}
               />
-              <Text str={job.summary} />
-            </ColumnWrapper>
-            <ColumnWrapper>
-              <HeaderTwo str="Ideal Creative" />
-              <Text str={job.creativeSummary} />
-            </ColumnWrapper>
+            )}
+            {loggedInUser !== job.user._id && (
+              <CreativeNotifications
+                inviteStatus={inviteStatus}
+                history={history}
+                jobStatus={job.submitted}
+              />
+            )}
+            <HeaderTwo str={job.name} />
+            <Meta
+              str={`${timeDifferenceForDate(job.createdAt)} | ${job.user.name}`}
+            />
+            <Text str={job.summary} />
+            <Divider />
+            <HeaderTwo str="Ideal Creative" />
+            <Text str={job.creativeSummary} />
+            <Divider />
             {job.submitted === 'closed' && (
               <ColumnWrapper>
                 <UnlockInfoReverse str="This project has been closed by the owner" />
@@ -120,46 +118,62 @@ export default function SummaryView({
                 displayChat={inviteStatus !== 'declined'}
               />
             )}
+
+            <div>
+              {chatOpen && conversationUser && inviteStatus !== 'declined' && (
+                <ChatView
+                  job={job}
+                  setPageNbr={setPageNbr}
+                  jobId={jobId}
+                  conversationUser={conversationUser}
+                  pageNbr={pageNbr}
+                  setChatOpen={setChatOpen}
+                  setMessages={setMessages}
+                  messages={messages}
+                  history={history}
+                />
+              )}
+            </div>
             {job.submitted === 'paid' && <PaymentsView job={job} />}
-            <ColumnWrapper>
-              <div>
-                {chatOpen &&
-                  conversationUser &&
-                  inviteStatus !== 'declined' && (
-                    <ChatView
-                      job={job}
-                      setPageNbr={setPageNbr}
-                      jobId={jobId}
-                      conversationUser={conversationUser}
-                      pageNbr={pageNbr}
-                      setChatOpen={setChatOpen}
-                      setMessages={setMessages}
-                      messages={messages}
-                      history={history}
-                    />
-                  )}
-              </div>
-              <TextDivider />
-              {job.submitted === 'closed' ||
+            {job.contracts.filter((contract) => {
+              return contract.user._id === loggedInUser;
+            }).length > 0 ? (
+              <Column>
+                <BorderBox w={300}>
+                  <Meta str="View your quote for this job " />
+                  <IconButton
+                    color="primary"
+                    icon="preview"
+                    title="View"
+                    onClickEvent={() =>
+                      history.push(`/app/view-proposal/${job._id}`)
+                    }
+                    styleOverride={{ width: '100%' }}
+                    iconPos="right"
+                  />
+                </BorderBox>
+              </Column>
+            ) : job.submitted === 'closed' ||
               job.submitted === 'paid' ? null : job.submitted ===
-                'accepted' ? null : loggedInUser === job.user._id ? (
-                <CloseButton job={job} jobId={jobId} setJob={setJob} />
-              ) : inviteStatus !== 'declined' ? (
-                <Column>
-                  <BorderBox w={300}>
-                    <Meta str="Create a quote for this job or decline if it's not for you" />
-                    <CreativeActions
-                      proposalOpen={proposalOpen}
-                      setProposalOpen={setProposalOpen}
-                      inviteId={inviteId}
-                      setInviteStatus={setInviteStatus}
-                    />
-                  </BorderBox>
-                </Column>
-              ) : null}
-            </ColumnWrapper>
-          </div>
-        </Column>{' '}
+              'accepted' ? null : loggedInUser === job.user._id ? (
+              <CloseButton job={job} jobId={jobId} setJob={setJob} />
+            ) : inviteStatus !== 'declined' ? (
+              <Column>
+                <BorderBox w={300}>
+                  <Meta str="Create a quote for this job or decline if it's not for you" />
+                  <CreativeActions
+                    proposalOpen={proposalOpen}
+                    setProposalOpen={setProposalOpen}
+                    inviteId={inviteId}
+                    setInviteStatus={setInviteStatus}
+                  />
+                </BorderBox>
+              </Column>
+            ) : null}
+
+            {}
+          </Column>
+        </Paper>
       </div>
     </Slide>
   );

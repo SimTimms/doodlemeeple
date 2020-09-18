@@ -2,11 +2,10 @@ import React from 'react';
 import { useStyles } from './styles';
 import { useMediaQuery, Typography, Icon } from '@material-ui/core';
 import clsx from 'clsx';
-import { AppDrawer } from '../menus/appDrawer';
-import { Dashboard } from './views/dashboard';
-//import { Profile } from './views/profile';
-import { EditProfile } from './views/profileEdit';
-import Help from './views/help';
+import AppDrawer from '../menus/appDrawer';
+import AppDashboard from './views/appDashboard';
+import AppProfileEdit from './views/appProfileEdit';
+import AppHelp from './views/appHelp';
 import Beta from './views/beta';
 import CreativeRoster from './views/creativeRoster';
 import { Account } from './views/account';
@@ -14,9 +13,10 @@ import FullContract from './views/fullContract';
 import { Invites } from './views/invites';
 import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
-import { EditJob, Jobs, PreviewJob } from './views/job';
+import { EditJob, Jobs, AppViewJob } from './views/job';
 import { PreviewContract, EditContract } from './views/contract';
 import Withdraw from './views/withdraw';
+import ViewProposal from './views/viewProposal';
 import { PickArtist } from './views/pickArtist';
 import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
@@ -92,9 +92,9 @@ function AppLayout(props) {
     <div className={classes.root}>
       <ToastContainer />
       <StyledNavBar open={open} history={history} theme={props.theme}>
-        <Typography variant="h6">{`${pageHeaders(page)} ${
+        <Typography variant="h6">{`${
           profile ? profile.name : ''
-        }`}</Typography>
+        } - ${pageHeaders(page)}`}</Typography>
         <div>
           <Row>
             <MenuButton text={alphaButton} onClickEvent={alphaButton.link} />
@@ -125,17 +125,17 @@ function AppLayout(props) {
       >
         <ContentTop style={{ width: '100%' }}>
           {page === 'dashboard' && profile ? (
-            <Dashboard
+            <AppDashboard
               history={history}
               profile={profile}
               setProfile={setProfile}
             />
           ) : page === 'help' ? (
-            <Help history={history} />
+            <AppHelp history={history} />
           ) : page === 'beta' ? (
             <Beta history={history} />
           ) : page === 'edit-profile' ? (
-            <EditProfile theme={props.theme} history={history} />
+            <AppProfileEdit theme={props.theme} history={history} />
           ) : page === 'creative-roster' ? (
             <CreativeRoster
               theme={props.theme}
@@ -176,12 +176,14 @@ function AppLayout(props) {
               favourites={favourites}
             />
           ) : page === 'view-job' ? (
-            <PreviewJob
+            <AppViewJob
               theme={props.theme}
               jobId={pathParam}
               inviteId={pathParam2}
               history={history}
             />
+          ) : page === 'view-proposal' ? (
+            <ViewProposal jobId={pathParam} history={history} />
           ) : page === 'view-contract' ? (
             <PreviewContract contractId={pathParam} history={history} />
           ) : page === 'view-full-contract' ? (

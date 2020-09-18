@@ -189,6 +189,7 @@ export const UPDATE_CONTRACT = gql`
     $startDate: String
     $currency: String
     $cost: String
+    $status: String
   ) {
     contractUpdateById(
       record: {
@@ -198,6 +199,7 @@ export const UPDATE_CONTRACT = gql`
         startDate: $startDate
         currency: $currency
         cost: $cost
+        status: $status
       }
     ) {
       recordId

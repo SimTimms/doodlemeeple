@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import Slide from '@material-ui/core/Slide';
 import { Notifications } from './components/notifications';
 import { Posts } from './components/Posts';
-import { FeaturedMini } from './components/FeaturedMini';
 import axios from 'axios';
 import {
   FieldTitleDashboard,
@@ -13,7 +12,7 @@ import { useStyles } from './styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 
-export function Dashboard({ history, profile, setProfile }) {
+export default function AppDashboard({ history, profile, setProfile }) {
   const classes = useStyles();
   const [posts, setPosts] = React.useState(null);
   const [home, setHome] = React.useState(null);

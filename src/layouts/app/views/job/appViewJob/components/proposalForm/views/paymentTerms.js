@@ -8,15 +8,7 @@ import {
 } from '../../../../../../../../components';
 import { AddPaymentTerm } from './components';
 import PaymentTerm from '../components';
-import {
-  Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import autosave from '../../../../../../../../utils/autosave';
 
 export default function PaymentTerms({
@@ -45,7 +37,7 @@ export default function PaymentTerms({
         name="2. Payment"
         description="Set out the total amount you would like to be paid upon completion of this project"
         warning="Example: 1100 GBP"
-        inline={true}
+        inline={false}
       />
       <Divider />
       <FieldBox
@@ -87,7 +79,7 @@ export default function PaymentTerms({
         name="3. Milestones"
         description="Go into detail about how and when you would like to be paid, be very specific about your terms to decrease the chance of a dispute further down the line."
         warning="Example: The Creative shall receive 100 GBP upon commencement of the project, The Creative shall receive 200 GBP upon delivery of 10 full resolution SVG files, the Creative shall receive 500GBP upon delivery of all remaining specified items"
-        inline={true}
+        inline={false}
       />
       <Divider />
       {contract.paymentTerms.map((paymentTerm, index) => {
@@ -129,78 +121,6 @@ export default function PaymentTerms({
         <UnlockInfo str="Your milestone payments exceed your total contract fee." />
       ) : (
         <Column>
-          <Divider />
-          <FieldTitle
-            name="4. Payment Schedule"
-            description="This is what the full payment schedule looks like, including DoodleMeeple fees."
-            warning=""
-            inline={true}
-          />
-          <TableContainer style={{ paddingTop: 0 }}>
-            <Table aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="left" style={{ fontWeight: 900 }}>
-                    DESCRIPTION
-                  </TableCell>
-                  <TableCell align="right" style={{ fontWeight: 900 }}>
-                    AMOUNT
-                  </TableCell>
-                  <TableCell
-                    align="right"
-                    style={{ fontWeight: 900 }}
-                  ></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {contract.paymentTerms.map((paymentTerm, index) => {
-                  return (
-                    <TableRow key={`payment_summary_${index}`}>
-                      <TableCell align="left">{`#${index + 1} ${
-                        paymentTerm.description
-                      }`}</TableCell>
-                      <TableCell align="right">{paymentTerm.percent}</TableCell>
-                      <TableCell align="right">{contract.currency}</TableCell>
-                    </TableRow>
-                  );
-                })}
-                {totalCount > 0 && (
-                  <TableRow>
-                    <TableCell align="left">{`#${
-                      contract.paymentTerms.length + 1
-                    } Upon completion`}</TableCell>
-                    <TableCell align="right">
-                      {contract.cost - totalCount}
-                    </TableCell>
-                    <TableCell align="right">{contract.currency}</TableCell>
-                  </TableRow>
-                )}
-                <TableRow>
-                  <TableCell align="left">Subtotal</TableCell>
-                  <TableCell align="right">{contract.cost}</TableCell>
-                  <TableCell align="right">{contract.currency}</TableCell>
-                </TableRow>
-
-                <TableRow>
-                  <TableCell align="left">DoodleMeeple fee</TableCell>
-                  <TableCell align="right">-{contract.cost * 0.1}</TableCell>
-                  <TableCell align="right">{contract.currency}</TableCell>
-                </TableRow>
-
-                <TableRow style={{ background: '#444' }}>
-                  <TableCell align="left" style={{ color: '#fff' }}>
-                    Total Payout
-                  </TableCell>
-                  <TableCell align="right" style={{ color: '#fff' }}>
-                    {contract.cost * 0.9}
-                  </TableCell>
-                  <TableCell align="right" style={{ color: '#fff' }}>
-                    {contract.currency}
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
           <Divider />
           {menu}
         </Column>
