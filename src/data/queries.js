@@ -160,11 +160,23 @@ export const MESSAGES = gql`
 `;
 
 export const PAYMENTS = gql`
-  query GetPayments($contractId: MongoID!) {
-    paymentMany(filter: { contract: $contractId }) {
+  query GetPayments(
+    $contractId: MongoID!
+    $accountOne: String
+    $accountTwo: String
+  ) {
+    paymentMany(
+      filter: {
+        contract: $contractId
+        OR: [{ account: $accountOne }, { account: $accountTwo }]
+      }
+      sort: CREATEDAT__UPDATEDAT_ASC
+    ) {
       amount
       currency
       status
+      account
+      updatedAt
       paidBy {
         _id
       }
@@ -415,6 +427,7 @@ export const GET_CONTRACT_ID = gql`
         user {
           id
           email
+          name
         }
       }
       paymentTerms {
@@ -427,7 +440,7 @@ export const GET_CONTRACT_ID = gql`
 `;
 
 export const PREVIEW_CONTRACT = gql`
-  query PreviewContract($contractId: MongoID!) {
+  query AppViewContract($contractId: MongoID!) {
     contractById(_id: $contractId) {
       _id
       notes

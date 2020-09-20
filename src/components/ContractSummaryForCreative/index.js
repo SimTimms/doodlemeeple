@@ -3,13 +3,17 @@ import { useStyles } from './styles';
 import { Row, Divider, PaymentSchedule } from '../';
 import moment from 'moment';
 import { Typography } from '@material-ui/core';
+import Cookies from 'js-cookie';
 
 export default function ContractSummaryForCreative({ contractData }) {
   const classes = useStyles();
   const { job } = contractData;
+  const isClient = Cookies.get('userId') !== contractData.user._id;
   return (
     <div className={classes.root}>
-      <Typography variant="h4">About The Job</Typography>
+      <Typography variant="h4" className={classes.alignLeftOnly}>
+        About The Job
+      </Typography>
       <Divider />
       <Row j="flex-start">
         <Typography className={classes.alignLeft}>{`Name: `}</Typography>
@@ -41,7 +45,9 @@ export default function ContractSummaryForCreative({ contractData }) {
       </Row>
       <Divider />
       <Divider />
-      <Typography variant="h4">Creative Terms</Typography>
+      <Typography variant="h4" className={classes.alignLeftOnly}>
+        Creative Terms
+      </Typography>
       <Divider />
       <Row j="flex-start" a="flex-start">
         <Typography className={classes.alignLeft}>{`Total Cost: `}</Typography>
@@ -75,9 +81,11 @@ export default function ContractSummaryForCreative({ contractData }) {
       </Row>
       <Divider />
       <Divider />
-      <Typography variant="h4">Payment Schedule</Typography>
+      <Typography variant="h4" className={classes.alignLeftOnly}>
+        Payment Schedule
+      </Typography>
       <Divider />
-      <PaymentSchedule contractData={contractData} />
+      <PaymentSchedule contractData={contractData} isClient={isClient} />
     </div>
   );
 }

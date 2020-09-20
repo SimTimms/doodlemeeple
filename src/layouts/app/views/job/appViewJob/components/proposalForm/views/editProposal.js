@@ -24,10 +24,10 @@ import {
   SubmitContractButton,
   IconButton,
   UnlockInfo,
+  PaymentTerms,
 } from '../../../../../../../../components';
 
 import QuoteDetails from './quoteDetails';
-import PaymentTerms from './paymentTerms';
 import { calculatePercent } from '../../../../../../../../utils';
 import { toaster } from '../../../../../../../../utils/toaster';
 import { Mutation } from 'react-apollo';

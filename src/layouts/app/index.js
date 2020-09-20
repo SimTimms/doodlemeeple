@@ -14,7 +14,7 @@ import { Invites } from './views/invites';
 import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
 import { EditJob, Jobs, AppViewJob } from './views/job';
-import { PreviewContract, EditContract } from './views/contract';
+import { AppViewContract, EditContract } from './views/contract';
 import Withdraw from './views/withdraw';
 import ViewProposal from './views/viewProposal';
 import { PickArtist } from './views/pickArtist';
@@ -185,7 +185,7 @@ function AppLayout(props) {
           ) : page === 'view-proposal' ? (
             <ViewProposal jobId={pathParam} history={history} />
           ) : page === 'view-contract' ? (
-            <PreviewContract contractId={pathParam} history={history} />
+            <AppViewContract contractId={pathParam} history={history} />
           ) : page === 'view-full-contract' ? (
             <FullContract contractId={pathParam} history={history} />
           ) : page === 'edit-contract' ? (

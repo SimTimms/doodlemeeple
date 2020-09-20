@@ -62,7 +62,7 @@ export default function ClientView({
                         icon="request_quote"
                         title={
                           contracts[contractIndex].status === 'declined'
-                            ? 'Rejected'
+                            ? 'Rejectedjmu7'
                             : 'Quote'
                         }
                         color={

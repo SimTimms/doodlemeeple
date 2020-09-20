@@ -15,7 +15,7 @@ import { GET_CONTRACT } from '../../../../data/queries';
 export default function ViewProposal({ jobId, history }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div>
+      <div style={{ width: 600 }}>
         <Query
           query={GET_CONTRACT}
           variables={{ jobId }}

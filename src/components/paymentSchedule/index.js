@@ -8,7 +8,7 @@ import {
   TableRow,
 } from '@material-ui/core';
 
-export default function PaymentSchedule({ contractData }) {
+export default function PaymentSchedule({ contractData, isClient }) {
   const creativeCommission = 0.9;
   const creatorCommission = 1.1;
   const doodleMeeplePercent = 0.1;
@@ -60,7 +60,9 @@ export default function PaymentSchedule({ contractData }) {
           <TableRow>
             <TableCell align="left">DoodleMeeple fee</TableCell>
             <TableCell align="right">
-              -{contractData.cost * doodleMeeplePercent}
+              {isClient
+                ? contractData.cost * doodleMeeplePercent
+                : -contractData.cost * doodleMeeplePercent}
             </TableCell>
             <TableCell align="right">{contractData.currency}</TableCell>
           </TableRow>
@@ -70,7 +72,9 @@ export default function PaymentSchedule({ contractData }) {
               Total Payout
             </TableCell>
             <TableCell align="right" style={{ color: '#fff' }}>
-              {contractData.cost * creativeCommission}
+              {isClient
+                ? parseInt(`${contractData.cost * creatorCommission}`)
+                : parseInt(`${contractData.cost * creativeCommission}`)}
             </TableCell>
             <TableCell align="right" style={{ color: '#fff' }}>
               {contractData.currency}

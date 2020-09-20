@@ -54,6 +54,7 @@ import DMCard from './dmCard';
 import ActionWrapper from './actionWrapper';
 import ContractSummary from './contractSummary';
 import EditContractButton from './editContractButton';
+import PaymentTerms from './paymentTerms';
 import ViewContractButton from './viewContractButton';
 import SubmitContractButton from './submitContractButton';
 import ContractSummaryForCreative from './ContractSummaryForCreative';
@@ -97,6 +98,7 @@ export {
   Meta,
   ContractSummaryForCreative,
   TextLink,
+  PaymentTerms,
   TextLeft,
   TextDivider,
   ColumnWrapperFull,

@@ -1,15 +1,9 @@
 import React from 'react';
-import {
-  FieldTitle,
-  Divider,
-  Column,
-  FieldBox,
-  UnlockInfo,
-} from '../../../../../../../../components';
-import { AddPaymentTerm } from './components';
-import PaymentTerm from '../components';
+import { FieldTitle, Divider, Column, FieldBox, UnlockInfo } from '../';
+import AddPaymentTerm from './addPaymentTerms';
+import PaymentTerm from './paymentTerm';
 import { Typography } from '@material-ui/core';
-import autosave from '../../../../../../../../utils/autosave';
+import autosave from '../../utils/autosave';
 
 export default function PaymentTerms({
   contract,
@@ -117,7 +111,7 @@ export default function PaymentTerms({
         </Typography>
       )}
 
-      {totalCount >= parseInt(contract.cost) ? (
+      {totalCount > parseInt(contract.cost) ? (
         <UnlockInfo str="Your milestone payments exceed your total contract fee." />
       ) : (
         <Column>

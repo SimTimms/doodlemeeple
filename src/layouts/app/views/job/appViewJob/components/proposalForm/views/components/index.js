@@ -2,57 +2,8 @@ import React from 'react';
 import { IconButton } from '../../../../../../../../../components';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../../../../../../../../utils/toaster';
-import {
-  CREATE_TERM,
-  UPDATE_CONTRACT,
-} from '../../../../../../../../../data/mutations';
+import { UPDATE_CONTRACT } from '../../../../../../../../../data/mutations';
 import { useStyles } from './styles';
-
-export function AddPaymentTerm({
-  contractId,
-  setDetailsLock,
-  detailsLock,
-  percentLock,
-  addPaymentTerm,
-}) {
-  return (
-    <Mutation
-      mutation={CREATE_TERM}
-      variables={{
-        percent: 0,
-        description: '',
-        contractId: contractId,
-      }}
-      onCompleted={(data) => {
-        toaster('Created');
-        setDetailsLock(true);
-        addPaymentTerm({
-          _id: data.paymentTermsCreateOne.recordId,
-          percent: 0,
-          description: '',
-          contractId: contractId,
-        });
-      }}
-    >
-      {(mutation, { loading }) => {
-        return (
-          <IconButton
-            disabled={detailsLock || percentLock.sum < 0 || percentLock.status}
-            color="primary"
-            title="Add"
-            icon=""
-            onClickEvent={() => {
-              mutation();
-            }}
-            styleOverride={{ alignSelf: 'flex-end' }}
-            type="button"
-            iconPos="right"
-          />
-        );
-      }}
-    </Mutation>
-  );
-}
 
 export function SubmitButton({ setDetailsLock, contract, setContractParent }) {
   const classes = useStyles();

@@ -3,7 +3,6 @@ import { Typography } from '@material-ui/core';
 import {
   IconButton,
   StripeCheckout,
-  Payments,
   FieldTitleDashboard,
   Meta,
   Column,
@@ -34,7 +33,7 @@ export default function PaymentElement({
     setVisible(display);
     setPaymentStatus(contractData.status);
   }, [contractData, display]);
-
+  console.log(paymentStatus);
   return (
     <div
       className={clsx({
@@ -125,6 +124,17 @@ export default function PaymentElement({
               </Elements>
             )}
             {/*  <Payments data={contractData.payments} />*/}
+            <IconButton
+              disabled={false}
+              onClickEvent={() => {
+                setDisplayPayment(false);
+              }}
+              title="Close"
+              icon=""
+              color="text-dark"
+              styleOverride={null}
+              type="button"
+            />
           </Column>
         )}
       </div>

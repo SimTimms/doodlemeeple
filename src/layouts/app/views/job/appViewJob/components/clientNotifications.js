@@ -9,7 +9,7 @@ export default function ClientNotification({ jobStatus, job, history }) {
     jobStatus === 'accepted' && (
       <NoticeBox
         title="Payment Required"
-        color="primary"
+        color="warning"
         subTitle="Your Creative cannot start work until the deposit has been paid"
         actionTitle="Deposit Funds"
         actionEvent={() => {

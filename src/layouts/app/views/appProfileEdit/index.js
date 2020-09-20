@@ -29,6 +29,7 @@ import autosave from '../../../../utils/autosave';
 export default function AppProfileEdit({ theme, history }) {
   const classes = useStyles();
   const [profile, setProfile] = React.useState({
+    _id: '',
     name: '',
     summary: '',
     profileBG: '',
@@ -36,7 +37,6 @@ export default function AppProfileEdit({ theme, history }) {
     creativeTrue: false,
     creatorTrue: false,
   });
-  const [userId, setUserId] = React.useState('');
   const [sections, setSections] = React.useState([]);
   const [profileImg, setProfileImg] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
@@ -95,7 +95,7 @@ export default function AppProfileEdit({ theme, history }) {
                         count: changes,
                       }}
                       onClickEvent={() => {
-                        history.push(`/preview/${userId}`);
+                        history.push(`/preview/${profile._id}`);
                       }}
                     />
                   }

@@ -12,7 +12,7 @@ import Chat from './views/chat';
 import PaymentElement from './views/payments';
 import Cookies from 'js-cookie';
 
-export default function PreviewContract({ contractId, history }) {
+export default function AppViewContract({ contractId, history }) {
   const [tabs, setTabs] = React.useState([true, false, false]);
   const [contract, setContract] = React.useState({
     _id: null,
