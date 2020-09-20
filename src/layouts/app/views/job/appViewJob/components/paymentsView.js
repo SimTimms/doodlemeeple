@@ -4,7 +4,7 @@ import {
   HeaderTwo,
   Column,
   Payments,
-  PaymentTerms,
+  PaymentTermsWithdraw,
 } from '../../../../../../components';
 import { Query } from 'react-apollo';
 import { PAYMENTS, GET_PAYMENT_TERMS } from '../../../../../../data/queries';
@@ -27,11 +27,7 @@ export default function PaymentsView({ job }) {
         >
           {({ data }) => {
             return data ? (
-              <Payments
-                data={data.paymentMany.reverse()}
-                type="creative"
-                isCreator={isCreator}
-              />
+              <Payments data={data.paymentMany.reverse()} type="creative" />
             ) : null;
           }}
         </Query>
@@ -43,10 +39,10 @@ export default function PaymentsView({ job }) {
           fetchPolicy="network-only"
         >
           {({ data }) => {
+            console.log(data);
             return data ? (
-              <PaymentTerms
-                data={data.getPaymentTerms.reverse()}
-                type="creative"
+              <PaymentTermsWithdraw
+                data={data.getPaymentTerms}
                 isCreator={isCreator}
               />
             ) : null;

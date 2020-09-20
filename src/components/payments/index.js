@@ -10,9 +10,8 @@ import {
 import moment from 'moment';
 import { useStyles } from './styles';
 import clsx from 'clsx';
-import { IconButton } from '../';
 
-export default function Payments({ data, type, isCreator }) {
+export default function Payments({ data, type }) {
   const classes = useStyles();
 
   return (
@@ -24,7 +23,6 @@ export default function Payments({ data, type, isCreator }) {
             <TableCell align="right">STATUS</TableCell>
             <TableCell align="right">TYPE</TableCell>
             <TableCell align="right">DATE</TableCell>
-            <TableCell align="right">WITHDRAW</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -56,17 +54,6 @@ export default function Payments({ data, type, isCreator }) {
                 <TableCell align="right">{payment.account}</TableCell>
                 <TableCell align="right">
                   {moment(payment.updatedAt).format('LLLL')}
-                </TableCell>
-                <TableCell align="right">
-                  {payment.status === 'charge_succeeded' &&
-                  payment.account === 'holding' &&
-                  !isCreator ? (
-                    <IconButton
-                      title="Withdraw"
-                      icon="payment"
-                      onClickEvent={() => console.log('withdraw')}
-                    />
-                  ) : null}
                 </TableCell>
               </TableRow>
             );

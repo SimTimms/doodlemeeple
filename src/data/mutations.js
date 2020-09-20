@@ -8,6 +8,18 @@ export const SIGNUP_MUTATION = gql`
   }
 `;
 
+export const REQUEST_WITHDRAW = gql`
+  mutation RequestWithdraw($_id: MongoID!) {
+    requestWithdraw(_id: $_id)
+  }
+`;
+
+export const APPROVE_WITHDRAW = gql`
+  mutation ApproveWithdraw($_id: MongoID!) {
+    approveWithdraw(_id: $_id)
+  }
+`;
+
 export const MAKE_PAYMENT = gql`
   mutation MakePayment($contractId: MongoID!) {
     makePayment(contractId: $contractId)

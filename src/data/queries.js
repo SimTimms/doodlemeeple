@@ -321,9 +321,16 @@ export const JOBS = gql`
 export const GET_PAYMENT_TERMS = gql`
   query GetPaymentTerms($contractId: String!) {
     getPaymentTerms(contractId: $contractId) {
-      id
+      _id
       description
       percent
+      withdrawRequest
+      withdrawApproved
+      withdrawPaid
+      contract {
+        _id
+        currency
+      }
     }
   }
 `;
