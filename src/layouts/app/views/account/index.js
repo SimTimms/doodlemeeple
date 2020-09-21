@@ -8,7 +8,12 @@ import {
   Button,
 } from '@material-ui/core';
 import { useStyles } from './styles';
-import { ErrorBox, ContentHeader } from '../../../../components';
+import {
+  ErrorBox,
+  Column,
+  BorderBox,
+  IconButton,
+} from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE } from '../../../../data/queries';
 import { UPDATE_EMAIL, DELETE_ACCOUNT } from '../../../../data/mutations';
@@ -16,6 +21,7 @@ import { readableErrors } from '../../../../utils/readableErrors';
 import { toaster } from '../../../../utils/toaster';
 import { validate } from 'email-validator';
 import Cookies from 'js-cookie';
+import axios from 'axios';
 
 export function Account({ history }) {
   function submitChecks(mutation) {
@@ -37,10 +43,35 @@ export function Account({ history }) {
   const [errors, setError] = React.useState({
     email: null,
   });
-
+  async function requestStripe(history) {
+    {
+      await axios
+        .post('http://localhost:4000/stripe-onboarding')
+        .then((response) => {
+          console.log(response);
+          window.location.replace(response.data.url);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
+        <IconButton
+          color="text-white"
+          disabled={false}
+          onClickEvent={() => {
+            requestStripe(history);
+          }}
+          icon=""
+          title="Post a Job"
+          styleOverride={null}
+          type="button"
+          iconPos="right"
+        />
+
         <Query
           query={PROFILE}
           onCompleted={(data) => {
@@ -54,25 +85,6 @@ export function Account({ history }) {
         </Query>
 
         <div className={classes.root}>
-          <ContentHeader>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '100%',
-              }}
-            >
-              <Typography variant="h1" color="textPrimary">
-                Account
-              </Typography>
-            </div>
-            <Typography color="textSecondary" component="p">
-              -
-            </Typography>
-          </ContentHeader>
-
           <div
             style={{
               display: 'flex',
@@ -94,17 +106,15 @@ export function Account({ history }) {
             >
               {(mutation) => {
                 return (
-                  <Button
-                    onClick={() => {
+                  <IconButton
+                    onClickEvent={() => {
                       submitChecks(mutation);
                     }}
-                    variant="contained"
+                    icon="save"
+                    title="Save"
                     color="primary"
                     style={{ margin: 10 }}
-                    disabled={!validate}
-                  >
-                    <Icon style={{ fontSize: 18, color: '#fff' }}>save</Icon>
-                  </Button>
+                  />
                 );
               }}
             </Mutation>
@@ -126,54 +136,58 @@ export function Account({ history }) {
               />
 
               <ErrorBox errorMsg={errors.email} />
-              <Button
-                className={classes.iconButton}
-                onClick={() => {
+              <IconButton
+                onClickEvent={() => {
                   setConfirm(true);
                 }}
-              >
-                <Icon className={classes.iconButtonIcon}>delete</Icon>
-                Delete Account
-              </Button>
+                icon="delete"
+                title="Delete"
+                color="warning"
+              />
+
               {confirm && (
-                <div>
-                  This action will delete your account and all uploaded media.
-                  This is irreversible. Are you sure you want to continue?{' '}
-                  <Button
-                    className={classes.iconButtonNo}
-                    onClick={() => {
-                      setConfirm(false);
-                    }}
-                  >
-                    <Icon className={classes.iconButtonNoIcon}>cancel</Icon>
-                    No
-                  </Button>
-                  <Mutation
-                    mutation={DELETE_ACCOUNT}
-                    onCompleted={() => {
-                      Cookies.remove('token');
-                      history.push('/deleted');
-                    }}
-                    onError={() => {
-                      Cookies.remove('token');
-                      history.push('/deleted');
-                    }}
-                  >
-                    {(mutation) => {
-                      return (
-                        <Button
-                          className={classes.iconButton}
-                          onClick={() => {
-                            mutation();
-                          }}
-                        >
-                          <Icon className={classes.iconButtonIcon}>delete</Icon>
-                          Yes
-                        </Button>
-                      );
-                    }}
-                  </Mutation>
-                </div>
+                <BorderBox>
+                  <Column>
+                    <Typography>
+                      This action will delete your account and all uploaded
+                      media. This is irreversible. Are you sure you want to
+                      continue?
+                    </Typography>
+                    <Mutation
+                      mutation={DELETE_ACCOUNT}
+                      onCompleted={() => {
+                        Cookies.remove('token');
+                        history.push('/deleted');
+                      }}
+                      onError={() => {
+                        Cookies.remove('token');
+                        history.push('/deleted');
+                      }}
+                    >
+                      {(mutation) => {
+                        return (
+                          <IconButton
+                            onClickEvent={() => {
+                              mutation();
+                            }}
+                            icon="warning"
+                            title="Confirm"
+                            color="warning"
+                          />
+                        );
+                      }}
+                    </Mutation>
+                    <IconButton
+                      onClickEvent={() => {
+                        setConfirm(false);
+                      }}
+                      icon="cancel"
+                      title="Cancel"
+                      color="text-dark"
+                      styleOverride={{ margin: 0 }}
+                    />
+                  </Column>
+                </BorderBox>
               )}
             </div>
           </Card>

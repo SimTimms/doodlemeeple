@@ -133,7 +133,7 @@ export const useStyles = makeStyles((theme) => ({
     color: 'rgba(255,255,255,0.7)',
   },
   iconButtonIconTextDark: {
-    color: theme.palette.primary.main,
+    color: '#444',
   },
   iconButtonIconWhite: {
     color: '#fff',

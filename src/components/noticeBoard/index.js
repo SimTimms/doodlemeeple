@@ -134,7 +134,7 @@ export default function NoticeBoard({
                           styleOverride={null}
                           type="button"
                           iconPos="right"
-                        />{' '}
+                        />
                         <IconButton
                           color="text-white-mini"
                           disabled={false}
