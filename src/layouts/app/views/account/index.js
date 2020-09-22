@@ -16,12 +16,13 @@ import {
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE } from '../../../../data/queries';
+import stripeButton from '../../../../assets/stripe_button.png';
 import { UPDATE_EMAIL, DELETE_ACCOUNT } from '../../../../data/mutations';
 import { readableErrors } from '../../../../utils/readableErrors';
 import { toaster } from '../../../../utils/toaster';
 import { validate } from 'email-validator';
 import Cookies from 'js-cookie';
-import axios from 'axios';
+import { requestStripe } from '../../../../utils/stripe';
 
 export function Account({ history }) {
   function submitChecks(mutation) {
@@ -43,35 +44,10 @@ export function Account({ history }) {
   const [errors, setError] = React.useState({
     email: null,
   });
-  async function requestStripe(history) {
-    {
-      await axios
-        .post('http://localhost:4000/stripe-onboarding')
-        .then((response) => {
-          console.log(response);
-          window.location.replace(response.data.url);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }
+
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <IconButton
-          color="text-white"
-          disabled={false}
-          onClickEvent={() => {
-            requestStripe(history);
-          }}
-          icon=""
-          title="Post a Job"
-          styleOverride={null}
-          type="button"
-          iconPos="right"
-        />
-
         <Query
           query={PROFILE}
           onCompleted={(data) => {
@@ -121,6 +97,13 @@ export function Account({ history }) {
           </div>
           <Card className={classes.card}>
             <div style={{ padding: 10 }}>
+              <img
+                src={stripeButton}
+                onClick={() => {
+                  requestStripe(history);
+                }}
+                style={{ width: 200 }}
+              />
               <TextField
                 id={'email'}
                 label={`Email ${email ? `(${256 - email.length})` : ''}`}

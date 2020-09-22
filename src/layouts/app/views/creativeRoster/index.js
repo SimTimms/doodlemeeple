@@ -29,7 +29,6 @@ export default function CreativeRoster({ theme, history, favourites }) {
     'proof-reader',
     'translator',
     'play-tester',
-    ,
   ];
   return loading ? (
     <LoadIcon />

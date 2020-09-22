@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStyles } from './styles';
 import { NoticeBox } from '../';
-import { HeaderThree, Column, Divider, TextLeft, Meta } from '../';
+import { HeaderThree, Column, Divider, TextLeft } from '../';
 import { timeDifferenceForDate } from '../../utils/dates';
 
 export default function ContractSummary({ contractData, contractStatus }) {

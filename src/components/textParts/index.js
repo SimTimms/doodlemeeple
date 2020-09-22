@@ -49,14 +49,19 @@ export function HeaderThree({ str }) {
       <Typography variant="h6" className={classes.descriptionTitleTwo}>
         {str}
       </Typography>
-      <div className={classes.headerLineTwoFull}></div>
+      <div className={classes.headerLineTwo}></div>
     </div>
   );
 }
-export function Text({ str }) {
+export function Text({ str, ...props }) {
+  const { a } = props;
   const classes = useStyles();
   return (
-    <Typography variant="body1" className={classes.description}>
+    <Typography
+      variant="body1"
+      className={classes.description}
+      style={{ textAlign: a ? a : 'center' }}
+    >
       {str}
     </Typography>
   );
@@ -90,10 +95,10 @@ export function TextLink({ str, onClickEvent }) {
 }
 
 export function Meta(props) {
-  const { str, children, a } = props;
+  const { str, children } = props;
   const classes = useStyles();
   return str ? (
-    <Typography variant="body1" className={classes.meta} style={{}}>
+    <Typography variant="body1" className={classes.meta}>
       {str}
     </Typography>
   ) : (

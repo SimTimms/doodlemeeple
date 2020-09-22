@@ -6,6 +6,8 @@ export default function pageHeaders(inStr) {
       return 'Invites';
     case 'account':
       return 'Account';
+    case 'view-job':
+      return 'Job Dashboard';
     default:
       return 'Dashboard';
   }

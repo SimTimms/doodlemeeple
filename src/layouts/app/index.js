@@ -22,7 +22,13 @@ import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
 import { FAVOURITES, PROFILE } from '../../data/queries';
-import { ContentTop, StyledNavBar, MenuButton, Row } from '../../components';
+import {
+  ContentTop,
+  StyledNavBar,
+  MenuButton,
+  Row,
+  MenuButtonShortcut,
+} from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 import pageHeaders from './pageHeaders';
 
@@ -68,23 +74,23 @@ function AppLayout(props) {
 
   const helpButton = {
     name: 'Help',
-    icon: <Icon>contact_support</Icon>,
+    icon: 'contact_support',
     link: () => history.push('/app/help'),
-    color: props.theme.palette.secondary.main,
+    color: '#222',
     count: 0,
   };
   const alphaButton = {
     name: 'Open Beta',
-    icon: <Icon>construction</Icon>,
+    icon: 'warning',
     link: () => history.push('/app/beta'),
-    color: props.theme.palette.secondary.main,
+    color: props.theme.palette.error.main,
     count: 0,
   };
   const creativeRoster = {
     name: 'Creatives',
-    icon: <Icon>brush</Icon>,
+    icon: 'brush',
     link: () => history.push('/app/creative-roster'),
-    color: props.theme.palette.secondary.main,
+    color: '#222',
     count: 0,
   };
 
@@ -97,12 +103,37 @@ function AppLayout(props) {
         } - ${pageHeaders(page)}`}</Typography>
         <div>
           <Row>
-            <MenuButton text={alphaButton} onClickEvent={alphaButton.link} />
-            <MenuButton
-              text={creativeRoster}
-              onClickEvent={creativeRoster.link}
+            <MenuButtonShortcut
+              text={{
+                name: alphaButton.name,
+                color: alphaButton.color,
+                icon: alphaButton.icon,
+                count: 0,
+              }}
+              onClickEvent={alphaButton.link}
+              active={false}
             />
-            <MenuButton text={helpButton} onClickEvent={helpButton.link} />
+            <MenuButtonShortcut
+              text={{
+                name: creativeRoster.name,
+                color: creativeRoster.color,
+                icon: creativeRoster.icon,
+                count: 0,
+              }}
+              onClickEvent={creativeRoster.link}
+              active={false}
+            />
+
+            <MenuButtonShortcut
+              text={{
+                name: helpButton.name,
+                color: helpButton.color,
+                icon: helpButton.icon,
+                count: 0,
+              }}
+              onClickEvent={helpButton.link}
+              active={false}
+            />
           </Row>
         </div>
       </StyledNavBar>

@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
 import Icon from '@material-ui/core/Icon';
-import { IconButton, CardComponent } from '../';
+import { CardComponent } from '../';
 import clsx from 'clsx';
 
 export default function JobComponent({ job, game, history }) {

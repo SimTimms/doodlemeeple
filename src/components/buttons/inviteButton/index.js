@@ -3,7 +3,6 @@ import { useStyles } from './styles';
 import { IconButton } from '../../';
 
 export default function InviteButton({ mutation, invite, disabled }) {
-  const classes = useStyles();
   const [on, setOn] = React.useState(false);
 
   useEffect(() => {

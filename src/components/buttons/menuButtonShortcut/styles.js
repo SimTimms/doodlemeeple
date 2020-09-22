@@ -27,13 +27,9 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     color: '#222',
     position: 'relative',
-    fontSize: 12,
+    fontSize: 16,
   },
-  active: {
-    background: theme.palette.secondary.main,
-    color: '#fff',
-    borderRadius: '50%',
-  },
+
   dark: { color: theme.palette.primary.light },
   link: {
     textDecoration: 'none',
@@ -57,9 +53,16 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.error.main,
     color: '#fff',
   },
-  button: { textAlign: 'right', color: '#222', fontSize: 12 },
+  button: { textAlign: 'right', color: '#222', fontSize: 14 },
   buttonMobile: {
     padding: 5,
     textAlign: 'center',
+  },
+  buttonRoot: {
+    paddingBottom: 3,
+    justifyContent: 'space-between',
+  },
+  active: {
+    borderBottom: `2px solid #aaa`,
   },
 }));

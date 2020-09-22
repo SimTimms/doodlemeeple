@@ -1,4 +1,4 @@
-import AppViewContract from './AppViewContract';
+import AppViewContract from './appViewContract';
 import EditContract from './editContract';
 
 export { AppViewContract, EditContract };

@@ -5,7 +5,6 @@ import logo from '../../../../assets/logo.svg';
 import logoDevice from '../../../../assets/dm_device.png';
 import {
   Header,
-  SubHeader,
   ColumnWrapper,
   HeaderTwo,
   Text,
@@ -93,7 +92,7 @@ export function PreviewProfile({ history, theme, profileId, publicView }) {
             }}
           >
             {userProfile.profileBG === null && (
-              <img src={logo} style={{ width: 500 }} />
+              <img src={logo} style={{ width: 500 }} alt="" />
             )}
           </div>
           <ColumnWrapper>

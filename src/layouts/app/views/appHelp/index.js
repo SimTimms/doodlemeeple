@@ -3,7 +3,6 @@ import { useStyles } from './styles';
 import { Card, CardContent, Typography, Slide } from '@material-ui/core';
 import {
   Column,
-  BorderBox,
   FieldTitleDashboard,
   Meta,
   Divider,

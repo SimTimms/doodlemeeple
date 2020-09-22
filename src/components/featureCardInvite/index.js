@@ -2,14 +2,13 @@ import React from 'react';
 import { Card } from '@material-ui/core';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
-import { HeaderTwo, TextArray, TextDivider } from '../';
+import { HeaderTwo, TextArray } from '../';
 
 export default function FeatureCardInvite({
   thumbnail,
   job,
   author,
   authorId,
-  summary,
   buttonOne,
   buttonTwo,
   history,

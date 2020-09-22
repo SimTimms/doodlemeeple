@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { Card, Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
-import { InviteButton, IconButton, Row, Column } from '../';
+import { InviteButton, IconButton, Column } from '../';
 import { Mutation } from 'react-apollo';
 import { ADD_FAVOURITE, CREATE_INVITE } from '../../data/mutations';
 import clsx from 'clsx';

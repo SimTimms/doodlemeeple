@@ -1,13 +1,6 @@
 import React from 'react';
 import { useStyles } from '../styles';
-import {
-  ColumnWrapper,
-  Divider,
-  FieldTitleDashboard,
-  MenuButtonShortcut,
-  Column,
-  Row,
-} from '../../../../../../components';
+import { ColumnWrapper, Column } from '../../../../../../components';
 import ProposalForm from '../components/proposalForm';
 
 export default function ProposalView({ jobId, setProposalOpen, history }) {

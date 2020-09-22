@@ -4,7 +4,6 @@ import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { INVITES } from '../../../../data/queries';
 import {
-  FieldTitleDashboard,
   IconButton,
   Column,
   Divider,

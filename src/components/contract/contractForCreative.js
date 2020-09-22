@@ -174,10 +174,16 @@ ${contractData.currency} `}
           conditions & privacy policy as follows:
         </Typography>
         <Typography style={{ marginLeft: 80 }}>
-          <b>9.1.1</b> <a href="https://doodlemeeple.com/terms-of-service/"></a>
+          <b>9.1.1</b>
+          <a href="https://doodlemeeple.com/terms-of-service/">
+            https://doodlemeeple.com/terms-of-service/
+          </a>
         </Typography>
         <Typography style={{ marginLeft: 80 }}>
-          <b>9.1.2</b> <a href="https://doodlemeeple.com/privacy-policy/"></a>
+          <b>9.1.2</b>{' '}
+          <a href="https://doodlemeeple.com/privacy-policy/">
+            https://doodlemeeple.com/privacy-policy/
+          </a>
         </Typography>
         <Typography style={{ marginLeft: 80 }}>
           <b>9.1.3</b> Where ambiguity or conflict arises between the terms of

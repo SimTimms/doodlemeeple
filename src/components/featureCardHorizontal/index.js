@@ -2,7 +2,6 @@ import React from 'react';
 import { Card } from '@material-ui/core';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
-import Divider from '../divider';
 
 export default function FeatureCardHorizontal({
   background,

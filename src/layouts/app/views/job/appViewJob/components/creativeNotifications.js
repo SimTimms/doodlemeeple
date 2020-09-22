@@ -1,14 +1,12 @@
 import React from 'react';
-import { useStyles } from '../styles';
 import { NoticeBox } from '../../../../../../components';
 
 export default function CreativeNotifications({
   inviteStatus,
   history,
   jobStatus,
+  setTabNbr,
 }) {
-  const classes = useStyles();
-
   return inviteStatus === 'declined' ? (
     <NoticeBox
       title="Declined"
@@ -22,7 +20,7 @@ export default function CreativeNotifications({
       subTitle="You may request payments from the holding account according to your payment schedule"
       actionTitle="Withdraw"
       actionEvent={() => {
-        history.push(`/app/withdraw/${'dd'}}`);
+        setTabNbr(4);
       }}
     />
   ) : null;

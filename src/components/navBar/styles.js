@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-const drawerWidth = 160;
+const drawerWidth = 120;
 export const useStyles = makeStyles((theme) => ({
   root: {
     background: '#fff',
@@ -13,7 +13,6 @@ export const useStyles = makeStyles((theme) => ({
     }),
     height: 64,
     position: 'relative',
-    paddingLeft: 48,
     boxSizing: 'border-box',
     boxShadow: 'none',
     borderBottom: '1px solid #ddd',

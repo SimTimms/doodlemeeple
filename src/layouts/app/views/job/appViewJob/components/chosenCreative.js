@@ -19,7 +19,6 @@ export default function ChosenCreative({
   chatOpen,
 }) {
   const classes = useStyles();
-  console.log(job);
   return (
     <ColumnWrapper>
       <Column j="center" a="center">

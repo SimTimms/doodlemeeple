@@ -1,11 +1,14 @@
 import React from 'react';
-import { useMediaQuery, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Column, Row, IconButton, LoadIcon } from '../';
 import { Mutation, Query } from 'react-apollo';
 import { SKIP_ONBOARDING, SET_AS_CREATOR } from '../../data/mutations';
 import { PROFILE_FEATURED } from '../../data/queries';
 import device from '../../assets/device.svg';
+import stripeButton from '../../assets/stripe_button.png';
+import stripeLogoSM from '../../assets/stripe_logo_sm.png';
+import { requestStripe } from '../../utils/stripe';
 
 export default function NoticeBoard({
   profile,
@@ -13,9 +16,9 @@ export default function NoticeBoard({
   featuredArticle,
   setProfile,
 }) {
-  const mobile = useMediaQuery('(max-width:800px)');
   const classes = useStyles();
-  console.log(featuredArticle);
+  const [loadingStripe, setLoadingStripe] = React.useState(false);
+
   return (
     <div className={classes.root}>
       <Row>
@@ -117,6 +120,63 @@ export default function NoticeBoard({
                             );
                           }}
                         </Mutation>
+                      </Column>
+                    ) : !profile.stripeID && profile.creativeTrue ? (
+                      <Column>
+                        <Typography
+                          variant="h4"
+                          style={{
+                            color: '#fff',
+                            textAlign: 'center',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          Connect to{' '}
+                          <a
+                            href="https://stripe.com"
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            <img
+                              src={stripeLogoSM}
+                              alt="STRIPE"
+                              style={{ width: 100 }}
+                            />
+                          </a>{' '}
+                          for payments
+                        </Typography>
+                        <Typography
+                          variant="h6"
+                          style={{ color: '#fff', textAlign: 'center' }}
+                        >
+                          It's simple to do, just click below to begin
+                        </Typography>
+                        {loadingStripe ? (
+                          <Typography
+                            variant="h6"
+                            style={{ color: '#fff', marginTop: 20 }}
+                          >
+                            Please Wait
+                          </Typography>
+                        ) : (
+                          <img
+                            src={stripeButton}
+                            style={{
+                              width: 200,
+                              marginTop: 20,
+                              cursor: 'pointer',
+                            }}
+                            onClick={() => {
+                              requestStripe();
+                              setLoadingStripe(true);
+                            }}
+                          />
+                        )}
                       </Column>
                     ) : (
                       <Column>

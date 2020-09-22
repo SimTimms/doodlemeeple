@@ -54,7 +54,6 @@ export const DEVELOPMENT_TYPES = [
   'proof-reader',
   'translator',
   'play-tester',
-  ,
 ];
 export function calculatePercent(paymentTermsArray, contractTotal, currency) {
   const totalInt = parseInt(contractTotal);

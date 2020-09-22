@@ -74,6 +74,7 @@ export function Card({ img }) {
               maxWidth: '100%',
               maxHeight: '100%',
             }}
+            alt=""
             onClick={() => {
               setLarge(null);
             }}

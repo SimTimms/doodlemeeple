@@ -1,14 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  Slide,
-  Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '@material-ui/core';
+import { Slide, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   Divider,

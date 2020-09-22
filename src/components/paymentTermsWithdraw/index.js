@@ -7,15 +7,12 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
-import { useStyles } from './styles';
 import { IconButton } from '../';
-
 import { Mutation } from 'react-apollo';
-import { REQUEST_WITHDRAW, APPROVE_WITHDRAW } from '../../data/mutations';
-
+import { APPROVE_WITHDRAW } from '../../data/mutations';
+import PayoutButton from './payoutButton';
+import ApproveButton from './approveButton';
 export default function PaymentTermsWithdraw({ data, isCreator }) {
-  const classes = useStyles();
-
   return (
     <TableContainer>
       <Table aria-label="simple table">
@@ -23,7 +20,7 @@ export default function PaymentTermsWithdraw({ data, isCreator }) {
           <TableRow>
             <TableCell align="left">DESCRIPTION</TableCell>
             <TableCell align="right">AMOUNT</TableCell>
-            <TableCell align="right">WITHDRAW</TableCell>
+            <TableCell align="right">OPTIONS</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -37,43 +34,19 @@ export default function PaymentTermsWithdraw({ data, isCreator }) {
                   {`${payment.percent} ${payment.contract.currency}`}
                 </TableCell>
                 <TableCell align="right">
-                  {isCreator && payment.withdrawRequest ? (
-                    <Mutation
-                      mutation={APPROVE_WITHDRAW}
-                      variables={{
-                        _id: payment._id,
-                      }}
-                    >
-                      {(mutation) => {
-                        return (
-                          <IconButton
-                            title="Approve"
-                            icon=""
-                            onClickEvent={() => mutation()}
-                          />
-                        );
-                      }}
-                    </Mutation>
-                  ) : (
-                    !isCreator &&
-                    !payment.withdrawRequest && (
-                      <Mutation
-                        mutation={REQUEST_WITHDRAW}
-                        variables={{
-                          _id: payment._id,
-                        }}
-                      >
-                        {(mutation) => {
-                          return (
-                            <IconButton
-                              title="Withdraw"
-                              icon=""
-                              onClickEvent={() => mutation()}
-                            />
-                          );
-                        }}
-                      </Mutation>
-                    )
+                  {payment.paid === 'success' && <div>PAID OUT</div>}
+                  {isCreator && payment.paid !== 'success' && (
+                    <ApproveButton
+                      paymentId={payment._id}
+                      withdrawApproved={payment.withdrawApproved}
+                    />
+                  )}
+
+                  {!isCreator && payment.paid !== 'success' && (
+                    <PayoutButton
+                      paymentId={payment._id}
+                      withdrawRequest={payment.withdrawRequest}
+                    />
                   )}
                 </TableCell>
               </TableRow>

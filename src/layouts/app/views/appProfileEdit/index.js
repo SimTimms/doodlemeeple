@@ -38,7 +38,6 @@ export default function AppProfileEdit({ theme, history }) {
     creatorTrue: false,
   });
   const [sections, setSections] = React.useState([]);
-  const [profileImg, setProfileImg] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [changes, setChanges] = React.useState(0);
   const [errors, setError] = React.useState({

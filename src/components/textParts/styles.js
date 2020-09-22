@@ -37,7 +37,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   headerLineTwo: {
-    borderTop: `1px dotted #ccc`,
+    borderTop: `1px dashed #ccc`,
     width: 40,
   },
   headerLineTwoFull: {

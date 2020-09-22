@@ -49,6 +49,7 @@ export default function Messages({
           }}
         >
           <img
+            alt=""
             src={viewer}
             style={{ marginLeft: 20, marginRight: 20, width: '100%' }}
           />

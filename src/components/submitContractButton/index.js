@@ -3,7 +3,6 @@ import { IconButton } from '../';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../utils/toaster';
 import { SUBMIT_CONTRACT } from '../../data/mutations';
-import { UnlockInfo } from '../../components';
 
 export default function SubmitContractButton({ contract, history }) {
   return (

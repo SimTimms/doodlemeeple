@@ -68,6 +68,9 @@ export const CONVERSATIONS = gql`
       job {
         _id
         name
+        user {
+          name
+        }
       }
       receiver {
         name
@@ -204,6 +207,9 @@ export const INVITES = gql`
         name
         summary
         submitted
+        user {
+          name
+        }
       }
     }
   }
@@ -227,6 +233,9 @@ export const INVITE_BY_ID = gql`
         name
         summary
         submitted
+        user {
+          name
+        }
       }
     }
   }
@@ -324,6 +333,7 @@ export const GET_PAYMENT_TERMS = gql`
       _id
       description
       percent
+      paid
       withdrawRequest
       withdrawApproved
       withdrawPaid
@@ -561,6 +571,7 @@ export const PROFILE = gql`
       email
       creatorTrue
       creativeTrue
+      stripeID
       onboarding
       favourites {
         receiver {

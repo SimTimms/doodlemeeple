@@ -3,8 +3,6 @@ import { useStyles } from '../styles';
 import { NoticeBox } from '../../../../../../components';
 
 export default function ClientNotification({ jobStatus, job, history }) {
-  const classes = useStyles();
-
   return (
     jobStatus === 'accepted' && (
       <NoticeBox

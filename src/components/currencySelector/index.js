@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { MenuItem, Select } from '@material-ui/core';
 import { useStyles } from './styles';
-import autosave from '../../utils/autosave';
 
 export default function CurrencySelector({ selectedCurrency, onChangeEvent }) {
   const [currency, setCurrency] = React.useState(0);
