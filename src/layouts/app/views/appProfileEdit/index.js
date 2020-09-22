@@ -55,6 +55,7 @@ export default function AppProfileEdit({ theme, history }) {
   function addChanges() {
     setChanges(changes + 1);
   }
+
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -292,8 +293,9 @@ export default function AppProfileEdit({ theme, history }) {
           onCompleted={(data) => {
             setProfile({ ...data.profile });
             setLoading(false);
-            /*
+
             setSections(data.profile.sections);
+            /*
             setUserName(data.profile.name);
             setSummary(data.profile.summary);
             setBgImage(data.profile.profileBG);
