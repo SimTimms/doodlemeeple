@@ -67,29 +67,10 @@ export default function NoticeBoard({
                     {profile.sections.length === 0 &&
                     profile.creatorTrue !== true ? (
                       <Column>
-                        <Typography
-                          variant="h5"
-                          style={{
-                            color: '#fff',
-                            textAlign: 'center',
-                            paddingLeft: 20,
-                            paddingRight: 20,
-                            marginBottom: 10,
-                          }}
-                        >
+                        <Typography variant="h5" className={classes.header5}>
                           Your profile isn't complete.
                         </Typography>
-                        <Typography
-                          variant="h6"
-                          style={{
-                            color: '#fff',
-                            textAlign: 'center',
-                            paddingLeft: 20,
-                            paddingRight: 20,
-                            marginBottom: 10,
-                            maxWidth: 300,
-                          }}
-                        >
+                        <Typography variant="h6" className={classes.header6}>
                           You'll need to add at least 1 skill section to be
                           listed on the Creative Roster.
                         </Typography>
@@ -123,16 +104,7 @@ export default function NoticeBoard({
                       </Column>
                     ) : !profile.stripeID && profile.creativeTrue ? (
                       <Column>
-                        <Typography
-                          variant="h4"
-                          style={{
-                            color: '#fff',
-                            textAlign: 'center',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                          }}
-                        >
+                        <Typography variant="h4" className={classes.header4}>
                           Connect to{' '}
                           <a
                             href="https://stripe.com"

@@ -300,7 +300,7 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                               inline={false}
                             />
                             <Divider />
-                            <div style={{ width: 350 }}>
+                            <div style={{ width: 450 }}>
                               <Column>
                                 <Row j="space-between">
                                   <MenuButtonShortcut

@@ -30,8 +30,8 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
   },
   appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
+    paddingLeft: drawerWidth,
+    width: '100%',
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,

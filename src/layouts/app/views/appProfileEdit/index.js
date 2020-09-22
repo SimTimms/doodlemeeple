@@ -273,6 +273,10 @@ export default function AppProfileEdit({ theme, history }) {
                         <AddSection
                           setSections={setSections}
                           sections={sections}
+                          userType={{
+                            creative: profile.creativeTrue,
+                            creator: profile.creatorTrue,
+                          }}
                         />
                       )}
                     </DMCard>

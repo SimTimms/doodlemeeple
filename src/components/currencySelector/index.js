@@ -4,7 +4,7 @@ import { useStyles } from './styles';
 
 export default function CurrencySelector({ selectedCurrency, onChangeEvent }) {
   const [currency, setCurrency] = React.useState(0);
-  const currencyArray = ['GBP', 'USD'];
+  const currencyArray = ['GBP', 'USD', 'EUR'];
 
   useEffect(() => {
     setCurrency(selectedCurrency);

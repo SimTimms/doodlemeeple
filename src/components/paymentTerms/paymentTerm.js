@@ -97,8 +97,8 @@ export default function PaymentTerm({
                   });
                 }}
                 replaceMode="loose"
-                placeholder="Example: initial deposit"
-                info="Split the total payment into pre-determined milestones, example: 50% upfront, 50% upon completion"
+                placeholder="Examples: Deposit | In 4 weeks | Upon delivery"
+                info="Split the total payment into pre-determined milestones, example: 50% deposit, 50% upon completion"
                 warning=""
                 size="s"
               />

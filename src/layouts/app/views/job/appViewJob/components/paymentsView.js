@@ -1,11 +1,9 @@
 import React from 'react';
 import {
-  ColumnWrapper,
   HeaderTwo,
   Column,
   Payments,
   PaymentTermsWithdraw,
-  Divider,
   Paper,
 } from '../../../../../../components';
 import { Query } from 'react-apollo';
@@ -27,7 +25,6 @@ export default function PaymentsView({ job }) {
             fetchPolicy="network-only"
           >
             {({ data }) => {
-              console.log(data);
               return data ? (
                 <PaymentTermsWithdraw
                   data={data.getPaymentTerms}

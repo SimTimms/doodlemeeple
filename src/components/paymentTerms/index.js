@@ -1,5 +1,5 @@
 import React from 'react';
-import { FieldTitle, Divider, Column, FieldBox, UnlockInfo } from '../';
+import { FieldTitle, Divider, Column, FieldBox, UnlockInfo, Row } from '../';
 import AddPaymentTerm from './addPaymentTerms';
 import PaymentTerm from './paymentTerm';
 import { Typography } from '@material-ui/core';
@@ -99,6 +99,26 @@ export default function PaymentTerms({
         percentLock={percentLock}
         addPaymentTerm={addPaymentTerm}
       />
+      {contract.paymentTerms.length === 0 ? (
+        <Row>
+          <Typography style={{ fontWeight: 900, marginRight: 10 }}>
+            No Milestones Set:
+          </Typography>
+          <Typography>
+            You'll receive {contract.cost} {contract.currency} upon completion
+          </Typography>
+        </Row>
+      ) : (
+        contract.cost > totalCount && (
+          <Row>
+            <Typography>
+              You'll receive the remaining {contract.cost - totalCount}{' '}
+              {contract.currency} upon completion
+            </Typography>
+          </Row>
+        )
+      )}
+
       {percentLock.message !== '' && (
         <Typography
           style={{

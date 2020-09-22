@@ -7,9 +7,6 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
-import { IconButton } from '../';
-import { Mutation } from 'react-apollo';
-import { APPROVE_WITHDRAW } from '../../data/mutations';
 import PayoutButton from './payoutButton';
 import ApproveButton from './approveButton';
 export default function PaymentTermsWithdraw({ data, isCreator }) {

@@ -55,7 +55,7 @@ export default function ContractSummaryForCreative({ contractData }) {
       </Row>
       <Row j="flex-start" a="flex-start">
         <Typography className={classes.alignLeft}>{`Start Date: `}</Typography>
-        {contractData.startDate !== '' ? (
+        {contractData.startDate !== '' && contractData.startDate !== null ? (
           <Typography>{`${contractData.startDate}`}</Typography>
         ) : (
           <Typography className={classes.warning}>Not Provided</Typography>
@@ -65,7 +65,7 @@ export default function ContractSummaryForCreative({ contractData }) {
         <Typography
           className={classes.alignLeft}
         >{`Delivery Date: `}</Typography>
-        {contractData.deadline !== '' ? (
+        {contractData.deadline !== '' && contractData.deadline !== null ? (
           <Typography>{`${contractData.deadline}`}</Typography>
         ) : (
           <Typography className={classes.warning}>Not Provided</Typography>
@@ -73,7 +73,7 @@ export default function ContractSummaryForCreative({ contractData }) {
       </Row>
       <Row j="flex-start" a="flex-start">
         <Typography className={classes.alignLeft}>{`Description: `}</Typography>
-        {contractData.notes !== '' ? (
+        {contractData.notes !== '' && contractData.notes !== null ? (
           <Typography>{`${contractData.notes}`}</Typography>
         ) : (
           <Typography className={classes.warning}>Not Provided</Typography>

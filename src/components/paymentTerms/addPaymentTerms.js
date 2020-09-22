@@ -33,14 +33,14 @@ export default function AddPaymentTerm({
       {(mutation, { loading }) => {
         return (
           <IconButton
-            disabled={detailsLock || percentLock.sum < 0 || percentLock.status}
+            disabled={percentLock.sum < 0 || percentLock.status}
             color="primary"
             title="Add"
             icon=""
             onClickEvent={() => {
               mutation();
             }}
-            styleOverride={{ alignSelf: 'flex-end' }}
+            styleOverride={{ marginTop: 0, marginBottom: 15 }}
             type="button"
             iconPos="right"
           />

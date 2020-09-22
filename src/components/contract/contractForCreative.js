@@ -9,7 +9,7 @@ export default function ContractComponentForCreative({
   contractData,
   ...props
 }) {
-  let paymentTermsSum = 100;
+  let paymentTermsSum = contractData.cost;
   const classes = useStyles();
   const { setOpenContract } = props;
 

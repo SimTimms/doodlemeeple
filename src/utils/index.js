@@ -34,7 +34,7 @@ export const TYPE_HELPER = (typeIn) => {
       return typeIn;
   }
 };
-
+export const CREATOR_TYPES = ['creator'];
 export const ARTIST_TYPES = [
   'graphic-artist',
   '3d-artist',
