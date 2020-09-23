@@ -40,7 +40,7 @@ export default function AppViewJob({ theme, jobId, history, inviteId }) {
   const [inviteStatus, setInviteStatus] = React.useState('');
   const [contracts, setContracts] = React.useState([]);
   const [proposalOpen, setProposalOpen] = React.useState(false);
-  const [messagesEnd, setMessagesEnd] = React.useState(null);
+  const [messagesEnd] = React.useState(null);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>

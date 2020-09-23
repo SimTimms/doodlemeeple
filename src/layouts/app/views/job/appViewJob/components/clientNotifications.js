@@ -1,5 +1,4 @@
 import React from 'react';
-import { useStyles } from '../styles';
 import { NoticeBox } from '../../../../../../components';
 
 export default function ClientNotification({ jobStatus, job, history }) {

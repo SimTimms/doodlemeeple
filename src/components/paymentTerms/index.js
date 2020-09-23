@@ -11,7 +11,6 @@ export default function PaymentTerms({
   setPercentLock,
   percentLock,
   calculatePercent,
-  setSaveLock,
   setDetailsLock,
   detailsLock,
   menu,
@@ -87,7 +86,6 @@ export default function PaymentTerms({
             key={`term_${index}`}
             calculatePercent={calculatePercent}
             setPercentLock={setPercentLock}
-            setSaveLock={setSaveLock}
             setDetailsLock={setDetailsLock}
           />
         );

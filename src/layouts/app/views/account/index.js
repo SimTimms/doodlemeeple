@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Icon,
-  Card,
-  Typography,
-  Slide,
-  TextField,
-  Button,
-} from '@material-ui/core';
+import { Card, Typography, Slide, TextField } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   ErrorBox,
@@ -103,6 +96,7 @@ export function Account({ history }) {
                   requestStripe(history);
                 }}
                 style={{ width: 200 }}
+                alt=""
               />
               <TextField
                 id={'email'}

@@ -143,6 +143,7 @@ export default function NoticeBoard({
                               marginTop: 20,
                               cursor: 'pointer',
                             }}
+                            alt=""
                             onClick={() => {
                               requestStripe();
                               setLoadingStripe(true);
@@ -196,6 +197,7 @@ export default function NoticeBoard({
                       ></div>
                       <img
                         src={data.userById ? data.userById.profileImg : device}
+                        alt=""
                         style={{
                           minWidth: 80,
                           maxWidth: 80,

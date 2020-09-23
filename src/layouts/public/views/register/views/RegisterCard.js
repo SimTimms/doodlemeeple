@@ -20,11 +20,6 @@ import { sharedStyles } from '../../styles';
 import { Mutation } from 'react-apollo';
 import { SIGNUP_MUTATION } from '../../../../../data/mutations';
 import { readableErrors } from '../../../../../utils/readableErrors';
-import {
-  PROFILE_NAME,
-  PROFILE_EMAIL,
-  PROFILE_PASSWORD,
-} from '../../../../../utils/dataLengths';
 import { validate } from 'email-validator';
 import clsx from 'clsx';
 

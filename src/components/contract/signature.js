@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Divider,
-  IconButton,
-  ActionWrapper,
-  NoticeBox,
-  BorderBox,
-  Meta,
-} from '../';
+import { IconButton, ActionWrapper, BorderBox, Meta } from '../';
 import { Mutation } from 'react-apollo';
 import { SIGN_CONTRACT, DECLINE_CONTRACT } from '../../data/mutations';
 import moment from 'moment';

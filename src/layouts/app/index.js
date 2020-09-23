@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStyles } from './styles';
-import { useMediaQuery, Typography, Icon } from '@material-ui/core';
+import { useMediaQuery, Typography } from '@material-ui/core';
 import clsx from 'clsx';
 import AppDrawer from '../menus/appDrawer';
 import AppDashboard from './views/appDashboard';
@@ -25,7 +25,6 @@ import { FAVOURITES, PROFILE } from '../../data/queries';
 import {
   ContentTop,
   StyledNavBar,
-  MenuButton,
   Row,
   MenuButtonShortcut,
 } from '../../components';

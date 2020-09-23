@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStyles } from '../styles';
-import { Slide, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import {
   IconButton,
   ColumnWrapper,

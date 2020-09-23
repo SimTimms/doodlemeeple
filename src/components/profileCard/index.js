@@ -17,19 +17,12 @@ export default function ProfileCard({
   const classes = useStyles();
   const [isFav, setIsFav] = React.useState(false);
   const [favCount, setFavCount] = React.useState(0);
-  const {
-    gameId,
-    jobId,
-    invite,
-    updateInviteList,
-    removeInviteList,
-    disabled,
-  } = props;
+  const { jobId, invite, updateInviteList, removeInviteList, disabled } = props;
 
   useEffect(() => {
     setIsFav(favourite);
     setFavCount(creative.likedMe.length);
-  }, [favourite]);
+  }, [favourite, creative]);
 
   return (
     <Card

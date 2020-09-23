@@ -13,7 +13,6 @@ export default function PaymentTerm({
   index,
   calculatePercent,
   setPercentLock,
-  setSaveLock,
   setDetailsLock,
 }) {
   const [values, setValues] = React.useState({
@@ -62,10 +61,6 @@ export default function PaymentTerm({
 
                   setDetailsLock(false);
                   setPercentLock(percentLockCalc);
-
-                  percentLockCalc.sum >= 0
-                    ? setSaveLock(false)
-                    : setSaveLock(true);
 
                   percentLockCalc.sum >= 0 &&
                     autosave(() => {

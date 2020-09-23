@@ -41,7 +41,6 @@ export default function EditProposalForm({
     message: '',
   });
   const [detailsLock, setDetailsLock] = React.useState(false);
-  const [saveLock, setSaveLock] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [page, setPage] = React.useState(0);
   useEffect(() => {
@@ -51,7 +50,6 @@ export default function EditProposalForm({
       contractData.currency
     );
     setPercentLock(percentLockCalc);
-    percentLockCalc.sum >= 0 ? setSaveLock(false) : setSaveLock(true);
   }, [contractData]);
 
   return (
@@ -191,7 +189,6 @@ export default function EditProposalForm({
                           contract={contractData}
                           setContract={setContract}
                           calculatePercent={calculatePercent}
-                          setSaveLock={setSaveLock}
                           setDetailsLock={setDetailsLock}
                           detailsLock={detailsLock}
                           mutation={mutation}

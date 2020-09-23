@@ -35,7 +35,7 @@ export function PublicLayout(props) {
         center={true}
         sidebarMissing={true}
       >
-        <img src={logo} style={{ height: 40 }} />
+        <img src={logo} style={{ height: 40 }} alt="DoodleMeeple Logo" />
       </StyledNavBar>
       <Content>
         {page === 'login' ? (

@@ -2,12 +2,9 @@ import React, { useEffect } from 'react';
 import { Slide, Typography } from '@material-ui/core';
 import { useStyles } from '../styles';
 import {
-  ColumnWrapper,
   HeaderTwo,
   HeaderThree,
   Column,
-  Text,
-  TextLeft,
   Meta,
   UnlockInfoReverse,
   MenuButtonShortcut,
@@ -49,7 +46,7 @@ export default function SummaryView({
   const [pageNbr, setPageNbr] = React.useState(0);
   const [tabNbr, setTabNbr] = React.useState(1);
   const [messages, setMessages] = React.useState([]);
-  const isCreator = loggedInUser == job.user._id;
+  const isCreator = loggedInUser === job.user._id;
   useEffect(() => {
     messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' });
   });

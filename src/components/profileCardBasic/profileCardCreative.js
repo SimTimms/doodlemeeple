@@ -15,7 +15,7 @@ export default function ProfileCardCreative({ history, creative, favourite }) {
   useEffect(() => {
     setIsFav(favourite);
     setFavCount(creative.likedMe.length);
-  }, [favourite]);
+  }, [favourite, creative]);
 
   return (
     <Card

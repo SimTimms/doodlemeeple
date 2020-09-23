@@ -15,7 +15,6 @@ import clsx from 'clsx';
 export default function AppDashboard({ history, profile, setProfile }) {
   const classes = useStyles();
   const [posts, setPosts] = React.useState(null);
-  const [home, setHome] = React.useState(null);
   const mobile = useMediaQuery('(max-width:800px)');
   const [featuredArticle, setFeaturedArticle] = React.useState({
     id: null,
@@ -61,9 +60,7 @@ export default function AppDashboard({ history, profile, setProfile }) {
           'https://doodlemeeple.com/wp-json/wp/v2/posts?_embed&categories=4',
           { cancelToken: axiosCancel.token }
         )
-        .then((response) => {
-          setHome(response.data);
-        })
+        .then((response) => {})
         .catch((error) => {
           console.log(error);
         });

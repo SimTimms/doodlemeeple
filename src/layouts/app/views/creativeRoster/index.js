@@ -7,7 +7,7 @@ import { TYPE_HELPER } from '../../../../utils';
 
 export default function CreativeRoster({ theme, history, favourites }) {
   const classes = useStyles();
-  const [loading, setLoading] = React.useState(false);
+  const [loading] = React.useState(false);
   const [filter, setFilter] = React.useState(['artist']);
   const [group, setGroup] = React.useState('artist');
   const artistTypes = [
