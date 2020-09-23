@@ -81,6 +81,7 @@ export default function AppDrawer({
                   handleDrawerClose();
                 }}
                 active={false}
+                key={`shortcut_${index}`}
               />
             ))}
           </div>
@@ -163,6 +164,7 @@ export default function AppDrawer({
                     handleDrawerClose();
                   }}
                   active={false}
+                  key={`menu_${index}`}
                 />
               )
           )}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { Column, Row, IconButton, LoadIcon } from '../';
+import { Column, Row, IconButton, LoadIcon, Divider } from '../';
 import { Mutation, Query } from 'react-apollo';
 import { SKIP_ONBOARDING, SET_AS_CREATOR } from '../../data/mutations';
 import { PROFILE_FEATURED } from '../../data/queries';
@@ -18,12 +18,14 @@ export default function NoticeBoard({
 }) {
   const classes = useStyles();
   const [loadingStripe, setLoadingStripe] = React.useState(false);
+  const [skip, setSkip] = React.useState(false);
 
   return (
     <div className={classes.root}>
       <Row>
-        {profile.onboarding !== 'complete' && !profile.profileBG ? (
+        {profile.onboarding !== 'complete' && !profile.profileBG && !skip ? (
           <Column>
+            <Divider />
             <Typography variant="h5" style={{ color: '#fff' }}>
               Welcome to DoodleMeeple, let's get started
             </Typography>
@@ -41,11 +43,15 @@ export default function NoticeBoard({
                     title="skip"
                     color="text-white-mini"
                     icon=""
-                    onClickEvent={() => mutation()}
+                    onClickEvent={() => {
+                      mutation();
+                      setSkip(true);
+                    }}
                   />
                 );
               }}
             </Mutation>
+            <Divider />
           </Column>
         ) : (
           featuredArticle.id && (

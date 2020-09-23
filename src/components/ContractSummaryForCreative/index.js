@@ -55,7 +55,9 @@ export default function ContractSummaryForCreative({ contractData }) {
       </Row>
       <Row j="flex-start" a="flex-start">
         <Typography className={classes.alignLeft}>{`Start Date: `}</Typography>
-        {contractData.startDate !== '' && contractData.startDate !== null ? (
+        {contractData.startDate !== '' &&
+        contractData.startDate !== null &&
+        contractData.startDate !== undefined ? (
           <Typography>{`${contractData.startDate}`}</Typography>
         ) : (
           <Typography className={classes.warning}>Not Provided</Typography>

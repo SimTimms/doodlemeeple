@@ -20,7 +20,7 @@ export default function ProposalForm({ jobId, setProposalOpen, history }) {
     user: { name: '' },
     currency: 'GBP',
     status: 'loading',
-    job: { _id: '', user: { _id: '', email: '' } },
+    job: { _id: '', user: { _id: '', email: '', name: '' } },
   });
 
   return (
@@ -56,6 +56,7 @@ export default function ProposalForm({ jobId, setProposalOpen, history }) {
         variables={{ jobId }}
         fetchPolicy="network-only"
         onCompleted={(data) => {
+          console.log(data.contractByJob);
           data.contractByJob
             ? setContract({ ...data.contractByJob })
             : setContract({ ...contract, status: '' });

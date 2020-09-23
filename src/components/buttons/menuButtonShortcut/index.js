@@ -11,7 +11,6 @@ export default function MenuButtonShortcut({ text, onClickEvent, active }) {
   return (
     <div
       className={classes.link}
-      key={text.name}
       onClick={() => {
         onClickEvent();
       }}

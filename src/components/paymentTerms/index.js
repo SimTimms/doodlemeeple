@@ -44,7 +44,7 @@ export default function PaymentTerms({
         }}
         replaceMode="number"
         placeholder="Example: 1050"
-        info="The total amount you will be paid upon completion of this job, please take into consideration that Doodle Meeple fees will be subtracted from this amount"
+        info="The total amount you will be paid upon completion of this job, please take into consideration that Doodle Meeple fees will be subtracted from this amount. This amount should be in excess of 50 GBP, 75 USD, or 75 EUR"
         warning="Example: 1050"
         size="s"
         multiline={false}

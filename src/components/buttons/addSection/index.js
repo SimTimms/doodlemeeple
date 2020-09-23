@@ -20,6 +20,7 @@ function AddSection({ setSections, sections, userType }) {
 
   useEffect(() => {
     setPage(userType.creator ? 1 : 0);
+    console.log(userType);
   }, [userType]);
 
   return (
@@ -126,12 +127,13 @@ function AddSection({ setSections, sections, userType }) {
             <Column>
               <HeaderTwo str="Project Creators" />
               <Divider />
-              {CREATOR_TYPES.map((type) => (
+              {CREATOR_TYPES.map((type, index) => (
                 <ArtistCard
                   setDisplay={setDisplay}
                   sections={sections}
                   setSections={setSections}
                   type={type}
+                  key={`creator_${index}`}
                 />
               ))}
               <Divider />
@@ -141,12 +143,13 @@ function AddSection({ setSections, sections, userType }) {
             <Column>
               <HeaderTwo str="Visual Art and Creative Writing" />
               <Divider />
-              {ARTIST_TYPES.map((type) => (
+              {ARTIST_TYPES.map((type, index) => (
                 <ArtistCard
                   setDisplay={setDisplay}
                   sections={sections}
                   setSections={setSections}
                   type={type}
+                  key={`artist_${index}`}
                 />
               ))}
               <Divider />
@@ -156,12 +159,13 @@ function AddSection({ setSections, sections, userType }) {
             <Column>
               <HeaderTwo str="Marketing and Campaign Management" />
               <Divider />
-              {MARKETING_TYPES.map((type) => (
+              {MARKETING_TYPES.map((type, index) => (
                 <ArtistCard
                   setDisplay={setDisplay}
                   sections={sections}
                   setSections={setSections}
                   type={type}
+                  key={`marketing_${index}`}
                 />
               ))}
               <Divider />
@@ -171,12 +175,13 @@ function AddSection({ setSections, sections, userType }) {
             <Column>
               <HeaderTwo str="Development" />
               <Divider />
-              {DEVELOPMENT_TYPES.map((type) => (
+              {DEVELOPMENT_TYPES.map((type, index) => (
                 <ArtistCard
                   setDisplay={setDisplay}
                   sections={sections}
                   setSections={setSections}
                   type={type}
+                  key={`dev_${index}`}
                 />
               ))}
 

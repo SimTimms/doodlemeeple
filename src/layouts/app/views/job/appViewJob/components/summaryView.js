@@ -170,14 +170,17 @@ export default function SummaryView({
         {job.submitted !== 'accepted' &&
           job.submitted !== 'paid' &&
           loggedInUser === job.user._id && (
-            <ClientView
-              job={job}
-              history={history}
-              setConversationUser={setConversationUser}
-              setChatOpen={setChatOpen}
-              chatOpen={chatOpen}
-              contracts={job.contracts}
-            />
+            <Paper pt={10}>
+              <HeaderTwo str="Invites" />
+              <ClientView
+                job={job}
+                history={history}
+                setConversationUser={setConversationUser}
+                setChatOpen={setChatOpen}
+                chatOpen={chatOpen}
+                contracts={job.contracts}
+              />
+            </Paper>
           )}
 
         {(tabNbr === 0 || tabNbr === 2) &&

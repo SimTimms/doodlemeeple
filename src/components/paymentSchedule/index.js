@@ -69,7 +69,7 @@ export default function PaymentSchedule({ contractData, isClient }) {
 
           <TableRow style={{ background: '#444' }}>
             <TableCell align="left" style={{ color: '#fff' }}>
-              Total Payout
+              {isClient ? 'Total Due' : 'Total Payout'}
             </TableCell>
             <TableCell align="right" style={{ color: '#fff' }}>
               {isClient

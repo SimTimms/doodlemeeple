@@ -10,7 +10,7 @@ import {
   Meta,
   Row,
   MenuButtonShortcut,
-  ContractComponentForCreative,
+  ContractComponentForCreator,
   ContractSummaryForCreative,
   SubmitContractButton,
   IconButton,
@@ -43,13 +43,12 @@ export default function EditProposalForm({
   const [detailsLock, setDetailsLock] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [page, setPage] = React.useState(0);
+  const [lockSubmit, setLockSubmit] = React.useState(true);
   useEffect(() => {
-    const percentLockCalc = calculatePercent(
-      contractData.paymentTerms,
-      contractData.cost,
-      contractData.currency
-    );
+    const { cost, paymentTerms, currency, notes } = contractData;
+    const percentLockCalc = calculatePercent(paymentTerms, cost, currency);
     setPercentLock(percentLockCalc);
+    setLockSubmit(cost <= 0 || notes === '' || !notes ? true : false);
   }, [contractData]);
 
   return (
@@ -222,26 +221,42 @@ export default function EditProposalForm({
                           <ContractSummaryForCreative
                             contractData={contractData}
                           />
+                          {lockSubmit && (
+                            <Column>
+                              <UnlockInfo str="WARNING! You need to set a START DATE, COST and a NOTE to continue." />
+                              <IconButton
+                                title="Go back and complete"
+                                icon="chevron_left"
+                                onClickEvent={() => setPage(0)}
+                                color="primary"
+                              />
+                            </Column>
+                          )}
 
                           {percentLock.status ? (
                             <UnlockInfo str="WARNING! Your milestone payments exceed the contract total, please adjust to continue." />
                           ) : (
-                            <BorderBox w={300}>
-                              {!percentLock.status && (
-                                <Meta str="Submit this proposal to the client?" />
-                              )}
-                              <SubmitContractButton
-                                contract={contractData}
-                                history={history}
-                              />
-                            </BorderBox>
+                            !lockSubmit && (
+                              <BorderBox w={300}>
+                                {!percentLock.status && (
+                                  <Meta str="Submit this proposal to the client?" />
+                                )}
+
+                                <SubmitContractButton
+                                  contract={contractData}
+                                  history={history}
+                                />
+                              </BorderBox>
+                            )
                           )}
                         </div>
                       )}
                       {page === 3 && (
                         <div style={{ width: '100%' }}>
-                          <ContractComponentForCreative
+                          <ContractComponentForCreator
                             contractData={contractData}
+                            history={history}
+                            setContract={setContract}
                           />
 
                           <BorderBox w={300}>
@@ -249,13 +264,6 @@ export default function EditProposalForm({
                               <Meta str="Continue to Confirmation" />
                             )}
 
-                            {!percentLock.status && (
-                              <SubmitContractButton
-                                percentLock={percentLock}
-                                contract={contractData}
-                                setContract={setContract}
-                              />
-                            )}
                             {percentLock.status && (
                               <IconButton
                                 title="Adjust Milestones"

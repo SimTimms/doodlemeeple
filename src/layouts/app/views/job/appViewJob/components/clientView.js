@@ -4,7 +4,6 @@ import { useStyles } from '../styles';
 import {
   IconButton,
   ColumnWrapper,
-  HeaderTwo,
   Column,
   Row,
 } from '../../../../../../components';
@@ -23,12 +22,7 @@ export default function ClientView({
       <div className={classes.rootRow}>
         <ColumnWrapper>
           <Column j="center" a="center">
-            <HeaderTwo str="Invites" />
             {job.invites.map((invite, index) => {
-              const contractIndex = contracts.map((contract, index) => {
-                return contract.user._id === invite.receiver._id ? index : -1;
-              })[0];
-              console.log(contracts[contractIndex]);
               return (
                 <div style={{ width: '100%' }} key={`invite-${index}`}>
                   <Row j="flex-start" a="center">
@@ -55,36 +49,41 @@ export default function ClientView({
                         {invite.status ? `(${invite.status})` : ''}
                       </Typography>
                     </Row>
-                    {contracts.filter(
-                      (contract) => contract.user._id === invite.receiver._id
-                    ).length > 0 && (
-                      <IconButton
-                        icon="request_quote"
-                        title={
-                          contracts[contractIndex].status === 'declined'
-                            ? 'Rejected'
-                            : 'Quote'
-                        }
-                        color={
-                          contracts[contractIndex].status === 'declined'
-                            ? 'warning'
-                            : 'primary'
-                        }
-                        onClickEvent={() => {
-                          history.push(
-                            `/app/view-contract/${
-                              contracts.filter(
-                                (contract) =>
-                                  contract.user._id === invite.receiver._id
-                              )[0]._id
-                            }`
-                          );
-                        }}
-                        styleOverride={{
-                          color: invite.status === 'declined' && '#fff',
-                        }}
-                      />
-                    )}
+
+                    {contracts.map((contract, index) => {
+                      return (
+                        contract.user._id === invite.receiver._id && (
+                          <IconButton
+                            key={`contract_button_${index}`}
+                            icon="request_quote"
+                            title={
+                              contracts.status === 'declined'
+                                ? 'Rejected'
+                                : 'Quote'
+                            }
+                            color={
+                              contracts.status === 'declined'
+                                ? 'warning'
+                                : 'primary'
+                            }
+                            onClickEvent={() => {
+                              history.push(
+                                `/app/view-contract/${
+                                  contracts.filter(
+                                    (contract) =>
+                                      contract.user._id === invite.receiver._id
+                                  )[0]._id
+                                }`
+                              );
+                            }}
+                            styleOverride={{
+                              color: invite.status === 'declined' && '#fff',
+                            }}
+                          />
+                        )
+                      );
+                    })}
+
                     <IconButton
                       disabled={invite.status === 'declined'}
                       color={

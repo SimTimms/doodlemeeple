@@ -185,6 +185,10 @@ export const CREATE_CONTRACT = gql`
         job {
           _id
           name
+          keywords
+          user {
+            name
+          }
         }
         createdAt
         updatedAt

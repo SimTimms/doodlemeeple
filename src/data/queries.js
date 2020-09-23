@@ -356,7 +356,6 @@ export const GET_CONTRACT = gql`
       currency
       status
       updatedAt
-
       payments {
         _id
         amount
