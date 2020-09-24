@@ -1,22 +1,42 @@
 import React from 'react';
-import { Typography, Slide } from '@material-ui/core';
-import { useStyles } from './styles';
+//Data
 import { Query } from 'react-apollo';
 import { INVITES } from '../../../../data/queries';
+//Components
+import { Typography, Slide } from '@material-ui/core';
 import {
   IconButton,
   Column,
   Divider,
   InviteComponent,
+  MenuButtonShortcut,
+  Row,
 } from '../../../../components';
+//Other
+import { useStyles } from './styles';
 
-export function Invites({ history, theme }) {
+export default function AppInvites({ history, theme }) {
   const classes = useStyles();
   const [inviteArray, setInviteArray] = React.useState([]);
+  const [tab, setTab] = React.useState(1);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
+        <Row>
+          <MenuButtonShortcut
+            text={{
+              name: 'Invites',
+              color: '#222',
+              icon: 'thumb_up',
+              count: 0,
+            }}
+            onClickEvent={() => {
+              setTab(1);
+            }}
+            active={false}
+          />
+        </Row>
         <Divider />
         <div className={classes.cardGrid}>
           {inviteArray.map((invite, index) => {

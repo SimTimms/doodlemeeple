@@ -4,14 +4,13 @@ import { useMediaQuery, Typography } from '@material-ui/core';
 import clsx from 'clsx';
 import AppDrawer from '../menus/appDrawer';
 import AppDashboard from './views/appDashboard';
-import AppProfileEdit from './views/appProfileEdit';
+import AppInvites from './views/appInvites';
 import AppHelp from './views/appHelp';
 import AppFailedPayment from './views/appFailedPayment';
 import Beta from './views/beta';
 import CreativeRoster from './views/creativeRoster';
 import { Account } from './views/account';
 import FullContract from './views/fullContract';
-import { Invites } from './views/invites';
 import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
 import { EditJob, Jobs, AppViewJob } from './views/job';
@@ -178,7 +177,7 @@ function AppLayout(props) {
           ) : page === 'account' ? (
             <Account history={history} />
           ) : page === 'invites' ? (
-            <Invites history={history} theme={props.theme} />
+            <AppInvites history={history} theme={props.theme} />
           ) : page === 'submitted' ? (
             <ProjectSubmitted history={history} />
           ) : page === 'games' ? (

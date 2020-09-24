@@ -17,7 +17,7 @@ export default function MenuButtonShortcut({ text, onClickEvent, active }) {
     >
       <ListItem
         button
-        style={{ paddingLeft: 5, paddingRight: 10 }}
+        style={{ paddingLeft: 10, paddingRight: 10 }}
         className={clsx({
           [classes.buttonRoot]: true,
           [classes.active]: active,

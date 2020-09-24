@@ -23,7 +23,7 @@ export default function InviteComponent({ invite, history }) {
             declined={invite.status === 'declined'}
           />
         )}
-        <Column>
+        <Column a="flex-start">
           <Typography
             variant="body1"
             component="p"
@@ -32,19 +32,25 @@ export default function InviteComponent({ invite, history }) {
           >
             {invite.job.name}
           </Typography>
-
           <Typography
             variant="body2"
             component="p"
-            style={{ width: '100%' }}
             className={clsx({
-              [classes.cardSummaryWarning]: true,
+              [classes.cardSummaryNeutral]: true,
+              [classes.cardSummaryWarning]: invite.status === 'declined',
+              [classes.cardSummaryGood]:
+                invite.status === 'unopened' || !invite.status,
+              [classes.cardSummaryAmber]: invite.status === 'quote_sent',
             })}
           >
             {!invite.sender
               ? 'Creator no longer exists'
               : invite.status === 'paid'
-              ? 'Active '
+              ? 'Active'
+              : invite.status === 'unopened' || !invite.status
+              ? 'New'
+              : invite.status === 'quote_sent'
+              ? 'Quote Sent'
               : 'Waiting'}
           </Typography>
         </Column>

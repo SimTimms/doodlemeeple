@@ -8,6 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'flex-end',
     flexDirection: 'column',
+    marginTop: 5,
   },
   cardGrid: {
     width: '100%',

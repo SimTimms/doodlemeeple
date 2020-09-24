@@ -28,6 +28,11 @@ export const useStyles = makeStyles((theme) => ({
     color: '#222',
     position: 'relative',
     fontSize: 16,
+    marginRight: 8,
+    background: 'rgba(0,0,0,0.05)',
+    borderRadius: '50%',
+    padding: 5,
+    textAlign: 'center',
   },
 
   dark: { color: theme.palette.primary.light },

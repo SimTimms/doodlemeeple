@@ -103,8 +103,8 @@ export default function AppDrawer({
               count: counts.messages,
             },*/,
             {
-              name: 'Invites',
-              icon: 'thumb_up',
+              name: 'My Jobs',
+              icon: 'work',
               link: () => history.push('/app/invites'),
               color: '#444',
               count: counts.invites,

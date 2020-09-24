@@ -22,7 +22,7 @@ export default function JobComponent({ job, game, history }) {
         style={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: 'center',
           width: '100%',
         }}
@@ -46,8 +46,8 @@ export default function JobComponent({ job, game, history }) {
         <Typography
           variant="body2"
           component="p"
-          style={{ width: '100%' }}
           className={clsx({
+            [classes.cardSummaryNeutral]: true,
             [classes.cardSummary]: true,
             [classes.cardSummaryWarning]: job.submitted === 'accepted',
             [classes.cardSummaryGood]:

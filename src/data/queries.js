@@ -193,6 +193,7 @@ export const PAYMENTS = gql`
 export const INVITES = gql`
   query GetInvites {
     invitesByUser {
+      status
       _id
       receiver {
         name
