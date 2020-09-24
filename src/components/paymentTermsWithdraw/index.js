@@ -41,6 +41,7 @@ export default function PaymentTermsWithdraw({ data, isCreator }) {
                       title="Approve"
                     />
                   ) : (
+                    isCreator &&
                     payment.paid === 'fail' && (
                       <ApproveButton
                         paymentId={payment._id}
