@@ -68,7 +68,8 @@ export function Notifications() {
                         [classes.notificationWork]:
                           notification.icon === 'work',
                         [classes.notificationBad]:
-                          notification.icon === 'thumb_down',
+                          notification.icon === 'thumb_down' ||
+                          notification.icon === 'warning',
                         [classes.notificationGood]:
                           notification.icon === 'request_quote',
                       })}

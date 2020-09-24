@@ -58,7 +58,7 @@ export default function PaymentSchedule({ contractData, isClient }) {
           </TableRow>
 
           <TableRow>
-            <TableCell align="left">DoodleMeeple fee</TableCell>
+            <TableCell align="left">DoodleMeeple Fee</TableCell>
             <TableCell align="right">
               {isClient
                 ? Math.round(contractData.cost * doodleMeeplePercent)

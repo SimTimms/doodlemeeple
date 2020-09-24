@@ -127,21 +127,21 @@ ${contractData.currency} `}
         </Typography>
         <Typography style={{ marginLeft: 80 }}>
           <b>6.1.1</b>{' '}
-          {`${
-            parseInt(contractData.cost) - parseInt(contractData.cost) * 0.1
-          } ${
+          {`${Math.round(
+            contractData.cost - Math.round(contractData.cost * 0.1)
+          )} ${
             contractData.currency
           } to be paid to the Creative (the "Creative Payment")`}
         </Typography>
         <Typography style={{ marginLeft: 80 }}>
           <b>6.1.2</b>{' '}
-          {`${parseInt(contractData.cost) * 0.1} ${
+          {`${Math.round(contractData.cost * 0.1)} ${
             contractData.currency
           } to be paid by the Creator to DoodleMeeple (the "Creator Commission Fee").`}
         </Typography>
         <Typography style={{ marginLeft: 80 }}>
           <b>6.1.3</b>{' '}
-          {`${parseInt(contractData.cost) * 0.1} ${
+          {`${Math.round(contractData.cost * 0.1)} ${
             contractData.currency
           } to be paid by the Creative to DoodleMeeple (the "Creative Commission Fee").`}
         </Typography>

@@ -25,6 +25,8 @@ import CreativeNotifications from '../components/creativeNotifications';
 import ChatView from '../components/chatView';
 import { timeDifferenceForDate } from '../../../../../../utils/dates';
 import Cookies from 'js-cookie';
+import stripeButton from '../../../../../../assets/stripe_button.png';
+import { requestStripe } from '../../../../../../utils/stripe';
 
 export default function SummaryView({
   job,
@@ -38,10 +40,12 @@ export default function SummaryView({
   contracts,
   proposalOpen,
   setProposalOpen,
+  stripeID,
 }) {
   const classes = useStyles();
   const [conversationUser, setConversationUser] = React.useState(null);
   const [chatOpen, setChatOpen] = React.useState(false);
+  const [loadingStripe, setLoadingStripe] = React.useState(false);
   const loggedInUser = Cookies.get('userId');
   const [pageNbr, setPageNbr] = React.useState(0);
   const [tabNbr, setTabNbr] = React.useState(1);
@@ -254,13 +258,44 @@ export default function SummaryView({
         ) : inviteStatus !== 'declined' ? (
           <Column>
             <BorderBox w={300}>
-              <Meta str="Create a quote for this job or decline if it's not for you" />
-              <CreativeActions
-                proposalOpen={proposalOpen}
-                setProposalOpen={setProposalOpen}
-                inviteId={inviteId}
-                setInviteStatus={setInviteStatus}
-              />
+              {!stripeID && (
+                <Meta str="Setup your STRIPE account to continue." />
+              )}
+              {loadingStripe ? (
+                <Typography
+                  variant="h6"
+                  style={{ color: '#fff', marginTop: 20 }}
+                >
+                  Please Wait
+                </Typography>
+              ) : (
+                !stripeID && (
+                  <img
+                    src={stripeButton}
+                    style={{
+                      width: 200,
+                      marginTop: 20,
+                      cursor: 'pointer',
+                    }}
+                    alt=""
+                    onClick={() => {
+                      requestStripe();
+                      setLoadingStripe(true);
+                    }}
+                  />
+                )
+              )}
+              {stripeID && (
+                <Meta str="Create a quote for this job or decline if it's not for you" />
+              )}
+              {stripeID && (
+                <CreativeActions
+                  proposalOpen={proposalOpen}
+                  setProposalOpen={setProposalOpen}
+                  inviteId={inviteId}
+                  setInviteStatus={setInviteStatus}
+                />
+              )}
             </BorderBox>
           </Column>
         ) : null}

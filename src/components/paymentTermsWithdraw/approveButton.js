@@ -3,9 +3,14 @@ import { IconButton } from '../';
 import { Mutation } from 'react-apollo';
 import { APPROVE_WITHDRAW } from '../../data/mutations';
 
-export default function ApproveButton({ paymentId, withdrawApproved }) {
+export default function ApproveButton({
+  paymentId,
+  withdrawApproved,
+  ...props
+}) {
   const [requested, setRequested] = React.useState(true);
-
+  const [response, setResponse] = React.useState('');
+  const { title } = props;
   useEffect(() => {
     setRequested(withdrawApproved);
   }, [withdrawApproved]);
@@ -20,7 +25,7 @@ export default function ApproveButton({ paymentId, withdrawApproved }) {
       {(mutation) => {
         return (
           <IconButton
-            title="Approve"
+            title={title ? title : 'Approve'}
             icon=""
             onClickEvent={() => {
               setRequested(true);

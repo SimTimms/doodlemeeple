@@ -6,7 +6,13 @@ import ProposalView from './components/proposalView';
 import { Query } from 'react-apollo';
 import { JOB, INVITE_BY_ID } from '../../../../../data/queries';
 
-export default function AppViewJob({ theme, jobId, history, inviteId }) {
+export default function AppViewJob({
+  theme,
+  jobId,
+  history,
+  inviteId,
+  profile,
+}) {
   const [job, setJob] = React.useState({
     _id: null,
     name: '',
@@ -58,6 +64,7 @@ export default function AppViewJob({ theme, jobId, history, inviteId }) {
             setInviteStatus={setInviteStatus}
             setProposalOpen={setProposalOpen}
             proposalOpen={proposalOpen}
+            stripeID={profile.stripeID}
           />
         )}
         <Column>
@@ -66,6 +73,7 @@ export default function AppViewJob({ theme, jobId, history, inviteId }) {
               jobId={jobId}
               setProposalOpen={setProposalOpen}
               history={history}
+              stripeID={profile.stripeID}
             />
           )}
           <Query

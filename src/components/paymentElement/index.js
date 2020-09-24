@@ -33,7 +33,7 @@ export default function PaymentElement({
     setVisible(display);
     setPaymentStatus(contractData.status);
   }, [contractData, display]);
-  console.log(paymentStatus, display);
+
   return (
     <div
       className={clsx({
