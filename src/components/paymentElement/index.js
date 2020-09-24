@@ -33,7 +33,7 @@ export default function PaymentElement({
     setVisible(display);
     setPaymentStatus(contractData.status);
   }, [contractData, display]);
-  console.log(paymentStatus);
+  console.log(paymentStatus, display);
   return (
     <div
       className={clsx({
@@ -46,7 +46,7 @@ export default function PaymentElement({
           [classes.wrapper]: true,
         })}
       >
-        {paymentStatus === 'accepted' && (
+        {
           <Column>
             <FieldTitleDashboard name="DEPOSIT PAYMENT" inline={false} a="c" />
             <Meta str="The full amount must be deposited into the DoodleMeeple holding account before work can progress" />
@@ -108,7 +108,7 @@ export default function PaymentElement({
               type="button"
             />
           </Column>
-        )}
+        }
         {paymentStatus === 'stripe' && (
           <Column>
             <FieldTitleDashboard name="CARD PAYMENT" inline={false} a="c" />

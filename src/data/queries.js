@@ -641,13 +641,17 @@ export const AUTOSAVE_IS = gql`
 
 export const NOTIFICATIONS = gql`
   {
-    notificationSecure {
+    notificationMany {
       _id
       message
       icon
       title
       createdAt
       linkTo
+      sender {
+        name
+        profileImg
+      }
     }
   }
 `;

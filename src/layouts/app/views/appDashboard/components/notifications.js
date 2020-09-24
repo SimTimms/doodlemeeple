@@ -30,7 +30,8 @@ export function Notifications() {
         <Query
           query={NOTIFICATIONS}
           onCompleted={(data) => {
-            setNotificationArray(data.notificationSecure);
+            console.log(data);
+            setNotificationArray(data.notificationMany);
           }}
           fetchPolicy="network-only"
         >
@@ -47,28 +48,40 @@ export function Notifications() {
                   className={classes.messageButton}
                   style={{ textDecoration: 'none' }}
                 >
-                  <div
-                    className={clsx({
-                      [classes.notifications]: true,
-                      [classes.notificationInvite]:
-                        notification.icon === 'thumb_up',
-                      [classes.notificationProfile]:
-                        notification.icon === 'contact_mail',
-                      [classes.notificationWork]: notification.icon === 'work',
-                      [classes.notificationBad]:
-                        notification.icon === 'thumb_down',
-                      [classes.notificationGood]:
-                        notification.icon === 'request_quote',
-                    })}
-                  >
-                    <Icon
+                  {notification.sender &&
+                  notification.icon === 'request_quote' ? (
+                    <div
+                      className={classes.notifications}
+                      style={{
+                        background: `url(${notification.sender.profileImg})`,
+                        backgroundSize: 'cover',
+                      }}
+                    ></div>
+                  ) : (
+                    <div
                       className={clsx({
-                        [classes.icon]: true,
+                        [classes.notifications]: true,
+                        [classes.notificationInvite]:
+                          notification.icon === 'thumb_up',
+                        [classes.notificationProfile]:
+                          notification.icon === 'contact_mail',
+                        [classes.notificationWork]:
+                          notification.icon === 'work',
+                        [classes.notificationBad]:
+                          notification.icon === 'thumb_down',
+                        [classes.notificationGood]:
+                          notification.icon === 'request_quote',
                       })}
                     >
-                      {notification.icon}
-                    </Icon>
-                  </div>
+                      <Icon
+                        className={clsx({
+                          [classes.icon]: true,
+                        })}
+                      >
+                        {notification.icon}
+                      </Icon>
+                    </div>
+                  )}
                   <div className={classes.profileWrapper}>
                     <div className={classes.wrapperOne}>
                       <div className={classes.messageDetails}>

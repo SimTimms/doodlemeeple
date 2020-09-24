@@ -49,7 +49,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     background: theme.palette.primary.main,
-    border: `2px solid ${theme.palette.primary.main}`,
+    border: `2px solid #fff`,
     color: '#fff',
     borderRadius: '50%',
     minHeight: 30,
@@ -59,7 +59,7 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 10,
     textShadow: ' 1px 1px 3px rgba(0,0,0,0.1)',
     boxShadow:
-      '2px 2px 5px rgba(0,0,0,0.2),inset 2px 2px 2px rgba(255,255,255,0.2)',
+      '0px 0px 5px rgba(0,0,0,0.1),inset 2px 2px 2px rgba(255,255,255,0.2)',
   },
   notificationInvite: {
     background: theme.palette.secondary.main,

@@ -77,6 +77,7 @@ export default function AppViewJob({ theme, jobId, history, inviteId }) {
                 (contract) => contract.user._id
               );
               setContracts(contractIds);
+              console.log(data);
               data.jobById && setJob({ ...data.jobById });
             }}
           >
