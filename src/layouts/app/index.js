@@ -7,6 +7,7 @@ import AppDashboard from './views/appDashboard';
 import AppInvites from './views/appInvites';
 import AppHelp from './views/appHelp';
 import AppFailedPayment from './views/appFailedPayment';
+import AppProfileEdit from './views/appProfileEdit';
 import Beta from './views/beta';
 import CreativeRoster from './views/creativeRoster';
 import { Account } from './views/account';
@@ -167,7 +168,7 @@ function AppLayout(props) {
           ) : page === 'help' ? (
             <AppHelp history={history} />
           ) : page === 'failed-payment' ? (
-            <AppFailedPayment theme={props.theme} history={history} />
+            <AppFailedPayment history={history} />
           ) : page === 'creative-roster' ? (
             <CreativeRoster
               theme={props.theme}
@@ -184,6 +185,8 @@ function AppLayout(props) {
             <Games history={history} />
           ) : page === 'jobs' ? (
             <Jobs history={history} theme={props.theme} />
+          ) : page === 'edit-profile' ? (
+            <AppProfileEdit theme={props.theme} history={history} />
           ) : page === 'edit-game' ? (
             <EditGame
               theme={props.theme}
