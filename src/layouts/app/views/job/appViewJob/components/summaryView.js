@@ -111,6 +111,20 @@ export default function SummaryView({
               active={tabNbr === 2}
             />
           )}
+          {!isCreator && inviteStatus === 'quote_sent' && (
+            <MenuButtonShortcut
+              text={{
+                name: 'My Quote',
+                color: '#222',
+                icon: 'request_quote',
+                count: 0,
+              }}
+              onClickEvent={() => {
+                setTabNbr(6);
+              }}
+              active={tabNbr === 6}
+            />
+          )}
           <MenuButtonShortcut
             text={{
               name: 'Payments',
@@ -126,18 +140,20 @@ export default function SummaryView({
         </Row>
 
         {loggedInUser !== job.user._id && (tabNbr === 1 || tabNbr === 0) && (
-          <Paper p={'0'}>
-            <CreativeNotifications
-              inviteStatus={inviteStatus}
-              history={history}
-              jobStatus={job.submitted}
-              setTabNbr={setTabNbr}
-            />
-          </Paper>
+          <Column>
+            <Divider />
+            <Paper p={'0'}>
+              <CreativeNotifications
+                inviteStatus={inviteStatus}
+                jobStatus={job.submitted}
+                setTabNbr={setTabNbr}
+              />
+            </Paper>
+          </Column>
         )}
 
         {(tabNbr === 0 || tabNbr === 1) && (
-          <Paper pt={10}>
+          <Paper pt={16}>
             <Column>
               {loggedInUser === job.user._id && (
                 <ClientNotifications
@@ -233,9 +249,7 @@ export default function SummaryView({
         {(tabNbr === 0 || tabNbr === 4) && job.submitted === 'paid' && (
           <PaymentsView job={job} />
         )}
-        {job.contracts.filter((contract) => {
-          return contract.user._id === loggedInUser;
-        }).length > 0 ? (
+        {inviteStatus === 'quote_sent' ? (
           <Column>
             <BorderBox w={300}>
               <Meta str="View your quote for this job " />

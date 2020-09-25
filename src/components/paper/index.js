@@ -9,11 +9,11 @@ export default function Paper({ children, ...props }) {
     <div
       className={classes.root}
       style={{
-        paddingTop: pt ? pt : 30,
-        paddingLeft: pl ? pl : 30,
-        paddingRight: pr ? pr : 30,
-        paddingBottom: pb ? pb : 30,
         padding: p ? p : 30,
+        paddingTop: pt ? pt : p ? p : 30,
+        paddingLeft: pl ? pl : p ? p : 30,
+        paddingRight: pr ? pr : p ? p : 30,
+        paddingBottom: pb ? pb : p ? p : 30,
       }}
     >
       {children}

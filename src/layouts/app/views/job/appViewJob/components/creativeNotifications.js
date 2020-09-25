@@ -3,15 +3,21 @@ import { NoticeBox } from '../../../../../../components';
 
 export default function CreativeNotifications({
   inviteStatus,
-  history,
   jobStatus,
   setTabNbr,
 }) {
+  console.log(inviteStatus);
   return inviteStatus === 'declined' ? (
     <NoticeBox
       title="Declined"
       color="warning"
       subTitle="You have declined this invitation"
+    />
+  ) : inviteStatus === 'quote_sent' ? (
+    <NoticeBox
+      title="Quote Sent"
+      color="primary"
+      subTitle="You have submitted a quote for this job"
     />
   ) : jobStatus === 'paid' ? (
     <NoticeBox

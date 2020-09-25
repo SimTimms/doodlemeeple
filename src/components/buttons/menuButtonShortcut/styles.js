@@ -29,9 +29,8 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     fontSize: 16,
     marginRight: 8,
-    background: 'rgba(0,0,0,0.05)',
-    borderRadius: '50%',
     padding: 5,
+
     textAlign: 'center',
   },
 
@@ -64,8 +63,8 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   buttonRoot: {
-    paddingBottom: 3,
     justifyContent: 'space-between',
+    paddingBottom: 8,
   },
   active: {
     borderBottom: `2px solid #aaa`,
