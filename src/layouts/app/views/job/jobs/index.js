@@ -111,6 +111,45 @@ export default function Jobs({ history, theme }) {
             }}
           </Query>
         </Column>
+        <Column a="center" j="flex-start">
+          {loading && <LoadIcon />}
+          <Query
+            query={JOBS}
+            fetchPolicy="network-only"
+            variables={{ status: 'closed' }}
+            onCompleted={() => {
+              setLoading(false);
+            }}
+          >
+            {({ data }) => {
+              const activeJobs = data
+                ? data.jobsByUser.map((job, index) => {
+                    return (
+                      <JobComponent
+                        key={`project_${index}`}
+                        job={job}
+                        game={job.game ? job.game : { name: '' }}
+                        history={history}
+                      />
+                    );
+                  })
+                : null;
+
+              return activeJobs ? (
+                activeJobs.length > 0 ? (
+                  <Column a="center" j="flex-start">
+                    <Divider />
+                    <FieldTitleDashboard name="Closed" inline={false} a="l" />
+                    <Divider />
+                    <div style={{ width: '100%', opacity: 0.4 }}>
+                      {activeJobs}
+                    </div>
+                  </Column>
+                ) : null
+              ) : null;
+            }}
+          </Query>
+        </Column>
       </div>
     </Slide>
   );

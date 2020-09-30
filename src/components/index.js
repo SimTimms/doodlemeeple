@@ -12,6 +12,7 @@ import Paper from './paper';
 import ContentHeader from './headers/contentHeader';
 import StripeCheckout from './stripeCheckout';
 import Payments from './payments';
+import PaymentTermsWithdraw from './paymentTermsWithdraw';
 import MessageComponent from './messageComponent';
 import PaymentElement from './paymentElement';
 import CurrencySelector from './currencySelector';
@@ -24,6 +25,7 @@ import ErrorBox from './pageElements';
 import { SelectTagsWidget, TagsWidget } from './tags';
 import Uploader from './uploader';
 import CardActionArea from './wrappers';
+import NoticeBoard from './noticeBoard';
 import Footer from './footer';
 import DeleteButton from './buttons/deleteButton';
 import TabWrapper from './tabWrapper';
@@ -53,13 +55,13 @@ import DMCard from './dmCard';
 import ActionWrapper from './actionWrapper';
 import ContractSummary from './contractSummary';
 import EditContractButton from './editContractButton';
+import PaymentTerms from './paymentTerms';
 import ViewContractButton from './viewContractButton';
 import SubmitContractButton from './submitContractButton';
+import ContractSummaryForCreative from './ContractSummaryForCreative';
+import PaymentSchedule from './paymentSchedule';
 import NoticeBox from './noticeBox';
-import {
-  ContractComponentForCreative,
-  ContractComponentForCreator,
-} from './contract';
+import { ContractComponentForCreator } from './contract';
 import CardComponent from './cardComponent';
 import ProfileAvatar from './profileAvatar';
 import FeatureCard from './featureCard';
@@ -88,10 +90,13 @@ export {
   UnlockInfoReverse,
   Column,
   Row,
+  PaymentSchedule,
   InlineHeaderWarning,
   FeatureCardInvite,
   Meta,
+  ContractSummaryForCreative,
   TextLink,
+  PaymentTerms,
   TextLeft,
   TextDivider,
   ColumnWrapperFull,
@@ -109,7 +114,6 @@ export {
   FeatureCardHorizontal,
   SubmitContractButton,
   NoticeBox,
-  ContractComponentForCreative,
   ContractComponentForCreator,
   Paper,
   ViewContractButton,
@@ -129,6 +133,7 @@ export {
   FieldTitleDashboard,
   FavouriteButton,
   InviteButton,
+  NoticeBoard,
   IconButton,
   ProfileCard,
   ProfileCardCreative,
@@ -142,6 +147,7 @@ export {
   TabWrapper,
   ActionButton,
   AddSection,
+  PaymentTermsWithdraw,
   FileGallery,
   FormInput,
   MessageComponent,

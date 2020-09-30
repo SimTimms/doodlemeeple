@@ -8,6 +8,18 @@ export const SIGNUP_MUTATION = gql`
   }
 `;
 
+export const REQUEST_WITHDRAW = gql`
+  mutation RequestWithdraw($_id: MongoID!) {
+    requestWithdraw(_id: $_id)
+  }
+`;
+
+export const APPROVE_WITHDRAW = gql`
+  mutation ApproveWithdraw($_id: MongoID!) {
+    approveWithdraw(_id: $_id)
+  }
+`;
+
 export const MAKE_PAYMENT = gql`
   mutation MakePayment($contractId: MongoID!) {
     makePayment(contractId: $contractId)
@@ -99,6 +111,12 @@ export const UPDATE_TERM = gql`
   }
 `;
 
+export const SKIP_ONBOARDING = gql`
+  mutation SkipOnboarding {
+    skipOnboarding
+  }
+`;
+
 export const CREATE_TERM = gql`
   mutation CreatePaymentTerm(
     $percent: Float
@@ -137,6 +155,7 @@ export const SIGN_CONTRACT = gql`
   mutation SignContract($contractId: MongoID!) {
     signContract(_id: $contractId) {
       _id
+      signedDate
     }
   }
 `;
@@ -159,6 +178,21 @@ export const CREATE_CONTRACT = gql`
       record: { currency: $currency, cost: $cost, job: $jobId }
     ) {
       recordId
+      record {
+        user {
+          name
+        }
+        job {
+          _id
+          name
+          keywords
+          user {
+            name
+          }
+        }
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -171,6 +205,7 @@ export const UPDATE_CONTRACT = gql`
     $startDate: String
     $currency: String
     $cost: String
+    $status: String
   ) {
     contractUpdateById(
       record: {
@@ -180,6 +215,7 @@ export const UPDATE_CONTRACT = gql`
         startDate: $startDate
         currency: $currency
         cost: $cost
+        status: $status
       }
     ) {
       recordId
@@ -264,6 +300,7 @@ export const UPDATE_JOB = gql`
     $type: String
     $creativeSummary: String
     $submitted: String
+    $keywords: [String]
   ) {
     jobUpdateById(
       record: {
@@ -276,6 +313,7 @@ export const UPDATE_JOB = gql`
         type: $type
         creativeSummary: $creativeSummary
         submitted: $submitted
+        keywords: $keywords
       }
     ) {
       recordId
@@ -313,6 +351,8 @@ export const UPDATE_USER_MUTATION = gql`
     $summary: String
     $profileBG: String
     $profileImg: String
+    $creativeTrue: Boolean
+    $creatorTrue: Boolean
   ) {
     userUpdateOne(
       record: {
@@ -320,8 +360,18 @@ export const UPDATE_USER_MUTATION = gql`
         summary: $summary
         profileBG: $profileBG
         profileImg: $profileImg
+        creativeTrue: $creativeTrue
+        creatorTrue: $creatorTrue
       }
     ) {
+      recordId
+    }
+  }
+`;
+
+export const SET_AS_CREATOR = gql`
+  mutation SetAsCreator($creatorTrue: Boolean!) {
+    userUpdateOne(record: { creatorTrue: $creatorTrue }) {
       recordId
     }
   }

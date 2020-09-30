@@ -13,20 +13,17 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.primary.main,
     color: '#fff',
     textAlign: 'center',
-    marginBottom: 20,
   },
   warning: {
     width: '100%',
     background: theme.palette.error.main,
     color: '#fff',
     textAlign: 'center',
-    marginBottom: 20,
   },
   secondary: {
     width: '100%',
     background: theme.palette.secondary.main,
     color: '#fff',
     textAlign: 'center',
-    marginBottom: 20,
   },
 }));

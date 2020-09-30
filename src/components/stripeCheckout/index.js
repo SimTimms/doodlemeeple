@@ -75,19 +75,6 @@ export default function CheckoutForm({
       <Typography variant="h4" className={classes.notify}>
         Payment Received
       </Typography>
-
-      <IconButton
-        title="CLose"
-        icon="close"
-        color="text"
-        disabled={false}
-        type="button"
-        onClickEvent={() => {
-          setVisible(false);
-          setPaymentStatus('complete');
-        }}
-        styleOverride={null}
-      />
     </div>
   ) : (
     <Column>
@@ -157,7 +144,7 @@ export default function CheckoutForm({
             icon="payment"
             styleOverride={null}
             type="submit"
-          />{' '}
+          />
         </Column>
       </form>
     </Column>

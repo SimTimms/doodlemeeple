@@ -3,18 +3,19 @@ import { useStyles } from './styles';
 import { useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 import { AppMenu } from '../menus';
-import { AppDrawer } from '../menus/appDrawer';
+import AppDrawer from '../menus/appDrawer';
 import { Conversations, ViewConversation } from './views/messaging';
 import { ToastContainer } from 'react-toastify';
-import { Query } from 'react-apollo';
-import { GET_MESSAGES } from '../../data/queries';
+import { GET_MESSAGES, PROFILE } from '../../data/queries';
 import { ContentTop, StyledNavBar, LoadIcon } from '../../components';
+import { Query } from 'react-apollo';
 
 function MessagesLayout(props) {
   const [page, setPage] = React.useState('home');
   const pageJump = props.match ? props.match.params.page : null;
   const mobile = useMediaQuery('(max-width:800px)');
   const [messages, setMessages] = React.useState([]);
+  const [profile, setProfile] = React.useState(null);
   const [conversationArgs, setConversationArgs] = React.useState({
     jobId: null,
     conversationUser: null,
@@ -53,7 +54,7 @@ function MessagesLayout(props) {
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  //TODO this is sooooo dirty, but until I can reliably product subscriptions this is the way it will have to be
+  //TODO this is sooooo dirty, but until I can reliably produce subscriptions this is the way it will have to be
   const [refreshCount, setRefreshCount] = React.useState(0);
 
   const handleDrawerOpen = () => {
@@ -64,7 +65,22 @@ function MessagesLayout(props) {
     setOpen(false);
   };
 
-  return (
+  return !profile ? (
+    <div>
+      <Query
+        query={PROFILE}
+        onCompleted={(data) => {
+          setProfile(data.profile);
+        }}
+        fetchPolicy="network-only"
+      >
+        {({ data }) => {
+          return null;
+        }}
+      </Query>
+      <LoadIcon />
+    </div>
+  ) : (
     <div className={classes.root}>
       <ToastContainer />
       <StyledNavBar
@@ -79,8 +95,10 @@ function MessagesLayout(props) {
       ></StyledNavBar>
       <AppDrawer
         handleDrawerClose={handleDrawerClose}
+        handleDrawerOpen={handleDrawerOpen}
         open={open}
         history={props.history}
+        profile={profile}
       />
       <main
         className={clsx({
@@ -114,22 +132,7 @@ function MessagesLayout(props) {
                 return loading ? (
                   <LoadIcon />
                 ) : data ? (
-                  <div
-                    style={{
-                      padding: 10,
-                      boxSizing: 'border-box',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      background: '#efeff5',
-                      position: 'fixed',
-                      zIndex: 1,
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      overflow: 'auto',
-                    }}
-                  >
+                  <div className={classes.wrapper4}>
                     <ViewConversation
                       history={props.history}
                       receiver={conversationArgs.conversationUser}

@@ -49,14 +49,19 @@ export function HeaderThree({ str }) {
       <Typography variant="h6" className={classes.descriptionTitleTwo}>
         {str}
       </Typography>
-      <div className={classes.headerLineTwoFull}></div>
+      <div className={classes.headerLineTwo}></div>
     </div>
   );
 }
-export function Text({ str }) {
+export function Text({ str, ...props }) {
+  const { a } = props;
   const classes = useStyles();
   return (
-    <Typography variant="body1" className={classes.description}>
+    <Typography
+      variant="body1"
+      className={classes.description}
+      style={{ textAlign: a ? a : 'center' }}
+    >
       {str}
     </Typography>
   );

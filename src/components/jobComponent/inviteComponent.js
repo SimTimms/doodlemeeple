@@ -1,23 +1,29 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { IconButton, CardComponent, Column, Row, ProfileAvatar } from '../';
+import { CardComponent, Column, Row, ProfileAvatar } from '../';
 import clsx from 'clsx';
 
 export default function InviteComponent({ invite, history }) {
   const classes = useStyles();
 
   return (
-    <CardComponent>
+    <CardComponent
+      onClickEvent={() => {
+        history.push(`/app/view-job/${invite.job._id}/${invite._id}`);
+      }}
+    >
       <Row>
-        <ProfileAvatar
-          profilePage={`/app/public-preview/${invite.sender._id}`}
-          title={invite.sender.name}
-          bgImg={invite.sender.profileImg}
-          history={history}
-          declined={invite.status === 'declined'}
-        />
-        <Column>
+        {invite.sender && (
+          <ProfileAvatar
+            profilePage={`/app/public-preview/${invite.sender._id}`}
+            title={invite.sender.name}
+            bgImg={invite.sender.profileImg}
+            history={history}
+            declined={invite.status === 'declined'}
+          />
+        )}
+        <Column a="flex-start">
           <Typography
             variant="body1"
             component="p"
@@ -26,37 +32,29 @@ export default function InviteComponent({ invite, history }) {
           >
             {invite.job.name}
           </Typography>
-
           <Typography
             variant="body2"
             component="p"
-            style={{ width: '100%' }}
             className={clsx({
-              [classes.cardSummaryWarning]: true,
+              [classes.cardSummaryNeutral]: true,
+              [classes.cardSummaryWarning]: invite.status === 'declined',
+              [classes.cardSummaryGood]:
+                invite.status === 'unopened' || !invite.status,
+              [classes.cardSummaryAmber]: invite.status === 'quote_sent',
             })}
           >
-            {invite.status === 'paid' ? 'Active ' : 'Waiting'}
+            {!invite.sender
+              ? 'Creator no longer exists'
+              : invite.status === 'paid'
+              ? 'Active'
+              : invite.status === 'unopened' || !invite.status
+              ? 'New'
+              : invite.status === 'quote_sent'
+              ? 'Quote Sent'
+              : 'Waiting'}
           </Typography>
         </Column>
       </Row>
-      <IconButton
-        disabled={false}
-        title={'View'}
-        color="text-dark"
-        type="button"
-        iconPos="right"
-        icon={
-          invite.status === 'submitted' || invite.status === 'closed'
-            ? 'preview'
-            : invite.status === 'accepted' || invite.status === 'paid'
-            ? 'chevron_right'
-            : 'edit'
-        }
-        styleOverride={{ marginLeft: 30 }}
-        onClickEvent={() => {
-          history.push(`/app/view-job/${invite.job._id}/${invite._id}`);
-        }}
-      />
     </CardComponent>
   );
 }

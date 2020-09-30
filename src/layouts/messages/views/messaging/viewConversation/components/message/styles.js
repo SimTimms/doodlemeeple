@@ -44,7 +44,10 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
   },
   icon: {
-    width: 40,
+    minWidth: 40,
+    maxWidth: 40,
+    minHeight: 40,
+    maxHeight: 40,
     borderRadius: '50%',
     border: '2px solid #ddd',
     marginLeft: 2,

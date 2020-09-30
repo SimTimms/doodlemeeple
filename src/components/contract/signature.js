@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Divider,
-  IconButton,
-  ActionWrapper,
-  NoticeBox,
-  BorderBox,
-  Meta,
-} from '../';
+import { IconButton, ActionWrapper, BorderBox, Meta } from '../';
 import { Mutation } from 'react-apollo';
 import { SIGN_CONTRACT, DECLINE_CONTRACT } from '../../data/mutations';
 import moment from 'moment';
@@ -17,6 +10,7 @@ export default function Signature({
   setContractStatus,
   contractData,
   history,
+  setContract,
 }) {
   return (
     <ActionWrapper>
@@ -35,7 +29,12 @@ export default function Signature({
               variables={{
                 contractId: contractData._id,
               }}
-              onCompleted={() => {
+              onCompleted={(data) => {
+                setContract({
+                  ...contractData,
+                  signedDate: data.signContract.signedDate,
+                  status: 'accepted',
+                });
                 setContractStatus && setContractStatus('accepted');
                 setOpenContract && setOpenContract(false);
               }}

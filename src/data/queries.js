@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const CREATIVES = gql`
-  query GetCreatives {
-    getCreatives {
+  query GetCreatives($type: [String]) {
+    getCreatives(type: $type) {
       _id
       name
       summary
@@ -68,6 +68,9 @@ export const CONVERSATIONS = gql`
       job {
         _id
         name
+        user {
+          name
+        }
       }
       receiver {
         name
@@ -160,11 +163,23 @@ export const MESSAGES = gql`
 `;
 
 export const PAYMENTS = gql`
-  query GetPayments($contractId: MongoID!) {
-    paymentMany(filter: { contract: $contractId }) {
+  query GetPayments(
+    $contractId: MongoID!
+    $accountOne: String
+    $accountTwo: String
+  ) {
+    paymentMany(
+      filter: {
+        contract: $contractId
+        OR: [{ account: $accountOne }, { account: $accountTwo }]
+      }
+      sort: CREATEDAT__UPDATEDAT_ASC
+    ) {
       amount
       currency
       status
+      account
+      updatedAt
       paidBy {
         _id
       }
@@ -178,6 +193,7 @@ export const PAYMENTS = gql`
 export const INVITES = gql`
   query GetInvites {
     invitesByUser {
+      status
       _id
       receiver {
         name
@@ -192,6 +208,9 @@ export const INVITES = gql`
         name
         summary
         submitted
+        user {
+          name
+        }
       }
     }
   }
@@ -215,6 +234,9 @@ export const INVITE_BY_ID = gql`
         name
         summary
         submitted
+        user {
+          name
+        }
       }
     }
   }
@@ -240,6 +262,7 @@ export const JOB = gql`
       }
       contracts {
         _id
+        status
         user {
           _id
         }
@@ -308,9 +331,17 @@ export const JOBS = gql`
 export const GET_PAYMENT_TERMS = gql`
   query GetPaymentTerms($contractId: String!) {
     getPaymentTerms(contractId: $contractId) {
-      id
+      _id
       description
       percent
+      paid
+      withdrawRequest
+      withdrawApproved
+      withdrawPaid
+      contract {
+        _id
+        currency
+      }
     }
   }
 `;
@@ -352,10 +383,13 @@ export const GET_CONTRACT = gql`
         _id
         name
         summary
+        createdAt
         creativeSummary
+        keywords
         user {
           _id
           email
+          name
         }
       }
       paymentTerms {
@@ -410,6 +444,7 @@ export const GET_CONTRACT_ID = gql`
         user {
           id
           email
+          name
         }
       }
       paymentTerms {
@@ -422,7 +457,7 @@ export const GET_CONTRACT_ID = gql`
 `;
 
 export const PREVIEW_CONTRACT = gql`
-  query PreviewContract($contractId: MongoID!) {
+  query AppViewContract($contractId: MongoID!) {
     contractById(_id: $contractId) {
       _id
       notes
@@ -485,6 +520,7 @@ export const PREVIEW_CONTRACT = gql`
         name
         summary
         creativeSummary
+        keywords
         user {
           _id
           email
@@ -533,6 +569,10 @@ export const PROFILE = gql`
       profileImg
       autosave
       email
+      creatorTrue
+      creativeTrue
+      stripeID
+      onboarding
       favourites {
         receiver {
           _id
@@ -602,13 +642,17 @@ export const AUTOSAVE_IS = gql`
 
 export const NOTIFICATIONS = gql`
   {
-    notificationSecure {
+    notificationMany {
       _id
       message
       icon
       title
       createdAt
       linkTo
+      sender {
+        name
+        profileImg
+      }
     }
   }
 `;

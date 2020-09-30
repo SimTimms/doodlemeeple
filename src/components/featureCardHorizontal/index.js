@@ -57,7 +57,7 @@ export default function FeatureCardHorizontal({
               </Typography>
             </div>
             <Typography variant="body1">{subtitle}</Typography>
-            <Typography variant="h6" component="h6" className={classes.meta}>
+            <Typography variant="body1" component="p" className={classes.meta}>
               <b>{meta}</b>
             </Typography>
           </div>

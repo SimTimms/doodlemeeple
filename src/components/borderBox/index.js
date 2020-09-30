@@ -1,14 +1,17 @@
 import React from 'react';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { styles } from './styles';
 
 function BorderBox(props) {
-  const mobile = useMediaQuery('(max-width:800px)');
   const classes = styles();
-  const { w } = props;
+  const { w, mb } = props;
   return (
     <div className={classes.root} style={{ maxWidth: w ? w : '100%' }}>
-      <div className={classes.borderBox}>{props.children}</div>
+      <div
+        className={classes.borderBox}
+        style={{ marginBottom: mb !== null ? mb : 320 }}
+      >
+        {props.children}
+      </div>
     </div>
   );
 }

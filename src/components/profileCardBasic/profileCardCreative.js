@@ -2,11 +2,10 @@ import React, { useEffect } from 'react';
 
 import { Card, Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
-import { IconButton, Row, Column } from '../';
+import { IconButton, Column } from '../';
 import { Mutation } from 'react-apollo';
 import { ADD_FAVOURITE } from '../../data/mutations';
 import clsx from 'clsx';
-import Cookies from 'js-cookie';
 
 export default function ProfileCardCreative({ history, creative, favourite }) {
   const classes = useStyles();
@@ -14,15 +13,9 @@ export default function ProfileCardCreative({ history, creative, favourite }) {
   const [favCount, setFavCount] = React.useState(0);
 
   useEffect(() => {
-    const length = creative.favourites.filter((fav) => {
-      return (
-        fav.user._id === Cookies.get('userId') &&
-        fav.receiver._id === creative._id
-      );
-    });
     setIsFav(favourite);
     setFavCount(creative.likedMe.length);
-  }, [favourite]);
+  }, [favourite, creative]);
 
   return (
     <Card

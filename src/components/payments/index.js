@@ -11,7 +11,7 @@ import moment from 'moment';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 
-export default function Payments({ data }) {
+export default function Payments({ data, type }) {
   const classes = useStyles();
 
   return (
@@ -21,6 +21,7 @@ export default function Payments({ data }) {
           <TableRow>
             <TableCell>AMOUNT</TableCell>
             <TableCell align="right">STATUS</TableCell>
+            <TableCell align="right">TYPE</TableCell>
             <TableCell align="right">DATE</TableCell>
           </TableRow>
         </TableHead>
@@ -28,9 +29,15 @@ export default function Payments({ data }) {
           {data.map((payment, index) => {
             return (
               <TableRow key={`payment_summary_${index}`}>
-                <TableCell>
-                  {`${payment.amount / 100} ${payment.currency}`}
-                </TableCell>
+                {type === 'creative' ? (
+                  <TableCell>
+                    {`${payment.amount} ${payment.currency}`}
+                  </TableCell>
+                ) : (
+                  <TableCell>
+                    {`${payment.amount} ${payment.currency}`}
+                  </TableCell>
+                )}
                 <TableCell align="right">
                   <div
                     className={clsx({
@@ -38,11 +45,13 @@ export default function Payments({ data }) {
                       [classes.good]: payment.status === 'charge_succeeded',
                     })}
                   >{`${
-                    payment.status === 'charg_succeeded'
-                      ? 'Payment Received'
+                    payment.status === 'charge_succeeded'
+                      ? 'Payment'
                       : payment.status
                   }`}</div>
                 </TableCell>
+
+                <TableCell align="right">{payment.account}</TableCell>
                 <TableCell align="right">
                   {moment(payment.updatedAt).format('LLLL')}
                 </TableCell>

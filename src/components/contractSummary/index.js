@@ -39,10 +39,35 @@ export default function ContractSummary({ contractData, contractStatus }) {
           )})`}
         />
         <TextLeft
-          str={`${contractData.user.name} estimates they can complete this job for a total cost of ${contractData.cost}.00 ${contractData.currency}`}
+          str={`${
+            parseInt(contractData.cost) + parseInt(contractData.cost) * 0.1
+          } ${
+            contractData.currency
+          } - If you accept this quote the total amount payable today will be ${
+            parseInt(contractData.cost) + parseInt(contractData.cost) * 0.1
+          } ${contractData.currency}`}
         />
+        <TextLeft
+          str={`${contractData.cost} ${contractData.currency} - ${contractData.user.name} estimates they can complete this job for a total cost of ${contractData.cost} ${contractData.currency}`}
+        />
+        <TextLeft
+          str={`${parseInt(contractData.cost) * 0.1} ${
+            contractData.currency
+          } - The DoodleMeeple commission on this quote will be ${
+            parseInt(contractData.cost) * 0.1
+          } ${contractData.currency}`}
+        />
+
         <Divider />
         <HeaderThree str="Payment Schedule" />
+        <TextLeft
+          str={`DoodleMeeple will release funds to the Creative according to this payment schedule:`}
+        />
+        <TextLeft
+          str={`${parseInt(contractData.cost) * 0.1} ${
+            contractData.currency
+          } upon commencement of the project`}
+        />
         {contractData.paymentTerms.map((term, index) => {
           paymentTermsSum = paymentTermsSum - term.percent;
           return (
@@ -57,6 +82,7 @@ export default function ContractSummary({ contractData, contractStatus }) {
             str={`${paymentTermsSum} ${contractData.currency} upon completion`}
           />
         )}
+
         <Divider />
         <HeaderThree str="Additional Notes" />
         <TextLeft

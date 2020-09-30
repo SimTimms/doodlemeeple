@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Message } from '../message';
 import { CreateMessage } from '../../../../../../../components';
+import { useStyles } from './styles';
 
 export default function Messages({
   messages,
@@ -14,6 +15,7 @@ export default function Messages({
 }) {
   const [messagesEnd, setMessagesEnd] = React.useState(null);
   const [viewer, setViewer] = React.useState(null);
+  const classesLocal = useStyles();
 
   useEffect(() => {
     messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' });
@@ -41,23 +43,13 @@ export default function Messages({
     <div style={{ width: '100%' }}>
       {viewer && (
         <div
-          style={{
-            position: 'fixed',
-            width: '100%',
-            height: '100%',
-            top: 0,
-            left: 0,
-            background: 'rgba(0,0,0,0.8)',
-            zIndex: 11,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
+          className={classesLocal.root}
           onClick={() => {
             setViewer(null);
           }}
         >
           <img
+            alt=""
             src={viewer}
             style={{ marginLeft: 20, marginRight: 20, width: '100%' }}
           />

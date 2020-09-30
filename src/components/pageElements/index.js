@@ -8,7 +8,7 @@ function ErrorBox({ errorMsg }) {
 
   return errorMsg === null ? null : (
     <div className={classes.root}>
-      <Icon color="primary">error_outline</Icon>
+      <Icon color="error">error_outline</Icon>
       <Typography
         gutterBottom
         variant="body1"

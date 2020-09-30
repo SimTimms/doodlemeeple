@@ -14,7 +14,11 @@ export default function Creatives({
 }) {
   const classes = useStyles();
   return (
-    <Query query={CREATIVES} fetchPolicy="network-only">
+    <Query
+      query={CREATIVES}
+      variables={{ type: job.keywords }}
+      fetchPolicy="network-only"
+    >
       {({ data }) => {
         return data ? (
           <div className={classes.creativeWrapper}>

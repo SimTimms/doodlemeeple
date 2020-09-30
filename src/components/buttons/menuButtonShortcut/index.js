@@ -11,12 +11,18 @@ export default function MenuButtonShortcut({ text, onClickEvent, active }) {
   return (
     <div
       className={classes.link}
-      key={text.name}
       onClick={() => {
         onClickEvent();
       }}
     >
-      <ListItem button style={{ paddingLeft: 5, paddingRight: 5 }}>
+      <ListItem
+        button
+        style={{ paddingLeft: 10, paddingRight: 10 }}
+        className={clsx({
+          [classes.buttonRoot]: true,
+          [classes.active]: active,
+        })}
+      >
         <div
           className={clsx({
             [classes.iconButton]: true,
@@ -27,10 +33,10 @@ export default function MenuButtonShortcut({ text, onClickEvent, active }) {
             className={clsx({
               [classes.iconIcon]: true,
               [classes.dark]: text.color === 'white',
-              [classes.active]: active,
             })}
+            style={{ color: text.color }}
           >
-            {active ? 'keyboard_arrow_down' : text.icon}
+            {text.icon}
           </Icon>
         </div>
         <Typography
@@ -38,6 +44,7 @@ export default function MenuButtonShortcut({ text, onClickEvent, active }) {
             [classes.button]: !mobile,
             [classes.buttonMobile]: mobile,
           })}
+          style={{ color: text.color }}
         >
           {text.name}
         </Typography>

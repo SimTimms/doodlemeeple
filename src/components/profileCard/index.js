@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { Card, Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
-import { InviteButton, IconButton, Row, Column } from '../';
+import { InviteButton, IconButton, Column } from '../';
 import { Mutation } from 'react-apollo';
 import { ADD_FAVOURITE, CREATE_INVITE } from '../../data/mutations';
 import clsx from 'clsx';
@@ -17,25 +17,12 @@ export default function ProfileCard({
   const classes = useStyles();
   const [isFav, setIsFav] = React.useState(false);
   const [favCount, setFavCount] = React.useState(0);
-  const {
-    gameId,
-    jobId,
-    invite,
-    updateInviteList,
-    removeInviteList,
-    disabled,
-  } = props;
+  const { jobId, invite, updateInviteList, removeInviteList, disabled } = props;
 
   useEffect(() => {
-    const length = creative.favourites.filter((fav) => {
-      return (
-        fav.user._id === Cookies.get('userId') &&
-        fav.receiver._id === creative._id
-      );
-    });
     setIsFav(favourite);
     setFavCount(creative.likedMe.length);
-  }, [favourite]);
+  }, [favourite, creative]);
 
   return (
     <Card
@@ -142,7 +129,7 @@ export default function ProfileCard({
           </Icon>
         </div>
       </Column>
-      {updateInviteList && (
+      {updateInviteList && Cookies.get('userId') !== creative._id && (
         <div className={classes.actionsWrapper}>
           <Mutation
             mutation={CREATE_INVITE}

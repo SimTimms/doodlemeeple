@@ -1,39 +1,22 @@
 import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import {
-  Divider,
-  Icon,
-  Drawer,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  List,
-  useMediaQuery,
-} from '@material-ui/core';
+import { Divider, Drawer, List, useMediaQuery } from '@material-ui/core';
 import { useStyles } from '../styles';
 import Cookies from 'js-cookie';
 import clsx from 'clsx';
 import { Query } from 'react-apollo';
 import { COUNTS } from '../../../data/queries';
 import logo from '../../../assets/dm_device.png';
-import { MenuButton } from '../../../components';
+import { MenuButtonShortcut } from '../../../components';
 
-export function AppDrawer({
+export default function AppDrawer({
   history,
   handleDrawerClose,
   handleDrawerOpen,
   open,
   ...props
 }) {
-  const {
-    button,
-    buttonMobile,
-    drawerOpen,
-    drawerOpenMobile,
-    drawerClose,
-    drawerCloseMobile,
-    drawerRoot,
-  } = useStyles();
+  const { drawerOpen, drawerOpenMobile, drawerRoot } = useStyles();
 
   const { page, profile } = props;
   const theme = useTheme();
@@ -50,17 +33,13 @@ export function AppDrawer({
       className={clsx({
         [drawerRoot]: true,
         [drawerOpenMobile]: open && mobile,
-        [drawerOpen]: open && !mobile,
-        [drawerCloseMobile]: !open && mobile,
-        [drawerClose]: !open && !mobile,
+        [drawerOpen]: true && !mobile,
       })}
       classes={{
         paper: clsx({
           [drawerRoot]: true,
           [drawerOpenMobile]: open && mobile,
-          [drawerOpen]: open && !mobile,
-          [drawerCloseMobile]: !open && mobile,
-          [drawerClose]: !open,
+          [drawerOpen]: !mobile,
         }),
       }}
     >
@@ -69,33 +48,40 @@ export function AppDrawer({
         style={{
           maxHeight: 37,
           maxWidth: 34,
-          marginLeft: 7,
+          marginLeft: 'auto',
+          marginRight: 'auto',
           paddingBottom: 11,
         }}
         alt="DoodleMeeple Man"
       />
-      {page !== 'dashboard' && <Divider />}
+      <Divider />
       <List>
-        {page !== 'dashboard' && <Divider /> && (
+        {page !== 'dashboard' && (
           <div>
             {[
               {
                 name: 'Back',
-                icon: <Icon>chevron_left</Icon>,
+                icon: 'chevron_left',
                 link: () => {
                   history.goBack();
                 },
-                color: theme.palette.secondary.main,
+                color: '#444',
                 count: null,
               },
             ].map((text, index) => (
-              <MenuButton
-                text={text}
-                key={text.name}
+              <MenuButtonShortcut
+                text={{
+                  name: text.name,
+                  color: text.color,
+                  icon: text.icon,
+                  count: text.count,
+                }}
                 onClickEvent={() => {
                   text.link();
                   handleDrawerClose();
                 }}
+                active={false}
+                key={`shortcut_${index}`}
               />
             ))}
           </div>
@@ -104,57 +90,57 @@ export function AppDrawer({
           {[
             {
               name: 'Dashboard',
-              icon: <Icon>home</Icon>,
+              icon: 'home',
               link: () => history.push('/app/dashboard'),
-              color: theme.palette.secondary.main,
+              color: '#444',
               count: null,
-            },
-            /*
+            } /*
             {
               name: 'Messages',
-              icon: <Icon>chat</Icon>,
+              icon: 'chat',
               link: () => history.push('/messages/conversations'),
-              color: theme.palette.primary.main,
+              color: '#444',
               count: counts.messages,
-            },
+            },*/,
             {
-              name: 'Invites',
-              icon: <Icon>thumb_up</Icon>,
+              name: 'My Jobs',
+              icon: 'work',
               link: () => history.push('/app/invites'),
-              color: theme.palette.primary.main,
+              color: '#444',
               count: counts.invites,
             },
+
             {
-              name: 'Projects',
-              icon: <Icon>work</Icon>,
+              name: profile.creatorTrue ? 'Projects' : 'hide',
+              icon: 'work',
               link: () => history.push('/app/jobs'),
-              color: theme.palette.primary.main,
+              color: '#444',
               count: null,
-            },*/
+            },
             {
               name: 'Profile',
-              icon: <Icon>contact_mail</Icon>,
+              icon: 'contact_mail',
               link: () => history.push('/app/edit-profile'),
-              color: theme.palette.primary.main,
+              color: '#444',
               count: profile.profileBG ? null : 1,
             },
             {
               name: 'Account',
-              icon: <Icon>account_balance</Icon>,
+              icon: 'account_balance',
               link: () => history.push('/app/account'),
-              color: theme.palette.primary.main,
+              color: '#444',
               count: null,
-            },
+            } /*
             {
               name: 'Games',
-              icon: <Icon>casino</Icon>,
+              icon: 'casino',
               link: () => history.push('/app/games'),
-              color: theme.palette.primary.main,
+              color: '#444',
               count: null,
-            },
+            },*/,
             {
               name: 'Logout',
-              icon: <Icon>exit_to_app</Icon>,
+              icon: 'exit_to_app',
               link: () => {
                 Cookies.remove('token');
                 Cookies.remove('userId');
@@ -163,33 +149,25 @@ export function AppDrawer({
               color: theme.palette.error.main,
               count: null,
             },
-          ].map((text, index) => (
-            <MenuButton
-              text={text}
-              key={text.name}
-              onClickEvent={() => {
-                text.link();
-                handleDrawerClose();
-              }}
-            />
-          ))}
-
-          <ListItem
-            button
-            onClick={open ? handleDrawerClose : handleDrawerOpen}
-            style={{ paddingLeft: 14 }}
-          >
-            <ListItemIcon style={{ minWidth: 32 }}>
-              <Icon>{open ? 'chevron_left' : 'chevron_right'}</Icon>
-            </ListItemIcon>
-            <ListItemText
-              primary="Minimise"
-              className={clsx({
-                [button]: !mobile,
-                [buttonMobile]: mobile,
-              })}
-            />
-          </ListItem>
+          ].map(
+            (text, index) =>
+              text.name !== 'hide' && (
+                <MenuButtonShortcut
+                  text={{
+                    name: text.name,
+                    color: text.color,
+                    icon: text.icon,
+                    count: text.count,
+                  }}
+                  onClickEvent={() => {
+                    text.link();
+                    handleDrawerClose();
+                  }}
+                  active={false}
+                  key={`menu_${index}`}
+                />
+              )
+          )}
         </div>
       </List>
       <Query

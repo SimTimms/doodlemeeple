@@ -27,7 +27,7 @@ function Uploader({
     let fileName = `${fileParts[0]}${Date.now()}`
       .replace(/[^a-z0-9]/gi, '_')
       .toLowerCase();
-    let fileType = fileParts[1];
+    let fileType = fileParts[fileParts.length - 1];
     let fileSize = uploadInput.files[0].size;
 
     const headers = {

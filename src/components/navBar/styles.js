@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-const drawerWidth = 160;
+const drawerWidth = 120;
 export const useStyles = makeStyles((theme) => ({
   root: {
     background: '#fff',
@@ -13,7 +13,6 @@ export const useStyles = makeStyles((theme) => ({
     }),
     height: 64,
     position: 'relative',
-    paddingLeft: 48,
     boxSizing: 'border-box',
     boxShadow: 'none',
     borderBottom: '1px solid #ddd',
@@ -31,8 +30,8 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
   },
   appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
+    paddingLeft: drawerWidth,
+    width: '100%',
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,

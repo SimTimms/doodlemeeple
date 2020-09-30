@@ -31,14 +31,13 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    marginTop: 20,
   },
   headerLine: {
     borderTop: `1px dashed #ccc`,
     width: '100%',
   },
   headerLineTwo: {
-    borderTop: `1px dotted #ccc`,
+    borderTop: `1px dashed #ccc`,
     width: 40,
   },
   headerLineTwoFull: {
@@ -46,7 +45,6 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   description: {
-    fontSize: 16,
     marginTop: 10,
     boxSizing: 'border-box',
     width: '100%',
@@ -54,7 +52,7 @@ export const useStyles = makeStyles((theme) => ({
     letterSpacing: -0.3,
   },
   descriptionLeft: {
-    fontSize: 16,
+    fontSize: 14,
     marginTop: 10,
     boxSizing: 'border-box',
     width: '100%',

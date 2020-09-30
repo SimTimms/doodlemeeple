@@ -1,27 +1,34 @@
 import React from 'react';
 import { useStyles } from './styles';
-import { useMediaQuery, Typography, Icon } from '@material-ui/core';
+import { useMediaQuery, Typography } from '@material-ui/core';
 import clsx from 'clsx';
-import { AppDrawer } from '../menus/appDrawer';
-import { Dashboard } from './views/dashboard';
-//import { Profile } from './views/profile';
-import { EditProfile } from './views/profileEdit';
-import Help from './views/help';
+import AppDrawer from '../menus/appDrawer';
+import AppDashboard from './views/appDashboard';
+import AppInvites from './views/appInvites';
+import AppHelp from './views/appHelp';
+import AppFailedPayment from './views/appFailedPayment';
+import AppProfileEdit from './views/appProfileEdit';
 import Beta from './views/beta';
 import CreativeRoster from './views/creativeRoster';
 import { Account } from './views/account';
 import FullContract from './views/fullContract';
-import { Invites } from './views/invites';
 import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
-import { EditJob, Jobs, PreviewJob } from './views/job';
-import { PreviewContract, EditContract } from './views/contract';
+import { EditJob, Jobs, AppViewJob } from './views/job';
+import { AppViewContract, EditContract } from './views/contract';
+import Withdraw from './views/withdraw';
+import ViewProposal from './views/viewProposal';
 import { PickArtist } from './views/pickArtist';
 import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
 import { FAVOURITES, PROFILE } from '../../data/queries';
-import { ContentTop, StyledNavBar, MenuButton, Row } from '../../components';
+import {
+  ContentTop,
+  StyledNavBar,
+  Row,
+  MenuButtonShortcut,
+} from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 import pageHeaders from './pageHeaders';
 
@@ -67,23 +74,23 @@ function AppLayout(props) {
 
   const helpButton = {
     name: 'Help',
-    icon: <Icon>contact_support</Icon>,
+    icon: 'contact_support',
     link: () => history.push('/app/help'),
-    color: props.theme.palette.secondary.main,
+    color: '#222',
     count: 0,
   };
   const alphaButton = {
     name: 'Open Beta',
-    icon: <Icon>construction</Icon>,
+    icon: 'warning',
     link: () => history.push('/app/beta'),
-    color: props.theme.palette.secondary.main,
+    color: props.theme.palette.error.main,
     count: 0,
   };
   const creativeRoster = {
     name: 'Creatives',
-    icon: <Icon>brush</Icon>,
+    icon: 'brush',
     link: () => history.push('/app/creative-roster'),
-    color: props.theme.palette.secondary.main,
+    color: '#222',
     count: 0,
   };
 
@@ -91,15 +98,42 @@ function AppLayout(props) {
     <div className={classes.root}>
       <ToastContainer />
       <StyledNavBar open={open} history={history} theme={props.theme}>
-        <Typography variant="h5">{pageHeaders(page)}</Typography>
+        <Typography variant="h6">{`${
+          profile ? profile.name : ''
+        } - ${pageHeaders(page)}`}</Typography>
         <div>
           <Row>
-            <MenuButton text={alphaButton} onClickEvent={alphaButton.link} />
-            <MenuButton
-              text={creativeRoster}
-              onClickEvent={creativeRoster.link}
+            <MenuButtonShortcut
+              text={{
+                name: alphaButton.name,
+                color: alphaButton.color,
+                icon: alphaButton.icon,
+                count: 0,
+              }}
+              onClickEvent={alphaButton.link}
+              active={false}
             />
-            <MenuButton text={helpButton} onClickEvent={helpButton.link} />
+            <MenuButtonShortcut
+              text={{
+                name: creativeRoster.name,
+                color: creativeRoster.color,
+                icon: creativeRoster.icon,
+                count: 0,
+              }}
+              onClickEvent={creativeRoster.link}
+              active={false}
+            />
+
+            <MenuButtonShortcut
+              text={{
+                name: helpButton.name,
+                color: helpButton.color,
+                icon: helpButton.icon,
+                count: 0,
+              }}
+              onClickEvent={helpButton.link}
+              active={false}
+            />
           </Row>
         </div>
       </StyledNavBar>
@@ -121,14 +155,20 @@ function AppLayout(props) {
         })}
       >
         <ContentTop style={{ width: '100%' }}>
-          {page === 'dashboard' ? (
-            <Dashboard history={history} />
+          {page === 'dashboard' && profile ? (
+            <AppDashboard
+              history={history}
+              profile={profile}
+              setProfile={setProfile}
+            />
           ) : page === 'help' ? (
-            <Help history={history} />
+            <AppHelp history={history} />
           ) : page === 'beta' ? (
             <Beta history={history} />
-          ) : page === 'edit-profile' ? (
-            <EditProfile theme={props.theme} history={history} />
+          ) : page === 'help' ? (
+            <AppHelp history={history} />
+          ) : page === 'failed-payment' ? (
+            <AppFailedPayment history={history} />
           ) : page === 'creative-roster' ? (
             <CreativeRoster
               theme={props.theme}
@@ -138,13 +178,15 @@ function AppLayout(props) {
           ) : page === 'account' ? (
             <Account history={history} />
           ) : page === 'invites' ? (
-            <Invites history={history} theme={props.theme} />
+            <AppInvites history={history} theme={props.theme} />
           ) : page === 'submitted' ? (
             <ProjectSubmitted history={history} />
           ) : page === 'games' ? (
             <Games history={history} />
           ) : page === 'jobs' ? (
             <Jobs history={history} theme={props.theme} />
+          ) : page === 'edit-profile' ? (
+            <AppProfileEdit theme={props.theme} history={history} />
           ) : page === 'edit-game' ? (
             <EditGame
               theme={props.theme}
@@ -152,6 +194,8 @@ function AppLayout(props) {
               autosaveIsOn={true}
               history={history}
             />
+          ) : page === 'withdraw' ? (
+            <Withdraw contractId={pathParam} history={history} />
           ) : page === 'view-game' ? (
             <PreviewGame
               theme={props.theme}
@@ -163,19 +207,21 @@ function AppLayout(props) {
             <EditJob
               theme={props.theme}
               jobId={pathParam}
-              autosaveIsOn={true}
               history={history}
               favourites={favourites}
             />
-          ) : page === 'view-job' ? (
-            <PreviewJob
+          ) : page === 'view-job' && profile ? (
+            <AppViewJob
               theme={props.theme}
               jobId={pathParam}
               inviteId={pathParam2}
               history={history}
+              profile={profile}
             />
+          ) : page === 'view-proposal' ? (
+            <ViewProposal jobId={pathParam} history={history} />
           ) : page === 'view-contract' ? (
-            <PreviewContract contractId={pathParam} history={history} />
+            <AppViewContract contractId={pathParam} history={history} />
           ) : page === 'view-full-contract' ? (
             <FullContract contractId={pathParam} history={history} />
           ) : page === 'edit-contract' ? (

@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
 import Icon from '@material-ui/core/Icon';
-import { IconButton, CardComponent } from '../';
+import { CardComponent } from '../';
 import clsx from 'clsx';
 
 export default function JobComponent({ job, game, history }) {
@@ -11,15 +11,20 @@ export default function JobComponent({ job, game, history }) {
   const contractsArr = job.contracts.map((contract) => contract.user._id);
 
   return (
-    <CardComponent>
+    <CardComponent
+      onClickEvent={() => {
+        job.submitted
+          ? history.push(`/app/view-job/${job._id}`)
+          : history.push(`/app/edit-job/${job._id}`);
+      }}
+    >
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: 'center',
           width: '100%',
-          marginLeft: 20,
         }}
       >
         <Typography
@@ -41,8 +46,8 @@ export default function JobComponent({ job, game, history }) {
         <Typography
           variant="body2"
           component="p"
-          style={{ width: '100%' }}
           className={clsx({
+            [classes.cardSummaryNeutral]: true,
             [classes.cardSummary]: true,
             [classes.cardSummaryWarning]: job.submitted === 'accepted',
             [classes.cardSummaryGood]:
@@ -61,10 +66,16 @@ export default function JobComponent({ job, game, history }) {
         </Typography>
       </div>
       {job.invites.map((invite, index) => {
-        return (
+        return !invite.receiver ? (
+          <div
+            className={classes.profileThumb}
+            title="User account no longer available"
+          >
+            X
+          </div>
+        ) : (
           <div
             key={`invite_${index}`}
-            style={{ marginRight: -10 }}
             title={`${invite.receiver.name} ${
               invite.status === 'declined' ? '(declined)' : ''
             }`}
@@ -91,32 +102,6 @@ export default function JobComponent({ job, game, history }) {
           </div>
         );
       })}
-      <IconButton
-        disabled={false}
-        title={
-          job.submitted === 'submitted' || job.submitted === 'closed'
-            ? 'View'
-            : job.submitted === 'accepted' || job.submitted === 'paid'
-            ? ''
-            : 'Edit'
-        }
-        color="text-dark"
-        type="button"
-        iconPos="right"
-        icon={
-          job.submitted === 'submitted' || job.submitted === 'closed'
-            ? 'preview'
-            : job.submitted === 'accepted' || job.submitted === 'paid'
-            ? 'chevron_right'
-            : 'edit'
-        }
-        styleOverride={{ marginRight: 10, marginLeft: 30 }}
-        onClickEvent={() => {
-          job.submitted
-            ? history.push(`/app/view-job/${job._id}`)
-            : history.push(`/app/edit-job/${job._id}`);
-        }}
-      />
     </CardComponent>
   );
 }

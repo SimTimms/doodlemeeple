@@ -4,22 +4,12 @@ import { Mutation } from 'react-apollo';
 import { toaster } from '../../utils/toaster';
 import { UPDATE_CONTRACT } from '../../data/mutations';
 
-export default function EditContractButton({
-  contract,
-  jobId,
-  setContract,
-  title,
-}) {
+export default function EditContractButton({ contract, setContract, title }) {
   return (
     <Mutation
       mutation={UPDATE_CONTRACT}
       variables={{
         _id: contract._id,
-        notes: contract.notes,
-        deadline: contract.deadline,
-        currency: contract.currency,
-        cost: contract.cost,
-        jobId,
         status: '',
       }}
       onCompleted={(data) => {

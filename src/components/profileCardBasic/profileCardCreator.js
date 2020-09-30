@@ -1,16 +1,12 @@
 import React from 'react';
-
-import { Card, Typography, Icon } from '@material-ui/core';
+import { Card, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
-import { IconButton, Row, Column } from '../';
-import { Mutation } from 'react-apollo';
-import { ADD_FAVOURITE } from '../../data/mutations';
+import { IconButton, Column } from '../';
 import clsx from 'clsx';
-import Cookies from 'js-cookie';
 
 export default function ProfileCardCreator({ history, user }) {
   const classes = useStyles();
-  const [isFav, setIsFav] = React.useState(false);
+  const [isFav] = React.useState(false);
 
   return (
     <Card

@@ -34,7 +34,27 @@ export const TYPE_HELPER = (typeIn) => {
       return typeIn;
   }
 };
-
+export const CREATOR_TYPES = ['creator'];
+export const ARTIST_TYPES = [
+  'graphic-artist',
+  '3d-artist',
+  'artist',
+  'world-builder',
+];
+export const MARKETING_TYPES = [
+  'reviewer',
+  'marketing',
+  'voice-actor',
+  'video-editor',
+  'social',
+];
+export const DEVELOPMENT_TYPES = [
+  'rulebook-editor',
+  'games-developer',
+  'proof-reader',
+  'translator',
+  'play-tester',
+];
 export function calculatePercent(paymentTermsArray, contractTotal, currency) {
   const totalInt = parseInt(contractTotal);
   let response = {
@@ -54,7 +74,7 @@ export function calculatePercent(paymentTermsArray, contractTotal, currency) {
       ? {
           status: true,
           sum: totalInt - percentSum,
-          message: `Although it would be nice, your payment terms cannot exceed your total cost of ${contractTotal} ${currency}`,
+          message: ``,
         }
       : percentSum === totalInt
       ? {
@@ -65,10 +85,7 @@ export function calculatePercent(paymentTermsArray, contractTotal, currency) {
       : percentSum <= totalInt && {
           status: false,
           sum: totalInt - percentSum,
-          message: `Payment Term: The Creative shall receive the remaining ${
-            totalInt - percentSum
-          } ${currency}
-upon completion of this contract.`,
+          message: ``,
         };
   return response;
 }

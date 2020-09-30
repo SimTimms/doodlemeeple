@@ -14,7 +14,7 @@ function StyledNavBar(props) {
       className={`${clsx({
         [classes.appBar]: !mobile,
         [classes.appBarMobile]: mobile,
-        [classes.appBarShift]: open,
+        [classes.appBarShift]: true,
         [classes.appBarShiftMobile]: mobile && open,
         [classes.appBarNoSidebar]: sidebarMissing,
       })} ${classes.root}`}

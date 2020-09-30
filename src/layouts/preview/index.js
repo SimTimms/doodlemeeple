@@ -1,7 +1,6 @@
 import React from 'react';
 import { PreviewProfile } from './views/previewProfile';
 import { Content, StyledNavBar } from '../../components';
-import { PublicMenu } from '../menus';
 
 function PreviewLayout(props) {
   const pathParam = props

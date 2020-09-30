@@ -1,12 +1,7 @@
 import React from 'react';
 import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
-import {
-  LoadIcon,
-  FieldTitle,
-  UnlockInfo,
-  Column,
-} from '../../../../components';
+import { FieldTitle, UnlockInfo, Column } from '../../../../components';
 import { Query } from 'react-apollo';
 import { JOB } from '../../../../data/queries';
 import { ArtistLineup, Creatives, SubmitBrief } from './components';

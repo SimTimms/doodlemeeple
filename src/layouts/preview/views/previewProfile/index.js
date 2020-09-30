@@ -5,15 +5,17 @@ import logo from '../../../../assets/logo.svg';
 import logoDevice from '../../../../assets/dm_device.png';
 import {
   Header,
-  SubHeader,
   ColumnWrapper,
   HeaderTwo,
   Text,
   IconButton,
+  MenuButtonShortcut,
+  Row,
 } from '../../../../components';
 import { Query } from 'react-apollo';
 import { PROFILE_PREVIEW, SECTIONS_PREVIEW } from '../../../../data/queries';
 import GallerySection from './components/section/gallerySection';
+import { TYPE_HELPER } from '../../../../utils';
 
 export function PreviewProfile({ history, theme, profileId, publicView }) {
   const classes = useStyles();
@@ -27,6 +29,7 @@ export function PreviewProfile({ history, theme, profileId, publicView }) {
     profileImg: null,
   });
   const [sections, setSections] = React.useState([]);
+  const [page, setPage] = React.useState(-1);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -89,7 +92,7 @@ export function PreviewProfile({ history, theme, profileId, publicView }) {
             }}
           >
             {userProfile.profileBG === null && (
-              <img src={logo} style={{ width: 500 }} />
+              <img src={logo} style={{ width: 500 }} alt="" />
             )}
           </div>
           <ColumnWrapper>
@@ -122,7 +125,38 @@ export function PreviewProfile({ history, theme, profileId, publicView }) {
               ></div>
 
               <Header str={userProfile.userName} />
-              <SubHeader str="Artist" />
+
+              <Row>
+                <MenuButtonShortcut
+                  text={{
+                    name: 'All Skills',
+                    color: '#222',
+                    icon: 'chevron_right',
+                    count: 0,
+                  }}
+                  onClickEvent={() => {
+                    setPage(-1);
+                  }}
+                  active={page === -1}
+                />
+                {sections &&
+                  sections.map((section, index) => {
+                    return (
+                      <MenuButtonShortcut
+                        text={{
+                          name: `${TYPE_HELPER(section.type)} `,
+                          color: '#222',
+                          icon: 'chevron_right',
+                          count: 0,
+                        }}
+                        onClickEvent={() => {
+                          setPage(index);
+                        }}
+                        active={page === index}
+                      />
+                    );
+                  })}
+              </Row>
             </div>
           </ColumnWrapper>
           <ColumnWrapper>
@@ -137,9 +171,13 @@ export function PreviewProfile({ history, theme, profileId, publicView }) {
           </ColumnWrapper>
 
           {sections &&
-            sections.map((section, index) => (
-              <GallerySection section={section} key={`section_${index}`} />
-            ))}
+            sections.map((section, index) => {
+              return (
+                (index === page || page === -1) && (
+                  <GallerySection section={section} key={`section_${index}`} />
+                )
+              );
+            })}
           <Query
             query={SECTIONS_PREVIEW}
             onCompleted={(data) => {

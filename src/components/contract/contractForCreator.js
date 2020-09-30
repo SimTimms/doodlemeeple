@@ -9,9 +9,10 @@ import moment from 'moment';
 export default function ContractComponentForCreator({
   contractData,
   history,
+  setContract,
   ...props
 }) {
-  let paymentTermsSum = 100;
+  let paymentTermsSum = contractData.cost;
   const classes = useStyles();
   const { setOpenContract, setContractStatus, readOnly } = props;
 
@@ -119,21 +120,30 @@ export default function ContractComponentForCreator({
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
           <b>6.1</b> The Client will be charged a total fee of{' '}
-          {`${contractData.cost}
+          {`${parseInt(contractData.cost) + parseInt(contractData.cost) * 0.1}
 ${contractData.currency} `}
-          for the Services (the "Payment")
+          for the Services (the "Payment"), the Payment is distributed as
+          follows:
         </Typography>
-        <Typography style={{ marginLeft: 40 }}>
-          <b>6.2</b> The Creative will receive 90% of the total payment, an
-          amount equating to{' '}
-          {`${contractData.cost * 0.9}
-${contractData.currency} `}
+        <Typography style={{ marginLeft: 80 }}>
+          <b>6.1.1</b>{' '}
+          {`${Math.round(
+            contractData.cost - Math.round(contractData.cost * 0.1)
+          )} ${
+            contractData.currency
+          } to be paid to the Creative (the "Creative Payment")`}
         </Typography>
-        <Typography style={{ marginLeft: 40 }}>
-          <b>6.3</b> DoodleMeeple will retain 10% of the total payment, an
-          amount equating to{' '}
-          {`${contractData.cost * 0.1}
-${contractData.currency} `}
+        <Typography style={{ marginLeft: 80 }}>
+          <b>6.1.2</b>{' '}
+          {`${Math.round(contractData.cost * 0.1)} ${
+            contractData.currency
+          } to be paid by the Creator to DoodleMeeple (the "Creator Commission Fee").`}
+        </Typography>
+        <Typography style={{ marginLeft: 80 }}>
+          <b>6.1.3</b>{' '}
+          {`${Math.round(contractData.cost * 0.1)} ${
+            contractData.currency
+          } to be paid by the Creative to DoodleMeeple (the "Creative Commission Fee").`}
         </Typography>
         <Divider />
         <Typography>
@@ -148,7 +158,7 @@ ${contractData.currency} `}
           return (
             <Typography key={`term_${index}`} style={{ marginLeft: 80 }}>
               <b>{`7.1.${index + 1}: `}</b>
-              {`The Creative shall receive ${term.percent}% of the Payment upon ${term.description}`}
+              {`The Creative shall receive ${term.percent} ${contractData.currency} upon ${term.description}`}
             </Typography>
           );
         })}
@@ -158,7 +168,7 @@ ${contractData.currency} `}
             style={{ marginLeft: 80 }}
           >
             <b>{`7.1.${contractData.paymentTerms.length + 1}: `}</b>
-            {`${paymentTermsSum}% of the Payment upon completion of the Services`}
+            {`${paymentTermsSum} ${contractData.currency} upon completion of the Services`}
           </Typography>
         )}
         <Typography style={{ marginLeft: 40 }}>
@@ -194,10 +204,19 @@ ${contractData.currency} `}
           conditions as follows:
         </Typography>
         <Typography style={{ marginLeft: 80 }}>
-          <b>9.1.1</b> [link to terms]
+          <b>9.1.1</b>{' '}
+          <a href="https://doodlemeeple.com/terms-of-service/">
+            https://doodlemeeple.com/terms-of-service/
+          </a>
         </Typography>
         <Typography style={{ marginLeft: 80 }}>
-          <b>9.1.2</b> Where ambiguity or conflict arises between the terms of
+          <b>9.1.2</b>{' '}
+          <a href="https://doodlemeeple.com/privacy-policy/">
+            https://doodlemeeple.com/privacy-policy/
+          </a>
+        </Typography>
+        <Typography style={{ marginLeft: 80 }}>
+          <b>9.1.3</b> Where ambiguity or conflict arises between the terms of
           this Agreement and the Doodle Meeple Terms & Conditions the Doodle
           Meeple Terms and conditions will take precedence.
         </Typography>
@@ -216,6 +235,7 @@ ${contractData.currency} `}
             setContractStatus={setContractStatus}
             contractData={contractData}
             history={history}
+            setContract={setContract}
           />
         )}
       </div>

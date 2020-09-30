@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
@@ -6,11 +6,22 @@ import { useStyles } from './styles';
 import clsx from 'clsx';
 import { ArtistCard } from './ArtistCard';
 import { Divider, Column, Row, HeaderTwo, MenuButtonShortcut } from '../../';
+import {
+  ARTIST_TYPES,
+  MARKETING_TYPES,
+  DEVELOPMENT_TYPES,
+  CREATOR_TYPES,
+} from '../../../utils';
 
-function AddSection({ setSections, sections }) {
+function AddSection({ setSections, sections, userType }) {
   const [display, setDisplay] = React.useState(false);
   const [page, setPage] = React.useState(0);
   const classes = useStyles();
+
+  useEffect(() => {
+    setPage(userType.creator ? 1 : 0);
+    console.log(userType);
+  }, [userType]);
 
   return (
     <div>
@@ -39,181 +50,142 @@ function AddSection({ setSections, sections }) {
       >
         <Divider />
         <Column>
-          <Row j="space-between">
-            <MenuButtonShortcut
-              text={{
-                name: 'Show All',
-                color: '#222',
-                icon: 'chevron_right',
-                count: 0,
-              }}
-              onClickEvent={() => {
-                setPage(0);
-              }}
-              active={page === 0}
-            />
-            <MenuButtonShortcut
-              text={{
-                name: 'Project Creators',
-                color: '#222',
-                icon: 'chevron_right',
-                count: 0,
-              }}
-              onClickEvent={() => {
-                setPage(1);
-              }}
-              active={page === 1}
-            />
-            <MenuButtonShortcut
-              text={{
-                name: 'Creative',
-                color: '#222',
-                icon: 'chevron_right',
-                count: 0,
-              }}
-              onClickEvent={() => {
-                setPage(2);
-              }}
-              active={page === 2}
-            />
-            <MenuButtonShortcut
-              text={{
-                name: 'Marketing/Campaign',
-                color: '#222',
-                icon: 'chevron_right',
-                count: 0,
-              }}
-              onClickEvent={() => {
-                setPage(3);
-              }}
-              active={page === 3}
-            />
-            <MenuButtonShortcut
-              text={{
-                name: 'Development',
-                color: '#222',
-                icon: 'chevron_right',
-                count: 0,
-              }}
-              onClickEvent={() => {
-                setPage(4);
-              }}
-              active={page === 4}
-            />
+          <Row j="center">
+            {userType.creative && (
+              <MenuButtonShortcut
+                text={{
+                  name: 'Show All',
+                  color: '#222',
+                  icon: 'chevron_right',
+                  count: 0,
+                }}
+                onClickEvent={() => {
+                  setPage(0);
+                }}
+                active={page === 0}
+              />
+            )}
+            {userType.creator && (
+              <MenuButtonShortcut
+                text={{
+                  name: 'Project Creators',
+                  color: '#222',
+                  icon: 'work',
+                  count: 0,
+                }}
+                onClickEvent={() => {
+                  setPage(1);
+                }}
+                active={page === 1}
+              />
+            )}
+            {userType.creative && (
+              <MenuButtonShortcut
+                text={{
+                  name: 'Creative',
+                  color: '#222',
+                  icon: 'chevron_right',
+                  count: 0,
+                }}
+                onClickEvent={() => {
+                  setPage(2);
+                }}
+                active={page === 2}
+              />
+            )}
+            {userType.creative && (
+              <MenuButtonShortcut
+                text={{
+                  name: 'Marketing/Campaign',
+                  color: '#222',
+                  icon: 'chevron_right',
+                  count: 0,
+                }}
+                onClickEvent={() => {
+                  setPage(3);
+                }}
+                active={page === 3}
+              />
+            )}
+            {userType.creative && (
+              <MenuButtonShortcut
+                text={{
+                  name: 'Development',
+                  color: '#222',
+                  icon: 'chevron_right',
+                  count: 0,
+                }}
+                onClickEvent={() => {
+                  setPage(4);
+                }}
+                active={page === 4}
+              />
+            )}
           </Row>
+          <Divider />
           {(page === 0 || page === 1) && (
             <Column>
               <HeaderTwo str="Project Creators" />
               <Divider />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="creator"
-              />
+              {CREATOR_TYPES.map((type, index) => (
+                <ArtistCard
+                  setDisplay={setDisplay}
+                  sections={sections}
+                  setSections={setSections}
+                  type={type}
+                  key={`creator_${index}`}
+                />
+              ))}
+              <Divider />
             </Column>
           )}
           {(page === 0 || page === 2) && (
             <Column>
               <HeaderTwo str="Visual Art and Creative Writing" />
               <Divider />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="artist"
-              />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="3d-artist"
-              />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="graphic-artist"
-              />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="world-builder"
-              />
+              {ARTIST_TYPES.map((type, index) => (
+                <ArtistCard
+                  setDisplay={setDisplay}
+                  sections={sections}
+                  setSections={setSections}
+                  type={type}
+                  key={`artist_${index}`}
+                />
+              ))}
+              <Divider />
             </Column>
           )}
           {(page === 0 || page === 3) && (
             <Column>
               <HeaderTwo str="Marketing and Campaign Management" />
               <Divider />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="marketing"
-              />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="social"
-              />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="voice-actor"
-              />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="video-editor"
-              />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="reviewer"
-              />
+              {MARKETING_TYPES.map((type, index) => (
+                <ArtistCard
+                  setDisplay={setDisplay}
+                  sections={sections}
+                  setSections={setSections}
+                  type={type}
+                  key={`marketing_${index}`}
+                />
+              ))}
+              <Divider />
             </Column>
           )}
           {(page === 0 || page === 4) && (
             <Column>
               <HeaderTwo str="Development" />
               <Divider />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="rulebook-editor"
-              />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="proof-reader"
-              />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="translator"
-              />
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="games-developer"
-              />
+              {DEVELOPMENT_TYPES.map((type, index) => (
+                <ArtistCard
+                  setDisplay={setDisplay}
+                  sections={sections}
+                  setSections={setSections}
+                  type={type}
+                  key={`dev_${index}`}
+                />
+              ))}
 
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type="play-tester"
-              />
+              <Divider />
             </Column>
           )}
         </Column>
