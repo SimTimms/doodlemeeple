@@ -7,7 +7,6 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    paddingTop: 10,
   },
   rootRow: {
     width: '100%',

@@ -4,9 +4,15 @@ import { useStyles } from './styles';
 import clsx from 'clsx';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-export default function MenuButtonShortcut({ text, onClickEvent, active }) {
+export default function MenuButtonShortcut({
+  text,
+  onClickEvent,
+  active,
+  ...props
+}) {
   const mobile = useMediaQuery('(max-width:800px)');
   const classes = useStyles();
+  const { column } = props;
 
   return (
     <div
@@ -21,6 +27,7 @@ export default function MenuButtonShortcut({ text, onClickEvent, active }) {
         className={clsx({
           [classes.buttonRoot]: true,
           [classes.active]: active,
+          [classes.buttonRootColumn]: column,
         })}
       >
         <div
@@ -32,6 +39,7 @@ export default function MenuButtonShortcut({ text, onClickEvent, active }) {
           <Icon
             className={clsx({
               [classes.iconIcon]: true,
+              [classes.iconIconColumn]: column,
               [classes.dark]: text.color === 'white',
             })}
             style={{ color: text.color }}

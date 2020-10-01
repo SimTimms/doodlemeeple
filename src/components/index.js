@@ -38,6 +38,7 @@ import MenuButton from './buttons/menuButton';
 import MenuButtonShortcut from './buttons/menuButtonShortcut';
 import FieldTitle from './fieldTitle';
 import { JobComponent, InviteComponent } from './jobComponent';
+import InviteComponentDash from './inviteComponentDash';
 import FieldTitleDashboard from './fieldTitleDashboard';
 import FieldBox from './fieldBox';
 import InfoBox from './infoBox';
@@ -69,6 +70,7 @@ import FeatureCardInvite from './featureCardInvite';
 import FeatureCardHorizontal from './featureCardHorizontal';
 import UnlockInfo from './unlockInfo';
 import UnlockInfoReverse from './unlockInfoReverse';
+import NotificationComponent from './notificationComponent';
 import {
   Header,
   SubHeader,
@@ -83,9 +85,11 @@ import {
   HeaderThree,
   TextLeft,
 } from './textParts';
-import { Column, Row } from './blocks';
+import { Column, Row, TopMenuWrapper } from './blocks';
 
 export {
+  TopMenuWrapper,
+  NotificationComponent,
   ProfileAvatar,
   UnlockInfoReverse,
   Column,
@@ -94,6 +98,7 @@ export {
   InlineHeaderWarning,
   FeatureCardInvite,
   Meta,
+  InviteComponentDash,
   ContractSummaryForCreative,
   TextLink,
   PaymentTerms,

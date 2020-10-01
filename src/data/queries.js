@@ -657,6 +657,23 @@ export const NOTIFICATIONS = gql`
   }
 `;
 
+export const NOTIFICATIONS_BY_JOB = gql`
+  query NotificationsByJob($jobId: MongoID!) {
+    notificationMany(filter: { job: $jobId }) {
+      _id
+      message
+      icon
+      title
+      createdAt
+      linkTo
+      sender {
+        name
+        profileImg
+      }
+    }
+  }
+`;
+
 export const SECTIONS_PREVIEW = gql`
   query SectionsPreview($userId: MongoID!) {
     sectionMany(filter: { user: $userId }) {
