@@ -50,12 +50,14 @@ import IconBox from './iconBox';
 import IconTitle from './iconTitle';
 import { InlineHeader, InlineHeaderWarning } from './inlineHeader';
 import Divider from './divider';
+import DividerMini from './dividerMini';
 import DividerWithBorder from './dividerWithBorder';
 import SectionWrapper from './sectionWrapper';
 import DMCard from './dmCard';
 import ActionWrapper from './actionWrapper';
 import ContractSummary from './contractSummary';
 import EditContractButton from './editContractButton';
+import CreatorComponentDash from './creatorComponentDash';
 import PaymentTerms from './paymentTerms';
 import ViewContractButton from './viewContractButton';
 import SubmitContractButton from './submitContractButton';
@@ -88,6 +90,7 @@ import {
 import { Column, Row, TopMenuWrapper } from './blocks';
 
 export {
+  CreatorComponentDash,
   TopMenuWrapper,
   NotificationComponent,
   ProfileAvatar,
@@ -104,6 +107,7 @@ export {
   PaymentTerms,
   TextLeft,
   TextDivider,
+  DividerMini,
   ColumnWrapperFull,
   ColumnWrapper,
   FeatureCard,

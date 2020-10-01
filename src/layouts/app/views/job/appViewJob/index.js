@@ -65,6 +65,7 @@ export default function AppViewJob({
             setProposalOpen={setProposalOpen}
             proposalOpen={proposalOpen}
             stripeID={profile.stripeID}
+            theme={theme}
           />
         )}
         <Column>

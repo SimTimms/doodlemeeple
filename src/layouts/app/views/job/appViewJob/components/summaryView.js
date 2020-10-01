@@ -14,7 +14,7 @@ import {
   IconButton,
   Divider,
 } from '../../../../../../components';
-import CreatorDashboard from './creatorDashboard/';
+import { CreatorDashboard, CreativeDashboard } from './jobDashboards/';
 import CreativeView from '../components/creativeView';
 import CreativeActions from '../components/creativeActions';
 import ClientView from '../components/clientView';
@@ -42,11 +42,10 @@ export default function SummaryView({
   proposalOpen,
   setProposalOpen,
   stripeID,
+  theme,
 }) {
   const classes = useStyles();
   const [conversationUser, setConversationUser] = React.useState(null);
-  const [chatOpen, setChatOpen] = React.useState(false);
-  const [loadingStripe, setLoadingStripe] = React.useState(false);
   const loggedInUser = Cookies.get('userId');
   const [pageNbr, setPageNbr] = React.useState(0);
   const [tabNbr, setTabNbr] = React.useState(-1);
@@ -55,7 +54,7 @@ export default function SummaryView({
   useEffect(() => {
     messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' });
   });
-
+  console.log(conversationUser);
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -64,14 +63,14 @@ export default function SummaryView({
             text={{
               name: 'Dashboard',
               color: '#222',
-              icon: 'chevron_right',
+              icon: 'dashboard',
               count: 0,
             }}
             onClickEvent={() => {
-              setTabNbr(0);
+              setTabNbr(-1);
             }}
             column={true}
-            active={tabNbr === 0}
+            active={tabNbr === -1}
           />
           <MenuButtonShortcut
             text={{
@@ -144,28 +143,56 @@ export default function SummaryView({
             column={true}
             active={tabNbr === 4}
           />
+          {isCreator && (
+            <MenuButtonShortcut
+              text={{
+                name: 'Cancel Project',
+                color: theme.palette.error.main,
+                icon: 'close',
+                count: 0,
+              }}
+              onClickEvent={() => {
+                setTabNbr(10);
+              }}
+              column={true}
+              active={tabNbr === 10}
+            />
+          )}
         </TopMenuWrapper>
 
         {isCreator && tabNbr === -1 && (
           <Column>
-            <CreatorDashboard job={job} />
+            <CreatorDashboard
+              job={job}
+              setConversationUser={setConversationUser}
+            />
           </Column>
         )}
 
-        {!isCreator && (tabNbr === 1 || tabNbr === 0) && (
+        {!isCreator && tabNbr === -1 && (
           <Column>
-            <Divider />
-            <Paper p={'0'}>
-              <CreativeNotifications
-                inviteStatus={inviteStatus}
-                jobStatus={job.submitted}
-                setTabNbr={setTabNbr}
-              />
-            </Paper>
+            <CreativeDashboard
+              job={job}
+              setConversationUser={setConversationUser}
+            />
           </Column>
         )}
 
-        {(tabNbr === 0 || tabNbr === 1) && (
+        {conversationUser && (
+          <ChatView
+            job={job}
+            setPageNbr={setPageNbr}
+            jobId={jobId}
+            conversationUser={conversationUser}
+            pageNbr={pageNbr}
+            setConversationUser={setConversationUser}
+            setMessages={setMessages}
+            messages={messages}
+            history={history}
+          />
+        )}
+
+        {tabNbr === 1 && (
           <Paper pt={16}>
             <Column>
               {loggedInUser === job.user._id && (
@@ -192,140 +219,6 @@ export default function SummaryView({
             </Column>
           </Paper>
         )}
-
-        {job.submitted === 'closed' && (
-          <Paper pt={10}>
-            <Column>
-              <UnlockInfoReverse str="This project has been closed by the owner" />
-            </Column>
-          </Paper>
-        )}
-        {job.submitted !== 'accepted' &&
-          job.submitted !== 'paid' &&
-          loggedInUser === job.user._id && (
-            <Paper pt={10}>
-              <HeaderTwo str="Invites" />
-              <ClientView
-                job={job}
-                history={history}
-                setConversationUser={setConversationUser}
-                setChatOpen={setChatOpen}
-                chatOpen={chatOpen}
-                contracts={job.contracts}
-              />
-            </Paper>
-          )}
-
-        {(tabNbr === 0 || tabNbr === 2) &&
-          (job.submitted === 'accepted' || job.submitted === 'paid') &&
-          loggedInUser === job.user._id && (
-            <Paper pt={10}>
-              <Column>
-                <ChosenCreative
-                  job={job}
-                  setProposalOpen={setProposalOpen}
-                  contracts={contracts}
-                  setConversationUser={setConversationUser}
-                  history={history}
-                  setChatOpen={setChatOpen}
-                  chatOpen={chatOpen}
-                />
-              </Column>
-            </Paper>
-          )}
-        {!isCreator && (tabNbr === 0 || tabNbr === 2) && (
-          <CreativeView
-            job={job}
-            history={history}
-            setConversationUser={setConversationUser}
-            setChatOpen={setChatOpen}
-            chatOpen={chatOpen}
-            displayChat={inviteStatus !== 'declined'}
-          />
-        )}
-
-        <div>
-          {chatOpen && conversationUser && inviteStatus !== 'declined' && (
-            <ChatView
-              job={job}
-              setPageNbr={setPageNbr}
-              jobId={jobId}
-              conversationUser={conversationUser}
-              pageNbr={pageNbr}
-              setChatOpen={setChatOpen}
-              setMessages={setMessages}
-              messages={messages}
-              history={history}
-            />
-          )}
-        </div>
-        {(tabNbr === 0 || tabNbr === 4) && job.submitted === 'paid' && (
-          <PaymentsView job={job} />
-        )}
-        {inviteStatus === 'quote_sent' ? (
-          <Column>
-            <BorderBox w={300}>
-              <Meta str="View your quote for this job " />
-              <IconButton
-                color="primary"
-                icon="preview"
-                title="View"
-                onClickEvent={() =>
-                  history.push(`/app/view-proposal/${job._id}`)
-                }
-                styleOverride={{ width: '100%' }}
-                iconPos="right"
-              />
-            </BorderBox>
-          </Column>
-        ) : job.submitted === 'closed' ||
-          job.submitted === 'paid' ? null : job.submitted ===
-          'accepted' ? null : loggedInUser === job.user._id ? (
-          <CloseButton job={job} jobId={jobId} setJob={setJob} />
-        ) : inviteStatus !== 'declined' ? (
-          <Column>
-            <BorderBox w={300}>
-              {!stripeID && (
-                <Meta str="Setup your STRIPE account to continue." />
-              )}
-              {loadingStripe ? (
-                <Typography
-                  variant="h6"
-                  style={{ color: '#fff', marginTop: 20 }}
-                >
-                  Please Wait
-                </Typography>
-              ) : (
-                !stripeID && (
-                  <img
-                    src={stripeButton}
-                    style={{
-                      width: 200,
-                      marginTop: 20,
-                      cursor: 'pointer',
-                    }}
-                    alt=""
-                    onClick={() => {
-                      requestStripe();
-                      setLoadingStripe(true);
-                    }}
-                  />
-                )
-              )}
-              {stripeID && (
-                <Meta str="Create a quote for this job or decline if it's not for you" />
-              )}
-              {stripeID && (
-                <CreativeActions
-                  proposalOpen={proposalOpen}
-                  setProposalOpen={setProposalOpen}
-                  inviteId={inviteId}
-                  setInviteStatus={setInviteStatus}
-                />
-              )}
-            </BorderBox>
-          </Column>
-        ) : null}
       </div>
     </Slide>
   );

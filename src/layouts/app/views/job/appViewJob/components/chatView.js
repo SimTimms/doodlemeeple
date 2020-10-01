@@ -11,13 +11,14 @@ export default function ChatView({
   jobId,
   conversationUser,
   pageNbr,
-  setChatOpen,
+  setConversationUser,
   setMessages,
   messages,
   history,
 }) {
   const classes = useStyles();
   const [refreshCount, setRefreshCount] = React.useState(0);
+
   return (
     <Query
       query={GET_MESSAGES}
@@ -48,7 +49,7 @@ export default function ChatView({
               }}
               disabled={false}
               onClickEvent={() => {
-                setChatOpen(false);
+                setConversationUser(null);
               }}
             />
             {conversationUser && (

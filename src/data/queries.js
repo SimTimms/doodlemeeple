@@ -272,6 +272,7 @@ export const JOB = gql`
       location
       creativeSummary
       submitted
+      paid
       game {
         _id
         backgroundImg

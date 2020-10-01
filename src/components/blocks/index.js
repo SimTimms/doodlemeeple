@@ -1,10 +1,11 @@
 import React from 'react';
 
 export function Column(props) {
-  const { children, a, j, w } = props;
+  const { children, a, j, w, p } = props;
   const align = a ? a : 'center';
   const width = w ? w : '100%';
   const justify = j ? j : 'center';
+  const padding = p ? p : 0;
 
   return (
     <div
@@ -14,6 +15,7 @@ export function Column(props) {
         flexDirection: 'column',
         alignItems: align,
         justifyContent: justify,
+        padding,
       }}
     >
       {children}
