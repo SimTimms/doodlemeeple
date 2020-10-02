@@ -53,6 +53,7 @@ export default function AppViewJob({
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div style={{ width: '100%' }}>
+        {/*
         {!proposalOpen && isCreator && (
           <Query
             query={JOB}
@@ -85,7 +86,7 @@ export default function AppViewJob({
               ) : null;
             }}
           </Query>
-        )}
+          )}*/}
         {!proposalOpen && !isCreator && (
           <Query
             query={JOB_CREATIVE}
@@ -93,7 +94,9 @@ export default function AppViewJob({
             fetchPolicy="network-only"
           >
             {({ data }) => {
-              return data ? (
+              return data && isCreator ? (
+                <SummaryView job={data.jobChecklist} history={history} />
+              ) : data && !isCreator ? (
                 <SummaryViewCreative
                   job={data.jobChecklist}
                   history={history}
@@ -104,6 +107,7 @@ export default function AppViewJob({
         )}
 
         <Column>
+          {/*
           {proposalOpen && (
             <ProposalView
               jobId={jobId}
@@ -111,8 +115,7 @@ export default function AppViewJob({
               history={history}
               stripeID={profile.stripeID}
             />
-          )}
-
+          )}*/}
           <Query
             query={INVITE_BY_ID}
             variables={{ _id: inviteId }}

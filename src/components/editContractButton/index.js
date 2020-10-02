@@ -21,9 +21,8 @@ export default function EditContractButton({ contract, setContract, title }) {
         return (
           <IconButton
             title={title}
-            icon="edit"
-            styleOverride={{ width: '100%' }}
-            color="secondary"
+            icon="close"
+            color="warning"
             disabled={false}
             onClickEvent={() => {
               mutation();

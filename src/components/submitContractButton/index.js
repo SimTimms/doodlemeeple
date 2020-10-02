@@ -4,7 +4,7 @@ import { Mutation } from 'react-apollo';
 import { toaster } from '../../utils/toaster';
 import { SUBMIT_CONTRACT } from '../../data/mutations';
 
-export default function SubmitContractButton({ contract, history }) {
+export default function SubmitContractButton({ contract, setTabNbr }) {
   return (
     <Mutation
       mutation={SUBMIT_CONTRACT}
@@ -13,7 +13,7 @@ export default function SubmitContractButton({ contract, history }) {
       }}
       onCompleted={(data) => {
         toaster('Sent...');
-        history.push(`/app/view-proposal/${contract.job._id}`);
+        setTabNbr(-1);
       }}
     >
       {(mutation) => {

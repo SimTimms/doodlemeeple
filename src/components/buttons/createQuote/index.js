@@ -11,7 +11,7 @@ export default function CreateQuoteButton({
   ...props
 }) {
   const [loading, setLoading] = React.useState(false);
-  const { style, setTabNbr } = props;
+  const { style } = props;
   return (
     <Mutation
       mutation={CREATE_CONTRACT}
@@ -19,18 +19,19 @@ export default function CreateQuoteButton({
         currency: 'GBP',
         cost: '100',
         jobId,
-        paymentTerms: [],
       }}
       onCompleted={(data) => {
         toaster('Autosave');
         const updatedId = data.contractCreateOne.recordId;
         setLoading(false);
         setContract({
-          ...contract,
+          cost: data.contractCreateOne.record.cost,
+          currency: data.contractCreateOne.record.currency,
           _id: updatedId,
           updatedAt: data.contractCreateOne.record.updatedAt,
           user: data.contractCreateOne.record.user,
           job: data.contractCreateOne.record.job,
+          paymentTerms: [],
         });
       }}
     >

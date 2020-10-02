@@ -9,7 +9,6 @@ export default function Paper({ children, ...props }) {
     <div
       className={classes.root}
       style={{
-        padding: p ? p : 30,
         paddingTop: pt ? pt : p ? p : 30,
         paddingLeft: pl ? pl : p ? p : 30,
         paddingRight: pr ? pr : p ? p : 30,

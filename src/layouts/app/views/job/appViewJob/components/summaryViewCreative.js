@@ -14,7 +14,6 @@ export default function SummaryViewCreative({ job, history }) {
   const [tabNbr, setTabNbr] = React.useState(-1);
   const [messages, setMessages] = React.useState([]);
   const [contract, setContract] = React.useState();
-
   useEffect(() => {
     setContract(job.contract);
   }, [job]);
@@ -42,6 +41,7 @@ export default function SummaryViewCreative({ job, history }) {
             contractData={contract}
             setContract={setContract}
             history={history}
+            setTabNbr={setTabNbr}
           />
         ) : (
           tabNbr === 6 && (

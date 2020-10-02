@@ -34,7 +34,7 @@ export default function QuoteDetails({
           });
         }}
         replaceMode="loose"
-        placeholder="Example: Start of May"
+        placeholder="12-Sep-2020"
         info="The expected date of when you will start this project. Please be specific about whether this is a rough estimate or a definite start time."
         warning="Example: Between 1st and 7th May 2020"
         size="s"
@@ -52,7 +52,7 @@ export default function QuoteDetails({
           });
         }}
         replaceMode="loose"
-        placeholder="Example: End of May"
+        placeholder="01-Dec-2020"
         info="The expected date of when you will finish this project and provide the client with all the specified works. Please be specific about whether this deadline is a rough estimate or a definite finishing time."
         warning="Example: Around the 21st May, give or take 2-3 days"
         size="s"
@@ -61,14 +61,14 @@ export default function QuoteDetails({
 
       <FieldBox
         value={contract.notes}
-        title="Notes"
+        title="Additional Terms"
         maxLength={1024}
         onChangeEvent={(e) => {
           setContract({ ...contract, notes: e });
           autosave(mutation, null);
         }}
         replaceMode="loose"
-        placeholder="Example: This quote is valid for 7 days"
+        placeholder="Work will begin upon payment of the deposit"
         info="Add more information to your quote, show you understand the project and what's required by tailoring the content to this specific job"
         warning=""
         size="s"

@@ -22,12 +22,7 @@ export function CreativeDashboard({
   return (
     <Column>
       <Row a="flex-start">
-        <CheckListCreativeDash
-          job={job}
-          contract={contract}
-          setContract={setContract}
-          setTabNbr={setTabNbr}
-        />
+        <CheckListCreativeDash job={job} setTabNbr={setTabNbr} />
         <SummaryDash job={job} setConversationUser={setConversationUser} />
         <NotificationDash jobId={job._id} />
       </Row>

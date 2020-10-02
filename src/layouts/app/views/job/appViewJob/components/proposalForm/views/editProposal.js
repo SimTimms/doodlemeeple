@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react';
-import { Slide, Typography } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   Divider,
-  ActionWrapper,
   BorderBox,
   Paper,
   Column,
   Meta,
-  Row,
-  MenuButtonShortcut,
   ContractComponentForCreator,
   ContractSummaryForCreative,
   SubmitContractButton,
@@ -18,21 +15,19 @@ import {
   PaymentTerms,
   EditContractButton,
 } from '../../../../../../../../components';
-
+import Menu from './menu';
 import QuoteDetails from './quoteDetails';
 import { calculatePercent } from '../../../../../../../../utils';
 import { toaster } from '../../../../../../../../utils/toaster';
 import { Mutation } from 'react-apollo';
-import {
-  CREATE_CONTRACT,
-  UPDATE_CONTRACT,
-} from '../../../../../../../../data/mutations';
+import { UPDATE_CONTRACT } from '../../../../../../../../data/mutations';
 
 export default function EditProposalForm({
   jobId,
   contractData,
   setContract,
   history,
+  setTabNbr,
 }) {
   const classes = useStyles();
 
@@ -49,67 +44,23 @@ export default function EditProposalForm({
     const { cost, paymentTerms, currency, notes } = contractData;
     const percentLockCalc = calculatePercent(paymentTerms, cost, currency);
     setPercentLock(percentLockCalc);
-    setLockSubmit(cost <= 0 || notes === '' || !notes ? true : false);
+    setLockSubmit(cost <= 0 ? true : false);
   }, [contractData]);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div style={{ width: '100%' }}>
-        <Row j="space-between">
-          <MenuButtonShortcut
-            text={{
-              name: 'Details',
-              color: '#222',
-              icon: 'chevron_right',
-              count: 0,
-            }}
-            onClickEvent={() => {
-              setPage(0);
-            }}
-            active={page === 0}
-          />
-          <MenuButtonShortcut
-            text={{
-              name: 'Payment',
-              color: '#222',
-              icon: 'chevron_right',
-              count: 0,
-            }}
-            onClickEvent={() => {
-              setPage(1);
-            }}
-            active={page === 1}
-          />
-          <MenuButtonShortcut
-            text={{
-              name: 'Submit',
-              color: '#222',
-              icon: 'chevron_right',
-              count: 0,
-            }}
-            onClickEvent={() => {
-              setPage(2);
-            }}
-            active={page === 2}
-          />
-        </Row>
-        <Divider />
-        <Paper>
-          {contractData._id === '' ? (
-            <ActionWrapper></ActionWrapper>
-          ) : contractData.status === 'submitted' ? (
-            <div>
-              <Typography>
-                Submitted - this should display a view of the contract and allow
-                editing - send a notification and email to the job owner - add a
-                chat message with link to the contract
-              </Typography>
+        <Paper pt={'0'}>
+          {contractData.status === 'submitted' ? (
+            <Column>
+              <Divider />
+              <ContractSummaryForCreative contractData={contractData} />
               <EditContractButton
                 contract={contractData}
                 setContract={setContract}
-                title="Retract & Edit Quote"
+                title="Retract and/or Edit"
               />
-            </div>
+            </Column>
           ) : (
             <Column>
               <Mutation
@@ -126,6 +77,8 @@ export default function EditProposalForm({
                 {(mutation) => {
                   return (
                     <div className={classes.root}>
+                      <Menu />
+                      <Divider />
                       {page === 0 && (
                         <QuoteDetails
                           setContract={setContract}
@@ -210,6 +163,7 @@ export default function EditProposalForm({
                                 <SubmitContractButton
                                   contract={contractData}
                                   history={history}
+                                  setTabNbr={setTabNbr}
                                 />
                               </BorderBox>
                             )
