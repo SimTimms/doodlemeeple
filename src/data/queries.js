@@ -299,6 +299,79 @@ export const JOB = gql`
   }
 `;
 
+export const JOB_CHECKLIST = gql`
+  query GetJob($jobId: MongoID!) {
+    jobById(_id: $jobId) {
+      _id
+    }
+  }
+`;
+
+export const JOB_CREATIVE = gql`
+  query GetJob($jobId: MongoID!) {
+    jobChecklist(_id: $jobId) {
+      contract {
+        _id
+        notes
+        deadline
+        startDate
+        cost
+        currency
+        status
+        updatedAt
+        payments {
+          _id
+          amount
+          currency
+          status
+          paidBy {
+            _id
+            name
+          }
+          contract {
+            _id
+          }
+          paymentId
+          createdAt
+          updatedAt
+        }
+        user {
+          email
+          _id
+          name
+          profileImg
+        }
+        job {
+          _id
+          name
+          summary
+          createdAt
+          creativeSummary
+          keywords
+          user {
+            _id
+            email
+            name
+          }
+        }
+        paymentTerms {
+          _id
+          percent
+          description
+        }
+      }
+      creator {
+        _id
+        name
+        profileImg
+      }
+      job {
+        _id
+      }
+    }
+  }
+`;
+
 export const JOBS = gql`
   query GetJobs($status: String) {
     jobsByUser(status: $status) {

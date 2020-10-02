@@ -6,7 +6,15 @@ import { IconButton, Column, Row } from '../';
 export default function CreatorComponentDash({ user, setConversationUser }) {
   const classes = useStyles();
   return (
-    <div style={{ width: '100%' }}>
+    <div
+      style={{
+        width: '100%',
+        border: '1px dashed #ddd',
+        borderRadius: 5,
+        padding: 4,
+        boxSizing: 'border-box',
+      }}
+    >
       <Row j="space-between" a="center">
         <Row a="center" j="flex-start">
           <div

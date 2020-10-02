@@ -2,9 +2,11 @@ import React from 'react';
 import { Slide } from '@material-ui/core';
 import { Column } from '../../../../../components';
 import SummaryView from './components/summaryView';
+import SummaryViewCreative from './components/summaryViewCreative';
 import ProposalView from './components/proposalView';
 import { Query } from 'react-apollo';
-import { JOB, INVITE_BY_ID } from '../../../../../data/queries';
+import { JOB, JOB_CREATIVE, INVITE_BY_ID } from '../../../../../data/queries';
+import Cookies from 'js-cookie';
 
 export default function AppViewJob({
   theme,
@@ -47,36 +49,11 @@ export default function AppViewJob({
   const [contracts, setContracts] = React.useState([]);
   const [proposalOpen, setProposalOpen] = React.useState(false);
   const [messagesEnd] = React.useState(null);
-
+  const isCreator = Cookies.get('userId') === job.user._id;
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div style={{ width: '100%' }}>
-        {!proposalOpen && (
-          <SummaryView
-            job={job}
-            history={history}
-            inviteId={inviteId}
-            jobId={jobId}
-            setJob={setJob}
-            messagesEnd={messagesEnd}
-            inviteStatus={inviteStatus}
-            contracts={contracts}
-            setInviteStatus={setInviteStatus}
-            setProposalOpen={setProposalOpen}
-            proposalOpen={proposalOpen}
-            stripeID={profile.stripeID}
-            theme={theme}
-          />
-        )}
-        <Column>
-          {proposalOpen && (
-            <ProposalView
-              jobId={jobId}
-              setProposalOpen={setProposalOpen}
-              history={history}
-              stripeID={profile.stripeID}
-            />
-          )}
+        {!proposalOpen && isCreator && (
           <Query
             query={JOB}
             variables={{ jobId: jobId }}
@@ -86,14 +63,56 @@ export default function AppViewJob({
                 (contract) => contract.user._id
               );
               setContracts(contractIds);
-              console.log(data);
-              data.jobById && setJob({ ...data.jobById });
             }}
           >
             {({ data }) => {
-              return null;
+              return data ? (
+                <SummaryView
+                  job={data.jobById}
+                  history={history}
+                  inviteId={inviteId}
+                  jobId={job._id}
+                  setJob={setJob}
+                  messagesEnd={messagesEnd}
+                  inviteStatus={inviteStatus}
+                  contracts={contracts}
+                  setInviteStatus={setInviteStatus}
+                  setProposalOpen={setProposalOpen}
+                  proposalOpen={proposalOpen}
+                  stripeID={profile.stripeID}
+                  theme={theme}
+                />
+              ) : null;
             }}
           </Query>
+        )}
+        {!proposalOpen && !isCreator && (
+          <Query
+            query={JOB_CREATIVE}
+            variables={{ jobId: jobId }}
+            fetchPolicy="network-only"
+          >
+            {({ data }) => {
+              return data ? (
+                <SummaryViewCreative
+                  job={data.jobChecklist}
+                  history={history}
+                />
+              ) : null;
+            }}
+          </Query>
+        )}
+
+        <Column>
+          {proposalOpen && (
+            <ProposalView
+              jobId={jobId}
+              setProposalOpen={setProposalOpen}
+              history={history}
+              stripeID={profile.stripeID}
+            />
+          )}
+
           <Query
             query={INVITE_BY_ID}
             variables={{ _id: inviteId }}

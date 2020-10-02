@@ -51,10 +51,11 @@ export default function SummaryView({
   const [tabNbr, setTabNbr] = React.useState(-1);
   const [messages, setMessages] = React.useState([]);
   const isCreator = loggedInUser === job.user._id;
+
   useEffect(() => {
     messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' });
   });
-  console.log(conversationUser);
+
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -163,15 +164,6 @@ export default function SummaryView({
         {isCreator && tabNbr === -1 && (
           <Column>
             <CreatorDashboard
-              job={job}
-              setConversationUser={setConversationUser}
-            />
-          </Column>
-        )}
-
-        {!isCreator && tabNbr === -1 && (
-          <Column>
-            <CreativeDashboard
               job={job}
               setConversationUser={setConversationUser}
             />

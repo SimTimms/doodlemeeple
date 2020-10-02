@@ -35,6 +35,7 @@ import InviteButton from './buttons/inviteButton';
 import CreateMessage from './buttons/createMessage';
 import IconButton from './buttons/iconButton';
 import MenuButton from './buttons/menuButton';
+import CreateQuoteButton from './buttons/createQuote';
 import MenuButtonShortcut from './buttons/menuButtonShortcut';
 import FieldTitle from './fieldTitle';
 import { JobComponent, InviteComponent } from './jobComponent';
@@ -172,6 +173,7 @@ export {
   Uploader,
   CardActionArea,
   Footer,
+  CreateQuoteButton,
   CreateMessage,
   DeclineInvite,
   FieldTitleWrapper,

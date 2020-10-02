@@ -14,5 +14,5 @@ export const useStyles = makeStyles((theme) => ({
   red: { background: theme.palette.error.main },
   amber: { background: theme.palette.warning.main },
   green: { background: theme.palette.secondary.main },
-  dull: { background: '#eee', boxShadow: 'none' },
+  dull: { background: '#ddd', boxShadow: 'none' },
 }));

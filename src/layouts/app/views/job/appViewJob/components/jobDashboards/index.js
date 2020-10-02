@@ -8,18 +8,28 @@ import QuotesDash from './QuotesDash';
 import MilestoneDash from './MilestoneDash';
 import PaymentsDash from './PaymentsDash';
 import CheckListDash from './CheckListDash';
-import CreatorDash from './CreatorDash';
+import CheckListCreativeDash from './CheckListCreativeDash';
+import SummaryDash from './SummaryDash';
 
-export function CreativeDashboard({ job, setConversationUser }) {
+export function CreativeDashboard({
+  job,
+  setConversationUser,
+  contract,
+  setContract,
+  setTabNbr,
+}) {
   const classes = useStyles();
   return (
     <Column>
       <Row a="flex-start">
-        <NotificationDash jobId={job._id} />
-        <CreatorDash
-          creator={job.user}
-          setConversationUser={setConversationUser}
+        <CheckListCreativeDash
+          job={job}
+          contract={contract}
+          setContract={setContract}
+          setTabNbr={setTabNbr}
         />
+        <SummaryDash job={job} setConversationUser={setConversationUser} />
+        <NotificationDash jobId={job._id} />
       </Row>
       <Row>
         <MessageDash />

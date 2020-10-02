@@ -16,6 +16,7 @@ import {
   IconButton,
   UnlockInfo,
   PaymentTerms,
+  EditContractButton,
 } from '../../../../../../../../components';
 
 import QuoteDetails from './quoteDetails';
@@ -102,6 +103,7 @@ export default function EditProposalForm({
                   currency: 'GBP',
                   cost: '0',
                   jobId,
+                  paymentTerms: [],
                 }}
                 onCompleted={(data) => {
                   toaster('Autosave');
@@ -121,7 +123,7 @@ export default function EditProposalForm({
                     <IconButton
                       disabled={false}
                       color="primary"
-                      title={loading ? 'Creating...' : 'Create a Quote'}
+                      title={loading ? 'Creating...' : 'adsasdasda'}
                       icon="fact_check"
                       onClickEvent={() => {
                         !loading && mutation();
@@ -144,6 +146,11 @@ export default function EditProposalForm({
                 editing - send a notification and email to the job owner - add a
                 chat message with link to the contract
               </Typography>
+              <EditContractButton
+                contract={contractData}
+                setContract={setContract}
+                title="Retract & Edit Quote"
+              />
             </div>
           ) : (
             <Column>
