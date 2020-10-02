@@ -96,49 +96,7 @@ export default function EditProposalForm({
         <Divider />
         <Paper>
           {contractData._id === '' ? (
-            <ActionWrapper>
-              <Mutation
-                mutation={CREATE_CONTRACT}
-                variables={{
-                  currency: 'GBP',
-                  cost: '0',
-                  jobId,
-                  paymentTerms: [],
-                }}
-                onCompleted={(data) => {
-                  toaster('Autosave');
-                  const updatedId = data.contractCreateOne.recordId;
-                  setLoading(false);
-                  setContract({
-                    ...contractData,
-                    _id: updatedId,
-                    updatedAt: data.contractCreateOne.record.updatedAt,
-                    user: data.contractCreateOne.record.user,
-                    job: data.contractCreateOne.record.job,
-                  });
-                }}
-              >
-                {(mutation) => {
-                  return (
-                    <IconButton
-                      disabled={false}
-                      color="primary"
-                      title={loading ? 'Creating...' : 'adsasdasda'}
-                      icon="fact_check"
-                      onClickEvent={() => {
-                        !loading && mutation();
-                        setLoading(true);
-                      }}
-                      styleOverride={{
-                        margin: 'auto',
-                        marginTop: 10,
-                        marginBottom: 10,
-                      }}
-                    />
-                  );
-                }}
-              </Mutation>
-            </ActionWrapper>
+            <ActionWrapper></ActionWrapper>
           ) : contractData.status === 'submitted' ? (
             <div>
               <Typography>
