@@ -14,26 +14,26 @@ export default function ItemQuotesIn({ contracts, setTabNbr, invites }) {
   return (
     <RowCheckList j="space-between" active={true}>
       <Column a="space-between">
-        <Row j="flex-start" w={170}>
+        <Row j="flex-start" w={220}>
           <Typography style={{ marginRight: 10, width: 80 }}>
-            Quotes In:
+            Quotes:
           </Typography>
           <Typography
             className={clsx({
               [classes.dull]: true,
               [classes.green]: contracts.length === invites.length,
-              [classes.red]:
+              [classes.green]:
                 contracts.length > 0 && contracts.length < invites.length,
             })}
           >
             <b>
               {!contracts
-                ? 'None'
+                ? 'None Submitted'
                 : contracts.length === invites.length
-                ? 'All'
+                ? 'All Submitted'
                 : contracts.length > 0 &&
                   contracts.length < invites.length &&
-                  'Some'}
+                  'Some Submitted'}
             </b>
           </Typography>
         </Row>

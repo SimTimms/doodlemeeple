@@ -291,6 +291,14 @@ export const JOB = gql`
           name
           profileImg
         }
+        job {
+          contracts {
+            _id
+            user {
+              _id
+            }
+          }
+        }
       }
       showreel
       type

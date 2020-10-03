@@ -29,12 +29,16 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: 16,
     marginRight: 12,
     padding: 5,
-    border: '1px solid #ddd',
+    border: '1px solid rgba(0,0,0,0.1)',
     borderRadius: '50%',
     textAlign: 'center',
   },
   warning: { background: theme.palette.error.main },
   primary: { background: theme.palette.primary.main },
+  secondary: {
+    background: theme.palette.secondary.main,
+    boxShadow: 'inset 0 0 3px rgba(255,255,255,0.1),0 0 5px rgba(0,0,0,0.2)',
+  },
   iconIconNoMargin: { margin: 0 },
   iconIconColumn: {
     marginRight: 0,

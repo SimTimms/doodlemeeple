@@ -55,6 +55,11 @@ export default function MenuButtonShortcut({
                   ? true
                   : false
                 : false,
+              [classes.secondary]: text.back
+                ? text.back === 'secondary'
+                  ? true
+                  : false
+                : false,
             })}
             style={{ color: text.color }}
           >

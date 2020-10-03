@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Slide } from '@material-ui/core';
 import { useStyles } from '../styles';
-import { Column } from '../../../../../../components';
+import { Column, ContractSummary } from '../../../../../../components';
 import { CreatorDashboard } from './jobDashboards/';
 import ChatView from '../components/chatView';
+import InvitesView from './invitesView';
 import CreatorMenu from './creatorMenu';
 
 export default function SummaryViewCreator({ job, history }) {
@@ -12,10 +13,6 @@ export default function SummaryViewCreator({ job, history }) {
   const [pageNbr, setPageNbr] = React.useState(0);
   const [tabNbr, setTabNbr] = React.useState(-1);
   const [messages, setMessages] = React.useState([]);
-  const [contract, setContract] = React.useState();
-  useEffect(() => {
-    setContract(job.contract);
-  }, [job]);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -28,6 +25,14 @@ export default function SummaryViewCreator({ job, history }) {
               job={job}
               setConversationUser={setConversationUser}
               setTabNbr={setTabNbr}
+            />
+          </Column>
+        )}
+        {tabNbr === 2 && (
+          <Column>
+            <InvitesView
+              invites={job.invites}
+              setConversationUser={setConversationUser}
             />
           </Column>
         )}

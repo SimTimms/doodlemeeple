@@ -34,6 +34,7 @@ import FavouriteButton from './buttons/favouriteButton';
 import InviteButton from './buttons/inviteButton';
 import CreateMessage from './buttons/createMessage';
 import IconButton from './buttons/iconButton';
+import InviteComponentFull from './inviteComponentFull';
 import MenuButton from './buttons/menuButton';
 import CreateQuoteButton from './buttons/createQuote';
 import MenuButtonShortcut from './buttons/menuButtonShortcut';
@@ -122,6 +123,7 @@ export {
   HeaderTwo,
   SubHeader,
   FeatureCardHorizontal,
+  InviteComponentFull,
   SubmitContractButton,
   NoticeBox,
   ContractComponentForCreator,
