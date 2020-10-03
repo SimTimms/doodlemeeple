@@ -24,7 +24,29 @@ export function Column(props) {
 }
 
 export function Row(props) {
-  const { children, a, j, wrap } = props;
+  const { children, a, j, wrap, w } = props;
+  const align = a ? a : 'center';
+  const justify = j ? j : 'center';
+  const width = w ? w : '100%';
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        width,
+        flexDirection: 'row',
+        alignItems: align,
+        justifyContent: justify,
+        flexWrap: wrap,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+export function RowCheckList(props) {
+  const { children, a, j, wrap, active } = props;
   const align = a ? a : 'center';
   const justify = j ? j : 'center';
 
@@ -37,6 +59,8 @@ export function Row(props) {
         alignItems: align,
         justifyContent: justify,
         flexWrap: wrap,
+        opacity: !active ? 0.3 : 1,
+        height: 20,
       }}
     >
       {children}

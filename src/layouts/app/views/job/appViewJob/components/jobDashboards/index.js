@@ -15,14 +15,13 @@ export function CreativeDashboard({
   job,
   setConversationUser,
   contract,
-  setContract,
   setTabNbr,
 }) {
   const classes = useStyles();
   return (
     <Column>
       <Row a="flex-start">
-        <CheckListCreativeDash job={job} setTabNbr={setTabNbr} />
+        <CheckListCreativeDash contract={contract} setTabNbr={setTabNbr} />
         <SummaryDash job={job} setConversationUser={setConversationUser} />
         <NotificationDash jobId={job._id} />
       </Row>
@@ -39,12 +38,12 @@ export function CreativeDashboard({
   );
 }
 
-export function CreatorDashboard({ job, setConversationUser }) {
+export function CreatorDashboard({ job, setConversationUser, setTabNbr }) {
   const classes = useStyles();
   return (
     <Column>
       <Row a="flex-start">
-        <CheckListDash job={job} />
+        <CheckListDash job={job} setTabNbr={setTabNbr} />
         <NotificationDash jobId={job._id} />
         <InvitesDash
           invites={job.invites}

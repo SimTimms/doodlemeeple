@@ -21,7 +21,7 @@ export default function CreateQuoteButton({
         jobId,
       }}
       onCompleted={(data) => {
-        toaster('Autosave');
+        toaster('Created');
         const updatedId = data.contractCreateOne.recordId;
         setLoading(false);
         setContract({
@@ -32,6 +32,7 @@ export default function CreateQuoteButton({
           user: data.contractCreateOne.record.user,
           job: data.contractCreateOne.record.job,
           paymentTerms: [],
+          status: null,
         });
       }}
     >

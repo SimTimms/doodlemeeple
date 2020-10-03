@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import { Slide } from '@material-ui/core';
 import { useStyles } from '../styles';
-import { Column, CreateQuoteButton } from '../../../../../../components';
-import { CreativeDashboard } from './jobDashboards/';
+import { Column } from '../../../../../../components';
+import { CreatorDashboard } from './jobDashboards/';
 import ChatView from '../components/chatView';
-import CreativeMenu from './creativeMenu';
-import EditProposalForm from './proposalForm/views/editProposal';
+import CreatorMenu from './creatorMenu';
 
-export default function SummaryViewCreative({ job, history }) {
+export default function SummaryViewCreator({ job, history }) {
   const classes = useStyles();
   const [conversationUser, setConversationUser] = React.useState(null);
   const [pageNbr, setPageNbr] = React.useState(0);
@@ -21,36 +20,16 @@ export default function SummaryViewCreative({ job, history }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <CreativeMenu tabNbr={tabNbr} setTabNbr={setTabNbr} />
+        <CreatorMenu tabNbr={tabNbr} setTabNbr={setTabNbr} />
 
         {tabNbr === -1 && (
           <Column>
-            <CreativeDashboard
+            <CreatorDashboard
               job={job}
               setConversationUser={setConversationUser}
-              contract={contract}
-              setContract={setContract}
               setTabNbr={setTabNbr}
             />
           </Column>
-        )}
-
-        {tabNbr === 6 && contract ? (
-          <EditProposalForm
-            jobId={job.job._id}
-            contractData={contract}
-            setContract={setContract}
-            history={history}
-            setTabNbr={setTabNbr}
-          />
-        ) : (
-          tabNbr === 6 && (
-            <CreateQuoteButton
-              jobId={job.job._id}
-              contract={contract}
-              setContract={setContract}
-            />
-          )
         )}
 
         {conversationUser && (

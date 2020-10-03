@@ -88,7 +88,7 @@ import {
   HeaderThree,
   TextLeft,
 } from './textParts';
-import { Column, Row, TopMenuWrapper } from './blocks';
+import { Column, Row, TopMenuWrapper, RowCheckList } from './blocks';
 
 export {
   CreatorComponentDash,
@@ -166,6 +166,7 @@ export {
   ContentHeader,
   InvitesWidget,
   MediaGallery,
+  RowCheckList,
   StyledNavBar,
   ErrorBox,
   SelectTagsWidget,

@@ -14,7 +14,9 @@ export default function SummaryViewCreative({ job, history }) {
   const [tabNbr, setTabNbr] = React.useState(-1);
   const [messages, setMessages] = React.useState([]);
   const [contract, setContract] = React.useState();
+
   useEffect(() => {
+    console.log(job);
     setContract(job.contract);
   }, [job]);
 

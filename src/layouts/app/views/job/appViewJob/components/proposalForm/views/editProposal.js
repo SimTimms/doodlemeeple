@@ -162,8 +162,8 @@ export default function EditProposalForm({
 
                                 <SubmitContractButton
                                   contract={contractData}
-                                  history={history}
                                   setTabNbr={setTabNbr}
+                                  setContract={setContract}
                                 />
                               </BorderBox>
                             )

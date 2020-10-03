@@ -5,8 +5,8 @@ export default function DividerWithBorder() {
     <div
       style={{
         width: '100%',
-        marginTop: 20,
-        marginBottom: 20,
+        marginTop: 10,
+        marginBottom: 10,
         display: 'flex',
         borderTop: '1px dotted #ddd',
       }}

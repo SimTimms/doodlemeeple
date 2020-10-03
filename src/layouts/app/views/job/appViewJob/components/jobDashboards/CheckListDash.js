@@ -7,10 +7,12 @@ import {
   Paper,
   Row,
   DividerMini,
+  DividerWithBorder,
 } from '../../../../../../../components';
 import TrafficLight from './TrafficLight';
+import { ItemPosted, ItemInvites, ItemQuotesIn } from './CheckListItems';
 
-export default function CheckListDash({ job }) {
+export default function CheckListDash({ job, setTabNbr }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
 
@@ -18,38 +20,21 @@ export default function CheckListDash({ job }) {
     <Column w="50%" p={10}>
       <FieldTitleDashboard name="Checklist" inline={false} />
       <Paper p={10}>
-        <Row j="space-between">
-          <Typography>Job Posted</Typography>
-          <TrafficLight status="green" str="Yes" />
-        </Row>
-        <DividerMini />
-        <Row j="space-between">
-          <Typography>Invites Sent</Typography>
-          <TrafficLight
-            status={job.invites.length > 0 ? 'green' : 'dull'}
-            str={job.invites.length > 0 ? 'Yes' : 'No'}
+        <Column>
+          <ItemPosted setTabNbr={setTabNbr} />
+          <DividerWithBorder />
+          <ItemInvites setTabNbr={setTabNbr} />
+          <DividerWithBorder />
+          <ItemQuotesIn
+            contracts={job.contracts}
+            invites={job.invites}
+            setTabNbr={setTabNbr}
           />
-        </Row>
+          <DividerWithBorder />
+        </Column>
+
         <DividerMini />
-        <Row j="space-between">
-          <Typography>Quotes Received</Typography>
-          <TrafficLight
-            status={
-              job.contracts.length === job.invites.length
-                ? 'green'
-                : job.contracts.length > 0
-                ? 'dull'
-                : 'dull'
-            }
-            str={
-              job.contracts.length === job.invites.length
-                ? 'Yes'
-                : job.contracts.length > 0
-                ? 'Some'
-                : 'No'
-            }
-          />
-        </Row>
+
         <DividerMini />
         <Row j="space-between">
           <Typography>Quote Accepted</Typography>
