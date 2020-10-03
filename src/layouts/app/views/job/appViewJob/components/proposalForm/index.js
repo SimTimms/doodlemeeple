@@ -43,20 +43,12 @@ export default function ProposalForm({ jobId, history, stripeID }) {
             />
           </ActionWrapper>
         </div>
-      ) : contract.status === 'preview' ? null : (
-        <EditProposalForm
-          contractData={contract}
-          jobId={jobId}
-          setContract={setContract}
-          history={history}
-        />
-      )}
+      ) : null}
       <Query
         query={GET_CONTRACT}
         variables={{ jobId }}
         fetchPolicy="network-only"
         onCompleted={(data) => {
-          console.log(data.contractByJob);
           data.contractByJob
             ? setContract({ ...data.contractByJob })
             : setContract({ ...contract, status: '' });

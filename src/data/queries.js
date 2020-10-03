@@ -272,6 +272,7 @@ export const JOB = gql`
       location
       creativeSummary
       submitted
+      paid
       game {
         _id
         backgroundImg
@@ -290,10 +291,91 @@ export const JOB = gql`
           name
           profileImg
         }
+        job {
+          contracts {
+            _id
+            user {
+              _id
+            }
+          }
+        }
       }
       showreel
       type
       createdAt
+    }
+  }
+`;
+
+export const JOB_CHECKLIST = gql`
+  query GetJob($jobId: MongoID!) {
+    jobById(_id: $jobId) {
+      _id
+    }
+  }
+`;
+
+export const JOB_CREATIVE = gql`
+  query GetJob($jobId: MongoID!) {
+    jobChecklist(_id: $jobId) {
+      contract {
+        _id
+        notes
+        deadline
+        startDate
+        cost
+        currency
+        status
+        updatedAt
+        payments {
+          _id
+          amount
+          currency
+          status
+          paidBy {
+            _id
+            name
+          }
+          contract {
+            _id
+          }
+          paymentId
+          createdAt
+          updatedAt
+        }
+        user {
+          email
+          _id
+          name
+          profileImg
+        }
+        job {
+          _id
+          name
+          summary
+          createdAt
+          creativeSummary
+          keywords
+          user {
+            _id
+            email
+            name
+          }
+        }
+        paymentTerms {
+          _id
+          percent
+          description
+        }
+      }
+      creator {
+        _id
+        name
+        profileImg
+      }
+      job {
+        _id
+      }
     }
   }
 `;
@@ -643,6 +725,23 @@ export const AUTOSAVE_IS = gql`
 export const NOTIFICATIONS = gql`
   {
     notificationMany {
+      _id
+      message
+      icon
+      title
+      createdAt
+      linkTo
+      sender {
+        name
+        profileImg
+      }
+    }
+  }
+`;
+
+export const NOTIFICATIONS_BY_JOB = gql`
+  query NotificationsByJob($jobId: MongoID!) {
+    notificationMany(filter: { job: $jobId }) {
       _id
       message
       icon

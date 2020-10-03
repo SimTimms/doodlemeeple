@@ -89,7 +89,7 @@ export default function AppDrawer({
         <div>
           {[
             {
-              name: 'Dashboard',
+              name: 'Home',
               icon: 'home',
               link: () => history.push('/app/dashboard'),
               color: '#444',

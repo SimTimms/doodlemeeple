@@ -13,7 +13,7 @@ export const useStyles = makeStyles((theme) => ({
     letterSpacing: 1,
     boxShadow: '2px 2px 3px rgba(0,0,0,0.2)',
     textDecoration: 'none',
-    borderRadius: 2,
+    borderRadius: 4,
     display: 'flex',
     flexWrap: 'nowrap',
     minWidth: 'auto',
@@ -68,9 +68,9 @@ export const useStyles = makeStyles((theme) => ({
   iconButtonTextDark: {
     background: 'rgba(0,0,0,0)',
     color: '#444',
-    border: 'none',
-    boxShadow: 'none',
+    boxShadow: '2px 2px 5px rgba(0,0,0,0.05)',
     fontWeight: 400,
+    border: '1px solid #eee',
     justifyContent: 'space-between',
     '&:hover': {
       background: '#efeff5',

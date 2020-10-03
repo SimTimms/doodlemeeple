@@ -179,6 +179,8 @@ export const CREATE_CONTRACT = gql`
     ) {
       recordId
       record {
+        currency
+        cost
         user {
           name
         }

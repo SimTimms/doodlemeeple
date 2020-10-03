@@ -8,12 +8,13 @@ import {
   Meta,
   UnlockInfoReverse,
   MenuButtonShortcut,
-  Row,
+  TopMenuWrapper,
   BorderBox,
   Paper,
   IconButton,
   Divider,
 } from '../../../../../../components';
+import CreatorDashboard from './creatorDashboard/';
 import CreativeView from '../components/creativeView';
 import CreativeActions from '../components/creativeActions';
 import ClientView from '../components/clientView';
@@ -48,7 +49,7 @@ export default function SummaryView({
   const [loadingStripe, setLoadingStripe] = React.useState(false);
   const loggedInUser = Cookies.get('userId');
   const [pageNbr, setPageNbr] = React.useState(0);
-  const [tabNbr, setTabNbr] = React.useState(1);
+  const [tabNbr, setTabNbr] = React.useState(-1);
   const [messages, setMessages] = React.useState([]);
   const isCreator = loggedInUser === job.user._id;
   useEffect(() => {
@@ -58,10 +59,10 @@ export default function SummaryView({
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <Row j="center">
+        <TopMenuWrapper j="center">
           <MenuButtonShortcut
             text={{
-              name: 'Show All',
+              name: 'Dashboard',
               color: '#222',
               icon: 'chevron_right',
               count: 0,
@@ -69,6 +70,7 @@ export default function SummaryView({
             onClickEvent={() => {
               setTabNbr(0);
             }}
+            column={true}
             active={tabNbr === 0}
           />
           <MenuButtonShortcut
@@ -81,6 +83,7 @@ export default function SummaryView({
             onClickEvent={() => {
               setTabNbr(1);
             }}
+            column={true}
             active={tabNbr === 1}
           />
           {isCreator && (
@@ -94,6 +97,7 @@ export default function SummaryView({
               onClickEvent={() => {
                 setTabNbr(2);
               }}
+              column={true}
               active={tabNbr === 2}
             />
           )}
@@ -108,6 +112,7 @@ export default function SummaryView({
               onClickEvent={() => {
                 setTabNbr(2);
               }}
+              column={true}
               active={tabNbr === 2}
             />
           )}
@@ -122,6 +127,7 @@ export default function SummaryView({
               onClickEvent={() => {
                 setTabNbr(6);
               }}
+              column={true}
               active={tabNbr === 6}
             />
           )}
@@ -135,11 +141,12 @@ export default function SummaryView({
             onClickEvent={() => {
               setTabNbr(4);
             }}
+            column={true}
             active={tabNbr === 4}
           />
-        </Row>
+        </TopMenuWrapper>
 
-        {loggedInUser !== job.user._id && (tabNbr === 1 || tabNbr === 0) && (
+        {!isCreator && (tabNbr === 1 || tabNbr === 0) && (
           <Column>
             <Divider />
             <Paper p={'0'}>

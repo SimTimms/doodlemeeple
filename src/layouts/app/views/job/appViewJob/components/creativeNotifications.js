@@ -6,7 +6,6 @@ export default function CreativeNotifications({
   jobStatus,
   setTabNbr,
 }) {
-  console.log(inviteStatus);
   return inviteStatus === 'declined' ? (
     <NoticeBox
       title="Declined"

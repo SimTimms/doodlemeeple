@@ -20,12 +20,13 @@ export default function NoticeBox({ title, ...props }) {
       <Typography
         variant="body1"
         style={{
-          background: 'rgba(0,0,0,0.5)',
+          background: '#fff',
           marginTop: 10,
           marginBottom: 6,
           padding: 20,
-          borderRadius: 10,
+          borderRadius: 5,
           fontSize: 16,
+          color: '#222',
         }}
       >
         {subTitle}

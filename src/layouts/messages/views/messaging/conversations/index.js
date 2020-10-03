@@ -60,7 +60,6 @@ export default function Conversations({ history, setConversationArgs }) {
           }}
         >
           {({ data, loading }) => {
-            console.log(data);
             return loading ? <LoadIcon /> : null;
           }}
         </Query>

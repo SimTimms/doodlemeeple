@@ -19,7 +19,6 @@ export const useStyles = makeStyles((theme) => ({
       background: 'none',
     },
   },
-
   iconButtonOnly: { marginRight: 0 },
   iconIcon: {
     display: 'flex',
@@ -28,12 +27,22 @@ export const useStyles = makeStyles((theme) => ({
     color: '#222',
     position: 'relative',
     fontSize: 16,
-    marginRight: 8,
+    marginRight: 12,
     padding: 5,
-
+    border: '1px solid rgba(0,0,0,0.1)',
+    borderRadius: '50%',
     textAlign: 'center',
   },
-
+  warning: { background: theme.palette.error.main },
+  primary: { background: theme.palette.primary.main },
+  secondary: {
+    background: theme.palette.secondary.main,
+    boxShadow: 'inset 0 0 3px rgba(255,255,255,0.1),0 0 5px rgba(0,0,0,0.2)',
+  },
+  iconIconNoMargin: { margin: 0 },
+  iconIconColumn: {
+    marginRight: 0,
+  },
   dark: { color: theme.palette.primary.light },
   link: {
     textDecoration: 'none',
@@ -57,7 +66,7 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.error.main,
     color: '#fff',
   },
-  button: { textAlign: 'right', color: '#222', fontSize: 14 },
+  button: { textAlign: 'right', color: '#222', fontSize: 12 },
   buttonMobile: {
     padding: 5,
     textAlign: 'center',
@@ -66,7 +75,13 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     paddingBottom: 8,
   },
+  buttonRootColumn: {
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    paddingBottom: 8,
+    width: 120,
+  },
   active: {
-    borderBottom: `2px solid #aaa`,
+    borderBottom: `2px solid ${theme.palette.primary.main}`,
   },
 }));

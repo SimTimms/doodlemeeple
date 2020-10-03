@@ -56,6 +56,18 @@ export default function ViewProposal({ jobId, history }) {
                       );
                     }}
                   </Mutation>
+                  <IconButton
+                    title="Back"
+                    icon="chevron_left"
+                    styleOverride={{ width: '100%' }}
+                    color="warning"
+                    disabled={false}
+                    onClickEvent={() => {
+                      history.push('');
+                    }}
+                    iconPos="right"
+                    type="button"
+                  />
                 </BorderBox>
               </Paper>
             );

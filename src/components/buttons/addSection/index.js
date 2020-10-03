@@ -20,7 +20,6 @@ function AddSection({ setSections, sections, userType }) {
 
   useEffect(() => {
     setPage(userType.creator ? 1 : 0);
-    console.log(userType);
   }, [userType]);
 
   return (
