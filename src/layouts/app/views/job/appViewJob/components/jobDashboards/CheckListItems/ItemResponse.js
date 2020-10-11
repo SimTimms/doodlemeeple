@@ -20,6 +20,7 @@ export default function ItemResponse({ contract, setTabNbr }) {
           </Typography>
           <Typography
             className={clsx({
+              [classes.tag]: true,
               [classes.red]: true,
             })}
           >

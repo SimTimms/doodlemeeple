@@ -8,13 +8,12 @@ import moment from 'moment';
 
 export default function ContractComponentForCreator({
   contractData,
-  history,
-  setContract,
+  job,
   ...props
 }) {
   let paymentTermsSum = contractData.cost;
   const classes = useStyles();
-  const { setOpenContract, setContractStatus, readOnly } = props;
+  const { readOnly } = props;
 
   return (
     <div style={{ width: '100%' }}>
@@ -38,7 +37,7 @@ export default function ContractComponentForCreator({
         </Typography>*/}
         <Typography>
           <b>Project:</b>
-          {` ${contractData.job.name} `}
+          {` ${job.name} `}
           {/*
           <span
             className={classes.id}
@@ -46,7 +45,7 @@ export default function ContractComponentForCreator({
         </Typography>
         <Typography>
           <b>Client:</b>
-          {` ${contractData.job.user.name}`}
+          {` ${job.user.name}`}
           {/*
           <span className={classes.id}>
           {` (DMID-${contractData.job.user._id})`}
@@ -86,8 +85,8 @@ export default function ContractComponentForCreator({
           Client with the following services (the "Services"):
         </Typography>
         <Typography style={{ marginLeft: 40, marginTop: 20 }}>
-          <b>{contractData.job.name}</b>
-          {` ${contractData.job.summary}`}
+          <b>{job.name}</b>
+          {` ${job.summary}`}
         </Typography>
         <Divider />
         <Typography>
@@ -228,16 +227,6 @@ ${contractData.currency} `}
           <b>10.1</b> By clicking "I Accept" the Client will enter into a
           binding contract with the Creative.
         </Typography>
-        {!readOnly && (
-          <Signature
-            status={contractData.status}
-            setOpenContract={setOpenContract}
-            setContractStatus={setContractStatus}
-            contractData={contractData}
-            history={history}
-            setContract={setContract}
-          />
-        )}
       </div>
     </div>
   );

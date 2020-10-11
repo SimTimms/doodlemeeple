@@ -9,7 +9,7 @@ import {
 } from '../../../../../../../../components';
 import clsx from 'clsx';
 
-export default function ItemQuotesIn({ contracts, setTabNbr, invites }) {
+export default function ItemCreativePaid({ paid, setTabNbr }) {
   const classes = useStyles();
   return (
     <RowCheckList j="space-between" active={true}>
@@ -19,19 +19,10 @@ export default function ItemQuotesIn({ contracts, setTabNbr, invites }) {
             className={clsx({
               [classes.tag]: true,
               [classes.dull]: true,
-              [classes.red]: contracts.length === 0,
+              [classes.red]: paid !== 'paid',
             })}
           >
-            Quotes:{' '}
-            <b>
-              {!contracts
-                ? 'None Submitted'
-                : contracts.length === invites.length
-                ? 'All Submitted'
-                : contracts.length > 0 &&
-                  contracts.length < invites.length &&
-                  'Some Submitted'}
-            </b>
+            Creative Paid: <b>0GBP / 100GBP</b>
           </Typography>
         </Row>
       </Column>
@@ -39,8 +30,8 @@ export default function ItemQuotesIn({ contracts, setTabNbr, invites }) {
         text={{
           name: '',
           color: '',
-          border: '',
-          icon: 'chevron_right',
+          border: paid !== 'paid' ? 'warning' : 'check',
+          icon: paid !== 'paid' ? 'star' : 'check',
           count: 0,
           back: '',
         }}

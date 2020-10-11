@@ -5,7 +5,7 @@ import {
   TopMenuWrapper,
 } from '../../../../../../components';
 
-export default function CreatorMenu({ tabNbr, setTabNbr }) {
+export default function CreatorMenu({ tabNbr, setTabNbr, activeContract }) {
   const classes = useStyles();
 
   return (
@@ -37,7 +37,6 @@ export default function CreatorMenu({ tabNbr, setTabNbr }) {
           column={true}
           active={tabNbr === 1}
         />
-
         <MenuButtonShortcut
           text={{
             name: 'Creatives',
@@ -51,7 +50,21 @@ export default function CreatorMenu({ tabNbr, setTabNbr }) {
           column={true}
           active={tabNbr === 2}
         />
-
+        {activeContract && (
+          <MenuButtonShortcut
+            text={{
+              name: 'Contract',
+              color: '#222',
+              icon: 'request_quote',
+              count: 0,
+            }}
+            onClickEvent={() => {
+              setTabNbr(7);
+            }}
+            column={true}
+            active={tabNbr === 7}
+          />
+        )}
         <MenuButtonShortcut
           text={{
             name: 'Payments',

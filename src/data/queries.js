@@ -248,6 +248,61 @@ export const JOB = gql`
       _id
       name
       keywords
+      activeContract {
+        _id
+        notes
+        deadline
+        startDate
+        cost
+        currency
+        status
+        updatedAt
+        signedBy {
+          _id
+          name
+        }
+        signedDate
+        payments {
+          _id
+          amount
+          currency
+          status
+          paidBy {
+            _id
+            name
+          }
+          contract {
+            _id
+          }
+          paymentId
+          createdAt
+          updatedAt
+        }
+        user {
+          email
+          _id
+          name
+          profileImg
+        }
+        job {
+          _id
+          name
+          summary
+          createdAt
+          creativeSummary
+          keywords
+          user {
+            _id
+            email
+            name
+          }
+        }
+        paymentTerms {
+          _id
+          percent
+          description
+        }
+      }
       assignedCreative {
         _id
         name
@@ -293,6 +348,7 @@ export const JOB = gql`
         }
         job {
           contracts {
+            status
             _id
             user {
               _id

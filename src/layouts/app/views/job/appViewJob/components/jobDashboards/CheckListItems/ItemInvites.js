@@ -14,16 +14,14 @@ export default function ItemInvites({ setTabNbr }) {
   return (
     <RowCheckList j="space-between" active={true}>
       <Column a="space-between">
-        <Row j="flex-start" w={170}>
-          <Typography style={{ marginRight: 10, width: 80 }}>
-            Invites Sent:
-          </Typography>
+        <Row j="flex-start" w={220}>
           <Typography
             className={clsx({
-              [classes.green]: true,
+              [classes.tag]: true,
+              [classes.dull]: true,
             })}
           >
-            <b>Done</b>
+            Invites Sent:<b> Done</b>
           </Typography>
         </Row>
       </Column>

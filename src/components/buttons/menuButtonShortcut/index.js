@@ -31,6 +31,7 @@ export default function MenuButtonShortcut({
           [classes.buttonRoot]: true,
           [classes.active]: active,
           [classes.buttonRootColumn]: column,
+          [classes.buttonRootNoBackHover]: text.name === '',
         })}
       >
         <div
@@ -60,6 +61,9 @@ export default function MenuButtonShortcut({
                   ? true
                   : false
                 : false,
+              [classes.borderSecondary]: text.border === 'secondary',
+              [classes.borderWarning]: text.border === 'warning',
+              [classes.backHover]: text.name === '',
             })}
             style={{ color: text.color }}
           >

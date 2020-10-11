@@ -1,10 +1,17 @@
 import React from 'react';
 import { useStyles } from './styles';
-import { Row, Divider, PaymentSchedule, FieldTitleDashboard } from '../';
+import {
+  Row,
+  Divider,
+  PaymentSchedule,
+  FieldTitleDashboard,
+  IconButton,
+  BorderBox,
+} from '../';
 import moment from 'moment';
 import { Typography } from '@material-ui/core';
 
-export default function ContractSummaryForCreative({ contractData }) {
+export default function ContractSummaryForCreator({ contractData }) {
   const classes = useStyles();
   const { job } = contractData;
   return (
@@ -81,7 +88,7 @@ export default function ContractSummaryForCreative({ contractData }) {
       <Divider />
       <FieldTitleDashboard name="Payment Schedule" inline={false} />
       <Divider />
-      <PaymentSchedule contractData={contractData} isClient={false} />
+      <PaymentSchedule contractData={contractData} isClient={true} />
     </div>
   );
 }

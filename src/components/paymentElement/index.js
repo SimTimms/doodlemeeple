@@ -17,18 +17,13 @@ import clsx from 'clsx';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE);
 
-export default function PaymentElement({
-  display,
-  contractData,
-  setDisplayPayment,
-  setContractStatus,
-}) {
+export default function PaymentElement({ display, contractData, ...props }) {
   const classes = useStyles();
   const [paymentIntent, setPaymentIntent] = React.useState(null);
   const [visible, setVisible] = React.useState(null);
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [paymentStatus, setPaymentStatus] = React.useState('');
-
+  const { setDisplayPayment, setContractStatus } = props;
   useEffect(() => {
     setVisible(display);
     setPaymentStatus(contractData.status);

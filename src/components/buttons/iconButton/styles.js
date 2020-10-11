@@ -27,7 +27,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   iconButtonSecondary: {
-    background: theme.palette.secondary.light,
+    background: theme.palette.secondary.main,
     color: '#fff',
     boxShadow: '2px 2px 5px rgba(0,0,0,0.1)',
     '&:hover': {
@@ -139,7 +139,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
   },
   iconButtonIconSecondary: {
-    color: theme.palette.primary.main,
+    color: '#fff',
   },
   iconButtonIconTextError: {
     color: theme.palette.error.main,

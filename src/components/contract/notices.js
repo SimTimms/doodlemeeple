@@ -11,11 +11,13 @@ export default function Notices({ status }) {
           color="secondary"
         />
       ) : (
-        <NoticeBox
-          title="Read Me"
-          subTitle={`Please read the following General Service Agreement and Click "I Agree" to appoint this creative.`}
-          color="primary"
-        />
+        status !== 'accepted' && (
+          <NoticeBox
+            title="Read Me"
+            subTitle={`Please read the following General Service Agreement and Click "I Agree" to appoint this creative.`}
+            color="primary"
+          />
+        )
       )}
     </div>
   );

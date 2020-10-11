@@ -4,17 +4,10 @@ import { Mutation } from 'react-apollo';
 import { SIGN_CONTRACT, DECLINE_CONTRACT } from '../../data/mutations';
 import moment from 'moment';
 
-export default function Signature({
-  status,
-  setOpenContract,
-  setContractStatus,
-  contractData,
-  history,
-  setContract,
-}) {
+export default function Signature({ contractData, onAccept }) {
   return (
     <ActionWrapper>
-      {status !== 'paid' ? (
+      {contractData.status !== 'accepted' && contractData.status !== 'paid' ? (
         <BorderBox>
           <div
             style={{
@@ -29,15 +22,7 @@ export default function Signature({
               variables={{
                 contractId: contractData._id,
               }}
-              onCompleted={(data) => {
-                setContract({
-                  ...contractData,
-                  signedDate: data.signContract.signedDate,
-                  status: 'accepted',
-                });
-                setContractStatus && setContractStatus('accepted');
-                setOpenContract && setOpenContract(false);
-              }}
+              onCompleted={() => onAccept()}
             >
               {(mutation) => {
                 return (
@@ -60,10 +45,6 @@ export default function Signature({
               mutation={DECLINE_CONTRACT}
               variables={{
                 contractId: contractData._id,
-              }}
-              onCompleted={() => {
-                setContractStatus && setContractStatus('declined');
-                setOpenContract && setOpenContract(false);
               }}
             >
               {(mutation) => {
@@ -98,18 +79,6 @@ export default function Signature({
           />
         </BorderBox>
       )}
-
-      <IconButton
-        title={contractData.status === 'paid' ? 'Back to Project' : 'Close'}
-        color="text-dark"
-        icon={contractData.status === 'paid' ? 'chevron_left' : 'close'}
-        onClickEvent={() => {
-          contractData.status === 'paid'
-            ? history.push(`/app/view-job/${contractData.job._id}`)
-            : setOpenContract && setOpenContract(false);
-        }}
-        iconPos={contractData.status === 'paid' ? 'left' : 'right'}
-      />
     </ActionWrapper>
   );
 }

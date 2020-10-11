@@ -1,16 +1,18 @@
 import React from 'react';
 import { useStyles } from './styles';
 import { Typography } from '@material-ui/core';
-import {
-  Column,
-  RowCheckList,
-  Row,
-  MenuButtonShortcut,
-} from '../../../../../../../../components';
+import { Column, RowCheckList, Row, MenuButtonShortcut } from '../';
 import clsx from 'clsx';
 
-export default function ItemQuotesIn({ contracts, setTabNbr, invites }) {
+export default function CheckListItem({
+  color,
+  label,
+  status,
+  icon,
+  ...props
+}) {
   const classes = useStyles();
+  const { onClickEvent } = props;
   return (
     <RowCheckList j="space-between" active={true}>
       <Column a="space-between">
@@ -19,19 +21,11 @@ export default function ItemQuotesIn({ contracts, setTabNbr, invites }) {
             className={clsx({
               [classes.tag]: true,
               [classes.dull]: true,
-              [classes.red]: contracts.length === 0,
+              [classes.red]: color === 'warning',
+              [classes.green]: color === 'green',
             })}
           >
-            Quotes:{' '}
-            <b>
-              {!contracts
-                ? 'None Submitted'
-                : contracts.length === invites.length
-                ? 'All Submitted'
-                : contracts.length > 0 &&
-                  contracts.length < invites.length &&
-                  'Some Submitted'}
-            </b>
+            {label} <b>{status}</b>
           </Typography>
         </Row>
       </Column>
@@ -39,12 +33,12 @@ export default function ItemQuotesIn({ contracts, setTabNbr, invites }) {
         text={{
           name: '',
           color: '',
-          border: '',
-          icon: 'chevron_right',
+          border: color,
+          icon: icon,
           count: 0,
           back: '',
         }}
-        onClickEvent={() => setTabNbr(2)}
+        onClickEvent={() => onClickEvent && onClickEvent()}
         active={false}
       />
     </RowCheckList>

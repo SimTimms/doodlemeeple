@@ -12,9 +12,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     marginRight: 0,
     position: 'relative',
-    '&:hover': {
-      background: 'theme.palette.primary.dark',
-    },
+
     '&:visited': {
       background: 'none',
     },
@@ -24,14 +22,26 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: '#222',
+    color: '#fff',
     position: 'relative',
     fontSize: 16,
     marginRight: 12,
     padding: 5,
     border: '1px solid rgba(0,0,0,0.1)',
+    background: 'rgba(0,0,0,0.1)',
     borderRadius: '50%',
     textAlign: 'center',
+  },
+  backHover: {
+    '&:hover': {
+      opacity: 0.4,
+    },
+  },
+  borderSecondary: {
+    background: `${theme.palette.secondary.main}`,
+  },
+  borderWarning: {
+    background: `${theme.palette.error.main}`,
   },
   warning: { background: theme.palette.error.main },
   primary: { background: theme.palette.primary.main },
@@ -74,6 +84,11 @@ export const useStyles = makeStyles((theme) => ({
   buttonRoot: {
     justifyContent: 'space-between',
     paddingBottom: 8,
+  },
+  buttonRootNoBackHover: {
+    '&:hover': {
+      background: 'none !important',
+    },
   },
   buttonRootColumn: {
     justifyContent: 'space-between',
