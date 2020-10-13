@@ -12,6 +12,7 @@ import Cookies from 'js-cookie';
 
 export default function PaymentsView({ job }) {
   const isCreator = Cookies.get('userId') === job.user._id;
+
   return (
     <Column j="center" a="center">
       <Paper pt={10}>

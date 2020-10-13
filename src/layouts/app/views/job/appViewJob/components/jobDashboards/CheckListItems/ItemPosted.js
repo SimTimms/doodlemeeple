@@ -9,7 +9,7 @@ import {
 } from '../../../../../../../../components';
 import clsx from 'clsx';
 
-export default function ItemPosted({ setTabNbr }) {
+export default function ItemPosted({ setTabNbr, color }) {
   const classes = useStyles();
   return (
     <RowCheckList j="space-between" active={true}>
@@ -29,9 +29,9 @@ export default function ItemPosted({ setTabNbr }) {
         text={{
           name: '',
           color: '',
-          icon: 'chevron_right',
+          icon: color === 1 ? 'check' : color === 2 ? 'star' : '',
           count: 0,
-          back: '',
+          back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}
         onClickEvent={() => setTabNbr(1)}
         active={false}

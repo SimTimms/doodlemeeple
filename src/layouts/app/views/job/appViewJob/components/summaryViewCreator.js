@@ -12,6 +12,7 @@ import {
 import { CreatorDashboard } from './jobDashboards/';
 import ChatView from '../components/chatView';
 import InvitesView from './invitesView';
+import PaymentsView from './paymentsView';
 import CreatorMenu from './creatorMenu';
 
 export default function SummaryViewCreator({ job, history }) {
@@ -30,7 +31,6 @@ export default function SummaryViewCreator({ job, history }) {
           setTabNbr={setTabNbr}
           activeContract={job.activeContract}
         />
-
         {tabNbr === -1 && (
           <Column>
             <CreatorDashboard
@@ -46,6 +46,11 @@ export default function SummaryViewCreator({ job, history }) {
               invites={job.invites}
               setConversationUser={setConversationUser}
             />
+          </Column>
+        )}
+        {tabNbr === 4 && (
+          <Column>
+            <PaymentsView job={job} />
           </Column>
         )}
         {tabNbr === 7 && (
@@ -71,7 +76,6 @@ export default function SummaryViewCreator({ job, history }) {
             />
           </BorderBox>
         )}
-
         {conversationUser && (
           <ChatView
             job={job}

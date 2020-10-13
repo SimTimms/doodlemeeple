@@ -83,7 +83,7 @@ function AppLayout(props) {
     name: 'Open Beta',
     icon: 'warning',
     link: () => history.push('/app/beta'),
-    color: props.theme.palette.error.main,
+    color: props.theme.palette.primary.main,
     count: 0,
   };
   const creativeRoster = {

@@ -6,6 +6,8 @@ import {
   NotificationComponent,
   FieldTitleDashboard,
   Paper,
+  Divider,
+  DividerMini,
 } from '../../../../../../../components';
 import { NOTIFICATIONS_BY_JOB } from '../../../../../../../data/queries';
 
@@ -13,11 +15,12 @@ export default function NotificationDash({ jobId }) {
   const [notificationArray, setNotificationArray] = React.useState([]);
   return (
     <Column w="50%" p={10}>
-      <FieldTitleDashboard name="Notifications" inline={false} />
       <Paper p={10}>
+        <FieldTitleDashboard name="Notifications" inline={false} a="c" />
+        <DividerMini />
         <Query
           query={NOTIFICATIONS_BY_JOB}
-          variables={{ job: jobId }}
+          variables={{ jobId: jobId }}
           onCompleted={(data) => {
             setNotificationArray(data.notificationMany);
           }}

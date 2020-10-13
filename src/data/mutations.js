@@ -63,9 +63,11 @@ export const DELETE_IMAGE = gql`
 `;
 
 export const UPDATE_INVITE = gql`
-  mutation UpdateInvite($_id: MongoID!) {
-    declineInvite(_id: $_id) {
-      _id
+  mutation UpdateInvite($_id: MongoID!, $status: String) {
+    inviteUpdateById(record: { _id: $_id, status: $status }) {
+      record {
+        _id
+      }
     }
   }
 `;
@@ -232,8 +234,8 @@ export const REMOVE_CONTRACT = gql`
 `;
 
 export const DECLINE_INVITE = gql`
-  mutation DeclineInvite($id: MongoID!) {
-    declineInvite(_id: $id) {
+  mutation DeclineInvite($_id: MongoID!) {
+    declineInvite(_id: $_id) {
       _id
     }
   }

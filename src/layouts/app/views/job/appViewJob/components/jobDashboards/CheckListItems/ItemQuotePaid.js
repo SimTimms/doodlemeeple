@@ -9,7 +9,7 @@ import {
 } from '../../../../../../../../components';
 import clsx from 'clsx';
 
-export default function ItemQuoteAccepted({ paid, setTabNbr }) {
+export default function ItemQuotePaid({ paid, setTabNbr, color }) {
   const classes = useStyles();
   return (
     <RowCheckList j="space-between" active={true}>
@@ -19,7 +19,6 @@ export default function ItemQuoteAccepted({ paid, setTabNbr }) {
             className={clsx({
               [classes.tag]: true,
               [classes.dull]: true,
-              [classes.red]: paid !== 'paid',
             })}
           >
             Funded: <b>{paid !== 'paid' ? 'No' : 'Yes'}</b>
@@ -30,10 +29,9 @@ export default function ItemQuoteAccepted({ paid, setTabNbr }) {
         text={{
           name: '',
           color: '',
-          border: paid !== 'paid' ? 'warning' : 'check',
-          icon: paid !== 'paid' ? 'star' : 'check',
+          icon: color === 1 ? 'check' : color === 2 ? 'star' : '',
           count: 0,
-          back: '',
+          back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}
         onClickEvent={() => setTabNbr(2)}
         active={false}

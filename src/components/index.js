@@ -18,6 +18,7 @@ import PaymentElement from './paymentElement';
 import CurrencySelector from './currencySelector';
 import DeclineInvite from './buttons/declineInvite';
 import CheckListItem from './checkListItem';
+import Widget from './widget';
 import TabButton from './buttons/tabButton';
 import InvitesWidget from './invites';
 import MediaGallery from './mediaGallery';
@@ -151,6 +152,7 @@ export {
   FavouriteButton,
   InviteButton,
   NoticeBoard,
+  Widget,
   IconButton,
   ProfileCard,
   ProfileCardCreative,

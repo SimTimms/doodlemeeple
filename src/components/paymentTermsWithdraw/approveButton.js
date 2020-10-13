@@ -21,11 +21,15 @@ export default function ApproveButton({
       variables={{
         _id: paymentId,
       }}
+      onCompleted={(data) => {
+        data.approveWithdraw === 'STRIPE SETUP' &&
+          setResponse('Stripe Required');
+      }}
     >
       {(mutation) => {
         return (
           <IconButton
-            title={title ? title : 'Approve'}
+            title={response ? response : title ? title : 'Approve'}
             icon=""
             onClickEvent={() => {
               setRequested(true);

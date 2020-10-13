@@ -1,9 +1,14 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { IconButton, Column, Row } from '../';
+import { IconButton, Column, Row, MenuButtonShortcut } from '../';
 
-export default function CreatorComponentDash({ user, setConversationUser }) {
+export default function CreatorComponentDash({
+  user,
+  setConversationUser,
+  declined,
+  history,
+}) {
   const classes = useStyles();
   return (
     <div
@@ -28,12 +33,33 @@ export default function CreatorComponentDash({ user, setConversationUser }) {
             <Typography style={{ fontSize: 12 }}>Creator</Typography>
           </Column>
         </Row>
-        <IconButton
-          title=""
-          icon="chat"
-          color="text-dark"
-          onClickEvent={() => setConversationUser(user)}
+        <MenuButtonShortcut
+          text={{
+            name: '',
+            color: '',
+            icon: 'contact_mail',
+            count: 0,
+            back: 'primary',
+          }}
+          onClickEvent={() => {
+            history.push(`/public-preview/${user._id}`);
+          }}
+          active={false}
         />
+
+        {!declined && (
+          <MenuButtonShortcut
+            text={{
+              name: '',
+              color: '',
+              icon: 'chat',
+              count: 0,
+              back: 'primary',
+            }}
+            onClickEvent={() => setConversationUser(user)}
+            active={false}
+          />
+        )}
       </Row>
     </div>
   );

@@ -32,9 +32,7 @@ export default function PaymentTermsWithdraw({ data, isCreator }) {
                 </TableCell>
                 <TableCell align="right">
                   {payment.paid === 'success' && <div>PAID OUT</div>}
-                  {isCreator &&
-                  payment.paid !== 'success' &&
-                  payment.withdrawRequest ? (
+                  {isCreator && payment.paid !== 'success' ? (
                     <ApproveButton
                       paymentId={payment._id}
                       withdrawApproved={payment.withdrawApproved}

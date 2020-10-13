@@ -43,13 +43,19 @@ export default function InviteComponentFull({
               <Typography
                 style={{ fontSize: 12 }}
                 className={clsx({
+                  [classes.dull]: true,
                   [classes.red]:
                     invite.status && invite.status === 'unopened' && true,
                   [classes.green]:
-                    invite.status && invite.status === 'quote_sent' && true,
+                    invite.status &&
+                    (invite.status === 'quote_sent' ||
+                      invite.status === 'read') &&
+                    true,
                 })}
               >
-                {invite.status && invite.status === 'unopened' && 'Unopened'}
+                {invite.status && invite.status === 'unopened'
+                  ? 'Unopened'
+                  : invite.status === 'read' && 'Opened'}
               </Typography>
             </Column>
           </Row>
@@ -65,24 +71,11 @@ export default function InviteComponentFull({
                 display ? setDisplay(false) : setDisplay(true)
               }
             />
-            /* <MenuButtonShortcut
-              text={{
-                name: '',
-                color: '#fff',
-                icon: display ? 'keyboard_arrow_up' : 'request_quote',
-                count: 0,
-                back: 'secondary',
-              }}
-              onClickEvent={() =>
-                display ? setDisplay(false) : setDisplay(true)
-              }
-              active={false}
-            />*/
           )}
           <MenuButtonShortcut
             text={{
               name: '',
-              color: '',
+              color: '#444',
               icon: 'chat',
               count: 0,
               back: '',

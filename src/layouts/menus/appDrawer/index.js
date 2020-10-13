@@ -109,7 +109,6 @@ export default function AppDrawer({
               color: '#444',
               count: counts.invites,
             },
-
             {
               name: profile.creatorTrue ? 'Projects' : 'hide',
               icon: 'work',
@@ -146,7 +145,7 @@ export default function AppDrawer({
                 Cookies.remove('userId');
                 history.replace(`/`);
               },
-              color: theme.palette.error.main,
+              color: theme.palette.primary.main,
               count: null,
             },
           ].map(

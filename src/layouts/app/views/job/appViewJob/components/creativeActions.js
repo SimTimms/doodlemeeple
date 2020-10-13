@@ -1,29 +1,30 @@
 import React from 'react';
 import { useStyles } from '../styles';
-import { IconButton, DeclineInvite } from '../../../../../../components';
+import {
+  IconButton,
+  DeclineInvite,
+  BorderBox,
+} from '../../../../../../components';
 
 export default function CreativeActions({
-  proposalOpen,
-  setProposalOpen,
   inviteId,
-  setInviteStatus,
+  onClickEvent,
+  onDeclineEvent,
+  ...props
 }) {
   const classes = useStyles();
-
+  const { proposalOpen, setProposalOpen, setInviteStatus } = props;
   return (
     <div className={classes.actionWrapper}>
       <IconButton
-        color="primary"
-        icon={proposalOpen ? 'fact_check' : 'fact_check'}
+        color="secondary"
+        icon={proposalOpen ? 'thumb_up' : 'thumb_up'}
         title={proposalOpen ? 'Minimise Quote' : 'Quote'}
-        onClickEvent={() => setProposalOpen(proposalOpen ? false : true)}
-        styleOverride={{ width: '100%' }}
+        onClickEvent={() => onClickEvent()}
+        styleOverride={{ width: '100%', marginBottom: 0 }}
         iconPos="right"
       />
-      <DeclineInvite
-        inviteId={inviteId}
-        onCompleted={() => setInviteStatus('declined')}
-      />
+      <DeclineInvite inviteId={inviteId} onCompleted={() => onDeclineEvent()} />
     </div>
   );
 }

@@ -9,7 +9,7 @@ import {
 } from '../../../../../../../../components';
 import clsx from 'clsx';
 
-export default function ItemInvites({ setTabNbr }) {
+export default function ItemInvites({ setTabNbr, color }) {
   const classes = useStyles();
   return (
     <RowCheckList j="space-between" active={true}>
@@ -25,6 +25,18 @@ export default function ItemInvites({ setTabNbr }) {
           </Typography>
         </Row>
       </Column>
+      <MenuButtonShortcut
+        text={{
+          name: '',
+          color: '',
+          border: '',
+          icon: color === 1 ? 'check' : color === 2 ? 'star' : '',
+          count: 0,
+          back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
+        }}
+        onClickEvent={() => setTabNbr(2)}
+        active={false}
+      />
     </RowCheckList>
   );
 }

@@ -9,7 +9,7 @@ import {
 } from '../../../../../../../../components';
 import clsx from 'clsx';
 
-export default function ItemLeaveReview({ paid, setTabNbr, color }) {
+export default function InviteReplied({ color, setTabNbr, status }) {
   const classes = useStyles();
   return (
     <RowCheckList j="space-between" active={true}>
@@ -21,7 +21,14 @@ export default function ItemLeaveReview({ paid, setTabNbr, color }) {
               [classes.dull]: true,
             })}
           >
-            Leave Review: <b>No</b>
+            Quoted or Declined:
+            <b>
+              {status === 'declined'
+                ? 'Declined'
+                : status === ''
+                ? 'No'
+                : 'Accepted'}
+            </b>
           </Typography>
         </Row>
       </Column>
@@ -33,7 +40,9 @@ export default function ItemLeaveReview({ paid, setTabNbr, color }) {
           count: 0,
           back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}
-        onClickEvent={() => setTabNbr(2)}
+        onClickEvent={() => {
+          setTabNbr(1);
+        }}
         active={false}
       />
     </RowCheckList>

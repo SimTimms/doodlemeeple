@@ -1,4 +1,5 @@
 import React from 'react';
+import { useStyles } from './styles';
 
 export function Column(props) {
   const { children, a, j, w, p } = props;
@@ -69,21 +70,19 @@ export function RowCheckList(props) {
 }
 
 export function TopMenuWrapper(props) {
+  const classes = useStyles();
+
   const { children, a, j, wrap } = props;
   const align = a ? a : 'center';
   const justify = j ? j : 'center';
 
   return (
     <div
+      className={classes.menuWrapper}
       style={{
-        display: 'flex',
-        width: '100%',
-        flexDirection: 'row',
         alignItems: align,
         justifyContent: justify,
         flexWrap: wrap,
-        background: '#fff',
-        boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
       }}
     >
       {children}

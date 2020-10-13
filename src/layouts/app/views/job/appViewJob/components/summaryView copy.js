@@ -14,7 +14,6 @@ import {
   IconButton,
   Divider,
 } from '../../../../../../components';
-import CreatorDashboard from './creatorDashboard/';
 import CreativeView from '../components/creativeView';
 import CreativeActions from '../components/creativeActions';
 import ClientView from '../components/clientView';

@@ -191,8 +191,8 @@ export const PAYMENTS = gql`
 `;
 
 export const INVITES = gql`
-  query GetInvites {
-    invitesByUser {
+  query GetInvites($status: String) {
+    invitesByUser(status: $status) {
       status
       _id
       receiver {
@@ -301,6 +301,9 @@ export const JOB = gql`
           _id
           percent
           description
+          updatedAt
+          paid
+          status
         }
       }
       assignedCreative {
@@ -430,6 +433,20 @@ export const JOB_CREATIVE = gql`
         profileImg
       }
       job {
+        _id
+        name
+        summary
+        createdAt
+        creativeSummary
+        keywords
+        user {
+          _id
+          email
+          name
+        }
+      }
+      invite {
+        status
         _id
       }
     }

@@ -2,24 +2,44 @@ import React from 'react';
 import {
   Column,
   FieldTitleDashboard,
-  Paper,
+  Widget,
   DividerWithBorder,
-  DividerMini,
+  Divider,
 } from '../../../../../../../components';
-import { ItemQuote, ItemResponse } from './CheckListItems';
+import { InviteReceived, InviteReplied, ItemViewJob } from './CheckListItems';
 
-export default function CheckListCreativeDash({ contract, setTabNbr }) {
+export default function CheckListCreativeDash({ contract, invite, setTabNbr }) {
+  const color = [
+    1,
+    2,
+    invite.status === 'unopened' ? 2 : 1,
+    invite.status === 'declined' ? 1 : invite.status === '' ? 0 : 1,
+  ];
+
   return (
     <Column w="50%" p={10}>
-      <FieldTitleDashboard name="Checklist" inline={false} />
-      <Paper p={10}>
+      <Widget p={10}>
+        <FieldTitleDashboard name="Checklist" inline={false} a="c" />
+        <Divider />
         <Column>
-          <ItemQuote contract={contract} setTabNbr={setTabNbr} />
           <DividerWithBorder />
-          <ItemResponse contract={contract} setTabNbr={setTabNbr} />
-          <DividerMini />
+          <InviteReceived color={color[0]} />
+          <DividerWithBorder />
+          <ItemViewJob
+            reply={invite.status}
+            inviteId={invite._id}
+            setTabNbr={setTabNbr}
+            color={color[2]}
+          />
+          <DividerWithBorder />
+          <InviteReplied
+            color={color[3]}
+            status={invite.status}
+            setTabNbr={setTabNbr}
+          />
+          <DividerWithBorder />
         </Column>
-      </Paper>
+      </Widget>
     </Column>
   );
 }

@@ -21,7 +21,7 @@ export default function NotificationComponent({
           className={classes.messageButton}
           style={{ textDecoration: 'none' }}
         >
-          {notification.sender && notification.icon === 'request_quote' ? (
+          {notification.sender && notification.icon === 'request_quote' && (
             <div
               className={classes.notifications}
               style={{
@@ -29,29 +29,6 @@ export default function NotificationComponent({
                 backgroundSize: 'cover',
               }}
             ></div>
-          ) : (
-            <div
-              className={clsx({
-                [classes.notifications]: true,
-                [classes.notificationInvite]: notification.icon === 'thumb_up',
-                [classes.notificationProfile]:
-                  notification.icon === 'contact_mail',
-                [classes.notificationWork]: notification.icon === 'work',
-                [classes.notificationBad]:
-                  notification.icon === 'thumb_down' ||
-                  notification.icon === 'warning',
-                [classes.notificationGood]:
-                  notification.icon === 'request_quote',
-              })}
-            >
-              <Icon
-                className={clsx({
-                  [classes.icon]: true,
-                })}
-              >
-                {notification.icon}
-              </Icon>
-            </div>
           )}
           <div className={classes.profileWrapper}>
             <div className={classes.wrapperOne}>
@@ -61,9 +38,20 @@ export default function NotificationComponent({
                   style={{ justifyContent: 'space-between' }}
                 >
                   <Typography
-                    style={{ color: '#aaa' }}
                     variant="caption"
                     component="p"
+                    className={clsx({
+                      [classes.notificationInvite]:
+                        notification.icon === 'thumb_up',
+                      [classes.notificationProfile]:
+                        notification.icon === 'contact_mail',
+                      [classes.notificationWork]: notification.icon === 'work',
+                      [classes.notificationBad]:
+                        notification.icon === 'thumb_down' ||
+                        notification.icon === 'warning',
+                      [classes.notificationGood]:
+                        notification.icon === 'request_quote',
+                    })}
                   >
                     <b>{notification.title}</b>
                   </Typography>

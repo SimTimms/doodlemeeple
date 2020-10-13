@@ -9,6 +9,6 @@ export const useStyles = makeStyles((theme) => ({
   title: { color: '#222' },
   titleLine: {
     height: 2,
-    borderTop: '1px dashed #ccc',
+    borderTop: `2px dotted #efeff5`,
   },
 }));

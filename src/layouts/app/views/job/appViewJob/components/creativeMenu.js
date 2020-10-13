@@ -4,7 +4,6 @@ import {
   MenuButtonShortcut,
   TopMenuWrapper,
 } from '../../../../../../components';
-import Cookies from 'js-cookie';
 
 export default function CreativeMenu({ tabNbr, setTabNbr }) {
   const classes = useStyles();
@@ -15,7 +14,7 @@ export default function CreativeMenu({ tabNbr, setTabNbr }) {
         <MenuButtonShortcut
           text={{
             name: 'Dashboard',
-            color: '#222',
+            color: '#FFF',
             icon: 'dashboard',
             count: 0,
           }}
@@ -28,7 +27,7 @@ export default function CreativeMenu({ tabNbr, setTabNbr }) {
         <MenuButtonShortcut
           text={{
             name: 'Summary',
-            color: '#222',
+            color: '#FFF',
             icon: 'list_alt',
             count: 0,
           }}
@@ -42,7 +41,7 @@ export default function CreativeMenu({ tabNbr, setTabNbr }) {
         <MenuButtonShortcut
           text={{
             name: 'Client',
-            color: '#222',
+            color: '#FFF',
             icon: 'account_box',
             count: 0,
           }}
@@ -56,7 +55,7 @@ export default function CreativeMenu({ tabNbr, setTabNbr }) {
         <MenuButtonShortcut
           text={{
             name: 'My Quote',
-            color: '#222',
+            color: '#FFF',
             icon: 'request_quote',
             count: 0,
           }}
@@ -70,7 +69,7 @@ export default function CreativeMenu({ tabNbr, setTabNbr }) {
         <MenuButtonShortcut
           text={{
             name: 'Payments',
-            color: '#222',
+            color: '#FFF',
             icon: 'credit_card',
             count: 0,
           }}

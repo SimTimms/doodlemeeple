@@ -8,8 +8,10 @@ import {
   MenuButtonShortcut,
 } from '../../../../../../../../components';
 import clsx from 'clsx';
+import { Mutation } from 'react-apollo';
+import { UPDATE_INVITE } from '../../../../../../../../data/mutations';
 
-export default function ItemLeaveReview({ paid, setTabNbr, color }) {
+export default function ItemViewJob({ reply, inviteId, setTabNbr, color }) {
   const classes = useStyles();
   return (
     <RowCheckList j="space-between" active={true}>
@@ -21,10 +23,12 @@ export default function ItemLeaveReview({ paid, setTabNbr, color }) {
               [classes.dull]: true,
             })}
           >
-            Leave Review: <b>No</b>
+            Viewed Brief:
+            <b> {reply === 'unopened' ? 'No' : 'Yes'}</b>
           </Typography>
         </Row>
       </Column>
+
       <MenuButtonShortcut
         text={{
           name: '',
@@ -33,7 +37,9 @@ export default function ItemLeaveReview({ paid, setTabNbr, color }) {
           count: 0,
           back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}
-        onClickEvent={() => setTabNbr(2)}
+        onClickEvent={() => {
+          setTabNbr(1);
+        }}
         active={false}
       />
     </RowCheckList>

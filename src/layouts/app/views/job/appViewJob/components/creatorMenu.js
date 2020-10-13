@@ -14,7 +14,7 @@ export default function CreatorMenu({ tabNbr, setTabNbr, activeContract }) {
         <MenuButtonShortcut
           text={{
             name: 'Dashboard',
-            color: '#222',
+            color: '#fff',
             icon: 'dashboard',
             count: 0,
           }}
@@ -27,7 +27,7 @@ export default function CreatorMenu({ tabNbr, setTabNbr, activeContract }) {
         <MenuButtonShortcut
           text={{
             name: 'Summary',
-            color: '#222',
+            color: '#fff',
             icon: 'list_alt',
             count: 0,
           }}
@@ -40,7 +40,7 @@ export default function CreatorMenu({ tabNbr, setTabNbr, activeContract }) {
         <MenuButtonShortcut
           text={{
             name: 'Creatives',
-            color: '#222',
+            color: '#fff',
             icon: 'account_box',
             count: 0,
           }}
@@ -54,7 +54,7 @@ export default function CreatorMenu({ tabNbr, setTabNbr, activeContract }) {
           <MenuButtonShortcut
             text={{
               name: 'Contract',
-              color: '#222',
+              color: '#fff',
               icon: 'request_quote',
               count: 0,
             }}
@@ -68,7 +68,7 @@ export default function CreatorMenu({ tabNbr, setTabNbr, activeContract }) {
         <MenuButtonShortcut
           text={{
             name: 'Payments',
-            color: '#222',
+            color: '#fff',
             icon: 'credit_card',
             count: 0,
           }}

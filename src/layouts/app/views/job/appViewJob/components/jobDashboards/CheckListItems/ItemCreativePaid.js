@@ -9,8 +9,15 @@ import {
 } from '../../../../../../../../components';
 import clsx from 'clsx';
 
-export default function ItemCreativePaid({ paid, setTabNbr }) {
+export default function ItemCreativePaid({
+  totalPaid,
+  cost,
+  currency,
+  setTabNbr,
+  color,
+}) {
   const classes = useStyles();
+
   return (
     <RowCheckList j="space-between" active={true}>
       <Column a="space-between">
@@ -19,10 +26,13 @@ export default function ItemCreativePaid({ paid, setTabNbr }) {
             className={clsx({
               [classes.tag]: true,
               [classes.dull]: true,
-              [classes.red]: paid !== 'paid',
             })}
           >
-            Creative Paid: <b>0GBP / 100GBP</b>
+            Creative Paid:{' '}
+            <b>
+              {`${totalPaid} / ${cost} 
+              ${currency}`}
+            </b>
           </Typography>
         </Row>
       </Column>
@@ -30,12 +40,11 @@ export default function ItemCreativePaid({ paid, setTabNbr }) {
         text={{
           name: '',
           color: '',
-          border: paid !== 'paid' ? 'warning' : 'check',
-          icon: paid !== 'paid' ? 'star' : 'check',
+          icon: color === 1 ? 'check' : color === 2 ? 'star' : '',
           count: 0,
-          back: '',
+          back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}
-        onClickEvent={() => setTabNbr(2)}
+        onClickEvent={() => setTabNbr(4)}
         active={false}
       />
     </RowCheckList>

@@ -68,9 +68,8 @@ export const useStyles = makeStyles((theme) => ({
   iconButtonTextDark: {
     background: 'rgba(0,0,0,0)',
     color: '#444',
-    boxShadow: '2px 2px 5px rgba(0,0,0,0.05)',
+    boxShadow: 'none',
     fontWeight: 400,
-    border: '1px solid #eee',
     justifyContent: 'space-between',
     '&:hover': {
       background: '#efeff5',

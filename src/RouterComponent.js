@@ -1,5 +1,5 @@
 import React from 'react';
-import { AboutLayout } from './layouts';
+import { AboutLayout, StripeSuccess } from './layouts';
 import AppLayout from './layouts/app';
 import PreviewLayout from './layouts/preview';
 import { PublicLayout } from './layouts/public';
@@ -177,6 +177,9 @@ function RouterComponent(props) {
                 <PreviewLayout {...props} theme={theme} publicView={true} />
               )}
             />
+            <Route path="/stripe-success">
+              <StripeSuccess history={props.history} />
+            </Route>
             <Route path="/about">
               <AboutLayout theme={theme} />
             </Route>

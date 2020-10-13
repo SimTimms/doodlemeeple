@@ -3,7 +3,7 @@ import { ListItem, Icon, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-
+import { Row } from '../../';
 export default function MenuButtonShortcut({
   text,
   onClickEvent,
@@ -70,15 +70,24 @@ export default function MenuButtonShortcut({
             {text.icon}
           </Icon>
         </div>
-        <Typography
-          className={clsx({
-            [classes.button]: !mobile,
-            [classes.buttonMobile]: mobile,
-          })}
-          style={{ color: text.color }}
+        <Row
+          j={text.count > 0 ? 'space-between' : column ? 'center' : 'flex-end'}
+          w="100%"
         >
-          {text.name}
-        </Typography>
+          {text.count > 0 && (
+            <Typography className={classes.count}>{text.count}</Typography>
+          )}
+          <Typography
+            className={clsx({
+              [classes.button]: !mobile,
+              [classes.buttonMobile]: mobile,
+              [classes.spaceAbove]: column,
+            })}
+            style={{ color: text.color }}
+          >
+            {text.name}
+          </Typography>
+        </Row>
       </ListItem>
     </div>
   );

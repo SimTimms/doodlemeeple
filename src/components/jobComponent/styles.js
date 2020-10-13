@@ -14,6 +14,9 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  dull: { color: '#444' },
+  red: { color: theme.palette.error.main },
+  green: { color: theme.palette.secondary.main },
   profileThumb: {
     backgroundColor: '#ddd',
     backgroundSize: 'cover',
@@ -22,6 +25,7 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: 40,
     minHeight: 40,
     maxHeight: 40,
+    marginRight: 10,
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',

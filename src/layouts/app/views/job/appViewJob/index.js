@@ -14,7 +14,6 @@ export default function AppViewJob({
   inviteId,
   profile,
 }) {
-  const [inviteStatus, setInviteStatus] = React.useState('');
   const [contracts, setContracts] = React.useState([]);
   const [isCreator, setIsCreator] = React.useState(null);
 
@@ -37,21 +36,6 @@ export default function AppViewJob({
               return data ? (
                 <SummaryViewCreator job={data.jobById} history={history} />
               ) : null;
-              /*   <SummaryView
-                  job={data.jobById}
-                  history={history}
-                  inviteId={inviteId}
-                  jobId={job._id}
-                  setJob={setJob}
-                  messagesEnd={messagesEnd}
-                  inviteStatus={inviteStatus}
-                  contracts={contracts}
-                  setInviteStatus={setInviteStatus}
-                  setProposalOpen={setProposalOpen}
-                  proposalOpen={proposalOpen}
-                  stripeID={profile.stripeID}
-                  theme={theme}
-             />*/
             }}
           </Query>
         )}
