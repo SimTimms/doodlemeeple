@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
-  title: { color: '#222' },
+  title: { color: '#222', fontSize: 12 },
   titleLine: {
     height: 2,
     borderTop: `2px dotted #efeff5`,

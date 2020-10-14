@@ -17,7 +17,7 @@ import {
 import CreativeView from '../components/creativeView';
 import CreativeActions from '../components/creativeActions';
 import ClientView from '../components/clientView';
-import CloseButton from '../components/closeButton';
+import CloseButton from '../components/closeJobButton';
 import ChosenCreative from '../components/chosenCreative';
 import PaymentsView from '../components/paymentsView';
 import ClientNotifications from '../components/clientNotifications';

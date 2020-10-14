@@ -1,19 +1,12 @@
 import React from 'react';
 import { Slide } from '@material-ui/core';
-import { Column } from '../../../../../components';
 import SummaryViewCreator from './components/summaryViewCreator';
 import SummaryViewCreative from './components/summaryViewCreative';
 import { Query } from 'react-apollo';
-import { JOB, JOB_CREATIVE, INVITE_BY_ID } from '../../../../../data/queries';
+import { JOB, JOB_CREATIVE } from '../../../../../data/queries';
 import Cookies from 'js-cookie';
 
-export default function AppViewJob({
-  theme,
-  jobId,
-  history,
-  inviteId,
-  profile,
-}) {
+export default function AppViewJob({ jobId, history }) {
   const [contracts, setContracts] = React.useState([]);
   const [isCreator, setIsCreator] = React.useState(null);
 

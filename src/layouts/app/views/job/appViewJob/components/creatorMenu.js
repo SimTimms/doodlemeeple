@@ -5,7 +5,12 @@ import {
   TopMenuWrapper,
 } from '../../../../../../components';
 
-export default function CreatorMenu({ tabNbr, setTabNbr, activeContract }) {
+export default function CreatorMenu({
+  tabNbr,
+  setTabNbr,
+  activeContract,
+  jobClosed,
+}) {
   const classes = useStyles();
 
   return (
@@ -26,7 +31,7 @@ export default function CreatorMenu({ tabNbr, setTabNbr, activeContract }) {
         />
         <MenuButtonShortcut
           text={{
-            name: 'Summary',
+            name: 'Job Details',
             color: '#fff',
             icon: 'list_alt',
             count: 0,
@@ -37,19 +42,21 @@ export default function CreatorMenu({ tabNbr, setTabNbr, activeContract }) {
           column={true}
           active={tabNbr === 1}
         />
-        <MenuButtonShortcut
-          text={{
-            name: 'Creatives',
-            color: '#fff',
-            icon: 'account_box',
-            count: 0,
-          }}
-          onClickEvent={() => {
-            setTabNbr(2);
-          }}
-          column={true}
-          active={tabNbr === 2}
-        />
+        {!jobClosed && (
+          <MenuButtonShortcut
+            text={{
+              name: 'Creatives',
+              color: '#fff',
+              icon: 'account_box',
+              count: 0,
+            }}
+            onClickEvent={() => {
+              setTabNbr(2);
+            }}
+            column={true}
+            active={tabNbr === 2}
+          />
+        )}
         {activeContract && (
           <MenuButtonShortcut
             text={{
@@ -59,25 +66,27 @@ export default function CreatorMenu({ tabNbr, setTabNbr, activeContract }) {
               count: 0,
             }}
             onClickEvent={() => {
-              setTabNbr(7);
+              setTabNbr(3);
             }}
             column={true}
-            active={tabNbr === 7}
+            active={tabNbr === 3}
           />
         )}
-        <MenuButtonShortcut
-          text={{
-            name: 'Payments',
-            color: '#fff',
-            icon: 'credit_card',
-            count: 0,
-          }}
-          onClickEvent={() => {
-            setTabNbr(4);
-          }}
-          column={true}
-          active={tabNbr === 4}
-        />
+        {activeContract && (
+          <MenuButtonShortcut
+            text={{
+              name: 'Payments',
+              color: '#fff',
+              icon: 'credit_card',
+              count: 0,
+            }}
+            onClickEvent={() => {
+              setTabNbr(4);
+            }}
+            column={true}
+            active={tabNbr === 4}
+          />
+        )}
       </TopMenuWrapper>
     </div>
   );

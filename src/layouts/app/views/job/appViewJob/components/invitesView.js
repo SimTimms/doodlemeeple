@@ -10,7 +10,6 @@ import {
 export default function InvitesView({ invites, setConversationUser }) {
   return (
     <Column w="50%" p={10}>
-      <FieldTitleDashboard name="Invites" inline={false} />
       <Paper p={10}>
         {invites.map((invite, index) => {
           const contractSubmitted = invite.job.contracts.filter(

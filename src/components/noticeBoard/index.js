@@ -32,7 +32,7 @@ export default function NoticeBoard({
             <IconButton
               title="Create a Profile"
               color="text-white"
-              icon="contact_mail"
+              icon="face"
               styleOverride={{ marginBottom: 0 }}
               onClickEvent={() => history.push('/app/edit-profile/')}
             />

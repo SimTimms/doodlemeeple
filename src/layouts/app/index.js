@@ -211,13 +211,7 @@ function AppLayout(props) {
               favourites={favourites}
             />
           ) : page === 'view-job' && profile ? (
-            <AppViewJob
-              theme={props.theme}
-              jobId={pathParam}
-              inviteId={pathParam2}
-              history={history}
-              profile={profile}
-            />
+            <AppViewJob jobId={pathParam} history={history} />
           ) : page === 'view-proposal' ? (
             <ViewProposal jobId={pathParam} history={history} />
           ) : page === 'view-contract' ? (

@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
   },
-  dull: { background: '#eee', color: '#444', boxShadow: 'none' },
+  dull: { background: '#efeff5', color: '#444', boxShadow: 'none' },
   red: { background: theme.palette.error.main },
   amber: { background: theme.palette.warning.main },
   green: { background: theme.palette.secondary.main },

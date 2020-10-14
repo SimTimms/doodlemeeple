@@ -37,7 +37,7 @@ export default function CreatorComponentDash({
           text={{
             name: '',
             color: '',
-            icon: 'contact_mail',
+            icon: 'face',
             count: 0,
             back: 'primary',
           }}

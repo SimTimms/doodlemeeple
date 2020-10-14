@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Slide } from '@material-ui/core';
 import { useStyles } from '../styles';
 import {
@@ -14,6 +14,7 @@ import ChatView from '../components/chatView';
 import InvitesView from './invitesView';
 import PaymentsView from './paymentsView';
 import CreatorMenu from './creatorMenu';
+import CreatorJobSummary from './creatorJobSummary';
 
 export default function SummaryViewCreator({ job, history }) {
   const classes = useStyles();
@@ -22,6 +23,11 @@ export default function SummaryViewCreator({ job, history }) {
   const [tabNbr, setTabNbr] = React.useState(-1);
   const [messages, setMessages] = React.useState([]);
   const [displayPayment, setDisplayPayment] = React.useState(false);
+  const [jobData, setJobData] = React.useState({});
+
+  useEffect(() => {
+    setJobData({ ...job });
+  }, [job]);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -30,6 +36,7 @@ export default function SummaryViewCreator({ job, history }) {
           tabNbr={tabNbr}
           setTabNbr={setTabNbr}
           activeContract={job.activeContract}
+          jobClosed={job.submitted === 'closed'}
         />
         {tabNbr === -1 && (
           <Column>
@@ -40,6 +47,12 @@ export default function SummaryViewCreator({ job, history }) {
             />
           </Column>
         )}
+        {tabNbr === 1 && (
+          <CreatorJobSummary
+            jobData={{ data: jobData, setData: setJobData }}
+            setTabNbr={setTabNbr}
+          />
+        )}
         {tabNbr === 2 && (
           <Column>
             <InvitesView
@@ -48,12 +61,7 @@ export default function SummaryViewCreator({ job, history }) {
             />
           </Column>
         )}
-        {tabNbr === 4 && (
-          <Column>
-            <PaymentsView job={job} />
-          </Column>
-        )}
-        {tabNbr === 7 && (
+        {tabNbr === 3 && (
           <BorderBox w={700}>
             {job.activeContract.status !== 'paid' && (
               <IconButton
@@ -75,6 +83,11 @@ export default function SummaryViewCreator({ job, history }) {
               onAccept={() => setTabNbr(0)}
             />
           </BorderBox>
+        )}
+        {tabNbr === 4 && (
+          <Column>
+            <PaymentsView job={job} />
+          </Column>
         )}
         {conversationUser && (
           <ChatView

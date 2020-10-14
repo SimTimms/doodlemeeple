@@ -1,19 +1,28 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
 import { useStyles } from '../styles';
-import { IconButton, BorderBox } from '../../../../../../components';
+import {
+  IconButton,
+  BorderBox,
+  LoadIcon,
+  Meta,
+  Divider,
+} from '../../../../../../components';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../../../../../utils/toaster';
 import { CLOSE_JOB } from '../../../../../../data/mutations';
 
-export default function CloseButton({ job, jobId, setJob }) {
+export default function CloseJobButton({ job, setTabNbr }) {
   const classes = useStyles();
   const [closeConfirm, setCloseConfirm] = React.useState(false);
+  const [deleting, setDeleting] = React.useState(false);
 
-  return (
+  return deleting ? (
+    <LoadIcon />
+  ) : (
     <div className={classes.actionWrapper}>
       {!closeConfirm ? (
         <BorderBox w={300}>
+          <Meta str="Permanently close this job?" />
           <IconButton
             color="warning"
             icon="close"
@@ -24,25 +33,26 @@ export default function CloseButton({ job, jobId, setJob }) {
           />
         </BorderBox>
       ) : (
-        <div
-          style={{
-            background: '#fff',
-            padding: 20,
-            textAlign: 'center',
-          }}
-        >
-          <Typography variant="h6" style={{ marginBottom: 20 }}>
+        <BorderBox w={300}>
+          <Meta
+            str="
             This will permanently close the project. Your chosen creatives will
-            be unable to send a quote or discuss this job further.
-          </Typography>
-          <Typography variant="h6">Do you want to continue?</Typography>
+            be unable to send a quote or discuss this job further."
+          />
+          <Divider />
+          <Meta
+            str="
+        Continue?"
+          />
           <Mutation
             mutation={CLOSE_JOB}
             variables={{
-              _id: jobId,
+              _id: job.data._id,
               submitted: 'closed',
             }}
             onCompleted={(data) => {
+              job.setData({ ...job.data, submitted: 'closed' });
+              setTabNbr(-1);
               toaster('Project Closed');
             }}
           >
@@ -53,7 +63,7 @@ export default function CloseButton({ job, jobId, setJob }) {
                   icon="warning"
                   title="Confirm"
                   onClickEvent={() => {
-                    setJob({ ...job, submitted: 'closed' });
+                    setDeleting(true);
                     mutation();
                   }}
                   styleOverride={{ width: '100%' }}
@@ -70,7 +80,7 @@ export default function CloseButton({ job, jobId, setJob }) {
             styleOverride={{ width: '100%' }}
             iconPos="right"
           />
-        </div>
+        </BorderBox>
       )}
     </div>
   );

@@ -37,6 +37,7 @@ export default function MenuButtonShortcut({
         <div
           className={clsx({
             [classes.iconButton]: true,
+            [classes.iconIconColumn]: column,
             [classes.iconButtonOnly]: text.name === '',
           })}
         >
@@ -44,7 +45,7 @@ export default function MenuButtonShortcut({
             className={clsx({
               [classes.iconIcon]: true,
               [classes.iconIconNoMargin]: text.name === '',
-              [classes.iconIconColumn]: column,
+
               [classes.dark]: text.color === 'white',
               [classes.warning]: text.back
                 ? text.back === 'warning'

@@ -24,9 +24,13 @@ export default function InviteComponentFull({
   const classes = useStyles();
   const [display, setDisplay] = React.useState(false);
   const [tabNbr, setTabNbr] = React.useState(0);
+  const unread = invite.status === 'unopened';
+  const quoted = invite.status === 'quote_sent';
+  const read = invite.status === 'read';
+  const declined = invite.status === 'declined';
 
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: '100%', opacity: declined && 0.5 }}>
       <Column>
         <Row j="space-between" a="center">
           <Row a="center" j="flex-start">
@@ -44,18 +48,17 @@ export default function InviteComponentFull({
                 style={{ fontSize: 12 }}
                 className={clsx({
                   [classes.dull]: true,
-                  [classes.red]:
-                    invite.status && invite.status === 'unopened' && true,
-                  [classes.green]:
-                    invite.status &&
-                    (invite.status === 'quote_sent' ||
-                      invite.status === 'read') &&
-                    true,
+                  [classes.red]: unread,
+                  [classes.green]: quoted || read,
                 })}
               >
-                {invite.status && invite.status === 'unopened'
+                {unread
                   ? 'Unopened'
-                  : invite.status === 'read' && 'Opened'}
+                  : read
+                  ? 'Opened'
+                  : quoted
+                  ? 'Quoted'
+                  : declined && 'Declined'}
               </Typography>
             </Column>
           </Row>
@@ -72,17 +75,19 @@ export default function InviteComponentFull({
               }
             />
           )}
-          <MenuButtonShortcut
-            text={{
-              name: '',
-              color: '#444',
-              icon: 'chat',
-              count: 0,
-              back: '',
-            }}
-            onClickEvent={() => setConversationUser(invite.receiver)}
-            active={false}
-          />
+          {invite.status !== 'declined' && (
+            <MenuButtonShortcut
+              text={{
+                name: '',
+                color: '#444',
+                icon: 'chat',
+                count: 0,
+                back: '',
+              }}
+              onClickEvent={() => setConversationUser(invite.receiver)}
+              active={false}
+            />
+          )}
         </Row>
         {contract && display && (
           <Query

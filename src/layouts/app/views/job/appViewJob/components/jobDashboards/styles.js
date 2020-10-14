@@ -15,4 +15,10 @@ export const useStyles = makeStyles((theme) => ({
   red: { color: theme.palette.error.main },
   amber: { color: theme.palette.warning.main },
   green: { color: theme.palette.secondary.main },
+  status: {
+    background: theme.palette.error.main,
+    padding: '5px 30px 5px 30px',
+    borderRadius: 3,
+    color: '#fff',
+  },
 }));

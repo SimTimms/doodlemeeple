@@ -33,7 +33,7 @@ export default function ItemLeaveReview({ paid, setTabNbr, color }) {
           count: 0,
           back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}
-        onClickEvent={() => setTabNbr(2)}
+        onClickEvent={() => null}
         active={false}
       />
     </RowCheckList>

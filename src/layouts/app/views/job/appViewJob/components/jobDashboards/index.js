@@ -2,7 +2,13 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Typography } from '@material-ui/core';
 import clsx from 'clsx';
-import { Column, Row, Divider } from '../../../../../../../components';
+import {
+  Column,
+  Row,
+  Divider,
+  Widget,
+  FieldTitleDashboard,
+} from '../../../../../../../components';
 import NotificationDash from './NotificationDash';
 import InvitesDash from './InvitesDash';
 import MessageDash from './MessageDash';
@@ -25,21 +31,14 @@ export function CreativeDashboard({
   const declined = invite.data.status === 'declined';
   return (
     <Column>
-      <Divider />
-      <Typography
-        variant="h5"
-        className={clsx({
-          [classes.dull]: true,
-          [classes.red]: declined,
-        })}
-      >
-        {declined && 'INVITE DECLINED'}
-      </Typography>
       <Row a="flex-start">
         <CheckListCreativeDash
-          contract={contract}
+          declined={declined}
           invite={invite.data}
           setTabNbr={setTabNbr}
+          job={job}
+          history={history}
+          setConversationUser={setConversationUser}
         />
         <SummaryDash
           job={job}
@@ -63,17 +62,9 @@ export function CreatorDashboard({ job, setConversationUser, setTabNbr }) {
         <InvitesDash
           invites={job.invites}
           setConversationUser={setConversationUser}
+          jobClosed={job.submitted === 'closed'}
         />
       </Row>
-      <Row>
-        <MessageDash />
-        <QuotesDash />
-      </Row>
-      <Row>
-        <MilestoneDash />
-        <PaymentsDash />
-      </Row>
-      <div className={classes.dashbox}>Job Name & Description</div>
     </Column>
   );
 }

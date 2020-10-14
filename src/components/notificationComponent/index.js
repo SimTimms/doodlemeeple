@@ -6,6 +6,7 @@ import { REMOVE_NOTIFICATION_MUTATION } from '../../data/mutations';
 import { Mutation } from 'react-apollo';
 import { timeDifferenceForDate } from '../../utils/dates';
 import clsx from 'clsx';
+import { MenuButtonShortcut } from '../';
 
 export default function NotificationComponent({
   notification,
@@ -44,7 +45,7 @@ export default function NotificationComponent({
                       [classes.notificationInvite]:
                         notification.icon === 'thumb_up',
                       [classes.notificationProfile]:
-                        notification.icon === 'contact_mail',
+                        notification.icon === 'face',
                       [classes.notificationWork]: notification.icon === 'work',
                       [classes.notificationBad]:
                         notification.icon === 'thumb_down' ||
@@ -63,7 +64,7 @@ export default function NotificationComponent({
                     <b>{timeDifferenceForDate(notification.createdAt)}</b>
                   </Typography>
                 </div>
-                <Typography color="textPrimary" component="p">
+                <Typography color="textPrimary" component="p" variant="caption">
                   {notification.message}
                 </Typography>
               </div>
@@ -78,20 +79,23 @@ export default function NotificationComponent({
         >
           {(RemoveNotificationMutation) => {
             return (
-              <Button
-                color="primary"
-                onClick={() => {
+              <MenuButtonShortcut
+                text={{
+                  name: '',
+                  color: '#bbb',
+                  icon: 'delete',
+                  count: 0,
+                  back: '',
+                }}
+                onClickEvent={() => {
                   RemoveNotificationMutation();
                   const notificationArrayFiltered = notificationArray.filter(
                     (item) => item._id !== notification._id
                   );
                   setNotificationArray(notificationArrayFiltered);
                 }}
-              >
-                <Icon color="disabled" className={classes.iconButton}>
-                  delete
-                </Icon>
-              </Button>
+                active={false}
+              />
             );
           }}
         </Mutation>

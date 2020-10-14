@@ -10,9 +10,10 @@ export const useStyles = makeStyles((theme) => ({
     maxHeight: 22,
     minHeight: 22,
     borderRadius: '50%',
-    marginRight: 0,
+    marginRight: 12,
     position: 'relative',
-
+    boxShadow:
+      'inset 1px 1px 1px rgba(255,255,255,0.4),inset -1px -1px 1px rgba(0,0,0,0.2)',
     '&:visited': {
       background: 'none',
     },
@@ -25,7 +26,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
     position: 'relative',
     fontSize: 14,
-    marginRight: 12,
+
     padding: 5,
     background: 'rgba(0,0,0,0.05)',
     borderRadius: '50%',
@@ -42,11 +43,20 @@ export const useStyles = makeStyles((theme) => ({
   borderWarning: {
     background: `${theme.palette.error.main}`,
   },
-  warning: { background: theme.palette.error.main },
-  primary: { background: theme.palette.primary.main },
+  warning: {
+    background: theme.palette.error.main,
+    boxShadow:
+      'inset 1px 1px 1px rgba(255,255,255,0.4),inset -1px -1px 1px rgba(0,0,0,0.2)',
+  },
+  primary: {
+    background: theme.palette.primary.main,
+    boxShadow:
+      'inset 1px 1px 1px rgba(255,255,255,0.4),inset -1px -1px 1px rgba(0,0,0,0.2)',
+  },
   secondary: {
     background: theme.palette.secondary.main,
-    boxShadow: 'inset 0 0 3px rgba(255,255,255,0.1),0 0 5px rgba(0,0,0,0.2)',
+    boxShadow:
+      'inset 1px 1px 1px rgba(255,255,255,0.4),inset -1px -1px 1px rgba(0,0,0,0.2)',
   },
   iconIconNoMargin: { margin: 0 },
   iconIconColumn: {

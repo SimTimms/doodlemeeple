@@ -15,6 +15,7 @@ export default function ItemCreativePaid({
   currency,
   setTabNbr,
   color,
+  jobHasContract,
 }) {
   const classes = useStyles();
 
@@ -44,7 +45,7 @@ export default function ItemCreativePaid({
           count: 0,
           back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}
-        onClickEvent={() => setTabNbr(4)}
+        onClickEvent={() => (jobHasContract ? setTabNbr(4) : null)}
         active={false}
       />
     </RowCheckList>

@@ -77,7 +77,7 @@ export default function AppInvites({ history }) {
                   </Typography>
                   <IconButton
                     title="Profile"
-                    icon="contact_mail"
+                    icon="face"
                     color="primary"
                     styleOverride={null}
                     iconPos="right"

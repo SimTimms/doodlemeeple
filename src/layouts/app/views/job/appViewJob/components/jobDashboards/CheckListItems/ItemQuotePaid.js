@@ -9,7 +9,12 @@ import {
 } from '../../../../../../../../components';
 import clsx from 'clsx';
 
-export default function ItemQuotePaid({ paid, setTabNbr, color }) {
+export default function ItemQuotePaid({
+  paid,
+  setTabNbr,
+  color,
+  jobHasContract,
+}) {
   const classes = useStyles();
   return (
     <RowCheckList j="space-between" active={true}>
@@ -33,7 +38,7 @@ export default function ItemQuotePaid({ paid, setTabNbr, color }) {
           count: 0,
           back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}
-        onClickEvent={() => setTabNbr(2)}
+        onClickEvent={() => (jobHasContract ? setTabNbr(4) : null)}
         active={false}
       />
     </RowCheckList>
