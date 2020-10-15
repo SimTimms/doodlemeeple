@@ -6,8 +6,8 @@ import { JOBS } from '../../../../../data/queries';
 import {
   Column,
   LoadIcon,
+  IconButton,
   FieldTitleDashboard,
-  MenuButton,
   Divider,
   JobComponent,
 } from '../../../../../components';
@@ -24,23 +24,13 @@ export default function Jobs({ history, theme }) {
         <CreatorJobMenu tabNbr={tabNbr} setTabNbr={setTabNbr} />
         {tabNbr === 1 && (
           <Column w={600}>
-            <FieldTitleDashboard
-              name="Projects"
-              inline={false}
-              a="l"
-              menu={
-                <MenuButton
-                  text={{
-                    name: '',
-                    color: theme.palette.primary.main,
-                    icon: <Icon>add</Icon>,
-                    count: 0,
-                  }}
-                  onClickEvent={() => {
-                    history.push(`/app/edit-job/new`);
-                  }}
-                />
-              }
+            <Divider />
+            <IconButton
+              title="List a New Project"
+              onClickEvent={() => {
+                history.push(`/app/edit-job/new`);
+              }}
+              icon="add"
             />
             <Column a="center" j="flex-start">
               {loading && <LoadIcon />}

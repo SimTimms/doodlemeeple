@@ -11,6 +11,8 @@ import clsx from 'clsx';
 
 export default function InviteReplied({ color, setTabNbr, status }) {
   const classes = useStyles();
+  const declined = status === 'declined';
+  const accepted = status === 'accepted';
   return (
     <RowCheckList j="space-between" active={true}>
       <Column a="space-between">
@@ -22,13 +24,7 @@ export default function InviteReplied({ color, setTabNbr, status }) {
             })}
           >
             Quoted or Declined:
-            <b>
-              {status === 'declined'
-                ? 'Declined'
-                : status === ''
-                ? 'No'
-                : 'Accepted'}
-            </b>
+            <b>{declined ? 'Declined' : accepted ? 'Accepted' : 'No'}</b>
           </Typography>
         </Row>
       </Column>

@@ -51,7 +51,6 @@ export default function CheckListDash({ job, setTabNbr }) {
         <Paper p={10}>
           <FieldTitleDashboard name="Status" inline={false} a="c" />
           <DividerMini />
-
           <Typography
             variant="h6"
             className={clsx({
@@ -60,21 +59,10 @@ export default function CheckListDash({ job, setTabNbr }) {
           >
             {closed && 'JOB CLOSED'}
           </Typography>
+          <DividerMini />
         </Paper>
       ) : (
         <Paper p={10}>
-          <FieldTitleDashboard name="Status" inline={false} a="c" />
-          <DividerMini />
-
-          <Typography
-            variant="h6"
-            className={clsx({
-              [classes.status]: true,
-            })}
-          >
-            {closed && 'JOB CLOSED'}
-          </Typography>
-          <Divider />
           <FieldTitleDashboard name="Checklist" inline={false} a="c" />
           <Divider />
           <Column>

@@ -10,6 +10,9 @@ import {
 import clsx from 'clsx';
 
 export default function ItemQuotesIn({ contracts, setTabNbr, invites }) {
+  const noQuotes = !contracts || contracts.length === 0;
+  const someQuotes = contracts.length < invites.length;
+  const allQuotes = contracts.length === invites.length;
   const classes = useStyles();
   return (
     <RowCheckList j="space-between" active={true}>
@@ -24,13 +27,11 @@ export default function ItemQuotesIn({ contracts, setTabNbr, invites }) {
           >
             Quotes:{' '}
             <b>
-              {!contracts
+              {noQuotes
                 ? 'None Submitted'
-                : contracts.length === invites.length
+                : allQuotes
                 ? 'All Submitted'
-                : contracts.length > 0 &&
-                  contracts.length < invites.length &&
-                  'Some Submitted'}
+                : someQuotes && 'Some Submitted'}
             </b>
           </Typography>
         </Row>

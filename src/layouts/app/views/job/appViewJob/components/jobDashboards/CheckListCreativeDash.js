@@ -21,16 +21,14 @@ export default function CheckListCreativeDash({
   job,
   history,
 }) {
-  const color = [
-    1,
-    2,
-    invite.status === 'unopened' ? 2 : 1,
-    invite.status === 'declined' ? 1 : invite.status === '' ? 0 : 1,
-  ];
+  const accepted = invite.status === 'accepted';
+  const unopened = invite.status === 'unopened';
+
+  const color = [1, 2, unopened ? 2 : 1, declined ? 2 : accepted ? 0 : 2];
   const classes = useStyles();
 
   return (
-    <Column w="50%" p={10}>
+    <Column w={300} p={10}>
       <Widget p={10}>
         <FieldTitleDashboard name={job.job.name} inline={false} a="c" />
         <Typography variant="h6" align="left"></Typography>
@@ -41,17 +39,21 @@ export default function CheckListCreativeDash({
           declined={declined}
           history={history}
         />
-        <DividerMini />
-        <FieldTitleDashboard name="Status" inline={false} a="c" />
-        <DividerMini />
-        <Typography
-          variant="h6"
-          className={clsx({
-            [classes.status]: true,
-          })}
-        >
-          {declined && 'INVITE DECLINED'}
-        </Typography>
+        {declined && (
+          <Column>
+            <DividerMini />
+            <FieldTitleDashboard name="Status" inline={false} a="c" />
+            <DividerMini />
+            <Typography
+              variant="h6"
+              className={clsx({
+                [classes.status]: true,
+              })}
+            >
+              {declined && 'INVITE DECLINED'}
+            </Typography>
+          </Column>
+        )}
         <Divider />
         <FieldTitleDashboard name="Checklist" inline={false} a="c" />
         <Divider />

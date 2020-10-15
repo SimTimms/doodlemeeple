@@ -36,7 +36,7 @@ export default function CreatorJobSummary({ jobData, setTabNbr }) {
             <Divider />
           </Column>
           {job.submitted !== 'closed' && (
-            <CloseJobButton job={job} setTabNbr={setTabNbr} />
+            <CloseJobButton job={jobData} setTabNbr={setTabNbr} />
           )}
         </Paper>
       </div>

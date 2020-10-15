@@ -23,7 +23,7 @@ export default function SummaryViewCreator({ job, history }) {
   const [tabNbr, setTabNbr] = React.useState(-1);
   const [messages, setMessages] = React.useState([]);
   const [displayPayment, setDisplayPayment] = React.useState(false);
-  const [jobData, setJobData] = React.useState({});
+  const [jobData, setJobData] = React.useState(null);
 
   useEffect(() => {
     setJobData({ ...job });
@@ -38,10 +38,10 @@ export default function SummaryViewCreator({ job, history }) {
           activeContract={job.activeContract}
           jobClosed={job.submitted === 'closed'}
         />
-        {tabNbr === -1 && (
+        {tabNbr === -1 && jobData && (
           <Column>
             <CreatorDashboard
-              job={job}
+              job={jobData}
               setConversationUser={setConversationUser}
               setTabNbr={setTabNbr}
             />

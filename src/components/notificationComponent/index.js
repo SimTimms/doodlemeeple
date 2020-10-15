@@ -39,7 +39,6 @@ export default function NotificationComponent({
                   style={{ justifyContent: 'space-between' }}
                 >
                   <Typography
-                    variant="caption"
                     component="p"
                     className={clsx({
                       [classes.notificationInvite]:
@@ -64,7 +63,7 @@ export default function NotificationComponent({
                     <b>{timeDifferenceForDate(notification.createdAt)}</b>
                   </Typography>
                 </div>
-                <Typography color="textPrimary" component="p" variant="caption">
+                <Typography color="textPrimary" component="p">
                   {notification.message}
                 </Typography>
               </div>

@@ -73,7 +73,11 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                 name="Edit Project"
                 inline={false}
                 a="l"
-                menu={<DeleteButton mutation={mutation} str="" />}
+                menu={
+                  jobId !== 'new' ? (
+                    <DeleteButton mutation={mutation} str="" />
+                  ) : null
+                }
               />
             );
           }}

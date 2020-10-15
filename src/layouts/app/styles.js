@@ -37,7 +37,7 @@ export const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: 120,
+    marginLeft: 140,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',

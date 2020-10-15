@@ -40,12 +40,7 @@ export function CreativeDashboard({
           history={history}
           setConversationUser={setConversationUser}
         />
-        <SummaryDash
-          job={job}
-          setConversationUser={setConversationUser}
-          declined={declined}
-          history={history}
-        />
+
         <NotificationDash jobId={job.job._id} />
       </Row>
     </Column>

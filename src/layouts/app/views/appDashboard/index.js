@@ -88,7 +88,7 @@ export default function AppDashboard({ history, profile, setProfile }) {
                 [classes.columnMobile]: mobile,
               })}`}
             >
-              <FieldTitleDashboard name="Notifications" inline={false} />
+              <FieldTitleDashboard name="Notifications" inline={false} a="c" />
               <Divider />
               <Notifications />
             </div>

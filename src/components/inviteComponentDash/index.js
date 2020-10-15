@@ -11,6 +11,8 @@ export default function InviteComponentDash({
 }) {
   const classes = useStyles();
   const declined = invite.status === 'declined';
+  const unopened = invite.status === 'unopened';
+  const read = invite.status === 'read';
   const { jobClosed } = props;
   return (
     <div style={{ width: '100%', opacity: declined && 0.5 }}>
@@ -29,6 +31,10 @@ export default function InviteComponentDash({
             <Typography style={{ fontSize: 12 }}>
               {declined
                 ? 'Declined'
+                : unopened
+                ? 'Unopened'
+                : read
+                ? 'Opened'
                 : invite.status
                 ? `(${invite.status})`
                 : ''}
