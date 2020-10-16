@@ -8,12 +8,12 @@ import moment from 'moment';
 
 export default function ContractComponentForCreator({
   contractData,
-  job,
   ...props
 }) {
   let paymentTermsSum = contractData.cost;
   const classes = useStyles();
   const { readOnly } = props;
+  const job = contractData.job;
 
   return (
     <div style={{ width: '100%' }}>

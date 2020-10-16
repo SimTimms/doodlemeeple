@@ -50,12 +50,6 @@ export default function QuoteSummaryCreator({
         [classes.hide]: !display,
       })}
     >
-      <PaymentElement
-        display={displayPayment}
-        setDisplayPayment={setDisplayPayment}
-        contractData={contractData}
-        setContractStatus={setContractStatus}
-      />
       <Query
         query={FAVOURITES}
         onCompleted={(data) => {
@@ -247,13 +241,6 @@ export default function QuoteSummaryCreator({
                   </Column>
                 </BorderBox>
               )}
-
-              <PaymentElement
-                display={displayPayment}
-                setDisplayPayment={setDisplayPayment}
-                contractData={contractData}
-                setContractStatus={setContractStatus}
-              />
             </ActionWrapper>
           </Column>
         )}

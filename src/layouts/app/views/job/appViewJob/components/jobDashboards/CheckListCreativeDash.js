@@ -23,8 +23,15 @@ export default function CheckListCreativeDash({
 }) {
   const accepted = invite.status === 'accepted';
   const unopened = invite.status === 'unopened';
-
-  const color = [1, 2, unopened ? 2 : 1, declined ? 2 : accepted ? 0 : 2];
+  const quoted = invite.status === 'quote_sent';
+  const jobActive = job.job.activeContract;
+  const activeContract = job.job.activeContract._id === job.contract._id;
+  const color = [
+    1,
+    2,
+    unopened ? 2 : 1,
+    quoted ? 1 : declined ? 2 : accepted ? 0 : 2,
+  ];
   const classes = useStyles();
 
   return (
@@ -39,7 +46,7 @@ export default function CheckListCreativeDash({
           declined={declined}
           history={history}
         />
-        {declined && (
+        {(declined || quoted || activeContract || !activeContract) && (
           <Column>
             <DividerMini />
             <FieldTitleDashboard name="Status" inline={false} a="c" />
@@ -48,9 +55,18 @@ export default function CheckListCreativeDash({
               variant="h6"
               className={clsx({
                 [classes.status]: true,
+                [classes.statusGreen]: quoted || activeContract,
               })}
             >
-              {declined && 'INVITE DECLINED'}
+              {jobActive
+                ? activeContract
+                  ? 'QUOTE ACCEPTED'
+                  : !activeContract
+                  ? 'QUOTE REJECTED'
+                  : declined
+                  ? 'INVITE DECLINED'
+                  : quoted && 'WAITING ON CLIENT'
+                : null}
             </Typography>
           </Column>
         )}

@@ -63,16 +63,16 @@ export default function InviteComponentFull({
             </Column>
           </Row>
           {contract && (
-            <CheckListItem
-              color="warning"
-              label=""
-              status={
-                contract.status === 'accepted' ? 'Fund the Project' : 'check'
-              }
-              icon={contract.status === 'accepted' ? 'play_arrow' : 'check'}
-              onClickEvent={() =>
-                display ? setDisplay(false) : setDisplay(true)
-              }
+            <MenuButtonShortcut
+              text={{
+                name: '',
+                color: '#fff',
+                icon: 'request_quote',
+                count: 0,
+                back: 'warning',
+              }}
+              onClickEvent={() => setDisplay(true)}
+              active={false}
             />
           )}
           {invite.status !== 'declined' && (

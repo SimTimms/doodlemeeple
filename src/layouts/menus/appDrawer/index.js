@@ -114,7 +114,7 @@ export default function AppDrawer({
               icon: 'work',
               link: () => history.push('/app/jobs'),
               color: '#444',
-              count: null,
+              count: counts.quotes,
             },
             {
               name: 'My Profile',

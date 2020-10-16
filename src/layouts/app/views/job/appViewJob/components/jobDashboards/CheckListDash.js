@@ -39,8 +39,8 @@ export default function CheckListDash({ job, setTabNbr }) {
   const color = [
     1,
     1,
-    !accepted && !paid && 2,
-    !paid && 2,
+    jobHasContract ? 1 : !accepted && !paid && 2,
+    !paid ? 2 : 1,
     totalPaid < parseInt(cost) ? 2 : 0,
     0,
   ];
@@ -73,6 +73,7 @@ export default function CheckListDash({ job, setTabNbr }) {
             <ItemQuoteAccepted
               accepted={job.submitted}
               contracts={job.contracts}
+              activeContract={jobHasContract}
               setTabNbr={setTabNbr}
               color={color[2]}
             />

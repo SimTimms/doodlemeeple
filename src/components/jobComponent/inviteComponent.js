@@ -25,7 +25,7 @@ export default function InviteComponent({ invite, history }) {
             ></div>
             <Column a="flex-start">
               <Typography style={{ fontSize: 12 }}>
-                {`Invite from ${invite.receiver.name}`}
+                {`Invite from ${invite.sender.name}`}
               </Typography>
               <Typography
                 style={{ fontSize: 12 }}
@@ -58,9 +58,13 @@ export default function InviteComponent({ invite, history }) {
                   text={{
                     name: '',
                     color: '#fff',
-                    icon: unopened ? 'star' : '',
+                    icon: unopened || opened || quoted ? 'star' : '',
                     count: 0,
-                    back: unopened ? 'warning' : '',
+                    back: unopened
+                      ? 'warning'
+                      : opened || quoted
+                      ? 'primary'
+                      : '',
                   }}
                   onClickEvent={() => {
                     invite.status === 'unopened' && mutation();

@@ -121,6 +121,9 @@ export const useStyles = makeStyles((theme) => ({
   iconButtonIcon: {
     color: '#fff',
     fontSize: 12,
+    padding: 3,
+    borderRadius: '50%',
+    border: '1px solid rgba(255,255,255,0.4)',
   },
   iconButtonIconText: {
     color: '#aaa',

@@ -21,4 +21,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 3,
     color: '#fff',
   },
+  statusGreen: {
+    background: theme.palette.secondary.main,
+  },
 }));

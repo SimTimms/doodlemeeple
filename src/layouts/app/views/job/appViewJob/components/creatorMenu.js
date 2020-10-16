@@ -42,7 +42,7 @@ export default function CreatorMenu({
           column={true}
           active={tabNbr === 1}
         />
-        {!jobClosed && (
+        {!jobClosed && !activeContract && (
           <MenuButtonShortcut
             text={{
               name: 'Creatives',
@@ -57,6 +57,7 @@ export default function CreatorMenu({
             active={tabNbr === 2}
           />
         )}
+
         {activeContract && (
           <MenuButtonShortcut
             text={{

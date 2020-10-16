@@ -33,7 +33,7 @@ export default function ViewProposal({ jobId, history }) {
                     mutation={UPDATE_CONTRACT}
                     variables={{
                       _id: data.contractByJob._id,
-                      status: '',
+                      status: 'read',
                     }}
                     onCompleted={(data) => {
                       history.push(`/app/view-job/${jobId}`);

@@ -22,8 +22,9 @@ export default function ApproveButton({
         _id: paymentId,
       }}
       onCompleted={(data) => {
-        data.approveWithdraw === 'STRIPE SETUP' &&
-          setResponse('Stripe Required');
+        data.approveWithdraw === 'STRIPE SETUP'
+          ? setResponse('Stripe Required')
+          : setResponse('Paid Out');
       }}
     >
       {(mutation) => {

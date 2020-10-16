@@ -191,7 +191,7 @@ export const PAYMENTS = gql`
 `;
 
 export const INVITES = gql`
-  query GetInvites($status: String) {
+  query GetInvites($status: [String]) {
     invitesByUser(status: $status) {
       status
       _id
@@ -443,6 +443,9 @@ export const JOB_CREATIVE = gql`
           _id
           email
           name
+        }
+        activeContract {
+          _id
         }
       }
       invite {

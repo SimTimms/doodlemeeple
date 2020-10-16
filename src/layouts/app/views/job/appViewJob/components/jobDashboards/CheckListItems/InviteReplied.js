@@ -13,6 +13,7 @@ export default function InviteReplied({ color, setTabNbr, status }) {
   const classes = useStyles();
   const declined = status === 'declined';
   const accepted = status === 'accepted';
+  const quoted = status === 'quote_sent';
   return (
     <RowCheckList j="space-between" active={true}>
       <Column a="space-between">
@@ -24,7 +25,15 @@ export default function InviteReplied({ color, setTabNbr, status }) {
             })}
           >
             Quoted or Declined:
-            <b>{declined ? 'Declined' : accepted ? 'Accepted' : 'No'}</b>
+            <b>
+              {declined
+                ? 'Declined'
+                : accepted
+                ? 'Accepted'
+                : quoted
+                ? 'Quoted'
+                : 'No'}
+            </b>
           </Typography>
         </Row>
       </Column>
@@ -32,12 +41,18 @@ export default function InviteReplied({ color, setTabNbr, status }) {
         text={{
           name: '',
           color: '',
-          icon: color === 1 ? 'check' : color === 2 ? 'star' : '',
+          icon: quoted
+            ? 'query_builder'
+            : color === 1
+            ? 'check'
+            : color === 2
+            ? 'star'
+            : '',
           count: 0,
           back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}
         onClickEvent={() => {
-          setTabNbr(1);
+          quoted ? setTabNbr(6) : setTabNbr(1);
         }}
         active={false}
       />

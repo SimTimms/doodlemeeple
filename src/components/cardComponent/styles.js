@@ -14,11 +14,11 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 10,
-    boxShadow: '5px 5px 10px rgba(0,0,0,0.1)',
+    boxShadow: 'none',
     boxSizing: 'border-box',
   },
   clickable: {
     cursor: 'pointer',
-    '&:hover': { border: `2px solid ${theme.palette.primary.light}` },
+    '&:hover': { boxShadow: '5px 5px 10px rgba(0,0,0,0.1)' },
   },
 }));

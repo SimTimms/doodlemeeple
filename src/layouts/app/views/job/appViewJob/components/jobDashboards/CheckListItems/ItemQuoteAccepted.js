@@ -14,8 +14,12 @@ export default function ItemQuoteAccepted({
   setTabNbr,
   color,
   contracts,
+  activeContract,
 }) {
   const classes = useStyles();
+  const noContracts = !contracts;
+  const someContracts = contracts.length > 0;
+
   return (
     <RowCheckList j="space-between" active={true}>
       <Column a="space-between">
@@ -28,11 +32,13 @@ export default function ItemQuoteAccepted({
           >
             Quotes:
             <b>
-              {accepted !== 'accepted'
-                ? contracts.length === 0
-                  ? 'None Received'
-                  : 'No'
-                : 'Yes'}
+              {activeContract
+                ? 'Accepted'
+                : noContracts
+                ? 'None Received'
+                : someContracts
+                ? 'Received'
+                : 'No'}
             </b>
           </Typography>
         </Row>
@@ -45,7 +51,7 @@ export default function ItemQuoteAccepted({
           count: 0,
           back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}
-        onClickEvent={() => setTabNbr(2)}
+        onClickEvent={() => (activeContract ? setTabNbr(3) : setTabNbr(2))}
         active={false}
       />
     </RowCheckList>

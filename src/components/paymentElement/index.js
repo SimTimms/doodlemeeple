@@ -17,17 +17,18 @@ import clsx from 'clsx';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE);
 
-export default function PaymentElement({ display, contractData, ...props }) {
+export default function PaymentElement({ display, job, ...props }) {
   const classes = useStyles();
   const [paymentIntent, setPaymentIntent] = React.useState(null);
   const [visible, setVisible] = React.useState(null);
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [paymentStatus, setPaymentStatus] = React.useState('');
-  const { setDisplayPayment, setContractStatus } = props;
+  const contractData = job.jobData.activeContract;
+  const { setDisplayPayment } = props;
   useEffect(() => {
     setVisible(display);
-    setPaymentStatus(contractData.status);
-  }, [contractData, display]);
+    setPaymentStatus(job.jobData.activeContract.status);
+  }, [job, display]);
 
   return (
     <div
@@ -112,9 +113,7 @@ export default function PaymentElement({ display, contractData, ...props }) {
               <Elements stripe={stripePromise}>
                 <StripeCheckout
                   paymentIntent={paymentIntent}
-                  setPaymentStatus={setPaymentStatus}
-                  setVisible={setDisplayPayment}
-                  setContractStatus={setContractStatus}
+                  job={{ jobData: job.jobData, setJobData: job.setJobData }}
                 />
               </Elements>
             )}

@@ -27,7 +27,6 @@ export default function EditProposalForm({
   contractData,
   setContract,
   history,
-  setTabNbr,
 }) {
   const classes = useStyles();
 
@@ -38,7 +37,7 @@ export default function EditProposalForm({
   });
   const [detailsLock, setDetailsLock] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  const [page, setPage] = React.useState(0);
+  const [tabNbr, setTabNbr] = React.useState(0);
   const [lockSubmit, setLockSubmit] = React.useState(true);
   useEffect(() => {
     const { cost, paymentTerms, currency, notes } = contractData;
@@ -77,9 +76,9 @@ export default function EditProposalForm({
                 {(mutation) => {
                   return (
                     <div className={classes.root}>
-                      <Menu />
+                      <Menu tab={{ tabNbr: tabNbr, setTabNbr: setTabNbr }} />
                       <Divider />
-                      {page === 0 && (
+                      {tabNbr === 0 && (
                         <QuoteDetails
                           setContract={setContract}
                           contract={contractData}
@@ -89,7 +88,7 @@ export default function EditProposalForm({
                               <Meta str="Continue onto payment & milestones" />
                               <IconButton
                                 title="Next"
-                                onClickEvent={() => setPage(1)}
+                                onClickEvent={() => setTabNbr(1)}
                                 styleOverride={{ width: '100%' }}
                                 icon="chevron_right"
                                 iconPos="right"
@@ -99,7 +98,7 @@ export default function EditProposalForm({
                         />
                       )}
 
-                      {page === 1 && (
+                      {tabNbr === 1 && (
                         <PaymentTerms
                           percentLock={percentLock}
                           setPercentLock={setPercentLock}
@@ -115,7 +114,7 @@ export default function EditProposalForm({
                                 <Meta str="Continue to Confirmation" />
                                 <IconButton
                                   title="Next"
-                                  onClickEvent={() => setPage(2)}
+                                  onClickEvent={() => setTabNbr(2)}
                                   styleOverride={{ width: '100%' }}
                                   icon="chevron_right"
                                   iconPos="right"
@@ -125,7 +124,7 @@ export default function EditProposalForm({
                                   icon=""
                                   color="text-dark"
                                   onClickEvent={() => {
-                                    setPage(0);
+                                    setTabNbr(0);
                                   }}
                                   styleOverride={{ margin: 0, padding: 0 }}
                                 />
@@ -134,7 +133,7 @@ export default function EditProposalForm({
                           }
                         />
                       )}
-                      {page === 2 && (
+                      {tabNbr === 2 && (
                         <div style={{ width: '100%' }}>
                           <ContractSummaryForCreative
                             contractData={contractData}
@@ -145,7 +144,7 @@ export default function EditProposalForm({
                               <IconButton
                                 title="Go back and complete"
                                 icon="chevron_left"
-                                onClickEvent={() => setPage(0)}
+                                onClickEvent={() => setTabNbr(0)}
                                 color="primary"
                               />
                             </Column>
@@ -170,7 +169,7 @@ export default function EditProposalForm({
                           )}
                         </div>
                       )}
-                      {page === 3 && (
+                      {tabNbr === 3 && (
                         <div style={{ width: '100%' }}>
                           <ContractComponentForCreator
                             contractData={contractData}
@@ -190,7 +189,7 @@ export default function EditProposalForm({
                                 iconPos="left"
                                 color="warning"
                                 onClickEvent={() => {
-                                  setPage(1);
+                                  setTabNbr(1);
                                 }}
                                 styleOverride={{ width: '100%' }}
                               />

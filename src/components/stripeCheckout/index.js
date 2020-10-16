@@ -6,12 +6,7 @@ import stripeLogo from '../../assets/stripe.png';
 import { IconButton, Column } from '../';
 import clsx from 'clsx';
 
-export default function CheckoutForm({
-  paymentIntent,
-  setPaymentStatus,
-  setVisible,
-  setContractStatus,
-}) {
+export default function CheckoutForm({ paymentIntent, job }) {
   const classes = useStyles();
   const stripe = useStripe();
   const elements = useElements();
@@ -53,7 +48,10 @@ export default function CheckoutForm({
       });
     } else {
       if (result.paymentIntent.status === 'succeeded') {
-        setContractStatus('paid');
+        job.setJobData({
+          ...job.jobData,
+          activeContract: { ...job.jobData.activeContract, status: 'paid' },
+        });
         setStatus({
           complete: false,
           error: false,

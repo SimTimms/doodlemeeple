@@ -22,7 +22,6 @@ export default function SummaryViewCreator({ job, history }) {
   const [pageNbr, setPageNbr] = React.useState(0);
   const [tabNbr, setTabNbr] = React.useState(-1);
   const [messages, setMessages] = React.useState([]);
-  const [displayPayment, setDisplayPayment] = React.useState(false);
   const [jobData, setJobData] = React.useState(null);
 
   useEffect(() => {
@@ -44,6 +43,7 @@ export default function SummaryViewCreator({ job, history }) {
               job={jobData}
               setConversationUser={setConversationUser}
               setTabNbr={setTabNbr}
+              history={history}
             />
           </Column>
         )}
@@ -63,16 +63,6 @@ export default function SummaryViewCreator({ job, history }) {
         )}
         {tabNbr === 3 && (
           <BorderBox w={700}>
-            {job.activeContract.status !== 'paid' && (
-              <IconButton
-                title="Fund this Project"
-                onClickEvent={() => setDisplayPayment(true)}
-              />
-            )}
-            <PaymentElement
-              display={displayPayment}
-              contractData={job.activeContract}
-            />
             <ContractComponentForCreator
               contractData={job.activeContract}
               job={job}
@@ -86,7 +76,7 @@ export default function SummaryViewCreator({ job, history }) {
         )}
         {tabNbr === 4 && (
           <Column>
-            <PaymentsView job={job} />
+            <PaymentsView job={{ jobData: jobData, setJobData: setJobData }} />
           </Column>
         )}
         {conversationUser && (

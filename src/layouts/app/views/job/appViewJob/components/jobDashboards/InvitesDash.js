@@ -10,6 +10,7 @@ export default function InvitesDash({
   invites,
   setConversationUser,
   jobClosed,
+  history,
 }) {
   return (
     <Column w="50%" p={10}>
@@ -21,6 +22,8 @@ export default function InvitesDash({
             key={`invite-${index}`}
             setConversationUser={setConversationUser}
             jobClosed={jobClosed}
+            history={history}
+            user={invite.receiver}
           />
         ))}
       </Paper>

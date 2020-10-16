@@ -9,7 +9,11 @@ import clsx from 'clsx';
 export default function JobComponent({ job, game, history }) {
   const classes = useStyles();
   const contractsArr = job.contracts.map((contract) => contract.user._id);
-
+  const contractsIn = job.contracts.length > 0;
+  const submitted = job.submitted === 'submitted';
+  const accepted = job.submitted === 'accepted';
+  const paid = job.submitted === 'paid';
+  const closed = job.submitted === 'closed';
   return (
     <CardComponent
       onClickEvent={() => {
@@ -49,18 +53,19 @@ export default function JobComponent({ job, game, history }) {
           className={clsx({
             [classes.cardSummaryNeutral]: true,
             [classes.cardSummary]: true,
-            [classes.cardSummaryWarning]: job.submitted === 'accepted',
-            [classes.cardSummaryGood]:
-              job.submitted === 'paid' || job.submitted === 'submitted',
+            [classes.cardSummaryWarning]: submitted || contractsIn,
+            [classes.cardSummaryGood]: paid || accepted,
           })}
         >
-          {job.submitted === 'submitted'
+          {contractsIn
+            ? 'Quotes Received'
+            : submitted
             ? 'Invites sent'
-            : job.submitted === 'closed'
+            : closed
             ? 'Closed'
-            : job.submitted === 'accepted'
+            : accepted
             ? 'Awaiting Payment'
-            : job.submitted === 'paid'
+            : paid
             ? 'Paid & Active'
             : 'Draft'}
         </Typography>

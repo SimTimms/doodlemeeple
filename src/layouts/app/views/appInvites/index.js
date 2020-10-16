@@ -51,7 +51,10 @@ export default function AppInvites({ history }) {
         <Query
           query={INVITES}
           fetchPolicy="network-only"
-          variables={{ status: tabNbr === 1 ? 'unopened' : 'declined' }}
+          variables={{
+            status:
+              tabNbr === 1 ? ['unopened', 'read', 'quote_sent'] : ['declined'],
+          }}
           onCompleted={(data) => {
             setInviteArray(data.invitesByUser);
           }}
@@ -77,7 +80,7 @@ export default function AppInvites({ history }) {
                   </Typography>
                   <IconButton
                     title="Profile"
-                    icon="face"
+                    icon="contact_mail"
                     color="primary"
                     styleOverride={null}
                     iconPos="right"

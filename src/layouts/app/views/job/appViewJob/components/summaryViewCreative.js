@@ -6,6 +6,7 @@ import { CreativeDashboard } from './jobDashboards/';
 import ChatView from '../components/chatView';
 import CreativeMenu from './creativeMenu';
 import EditProposalForm from './proposalForm/views/editProposal';
+import PaymentsView from './paymentsView';
 import CreativeJobSummary from './creativeJobSummary';
 
 export default function SummaryViewCreative({ job, history }) {
@@ -64,6 +65,11 @@ export default function SummaryViewCreative({ job, history }) {
               setContract={setContract}
             />
           )
+        )}
+        {tabNbr === 4 && (
+          <Column>
+            <PaymentsView job={{ jobData: job.job, setJobData: null }} />
+          </Column>
         )}
         {conversationUser && (
           <ChatView
