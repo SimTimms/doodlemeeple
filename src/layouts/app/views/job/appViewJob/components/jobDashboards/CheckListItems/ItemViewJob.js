@@ -8,8 +8,6 @@ import {
   MenuButtonShortcut,
 } from '../../../../../../../../components';
 import clsx from 'clsx';
-import { Mutation } from 'react-apollo';
-import { UPDATE_INVITE } from '../../../../../../../../data/mutations';
 
 export default function ItemViewJob({ reply, inviteId, setTabNbr, color }) {
   const classes = useStyles();

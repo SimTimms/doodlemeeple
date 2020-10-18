@@ -58,6 +58,7 @@ export default function SummaryViewCreator({ job, history }) {
             <InvitesView
               invites={job.invites}
               setConversationUser={setConversationUser}
+              setTabNbr={setTabNbr}
             />
           </Column>
         )}
@@ -71,6 +72,7 @@ export default function SummaryViewCreator({ job, history }) {
             <Signature
               contractData={job.activeContract}
               onAccept={() => setTabNbr(0)}
+              onDecline={() => setTabNbr(0)}
             />
           </BorderBox>
         )}

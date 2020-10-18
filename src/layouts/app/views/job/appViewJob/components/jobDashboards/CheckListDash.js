@@ -21,15 +21,13 @@ import {
 
 export default function CheckListDash({ job, setTabNbr }) {
   const classes = useStyles();
-  const { paymentTerms, cost, currency } = job.activeContract
-    ? job.activeContract
-    : { paymentTerms: [], cost: 0, currency: 'GBP' };
-
   const jobHasContract = job.activeContract;
   const paid = job.submitted === 'paid';
   const accepted = job.submitted === 'accepted';
   const closed = job.submitted === 'closed';
-
+  const { paymentTerms, cost, currency } = job.activeContract
+    ? job.activeContract
+    : { paymentTerms: [], cost: 0, currency: 'GBP' };
   const paidOutArr = paymentTerms.filter((term) => term.paid === 'success');
   let totalPaid = 0;
   for (let i = 0; i < paidOutArr.length; i++) {
@@ -41,7 +39,7 @@ export default function CheckListDash({ job, setTabNbr }) {
     1,
     jobHasContract ? 1 : !accepted && !paid && 2,
     !paid ? 2 : 1,
-    totalPaid < parseInt(cost) ? 2 : 0,
+    totalPaid < parseInt(cost) ? 2 : 1,
     0,
   ];
 

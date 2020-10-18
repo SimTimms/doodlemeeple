@@ -3,7 +3,7 @@ import { BorderBox, IconButton } from '../';
 import { Mutation } from 'react-apollo';
 import { DECLINE_CONTRACT } from '../../data/mutations';
 
-export default function ActionSetOne({ contract, setTabNbr }) {
+export default function ActionSetOne({ contract, setTabNbr, setTabNbrTwo }) {
   return (
     <BorderBox w={300}>
       <IconButton
@@ -12,7 +12,7 @@ export default function ActionSetOne({ contract, setTabNbr }) {
         icon="chevron_right"
         disabled={false}
         onClickEvent={() => {
-          setTabNbr(1);
+          setTabNbrTwo(1);
         }}
         styleOverride={{
           margin: 'auto',
@@ -27,6 +27,7 @@ export default function ActionSetOne({ contract, setTabNbr }) {
         variables={{
           contractId: contract._id,
         }}
+        onCompleted={() => setTabNbr(-1)}
       >
         {(mutation) => {
           return (

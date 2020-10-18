@@ -9,11 +9,16 @@ import {
 } from '../../../../../../../../components';
 import clsx from 'clsx';
 
-export default function InviteReplied({ color, setTabNbr, status }) {
+export default function InviteReplied({
+  color,
+  setTabNbr,
+  declined,
+  quoted,
+  accepted,
+  rejected,
+}) {
   const classes = useStyles();
-  const declined = status === 'declined';
-  const accepted = status === 'accepted';
-  const quoted = status === 'quote_sent';
+
   return (
     <RowCheckList j="space-between" active={true}>
       <Column a="space-between">
@@ -24,14 +29,12 @@ export default function InviteReplied({ color, setTabNbr, status }) {
               [classes.dull]: true,
             })}
           >
-            Quoted or Declined:
+            Quoted:
             <b>
               {declined
                 ? 'Declined'
-                : accepted
-                ? 'Accepted'
-                : quoted
-                ? 'Quoted'
+                : quoted || accepted || rejected
+                ? 'Yes'
                 : 'No'}
             </b>
           </Typography>
@@ -41,8 +44,8 @@ export default function InviteReplied({ color, setTabNbr, status }) {
         text={{
           name: '',
           color: '',
-          icon: quoted
-            ? 'query_builder'
+          icon: declined
+            ? 'close'
             : color === 1
             ? 'check'
             : color === 2

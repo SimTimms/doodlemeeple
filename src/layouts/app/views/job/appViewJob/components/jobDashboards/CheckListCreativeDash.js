@@ -11,7 +11,14 @@ import {
   DividerMini,
   CreatorComponentDash,
 } from '../../../../../../../components';
-import { InviteReceived, InviteReplied, ItemViewJob } from './CheckListItems';
+import {
+  InviteReceived,
+  InviteReplied,
+  ItemViewJob,
+  ItemQuoteAcceptedCreative,
+  ItemQuotePaid,
+  ItemCreativePaid,
+} from './CheckListItems';
 
 export default function CheckListCreativeDash({
   declined,
@@ -20,17 +27,39 @@ export default function CheckListCreativeDash({
   setConversationUser,
   job,
   history,
+  jobHasBeenAwarded,
+  activeContract,
 }) {
+  function totalPaid(jobData) {
+    if (!jobData) {
+      return 0;
+    }
+    const paidOutArr = jobData.paymentTerms.filter(
+      (term) => term.paid === 'success'
+    );
+    let totalPaid = 0;
+    for (let i = 0; i < paidOutArr.length; i++) {
+      totalPaid += paidOutArr[i].percent;
+    }
+    return totalPaid;
+  }
+
   const accepted = invite.status === 'accepted';
   const unopened = invite.status === 'unopened';
   const quoted = invite.status === 'quote_sent';
-  const jobActive = job.job.activeContract;
-  const activeContract = job.job.activeContract._id === job.contract._id;
+  const rejected = invite.status === 'rejected';
+  const jobData = job.job;
+  const paid = jobData.submitted === 'paid';
+  const contractData = job.contract ? job.contract : null;
+  const cost = job.contract ? job.contract.cost : 0;
+  const currency = job.contract ? job.contract.currency : 'GBP';
   const color = [
     1,
     2,
     unopened ? 2 : 1,
-    quoted ? 1 : declined ? 2 : accepted ? 0 : 2,
+    quoted || accepted || rejected ? 1 : declined ? 0 : accepted ? 0 : 2,
+    paid ? 1 : declined ? 0 : 2,
+    totalPaid(contractData) < parseInt(cost) || parseInt(cost) === 0 ? 2 : 1,
   ];
   const classes = useStyles();
 
@@ -46,7 +75,7 @@ export default function CheckListCreativeDash({
           declined={declined}
           history={history}
         />
-        {(declined || quoted || activeContract || !activeContract) && (
+        {(declined || quoted || jobHasBeenAwarded) && (
           <Column>
             <DividerMini />
             <FieldTitleDashboard name="Status" inline={false} a="c" />
@@ -58,15 +87,13 @@ export default function CheckListCreativeDash({
                 [classes.statusGreen]: quoted || activeContract,
               })}
             >
-              {jobActive
+              {jobHasBeenAwarded
                 ? activeContract
                   ? 'QUOTE ACCEPTED'
-                  : !activeContract
-                  ? 'QUOTE REJECTED'
-                  : declined
-                  ? 'INVITE DECLINED'
-                  : quoted && 'WAITING ON CLIENT'
-                : null}
+                  : !activeContract && 'QUOTE REJECTED'
+                : declined
+                ? 'INVITE DECLINED'
+                : quoted && 'WAITING ON CLIENT'}
             </Typography>
           </Column>
         )}
@@ -85,10 +112,34 @@ export default function CheckListCreativeDash({
           <DividerWithBorder />
           <InviteReplied
             color={color[3]}
-            status={invite.status}
+            declined={declined}
+            quoted={quoted}
+            accepted={accepted}
+            rejected={rejected}
+            setTabNbr={setTabNbr}
+          />
+          <DividerWithBorder />
+          <ItemQuoteAcceptedCreative
+            color={color[3] === 1 ? color[3] : 0}
+            activeContract={activeContract}
             setTabNbr={setTabNbr}
           />
           <Divider />
+          <ItemQuotePaid
+            paid={paid}
+            setTabNbr={setTabNbr}
+            color={color[4] === 1 ? color[4] : 0}
+            jobHasContract={jobHasBeenAwarded}
+          />
+          <Divider />
+          <ItemCreativePaid
+            totalPaid={totalPaid(contractData)}
+            cost={cost}
+            currency={currency}
+            setTabNbr={setTabNbr}
+            color={color[5] === 1 ? color[5] : 0}
+            jobHasContract={jobHasBeenAwarded}
+          />
         </Column>
       </Widget>
     </Column>

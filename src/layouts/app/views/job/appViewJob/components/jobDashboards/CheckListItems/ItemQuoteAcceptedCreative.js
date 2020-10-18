@@ -9,13 +9,10 @@ import {
 } from '../../../../../../../../components';
 import clsx from 'clsx';
 
-export default function ItemCreativePaid({
-  totalPaid,
-  cost,
-  currency,
+export default function ItemQuoteAcceptedCreative({
   setTabNbr,
   color,
-  jobHasContract,
+  activeContract,
 }) {
   const classes = useStyles();
 
@@ -29,11 +26,8 @@ export default function ItemCreativePaid({
               [classes.dull]: true,
             })}
           >
-            Creative Paid:{' '}
-            <b>
-              {`${totalPaid} / ${cost} 
-              ${currency}`}
-            </b>
+            Client Response:
+            <b>{activeContract ? 'Accepted' : 'No'}</b>
           </Typography>
         </Row>
       </Column>
@@ -41,18 +35,11 @@ export default function ItemCreativePaid({
         text={{
           name: '',
           color: '',
-          icon:
-            totalPaid < cost
-              ? 'query_builder'
-              : color === 1
-              ? 'check'
-              : color === 2
-              ? 'star'
-              : '',
+          icon: color === 1 ? 'check' : color === 2 ? 'star' : '',
           count: 0,
           back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}
-        onClickEvent={() => (jobHasContract ? setTabNbr(4) : null)}
+        onClickEvent={() => (activeContract ? setTabNbr(3) : setTabNbr(2))}
         active={false}
       />
     </RowCheckList>

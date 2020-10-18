@@ -26,7 +26,7 @@ export default function ItemQuotePaid({
               [classes.dull]: true,
             })}
           >
-            Funded: <b>{paid !== 'paid' ? 'No' : 'Yes'}</b>
+            Funded: <b>{!paid ? 'No' : 'Yes'}</b>
           </Typography>
         </Row>
       </Column>
@@ -34,7 +34,13 @@ export default function ItemQuotePaid({
         text={{
           name: '',
           color: '',
-          icon: color === 1 ? 'check' : color === 2 ? 'star' : '',
+          icon: jobHasContract
+            ? 'query_builder'
+            : color === 1
+            ? 'check'
+            : color === 2
+            ? 'star'
+            : '',
           count: 0,
           back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}

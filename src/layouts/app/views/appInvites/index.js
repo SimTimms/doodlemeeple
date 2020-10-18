@@ -9,6 +9,7 @@ import {
   Column,
   Divider,
   InviteComponent,
+  DividerWithBorder,
   Paper,
   FieldTitleDashboard,
 } from '../../../../components';
@@ -37,11 +38,14 @@ export default function AppInvites({ history }) {
               <Paper p={10}>
                 {inviteArray.map((invite, index) => {
                   return (
-                    <InviteComponent
-                      history={history}
-                      key={`invite_${index}`}
-                      invite={invite}
-                    />
+                    <Column>
+                      {index > 0 && <DividerWithBorder />}
+                      <InviteComponent
+                        history={history}
+                        key={`invite_${index}`}
+                        invite={invite}
+                      />
+                    </Column>
                   );
                 })}
               </Paper>
@@ -53,7 +57,9 @@ export default function AppInvites({ history }) {
           fetchPolicy="network-only"
           variables={{
             status:
-              tabNbr === 1 ? ['unopened', 'read', 'quote_sent'] : ['declined'],
+              tabNbr === 1
+                ? ['unopened', 'read', 'quote_sent', 'accepted']
+                : ['declined', 'rejected'],
           }}
           onCompleted={(data) => {
             setInviteArray(data.invitesByUser);

@@ -20,10 +20,11 @@ export default function InviteComponentFull({
   invite,
   setConversationUser,
   contract,
+  setTabNbr,
 }) {
   const classes = useStyles();
   const [display, setDisplay] = React.useState(false);
-  const [tabNbr, setTabNbr] = React.useState(0);
+  const [tabNbrTwo, setTabNbrTwo] = React.useState(0);
   const unread = invite.status === 'unopened';
   const quoted = invite.status === 'quote_sent';
   const read = invite.status === 'read';
@@ -98,7 +99,11 @@ export default function InviteComponentFull({
             {({ data }) => {
               return data ? (
                 <div
-                  style={{ padding: 20, background: '#efeff5', marginTop: 20 }}
+                  style={{
+                    background: '#efeff5',
+                    marginTop: 20,
+                    width: '100%',
+                  }}
                 >
                   <div
                     style={{
@@ -107,20 +112,21 @@ export default function InviteComponentFull({
                       boxShadow: '0 0 10px rgba(0,0,0,0.1)',
                     }}
                   >
-                    {tabNbr === 0 && (
+                    {tabNbrTwo === 0 && (
                       <BorderBox>
                         <ContractSummaryForCreator
                           contractData={data.contractById}
                         />
                         {contract.status !== 'accepted' && (
                           <ActionSetOne
+                            setTabNbrTwo={setTabNbrTwo}
                             setTabNbr={setTabNbr}
                             contract={contract}
                           />
                         )}
                       </BorderBox>
                     )}
-                    {tabNbr === 1 && (
+                    {tabNbrTwo === 1 && (
                       <BorderBox>
                         <ContractComponentForCreator
                           contractData={data.contractById}
@@ -128,18 +134,10 @@ export default function InviteComponentFull({
                         <Signature
                           contractData={contract}
                           onAccept={() => setTabNbr(0)}
+                          onDecline={() => setTabNbr(0)}
                         />
                       </BorderBox>
                     )}
-                    <IconButton
-                      title="Back"
-                      color="text-dark"
-                      icon="close"
-                      onClickEvent={() => {
-                        setTabNbr(0);
-                      }}
-                      iconPos="chevron_left"
-                    />
                   </div>
                 </div>
               ) : null;

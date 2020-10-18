@@ -415,6 +415,7 @@ export const JOB_CREATIVE = gql`
           createdAt
           creativeSummary
           keywords
+          submitted
           user {
             _id
             email
@@ -425,6 +426,8 @@ export const JOB_CREATIVE = gql`
           _id
           percent
           description
+          status
+          paid
         }
       }
       creator {

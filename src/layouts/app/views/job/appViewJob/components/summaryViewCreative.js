@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { Slide } from '@material-ui/core';
 import { useStyles } from '../styles';
-import { Column, CreateQuoteButton, Paper } from '../../../../../../components';
+import {
+  Column,
+  CreateQuoteButton,
+  ContractComponentForCreator,
+} from '../../../../../../components';
 import { CreativeDashboard } from './jobDashboards/';
 import ChatView from '../components/chatView';
 import CreativeMenu from './creativeMenu';
@@ -18,6 +22,13 @@ export default function SummaryViewCreative({ job, history }) {
   const [contract, setContract] = React.useState();
   const [invite, setInvite] = React.useState({});
 
+  const jobHasBeenAwarded = job.job.activeContract;
+  const activeContract =
+    job.job.activeContract && job.contract
+      ? job.job.activeContract._id === job.contract._id
+      : false;
+  const userContract = job.contract && job.contract._id;
+
   useEffect(() => {
     setContract(job.contract);
     setInvite(job.invite);
@@ -26,16 +37,22 @@ export default function SummaryViewCreative({ job, history }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <CreativeMenu tabNbr={tabNbr} setTabNbr={setTabNbr} />
+        <CreativeMenu
+          tabNbr={tabNbr}
+          setTabNbr={setTabNbr}
+          activeContract={activeContract}
+          userContract={userContract}
+        />
         {tabNbr === -1 && (
           <Column>
             <CreativeDashboard
               job={job}
               setConversationUser={setConversationUser}
-              contract={contract}
               setTabNbr={setTabNbr}
               invite={{ data: invite, setData: setInvite }}
               history={history}
+              jobHasBeenAwarded={jobHasBeenAwarded}
+              activeContract={activeContract}
             />
           </Column>
         )}
@@ -46,6 +63,7 @@ export default function SummaryViewCreative({ job, history }) {
               history={history}
               invite={{ data: invite, setData: setInvite }}
               setTabNbr={setTabNbr}
+              userContract={userContract}
             />
           </Column>
         )}
@@ -55,7 +73,6 @@ export default function SummaryViewCreative({ job, history }) {
             contractData={contract}
             setContract={setContract}
             history={history}
-            setTabNbr={setTabNbr}
           />
         ) : (
           tabNbr === 6 && (
@@ -70,6 +87,9 @@ export default function SummaryViewCreative({ job, history }) {
           <Column>
             <PaymentsView job={{ jobData: job.job, setJobData: null }} />
           </Column>
+        )}
+        {tabNbr === 7 && (
+          <ContractComponentForCreator contractData={job.contract} />
         )}
         {conversationUser && (
           <ChatView

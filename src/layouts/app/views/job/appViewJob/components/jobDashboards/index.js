@@ -1,5 +1,4 @@
 import React from 'react';
-import { useStyles } from './styles';
 import { Column, Row } from '../../../../../../../components';
 import NotificationDash from './NotificationDash';
 import InvitesDash from './InvitesDash';
@@ -10,12 +9,12 @@ import CheckListCreativeDash from './CheckListCreativeDash';
 export function CreativeDashboard({
   job,
   setConversationUser,
-  contract,
   invite,
   setTabNbr,
   history,
+  activeContract,
+  jobHasBeenAwarded,
 }) {
-  const classes = useStyles();
   const declined = invite.data.status === 'declined';
   return (
     <Column>
@@ -27,8 +26,9 @@ export function CreativeDashboard({
           job={job}
           history={history}
           setConversationUser={setConversationUser}
+          jobHasBeenAwarded={jobHasBeenAwarded}
+          activeContract={activeContract}
         />
-
         <NotificationDash jobId={job.job._id} />
       </Row>
     </Column>
@@ -41,7 +41,6 @@ export function CreatorDashboard({
   setTabNbr,
   history,
 }) {
-  const classes = useStyles();
   return (
     <Column>
       <Row a="flex-start">

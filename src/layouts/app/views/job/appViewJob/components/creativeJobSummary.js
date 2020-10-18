@@ -19,6 +19,7 @@ export default function CreativeJobSummary({
   history,
   setTabNbr,
   invite,
+  userContract,
 }) {
   const classes = useStyles();
 
@@ -47,30 +48,35 @@ export default function CreativeJobSummary({
             <Typography>{job.job.creativeSummary}</Typography>
             <Divider />
             <Divider />
-
-            <BorderBox w={300}>
-              {invite.data.status === 'declined' ? (
-                <Meta str="You declined this invite" />
-              ) : invite.data.status === 'accepted' ? (
-                <Meta str="You have already quoted for this job" />
-              ) : (
-                <Meta str="Choose to quote for this job or decline" />
-              )}
-              {invite.data.status !== 'declined' &&
-                invite.data.status !== 'accepted' && (
-                  <CreativeActions
-                    inviteId={invite.data._id}
-                    onClickEvent={() => {
-                      invite.setData({ ...invite, status: 'accepted' });
-                      setTabNbr(6);
-                    }}
-                    onDeclineEvent={() => {
-                      invite.setData({ ...invite, status: 'declined' });
-                      setTabNbr(-1);
-                    }}
-                  />
+            {!userContract ? (
+              <BorderBox w={300}>
+                {invite.data.status === 'declined' ? (
+                  <Meta str="You declined this invite" />
+                ) : invite.data.status === 'accepted' ? (
+                  <Meta str="You have already quoted for this job" />
+                ) : (
+                  <Meta str="Choose to quote for this job or decline" />
                 )}
-            </BorderBox>
+                {invite.data.status !== 'declined' &&
+                  invite.data.status !== 'accepted' && (
+                    <CreativeActions
+                      inviteId={invite.data._id}
+                      onClickEvent={() => {
+                        invite.setData({ ...invite, status: 'accepted' });
+                        setTabNbr(6);
+                      }}
+                      onDeclineEvent={() => {
+                        invite.setData({ ...invite, status: 'declined' });
+                        setTabNbr(-1);
+                      }}
+                    />
+                  )}
+              </BorderBox>
+            ) : (
+              <BorderBox w={300}>
+                <Meta str="You've quoted for this job" />
+              </BorderBox>
+            )}
           </Column>
         </Paper>
       </div>

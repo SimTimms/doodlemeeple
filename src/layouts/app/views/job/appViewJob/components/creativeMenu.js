@@ -5,7 +5,12 @@ import {
   TopMenuWrapper,
 } from '../../../../../../components';
 
-export default function CreativeMenu({ tabNbr, setTabNbr }) {
+export default function CreativeMenu({
+  tabNbr,
+  setTabNbr,
+  activeContract,
+  userContract,
+}) {
   const classes = useStyles();
 
   return (
@@ -26,9 +31,9 @@ export default function CreativeMenu({ tabNbr, setTabNbr }) {
         />
         <MenuButtonShortcut
           text={{
-            name: 'Summary',
+            name: 'Job Details',
             color: '#FFF',
-            icon: 'list_alt',
+            icon: 'work',
             count: 0,
           }}
           onClickEvent={() => {
@@ -37,35 +42,36 @@ export default function CreativeMenu({ tabNbr, setTabNbr }) {
           column={true}
           active={tabNbr === 1}
         />
-
-        <MenuButtonShortcut
-          text={{
-            name: 'Client',
-            color: '#FFF',
-            icon: 'account_box',
-            count: 0,
-          }}
-          onClickEvent={() => {
-            setTabNbr(2);
-          }}
-          column={true}
-          active={tabNbr === 2}
-        />
-
-        <MenuButtonShortcut
-          text={{
-            name: 'My Quote',
-            color: '#FFF',
-            icon: 'request_quote',
-            count: 0,
-          }}
-          onClickEvent={() => {
-            setTabNbr(6);
-          }}
-          column={true}
-          active={tabNbr === 6}
-        />
-
+        {!activeContract && (
+          <MenuButtonShortcut
+            text={{
+              name: 'My Quote',
+              color: '#FFF',
+              icon: 'request_quote',
+              count: 0,
+            }}
+            onClickEvent={() => {
+              setTabNbr(6);
+            }}
+            column={true}
+            active={tabNbr === 6}
+          />
+        )}
+        {activeContract && (
+          <MenuButtonShortcut
+            text={{
+              name: 'Contract',
+              color: '#FFF',
+              icon: 'request_quote',
+              count: 0,
+            }}
+            onClickEvent={() => {
+              setTabNbr(7);
+            }}
+            column={true}
+            active={tabNbr === 7}
+          />
+        )}
         <MenuButtonShortcut
           text={{
             name: 'Payments',

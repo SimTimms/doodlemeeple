@@ -4,7 +4,7 @@ import { Mutation } from 'react-apollo';
 import { SIGN_CONTRACT, DECLINE_CONTRACT } from '../../data/mutations';
 import moment from 'moment';
 
-export default function Signature({ contractData, onAccept }) {
+export default function Signature({ contractData, onAccept, onDecline }) {
   return (
     <ActionWrapper>
       {contractData.status !== 'accepted' && contractData.status !== 'paid' ? (
@@ -45,6 +45,10 @@ export default function Signature({ contractData, onAccept }) {
               mutation={DECLINE_CONTRACT}
               variables={{
                 contractId: contractData._id,
+              }}
+              onCompleted={() => {
+                console.log('SAd');
+                onDecline();
               }}
             >
               {(mutation) => {

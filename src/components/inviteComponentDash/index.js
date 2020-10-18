@@ -16,6 +16,8 @@ export default function InviteComponentDash({
   const unopened = invite && invite.status === 'unopened';
   const read = invite && invite.status === 'read';
   const quoted = invite && invite.status === 'quote_sent';
+  const rejected = invite && invite.status === 'rejected';
+  const accepted = invite && invite.status === 'accepted';
 
   return (
     <div style={{ width: '100%', opacity: declined && 0.5 }}>
@@ -38,7 +40,9 @@ export default function InviteComponentDash({
                 ? 'Opened'
                 : quoted
                 ? 'Quoted'
-                : ''}
+                : rejected
+                ? 'Rejected'
+                : accepted && 'Accepted'}
             </Typography>
           </Column>
         </Row>

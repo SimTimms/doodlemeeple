@@ -12,6 +12,8 @@ export default function InviteComponent({ invite, history }) {
   const unopened = invite.status === 'unopened';
   const opened = invite.status === 'read';
   const quoted = invite.status === 'quote_sent';
+  const rejected = invite.status === 'rejected';
+  const accepted = invite.status === 'accepted';
   return (
     <div style={{ width: '100%', cursor: 'pointer' }}>
       <Column>
@@ -31,8 +33,8 @@ export default function InviteComponent({ invite, history }) {
                 style={{ fontSize: 12 }}
                 className={clsx({
                   [classes.dull]: true,
-                  [classes.red]: unopened || declined,
-                  [classes.green]: opened || quoted,
+                  [classes.red]: unopened || declined || rejected,
+                  [classes.green]: opened || quoted || accepted,
                 })}
               >
                 {declined
@@ -41,7 +43,11 @@ export default function InviteComponent({ invite, history }) {
                   ? 'Unread'
                   : opened
                   ? 'Opened'
-                  : quoted && 'Quoted'}
+                  : quoted
+                  ? 'Quoted'
+                  : rejected
+                  ? 'Rejected'
+                  : accepted && 'Accepted'}
               </Typography>
             </Column>
           </Row>
@@ -58,12 +64,15 @@ export default function InviteComponent({ invite, history }) {
                   text={{
                     name: '',
                     color: '#fff',
-                    icon: unopened || opened || quoted ? 'star' : '',
+                    icon:
+                      unopened || opened || quoted || accepted ? 'star' : '',
                     count: 0,
                     back: unopened
                       ? 'warning'
                       : opened || quoted
                       ? 'primary'
+                      : accepted
+                      ? 'secondary'
                       : '',
                   }}
                   onClickEvent={() => {

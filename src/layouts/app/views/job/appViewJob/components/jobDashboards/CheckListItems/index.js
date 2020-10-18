@@ -4,6 +4,7 @@ import ItemPosted from './ItemPosted';
 import ItemInvites from './ItemInvites';
 import ItemQuotesIn from './ItemQuotesIn';
 import ItemQuoteAccepted from './ItemQuoteAccepted';
+import ItemQuoteAcceptedCreative from './ItemQuoteAcceptedCreative';
 import ItemQuotePaid from './ItemQuotePaid';
 import ItemLeaveReview from './ItemLeaveReview';
 import ItemCreativePaid from './ItemCreativePaid';
@@ -23,4 +24,5 @@ export {
   InviteReceived,
   InviteReplied,
   ItemViewJob,
+  ItemQuoteAcceptedCreative,
 };

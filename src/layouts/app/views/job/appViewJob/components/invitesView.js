@@ -7,7 +7,11 @@ import {
   Paper,
 } from '../../../../../../components';
 
-export default function InvitesView({ invites, setConversationUser }) {
+export default function InvitesView({
+  invites,
+  setConversationUser,
+  setTabNbr,
+}) {
   return (
     <Column w="50%" p={10}>
       <Paper p={10}>
@@ -24,6 +28,7 @@ export default function InvitesView({ invites, setConversationUser }) {
                 key={`invite-${index}`}
                 setConversationUser={setConversationUser}
                 contract={contractSubmitted[0]}
+                setTabNbr={setTabNbr}
               />
             </Column>
           );
