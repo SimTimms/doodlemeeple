@@ -471,6 +471,7 @@ export const JOBS = gql`
         user {
           _id
         }
+        status
       }
       game {
         _id

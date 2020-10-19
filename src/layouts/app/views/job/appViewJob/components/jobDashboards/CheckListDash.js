@@ -25,10 +25,11 @@ export default function CheckListDash({ job, setTabNbr }) {
   const paid = job.submitted === 'paid';
   const accepted = job.submitted === 'accepted';
   const closed = job.submitted === 'closed';
-  const { paymentTerms, cost, currency } = job.activeContract
+  const { paymentTerms, cost, currency, status } = job.activeContract
     ? job.activeContract
-    : { paymentTerms: [], cost: 0, currency: 'GBP' };
+    : { paymentTerms: [], cost: 0, currency: 'GBP', status: '' };
   const paidOutArr = paymentTerms.filter((term) => term.paid === 'success');
+  const pending = status === 'pending';
   let totalPaid = 0;
   for (let i = 0; i < paidOutArr.length; i++) {
     totalPaid += paidOutArr[i].percent;
@@ -78,6 +79,7 @@ export default function CheckListDash({ job, setTabNbr }) {
             <DividerWithBorder />
             <ItemQuotePaid
               paid={job.submitted}
+              pending={pending}
               setTabNbr={setTabNbr}
               color={color[2] === 1 ? color[3] : 0}
               jobHasContract={jobHasContract}

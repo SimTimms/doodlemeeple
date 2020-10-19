@@ -14,6 +14,7 @@ export default function ItemQuotePaid({
   setTabNbr,
   color,
   jobHasContract,
+  pending,
 }) {
   const classes = useStyles();
   return (
@@ -26,7 +27,8 @@ export default function ItemQuotePaid({
               [classes.dull]: true,
             })}
           >
-            Funded: <b>{!paid ? 'No' : 'Yes'}</b>
+            Funded:{' '}
+            <b>{pending ? 'Pending Confirmation' : !paid ? 'No' : 'Yes'}</b>
           </Typography>
         </Row>
       </Column>
@@ -34,13 +36,14 @@ export default function ItemQuotePaid({
         text={{
           name: '',
           color: '',
-          icon: jobHasContract
-            ? 'query_builder'
-            : color === 1
-            ? 'check'
-            : color === 2
-            ? 'star'
-            : '',
+          icon:
+            jobHasContract && (!paid || pending)
+              ? 'query_builder'
+              : color === 1
+              ? 'check'
+              : color === 2
+              ? 'star'
+              : '',
           count: 0,
           back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}

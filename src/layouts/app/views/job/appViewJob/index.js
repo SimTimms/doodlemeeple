@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 export default function AppViewJob({ jobId, history }) {
   const [contracts, setContracts] = React.useState([]);
   const [isCreator, setIsCreator] = React.useState(null);
+  const [refreshCount, setRefreshCount] = React.useState(0);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -27,7 +28,12 @@ export default function AppViewJob({ jobId, history }) {
           >
             {({ data }) => {
               return data ? (
-                <SummaryViewCreator job={data.jobById} history={history} />
+                <SummaryViewCreator
+                  job={data.jobById}
+                  history={history}
+                  refreshCount={refreshCount}
+                  setRefreshCount={setRefreshCount}
+                />
               ) : null;
             }}
           </Query>

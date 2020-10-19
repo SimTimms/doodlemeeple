@@ -26,7 +26,7 @@ export default function Jobs({ history, theme }) {
           <Column w={600}>
             <Divider />
             <IconButton
-              title="List a New Project"
+              title="Create a Brief"
               onClickEvent={() => {
                 history.push(`/app/edit-job/new`);
               }}

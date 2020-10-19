@@ -6,8 +6,6 @@ import {
   BorderBox,
   ContractComponentForCreator,
   Signature,
-  PaymentElement,
-  IconButton,
 } from '../../../../../../components';
 import { CreatorDashboard } from './jobDashboards/';
 import ChatView from '../components/chatView';
@@ -16,7 +14,12 @@ import PaymentsView from './paymentsView';
 import CreatorMenu from './creatorMenu';
 import CreatorJobSummary from './creatorJobSummary';
 
-export default function SummaryViewCreator({ job, history }) {
+export default function SummaryViewCreator({
+  job,
+  history,
+  refreshCount,
+  setRefreshCount,
+}) {
   const classes = useStyles();
   const [conversationUser, setConversationUser] = React.useState(null);
   const [pageNbr, setPageNbr] = React.useState(0);
@@ -71,14 +74,18 @@ export default function SummaryViewCreator({ job, history }) {
             />
             <Signature
               contractData={job.activeContract}
-              onAccept={() => setTabNbr(0)}
-              onDecline={() => setTabNbr(0)}
+              onAccept={() => setTabNbr(-1)}
+              onDecline={() => setTabNbr(-1)}
             />
           </BorderBox>
         )}
         {tabNbr === 4 && (
           <Column>
-            <PaymentsView job={{ jobData: jobData, setJobData: setJobData }} />
+            <PaymentsView
+              job={{ jobData: jobData, setJobData: setJobData }}
+              refreshCount={refreshCount}
+              setRefreshCount={setRefreshCount}
+            />
           </Column>
         )}
         {conversationUser && (

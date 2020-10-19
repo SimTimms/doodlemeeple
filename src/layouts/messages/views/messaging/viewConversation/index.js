@@ -44,7 +44,7 @@ export default function ViewConversation({
               color="text-mini"
               onClickEvent={() => {
                 setMessages([]);
-                setRefreshCount(refreshCount+1);
+                setRefreshCount(refreshCount + 1);
               }}
             />
           </Row>

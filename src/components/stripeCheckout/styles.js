@@ -40,7 +40,7 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.secondary.main,
     color: '#fff',
     textAlign: 'center',
-    marginTop: 10,
+    marginTop: 20,
     width: '100%',
   },
 }));
