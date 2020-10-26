@@ -40,7 +40,7 @@ export default function EditContract({ contractId, history }) {
                 onCompleted={(data) => {
                   data.getContractId.length > 0
                     ? setContract({ ...data.getContractId[0] })
-                    : setContract({ ...contract, status: '' });
+                    : setContract({ ...contract, status: null });
                 }}
               >
                 {({ loading, data }) => {

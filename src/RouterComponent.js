@@ -5,8 +5,6 @@ import PreviewLayout from './layouts/preview';
 import { PublicLayout } from './layouts/public';
 import MessagesLayout from './layouts/messages';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import MessageLayout from './layouts/message';
-import RolesLayout from './layouts/roles';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { ApolloProvider } from 'react-apollo';
@@ -159,18 +157,17 @@ function RouterComponent(props) {
                 render={(props) => <MessagesLayout {...props} theme={theme} />}
               />
             )}
-            {authToken && (
+            {/*authToken && (
               <Route
                 path="/roles/:page/:pathParam?"
                 render={(props) => <RolesLayout {...props} theme={theme} />}
               />
             )}
-            {authToken && (
-              <Route
+             {( <Route
                 path="/message/:page/:pathParam?"
                 render={(props) => <MessageLayout {...props} theme={theme} />}
               />
-            )}
+            )*/}
             <Route
               path="/public-preview/:pathParam?"
               render={(props) => (

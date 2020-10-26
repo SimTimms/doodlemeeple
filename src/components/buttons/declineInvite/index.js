@@ -22,7 +22,7 @@ export default function DeclineInvite({ inviteId, onCompleted }) {
           <LoadIcon />
         ) : !confirm ? (
           <IconButton
-            color="warning"
+            color="primary"
             icon="thumb_down"
             title="Decline"
             onClickEvent={() => {

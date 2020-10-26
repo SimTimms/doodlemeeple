@@ -35,11 +35,18 @@ export default function ItemQuoteAcceptedCreative({
         text={{
           name: '',
           color: '',
-          icon: color === 1 ? 'check' : color === 2 ? 'star' : '',
+          icon:
+            color === 0
+              ? 'query_builder'
+              : color === 1
+              ? 'check'
+              : color === 2
+              ? 'star'
+              : '',
           count: 0,
           back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}
-        onClickEvent={() => (activeContract ? setTabNbr(3) : setTabNbr(2))}
+        onClickEvent={() => null}
         active={false}
       />
     </RowCheckList>

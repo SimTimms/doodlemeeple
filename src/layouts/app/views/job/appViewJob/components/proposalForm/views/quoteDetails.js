@@ -58,7 +58,6 @@ export default function QuoteDetails({
         size="s"
         multiline={false}
       />
-
       <FieldBox
         value={contract.notes}
         title="Additional Terms"

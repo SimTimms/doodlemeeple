@@ -22,7 +22,7 @@ export function EditButton({ contract, jobId, setContract }) {
       }}
       onCompleted={(data) => {
         toaster('Editing');
-        setContract({ ...contract, status: '' });
+        setContract({ ...contract, status: null });
       }}
     >
       {(mutation) => {

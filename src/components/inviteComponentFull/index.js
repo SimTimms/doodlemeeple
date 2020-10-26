@@ -21,6 +21,7 @@ export default function InviteComponentFull({
   setConversationUser,
   contract,
   setTabNbr,
+  refreshDashboard,
 }) {
   const classes = useStyles();
   const [display, setDisplay] = React.useState(false);
@@ -49,8 +50,8 @@ export default function InviteComponentFull({
                 style={{ fontSize: 12 }}
                 className={clsx({
                   [classes.dull]: true,
-                  [classes.red]: unread,
-                  [classes.green]: quoted || read,
+                  [classes.red]: quoted,
+                  [classes.green]: read,
                 })}
               >
                 {unread
@@ -133,8 +134,11 @@ export default function InviteComponentFull({
                         />
                         <Signature
                           contractData={contract}
-                          onAccept={() => setTabNbr(0)}
-                          onDecline={() => setTabNbr(0)}
+                          onAccept={() => {
+                            refreshDashboard();
+                            setTabNbr(-1);
+                          }}
+                          onDecline={() => setTabNbr(-1)}
                         />
                       </BorderBox>
                     )}

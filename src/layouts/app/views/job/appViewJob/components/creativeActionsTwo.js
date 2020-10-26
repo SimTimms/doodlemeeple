@@ -2,7 +2,7 @@ import React from 'react';
 import { useStyles } from '../styles';
 import { IconButton, DeclineInvite } from '../../../../../../components';
 
-export default function CreativeActions({
+export default function CreativeActionsTwo({
   inviteId,
   onClickEvent,
   onDeclineEvent,
@@ -13,9 +13,9 @@ export default function CreativeActions({
   return (
     <div className={classes.actionWrapper}>
       <IconButton
-        color="warning"
-        icon={proposalOpen ? 'thumb_up' : 'thumb_up'}
-        title={proposalOpen ? 'Minimise Quote' : 'Quote'}
+        color="primary"
+        icon="edit"
+        title="Edit Quote"
         onClickEvent={() => onClickEvent()}
         styleOverride={{ width: '100%', marginBottom: 0 }}
         iconPos="right"

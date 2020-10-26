@@ -28,12 +28,13 @@ export default function SummaryViewCreative({ job, history }) {
       ? job.job.activeContract._id === job.contract._id
       : false;
   const userContract = job.contract && job.contract._id;
+  const userContractStatus = job.contract && job.contract.status;
 
   useEffect(() => {
     setContract(job.contract);
     setInvite(job.invite);
   }, [job]);
-
+  console.log(contract);
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -47,12 +48,14 @@ export default function SummaryViewCreative({ job, history }) {
           <Column>
             <CreativeDashboard
               job={job}
+              contractData={contract}
               setConversationUser={setConversationUser}
               setTabNbr={setTabNbr}
               invite={{ data: invite, setData: setInvite }}
               history={history}
               jobHasBeenAwarded={jobHasBeenAwarded}
               activeContract={activeContract}
+              userContractStatus={userContractStatus}
             />
           </Column>
         )}
@@ -64,12 +67,12 @@ export default function SummaryViewCreative({ job, history }) {
               invite={{ data: invite, setData: setInvite }}
               setTabNbr={setTabNbr}
               userContract={userContract}
+              userContractStatus={userContractStatus}
             />
           </Column>
         )}
         {tabNbr === 6 && contract ? (
           <EditProposalForm
-            jobId={job.job._id}
             contractData={contract}
             setContract={setContract}
             history={history}

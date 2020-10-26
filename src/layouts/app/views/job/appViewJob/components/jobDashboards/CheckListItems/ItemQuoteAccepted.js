@@ -10,7 +10,7 @@ import {
 import clsx from 'clsx';
 
 export default function ItemQuoteAccepted({
-  accepted,
+  jobStatus,
   setTabNbr,
   color,
   contracts,

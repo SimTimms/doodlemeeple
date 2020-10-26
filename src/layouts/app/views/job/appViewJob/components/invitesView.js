@@ -11,6 +11,7 @@ export default function InvitesView({
   invites,
   setConversationUser,
   setTabNbr,
+  refreshDashboard,
 }) {
   return (
     <Column w="50%" p={10}>
@@ -29,6 +30,7 @@ export default function InvitesView({
                 setConversationUser={setConversationUser}
                 contract={contractSubmitted[0]}
                 setTabNbr={setTabNbr}
+                refreshDashboard={refreshDashboard}
               />
             </Column>
           );

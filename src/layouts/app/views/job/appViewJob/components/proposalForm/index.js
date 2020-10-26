@@ -51,7 +51,7 @@ export default function ProposalForm({ jobId, history, stripeID }) {
         onCompleted={(data) => {
           data.contractByJob
             ? setContract({ ...data.contractByJob })
-            : setContract({ ...contract, status: '' });
+            : setContract({ ...contract, status: null });
         }}
       >
         {({ loading, data }) => {

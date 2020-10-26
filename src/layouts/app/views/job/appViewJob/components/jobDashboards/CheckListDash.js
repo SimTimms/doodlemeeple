@@ -27,7 +27,7 @@ export default function CheckListDash({ job, setTabNbr }) {
   const closed = job.submitted === 'closed';
   const { paymentTerms, cost, currency, status } = job.activeContract
     ? job.activeContract
-    : { paymentTerms: [], cost: 0, currency: 'GBP', status: '' };
+    : { paymentTerms: [], cost: 0, currency: 'GBP', status: null };
   const paidOutArr = paymentTerms.filter((term) => term.paid === 'success');
   const pending = status === 'pending';
   let totalPaid = 0;
@@ -70,7 +70,7 @@ export default function CheckListDash({ job, setTabNbr }) {
             <ItemInvites setTabNbr={setTabNbr} color={color[1]} />
             <DividerWithBorder />
             <ItemQuoteAccepted
-              accepted={job.submitted}
+              jobStatus={job.submitted}
               contracts={job.contracts}
               activeContract={jobHasContract}
               setTabNbr={setTabNbr}
@@ -78,11 +78,12 @@ export default function CheckListDash({ job, setTabNbr }) {
             />
             <DividerWithBorder />
             <ItemQuotePaid
-              paid={job.submitted}
+              paid={paid}
               pending={pending}
               setTabNbr={setTabNbr}
               color={color[2] === 1 ? color[3] : 0}
               jobHasContract={jobHasContract}
+              isCreator={true}
             />
             <DividerWithBorder />
             <ItemCreativePaid

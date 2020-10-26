@@ -19,7 +19,7 @@ export default function AppViewContract({ contractId, history }) {
     user: { _id: null },
     signedDate: null,
     job: null,
-    status: '',
+    status: null,
   });
   const [job, setJob] = React.useState({ id: null, user: { id: '' } });
   const [conversationId, setConversationId] = React.useState(null);

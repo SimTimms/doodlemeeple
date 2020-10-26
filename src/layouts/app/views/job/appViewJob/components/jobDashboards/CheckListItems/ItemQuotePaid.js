@@ -14,9 +14,11 @@ export default function ItemQuotePaid({
   setTabNbr,
   color,
   jobHasContract,
-  pending,
+  isCreator,
+  ...props
 }) {
   const classes = useStyles();
+  const { pending } = props;
   return (
     <RowCheckList j="space-between" active={true}>
       <Column a="space-between">
@@ -37,11 +39,12 @@ export default function ItemQuotePaid({
           name: '',
           color: '',
           icon:
-            jobHasContract && (!paid || pending)
+            jobHasContract && (!paid || pending) && !isCreator
               ? 'query_builder'
               : color === 1
               ? 'check'
-              : color === 2
+              : color === 2 ||
+                (jobHasContract && (!paid || pending) && !isCreator)
               ? 'star'
               : '',
           count: 0,

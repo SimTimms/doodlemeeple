@@ -16,6 +16,7 @@ export default function InviteReplied({
   quoted,
   accepted,
   rejected,
+  submitted,
 }) {
   const classes = useStyles();
 
@@ -33,7 +34,7 @@ export default function InviteReplied({
             <b>
               {declined
                 ? 'Declined'
-                : quoted || accepted || rejected
+                : quoted || accepted || rejected || submitted
                 ? 'Yes'
                 : 'No'}
             </b>

@@ -14,8 +14,11 @@ export function CreativeDashboard({
   history,
   activeContract,
   jobHasBeenAwarded,
+  userContractStatus,
+  contractData,
 }) {
   const declined = invite.data.status === 'declined';
+
   return (
     <Column>
       <Row a="flex-start">
@@ -28,6 +31,8 @@ export function CreativeDashboard({
           setConversationUser={setConversationUser}
           jobHasBeenAwarded={jobHasBeenAwarded}
           activeContract={activeContract}
+          userContractStatus={userContractStatus}
+          contractData={contractData}
         />
         <NotificationDash jobId={job.job._id} />
       </Row>

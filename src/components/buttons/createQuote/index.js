@@ -44,7 +44,7 @@ export default function CreateQuoteButton({
             return (
               <IconButton
                 disabled={false}
-                color="secondary"
+                color="warning"
                 title={loading ? 'Creating...' : 'Create a Quote'}
                 icon="fact_check"
                 onClickEvent={() => {

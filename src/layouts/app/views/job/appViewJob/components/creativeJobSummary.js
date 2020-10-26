@@ -9,8 +9,10 @@ import {
   Paper,
   Divider,
   BorderBox,
+  IconButton,
 } from '../../../../../../components';
 import CreativeActions from '../components/creativeActions';
+import CreativeActionsTwo from '../components/creativeActionsTwo';
 import ClientNotifications from '../components/clientNotifications';
 import { timeDifferenceForDate } from '../../../../../../utils/dates';
 
@@ -20,9 +22,10 @@ export default function CreativeJobSummary({
   setTabNbr,
   invite,
   userContract,
+  userContractStatus,
 }) {
   const classes = useStyles();
-
+  console.log(userContractStatus);
   return (
     <Slide direction="up" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -62,7 +65,7 @@ export default function CreativeJobSummary({
                     <CreativeActions
                       inviteId={invite.data._id}
                       onClickEvent={() => {
-                        invite.setData({ ...invite, status: 'accepted' });
+                        invite.setData({ ...invite, status: null });
                         setTabNbr(6);
                       }}
                       onDeclineEvent={() => {
@@ -72,9 +75,30 @@ export default function CreativeJobSummary({
                     />
                   )}
               </BorderBox>
+            ) : !userContractStatus ? (
+              <CreativeActionsTwo
+                inviteId={invite.data._id}
+                onClickEvent={() => {
+                  invite.setData({ ...invite, status: null });
+                  setTabNbr(6);
+                }}
+                onDeclineEvent={() => {
+                  invite.setData({ ...invite, status: 'declined' });
+                  setTabNbr(-1);
+                }}
+              />
             ) : (
               <BorderBox w={300}>
                 <Meta str="You've quoted for this job" />
+                <IconButton
+                  title="View Quote"
+                  onClickEvent={() => {
+                    setTabNbr(6);
+                  }}
+                  color="primary"
+                  icon=""
+                  styleOverride={{ marginLeft: 'auto', marginRight: 'auto' }}
+                />
               </BorderBox>
             )}
           </Column>

@@ -14,6 +14,7 @@ export default function InviteComponent({ invite, history }) {
   const quoted = invite.status === 'quote_sent';
   const rejected = invite.status === 'rejected';
   const accepted = invite.status === 'accepted';
+  console.log(invite.job);
   return (
     <div style={{ width: '100%', cursor: 'pointer' }}>
       <Column>
@@ -27,14 +28,13 @@ export default function InviteComponent({ invite, history }) {
             ></div>
             <Column a="flex-start">
               <Typography style={{ fontSize: 12 }}>
-                {`Invite from ${invite.sender.name}`}
+                {`Invite from ${invite.sender.name} for ${invite.job.name}`}
               </Typography>
               <Typography
                 style={{ fontSize: 12 }}
                 className={clsx({
                   [classes.dull]: true,
                   [classes.red]: unopened || declined || rejected,
-                  [classes.green]: opened || quoted || accepted,
                 })}
               >
                 {declined

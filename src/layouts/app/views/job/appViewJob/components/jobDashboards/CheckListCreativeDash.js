@@ -29,6 +29,8 @@ export default function CheckListCreativeDash({
   history,
   jobHasBeenAwarded,
   activeContract,
+  userContractStatus,
+  contractData,
 }) {
   function totalPaid(jobData) {
     if (!jobData) {
@@ -46,23 +48,23 @@ export default function CheckListCreativeDash({
 
   const accepted = invite.status === 'accepted';
   const unopened = invite.status === 'unopened';
-  const quoted = invite.status === 'quote_sent';
+  const quoted = userContractStatus !== null;
   const rejected = invite.status === 'rejected';
   const jobData = job.job;
   const paid = jobData.submitted === 'paid';
-  const contractData = job.contract ? job.contract : null;
-  const cost = job.contract ? job.contract.cost : 0;
-  const currency = job.contract ? job.contract.currency : 'GBP';
+  const cost = contractData ? contractData.cost : 0;
+  const currency = contractData ? contractData.currency : 'GBP';
+  const submitted = contractData && contractData.status === 'submitted';
+
   const color = [
     1,
-    2,
     unopened ? 2 : 1,
-    quoted || accepted || rejected ? 1 : declined ? 0 : accepted ? 0 : 2,
+    submitted || quoted ? 1 : 2,
+    accepted || rejected ? 1 : declined || !userContractStatus ? 0 : 2,
     paid ? 1 : declined ? 0 : 2,
     totalPaid(contractData) < parseInt(cost) || parseInt(cost) === 0 ? 2 : 1,
   ];
   const classes = useStyles();
-
   return (
     <Column w={300} p={10}>
       <Widget p={10}>
@@ -88,7 +90,11 @@ export default function CheckListCreativeDash({
               })}
             >
               {jobHasBeenAwarded
-                ? activeContract
+                ? totalPaid(contractData) === parseInt(cost)
+                  ? 'FULLY PAID'
+                  : paid
+                  ? 'FUNDED'
+                  : activeContract
                   ? 'QUOTE ACCEPTED'
                   : !activeContract && 'QUOTE REJECTED'
                 : declined
@@ -107,20 +113,21 @@ export default function CheckListCreativeDash({
             reply={invite.status}
             inviteId={invite._id}
             setTabNbr={setTabNbr}
-            color={color[2]}
+            color={color[1]}
           />
           <DividerWithBorder />
           <InviteReplied
-            color={color[3]}
+            color={color[2]}
             declined={declined}
             quoted={quoted}
             accepted={accepted}
             rejected={rejected}
             setTabNbr={setTabNbr}
+            submitted={submitted}
           />
           <DividerWithBorder />
           <ItemQuoteAcceptedCreative
-            color={color[3] === 1 ? color[3] : 0}
+            color={color[2] === 1 ? color[3] : 0}
             activeContract={activeContract}
             setTabNbr={setTabNbr}
           />
@@ -128,8 +135,9 @@ export default function CheckListCreativeDash({
           <ItemQuotePaid
             paid={paid}
             setTabNbr={setTabNbr}
-            color={color[4] === 1 ? color[4] : 0}
+            color={color[3] === 1 ? color[4] : 0}
             jobHasContract={jobHasBeenAwarded}
+            isCreator={false}
           />
           <Divider />
           <ItemCreativePaid
@@ -137,7 +145,7 @@ export default function CheckListCreativeDash({
             cost={cost}
             currency={currency}
             setTabNbr={setTabNbr}
-            color={color[5] === 1 ? color[5] : 0}
+            color={color[4] === 1 ? color[5] : 0}
             jobHasContract={jobHasBeenAwarded}
           />
         </Column>

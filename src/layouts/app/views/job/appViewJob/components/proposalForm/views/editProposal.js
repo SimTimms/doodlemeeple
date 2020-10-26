@@ -23,7 +23,6 @@ import { Mutation } from 'react-apollo';
 import { UPDATE_CONTRACT } from '../../../../../../../../data/mutations';
 
 export default function EditProposalForm({
-  jobId,
   contractData,
   setContract,
   history,
@@ -158,7 +157,6 @@ export default function EditProposalForm({
                                 {!percentLock.status && (
                                   <Meta str="Submit this proposal to the client?" />
                                 )}
-
                                 <SubmitContractButton
                                   contract={contractData}
                                   setTabNbr={setTabNbr}

@@ -17,7 +17,7 @@ export default function AppViewJob({ jobId, history }) {
         {isCreator && (
           <Query
             query={JOB}
-            variables={{ jobId: jobId }}
+            variables={{ jobId: jobId, refreshCount: refreshCount }}
             fetchPolicy="network-only"
             onCompleted={(data) => {
               const contractIds = data.jobById.contracts.map(

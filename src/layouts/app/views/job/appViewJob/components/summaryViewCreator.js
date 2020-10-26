@@ -62,6 +62,9 @@ export default function SummaryViewCreator({
               invites={job.invites}
               setConversationUser={setConversationUser}
               setTabNbr={setTabNbr}
+              refreshDashboard={() => {
+                setRefreshCount(refreshCount + 1);
+              }}
             />
           </Column>
         )}
@@ -74,7 +77,9 @@ export default function SummaryViewCreator({
             />
             <Signature
               contractData={job.activeContract}
-              onAccept={() => setTabNbr(-1)}
+              onAccept={() => {
+                setTabNbr(-1);
+              }}
               onDecline={() => setTabNbr(-1)}
             />
           </BorderBox>
