@@ -41,16 +41,13 @@ export default function NotificationComponent({
                   <Typography
                     component="p"
                     className={clsx({
-                      [classes.notificationInvite]:
-                        notification.icon === 'thumb_up',
-                      [classes.notificationProfile]:
-                        notification.icon === 'face',
-                      [classes.notificationWork]: notification.icon === 'work',
+                      [classes.notificationNeutral]: true,
                       [classes.notificationBad]:
+                        notification.icon === 'request_quote' ||
+                        notification.icon === 'thumb_up',
+                      [classes.notificationGood]:
                         notification.icon === 'thumb_down' ||
                         notification.icon === 'warning',
-                      [classes.notificationGood]:
-                        notification.icon === 'request_quote',
                     })}
                   >
                     <b>{notification.title}</b>

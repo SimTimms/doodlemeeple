@@ -30,19 +30,14 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 10,
     textShadow: ' 1px 1px 3px rgba(0,0,0,0.1)',
   },
-  notificationInvite: {
+
+  notificationNeutral: {
+    color: theme.palette.primary.main,
+  },
+  notificationGood: {
     color: theme.palette.secondary.main,
   },
   notificationBad: {
-    color: theme.palette.error.main,
-  },
-  notificationProfile: {
-    color: theme.palette.error.main,
-  },
-  notificationWork: {
-    color: theme.palette.error.main,
-  },
-  notificationGood: {
     color: theme.palette.error.main,
   },
   projectNotifications: {

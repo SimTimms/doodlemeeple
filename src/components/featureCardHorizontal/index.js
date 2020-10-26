@@ -42,7 +42,7 @@ export default function FeatureCardHorizontal({
             <div
               style={{
                 display: 'flex',
-                flexDirection: 'row',
+                flexDirection: 'column',
                 width: '100%',
                 justifyContent: 'space-between',
                 alignItems: 'space-between',
@@ -54,12 +54,16 @@ export default function FeatureCardHorizontal({
                 className={classes.postHeaderText}
               >
                 <b>{title}</b>
+              </Typography>{' '}
+              <Typography
+                variant="body1"
+                component="p"
+                className={classes.meta}
+              >
+                <b>{meta}</b>
               </Typography>
             </div>
             <Typography variant="body1">{subtitle}</Typography>
-            <Typography variant="body1" component="p" className={classes.meta}>
-              <b>{meta}</b>
-            </Typography>
           </div>
           <div
             style={{
