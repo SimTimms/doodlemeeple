@@ -55,6 +55,7 @@ export default function CheckListCreativeDash({
   const cost = contractData ? contractData.cost : 0;
   const currency = contractData ? contractData.currency : 'GBP';
   const submitted = contractData && contractData.status === 'submitted';
+  const finished = job.job.submitted === 'complete';
 
   const color = [
     1,
@@ -91,7 +92,9 @@ export default function CheckListCreativeDash({
               })}
             >
               {jobHasBeenAwarded
-                ? totalPaid(contractData) === parseInt(cost)
+                ? finished
+                  ? 'JOB COMPLETE'
+                  : totalPaid(contractData) === parseInt(cost)
                   ? 'FULLY PAID'
                   : paid
                   ? 'FUNDED'

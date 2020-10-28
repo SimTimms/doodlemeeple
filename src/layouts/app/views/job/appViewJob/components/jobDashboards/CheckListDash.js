@@ -67,7 +67,7 @@ export default function CheckListDash({ job, setTabNbr, history }) {
         </Paper>
       ) : (
         <Paper p={10}>
-          {(fullyPaid || draft) && (
+          {(fullyPaid || draft || finished) && (
             <Column>
               <FieldTitleDashboard name="Status" inline={false} a="c" />
               <DividerMini />
@@ -78,8 +78,8 @@ export default function CheckListDash({ job, setTabNbr, history }) {
                   [classes.statusGreen]: fullyPaid,
                 })}
               >
-                {fullyPaid && 'FULLY PAID'}
                 {draft && 'DRAFT'}
+                {finished ? 'JOB COMPLETE' : fullyPaid && 'FULLY PAID'}
               </Typography>
               <DividerMini />
             </Column>

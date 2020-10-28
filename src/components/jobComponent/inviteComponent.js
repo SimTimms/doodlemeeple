@@ -14,7 +14,8 @@ export default function InviteComponent({ invite, history }) {
   const quoted = invite.status === 'quote_sent';
   const rejected = invite.status === 'rejected';
   const accepted = invite.status === 'accepted';
-  console.log(invite.job);
+  const completed = invite.job.submitted === 'complete';
+
   return (
     <div style={{ width: '100%', cursor: 'pointer' }}>
       <Column>
@@ -37,7 +38,9 @@ export default function InviteComponent({ invite, history }) {
                   [classes.red]: unopened || declined || rejected,
                 })}
               >
-                {declined
+                {completed
+                  ? 'Completed'
+                  : declined
                   ? 'Declined'
                   : unopened
                   ? 'Unread'
@@ -64,10 +67,15 @@ export default function InviteComponent({ invite, history }) {
                   text={{
                     name: '',
                     color: '#fff',
-                    icon:
-                      unopened || opened || quoted || accepted ? 'star' : '',
+                    icon: completed
+                      ? ''
+                      : unopened || opened || quoted || accepted
+                      ? 'star'
+                      : '',
                     count: invite.messages,
-                    back: unopened
+                    back: completed
+                      ? ''
+                      : unopened
                       ? 'warning'
                       : opened || quoted
                       ? 'primary'
