@@ -11,13 +11,14 @@ export default function InviteComponentDash({
 }) {
   const classes = useStyles();
   const { jobClosed, invite, job } = props;
-
   const declined = invite && invite.status === 'declined';
   const unopened = invite && invite.status === 'unopened';
   const read = invite && invite.status === 'read';
   const quoted = invite && invite.status === 'quote_sent';
   const rejected = invite && invite.status === 'rejected';
   const accepted = invite && invite.status === 'accepted';
+
+  const messageCount = invite ? invite.messages : 0;
 
   return (
     <div style={{ width: '100%', opacity: declined && 0.5 }}>
@@ -66,11 +67,12 @@ export default function InviteComponentDash({
               name: '',
               color: '',
               icon: 'chat',
-              count: 0,
+              count: messageCount,
               back: 'primary',
             }}
             onClickEvent={() => setConversationUser(user)}
             active={false}
+            countIcon="mail"
           />
         )}
       </Row>

@@ -60,7 +60,7 @@ export default function CheckListCreativeDash({
     1,
     unopened ? 2 : 1,
     submitted || quoted ? 1 : 2,
-    accepted || rejected ? 1 : declined || !userContractStatus ? 0 : 2,
+    accepted || rejected ? 1 : userContractStatus ? 3 : 2,
     paid ? 1 : declined ? 0 : 2,
     totalPaid(contractData) < parseInt(cost) || parseInt(cost) === 0 ? 2 : 1,
   ];
@@ -76,6 +76,7 @@ export default function CheckListCreativeDash({
           setConversationUser={setConversationUser}
           declined={declined}
           history={history}
+          messages={invite.messages}
         />
         {(declined || quoted || jobHasBeenAwarded) && (
           <Column>
@@ -86,7 +87,7 @@ export default function CheckListCreativeDash({
               variant="h6"
               className={clsx({
                 [classes.status]: true,
-                [classes.statusGreen]: quoted || activeContract,
+                [classes.statusGreen]: activeContract,
               })}
             >
               {jobHasBeenAwarded

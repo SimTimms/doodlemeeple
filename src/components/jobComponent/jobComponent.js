@@ -72,6 +72,7 @@ export default function JobComponent({ job, game, history }) {
         </Typography>
       </div>
       {job.invites.map((invite, index) => {
+        console.log(invite);
         const contractFromArray = contractsArr.indexOf(invite.receiver._id);
         const thisContract = job.contracts[contractFromArray];
         const thisStatus = thisContract ? thisContract.status : null;
@@ -105,6 +106,15 @@ export default function JobComponent({ job, game, history }) {
                   className={classes.countsStyle}
                 >
                   <Icon style={{ fontSize: 10 }}>star</Icon>
+                </Typography>
+              )}
+              {invite.messages > 0 && (
+                <Typography
+                  variant="body1"
+                  component="p"
+                  className={classes.countsStyle}
+                >
+                  <Icon style={{ fontSize: 10 }}>mail</Icon>
                 </Typography>
               )}
             </div>

@@ -65,7 +65,6 @@ export default function AppDrawer({
                 link: () => {
                   history.goBack();
                 },
-                color: '#444',
                 count: null,
               },
             ].map((text, index) => (
@@ -82,6 +81,7 @@ export default function AppDrawer({
                 }}
                 active={false}
                 key={`shortcut_${index}`}
+                countIcon="star"
               />
             ))}
           </div>
@@ -92,42 +92,43 @@ export default function AppDrawer({
               name: 'Home',
               icon: 'home',
               link: () => history.push('/app/dashboard'),
-              color: '#444',
               count: null,
-            } /*
+            },
+            /*
             {
               name: 'Messages',
               icon: 'chat',
               link: () => history.push('/messages/conversations'),
               color: '#444',
               count: counts.messages,
-            },*/,
+            },*/
             {
               name: 'Creative',
               icon: 'brush',
               link: () => history.push('/app/invites'),
-              color: '#444',
-              count: counts.invites,
+              count:
+                counts.invites > 0
+                  ? { icon: 'thumb_up', count: counts.invites }
+                  : { icon: 'mail', count: counts.messages },
             },
             {
               name: profile.creatorTrue ? 'Creator' : 'hide',
               icon: 'work',
               link: () => history.push('/app/jobs'),
-              color: '#444',
-              count: counts.quotes,
+              count: { icon: 'star', count: counts.quotes },
             },
             {
               name: 'My Profile',
               icon: 'face',
               link: () => history.push('/app/edit-profile'),
-              color: '#444',
-              count: profile.profileBG ? null : 1,
+              count: !profile.profileBG
+                ? { icon: 'star', count: counts.quotes }
+                : null,
             },
             {
               name: 'Account',
               icon: 'account_balance',
               link: () => history.push('/app/account'),
-              color: '#444',
               count: null,
             } /*
             {
@@ -145,7 +146,6 @@ export default function AppDrawer({
                 Cookies.remove('userId');
                 history.replace(`/`);
               },
-              color: theme.palette.primary.main,
               count: null,
             },
           ].map(
@@ -156,7 +156,7 @@ export default function AppDrawer({
                     name: text.name,
                     color: text.color,
                     icon: text.icon,
-                    count: text.count,
+                    count: text.count ? text.count.count : 0,
                   }}
                   onClickEvent={() => {
                     text.link();
@@ -164,6 +164,7 @@ export default function AppDrawer({
                   }}
                   active={false}
                   key={`menu_${index}`}
+                  countIcon={text.count ? text.count.icon : 'star'}
                 />
               )
           )}

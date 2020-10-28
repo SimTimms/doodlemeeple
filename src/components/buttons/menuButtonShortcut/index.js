@@ -4,6 +4,7 @@ import { useStyles } from './styles';
 import clsx from 'clsx';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Row } from '../../';
+
 export default function MenuButtonShortcut({
   text,
   onClickEvent,
@@ -12,7 +13,7 @@ export default function MenuButtonShortcut({
 }) {
   const mobile = useMediaQuery('(max-width:800px)');
   const classes = useStyles();
-  const { column } = props;
+  const { column, countIcon } = props;
 
   return (
     <div
@@ -45,7 +46,6 @@ export default function MenuButtonShortcut({
             className={clsx({
               [classes.iconIcon]: true,
               [classes.iconIconNoMargin]: text.name === '',
-
               [classes.dark]: text.color === 'white',
               [classes.warning]: text.back
                 ? text.back === 'warning'
@@ -75,9 +75,12 @@ export default function MenuButtonShortcut({
           j={text.count > 0 ? 'space-between' : column ? 'center' : 'flex-end'}
           w="100%"
         >
-          {text.count > 0 && (
-            <Typography className={classes.count}>{text.count}</Typography>
-          )}
+          {text.count > 0 &&
+            (!countIcon ? (
+              <Typography className={classes.count}>{text.count}</Typography>
+            ) : (
+              <Icon className={classes.count}>{countIcon}</Icon>
+            ))}
           <Typography
             className={clsx({
               [classes.button]: !mobile,

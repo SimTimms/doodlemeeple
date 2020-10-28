@@ -194,6 +194,7 @@ export const INVITES = gql`
   query GetInvites($status: [String]) {
     invitesByUser(status: $status) {
       status
+      messages
       _id
       receiver {
         name
@@ -312,6 +313,7 @@ export const JOB = gql`
       }
       invites {
         status
+        messages
         receiver {
           _id
           name
@@ -454,6 +456,7 @@ export const JOB_CREATIVE = gql`
       }
       invite {
         status
+        messages
         _id
       }
     }
@@ -481,6 +484,10 @@ export const JOBS = gql`
       }
       invites {
         status
+        messages
+        job {
+          _id
+        }
         receiver {
           _id
           name

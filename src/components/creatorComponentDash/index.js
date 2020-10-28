@@ -1,13 +1,14 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { IconButton, Column, Row, MenuButtonShortcut } from '../';
+import { Column, Row, MenuButtonShortcut } from '../';
 
 export default function CreatorComponentDash({
   user,
   setConversationUser,
   declined,
   history,
+  messages,
 }) {
   const classes = useStyles();
   return (
@@ -53,7 +54,7 @@ export default function CreatorComponentDash({
               name: '',
               color: '',
               icon: 'chat',
-              count: 0,
+              count: messages,
               back: 'primary',
             }}
             onClickEvent={() => setConversationUser(user)}

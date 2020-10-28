@@ -72,19 +72,21 @@ export default function CreativeMenu({
             active={tabNbr === 7}
           />
         )}
-        <MenuButtonShortcut
-          text={{
-            name: 'Payments',
-            color: '#FFF',
-            icon: 'credit_card',
-            count: 0,
-          }}
-          onClickEvent={() => {
-            setTabNbr(4);
-          }}
-          column={true}
-          active={tabNbr === 4}
-        />
+        {activeContract && (
+          <MenuButtonShortcut
+            text={{
+              name: 'Payments',
+              color: '#FFF',
+              icon: 'credit_card',
+              count: 0,
+            }}
+            onClickEvent={() => {
+              setTabNbr(4);
+            }}
+            column={true}
+            active={tabNbr === 4}
+          />
+        )}
       </TopMenuWrapper>
     </div>
   );

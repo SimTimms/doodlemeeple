@@ -27,7 +27,9 @@ export default function ItemQuoteAcceptedCreative({
             })}
           >
             Client Response:
-            <b>{activeContract ? 'Accepted' : 'No'}</b>
+            <b>
+              {color === 3 ? 'Waiting' : activeContract ? 'Accepted' : 'No'}
+            </b>
           </Typography>
         </Row>
       </Column>
@@ -36,7 +38,7 @@ export default function ItemQuoteAcceptedCreative({
           name: '',
           color: '',
           icon:
-            color === 0
+            color === 3
               ? 'query_builder'
               : color === 1
               ? 'check'

@@ -66,7 +66,7 @@ export default function InviteComponent({ invite, history }) {
                     color: '#fff',
                     icon:
                       unopened || opened || quoted || accepted ? 'star' : '',
-                    count: 0,
+                    count: invite.messages,
                     back: unopened
                       ? 'warning'
                       : opened || quoted
@@ -82,6 +82,7 @@ export default function InviteComponent({ invite, history }) {
                     );
                   }}
                   active={false}
+                  countIcon="star"
                 />
               );
             }}

@@ -29,12 +29,12 @@ export default function SummaryViewCreative({ job, history }) {
       : false;
   const userContract = job.contract && job.contract._id;
   const userContractStatus = job.contract && job.contract.status;
+  const jobData = job.job;
 
   useEffect(() => {
     setContract(job.contract);
     setInvite(job.invite);
   }, [job]);
-  console.log(contract);
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -80,7 +80,7 @@ export default function SummaryViewCreative({ job, history }) {
         ) : (
           tabNbr === 6 && (
             <CreateQuoteButton
-              jobId={job.job._id}
+              jobId={jobData._id}
               contract={contract}
               setContract={setContract}
             />
@@ -88,7 +88,7 @@ export default function SummaryViewCreative({ job, history }) {
         )}
         {tabNbr === 4 && (
           <Column>
-            <PaymentsView job={{ jobData: job.job, setJobData: null }} />
+            <PaymentsView job={{ jobData: jobData, setJobData: null }} />
           </Column>
         )}
         {tabNbr === 7 && (
@@ -96,9 +96,9 @@ export default function SummaryViewCreative({ job, history }) {
         )}
         {conversationUser && (
           <ChatView
-            job={job}
+            job={jobData}
             setPageNbr={setPageNbr}
-            jobId={job._id}
+            jobId={jobData._id}
             conversationUser={conversationUser}
             pageNbr={pageNbr}
             setConversationUser={setConversationUser}

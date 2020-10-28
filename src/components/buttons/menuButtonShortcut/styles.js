@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     maxHeight: 22,
     minHeight: 22,
     borderRadius: '50%',
-    marginRight: 12,
+    marginRight: 0,
     position: 'relative',
     boxShadow:
       'inset 1px 1px 1px rgba(255,255,255,0.4),inset -1px -1px 1px rgba(0,0,0,0.2)',
@@ -26,11 +26,12 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
     position: 'relative',
     fontSize: 14,
-
     padding: 5,
-    background: 'rgba(0,0,0,0.05)',
+    background: '#c3c3d6',
     borderRadius: '50%',
     textAlign: 'center',
+    boxShadow:
+      'inset 1px 1px 1px rgba(255,255,255,0.7),inset -1px -1px 1px rgba(0,0,0,0.1)',
   },
   backHover: {
     '&:hover': {
@@ -90,7 +91,7 @@ export const useStyles = makeStyles((theme) => ({
     zIndex: 2,
   },
   spaceAbove: { marginTop: 4 },
-  button: { textAlign: 'right', color: '#222', fontSize: 12 },
+  button: { textAlign: 'right', color: '#222', fontSize: 12, marginLeft: 10 },
   buttonMobile: {
     padding: 5,
     textAlign: 'center',

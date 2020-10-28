@@ -78,8 +78,7 @@ export default function NotificationComponent({
               <MenuButtonShortcut
                 text={{
                   name: '',
-                  color: '#bbb',
-                  icon: 'delete',
+                  icon: 'close',
                   count: 0,
                   back: '',
                 }}

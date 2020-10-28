@@ -7,6 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
     paddingTop: 120,
     paddingBottom: 120,
+    margin: 'auto',
   },
   createWrapper: {
     padding: 20,
