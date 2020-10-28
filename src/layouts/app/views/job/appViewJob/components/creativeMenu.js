@@ -9,7 +9,7 @@ export default function CreativeMenu({
   tabNbr,
   setTabNbr,
   activeContract,
-  userContract,
+  closed,
 }) {
   const classes = useStyles();
 
@@ -42,7 +42,7 @@ export default function CreativeMenu({
           column={true}
           active={tabNbr === 1}
         />
-        {!activeContract && (
+        {!activeContract && !closed && (
           <MenuButtonShortcut
             text={{
               name: 'My Quote',

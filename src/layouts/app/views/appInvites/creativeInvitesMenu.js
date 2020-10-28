@@ -23,15 +23,28 @@ export default function CreativeInvitesMenu({ tabNbr, setTabNbr }) {
         />
         <MenuButtonShortcut
           text={{
-            name: 'History',
+            name: 'Jobs',
             color: '#fff',
-            icon: 'history',
+            icon: 'work',
             count: 0,
           }}
           onClickEvent={() => {
             setTabNbr(2);
           }}
           active={tabNbr === 2}
+          column={true}
+        />
+        <MenuButtonShortcut
+          text={{
+            name: 'History',
+            color: '#fff',
+            icon: 'history',
+            count: 0,
+          }}
+          onClickEvent={() => {
+            setTabNbr(3);
+          }}
+          active={tabNbr === 3}
           column={true}
         />
       </TopMenuWrapper>

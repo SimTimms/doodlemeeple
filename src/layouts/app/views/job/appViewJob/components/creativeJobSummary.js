@@ -25,6 +25,8 @@ export default function CreativeJobSummary({
   userContractStatus,
 }) {
   const classes = useStyles();
+  const closed = job.job.submitted === 'closed';
+  const complete = job.job.submitted === 'complete';
 
   return (
     <Slide direction="up" in={true} mountOnEnter unmountOnExit>
@@ -57,11 +59,17 @@ export default function CreativeJobSummary({
                   <Meta str="You declined this invite" />
                 ) : invite.data.status === 'accepted' ? (
                   <Meta str="You have already quoted for this job" />
+                ) : closed ? (
+                  <Meta str="The Creator closed this job" />
+                ) : complete ? (
+                  <Meta str="This job is complete" />
                 ) : (
                   <Meta str="Choose to quote for this job or decline" />
                 )}
                 {invite.data.status !== 'declined' &&
-                  invite.data.status !== 'accepted' && (
+                  invite.data.status !== 'accepted' &&
+                  !complete &&
+                  !closed && (
                     <CreativeActions
                       inviteId={invite.data._id}
                       onClickEvent={() => {

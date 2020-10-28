@@ -56,6 +56,7 @@ export default function CheckListCreativeDash({
   const currency = contractData ? contractData.currency : 'GBP';
   const submitted = contractData && contractData.status === 'submitted';
   const finished = job.job.submitted === 'complete';
+  const closed = job.job.submitted === 'closed';
 
   const color = [
     1,
@@ -78,6 +79,7 @@ export default function CheckListCreativeDash({
           declined={declined}
           history={history}
           messages={invite.messages}
+          closed={closed}
         />
         {(declined || quoted || jobHasBeenAwarded) && (
           <Column>
@@ -92,7 +94,9 @@ export default function CheckListCreativeDash({
               })}
             >
               {jobHasBeenAwarded
-                ? finished
+                ? closed
+                  ? 'CLOSED'
+                  : finished
                   ? 'JOB COMPLETE'
                   : totalPaid(contractData) === parseInt(cost)
                   ? 'FULLY PAID'
@@ -108,51 +112,55 @@ export default function CheckListCreativeDash({
           </Column>
         )}
         <Divider />
-        <FieldTitleDashboard name="Checklist" inline={false} a="c" />
-        <Divider />
-        <Column>
-          <InviteReceived color={color[0]} />
-          <DividerWithBorder />
-          <ItemViewJob
-            reply={invite.status}
-            inviteId={invite._id}
-            setTabNbr={setTabNbr}
-            color={color[1]}
-          />
-          <DividerWithBorder />
-          <InviteReplied
-            color={color[2]}
-            declined={declined}
-            quoted={quoted}
-            accepted={accepted}
-            rejected={rejected}
-            setTabNbr={setTabNbr}
-            submitted={submitted}
-          />
-          <DividerWithBorder />
-          <ItemQuoteAcceptedCreative
-            color={color[2] === 1 ? color[3] : 0}
-            activeContract={activeContract}
-            setTabNbr={setTabNbr}
-          />
-          <Divider />
-          <ItemQuotePaid
-            paid={paid}
-            setTabNbr={setTabNbr}
-            color={color[3] === 1 ? color[4] : 0}
-            jobHasContract={jobHasBeenAwarded}
-            isCreator={false}
-          />
-          <Divider />
-          <ItemCreativePaid
-            totalPaid={totalPaid(contractData)}
-            cost={cost}
-            currency={currency}
-            setTabNbr={setTabNbr}
-            color={color[4] === 1 ? color[5] : 0}
-            jobHasContract={jobHasBeenAwarded}
-          />
-        </Column>
+
+        {!closed && (
+          <Column>
+            <FieldTitleDashboard name="Checklist" inline={false} a="c" />
+            <Divider />
+            <InviteReceived color={color[0]} />
+            <DividerWithBorder />
+            <ItemViewJob
+              reply={invite.status}
+              inviteId={invite._id}
+              setTabNbr={setTabNbr}
+              color={color[1]}
+            />
+            <DividerWithBorder />
+            <InviteReplied
+              color={color[2]}
+              declined={declined}
+              quoted={quoted}
+              accepted={accepted}
+              rejected={rejected}
+              setTabNbr={setTabNbr}
+              submitted={submitted}
+            />
+            <DividerWithBorder />
+            <ItemQuoteAcceptedCreative
+              color={color[2] === 1 ? color[3] : 0}
+              activeContract={activeContract}
+              setTabNbr={setTabNbr}
+            />
+            <Divider />
+            <ItemQuotePaid
+              paid={paid}
+              setTabNbr={setTabNbr}
+              color={color[3] === 1 ? color[4] : 0}
+              jobHasContract={jobHasBeenAwarded}
+              isCreator={false}
+            />
+            <Divider />
+            <ItemCreativePaid
+              totalPaid={totalPaid(contractData)}
+              cost={cost}
+              currency={currency}
+              setTabNbr={setTabNbr}
+              color={color[4] === 1 ? color[5] : 0}
+              jobHasContract={jobHasBeenAwarded}
+              paid={paid}
+            />
+          </Column>
+        )}
       </Widget>
     </Column>
   );

@@ -28,10 +28,15 @@ export default function AppInvites({ history }) {
         <Column w="100%">
           <CreativeInvitesMenu setTabNbr={setTabNbr} tabNbr={tabNbr} />
           <Divider />
-
           <Column w={600}>
             <FieldTitleDashboard
-              name={tabNbr === 1 ? 'Invites' : 'Invite History'}
+              name={
+                tabNbr === 1
+                  ? 'Invites'
+                  : tabNbr === 2
+                  ? 'Active Jobs'
+                  : 'History'
+              }
               inline={false}
             />
             {inviteArray.length > 0 && (
@@ -58,8 +63,10 @@ export default function AppInvites({ history }) {
           variables={{
             status:
               tabNbr === 1
-                ? ['unopened', 'read', 'quote_sent', 'accepted']
-                : ['declined', 'rejected'],
+                ? ['unopened', 'read', 'quote_sent']
+                : tabNbr === 2
+                ? ['accepted']
+                : ['declined', 'rejected', 'closed', 'complete'],
           }}
           onCompleted={(data) => {
             setInviteArray(data.invitesByUser);

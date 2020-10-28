@@ -9,7 +9,7 @@ export default function CreativeActions({
   ...props
 }) {
   const classes = useStyles();
-  const { proposalOpen, setProposalOpen, setInviteStatus } = props;
+  const { proposalOpen } = props;
   return (
     <div className={classes.actionWrapper}>
       <IconButton

@@ -30,6 +30,7 @@ export default function SummaryViewCreative({ job, history }) {
   const userContract = job.contract && job.contract._id;
   const userContractStatus = job.contract && job.contract.status;
   const jobData = job.job;
+  const closed = job.job.submitted === 'closed';
 
   useEffect(() => {
     setContract(job.contract);
@@ -42,7 +43,7 @@ export default function SummaryViewCreative({ job, history }) {
           tabNbr={tabNbr}
           setTabNbr={setTabNbr}
           activeContract={activeContract}
-          userContract={userContract}
+          closed={closed}
         />
         {tabNbr === -1 && (
           <Column>

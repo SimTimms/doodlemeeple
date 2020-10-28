@@ -9,6 +9,7 @@ export default function CreatorComponentDash({
   declined,
   history,
   messages,
+  closed,
 }) {
   const classes = useStyles();
   return (
@@ -48,7 +49,7 @@ export default function CreatorComponentDash({
           active={false}
         />
 
-        {!declined && (
+        {!declined && !closed && (
           <MenuButtonShortcut
             text={{
               name: '',
