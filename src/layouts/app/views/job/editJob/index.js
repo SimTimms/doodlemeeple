@@ -49,7 +49,7 @@ export default function EditJob({ theme, jobId, history, favourites }) {
     creativeSummary: '',
     _id: 'new',
     gameId: '',
-    submitted: false,
+    submitted: '',
   });
   const [screen, setScreen] = React.useState(1);
 
