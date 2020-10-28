@@ -11,6 +11,7 @@ import {
 } from '../../../../../../components';
 import { timeDifferenceForDate } from '../../../../../../utils/dates';
 import CloseJobButton from './closeJobButton';
+import EndJobButton from './endJobButton';
 
 export default function CreatorJobSummary({ jobData, setTabNbr }) {
   const classes = useStyles();
@@ -37,9 +38,13 @@ export default function CreatorJobSummary({ jobData, setTabNbr }) {
           </Column>
           {job.submitted !== 'closed' &&
             job.submitted !== 'paid' &&
-            job.submitted !== 'accepted' && (
+            job.submitted !== 'accepted' &&
+            job.submitted !== 'complete' && (
               <CloseJobButton job={jobData} setTabNbr={setTabNbr} />
             )}
+          {job.submitted === 'paid' && (
+            <EndJobButton job={jobData} setTabNbr={setTabNbr} />
+          )}
         </Paper>
       </div>
     </Slide>

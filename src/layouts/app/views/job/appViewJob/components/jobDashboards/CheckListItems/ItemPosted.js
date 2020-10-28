@@ -9,7 +9,13 @@ import {
 } from '../../../../../../../../components';
 import clsx from 'clsx';
 
-export default function ItemPosted({ setTabNbr, color }) {
+export default function ItemPosted({
+  setTabNbr,
+  color,
+  draft,
+  history,
+  jobId,
+}) {
   const classes = useStyles();
   return (
     <RowCheckList j="space-between" active={true}>
@@ -21,7 +27,7 @@ export default function ItemPosted({ setTabNbr, color }) {
               [classes.dull]: true,
             })}
           >
-            Job Posted:<b> Done</b>
+            Job Posted:<b> {draft ? 'No' : 'Yes'}</b>
           </Typography>
         </Row>
       </Column>
@@ -33,7 +39,7 @@ export default function ItemPosted({ setTabNbr, color }) {
           count: 0,
           back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}
-        onClickEvent={() => setTabNbr(1)}
+        onClickEvent={() => history.push(`/app/edit-job/${jobId}`)}
         active={false}
       />
     </RowCheckList>

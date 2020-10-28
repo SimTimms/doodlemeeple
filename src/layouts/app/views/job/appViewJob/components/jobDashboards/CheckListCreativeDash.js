@@ -51,7 +51,7 @@ export default function CheckListCreativeDash({
   const quoted = userContractStatus !== null;
   const rejected = invite.status === 'rejected';
   const jobData = job.job;
-  const paid = jobData.submitted === 'paid';
+  const paid = jobData.submitted === 'paid' || jobData.submitted === 'complete';
   const cost = contractData ? contractData.cost : 0;
   const currency = contractData ? contractData.currency : 'GBP';
   const submitted = contractData && contractData.status === 'submitted';

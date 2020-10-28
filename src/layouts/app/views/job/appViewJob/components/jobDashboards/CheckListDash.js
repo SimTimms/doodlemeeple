@@ -16,15 +16,18 @@ import {
   ItemCreativePaid,
   ItemLeaveReview,
   ItemQuoteAccepted,
+  ItemCloseJob,
   ItemQuotePaid,
 } from './CheckListItems';
 
-export default function CheckListDash({ job, setTabNbr }) {
+export default function CheckListDash({ job, setTabNbr, history }) {
   const classes = useStyles();
   const jobHasContract = job.activeContract;
-  const paid = job.submitted === 'paid';
+  const draft = job.submitted === 'draft';
+  const paid = job.submitted === 'paid' || job.submitted === 'complete';
   const accepted = job.submitted === 'accepted';
   const closed = job.submitted === 'closed';
+  const finished = job.submitted === 'complete';
   const { paymentTerms, cost, currency, status } = job.activeContract
     ? job.activeContract
     : { paymentTerms: [], cost: 0, currency: 'GBP', status: null };
@@ -34,14 +37,16 @@ export default function CheckListDash({ job, setTabNbr }) {
   for (let i = 0; i < paidOutArr.length; i++) {
     totalPaid += paidOutArr[i].percent;
   }
+  const fullyPaid = totalPaid === parseInt(cost) && cost > 0;
 
   const color = [
-    1,
-    1,
+    draft ? 2 : 1,
+    draft ? 0 : 1,
     jobHasContract ? 1 : !accepted && !paid && 2,
     !paid ? 2 : 1,
     totalPaid < parseInt(cost) ? 2 : 1,
     0,
+    finished ? 1 : 2,
   ];
 
   return (
@@ -62,19 +67,45 @@ export default function CheckListDash({ job, setTabNbr }) {
         </Paper>
       ) : (
         <Paper p={10}>
+          {(fullyPaid || draft) && (
+            <Column>
+              <FieldTitleDashboard name="Status" inline={false} a="c" />
+              <DividerMini />
+              <Typography
+                variant="h6"
+                className={clsx({
+                  [classes.status]: true,
+                  [classes.statusGreen]: fullyPaid,
+                })}
+              >
+                {fullyPaid && 'FULLY PAID'}
+                {draft && 'DRAFT'}
+              </Typography>
+              <DividerMini />
+            </Column>
+          )}
           <FieldTitleDashboard name="Checklist" inline={false} a="c" />
           <Divider />
           <Column>
-            <ItemPosted setTabNbr={setTabNbr} color={color[0]} />
+            <ItemPosted
+              setTabNbr={setTabNbr}
+              color={color[0]}
+              draft={draft}
+              history={history}
+              jobId={job._id}
+            />
             <DividerWithBorder />
-            <ItemInvites setTabNbr={setTabNbr} color={color[1]} />
+            <ItemInvites
+              setTabNbr={setTabNbr}
+              color={color[0] === 1 ? color[1] : 0}
+              draft={draft}
+            />
             <DividerWithBorder />
             <ItemQuoteAccepted
-              jobStatus={job.submitted}
               contracts={job.contracts}
               activeContract={jobHasContract}
               setTabNbr={setTabNbr}
-              color={color[2]}
+              color={color[1] === 1 ? color[2] : 0}
             />
             <DividerWithBorder />
             <ItemQuotePaid
@@ -93,12 +124,19 @@ export default function CheckListDash({ job, setTabNbr }) {
               setTabNbr={setTabNbr}
               color={color[3] === 1 ? color[4] : 0}
               jobHasContract={jobHasContract}
+              paid={paid}
             />
             <DividerWithBorder />
             <ItemLeaveReview
               paid={false}
               setTabNbr={setTabNbr}
               color={color[4] === 1 ? color[5] : 0}
+            />
+            <DividerWithBorder />
+            <ItemCloseJob
+              finished={finished}
+              setTabNbr={setTabNbr}
+              color={color[4] === 1 ? color[6] : 0}
             />
           </Column>
           <DividerMini />

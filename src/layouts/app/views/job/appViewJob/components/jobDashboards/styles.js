@@ -23,6 +23,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   statusGreen: {
     background: theme.palette.secondary.main,
+    color: '#fff',
   },
   statusRed: {
     background: theme.palette.error.main,

@@ -48,7 +48,14 @@ export default function ItemQuotePaid({
               ? 'star'
               : '',
           count: 0,
-          back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
+          back:
+            jobHasContract && (!paid || pending) && !isCreator
+              ? ''
+              : color === 1
+              ? 'secondary'
+              : color === 2
+              ? 'warning'
+              : '',
         }}
         onClickEvent={() => (jobHasContract ? setTabNbr(4) : null)}
         active={false}

@@ -21,7 +21,7 @@ export default function ItemLeaveReview({ paid, setTabNbr, color }) {
               [classes.dull]: true,
             })}
           >
-            Leave Review: <b>No</b>
+            Leave Review: <b>Coming Soon</b>
           </Typography>
         </Row>
       </Column>

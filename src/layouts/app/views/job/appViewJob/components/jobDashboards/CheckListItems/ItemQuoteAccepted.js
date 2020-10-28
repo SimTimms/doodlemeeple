@@ -10,14 +10,13 @@ import {
 import clsx from 'clsx';
 
 export default function ItemQuoteAccepted({
-  jobStatus,
   setTabNbr,
   color,
   contracts,
   activeContract,
 }) {
   const classes = useStyles();
-  const noContracts = !contracts;
+  const noContracts = contracts.length === 0;
   const someContracts = contracts.length > 0;
 
   return (
@@ -47,9 +46,21 @@ export default function ItemQuoteAccepted({
         text={{
           name: '',
           color: '',
-          icon: color === 1 ? 'check' : color === 2 ? 'star' : '',
+          icon: noContracts
+            ? 'query_builder'
+            : color === 1
+            ? 'check'
+            : color === 2
+            ? 'star'
+            : '',
           count: 0,
-          back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
+          back: noContracts
+            ? ''
+            : color === 1
+            ? 'secondary'
+            : color === 2
+            ? 'warning'
+            : '',
         }}
         onClickEvent={() => (activeContract ? setTabNbr(3) : setTabNbr(2))}
         active={false}

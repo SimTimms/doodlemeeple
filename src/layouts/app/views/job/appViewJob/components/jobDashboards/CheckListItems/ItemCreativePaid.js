@@ -16,6 +16,7 @@ export default function ItemCreativePaid({
   setTabNbr,
   color,
   jobHasContract,
+  paid,
 }) {
   const classes = useStyles();
 
@@ -42,7 +43,7 @@ export default function ItemCreativePaid({
           name: '',
           color: '',
           icon:
-            totalPaid < cost
+            totalPaid < cost && paid
               ? 'query_builder'
               : color === 1
               ? 'check'

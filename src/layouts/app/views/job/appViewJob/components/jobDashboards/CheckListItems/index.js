@@ -8,6 +8,7 @@ import ItemQuoteAcceptedCreative from './ItemQuoteAcceptedCreative';
 import ItemQuotePaid from './ItemQuotePaid';
 import ItemLeaveReview from './ItemLeaveReview';
 import ItemCreativePaid from './ItemCreativePaid';
+import ItemCloseJob from './ItemCloseJob';
 import InviteReceived from './InviteReceived';
 import InviteReplied from './InviteReplied';
 import ItemViewJob from './ItemViewJob';
@@ -25,4 +26,5 @@ export {
   InviteReplied,
   ItemViewJob,
   ItemQuoteAcceptedCreative,
+  ItemCloseJob,
 };

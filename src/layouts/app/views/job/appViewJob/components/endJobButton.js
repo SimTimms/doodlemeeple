@@ -9,9 +9,9 @@ import {
 } from '../../../../../../components';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../../../../../utils/toaster';
-import { CLOSE_JOB } from '../../../../../../data/mutations';
+import { COMPLETE_JOB } from '../../../../../../data/mutations';
 
-export default function CloseJobButton({ job, setTabNbr }) {
+export default function EndJobButton({ job, setTabNbr }) {
   const classes = useStyles();
   const [closeConfirm, setCloseConfirm] = React.useState(false);
   const [deleting, setDeleting] = React.useState(false);
@@ -22,11 +22,11 @@ export default function CloseJobButton({ job, setTabNbr }) {
     <div className={classes.actionWrapper}>
       {!closeConfirm ? (
         <BorderBox w={300}>
-          <Meta str="Permanently close this job?" />
+          <Meta str="Is this job complete?" />
           <IconButton
             color="warning"
-            icon="close"
-            title="Close Job"
+            icon="thumb_up"
+            title="Yes"
             onClickEvent={() => setCloseConfirm(true)}
             styleOverride={{ width: '100%' }}
             iconPos="right"
@@ -36,8 +36,7 @@ export default function CloseJobButton({ job, setTabNbr }) {
         <BorderBox w={300}>
           <Meta
             str="
-            This will permanently close the project. Your chosen creatives will
-            be unable to send a quote or discuss this job further."
+            This will permanently close the project. Are you sure this project is complete?"
           />
           <Divider />
           <Meta
@@ -45,14 +44,14 @@ export default function CloseJobButton({ job, setTabNbr }) {
         Continue?"
           />
           <Mutation
-            mutation={CLOSE_JOB}
+            mutation={COMPLETE_JOB}
             variables={{
               _id: job.data._id,
             }}
             onCompleted={(data) => {
-              job.setData({ ...job.data, submitted: 'closed' });
+              job.setData({ ...job.data, submitted: 'complete' });
               setTabNbr(-1);
-              toaster('Project Closed');
+              toaster('Project Complete');
             }}
           >
             {(mutation) => {

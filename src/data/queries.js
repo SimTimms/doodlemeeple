@@ -464,7 +464,7 @@ export const JOB_CREATIVE = gql`
 `;
 
 export const JOBS = gql`
-  query GetJobs($status: String) {
+  query GetJobs($status: [String]) {
     jobsByUser(status: $status) {
       _id
       name

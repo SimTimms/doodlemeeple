@@ -9,7 +9,7 @@ import {
 } from '../../../../../../../../components';
 import clsx from 'clsx';
 
-export default function ItemInvites({ setTabNbr, color, draft }) {
+export default function ItemCloseJob({ finished, setTabNbr, color }) {
   const classes = useStyles();
   return (
     <RowCheckList j="space-between" active={true}>
@@ -21,7 +21,7 @@ export default function ItemInvites({ setTabNbr, color, draft }) {
               [classes.dull]: true,
             })}
           >
-            Invites Sent:<b> {draft ? 'No' : 'Yes'} </b>
+            Close Job:<b> No</b>
           </Typography>
         </Row>
       </Column>
@@ -34,7 +34,7 @@ export default function ItemInvites({ setTabNbr, color, draft }) {
           count: 0,
           back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}
-        onClickEvent={() => setTabNbr(2)}
+        onClickEvent={() => setTabNbr(1)}
         active={false}
       />
     </RowCheckList>

@@ -14,6 +14,7 @@ export default function JobComponent({ job, game, history }) {
   const accepted = job.submitted === 'accepted';
   const paid = job.submitted === 'paid';
   const closed = job.submitted === 'closed';
+  const complete = job.submitted === 'complete';
 
   return (
     <CardComponent
@@ -58,7 +59,9 @@ export default function JobComponent({ job, game, history }) {
             [classes.cardSummaryGood]: paid || accepted,
           })}
         >
-          {submitted
+          {complete
+            ? 'Completed'
+            : submitted
             ? 'Invites sent'
             : closed
             ? 'Closed'
@@ -72,7 +75,6 @@ export default function JobComponent({ job, game, history }) {
         </Typography>
       </div>
       {job.invites.map((invite, index) => {
-        console.log(invite);
         const contractFromArray = contractsArr.indexOf(invite.receiver._id);
         const thisContract = job.contracts[contractFromArray];
         const thisStatus = thisContract ? thisContract.status : null;

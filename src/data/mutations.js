@@ -333,6 +333,14 @@ export const CLOSE_JOB = gql`
   }
 `;
 
+export const COMPLETE_JOB = gql`
+  mutation completeJob($_id: MongoID!) {
+    completeJob(_id: $_id) {
+      _id
+    }
+  }
+`;
+
 export const CREATE_JOB = gql`
   mutation CreateJob($name: String!) {
     jobCreateOne(record: { name: $name }) {

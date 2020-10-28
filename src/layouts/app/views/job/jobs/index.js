@@ -37,7 +37,7 @@ export default function Jobs({ history, theme }) {
               <Query
                 query={JOBS}
                 fetchPolicy="network-only"
-                variables={{ status: '' }}
+                variables={{ status: ['draft', 'submitted', 'paid'] }}
                 onCompleted={() => {
                   setLoading(false);
                 }}
@@ -74,7 +74,7 @@ export default function Jobs({ history, theme }) {
               <Query
                 query={JOBS}
                 fetchPolicy="network-only"
-                variables={{ status: null }}
+                variables={{ status: [''] }}
                 onCompleted={() => {
                   setLoading(false);
                 }}
@@ -119,7 +119,7 @@ export default function Jobs({ history, theme }) {
               <Query
                 query={JOBS}
                 fetchPolicy="network-only"
-                variables={{ status: 'closed' }}
+                variables={{ status: ['closed', 'complete'] }}
                 onCompleted={() => {
                   setLoading(false);
                 }}

@@ -69,7 +69,7 @@ export default function PaymentsView({ job, refreshCount, setRefreshCount }) {
             setDisplayPayment={setDisplayPayment}
             job={{ jobData: job.jobData, setJobData: job.setJobData }}
           />
-          {!isFunded ? (
+          {!isFunded && isCreator ? (
             <UnlockInfo str="Fund this project to unlock" />
           ) : (
             <Query

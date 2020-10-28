@@ -49,7 +49,7 @@ export function CreatorDashboard({
   return (
     <Column>
       <Row a="flex-start">
-        <CheckListDash job={job} setTabNbr={setTabNbr} />
+        <CheckListDash job={job} setTabNbr={setTabNbr} history={history} />
         <NotificationDash jobId={job._id} />
         {!job.activeContract && (
           <InvitesDash

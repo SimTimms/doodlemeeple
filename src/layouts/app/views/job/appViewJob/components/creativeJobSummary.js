@@ -25,7 +25,7 @@ export default function CreativeJobSummary({
   userContractStatus,
 }) {
   const classes = useStyles();
-  console.log(userContractStatus);
+
   return (
     <Slide direction="up" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -90,15 +90,21 @@ export default function CreativeJobSummary({
             ) : (
               <BorderBox w={300}>
                 <Meta str="You've quoted for this job" />
-                <IconButton
-                  title="View Quote"
-                  onClickEvent={() => {
-                    setTabNbr(6);
-                  }}
-                  color="primary"
-                  icon=""
-                  styleOverride={{ marginLeft: 'auto', marginRight: 'auto' }}
-                />
+                {job.job.submitted !== 'closed' &&
+                  job.job.submitted !== 'complete' && (
+                    <IconButton
+                      title="View Quote"
+                      onClickEvent={() => {
+                        setTabNbr(6);
+                      }}
+                      color="primary"
+                      icon=""
+                      styleOverride={{
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                      }}
+                    />
+                  )}
               </BorderBox>
             )}
           </Column>
