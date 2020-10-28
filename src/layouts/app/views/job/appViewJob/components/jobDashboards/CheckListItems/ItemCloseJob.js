@@ -9,7 +9,7 @@ import {
 } from '../../../../../../../../components';
 import clsx from 'clsx';
 
-export default function ItemCloseJob({ finished, setTabNbr, color }) {
+export default function ItemCloseJob({ setTabNbr, color }) {
   const classes = useStyles();
   return (
     <RowCheckList j="space-between" active={true}>

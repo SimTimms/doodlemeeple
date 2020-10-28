@@ -44,7 +44,7 @@ export default function CheckListDash({ job, setTabNbr, history }) {
     draft ? 0 : 1,
     jobHasContract ? 1 : !accepted && !paid && 2,
     !paid ? 2 : 1,
-    totalPaid < parseInt(cost) ? 2 : 1,
+    fullyPaid ? 1 : 2,
     0,
     finished ? 1 : 2,
   ];
@@ -134,7 +134,6 @@ export default function CheckListDash({ job, setTabNbr, history }) {
             />
             <DividerWithBorder />
             <ItemCloseJob
-              finished={finished}
               setTabNbr={setTabNbr}
               color={color[4] === 1 ? color[6] : 0}
             />
