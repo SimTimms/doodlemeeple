@@ -183,7 +183,7 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                   {job._id !== 'new' && (
                     <Card className={classes.card}>
                       <div style={{ padding: '10px 10px 0 10px' }}>
-                        {job.submitted && (
+                        {job.submitted && job.submitted !== 'draft' && (
                           <UnlockInfo str="This project has been submitted and can't be modified" />
                         )}
 
