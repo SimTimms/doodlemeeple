@@ -7,7 +7,6 @@ import { JOB, JOB_CREATIVE } from '../../../../../data/queries';
 import Cookies from 'js-cookie';
 
 export default function AppViewJob({ jobId, history }) {
-  const [contracts, setContracts] = React.useState([]);
   const [isCreator, setIsCreator] = React.useState(null);
   const [refreshCount, setRefreshCount] = React.useState(0);
 
@@ -19,12 +18,6 @@ export default function AppViewJob({ jobId, history }) {
             query={JOB}
             variables={{ jobId: jobId, refreshCount: refreshCount }}
             fetchPolicy="network-only"
-            onCompleted={(data) => {
-              const contractIds = data.jobById.contracts.map(
-                (contract) => contract.user._id
-              );
-              setContracts(contractIds);
-            }}
           >
             {({ data }) => {
               return data ? (

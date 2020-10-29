@@ -51,8 +51,4 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
   },
   button: { textAlign: 'right' },
-  buttonMobile: {
-    padding: 5,
-    textAlign: 'center',
-  },
 }));

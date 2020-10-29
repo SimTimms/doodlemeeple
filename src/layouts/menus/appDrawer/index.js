@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTheme } from '@material-ui/core/styles';
 import { Divider, Drawer, List, useMediaQuery } from '@material-ui/core';
 import { useStyles } from '../styles';
 import Cookies from 'js-cookie';
@@ -16,10 +15,9 @@ export default function AppDrawer({
   open,
   ...props
 }) {
-  const { drawerOpen, drawerOpenMobile, drawerRoot } = useStyles();
+  const { drawerOpenTablet, drawerRoot } = useStyles();
 
   const { page, profile } = props;
-  const theme = useTheme();
   const mobile = useMediaQuery('(max-width:800px)');
   const [counts, setCounts] = React.useState({
     invites: 0,
@@ -30,16 +28,10 @@ export default function AppDrawer({
   return (
     <Drawer
       variant="permanent"
-      className={clsx({
-        [drawerRoot]: true,
-        [drawerOpenMobile]: open && mobile,
-        [drawerOpen]: true && !mobile,
-      })}
       classes={{
         paper: clsx({
           [drawerRoot]: true,
-          [drawerOpenMobile]: open && mobile,
-          [drawerOpen]: !mobile,
+          [drawerOpenTablet]: mobile,
         }),
       }}
     >

@@ -341,6 +341,12 @@ export const COMPLETE_JOB = gql`
   }
 `;
 
+export const CLOSE_EARLY = gql`
+  mutation closeEarly($_id: MongoID!) {
+    closeEarly(_id: $_id)
+  }
+`;
+
 export const CREATE_JOB = gql`
   mutation CreateJob($name: String!) {
     jobCreateOne(record: { name: $name }) {

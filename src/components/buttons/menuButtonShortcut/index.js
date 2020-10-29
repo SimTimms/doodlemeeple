@@ -83,9 +83,8 @@ export default function MenuButtonShortcut({
             ))}
           <Typography
             className={clsx({
-              [classes.button]: !mobile,
+              [classes.button]: true,
               [classes.buttonColumn]: column,
-              [classes.buttonMobile]: mobile,
               [classes.spaceAbove]: column,
             })}
             style={{ color: text.color }}

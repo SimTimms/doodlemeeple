@@ -37,7 +37,7 @@ function AppLayout(props) {
   const [favourites, setFavourites] = React.useState([]);
   const [profile, setProfile] = React.useState(null);
   const pageJump = props.match ? props.match.params.page : null;
-  const mobile = useMediaQuery('(max-width:800px)');
+  const mobile = useMediaQuery('(max-width:700px)');
   const { history } = props;
 
   //TODO: I guess this is proper dirty
@@ -45,14 +45,6 @@ function AppLayout(props) {
     ? props.match
       ? props.match.params.pathParam
         ? props.match.params.pathParam
-        : null
-      : null
-    : null;
-
-  const pathParam2 = props
-    ? props.match
-      ? props.match.params.pathParam2
-        ? props.match.params.pathParam2
         : null
       : null
     : null;
@@ -150,8 +142,7 @@ function AppLayout(props) {
       <main
         className={clsx({
           [classes.content]: true,
-          [classes.contentMobile]: !open && mobile,
-          [classes.contentShift]: open,
+          [classes.contentMobile]: mobile,
         })}
       >
         <ContentTop style={{ width: '100%' }}>

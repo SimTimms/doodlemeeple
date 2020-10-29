@@ -54,7 +54,6 @@ export default function MenuButton({ text, onClickEvent }) {
           primary={text.name}
           className={clsx({
             [classes.button]: !mobile,
-            [classes.buttonMobile]: mobile,
           })}
         />
       </ListItem>

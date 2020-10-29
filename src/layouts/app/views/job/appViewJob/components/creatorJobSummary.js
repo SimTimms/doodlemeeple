@@ -12,10 +12,16 @@ import {
 import { timeDifferenceForDate } from '../../../../../../utils/dates';
 import CloseJobButton from './closeJobButton';
 import EndJobButton from './endJobButton';
+import RequestCloseButton from './requestCloseButton';
 
 export default function CreatorJobSummary({ jobData, setTabNbr }) {
   const classes = useStyles();
   const job = jobData.data;
+  const allPaidSuccess = job.activeContract.paymentTerms.filter(
+    (item) => item.paid === 'success'
+  );
+  const allPaid =
+    allPaidSuccess.length === job.activeContract.paymentTerms.length;
 
   return (
     <Slide direction="up" in={true} mountOnEnter unmountOnExit>
@@ -42,8 +48,11 @@ export default function CreatorJobSummary({ jobData, setTabNbr }) {
             job.submitted !== 'complete' && (
               <CloseJobButton job={jobData} setTabNbr={setTabNbr} />
             )}
-          {job.submitted === 'paid' && (
+          {job.submitted === 'paid' && allPaid && (
             <EndJobButton job={jobData} setTabNbr={setTabNbr} />
+          )}
+          {job.submitted === 'paid' && !allPaid && (
+            <RequestCloseButton job={jobData} setTabNbr={setTabNbr} />
           )}
         </Paper>
       </div>

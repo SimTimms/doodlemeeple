@@ -93,10 +93,6 @@ export const useStyles = makeStyles((theme) => ({
   spaceAbove: { marginTop: 4 },
   button: { textAlign: 'right', color: '#222', fontSize: 12, marginLeft: 10 },
   buttonColumn: { marginLeft: 0 },
-  buttonMobile: {
-    padding: 5,
-    textAlign: 'center',
-  },
   buttonRoot: {
     justifyContent: 'space-between',
     paddingBottom: 8,
