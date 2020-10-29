@@ -17,11 +17,12 @@ import RequestCloseButton from './requestCloseButton';
 export default function CreatorJobSummary({ jobData, setTabNbr }) {
   const classes = useStyles();
   const job = jobData.data;
-  const allPaidSuccess = job.activeContract.paymentTerms.filter(
-    (item) => item.paid === 'success'
-  );
-  const allPaid =
-    allPaidSuccess.length === job.activeContract.paymentTerms.length;
+  const allPaidSuccess = job.activeContract
+    ? job.activeContract.paymentTerms.filter((item) => item.paid === 'success')
+    : [];
+  const allPaid = job.activeContract
+    ? allPaidSuccess.length === job.activeContract.paymentTerms.length
+    : false;
 
   return (
     <Slide direction="up" in={true} mountOnEnter unmountOnExit>
