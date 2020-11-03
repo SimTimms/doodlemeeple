@@ -27,13 +27,13 @@ export default function NoticeBoard({
           <Column>
             <Divider />
             <Typography variant="h5" style={{ color: '#fff' }} align="center">
-              Welcome to DoodleMeeple, let's get started
+              Welcome to DoodleMeeple
             </Typography>
             <IconButton
               title="Create a Profile"
               color="text-white"
               icon="face"
-              styleOverride={{ marginBottom: 0 }}
+              styleOverride={{ marginBottom: 20, marginTop: 20 }}
               onClickEvent={() => history.push('/app/edit-profile/')}
             />
             <Mutation mutation={SKIP_ONBOARDING}>
@@ -142,19 +142,32 @@ export default function NoticeBoard({
                             Please Wait
                           </Typography>
                         ) : (
-                          <img
-                            src={stripeButton}
-                            style={{
-                              width: 200,
-                              marginTop: 20,
-                              cursor: 'pointer',
-                            }}
-                            alt=""
-                            onClick={() => {
-                              requestStripe();
-                              setLoadingStripe(true);
-                            }}
-                          />
+                          <Column>
+                            <img
+                              src={stripeButton}
+                              style={{
+                                width: 200,
+                                marginTop: 20,
+                                cursor: 'pointer',
+                              }}
+                              alt=""
+                              onClick={() => {
+                                requestStripe();
+                                setLoadingStripe(true);
+                              }}
+                            />
+                            <a
+                              href="https://doodlemeeple.com/connecting-with-stripe"
+                              target="_blank"
+                              style={{
+                                textDecoration: 'none',
+                                color: 'rgba(255,255,255,0.5)',
+                                marginTop: 5,
+                              }}
+                            >
+                              <Typography variant="body1">Read More</Typography>
+                            </a>
+                          </Column>
                         )}
                       </Column>
                     ) : (
