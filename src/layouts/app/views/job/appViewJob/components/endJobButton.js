@@ -25,7 +25,7 @@ export default function EndJobButton({ job, setTabNbr }) {
           <Meta str="Is this job complete?" />
           <IconButton
             color="warning"
-            icon="thumb_up"
+            icon="local_post_office"
             title="Yes"
             onClickEvent={() => setCloseConfirm(true)}
             styleOverride={{ width: '100%' }}

@@ -14,7 +14,7 @@ export default function CreativeActions({
     <div className={classes.actionWrapper}>
       <IconButton
         color="warning"
-        icon={proposalOpen ? 'thumb_up' : 'thumb_up'}
+        icon={proposalOpen ? 'local_post_office' : 'local_post_office'}
         title={proposalOpen ? 'Minimise Quote' : 'Quote'}
         onClickEvent={() => onClickEvent()}
         styleOverride={{ width: '100%', marginBottom: 0 }}

@@ -15,6 +15,7 @@ import CreativeActions from '../components/creativeActions';
 import CreativeActionsTwo from '../components/creativeActionsTwo';
 import ClientNotifications from '../components/clientNotifications';
 import { timeDifferenceForDate } from '../../../../../../utils/dates';
+import { nameShortener } from '../../../../../../utils';
 
 export default function CreativeJobSummary({
   job,
@@ -38,14 +39,14 @@ export default function CreativeJobSummary({
               job={job}
               history={history}
             />
-            <HeaderTwo str={job.job.name} />
+            <HeaderTwo str={nameShortener(job.job.name, 30)} />
             <Meta
               str={`${timeDifferenceForDate(job.job.createdAt)} | ${
                 job.creator.name
               }`}
             />
             <Divider />
-            <Typography>{job.job.summary}</Typography>
+            <Typography noWrap={false}>{job.job.summary}</Typography>
             <Divider />
             <Divider />
             <HeaderThree str="Creative Summary" />

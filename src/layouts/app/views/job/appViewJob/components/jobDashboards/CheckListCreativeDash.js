@@ -19,6 +19,7 @@ import {
   ItemQuotePaid,
   ItemCreativePaid,
 } from './CheckListItems';
+import { nameShortener } from '../../../../../../../utils';
 
 export default function CheckListCreativeDash({
   declined,
@@ -70,7 +71,11 @@ export default function CheckListCreativeDash({
   return (
     <Column w={300} p={10}>
       <Widget p={10}>
-        <FieldTitleDashboard name={job.job.name} inline={false} a="c" />
+        <FieldTitleDashboard
+          name={nameShortener(job.job.name, 30)}
+          inline={false}
+          a="c"
+        />
         <Typography variant="h6" align="left"></Typography>
         <DividerMini />
         <CreatorComponentDash

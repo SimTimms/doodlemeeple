@@ -363,7 +363,7 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                                       title={TYPE_HELPER(type)}
                                       icon={
                                         job.keywords.indexOf(type) > -1
-                                          ? 'thumb_up'
+                                          ? 'local_post_office'
                                           : 'add'
                                       }
                                       color={
@@ -397,7 +397,7 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                                       title={TYPE_HELPER(type)}
                                       icon={
                                         job.keywords.indexOf(type) > -1
-                                          ? 'thumb_up'
+                                          ? 'local_post_office'
                                           : 'add'
                                       }
                                       color={
@@ -431,7 +431,7 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                                       title={TYPE_HELPER(type)}
                                       icon={
                                         job.keywords.indexOf(type) > -1
-                                          ? 'thumb_up'
+                                          ? 'local_post_office'
                                           : 'add'
                                       }
                                       color={

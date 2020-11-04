@@ -55,6 +55,10 @@ export const DEVELOPMENT_TYPES = [
   'translator',
   'play-tester',
 ];
+
+export function nameShortener(strIn, length) {
+  return strIn.length > length ? `${strIn.substring(0, length)}...` : strIn;
+}
 export function calculatePercent(paymentTermsArray, contractTotal, currency) {
   const totalInt = parseInt(contractTotal);
   let response = {

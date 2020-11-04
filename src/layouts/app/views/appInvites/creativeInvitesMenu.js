@@ -12,7 +12,7 @@ export default function CreativeInvitesMenu({ tabNbr, setTabNbr }) {
           text={{
             name: 'Invites',
             color: '#fff',
-            icon: 'thumb_up',
+            icon: 'local_post_office',
             count: 0,
           }}
           onClickEvent={() => {

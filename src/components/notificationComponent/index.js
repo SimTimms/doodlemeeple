@@ -44,7 +44,7 @@ export default function NotificationComponent({
                       [classes.notificationNeutral]: true,
                       [classes.notificationBad]:
                         notification.icon === 'request_quote' ||
-                        notification.icon === 'thumb_up',
+                        notification.icon === 'local_post_office',
                       [classes.notificationGood]:
                         notification.icon === 'thumb_down' ||
                         notification.icon === 'warning',

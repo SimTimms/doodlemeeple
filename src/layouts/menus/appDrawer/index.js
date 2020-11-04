@@ -100,7 +100,7 @@ export default function AppDrawer({
               link: () => history.push('/app/invites'),
               count:
                 counts.invites > 0
-                  ? { icon: 'thumb_up', count: counts.invites }
+                  ? { icon: 'local_post_office', count: counts.invites }
                   : { icon: 'mail', count: counts.messages },
             },
             {

@@ -24,7 +24,7 @@ export default function RequestCloseButton({ job, setTabNbr }) {
           <Meta str="Request to close this job early?" />
           <IconButton
             color="warning"
-            icon="thumb_up"
+            icon="local_post_office"
             title="Yes"
             onClickEvent={() => setCloseConfirm(true)}
             styleOverride={{ width: '100%' }}

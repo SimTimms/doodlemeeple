@@ -29,7 +29,7 @@ export default function Signature({ contractData, onAccept, onDecline }) {
                   <IconButton
                     title="I Accept"
                     color="primary"
-                    icon="thumb_up"
+                    icon="local_post_office"
                     disabled={false}
                     onClickEvent={() => {
                       mutation();

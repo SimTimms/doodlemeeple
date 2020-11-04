@@ -5,6 +5,7 @@ import { MenuButtonShortcut, Column, Row } from '../';
 import clsx from 'clsx';
 import { Mutation } from 'react-apollo';
 import { UPDATE_INVITE } from '../../data/mutations';
+import { nameShortener } from '../../utils';
 
 export default function InviteComponent({ invite, history }) {
   const classes = useStyles();
@@ -17,52 +18,62 @@ export default function InviteComponent({ invite, history }) {
   const completed = invite.job.submitted === 'complete';
 
   return (
-    <div style={{ width: '100%', cursor: 'pointer' }}>
-      <Column>
-        <Row j="space-between" a="center">
-          <Row a="center" j="flex-start">
-            <div
-              style={{
-                backgroundImage: `url(${invite.sender.profileImg})`,
-              }}
-              className={classes.profileThumb}
-            ></div>
-            <Column a="flex-start">
-              <Typography style={{ fontSize: 12 }}>
-                {`Invite from ${invite.sender.name} for ${invite.job.name}`}
-              </Typography>
-              <Typography
-                style={{ fontSize: 12 }}
-                className={clsx({
-                  [classes.dull]: true,
-                  [classes.red]: unopened || declined || rejected,
-                })}
-              >
-                {completed
-                  ? 'Completed'
-                  : declined
-                  ? 'Declined'
-                  : unopened
-                  ? 'Unread'
-                  : opened
-                  ? 'Opened'
-                  : quoted
-                  ? 'Quoted'
-                  : rejected
-                  ? 'Rejected'
-                  : accepted && 'Accepted'}
-              </Typography>
-            </Column>
-          </Row>
-          <Mutation
-            mutation={UPDATE_INVITE}
-            variables={{
-              status: 'read',
-              _id: invite._id,
+    <Mutation
+      mutation={UPDATE_INVITE}
+      variables={{
+        status: 'read',
+        _id: invite._id,
+      }}
+    >
+      {(mutation) => {
+        return (
+          <div
+            style={{ width: '100%', cursor: 'pointer' }}
+            onClick={() => {
+              invite.status === 'unopened' && mutation();
+              history.push(`/app/view-job/${invite.job._id}/${invite._id}`);
             }}
           >
-            {(mutation) => {
-              return (
+            <Column>
+              <Row j="space-between" a="center">
+                <Row a="center" j="flex-start">
+                  <div
+                    style={{
+                      backgroundImage: `url(${invite.sender.profileImg})`,
+                    }}
+                    className={classes.profileThumb}
+                  ></div>
+                  <Column a="flex-start">
+                    <Typography style={{ fontSize: 12 }}>
+                      {`Invite from ${invite.sender.name} for ${nameShortener(
+                        invite.job.name,
+                        30
+                      )}`}
+                    </Typography>
+                    <Typography
+                      style={{ fontSize: 12 }}
+                      className={clsx({
+                        [classes.dull]: true,
+                        [classes.red]: unopened || declined || rejected,
+                      })}
+                    >
+                      {completed
+                        ? 'Completed'
+                        : declined
+                        ? 'Declined'
+                        : unopened
+                        ? 'Unread'
+                        : opened
+                        ? 'Opened'
+                        : quoted
+                        ? 'Quoted'
+                        : rejected
+                        ? 'Rejected'
+                        : accepted && 'Accepted'}
+                    </Typography>
+                  </Column>
+                </Row>
+
                 <MenuButtonShortcut
                   text={{
                     name: '',
@@ -70,7 +81,7 @@ export default function InviteComponent({ invite, history }) {
                     icon: completed
                       ? ''
                       : unopened || opened || quoted || accepted
-                      ? 'star'
+                      ? 'local_post_office'
                       : '',
                     count: invite.messages,
                     back: completed
@@ -92,11 +103,11 @@ export default function InviteComponent({ invite, history }) {
                   active={false}
                   countIcon="star"
                 />
-              );
-            }}
-          </Mutation>
-        </Row>
-      </Column>
-    </div>
+              </Row>
+            </Column>
+          </div>
+        );
+      }}
+    </Mutation>
   );
 }
