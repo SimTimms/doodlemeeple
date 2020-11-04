@@ -192,7 +192,7 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                             <FieldBox
                               title="Project Title"
                               value={job.name}
-                              maxLength={90}
+                              maxLength={46}
                               placeholder="24 Fantasy Images for Card Game"
                               onChangeEvent={(e) => {
                                 autosave(mutation);
