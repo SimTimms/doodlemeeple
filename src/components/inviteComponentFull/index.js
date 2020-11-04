@@ -81,7 +81,7 @@ export default function InviteComponentFull({
             <MenuButtonShortcut
               text={{
                 name: '',
-                color: '#444',
+                color: '#FFF',
                 icon: 'chat',
                 count: 0,
                 back: '',

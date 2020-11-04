@@ -47,7 +47,7 @@ export function Row(props) {
 }
 
 export function RowCheckList(props) {
-  const { children, a, j, wrap, active } = props;
+  const { children, a, j, wrap, active, pointer, onClickEvent } = props;
   const align = a ? a : 'center';
   const justify = j ? j : 'center';
 
@@ -62,7 +62,9 @@ export function RowCheckList(props) {
         flexWrap: wrap,
         opacity: !active ? 0.3 : 1,
         height: 20,
+        cursor: pointer ? 'pointer' : 'default',
       }}
+      onClick={() => (onClickEvent ? onClickEvent() : null)}
     >
       {children}
     </div>

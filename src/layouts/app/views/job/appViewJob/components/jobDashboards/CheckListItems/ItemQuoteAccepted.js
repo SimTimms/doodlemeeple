@@ -20,7 +20,12 @@ export default function ItemQuoteAccepted({
   const someContracts = contracts.length > 0;
 
   return (
-    <RowCheckList j="space-between" active={true}>
+    <RowCheckList
+      j="space-between"
+      active={true}
+      onClickEvent={() => (activeContract ? setTabNbr(3) : setTabNbr(2))}
+      pointer={color === 2}
+    >
       <Column a="space-between">
         <Row j="flex-start" w={220}>
           <Typography
@@ -62,7 +67,7 @@ export default function ItemQuoteAccepted({
             ? 'warning'
             : '',
         }}
-        onClickEvent={() => (activeContract ? setTabNbr(3) : setTabNbr(2))}
+        onClickEvent={() => {}}
         active={false}
       />
     </RowCheckList>

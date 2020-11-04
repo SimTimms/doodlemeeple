@@ -177,9 +177,9 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                       id={'name'}
                       value={job.name}
                       label={`Job Name ${
-                        job.name ? `(${86 - job.name.length})` : ''
+                        job.name ? `(${46 - job.name.length})` : ''
                       }`}
-                      inputProps={{ maxLength: 86 }}
+                      inputProps={{ maxLength: 46 }}
                       onChange={(e) => {
                         setDisabledValue(true);
                         autosaveIsOn && autosave(mutation, 'image');
