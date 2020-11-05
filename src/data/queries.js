@@ -376,6 +376,16 @@ export const JOB_CHECKLIST = gql`
   }
 `;
 
+export const GET_STRIPE = gql`
+  {
+    getStripe {
+      object
+      details_submitted
+      payouts_enabled
+    }
+  }
+`;
+
 export const JOB_CREATIVE = gql`
   query GetJob($jobId: MongoID!) {
     jobChecklist(_id: $jobId) {

@@ -12,5 +12,8 @@ export const styles = makeStyles({
     padding: 20,
     boxSizing: 'border-box',
     width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
   },
 });

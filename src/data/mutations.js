@@ -42,7 +42,9 @@ export const MARK_AS_READ = gql`
 
 export const UPDATE_EMAIL = gql`
   mutation UpdateEmail($email: String!) {
-    updateEmail(email: $email)
+    userUpdateOne(record: { email: $email }) {
+      recordId
+    }
   }
 `;
 
