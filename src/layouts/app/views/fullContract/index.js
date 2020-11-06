@@ -1,7 +1,7 @@
 import React from 'react';
 import { Slide, Typography } from '@material-ui/core';
 import {
-  ContractComponentForCreator,
+  FullContractComponent,
   LoadIcon,
   Column,
 } from '../../../../components';
@@ -40,7 +40,7 @@ export default function FullContract({ history, contractId }) {
                 </Typography>
               ) : (
                 data && (
-                  <ContractComponentForCreator
+                  <FullContractComponent
                     contractData={contractData}
                     history={history}
                     readOnly={true}

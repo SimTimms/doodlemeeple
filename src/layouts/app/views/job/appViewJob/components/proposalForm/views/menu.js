@@ -32,6 +32,19 @@ export default function Menu({ tab }) {
       />
       <MenuButtonShortcut
         text={{
+          name: 'Contract',
+          color: '#222',
+          icon: 'request_quote',
+          count: 0,
+        }}
+        onClickEvent={() => {
+          tab.setTabNbr(3);
+        }}
+        active={tab.tabNbr === 3}
+        column={true}
+      />
+      <MenuButtonShortcut
+        text={{
           name: 'Submit',
           color: '#222',
           icon: 'check_circle',

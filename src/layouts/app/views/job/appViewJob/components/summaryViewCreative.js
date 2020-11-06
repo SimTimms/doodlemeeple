@@ -4,7 +4,7 @@ import { useStyles } from '../styles';
 import {
   Column,
   CreateQuoteButton,
-  ContractComponentForCreator,
+  FullContractComponent,
 } from '../../../../../../components';
 import { CreativeDashboard } from './jobDashboards/';
 import ChatView from '../components/chatView';
@@ -92,9 +92,7 @@ export default function SummaryViewCreative({ job, history }) {
             <PaymentsView job={{ jobData: jobData, setJobData: null }} />
           </Column>
         )}
-        {tabNbr === 7 && (
-          <ContractComponentForCreator contractData={job.contract} />
-        )}
+        {tabNbr === 7 && <FullContractComponent contractData={job.contract} />}
         {conversationUser && (
           <ChatView
             job={jobData}

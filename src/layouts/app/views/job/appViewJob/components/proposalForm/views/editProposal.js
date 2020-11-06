@@ -7,7 +7,7 @@ import {
   Paper,
   Column,
   Meta,
-  ContractComponentForCreator,
+  FullContractComponent,
   ContractSummaryForCreative,
   SubmitContractButton,
   IconButton,
@@ -110,7 +110,7 @@ export default function EditProposalForm({
                           menu={
                             <BorderBox w={300} mb={0}>
                               <Column>
-                                <Meta str="Continue to Confirmation" />
+                                <Meta str="Continue to Summary" />
                                 <IconButton
                                   title="Next"
                                   onClickEvent={() => setTabNbr(2)}
@@ -155,12 +155,13 @@ export default function EditProposalForm({
                             !lockSubmit && (
                               <BorderBox w={300}>
                                 {!percentLock.status && (
-                                  <Meta str="Submit this proposal to the client?" />
+                                  <Meta str="Is everything OK?" />
                                 )}
-                                <SubmitContractButton
-                                  contract={contractData}
-                                  setTabNbr={setTabNbr}
-                                  setContract={setContract}
+                                <IconButton
+                                  title="Continue"
+                                  icon="chevron_left"
+                                  onClickEvent={() => setTabNbr(3)}
+                                  color="primary"
                                 />
                               </BorderBox>
                             )
@@ -169,29 +170,19 @@ export default function EditProposalForm({
                       )}
                       {tabNbr === 3 && (
                         <div style={{ width: '100%' }}>
-                          <ContractComponentForCreator
+                          <FullContractComponent
                             contractData={contractData}
                             history={history}
                             setContract={setContract}
                           />
 
                           <BorderBox w={300}>
-                            {!percentLock.status && (
-                              <Meta str="Continue to Confirmation" />
-                            )}
-
-                            {percentLock.status && (
-                              <IconButton
-                                title="Adjust Milestones"
-                                icon=""
-                                iconPos="left"
-                                color="warning"
-                                onClickEvent={() => {
-                                  setTabNbr(1);
-                                }}
-                                styleOverride={{ width: '100%' }}
-                              />
-                            )}
+                            <Meta str="Submit to Client" />
+                            <SubmitContractButton
+                              contract={contractData}
+                              setTabNbr={setTabNbr}
+                              setContract={setContract}
+                            />
                           </BorderBox>
                         </div>
                       )}

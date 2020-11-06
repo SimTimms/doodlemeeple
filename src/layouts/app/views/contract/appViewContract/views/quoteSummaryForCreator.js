@@ -3,7 +3,7 @@ import {
   Paper,
   IconButton,
   ActionWrapper,
-  ContractComponentForCreator,
+  FullContractComponent,
   ContractSummaryForCreative,
   ProfileCardCreative,
   ProfileCardCreator,
@@ -114,7 +114,7 @@ export default function QuoteSummaryCreator({
           <ContractSummaryForCreative contractData={contractData} />
         )}
         {(openContract || contractData.status === 'paid') && (
-          <ContractComponentForCreator
+          <FullContractComponent
             contractData={contractData}
             setOpenContract={setOpenContract}
             setContractStatus={setContractStatus}

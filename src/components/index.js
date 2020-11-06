@@ -69,7 +69,7 @@ import ContractSummaryForCreative from './ContractSummaryForCreative';
 import ContractSummaryForCreator from './ContractSummaryForCreator';
 import PaymentSchedule from './paymentSchedule';
 import NoticeBox from './noticeBox';
-import { ContractComponentForCreator, Signature } from './contract';
+import { FullContractComponent, Signature } from './contract';
 import CardComponent from './cardComponent';
 import ProfileAvatar from './profileAvatar';
 import FeatureCard from './featureCard';
@@ -132,7 +132,7 @@ export {
   CheckListItem,
   SubmitContractButton,
   NoticeBox,
-  ContractComponentForCreator,
+  FullContractComponent,
   Paper,
   ViewContractButton,
   EditContractButton,

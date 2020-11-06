@@ -27,7 +27,7 @@ export default function Signature({ contractData, onAccept, onDecline }) {
               {(mutation) => {
                 return (
                   <IconButton
-                    title="I Accept"
+                    title="I Agree"
                     color="primary"
                     icon="local_post_office"
                     disabled={false}

@@ -5,6 +5,8 @@ import { useStyles } from './styles';
 import { REMOVE_NOTIFICATION_MUTATION } from '../../data/mutations';
 import { Mutation } from 'react-apollo';
 import { timeDifferenceForDate } from '../../utils/dates';
+import { nameShortener } from '../../utils';
+
 import clsx from 'clsx';
 import { MenuButtonShortcut } from '../';
 
@@ -61,7 +63,7 @@ export default function NotificationComponent({
                   </Typography>
                 </div>
                 <Typography color="textPrimary" component="p">
-                  {notification.message}
+                  {nameShortener(notification.message, 50)}
                 </Typography>
               </div>
             </div>

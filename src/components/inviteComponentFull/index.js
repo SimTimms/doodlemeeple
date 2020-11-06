@@ -6,7 +6,7 @@ import {
   Column,
   Row,
   ContractSummaryForCreator,
-  ContractComponentForCreator,
+  FullContractComponent,
   BorderBox,
   IconButton,
   Signature,
@@ -129,7 +129,7 @@ export default function InviteComponentFull({
                     )}
                     {tabNbrTwo === 1 && (
                       <BorderBox>
-                        <ContractComponentForCreator
+                        <FullContractComponent
                           contractData={data.contractById}
                         />
                         <Signature

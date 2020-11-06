@@ -14,7 +14,7 @@ export default function Notices({ status }) {
         status !== 'accepted' && (
           <NoticeBox
             title="Read Me"
-            subTitle={`Please read the following General Service Agreement and Click "I Agree" to appoint this creative.`}
+            subTitle={`Please read the following General Service Agreement and Click "I Agree" to continue.`}
             color="primary"
           />
         )

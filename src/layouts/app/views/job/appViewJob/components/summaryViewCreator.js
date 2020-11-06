@@ -4,7 +4,7 @@ import { useStyles } from '../styles';
 import {
   Column,
   BorderBox,
-  ContractComponentForCreator,
+  FullContractComponent,
   Signature,
 } from '../../../../../../components';
 import { CreatorDashboard } from './jobDashboards/';
@@ -70,7 +70,7 @@ export default function SummaryViewCreator({
         )}
         {tabNbr === 3 && (
           <BorderBox w={700}>
-            <ContractComponentForCreator
+            <FullContractComponent
               contractData={job.activeContract}
               job={job}
               history={history}

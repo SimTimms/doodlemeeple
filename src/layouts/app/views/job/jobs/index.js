@@ -37,7 +37,9 @@ export default function Jobs({ history, theme }) {
               <Query
                 query={JOBS}
                 fetchPolicy="network-only"
-                variables={{ status: ['draft', 'submitted', 'paid'] }}
+                variables={{
+                  status: ['draft', 'submitted', 'paid', 'accepted'],
+                }}
                 onCompleted={() => {
                   setLoading(false);
                 }}

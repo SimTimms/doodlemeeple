@@ -3,13 +3,9 @@ import { Typography } from '@material-ui/core';
 import { Divider } from '../';
 import { useStyles } from './styles';
 import Notices from './notices';
-import Signature from './signature';
 import moment from 'moment';
 
-export default function ContractComponentForCreator({
-  contractData,
-  ...props
-}) {
+export default function FullContractComponent({ contractData, ...props }) {
   let paymentTermsSum = contractData.cost;
   const classes = useStyles();
   const { readOnly } = props;
@@ -224,8 +220,12 @@ ${contractData.currency} `}
           <b>10. SIGNATURES:</b>
         </Typography>
         <Typography style={{ marginLeft: 40, paddingBottom: 10 }}>
-          <b>10.1</b> By clicking "I Accept" the Client will enter into a
-          binding contract with the Creative.
+          <b>10.1</b> By pressing "I Agree" you agree to abide by the terms of
+          this contract.
+        </Typography>
+        <Typography style={{ marginLeft: 40, paddingBottom: 10 }}>
+          <b>10.2</b> This contract becomes legally binding when both parties
+          have pressed the "I Agree" button.
         </Typography>
       </div>
     </div>

@@ -7,11 +7,13 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     padding: 15,
     boxSizing: 'border-box',
+    marginBottom: 20,
   },
   primary: {
     width: '100%',
-    background: theme.palette.primary.main,
-    color: '#fff',
+    border: `2px solid ${theme.palette.primary.main}`,
+    background: '#fff',
+    color: theme.palette.primary.main,
     textAlign: 'center',
   },
   warning: {
