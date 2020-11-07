@@ -5,6 +5,9 @@ import InvitesDash from './InvitesDash';
 import CreativeDash from './CreativeDash';
 import CheckListDash from './CheckListDash';
 import CheckListCreativeDash from './CheckListCreativeDash';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import clsx from 'clsx';
+import { useStyles } from './styles';
 
 export function CreativeDashboard({
   job,
@@ -46,9 +49,16 @@ export function CreatorDashboard({
   setTabNbr,
   history,
 }) {
+  const classes = useStyles();
+  const mobile = useMediaQuery('(max-width:800px)');
   return (
     <Column>
-      <Row a="flex-start">
+      <div
+        className={clsx({
+          [classes.desktop]: true,
+          [classes.mobile]: mobile,
+        })}
+      >
         <CheckListDash job={job} setTabNbr={setTabNbr} history={history} />
         <NotificationDash jobId={job._id} />
         {!job.activeContract && (
@@ -66,7 +76,7 @@ export function CreatorDashboard({
             job={job}
           />
         )}
-      </Row>
+      </div>
     </Column>
   );
 }

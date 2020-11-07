@@ -22,7 +22,7 @@ export default function EditContractButton({ contract, setContract, title }) {
           <IconButton
             title={title}
             icon="close"
-            color="warning"
+            color="primary"
             disabled={false}
             onClickEvent={() => {
               mutation();

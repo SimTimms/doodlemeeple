@@ -1,5 +1,7 @@
 import React from 'react';
 import { useStyles } from './styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import clsx from 'clsx';
 
 export function Column(props) {
   const { children, a, j, w, p } = props;
@@ -7,17 +9,21 @@ export function Column(props) {
   const width = w ? w : '100%';
   const justify = j ? j : 'center';
   const padding = p ? p : 0;
+  const classes = useStyles();
+  const mobile = useMediaQuery('(max-width:800px)');
 
   return (
     <div
       style={{
-        display: 'flex',
-        width: width,
-        flexDirection: 'column',
+        width: !mobile && width,
         alignItems: align,
         justifyContent: justify,
         padding,
       }}
+      className={clsx({
+        [classes.desktop]: true,
+        [classes.mobile]: mobile,
+      })}
     >
       {children}
     </div>

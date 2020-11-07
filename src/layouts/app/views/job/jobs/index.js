@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slide, Icon } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { JOBS } from '../../../../../data/queries';
@@ -33,7 +33,6 @@ export default function Jobs({ history, theme }) {
               icon="add"
             />
             <Column a="center" j="flex-start">
-              {loading && <LoadIcon />}
               <Query
                 query={JOBS}
                 fetchPolicy="network-only"
@@ -44,7 +43,7 @@ export default function Jobs({ history, theme }) {
                   setLoading(false);
                 }}
               >
-                {({ data }) => {
+                {({ data, loading }) => {
                   const activeJobs = data
                     ? data.jobsByUser.map((job, index) => {
                         return (
@@ -60,7 +59,9 @@ export default function Jobs({ history, theme }) {
                       })
                     : null;
 
-                  return activeJobs ? (
+                  return loading ? (
+                    <LoadIcon />
+                  ) : activeJobs ? (
                     activeJobs.length > 0 ? (
                       <Column a="center" j="flex-start">
                         <Divider />

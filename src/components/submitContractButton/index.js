@@ -24,7 +24,7 @@ export default function SubmitContractButton({
       {(mutation) => {
         return (
           <IconButton
-            title={`Submit`}
+            title={`I Agree`}
             icon="send"
             styleOverride={{ width: '100%' }}
             color="primary"
