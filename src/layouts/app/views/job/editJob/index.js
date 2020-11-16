@@ -49,7 +49,7 @@ export default function EditJob({ theme, jobId, history, favourites }) {
     creativeSummary: '',
     _id: 'new',
     gameId: '',
-    submitted: false,
+    submitted: '',
   });
   const [screen, setScreen] = React.useState(1);
 
@@ -73,7 +73,11 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                 name="Edit Project"
                 inline={false}
                 a="l"
-                menu={<DeleteButton mutation={mutation} str="" />}
+                menu={
+                  jobId !== 'new' ? (
+                    <DeleteButton mutation={mutation} str="" />
+                  ) : null
+                }
               />
             );
           }}
@@ -179,7 +183,7 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                   {job._id !== 'new' && (
                     <Card className={classes.card}>
                       <div style={{ padding: '10px 10px 0 10px' }}>
-                        {job.submitted && (
+                        {job.submitted && job.submitted !== 'draft' && (
                           <UnlockInfo str="This project has been submitted and can't be modified" />
                         )}
 
@@ -188,7 +192,7 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                             <FieldBox
                               title="Project Title"
                               value={job.name}
-                              maxLength={90}
+                              maxLength={46}
                               placeholder="24 Fantasy Images for Card Game"
                               onChangeEvent={(e) => {
                                 autosave(mutation);
@@ -359,7 +363,7 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                                       title={TYPE_HELPER(type)}
                                       icon={
                                         job.keywords.indexOf(type) > -1
-                                          ? 'thumb_up'
+                                          ? 'local_post_office'
                                           : 'add'
                                       }
                                       color={
@@ -393,7 +397,7 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                                       title={TYPE_HELPER(type)}
                                       icon={
                                         job.keywords.indexOf(type) > -1
-                                          ? 'thumb_up'
+                                          ? 'local_post_office'
                                           : 'add'
                                       }
                                       color={
@@ -427,7 +431,7 @@ export default function EditJob({ theme, jobId, history, favourites }) {
                                       title={TYPE_HELPER(type)}
                                       icon={
                                         job.keywords.indexOf(type) > -1
-                                          ? 'thumb_up'
+                                          ? 'local_post_office'
                                           : 'add'
                                       }
                                       color={

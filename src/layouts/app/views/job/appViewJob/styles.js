@@ -137,9 +137,7 @@ export const useStyles = makeStyles((theme) => ({
   wrapperTen: {
     padding: 10,
     boxSizing: 'border-box',
-    display: 'flex',
-    justifyContent: 'center',
-    background: '#efeff5',
+    background: 'rgba(0,0,0,0.6)',
     position: 'fixed',
     zIndex: 10,
     top: 0,

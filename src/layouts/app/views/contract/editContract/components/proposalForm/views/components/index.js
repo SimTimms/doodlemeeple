@@ -18,11 +18,11 @@ export function EditButton({ contract, jobId, setContract }) {
         currency: contract.currency,
         cost: contract.cost,
         jobId,
-        status: '',
+        status: 'read',
       }}
       onCompleted={(data) => {
         toaster('Editing');
-        setContract({ ...contract, status: '' });
+        setContract({ ...contract, status: null });
       }}
     >
       {(mutation) => {

@@ -9,6 +9,12 @@ import clsx from 'clsx';
 export default function JobComponent({ job, game, history }) {
   const classes = useStyles();
   const contractsArr = job.contracts.map((contract) => contract.user._id);
+  const contractsIn = job.contracts.length > 0;
+  const submitted = job.submitted === 'submitted';
+  const accepted = job.submitted === 'accepted';
+  const paid = job.submitted === 'paid';
+  const closed = job.submitted === 'closed';
+  const complete = job.submitted === 'complete';
 
   return (
     <CardComponent
@@ -49,23 +55,29 @@ export default function JobComponent({ job, game, history }) {
           className={clsx({
             [classes.cardSummaryNeutral]: true,
             [classes.cardSummary]: true,
-            [classes.cardSummaryWarning]: job.submitted === 'accepted',
-            [classes.cardSummaryGood]:
-              job.submitted === 'paid' || job.submitted === 'submitted',
+            [classes.cardSummaryWarning]: submitted || contractsIn,
+            [classes.cardSummaryGood]: paid || accepted,
           })}
         >
-          {job.submitted === 'submitted'
+          {complete
+            ? 'Completed'
+            : submitted
             ? 'Invites sent'
-            : job.submitted === 'closed'
+            : closed
             ? 'Closed'
-            : job.submitted === 'accepted'
+            : accepted
             ? 'Awaiting Payment'
-            : job.submitted === 'paid'
+            : paid
             ? 'Paid & Active'
+            : contractsIn
+            ? 'Quotes Received'
             : 'Draft'}
         </Typography>
       </div>
       {job.invites.map((invite, index) => {
+        const contractFromArray = contractsArr.indexOf(invite.receiver._id);
+        const thisContract = job.contracts[contractFromArray];
+        const thisStatus = thisContract ? thisContract.status : null;
         return !invite.receiver ? (
           <div
             className={classes.profileThumb}
@@ -89,13 +101,22 @@ export default function JobComponent({ job, game, history }) {
               {invite.status === 'declined' && (
                 <div className={classes.declined}></div>
               )}
-              {contractsArr.indexOf(invite.receiver._id) > -1 && (
+              {contractFromArray > -1 && thisStatus === 'submitted' && (
                 <Typography
                   variant="body1"
                   component="p"
                   className={classes.countsStyle}
                 >
-                  1
+                  <Icon style={{ fontSize: 10 }}>star</Icon>
+                </Typography>
+              )}
+              {invite.messages > 0 && (
+                <Typography
+                  variant="body1"
+                  component="p"
+                  className={classes.countsStyle}
+                >
+                  <Icon style={{ fontSize: 10 }}>mail</Icon>
                 </Typography>
               )}
             </div>
@@ -103,24 +124,5 @@ export default function JobComponent({ job, game, history }) {
         );
       })}
     </CardComponent>
-  );
-}
-
-export function EmptyJobComponent() {
-  const classes = useStyles();
-  return (
-    <Link to={`/app/edit-job/new`} className={classes.cardLink}>
-      <div className={classes.flexCenter}>
-        <Icon style={{ fontSize: 32, color: '#444' }}>add_circle</Icon>
-        <Typography
-          variant="body1"
-          component="p"
-          style={{ width: '100%', paddingLeft: 10, color: '#444' }}
-          className={classes.cardSummary}
-        >
-          Create a Brief
-        </Typography>
-      </div>
-    </Link>
   );
 }

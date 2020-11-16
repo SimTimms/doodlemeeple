@@ -7,7 +7,7 @@ import {
   Paper,
   Column,
   Meta,
-  ContractComponentForCreator,
+  FullContractComponent,
   ContractSummaryForCreative,
   SubmitContractButton,
   IconButton,
@@ -23,11 +23,9 @@ import { Mutation } from 'react-apollo';
 import { UPDATE_CONTRACT } from '../../../../../../../../data/mutations';
 
 export default function EditProposalForm({
-  jobId,
   contractData,
   setContract,
   history,
-  setTabNbr,
 }) {
   const classes = useStyles();
 
@@ -38,7 +36,7 @@ export default function EditProposalForm({
   });
   const [detailsLock, setDetailsLock] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  const [page, setPage] = React.useState(0);
+  const [tabNbr, setTabNbr] = React.useState(0);
   const [lockSubmit, setLockSubmit] = React.useState(true);
   useEffect(() => {
     const { cost, paymentTerms, currency, notes } = contractData;
@@ -77,9 +75,9 @@ export default function EditProposalForm({
                 {(mutation) => {
                   return (
                     <div className={classes.root}>
-                      <Menu />
+                      <Menu tab={{ tabNbr: tabNbr, setTabNbr: setTabNbr }} />
                       <Divider />
-                      {page === 0 && (
+                      {tabNbr === 0 && (
                         <QuoteDetails
                           setContract={setContract}
                           contract={contractData}
@@ -89,7 +87,7 @@ export default function EditProposalForm({
                               <Meta str="Continue onto payment & milestones" />
                               <IconButton
                                 title="Next"
-                                onClickEvent={() => setPage(1)}
+                                onClickEvent={() => setTabNbr(1)}
                                 styleOverride={{ width: '100%' }}
                                 icon="chevron_right"
                                 iconPos="right"
@@ -99,7 +97,7 @@ export default function EditProposalForm({
                         />
                       )}
 
-                      {page === 1 && (
+                      {tabNbr === 1 && (
                         <PaymentTerms
                           percentLock={percentLock}
                           setPercentLock={setPercentLock}
@@ -112,10 +110,10 @@ export default function EditProposalForm({
                           menu={
                             <BorderBox w={300} mb={0}>
                               <Column>
-                                <Meta str="Continue to Confirmation" />
+                                <Meta str="Continue to Summary" />
                                 <IconButton
                                   title="Next"
-                                  onClickEvent={() => setPage(2)}
+                                  onClickEvent={() => setTabNbr(2)}
                                   styleOverride={{ width: '100%' }}
                                   icon="chevron_right"
                                   iconPos="right"
@@ -125,7 +123,7 @@ export default function EditProposalForm({
                                   icon=""
                                   color="text-dark"
                                   onClickEvent={() => {
-                                    setPage(0);
+                                    setTabNbr(0);
                                   }}
                                   styleOverride={{ margin: 0, padding: 0 }}
                                 />
@@ -134,7 +132,7 @@ export default function EditProposalForm({
                           }
                         />
                       )}
-                      {page === 2 && (
+                      {tabNbr === 2 && (
                         <div style={{ width: '100%' }}>
                           <ContractSummaryForCreative
                             contractData={contractData}
@@ -145,7 +143,7 @@ export default function EditProposalForm({
                               <IconButton
                                 title="Go back and complete"
                                 icon="chevron_left"
-                                onClickEvent={() => setPage(0)}
+                                onClickEvent={() => setTabNbr(0)}
                                 color="primary"
                               />
                             </Column>
@@ -157,44 +155,34 @@ export default function EditProposalForm({
                             !lockSubmit && (
                               <BorderBox w={300}>
                                 {!percentLock.status && (
-                                  <Meta str="Submit this proposal to the client?" />
+                                  <Meta str="Is everything OK?" />
                                 )}
-
-                                <SubmitContractButton
-                                  contract={contractData}
-                                  setTabNbr={setTabNbr}
-                                  setContract={setContract}
+                                <IconButton
+                                  title="Continue"
+                                  icon="chevron_left"
+                                  onClickEvent={() => setTabNbr(3)}
+                                  color="primary"
                                 />
                               </BorderBox>
                             )
                           )}
                         </div>
                       )}
-                      {page === 3 && (
+                      {tabNbr === 3 && (
                         <div style={{ width: '100%' }}>
-                          <ContractComponentForCreator
+                          <FullContractComponent
                             contractData={contractData}
                             history={history}
                             setContract={setContract}
                           />
 
                           <BorderBox w={300}>
-                            {!percentLock.status && (
-                              <Meta str="Continue to Confirmation" />
-                            )}
-
-                            {percentLock.status && (
-                              <IconButton
-                                title="Adjust Milestones"
-                                icon=""
-                                iconPos="left"
-                                color="warning"
-                                onClickEvent={() => {
-                                  setPage(1);
-                                }}
-                                styleOverride={{ width: '100%' }}
-                              />
-                            )}
+                            <Meta str="Submit to Client" />
+                            <SubmitContractButton
+                              contract={contractData}
+                              setTabNbr={setTabNbr}
+                              setContract={setContract}
+                            />
                           </BorderBox>
                         </div>
                       )}

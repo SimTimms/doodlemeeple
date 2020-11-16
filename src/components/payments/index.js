@@ -43,6 +43,7 @@ export default function Payments({ data, type }) {
                     className={clsx({
                       [classes.paymentStatus]: true,
                       [classes.good]: payment.status === 'charge_succeeded',
+                      [classes.red]: payment.status === 'Incomplete',
                     })}
                   >{`${
                     payment.status === 'charge_succeeded'

@@ -19,7 +19,7 @@ export default function InviteButton({ mutation, invite, disabled }) {
       onClickEvent={() => {
         mutation();
       }}
-      icon={disabled ? '' : on ? 'thumb_up' : ''}
+      icon={disabled ? '' : on ? 'local_post_office' : ''}
     />
     /*
     <Button
@@ -33,7 +33,7 @@ export default function InviteButton({ mutation, invite, disabled }) {
           ? toaster('5 Invites Max')
           : toaster(
               !on ? (
-                <Icon className={classes.iconOn}>thumb_up</Icon>
+                <Icon className={classes.iconOn}>local_post_office</Icon>
               ) : (
                 'Invite Cancelled'
               )

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStyles } from './styles';
-import { Row, Divider, PaymentSchedule } from '../';
+import { Row, Divider, PaymentSchedule, FieldTitleDashboard } from '../';
 import moment from 'moment';
 import { Typography } from '@material-ui/core';
 
@@ -9,9 +9,7 @@ export default function ContractSummaryForCreative({ contractData }) {
   const { job } = contractData;
   return (
     <div className={classes.root}>
-      <Typography variant="h4" className={classes.alignLeftOnly}>
-        About The Job
-      </Typography>
+      <FieldTitleDashboard name="About the Job" inline={false} />
       <Divider />
       <Row j="flex-start">
         <Typography className={classes.alignLeft}>{`Name: `}</Typography>
@@ -43,9 +41,7 @@ export default function ContractSummaryForCreative({ contractData }) {
       </Row>
       <Divider />
       <Divider />
-      <Typography variant="h4" className={classes.alignLeftOnly}>
-        Creative Terms
-      </Typography>
+      <FieldTitleDashboard name="Creative's Terms" inline={false} />
       <Divider />
       <Row j="flex-start" a="flex-start">
         <Typography className={classes.alignLeft}>{`Total Cost: `}</Typography>
@@ -83,9 +79,7 @@ export default function ContractSummaryForCreative({ contractData }) {
       </Row>
       <Divider />
       <Divider />
-      <Typography variant="h4" className={classes.alignLeftOnly}>
-        Payment Schedule
-      </Typography>
+      <FieldTitleDashboard name="Payment Schedule" inline={false} />
       <Divider />
       <PaymentSchedule contractData={contractData} isClient={false} />
     </div>

@@ -8,6 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     flexDirection: 'column',
   },
+  dull: { color: '#aaa' },
   red: { color: theme.palette.error.main },
   green: { color: theme.palette.secondary.main },
   countsStyle: {

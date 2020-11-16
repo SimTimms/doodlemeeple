@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, useMediaQuery } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Column, Row, IconButton, LoadIcon, Divider } from '../';
 import { Mutation, Query } from 'react-apollo';
@@ -19,21 +19,21 @@ export default function NoticeBoard({
   const classes = useStyles();
   const [loadingStripe, setLoadingStripe] = React.useState(false);
   const [skip, setSkip] = React.useState(false);
-
+  const mobile = useMediaQuery('(max-width:800px)');
   return (
     <div className={classes.root}>
       <Row>
         {profile.onboarding !== 'complete' && !profile.profileBG && !skip ? (
           <Column>
             <Divider />
-            <Typography variant="h5" style={{ color: '#fff' }}>
-              Welcome to DoodleMeeple, let's get started
+            <Typography variant="h5" style={{ color: '#fff' }} align="center">
+              Welcome to DoodleMeeple
             </Typography>
             <IconButton
               title="Create a Profile"
               color="text-white"
-              icon="contact_mail"
-              styleOverride={{ marginBottom: 0 }}
+              icon="face"
+              styleOverride={{ marginBottom: 20, marginTop: 20 }}
               onClickEvent={() => history.push('/app/edit-profile/')}
             />
             <Mutation mutation={SKIP_ONBOARDING}>
@@ -142,24 +142,41 @@ export default function NoticeBoard({
                             Please Wait
                           </Typography>
                         ) : (
-                          <img
-                            src={stripeButton}
-                            style={{
-                              width: 200,
-                              marginTop: 20,
-                              cursor: 'pointer',
-                            }}
-                            alt=""
-                            onClick={() => {
-                              requestStripe();
-                              setLoadingStripe(true);
-                            }}
-                          />
+                          <Column>
+                            <img
+                              src={stripeButton}
+                              style={{
+                                width: 200,
+                                marginTop: 20,
+                                cursor: 'pointer',
+                              }}
+                              alt=""
+                              onClick={() => {
+                                requestStripe();
+                                setLoadingStripe(true);
+                              }}
+                            />
+                            <a
+                              href="https://doodlemeeple.com/connecting-with-stripe"
+                              target="_blank"
+                              style={{
+                                textDecoration: 'none',
+                                color: 'rgba(255,255,255,0.5)',
+                                marginTop: 5,
+                              }}
+                            >
+                              <Typography variant="body1">Read More</Typography>
+                            </a>
+                          </Column>
                         )}
                       </Column>
                     ) : (
                       <Column>
-                        <Typography variant="h4" style={{ color: '#fff' }}>
+                        <Typography
+                          variant="h4"
+                          style={{ color: '#fff' }}
+                          align="center"
+                        >
                           Welcome to DoodleMeeple
                         </Typography>
                         <IconButton
@@ -188,70 +205,73 @@ export default function NoticeBoard({
                         />
                       </Column>
                     )}
-
-                    <Column>
-                      <div
-                        style={{
-                          minWidth: 300,
-                          maxWidth: 300,
-                          minHeight: 300,
-                          maxHeight: 300,
-                          background: `url(${media})`,
-                          backgroundSize: 'contain',
-                          backgroundRepeat: 'no-repeat',
-                        }}
-                      ></div>
-                      <img
-                        src={data.userById ? data.userById.profileImg : device}
-                        alt=""
-                        style={{
-                          minWidth: 80,
-                          maxWidth: 80,
-                          minHeight: 80,
-                          maxHeight: 80,
-                          padding: 3,
-                          marginTop: -120,
-                          borderRadius: '50%',
-                          backgroundColor: '#fff',
-                          boxShadow: '5px 5px 10px rgba(0,0,0,0.2)',
-                        }}
-                      />
-                      <Typography variant="h6" style={{ color: '#fff' }}>
-                        {title}
-                      </Typography>
-                      <Row>
-                        <IconButton
-                          color="text-white-mini"
-                          disabled={false}
-                          onClickEvent={() => {
-                            history.push(
-                              `/app/public-preview/${featuredArticle.id}`
-                            );
+                    {!mobile && (
+                      <Column>
+                        <div
+                          style={{
+                            minWidth: 300,
+                            maxWidth: 300,
+                            minHeight: 300,
+                            maxHeight: 300,
+                            background: `url(${media})`,
+                            backgroundSize: 'contain',
+                            backgroundRepeat: 'no-repeat',
                           }}
-                          icon=""
-                          title="profile"
-                          styleOverride={null}
-                          type="button"
-                          iconPos="right"
+                        ></div>
+                        <img
+                          src={
+                            data.userById ? data.userById.profileImg : device
+                          }
+                          alt=""
+                          style={{
+                            minWidth: 80,
+                            maxWidth: 80,
+                            minHeight: 80,
+                            maxHeight: 80,
+                            padding: 3,
+                            marginTop: -120,
+                            borderRadius: '50%',
+                            backgroundColor: '#fff',
+                            boxShadow: '5px 5px 10px rgba(0,0,0,0.2)',
+                          }}
                         />
-                        <a
-                          href={linkTo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ textDecoration: 'none' }}
-                        >
+                        <Typography variant="h6" style={{ color: '#fff' }}>
+                          {title}
+                        </Typography>
+                        <Row>
                           <IconButton
                             color="text-white-mini"
                             disabled={false}
-                            onClickEvent={() => {}}
+                            onClickEvent={() => {
+                              history.push(
+                                `/app/public-preview/${featuredArticle.id}`
+                              );
+                            }}
                             icon=""
-                            title="article"
+                            title="profile"
                             styleOverride={null}
                             type="button"
+                            iconPos="right"
                           />
-                        </a>
-                      </Row>
-                    </Column>
+                          <a
+                            href={linkTo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ textDecoration: 'none' }}
+                          >
+                            <IconButton
+                              color="text-white-mini"
+                              disabled={false}
+                              onClickEvent={() => {}}
+                              icon=""
+                              title="article"
+                              styleOverride={null}
+                              type="button"
+                            />
+                          </a>
+                        </Row>
+                      </Column>
+                    )}
                   </Row>
                 ) : (
                   <LoadIcon />

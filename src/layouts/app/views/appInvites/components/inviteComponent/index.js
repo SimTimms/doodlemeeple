@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton, FeatureCardInvite } from '../../../../../../components';
 import { Mutation } from 'react-apollo';
-import { UPDATE_INVITE } from '../../../../../../data/mutations';
+import { DECLINE_INVITE } from '../../../../../../data/mutations';
 
 export function InviteComponent({ invite, removeInvite, history }) {
   return (
@@ -9,13 +9,12 @@ export function InviteComponent({ invite, removeInvite, history }) {
       <FeatureCardInvite
         thumbnail={invite.sender.profileImg}
         job={invite.job.name}
-        summary={invite.job.summary}
         author={invite.sender.name}
         authorId={invite.sender._id}
         history={history}
         buttonOne={
           <Mutation
-            mutation={UPDATE_INVITE}
+            mutation={DECLINE_INVITE}
             variables={{
               _id: invite._id,
             }}

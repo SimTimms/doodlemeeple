@@ -26,7 +26,28 @@ export default function AppHelp({ history }) {
             <Meta str="We'd love to hear from you" />
             <Divider />
             <Typography
-              variant="h6"
+              variant="body1"
+              color="textPrimary"
+              style={{ textAlign: 'center' }}
+              gutterBottom
+            >
+              Visit our FAQ page for answers to some of the most common
+              questions:
+              <a href="https://doodlemeeple.com/faq" style={{ color: '#444' }}>
+                {' '}
+                https://doodlemeeple.com/faq
+              </a>
+            </Typography>
+            <Typography
+              variant="body1"
+              color="textPrimary"
+              style={{ textAlign: 'center' }}
+              gutterBottom
+            >
+              or email us directly
+            </Typography>
+            <Typography
+              variant="body1"
               color="textPrimary"
               style={{ textAlign: 'center' }}
               gutterBottom
@@ -36,7 +57,7 @@ export default function AppHelp({ history }) {
               </a>
             </Typography>
             <Typography
-              variant="h6"
+              variant="body1"
               color="textPrimary"
               style={{ textAlign: 'center' }}
               gutterBottom

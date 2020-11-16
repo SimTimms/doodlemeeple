@@ -1,36 +1,24 @@
 import React from 'react';
-import { Card, Typography, Slide, TextField } from '@material-ui/core';
+import { Typography, Slide, TextField } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   ErrorBox,
   Column,
   BorderBox,
   IconButton,
+  Paper,
+  FieldTitleDashboard,
+  Divider,
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
-import { PROFILE } from '../../../../data/queries';
+import { PROFILE, GET_STRIPE } from '../../../../data/queries';
 import stripeButton from '../../../../assets/stripe_button.png';
-import { UPDATE_EMAIL, DELETE_ACCOUNT } from '../../../../data/mutations';
-import { readableErrors } from '../../../../utils/readableErrors';
-import { toaster } from '../../../../utils/toaster';
-import { validate } from 'email-validator';
+import { DELETE_ACCOUNT } from '../../../../data/mutations';
 import Cookies from 'js-cookie';
 import { requestStripe } from '../../../../utils/stripe';
+import { SaveButton } from './components';
 
 export function Account({ history }) {
-  function submitChecks(mutation) {
-    let passed = true;
-
-    const emailPass = validate(email);
-    !emailPass && (passed = false);
-
-    setError({
-      email: !emailPass ? 'Valid email require' : null,
-    });
-
-    passed && mutation();
-  }
-
   const classes = useStyles();
   const [email, setEmail] = React.useState('');
   const [confirm, setConfirm] = React.useState(false);
@@ -54,120 +42,117 @@ export function Account({ history }) {
         </Query>
 
         <div className={classes.root}>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              alignItems: 'center',
-            }}
-          >
-            <Mutation
-              mutation={UPDATE_EMAIL}
-              variables={{
-                email,
+          <Paper pt={10}>
+            <FieldTitleDashboard name="Details" inline={false} a="c" />
+            <TextField
+              id={'email'}
+              label={`Email ${email ? `(${256 - email.length})` : ''}`}
+              inputProps={{ maxLength: 256 }}
+              type="text"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value.substring(0, 256));
               }}
-              onError={(error) => {
-                setError(readableErrors(error, errors));
+              margin="normal"
+              variant="outlined"
+              style={{ width: '100%' }}
+            />
+            <ErrorBox errorMsg={errors.email} />
+            <SaveButton email={email} errors={errors} setError={setError} />
+          </Paper>
+          <Paper pt={10}>
+            <FieldTitleDashboard name="Stripe" inline={false} a="c" />
+            <Divider />
+            <Query query={GET_STRIPE} fetchPolicy="network-only">
+              {({ data }) => {
+                console.log(data);
+                return data ? (
+                  data.getStripe.object !== 'account' ? (
+                    <img
+                      src={stripeButton}
+                      onClick={() => {
+                        requestStripe(history);
+                      }}
+                      style={{ width: 200 }}
+                      alt=""
+                    />
+                  ) : (
+                    !data.getStripe.payouts_enabled && (
+                      <Column>
+                        <Typography className={classes.status}>
+                          Your Stripe account hasn't been verified, please login
+                          to your Stripe dashboard to continue.
+                        </Typography>
+                        <Divider />
+                        <a href="https://dashboard.stripe.com/login">
+                          <Typography>Login to Stripe</Typography>
+                        </a>
+                      </Column>
+                    )
+                  )
+                ) : null;
               }}
-              onCompleted={() => {
-                toaster('Autosave');
+            </Query>
+          </Paper>
+          <Paper pt={10}>
+            <FieldTitleDashboard
+              name="Delete Account Permanently"
+              inline={false}
+              a="c"
+            />
+            <Divider />
+            <IconButton
+              onClickEvent={() => {
+                setConfirm(true);
               }}
-            >
-              {(mutation) => {
-                return (
+              icon="delete"
+              title="Delete"
+              color="primary"
+            />
+            {confirm && (
+              <BorderBox>
+                <Column>
+                  <Typography>
+                    This action will delete your account and all uploaded media.
+                    This is irreversible. Are you sure you want to continue?
+                  </Typography>
+                  <Mutation
+                    mutation={DELETE_ACCOUNT}
+                    onCompleted={() => {
+                      Cookies.remove('token');
+                      history.push('/deleted');
+                    }}
+                    onError={() => {
+                      Cookies.remove('token');
+                      history.push('/deleted');
+                    }}
+                  >
+                    {(mutation) => {
+                      return (
+                        <IconButton
+                          onClickEvent={() => {
+                            mutation();
+                          }}
+                          icon="warning"
+                          title="Confirm"
+                          color="warning"
+                        />
+                      );
+                    }}
+                  </Mutation>
                   <IconButton
                     onClickEvent={() => {
-                      submitChecks(mutation);
+                      setConfirm(false);
                     }}
-                    icon="save"
-                    title="Save"
-                    color="primary"
-                    style={{ margin: 10 }}
+                    icon="cancel"
+                    title="Cancel"
+                    color="text-dark"
+                    styleOverride={{ margin: 0 }}
                   />
-                );
-              }}
-            </Mutation>
-          </div>
-          <Card className={classes.card}>
-            <div style={{ padding: 10 }}>
-              <img
-                src={stripeButton}
-                onClick={() => {
-                  requestStripe(history);
-                }}
-                style={{ width: 200 }}
-                alt=""
-              />
-              <TextField
-                id={'email'}
-                label={`Email ${email ? `(${256 - email.length})` : ''}`}
-                inputProps={{ maxLength: 256 }}
-                type="text"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value.substring(0, 256));
-                }}
-                margin="normal"
-                variant="outlined"
-                style={{ width: '100%' }}
-              />
-
-              <ErrorBox errorMsg={errors.email} />
-              <IconButton
-                onClickEvent={() => {
-                  setConfirm(true);
-                }}
-                icon="delete"
-                title="Delete"
-                color="warning"
-              />
-
-              {confirm && (
-                <BorderBox>
-                  <Column>
-                    <Typography>
-                      This action will delete your account and all uploaded
-                      media. This is irreversible. Are you sure you want to
-                      continue?
-                    </Typography>
-                    <Mutation
-                      mutation={DELETE_ACCOUNT}
-                      onCompleted={() => {
-                        Cookies.remove('token');
-                        history.push('/deleted');
-                      }}
-                      onError={() => {
-                        Cookies.remove('token');
-                        history.push('/deleted');
-                      }}
-                    >
-                      {(mutation) => {
-                        return (
-                          <IconButton
-                            onClickEvent={() => {
-                              mutation();
-                            }}
-                            icon="warning"
-                            title="Confirm"
-                            color="warning"
-                          />
-                        );
-                      }}
-                    </Mutation>
-                    <IconButton
-                      onClickEvent={() => {
-                        setConfirm(false);
-                      }}
-                      icon="cancel"
-                      title="Cancel"
-                      color="text-dark"
-                      styleOverride={{ margin: 0 }}
-                    />
-                  </Column>
-                </BorderBox>
-              )}
-            </div>
-          </Card>
+                </Column>
+              </BorderBox>
+            )}
+          </Paper>
         </div>
       </div>
     </Slide>

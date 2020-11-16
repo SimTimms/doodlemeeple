@@ -88,29 +88,20 @@ export default function AppDashboard({ history, profile, setProfile }) {
                 [classes.columnMobile]: mobile,
               })}`}
             >
-              <FieldTitleDashboard name="Notifications" inline={false} />
+              <FieldTitleDashboard name="Notifications" inline={false} a="c" />
               <Divider />
               <Notifications />
             </div>
+            {mobile && <Divider />}
             <div
               className={`${clsx({
                 [classes.columnRight]: true,
                 [classes.columnMobile]: mobile,
               })}`}
             >
-              <FieldTitleDashboard name="Updates" inline={false} />
+              <FieldTitleDashboard name="Updates" inline={false} a="c" />
               <Divider />
               <Posts posts={posts ? posts : []} />
-              {/*
-              <Divider />
-              <FieldTitleDashboard name="Featured Artist" inline={false} />
-              <Divider />
-            
-              <FeaturedMini
-                posts={featuredArticle.article ? featuredArticle.article : []}
-                featuredId={featuredArticle.id}
-                history={history}
-            />*/}
             </div>
           </div>
         </div>

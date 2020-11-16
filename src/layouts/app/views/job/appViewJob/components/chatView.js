@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStyles } from '../styles';
-import { IconButton } from '../../../../../../components';
+import { IconButton, Row } from '../../../../../../components';
 import ViewConversation from '../../../../../messages/views/messaging/viewConversation';
 import { Query } from 'react-apollo';
 import { GET_MESSAGES } from '../../../../../../data/queries';
@@ -36,22 +36,49 @@ export default function ChatView({
       {({ data }) => {
         return data ? (
           <div className={classes.wrapperTen}>
-            <IconButton
-              title="Close"
-              icon=""
-              iconPos="right"
-              color="warning"
-              type="button"
-              styleOverride={{
-                top: 60,
+            <div
+              style={{
                 position: 'fixed',
+                width: '100%',
+                background: '#fff',
+                top: 0,
                 zIndex: 10,
               }}
-              disabled={false}
-              onClickEvent={() => {
-                setConversationUser(null);
-              }}
-            />
+            >
+              <Row>
+                <IconButton
+                  icon="close"
+                  title=""
+                  iconPos="right"
+                  color="text-mini"
+                  styleOverride={{
+                    zIndex: 10,
+                  }}
+                  onClickEvent={() => {
+                    setConversationUser(null);
+                  }}
+                />
+                <IconButton
+                  icon="more_horiz"
+                  title=""
+                  iconPos="right"
+                  color="text-mini"
+                  onClickEvent={() => {
+                    setPageNbr(pageNbr + 1);
+                  }}
+                />
+                <IconButton
+                  icon="refresh"
+                  title=""
+                  iconPos="right"
+                  color="text-mini"
+                  onClickEvent={() => {
+                    setMessages([]);
+                    setRefreshCount(refreshCount + 1);
+                  }}
+                />
+              </Row>
+            </div>
             {conversationUser && (
               <ViewConversation
                 history={history}

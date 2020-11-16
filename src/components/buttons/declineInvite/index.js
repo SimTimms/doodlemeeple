@@ -11,7 +11,7 @@ export default function DeclineInvite({ inviteId, onCompleted }) {
     <Mutation
       mutation={DECLINE_INVITE}
       variables={{
-        id: inviteId,
+        _id: inviteId,
       }}
       onCompleted={() => {
         onCompleted && onCompleted();
@@ -22,7 +22,7 @@ export default function DeclineInvite({ inviteId, onCompleted }) {
           <LoadIcon />
         ) : !confirm ? (
           <IconButton
-            color="warning"
+            color="primary"
             icon="thumb_down"
             title="Decline"
             onClickEvent={() => {
@@ -34,7 +34,7 @@ export default function DeclineInvite({ inviteId, onCompleted }) {
         ) : (
           <IconButton
             color="warning"
-            icon="thumb_down"
+            icon="warning"
             title="Confirm"
             onClickEvent={() => {
               setLoading(true);

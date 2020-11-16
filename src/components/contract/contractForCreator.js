@@ -3,18 +3,13 @@ import { Typography } from '@material-ui/core';
 import { Divider } from '../';
 import { useStyles } from './styles';
 import Notices from './notices';
-import Signature from './signature';
 import moment from 'moment';
 
-export default function ContractComponentForCreator({
-  contractData,
-  history,
-  setContract,
-  ...props
-}) {
+export default function FullContractComponent({ contractData, ...props }) {
   let paymentTermsSum = contractData.cost;
   const classes = useStyles();
-  const { setOpenContract, setContractStatus, readOnly } = props;
+  const { readOnly } = props;
+  const job = contractData.job;
 
   return (
     <div style={{ width: '100%' }}>
@@ -38,7 +33,7 @@ export default function ContractComponentForCreator({
         </Typography>*/}
         <Typography>
           <b>Project:</b>
-          {` ${contractData.job.name} `}
+          {` ${job.name} `}
           {/*
           <span
             className={classes.id}
@@ -46,7 +41,7 @@ export default function ContractComponentForCreator({
         </Typography>
         <Typography>
           <b>Client:</b>
-          {` ${contractData.job.user.name}`}
+          {` ${job.user.name}`}
           {/*
           <span className={classes.id}>
           {` (DMID-${contractData.job.user._id})`}
@@ -86,8 +81,8 @@ export default function ContractComponentForCreator({
           Client with the following services (the "Services"):
         </Typography>
         <Typography style={{ marginLeft: 40, marginTop: 20 }}>
-          <b>{contractData.job.name}</b>
-          {` ${contractData.job.summary}`}
+          <b>{job.name}</b>
+          {` ${job.summary}`}
         </Typography>
         <Divider />
         <Typography>
@@ -225,19 +220,13 @@ ${contractData.currency} `}
           <b>10. SIGNATURES:</b>
         </Typography>
         <Typography style={{ marginLeft: 40, paddingBottom: 10 }}>
-          <b>10.1</b> By clicking "I Accept" the Client will enter into a
-          binding contract with the Creative.
+          <b>10.1</b> By pressing "I Agree" you agree to abide by the terms of
+          this contract.
         </Typography>
-        {!readOnly && (
-          <Signature
-            status={contractData.status}
-            setOpenContract={setOpenContract}
-            setContractStatus={setContractStatus}
-            contractData={contractData}
-            history={history}
-            setContract={setContract}
-          />
-        )}
+        <Typography style={{ marginLeft: 40, paddingBottom: 10 }}>
+          <b>10.2</b> This contract becomes legally binding when both parties
+          have pressed the "I Agree" button.
+        </Typography>
       </div>
     </div>
   );

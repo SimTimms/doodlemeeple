@@ -9,9 +9,15 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'flex-end',
     flexDirection: 'column',
   },
-  card: { maxWidth: 712, width: '100%' },
   title: {
     fontSize: 14,
+  },
+  status: {
+    background: theme.palette.error.main,
+    padding: 10,
+    color: '#fff',
+    borderRadius: 5,
+    textAlign: 'center',
   },
   iconButton: {
     cursor: 'pointer',

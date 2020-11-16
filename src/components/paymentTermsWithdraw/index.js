@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import PayoutButton from './payoutButton';
 import ApproveButton from './approveButton';
-export default function PaymentTermsWithdraw({ data, isCreator }) {
+export default function PaymentTermsWithdraw({ data, isCreator, isFunded }) {
   return (
     <TableContainer>
       <Table aria-label="simple table">
@@ -32,9 +32,7 @@ export default function PaymentTermsWithdraw({ data, isCreator }) {
                 </TableCell>
                 <TableCell align="right">
                   {payment.paid === 'success' && <div>PAID OUT</div>}
-                  {isCreator &&
-                  payment.paid !== 'success' &&
-                  payment.withdrawRequest ? (
+                  {isCreator && payment.paid !== 'success' && isFunded ? (
                     <ApproveButton
                       paymentId={payment._id}
                       withdrawApproved={payment.withdrawApproved}
@@ -42,7 +40,8 @@ export default function PaymentTermsWithdraw({ data, isCreator }) {
                     />
                   ) : (
                     isCreator &&
-                    payment.paid === 'fail' && (
+                    payment.paid === 'fail' &&
+                    isFunded && (
                       <ApproveButton
                         paymentId={payment._id}
                         withdrawApproved={payment.withdrawApproved}
@@ -51,7 +50,7 @@ export default function PaymentTermsWithdraw({ data, isCreator }) {
                     )
                   )}
 
-                  {!isCreator && payment.paid !== 'success' && (
+                  {!isCreator && payment.paid !== 'success' && isFunded && (
                     <PayoutButton
                       paymentId={payment._id}
                       withdrawRequest={payment.withdrawRequest}

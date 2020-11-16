@@ -26,29 +26,7 @@ export default function ViewConversation({
         jobId={jobId}
         pageNbr={pageNbr}
         setMessages={setMessages}
-        moreButton={
-          <Row>
-            <IconButton
-              icon="more_horiz"
-              title=""
-              iconPos="right"
-              color="text-mini"
-              onClickEvent={() => {
-                setPageNbr(pageNbr + 1);
-              }}
-            />
-            <IconButton
-              icon="refresh"
-              title=""
-              iconPos="right"
-              color="text-mini"
-              onClickEvent={() => {
-                setMessages([]);
-                setRefreshCount(refreshCount+1);
-              }}
-            />
-          </Row>
-        }
+        moreButton={<Row></Row>}
       />
     </div>
   );

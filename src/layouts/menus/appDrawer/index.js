@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTheme } from '@material-ui/core/styles';
 import { Divider, Drawer, List, useMediaQuery } from '@material-ui/core';
 import { useStyles } from '../styles';
 import Cookies from 'js-cookie';
@@ -16,10 +15,9 @@ export default function AppDrawer({
   open,
   ...props
 }) {
-  const { drawerOpen, drawerOpenMobile, drawerRoot } = useStyles();
+  const { drawerOpenTablet, drawerRoot } = useStyles();
 
   const { page, profile } = props;
-  const theme = useTheme();
   const mobile = useMediaQuery('(max-width:800px)');
   const [counts, setCounts] = React.useState({
     invites: 0,
@@ -30,16 +28,10 @@ export default function AppDrawer({
   return (
     <Drawer
       variant="permanent"
-      className={clsx({
-        [drawerRoot]: true,
-        [drawerOpenMobile]: open && mobile,
-        [drawerOpen]: true && !mobile,
-      })}
       classes={{
         paper: clsx({
           [drawerRoot]: true,
-          [drawerOpenMobile]: open && mobile,
-          [drawerOpen]: !mobile,
+          [drawerOpenTablet]: mobile,
         }),
       }}
     >
@@ -65,7 +57,6 @@ export default function AppDrawer({
                 link: () => {
                   history.goBack();
                 },
-                color: '#444',
                 count: null,
               },
             ].map((text, index) => (
@@ -82,6 +73,7 @@ export default function AppDrawer({
                 }}
                 active={false}
                 key={`shortcut_${index}`}
+                countIcon="star"
               />
             ))}
           </div>
@@ -92,43 +84,43 @@ export default function AppDrawer({
               name: 'Home',
               icon: 'home',
               link: () => history.push('/app/dashboard'),
-              color: '#444',
               count: null,
-            } /*
+            },
+            /*
             {
               name: 'Messages',
               icon: 'chat',
               link: () => history.push('/messages/conversations'),
               color: '#444',
               count: counts.messages,
-            },*/,
+            },*/
             {
-              name: 'My Jobs',
-              icon: 'work',
+              name: 'Creative',
+              icon: 'brush',
               link: () => history.push('/app/invites'),
-              color: '#444',
-              count: counts.invites,
+              count:
+                counts.invites > 0
+                  ? { icon: 'local_post_office', count: counts.invites }
+                  : { icon: 'mail', count: counts.messages },
             },
-
             {
-              name: profile.creatorTrue ? 'Projects' : 'hide',
+              name: profile.creatorTrue ? 'Creator' : 'hide',
               icon: 'work',
               link: () => history.push('/app/jobs'),
-              color: '#444',
-              count: null,
+              count: { icon: 'star', count: counts.quotes },
             },
             {
-              name: 'Profile',
-              icon: 'contact_mail',
+              name: 'My Profile',
+              icon: 'face',
               link: () => history.push('/app/edit-profile'),
-              color: '#444',
-              count: profile.profileBG ? null : 1,
+              count: !profile.profileBG
+                ? { icon: 'star', count: counts.quotes }
+                : null,
             },
             {
               name: 'Account',
               icon: 'account_balance',
               link: () => history.push('/app/account'),
-              color: '#444',
               count: null,
             } /*
             {
@@ -146,7 +138,6 @@ export default function AppDrawer({
                 Cookies.remove('userId');
                 history.replace(`/`);
               },
-              color: theme.palette.error.main,
               count: null,
             },
           ].map(
@@ -157,7 +148,7 @@ export default function AppDrawer({
                     name: text.name,
                     color: text.color,
                     icon: text.icon,
-                    count: text.count,
+                    count: text.count ? text.count.count : 0,
                   }}
                   onClickEvent={() => {
                     text.link();
@@ -165,6 +156,7 @@ export default function AppDrawer({
                   }}
                   active={false}
                   key={`menu_${index}`}
+                  countIcon={text.count ? text.count.icon : 'star'}
                 />
               )
           )}

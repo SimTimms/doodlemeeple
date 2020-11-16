@@ -7,6 +7,8 @@ import {
   Meta,
   Column,
   Divider,
+  BorderBox,
+  LoadIcon,
 } from '../';
 import { Mutation } from 'react-apollo';
 import { useStyles } from './styles';
@@ -17,22 +19,19 @@ import clsx from 'clsx';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE);
 
-export default function PaymentElement({
-  display,
-  contractData,
-  setDisplayPayment,
-  setContractStatus,
-}) {
+export default function PaymentElement({ display, job, ...props }) {
   const classes = useStyles();
   const [paymentIntent, setPaymentIntent] = React.useState(null);
   const [visible, setVisible] = React.useState(null);
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [paymentStatus, setPaymentStatus] = React.useState('');
-
+  const [tabNbr, setTabNbr] = React.useState(0);
+  const contractData = job.jobData.activeContract;
+  const { setDisplayPayment } = props;
   useEffect(() => {
     setVisible(display);
-    setPaymentStatus(contractData.status);
-  }, [contractData, display]);
+    setPaymentStatus(job.jobData.activeContract.status);
+  }, [job, display]);
 
   return (
     <div
@@ -46,9 +45,49 @@ export default function PaymentElement({
           [classes.wrapper]: true,
         })}
       >
-        {
+        {tabNbr === 0 && (
           <Column>
             <FieldTitleDashboard name="DEPOSIT PAYMENT" inline={false} a="c" />
+            <div>
+              <Divider />
+              <BorderBox>
+                <Typography variant="body1">{`You have agreed to pay:`}</Typography>
+                <Typography variant="h5">{`${
+                  parseInt(contractData.cost) +
+                  parseInt(contractData.cost) * 0.1
+                } ${contractData.currency}`}</Typography>
+                <Divider />
+                <Mutation
+                  mutation={MAKE_PAYMENT}
+                  variables={{
+                    contractId: contractData._id,
+                  }}
+                  onCompleted={(response) => {
+                    setPaymentIntent(response.makePayment);
+                  }}
+                >
+                  {(mutation) => {
+                    return (
+                      <IconButton
+                        disabled={buttonDisabled}
+                        onClickEvent={() => {
+                          setPaymentStatus('stripe');
+                          setTabNbr(1);
+                          setButtonDisabled(true);
+                          mutation();
+                        }}
+                        title="Deposit Now"
+                        icon="payment"
+                        color="primary"
+                        styleOverride={{ margin: 'auto' }}
+                        type="button"
+                      />
+                    );
+                  }}
+                </Mutation>
+              </BorderBox>
+            </div>
+            <Divider />
             <Meta str="The full amount must be deposited into the DoodleMeeple holding account before work can progress" />
             <Meta
               str={
@@ -59,47 +98,13 @@ export default function PaymentElement({
                   </a>
                 </span>
               }
-            ></Meta>
-
-            <div>
-              <Divider />
-              <Typography variant="h6">{`You have agreed to pay:`}</Typography>
-              <Typography variant="h5">{`${
-                parseInt(contractData.cost) + parseInt(contractData.cost) * 0.1
-              } ${contractData.currency}`}</Typography>
-              <Divider />
-              <Mutation
-                mutation={MAKE_PAYMENT}
-                variables={{
-                  contractId: contractData._id,
-                }}
-                onCompleted={(response) => {
-                  setPaymentIntent(response.makePayment);
-                }}
-              >
-                {(mutation) => {
-                  return (
-                    <IconButton
-                      disabled={buttonDisabled}
-                      onClickEvent={() => {
-                        setPaymentStatus('stripe');
-                        setButtonDisabled(true);
-                        mutation();
-                      }}
-                      title="Deposit Now"
-                      icon="payment"
-                      color="primary"
-                      styleOverride={{ margin: 'auto' }}
-                      type="button"
-                    />
-                  );
-                }}
-              </Mutation>
-            </div>
+            ></Meta>{' '}
             <IconButton
               disabled={buttonDisabled}
               onClickEvent={() => {
                 setDisplayPayment(false);
+                setButtonDisabled(false);
+                setTabNbr(0);
               }}
               title="Close"
               icon=""
@@ -108,18 +113,19 @@ export default function PaymentElement({
               type="button"
             />
           </Column>
-        }
-        {paymentStatus === 'stripe' && (
+        )}
+        {tabNbr === 1 && (
           <Column>
             <FieldTitleDashboard name="CARD PAYMENT" inline={false} a="c" />
-            <Meta str="Stripe is our chosen payment provider, you can use any major credit or debit card to make a payment" />
+            {!paymentIntent && <LoadIcon />}
             {paymentIntent && (
               <Elements stripe={stripePromise}>
                 <StripeCheckout
                   paymentIntent={paymentIntent}
-                  setPaymentStatus={setPaymentStatus}
-                  setVisible={setDisplayPayment}
-                  setContractStatus={setContractStatus}
+                  job={{ jobData: job.jobData, setJobData: job.setJobData }}
+                  onClickEvent={() => {
+                    setDisplayPayment(false);
+                  }}
                 />
               </Elements>
             )}
@@ -127,7 +133,9 @@ export default function PaymentElement({
             <IconButton
               disabled={false}
               onClickEvent={() => {
+                setTabNbr(0);
                 setDisplayPayment(false);
+                setButtonDisabled(false);
               }}
               title="Close"
               icon=""

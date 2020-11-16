@@ -1,3 +1,4 @@
-import ContractComponentForCreator from './contractForCreator';
+import FullContractComponent from './contractForCreator';
+import Signature from './signature';
 
-export { ContractComponentForCreator };
+export { FullContractComponent, Signature };

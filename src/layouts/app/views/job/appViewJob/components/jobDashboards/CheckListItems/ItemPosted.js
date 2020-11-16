@@ -9,21 +9,25 @@ import {
 } from '../../../../../../../../components';
 import clsx from 'clsx';
 
-export default function ItemPosted({ setTabNbr }) {
+export default function ItemPosted({
+  setTabNbr,
+  color,
+  draft,
+  history,
+  jobId,
+}) {
   const classes = useStyles();
   return (
     <RowCheckList j="space-between" active={true}>
       <Column a="space-between">
-        <Row j="flex-start" w={170}>
-          <Typography style={{ marginRight: 10, width: 80 }}>
-            Job Posted:
-          </Typography>
+        <Row j="flex-start" w={220}>
           <Typography
             className={clsx({
-              [classes.green]: true,
+              [classes.tag]: true,
+              [classes.dull]: true,
             })}
           >
-            <b>Done</b>
+            Job Posted:<b> {draft ? 'No' : 'Yes'}</b>
           </Typography>
         </Row>
       </Column>
@@ -31,11 +35,11 @@ export default function ItemPosted({ setTabNbr }) {
         text={{
           name: '',
           color: '',
-          icon: 'chevron_right',
+          icon: color === 1 ? 'check' : color === 2 ? 'star' : '',
           count: 0,
-          back: '',
+          back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}
-        onClickEvent={() => setTabNbr(1)}
+        onClickEvent={() => history.push(`/app/edit-job/${jobId}`)}
         active={false}
       />
     </RowCheckList>

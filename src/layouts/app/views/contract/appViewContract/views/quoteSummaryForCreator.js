@@ -3,7 +3,7 @@ import {
   Paper,
   IconButton,
   ActionWrapper,
-  ContractComponentForCreator,
+  FullContractComponent,
   ContractSummaryForCreative,
   ProfileCardCreative,
   ProfileCardCreator,
@@ -50,12 +50,6 @@ export default function QuoteSummaryCreator({
         [classes.hide]: !display,
       })}
     >
-      <PaymentElement
-        display={displayPayment}
-        setDisplayPayment={setDisplayPayment}
-        contractData={contractData}
-        setContractStatus={setContractStatus}
-      />
       <Query
         query={FAVOURITES}
         onCompleted={(data) => {
@@ -120,7 +114,7 @@ export default function QuoteSummaryCreator({
           <ContractSummaryForCreative contractData={contractData} />
         )}
         {(openContract || contractData.status === 'paid') && (
-          <ContractComponentForCreator
+          <FullContractComponent
             contractData={contractData}
             setOpenContract={setOpenContract}
             setContractStatus={setContractStatus}
@@ -247,13 +241,6 @@ export default function QuoteSummaryCreator({
                   </Column>
                 </BorderBox>
               )}
-
-              <PaymentElement
-                display={displayPayment}
-                setDisplayPayment={setDisplayPayment}
-                contractData={contractData}
-                setContractStatus={setContractStatus}
-              />
             </ActionWrapper>
           </Column>
         )}

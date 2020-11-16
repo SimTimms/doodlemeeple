@@ -12,9 +12,8 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     marginRight: 0,
     position: 'relative',
-    '&:hover': {
-      background: 'theme.palette.primary.dark',
-    },
+    boxShadow:
+      'inset 1px 1px 1px rgba(255,255,255,0.4),inset -1px -1px 1px rgba(0,0,0,0.2)',
     '&:visited': {
       background: 'none',
     },
@@ -24,20 +23,41 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: '#222',
+    color: '#fff',
     position: 'relative',
-    fontSize: 16,
-    marginRight: 12,
+    fontSize: 14,
     padding: 5,
-    border: '1px solid rgba(0,0,0,0.1)',
+    background: '#c3c3d6',
     borderRadius: '50%',
     textAlign: 'center',
+    boxShadow:
+      'inset 1px 1px 1px rgba(255,255,255,0.7),inset -1px -1px 1px rgba(0,0,0,0.1)',
   },
-  warning: { background: theme.palette.error.main },
-  primary: { background: theme.palette.primary.main },
+  backHover: {
+    '&:hover': {
+      opacity: 0.4,
+    },
+  },
+  borderSecondary: {
+    background: `${theme.palette.secondary.main}`,
+  },
+  borderWarning: {
+    background: `${theme.palette.error.main}`,
+  },
+  warning: {
+    background: theme.palette.error.main,
+    boxShadow:
+      'inset 1px 1px 1px rgba(255,255,255,0.4),inset -1px -1px 1px rgba(0,0,0,0.2)',
+  },
+  primary: {
+    background: theme.palette.primary.main,
+    boxShadow:
+      'inset 1px 1px 1px rgba(255,255,255,0.4),inset -1px -1px 1px rgba(0,0,0,0.2)',
+  },
   secondary: {
     background: theme.palette.secondary.main,
-    boxShadow: 'inset 0 0 3px rgba(255,255,255,0.1),0 0 5px rgba(0,0,0,0.2)',
+    boxShadow:
+      'inset 1px 1px 1px rgba(255,255,255,0.4),inset -1px -1px 1px rgba(0,0,0,0.2)',
   },
   iconIconNoMargin: { margin: 0 },
   iconIconColumn: {
@@ -51,29 +71,36 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     color: '#444',
   },
-  countsStyle: {
-    position: 'absolute',
-    top: -5,
-    right: -5,
-    maxHeight: 20,
-    minHeight: 20,
-    maxWidth: 20,
-    minWidth: 20,
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+
+  count: {
     background: theme.palette.error.main,
+    borderRadius: '50%',
+    minHeight: 16,
+    maxHeight: 16,
+    minWidth: 16,
+    maxWidth: 16,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: -10,
+    marginRight: 5,
+    marginTop: -15,
     color: '#fff',
+    border: '2px solid #fff',
+    fontSize: 10,
+    zIndex: 2,
   },
-  button: { textAlign: 'right', color: '#222', fontSize: 12 },
-  buttonMobile: {
-    padding: 5,
-    textAlign: 'center',
-  },
+  spaceAbove: { marginTop: 4 },
+  button: { textAlign: 'right', color: '#222', fontSize: 12, marginLeft: 10 },
+  buttonColumn: { marginLeft: 0 },
   buttonRoot: {
     justifyContent: 'space-between',
     paddingBottom: 8,
+  },
+  buttonRootNoBackHover: {
+    '&:hover': {
+      background: 'none !important',
+    },
   },
   buttonRootColumn: {
     justifyContent: 'space-between',
@@ -83,5 +110,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   active: {
     borderBottom: `2px solid ${theme.palette.primary.main}`,
+    background: 'rgba(255,255,255,0.2)',
   },
 }));

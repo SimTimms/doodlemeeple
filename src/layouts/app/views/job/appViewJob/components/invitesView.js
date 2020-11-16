@@ -7,10 +7,14 @@ import {
   Paper,
 } from '../../../../../../components';
 
-export default function InvitesView({ invites, setConversationUser }) {
+export default function InvitesView({
+  invites,
+  setConversationUser,
+  setTabNbr,
+  refreshDashboard,
+}) {
   return (
     <Column w="50%" p={10}>
-      <FieldTitleDashboard name="Invites" inline={false} />
       <Paper p={10}>
         {invites.map((invite, index) => {
           const contractSubmitted = invite.job.contracts.filter(
@@ -25,6 +29,8 @@ export default function InvitesView({ invites, setConversationUser }) {
                 key={`invite-${index}`}
                 setConversationUser={setConversationUser}
                 contract={contractSubmitted[0]}
+                setTabNbr={setTabNbr}
+                refreshDashboard={refreshDashboard}
               />
             </Column>
           );

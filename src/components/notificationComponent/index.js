@@ -5,7 +5,10 @@ import { useStyles } from './styles';
 import { REMOVE_NOTIFICATION_MUTATION } from '../../data/mutations';
 import { Mutation } from 'react-apollo';
 import { timeDifferenceForDate } from '../../utils/dates';
+import { nameShortener } from '../../utils';
+
 import clsx from 'clsx';
+import { MenuButtonShortcut } from '../';
 
 export default function NotificationComponent({
   notification,
@@ -21,7 +24,7 @@ export default function NotificationComponent({
           className={classes.messageButton}
           style={{ textDecoration: 'none' }}
         >
-          {notification.sender && notification.icon === 'request_quote' ? (
+          {notification.sender && notification.icon === 'request_quote' && (
             <div
               className={classes.notifications}
               style={{
@@ -29,29 +32,6 @@ export default function NotificationComponent({
                 backgroundSize: 'cover',
               }}
             ></div>
-          ) : (
-            <div
-              className={clsx({
-                [classes.notifications]: true,
-                [classes.notificationInvite]: notification.icon === 'thumb_up',
-                [classes.notificationProfile]:
-                  notification.icon === 'contact_mail',
-                [classes.notificationWork]: notification.icon === 'work',
-                [classes.notificationBad]:
-                  notification.icon === 'thumb_down' ||
-                  notification.icon === 'warning',
-                [classes.notificationGood]:
-                  notification.icon === 'request_quote',
-              })}
-            >
-              <Icon
-                className={clsx({
-                  [classes.icon]: true,
-                })}
-              >
-                {notification.icon}
-              </Icon>
-            </div>
           )}
           <div className={classes.profileWrapper}>
             <div className={classes.wrapperOne}>
@@ -61,9 +41,16 @@ export default function NotificationComponent({
                   style={{ justifyContent: 'space-between' }}
                 >
                   <Typography
-                    style={{ color: '#aaa' }}
-                    variant="caption"
                     component="p"
+                    className={clsx({
+                      [classes.notificationNeutral]: true,
+                      [classes.notificationBad]:
+                        notification.icon === 'request_quote' ||
+                        notification.icon === 'local_post_office',
+                      [classes.notificationGood]:
+                        notification.icon === 'thumb_down' ||
+                        notification.icon === 'warning',
+                    })}
                   >
                     <b>{notification.title}</b>
                   </Typography>
@@ -76,7 +63,7 @@ export default function NotificationComponent({
                   </Typography>
                 </div>
                 <Typography color="textPrimary" component="p">
-                  {notification.message}
+                  {nameShortener(notification.message, 50)}
                 </Typography>
               </div>
             </div>
@@ -90,20 +77,22 @@ export default function NotificationComponent({
         >
           {(RemoveNotificationMutation) => {
             return (
-              <Button
-                color="primary"
-                onClick={() => {
+              <MenuButtonShortcut
+                text={{
+                  name: '',
+                  icon: 'close',
+                  count: 0,
+                  back: '',
+                }}
+                onClickEvent={() => {
                   RemoveNotificationMutation();
                   const notificationArrayFiltered = notificationArray.filter(
                     (item) => item._id !== notification._id
                   );
                   setNotificationArray(notificationArrayFiltered);
                 }}
-              >
-                <Icon color="disabled" className={classes.iconButton}>
-                  delete
-                </Icon>
-              </Button>
+                active={false}
+              />
             );
           }}
         </Mutation>

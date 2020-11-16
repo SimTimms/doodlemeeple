@@ -7,8 +7,10 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
+import { useStyles } from './styles';
 
 export default function PaymentSchedule({ contractData, isClient }) {
+  const classes = useStyles();
   const creativeCommission = 0.9;
   const creatorCommission = 1.1;
   const doodleMeeplePercent = 0.1;
@@ -51,32 +53,42 @@ export default function PaymentSchedule({ contractData, isClient }) {
               <TableCell align="right">{contractData.currency}</TableCell>
             </TableRow>
           )}
-          <TableRow>
-            <TableCell align="left">Subtotal</TableCell>
-            <TableCell align="right">{contractData.cost}</TableCell>
-            <TableCell align="right">{contractData.currency}</TableCell>
+          <TableRow className={classes.subtotal}>
+            <TableCell align="left" style={{ color: '#fff' }}>
+              Subtotal
+            </TableCell>
+            <TableCell align="right" style={{ color: '#fff' }}>
+              {contractData.cost}
+            </TableCell>
+            <TableCell align="right" style={{ color: '#fff' }}>
+              {contractData.currency}
+            </TableCell>
           </TableRow>
 
-          <TableRow>
-            <TableCell align="left">DoodleMeeple Fee</TableCell>
-            <TableCell align="right">
+          <TableRow className={classes.subtotal}>
+            <TableCell align="left" style={{ color: '#fff' }}>
+              DoodleMeeple Fee
+            </TableCell>
+            <TableCell align="right" style={{ color: '#fff' }}>
               {isClient
                 ? Math.round(contractData.cost * doodleMeeplePercent)
                 : -Math.round(contractData.cost * doodleMeeplePercent)}
             </TableCell>
-            <TableCell align="right">{contractData.currency}</TableCell>
+            <TableCell align="right" style={{ color: '#fff' }}>
+              {contractData.currency}
+            </TableCell>
           </TableRow>
 
-          <TableRow style={{ background: '#444' }}>
-            <TableCell align="left" style={{ color: '#fff' }}>
+          <TableRow className={classes.total}>
+            <TableCell align="left" style={{ color: '#fff', fontSize: 18 }}>
               {isClient ? 'Total Due' : 'Total Payout'}
             </TableCell>
-            <TableCell align="right" style={{ color: '#fff' }}>
+            <TableCell align="right" style={{ color: '#fff', fontSize: 18 }}>
               {isClient
                 ? parseInt(`${contractData.cost * creatorCommission}`)
                 : parseInt(`${contractData.cost * creativeCommission}`)}
             </TableCell>
-            <TableCell align="right" style={{ color: '#fff' }}>
+            <TableCell align="right" style={{ color: '#fff', fontSize: 18 }}>
               {contractData.currency}
             </TableCell>
           </TableRow>

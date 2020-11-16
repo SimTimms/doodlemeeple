@@ -10,11 +10,11 @@ export default function EditContractButton({ contract, setContract, title }) {
       mutation={UPDATE_CONTRACT}
       variables={{
         _id: contract._id,
-        status: '',
+        status: null,
       }}
       onCompleted={(data) => {
         toaster('Editing');
-        setContract({ ...contract, status: '' });
+        setContract({ ...contract, status: null });
       }}
     >
       {(mutation) => {
@@ -22,7 +22,7 @@ export default function EditContractButton({ contract, setContract, title }) {
           <IconButton
             title={title}
             icon="close"
-            color="warning"
+            color="primary"
             disabled={false}
             onClickEvent={() => {
               mutation();

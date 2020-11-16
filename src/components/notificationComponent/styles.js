@@ -15,15 +15,13 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  icon: { paddingLeft: 10, paddingRight: 10 },
+  icon: { paddingLeft: 10, paddingRight: 10, fontSize: 14 },
   notifications: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    background: theme.palette.primary.main,
-    border: `2px solid #fff`,
-    color: '#fff',
+    color: '#444',
     borderRadius: '50%',
     minHeight: 30,
     maxHeight: 30,
@@ -31,28 +29,16 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: 30,
     marginLeft: 10,
     textShadow: ' 1px 1px 3px rgba(0,0,0,0.1)',
-    boxShadow:
-      '0px 0px 5px rgba(0,0,0,0.1),inset 2px 2px 2px rgba(255,255,255,0.2)',
   },
-  notificationInvite: {
-    background: theme.palette.secondary.main,
-    border: `2px solid ${theme.palette.secondary.main}`,
-  },
-  notificationBad: {
-    background: theme.palette.error.main,
-    border: `2px solid ${theme.palette.error.main}`,
-  },
-  notificationProfile: {
-    background: theme.palette.secondary.main,
-    border: `2px solid ${theme.palette.secondary.main}`,
-  },
-  notificationWork: {
-    background: theme.palette.secondary.main,
-    border: `2px solid ${theme.palette.secondary.main}`,
+
+  notificationNeutral: {
+    color: theme.palette.primary.main,
   },
   notificationGood: {
-    background: theme.palette.secondary.main,
-    border: `2px solid ${theme.palette.secondary.main}`,
+    color: theme.palette.secondary.main,
+  },
+  notificationBad: {
+    color: theme.palette.error.main,
   },
   projectNotifications: {
     display: 'flex',

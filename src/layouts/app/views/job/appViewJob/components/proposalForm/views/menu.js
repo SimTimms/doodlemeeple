@@ -1,9 +1,7 @@
 import React from 'react';
 import { Row, MenuButtonShortcut } from '../../../../../../../../components';
 
-export default function Menu() {
-  const [page, setPage] = React.useState(0);
-
+export default function Menu({ tab }) {
   return (
     <Row j="center">
       <MenuButtonShortcut
@@ -14,9 +12,9 @@ export default function Menu() {
           count: 0,
         }}
         onClickEvent={() => {
-          setPage(0);
+          tab.setTabNbr(0);
         }}
-        active={page === 0}
+        active={tab.tabNbr === 0}
         column={true}
       />
       <MenuButtonShortcut
@@ -27,9 +25,22 @@ export default function Menu() {
           count: 0,
         }}
         onClickEvent={() => {
-          setPage(1);
+          tab.setTabNbr(1);
         }}
-        active={page === 1}
+        active={tab.tabNbr === 1}
+        column={true}
+      />
+      <MenuButtonShortcut
+        text={{
+          name: 'Contract',
+          color: '#222',
+          icon: 'request_quote',
+          count: 0,
+        }}
+        onClickEvent={() => {
+          tab.setTabNbr(3);
+        }}
+        active={tab.tabNbr === 3}
         column={true}
       />
       <MenuButtonShortcut
@@ -40,9 +51,9 @@ export default function Menu() {
           count: 0,
         }}
         onClickEvent={() => {
-          setPage(2);
+          tab.setTabNbr(2);
         }}
-        active={page === 2}
+        active={tab.tabNbr === 2}
         column={true}
       />
     </Row>

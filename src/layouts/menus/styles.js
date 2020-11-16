@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-const drawerWidth = 120;
+const drawerWidth = 140;
 
 export const useStyles = makeStyles((theme) => ({
   menuWrapper: {
@@ -30,10 +30,6 @@ export const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
   },
   button: { textAlign: 'right' },
-  buttonMobile: {
-    padding: 5,
-    textAlign: 'center',
-  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -71,37 +67,10 @@ export const useStyles = makeStyles((theme) => ({
     paddingTop: 16,
     position: 'fixed',
     zIndex: 10,
-  },
-  drawerOpenMobile: {
-    width: '100%',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerOpen: {
     width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: 44,
-    height: '100%',
-  },
-  drawerCloseMobile: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    display: 'none',
+  drawerOpenTablet: {
+    width: drawerWidth,
   },
   icon: {
     minWidth: 30,

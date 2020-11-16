@@ -3,6 +3,7 @@ import { ListItem, Icon, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Row } from '../../';
 
 export default function MenuButtonShortcut({
   text,
@@ -12,7 +13,7 @@ export default function MenuButtonShortcut({
 }) {
   const mobile = useMediaQuery('(max-width:800px)');
   const classes = useStyles();
-  const { column } = props;
+  const { column, countIcon } = props;
 
   return (
     <div
@@ -31,11 +32,13 @@ export default function MenuButtonShortcut({
           [classes.buttonRoot]: true,
           [classes.active]: active,
           [classes.buttonRootColumn]: column,
+          [classes.buttonRootNoBackHover]: text.name === '',
         })}
       >
         <div
           className={clsx({
             [classes.iconButton]: true,
+            [classes.iconIconColumn]: column,
             [classes.iconButtonOnly]: text.name === '',
           })}
         >
@@ -43,7 +46,6 @@ export default function MenuButtonShortcut({
             className={clsx({
               [classes.iconIcon]: true,
               [classes.iconIconNoMargin]: text.name === '',
-              [classes.iconIconColumn]: column,
               [classes.dark]: text.color === 'white',
               [classes.warning]: text.back
                 ? text.back === 'warning'
@@ -60,21 +62,36 @@ export default function MenuButtonShortcut({
                   ? true
                   : false
                 : false,
+              [classes.borderSecondary]: text.border === 'secondary',
+              [classes.borderWarning]: text.border === 'warning',
+              [classes.backHover]: text.name === '',
             })}
             style={{ color: text.color }}
           >
             {text.icon}
           </Icon>
         </div>
-        <Typography
-          className={clsx({
-            [classes.button]: !mobile,
-            [classes.buttonMobile]: mobile,
-          })}
-          style={{ color: text.color }}
+        <Row
+          j={text.count > 0 ? 'space-between' : column ? 'center' : 'flex-end'}
+          w="100%"
         >
-          {text.name}
-        </Typography>
+          {text.count > 0 &&
+            (!countIcon ? (
+              <Typography className={classes.count}>{text.count}</Typography>
+            ) : (
+              <Icon className={classes.count}>{countIcon}</Icon>
+            ))}
+          <Typography
+            className={clsx({
+              [classes.button]: true,
+              [classes.buttonColumn]: column,
+              [classes.spaceAbove]: column,
+            })}
+            style={{ color: text.color }}
+          >
+            {text.name}
+          </Typography>
+        </Row>
       </ListItem>
     </div>
   );

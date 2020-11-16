@@ -1,22 +1,14 @@
 import React from 'react';
 import { Slide } from '@material-ui/core';
-import { Column } from '../../../../../components';
 import SummaryViewCreator from './components/summaryViewCreator';
 import SummaryViewCreative from './components/summaryViewCreative';
 import { Query } from 'react-apollo';
-import { JOB, JOB_CREATIVE, INVITE_BY_ID } from '../../../../../data/queries';
+import { JOB, JOB_CREATIVE } from '../../../../../data/queries';
 import Cookies from 'js-cookie';
 
-export default function AppViewJob({
-  theme,
-  jobId,
-  history,
-  inviteId,
-  profile,
-}) {
-  const [inviteStatus, setInviteStatus] = React.useState('');
-  const [contracts, setContracts] = React.useState([]);
+export default function AppViewJob({ jobId, history }) {
   const [isCreator, setIsCreator] = React.useState(null);
+  const [refreshCount, setRefreshCount] = React.useState(0);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -24,34 +16,18 @@ export default function AppViewJob({
         {isCreator && (
           <Query
             query={JOB}
-            variables={{ jobId: jobId }}
+            variables={{ jobId: jobId, refreshCount: refreshCount }}
             fetchPolicy="network-only"
-            onCompleted={(data) => {
-              const contractIds = data.jobById.contracts.map(
-                (contract) => contract.user._id
-              );
-              setContracts(contractIds);
-            }}
           >
             {({ data }) => {
               return data ? (
-                <SummaryViewCreator job={data.jobById} history={history} />
-              ) : null;
-              /*   <SummaryView
+                <SummaryViewCreator
                   job={data.jobById}
                   history={history}
-                  inviteId={inviteId}
-                  jobId={job._id}
-                  setJob={setJob}
-                  messagesEnd={messagesEnd}
-                  inviteStatus={inviteStatus}
-                  contracts={contracts}
-                  setInviteStatus={setInviteStatus}
-                  setProposalOpen={setProposalOpen}
-                  proposalOpen={proposalOpen}
-                  stripeID={profile.stripeID}
-                  theme={theme}
-             />*/
+                  refreshCount={refreshCount}
+                  setRefreshCount={setRefreshCount}
+                />
+              ) : null;
             }}
           </Query>
         )}

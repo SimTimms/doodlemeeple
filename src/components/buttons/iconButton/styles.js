@@ -27,7 +27,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   iconButtonSecondary: {
-    background: theme.palette.secondary.light,
+    background: theme.palette.secondary.main,
     color: '#fff',
     boxShadow: '2px 2px 5px rgba(0,0,0,0.1)',
     '&:hover': {
@@ -68,9 +68,8 @@ export const useStyles = makeStyles((theme) => ({
   iconButtonTextDark: {
     background: 'rgba(0,0,0,0)',
     color: '#444',
-    boxShadow: '2px 2px 5px rgba(0,0,0,0.05)',
+    boxShadow: 'none',
     fontWeight: 400,
-    border: '1px solid #eee',
     justifyContent: 'space-between',
     '&:hover': {
       background: '#efeff5',
@@ -122,6 +121,9 @@ export const useStyles = makeStyles((theme) => ({
   iconButtonIcon: {
     color: '#fff',
     fontSize: 12,
+    padding: 3,
+    borderRadius: '50%',
+    border: '1px solid rgba(255,255,255,0.4)',
   },
   iconButtonIconText: {
     color: '#aaa',
@@ -139,7 +141,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
   },
   iconButtonIconSecondary: {
-    color: theme.palette.primary.main,
+    color: '#fff',
   },
   iconButtonIconTextError: {
     color: theme.palette.error.main,

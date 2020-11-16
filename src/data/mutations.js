@@ -42,7 +42,9 @@ export const MARK_AS_READ = gql`
 
 export const UPDATE_EMAIL = gql`
   mutation UpdateEmail($email: String!) {
-    updateEmail(email: $email)
+    userUpdateOne(record: { email: $email }) {
+      recordId
+    }
   }
 `;
 
@@ -63,9 +65,11 @@ export const DELETE_IMAGE = gql`
 `;
 
 export const UPDATE_INVITE = gql`
-  mutation UpdateInvite($_id: MongoID!) {
-    declineInvite(_id: $_id) {
-      _id
+  mutation UpdateInvite($_id: MongoID!, $status: String) {
+    inviteUpdateById(record: { _id: $_id, status: $status }) {
+      record {
+        _id
+      }
     }
   }
 `;
@@ -232,8 +236,8 @@ export const REMOVE_CONTRACT = gql`
 `;
 
 export const DECLINE_INVITE = gql`
-  mutation DeclineInvite($id: MongoID!) {
-    declineInvite(_id: $id) {
+  mutation DeclineInvite($_id: MongoID!) {
+    declineInvite(_id: $_id) {
       _id
     }
   }
@@ -328,6 +332,20 @@ export const CLOSE_JOB = gql`
     closeJob(_id: $_id) {
       _id
     }
+  }
+`;
+
+export const COMPLETE_JOB = gql`
+  mutation completeJob($_id: MongoID!) {
+    completeJob(_id: $_id) {
+      _id
+    }
+  }
+`;
+
+export const CLOSE_EARLY = gql`
+  mutation closeEarly($_id: MongoID!) {
+    closeEarly(_id: $_id)
   }
 `;
 

@@ -191,9 +191,10 @@ export const PAYMENTS = gql`
 `;
 
 export const INVITES = gql`
-  query GetInvites {
-    invitesByUser {
+  query GetInvites($status: [String]) {
+    invitesByUser(status: $status) {
       status
+      messages
       _id
       receiver {
         name
@@ -248,12 +249,71 @@ export const JOB = gql`
       _id
       name
       keywords
+      activeContract {
+        _id
+        notes
+        deadline
+        startDate
+        cost
+        currency
+        status
+        updatedAt
+        signedBy {
+          _id
+          name
+        }
+        signedDate
+        payments {
+          _id
+          amount
+          currency
+          status
+          paidBy {
+            _id
+            name
+          }
+          contract {
+            _id
+          }
+          paymentId
+          createdAt
+          updatedAt
+        }
+        user {
+          email
+          _id
+          name
+          profileImg
+        }
+        job {
+          _id
+          name
+          summary
+          createdAt
+          creativeSummary
+          keywords
+          user {
+            _id
+            email
+            name
+          }
+        }
+        paymentTerms {
+          _id
+          percent
+          description
+          updatedAt
+          paid
+          status
+        }
+      }
       assignedCreative {
         _id
         name
       }
       invites {
         status
+        messages
         receiver {
           _id
           name
@@ -293,6 +353,7 @@ export const JOB = gql`
         }
         job {
           contracts {
+            status
             _id
             user {
               _id
@@ -311,6 +372,16 @@ export const JOB_CHECKLIST = gql`
   query GetJob($jobId: MongoID!) {
     jobById(_id: $jobId) {
       _id
+    }
+  }
+`;
+
+export const GET_STRIPE = gql`
+  {
+    getStripe {
+      object
+      details_submitted
+      payouts_enabled
     }
   }
 `;
@@ -356,6 +427,7 @@ export const JOB_CREATIVE = gql`
           createdAt
           creativeSummary
           keywords
+          submitted
           user {
             _id
             email
@@ -366,6 +438,8 @@ export const JOB_CREATIVE = gql`
           _id
           percent
           description
+          status
+          paid
         }
       }
       creator {
@@ -375,13 +449,32 @@ export const JOB_CREATIVE = gql`
       }
       job {
         _id
+        name
+        summary
+        createdAt
+        creativeSummary
+        keywords
+        submitted
+        user {
+          _id
+          email
+          name
+        }
+        activeContract {
+          _id
+        }
+      }
+      invite {
+        status
+        messages
+        _id
       }
     }
   }
 `;
 
 export const JOBS = gql`
-  query GetJobs($status: String) {
+  query GetJobs($status: [String]) {
     jobsByUser(status: $status) {
       _id
       name
@@ -392,6 +485,7 @@ export const JOBS = gql`
         user {
           _id
         }
+        status
       }
       game {
         _id
@@ -400,6 +494,10 @@ export const JOBS = gql`
       }
       invites {
         status
+        messages
+        job {
+          _id
+        }
         receiver {
           _id
           name

@@ -3,15 +3,10 @@ import { Typography, Icon } from '@material-ui/core';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import { useStyles } from './styles';
 import stripeLogo from '../../assets/stripe.png';
-import { IconButton, Column } from '../';
+import { IconButton, Column, Meta, BorderBox, LoadIcon } from '../';
 import clsx from 'clsx';
 
-export default function CheckoutForm({
-  paymentIntent,
-  setPaymentStatus,
-  setVisible,
-  setContractStatus,
-}) {
+export default function StripeCheckout({ paymentIntent, job, onClickEvent }) {
   const classes = useStyles();
   const stripe = useStripe();
   const elements = useElements();
@@ -34,9 +29,7 @@ export default function CheckoutForm({
     event.preventDefault();
 
     if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
-      return;
+      return <LoadIcon />;
     }
 
     const result = await stripe.confirmCardPayment(paymentIntent, {
@@ -53,7 +46,10 @@ export default function CheckoutForm({
       });
     } else {
       if (result.paymentIntent.status === 'succeeded') {
-        setContractStatus('paid');
+        job.setJobData({
+          ...job.jobData,
+          activeContract: { ...job.jobData.activeContract, status: 'pending' },
+        });
         setStatus({
           complete: false,
           error: false,
@@ -72,12 +68,29 @@ export default function CheckoutForm({
         marginBottom: 20,
       }}
     >
-      <Typography variant="h4" className={classes.notify}>
-        Payment Received
-      </Typography>
+      <BorderBox w={400}>
+        <Typography variant="h4" className={classes.notify}>
+          Payment Received
+        </Typography>
+        <Typography variant="body1" style={{ marginTop: 20 }}>
+          PLEASE NOTE: It may take a few minutes for this payment to appear on
+          your dashboard as completed, you will receive an email confirmation of
+          the successful transaction.
+        </Typography>
+        <IconButton
+          onClickEvent={() => onClickEvent()}
+          title="OK"
+          color="primary"
+          icon="check"
+          styleOverride={{ margin: 'auto', marginTop: 20 }}
+          iconPos="left"
+        />
+      </BorderBox>
     </div>
   ) : (
     <Column>
+      <Meta str="Stripe is our chosen payment provider, you can use any major credit or debit card to make a payment" />
+
       <form onSubmit={handleSubmit} style={{ width: '100%' }}>
         <Column>
           <div className={classes.card}>
@@ -111,6 +124,7 @@ export default function CheckoutForm({
                 )}
               </div>
             </div>
+
             <CardElement
               onChange={(e) => {
                 setStatus({

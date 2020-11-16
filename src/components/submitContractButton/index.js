@@ -16,15 +16,15 @@ export default function SubmitContractButton({
         _id: contract._id,
       }}
       onCompleted={(data) => {
-        toaster('Submitted...');
         setContract({ ...contract, status: 'submitted' });
-        setTabNbr(-1);
+        toaster('Submitted...');
+        setTabNbr(0);
       }}
     >
       {(mutation) => {
         return (
           <IconButton
-            title={`Submit`}
+            title={`I Agree`}
             icon="send"
             styleOverride={{ width: '100%' }}
             color="primary"
