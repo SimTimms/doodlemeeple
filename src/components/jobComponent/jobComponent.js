@@ -1,6 +1,5 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
 import Icon from '@material-ui/core/Icon';
 import { CardComponent } from '../';
@@ -8,10 +7,9 @@ import clsx from 'clsx';
 
 export default function JobComponent({ job, game, history }) {
   const classes = useStyles();
-  const contractsArr =
-    job.contracts.length > 0
-      ? job.contracts.map((contract) => contract.user._id)
-      : [];
+  const contractsArr = job.contracts.map((contract) =>
+    contract.user ? contract.user._id : 'deleted'
+  );
   const contractsIn = job.contracts.length > 0;
   const submitted = job.submitted === 'submitted';
   const accepted = job.submitted === 'accepted';
@@ -78,9 +76,12 @@ export default function JobComponent({ job, game, history }) {
         </Typography>
       </div>
       {job.invites.map((invite, index) => {
-        const contractFromArray = contractsArr.indexOf(invite.receiver._id);
-        const thisContract = job.contracts[contractFromArray];
-        const thisStatus = thisContract ? thisContract.status : null;
+        const contractFromArray =
+          invite.reciever && contractsArr.indexOf(invite.receiver._id);
+        const thisContract =
+          invite.reciever && job.contracts[contractFromArray];
+        const thisStatus =
+          invite.reciever && thisContract ? thisContract.status : null;
         return !invite.receiver ? (
           <div
             className={classes.profileThumb}
