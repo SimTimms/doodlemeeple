@@ -8,7 +8,10 @@ import clsx from 'clsx';
 
 export default function JobComponent({ job, game, history }) {
   const classes = useStyles();
-  const contractsArr = job.contracts.map((contract) => contract.user._id);
+  const contractsArr =
+    job.contracts.length > 0
+      ? job.contracts.map((contract) => contract.user._id)
+      : [];
   const contractsIn = job.contracts.length > 0;
   const submitted = job.submitted === 'submitted';
   const accepted = job.submitted === 'accepted';
