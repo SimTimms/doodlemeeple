@@ -24,7 +24,7 @@ export default function NoticeBoard({
   return (
     <div className={classes.root}>
       <Row>
-        {!profile.creativeTrue && !profile.creativeFalse ? (
+        {!profile.creativeTrue && !profile.creatorTrue ? (
           <Column>
             <Divider />
             <Typography variant="h5" style={{ color: '#fff' }} align="center">
