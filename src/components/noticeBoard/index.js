@@ -20,10 +20,27 @@ export default function NoticeBoard({
   const [loadingStripe, setLoadingStripe] = React.useState(false);
   const [skip, setSkip] = React.useState(false);
   const mobile = useMediaQuery('(max-width:800px)');
+
   return (
     <div className={classes.root}>
       <Row>
-        {profile.onboarding !== 'complete' && !profile.profileBG && !skip ? (
+        {!profile.creativeTrue && !profile.creativeFalse ? (
+          <Column>
+            <Divider />
+            <Typography variant="h5" style={{ color: '#fff' }} align="center">
+              Are you a Creative or Creator?
+            </Typography>
+            <IconButton
+              title="Update your Profile"
+              color="text-white"
+              icon="face"
+              styleOverride={{ marginBottom: 20, marginTop: 20 }}
+              onClickEvent={() => history.push('/app/edit-profile/')}
+            />
+
+            <Divider />
+          </Column>
+        ) : profile.onboarding !== 'complete' && !profile.profileBG && !skip ? (
           <Column>
             <Divider />
             <Typography variant="h5" style={{ color: '#fff' }} align="center">
