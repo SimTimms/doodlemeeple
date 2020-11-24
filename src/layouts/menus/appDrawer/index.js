@@ -95,7 +95,7 @@ export default function AppDrawer({
               count: counts.messages,
             },*/
             {
-              name: 'Creative',
+              name: profile.creativeTrue ? 'Creative' : 'hide',
               icon: 'brush',
               link: () => history.push('/app/invites'),
               count:
