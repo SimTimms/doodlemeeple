@@ -1,8 +1,20 @@
 import gql from 'graphql-tag';
 
 export const SIGNUP_MUTATION = gql`
-  mutation SignupMutation($name: String!, $email: String!, $password: String!) {
-    userCreateOne(record: { name: $name, email: $email, password: $password }) {
+  mutation SignupMutation(
+    $name: String!
+    $email: String!
+    $password: String!
+    $campaignId: String
+  ) {
+    userCreateOne(
+      record: {
+        name: $name
+        email: $email
+        password: $password
+        campaignId: $campaignId
+      }
+    ) {
       recordId
     }
   }

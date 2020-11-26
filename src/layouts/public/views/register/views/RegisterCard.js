@@ -25,7 +25,7 @@ import clsx from 'clsx';
 
 var passwordValidator = require('password-validator');
 
-export default function RegisterCard({ setPage }) {
+export default function RegisterCard({ setPage, ...props }) {
   const classes = { ...styles(), ...sharedStyles() };
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -37,6 +37,8 @@ export default function RegisterCard({ setPage }) {
   const [password, setPassword] = React.useState('');
   const [buttonStatus, setButtonStatus] = React.useState('Register');
   const mobile = useMediaQuery('(max-width:800px)');
+
+  const { campaignId } = props;
 
   function submitChecks(SignupMutation) {
     let passed = true;
@@ -158,7 +160,7 @@ export default function RegisterCard({ setPage }) {
           <CardContent className={classes.cardContentCenter}>
             <Mutation
               mutation={SIGNUP_MUTATION}
-              variables={{ name, email, password }}
+              variables={{ name, email, password, campaignId }}
               onError={(error) => {
                 setButtonStatus('Error');
                 setError(readableErrors(error, errors));
