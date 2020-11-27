@@ -44,7 +44,7 @@ export default function NoticeBoard({
           <Column>
             <Divider />
             <Typography variant="h5" className={classes.header5}>
-              Your profile isn't complete.
+              Let's get your profile ready
             </Typography>
             <Typography variant="h6" className={classes.header6}>
               {!profile.profileBG
