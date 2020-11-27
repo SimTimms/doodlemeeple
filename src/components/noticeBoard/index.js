@@ -37,14 +37,21 @@ export default function NoticeBoard({
               styleOverride={{ marginBottom: 20, marginTop: 20 }}
               onClickEvent={() => history.push('/app/edit-profile/')}
             />
-
             <Divider />
           </Column>
-        ) : profile.onboarding !== 'complete' && !profile.profileBG && !skip ? (
+        ) : profile.onboarding !== 'complete' &&
+          (!profile.profileBG || !profile.profileImg || !profile.summary) ? (
           <Column>
             <Divider />
-            <Typography variant="h5" style={{ color: '#fff' }} align="center">
-              Welcome to DoodleMeeple
+            <Typography variant="h5" className={classes.header5}>
+              Your profile isn't complete.
+            </Typography>
+            <Typography variant="h6" className={classes.header6}>
+              {!profile.profileBG
+                ? 'Set a Feature Image to continue'
+                : !profile.profileImg
+                ? 'Please add a profile image'
+                : 'Write something about yourself in the summary'}
             </Typography>
             <IconButton
               title="Create a Profile"
@@ -53,21 +60,7 @@ export default function NoticeBoard({
               styleOverride={{ marginBottom: 20, marginTop: 20 }}
               onClickEvent={() => history.push('/app/edit-profile/')}
             />
-            <Mutation mutation={SKIP_ONBOARDING}>
-              {(mutation) => {
-                return (
-                  <IconButton
-                    title="skip"
-                    color="text-white-mini"
-                    icon=""
-                    onClickEvent={() => {
-                      mutation();
-                      setSkip(true);
-                    }}
-                  />
-                );
-              }}
-            </Mutation>
+
             <Divider />
           </Column>
         ) : (
