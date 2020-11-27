@@ -125,6 +125,74 @@ export default function NoticeBoard({
                           }}
                         </Mutation>
                       </Column>
+                    ) : profile.stripeID && profile.stripeStatus === 'false' ? (
+                      <Column>
+                        <Typography variant="h4" className={classes.header4}>
+                          Your{' '}
+                          <a
+                            href="https://stripe.com"
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            <img
+                              src={stripeLogoSM}
+                              alt="STRIPE"
+                              style={{ width: 100 }}
+                            />
+                          </a>{' '}
+                          account needs validating
+                        </Typography>
+                        <Typography
+                          variant="h6"
+                          style={{ color: '#fff', textAlign: 'center' }}
+                        >
+                          Please login and follow instructions to verify your
+                          account
+                        </Typography>
+                        {loadingStripe ? (
+                          <Typography
+                            variant="h6"
+                            style={{ color: '#fff', marginTop: 20 }}
+                          >
+                            Please Wait
+                          </Typography>
+                        ) : (
+                          <Column>
+                            <a
+                              href="https://dashboard.stripe.com/login"
+                              style={{
+                                textDecoration: 'none',
+                                color: 'rgba(255,255,255,0.5)',
+                                marginTop: 5,
+                              }}
+                            >
+                              <IconButton
+                                title="Visit Stripe"
+                                icon="chevron_right"
+                                iconPos="right"
+                                color="stripe"
+                                onClickEvent={() => {}}
+                              />
+                            </a>
+                            <a
+                              href="https://doodlemeeple.com/activate-stripe"
+                              target="_blank"
+                              style={{
+                                textDecoration: 'none',
+                                color: 'rgba(255,255,255,0.9)',
+                                marginTop: 5,
+                              }}
+                            >
+                              <Typography variant="body1">
+                                Need Help?
+                              </Typography>
+                            </a>
+                          </Column>
+                        )}
+                      </Column>
                     ) : !profile.stripeID && profile.creativeTrue ? (
                       <Column>
                         <Typography variant="h4" className={classes.header4}>

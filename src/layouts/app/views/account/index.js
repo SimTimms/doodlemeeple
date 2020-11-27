@@ -68,7 +68,6 @@ export function Account({ history }) {
               <Divider />
               <Query query={GET_STRIPE} fetchPolicy="network-only">
                 {({ data }) => {
-                  console.log(data);
                   return data ? (
                     data.getStripe.object !== 'account' ? (
                       <img

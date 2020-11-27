@@ -20,6 +20,7 @@ export default function IconButton(props) {
       type={type}
       className={clsx({
         [classes.iconButton]: true,
+        [classes.iconButtonStripe]: color === 'stripe',
         [classes.iconButtonSecondary]: color === 'secondary',
         [classes.iconButtonWarning]: color === 'warning',
         [classes.iconButtonText]: color === 'text',
@@ -38,6 +39,7 @@ export default function IconButton(props) {
         <Icon
           className={clsx({
             [classes.iconButtonIcon]: true,
+            [classes.iconButtonIconStripe]: color === 'stripe',
             [classes.iconButtonIconSecondary]: color === 'secondary',
             [classes.iconButtonIconText]: color === 'text',
             [classes.iconButtonIconTextWhite]: color === 'text-white',
@@ -57,6 +59,7 @@ export default function IconButton(props) {
         <Icon
           className={clsx({
             [classes.iconButtonIcon]: true,
+            [classes.iconButtonIconStripe]: color === 'stripe',
             [classes.iconButtonIconSecondary]: color === 'secondary',
             [classes.iconButtonIconText]: color === 'text',
             [classes.iconButtonIconTextWhite]: color === 'text-white',

@@ -752,6 +752,7 @@ export const PROFILE = gql`
       creatorTrue
       creativeTrue
       stripeID
+      stripeStatus
       onboarding
       favourites {
         receiver {
