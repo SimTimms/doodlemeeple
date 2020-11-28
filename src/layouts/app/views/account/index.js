@@ -25,6 +25,7 @@ export function Account({ history }) {
   const classes = useStyles();
   const [email, setEmail] = React.useState('');
   const [isCreative, setIsCreative] = React.useState(false);
+  const [refresh, setRefresh] = React.useState(0);
   const [confirm, setConfirm] = React.useState(false);
   const [errors, setError] = React.useState({
     email: null,
@@ -70,9 +71,12 @@ export function Account({ history }) {
             <Paper pt={10}>
               <FieldTitleDashboard name="Stripe" inline={false} a="c" />
               <Divider />
-              <Query query={GET_STRIPE} fetchPolicy="network-only">
+              <Query
+                query={GET_STRIPE}
+                variables={{ refresh }}
+                fetchPolicy="network-only"
+              >
                 {({ data }) => {
-                  console.log(data);
                   return data ? (
                     data.getStripe.object !== 'account' ? (
                       <img
@@ -99,7 +103,7 @@ export function Account({ history }) {
                         <Mutation
                           mutation={DELETE_STRIPE_ACCOUNT}
                           onCompleted={(data) => {
-                            console.log(data);
+                            setRefresh(refresh + 1);
                           }}
                         >
                           {(mutation) => {
