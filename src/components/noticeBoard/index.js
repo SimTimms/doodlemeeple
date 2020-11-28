@@ -257,18 +257,20 @@ export default function NoticeBoard({
                         >
                           Welcome to DoodleMeeple
                         </Typography>
-                        <IconButton
-                          color="text-white"
-                          disabled={false}
-                          onClickEvent={() => {
-                            history.push(`/app/jobs`);
-                          }}
-                          icon=""
-                          title="Post a Job"
-                          styleOverride={null}
-                          type="button"
-                          iconPos="right"
-                        />
+                        {profile.creatorTrue && (
+                          <IconButton
+                            color="text-white"
+                            disabled={false}
+                            onClickEvent={() => {
+                              history.push(`/app/jobs`);
+                            }}
+                            icon=""
+                            title="Post a Job"
+                            styleOverride={null}
+                            type="button"
+                            iconPos="right"
+                          />
+                        )}
                         <IconButton
                           color="text-white-mini"
                           disabled={false}
@@ -276,7 +278,7 @@ export default function NoticeBoard({
                             history.push(`/app/creative-roster`);
                           }}
                           icon=""
-                          title="Browse"
+                          title="View the Creative Roster"
                           styleOverride={null}
                           type="button"
                           iconPos="right"
