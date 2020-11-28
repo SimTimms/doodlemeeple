@@ -97,6 +97,21 @@ export function Account({ history }) {
                         <a href="https://dashboard.stripe.com/login">
                           <Typography>Login to Stripe</Typography>
                         </a>
+                        <Mutation
+                          mutation={DELETE_STRIPE_ACCOUNT}
+                          onCompleted={(data) => {
+                            setRefresh(refresh + 1);
+                          }}
+                        >
+                          {(mutation) => {
+                            return (
+                              <IconButton
+                                title="Delete Stripe Account"
+                                onClickEvent={() => mutation()}
+                              />
+                            );
+                          }}
+                        </Mutation>
                       </Column>
                     ) : (
                       <Column>
