@@ -19,7 +19,11 @@ export const SIGNUP_MUTATION = gql`
     }
   }
 `;
-
+export const DELETE_STRIPE_ACCOUNT = gql`
+  mutation deleteStripe {
+    deleteStripe
+  }
+`;
 export const REQUEST_WITHDRAW = gql`
   mutation RequestWithdraw($_id: MongoID!) {
     requestWithdraw(_id: $_id)

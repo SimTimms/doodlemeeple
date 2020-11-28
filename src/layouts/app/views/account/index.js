@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Slide, TextField } from '@material-ui/core';
+import { Typography, Slide, TextField, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   ErrorBox,
@@ -13,7 +13,10 @@ import {
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE, GET_STRIPE } from '../../../../data/queries';
 import stripeButton from '../../../../assets/stripe_button.png';
-import { DELETE_ACCOUNT } from '../../../../data/mutations';
+import {
+  DELETE_ACCOUNT,
+  DELETE_STRIPE_ACCOUNT,
+} from '../../../../data/mutations';
 import Cookies from 'js-cookie';
 import { requestStripe } from '../../../../utils/stripe';
 import { SaveButton } from './components';
@@ -62,12 +65,14 @@ export function Account({ history }) {
             <ErrorBox errorMsg={errors.email} />
             <SaveButton email={email} errors={errors} setError={setError} />
           </Paper>
+
           {isCreative && (
             <Paper pt={10}>
               <FieldTitleDashboard name="Stripe" inline={false} a="c" />
               <Divider />
               <Query query={GET_STRIPE} fetchPolicy="network-only">
                 {({ data }) => {
+                  console.log(data);
                   return data ? (
                     data.getStripe.object !== 'account' ? (
                       <img
@@ -78,19 +83,35 @@ export function Account({ history }) {
                         style={{ width: 200 }}
                         alt=""
                       />
+                    ) : !data.getStripe.payouts_enabled ? (
+                      <Column>
+                        <Typography className={classes.status}>
+                          Your Stripe account hasn't been verified, please login
+                          to your Stripe dashboard to continue.
+                        </Typography>
+                        <Divider />
+                        <a href="https://dashboard.stripe.com/login">
+                          <Typography>Login to Stripe</Typography>
+                        </a>
+                      </Column>
                     ) : (
-                      !data.getStripe.payouts_enabled && (
-                        <Column>
-                          <Typography className={classes.status}>
-                            Your Stripe account hasn't been verified, please
-                            login to your Stripe dashboard to continue.
-                          </Typography>
-                          <Divider />
-                          <a href="https://dashboard.stripe.com/login">
-                            <Typography>Login to Stripe</Typography>
-                          </a>
-                        </Column>
-                      )
+                      <Column>
+                        <Mutation
+                          mutation={DELETE_STRIPE_ACCOUNT}
+                          onCompleted={(data) => {
+                            console.log(data);
+                          }}
+                        >
+                          {(mutation) => {
+                            return (
+                              <IconButton
+                                title="Delete Stripe Account"
+                                onClickEvent={() => mutation()}
+                              />
+                            );
+                          }}
+                        </Mutation>
+                      </Column>
                     )
                   ) : null;
                 }}

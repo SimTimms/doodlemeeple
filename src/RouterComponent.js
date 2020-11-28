@@ -174,6 +174,13 @@ function RouterComponent(props) {
                 <PreviewLayout {...props} theme={theme} publicView={true} />
               )}
             />
+            <Route
+              path="/onboard-user/refresh/"
+              render={(props) => (
+                <StripeSuccess {...props} history={props.history} />
+              )}
+            />
+
             <Route path="/stripe-success">
               <StripeSuccess history={props.history} />
             </Route>

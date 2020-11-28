@@ -79,10 +79,10 @@ function AppLayout(props) {
     count: 0,
   };
   const creativeRoster = {
-    name: 'Creatives',
-    icon: 'brush',
+    name: 'Creative Roster',
+    icon: 'image',
     link: () => history.push('/app/creative-roster'),
-    color: '#222',
+    color: '#fff',
     count: 0,
   };
 
@@ -97,18 +97,8 @@ function AppLayout(props) {
           <Row>
             <MenuButtonShortcut
               text={{
-                name: alphaButton.name,
-                color: alphaButton.color,
-                icon: alphaButton.icon,
-                count: 0,
-              }}
-              onClickEvent={alphaButton.link}
-              active={false}
-            />
-            <MenuButtonShortcut
-              text={{
                 name: creativeRoster.name,
-                color: creativeRoster.color,
+                color: '',
                 icon: creativeRoster.icon,
                 count: 0,
               }}
@@ -119,7 +109,7 @@ function AppLayout(props) {
             <MenuButtonShortcut
               text={{
                 name: helpButton.name,
-                color: helpButton.color,
+                color: '',
                 icon: helpButton.icon,
                 count: 0,
               }}

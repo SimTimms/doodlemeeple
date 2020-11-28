@@ -5,9 +5,16 @@ import dmDevice from '../../assets/dm_white.png';
 import { Column, IconButton, Row, Divider } from '../../components';
 import { Typography } from '@material-ui/core';
 
-export default function StripeSuccess({ history }) {
+export default function StripeSuccess({ history, ...props }) {
   const classes = useStyles();
-
+  const pathParam = props
+    ? props.match
+      ? props.match.params.pathParam
+        ? props.match.params.pathParam
+        : null
+      : null
+    : null;
+  console.log(props);
   return (
     <div className={classes.root}>
       <div className={classes.box}>
