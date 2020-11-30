@@ -24,9 +24,22 @@ export const DELETE_STRIPE_ACCOUNT = gql`
     deleteStripe
   }
 `;
+
+export const DISCONNECT_STRIPE_ACCOUNT = gql`
+  mutation disconnectStripeAccount {
+    disconnectStripe
+  }
+`;
+
 export const REQUEST_WITHDRAW = gql`
   mutation RequestWithdraw($_id: MongoID!) {
     requestWithdraw(_id: $_id)
+  }
+`;
+
+export const CONNECT_STRIPE = gql`
+  mutation connectStripe($token: String!) {
+    connectStripe(token: $token)
   }
 `;
 

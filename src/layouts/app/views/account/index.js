@@ -16,6 +16,7 @@ import stripeButton from '../../../../assets/stripe_button.png';
 import {
   DELETE_ACCOUNT,
   DELETE_STRIPE_ACCOUNT,
+  DISCONNECT_STRIPE_ACCOUNT,
 } from '../../../../data/mutations';
 import Cookies from 'js-cookie';
 import { requestStripe } from '../../../../utils/stripe';
@@ -27,6 +28,10 @@ export function Account({ history }) {
   const [isCreative, setIsCreative] = React.useState(false);
   const [refresh, setRefresh] = React.useState(0);
   const [confirm, setConfirm] = React.useState(false);
+  const [stripeObject, setStripeObject] = React.useState({
+    stripeID: '',
+    stripeClientId: '',
+  });
   const [errors, setError] = React.useState({
     email: null,
   });
@@ -37,8 +42,13 @@ export function Account({ history }) {
         <Query
           query={PROFILE}
           onCompleted={(data) => {
+            console.log(data);
             setEmail(data.profile.email);
             setIsCreative(data.profile.creativeTrue);
+            setStripeObject({
+              stripeID: data.profile.stripeID,
+              stripeClientId: data.profile.stripeClientId,
+            });
           }}
           fetchPolicy="network-only"
         >
@@ -69,8 +79,57 @@ export function Account({ history }) {
 
           {isCreative && (
             <Paper pt={10}>
-              <FieldTitleDashboard name="Stripe" inline={false} a="c" />
-              <Divider />
+              <FieldTitleDashboard
+                name="Payment Methods"
+                inline={false}
+                a="c"
+              />
+              {stripeObject.stripeClientId === null ? (
+                <Column>
+                  <Divider />
+                  <Typography>
+                    You'll need a stripe account if you want to get paid.
+                    Fortunately we can set one up (or link to an existing
+                    account) from here.
+                  </Typography>
+                  <Divider />
+                  <a
+                    href={`https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_STRIPE_CLIENT}&scope=read_write&redirect_uri=${process.env.REACT_APP_STRIPE_REDIRECT}`}
+                  >
+                    <img src={stripeButton} style={{ width: 200 }} alt="" />
+                  </a>
+                  <a href={`https://doodlemeeple.com/no-stripe`}>
+                    <IconButton
+                      title="Stripe is not available in my country"
+                      onClickEvent={() => {}}
+                      color="text-dark"
+                      icon=""
+                    />
+                  </a>
+                </Column>
+              ) : (
+                stripeObject.stripeClientId !== '' && (
+                  <Column>
+                    <Mutation
+                      mutation={DISCONNECT_STRIPE_ACCOUNT}
+                      onCompleted={(data) => {
+                        setRefresh(refresh + 1);
+                      }}
+                    >
+                      {(mutation) => {
+                        return (
+                          <IconButton
+                            title="Disconnect your Stripe account"
+                            onClickEvent={() => mutation()}
+                            color="text-dark"
+                            icon=""
+                          />
+                        );
+                      }}
+                    </Mutation>
+                  </Column>
+                )
+              )}
               <Query
                 query={GET_STRIPE}
                 variables={{ refresh }}
@@ -78,16 +137,9 @@ export function Account({ history }) {
               >
                 {({ data }) => {
                   return data ? (
-                    data.getStripe.object !== 'account' ? (
-                      <img
-                        src={stripeButton}
-                        onClick={() => {
-                          requestStripe(history);
-                        }}
-                        style={{ width: 200 }}
-                        alt=""
-                      />
-                    ) : !data.getStripe.payouts_enabled ? (
+                    data.getStripe.object !== 'account' &&
+                    stripeObject.stripeID &&
+                    !data.getStripe.payouts_enabled ? (
                       <Column>
                         <Typography className={classes.status}>
                           Your Stripe account hasn't been verified, please login
@@ -106,31 +158,36 @@ export function Account({ history }) {
                           {(mutation) => {
                             return (
                               <IconButton
-                                title="Delete Stripe Account"
+                                title="Disconnect your Stripe Connect account"
                                 onClickEvent={() => mutation()}
+                                color="text-dark"
                               />
                             );
                           }}
                         </Mutation>
                       </Column>
                     ) : (
-                      <Column>
-                        <Mutation
-                          mutation={DELETE_STRIPE_ACCOUNT}
-                          onCompleted={(data) => {
-                            setRefresh(refresh + 1);
-                          }}
-                        >
-                          {(mutation) => {
-                            return (
-                              <IconButton
-                                title="Delete Stripe Account"
-                                onClickEvent={() => mutation()}
-                              />
-                            );
-                          }}
-                        </Mutation>
-                      </Column>
+                      stripeObject.stripeID && (
+                        <Column>
+                          <Mutation
+                            mutation={DELETE_STRIPE_ACCOUNT}
+                            onCompleted={(data) => {
+                              setRefresh(refresh + 1);
+                            }}
+                          >
+                            {(mutation) => {
+                              return (
+                                <IconButton
+                                  title="Disconnect your Stripe Connect account"
+                                  onClickEvent={() => mutation()}
+                                  color="text-dark"
+                                  icon=""
+                                />
+                              );
+                            }}
+                          </Mutation>
+                        </Column>
+                      )
                     )
                   ) : null;
                 }}

@@ -753,6 +753,8 @@ export const PROFILE = gql`
       creativeTrue
       stripeID
       stripeStatus
+      stripeClientId
+      paymentMethod
       onboarding
       favourites {
         receiver {

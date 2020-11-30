@@ -11,6 +11,7 @@ import AppProfileEdit from './views/appProfileEdit';
 import Beta from './views/beta';
 import CreativeRoster from './views/creativeRoster';
 import { Account } from './views/account';
+import { StripeConnect } from './views/stripeConnect';
 import FullContract from './views/fullContract';
 import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
@@ -45,6 +46,14 @@ function AppLayout(props) {
     ? props.match
       ? props.match.params.pathParam
         ? props.match.params.pathParam
+        : null
+      : null
+    : null;
+
+  const searchValues = props
+    ? props.location
+      ? props.location.search
+        ? props.location.search
         : null
       : null
     : null;
@@ -157,7 +166,9 @@ function AppLayout(props) {
               favourites={favourites}
             />
           ) : page === 'account' ? (
-            <Account history={history} />
+            <Account history={history} searchValues={searchValues} />
+          ) : page === 'stripe-connect' ? (
+            <StripeConnect history={history} searchValues={searchValues} />
           ) : page === 'invites' ? (
             <AppInvites history={history} theme={props.theme} />
           ) : page === 'submitted' ? (

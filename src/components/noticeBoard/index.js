@@ -20,7 +20,7 @@ export default function NoticeBoard({
   const [loadingStripe, setLoadingStripe] = React.useState(false);
   const [skip, setSkip] = React.useState(false);
   const mobile = useMediaQuery('(max-width:800px)');
-  console.log(profile);
+
   return (
     <div className={classes.root}>
       <Row>

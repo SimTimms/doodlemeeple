@@ -36,3 +36,13 @@ export const readableErrors = (errorIn, errors) => {
 
   return Object.assign({}, errors);
 };
+
+export const friendlyGraphQLError = (errorIn) => {
+  let errorString = errorIn.toString();
+  console.log(errorString);
+  return errorString.indexOf('authorization code has already been used') > -1
+    ? 'This code has expired'
+    : errorString.indexOf('Authorization code expired') > -1
+    ? 'This code has expired'
+    : 'Error';
+};
