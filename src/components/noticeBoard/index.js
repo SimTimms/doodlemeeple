@@ -230,7 +230,7 @@ export default function NoticeBoard({
                           </Column>
                         </Column>
                       )
-                    ) : !profile.stripeClientId && profile.creativeTrue ? (
+                    ) : !profile.stripeID && profile.creativeTrue ? (
                       <Column>
                         <Typography variant="h4" className={classes.header4}>
                           Connect to{' '}
@@ -265,19 +265,16 @@ export default function NoticeBoard({
                           </Typography>
                         ) : (
                           <Column>
-                            <img
-                              src={stripeButton}
-                              style={{
-                                width: 200,
-                                marginTop: 20,
-                                cursor: 'pointer',
-                              }}
-                              alt=""
-                              onClick={() => {
-                                requestStripe();
-                                setLoadingStripe(true);
-                              }}
-                            />
+                            <a
+                              href={`https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_STRIPE_CLIENT}&scope=read_write&redirect_uri=${process.env.REACT_APP_STRIPE_REDIRECT}`}
+                            >
+                              <img
+                                src={stripeButton}
+                                style={{ width: 200 }}
+                                alt=""
+                              />
+                            </a>
+
                             <a
                               href="https://doodlemeeple.com/connecting-with-stripe"
                               target="_blank"
