@@ -221,7 +221,9 @@ export default function NoticeBoard({
                           </Column>
                         </Column>
                       )
-                    ) : !profile.stripeID && profile.creativeTrue ? (
+                    ) : !profile.stripeID &&
+                      !profile.stripeClientId &&
+                      profile.creativeTrue ? (
                       <Column>
                         <Typography variant="h4" className={classes.header4}>
                           Connect to{' '}
@@ -247,6 +249,7 @@ export default function NoticeBoard({
                         >
                           It's simple to do, just click below to begin
                         </Typography>
+                        <Divider />
                         {
                           <Column>
                             <a

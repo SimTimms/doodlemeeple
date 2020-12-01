@@ -28,7 +28,7 @@ export function Account({ history }) {
   const [refresh, setRefresh] = React.useState(0);
   const [confirm, setConfirm] = React.useState(false);
   const [stripeObject, setStripeObject] = React.useState({
-    stripeID: '',
+    stripeID: null,
     stripeClientId: '',
   });
   const [errors, setError] = React.useState({
@@ -138,27 +138,47 @@ export function Account({ history }) {
                     />
                   </a>
                 </Column>
+              ) : stripeObject.stripeClientId !== '' && refresh === 0 ? (
+                <Column>
+                  <Meta str="Your Stripe account is connected to DoodleMeeple" />
+                  <Mutation
+                    mutation={DISCONNECT_STRIPE_ACCOUNT}
+                    onCompleted={(data) => {
+                      setRefresh(refresh + 1);
+                    }}
+                    variables={{ refresh }}
+                  >
+                    {(mutation) => {
+                      return (
+                        <IconButton
+                          title="Disconnect your Stripe account"
+                          onClickEvent={() => mutation()}
+                          color="text-dark"
+                          icon=""
+                        />
+                      );
+                    }}
+                  </Mutation>
+                </Column>
               ) : (
-                stripeObject.stripeClientId !== '' && (
+                refresh > 0 && (
                   <Column>
-                    <Mutation
-                      mutation={DISCONNECT_STRIPE_ACCOUNT}
-                      onCompleted={(data) => {
-                        setRefresh(refresh + 1);
-                      }}
-                      variables={{ refresh }}
+                    <Divider />
+                    <Meta str="Your Stripe account has been disconnected from DoodleMeeple" />
+                    <Divider />
+                    <a
+                      href={`https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_STRIPE_CLIENT}&scope=read_write&redirect_uri=${process.env.REACT_APP_STRIPE_REDIRECT}`}
                     >
-                      {(mutation) => {
-                        return (
-                          <IconButton
-                            title="Disconnect your Stripe account"
-                            onClickEvent={() => mutation()}
-                            color="text-dark"
-                            icon=""
-                          />
-                        );
-                      }}
-                    </Mutation>
+                      <img src={stripeButton} style={{ width: 200 }} alt="" />
+                    </a>
+                    <a href={`https://doodlemeeple.com/no-stripe`}>
+                      <IconButton
+                        title="Stripe is not available in my country"
+                        onClickEvent={() => {}}
+                        color="text-dark"
+                        icon=""
+                      />
+                    </a>
                   </Column>
                 )
               )}
@@ -168,7 +188,7 @@ export function Account({ history }) {
                 fetchPolicy="network-only"
               >
                 {({ data }) => {
-                  return data && stripeObject.stripeID !== '' ? (
+                  return data && stripeObject.stripeID ? (
                     <Column>
                       <Typography className={classes.status}>
                         You have a Stripe Connect account. We're phasing these
