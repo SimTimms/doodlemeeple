@@ -9,6 +9,7 @@ import {
   Paper,
   FieldTitleDashboard,
   Divider,
+  Meta,
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE, GET_STRIPE } from '../../../../data/queries';
@@ -87,11 +88,13 @@ export function Account({ history }) {
               {stripeObject.stripeClientId === null ? (
                 <Column>
                   <Divider />
-                  <Typography>
+                  <Meta
+                    str="
                     You'll need a stripe account if you want to get paid.
                     Fortunately we can set one up (or link to an existing
-                    account) from here.
-                  </Typography>
+                    account) from here"
+                  />
+
                   <Divider />
                   <a
                     href={`https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_STRIPE_CLIENT}&scope=read_write&redirect_uri=${process.env.REACT_APP_STRIPE_REDIRECT}`}
@@ -113,8 +116,10 @@ export function Account({ history }) {
                     <Mutation
                       mutation={DISCONNECT_STRIPE_ACCOUNT}
                       onCompleted={(data) => {
+                        console.log(data);
                         setRefresh(refresh + 1);
                       }}
+                      variables={{ refresh }}
                     >
                       {(mutation) => {
                         return (
