@@ -230,7 +230,7 @@ export default function NoticeBoard({
                           </Column>
                         </Column>
                       )
-                    ) : !profile.stripeID && profile.creativeTrue ? (
+                    ) : !profile.stripeClientId && profile.creativeTrue ? (
                       <Column>
                         <Typography variant="h4" className={classes.header4}>
                           Connect to{' '}
