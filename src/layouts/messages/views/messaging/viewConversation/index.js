@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStyles } from './styles';
 import Messages from './components/messages';
-import { IconButton, Row } from '../../../../../components';
+import { Row } from '../../../../../components';
 
 export default function ViewConversation({
   history,

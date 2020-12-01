@@ -2,13 +2,9 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Card, CardContent, Typography, Slide } from '@material-ui/core';
 import { Column, FieldTitleDashboard, Divider } from '../../../../components';
-import stripeButton from '../../../../assets/stripe_button.png';
-import stripeLogoSM from '../../../../assets/stripe_logo_sm.png';
-import { requestStripe } from '../../../../utils/stripe';
 
 export default function AppFailedPayment({ history }) {
   const classes = useStyles();
-  const [loadingStripe, setLoadingStripe] = React.useState(false);
 
   return (
     <Slide
@@ -35,25 +31,10 @@ export default function AppFailedPayment({ history }) {
             <Divider />
             <Typography>
               Before we take a look we want to make sure that your DoodleMeeple
-              account is correctly connected to STRIPE.
+              account is correctly connected to Stripe.
             </Typography>
             <Divider />
-            <Typography>
-              Please click the button below and follow the instructions.
-            </Typography>
-            <img
-              src={stripeButton}
-              style={{
-                width: 200,
-                marginTop: 20,
-                cursor: 'pointer',
-              }}
-              alt=""
-              onClick={() => {
-                requestStripe();
-                setLoadingStripe(true);
-              }}
-            />
+            <Typography>We'll be in touch soon</Typography>
           </Column>
         </CardContent>
       </Card>

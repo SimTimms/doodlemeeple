@@ -6,7 +6,6 @@ import {
   NotificationComponent,
   FieldTitleDashboard,
   Paper,
-  Divider,
   DividerMini,
 } from '../../../../../../../components';
 import { NOTIFICATIONS_BY_JOB } from '../../../../../../../data/queries';

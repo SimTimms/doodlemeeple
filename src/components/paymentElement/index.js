@@ -24,13 +24,11 @@ export default function PaymentElement({ display, job, ...props }) {
   const [paymentIntent, setPaymentIntent] = React.useState(null);
   const [visible, setVisible] = React.useState(null);
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
-  const [paymentStatus, setPaymentStatus] = React.useState('');
   const [tabNbr, setTabNbr] = React.useState(0);
   const contractData = job.jobData.activeContract;
   const { setDisplayPayment } = props;
   useEffect(() => {
     setVisible(display);
-    setPaymentStatus(job.jobData.activeContract.status);
   }, [job, display]);
 
   return (
@@ -71,7 +69,6 @@ export default function PaymentElement({ display, job, ...props }) {
                       <IconButton
                         disabled={buttonDisabled}
                         onClickEvent={() => {
-                          setPaymentStatus('stripe');
                           setTabNbr(1);
                           setButtonDisabled(true);
                           mutation();

@@ -1,13 +1,6 @@
 import React from 'react';
 import { useStyles } from './styles';
-import {
-  Row,
-  Divider,
-  PaymentSchedule,
-  FieldTitleDashboard,
-  IconButton,
-  BorderBox,
-} from '../';
+import { Row, Divider, PaymentSchedule, FieldTitleDashboard } from '../';
 import moment from 'moment';
 import { Typography } from '@material-ui/core';
 

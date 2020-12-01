@@ -3,12 +3,11 @@ import { Typography, useMediaQuery } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Column, Row, IconButton, LoadIcon, Divider } from '../';
 import { Mutation, Query } from 'react-apollo';
-import { SKIP_ONBOARDING, SET_AS_CREATOR } from '../../data/mutations';
+import { SET_AS_CREATOR } from '../../data/mutations';
 import { PROFILE_FEATURED } from '../../data/queries';
 import device from '../../assets/device.svg';
 import stripeButton from '../../assets/stripe_button.png';
 import stripeLogoSM from '../../assets/stripe_logo_sm.png';
-import { requestStripe } from '../../utils/stripe';
 
 export default function NoticeBoard({
   profile,
@@ -17,8 +16,6 @@ export default function NoticeBoard({
   setProfile,
 }) {
   const classes = useStyles();
-  const [loadingStripe, setLoadingStripe] = React.useState(false);
-  const [skip, setSkip] = React.useState(false);
   const mobile = useMediaQuery('(max-width:800px)');
 
   return (
@@ -148,14 +145,7 @@ export default function NoticeBoard({
                             Please login and follow instructions to verify your
                             account
                           </Typography>
-                          {loadingStripe ? (
-                            <Typography
-                              variant="h6"
-                              style={{ color: '#fff', marginTop: 20 }}
-                            >
-                              Please Wait
-                            </Typography>
-                          ) : (
+                          {
                             <Column>
                               <a
                                 href="https://dashboard.stripe.com/login"
@@ -176,6 +166,7 @@ export default function NoticeBoard({
                               <a
                                 href="https://doodlemeeple.com/activate-stripe"
                                 target="_blank"
+                                rel="noopener noreferrer"
                                 style={{
                                   textDecoration: 'none',
                                   color: 'rgba(255,255,255,0.9)',
@@ -187,7 +178,7 @@ export default function NoticeBoard({
                                 </Typography>
                               </a>
                             </Column>
-                          )}
+                          }
                         </Column>
                       ) : (
                         <Column>
@@ -256,14 +247,7 @@ export default function NoticeBoard({
                         >
                           It's simple to do, just click below to begin
                         </Typography>
-                        {loadingStripe ? (
-                          <Typography
-                            variant="h6"
-                            style={{ color: '#fff', marginTop: 20 }}
-                          >
-                            Please Wait
-                          </Typography>
-                        ) : (
+                        {
                           <Column>
                             <a
                               href={`https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_STRIPE_CLIENT}&scope=read_write&redirect_uri=${process.env.REACT_APP_STRIPE_REDIRECT}`}
@@ -278,6 +262,7 @@ export default function NoticeBoard({
                             <a
                               href="https://doodlemeeple.com/connecting-with-stripe"
                               target="_blank"
+                              rel="noopener noreferrer"
                               style={{
                                 textDecoration: 'none',
                                 color: 'rgba(255,255,255,0.5)',
@@ -287,7 +272,7 @@ export default function NoticeBoard({
                               <Typography variant="body1">Read More</Typography>
                             </a>
                           </Column>
-                        )}
+                        }
                       </Column>
                     ) : (
                       <Column>

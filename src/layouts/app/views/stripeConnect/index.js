@@ -12,7 +12,6 @@ import {
   Meta,
 } from '../../../../components';
 import { friendlyGraphQLError } from '../../../../utils/readableErrors';
-import stripeButton from '../../../../assets/stripe_button.png';
 
 export function StripeConnect({ history, searchValues }) {
   const [stripeError, setStripeError] = React.useState('');

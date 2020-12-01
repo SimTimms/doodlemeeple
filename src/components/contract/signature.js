@@ -47,7 +47,6 @@ export default function Signature({ contractData, onAccept, onDecline }) {
                 contractId: contractData._id,
               }}
               onCompleted={() => {
-                console.log('SAd');
                 onDecline();
               }}
             >

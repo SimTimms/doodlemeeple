@@ -16,7 +16,6 @@ import { PROFILE, GET_STRIPE } from '../../../../data/queries';
 import stripeButton from '../../../../assets/stripe_button.png';
 import {
   DELETE_ACCOUNT,
-  DELETE_STRIPE_ACCOUNT,
   DISCONNECT_STRIPE_ACCOUNT,
 } from '../../../../data/mutations';
 import Cookies from 'js-cookie';
@@ -43,7 +42,6 @@ export function Account({ history }) {
         <Query
           query={PROFILE}
           onCompleted={(data) => {
-            console.log(data);
             setEmail(data.profile.email);
             setIsCreative(data.profile.creativeTrue);
             setStripeObject({
@@ -146,7 +144,6 @@ export function Account({ history }) {
                     <Mutation
                       mutation={DISCONNECT_STRIPE_ACCOUNT}
                       onCompleted={(data) => {
-                        console.log(data);
                         setRefresh(refresh + 1);
                       }}
                       variables={{ refresh }}
@@ -171,8 +168,7 @@ export function Account({ history }) {
                 fetchPolicy="network-only"
               >
                 {({ data }) => {
-                  console.log(stripeObject.stripeID);
-                  return data ? (
+                  return data && stripeObject.stripeID !== '' ? (
                     <Column>
                       <Typography className={classes.status}>
                         You have a Stripe Connect account. We're phasing these

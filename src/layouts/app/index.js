@@ -80,13 +80,7 @@ function AppLayout(props) {
     color: '#222',
     count: 0,
   };
-  const alphaButton = {
-    name: 'Open Beta',
-    icon: 'warning',
-    link: () => history.push('/app/beta'),
-    color: props.theme.palette.primary.main,
-    count: 0,
-  };
+
   const creativeRoster = {
     name: 'Creative Roster',
     icon: 'image',
@@ -166,11 +160,11 @@ function AppLayout(props) {
               favourites={favourites}
             />
           ) : page === 'account' ? (
-            <Account history={history} searchValues={searchValues} />
+            <Account history={history} />
           ) : page === 'stripe-connect' ? (
             <StripeConnect history={history} searchValues={searchValues} />
           ) : page === 'invites' ? (
-            <AppInvites history={history} theme={props.theme} />
+            <AppInvites history={history} />
           ) : page === 'submitted' ? (
             <ProjectSubmitted history={history} />
           ) : page === 'games' ? (

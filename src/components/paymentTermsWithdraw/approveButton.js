@@ -34,18 +34,18 @@ export default function ApproveButton({
       }}
     >
       {(mutation) => {
-        return response == 'zero_account' ? (
+        return response === 'zero_account' ? (
           <Typography>
             DoodleMeeple was unable to automatically transfer this payment,
             technicians have been notified and will make the transfer manually
             in a few minutes. Contact tech@doodlemeeple.com for details.
           </Typography>
-        ) : response == 'greater_zero' ? (
+        ) : response === 'greater_zero' ? (
           <Typography>
             STRIPE cannot process payments of 0.00, please contact
             tech@doodlemeeple.com for details
           </Typography>
-        ) : response == 'stripe_required' ? (
+        ) : response === 'stripe_required' ? (
           <Typography>
             There is an issue with the Creative's STRIPE account. They have been
             notified. Please try again later.
