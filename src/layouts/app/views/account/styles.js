@@ -13,9 +13,9 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: 14,
   },
   status: {
-    background: theme.palette.error.main,
+    border: `2px solid ${theme.palette.error.main}`,
     padding: 10,
-    color: '#fff',
+    color: '#222',
     borderRadius: 5,
     textAlign: 'center',
   },

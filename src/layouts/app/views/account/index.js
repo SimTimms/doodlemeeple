@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Slide, TextField, Icon } from '@material-ui/core';
+import { Typography, Slide, TextField } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   ErrorBox,
@@ -20,7 +20,6 @@ import {
   DISCONNECT_STRIPE_ACCOUNT,
 } from '../../../../data/mutations';
 import Cookies from 'js-cookie';
-import { requestStripe } from '../../../../utils/stripe';
 import { SaveButton } from './components';
 
 export function Account({ history }) {
@@ -35,6 +34,7 @@ export function Account({ history }) {
   });
   const [errors, setError] = React.useState({
     email: null,
+    stripe: null,
   });
 
   return (
@@ -50,6 +50,8 @@ export function Account({ history }) {
               stripeID: data.profile.stripeID,
               stripeClientId: data.profile.stripeClientId,
             });
+            data.profile.stripeStatus === 'error' &&
+              setError({ ...errors, stripe: true });
           }}
           fetchPolicy="network-only"
         >
@@ -85,13 +87,41 @@ export function Account({ history }) {
                 inline={false}
                 a="c"
               />
-              {stripeObject.stripeClientId === null ? (
+
+              {errors.stripe ? (
+                <Column>
+                  <Typography className={classes.status}>
+                    We've detected an issue with your Stripe account, please
+                    contact{' '}
+                    <a
+                      style={{ color: '#222', fontWeight: 700 }}
+                      href="mailto:support@doodlmeeple.com"
+                    >
+                      support@doodlemeeple.com
+                    </a>{' '}
+                    and provide this number:{' '}
+                    <div
+                      style={{
+                        fontWeight: 800,
+                        marginTop: 10,
+                        marginBottom: 10,
+                        width: '100%',
+                        fontSize: 20,
+                      }}
+                    >
+                      {stripeObject.stripeID}
+                    </div>
+                  </Typography>
+                  <Divider />
+                  <Meta str="Don't worry, your payments are safe and your account hasn't been compromised, contact us and we'll investigate the issue." />
+                </Column>
+              ) : stripeObject.stripeClientId === null ? (
                 <Column>
                   <Divider />
                   <Meta
                     str="
                     You'll need a stripe account if you want to get paid.
-                    Fortunately we can set one up (or link to an existing
+                    You can set one up (or link to an existing
                     account) from here"
                   />
 
@@ -141,59 +171,31 @@ export function Account({ history }) {
                 fetchPolicy="network-only"
               >
                 {({ data }) => {
+                  console.log(stripeObject.stripeID);
                   return data ? (
-                    data.getStripe.object !== 'account' &&
-                    stripeObject.stripeID &&
-                    !data.getStripe.payouts_enabled ? (
-                      <Column>
-                        <Typography className={classes.status}>
-                          Your Stripe account hasn't been verified, please login
-                          to your Stripe dashboard to continue.
-                        </Typography>
-                        <Divider />
-                        <a href="https://dashboard.stripe.com/login">
-                          <Typography>Login to Stripe</Typography>
-                        </a>
-                        <Mutation
-                          mutation={DELETE_STRIPE_ACCOUNT}
-                          onCompleted={(data) => {
-                            setRefresh(refresh + 1);
-                          }}
-                        >
-                          {(mutation) => {
-                            return (
-                              <IconButton
-                                title="Disconnect your Stripe Connect account"
-                                onClickEvent={() => mutation()}
-                                color="text-dark"
-                              />
-                            );
-                          }}
-                        </Mutation>
-                      </Column>
-                    ) : (
-                      stripeObject.stripeID && (
-                        <Column>
-                          <Mutation
-                            mutation={DELETE_STRIPE_ACCOUNT}
-                            onCompleted={(data) => {
-                              setRefresh(refresh + 1);
-                            }}
-                          >
-                            {(mutation) => {
-                              return (
-                                <IconButton
-                                  title="Disconnect your Stripe Connect account"
-                                  onClickEvent={() => mutation()}
-                                  color="text-dark"
-                                  icon=""
-                                />
-                              );
-                            }}
-                          </Mutation>
-                        </Column>
-                      )
-                    )
+                    <Column>
+                      <Typography className={classes.status}>
+                        You have a Stripe Connect account. We're phasing these
+                        out in favour of a much simpler approach. Please
+                        support@doodlemeeple.com so we can guide you through the
+                        process of transferring your account
+                      </Typography>
+
+                      {data.getStripe.object === 'account' &&
+                        stripeObject.stripeID &&
+                        !data.getStripe.payouts_enabled && (
+                          <Column>
+                            <Typography className={classes.status}>
+                              Your Stripe account hasn't been verified, please
+                              login to your Stripe dashboard to continue.
+                            </Typography>
+                            <Divider />
+                            <a href="https://dashboard.stripe.com/login">
+                              <Typography>Login to Stripe</Typography>
+                            </a>
+                          </Column>
+                        )}
+                    </Column>
                   ) : null;
                 }}
               </Query>
