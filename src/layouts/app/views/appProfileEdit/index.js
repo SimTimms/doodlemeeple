@@ -95,7 +95,7 @@ export default function AppProfileEdit({ theme, history }) {
                         count: changes,
                       }}
                       onClickEvent={() => {
-                        history.push(`/preview/${profile._id}`);
+                        history.push(`/app/public-preview/${profile._id}`);
                       }}
                     />
                   }
