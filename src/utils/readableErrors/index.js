@@ -44,5 +44,5 @@ export const friendlyGraphQLError = (errorIn) => {
     ? 'This code has expired'
     : errorString.indexOf('Authorization code expired') > -1
     ? 'This code has expired'
-    : 'Error';
+    : `Error: ${errorString}`;
 };
