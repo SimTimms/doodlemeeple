@@ -77,12 +77,13 @@ export function PreviewProfile({ history, theme, profileId, publicView }) {
 
           <div
             style={{
-              background:
+              backgroundImage:
                 userProfile.profileBG !== null
                   ? `url(${userProfile.profileBG}`
                   : '#fafafa',
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
+              backgroundRepeat: 'no-repeat',
               minHeight: 300,
               maxHeight: 300,
               display: 'flex',

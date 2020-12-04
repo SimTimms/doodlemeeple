@@ -322,7 +322,7 @@ export default function NoticeBoard({
                             maxWidth: 300,
                             minHeight: 300,
                             maxHeight: 300,
-                            background: `url(${media})`,
+                            backgroundImage: `url(${media})`,
                             backgroundSize: 'contain',
                             backgroundRepeat: 'no-repeat',
                           }}
