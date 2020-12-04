@@ -86,22 +86,24 @@ export default function AppDrawer({
               link: () => history.push('/app/dashboard'),
               count: null,
             },
-            /*
             {
               name: 'Messages',
               icon: 'chat',
               link: () => history.push('/messages/conversations'),
-              color: '#444',
-              count: counts.messages,
-            },*/
+              color: '',
+              count:
+                counts.messages > 0
+                  ? { icon: 'local_post_office', count: counts.messages }
+                  : { icon: 'mail', count: counts.messages },
+            },
             {
               name: profile.creativeTrue ? 'Creative' : 'hide',
               icon: 'brush',
               link: () => history.push('/app/invites'),
-              count:
-                counts.invites > 0
-                  ? { icon: 'local_post_office', count: counts.invites }
-                  : { icon: 'mail', count: counts.messages },
+              count: counts.invites > 0 && {
+                icon: 'local_post_office',
+                count: counts.invites,
+              },
             },
             {
               name: profile.creatorTrue ? 'Creator' : 'hide',

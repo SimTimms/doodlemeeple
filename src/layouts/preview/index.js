@@ -1,6 +1,6 @@
 import React from 'react';
 import { PreviewProfile } from './views/previewProfile';
-import { Content, StyledNavBar, IconButton, Column } from '../../components';
+import { Content, IconButton, Column } from '../../components';
 
 function PreviewLayout(props) {
   const pathParam = props

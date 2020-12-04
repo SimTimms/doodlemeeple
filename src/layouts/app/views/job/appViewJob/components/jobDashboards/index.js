@@ -52,7 +52,7 @@ export function CreatorDashboard({
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
   return (
-    <Column>
+    <Column a="flex-start">
       <div
         className={clsx({
           [classes.desktop]: true,

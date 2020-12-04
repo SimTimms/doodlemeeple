@@ -11,7 +11,12 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
     boxShadow: '0 0 5px rgba(0,0,0,0.2)',
   },
-  desktop: { width: '100%', display: 'flex', flexDirection: 'row' },
+  desktop: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
   mobile: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
   dull: { color: '#ddd', boxShadow: 'none' },
   red: { color: theme.palette.error.main },
