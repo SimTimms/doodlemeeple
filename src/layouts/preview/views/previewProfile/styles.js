@@ -15,6 +15,5 @@ export const useStyles = makeStyles((theme) => ({
     minHeight: 300,
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
-    backgroundRepeat: 'no-repeat',
   },
 }));

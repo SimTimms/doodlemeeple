@@ -20,7 +20,6 @@ export const useStyles = makeStyles((theme) => ({
   rootImage: {
     maxHeight: 300,
     minHeight: 300,
-    backgroundRepeat: 'no-repeat',
   },
   controlsWrapper: {
     position: 'absolute',
