@@ -22,6 +22,7 @@ export function PublicLayout(props) {
         : null
       : null
     : null;
+
   if (pageJump !== page) {
     setPage(pageJump);
   }
@@ -46,7 +47,7 @@ export function PublicLayout(props) {
           </div>
         ) : page === 'register' ? (
           <div className={classes.backgroundSignup}>
-            <Registry />
+            <Registry campaignId={token} />
           </div>
         ) : page === 'password-forgot' ? (
           <div className={classes.backgroundSignup}>

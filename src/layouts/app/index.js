@@ -11,6 +11,7 @@ import AppProfileEdit from './views/appProfileEdit';
 import Beta from './views/beta';
 import CreativeRoster from './views/creativeRoster';
 import { Account } from './views/account';
+import { StripeConnect } from './views/stripeConnect';
 import FullContract from './views/fullContract';
 import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
@@ -49,6 +50,14 @@ function AppLayout(props) {
       : null
     : null;
 
+  const searchValues = props
+    ? props.location
+      ? props.location.search
+        ? props.location.search
+        : null
+      : null
+    : null;
+
   if (pageJump !== page) {
     setPage(pageJump);
   }
@@ -71,18 +80,12 @@ function AppLayout(props) {
     color: '#222',
     count: 0,
   };
-  const alphaButton = {
-    name: 'Open Beta',
-    icon: 'warning',
-    link: () => history.push('/app/beta'),
-    color: props.theme.palette.primary.main,
-    count: 0,
-  };
+
   const creativeRoster = {
-    name: 'Creatives',
-    icon: 'brush',
+    name: 'Creative Roster',
+    icon: 'image',
     link: () => history.push('/app/creative-roster'),
-    color: '#222',
+    color: '#fff',
     count: 0,
   };
 
@@ -97,18 +100,8 @@ function AppLayout(props) {
           <Row>
             <MenuButtonShortcut
               text={{
-                name: alphaButton.name,
-                color: alphaButton.color,
-                icon: alphaButton.icon,
-                count: 0,
-              }}
-              onClickEvent={alphaButton.link}
-              active={false}
-            />
-            <MenuButtonShortcut
-              text={{
                 name: creativeRoster.name,
-                color: creativeRoster.color,
+                color: '',
                 icon: creativeRoster.icon,
                 count: 0,
               }}
@@ -119,7 +112,7 @@ function AppLayout(props) {
             <MenuButtonShortcut
               text={{
                 name: helpButton.name,
-                color: helpButton.color,
+                color: '',
                 icon: helpButton.icon,
                 count: 0,
               }}
@@ -168,8 +161,10 @@ function AppLayout(props) {
             />
           ) : page === 'account' ? (
             <Account history={history} />
+          ) : page === 'stripe-connect' ? (
+            <StripeConnect history={history} searchValues={searchValues} />
           ) : page === 'invites' ? (
-            <AppInvites history={history} theme={props.theme} />
+            <AppInvites history={history} />
           ) : page === 'submitted' ? (
             <ProjectSubmitted history={history} />
           ) : page === 'games' ? (

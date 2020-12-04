@@ -5,7 +5,7 @@ import dmDevice from '../../assets/dm_white.png';
 import { Column, IconButton, Row, Divider } from '../../components';
 import { Typography } from '@material-ui/core';
 
-export default function StripeSuccess({ history }) {
+export default function StripeSuccess({ history, ...props }) {
   const classes = useStyles();
 
   return (

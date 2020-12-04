@@ -35,11 +35,10 @@ export default function EditProposalForm({
     message: '',
   });
   const [detailsLock, setDetailsLock] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
   const [tabNbr, setTabNbr] = React.useState(0);
   const [lockSubmit, setLockSubmit] = React.useState(true);
   useEffect(() => {
-    const { cost, paymentTerms, currency, notes } = contractData;
+    const { cost, paymentTerms, currency } = contractData;
     const percentLockCalc = calculatePercent(paymentTerms, cost, currency);
     setPercentLock(percentLockCalc);
     setLockSubmit(cost <= 0 ? true : false);
@@ -69,7 +68,6 @@ export default function EditProposalForm({
                 onCompleted={(data) => {
                   toaster('Autosave');
                   setDetailsLock(false);
-                  setLoading(false);
                 }}
               >
                 {(mutation) => {

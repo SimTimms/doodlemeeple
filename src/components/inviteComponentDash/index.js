@@ -10,7 +10,7 @@ export default function InviteComponentDash({
   ...props
 }) {
   const classes = useStyles();
-  const { jobClosed, invite, job } = props;
+  const { jobClosed, invite } = props;
   const declined = invite && invite.status === 'declined';
   const unopened = invite && invite.status === 'unopened';
   const read = invite && invite.status === 'read';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Icon, Button, Typography } from '@material-ui/core';
+import { Card, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { REMOVE_NOTIFICATION_MUTATION } from '../../data/mutations';
 import { Mutation } from 'react-apollo';

@@ -8,9 +8,7 @@ import {
   ContractSummaryForCreator,
   FullContractComponent,
   BorderBox,
-  IconButton,
   Signature,
-  CheckListItem,
 } from '../';
 import clsx from 'clsx';
 import { PREVIEW_CONTRACT } from '../../data/queries';

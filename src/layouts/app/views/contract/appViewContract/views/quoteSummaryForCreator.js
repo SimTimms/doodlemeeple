@@ -13,7 +13,6 @@ import {
   Meta,
   Text,
   BorderBox,
-  PaymentElement,
   HeaderThree,
   NoticeBox,
 } from '../../../../../../components';
@@ -37,7 +36,6 @@ export default function QuoteSummaryCreator({
   const [contractStatus, setContractStatus] = React.useState(null);
   const [declineWarning, setDeclineWarning] = React.useState(false);
   const [favourites, setFavourites] = React.useState([]);
-  const [displayPayment, setDisplayPayment] = React.useState(false);
   const userId = Cookies.get('userId');
   useEffect(() => {
     setContractStatus(contractData.status);
@@ -105,9 +103,6 @@ export default function QuoteSummaryCreator({
           'LLLL'
         )}. Payment is required to continue.`}
             actionTitle="Pay Now"
-            actionEvent={() => {
-              setDisplayPayment(true);
-            }}
           />
         )}
         {!openContract && contractData.status !== 'paid' && (
@@ -234,9 +229,6 @@ export default function QuoteSummaryCreator({
                       title="Pay Now"
                       color="text-dark"
                       icon="payment"
-                      onClickEvent={() => {
-                        setDisplayPayment(true);
-                      }}
                     />
                   </Column>
                 </BorderBox>

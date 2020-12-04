@@ -1,6 +1,6 @@
 import React from 'react';
 import { PreviewProfile } from './views/previewProfile';
-import { Content, StyledNavBar } from '../../components';
+import { Content, StyledNavBar, IconButton, Column } from '../../components';
 
 function PreviewLayout(props) {
   const pathParam = props
@@ -13,7 +13,17 @@ function PreviewLayout(props) {
 
   return (
     <div>
-      <StyledNavBar title="" open={false} theme={props.theme}></StyledNavBar>
+      <Column>
+        <a
+          href={`https://app.doodlemeeple.com/register/profile-link-${pathParam}`}
+        >
+          <IconButton
+            title="Hire this professional and more at DoodleMeeple.com"
+            color="text-dark"
+          />
+        </a>
+      </Column>
+
       <Content>
         <PreviewProfile
           profileId={pathParam}

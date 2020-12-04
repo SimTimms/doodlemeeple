@@ -3,12 +3,11 @@ import { Typography, useMediaQuery } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Column, Row, IconButton, LoadIcon, Divider } from '../';
 import { Mutation, Query } from 'react-apollo';
-import { SKIP_ONBOARDING, SET_AS_CREATOR } from '../../data/mutations';
+import { SET_AS_CREATOR } from '../../data/mutations';
 import { PROFILE_FEATURED } from '../../data/queries';
 import device from '../../assets/device.svg';
 import stripeButton from '../../assets/stripe_button.png';
 import stripeLogoSM from '../../assets/stripe_logo_sm.png';
-import { requestStripe } from '../../utils/stripe';
 
 export default function NoticeBoard({
   profile,
@@ -17,17 +16,39 @@ export default function NoticeBoard({
   setProfile,
 }) {
   const classes = useStyles();
-  const [loadingStripe, setLoadingStripe] = React.useState(false);
-  const [skip, setSkip] = React.useState(false);
   const mobile = useMediaQuery('(max-width:800px)');
+
   return (
     <div className={classes.root}>
       <Row>
-        {profile.onboarding !== 'complete' && !profile.profileBG && !skip ? (
+        {!profile.creativeTrue && !profile.creatorTrue ? (
           <Column>
             <Divider />
             <Typography variant="h5" style={{ color: '#fff' }} align="center">
-              Welcome to DoodleMeeple
+              Are you a Creative or Creator?
+            </Typography>
+            <IconButton
+              title="Update your Profile"
+              color="text-white"
+              icon="face"
+              styleOverride={{ marginBottom: 20, marginTop: 20 }}
+              onClickEvent={() => history.push('/app/edit-profile/')}
+            />
+            <Divider />
+          </Column>
+        ) : profile.onboarding !== 'complete' &&
+          (!profile.profileBG || !profile.profileImg || !profile.summary) ? (
+          <Column>
+            <Divider />
+            <Typography variant="h5" className={classes.header5}>
+              Let's get your profile ready
+            </Typography>
+            <Typography variant="h6" className={classes.header6}>
+              {!profile.profileBG
+                ? 'Set a Feature Image to continue'
+                : !profile.profileImg
+                ? 'Please add a profile image'
+                : 'Write something about yourself in the summary'}
             </Typography>
             <IconButton
               title="Create a Profile"
@@ -36,21 +57,7 @@ export default function NoticeBoard({
               styleOverride={{ marginBottom: 20, marginTop: 20 }}
               onClickEvent={() => history.push('/app/edit-profile/')}
             />
-            <Mutation mutation={SKIP_ONBOARDING}>
-              {(mutation) => {
-                return (
-                  <IconButton
-                    title="skip"
-                    color="text-white-mini"
-                    icon=""
-                    onClickEvent={() => {
-                      mutation();
-                      setSkip(true);
-                    }}
-                  />
-                );
-              }}
-            </Mutation>
+
             <Divider />
           </Column>
         ) : (
@@ -108,7 +115,115 @@ export default function NoticeBoard({
                           }}
                         </Mutation>
                       </Column>
-                    ) : !profile.stripeID && profile.creativeTrue ? (
+                    ) : profile.stripeID &&
+                      (profile.stripeStatus === 'false' ||
+                        profile.stripeStatus === 'error') ? (
+                      profile.stripeStatus === 'false' ? (
+                        <Column>
+                          <Typography variant="h4" className={classes.header4}>
+                            Your{' '}
+                            <a
+                              href="https://stripe.com"
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                              }}
+                            >
+                              <img
+                                src={stripeLogoSM}
+                                alt="STRIPE"
+                                style={{ width: 100 }}
+                              />
+                            </a>{' '}
+                            account needs validating
+                          </Typography>
+                          <Typography
+                            variant="h6"
+                            style={{ color: '#fff', textAlign: 'center' }}
+                          >
+                            Please login and follow instructions to verify your
+                            account
+                          </Typography>
+                          {
+                            <Column>
+                              <a
+                                href="https://dashboard.stripe.com/login"
+                                style={{
+                                  textDecoration: 'none',
+                                  color: 'rgba(255,255,255,0.5)',
+                                  marginTop: 5,
+                                }}
+                              >
+                                <IconButton
+                                  title="Visit Stripe"
+                                  icon="chevron_right"
+                                  iconPos="right"
+                                  color="stripe"
+                                  onClickEvent={() => {}}
+                                />
+                              </a>
+                              <a
+                                href="https://doodlemeeple.com/activate-stripe"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                  textDecoration: 'none',
+                                  color: 'rgba(255,255,255,0.9)',
+                                  marginTop: 5,
+                                }}
+                              >
+                                <Typography variant="body1">
+                                  Need Help?
+                                </Typography>
+                              </a>
+                            </Column>
+                          }
+                        </Column>
+                      ) : (
+                        <Column>
+                          <Typography variant="h4" className={classes.header4}>
+                            Your{' '}
+                            <a
+                              href="https://stripe.com"
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                              }}
+                            >
+                              <img
+                                src={stripeLogoSM}
+                                alt="STRIPE"
+                                style={{ width: 100 }}
+                              />
+                            </a>{' '}
+                            account has an error
+                          </Typography>
+
+                          <Column>
+                            <a
+                              href="mailto:support@doodlemeeple.com"
+                              style={{
+                                textDecoration: 'none',
+                                color: 'rgba(255,255,255,0.5)',
+                                marginTop: 5,
+                              }}
+                            >
+                              <IconButton
+                                title="Contact support@doodlemeeple.com"
+                                icon="mail"
+                                iconPos="right"
+                                color="stripe"
+                                onClickEvent={() => {}}
+                              />
+                            </a>
+                          </Column>
+                        </Column>
+                      )
+                    ) : !profile.stripeID &&
+                      !profile.stripeClientId &&
+                      profile.creativeTrue ? (
                       <Column>
                         <Typography variant="h4" className={classes.header4}>
                           Connect to{' '}
@@ -134,31 +249,23 @@ export default function NoticeBoard({
                         >
                           It's simple to do, just click below to begin
                         </Typography>
-                        {loadingStripe ? (
-                          <Typography
-                            variant="h6"
-                            style={{ color: '#fff', marginTop: 20 }}
-                          >
-                            Please Wait
-                          </Typography>
-                        ) : (
+                        <Divider />
+                        {
                           <Column>
-                            <img
-                              src={stripeButton}
-                              style={{
-                                width: 200,
-                                marginTop: 20,
-                                cursor: 'pointer',
-                              }}
-                              alt=""
-                              onClick={() => {
-                                requestStripe();
-                                setLoadingStripe(true);
-                              }}
-                            />
+                            <a
+                              href={`https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_STRIPE_CLIENT}&scope=read_write&redirect_uri=${process.env.REACT_APP_STRIPE_REDIRECT}`}
+                            >
+                              <img
+                                src={stripeButton}
+                                style={{ width: 200 }}
+                                alt=""
+                              />
+                            </a>
+
                             <a
                               href="https://doodlemeeple.com/connecting-with-stripe"
                               target="_blank"
+                              rel="noopener noreferrer"
                               style={{
                                 textDecoration: 'none',
                                 color: 'rgba(255,255,255,0.5)',
@@ -168,7 +275,7 @@ export default function NoticeBoard({
                               <Typography variant="body1">Read More</Typography>
                             </a>
                           </Column>
-                        )}
+                        }
                       </Column>
                     ) : (
                       <Column>
@@ -179,18 +286,20 @@ export default function NoticeBoard({
                         >
                           Welcome to DoodleMeeple
                         </Typography>
-                        <IconButton
-                          color="text-white"
-                          disabled={false}
-                          onClickEvent={() => {
-                            history.push(`/app/jobs`);
-                          }}
-                          icon=""
-                          title="Post a Job"
-                          styleOverride={null}
-                          type="button"
-                          iconPos="right"
-                        />
+                        {profile.creatorTrue && (
+                          <IconButton
+                            color="text-white"
+                            disabled={false}
+                            onClickEvent={() => {
+                              history.push(`/app/jobs`);
+                            }}
+                            icon=""
+                            title="Post a Job"
+                            styleOverride={null}
+                            type="button"
+                            iconPos="right"
+                          />
+                        )}
                         <IconButton
                           color="text-white-mini"
                           disabled={false}
@@ -198,7 +307,7 @@ export default function NoticeBoard({
                             history.push(`/app/creative-roster`);
                           }}
                           icon=""
-                          title="Browse"
+                          title="View the Creative Roster"
                           styleOverride={null}
                           type="button"
                           iconPos="right"

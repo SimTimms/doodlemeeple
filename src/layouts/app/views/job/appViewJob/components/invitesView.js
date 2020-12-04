@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Column,
-  FieldTitleDashboard,
   InviteComponentFull,
   DividerWithBorder,
   Paper,

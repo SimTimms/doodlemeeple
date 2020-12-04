@@ -1,16 +1,45 @@
 import gql from 'graphql-tag';
 
 export const SIGNUP_MUTATION = gql`
-  mutation SignupMutation($name: String!, $email: String!, $password: String!) {
-    userCreateOne(record: { name: $name, email: $email, password: $password }) {
+  mutation SignupMutation(
+    $name: String!
+    $email: String!
+    $password: String!
+    $campaignId: String
+  ) {
+    userCreateOne(
+      record: {
+        name: $name
+        email: $email
+        password: $password
+        campaignId: $campaignId
+      }
+    ) {
       recordId
     }
+  }
+`;
+export const DELETE_STRIPE_ACCOUNT = gql`
+  mutation deleteStripe {
+    deleteStripe
+  }
+`;
+
+export const DISCONNECT_STRIPE_ACCOUNT = gql`
+  mutation disconnectStripeAccount {
+    disconnectStripe
   }
 `;
 
 export const REQUEST_WITHDRAW = gql`
   mutation RequestWithdraw($_id: MongoID!) {
     requestWithdraw(_id: $_id)
+  }
+`;
+
+export const CONNECT_STRIPE = gql`
+  mutation connectStripe($token: String!) {
+    connectStripe(token: $token)
   }
 `;
 

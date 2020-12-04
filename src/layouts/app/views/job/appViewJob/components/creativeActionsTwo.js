@@ -9,7 +9,6 @@ export default function CreativeActionsTwo({
   ...props
 }) {
   const classes = useStyles();
-  const { proposalOpen, setProposalOpen, setInviteStatus } = props;
   return (
     <div className={classes.actionWrapper}>
       <IconButton

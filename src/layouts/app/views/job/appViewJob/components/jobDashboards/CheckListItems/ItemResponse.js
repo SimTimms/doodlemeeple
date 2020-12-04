@@ -1,12 +1,7 @@
 import React from 'react';
 import { useStyles } from './styles';
 import { Typography } from '@material-ui/core';
-import {
-  Column,
-  RowCheckList,
-  Row,
-  MenuButtonShortcut,
-} from '../../../../../../../../components';
+import { Column, RowCheckList, Row } from '../../../../../../../../components';
 import clsx from 'clsx';
 
 export default function ItemResponse({ contract, setTabNbr }) {

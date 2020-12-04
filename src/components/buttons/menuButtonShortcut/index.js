@@ -2,7 +2,6 @@ import React from 'react';
 import { ListItem, Icon, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Row } from '../../';
 
 export default function MenuButtonShortcut({
@@ -11,7 +10,6 @@ export default function MenuButtonShortcut({
   active,
   ...props
 }) {
-  const mobile = useMediaQuery('(max-width:800px)');
   const classes = useStyles();
   const { column, countIcon } = props;
 

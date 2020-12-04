@@ -13,9 +13,6 @@ import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
 //import * as serviceWorker from './serviceWorker';
-import { split } from 'apollo-link';
-import { WebSocketLink } from 'apollo-link-ws';
-import { getMainDefinition } from 'apollo-utilities';
 
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
@@ -49,15 +46,6 @@ function RouterComponent(props) {
       },
     };
   });
-
-  const link = split(
-    ({ query }) => {
-      const { kind, operation } = getMainDefinition(query);
-      return kind === 'OperationDefinition' && operation === 'subscription';
-    },
-    //wsLink,
-    authLink.concat(httpLink)
-  );
 
   const client = new ApolloClient({
     link: authLink.concat(httpLink),
@@ -174,6 +162,13 @@ function RouterComponent(props) {
                 <PreviewLayout {...props} theme={theme} publicView={true} />
               )}
             />
+            <Route
+              path="/onboard-user/refresh/"
+              render={(props) => (
+                <StripeSuccess {...props} history={props.history} />
+              )}
+            />
+
             <Route path="/stripe-success">
               <StripeSuccess history={props.history} />
             </Route>
