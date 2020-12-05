@@ -40,13 +40,17 @@ function Uploader({
       },
     };
     setStatusMessage('Loading...');
-
+    const base64data = await resizeImage(file, 1920, 1080);
+    const bufferdata = Buffer.from(
+      base64data.replace(/^data:image\/\w+;base64,/, ''),
+      'base64'
+    );
     await axios
       .post(uploadURL, {
         ...config,
         fileName: fileName,
         fileType: fileType,
-        fileSize,
+        fileSize: bufferdata.length,
         category: 'profileBG',
       })
       .then(async (response) => {
@@ -56,11 +60,7 @@ function Uploader({
           const returnData = response.data.data.returnData;
           const signedRequest = returnData.signedRequest;
           const url = returnData.url;
-          const base64data = await resizeImage(file, 1920, 1920);
-          const bufferdata = Buffer.from(
-            base64data.replace(/^data:image\/\w+;base64,/, ''),
-            'base64'
-          );
+
           axios
             .put(signedRequest, bufferdata, {
               headers: {
