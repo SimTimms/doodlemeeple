@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useStyles } from './styles';
 import { Typography, Button, Icon } from '@material-ui/core';
 import Cookies from 'js-cookie';
+import { Buffer } from 'buffer';
+import resizeImage from '../../utils/resizeImage';
 
 function Uploader({
   cbImage,
@@ -30,10 +32,6 @@ function Uploader({
     let fileType = fileParts[fileParts.length - 1];
     let fileSize = uploadInput.files[0].size;
 
-    const headers = {
-      'Content-Type': 'image/jpeg',
-    };
-
     const uploadURL = `${process.env.REACT_APP_API_S3}/sign_s3`;
     const token = Cookies.get('token');
     let config = {
@@ -51,20 +49,25 @@ function Uploader({
         fileSize,
         category: 'profileBG',
       })
-      .then((response) => {
+      .then(async (response) => {
         setStatusMessage('Sending...');
         if (response.data.data) {
           setStatusMessage('Uploading...');
           const returnData = response.data.data.returnData;
           const signedRequest = returnData.signedRequest;
           const url = returnData.url;
-
-          const options = {
-            headers: headers,
-          };
-
+          const base64data = await resizeImage(file, 1920, 1920);
+          const bufferdata = Buffer.from(
+            base64data.replace(/^data:image\/\w+;base64,/, ''),
+            'base64'
+          );
           axios
-            .put(signedRequest, file, options)
+            .put(signedRequest, bufferdata, {
+              headers: {
+                'Content-Type': file.type,
+                'Content-Encoding': 'base64',
+              },
+            })
             .then((result) => {
               setStatusMessage('');
               cbImage(url);
