@@ -84,7 +84,7 @@ export default function ContractSummary({ contractData, contractStatus }) {
         )}
 
         <Divider />
-        <HeaderThree str="Additional Notes" />
+        <HeaderThree str="Details of my offer" />
         <TextLeft
           str={
             contractData.notes

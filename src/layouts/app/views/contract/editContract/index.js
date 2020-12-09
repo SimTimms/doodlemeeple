@@ -53,12 +53,11 @@ export default function EditContract({ contractId, history }) {
                           contractData={contract}
                           contractStatus={contract.status}
                         />
-                        <HeaderThree str="Additional Notes" />
+                        <HeaderThree str="Details of my offer" />
                         <ActionWrapper>
                           {contract.status === 'submitted' && (
                             <EditContractButton
                               contract={contract}
-                              jobId={contract.job.id}
                               setContract={setContract}
                               title="Retract Quote"
                             />
