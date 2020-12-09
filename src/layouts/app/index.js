@@ -78,7 +78,8 @@ function AppLayout(props) {
   };
 
   const helpButton = {
-    name: 'Help',
+    name: '',
+    title: 'What to do if you need help',
     icon: 'contact_support',
     link: () => history.push('/app/help'),
     color: '#222',
@@ -188,6 +189,13 @@ function AppLayout(props) {
               active={false}
               noPad={true}
             />
+            <div
+              style={{
+                height: '30px',
+                borderRight: '1px solid #ddd',
+                marginRight: 10,
+              }}
+            ></div>
             <MenuButtonShortcut
               text={{
                 name: helpButton.name,
@@ -198,6 +206,7 @@ function AppLayout(props) {
               onClickEvent={helpButton.link}
               active={false}
               noPad={true}
+              title={helpButton.title}
             />
           </Row>
         </div>

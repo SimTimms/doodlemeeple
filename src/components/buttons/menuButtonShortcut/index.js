@@ -14,6 +14,7 @@ export default function MenuButtonShortcut({ text, ...props }) {
     active,
     imageIcon,
     noPad,
+    title,
   } = props;
 
   return (
@@ -25,6 +26,7 @@ export default function MenuButtonShortcut({ text, ...props }) {
       }}
       target="_blank"
       rel="noopener noreferrer"
+      title={title && title}
     >
       <ListItem
         button
