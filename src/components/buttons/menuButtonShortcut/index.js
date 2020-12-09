@@ -4,27 +4,33 @@ import { useStyles } from './styles';
 import clsx from 'clsx';
 import { Row } from '../../';
 
-export default function MenuButtonShortcut({
-  text,
-  onClickEvent,
-  active,
-  ...props
-}) {
+export default function MenuButtonShortcut({ text, ...props }) {
   const classes = useStyles();
-  const { column, countIcon } = props;
+  const {
+    column,
+    countIcon,
+    href,
+    onClickEvent,
+    active,
+    imageIcon,
+    noPad,
+  } = props;
 
   return (
-    <div
+    <a
+      href={href ? href : null}
       className={classes.link}
       onClick={() => {
-        onClickEvent();
+        onClickEvent && onClickEvent();
       }}
+      target="_blank"
+      rel="noopener noreferrer"
     >
       <ListItem
         button
         style={{
-          paddingLeft: 10,
-          paddingRight: 10,
+          paddingLeft: noPad ? 0 : 10,
+          paddingRight: noPad ? 0 : 10,
         }}
         className={clsx({
           [classes.buttonRoot]: true,
@@ -35,39 +41,51 @@ export default function MenuButtonShortcut({
       >
         <div
           className={clsx({
-            [classes.iconButton]: true,
+            [classes.iconButton]: !imageIcon,
+            [classes.iconButtonImage]: imageIcon,
             [classes.iconIconColumn]: column,
             [classes.iconButtonOnly]: text.name === '',
           })}
         >
-          <Icon
-            className={clsx({
-              [classes.iconIcon]: true,
-              [classes.iconIconNoMargin]: text.name === '',
-              [classes.dark]: text.color === 'white',
-              [classes.warning]: text.back
-                ? text.back === 'warning'
-                  ? true
-                  : false
-                : false,
-              [classes.primary]: text.back
-                ? text.back === 'primary'
-                  ? true
-                  : false
-                : false,
-              [classes.secondary]: text.back
-                ? text.back === 'secondary'
-                  ? true
-                  : false
-                : false,
-              [classes.borderSecondary]: text.border === 'secondary',
-              [classes.borderWarning]: text.border === 'warning',
-              [classes.backHover]: text.name === '',
-            })}
-            style={{ color: text.color }}
-          >
-            {text.icon}
-          </Icon>
+          {!text.icon ? (
+            <img
+              src={imageIcon}
+              className={clsx({
+                [classes.iconImage]: true,
+                [classes.iconIconNoMargin]: text.name === '',
+              })}
+              style={{ color: text.color }}
+            />
+          ) : (
+            <Icon
+              className={clsx({
+                [classes.iconIcon]: true,
+                [classes.iconIconNoMargin]: text.name === '',
+                [classes.dark]: text.color === 'white',
+                [classes.warning]: text.back
+                  ? text.back === 'warning'
+                    ? true
+                    : false
+                  : false,
+                [classes.primary]: text.back
+                  ? text.back === 'primary'
+                    ? true
+                    : false
+                  : false,
+                [classes.secondary]: text.back
+                  ? text.back === 'secondary'
+                    ? true
+                    : false
+                  : false,
+                [classes.borderSecondary]: text.border === 'secondary',
+                [classes.borderWarning]: text.border === 'warning',
+                [classes.backHover]: text.name === '',
+              })}
+              style={{ color: text.color }}
+            >
+              {text.icon}
+            </Icon>
+          )}
         </div>
         <Row
           j={text.count > 0 ? 'space-between' : column ? 'center' : 'flex-end'}
@@ -91,6 +109,6 @@ export default function MenuButtonShortcut({
           </Typography>
         </Row>
       </ListItem>
-    </div>
+    </a>
   );
 }
