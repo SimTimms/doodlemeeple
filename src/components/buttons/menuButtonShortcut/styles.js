@@ -18,7 +18,37 @@ export const useStyles = makeStyles((theme) => ({
       background: 'none',
     },
   },
+  iconButtonImage: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: 26,
+    maxWidth: 26,
+    maxHeight: 26,
+    minHeight: 26,
+    borderRadius: '50%',
+    marginRight: 0,
+    position: 'relative',
+    boxShadow:
+      'inset 1px 1px 1px rgba(0,0,0,0.1),inset -1px -1px 1px rgba(0,0,0,0.2)',
+    '&:visited': {
+      background: 'none',
+    },
+    '&:hover': {
+      backgroundColor: 'rgba(0,0,0,0.05)',
+    },
+  },
   iconButtonOnly: { marginRight: 0 },
+  iconImage: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#fff',
+    position: 'relative',
+    width: 24,
+    borderRadius: '50%',
+    textAlign: 'center',
+  },
   iconIcon: {
     display: 'flex',
     alignItems: 'center',
@@ -71,7 +101,6 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     color: '#444',
   },
-
   count: {
     background: theme.palette.error.main,
     borderRadius: '50%',
