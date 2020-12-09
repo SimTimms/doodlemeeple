@@ -2,6 +2,8 @@ export const TYPE_HELPER = (typeIn) => {
   switch (typeIn) {
     case 'graphic-artist':
       return 'Graphic Artist';
+    case 'mini-painter':
+      return 'Miniature Painter';
     case '3d-artist':
       return '3d Sculptor';
     case 'rulebook-editor':
@@ -11,7 +13,7 @@ export const TYPE_HELPER = (typeIn) => {
     case 'creator':
       return 'Creator';
     case 'reviewer':
-      return 'Reviewer';
+      return 'Reviewer/Content Creator';
     case 'marketing':
       return 'Marketing';
     case 'games-developer':
@@ -40,6 +42,7 @@ export const ARTIST_TYPES = [
   '3d-artist',
   'artist',
   'world-builder',
+  'mini-painter',
 ];
 export const MARKETING_TYPES = [
   'reviewer',
