@@ -98,6 +98,7 @@ function AppLayout(props) {
         } - ${pageHeaders(page)}`}</Typography>
         <div>
           <Row>
+            {/*
             <MenuButtonShortcut
               text={{
                 name: creativeRoster.name,
@@ -108,7 +109,7 @@ function AppLayout(props) {
               onClickEvent={creativeRoster.link}
               active={false}
             />
-
+            */}
             <MenuButtonShortcut
               text={{
                 name: helpButton.name,
