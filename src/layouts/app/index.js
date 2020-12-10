@@ -32,6 +32,10 @@ import {
 } from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 import pageHeaders from './pageHeaders';
+import twitterImage from '../../assets/twitter.png';
+import facebookImage from '../../assets/facebook.png';
+import linkedInImage from '../../assets/linkedIn.png';
+import instaImage from '../../assets/insta.png';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('home');
@@ -74,7 +78,8 @@ function AppLayout(props) {
   };
 
   const helpButton = {
-    name: 'Help',
+    name: '',
+    title: 'What to do if you need help',
     icon: 'contact_support',
     link: () => history.push('/app/help'),
     color: '#222',
@@ -82,9 +87,40 @@ function AppLayout(props) {
   };
 
   const creativeRoster = {
-    name: 'Creative Roster',
+    name: '',
     icon: 'image',
     link: () => history.push('/app/creative-roster'),
+    color: '#fff',
+    count: 0,
+    title: 'View a sample of the Creative Roster',
+  };
+
+  const twitter = {
+    name: '',
+    icon: twitterImage,
+    link: 'https://twitter.com/doodlemeeple',
+    color: '#fff',
+    count: 0,
+  };
+
+  const facebook = {
+    name: '',
+    icon: facebookImage,
+    link: 'https://www.facebook.com/doodlemeeple/',
+    color: '#fff',
+    count: 0,
+  };
+  const linkedIn = {
+    name: '',
+    icon: linkedInImage,
+    link: 'https://www.linkedin.com/company/72550979',
+    color: '#fff',
+    count: 0,
+  };
+  const insta = {
+    name: '',
+    icon: instaImage,
+    link: 'https://www.instagram.com/doodlemeeple/',
     color: '#fff',
     count: 0,
   };
@@ -100,6 +136,57 @@ function AppLayout(props) {
           <Row>
             <MenuButtonShortcut
               text={{
+                name: twitter.name,
+                color: '',
+                count: 0,
+              }}
+              href={twitter.link}
+              imageIcon={twitter.icon}
+              active={false}
+              noPad={true}
+            />
+            <MenuButtonShortcut
+              text={{
+                name: linkedIn.name,
+                color: '',
+                count: 0,
+              }}
+              href={linkedIn.link}
+              imageIcon={linkedIn.icon}
+              active={false}
+              noPad={true}
+            />
+            <MenuButtonShortcut
+              text={{
+                name: insta.name,
+                color: '',
+                count: 0,
+              }}
+              href={insta.link}
+              imageIcon={insta.icon}
+              active={false}
+              noPad={true}
+            />
+            <MenuButtonShortcut
+              text={{
+                name: facebook.name,
+                color: '',
+                count: 0,
+              }}
+              href={facebook.link}
+              imageIcon={facebook.icon}
+              active={false}
+              noPad={true}
+            />
+            <div
+              style={{
+                height: '30px',
+                borderRight: '1px solid #ddd',
+                marginRight: 10,
+              }}
+            ></div>
+            <MenuButtonShortcut
+              text={{
                 name: creativeRoster.name,
                 color: '',
                 icon: creativeRoster.icon,
@@ -107,8 +194,9 @@ function AppLayout(props) {
               }}
               onClickEvent={creativeRoster.link}
               active={false}
+              noPad={true}
+              title={creativeRoster.title}
             />
-
             <MenuButtonShortcut
               text={{
                 name: helpButton.name,
@@ -118,6 +206,8 @@ function AppLayout(props) {
               }}
               onClickEvent={helpButton.link}
               active={false}
+              noPad={true}
+              title={helpButton.title}
             />
           </Row>
         </div>

@@ -3,6 +3,7 @@ import { Typography } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useStyles } from './styles';
 import clsx from 'clsx';
+import imageOptimiser from '../../../../../../../../utils/imageOptimiser';
 
 function titleReplace(titleIn) {
   const titleOut = titleIn === 'graphic-artist' ? 'Graphic Artist' : 'Artist';
@@ -45,7 +46,7 @@ export function Card({ img }) {
         className={classes.imgBack}
         style={{
           cursor: 'pointer',
-          backgroundImage: `url(${img})`,
+          backgroundImage: `url(${imageOptimiser(img)})`,
         }}
         onClick={() => {
           setLarge(img);
@@ -93,7 +94,7 @@ export function Testimonials({ testimonials }) {
         {item.image && (
           <div
             style={{
-              backgroundImage: `url(${item.image}`,
+              backgroundImage: `url(${imageOptimiser(item.image)}`,
             }}
             className={classes.testimonialWrapperItem}
           ></div>
@@ -127,7 +128,7 @@ export function Projects({ projects }) {
           <div
             className={classes.projectWrapperItem}
             style={{
-              backgroundImage: `url(${item.image}`,
+              backgroundImage: `url(${imageOptimiser(item.image)}`,
               backgroundSize: 'cover',
             }}
           ></div>
