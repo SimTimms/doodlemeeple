@@ -116,6 +116,7 @@ export default function ProfileCard({
                   setFavCount(isFav ? favCount - 1 : favCount + 1);
                   mutation();
                 }}
+                title={`${favCount} people have liked this creative`}
               >
                 <Icon
                   className={clsx({
