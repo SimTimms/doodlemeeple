@@ -37,7 +37,7 @@ export default function ProfileCard({
       <div
         style={{
           backgroundImage:
-            creative.profileBG !== ''
+            creative.profileBG !== '' && creative.profileBG
               ? `url(${imageOptimise(creative.profileBG)})`
               : '#eee',
           backgroundSize: 'cover',
