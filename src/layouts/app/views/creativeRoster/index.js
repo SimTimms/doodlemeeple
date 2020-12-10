@@ -15,6 +15,7 @@ export default function CreativeRoster({ theme, history, favourites }) {
     '3d-artist',
     'artist',
     'world-builder',
+    'mini-painter',
   ];
   const marketingTypes = [
     'reviewer',

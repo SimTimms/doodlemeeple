@@ -90,7 +90,6 @@ function MediaGallery({ items, edit, setBgImage, setImages, galleryId }) {
                     <Uploader
                       cbImage={(url) => {
                         setSaveImage(url);
-
                         mutation();
                       }}
                       styleOverride={null}
