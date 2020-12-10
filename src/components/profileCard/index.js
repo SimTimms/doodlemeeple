@@ -8,6 +8,7 @@ import { ADD_FAVOURITE, CREATE_INVITE } from '../../data/mutations';
 import clsx from 'clsx';
 import Cookies from 'js-cookie';
 import imageOptimiser from '../../utils/imageOptimiser';
+import stripeImg from '../../assets/stripe_logo_sm.png';
 
 export default function ProfileCard({
   history,
@@ -68,33 +69,75 @@ export default function ProfileCard({
           position: 'relative',
         }}
       ></div>
-      <Mutation
-        mutation={ADD_FAVOURITE}
-        variables={{
-          id: creative._id,
+      <div
+        style={{
+          width: '100%',
+          height: '32px',
+          marginTop: '-40px',
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'flex-end',
+          alignItems: 'center',
         }}
       >
-        {(mutation) => {
-          return (
-            <div className={`${classes.smallActionWrapper} ${classes.top}`}>
-              <Icon
+        {(creative.stripeID || creative.stripeClientId) && (
+          <div className={classes.stripeBox}>
+            <img
+              src={stripeImg}
+              style={{ width: '100%' }}
+              alt="Stripe Logo"
+              title="This creative has completed their payment profile"
+            />
+          </div>
+        )}
+        {creative.paymentMethod && (
+          <Icon
+            className={clsx({
+              [classes.favIcon]: true,
+              [classes.favIconPrimary]: true,
+            })}
+            title="This creative has made arrangements to be paid by BACS"
+          >
+            credit_card
+          </Icon>
+        )}
+        <Mutation
+          mutation={ADD_FAVOURITE}
+          variables={{
+            id: creative._id,
+          }}
+        >
+          {(mutation) => {
+            return (
+              <div
+                className={`${classes.smallActionWrapper} ${classes.top}`}
                 onClick={() => {
                   setIsFav(isFav ? false : true);
                   setFavCount(isFav ? favCount - 1 : favCount + 1);
                   mutation();
                 }}
-                className={classes.favIcon}
               >
-                {isFav ? 'favorite' : 'favorite_border'}
-              </Icon>
-              <Typography className={classes.actionText} style={{}}>
-                {favCount}
-              </Typography>
-            </div>
-          );
-        }}
-      </Mutation>
-
+                <Icon
+                  className={clsx({
+                    [classes.favIcon]: true,
+                    [classes.favIconDark]: !isFav,
+                  })}
+                >
+                  favorite
+                </Icon>
+                <Typography
+                  className={clsx({
+                    [classes.actionText]: true,
+                    [classes.actionTextDark]: !isFav,
+                  })}
+                >
+                  {favCount}
+                </Typography>
+              </div>
+            );
+          }}
+        </Mutation>
+      </div>
       <Column j="center" a="center">
         <IconButton
           title={creative.name}

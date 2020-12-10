@@ -8,6 +8,9 @@ export const CREATIVES = gql`
       summary
       profileBG
       profileImg
+      stripeID
+      stripeClientId
+      paymentMethod
       likedMe {
         _id
         receiver {
