@@ -5,7 +5,6 @@ import { Uploader } from '../../components';
 import clsx from 'clsx';
 import { UPLOAD_IMAGE, DELETE_IMAGE } from '../../data/mutations';
 import { Mutation } from 'react-apollo';
-import imageOptimiser from '../../utils/imageOptimiser';
 
 function MediaGallery({ items, edit, setBgImage, setImages, galleryId }) {
   const seedID = Math.floor(Math.random());
@@ -25,7 +24,7 @@ function MediaGallery({ items, edit, setBgImage, setImages, galleryId }) {
                 [classes.imageMobile]: mobile,
               })}
               style={{
-                backgroundImage: `url(${imageOptimiser(tile.img)})`,
+                backgroundImage: `url(${tile.img})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
                 border: '5px solid #fff',
