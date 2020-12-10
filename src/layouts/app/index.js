@@ -87,11 +87,12 @@ function AppLayout(props) {
   };
 
   const creativeRoster = {
-    name: 'Creative Roster',
+    name: '',
     icon: 'image',
     link: () => history.push('/app/creative-roster'),
     color: '#fff',
     count: 0,
+    title: 'View a sample of the Creative Roster',
   };
 
   const twitter = {
@@ -133,18 +134,6 @@ function AppLayout(props) {
         } - ${pageHeaders(page)}`}</Typography>
         <div>
           <Row>
-            {/*
-            <MenuButtonShortcut
-              text={{
-                name: creativeRoster.name,
-                color: '',
-                icon: creativeRoster.icon,
-                count: 0,
-              }}
-              onClickEvent={creativeRoster.link}
-              active={false}
-            />
-            */}
             <MenuButtonShortcut
               text={{
                 name: twitter.name,
@@ -196,6 +185,18 @@ function AppLayout(props) {
                 marginRight: 10,
               }}
             ></div>
+            <MenuButtonShortcut
+              text={{
+                name: creativeRoster.name,
+                color: '',
+                icon: creativeRoster.icon,
+                count: 0,
+              }}
+              onClickEvent={creativeRoster.link}
+              active={false}
+              noPad={true}
+              title={creativeRoster.title}
+            />
             <MenuButtonShortcut
               text={{
                 name: helpButton.name,
