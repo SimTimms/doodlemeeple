@@ -7,6 +7,7 @@ import { Mutation } from 'react-apollo';
 import { ADD_FAVOURITE, CREATE_INVITE } from '../../data/mutations';
 import clsx from 'clsx';
 import Cookies from 'js-cookie';
+import imageOptimise from '../../utils/imageOptimiser';
 
 export default function ProfileCard({
   history,
@@ -36,7 +37,9 @@ export default function ProfileCard({
       <div
         style={{
           backgroundImage:
-            creative.profileBG !== '' ? `url(${creative.profileBG})` : '#eee',
+            creative.profileBG !== ''
+              ? `url(${imageOptimise(creative.profileBG)})`
+              : '#eee',
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
           boxShadow:
