@@ -14,6 +14,7 @@ export default function Creatives({ favourites, history, filter, ...props }) {
   const [creativeArray, setCreativeArray] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [noMore, setNoMore] = React.useState(false);
+  const [existingFilter, setExistingFilter] = React.useState(false);
 
   return (
     <div
@@ -30,7 +31,13 @@ export default function Creatives({ favourites, history, filter, ...props }) {
         variables={{ type: filter, page: page }}
         fetchPolicy="network-only"
         onCompleted={(data) => {
-          setCreativeArray([...creativeArray, ...data.getCreatives]);
+          filter === existingFilter &&
+            setCreativeArray([...creativeArray, ...data.getCreatives]);
+
+          if (filter !== existingFilter) {
+            setCreativeArray([...data.getCreatives]);
+            setExistingFilter(filter);
+          }
           data.getCreatives.length === 0 && setNoMore(true);
         }}
       >
