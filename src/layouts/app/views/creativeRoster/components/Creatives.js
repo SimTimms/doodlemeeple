@@ -12,7 +12,7 @@ import {
 export default function Creatives({ favourites, history, filter, ...props }) {
   const classes = useStyles();
   const [creativeArray, setCreativeArray] = React.useState([]);
-  const [page, setPage] = React.useState(1);
+  const [page, setPage] = React.useState(0);
   const [noMore, setNoMore] = React.useState(false);
 
   return (
