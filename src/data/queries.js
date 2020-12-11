@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const CREATIVES = gql`
-  query GetCreatives($type: [String]) {
-    getCreatives(type: $type) {
+  query GetCreatives($type: [String], $page: Int) {
+    getCreatives(type: $type, page: $page) {
       _id
       name
       summary
@@ -11,6 +11,36 @@ export const CREATIVES = gql`
       stripeID
       stripeClientId
       paymentMethod
+      likedMe {
+        _id
+        receiver {
+          _id
+        }
+        user {
+          _id
+        }
+      }
+      favourites {
+        _id
+        receiver {
+          _id
+        }
+        user {
+          _id
+        }
+      }
+    }
+  }
+`;
+
+export const LIKES = gql`
+  query GetLikes {
+    getLikes {
+      _id
+      name
+      summary
+      profileBG
+      profileImg
       likedMe {
         _id
         receiver {

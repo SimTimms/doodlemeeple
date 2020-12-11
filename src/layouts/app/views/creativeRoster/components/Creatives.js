@@ -2,34 +2,63 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { CREATIVES } from '../../../../../data/queries';
-import { ProfileCard } from '../../../../../components';
+import {
+  ProfileCard,
+  IconButton,
+  LoadIcon,
+  Divider,
+} from '../../../../../components';
 
 export default function Creatives({ favourites, history, filter, ...props }) {
   const classes = useStyles();
+  const [creativeArray, setCreativeArray] = React.useState([]);
+  const [page, setPage] = React.useState(1);
+  const [noMore, setNoMore] = React.useState(false);
+
   return (
-    <Query
-      query={CREATIVES}
-      variables={{ type: filter }}
-      fetchPolicy="network-only"
-    >
-      {({ data }) => {
-        return data ? (
-          <div className={classes.creativeWrapper}>
-            {data.getCreatives.map((creative, index) => {
-              return (
-                <ProfileCard
-                  history={history}
-                  creative={creative}
-                  favourite={
-                    favourites.indexOf(creative._id) > -1 ? true : false
-                  }
-                  key={`creative_${index}`}
-                />
-              );
-            })}
-          </div>
-        ) : null;
+    <div
+      style={{
+        width: '100%',
+        marginTop: 50,
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
       }}
-    </Query>
+    >
+      <Query
+        query={CREATIVES}
+        variables={{ type: filter, page: page }}
+        fetchPolicy="network-only"
+        onCompleted={(data) => {
+          setCreativeArray([...creativeArray, ...data.getCreatives]);
+          data.getCreatives.length === 0 && setNoMore(true);
+        }}
+      >
+        {({ data, loading }) => {
+          return loading ? (
+            <LoadIcon />
+          ) : data ? (
+            <div className={classes.creativeWrapper}></div>
+          ) : null;
+        }}
+      </Query>
+      {creativeArray.map((creative, index) => {
+        return (
+          <ProfileCard
+            history={history}
+            creative={creative}
+            favourite={favourites.indexOf(creative._id) > -1 ? true : false}
+            key={`creative_${index}`}
+          />
+        );
+      })}
+      <Divider />
+
+      <IconButton
+        title={!noMore ? 'More' : 'Done'}
+        icon="keyboard_arrow_down"
+        onClickEvent={() => (!noMore ? setPage(page + 1) : null)}
+      />
+    </div>
   );
 }

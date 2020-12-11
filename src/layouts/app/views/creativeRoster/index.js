@@ -121,13 +121,7 @@ export default function CreativeRoster({ theme, history, favourites }) {
               />
             ))}
         </Row>
-        <div style={{ width: '100%', marginTop: 50 }}>
-          <Creatives
-            history={history}
-            favourites={favourites}
-            filter={filter}
-          />
-        </div>
+        <Creatives history={history} favourites={favourites} filter={filter} />
       </div>
     </Slide>
   );
