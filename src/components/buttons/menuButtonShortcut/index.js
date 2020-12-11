@@ -47,7 +47,7 @@ export default function MenuButtonShortcut({ text, ...props }) {
             [classes.iconButtonImage]: imageIcon,
             [classes.iconIconColumn]: column,
             [classes.iconButtonOnly]: text.name === '',
-            [classes.iconTextOnly]: !text.icon,
+            [classes.iconTextOnly]: !text.icon && !imageIcon,
           })}
         >
           {imageIcon ? (
@@ -105,7 +105,7 @@ export default function MenuButtonShortcut({ text, ...props }) {
               [classes.button]: true,
               [classes.buttonColumn]: column,
               [classes.spaceAbove]: column,
-              [classes.iconTextOnlyButton]: !text.icon,
+              [classes.iconTextOnlyButton]: !text.icon && !imageIcon,
             })}
             style={{ color: text.color }}
           >
