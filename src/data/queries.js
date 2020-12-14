@@ -278,6 +278,12 @@ export const JOB = gql`
       _id
       name
       keywords
+      genre
+      scope
+      mechanics
+      timeframe
+      budget
+      extra
       activeContract {
         _id
         notes

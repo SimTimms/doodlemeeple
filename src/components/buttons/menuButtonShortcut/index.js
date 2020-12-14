@@ -58,6 +58,7 @@ export default function MenuButtonShortcut({ text, ...props }) {
                 [classes.iconIconNoMargin]: text.name === '',
               })}
               style={{ color: text.color }}
+              alt=""
             />
           ) : (
             <Icon

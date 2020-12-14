@@ -21,4 +21,5 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     '&:hover': { boxShadow: '5px 5px 10px rgba(0,0,0,0.1)' },
   },
+  locked: { background: theme.palette.primary.main, color: '#fff' },
 }));
