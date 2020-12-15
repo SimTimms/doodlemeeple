@@ -12,7 +12,7 @@ export default function ArtistLineup({
 }) {
   const classes = useStyles();
 
-  function Fillers({ count }) {
+  function fillers(count) {
     let returnArr = [];
     for (let i = count * 1; i < 5; i++) {
       returnArr.push(
@@ -72,7 +72,7 @@ export default function ArtistLineup({
               </div>
             </div>
           ))}
-          <Fillers count={inviteList.length} />
+          {fillers(inviteList.length)}
         </div>
       </div>
     </Column>

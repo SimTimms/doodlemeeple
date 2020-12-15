@@ -16,7 +16,11 @@ export default function Section3({ setJob, job, mutation }) {
     job.keywords.length === 0;
 
   return (
-    <CardComponent locked={locked}>
+    <CardComponent
+      locked={locked}
+      lockedMsg="Scope & Mechanics"
+      selected={false}
+    >
       <Column>
         <FieldBox
           title="Scope"
@@ -52,24 +56,6 @@ export default function Section3({ setJob, job, mutation }) {
           info={`Sometimes it helps Creatives to understand what you need when you add some context. For example Graphic Designers can actually make your game easier to learn, if they are on the same wavelength as you. You can discuss this more once a contract has been agreed.`}
           size="s"
           multiline={true}
-        />
-        <FieldBox
-          title="Video Message"
-          value={job.showreel}
-          maxLength={200}
-          placeholder="https://www.youtube.com/watch?v=zdDox2o7G1g"
-          onChangeEvent={(e) => {
-            autosave(mutation);
-            setJob({
-              ...job,
-              showreel: e,
-            });
-          }}
-          replaceMode="loose"
-          info="Add a video message to describe the project in more detail"
-          warning=""
-          size="s"
-          multiline={false}
         />
       </Column>
     </CardComponent>

@@ -14,7 +14,7 @@ export default function Section4({ setJob, job, mutation }) {
     !checkLength(job.summary, 'summary');
 
   return (
-    <CardComponent locked={locked}>
+    <CardComponent locked={locked} lockedMsg="Creative Summary">
       <Column a="center" j="center">
         <FieldBox
           title="Creative Summary"

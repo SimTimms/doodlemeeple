@@ -6,13 +6,14 @@ import {
 } from '../../../../../../../components';
 import autosave from '../../../../../../../utils/autosave';
 import { checkLength } from '../../unlock';
+import { toaster } from '../../../../../../../utils/toaster';
 
 export default function Section2({ setJob, job, mutation }) {
   const locked =
     !checkLength(job.name, 'name') || !checkLength(job.genre, 'genre');
 
   return (
-    <CardComponent locked={locked}>
+    <CardComponent locked={locked} lockedMsg="Project Summary">
       <Column>
         <FieldBox
           title="Project Summary"

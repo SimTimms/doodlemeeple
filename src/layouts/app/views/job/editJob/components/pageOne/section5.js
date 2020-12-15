@@ -23,10 +23,12 @@ import { checkLength } from '../../unlock';
 export default function Section5({ setJob, job, mutation }) {
   const [page, setPage] = React.useState(1);
   const locked =
-    !checkLength(job.creativeSummary, 'creativeSummary') ||
-    !checkLength(job.genre, 'genre');
+    !checkLength(job.name, 'name') ||
+    !checkLength(job.genre, 'genre') ||
+    !checkLength(job.summary, 'summary') ||
+    !checkLength(job.creativeSummary, 'creativeSummary');
   return (
-    <CardComponent locked={locked}>
+    <CardComponent locked={locked} lockedMsg="Invites">
       <Column a="center" j="center">
         <FieldTitle
           name="Keywords"
@@ -180,11 +182,6 @@ export default function Section5({ setJob, job, mutation }) {
               ))}
           </Column>
         </div>
-        {job.keywords.length === 0 && (
-          <UnlockInfo str={`Choose and at least 1 keyword to continue`} />
-        )}
-        <Divider />
-        <FieldTitleDashboard name="" inline={false} a="l" />
       </Column>
     </CardComponent>
   );

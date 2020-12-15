@@ -2,25 +2,37 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { Mutation } from 'react-apollo';
 import { SUBMIT_BRIEF } from '../../../../../data/mutations';
-import { IconButton, Column } from '../../../../../components';
+import { IconButton, Column, Row } from '../../../../../components';
 
 export default function SubmitBrief({ job, history, inviteList }) {
   const [page, setPage] = React.useState(0);
 
   return page === 0 ? (
     <Column j="center" a="center">
-      <IconButton
-        onClickEvent={() => {
-          setPage(1);
-        }}
-        disabled={inviteList.length > 0 ? false : true}
-        icon="chevron_right"
-        title="Continue"
-        iconPos="right"
-        styleOverride={null}
-        type="button"
-        color="primary"
-      />
+      <Row>
+        <IconButton
+          title="Back"
+          icon="chevron_left"
+          iconPos="left"
+          color="primary"
+          onClickEvent={() => {
+            history.push(`/app/edit-job/${job._id}`);
+          }}
+          styleOverride={{ marginRight: 5, minWidth: 120 }}
+        />
+        <IconButton
+          onClickEvent={() => {
+            setPage(1);
+          }}
+          disabled={inviteList.length > 0 ? false : true}
+          icon="chevron_right"
+          title="Continue"
+          iconPos="right"
+          styleOverride={{ marginLeft: 5, minWidth: 120 }}
+          type="button"
+          color="primary"
+        />
+      </Row>
     </Column>
   ) : (
     <Mutation

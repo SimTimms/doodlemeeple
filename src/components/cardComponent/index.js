@@ -1,11 +1,11 @@
 import React from 'react';
-import { Typography, Icon, Card } from '@material-ui/core';
+import { Typography, Icon, Card, Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Row } from '../';
 import clsx from 'clsx';
 
 export default function CardComponent({ children, ...props }) {
-  const { styleOverride, onClickEvent, locked } = props;
+  const { styleOverride, onClickEvent, locked, lockedMsg } = props;
   const classes = useStyles();
 
   return (
@@ -13,20 +13,21 @@ export default function CardComponent({ children, ...props }) {
       className={clsx({
         [classes.card]: true,
         [classes.clickable]: onClickEvent,
-        [classes.locked]: locked,
+        [classes.cardLocked]: locked,
       })}
       style={styleOverride && styleOverride}
       onClick={() => (onClickEvent ? onClickEvent() : () => {})}
     >
       {!locked ? (
-        children
+        <Slide direction="left" in={true} mountOnEnter unmountOnExit>
+          <div style={{ width: '100%' }}>{children}</div>
+        </Slide>
       ) : (
         <Row>
-          <Icon>lock</Icon>
+          <Icon className={classes.locked}>lock</Icon>
           <Typography align="center" style={{ width: '100%' }}>
-            Locked
+            {lockedMsg ? lockedMsg : 'Locked'}
           </Typography>
-          <Icon>lock</Icon>
         </Row>
       )}
     </Card>

@@ -26,7 +26,7 @@ import {
   Section7,
 } from './components/pageOne';
 import PageZero from './components/pageZero';
-import { Unlock, checkLength } from './unlock';
+import { unlock, checkLength } from './unlock';
 
 export default function EditJob({ jobId, history }) {
   const classes = useStyles();
@@ -142,37 +142,51 @@ export default function EditJob({ jobId, history }) {
                           job={job}
                           mutation={mutation}
                         />
+                        <Divider />
                         <Section2
                           setJob={setJob}
                           job={job}
                           mutation={mutation}
                         />
+                        <Divider />
                         <Section4
                           setJob={setJob}
                           job={job}
                           mutation={mutation}
                         />
+                        <Divider />
                         <Section5
                           setJob={setJob}
                           job={job}
                           mutation={mutation}
                         />
+                        <Divider />
+                        <FieldTitleDashboard
+                          name="Optional"
+                          inline={false}
+                          a="c"
+                        />
+                        <Divider />
                         <Section3
                           setJob={setJob}
                           job={job}
                           mutation={mutation}
                         />
+                        <Divider />
                         <Section6
                           setJob={setJob}
                           job={job}
                           mutation={mutation}
                         />
+                        <Divider />
                         <Section7
                           setJob={setJob}
                           job={job}
                           mutation={mutation}
                         />
-                        <Unlock job={job} />
+                        {unlock(job) !== null && (
+                          <UnlockInfo str={unlock(job)} />
+                        )}
                         {!locked && (
                           <IconButton
                             title="Continue"

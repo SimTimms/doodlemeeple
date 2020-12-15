@@ -16,7 +16,7 @@ export default function Section6({ setJob, job, mutation }) {
     job.keywords.length === 0;
 
   return (
-    <CardComponent locked={locked}>
+    <CardComponent locked={locked} lockedMsg="Timeframe & budget">
       <Column a="center" j="center">
         <FieldBox
           title="Timeframe"
