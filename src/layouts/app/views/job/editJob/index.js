@@ -23,6 +23,7 @@ import {
   Section5,
   Section6,
   Section7,
+  Section8,
 } from './components/pageOne';
 import PageZero from './components/pageZero';
 import { unlock, checkLength } from './unlock';
@@ -112,7 +113,7 @@ export default function EditJob({ jobId, history }) {
               scope: job.scope,
               mechanics: job.mechanics,
               timeframe: job.timeframe,
-              gallery: job.gallery,
+              gallery: job.gallery._id,
               extra: job.extra,
               budget: job.budget,
               showreel: job.showreel,
@@ -155,6 +156,12 @@ export default function EditJob({ jobId, history }) {
                         />
                         <Divider />
                         <Section5
+                          setJob={setJob}
+                          job={job}
+                          mutation={mutation}
+                        />
+                        <Divider />
+                        <Section8
                           setJob={setJob}
                           job={job}
                           mutation={mutation}

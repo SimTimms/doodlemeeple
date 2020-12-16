@@ -341,6 +341,7 @@ export const UPDATE_JOB = gql`
     $scope: String
     $mechanics: String
     $timeframe: String
+    $gallery: MongoID!
     $budget: String
     $extra: String
     $keywords: [String]
@@ -357,6 +358,7 @@ export const UPDATE_JOB = gql`
         type: $type
         creativeSummary: $creativeSummary
         submitted: $submitted
+        gallery: $gallery
         keywords: $keywords
         timeframe: $timeframe
         extra: $extra

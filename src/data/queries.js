@@ -481,6 +481,14 @@ export const JOB_CREATIVE = gql`
           submitted
           scope
           mechanics
+          gallery {
+            _id
+            summary
+            images {
+              _id
+              img
+            }
+          }
           timeframe
           budget
           extra
@@ -518,6 +526,14 @@ export const JOB_CREATIVE = gql`
         budget
         extra
         showreel
+        gallery {
+          _id
+          summary
+          images {
+            _id
+            img
+          }
+        }
         user {
           _id
           email

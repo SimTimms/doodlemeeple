@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
     width: '100%',
-    maxWidth: 600,
+    maxWidth: 800,
     margin: 'auto',
     marginTop: 10,
     marginBottom: 30,

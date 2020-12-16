@@ -78,6 +78,7 @@ import FeatureCardHorizontal from './featureCardHorizontal';
 import UnlockInfo from './unlockInfo';
 import UnlockInfoReverse from './unlockInfoReverse';
 import NotificationComponent from './notificationComponent';
+import GalleryCard from './galleryCard';
 import {
   Header,
   SubHeader,
@@ -100,6 +101,7 @@ export {
   NotificationComponent,
   ProfileAvatar,
   UnlockInfoReverse,
+  GalleryCard,
   Column,
   Row,
   PaymentSchedule,

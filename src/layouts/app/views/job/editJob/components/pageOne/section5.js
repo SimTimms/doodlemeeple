@@ -60,7 +60,7 @@ export default function Section5({ setJob, job, mutation }) {
                   setPage(1);
                 }}
                 active={page === 1}
-              />{' '}
+              />
               <MenuButtonShortcut
                 text={{
                   name: 'Marketing',
