@@ -294,7 +294,7 @@ export default function NoticeBoard({
                               history.push(`/app/jobs`);
                             }}
                             icon=""
-                            title="Post a Job"
+                            title="Post a Project"
                             styleOverride={null}
                             type="button"
                             iconPos="right"

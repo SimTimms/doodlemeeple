@@ -25,7 +25,9 @@ export function Posts({ posts }) {
         const message = post.excerpt.rendered
           .replace(regex, '')
           .replace(/&#8217;/gi, "'")
+          .replace(/&#8216;/gi, "'")
           .replace(/&amp;/gi, '&')
+          .replace(/&#038;/gi, '&')
           .replace(/\[&hellip;\]/gi, '...');
         const title = post.title.rendered;
         const media = post._embedded['wp:featuredmedia']
