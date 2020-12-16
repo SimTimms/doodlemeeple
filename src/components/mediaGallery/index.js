@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { UPLOAD_IMAGE, DELETE_IMAGE } from '../../data/mutations';
 import { Mutation } from 'react-apollo';
 
-function MediaGallery({ items, edit, setBgImage, setImages, galleryId }) {
+function MediaGallery({ items, edit, setImages, galleryId }) {
   const seedID = Math.floor(Math.random());
   const [mediaViewer, setMediaViewer] = React.useState(null);
   const [saveImage, setSaveImage] = React.useState(null);
@@ -96,7 +96,7 @@ function MediaGallery({ items, edit, setBgImage, setImages, galleryId }) {
                       className={null}
                       cbDelete={null}
                       hasFile={false}
-                      size="1MB PNG JPG GIF"
+                      size="2MB PNG JPG GIF"
                     />
                   );
                 }}

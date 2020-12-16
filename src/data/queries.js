@@ -284,6 +284,14 @@ export const JOB = gql`
       timeframe
       budget
       extra
+      gallery {
+        _id
+        summary
+        images {
+          _id
+          img
+        }
+      }
       activeContract {
         _id
         notes
@@ -327,6 +335,14 @@ export const JOB = gql`
           createdAt
           creativeSummary
           keywords
+          gallery {
+            _id
+            summary
+            images {
+              _id
+              img
+            }
+          }
           user {
             _id
             email
@@ -463,6 +479,12 @@ export const JOB_CREATIVE = gql`
           creativeSummary
           keywords
           submitted
+          scope
+          mechanics
+          timeframe
+          budget
+          extra
+          showreel
           user {
             _id
             email
@@ -490,6 +512,12 @@ export const JOB_CREATIVE = gql`
         creativeSummary
         keywords
         submitted
+        scope
+        mechanics
+        timeframe
+        budget
+        extra
+        showreel
         user {
           _id
           email

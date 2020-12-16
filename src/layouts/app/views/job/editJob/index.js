@@ -9,7 +9,6 @@ import {
   Column,
   FieldTitleDashboard,
   DeleteButton,
-  Row,
 } from '../../../../../components';
 import { Query } from 'react-apollo';
 import { Mutation } from 'react-apollo';
@@ -113,9 +112,9 @@ export default function EditJob({ jobId, history }) {
               scope: job.scope,
               mechanics: job.mechanics,
               timeframe: job.timeframe,
+              gallery: job.gallery,
               extra: job.extra,
               budget: job.budget,
-              gallery: job.gallery,
               showreel: job.showreel,
               type: job.type,
               gameId: job.gameId,
@@ -159,12 +158,6 @@ export default function EditJob({ jobId, history }) {
                           setJob={setJob}
                           job={job}
                           mutation={mutation}
-                        />
-                        <Divider />
-                        <FieldTitleDashboard
-                          name="Optional"
-                          inline={false}
-                          a="c"
                         />
                         <Divider />
                         <Section3
@@ -224,6 +217,7 @@ export default function EditJob({ jobId, history }) {
                   scope: data.jobById.scope ? data.jobById.scope : '',
                   budget: data.jobById.budget ? data.jobById.budget : '',
                   extra: data.jobById.extra ? data.jobById.extra : '',
+                  gallery: data.jobById.gallery ? data.jobById.gallery : '',
                   timeframe: data.jobById.timeframe
                     ? data.jobById.timeframe
                     : '',

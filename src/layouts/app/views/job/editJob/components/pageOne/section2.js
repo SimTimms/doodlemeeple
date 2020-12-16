@@ -6,7 +6,6 @@ import {
 } from '../../../../../../../components';
 import autosave from '../../../../../../../utils/autosave';
 import { checkLength } from '../../unlock';
-import { toaster } from '../../../../../../../utils/toaster';
 
 export default function Section2({ setJob, job, mutation }) {
   const locked =

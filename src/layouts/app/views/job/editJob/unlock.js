@@ -1,5 +1,3 @@
-import React from 'react';
-import { UnlockInfo } from '../../../../../components';
 const minLengths = { name: 10, genre: 3, summary: 30, creativeSummary: 20 };
 export function unlock(job) {
   return job.name.length < minLengths.name

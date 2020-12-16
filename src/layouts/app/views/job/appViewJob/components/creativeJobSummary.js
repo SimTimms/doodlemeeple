@@ -54,6 +54,36 @@ export default function CreativeJobSummary({
             <Typography>{job.job.creativeSummary}</Typography>
             <Divider />
             <Divider />
+            <HeaderThree str="Timeframe" />
+            <Divider />
+            <Typography>{job.job.timeframe}</Typography> <Divider />
+            <Divider />
+            <Divider />
+            <HeaderThree str="Mechanics" />
+            <Divider />
+            <Typography>{job.job.mechanics}</Typography>
+            <Divider />
+            <Divider />
+            <HeaderThree str="Timeframe" />
+            <Divider />
+            <Typography>{job.job.timeframe}</Typography>
+            <Divider />
+            <Divider />
+            <HeaderThree str="Budget" />
+            <Divider />
+            <Typography>{job.job.budget}</Typography>
+            <Divider />
+            <Divider />
+            <HeaderThree str="Extra" />
+            <Divider />
+            <Typography>{job.job.extra}</Typography>
+            <Divider />
+            <Divider />
+            <HeaderThree str="Showreel" />
+            <Divider />
+            <Typography>{job.job.showreel}</Typography>
+            <Divider />
+            <Divider />
             {!userContract ? (
               <BorderBox w={300}>
                 {invite.data.status === 'declined' ? (

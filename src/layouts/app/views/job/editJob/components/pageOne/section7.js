@@ -3,11 +3,16 @@ import {
   FieldBox,
   Column,
   CardComponent,
+  MediaGallery,
 } from '../../../../../../../components';
+
 import autosave from '../../../../../../../utils/autosave';
 import { checkLength } from '../../unlock';
 
 export default function Section7({ setJob, job, mutation }) {
+  function setImages(imageArray) {
+    setJob({ ...job, gallery: { images: [...imageArray] } });
+  }
   const locked =
     !checkLength(job.name, 'name') ||
     !checkLength(job.genre, 'genre') ||
@@ -17,6 +22,12 @@ export default function Section7({ setJob, job, mutation }) {
   return (
     <CardComponent locked={locked} lockedMsg="More Info">
       <Column>
+        <MediaGallery
+          items={job.gallery.images || []}
+          edit={true}
+          setImages={setImages}
+          galleryId={job.gallery._id}
+        />
         <FieldBox
           title="Notes "
           value={job.extra}
