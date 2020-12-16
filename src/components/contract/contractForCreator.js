@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { Divider } from '../';
+import { Divider, Row } from '../';
 import { useStyles } from './styles';
 import Notices from './notices';
 import moment from 'moment';
@@ -81,8 +81,15 @@ export default function FullContractComponent({ contractData, ...props }) {
           Client with the following services (the "Services"):
         </Typography>
         <Typography style={{ marginLeft: 40, marginTop: 20 }}>
-          <b>{job.name}</b>
-          {` ${job.summary}`}
+          <Row j="flex-start">
+            <b style={{ marginRight: 10 }}>Project Title: </b> {job.name}
+          </Row>
+          <Row j="flex-start">
+            <b style={{ marginRight: 10 }}>Summary: </b> {job.summary}
+          </Row>
+          <Row j="flex-start">
+            <b style={{ marginRight: 10 }}>Notes: </b> {job.extra}
+          </Row>
         </Typography>
         <Divider />
         <Typography>
@@ -107,7 +114,12 @@ export default function FullContractComponent({ contractData, ...props }) {
           <b>5. COMPLETION DATE:</b>
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
-          <b>5.1</b> {contractData.deadline}
+          <b style={{ marginRight: 10 }}>5.1</b>
+          {contractData.deadline === '' || !contractData.deadline ? (
+            <i>No completion date has been documented</i>
+          ) : (
+            contractData.deadline
+          )}
         </Typography>
         <Divider />
         <Typography>
@@ -186,9 +198,11 @@ ${contractData.currency} `}
         </Typography>
         <Typography style={{ marginLeft: 80 }}>
           <b>8.1.1</b>{' '}
-          {contractData.notes === ''
-            ? 'No additional notes'
-            : contractData.notes}
+          {contractData.notes === '' || !contractData.notes ? (
+            <i>No Additional Notes</i>
+          ) : (
+            contractData.notes
+          )}
         </Typography>
         <Divider />
         <Typography>

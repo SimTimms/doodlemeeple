@@ -11,7 +11,6 @@ import {
 } from '../../../../../../components';
 export default function ChosenCreative({
   job,
-  setProposalOpen,
   contracts,
   setConversationUser,
   history,

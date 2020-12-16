@@ -69,31 +69,33 @@ export default function EditJob({ jobId, history }) {
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <Divider />
-        <Mutation
-          mutation={REMOVE_JOB}
-          variables={{
-            id: jobId,
-          }}
-          onCompleted={(data) => {
-            toaster('Deleted');
-            history.replace(`/app/jobs`);
-          }}
-        >
-          {(mutation) => {
-            return (
-              <FieldTitleDashboard
-                name="Edit Project"
-                inline={false}
-                a="l"
-                menu={
-                  jobId !== 'new' ? (
-                    <DeleteButton mutation={mutation} str="" />
-                  ) : null
-                }
-              />
-            );
-          }}
-        </Mutation>
+        {job.submitted && job.submitted === 'draft' && (
+          <Mutation
+            mutation={REMOVE_JOB}
+            variables={{
+              id: jobId,
+            }}
+            onCompleted={(data) => {
+              toaster('Deleted');
+              history.replace(`/app/jobs`);
+            }}
+          >
+            {(mutation) => {
+              return (
+                <FieldTitleDashboard
+                  name="Edit Project"
+                  inline={false}
+                  a="l"
+                  menu={
+                    jobId !== 'new' ? (
+                      <DeleteButton mutation={mutation} str="" />
+                    ) : null
+                  }
+                />
+              );
+            }}
+          </Mutation>
+        )}
 
         <Divider />
         {loading ? (
@@ -132,74 +134,74 @@ export default function EditJob({ jobId, history }) {
                 <div style={{ width: '100%' }}>
                   {job._id !== 'new' && (
                     <div style={{ padding: '10px 10px 0 10px' }}>
-                      {job.submitted && job.submitted !== 'draft' && (
+                      {job.submitted && job.submitted !== 'draft' ? (
                         <UnlockInfo str="This project has been submitted and can't be modified" />
-                      )}
-
-                      <Column>
-                        <Section1
-                          setJob={setJob}
-                          job={job}
-                          mutation={mutation}
-                        />
-                        <Divider />
-                        <Section2
-                          setJob={setJob}
-                          job={job}
-                          mutation={mutation}
-                        />
-                        <Divider />
-                        <Section4
-                          setJob={setJob}
-                          job={job}
-                          mutation={mutation}
-                        />
-                        <Divider />
-                        <Section5
-                          setJob={setJob}
-                          job={job}
-                          mutation={mutation}
-                        />
-                        <Divider />
-                        <Section8
-                          setJob={setJob}
-                          job={job}
-                          mutation={mutation}
-                        />
-                        <Divider />
-                        <Section3
-                          setJob={setJob}
-                          job={job}
-                          mutation={mutation}
-                        />
-                        <Divider />
-                        <Section6
-                          setJob={setJob}
-                          job={job}
-                          mutation={mutation}
-                        />
-                        <Divider />
-                        <Section7
-                          setJob={setJob}
-                          job={job}
-                          mutation={mutation}
-                        />
-                        {unlock(job) !== null && (
-                          <UnlockInfo str={unlock(job)} />
-                        )}
-                        {!locked && (
-                          <IconButton
-                            title="Continue"
-                            icon="chevron_right"
-                            iconPos="right"
-                            color="primary"
-                            onClickEvent={() => {
-                              history.push(`/app/pick-artist/${jobId}`);
-                            }}
-                            styleOverride={{ marginLeft: 10 }}
+                      ) : (
+                        <Column>
+                          <Section1
+                            setJob={setJob}
+                            job={job}
+                            mutation={mutation}
                           />
-                        )}
-                      </Column>
+                          <Divider />
+                          <Section2
+                            setJob={setJob}
+                            job={job}
+                            mutation={mutation}
+                          />
+                          <Divider />
+                          <Section4
+                            setJob={setJob}
+                            job={job}
+                            mutation={mutation}
+                          />
+                          <Divider />
+                          <Section5
+                            setJob={setJob}
+                            job={job}
+                            mutation={mutation}
+                          />
+                          <Divider />
+                          <Section8
+                            setJob={setJob}
+                            job={job}
+                            mutation={mutation}
+                          />
+                          <Divider />
+                          <Section3
+                            setJob={setJob}
+                            job={job}
+                            mutation={mutation}
+                          />
+                          <Divider />
+                          <Section6
+                            setJob={setJob}
+                            job={job}
+                            mutation={mutation}
+                          />
+                          <Divider />
+                          <Section7
+                            setJob={setJob}
+                            job={job}
+                            mutation={mutation}
+                          />
+                          {unlock(job) !== null && (
+                            <UnlockInfo str={unlock(job)} />
+                          )}
+                          {!locked && (
+                            <IconButton
+                              title="Continue"
+                              icon="chevron_right"
+                              iconPos="right"
+                              color="primary"
+                              onClickEvent={() => {
+                                history.push(`/app/pick-artist/${jobId}`);
+                              }}
+                              styleOverride={{ marginLeft: 10 }}
+                            />
+                          )}
+                        </Column>
+                      )}
                     </div>
                   )}
                 </div>

@@ -1,23 +1,17 @@
 import React from 'react';
-import { Slide, Typography } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import { useStyles } from '../styles';
 import {
-  HeaderTwo,
-  HeaderThree,
   Column,
   Meta,
   Paper,
-  Divider,
-  GalleryCard,
   BorderBox,
   IconButton,
 } from '../../../../../../components';
 import CreativeActions from '../components/creativeActions';
 import CreativeActionsTwo from '../components/creativeActionsTwo';
 import ClientNotifications from '../components/clientNotifications';
-import { timeDifferenceForDate } from '../../../../../../utils/dates';
-import { nameShortener } from '../../../../../../utils';
-import ReactPlayer from 'react-player';
+import JobSummaryComponent from './jobSummaryComponent';
 
 export default function CreativeJobSummary({
   job,
@@ -41,106 +35,7 @@ export default function CreativeJobSummary({
               job={job}
               history={history}
             />
-            <HeaderTwo str={nameShortener(job.job.name, 30)} />
-            <Meta
-              str={`${timeDifferenceForDate(job.job.createdAt)} | ${
-                job.creator.name
-              }`}
-            />
-            <Divider />
-            <Typography noWrap={false}>{job.job.summary}</Typography>
-            <Divider />
-            <Divider />
-            <HeaderThree str="Creative Summary" />
-            <Divider />
-            <Typography>{job.job.creativeSummary}</Typography>
-            <Divider />
-            <Divider />
-            {job.job.gallery && (
-              <Column>
-                <HeaderThree str="Reference Images" />
-                <Divider />
-
-                <Column>
-                  <div
-                    style={{
-                      width: '100%',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'flex-start',
-                      flexWrap: 'wrap',
-                      paddingLeft: 40,
-                      paddingRight: 40,
-                      boxSizing: 'border-box',
-                    }}
-                  >
-                    {job.job.gallery.images.map((item, index) => {
-                      return <GalleryCard img={`${item.img}`} />;
-                    })}
-                  </div>
-                </Column>
-
-                <Divider />
-                <Divider />
-              </Column>
-            )}
-            {job.job.mechanics !== '' && (
-              <Column>
-                <HeaderThree str="Mechanics" />
-                <Divider />
-                <Typography>{job.job.mechanics}</Typography>
-                <Divider />
-                <Divider />
-              </Column>
-            )}
-            {job.job.timeframe !== '' && (
-              <Column>
-                <HeaderThree str="Timeframe" />
-                <Divider />
-                <Typography>{job.job.timeframe}</Typography>
-                <Divider />
-                <Divider />
-              </Column>
-            )}
-            {job.job.budget !== '' && (
-              <Column>
-                <HeaderThree str="Budget" />
-                <Divider />
-                <Typography>{job.job.budget}</Typography>
-                <Divider />
-                <Divider />
-              </Column>
-            )}
-            {job.job.extra !== '' && (
-              <Column>
-                <HeaderThree str="Extra" />
-                <Divider />
-                <Typography>{job.job.extra}</Typography>
-                <Divider />
-                <Divider />
-              </Column>
-            )}
-            {job.job.showreel !== '' && (
-              <Column>
-                <HeaderThree str="Showreel" />
-                <ReactPlayer
-                  url={job.job.showreel}
-                  playing
-                  controls={true}
-                  muted={true}
-                  style={{
-                    width: '100%',
-                    padding: 10,
-                    boxSizing: 'border-box',
-                    background: '#ddd',
-                    marginTop: 20,
-                  }}
-                  width="100%"
-                />
-                <Divider />
-                <Divider />
-              </Column>
-            )}
+            <JobSummaryComponent job={job.job} />
             {!userContract ? (
               <BorderBox w={300}>
                 {invite.data.status === 'declined' ? (
