@@ -85,6 +85,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
     height: 140,
+    marginTop: -40,
   },
 
   card: {
