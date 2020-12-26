@@ -80,16 +80,26 @@ export default function ProfileCard({
           alignItems: 'center',
         }}
       >
-        {(creative.stripeID || creative.stripeClientId) && (
-          <div className={classes.stripeBox}>
+        {!creative.paymentMethod && (
+          <div
+            className={clsx({
+              [classes.stripeBoxNull]: true,
+              [classes.stripeBox]: creative.stripeID || creative.stripeClientId,
+            })}
+          >
             <img
               src={stripeImg}
               style={{ width: '100%' }}
               alt="Stripe Logo"
-              title="This creative has completed their payment profile"
+              title={
+                creative.stripeID || creative.stripeClientId
+                  ? 'This creative has completed their payment profile'
+                  : 'This creative has not yet completed their payment profile'
+              }
             />
           </div>
         )}
+
         {creative.paymentMethod && (
           <Icon
             className={clsx({
@@ -101,6 +111,34 @@ export default function ProfileCard({
             credit_card
           </Icon>
         )}
+        {
+          <div
+            className={`${classes.smallActionWrapper} ${classes.top}`}
+            title={
+              creative.viewCount === 1
+                ? `1 person has looked at this creative`
+                : `${creative.viewCount} people have looked at this creative`
+            }
+            style={{ marginRight: 0, marginLeft: 3 }}
+          >
+            <Icon
+              className={clsx({
+                [classes.favIconNull]: true,
+                [classes.favIcon]: creative.viewCount > 0,
+              })}
+            >
+              brightness_1
+            </Icon>
+            <Typography
+              className={clsx({
+                [classes.actionText]: true,
+              })}
+              style={{ paddingTop: 2 }}
+            >
+              {creative.viewCount ? creative.viewCount : 0}
+            </Typography>
+          </div>
+        }
         <Mutation
           mutation={ADD_FAVOURITE}
           variables={{
@@ -116,7 +154,12 @@ export default function ProfileCard({
                   setFavCount(isFav ? favCount - 1 : favCount + 1);
                   mutation();
                 }}
-                title={`${favCount} people have liked this creative`}
+                title={
+                  favCount === 1
+                    ? `1 person has liked this creative`
+                    : `${favCount} people have liked this creative`
+                }
+                style={{ marginRight: 3 }}
               >
                 <Icon
                   className={clsx({

@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     minWidth: 270,
     maxWidth: 270,
     position: 'relative',
-    boxShadow: '10px 10px 30px rgba(0,0,0,0.2)',
+    boxShadow: '10px 10px 20px rgba(0,0,0,0.2)',
   },
   creativeCardNoShadow: { boxShadow: 'none' },
   creativeCardWrapper: {
@@ -56,18 +56,22 @@ export const useStyles = makeStyles((theme) => ({
     background: '#fafafc',
   },
   creativeCardInvited: {
-    boxShadow: `0 0 30px ${theme.palette.primary.light}`,
+    boxShadow: `0 0 20px ${theme.palette.primary.light}`,
     border: `1px solid ${theme.palette.primary.light}`,
   },
-  favIcon: {
-    color: theme.palette.error.main,
+
+  favIconNull: {
+    color: '#ccc',
     fontSize: 20,
     paddingTop: 3,
     paddingBottom: 3,
     margin: 0,
     cursor: 'pointer',
-    width: 30,
+    width: 20,
     textAlign: 'center',
+  },
+  favIcon: {
+    color: theme.palette.primary.main,
   },
   favIconPrimary: {
     color: theme.palette.primary.main,
@@ -98,20 +102,22 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     marginTop: -2,
     color: '#fff',
-    width: 30,
+    width: 20,
     position: 'absolute',
     textAlign: 'center',
   },
   actionTextDark: {
     color: '#fff',
   },
-  stripeBox: {
+  stripeBoxNull: {
     width: 30,
-    marginLeft: 5,
-    background: theme.palette.primary.main,
+    background: '#ccc',
     display: 'flex',
     alignItems: 'center',
     padding: '1px 3px 1px 3px',
     borderRadius: 2,
+  },
+  stripeBox: {
+    background: theme.palette.primary.main,
   },
 }));
