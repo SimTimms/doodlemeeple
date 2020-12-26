@@ -170,7 +170,7 @@ export default function AppProfileEdit({ theme, history }) {
                         <FieldTitle
                           name="Feature Image"
                           description="Use this space to showcase your most impressive artwork, "
-                          warning="PNG, GIF or JPG | optimum size 1920 x 300px | 1MB Max"
+                          warning="PNG or JPG | optimum size 1920 x 300px | 2MB Max"
                           inline={false}
                         />
                         <ProfileHeader

@@ -1,18 +1,11 @@
 import React from 'react';
-import { Slide, Typography } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import { useStyles } from '../styles';
-import {
-  HeaderTwo,
-  HeaderThree,
-  Column,
-  Meta,
-  Paper,
-  Divider,
-} from '../../../../../../components';
-import { timeDifferenceForDate } from '../../../../../../utils/dates';
+import { Column, Paper } from '../../../../../../components';
 import CloseJobButton from './closeJobButton';
 import EndJobButton from './endJobButton';
 import RequestCloseButton from './requestCloseButton';
+import JobSummaryComponent from './jobSummaryComponent';
 
 export default function CreatorJobSummary({ jobData, setTabNbr }) {
   const classes = useStyles();
@@ -29,19 +22,7 @@ export default function CreatorJobSummary({ jobData, setTabNbr }) {
       <div className={classes.root}>
         <Paper pt={16}>
           <Column>
-            <HeaderTwo str={job.name} />
-            <Meta
-              str={`${timeDifferenceForDate(job.createdAt)} | ${job.user.name}`}
-            />
-            <Divider />
-            <Typography>{job.summary}</Typography>
-            <Divider />
-            <Divider />
-            <HeaderThree str="Creative Summary" />
-            <Divider />
-            <Typography>{job.creativeSummary}</Typography>
-            <Divider />
-            <Divider />
+            <JobSummaryComponent job={job} />
           </Column>
           {job.submitted !== 'closed' &&
             job.submitted !== 'paid' &&

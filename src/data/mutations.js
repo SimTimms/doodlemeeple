@@ -278,6 +278,7 @@ export const UPDATE_GAME = gql`
     $name: String
     $img: String
     $backgroundImg: String
+    $mechanics: String
     $summary: String
     $location: String
     $showreel: String
@@ -293,6 +294,7 @@ export const UPDATE_GAME = gql`
         location: $location
         showreel: $showreel
         type: $type
+        mechanics: $mechanics
       }
     ) {
       recordId
@@ -335,6 +337,13 @@ export const UPDATE_JOB = gql`
     $type: String
     $creativeSummary: String
     $submitted: String
+    $genre: String
+    $scope: String
+    $mechanics: String
+    $timeframe: String
+    $gallery: MongoID!
+    $budget: String
+    $extra: String
     $keywords: [String]
   ) {
     jobUpdateById(
@@ -344,11 +353,18 @@ export const UPDATE_JOB = gql`
         img: $img
         summary: $summary
         location: $location
+        mechanics: $mechanics
         showreel: $showreel
         type: $type
         creativeSummary: $creativeSummary
         submitted: $submitted
+        gallery: $gallery
         keywords: $keywords
+        timeframe: $timeframe
+        extra: $extra
+        budget: $budget
+        scope: $scope
+        genre: $genre
       }
     ) {
       recordId

@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
     backgroundColor: '#fff',
-    border: `2px solid #fff`,
+    border: `1px solid #fff`,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -17,8 +17,19 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: 'none',
     boxSizing: 'border-box',
   },
+  cardLocked: {
+    padding: 0,
+    background: 'rgba(255,255,255,0.2)',
+    border: `1px solid #fff`,
+  },
   clickable: {
     cursor: 'pointer',
     '&:hover': { boxShadow: '5px 5px 10px rgba(0,0,0,0.1)' },
+  },
+  locked: {
+    background: theme.palette.primary.main,
+    color: '#fff',
+    borderRadius: '3px 0 0 3px',
+    padding: 4,
   },
 }));

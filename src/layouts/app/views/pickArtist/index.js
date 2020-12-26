@@ -6,13 +6,7 @@ import { Query } from 'react-apollo';
 import { JOB } from '../../../../data/queries';
 import { ArtistLineup, Creatives, SubmitBrief } from './components';
 
-export function PickArtist({
-  theme,
-  jobId,
-  autosaveIsOn,
-  history,
-  favourites,
-}) {
+export function PickArtist({ jobId, history, favourites }) {
   const classes = useStyles();
   const [job, setJob] = React.useState({
     name: '',
@@ -58,8 +52,9 @@ export function PickArtist({
         />
 
         <Column j="center" a="center">
-          <div style={{ marginTop: 80 }}>
-            <SubmitBrief job={job} history={history} inviteList={inviteList} />{' '}
+          <div style={{ marginTop: 70 }}>
+            <SubmitBrief job={job} history={history} inviteList={inviteList} />
+
             {inviteList.length < 1 && (
               <UnlockInfo str="Please select at least 1 creative" />
             )}

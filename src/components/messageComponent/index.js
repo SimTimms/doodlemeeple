@@ -49,18 +49,7 @@ export default function MessageComponent({
                 style={{ backgroundImage: `url(${backgroundImg})` }}
               />
             )}
-            {count ? (
-              <Typography
-                variant="body1"
-                component="p"
-                className={clsx({
-                  [classes.count]: true,
-                  [classes.countOff]: count < 1,
-                })}
-              >
-                {count < 9 ? count : '9+'}
-              </Typography>
-            ) : null}
+            {count ? <Icon className={classes.count}>mail</Icon> : null}
           </div>
           <div className={classes.profileWrapper}>
             <div className={classes.wrapperOne}>

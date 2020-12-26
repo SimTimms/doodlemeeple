@@ -41,7 +41,7 @@ export default function CreativeRoster({ theme, history, favourites }) {
             text={{
               name: 'Visual & Creative',
               color: '#222',
-              icon: 'chevron_right',
+              icon: null,
               count: 0,
             }}
             onClickEvent={() => {
@@ -53,7 +53,7 @@ export default function CreativeRoster({ theme, history, favourites }) {
             text={{
               name: 'Marketing',
               color: '#222',
-              icon: 'chevron_right',
+              icon: null,
               count: 0,
             }}
             onClickEvent={() => {
@@ -65,7 +65,7 @@ export default function CreativeRoster({ theme, history, favourites }) {
             text={{
               name: 'Development',
               color: '#222',
-              icon: 'chevron_right',
+              icon: null,
               count: 0,
             }}
             onClickEvent={() => {
@@ -81,7 +81,7 @@ export default function CreativeRoster({ theme, history, favourites }) {
                 text={{
                   name: TYPE_HELPER(type),
                   color: '#222',
-                  icon: 'chevron_right',
+                  icon: null,
                   count: 0,
                 }}
                 onClickEvent={() => {
@@ -96,7 +96,7 @@ export default function CreativeRoster({ theme, history, favourites }) {
                 text={{
                   name: TYPE_HELPER(type),
                   color: '#222',
-                  icon: 'chevron_right',
+                  icon: null,
                   count: 0,
                 }}
                 onClickEvent={() => {
@@ -111,7 +111,7 @@ export default function CreativeRoster({ theme, history, favourites }) {
                 text={{
                   name: TYPE_HELPER(type),
                   color: '#222',
-                  icon: 'chevron_right',
+                  icon: null,
                   count: 0,
                 }}
                 onClickEvent={() => {
@@ -121,13 +121,7 @@ export default function CreativeRoster({ theme, history, favourites }) {
               />
             ))}
         </Row>
-        <div style={{ width: '100%', marginTop: 50 }}>
-          <Creatives
-            history={history}
-            favourites={favourites}
-            filter={filter}
-          />
-        </div>
+        <Creatives history={history} favourites={favourites} filter={filter} />
       </div>
     </Slide>
   );

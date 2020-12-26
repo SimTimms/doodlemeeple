@@ -1,8 +1,41 @@
 import gql from 'graphql-tag';
 
 export const CREATIVES = gql`
-  query GetCreatives($type: [String]) {
-    getCreatives(type: $type) {
+  query GetCreatives($type: [String], $page: Int) {
+    getCreatives(type: $type, page: $page) {
+      _id
+      name
+      summary
+      profileBG
+      profileImg
+      stripeID
+      stripeClientId
+      paymentMethod
+      likedMe {
+        _id
+        receiver {
+          _id
+        }
+        user {
+          _id
+        }
+      }
+      favourites {
+        _id
+        receiver {
+          _id
+        }
+        user {
+          _id
+        }
+      }
+    }
+  }
+`;
+
+export const LIKES = gql`
+  query GetLikes {
+    getLikes {
       _id
       name
       summary
@@ -63,14 +96,10 @@ export const GAMES = gql`
 export const CONVERSATIONS = gql`
   query GetConversations {
     getConversations {
-      _id
       count
       job {
         _id
         name
-        user {
-          name
-        }
       }
       receiver {
         name
@@ -249,6 +278,20 @@ export const JOB = gql`
       _id
       name
       keywords
+      genre
+      scope
+      mechanics
+      timeframe
+      budget
+      extra
+      gallery {
+        _id
+        summary
+        images {
+          _id
+          img
+        }
+      }
       activeContract {
         _id
         notes
@@ -292,6 +335,14 @@ export const JOB = gql`
           createdAt
           creativeSummary
           keywords
+          gallery {
+            _id
+            summary
+            images {
+              _id
+              img
+            }
+          }
           user {
             _id
             email
@@ -428,6 +479,20 @@ export const JOB_CREATIVE = gql`
           creativeSummary
           keywords
           submitted
+          scope
+          mechanics
+          gallery {
+            _id
+            summary
+            images {
+              _id
+              img
+            }
+          }
+          timeframe
+          budget
+          extra
+          showreel
           user {
             _id
             email
@@ -455,6 +520,20 @@ export const JOB_CREATIVE = gql`
         creativeSummary
         keywords
         submitted
+        scope
+        mechanics
+        timeframe
+        budget
+        extra
+        showreel
+        gallery {
+          _id
+          summary
+          images {
+            _id
+            img
+          }
+        }
         user {
           _id
           email

@@ -294,7 +294,7 @@ export default function NoticeBoard({
                               history.push(`/app/jobs`);
                             }}
                             icon=""
-                            title="Post a Job"
+                            title="Post a Project"
                             styleOverride={null}
                             type="button"
                             iconPos="right"
@@ -338,7 +338,7 @@ export default function NoticeBoard({
                             minHeight: 80,
                             maxHeight: 80,
                             padding: 3,
-                            marginTop: -120,
+                            marginTop: -160,
                             borderRadius: '50%',
                             backgroundColor: '#fff',
                             boxShadow: '5px 5px 10px rgba(0,0,0,0.2)',
@@ -379,6 +379,7 @@ export default function NoticeBoard({
                             />
                           </a>
                         </Row>
+                        <Divider />
                       </Column>
                     )}
                   </Row>

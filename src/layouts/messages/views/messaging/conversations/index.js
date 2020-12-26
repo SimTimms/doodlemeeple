@@ -54,7 +54,6 @@ export default function Conversations({ history, setConversationArgs }) {
         <Query
           query={CONVERSATIONS}
           variables={{ status: 'submitted' }}
-          fetchPolicy="network-only"
           onCompleted={(data) => {
             setConversationArray(data.getConversations);
           }}

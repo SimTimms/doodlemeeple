@@ -49,8 +49,8 @@ export function ProfileHeader({
       </div>
       <FieldTitle
         name="Profile Image"
-        description="Your mugshot or logo"
-        warning="PNG,GIF or JPG | optimum size 140 x 140 | 1MB Max"
+        description="Your mugshot"
+        warning="PNG or JPG | optimum size 140 x 140 | 2MB Max"
         inline={false}
       />
       <div

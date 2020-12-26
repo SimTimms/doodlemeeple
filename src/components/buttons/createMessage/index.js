@@ -84,7 +84,7 @@ export default function CreateMessage({ updateMessageArray, jobId, receiver }) {
               className={null}
               cbDelete={null}
               hasFile={false}
-              size="1MB Max"
+              size="2MB Max"
             />
           );
         }}

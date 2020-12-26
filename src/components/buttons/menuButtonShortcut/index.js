@@ -47,9 +47,10 @@ export default function MenuButtonShortcut({ text, ...props }) {
             [classes.iconButtonImage]: imageIcon,
             [classes.iconIconColumn]: column,
             [classes.iconButtonOnly]: text.name === '',
+            [classes.iconTextOnly]: !text.icon && !imageIcon,
           })}
         >
-          {!text.icon ? (
+          {imageIcon ? (
             <img
               src={imageIcon}
               className={clsx({
@@ -57,6 +58,7 @@ export default function MenuButtonShortcut({ text, ...props }) {
                 [classes.iconIconNoMargin]: text.name === '',
               })}
               style={{ color: text.color }}
+              alt=""
             />
           ) : (
             <Icon
@@ -104,6 +106,7 @@ export default function MenuButtonShortcut({ text, ...props }) {
               [classes.button]: true,
               [classes.buttonColumn]: column,
               [classes.spaceAbove]: column,
+              [classes.iconTextOnlyButton]: !text.icon && !imageIcon,
             })}
             style={{ color: text.color }}
           >

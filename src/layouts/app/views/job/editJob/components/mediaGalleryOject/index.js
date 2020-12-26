@@ -13,7 +13,7 @@ export function MediaGalleryObject({ images, setImages, index }) {
     >
       <MediaGallery
         items={images}
-        setBgImage={url => {
+        setBgImage={(url) => {
           let imageArray = Object.assign([], images);
           imageArray.push({
             img: url,

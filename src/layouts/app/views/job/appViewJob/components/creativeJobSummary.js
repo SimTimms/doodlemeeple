@@ -1,21 +1,17 @@
 import React from 'react';
-import { Slide, Typography } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import { useStyles } from '../styles';
 import {
-  HeaderTwo,
-  HeaderThree,
   Column,
   Meta,
   Paper,
-  Divider,
   BorderBox,
   IconButton,
 } from '../../../../../../components';
 import CreativeActions from '../components/creativeActions';
 import CreativeActionsTwo from '../components/creativeActionsTwo';
 import ClientNotifications from '../components/clientNotifications';
-import { timeDifferenceForDate } from '../../../../../../utils/dates';
-import { nameShortener } from '../../../../../../utils';
+import JobSummaryComponent from './jobSummaryComponent';
 
 export default function CreativeJobSummary({
   job,
@@ -39,21 +35,7 @@ export default function CreativeJobSummary({
               job={job}
               history={history}
             />
-            <HeaderTwo str={nameShortener(job.job.name, 30)} />
-            <Meta
-              str={`${timeDifferenceForDate(job.job.createdAt)} | ${
-                job.creator.name
-              }`}
-            />
-            <Divider />
-            <Typography noWrap={false}>{job.job.summary}</Typography>
-            <Divider />
-            <Divider />
-            <HeaderThree str="Creative Summary" />
-            <Divider />
-            <Typography>{job.job.creativeSummary}</Typography>
-            <Divider />
-            <Divider />
+            <JobSummaryComponent job={job.job} />
             {!userContract ? (
               <BorderBox w={300}>
                 {invite.data.status === 'declined' ? (

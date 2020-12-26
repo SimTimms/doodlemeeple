@@ -280,12 +280,7 @@ function AppLayout(props) {
               history={history}
             />
           ) : page === 'edit-job' ? (
-            <EditJob
-              theme={props.theme}
-              jobId={pathParam}
-              history={history}
-              favourites={favourites}
-            />
+            <EditJob jobId={pathParam} history={history} />
           ) : page === 'view-job' && profile ? (
             <AppViewJob jobId={pathParam} history={history} />
           ) : page === 'view-proposal' ? (

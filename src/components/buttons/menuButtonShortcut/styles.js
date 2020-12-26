@@ -141,4 +141,6 @@ export const useStyles = makeStyles((theme) => ({
     borderBottom: `2px solid ${theme.palette.primary.main}`,
     background: 'rgba(255,255,255,0.2)',
   },
+  iconTextOnly: { display: 'none' },
+  iconTextOnlyButton: { marginLeft: 0 },
 }));
