@@ -106,7 +106,7 @@ export default function ProfileCard({
               [classes.favIcon]: true,
               [classes.favIconPrimary]: true,
             })}
-            title="This creative has made arrangements to be paid by BACS"
+            title="This creative has completed their payment profile and arranged payment by means other than Stripe"
           >
             credit_card
           </Icon>
