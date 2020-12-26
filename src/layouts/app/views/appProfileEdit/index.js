@@ -199,7 +199,7 @@ export default function AppProfileEdit({ theme, history }) {
                           }}
                           replaceMode="loose"
                           placeholder="Example: David Jones"
-                          info="Your name, callsign, company name, handle, alias or whatever else you want to be know as."
+                          info="Your name"
                           warning=""
                           size="s"
                           multiline={false}
