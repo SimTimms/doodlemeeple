@@ -9,7 +9,7 @@ export default function Availability({ available }) {
   const [availability, setAvailability] = React.useState(true);
 
   useEffect(() => {
-    setAvailability(available);
+    setAvailability(available ? available : true);
   }, [available]);
 
   return (
