@@ -92,8 +92,8 @@ export default function ProfileCard({
           <Icon
             className={clsx({
               [classes.favIconNull]: true,
-              [classes.favIconBad]: creative.responsePercent > 50,
-              [classes.favIconMed]: creative.responsePercent > 70,
+              [classes.favIconBad]: creative.responsePercent > 0,
+              [classes.favIconMed]: creative.responsePercent > 50,
               [classes.favIconGood]: creative.responsePercent > 90,
             })}
           >
