@@ -6,7 +6,7 @@ import { IconButton } from '../../';
 
 export default function Availability({ available }) {
   const classes = useStyles();
-  const [availability, setAvailability] = React.useState(false);
+  const [availability, setAvailability] = React.useState(true);
 
   useEffect(() => {
     setAvailability(available);
