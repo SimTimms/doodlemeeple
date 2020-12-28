@@ -10,6 +10,7 @@ export const CREATIVES = gql`
       profileImg
       stripeID
       stripeClientId
+      viewCount
       paymentMethod
       responsePercent
       likedMe {
