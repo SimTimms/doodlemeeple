@@ -59,7 +59,6 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: `0 0 20px ${theme.palette.primary.light}`,
     border: `1px solid ${theme.palette.primary.light}`,
   },
-
   favIconNull: {
     color: '#ccc',
     fontSize: 20,
@@ -72,6 +71,15 @@ export const useStyles = makeStyles((theme) => ({
   },
   favIcon: {
     color: theme.palette.primary.main,
+  },
+  favIconBad: {
+    color: '#de5d5d',
+  },
+  favIconMed: {
+    color: '#f5cd5f',
+  },
+  favIconGood: {
+    color: '#32a88d',
   },
   favIconPrimary: {
     color: theme.palette.primary.main,

@@ -80,10 +80,34 @@ export default function ProfileCard({
           alignItems: 'center',
         }}
       >
-        <Typography style={{ fontSize: 10, marginLeft: 4 }}>
-          {creative.responsePercent !== '' &&
-            `${creative.responsePercent} Response`}
-        </Typography>
+        <div
+          className={`${classes.smallActionWrapper} ${classes.top}`}
+          title={
+            creative.responsePercent === ''
+              ? `This creative has not yet been invited to provide a quote.`
+              : `This creative has replied to ${creative.responsePercent}% of invites.`
+          }
+          style={{ marginRight: 0, marginLeft: 3 }}
+        >
+          <Icon
+            className={clsx({
+              [classes.favIconNull]: true,
+              [classes.favIconBad]: creative.responsePercent > 50,
+              [classes.favIconMed]: creative.responsePercent > 70,
+              [classes.favIconGood]: creative.responsePercent > 90,
+            })}
+          >
+            chat_bubble
+          </Icon>
+          <Typography
+            className={clsx({
+              [classes.actionText]: true,
+            })}
+            style={{ paddingTop: 0, marginTop: -3 }}
+          >
+            {creative.responsePercent ? creative.responsePercent : 0}
+          </Typography>
+        </div>
         <Row j="flex-end" w="100px">
           {!creative.paymentMethod && (
             <div
