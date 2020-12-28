@@ -3,6 +3,7 @@ import Content from './content';
 import ContentTop from './contentTop';
 import ImagePos from './imagePos';
 import ActionButton from './buttons';
+import Availability from './buttons/availability';
 import AddSection from './buttons/addSection';
 import FileGallery from './fileGallery';
 import FormInput from './formInput';
@@ -152,6 +153,7 @@ export {
   IconBox,
   FieldTitleDashboard,
   FavouriteButton,
+  Availability,
   InviteButton,
   NoticeBoard,
   Widget,

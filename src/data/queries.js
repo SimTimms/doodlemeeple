@@ -836,6 +836,7 @@ export const PROFILE = gql`
       stripeStatus
       stripeClientId
       paymentMethod
+      available
       onboarding
       favourites {
         receiver {

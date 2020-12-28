@@ -77,6 +77,14 @@ export const UPDATE_EMAIL = gql`
   }
 `;
 
+export const UPDATE_AVAILABILITY = gql`
+  mutation UpdateAvailability($available: Boolean!) {
+    userUpdateOne(record: { available: $available }) {
+      recordId
+    }
+  }
+`;
+
 export const DELETE_ACCOUNT = gql`
   mutation DeleteAccount {
     deleteAccount {
