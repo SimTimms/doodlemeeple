@@ -11,7 +11,7 @@ export const CREATIVES = gql`
       stripeID
       stripeClientId
       paymentMethod
-      viewCount
+      responsePercent
       likedMe {
         _id
         receiver {

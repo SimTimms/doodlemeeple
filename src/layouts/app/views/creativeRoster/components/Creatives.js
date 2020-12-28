@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
-import { CREATIVES } from '../../../../../data/queries';
+import { CREATIVES, CREATIVESCORES } from '../../../../../data/queries';
 import {
   ProfileCard,
   IconButton,
@@ -52,6 +52,7 @@ export default function Creatives({ favourites, history, filter, ...props }) {
           ) : null;
         }}
       </Query>
+
       {creativeArray.map((creative, index) => {
         return (
           <ProfileCard

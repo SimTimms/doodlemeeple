@@ -15,9 +15,12 @@ export default function InviteComponent({ invite, history }) {
   const quoted = invite.status === 'quote_sent';
   const rejected = invite.status === 'rejected';
   const accepted = invite.status === 'accepted';
-  const completed = invite.job.submitted === 'complete';
+  const inviteJob = invite.job ? invite.job : null;
+  const completed = inviteJob ? inviteJob.submitted === 'complete' : false;
 
-  return (
+  return !inviteJob ? (
+    <Typography>Deleted</Typography>
+  ) : (
     <Mutation
       mutation={UPDATE_INVITE}
       variables={{

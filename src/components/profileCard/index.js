@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { Card, Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
-import { InviteButton, IconButton, Column } from '../';
+import { InviteButton, IconButton, Column, Row } from '../';
 import { Mutation } from 'react-apollo';
 import { ADD_FAVOURITE, CREATE_INVITE } from '../../data/mutations';
 import clsx from 'clsx';
@@ -76,111 +76,118 @@ export default function ProfileCard({
           marginTop: '-40px',
           position: 'relative',
           display: 'flex',
-          justifyContent: 'flex-end',
+          justifyContent: 'space-between',
           alignItems: 'center',
         }}
       >
-        {!creative.paymentMethod && (
-          <div
-            className={clsx({
-              [classes.stripeBoxNull]: true,
-              [classes.stripeBox]: creative.stripeID || creative.stripeClientId,
-            })}
-          >
-            <img
-              src={stripeImg}
-              style={{ width: '100%' }}
-              alt="Stripe Logo"
-              title={
-                creative.stripeID || creative.stripeClientId
-                  ? 'This creative has completed their payment profile'
-                  : 'This creative has not yet completed their payment profile'
-              }
-            />
-          </div>
-        )}
+        <Typography style={{ fontSize: 10, marginLeft: 4 }}>
+          {creative.responsePercent !== '' &&
+            `${creative.responsePercent} Response`}
+        </Typography>
+        <Row j="flex-end" w="100px">
+          {!creative.paymentMethod && (
+            <div
+              className={clsx({
+                [classes.stripeBoxNull]: true,
+                [classes.stripeBox]:
+                  creative.stripeID || creative.stripeClientId,
+              })}
+            >
+              <img
+                src={stripeImg}
+                style={{ width: '100%' }}
+                alt="Stripe Logo"
+                title={
+                  creative.stripeID || creative.stripeClientId
+                    ? 'This creative has completed their payment profile'
+                    : 'This creative has not yet completed their payment profile'
+                }
+              />
+            </div>
+          )}
 
-        {creative.paymentMethod && (
-          <Icon
-            className={clsx({
-              [classes.favIcon]: true,
-              [classes.favIconPrimary]: true,
-            })}
-            title="This creative has completed their payment profile and arranged payment by means other than Stripe"
-          >
-            credit_card
-          </Icon>
-        )}
-        {
-          <div
-            className={`${classes.smallActionWrapper} ${classes.top}`}
-            title={
-              creative.viewCount === 1
-                ? `1 person has looked at this creative`
-                : `${creative.viewCount} people have looked at this creative`
-            }
-            style={{ marginRight: 0, marginLeft: 3 }}
-          >
+          {creative.paymentMethod && (
             <Icon
               className={clsx({
-                [classes.favIconNull]: true,
-                [classes.favIcon]: creative.viewCount > 0,
+                [classes.favIcon]: true,
+                [classes.favIconPrimary]: true,
               })}
+              title="This creative has completed their payment profile and arranged payment by means other than Stripe"
             >
-              brightness_1
+              credit_card
             </Icon>
-            <Typography
-              className={clsx({
-                [classes.actionText]: true,
-              })}
-              style={{ paddingTop: 2 }}
+          )}
+          {
+            <div
+              className={`${classes.smallActionWrapper} ${classes.top}`}
+              title={
+                creative.viewCount === 1
+                  ? `1 person has looked at this creative`
+                  : `${creative.viewCount} people have looked at this creative`
+              }
+              style={{ marginRight: 0, marginLeft: 3 }}
             >
-              {creative.viewCount ? creative.viewCount : 0}
-            </Typography>
-          </div>
-        }
-        <Mutation
-          mutation={ADD_FAVOURITE}
-          variables={{
-            id: creative._id,
-          }}
-        >
-          {(mutation) => {
-            return (
-              <div
-                className={`${classes.smallActionWrapper} ${classes.top}`}
-                onClick={() => {
-                  setIsFav(isFav ? false : true);
-                  setFavCount(isFav ? favCount - 1 : favCount + 1);
-                  mutation();
-                }}
-                title={
-                  favCount === 1
-                    ? `1 person has liked this creative`
-                    : `${favCount} people have liked this creative`
-                }
-                style={{ marginRight: 3 }}
+              <Icon
+                className={clsx({
+                  [classes.favIconNull]: true,
+                  [classes.favIcon]: creative.viewCount > 0,
+                })}
               >
-                <Icon
-                  className={clsx({
-                    [classes.favIcon]: true,
-                    [classes.favIconDark]: !isFav,
-                  })}
+                brightness_1
+              </Icon>
+              <Typography
+                className={clsx({
+                  [classes.actionText]: true,
+                })}
+                style={{ paddingTop: 2 }}
+              >
+                {creative.viewCount ? creative.viewCount : 0}
+              </Typography>
+            </div>
+          }
+          <Mutation
+            mutation={ADD_FAVOURITE}
+            variables={{
+              id: creative._id,
+            }}
+          >
+            {(mutation) => {
+              return (
+                <div
+                  className={`${classes.smallActionWrapper} ${classes.top}`}
+                  onClick={() => {
+                    setIsFav(isFav ? false : true);
+                    setFavCount(isFav ? favCount - 1 : favCount + 1);
+                    mutation();
+                  }}
+                  title={
+                    favCount === 1
+                      ? `1 person has liked this creative`
+                      : `${favCount} people have liked this creative`
+                  }
+                  style={{ marginRight: 3 }}
                 >
-                  favorite
-                </Icon>
-                <Typography
-                  className={clsx({
-                    [classes.actionText]: true,
-                    [classes.actionTextDark]: !isFav,
-                  })}
-                >
-                  {favCount}
-                </Typography>
-              </div>
-            );
-          }}
-        </Mutation>
+                  <Icon
+                    className={clsx({
+                      [classes.favIcon]: true,
+                      [classes.favIconDark]: !isFav,
+                    })}
+                  >
+                    favorite
+                  </Icon>
+                  <Typography
+                    className={clsx({
+                      [classes.actionText]: true,
+                      [classes.actionTextDark]: !isFav,
+                    })}
+                  >
+                    {favCount}
+                  </Typography>
+                </div>
+              );
+            }}
+          </Mutation>
+        </Row>
       </div>
       <Column j="center" a="center">
         <IconButton

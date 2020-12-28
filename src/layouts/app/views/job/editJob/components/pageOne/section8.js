@@ -8,7 +8,7 @@ import {
 
 import { checkLength } from '../../unlock';
 
-export default function Section8({ setJob, job, mutation }) {
+export default function Section8({ setJob, job }) {
   function setImages(imageArray) {
     setJob({ ...job, gallery: { ...job.gallery, images: [...imageArray] } });
   }
