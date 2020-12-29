@@ -31,10 +31,11 @@ export function Column(props) {
 }
 
 export function Row(props) {
-  const { children, a, j, wrap, w } = props;
+  const { children, a, j, wrap, w, b } = props;
   const align = a ? a : 'center';
   const justify = j ? j : 'center';
   const width = w ? w : '100%';
+  const border = b ? b : '';
 
   return (
     <div
@@ -45,6 +46,7 @@ export function Row(props) {
         alignItems: align,
         justifyContent: justify,
         flexWrap: wrap,
+        border,
       }}
     >
       {children}

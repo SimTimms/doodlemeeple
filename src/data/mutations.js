@@ -352,6 +352,10 @@ export const UPDATE_JOB = gql`
     $gallery: MongoID!
     $budget: String
     $extra: String
+    $funded: Boolean
+    $speculative: Boolean
+    $termsAccepted: Boolean
+    $inLieu: Boolean
     $keywords: [String]
   ) {
     jobUpdateById(
@@ -363,7 +367,11 @@ export const UPDATE_JOB = gql`
         location: $location
         mechanics: $mechanics
         showreel: $showreel
+        funded: $funded
+        speculative: $speculative
+        inLieu: $inLieu
         type: $type
+        termsAccepted: $termsAccepted
         creativeSummary: $creativeSummary
         submitted: $submitted
         gallery: $gallery

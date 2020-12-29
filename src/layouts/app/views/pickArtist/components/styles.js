@@ -8,6 +8,17 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     flexDirection: 'column',
   },
+  noticeArea: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background:
+      'linear-gradient(180deg, rgba(52,190,177,1) 0%, rgba(52,190,177,1) 53%, rgba(39,168,156,1) 100%)',
+    padding: '20px 0 20px 0',
+    '& h4': { color: '#fff' },
+  },
   iconButton: {
     cursor: 'pointer',
     background: theme.palette.primary.main,
@@ -88,7 +99,6 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     padding: 10,
     boxSizing: 'border-box',
-    position: 'fixed',
     top: 80,
     zIndex: 50,
   },

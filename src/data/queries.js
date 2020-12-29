@@ -286,6 +286,10 @@ export const JOB = gql`
       timeframe
       budget
       extra
+      funded
+      speculative
+      inLieu
+      termsAccepted
       gallery {
         _id
         summary

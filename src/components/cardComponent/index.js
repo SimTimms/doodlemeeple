@@ -25,7 +25,13 @@ export default function CardComponent({ children, ...props }) {
       ) : (
         <Row>
           <Icon className={classes.locked}>lock</Icon>
-          <Typography align="center" style={{ width: '100%' }}>
+          <Typography
+            align="center"
+            className={clsx({
+              [classes.cardTitle]: true,
+              [classes.cardTitleLocked]: locked,
+            })}
+          >
             {lockedMsg ? lockedMsg : 'Locked'}
           </Typography>
         </Row>

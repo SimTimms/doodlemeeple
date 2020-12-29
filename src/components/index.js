@@ -29,6 +29,7 @@ import { SelectTagsWidget, TagsWidget } from './tags';
 import Uploader from './uploader';
 import CardActionArea from './wrappers';
 import NoticeBoard from './noticeBoard';
+import NoticeBoardSecondary from './noticeBoardSecondary';
 import Footer from './footer';
 import DeleteButton from './buttons/deleteButton';
 import TabWrapper from './tabWrapper';
@@ -156,6 +157,7 @@ export {
   Availability,
   InviteButton,
   NoticeBoard,
+  NoticeBoardSecondary,
   Widget,
   IconButton,
   ProfileCard,
