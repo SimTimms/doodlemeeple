@@ -5,7 +5,7 @@ import { useStyles } from './styles';
 import { IconButton } from '../../';
 import { toaster } from '../../../utils/toaster';
 
-export default function Speculative({ available }) {
+export default function Availability({ available }) {
   const classes = useStyles();
   const [availability, setAvailability] = React.useState(true);
 

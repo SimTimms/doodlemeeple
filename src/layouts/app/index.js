@@ -29,7 +29,6 @@ import {
   StyledNavBar,
   Row,
   MenuButtonShortcut,
-  Availability,
 } from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 import pageHeaders from './pageHeaders';
@@ -133,7 +132,7 @@ function AppLayout(props) {
         <Typography variant="h6">{`${
           profile ? profile.name : ''
         } - ${pageHeaders(page)}`}</Typography>
-        <Availability available={profile ? profile.available : false} />
+
         <div>
           <Row>
             <MenuButtonShortcut

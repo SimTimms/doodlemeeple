@@ -4,6 +4,7 @@ import ContentTop from './contentTop';
 import ImagePos from './imagePos';
 import ActionButton from './buttons';
 import Availability from './buttons/availability';
+import Speculative from './buttons/speculative';
 import AddSection from './buttons/addSection';
 import FileGallery from './fileGallery';
 import FormInput from './formInput';
@@ -155,6 +156,7 @@ export {
   FieldTitleDashboard,
   FavouriteButton,
   Availability,
+  Speculative,
   InviteButton,
   NoticeBoard,
   NoticeBoardSecondary,

@@ -34,5 +34,24 @@ export const useStyles = makeStyles((theme) => {
       marginBottom: 10,
       maxWidth: 300,
     },
+    articlePanel: {
+      minWidth: 300,
+      maxWidth: 300,
+      minHeight: 300,
+      maxHeight: 300,
+      backgroundSize: 'contain',
+      backgroundRepeat: 'no-repeat',
+    },
+    articleAvatar: {
+      minWidth: 80,
+      maxWidth: 80,
+      minHeight: 80,
+      maxHeight: 80,
+      padding: 3,
+      marginTop: -160,
+      borderRadius: '50%',
+      backgroundColor: '#fff',
+      boxShadow: '5px 5px 10px rgba(0,0,0,0.2)',
+    },
   };
 });
