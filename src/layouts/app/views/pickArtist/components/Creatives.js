@@ -16,7 +16,7 @@ export default function Creatives({
   return (
     <Query
       query={CREATIVES}
-      variables={{ type: job.keywords }}
+      variables={{ type: job.keywords, job: job._id }}
       fetchPolicy="network-only"
     >
       {({ data }) => {

@@ -5,6 +5,8 @@ import ImagePos from './imagePos';
 import ActionButton from './buttons';
 import Availability from './buttons/availability';
 import Speculative from './buttons/speculative';
+import Funded from './buttons/funded';
+import Royalties from './buttons/royalties';
 import AddSection from './buttons/addSection';
 import FileGallery from './fileGallery';
 import FormInput from './formInput';
@@ -152,6 +154,7 @@ export {
   InlineHeader,
   IconTitle,
   TabButton,
+  Funded,
   IconBox,
   FieldTitleDashboard,
   FavouriteButton,
@@ -181,6 +184,7 @@ export {
   Form,
   CardHeader,
   ContentHeader,
+  Royalties,
   InvitesWidget,
   MediaGallery,
   RowCheckList,

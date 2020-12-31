@@ -1,43 +1,41 @@
 import React, { useEffect } from 'react';
 import { Mutation } from 'react-apollo';
-import { UPDATE_AVAILABILITY } from '../../../data/mutations';
+import { UPDATE_ROYALTIES } from '../../../data/mutations';
 import { useStyles } from './styles';
 import { IconButton } from '../../';
 import { toaster } from '../../../utils/toaster';
 
-export default function Availability({ available }) {
+export default function Royalties({ royalties }) {
   const classes = useStyles();
-  const [availability, setAvailability] = React.useState(true);
+  const [royaltiesState, setRoyaltiesState] = React.useState(false);
 
   useEffect(() => {
-    setAvailability(available);
-  }, [available]);
-  console.log(availability);
+    setRoyaltiesState(royalties);
+  }, [royalties]);
+
   return (
     <Mutation
-      mutation={UPDATE_AVAILABILITY}
+      mutation={UPDATE_ROYALTIES}
       variables={{
-        available: availability ? false : true,
+        acceptsRoyalties: royaltiesState ? false : true,
       }}
-      onCompleted={() => toaster('Availability Set')}
+      onCompleted={() => toaster('Royalties Set')}
     >
       {(mutation) => {
-        function changeAvailable() {
-          setAvailability(availability ? false : true);
-          mutation();
-        }
-
         return (
           <div className={classes.root}>
             <IconButton
-              icon={!availability ? 'toggle_off' : 'toggle_on'}
+              icon={!royaltiesState ? 'toggle_off' : 'toggle_on'}
               title={
-                !availability ? 'I am unavailable' : 'I am available for work'
+                !royaltiesState
+                  ? 'I will accept full payment only'
+                  : 'I will accept some payment in royalties'
               }
               disabled={false}
               color="text-dark"
               onClickEvent={() => {
-                changeAvailable();
+                setRoyaltiesState(royaltiesState ? false : true);
+                mutation();
               }}
               styleOverride={{
                 margin: 0,

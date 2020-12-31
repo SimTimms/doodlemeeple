@@ -1,46 +1,50 @@
 import React, { useEffect } from 'react';
 import { Mutation } from 'react-apollo';
-import { UPDATE_AVAILABILITY } from '../../../data/mutations';
+import { UPDATE_SPECULATIVE } from '../../../data/mutations';
 import { useStyles } from './styles';
 import { IconButton } from '../../';
 import { toaster } from '../../../utils/toaster';
 
-export default function Availability({ available }) {
+export default function Speculative({ acceptsSpeculative }) {
   const classes = useStyles();
-  const [availability, setAvailability] = React.useState(true);
+  const [speculative, setSpeculative] = React.useState(false);
 
   useEffect(() => {
-    setAvailability(available ? available : true);
-  }, [available]);
+    setSpeculative(acceptsSpeculative);
+  }, [acceptsSpeculative]);
 
   return (
     <Mutation
-      mutation={UPDATE_AVAILABILITY}
+      mutation={UPDATE_SPECULATIVE}
       variables={{
-        available: availability ? false : true,
+        acceptsSpeculative: speculative ? false : true,
       }}
-      onCompleted={toaster('Availability Set')}
+      onCompleted={() => toaster('Speculative Set')}
     >
       {(mutation) => {
-        function changeAvailable() {
-          setAvailability(availability ? false : true);
+        function changeSpeculative() {
+          setSpeculative(speculative ? false : true);
           mutation();
         }
 
         return (
           <div className={classes.root}>
             <IconButton
-              icon={!availability ? 'toggle_off' : 'toggle_on'}
-              title={!availability ? 'Unavailable' : 'Available'}
+              icon={!speculative ? 'toggle_off' : 'toggle_on'}
+              title={
+                !speculative
+                  ? 'I quote for jobs starting within 4 weeks'
+                  : 'I will quote for speculative briefs'
+              }
               disabled={false}
               color="text-dark"
               onClickEvent={() => {
-                changeAvailable();
+                changeSpeculative();
               }}
               styleOverride={{
                 margin: 0,
                 marginLeft: 10,
-                width: 140,
+                width: 340,
                 paddingLeft: 10,
                 paddingRight: 10,
               }}

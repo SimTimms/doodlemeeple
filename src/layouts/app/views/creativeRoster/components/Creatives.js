@@ -28,7 +28,7 @@ export default function Creatives({ favourites, history, filter, ...props }) {
     >
       <Query
         query={CREATIVES}
-        variables={{ type: filter, page: page }}
+        variables={{ type: filter, page: page, job: null }}
         fetchPolicy="network-only"
         onCompleted={(data) => {
           data.getCreatives.length === 0 && setNoMore(true);

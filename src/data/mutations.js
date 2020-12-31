@@ -85,6 +85,30 @@ export const UPDATE_AVAILABILITY = gql`
   }
 `;
 
+export const UPDATE_SPECULATIVE = gql`
+  mutation UpdateAvailability($acceptsSpeculative: Boolean!) {
+    userUpdateOne(record: { acceptsSpeculative: $acceptsSpeculative }) {
+      recordId
+    }
+  }
+`;
+
+export const UPDATE_ROYALTIES = gql`
+  mutation UpdateRoyalties($acceptsRoyalties: Boolean!) {
+    userUpdateOne(record: { acceptsRoyalties: $acceptsRoyalties }) {
+      recordId
+    }
+  }
+`;
+
+export const UPDATE_FUNDED = gql`
+  mutation UpdateFunded($acceptsUnfunded: Boolean!) {
+    userUpdateOne(record: { acceptsUnfunded: $acceptsUnfunded }) {
+      recordId
+    }
+  }
+`;
+
 export const DELETE_ACCOUNT = gql`
   mutation DeleteAccount {
     deleteAccount {

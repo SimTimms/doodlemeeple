@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const CREATIVES = gql`
-  query GetCreatives($type: [String], $page: Int) {
-    getCreatives(type: $type, page: $page) {
+  query GetCreatives($type: [String], $job: MongoID, $page: Int) {
+    getCreatives(type: $type, page: $page, job: $job) {
       _id
       name
       summary
@@ -841,6 +841,9 @@ export const PROFILE = gql`
       stripeClientId
       paymentMethod
       available
+      acceptsSpeculative
+      acceptsRoyalties
+      acceptsUnfunded
       onboarding
       favourites {
         receiver {

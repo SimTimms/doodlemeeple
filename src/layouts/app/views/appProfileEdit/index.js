@@ -1,5 +1,4 @@
 import React from 'react';
-import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { PROFILE } from '../../../../data/queries';

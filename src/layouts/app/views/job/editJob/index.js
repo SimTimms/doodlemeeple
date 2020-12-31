@@ -265,11 +265,11 @@ export default function EditJob({ jobId, history }) {
                     termsAccepted: data.jobById.termsAccepted
                       ? data.jobById.termsAccepted
                       : false,
-                    funded: data.jobById.funded ? data.jobById.funded : null,
+                    funded: data.jobById.funded ? data.jobById.funded : false,
                     speculative: data.jobById.speculative
                       ? data.jobById.speculative
-                      : null,
-                    inLieu: data.jobById.inLieu ? data.jobById.inLieu : null,
+                      : false,
+                    inLieu: data.jobById.inLieu ? data.jobById.inLieu : false,
                     timeframe: data.jobById.timeframe
                       ? data.jobById.timeframe
                       : '',
