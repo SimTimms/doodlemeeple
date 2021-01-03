@@ -6,6 +6,7 @@ import ProfileMenu from './profileMenu';
 import TabProfile from './tabProfile';
 import TabPreferences from './tabPreferences';
 import { initialState } from './initialState';
+import Onboarding from './onboarding';
 
 export default function AppProfileEdit({ theme, history }) {
   const classes = useStyles();
@@ -24,7 +25,9 @@ export default function AppProfileEdit({ theme, history }) {
         profile={profile}
         changes={changes}
       />
-      {tabNbr === 0 ? (
+      {!profile.profileBG || !profile.profileImg || !profile.summary ? (
+        <Onboarding profile={profile} setProfile={setProfile} />
+      ) : tabNbr === 0 ? (
         <TabProfile
           profile={profile}
           loading={loading}
