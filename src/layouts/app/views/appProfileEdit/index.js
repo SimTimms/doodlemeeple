@@ -25,9 +25,11 @@ export default function AppProfileEdit({ theme, history }) {
         profile={profile}
         changes={changes}
       />
-      {!profile.profileBG || !profile.profileImg || !profile.summary ? (
+      {loading === false && (
         <Onboarding profile={profile} setProfile={setProfile} />
-      ) : tabNbr === 0 ? (
+      )}
+
+      {tabNbr === 0 ? (
         <TabProfile
           profile={profile}
           loading={loading}
