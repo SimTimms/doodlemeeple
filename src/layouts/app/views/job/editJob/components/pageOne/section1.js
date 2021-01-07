@@ -34,7 +34,7 @@ export default function Section1({ setJob, job, mutation }) {
           title="Genre/Style of Project"
           value={job.genre}
           maxLength={126}
-          placeholder="24 Fantasy Images for Card Game"
+          placeholder="Fantasy, similar to Studio Ghibli"
           onChangeEvent={(e) => {
             autosave(mutation);
             setJob({

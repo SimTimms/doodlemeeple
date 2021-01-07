@@ -1,10 +1,9 @@
 import React from 'react';
 import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
-import { FieldTitle, UnlockInfo, Column } from '../../../../components';
 import { Query } from 'react-apollo';
 import { JOB } from '../../../../data/queries';
-import { ArtistLineup, Creatives, SubmitBrief } from './components';
+import { ArtistLineup, Creatives } from './components';
 
 export function PickArtist({ jobId, history, favourites }) {
   const classes = useStyles();
@@ -49,25 +48,10 @@ export function PickArtist({ jobId, history, favourites }) {
           removeInviteList={removeInviteList}
           inviteList={inviteList}
           history={history}
+          job={job}
         />
 
-        <Column j="center" a="center">
-          <div style={{ marginTop: 70 }}>
-            <SubmitBrief job={job} history={history} inviteList={inviteList} />
-
-            {inviteList.length < 1 && (
-              <UnlockInfo str="Please select at least 1 creative" />
-            )}
-          </div>
-        </Column>
-
         <div style={{ width: '100%', marginTop: 50 }}>
-          <FieldTitle
-            name="Invite Creatives"
-            description=""
-            warning=""
-            inline={false}
-          />
           <Creatives
             history={history}
             favourites={favourites}

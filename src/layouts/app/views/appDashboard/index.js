@@ -99,8 +99,6 @@ export default function AppDashboard({ history, profile, setProfile }) {
                 [classes.columnMobile]: mobile,
               })}`}
             >
-              <FieldTitleDashboard name="Updates" inline={false} a="c" />
-              <Divider />
               <Posts posts={posts ? posts : []} />
             </div>
           </div>

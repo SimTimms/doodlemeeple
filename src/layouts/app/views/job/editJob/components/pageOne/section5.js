@@ -25,7 +25,7 @@ export default function Section5({ setJob, job, mutation }) {
     !checkLength(job.summary, 'summary') ||
     !checkLength(job.creativeSummary, 'creativeSummary');
   return (
-    <CardComponent locked={locked} lockedMsg="Invites">
+    <CardComponent locked={locked} lockedMsg="Keywords">
       <Column a="center" j="center">
         <FieldTitle
           name="Keywords"

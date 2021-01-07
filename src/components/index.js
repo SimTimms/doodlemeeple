@@ -3,6 +3,10 @@ import Content from './content';
 import ContentTop from './contentTop';
 import ImagePos from './imagePos';
 import ActionButton from './buttons';
+import Availability from './buttons/availability';
+import Speculative from './buttons/speculative';
+import Funded from './buttons/funded';
+import Royalties from './buttons/royalties';
 import AddSection from './buttons/addSection';
 import FileGallery from './fileGallery';
 import FormInput from './formInput';
@@ -28,6 +32,7 @@ import { SelectTagsWidget, TagsWidget } from './tags';
 import Uploader from './uploader';
 import CardActionArea from './wrappers';
 import NoticeBoard from './noticeBoard';
+import NoticeBoardSecondary from './noticeBoardSecondary';
 import Footer from './footer';
 import DeleteButton from './buttons/deleteButton';
 import TabWrapper from './tabWrapper';
@@ -149,11 +154,15 @@ export {
   InlineHeader,
   IconTitle,
   TabButton,
+  Funded,
   IconBox,
   FieldTitleDashboard,
   FavouriteButton,
+  Availability,
+  Speculative,
   InviteButton,
   NoticeBoard,
+  NoticeBoardSecondary,
   Widget,
   IconButton,
   ProfileCard,
@@ -175,6 +184,7 @@ export {
   Form,
   CardHeader,
   ContentHeader,
+  Royalties,
   InvitesWidget,
   MediaGallery,
   RowCheckList,

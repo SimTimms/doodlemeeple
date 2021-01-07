@@ -14,8 +14,8 @@ export const useStyles = makeStyles((theme) => ({
     maxHeight: 60,
     minWidth: 60,
     maxWidth: 60,
-
-    background: 'rgba(255,255,255,0.5)',
+    border: '1px solid rgba(0,0,0,0.1)',
+    background: 'rgba(255,255,255,1)',
     cursor: 'pointer',
     '&:hover': {
       background: 'rgba(0,0,0,0.2)',

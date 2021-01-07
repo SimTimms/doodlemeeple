@@ -69,9 +69,7 @@ export const useStyles = makeStyles((theme) => ({
     zIndex: 10,
     width: drawerWidth,
   },
-  drawerOpenTablet: {
-    width: drawerWidth,
-  },
+  drawerOpenTablet: {},
   icon: {
     minWidth: 30,
     borderRight: '1px solid #ddd',

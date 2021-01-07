@@ -132,6 +132,7 @@ function AppLayout(props) {
         <Typography variant="h6">{`${
           profile ? profile.name : ''
         } - ${pageHeaders(page)}`}</Typography>
+
         <div>
           <Row>
             <MenuButtonShortcut

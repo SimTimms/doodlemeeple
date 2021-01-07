@@ -77,6 +77,38 @@ export const UPDATE_EMAIL = gql`
   }
 `;
 
+export const UPDATE_AVAILABILITY = gql`
+  mutation UpdateAvailability($available: Boolean!) {
+    userUpdateOne(record: { available: $available }) {
+      recordId
+    }
+  }
+`;
+
+export const UPDATE_SPECULATIVE = gql`
+  mutation UpdateAvailability($acceptsSpeculative: Boolean!) {
+    userUpdateOne(record: { acceptsSpeculative: $acceptsSpeculative }) {
+      recordId
+    }
+  }
+`;
+
+export const UPDATE_ROYALTIES = gql`
+  mutation UpdateRoyalties($acceptsRoyalties: Boolean!) {
+    userUpdateOne(record: { acceptsRoyalties: $acceptsRoyalties }) {
+      recordId
+    }
+  }
+`;
+
+export const UPDATE_FUNDED = gql`
+  mutation UpdateFunded($acceptsUnfunded: Boolean!) {
+    userUpdateOne(record: { acceptsUnfunded: $acceptsUnfunded }) {
+      recordId
+    }
+  }
+`;
+
 export const DELETE_ACCOUNT = gql`
   mutation DeleteAccount {
     deleteAccount {
@@ -344,6 +376,10 @@ export const UPDATE_JOB = gql`
     $gallery: MongoID!
     $budget: String
     $extra: String
+    $funded: Boolean
+    $speculative: Boolean
+    $termsAccepted: Boolean
+    $inLieu: Boolean
     $keywords: [String]
   ) {
     jobUpdateById(
@@ -355,7 +391,11 @@ export const UPDATE_JOB = gql`
         location: $location
         mechanics: $mechanics
         showreel: $showreel
+        funded: $funded
+        speculative: $speculative
+        inLieu: $inLieu
         type: $type
+        termsAccepted: $termsAccepted
         creativeSummary: $creativeSummary
         submitted: $submitted
         gallery: $gallery

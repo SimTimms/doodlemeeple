@@ -11,16 +11,6 @@ export default function SubmitBrief({ job, history, inviteList }) {
     <Column j="center" a="center">
       <Row>
         <IconButton
-          title="Back"
-          icon="chevron_left"
-          iconPos="left"
-          color="primary"
-          onClickEvent={() => {
-            history.push(`/app/edit-job/${job._id}`);
-          }}
-          styleOverride={{ marginRight: 5, minWidth: 120 }}
-        />
-        <IconButton
           onClickEvent={() => {
             setPage(1);
           }}

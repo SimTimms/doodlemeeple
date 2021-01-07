@@ -58,7 +58,7 @@ export function Posts({ posts }) {
                   onClickEvent={() => {}}
                   icon=""
                   title="Read"
-                  color="text-dark"
+                  color="text-white"
                   type="button"
                   styleOverride={null}
                 />

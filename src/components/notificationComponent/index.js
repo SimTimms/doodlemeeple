@@ -6,9 +6,8 @@ import { REMOVE_NOTIFICATION_MUTATION } from '../../data/mutations';
 import { Mutation } from 'react-apollo';
 import { timeDifferenceForDate } from '../../utils/dates';
 import { nameShortener } from '../../utils';
-
 import clsx from 'clsx';
-import { MenuButtonShortcut } from '../';
+import { MenuButtonShortcut, DividerMini } from '../';
 
 export default function NotificationComponent({
   notification,
@@ -62,6 +61,7 @@ export default function NotificationComponent({
                     <b>{timeDifferenceForDate(notification.createdAt)}</b>
                   </Typography>
                 </div>
+                <DividerMini />
                 <Typography color="textPrimary" component="p">
                   {nameShortener(notification.message, 50)}
                 </Typography>

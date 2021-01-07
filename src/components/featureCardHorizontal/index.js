@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card } from '@material-ui/core';
 import { useStyles } from './styles';
-import Typography from '@material-ui/core/Typography';
+import { Typography } from '@material-ui/core';
+import { Row, Column, Paper } from '../';
 
 export default function FeatureCardHorizontal({
   background,
@@ -12,77 +12,85 @@ export default function FeatureCardHorizontal({
   buttonTwo,
 }) {
   const classes = useStyles();
+  console.log(meta);
   return (
-    <Card className={classes.card}>
+    <Paper p="0">
       <div className={classes.postHeader}>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            width: '100%',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            position: 'relative',
-          }}
-        >
+        <Column>
           <div
             className={classes.profileWrapperFeatured}
             style={{ backgroundImage: `url(${background})` }}
-          ></div>
-
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              width: '100%',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-            }}
           >
-            <div
+            <Typography
               style={{
-                display: 'flex',
-                flexDirection: 'column',
-                width: '100%',
-                justifyContent: 'space-between',
-                alignItems: 'space-between',
+                color: '#fff',
+                textShadow: '0 0px 5px rgba(0,0,0,1)',
+                fontWeight: 900,
+                paddingBottom: 5,
+                paddingLeft: 10,
+                boxSizing: 'border-box',
               }}
+              variant="h5"
             >
-              <Typography
-                variant="h6"
-                component="h6"
-                className={classes.postHeaderText}
+              {title}
+            </Typography>
+          </div>
+
+          <div className={classes.content}>
+            <Row j="flex-start">
+              <div
+                style={{
+                  maxWidth: 120,
+                  minWidth: 120,
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
               >
-                <b>{title}</b>
-              </Typography>{' '}
+                <Typography
+                  variant="body1"
+                  component="p"
+                  className={classes.meta}
+                >
+                  <b>by {meta.split(' - ')[0]}</b>
+                </Typography>
+                <Typography
+                  variant="body1"
+                  component="p"
+                  className={classes.meta}
+                >
+                  {meta.split(' - ')[1]}
+                </Typography>
+              </div>
               <Typography
                 variant="body1"
-                component="p"
-                className={classes.meta}
+                style={{
+                  borderLeft: '1px solid rgba(255,255,255,0.3)',
+                  paddingLeft: 20,
+                  paddingRight: 20,
+                }}
               >
-                <b>{meta}</b>
+                {subtitle}
               </Typography>
-            </div>
-            <Typography variant="body1">{subtitle}</Typography>
+              <div
+                style={{
+                  maxWidth: 80,
+                  minWidth: 80,
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                {buttonOne}
+                {buttonTwo && (
+                  <div
+                    style={{ height: 20, borderLeft: '1px solid #222' }}
+                  ></div>
+                )}
+                {buttonTwo && buttonTwo}
+              </div>
+            </Row>
           </div>
-          <div
-            style={{
-              display: 'flex',
-              maxWidth: 300,
-              justifyContent: 'space-between',
-              marginTop: 10,
-              zIndex: 1,
-              alignItems: 'center',
-            }}
-          >
-            {buttonOne}
-            {buttonTwo && (
-              <div style={{ height: 20, borderLeft: '1px solid #222' }}></div>
-            )}
-            {buttonTwo && buttonTwo}
-          </div>
-        </div>
+        </Column>
       </div>
-    </Card>
+    </Paper>
   );
 }

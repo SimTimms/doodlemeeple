@@ -2,11 +2,12 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { TYPE_HELPER } from '../../utils';
 import { useStyles } from './styles';
+import { DMCard } from '../';
 
 export default function SectionWrapper({ children, header, button }) {
   const classes = useStyles();
   return (
-    <div className={classes.sectionWrapperMain}>
+    <DMCard p={10}>
       <div className={classes.actionWrapper}>
         <Typography
           variant="h5"
@@ -18,6 +19,6 @@ export default function SectionWrapper({ children, header, button }) {
         {button && button}
       </div>
       {children}
-    </div>
+    </DMCard>
   );
 }
