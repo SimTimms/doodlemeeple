@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
-import { CREATIVES, CREATIVESCORES } from '../../../../../data/queries';
+import { CREATIVES } from '../../../../../data/queries';
 import {
   ProfileCard,
   IconButton,

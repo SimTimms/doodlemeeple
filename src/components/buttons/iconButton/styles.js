@@ -53,13 +53,13 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   iconButtonTextWhite: {
-    background: 'rgba(0,0,0,0)',
+    background: 'rgba(255,255,255,0.4)',
     color: '#fff',
     border: '1px solid rgba(255,255,255,0.3)',
     boxShadow: 'none',
     justifyContent: 'center',
     '&:hover': {
-      background: 'rgba(255,255,255,0.4)',
+      background: 'rgba(255,255,255,0.1)',
     },
   },
   iconButtonTextWhiteMini: {

@@ -6,14 +6,12 @@ import ProfileMenu from './profileMenu';
 import TabProfile from './tabProfile';
 import TabPreferences from './tabPreferences';
 import { initialState } from './initialState';
-import Onboarding from './onboarding';
 
 export default function AppProfileEdit({ theme, history }) {
   const classes = useStyles();
   const [profile, setProfile] = React.useState(initialState);
   const [sections, setSections] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
-  const [changes, setChanges] = React.useState(0);
   const [tabNbr, setTabNbr] = React.useState(0);
 
   return (
@@ -23,11 +21,7 @@ export default function AppProfileEdit({ theme, history }) {
         setTabNbr={setTabNbr}
         history={history}
         profile={profile}
-        changes={changes}
       />
-      {loading === false && (
-        <Onboarding profile={profile} setProfile={setProfile} />
-      )}
 
       {tabNbr === 0 ? (
         <TabProfile

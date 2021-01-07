@@ -2,15 +2,15 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   profileWrapperFeatured: {
-    minWidth: 50,
-    maxWidth: 50,
-    minHeight: 50,
-    maxHeight: 50,
-    borderRadius: '50%',
-    border: '4px solid #fff',
+    width: '100%',
+    height: 180,
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
-    marginRight: 20,
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+    flexDirection: 'column',
+    boxShadow: 'inset 0px -60px 20px -10px rgb(0,0,0,0.8)',
   },
   postHeader: {
     bottom: 0,
@@ -24,8 +24,18 @@ export const useStyles = makeStyles((theme) => ({
     zIndex: 1,
   },
   meta: {
-    fontSize: 12,
-    color: theme.palette.primary.main,
+    fontSize: 10,
+    color: '#fff',
+  },
+  content: {
+    width: '100%',
+    background: theme.palette.secondary.light,
+    padding: 10,
+    boxSizing: 'border-box',
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
   },
   postHeaderText: {
     color: '#222',

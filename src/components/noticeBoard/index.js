@@ -90,7 +90,10 @@ export default function NoticeBoard({
             {featuredArticle.id && (
               <Row>
                 {!mobile && (
-                  <FeaturedCreative featuredArticle={featuredArticle} />
+                  <FeaturedCreative
+                    featuredArticle={featuredArticle}
+                    history={history}
+                  />
                 )}
               </Row>
             )}

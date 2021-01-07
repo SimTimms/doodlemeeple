@@ -116,7 +116,7 @@ export default function AppProfileEdit({
                       maxLength={26}
                       onChangeEvent={(e) => {
                         setProfile({ ...profile, name: e });
-                        autosave(SignupMutation, 'username');
+                        e.length > 5 && autosave(SignupMutation, 'username');
                       }}
                       replaceMode="loose"
                       placeholder="Example: David Jones"

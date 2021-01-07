@@ -1,16 +1,7 @@
 import React from 'react';
-import { useStyles } from './styles';
 import { MenuButtonShortcut, TopMenuWrapper } from '../../../../components';
 
-export default function ProfileMenu({
-  tabNbr,
-  setTabNbr,
-  history,
-  profile,
-  changes,
-}) {
-  const classes = useStyles();
-
+export default function ProfileMenu({ tabNbr, setTabNbr, history, profile }) {
   return (
     <div style={{ width: '100%' }}>
       <TopMenuWrapper j="center">

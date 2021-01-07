@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useStyles } from './styles';
 import { Typography } from '@material-ui/core';
 import {
+  AddSection,
   Column,
   DividerMini,
   Divider,
@@ -16,7 +17,12 @@ import { useMutation } from 'react-apollo';
 import autosave from '../../../../../utils/autosave';
 import { toaster } from '../../../../../utils/toaster';
 
-export default function Onboarding({ profile, setProfile }) {
+export default function Onboarding({
+  profile,
+  setProfile,
+  sections,
+  setSections,
+}) {
   const classes = useStyles();
   const [updateUser] = useMutation(UPDATE_USER_MUTATION);
   const [summary, setSummary] = React.useState('');
@@ -28,7 +34,8 @@ export default function Onboarding({ profile, setProfile }) {
       profile.profileBG &&
         profile.profileImg &&
         profile.summary &&
-        profile.summary !== ''
+        profile.summary !== '' &&
+        profile.sections.length > 0
     );
   }, [profile]);
 
@@ -38,13 +45,16 @@ export default function Onboarding({ profile, setProfile }) {
   const hasAvatar = profile.profileImg;
   const hasSummary =
     profile.summary !== '' && profile.summary !== null ? true : false;
+  const hasSection = profile.sections.length > 0;
 
   const displayUploader = !hasBackground;
   const displaySummary = !hasSummary && hasBackground && hasAvatar;
   const displayAvUploader = !hasAvatar && hasBackground;
+  const displaySection =
+    hasSummary && hasBackground && hasAvatar && !hasSection;
   const displayText = {
     newTitle: 'Create a Profile',
-    newStr: `Let's creating a profile so people know a bit about you, upload a header image that defines your work it should be 1920x300px and less than 2MB`,
+    newStr: `Let's creating a profile so people can get to know you. Upload a header image that defines your work it should be 1920x300px and less than 2MB`,
     profileTitle: 'Great! Now add a profile picture',
     profileStr: `Upload a photo, sketch, painting or drawing of yourself.`,
     bgImageTitle:
@@ -52,6 +62,8 @@ export default function Onboarding({ profile, setProfile }) {
     bgImage: '',
     summaryTitle: 'Describe yourself and how you work',
     summaryStr: `Tell people about yourself; How long have you been working in your profession? What are your influences? What projects are you most proud of?`,
+    sectionTitle: 'Add a Skill',
+    sectionStr: 'Expand your profile by describing your skills and experience',
   };
 
   const title = newProfile
@@ -60,14 +72,18 @@ export default function Onboarding({ profile, setProfile }) {
     ? displayText.bgImageTitle
     : !hasAvatar
     ? displayText.profileTitle
-    : !hasSummary && displayText.summaryTitle;
+    : !hasSummary
+    ? displayText.summaryTitle
+    : displaySection && displayText.sectionTitle;
   const text = newProfile
     ? displayText.newStr
     : !hasBackground
     ? displayText.bgImage
     : !hasAvatar
     ? displayText.profileStr
-    : !hasSummary && displayText.summaryStr;
+    : !hasSummary
+    ? displayText.summaryStr
+    : displaySection && displayText.sectionStr;
 
   return invisible ? null : (
     <div className={classes.noticeArea}>
@@ -176,7 +192,10 @@ export default function Onboarding({ profile, setProfile }) {
                 icon="chevron_right"
                 iconPos="right"
                 color="text-white"
-                onClickEvent={() => setInvisible(true)}
+                onClickEvent={() => {
+                  setProfile({ ...profile, summary: summary });
+                  setInvisible(true);
+                }}
               />
             ) : (
               <UnlockInfo
@@ -187,6 +206,16 @@ export default function Onboarding({ profile, setProfile }) {
               />
             )}
           </Column>
+        )}
+        {displaySection && (
+          <AddSection
+            setSections={setSections}
+            sections={sections}
+            userType={{
+              creative: profile.creativeTrue,
+              creator: profile.creatorTrue,
+            }}
+          />
         )}
       </Column>
     </div>

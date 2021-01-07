@@ -4,7 +4,6 @@ import {
   HeaderTwo,
   HeaderThree,
   Column,
-  Paper,
   Divider,
   GalleryCard,
 } from '../../../../../../components';

@@ -81,8 +81,6 @@ export function FeaturedCreative({ history, featuredArticle }) {
 }
 
 export function WelcomeToDM({ profile, history }) {
-  const classes = useStyles();
-
   return (
     <Column>
       <Typography variant="h4" style={{ color: '#fff' }} align="center">

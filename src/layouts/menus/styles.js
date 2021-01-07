@@ -70,7 +70,7 @@ export const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   drawerOpenTablet: {
-    width: drawerWidth,
+    display: 'none',
   },
   icon: {
     minWidth: 30,

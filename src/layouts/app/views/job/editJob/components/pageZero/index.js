@@ -1,12 +1,7 @@
 import React from 'react';
 import { Card } from '@material-ui/core';
 import { useStyles } from '../../styles';
-import {
-  IconButton,
-  FieldBox,
-  Column,
-  UnlockInfo,
-} from '../../../../../../../components';
+import { FieldBox, Column } from '../../../../../../../components';
 
 export default function PageZero({ setJob, job, mutation }) {
   const classes = useStyles();

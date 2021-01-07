@@ -1,7 +1,6 @@
 import React from 'react';
 import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
-import { FieldTitle } from '../../../../components';
 import { Query } from 'react-apollo';
 import { JOB } from '../../../../data/queries';
 import { ArtistLineup, Creatives } from './components';
