@@ -90,13 +90,7 @@ export default function PaymentTerms({
           />
         );
       })}
-      <AddPaymentTerm
-        contractId={contract._id}
-        setDetailsLock={setDetailsLock}
-        detailsLock={detailsLock}
-        percentLock={percentLock}
-        addPaymentTerm={addPaymentTerm}
-      />
+
       {contract.paymentTerms.length === 0 ? (
         <Row>
           <Typography style={{ fontWeight: 900, marginRight: 10 }}>
@@ -116,7 +110,14 @@ export default function PaymentTerms({
           </Row>
         )
       )}
-
+      <Divider />
+      <AddPaymentTerm
+        contractId={contract._id}
+        setDetailsLock={setDetailsLock}
+        detailsLock={detailsLock}
+        percentLock={percentLock}
+        addPaymentTerm={addPaymentTerm}
+      />
       {percentLock.message !== '' && (
         <Typography
           style={{

@@ -34,8 +34,8 @@ export default function AddPaymentTerm({
         return (
           <IconButton
             disabled={percentLock.sum < 0 || percentLock.status}
-            color="primary"
-            title="Add"
+            color="secondary"
+            title="Add a Payment Term"
             icon=""
             onClickEvent={() => {
               mutation();
