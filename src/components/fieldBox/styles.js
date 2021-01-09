@@ -1,17 +1,17 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  root: {
+  input: {
     display: 'flex',
     position: 'relative',
     fontFamily: theme.typography.fontFamily,
     resize: 'vertical',
-    marginLeft: 10,
     padding: 10,
     borderRadius: 5,
     boxShadow: 'inset 3px 3px 10px rgba(0,0,0,0.05)',
     border: '1px solid #ddd',
     background: 'rgba(0,0,0,0.025)',
+    boxSizing: 'border-box',
     outline: 'none',
     fontSize: 14,
     width: '100%',
@@ -34,11 +34,13 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 10,
     width: '100%',
   },
-
-  small: { minWidth: 100 },
-  medium: { minWidth: 150 },
-  large: { minWidth: 200 },
-  tiny: { maxWidth: 30, minWidth: 30 },
+  inputLabel: { fontSize: 10 },
+  small: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'space-between',
+  },
+  hide: { display: 'none' },
   openClose: {
     width: '100%',
     marginTop: 10,

@@ -42,6 +42,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: '20px 0 20px 0',
     '& h4': { color: '#fff' },
   },
+  socialIcon: { width: 30, border: '1px solid #ccc', borderRadius: '50%' },
   profileWrapper: {
     display: 'flex',
     flexDirection: 'row',

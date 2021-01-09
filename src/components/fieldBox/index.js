@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
-import { CurrencySelector } from '../';
+import { CurrencySelector, Column } from '../';
 import clsx from 'clsx';
 
 export default function FieldBox({ title, value, onChangeEvent, ...props }) {
@@ -21,29 +21,23 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
   } = props;
   value = value ? value : '';
   return (
-    <div className={classes.one} style={{ width: width ? '' : '100%' }}>
-      <div
-        className={classes.two}
-        style={{
-          alignItems: multiline ? 'flex-start' : 'center',
-        }}
-      >
-        {(!titlePos || titlePos === 'left') && (
-          <Typography
-            className={clsx({
-              [classes.tiny]: size === 'xs',
-              [classes.small]: true,
-              [classes.medium]: size === 'm',
-              [classes.large]: size === 'l',
-            })}
-            style={{ display: title === '' ? 'none' : '' }}
-          >{`${title}`}</Typography>
-        )}
-
+    <Column w={width ? '' : '100%'}>
+      <Column a="flex-start">
+        <div
+          className={clsx({
+            [classes.small]: true,
+            [classes.hide]: title === '',
+          })}
+        >
+          <Typography className={classes.inputLabel}>{`${title}`}</Typography>{' '}
+          <Typography className={classes.inputLabel}>{`${
+            maxLength > 0 && maxLength - value.length
+          }`}</Typography>
+        </div>
         {multiline ? (
           <textarea
             rows={3}
-            className={classes.root}
+            className={classes.input}
             placeholder={placeholder}
             value={value.substring(0, maxLength)}
             onChange={(e) => {
@@ -68,7 +62,7 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
         ) : (
           <input
             className={clsx({
-              [classes.root]: true,
+              [classes.input]: true,
               [classes.tiny]: size === 'xs',
             })}
             style={{ width: width ? width : '100%' }}
@@ -92,11 +86,6 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
           />
         )}
 
-        {maxLength > 0 && titlePos !== 'right' && (
-          <Typography style={{ marginLeft: 5, fontSize: 12, width: 30 }}>{`${
-            maxLength - value.length
-          }`}</Typography>
-        )}
         {(warning !== '' || info !== '') && (
           <Icon
             className={classes.helpIcon}
@@ -107,18 +96,7 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
             {infoOpen === false ? 'info' : 'keyboard_arrow_up'}
           </Icon>
         )}
-        {titlePos === 'right' && (
-          <Typography
-            style={{ marginLeft: 5 }}
-            className={clsx({
-              [classes.tiny]: size === 'xs',
-              [classes.small]: true,
-              [classes.medium]: size === 'm',
-              [classes.large]: size === 'l',
-            })}
-          >{`${title}`}</Typography>
-        )}
-      </div>
+      </Column>
       <div
         className={clsx({
           [classes.openClose]: true,
@@ -131,6 +109,6 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
           {warning !== '' && <span style={{ fontWeight: 900 }}>{warning}</span>}
         </Typography>
       </div>
-    </div>
+    </Column>
   );
 }

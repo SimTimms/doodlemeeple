@@ -4,7 +4,6 @@ import { useStyles } from './styles';
 import { ProfileHeader } from './components/profileHeader';
 import {
   AddSection,
-  ErrorBox,
   IconTitle,
   InlineHeader,
   FieldTitle,
@@ -22,6 +21,10 @@ import { readableErrors } from '../../../../utils/readableErrors';
 import { toaster } from '../../../../utils/toaster';
 import autosave from '../../../../utils/autosave';
 import RoleObject from './components/roleObject';
+import socialTwitter from '../../../../assets/socialTwitter.svg';
+import socialFacebook from '../../../../assets/socialFacebook.png';
+import socialInstagram from '../../../../assets/socialInstagram.png';
+import socialLinkedIn from '../../../../assets/socialLinkedIn.png';
 
 export default function AppProfileEdit({
   profile,
@@ -96,6 +99,8 @@ export default function AppProfileEdit({
                     />
                     <ProfileHeader
                       profile={profile}
+                      setProfile={setProfile}
+                      errors={errors}
                       setProfileImg={(url) => {
                         setProfile({ ...profile, profileImg: url });
                       }}
@@ -104,43 +109,90 @@ export default function AppProfileEdit({
                       }}
                       autosaveFunction={SignupMutation}
                     />
+                    <Divider />
                     <FieldTitle
-                      name="About You"
-                      description="Your name and a brief summary of what you do"
+                      name="Social"
+                      description=""
                       warning=""
                       inline={false}
                     />
-                    <FieldBox
-                      value={profile.name}
-                      title="Name"
-                      maxLength={26}
-                      onChangeEvent={(e) => {
-                        setProfile({ ...profile, name: e });
-                        e.length > 5 && autosave(SignupMutation, 'username');
-                      }}
-                      replaceMode="loose"
-                      placeholder="Example: David Jones"
-                      info="Your name"
-                      warning=""
-                      size="s"
-                      multiline={false}
-                    />
-                    <ErrorBox errorMsg={errors.name} />
-                    <FieldBox
-                      value={profile.summary}
-                      title="Summary"
-                      maxLength={256}
-                      onChangeEvent={(e) => {
-                        setProfile({ ...profile, summary: e });
-                        autosave(SignupMutation, 'summary');
-                      }}
-                      replaceMode="loose"
-                      placeholder="Example: Digital artist with 12 years experience..."
-                      info="Coming Soon"
-                      warning=""
-                      size="s"
-                      multiline={true}
-                    />
+                    <Row>
+                      <img
+                        src={socialFacebook}
+                        className={classes.socialIcon}
+                      />
+                      <FieldBox
+                        value={profile.facebook}
+                        title=""
+                        maxLength={256}
+                        onChangeEvent={(e) => {
+                          setProfile({ ...profile, facebook: e });
+                          autosave(SignupMutation, 'facebook');
+                        }}
+                        replaceMode="loose"
+                        placeholder=""
+                        info=""
+                        warning=""
+                        size="s"
+                      />
+                    </Row>
+                    <Row>
+                      <img src={socialTwitter} className={classes.socialIcon} />
+                      <FieldBox
+                        value={profile.twitter}
+                        title=""
+                        maxLength={256}
+                        onChangeEvent={(e) => {
+                          setProfile({ ...profile, twitter: e });
+                          autosave(SignupMutation, 'twitter');
+                        }}
+                        replaceMode="loose"
+                        placeholder=""
+                        info=""
+                        warning=""
+                        size="s"
+                      />
+                    </Row>
+                    <Row>
+                      <img
+                        src={socialInstagram}
+                        className={classes.socialIcon}
+                      />
+                      <FieldBox
+                        value={profile.instagram}
+                        title=""
+                        maxLength={256}
+                        onChangeEvent={(e) => {
+                          setProfile({ ...profile, instagram: e });
+                          autosave(SignupMutation, 'instagram');
+                        }}
+                        replaceMode="loose"
+                        placeholder=""
+                        info=""
+                        warning=""
+                        size="s"
+                      />
+                    </Row>
+                    <Row>
+                      <img
+                        src={socialLinkedIn}
+                        className={classes.socialIcon}
+                      />
+                      <FieldBox
+                        value={profile.linkedIn}
+                        title=""
+                        maxLength={256}
+                        onChangeEvent={(e) => {
+                          setProfile({ ...profile, linkedIn: e });
+                          autosave(SignupMutation, 'linkedIn');
+                        }}
+                        replaceMode="loose"
+                        placeholder=""
+                        info=""
+                        warning=""
+                        size="s"
+                      />
+                    </Row>
                     <Divider />
                     <FieldTitle
                       name="Your Role"
