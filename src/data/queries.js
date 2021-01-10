@@ -13,6 +13,13 @@ export const CREATIVES = gql`
       viewCount
       paymentMethod
       responsePercent
+      facebook
+      skype
+      publicEmail
+      website
+      twitter
+      linkedIn
+      instagram
       likedMe {
         _id
         receiver {

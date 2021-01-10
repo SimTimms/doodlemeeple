@@ -21,7 +21,7 @@ import { readableErrors } from '../../../../utils/readableErrors';
 import { toaster } from '../../../../utils/toaster';
 import autosave from '../../../../utils/autosave';
 import RoleObject from './components/roleObject';
-import * as social from '../../../../assets/social.svg';
+import * as social from '../../../../assets/social';
 import SocialHeader from './socialHeader';
 
 export default function AppProfileEdit({

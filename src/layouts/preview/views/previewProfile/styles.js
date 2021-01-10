@@ -38,5 +38,5 @@ export const useStyles = makeStyles((theme) => ({
     border: '4px solid #fff',
     boxShadow: '0 0 30px rgba(0,0,0,0.2)',
   },
-  socialIcon: { height: 40 },
+  socialIcon: { height: 20, marginLeft: 5, marginRight: 5, cursor: 'pointer' },
 }));

@@ -9,6 +9,8 @@ import clsx from 'clsx';
 import Cookies from 'js-cookie';
 import imageOptimiser from '../../utils/imageOptimiser';
 import stripeImg from '../../assets/stripe_logo_sm.png';
+import * as social from '../../assets/social';
+import SocialIcon from './socialIcon';
 
 export default function ProfileCard({
   history,
@@ -250,6 +252,23 @@ export default function ProfileCard({
           <Icon onClick={() => {}} className={classes.favIconStar}>
             {isFav ? 'star_border' : 'star_border'}
           </Icon>
+        </div>
+        <div
+          style={{
+            background: '#fff',
+            width: '100%',
+            borderTop: '1px solid #ddd',
+          }}
+        >
+          <Row a="center" j="center">
+            <SocialIcon img={social.socialLinkedIn} link={creative.linkedIn} />
+            <SocialIcon img={social.socialFacebook} link={creative.facebook} />
+            <SocialIcon img={social.socialTwitter} link={creative.twitter} />
+            <SocialIcon
+              img={social.socialInstagram}
+              link={creative.instagram}
+            />
+          </Row>
         </div>
       </Column>
       {updateInviteList && Cookies.get('userId') !== creative._id && (

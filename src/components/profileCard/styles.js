@@ -12,6 +12,13 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     boxShadow: '10px 10px 20px rgba(0,0,0,0.2)',
   },
+  socialIcon: {
+    width: 20,
+    marginLeft: 3,
+    marginRight: 3,
+    border: '1px solid rgba(255,255,255,0.4)',
+    borderRadius: '50%',
+  },
   creativeCardNoShadow: { boxShadow: 'none' },
   creativeCardWrapper: {
     background: '#fafafa',

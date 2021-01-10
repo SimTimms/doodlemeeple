@@ -6,8 +6,8 @@ export function Header({ str }) {
   const classes = useStyles();
   return (
     <Typography
-      variant="h1"
-      style={{ textAlign: 'center', fontSize: 40, width: '100%' }}
+      variant="h3"
+      style={{ textAlign: 'center', width: '100%' }}
       className={classes.title}
     >
       {str}

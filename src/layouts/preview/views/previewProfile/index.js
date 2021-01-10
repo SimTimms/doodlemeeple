@@ -10,13 +10,13 @@ import {
   IconButton,
   MenuButtonShortcut,
   Row,
+  Divider,
 } from '../../../../components';
 import { Query } from 'react-apollo';
 import { PROFILE_PREVIEW, SECTIONS_PREVIEW } from '../../../../data/queries';
 import GallerySection from './components/section/gallerySection';
 import { TYPE_HELPER } from '../../../../utils';
-import socialLinkedIn from '../../../../assets/socialLinkedIn.png';
-import socialFacebook from '../../../../assets/socialFacebook.png';
+import * as social from '../../../../assets/social';
 import Avatar from './avatar';
 import SocialIcon from './socialIcon';
 import { initialState } from './initialState';
@@ -28,7 +28,7 @@ export function PreviewProfile({ history, profileId, publicView }) {
   });
   const [sections, setSections] = React.useState([]);
   const [page, setPage] = React.useState(-1);
-
+  console.log(userProfile);
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -93,22 +93,21 @@ export function PreviewProfile({ history, profileId, publicView }) {
             >
               <Avatar img={userProfile.profileImg} />
               <Header str={userProfile.name} />
-              <SocialIcon img={socialLinkedIn} link={userProfile.linkedIn} />
-              <SocialIcon img={socialLinkedIn} link={userProfile.linkedIn} />
-
               <Row>
-                <MenuButtonShortcut
-                  text={{
-                    name: 'All Skills',
-                    color: '#222',
-                    icon: 'chevron_right',
-                    count: 0,
-                  }}
-                  onClickEvent={() => {
-                    setPage(-1);
-                  }}
-                  active={page === -1}
-                />
+                {sections.length > 0 && (
+                  <MenuButtonShortcut
+                    text={{
+                      name: 'All Skills',
+                      color: '#222',
+                      icon: 'chevron_right',
+                      count: 0,
+                    }}
+                    onClickEvent={() => {
+                      setPage(-1);
+                    }}
+                    active={page === -1}
+                  />
+                )}
                 {sections &&
                   sections.map((section, index) => {
                     return (
@@ -161,6 +160,23 @@ export function PreviewProfile({ history, profileId, publicView }) {
               return null;
             }}
           </Query>
+          <HeaderTwo str="Connect" />
+          <Divider />
+          <Row>
+            <SocialIcon
+              img={social.socialLinkedIn}
+              link={userProfile.linkedIn}
+            />
+            <SocialIcon
+              img={social.socialFacebook}
+              link={userProfile.facebook}
+            />
+            <SocialIcon img={social.socialTwitter} link={userProfile.twitter} />
+            <SocialIcon
+              img={social.socialInstagram}
+              link={userProfile.instagram}
+            />
+          </Row>
         </div>
       </div>
     </Slide>

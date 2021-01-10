@@ -1,7 +1,6 @@
 import React from 'react';
 import { Row } from '../../../../components';
-import * as images from '../../../../assets/social.svg';
-
+import * as images from '../../../../assets/social';
 import FieldButton from './fieldButton';
 
 export default function SocialHeader({ profile, visible, setVisible }) {
