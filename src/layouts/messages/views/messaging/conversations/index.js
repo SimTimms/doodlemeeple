@@ -22,8 +22,9 @@ export default function Conversations({ history, setConversationArgs }) {
         <Divider />
         <div className={classes.cardGrid}>
           {conversationArray.map((conversation, index) => {
-            return conversation.sender === null ||
-              conversation.receiver === null ? null : (
+            return !conversation.sender ||
+              !conversation.receiver ||
+              !conversation.job ? null : (
               <MessageComponent
                 disabled={false}
                 key={`conversationparent_${index}`}

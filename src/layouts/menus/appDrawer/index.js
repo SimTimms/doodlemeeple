@@ -138,6 +138,8 @@ export default function AppDrawer({
               link: () => {
                 Cookies.remove('token');
                 Cookies.remove('userId');
+                localStorage.removeItem('featureArticle');
+                localStorage.removeItem('posts');
                 history.replace(`/`);
               },
               count: null,

@@ -845,6 +845,14 @@ export const PROFILE = gql`
       acceptsRoyalties
       acceptsUnfunded
       onboarding
+      facebook
+      twitter
+      website
+      instagram
+      linkedIn
+      publicEmail
+      skype
+      phone
       favourites {
         receiver {
           _id
@@ -888,6 +896,12 @@ export const PROFILE_PREVIEW = gql`
       summary
       profileBG
       profileImg
+      linkedIn
+      twitter
+      facebook
+      instagram
+      publicEmail
+      website
     }
   }
 `;

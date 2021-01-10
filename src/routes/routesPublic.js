@@ -4,7 +4,7 @@ import { AboutLayout, StripeSuccess } from '../layouts';
 import PreviewLayout from '../layouts/preview';
 import { PublicLayout } from '../layouts/public';
 
-export default function PublicRoutes({ theme, ...props }) {
+export default function PublicRoutes({ theme, props: { ...props } }) {
   return (
     <Switch>
       <Route

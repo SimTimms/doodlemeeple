@@ -4,13 +4,14 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 
 export function Column(props) {
-  const { children, a, j, w, p, b, br, h } = props;
+  const { children, a, j, w, p, b, br, h, bg } = props;
   const align = a ? a : 'center';
   const width = w ? w : '100%';
   const height = h ? h : '';
   const justify = j ? j : 'center';
   const padding = p ? p : 0;
   const border = b ? b : 'none';
+  const background = bg ? bg : '';
   const borderRadius = br ? br : 0;
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
@@ -26,6 +27,7 @@ export function Column(props) {
         borderRadius,
         boxSizing: 'border-box',
         height,
+        background,
       }}
       className={clsx({
         [classes.desktop]: true,
@@ -38,13 +40,15 @@ export function Column(props) {
 }
 
 export function Row(props) {
-  const { children, a, j, wrap, w, b } = props;
+  const { children, a, j, wrap, w, b, pb, v, mb } = props;
   const align = a ? a : 'center';
   const justify = j ? j : 'center';
   const width = w ? w : '100%';
   const border = b ? b : '';
+  const paddingBottom = pb ? pb : '';
+  const marginBottom = mb ? mb : '';
 
-  return (
+  return v === 'none' ? null : (
     <div
       style={{
         display: 'flex',
@@ -54,6 +58,8 @@ export function Row(props) {
         justifyContent: justify,
         flexWrap: wrap,
         border,
+        paddingBottom,
+        marginBottom,
       }}
     >
       {children}

@@ -32,6 +32,7 @@ function RouterComponent(props) {
     link: authLink.concat(httpLink),
     cache: new InMemoryCache({ addTypename: false }),
   });
+
   return (
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>

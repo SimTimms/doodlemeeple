@@ -77,6 +77,8 @@ export function PublicMenu({ history }) {
           onClick={() => {
             Cookies.remove('token');
             Cookies.remove('userId');
+            localStorage.removeItem('featureArticle');
+            localStorage.removeItem('posts');
             history.push(`/`);
           }}
         >

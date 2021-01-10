@@ -2,7 +2,6 @@ import React from 'react';
 import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import logo from '../../../../assets/logo.svg';
-import logoDevice from '../../../../assets/dm_device.png';
 import {
   Header,
   ColumnWrapper,
@@ -16,17 +15,16 @@ import { Query } from 'react-apollo';
 import { PROFILE_PREVIEW, SECTIONS_PREVIEW } from '../../../../data/queries';
 import GallerySection from './components/section/gallerySection';
 import { TYPE_HELPER } from '../../../../utils';
+import socialLinkedIn from '../../../../assets/socialLinkedIn.png';
+import socialFacebook from '../../../../assets/socialFacebook.png';
+import Avatar from './avatar';
+import SocialIcon from './socialIcon';
+import { initialState } from './initialState';
 
-export function PreviewProfile({ history, theme, profileId, publicView }) {
+export function PreviewProfile({ history, profileId, publicView }) {
   const classes = useStyles();
-
   const [userProfile, setUserProfile] = React.useState({
-    profileBG: null,
-    userName: '',
-    userId: '',
-    summary: '',
-    sections: [],
-    profileImg: null,
+    initialState,
   });
   const [sections, setSections] = React.useState([]);
   const [page, setPage] = React.useState(-1);
@@ -38,14 +36,8 @@ export function PreviewProfile({ history, theme, profileId, publicView }) {
           query={PROFILE_PREVIEW}
           variables={{ userId: profileId }}
           onCompleted={(data) => {
-            const { name, summary, profileBG, _id, profileImg } = data.userById;
             setUserProfile({
-              profileBG: profileBG,
-              userName: name,
-              userId: _id,
-              summary,
-              sections: [],
-              profileImg,
+              ...data.userById,
             });
           }}
         >
@@ -81,15 +73,8 @@ export function PreviewProfile({ history, theme, profileId, publicView }) {
                 userProfile.profileBG !== null
                   ? `url(${userProfile.profileBG}`
                   : '#fafafa',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center center',
-              minHeight: 300,
-              maxHeight: 300,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '100%',
             }}
+            className={classes.profileWrapper}
           >
             {userProfile.profileBG === null && (
               <img src={logo} style={{ width: 500 }} alt="" />
@@ -106,25 +91,10 @@ export function PreviewProfile({ history, theme, profileId, publicView }) {
                 marginTop: -70,
               }}
             >
-              <div
-                style={{
-                  backgroundColor: theme.palette.primary.main,
-                  backgroundImage: userProfile.profileImg
-                    ? `url(${userProfile.profileImg}`
-                    : `url(${logoDevice})`,
-                  minWidth: 140,
-                  maxWidth: 140,
-                  minHeight: 140,
-                  maxHeight: 140,
-                  backgroundSize: 'cover',
-                  backgroundPosition: `center center`,
-                  borderRadius: 20,
-                  border: '4px solid #fff',
-                  boxShadow: '0 0 30px rgba(0,0,0,0.2)',
-                }}
-              ></div>
-
-              <Header str={userProfile.userName} />
+              <Avatar img={userProfile.profileImg} />
+              <Header str={userProfile.name} />
+              <SocialIcon img={socialLinkedIn} link={userProfile.linkedIn} />
+              <SocialIcon img={socialLinkedIn} link={userProfile.linkedIn} />
 
               <Row>
                 <MenuButtonShortcut
@@ -165,7 +135,7 @@ export function PreviewProfile({ history, theme, profileId, publicView }) {
               str={
                 userProfile.summary !== ''
                   ? userProfile.summary
-                  : `${userProfile.userName} has not submitted a summary yet`
+                  : `${userProfile.name} has not submitted a summary yet`
               }
             />
           </ColumnWrapper>

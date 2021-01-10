@@ -32,10 +32,7 @@ import {
 } from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 import pageHeaders from './pageHeaders';
-import twitterImage from '../../assets/twitter.png';
-import facebookImage from '../../assets/facebook.png';
-import linkedInImage from '../../assets/linkedIn.png';
-import instaImage from '../../assets/insta.png';
+import * as social from '../../assets/social';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('home');
@@ -97,7 +94,7 @@ function AppLayout(props) {
 
   const twitter = {
     name: '',
-    icon: twitterImage,
+    icon: social.socialTwitter,
     link: 'https://twitter.com/doodlemeeple',
     color: '#fff',
     count: 0,
@@ -105,21 +102,21 @@ function AppLayout(props) {
 
   const facebook = {
     name: '',
-    icon: facebookImage,
+    icon: social.socialFacebook,
     link: 'https://www.facebook.com/doodlemeeple/',
     color: '#fff',
     count: 0,
   };
   const linkedIn = {
     name: '',
-    icon: linkedInImage,
+    icon: social.socialLinkedIn,
     link: 'https://www.linkedin.com/company/72550979',
     color: '#fff',
     count: 0,
   };
   const insta = {
     name: '',
-    icon: instaImage,
+    icon: social.socialInstagram,
     link: 'https://www.instagram.com/doodlemeeple/',
     color: '#fff',
     count: 0,

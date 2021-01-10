@@ -48,6 +48,12 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  socialIcon: {
+    width: 30,
+    border: '1px solid #ccc',
+    borderRadius: '50%',
+    marginRight: 10,
+  },
   openCloseOff: { display: 'none' },
   infoBox: {
     marginTop: 10,

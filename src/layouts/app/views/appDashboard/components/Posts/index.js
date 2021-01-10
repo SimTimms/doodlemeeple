@@ -8,7 +8,7 @@ import {
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 import { timeDifferenceForDate } from '../../../../../../utils/dates';
-
+import { excerptReplace } from '../../../../../../utils/excerptReplace';
 export function Posts({ posts }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
@@ -20,17 +20,8 @@ export function Posts({ posts }) {
       })}
     >
       {posts.map((post, index) => {
-        const regex = /(<([^>]+)>)/gi;
         const linkTo = post.link;
-        const message = post.excerpt.rendered
-          .replace(regex, '')
-          .replace(/&#8217;/gi, "'")
-          .replace(/&#8216;/gi, "'")
-          .replace(/&amp;/gi, '&')
-          .replace(/&#038;/gi, '&')
-          .replace(/&#8221;/gi, '"')
-          .replace(/&#8220;/gi, '"')
-          .replace(/\[&hellip;\]/gi, '...');
+        const message = excerptReplace(post.excerpt.rendered);
 
         const title = post.title.rendered;
         const media = post._embedded['wp:featuredmedia']

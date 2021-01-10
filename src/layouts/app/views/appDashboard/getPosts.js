@@ -33,6 +33,7 @@ export function getFeatured(setFeaturedArticle) {
             title: response.data[0].title.rendered,
             image: response.data[0]._embedded,
             linkTo: response.data[0].link,
+            excerpt: response.data[0].excerpt.rendered,
           },
         };
         localStorage.setItem(

@@ -88,14 +88,14 @@ export default function NoticeBoard({
               <WelcomeToDM profile={profile} history={history} />
             )}
             {featuredArticle.id && (
-              <Row>
+              <Column bg="#222">
                 {!mobile && (
                   <FeaturedCreative
                     featuredArticle={featuredArticle}
                     history={history}
                   />
                 )}
-              </Row>
+              </Column>
             )}
           </Row>
         )}
