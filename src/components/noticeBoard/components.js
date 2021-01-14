@@ -1,15 +1,16 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { Column, IconButton, Divider, LoadIcon, Row } from '../';
-import { Mutation } from 'react-apollo';
+import { Column, IconButton, LoadIcon, Row } from '../';
+import { Mutation, Query } from 'react-apollo';
 import { SET_AS_CREATOR } from '../../data/mutations';
-import stripeButton from '../../assets/stripe_button.png';
 import stripeLogoSM from '../../assets/stripe_logo_sm.png';
-import { Query } from 'react-apollo';
 import { PROFILE_FEATURED } from '../../data/queries';
 import device from '../../assets/device.svg';
 import { excerptReplace } from '../../utils/excerptReplace';
+import miniOne from '../../assets/miniOne.jpg';
+import { CategoryBox, CategoryBoxMini } from './categoryBox';
+
 export function FeaturedCreative({ history, featuredArticle }) {
   const classes = useStyles();
 
@@ -38,7 +39,6 @@ export function FeaturedCreative({ history, featuredArticle }) {
                   justifyContent: 'space-between',
                   width: '100%',
                   flexDirection: 'column',
-
                   paddingTop: 10,
                 }}
               >
@@ -152,7 +152,7 @@ export function AddASkill({ profile, history, setProfile }) {
 
   return (
     <Column>
-      <Typography variant="h5" className={classes.header5}>
+      <Typography variant="h6" className={classes.header5}>
         Your profile isn't complete.
       </Typography>
       <Typography variant="h6" className={classes.header6}>
@@ -288,51 +288,56 @@ export function StripeError() {
   );
 }
 
-export function NoStripe() {
+export function NoStripe({ history }) {
   const classes = useStyles();
 
   return (
-    <Column>
-      <Typography variant="h4" className={classes.header4}>
-        Connect to{' '}
-        <a
-          href="https://stripe.com"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <img src={stripeLogoSM} alt="STRIPE" style={{ width: 100 }} />
-        </a>{' '}
-        for payments
-      </Typography>
-      <Typography variant="h6" style={{ color: '#fff', textAlign: 'center' }}>
-        It's simple to do, just click below to begin
-      </Typography>
-      <Divider />
-      {
-        <Column>
-          <a
-            href={`https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_STRIPE_CLIENT}&scope=read_write&redirect_uri=${process.env.REACT_APP_STRIPE_REDIRECT}`}
-          >
-            <img src={stripeButton} style={{ width: 200 }} alt="" />
-          </a>
+    <Column a="space-between" j="space-between" h={300}>
+      <Column h="100%" a="center" j="center" bg="#111">
+        <Row>
+          <CategoryBox
+            img={miniOne}
+            title="Miniature Painters"
+            type="mini-painter"
+          />
+          <CategoryBox img={miniOne} title="Artists" type="artist" />
+          <CategoryBox
+            img={miniOne}
+            title="Graphic Artists"
+            type="graphic-artist"
+          />
+          <CategoryBox
+            img={miniOne}
+            title="World Builders"
+            type="world-builder"
+          />
+        </Row>
+        <Row>
+          <CategoryBoxMini img={miniOne} title="Title" />
+          <CategoryBoxMini img={miniOne} title="Title" />
+          <CategoryBoxMini img={miniOne} title="Title" />
+          <CategoryBoxMini img={miniOne} title="Title" />
+          <CategoryBoxMini img={miniOne} title="Title" />
+          <CategoryBoxMini img={miniOne} title="Title" />
+          <CategoryBoxMini img={miniOne} title="Title" />
+          <CategoryBoxMini img={miniOne} title="Title" />
+        </Row>
+      </Column>
 
-          <a
-            href="https://doodlemeeple.com/connecting-with-stripe"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              textDecoration: 'none',
-              color: 'rgba(255,255,255,0.5)',
-              marginTop: 5,
-            }}
-          >
-            <Typography variant="body1">Read More</Typography>
-          </a>
-        </Column>
-      }
+      <Column>
+        <IconButton
+          color="text-white-mini"
+          disabled={false}
+          onClickEvent={() => {
+            history.push('/app/creative-roster');
+          }}
+          icon="chevron_right"
+          title="All Categories"
+          styleOverride={null}
+          type="button"
+          iconPos="right"
+        />
+      </Column>
     </Column>
   );
 }

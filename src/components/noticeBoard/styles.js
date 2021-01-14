@@ -5,8 +5,7 @@ export const useStyles = makeStyles((theme) => {
     root: {
       width: '100%',
       height: 300,
-      background:
-        'linear-gradient(180deg, rgba(52,190,177,1) 0%, rgba(52,190,177,1) 53%, rgba(39,168,156,1) 100%)',
+      background: theme.palette.primary.main,
     },
     header4: {
       color: '#fff',

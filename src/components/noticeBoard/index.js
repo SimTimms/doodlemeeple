@@ -69,24 +69,9 @@ export default function NoticeBoard({
             <Divider />
           </Column>
         ) : (
-          <Row>
-            {addASkill ? (
-              <AddASkill
-                profile={profile}
-                history={history}
-                setProfile={setProfile}
-              />
-            ) : stripeError ? (
-              !stripeStatus ? (
-                <StripeRequired />
-              ) : (
-                <StripeError />
-              )
-            ) : noStripe ? (
-              <NoStripe />
-            ) : (
-              <WelcomeToDM profile={profile} history={history} />
-            )}
+          <Row a="flex-start">
+            <NoStripe history={history} />
+
             {featuredArticle.id && (
               <Column bg="#222">
                 {!mobile && (

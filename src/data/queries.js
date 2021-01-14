@@ -923,6 +923,17 @@ export const PROFILE_FEATURED = gql`
   }
 `;
 
+export const CATEGORY_IMAGES = gql`
+  query CategoryImages($type: [String]) {
+    categoryImages(type: $type) {
+      _id
+      profileBG
+      name
+      autosave
+    }
+  }
+`;
+
 export const AUTOSAVE_IS = gql`
   {
     profile {

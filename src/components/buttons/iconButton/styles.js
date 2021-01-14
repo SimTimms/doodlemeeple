@@ -66,7 +66,7 @@ export const useStyles = makeStyles((theme) => ({
     background: 'rgba(0,0,0,0)',
     color: 'rgba(255,255,255,0.7)',
     boxShadow: 'none',
-    padding: 0,
+    padding: 3,
     margin: 5,
     justifyContent: 'center',
     '&:hover': {
