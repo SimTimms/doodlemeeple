@@ -52,10 +52,8 @@ export function CategoryBoxMini({ type, title }) {
   return (
     <Query query={CATEGORY_IMAGES} variables={{ type: [type] }}>
       {({ data, loading }) => {
-        console.log(data);
         return (
           <div
-            className={`${classes.catBox} ${classes.sizeSmall}`}
             style={{
               backgroundImage: data
                 ? data.categoryImages
@@ -63,6 +61,7 @@ export function CategoryBoxMini({ type, title }) {
                   : ''
                 : '',
             }}
+            className={`${classes.catBox} ${classes.sizeSmall}`}
           >
             <Typography variant="h6" className={classes.catBoxTitleSecondary}>
               {title}
