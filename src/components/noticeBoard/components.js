@@ -295,32 +295,24 @@ export function NoStripe({ history }) {
     <Column a="space-between" j="space-between" h={300}>
       <Column h="100%" a="center" j="center" bg="#111">
         <Row>
-          <CategoryBox
-            img={miniOne}
-            title="Miniature Painters"
-            type="mini-painter"
-          />
+          <CategoryBox title="Miniature Painters" type="mini-painter" />
           <CategoryBox img={miniOne} title="Artists" type="artist" />
-          <CategoryBox
-            img={miniOne}
-            title="Graphic Artists"
-            type="graphic-artist"
-          />
-          <CategoryBox
-            img={miniOne}
-            title="World Builders"
-            type="world-builder"
-          />
+          <CategoryBox title="Graphic Artists" type="graphic-artist" />
+          <CategoryBox title="World Builders" type="world-builder" />
         </Row>
         <Row>
-          <CategoryBoxMini img={miniOne} title="Title" />
-          <CategoryBoxMini img={miniOne} title="Title" />
-          <CategoryBoxMini img={miniOne} title="Title" />
-          <CategoryBoxMini img={miniOne} title="Title" />
-          <CategoryBoxMini img={miniOne} title="Title" />
-          <CategoryBoxMini img={miniOne} title="Title" />
-          <CategoryBoxMini img={miniOne} title="Title" />
-          <CategoryBoxMini img={miniOne} title="Title" />
+          <CategoryBoxMini type="reviewer" title="Reviewer" />
+          <CategoryBoxMini type="voice-actor" title="Voice" />
+          <CategoryBoxMini type="video-editor" title="Video" />
+          <CategoryBoxMini type="marketing" title="Marketing" />
+          <CategoryBoxMini type="games-developer" title="Developer" />
+          <CategoryBoxMini type="proof-reader" title="Proof" />
+          <CategoryBoxMini type="translator" title="Translator" />
+          <CategoryBoxMini
+            type="play-tester"
+            img={miniOne}
+            title="Play Tester"
+          />
         </Row>
       </Column>
 
