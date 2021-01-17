@@ -242,11 +242,22 @@ function AppLayout(props) {
           ) : page === 'failed-payment' ? (
             <AppFailedPayment history={history} />
           ) : page === 'creative-roster' ? (
-            <CreativeRoster
-              theme={props.theme}
-              history={history}
-              favourites={favourites}
-            />
+            <Query query={FAVOURITES} fetchPolicy="network-only">
+              {({ data, loading }) => {
+                data && console.log(data);
+                return loading
+                  ? null
+                  : data && (
+                      <CreativeRoster
+                        theme={props.theme}
+                        history={history}
+                        favourites={data.profile.favourites.map(
+                          (fav) => fav.receiver && fav.receiver._id
+                        )}
+                      />
+                    );
+              }}
+            </Query>
           ) : page === 'account' ? (
             <Account history={history} />
           ) : page === 'stripe-connect' ? (
@@ -297,33 +308,28 @@ function AppLayout(props) {
               history={history}
             />
           ) : page === 'pick-artist' ? (
-            <PickArtist
-              theme={props.theme}
-              jobId={pathParam}
-              autosaveIsOn={true}
-              history={history}
-              favourites={favourites}
-            />
+            <Query query={FAVOURITES} fetchPolicy="network-only">
+              {({ data }) => {
+                console.log(data);
+                return (
+                  <PickArtist
+                    theme={props.theme}
+                    jobId={pathParam}
+                    autosaveIsOn={true}
+                    history={history}
+                    favourites={data.profile.favourites.map(
+                      (fav) => fav.receiver && fav.receiver._id
+                    )}
+                  />
+                );
+              }}
+            </Query>
           ) : page === 'create-quote' ? (
             <NewQuote projectId={pathParam} />
           ) : null}
         </ContentTop>
       </main>
-      <Query
-        query={FAVOURITES}
-        onCompleted={(data) => {
-          setFavourites(
-            data.profile.favourites.map(
-              (fav) => fav.receiver && fav.receiver._id
-            )
-          );
-        }}
-        fetchPolicy="network-only"
-      >
-        {({ data }) => {
-          return null;
-        }}
-      </Query>
+
       <Query
         query={PROFILE}
         onCompleted={(data) => {
