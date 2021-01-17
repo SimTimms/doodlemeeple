@@ -860,11 +860,7 @@ export const PROFILE = gql`
       publicEmail
       skype
       phone
-      favourites {
-        receiver {
-          _id
-        }
-      }
+
       sections {
         _id
         summary
