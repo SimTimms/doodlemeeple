@@ -2,14 +2,7 @@ import React from 'react';
 import { Typography, useMediaQuery } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Column, Row, IconButton, Divider } from '../';
-import {
-  AddASkill,
-  StripeRequired,
-  StripeError,
-  NoStripe,
-  WelcomeToDM,
-  FeaturedCreative,
-} from './components';
+import { NoStripe, FeaturedCreative } from './components';
 
 export default function NoticeBoard({
   profile,
@@ -19,13 +12,8 @@ export default function NoticeBoard({
 }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
-  const addASkill =
-    profile.sections.length === 0 && profile.creatorTrue !== true;
   const stripeStatus = profile.stripeStatus;
-  const stripeError =
-    profile.stripeID && (stripeStatus === 'false' || stripeStatus === 'error');
-  const noStripe =
-    !profile.stripeID && !profile.stripeClientId && profile.creativeTrue;
+
   return (
     <div className={classes.root}>
       <Row>

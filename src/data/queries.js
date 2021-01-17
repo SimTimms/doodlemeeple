@@ -925,11 +925,8 @@ export const PROFILE_FEATURED = gql`
 
 export const CATEGORY_IMAGES = gql`
   query CategoryImages($type: [String]) {
-    categoryImages(type: $type) {
-      _id
-      profileBG
-      name
-      autosave
+    imageCategory(type: $type) {
+      img
     }
   }
 `;

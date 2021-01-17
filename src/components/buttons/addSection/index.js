@@ -9,7 +9,7 @@ import SectionList from './sectionList';
 function AddSection({ setSections, sections, userType }) {
   const [display, setDisplay] = React.useState(false);
   const classes = useStyles();
-
+  console.log(display);
   return (
     <div>
       <CardContent

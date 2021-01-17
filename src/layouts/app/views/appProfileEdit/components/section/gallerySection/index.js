@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { MediaGalleryObject } from '../../mediaGalleryOject';
+import { MediaGalleryObjectProfile } from '../../mediaGalleryOject';
 import { Mutation } from 'react-apollo';
 import ReactPlayer from 'react-player';
 import autosave from '../../../../../../../utils/autosave';
@@ -172,13 +172,14 @@ function GallerySection({
                       warning=""
                       inline={false}
                     />
-                    <MediaGalleryObject
+                    <MediaGalleryObjectProfile
                       images={images}
                       setImages={(newImages) => {
                         setImages(newImages);
                       }}
                       index={index}
                       galleryId={section.gallery._id}
+                      sectionType={section.type}
                     />
                     <Projects
                       projects={notableProjects}

@@ -23,7 +23,7 @@ export function FeaturedCreative({ history, featuredArticle }) {
         const media = featuredArticle.article.image['wp:featuredmedia']
           ? featuredArticle.article.image['wp:featuredmedia']['0'].source_url
           : null;
-        return data ? (
+        return loading ? null : data ? (
           <Column>
             <div
               className={classes.articlePanel}

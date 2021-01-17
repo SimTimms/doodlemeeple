@@ -11,6 +11,7 @@ function Uploader({
   cbDelete,
   hasFile,
   size,
+  ...props
 }) {
   const classes = useStyles();
   const [statusMessage, setStatusMessage] = React.useState('');

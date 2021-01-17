@@ -10,13 +10,14 @@ export function CategoryBox({ title, type }) {
   return (
     <Query query={CATEGORY_IMAGES} variables={{ type: [type] }}>
       {({ data, loading }) => {
-        return (
+        data && console.log(data);
+        return loading ? null : (
           <div
             className={`${classes.catBox} ${classes.sizeLarge}`}
             style={{
               backgroundImage: data
-                ? data.categoryImages
-                  ? `url(${data.categoryImages.profileBG})`
+                ? data.imageCategory
+                  ? `url(${data.imageCategory[0].img})`
                   : ''
                 : '',
             }}
@@ -52,12 +53,12 @@ export function CategoryBoxMini({ type, title }) {
   return (
     <Query query={CATEGORY_IMAGES} variables={{ type: [type] }}>
       {({ data, loading }) => {
-        return (
+        return loading ? null : (
           <div
             style={{
               backgroundImage: data
-                ? data.categoryImages
-                  ? `url(${data.categoryImages.profileBG})`
+                ? data.imageCategory
+                  ? `url(${data.imageCategory[0].img})`
                   : ''
                 : '',
             }}

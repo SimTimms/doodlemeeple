@@ -532,8 +532,10 @@ export const UPDATE_GALLERY_SECTION_MUTATION = gql`
 `;
 
 export const UPLOAD_IMAGE = gql`
-  mutation UploadImage($img: String!, $galleryId: MongoID!) {
-    imageCreateOne(record: { img: $img, gallery: $galleryId }) {
+  mutation UploadImage($img: String!, $galleryId: MongoID!, $category: String) {
+    imageCreateOne(
+      record: { img: $img, gallery: $galleryId, category: $category }
+    ) {
       recordId
       record {
         img
