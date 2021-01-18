@@ -50,7 +50,7 @@ export const useStyles = makeStyles((theme) => ({
     border: '2px solid #fff',
     boxShadow: '3px 3px 10px rgba(0,0,0,0.2)',
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',
     cursor: 'pointer',
     '&:hover': { opacity: 0.8 },
