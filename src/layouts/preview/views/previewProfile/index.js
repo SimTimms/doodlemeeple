@@ -6,11 +6,12 @@ import {
   Header,
   ColumnWrapper,
   HeaderTwo,
+  HeaderThree,
   Text,
   IconButton,
-  MenuButtonShortcut,
   Row,
   Divider,
+  DividerMini,
 } from '../../../../components';
 import { Query } from 'react-apollo';
 import { PROFILE_PREVIEW, SECTIONS_PREVIEW } from '../../../../data/queries';
@@ -45,7 +46,6 @@ export function PreviewProfile({ history, profileId, publicView }) {
             return null;
           }}
         </Query>
-
         <div className={classes.root}>
           {!publicView && (
             <div
@@ -101,6 +101,36 @@ export function PreviewProfile({ history, profileId, publicView }) {
                 }
               />
               <Divider />
+              <HeaderThree str="Connect" />
+              <DividerMini />
+              <Row>
+                <SocialIcon
+                  img={social.socialLinkedIn}
+                  link={userProfile.linkedIn}
+                />
+                <SocialIcon
+                  img={social.socialFacebook}
+                  link={userProfile.facebook}
+                />
+                <SocialIcon
+                  img={social.socialTwitter}
+                  link={userProfile.twitter}
+                />
+                <SocialIcon
+                  img={social.socialInstagram}
+                  link={userProfile.instagram}
+                />
+                <SocialIcon
+                  img={social.iconEmail}
+                  link={userProfile.publicEmail}
+                />
+                <SocialIcon
+                  img={social.socialInstagram}
+                  link={userProfile.instagram}
+                />
+              </Row>
+              <Divider />
+              <HeaderThree str="Skills" />
               <Row>
                 {sections &&
                   sections.map((section, index) => {
@@ -148,23 +178,6 @@ export function PreviewProfile({ history, profileId, publicView }) {
               return null;
             }}
           </Query>
-          <HeaderTwo str="Connect" />
-          <Divider />
-          <Row>
-            <SocialIcon
-              img={social.socialLinkedIn}
-              link={userProfile.linkedIn}
-            />
-            <SocialIcon
-              img={social.socialFacebook}
-              link={userProfile.facebook}
-            />
-            <SocialIcon img={social.socialTwitter} link={userProfile.twitter} />
-            <SocialIcon
-              img={social.socialInstagram}
-              link={userProfile.instagram}
-            />
-          </Row>
         </div>
       </div>
     </Slide>
