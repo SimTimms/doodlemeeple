@@ -4,7 +4,7 @@ import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { CATEGORY_IMAGES } from '../../../data/queries';
 
-export function CategoryBox({ title, type }) {
+export function CategoryBox({ title, type, history }) {
   const classes = useStyles();
 
   return (
@@ -19,6 +19,9 @@ export function CategoryBox({ title, type }) {
                   ? `url(${data.imageCategory[0].img})`
                   : ''
                 : '',
+            }}
+            onClick={() => {
+              history.push(`/app/creative-roster/${type}`);
             }}
           >
             <Typography

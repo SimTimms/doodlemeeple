@@ -295,23 +295,61 @@ export function NoStripe({ history }) {
     <Column a="space-between" j="space-between" h={300}>
       <Column h="100%" a="center" j="center" bg="#111">
         <Row>
-          <CategoryBox title="Miniature Painters" type="mini-painter" />
-          <CategoryBox img={miniOne} title="Artists" type="artist" />
-          <CategoryBox title="Graphic Artists" type="graphic-artist" />
-          <CategoryBox title="World Builders" type="world-builder" />
+          <CategoryBox
+            title="Miniature Painters"
+            type="mini-painter"
+            history={history}
+          />
+          <CategoryBox
+            img={miniOne}
+            title="Artists"
+            type="artist"
+            history={history}
+          />
+          <CategoryBox
+            title="Graphic Artists"
+            type="graphic-artist"
+            history={history}
+          />
+          <CategoryBox
+            title="World Builders"
+            type="world-builder"
+            history={history}
+          />
         </Row>
         <Row>
-          <CategoryBoxMini type="reviewer" title="Reviewer" />
-          <CategoryBoxMini type="voice-actor" title="Voice" />
-          <CategoryBoxMini type="video-editor" title="Video" />
-          <CategoryBoxMini type="marketing" title="Marketing" />
-          <CategoryBoxMini type="games-developer" title="Developer" />
-          <CategoryBoxMini type="proof-reader" title="Proof" />
-          <CategoryBoxMini type="translator" title="Translator" />
+          <CategoryBoxMini type="reviewer" title="Reviewer" history={history} />
+          <CategoryBoxMini type="voice-actor" title="Voice" history={history} />
+          <CategoryBoxMini
+            type="video-editor"
+            title="Video"
+            history={history}
+          />
+          <CategoryBoxMini
+            type="marketing"
+            title="Marketing"
+            history={history}
+          />
+          <CategoryBoxMini
+            type="games-developer"
+            title="Developer"
+            history={history}
+          />
+          <CategoryBoxMini
+            type="proof-reader"
+            title="Proof"
+            history={history}
+          />
+          <CategoryBoxMini
+            type="translator"
+            title="Translator"
+            history={history}
+          />
           <CategoryBoxMini
             type="play-tester"
             img={miniOne}
             title="Play Tester"
+            history={history}
           />
         </Row>
       </Column>

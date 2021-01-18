@@ -254,6 +254,7 @@ function AppLayout(props) {
                         favourites={data.profile.favourites.map(
                           (fav) => fav.receiver && fav.receiver._id
                         )}
+                        groupIn={pathParam && pathParam}
                       />
                     );
               }}
@@ -310,7 +311,6 @@ function AppLayout(props) {
           ) : page === 'pick-artist' ? (
             <Query query={FAVOURITES} fetchPolicy="network-only">
               {({ data }) => {
-                console.log(data);
                 return (
                   <PickArtist
                     theme={props.theme}

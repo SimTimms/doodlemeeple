@@ -54,7 +54,7 @@ export const useStyles = makeStyles((theme) => {
     },
     catBoxTitleSecondary: {
       color: '#fff',
-      background: '#111',
+      background: 'rgba(0,0,0,0.8)',
       fontSize: 10,
       letterSpacing: 1,
       width: '100%',
