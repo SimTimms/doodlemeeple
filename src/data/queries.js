@@ -978,6 +978,7 @@ export const SECTIONS_PREVIEW = gql`
       summary
       showreel
       type
+      referenceImage
       gallery {
         _id
         summary

@@ -30,9 +30,12 @@ function GallerySection({ section }) {
         alignItems: 'center',
       }}
     >
+      <ColumnWrapper>
+        <HeaderTwo str={TYPE_HELPER(type)} />
+        <Text str={summary} />
+      </ColumnWrapper>
       {showreel && (
         <ColumnWrapper>
-          <HeaderTwo str="Feature" />
           <ReactPlayer
             url={showreel}
             playing
@@ -53,11 +56,6 @@ function GallerySection({ section }) {
           />
         </ColumnWrapper>
       )}
-
-      <ColumnWrapper>
-        <HeaderTwo str={TYPE_HELPER(type)} />
-        <Text str={summary} />
-      </ColumnWrapper>
       {gallery.images.length > 0 && (
         <ColumnWrapperFull>
           <div

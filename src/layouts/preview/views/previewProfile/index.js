@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slide } from '@material-ui/core';
+import { Slide, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import logo from '../../../../assets/logo.svg';
 import {
@@ -19,6 +19,7 @@ import { TYPE_HELPER } from '../../../../utils';
 import * as social from '../../../../assets/social';
 import Avatar from './avatar';
 import SocialIcon from './socialIcon';
+import imageOptimiser from '../../../../utils/imageOptimiser';
 import { initialState } from './initialState';
 
 export function PreviewProfile({ history, profileId, publicView }) {
@@ -28,7 +29,6 @@ export function PreviewProfile({ history, profileId, publicView }) {
   });
   const [sections, setSections] = React.useState([]);
   const [page, setPage] = React.useState(-1);
-  console.log(userProfile);
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -93,50 +93,38 @@ export function PreviewProfile({ history, profileId, publicView }) {
             >
               <Avatar img={userProfile.profileImg} />
               <Header str={userProfile.name} />
+              <Text
+                str={
+                  userProfile.summary !== ''
+                    ? userProfile.summary
+                    : `${userProfile.name} has not submitted a summary yet`
+                }
+              />
+              <Divider />
               <Row>
-                {sections.length > 0 && (
-                  <MenuButtonShortcut
-                    text={{
-                      name: 'All Skills',
-                      color: '#222',
-                      icon: 'chevron_right',
-                      count: 0,
-                    }}
-                    onClickEvent={() => {
-                      setPage(-1);
-                    }}
-                    active={page === -1}
-                  />
-                )}
                 {sections &&
                   sections.map((section, index) => {
                     return (
-                      <MenuButtonShortcut
-                        text={{
-                          name: `${TYPE_HELPER(section.type)} `,
-                          color: '#222',
-                          icon: 'chevron_right',
-                          count: 0,
-                        }}
-                        onClickEvent={() => {
+                      <div
+                        onClick={() => {
                           setPage(index);
                         }}
-                        active={page === index}
-                      />
+                        className={classes.catWrapper}
+                        style={{
+                          backgroundImage: `url(${imageOptimiser(
+                            section.referenceImage
+                          )})`,
+                        }}
+                      >
+                        <Typography
+                          className={classes.catTitle}
+                          align="center"
+                        >{`${TYPE_HELPER(section.type)}`}</Typography>
+                      </div>
                     );
                   })}
               </Row>
             </div>
-          </ColumnWrapper>
-          <ColumnWrapper>
-            <HeaderTwo str="About Me" />
-            <Text
-              str={
-                userProfile.summary !== ''
-                  ? userProfile.summary
-                  : `${userProfile.name} has not submitted a summary yet`
-              }
-            />
           </ColumnWrapper>
 
           {sections &&
