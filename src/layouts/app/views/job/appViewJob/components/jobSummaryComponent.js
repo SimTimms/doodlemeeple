@@ -6,6 +6,7 @@ import {
   Column,
   Divider,
   GalleryCard,
+  DividerMini,
 } from '../../../../../../components';
 import ReactPlayer from 'react-player';
 import { nameShortener } from '../../../../../../utils';
@@ -61,6 +62,7 @@ export default function JobSummaryComponent({ job }) {
       )}
       {job.genre !== '' && (
         <Column>
+          <DividerMini />
           <HeaderThree str="Genre/Style of Project" />
           <Divider />
           <Typography>{job.genre}</Typography>

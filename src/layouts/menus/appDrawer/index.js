@@ -63,7 +63,7 @@ export default function AppDrawer({
               <MenuButtonShortcut
                 text={{
                   name: text.name,
-                  color: text.color,
+                  color: '#222',
                   icon: text.icon,
                   count: text.count,
                 }}
@@ -87,7 +87,10 @@ export default function AppDrawer({
               count: null,
             },
             {
-              name: 'Messages',
+              name:
+                profile.creativeTrue || profile.creatorTrue
+                  ? 'Messages'
+                  : 'hide',
               icon: 'chat',
               link: () => history.push('/messages/conversations'),
               color: '',
@@ -150,7 +153,7 @@ export default function AppDrawer({
                 <MenuButtonShortcut
                   text={{
                     name: text.name,
-                    color: text.color,
+                    color: '#222',
                     icon: text.icon,
                     count: text.count ? text.count.count : 0,
                   }}

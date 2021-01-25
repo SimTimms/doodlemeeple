@@ -160,7 +160,7 @@ export default function RegisterCard({ setPage, ...props }) {
           <CardContent className={classes.cardContentCenter}>
             <Mutation
               mutation={SIGNUP_MUTATION}
-              variables={{ name, email, password, campaignId }}
+              variables={{ name, email, password, campaignId, available: true }}
               onError={(error) => {
                 setButtonStatus('Error');
                 setError(readableErrors(error, errors));

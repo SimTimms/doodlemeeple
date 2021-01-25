@@ -19,7 +19,7 @@ export default function SectionList({
 }) {
   const [page, setPage] = React.useState(0);
   const classes = useStyles();
-
+  console.log(userType);
   useEffect(() => {
     setPage(userType.creator ? 1 : 0);
   }, [userType]);
@@ -103,7 +103,7 @@ export default function SectionList({
         )}
       </Row>
       <Column>
-        {(page === 0 || page === 1) && (
+        {(page === 0 || page === 1) && userType.creator && (
           <Column>
             <HeaderTwo str="Project Creators" />
             <Divider />

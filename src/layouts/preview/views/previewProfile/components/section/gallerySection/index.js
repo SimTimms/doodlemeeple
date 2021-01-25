@@ -4,7 +4,7 @@ import { Card, Testimonials, Projects } from './components';
 import {
   ColumnWrapper,
   ColumnWrapperFull,
-  HeaderTwo,
+  HeaderThree,
   Text,
 } from '../../../../../../../components';
 import { TYPE_HELPER } from '../../../../../../../utils';
@@ -31,7 +31,7 @@ function GallerySection({ section }) {
       }}
     >
       <ColumnWrapper>
-        <HeaderTwo str={TYPE_HELPER(type)} />
+        <HeaderThree str={TYPE_HELPER(type)} />
         <Text str={summary} />
       </ColumnWrapper>
       {showreel && (
@@ -78,7 +78,7 @@ function GallerySection({ section }) {
       )}
       {testimonials.length > 0 && (
         <ColumnWrapper>
-          <HeaderTwo str="Testimonials" />
+          <HeaderThree str="Testimonials" />
           <div
             style={{
               width: '100%',
@@ -95,7 +95,7 @@ function GallerySection({ section }) {
       )}
       {notableProjects.length > 0 && (
         <ColumnWrapper>
-          <HeaderTwo str="Projects" />
+          <HeaderThree str="Projects" />
           <div
             style={{
               width: '100%',

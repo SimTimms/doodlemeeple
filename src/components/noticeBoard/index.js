@@ -12,42 +12,48 @@ export default function NoticeBoard({
 }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
-  const stripeStatus = profile.stripeStatus;
 
   return (
     <div className={classes.root}>
-      <Row>
+      <Row h="100%">
         {!profile.creativeTrue && !profile.creatorTrue ? (
-          <Column>
+          <Column h="100%">
             <Divider />
             <Typography variant="h5" style={{ color: '#fff' }} align="center">
-              Are you a Creative or Creator?
+              Are you here to find work or to post a job?
             </Typography>
             <IconButton
-              title="Update your Profile"
+              title="Let us know"
               color="text-white"
-              icon="face"
+              icon="touch_app"
               styleOverride={{ marginBottom: 20, marginTop: 20 }}
               onClickEvent={() => history.push('/app/edit-profile/')}
             />
             <Divider />
           </Column>
         ) : profile.onboarding !== 'complete' &&
-          (!profile.profileBG || !profile.profileImg || !profile.summary) ? (
+          (!profile.profileBG ||
+            !profile.profileImg ||
+            !profile.summary ||
+            profile.sections.length === 0) ? (
           <Column>
             <Divider />
             <Typography variant="h5" className={classes.header5}>
-              Let's get your profile ready
+              {profile.sections.length === 0
+                ? 'Your profile still needs work'
+                : "Let's get your profile ready"}
             </Typography>
             <Typography variant="h6" className={classes.header6}>
               {!profile.profileBG
                 ? 'Set a Feature Image to continue'
                 : !profile.profileImg
                 ? 'Please add a profile image'
+                : profile.sections.length === 0
+                ? 'Add a skill to your profile'
                 : 'Write something about yourself in the summary'}
             </Typography>
             <IconButton
-              title="Create a Profile"
+              title="Edit your Profile"
               color="text-white"
               icon="face"
               styleOverride={{ marginBottom: 20, marginTop: 20 }}

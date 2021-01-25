@@ -83,6 +83,7 @@ export default function NotificationComponent({
                   icon: 'close',
                   count: 0,
                   back: '',
+                  color: '#222',
                 }}
                 onClickEvent={() => {
                   RemoveNotificationMutation();

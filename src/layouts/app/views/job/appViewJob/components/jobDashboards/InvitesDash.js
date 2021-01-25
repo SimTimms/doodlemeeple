@@ -3,29 +3,29 @@ import {
   Column,
   FieldTitleDashboard,
   InviteComponentDash,
+  InviteComponentFull,
   Paper,
 } from '../../../../../../../components';
 
-export default function InvitesDash({
-  invites,
-  setConversationUser,
-  jobClosed,
-  history,
-}) {
+export default function InvitesDash({ invites, setConversationUser, history }) {
   return (
     <Column w="50%" p={10}>
       <Paper p={10}>
-        <FieldTitleDashboard name="Invites" inline={false} />
-        {invites.map((invite, index) => (
-          <InviteComponentDash
-            invite={invite}
-            key={`invite-${index}`}
-            setConversationUser={setConversationUser}
-            jobClosed={jobClosed}
-            history={history}
-            user={invite.receiver}
-          />
-        ))}
+        <FieldTitleDashboard name="Invited Creatives" inline={false} />
+        {invites.map((invite, index) => {
+          const contractSubmitted = invite.job.contracts.filter(
+            (contract) => contract.user._id === invite.receiver._id
+          );
+          return (
+            <InviteComponentFull
+              invite={invite}
+              key={`invite-${index}`}
+              setConversationUser={setConversationUser}
+              contract={contractSubmitted[0]}
+              history={history}
+            />
+          );
+        })}
       </Paper>
     </Column>
   );

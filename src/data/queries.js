@@ -483,6 +483,7 @@ export const JOB_CREATIVE = gql`
           _id
           name
           profileImg
+          publicEmail
         }
         job {
           _id
@@ -524,6 +525,7 @@ export const JOB_CREATIVE = gql`
         _id
         name
         profileImg
+        publicEmail
       }
       job {
         _id
@@ -551,6 +553,7 @@ export const JOB_CREATIVE = gql`
           _id
           email
           name
+          publicEmail
         }
         activeContract {
           _id
@@ -905,6 +908,7 @@ export const PROFILE_PREVIEW = gql`
       instagram
       publicEmail
       website
+      skype
     }
   }
 `;

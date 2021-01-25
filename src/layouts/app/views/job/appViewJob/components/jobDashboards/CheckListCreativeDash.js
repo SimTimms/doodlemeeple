@@ -50,7 +50,7 @@ export default function CheckListCreativeDash({
   const accepted = invite.status === 'accepted';
   const unopened = invite.status === 'unopened';
   const quoted = userContractStatus !== null;
-  const rejected = invite.status === 'rejected';
+  const rejected = invite.status === 'declined';
   const jobData = job.job;
   const paid = jobData.submitted === 'paid' || jobData.submitted === 'complete';
   const cost = contractData ? contractData.cost : 0;
@@ -85,6 +85,7 @@ export default function CheckListCreativeDash({
           history={history}
           messages={invite.messages}
           closed={closed}
+          accepted={activeContract}
         />
         {(declined || quoted || jobHasBeenAwarded) && (
           <Column>
@@ -141,12 +142,15 @@ export default function CheckListCreativeDash({
               submitted={submitted}
             />
             <DividerWithBorder />
-            <ItemQuoteAcceptedCreative
-              color={color[2] === 1 ? color[3] : 0}
-              activeContract={activeContract}
-              setTabNbr={setTabNbr}
-            />
-            <Divider />
+            {!rejected && (
+              <ItemQuoteAcceptedCreative
+                color={color[2] === 1 ? color[3] : 0}
+                activeContract={activeContract}
+                setTabNbr={setTabNbr}
+              />
+            )}
+            {!rejected && <Divider />}
+            {/*
             <ItemQuotePaid
               paid={paid}
               setTabNbr={setTabNbr}
@@ -154,16 +158,18 @@ export default function CheckListCreativeDash({
               jobHasContract={jobHasBeenAwarded}
               isCreator={false}
             />
-            <Divider />
-            <ItemCreativePaid
-              totalPaid={totalPaid(contractData)}
-              cost={cost}
-              currency={currency}
-              setTabNbr={setTabNbr}
-              color={color[4] === 1 ? color[5] : 0}
-              jobHasContract={jobHasBeenAwarded}
-              paid={paid}
-            />
+            {!rejected && (
+              <ItemCreativePaid
+                totalPaid={totalPaid(contractData)}
+                cost={cost}
+                currency={currency}
+                setTabNbr={setTabNbr}
+                color={color[4] === 1 ? color[5] : 0}
+                jobHasContract={jobHasBeenAwarded}
+                paid={paid}
+              />
+            )}
+            */}
           </Column>
         )}
       </Widget>

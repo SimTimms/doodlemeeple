@@ -5,7 +5,6 @@ import logo from '../../../../assets/logo.svg';
 import {
   Header,
   ColumnWrapper,
-  HeaderTwo,
   HeaderThree,
   Text,
   IconButton,
@@ -30,6 +29,7 @@ export function PreviewProfile({ history, profileId, publicView }) {
   });
   const [sections, setSections] = React.useState([]);
   const [page, setPage] = React.useState(-1);
+
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
@@ -101,7 +101,7 @@ export function PreviewProfile({ history, profileId, publicView }) {
                 }
               />
               <Divider />
-              <HeaderThree str="Connect" />
+              <HeaderThree str="Social" />
               <DividerMini />
               <Row>
                 <SocialIcon
@@ -120,13 +120,10 @@ export function PreviewProfile({ history, profileId, publicView }) {
                   img={social.socialInstagram}
                   link={userProfile.instagram}
                 />
+                <SocialIcon img={social.socialSkype} link={userProfile.skype} />
                 <SocialIcon
-                  img={social.iconEmail}
-                  link={userProfile.publicEmail}
-                />
-                <SocialIcon
-                  img={social.socialInstagram}
-                  link={userProfile.instagram}
+                  img={social.iconWebsite}
+                  link={userProfile.website}
                 />
               </Row>
               <Divider />

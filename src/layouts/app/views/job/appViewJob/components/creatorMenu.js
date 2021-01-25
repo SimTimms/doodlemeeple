@@ -42,21 +42,6 @@ export default function CreatorMenu({
           column={true}
           active={tabNbr === 1}
         />
-        {!jobClosed && !activeContract && (
-          <MenuButtonShortcut
-            text={{
-              name: 'Creatives',
-              color: '#fff',
-              icon: 'account_box',
-              count: 0,
-            }}
-            onClickEvent={() => {
-              setTabNbr(2);
-            }}
-            column={true}
-            active={tabNbr === 2}
-          />
-        )}
 
         {activeContract && (
           <MenuButtonShortcut
@@ -73,7 +58,7 @@ export default function CreatorMenu({
             active={tabNbr === 3}
           />
         )}
-        {activeContract && (
+        {/*
           <MenuButtonShortcut
             text={{
               name: 'Payments',
@@ -87,7 +72,7 @@ export default function CreatorMenu({
             column={true}
             active={tabNbr === 4}
           />
-        )}
+          */}
       </TopMenuWrapper>
     </div>
   );

@@ -40,7 +40,7 @@ export function Column(props) {
 }
 
 export function Row(props) {
-  const { children, a, j, wrap, w, b, pb, v, mb, br, bg } = props;
+  const { children, a, j, wrap, w, b, pb, v, mb, br, bg, h } = props;
   const align = a ? a : 'center';
   const justify = j ? j : 'center';
   const width = w ? w : '100%';
@@ -49,6 +49,7 @@ export function Row(props) {
   const marginBottom = mb ? mb : '';
   const borderRadius = br ? br : '';
   const background = bg ? bg : '';
+  const height = h ? h : '';
 
   return v === 'none' ? null : (
     <div
@@ -64,6 +65,7 @@ export function Row(props) {
         marginBottom,
         borderRadius,
         background,
+        height,
       }}
     >
       {children}

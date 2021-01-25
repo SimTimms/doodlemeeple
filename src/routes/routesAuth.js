@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MessagesLayout from '../layouts/messages';
 import AppLayout from '../layouts/app';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PreviewLayout from '../layouts/preview';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import Cookies from 'js-cookie';
 
 export default function AuthRoutes({ theme, props: { ...props } }) {
   const stripePromise = loadStripe(

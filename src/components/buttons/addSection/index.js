@@ -25,7 +25,7 @@ function AddSection({ setSections, sections, userType }) {
           component="p"
           style={{ fontSize: 16, color: '#fff', marginLeft: 10 }}
         >
-          {`Add a Section (${3 - sections.length})`}
+          {`Add a Skill (${3 - sections.length})`}
         </Typography>
       </CardContent>
 

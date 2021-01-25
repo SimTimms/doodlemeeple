@@ -183,6 +183,7 @@ function AppLayout(props) {
                 marginRight: 10,
               }}
             ></div>
+            {/*
             <MenuButtonShortcut
               text={{
                 name: creativeRoster.name,
@@ -194,11 +195,11 @@ function AppLayout(props) {
               active={false}
               noPad={true}
               title={creativeRoster.title}
-            />
+            />*/}
             <MenuButtonShortcut
               text={{
                 name: helpButton.name,
-                color: '',
+                color: '#222',
                 icon: helpButton.icon,
                 count: 0,
               }}
@@ -310,8 +311,8 @@ function AppLayout(props) {
             />
           ) : page === 'pick-artist' ? (
             <Query query={FAVOURITES} fetchPolicy="network-only">
-              {({ data }) => {
-                return (
+              {({ data, loading }) => {
+                return loading ? null : (
                   <PickArtist
                     theme={props.theme}
                     jobId={pathParam}

@@ -14,12 +14,13 @@ import clsx from 'clsx';
 import { PREVIEW_CONTRACT } from '../../data/queries';
 import { Query } from 'react-apollo';
 import ActionSetOne from './ActionSetOne';
+
 export default function InviteComponentFull({
   invite,
   setConversationUser,
   contract,
   setTabNbr,
-  refreshDashboard,
+  history,
 }) {
   const classes = useStyles();
   const [display, setDisplay] = React.useState(false);
@@ -38,10 +39,19 @@ export default function InviteComponentFull({
               style={{
                 backgroundImage: `url(${invite.receiver.profileImg})`,
               }}
-              className={classes.profileThumb}
+              className={`${classes.clickable} ${classes.profileThumb}`}
+              onClick={() =>
+                history.push(`/app/public-preview/${invite.receiver._id}`)
+              }
             ></div>
             <Column a="flex-start">
-              <Typography style={{ fontSize: 12 }}>
+              <Typography
+                style={{ fontSize: 12 }}
+                className={classes.clickable}
+                onClick={() =>
+                  history.push(`/app/public-preview/${invite.receiver._id}`)
+                }
+              >
                 {invite.receiver.name}
               </Typography>
               <Typography
@@ -62,24 +72,30 @@ export default function InviteComponentFull({
               </Typography>
             </Column>
           </Row>
-          {contract && (
-            <MenuButtonShortcut
-              text={{
-                name: '',
-                color: '#fff',
-                icon: 'request_quote',
-                count: 0,
-                back: 'warning',
-              }}
-              onClickEvent={() => setDisplay(true)}
-              active={false}
-            />
-          )}
+
+          <MenuButtonShortcut
+            text={{
+              name: '',
+              color: '#222',
+              icon: 'request_quote',
+              count: contract ? 1 : 0,
+              back: '',
+            }}
+            onClickEvent={() =>
+              contract
+                ? !display
+                  ? setDisplay(true)
+                  : setDisplay(false)
+                : null
+            }
+            active={false}
+          />
+
           {invite.status !== 'declined' && (
             <MenuButtonShortcut
               text={{
                 name: '',
-                color: '#FFF',
+                color: '#222',
                 icon: 'chat',
                 count: 0,
                 back: '',
@@ -121,6 +137,7 @@ export default function InviteComponentFull({
                             setTabNbrTwo={setTabNbrTwo}
                             setTabNbr={setTabNbr}
                             contract={contract}
+                            history={history}
                           />
                         )}
                       </BorderBox>
@@ -133,10 +150,15 @@ export default function InviteComponentFull({
                         <Signature
                           contractData={contract}
                           onAccept={() => {
-                            refreshDashboard();
-                            setTabNbr(-1);
+                            history.push(
+                              `/app/view-job/${data.contractById.job._id}`
+                            );
                           }}
-                          onDecline={() => setTabNbr(-1)}
+                          onDecline={() =>
+                            history.push(
+                              `/app/view-job/${data.contractById.job._id}`
+                            )
+                          }
                         />
                       </BorderBox>
                     )}

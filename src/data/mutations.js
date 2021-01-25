@@ -6,6 +6,7 @@ export const SIGNUP_MUTATION = gql`
     $email: String!
     $password: String!
     $campaignId: String
+    $available: Boolean
   ) {
     userCreateOne(
       record: {
@@ -13,6 +14,7 @@ export const SIGNUP_MUTATION = gql`
         email: $email
         password: $password
         campaignId: $campaignId
+        available: $available
       }
     ) {
       recordId

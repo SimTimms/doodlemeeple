@@ -10,7 +10,7 @@ import {
 } from '../../../../../../components';
 import CreativeActions from '../components/creativeActions';
 import CreativeActionsTwo from '../components/creativeActionsTwo';
-import ClientNotifications from '../components/clientNotifications';
+import ClientNotification from '../components/clientNotifications';
 import JobSummaryComponent from './jobSummaryComponent';
 
 export default function CreativeJobSummary({
@@ -30,11 +30,12 @@ export default function CreativeJobSummary({
       <div className={classes.root}>
         <Paper pt={16}>
           <Column>
-            <ClientNotifications
+            {/*
+            <ClientNotification
               jobStatus={job.job.submitted}
               job={job}
               history={history}
-            />
+          />*/}
             <JobSummaryComponent job={job.job} />
             {!userContract ? (
               <BorderBox w={300}>
@@ -82,7 +83,9 @@ export default function CreativeJobSummary({
               <BorderBox w={300}>
                 <Meta str="You've quoted for this job" />
                 {job.job.submitted !== 'closed' &&
-                  job.job.submitted !== 'complete' && (
+                  job.job.submitted !== 'complete' &&
+                  job.job.submitted !== 'accepted' &&
+                  job.job.submitted !== 'paid' && (
                     <IconButton
                       title="View Quote"
                       onClickEvent={() => {

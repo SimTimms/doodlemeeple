@@ -10,6 +10,7 @@ export default function CreatorComponentDash({
   history,
   messages,
   closed,
+  accepted,
 }) {
   const classes = useStyles();
   return (
@@ -33,6 +34,11 @@ export default function CreatorComponentDash({
           <Column a="flex-start">
             <Typography style={{ fontSize: 12 }}>{user.name}</Typography>
             <Typography style={{ fontSize: 12 }}>Creator</Typography>
+            {accepted && (
+              <Typography style={{ fontSize: 12 }}>
+                {user.publicEmail}
+              </Typography>
+            )}
           </Column>
         </Row>
         <MenuButtonShortcut
@@ -44,7 +50,7 @@ export default function CreatorComponentDash({
             back: 'primary',
           }}
           onClickEvent={() => {
-            history.push(`/public-preview/${user._id}`);
+            history.push(`/app/public-preview/${user._id}`);
           }}
           active={false}
         />
