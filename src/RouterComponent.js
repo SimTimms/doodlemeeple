@@ -33,11 +33,26 @@ function RouterComponent(props) {
     cache: new InMemoryCache({ addTypename: false }),
   });
 
+  const Context = React.createContext(false);
+  const playing = false;
+  const AppTheme = {
+    light: {
+      textColor: '#000',
+      backgroundColor: '#fff',
+    },
+    dark: {
+      textColor: '#fff',
+      backgroundColor: '#333',
+    },
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
-        {authToken && <AuthRoutes props={props} theme={theme} />}
-        {!authToken && <PublicRoutes props={props} theme={theme} />}
+        <Context.Provider value={playing}>
+          {authToken && <AuthRoutes props={props} theme={theme} />}
+          {!authToken && <PublicRoutes props={props} theme={theme} />}
+        </Context.Provider>
       </ApolloProvider>
     </ThemeProvider>
   );

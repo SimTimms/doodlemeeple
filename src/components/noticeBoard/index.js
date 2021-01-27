@@ -1,15 +1,10 @@
 import React from 'react';
-import { Typography, useMediaQuery } from '@material-ui/core';
+import { Typography, useMediaQuery, Zoom } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Column, Row, IconButton, Divider } from '../';
 import { NoStripe, FeaturedCreative } from './components';
 
-export default function NoticeBoard({
-  profile,
-  history,
-  featuredArticle,
-  setProfile,
-}) {
+export default function NoticeBoard({ profile, history, featuredArticle }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
 
@@ -20,15 +15,27 @@ export default function NoticeBoard({
           <Column h="100%">
             <Divider />
             <Typography variant="h5" style={{ color: '#fff' }} align="center">
-              Are you here to find work or to post a job?
+              Are you here to{' '}
+              <span style={{ fontWeight: 900, fontSize: 26 }}>find work</span>,
+              or
             </Typography>
+            <Typography variant="h5" style={{ color: '#fff' }} align="center">
+              to{' '}
+              <span style={{ fontWeight: 900, fontSize: 26 }}>post a job</span>?
+            </Typography>
+
             <IconButton
               title="Let us know"
               color="text-white"
               icon="touch_app"
+              zoom={true}
+              clickSound={true}
               styleOverride={{ marginBottom: 20, marginTop: 20 }}
-              onClickEvent={() => history.push('/app/edit-profile/')}
+              onClickEvent={() => {
+                history.push('/app/edit-profile/');
+              }}
             />
+
             <Divider />
           </Column>
         ) : profile.onboarding !== 'complete' &&
@@ -52,12 +59,17 @@ export default function NoticeBoard({
                 ? 'Add a skill to your profile'
                 : 'Write something about yourself in the summary'}
             </Typography>
+
             <IconButton
-              title="Edit your Profile"
+              title="Update your Profile"
               color="text-white"
               icon="face"
+              zoom={true}
+              clickSound={true}
               styleOverride={{ marginBottom: 20, marginTop: 20 }}
-              onClickEvent={() => history.push('/app/edit-profile/')}
+              onClickEvent={() => {
+                history.push('/app/edit-profile/');
+              }}
             />
 
             <Divider />

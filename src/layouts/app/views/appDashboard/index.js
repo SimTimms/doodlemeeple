@@ -5,6 +5,7 @@ import {
   FieldTitleDashboard,
   Divider,
   NoticeBoard,
+  MiniDashCreator,
 } from '../../../../components';
 import { useStyles } from './styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -34,6 +35,7 @@ export default function AppDashboard({ history, profile, setProfile }) {
 
   return (
     <div style={{ width: '100%' }}>
+      <MiniDashCreator profile={profile} history={history} />
       <NoticeBoard
         profile={profile}
         setProfile={setProfile}

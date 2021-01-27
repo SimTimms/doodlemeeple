@@ -817,6 +817,9 @@ export const COUNTS = gql`
       invites
       messages
       quotes
+      jobs
+      socials
+      contact
     }
   }
 `;

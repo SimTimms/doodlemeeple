@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import MessagesLayout from '../layouts/messages';
 import AppLayout from '../layouts/app';
 import { Route, Switch, Redirect } from 'react-router-dom';

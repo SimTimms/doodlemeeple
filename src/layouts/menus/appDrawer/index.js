@@ -87,6 +87,21 @@ export default function AppDrawer({
               count: null,
             },
             {
+              name: profile.creativeTrue ? 'Creative Dash' : 'hide',
+              icon: 'brush',
+              link: () => history.push('/app/invites'),
+              count: counts.invites > 0 && {
+                icon: 'local_post_office',
+                count: counts.invites,
+              },
+            },
+            {
+              name: profile.creatorTrue ? 'Projects' : 'hide',
+              icon: 'casino',
+              link: () => history.push('/app/jobs'),
+              count: { icon: 'star', count: counts.quotes },
+            },
+            {
               name:
                 profile.creativeTrue || profile.creatorTrue
                   ? 'Messages'
@@ -99,21 +114,7 @@ export default function AppDrawer({
                   ? { icon: 'local_post_office', count: counts.messages }
                   : { icon: 'mail', count: counts.messages },
             },
-            {
-              name: profile.creativeTrue ? 'Creative' : 'hide',
-              icon: 'brush',
-              link: () => history.push('/app/invites'),
-              count: counts.invites > 0 && {
-                icon: 'local_post_office',
-                count: counts.invites,
-              },
-            },
-            {
-              name: profile.creatorTrue ? 'Creator' : 'hide',
-              icon: 'work',
-              link: () => history.push('/app/jobs'),
-              count: { icon: 'star', count: counts.quotes },
-            },
+
             {
               name: 'My Profile',
               icon: 'face',

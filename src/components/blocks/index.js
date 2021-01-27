@@ -4,7 +4,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 
 export function Column(props) {
-  const { children, a, j, w, p, b, br, h, bg } = props;
+  const { children, a, j, w, p, b, br, h, bg, m } = props;
   const align = a ? a : 'center';
   const width = w ? w : '100%';
   const height = h ? h : '';
@@ -13,6 +13,7 @@ export function Column(props) {
   const border = b ? b : 'none';
   const background = bg ? bg : '';
   const borderRadius = br ? br : 0;
+  const margin = m ? m : 0;
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
 
@@ -28,6 +29,7 @@ export function Column(props) {
         boxSizing: 'border-box',
         height,
         background,
+        margin,
       }}
       className={clsx({
         [classes.desktop]: true,

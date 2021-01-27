@@ -24,12 +24,9 @@ export default function CreatorJobSummary({ jobData, setTabNbr }) {
           <Column>
             <JobSummaryComponent job={job} />
           </Column>
-          {job.submitted !== 'closed' &&
-            job.submitted !== 'paid' &&
-            job.submitted !== 'accepted' &&
-            job.submitted !== 'complete' && (
-              <CloseJobButton job={jobData} setTabNbr={setTabNbr} />
-            )}
+          {job.submitted !== 'closed' && job.submitted !== 'complete' && (
+            <CloseJobButton job={jobData} setTabNbr={setTabNbr} />
+          )}
           {job.submitted === 'paid' && allPaid && (
             <EndJobButton job={jobData} setTabNbr={setTabNbr} />
           )}
