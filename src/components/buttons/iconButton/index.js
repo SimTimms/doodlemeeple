@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Button, Icon, Zoom } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
@@ -16,6 +16,7 @@ function ButtonObj({ ...props }) {
     type,
     iconPos,
     clickSound,
+    zoom,
   } = props.props;
 
   return (
@@ -85,9 +86,6 @@ function ButtonObj({ ...props }) {
 }
 export default function IconButton(props) {
   const { zoom } = props;
-  useEffect(() => {
-    zoom && playSound('like');
-  }, [zoom]);
   return zoom ? (
     <Zoom in={true} timeout={500}>
       <div>

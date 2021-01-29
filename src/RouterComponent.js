@@ -14,7 +14,6 @@ import PublicRoutes from './routes/routesPublic';
 function RouterComponent(props) {
   const authToken = Cookies.get('token');
   const theme = themeDesigner();
-
   const httpLink = createHttpLink({
     uri: process.env.REACT_APP_API,
   });
@@ -33,26 +32,11 @@ function RouterComponent(props) {
     cache: new InMemoryCache({ addTypename: false }),
   });
 
-  const Context = React.createContext(false);
-  const playing = false;
-  const AppTheme = {
-    light: {
-      textColor: '#000',
-      backgroundColor: '#fff',
-    },
-    dark: {
-      textColor: '#fff',
-      backgroundColor: '#333',
-    },
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
-        <Context.Provider value={playing}>
-          {authToken && <AuthRoutes props={props} theme={theme} />}
-          {!authToken && <PublicRoutes props={props} theme={theme} />}
-        </Context.Provider>
+        {authToken && <AuthRoutes props={props} theme={theme} />}
+        {!authToken && <PublicRoutes props={props} theme={theme} />}
       </ApolloProvider>
     </ThemeProvider>
   );

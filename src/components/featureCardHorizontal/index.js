@@ -24,11 +24,11 @@ export default function FeatureCardHorizontal({
             <Typography
               style={{
                 color: '#fff',
-                textShadow: '0 0px 5px rgba(0,0,0,1)',
                 fontWeight: 900,
                 paddingBottom: 5,
                 paddingLeft: 10,
                 boxSizing: 'border-box',
+                fontSize: 16,
               }}
               variant="h5"
             >

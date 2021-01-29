@@ -5,6 +5,6 @@ export default function playSound(audioFile) {
   const clickAudio = new Audio(click);
   const likeAudio = new Audio(like);
 
-  //  audioFile === 'click' && playing === false && clickAudio.play();
-  //  audioFile === 'like' && playing === false && likeAudio.play();
+  audioFile === 'click' && clickAudio.play();
+  audioFile === 'like' && likeAudio.play();
 }

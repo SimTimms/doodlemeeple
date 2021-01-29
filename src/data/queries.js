@@ -820,6 +820,7 @@ export const COUNTS = gql`
       jobs
       socials
       contact
+      skills
     }
   }
 `;

@@ -23,6 +23,7 @@ import autosave from '../../../../utils/autosave';
 import RoleObject from './components/roleObject';
 import * as social from '../../../../assets/social';
 import SocialHeader from './socialHeader';
+import ContactHeader from './contactHeader';
 
 export default function AppProfileEdit({
   profile,
@@ -161,10 +162,10 @@ export default function AppProfileEdit({
                 </DMCard>
                 <DMCard>
                   <InlineHeader>
-                    <IconTitle icon="link" title="Links" />
+                    <IconTitle icon="link" title="Contact" />
                   </InlineHeader>
                   <div style={{ padding: 10 }}>
-                    <SocialHeader
+                    <ContactHeader
                       profile={profile}
                       visible={visible}
                       setVisible={setVisible}
@@ -221,6 +222,20 @@ export default function AppProfileEdit({
                         icon={social.socialSkype}
                       />
                     </Row>
+                  </div>
+                </DMCard>
+                <DMCard>
+                  <InlineHeader>
+                    <IconTitle icon="link" title="Social" />
+                  </InlineHeader>
+                  <div style={{ padding: 10 }}>
+                    <SocialHeader
+                      profile={profile}
+                      visible={visible}
+                      setVisible={setVisible}
+                    />
+                    <Divider />
+
                     <Row v={!visible.facebook && 'none'} mb={10}>
                       <FieldBox
                         value={profile.facebook}

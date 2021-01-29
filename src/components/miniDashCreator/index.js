@@ -5,7 +5,7 @@ import { IconButton, Row } from '../';
 import { Query } from 'react-apollo';
 import { COUNTS } from '../../data/queries';
 
-export default function MiniDashCreator({ history }) {
+export default function MiniDashCreator({ history, profile }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
 
@@ -19,7 +19,7 @@ export default function MiniDashCreator({ history }) {
 
           return (
             <Row>
-              {data.counts.jobs === 0 && (
+              {data.counts.jobs === 0 && profile.creatorTrue && (
                 <IconButton
                   title="Post a Job"
                   icon="work"
@@ -45,6 +45,17 @@ export default function MiniDashCreator({ history }) {
                 <IconButton
                   title="Add Contact"
                   icon="mail"
+                  color="secondary"
+                  clickSound={true}
+                  zoom={true}
+                  onClickEvent={() => history.push('/app/edit-profile')}
+                  styleOverride={{ marginLeft: 10 }}
+                />
+              )}
+              {data.counts.skills === 0 && (
+                <IconButton
+                  title="Add a Skill"
+                  icon="brush"
                   color="secondary"
                   clickSound={true}
                   zoom={true}
