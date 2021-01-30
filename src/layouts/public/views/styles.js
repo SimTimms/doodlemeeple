@@ -15,6 +15,16 @@ export const sharedStyles = makeStyles((theme) => ({
     paddingRight: 0,
     minWidth: '100%',
   },
+  pageWrapper: {
+    width: '100%',
+    height: 'calc(100vh - 122px)',
+    background: theme.palette.primary.main,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'auto',
+  },
+  pageWrapperSecondary: { background: theme.palette.secondary.main },
   cardWrapper: {
     width: '100%',
     display: 'flex',

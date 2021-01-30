@@ -114,9 +114,14 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
         })}
       >
         <Typography variant="body1" className={classes.descriptionBox}>
-          {info} <br />
-          <br />
-          {warning !== '' && <span style={{ fontWeight: 900 }}>{warning}</span>}
+          {info}
+          {warning !== '' && (
+            <span style={{ fontWeight: 900 }}>
+              <br />
+              <br />
+              {warning}
+            </span>
+          )}
         </Typography>
       </div>
     </Column>

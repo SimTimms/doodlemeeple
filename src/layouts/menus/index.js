@@ -27,6 +27,8 @@ const StyledButtonFooter = withStyles({
     height: 28,
     margin: 5,
     padding: '0 ',
+    fontSize: 12,
+    fontWeight: 400,
   },
 })(Button);
 

@@ -1,5 +1,11 @@
 import React from 'react';
-import { Typography, Icon, Card, Slide } from '@material-ui/core';
+import {
+  Typography,
+  Icon,
+  Card,
+  Slide,
+  useMediaQuery,
+} from '@material-ui/core';
 import { useStyles } from './styles';
 import { Row } from '../';
 import clsx from 'clsx';
@@ -7,13 +13,14 @@ import clsx from 'clsx';
 export default function CardComponent({ children, ...props }) {
   const { styleOverride, onClickEvent, locked, lockedMsg } = props;
   const classes = useStyles();
-
+  const mobile = useMediaQuery('(max-width:800px)');
   return (
     <Card
       className={clsx({
         [classes.card]: true,
         [classes.clickable]: onClickEvent,
         [classes.cardLocked]: locked,
+        [classes.cardMobile]: mobile,
       })}
       style={styleOverride && styleOverride}
       onClick={() => (onClickEvent ? onClickEvent() : () => {})}

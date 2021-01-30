@@ -1,19 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Card,
-  Divider,
-  CardContent,
-  Typography,
-  useMediaQuery,
-  Button,
-  Slide,
-} from '@material-ui/core';
+import { Typography, useMediaQuery, Button } from '@material-ui/core';
 import {
   ErrorBox,
   IconButton,
   Meta,
   FieldBox,
+  CardComponent,
+  Column,
+  DividerWithBorder,
+  Divider,
+  DividerMini,
 } from '../../../../../components';
 import { styles } from './styles';
 import { sharedStyles } from '../../styles';
@@ -21,7 +18,6 @@ import { Mutation } from 'react-apollo';
 import { SIGNUP_MUTATION } from '../../../../../data/mutations';
 import { readableErrors } from '../../../../../utils/readableErrors';
 import { validate } from 'email-validator';
-import clsx from 'clsx';
 
 var passwordValidator = require('password-validator');
 
@@ -36,9 +32,8 @@ export default function RegisterCard({ setPage, ...props }) {
   });
   const [password, setPassword] = React.useState('');
   const [buttonStatus, setButtonStatus] = React.useState('Register');
-  const mobile = useMediaQuery('(max-width:800px)');
 
-  const { campaignId } = props;
+  const { campaignId, history } = props;
 
   function submitChecks(SignupMutation) {
     let passed = true;
@@ -83,166 +78,144 @@ export default function RegisterCard({ setPage, ...props }) {
   }
 
   return (
-    <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div className={classes.root}>
-        <Card
-          className={clsx({
-            [classes.card]: true,
-            [classes.cardMobile]: mobile,
-          })}
-        >
-          <CardContent style={{ padding: 5 }}>
-            <Typography
-              variant="h2"
-              color="textPrimary"
-              style={{ textAlign: 'center' }}
-            >
-              Register
-            </Typography>
-            <Typography
-              variant="body1"
-              component="p"
-              style={{ textAlign: 'center' }}
-              className={classes.description}
-            >
-              Enter a few details to create your account
-            </Typography>
-          </CardContent>
-          <Divider />
-          <CardContent className={classes.cardContentCenter}>
-            <FieldBox
-              value={name}
-              title="Name"
-              maxLength={26}
-              onChangeEvent={(e) => {
-                setName(e);
-              }}
-              replaceMode="tight"
-              placeholder="Example: David Jones"
-              info="Your name"
-              warning=""
-              size="s"
-              multiline={false}
-            />
-            <ErrorBox errorMsg={errors.name} />
-            <FieldBox
-              value={email}
-              title="Email"
-              maxLength={226}
-              onChangeEvent={(e) => {
-                setEmail(e);
-              }}
-              replaceMode=""
-              placeholder="Example: info@doodlemeeple.com"
-              info="Your email address, used for logging into your account"
-              warning=""
-              size="s"
-              multiline={false}
-            />
-            <ErrorBox errorMsg={errors.email} />
-            <FieldBox
-              value={password}
-              title="Password"
-              maxLength={20}
-              onChangeEvent={(e) => {
-                setPassword(e);
-              }}
-              replaceMode=""
-              placeholder="Example: *********"
-              info="The password you will use for logging into your account"
-              warning=""
-              size="s"
-              type="password"
-              multiline={false}
-            />
-            <ErrorBox errorMsg={errors.password} />
-          </CardContent>
-          <CardContent className={classes.cardContentCenter}>
-            <Mutation
-              mutation={SIGNUP_MUTATION}
-              variables={{ name, email, password, campaignId, available: true }}
-              onError={(error) => {
-                setButtonStatus('Error');
-                setError(readableErrors(error, errors));
-              }}
-              onCompleted={(a, b) => {
-                setButtonStatus('Done');
-                setPage();
-              }}
-            >
-              {(SignupMutation) => {
-                return (
-                  <div>
-                    <IconButton
-                      onClickEvent={() => {
-                        setButtonStatus('Checking...');
-                        submitChecks(SignupMutation);
-                      }}
-                      title={buttonStatus}
-                      disabled={false}
-                      icon=""
-                      iconPos="right"
-                      type="button"
-                      color="primary"
-                      styleOverride={null}
-                    />
-                  </div>
-                );
-              }}
-            </Mutation>
-            <Meta str={`By registering you agree to the DoodleMeeple`} />
-            <Meta
-              str={
-                <a
-                  href="https://doodlemeeple.com/terms-of-service/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Terms of Service
-                </a>
-              }
-            />
-            <Meta
-              str={
-                <a
-                  href="https://doodlemeeple.com/privacy-policy/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Privacy Policy
-                </a>
-              }
-            />
-          </CardContent>
-          <Divider />
-          <CardContent
-            style={{ paddingBottom: 70 }}
-            className={classes.cardContentCenter}
+    <div className={`${classes.pageWrapper}`}>
+      <CardComponent
+        styleOverride={{
+          width: 400,
+          boxShadow: '5px 5px 20px rgba(0,0,0,0.2)',
+        }}
+      >
+        <Column>
+          <Typography variant="h5">Register</Typography>
+          <Typography> Enter a few details to create your account</Typography>
+          <DividerWithBorder />
+        </Column>
+        <Divider />
+        <Column>
+          <FieldBox
+            value={name}
+            title="Name"
+            maxLength={26}
+            onChangeEvent={(e) => {
+              setName(e);
+            }}
+            replaceMode="tight"
+            placeholder="Example: David Jones"
+            info="Your name, this will be visible to all users"
+            warning=""
+            size="s"
+            multiline={false}
+          />
+          <ErrorBox errorMsg={errors.name} />
+          <DividerMini />
+          <FieldBox
+            value={email}
+            title="Email"
+            maxLength={226}
+            onChangeEvent={(e) => {
+              setEmail(e);
+            }}
+            replaceMode=""
+            placeholder="Example: info@doodlemeeple.com"
+            info="Your email address, used for logging into your account. This will not be displayed to other users"
+            warning=""
+            size="s"
+            multiline={false}
+          />
+          <ErrorBox errorMsg={errors.email} />
+          <DividerMini />
+          <FieldBox
+            value={password}
+            title="Password"
+            maxLength={20}
+            onChangeEvent={(e) => {
+              setPassword(e);
+            }}
+            replaceMode=""
+            placeholder="Example: *********"
+            info="The password you will use for logging into your account"
+            warning=""
+            size="s"
+            type="password"
+            multiline={false}
+          />
+          <ErrorBox errorMsg={errors.password} />
+        </Column>
+
+        <Column>
+          <Mutation
+            mutation={SIGNUP_MUTATION}
+            variables={{ name, email, password, campaignId, available: true }}
+            onError={(error) => {
+              setButtonStatus('Error');
+              setError(readableErrors(error, errors));
+            }}
+            onCompleted={(a, b) => {
+              setButtonStatus('Done');
+              setPage();
+            }}
           >
-            <Typography
-              component="p"
-              style={{ textAlign: 'center', fontSize: 12 }}
-              color="primary"
-            >
-              Already have an account?
-            </Typography>
-            <Link to="/">
-              <Button
-                color="primary"
-                style={{
-                  width: 80,
-                  textTransform: 'none',
-                  fontWeight: 600,
-                  fontSize: 16,
-                  padding: 0,
-                }}
+            {(SignupMutation) => {
+              return (
+                <div>
+                  <IconButton
+                    onClickEvent={() => {
+                      setButtonStatus('Checking...');
+                      submitChecks(SignupMutation);
+                    }}
+                    title={buttonStatus}
+                    disabled={false}
+                    icon=""
+                    iconPos="right"
+                    type="button"
+                    color="primary"
+                    styleOverride={null}
+                  />
+                </div>
+              );
+            }}
+          </Mutation>
+          <DividerWithBorder />
+          <Meta str={`By registering you agree to the DoodleMeeple`} />
+          <Meta
+            str={
+              <a
+                href="https://doodlemeeple.com/terms-of-service/"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Login
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-      </div>
-    </Slide>
+                Terms of Service
+              </a>
+            }
+          />
+          <Meta
+            str={
+              <a
+                href="https://doodlemeeple.com/privacy-policy/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Privacy Policy
+              </a>
+            }
+          />
+        </Column>
+
+        <Divider />
+        <Column
+          style={{ paddingBottom: 70 }}
+          className={classes.cardContentCenter}
+        >
+          <Typography
+            component="p"
+            style={{ textAlign: 'center', fontSize: 12, cursor: 'pointer' }}
+            color="primary"
+            onClick={() => history.push('/')}
+          >
+            Back to Login
+          </Typography>
+        </Column>
+      </CardComponent>
+    </div>
   );
 }

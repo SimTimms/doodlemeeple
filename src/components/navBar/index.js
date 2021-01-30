@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMediaQuery, Toolbar, AppBar } from '@material-ui/core';
+import { useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 import { useStyles } from './styles';
 
@@ -9,7 +9,7 @@ function StyledNavBar(props) {
   const mobile = useMediaQuery('(max-width:800px)');
 
   return (
-    <AppBar
+    <div
       position="relative"
       className={`${clsx({
         [classes.appBar]: !mobile,
@@ -19,10 +19,11 @@ function StyledNavBar(props) {
         [classes.appBarNoSidebar]: sidebarMissing,
       })} ${classes.root}`}
     >
-      <Toolbar
+      <div
         style={{
           display: 'flex',
           justifyContent: center ? 'center' : 'space-between',
+          width: '100%',
         }}
       >
         <div
@@ -36,8 +37,8 @@ function StyledNavBar(props) {
         >
           {children}
         </div>
-      </Toolbar>
-    </AppBar>
+      </div>
+    </div>
   );
 }
 

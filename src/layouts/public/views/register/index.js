@@ -3,10 +3,10 @@ import RegisterCard from './views/RegisterCard';
 import ThanksCard from './views/ThanksCard';
 
 function RegisterLayout({ ...props }) {
-  const { campaignId } = props;
+  const { campaignId, history } = props;
   const [page, setPage] = React.useState(0);
   return page === 0 ? (
-    <RegisterCard setPage={setPage} campaignId={campaignId} />
+    <RegisterCard setPage={setPage} campaignId={campaignId} history={history} />
   ) : (
     <ThanksCard setPage={setPage} />
   );

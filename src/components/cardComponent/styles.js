@@ -33,4 +33,5 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '3px 0 0 3px',
     padding: 4,
   },
+  cardMobile: { width: '100%' },
 }));
