@@ -6,6 +6,7 @@ import {
   Divider,
   NoticeBoard,
   MiniDashCreator,
+  Column,
 } from '../../../../components';
 import { useStyles } from './styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -34,7 +35,7 @@ export default function AppDashboard({ history, profile, setProfile }) {
   }, []);
 
   return (
-    <div style={{ width: '100%' }}>
+    <Column>
       <MiniDashCreator profile={profile} history={history} />
       <NoticeBoard
         profile={profile}
@@ -65,6 +66,6 @@ export default function AppDashboard({ history, profile, setProfile }) {
           </div>
         </div>
       </div>
-    </div>
+    </Column>
   );
 }

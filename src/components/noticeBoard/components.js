@@ -289,8 +289,6 @@ export function StripeError() {
 }
 
 export function NoStripe({ history }) {
-  const classes = useStyles();
-
   return (
     <Column a="space-between" j="space-between" h={300}>
       <Column h="100%" a="center" j="center" bg="#111">

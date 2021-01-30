@@ -3,14 +3,20 @@ import { Typography, useMediaQuery, Zoom } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Column, Row, IconButton, Divider } from '../';
 import { NoStripe, FeaturedCreative } from './components';
+import clsx from 'clsx';
 
 export default function NoticeBoard({ profile, history, featuredArticle }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
 
   return (
-    <div className={classes.root}>
-      <Row h="100%">
+    <div
+      className={clsx({
+        [classes.root]: !mobile,
+        [classes.mobile]: mobile,
+      })}
+    >
+      <Row>
         {!profile.creativeTrue && !profile.creatorTrue ? (
           <Column h="100%">
             <Divider />
@@ -74,21 +80,31 @@ export default function NoticeBoard({ profile, history, featuredArticle }) {
 
             <Divider />
           </Column>
-        ) : (
+        ) : !mobile ? (
           <Row a="flex-start">
             <NoStripe history={history} />
 
             {featuredArticle.id && (
               <Column bg="#222">
-                {!mobile && (
-                  <FeaturedCreative
-                    featuredArticle={featuredArticle}
-                    history={history}
-                  />
-                )}
+                <FeaturedCreative
+                  featuredArticle={featuredArticle}
+                  history={history}
+                />
               </Column>
             )}
           </Row>
+        ) : (
+          <Column>
+            <NoStripe history={history} />
+            {featuredArticle.id && (
+              <Column bg="#222">
+                <FeaturedCreative
+                  featuredArticle={featuredArticle}
+                  history={history}
+                />
+              </Column>
+            )}
+          </Column>
         )}
       </Row>
     </div>

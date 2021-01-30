@@ -1,12 +1,12 @@
 import React from 'react';
-import { Divider, Drawer, List, useMediaQuery } from '@material-ui/core';
+import { Divider, Drawer, List, useMediaQuery, Icon } from '@material-ui/core';
 import { useStyles } from '../styles';
 import Cookies from 'js-cookie';
 import clsx from 'clsx';
 import { Query } from 'react-apollo';
 import { COUNTS } from '../../../data/queries';
 import logo from '../../../assets/dm_device.png';
-import { MenuButtonShortcut } from '../../../components';
+import { MenuButtonShortcut, Row } from '../../../components';
 
 export default function AppDrawer({
   history,
@@ -15,10 +15,11 @@ export default function AppDrawer({
   open,
   ...props
 }) {
-  const { drawerOpenTablet, drawerRoot } = useStyles();
+  const { drawerOpenTablet, drawerRoot, drawerClosed } = useStyles();
 
   const { page, profile } = props;
   const mobile = useMediaQuery('(max-width:800px)');
+  const [isOpen, setIsOpen] = React.useState(false);
   const [counts, setCounts] = React.useState({
     invites: 0,
     messages: 0,
@@ -32,22 +33,37 @@ export default function AppDrawer({
         paper: clsx({
           [drawerRoot]: true,
           [drawerOpenTablet]: mobile,
+          [drawerClosed]: !isOpen && mobile,
         }),
       }}
     >
-      <img
-        src={logo}
+      <div
         style={{
-          maxHeight: 37,
-          maxWidth: 34,
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          paddingBottom: 11,
+          minHeight: 64,
+          display: 'flex',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          cursor: 'pointer',
+          width: '100%',
         }}
-        alt="DoodleMeeple Man"
-      />
+        onClick={() => setIsOpen(isOpen ? false : true)}
+      >
+        <Row a="center" j="center">
+          <img
+            src={logo}
+            style={{
+              maxHeight: 37,
+              maxWidth: 34,
+            }}
+            alt="DoodleMeeple Man"
+          />
+          {mobile && (
+            <Icon style={{ color: '#222', marginLeft: 10 }}>menu</Icon>
+          )}
+        </Row>
+      </div>
       <Divider />
-      <List>
+      <List onClick={() => setIsOpen(false)}>
         {page !== 'dashboard' && (
           <div>
             {[

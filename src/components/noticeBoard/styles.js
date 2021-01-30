@@ -7,6 +7,7 @@ export const useStyles = makeStyles((theme) => {
       height: 300,
       background: theme.palette.primary.main,
     },
+    mobile: { width: '100%', background: theme.palette.primary.main },
     header4: {
       color: '#fff',
       textAlign: 'center',

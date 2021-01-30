@@ -39,7 +39,7 @@ function AppLayout(props) {
   const [favourites, setFavourites] = React.useState([]);
   const [profile, setProfile] = React.useState(null);
   const pageJump = props.match ? props.match.params.page : null;
-  const mobile = useMediaQuery('(max-width:700px)');
+  const mobile = useMediaQuery('(max-width:800px)');
   const { history } = props;
 
   //TODO: I guess this is proper dirty
@@ -83,15 +83,6 @@ function AppLayout(props) {
     count: 0,
   };
 
-  const creativeRoster = {
-    name: '',
-    icon: 'image',
-    link: () => history.push('/app/creative-roster'),
-    color: '#fff',
-    count: 0,
-    title: 'View a sample of the Creative Roster',
-  };
-
   const twitter = {
     name: '',
     icon: social.socialTwitter,
@@ -132,6 +123,7 @@ function AppLayout(props) {
 
         <div>
           <Row>
+            {/*
             <MenuButtonShortcut
               text={{
                 name: twitter.name,
@@ -182,7 +174,7 @@ function AppLayout(props) {
                 borderRight: '1px solid #ddd',
                 marginRight: 10,
               }}
-            ></div>
+            ></div>*/}
             {/*
             <MenuButtonShortcut
               text={{
@@ -195,7 +187,7 @@ function AppLayout(props) {
               active={false}
               noPad={true}
               title={creativeRoster.title}
-            />*/}
+            />
             <MenuButtonShortcut
               text={{
                 name: helpButton.name,
@@ -207,7 +199,7 @@ function AppLayout(props) {
               active={false}
               noPad={true}
               title={helpButton.title}
-            />
+            />*/}
           </Row>
         </div>
       </StyledNavBar>
