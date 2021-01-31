@@ -49,7 +49,7 @@ export function CategoryBox({ title, type, history }) {
   );
 }
 
-export function CategoryBoxMini({ type, title }) {
+export function CategoryBoxMini({ type, title, history }) {
   const classes = useStyles();
 
   return (
@@ -65,6 +65,9 @@ export function CategoryBoxMini({ type, title }) {
                 : '',
             }}
             className={`${classes.catBox} ${classes.sizeSmall}`}
+            onClick={() => {
+              history.push(`/app/creative-roster/${type}`);
+            }}
           >
             <Typography variant="h6" className={classes.catBoxTitleSecondary}>
               {title}
