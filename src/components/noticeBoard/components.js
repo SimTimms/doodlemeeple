@@ -289,6 +289,8 @@ export function StripeError() {
 }
 
 export function NoStripe({ history }) {
+  const classes = useStyles();
+
   return (
     <Column a="space-between" j="space-between" h={300}>
       <Column h="100%" a="center" j="center" bg="#111">
@@ -315,7 +317,7 @@ export function NoStripe({ history }) {
             history={history}
           />
         </Row>
-        <Row>
+        <Row o={0.8}>
           <CategoryBoxMini type="reviewer" title="Reviewer" history={history} />
           <CategoryBoxMini type="voice-actor" title="Voice" history={history} />
           <CategoryBoxMini
@@ -328,6 +330,8 @@ export function NoStripe({ history }) {
             title="Marketing"
             history={history}
           />
+        </Row>
+        <Row o={0.6}>
           <CategoryBoxMini
             type="games-developer"
             title="Developer"
@@ -335,7 +339,7 @@ export function NoStripe({ history }) {
           />
           <CategoryBoxMini
             type="proof-reader"
-            title="Proof"
+            title="Proof Reader"
             history={history}
           />
           <CategoryBoxMini

@@ -53,28 +53,15 @@ export function CategoryBoxMini({ type, title, history }) {
   const classes = useStyles();
 
   return (
-    <Query query={CATEGORY_IMAGES} variables={{ type: [type] }}>
-      {({ data, loading }) => {
-        return loading ? null : (
-          <div
-            style={{
-              backgroundImage: data
-                ? data.imageCategory.length > 0
-                  ? `url(${data.imageCategory[0].img})`
-                  : ''
-                : '',
-            }}
-            className={`${classes.catBox} ${classes.sizeSmall}`}
-            onClick={() => {
-              history.push(`/app/creative-roster/${type}`);
-            }}
-          >
-            <Typography variant="h6" className={classes.catBoxTitleSecondary}>
-              {title}
-            </Typography>
-          </div>
-        );
+    <div
+      className={`${classes.catBox} ${classes.sizeSmall}`}
+      onClick={() => {
+        history.push(`/app/creative-roster/${type}`);
       }}
-    </Query>
+    >
+      <Typography variant="h6" className={classes.catBoxTitleSecondary}>
+        {title}
+      </Typography>
+    </div>
   );
 }

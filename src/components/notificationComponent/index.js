@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { REMOVE_NOTIFICATION_MUTATION } from '../../data/mutations';
 import { Mutation } from 'react-apollo';
@@ -16,22 +16,13 @@ export default function NotificationComponent({
 }) {
   const classes = useStyles();
   return (
-    <Card className={classes.card}>
+    <div className={classes.card}>
       <div className={classes.rowWrapper}>
         <Link
           to={notification.linkTo}
           className={classes.messageButton}
           style={{ textDecoration: 'none' }}
         >
-          {notification.sender && notification.icon === 'request_quote' && (
-            <div
-              className={classes.notifications}
-              style={{
-                background: `url(${notification.sender.profileImg})`,
-                backgroundSize: 'cover',
-              }}
-            ></div>
-          )}
           <div className={classes.profileWrapper}>
             <div className={classes.wrapperOne}>
               <div className={classes.messageDetails}>
@@ -43,12 +34,6 @@ export default function NotificationComponent({
                     component="p"
                     className={clsx({
                       [classes.notificationNeutral]: true,
-                      [classes.notificationBad]:
-                        notification.icon === 'request_quote' ||
-                        notification.icon === 'local_post_office',
-                      [classes.notificationGood]:
-                        notification.icon === 'thumb_down' ||
-                        notification.icon === 'warning',
                     })}
                   >
                     <b>{notification.title}</b>
@@ -62,42 +47,48 @@ export default function NotificationComponent({
                   </Typography>
                 </div>
                 <DividerMini />
-                <Typography color="textPrimary" component="p">
+                <Typography
+                  color="textPrimary"
+                  component="p"
+                  style={{ fontSize: 12 }}
+                >
                   {nameShortener(notification.message, 50)}
                 </Typography>
               </div>
             </div>
           </div>
         </Link>
-        <Mutation
-          mutation={REMOVE_NOTIFICATION_MUTATION}
-          variables={{
-            id: notification._id,
-          }}
-        >
-          {(RemoveNotificationMutation) => {
-            return (
-              <MenuButtonShortcut
-                text={{
-                  name: '',
-                  icon: 'close',
-                  count: 0,
-                  back: '',
-                  color: '#222',
-                }}
-                onClickEvent={() => {
-                  RemoveNotificationMutation();
-                  const notificationArrayFiltered = notificationArray.filter(
-                    (item) => item._id !== notification._id
-                  );
-                  setNotificationArray(notificationArrayFiltered);
-                }}
-                active={false}
-              />
-            );
-          }}
-        </Mutation>
+        {notification.title !== 'No Notifications' && (
+          <Mutation
+            mutation={REMOVE_NOTIFICATION_MUTATION}
+            variables={{
+              id: notification._id,
+            }}
+          >
+            {(RemoveNotificationMutation) => {
+              return (
+                <MenuButtonShortcut
+                  text={{
+                    name: '',
+                    icon: 'close',
+                    count: 0,
+                    back: '',
+                    color: '#222',
+                  }}
+                  onClickEvent={() => {
+                    RemoveNotificationMutation();
+                    const notificationArrayFiltered = notificationArray.filter(
+                      (item) => item._id !== notification._id
+                    );
+                    setNotificationArray(notificationArrayFiltered);
+                  }}
+                  active={false}
+                />
+              );
+            }}
+          </Mutation>
+        )}
       </div>
-    </Card>
+    </div>
   );
 }
