@@ -114,7 +114,7 @@ export function PublicFooterMenu() {
       >
         <StyledButtonFooter>Privacy Policy</StyledButtonFooter>
       </a>
-      <a href="mailto:info@doodlemeeplecom" style={{ textDecoration: 'none' }}>
+      <a href="mailto:info@doodlemeeple.com" style={{ textDecoration: 'none' }}>
         <StyledButtonFooter>info@doodlemeeple.com</StyledButtonFooter>
       </a>
     </div>
