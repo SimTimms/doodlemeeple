@@ -18,9 +18,15 @@ export default function NoticeBoardSecondary({
       <Column>
         <Typography variant="h4">{title}</Typography>
         <Divider />
-        <Typography variant="h6" align="center" style={{ color: '#fff' }}>
-          {subTitle}
-        </Typography>
+        {subTitle !== '' && (
+          <Typography
+            variant="h6"
+            align="center"
+            style={{ color: '#fff', marginBottom: 10 }}
+          >
+            {subTitle}
+          </Typography>
+        )}
         {children}
 
         {buttonLocked ? (

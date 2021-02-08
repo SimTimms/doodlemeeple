@@ -51,6 +51,14 @@ function AppLayout(props) {
       : null
     : null;
 
+  const pathParam2 = props
+    ? props.match
+      ? props.match.params.pathParam2
+        ? props.match.params.pathParam2
+        : null
+      : null
+    : null;
+
   const searchValues = props
     ? props.location
       ? props.location.search
@@ -283,7 +291,11 @@ function AppLayout(props) {
               history={history}
             />
           ) : page === 'edit-job' ? (
-            <EditJob jobId={pathParam} history={history} />
+            <EditJob
+              jobId={pathParam}
+              history={history}
+              creativeId={pathParam2}
+            />
           ) : page === 'view-job' && profile ? (
             <AppViewJob jobId={pathParam} history={history} />
           ) : page === 'view-proposal' ? (
@@ -308,6 +320,7 @@ function AppLayout(props) {
                   <PickArtist
                     theme={props.theme}
                     jobId={pathParam}
+                    creativeId={pathParam2}
                     autosaveIsOn={true}
                     history={history}
                     favourites={data.profile.favourites.map(

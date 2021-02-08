@@ -906,13 +906,36 @@ export const PROFILE_PREVIEW = gql`
       summary
       profileBG
       profileImg
-      linkedIn
-      twitter
+      stripeID
+      stripeClientId
+      viewCount
+      paymentMethod
+      responsePercent
       facebook
-      instagram
+      skype
       publicEmail
       website
-      skype
+      twitter
+      linkedIn
+      instagram
+      likedMe {
+        _id
+        receiver {
+          _id
+        }
+        user {
+          _id
+        }
+      }
+      favourites {
+        _id
+        receiver {
+          _id
+        }
+        user {
+          _id
+        }
+      }
     }
   }
 `;

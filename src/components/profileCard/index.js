@@ -234,25 +234,8 @@ export default function ProfileCard({
           }}
           type="button"
         />
-        <div>
-          <Icon onClick={() => {}} className={classes.favIconStar}>
-            {isFav ? 'star_border' : 'star_border'}
-          </Icon>
-          <Icon onClick={() => {}} className={classes.favIconStar}>
-            {isFav ? 'star_border' : 'star_border'}
-          </Icon>
-          <Icon onClick={() => {}} className={classes.favIconStar}>
-            {isFav ? 'star_border' : 'star_border'}
-          </Icon>
-          <Icon onClick={() => {}} className={classes.favIconStar}>
-            {isFav ? 'star_border' : 'star_border'}
-          </Icon>
-          <Icon onClick={() => {}} className={classes.favIconStar}>
-            {isFav ? 'star_border' : 'star_border'}
-          </Icon>
-        </div>
       </Column>
-      {updateInviteList && Cookies.get('userId') !== creative._id && (
+      {updateInviteList && Cookies.get('userId') !== creative._id ? (
         <div className={classes.actionsWrapper}>
           <Mutation
             mutation={CREATE_INVITE}
@@ -286,6 +269,15 @@ export default function ProfileCard({
             }}
           </Mutation>
         </div>
+      ) : (
+        <IconButton
+          title="Hire"
+          color="white"
+          icon="chevron_right"
+          iconPos="right"
+          styleOverride={{ paddingTop: 3, paddingBottom: 3 }}
+          onClickEvent={() => history.push(`/app/edit-job/new/${creative._id}`)}
+        />
       )}
     </Card>
   );

@@ -112,7 +112,7 @@ export default function AppDrawer({
               },
             },
             {
-              name: profile.creatorTrue ? 'Projects' : 'hide',
+              name: 'Projects',
               icon: 'casino',
               link: () => history.push('/app/jobs'),
               count: { icon: 'star', count: counts.quotes },
