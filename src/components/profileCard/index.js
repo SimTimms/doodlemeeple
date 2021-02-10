@@ -85,7 +85,7 @@ export default function ProfileCard({
             badge.badgeType === 'featured' &&
               badgeArr.push(
                 <img
-                  src={badgeLeaf}
+                  src={badgeFlower}
                   title="This creative has been featured!"
                   key={`badge_${index}_${creative._id}`}
                   style={{ maxHeight: 16, maxWidth: 16, margin: 2 }}
@@ -94,7 +94,7 @@ export default function ProfileCard({
             badge.badgeType === 'early' &&
               badgeArr.push(
                 <img
-                  src={badgeBird}
+                  src={badgeLeaf}
                   title="This creative was one of the first to join!"
                   key={`badge_${index}_${creative._id}`}
                   style={{ maxHeight: 16, maxWidth: 16, margin: 2 }}
