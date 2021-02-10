@@ -8,6 +8,10 @@ import { ADD_FAVOURITE, CREATE_INVITE } from '../../data/mutations';
 import clsx from 'clsx';
 import Cookies from 'js-cookie';
 import imageOptimiser from '../../utils/imageOptimiser';
+import badgeFeatured from '../../assets/badgeFeatured.png';
+import badgeBird from '../../assets/badgeBird.png';
+import badgeFlower from '../../assets/badgeFlower.png';
+import badgeFlowerPink from '../../assets/badgeFlowerPink.png';
 
 export default function ProfileCard({
   history,
@@ -75,18 +79,29 @@ export default function ProfileCard({
         }}
       >
         <Row j="flex-start" w="100px" paddingLeft={5}>
-          {creative.badges.map(
-            (badge, index) =>
-              badge.badgeType === 'featured' && (
-                <Icon
+          {creative.badges.map((badge, index) => {
+            const badgeArr = [];
+            badge.badgeType === 'featured' &&
+              badgeArr.push(
+                <img
+                  src={badgeFlower}
                   title="This creative has been featured!"
-                  style={{ color: '#ffd53d' }}
                   key={`badge_${index}_${creative._id}`}
-                >
-                  star
-                </Icon>
-              )
-          )}
+                  style={{ maxHeight: 16, maxWidth: 16, margin: 2 }}
+                />
+              );
+            badge.badgeType === 'early' &&
+              badgeArr.push(
+                <img
+                  src={badgeBird}
+                  title="This creative was one of the first to join!"
+                  key={`badge_${index}_${creative._id}`}
+                  style={{ maxHeight: 16, maxWidth: 16, margin: 2 }}
+                />
+              );
+
+            return badgeArr;
+          })}
         </Row>
         <Row j="flex-end" w="100px">
           <div
