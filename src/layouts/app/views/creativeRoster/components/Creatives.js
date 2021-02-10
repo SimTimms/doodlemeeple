@@ -26,34 +26,32 @@ export default function Creatives({ favourites, history, filter, ...props }) {
         justifyContent: 'center',
       }}
     >
-      {creativeArray.length === 0 && (
-        <Query
-          query={CREATIVES}
-          variables={{ type: filter, page: page, job: null }}
-          fetchPolicy="network-only"
-          onCompleted={(data) => {
-            data.getCreatives.length === 0 && setNoMore(true);
+      <Query
+        query={CREATIVES}
+        variables={{ type: filter, page: page, job: null }}
+        fetchPolicy="network-only"
+        onCompleted={(data) => {
+          data.getCreatives.length === 0 && setNoMore(true);
 
-            filter === existingFilter &&
-              setCreativeArray([...creativeArray, ...data.getCreatives]);
+          filter === existingFilter &&
+            setCreativeArray([...creativeArray, ...data.getCreatives]);
 
-            if (filter !== existingFilter) {
-              setCreativeArray([...data.getCreatives]);
-              setExistingFilter(filter);
-              setNoMore(false);
-              setPage(0);
-            }
-          }}
-        >
-          {({ data, loading }) => {
-            return loading ? (
-              <LoadIcon />
-            ) : data ? (
-              <div className={classes.creativeWrapper}></div>
-            ) : null;
-          }}
-        </Query>
-      )}
+          if (filter !== existingFilter) {
+            setCreativeArray([...data.getCreatives]);
+            setExistingFilter(filter);
+            setNoMore(false);
+            setPage(0);
+          }
+        }}
+      >
+        {({ data, loading }) => {
+          return loading ? (
+            <LoadIcon />
+          ) : data ? (
+            <div className={classes.creativeWrapper}></div>
+          ) : null;
+        }}
+      </Query>
 
       {creativeArray.map((creative, index) => {
         return (
