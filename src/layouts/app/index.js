@@ -245,7 +245,6 @@ function AppLayout(props) {
           ) : page === 'creative-roster' ? (
             <Query query={FAVOURITES} fetchPolicy="network-only">
               {({ data, loading }) => {
-                data && console.log(data);
                 return loading
                   ? null
                   : data && (

@@ -12,7 +12,6 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     boxShadow: '10px 10px 20px rgba(0,0,0,0.2)',
   },
-
   creativeCardNoShadow: { boxShadow: 'none' },
   creativeCardWrapper: {
     background: '#fafafa',
@@ -24,6 +23,14 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
     borderBottom: '1px solid #ddd',
   },
+  background: {
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
+    height: 100,
+    width: '100%',
+    position: 'relative',
+    cursor: 'pointer',
+  },
   noBG: { minHeight: 0, maxHeight: 0, height: 0 },
   noProfile: { display: 'none' },
   creativeCardBackground: {
@@ -34,6 +41,10 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     border: '5px solid #fff',
     marginTop: -50,
+    cursor: 'pointer',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
+    position: 'relative',
   },
   profileNoBG: { marginTop: 10 },
   creativeCardDetails: {
@@ -71,8 +82,9 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   favIcon: {
-    color: theme.palette.primary.main,
+    color: theme.palette.error.main,
   },
+  countIcon: { color: theme.palette.primary.main },
   favIconBad: {
     color: '#de5d5d',
   },

@@ -10,6 +10,10 @@ export const CREATIVES = gql`
       profileImg
       stripeID
       stripeClientId
+      badges {
+        badgeType
+        link
+      }
       viewCount
       paymentMethod
       responsePercent

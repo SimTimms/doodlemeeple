@@ -8,7 +8,6 @@ import { ADD_FAVOURITE, CREATE_INVITE } from '../../data/mutations';
 import clsx from 'clsx';
 import Cookies from 'js-cookie';
 import imageOptimiser from '../../utils/imageOptimiser';
-import stripeImg from '../../assets/stripe_logo_sm.png';
 
 export default function ProfileCard({
   history,
@@ -41,19 +40,16 @@ export default function ProfileCard({
             creative.profileBG !== '' && creative.profileBG
               ? `url(${imageOptimiser(creative.profileBG)})`
               : '#eee',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
           boxShadow:
             creative.profileBG !== ''
               ? '10px 10px 10px rgba(0,0,0,0.2)'
               : 'none',
-          height: 100,
-          width: '100%',
-          position: 'relative',
         }}
         className={clsx({
+          [classes.background]: true,
           [classes.noBG]: !creative.profileBG,
         })}
+        onClick={() => history.push(`/app/public-preview/${creative._id}`)}
       ></div>
       <div
         className={clsx({
@@ -64,10 +60,8 @@ export default function ProfileCard({
         style={{
           backgroundImage:
             creative.profileImg !== '' ? `url(${creative.profileImg})` : `#ddd`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          position: 'relative',
         }}
+        onClick={() => history.push(`/app/public-preview/${creative._id}`)}
       ></div>
       <div
         style={{
@@ -80,95 +74,76 @@ export default function ProfileCard({
           alignItems: 'center',
         }}
       >
-        <div
-          className={`${classes.smallActionWrapper} ${classes.top}`}
-          title={
-            creative.responsePercent === ''
-              ? `This creative has not yet been invited to provide a quote.`
-              : `This creative has replied to ${creative.responsePercent}% of invites.`
-          }
-          style={{ marginRight: 0, marginLeft: 3 }}
-        >
-          <Icon
-            className={clsx({
-              [classes.favIconNull]: true,
-              [classes.favIconBad]: creative.responsePercent > 0,
-              [classes.favIconMed]: creative.responsePercent > 50,
-              [classes.favIconGood]: creative.responsePercent > 90,
-            })}
-          >
-            chat_bubble
-          </Icon>
-          <Typography
-            className={clsx({
-              [classes.actionText]: true,
-            })}
-            style={{ paddingTop: 0, marginTop: -3 }}
-          >
-            {creative.responsePercent ? creative.responsePercent : 0}
-          </Typography>
-        </div>
-        <Row j="flex-end" w="100px">
-          {!creative.paymentMethod && (
-            <div
-              className={clsx({
-                [classes.stripeBoxNull]: true,
-                [classes.stripeBox]:
-                  creative.stripeID || creative.stripeClientId,
-              })}
-            >
-              <img
-                src={stripeImg}
-                style={{ width: '100%' }}
-                alt="Stripe Logo"
-                title={
-                  creative.stripeID || creative.stripeClientId
-                    ? 'This creative has completed their payment profile'
-                    : 'This creative has not yet completed their payment profile'
-                }
-              />
-            </div>
+        <Row j="flex-start" w="100px" paddingLeft={5}>
+          {creative.badges.map(
+            (badge, index) =>
+              badge.badgeType === 'featured' && (
+                <Icon
+                  title="This creative has been featured!"
+                  style={{ color: '#ffd53d' }}
+                  key={`badge_${index}_${creative._id}`}
+                >
+                  star
+                </Icon>
+              )
           )}
-
-          {creative.paymentMethod && (
+        </Row>
+        <Row j="flex-end" w="100px">
+          <div
+            className={`${classes.smallActionWrapper} ${classes.top}`}
+            title={
+              creative.responsePercent === ''
+                ? `This creative has not yet been invited to provide a quote.`
+                : `This creative has replied to ${creative.responsePercent}% of invites.`
+            }
+            style={{ marginRight: 0, marginLeft: 3 }}
+          >
             <Icon
               className={clsx({
-                [classes.favIcon]: true,
-                [classes.favIconPrimary]: true,
+                [classes.favIconNull]: true,
+                [classes.favIconBad]: creative.responsePercent > 0,
+                [classes.favIconMed]: creative.responsePercent > 50,
+                [classes.favIconGood]: creative.responsePercent > 90,
               })}
-              title="This creative has completed their payment profile and arranged payment by means other than Stripe"
             >
-              credit_card
+              chat_bubble
             </Icon>
-          )}
-          {
-            <div
-              className={`${classes.smallActionWrapper} ${classes.top}`}
-              title={
-                creative.viewCount === 1
-                  ? `1 person has looked at this creative`
-                  : `${creative.viewCount} people have looked at this creative`
-              }
-              style={{ marginRight: 0, marginLeft: 3 }}
+            <Typography
+              className={clsx({
+                [classes.actionText]: true,
+              })}
+              style={{ paddingTop: 0, marginTop: -3 }}
             >
-              <Icon
-                className={clsx({
-                  [classes.favIconNull]: true,
-                  [classes.favIcon]: creative.viewCount > 0,
-                })}
-              >
-                brightness_1
-              </Icon>
-              <Typography
-                className={clsx({
-                  [classes.actionText]: true,
-                })}
-                style={{ paddingTop: 2 }}
-              >
-                {creative.viewCount ? creative.viewCount : 0}
-              </Typography>
-            </div>
-          }
+              {creative.responsePercent ? creative.responsePercent : 0}
+            </Typography>
+          </div>
+          <div
+            className={`${classes.smallActionWrapper} ${classes.top}`}
+            title={
+              creative.viewCount === 1
+                ? `1 person has looked at this creative`
+                : `${creative.viewCount} people have looked at this creative`
+            }
+            style={{ marginRight: 0, marginLeft: 3 }}
+          >
+            <Icon
+              className={clsx({
+                [classes.favIconNull]: true,
+                [classes.countIcon]: creative.viewCount > 0,
+              })}
+            >
+              brightness_1
+            </Icon>
+            <Typography
+              className={clsx({
+                [classes.actionText]: true,
+              })}
+              style={{ paddingTop: 2 }}
+            >
+              {creative.viewCount ? creative.viewCount : 0}
+            </Typography>
+          </div>
+
           <Mutation
             mutation={ADD_FAVOURITE}
             variables={{
@@ -272,10 +247,15 @@ export default function ProfileCard({
       ) : (
         <IconButton
           title="Hire"
-          color="white"
-          icon="chevron_right"
+          color="text-dark"
+          icon=""
           iconPos="right"
-          styleOverride={{ paddingTop: 3, paddingBottom: 3 }}
+          styleOverride={{
+            paddingTop: 3,
+            paddingBottom: 3,
+            paddingLeft: 5,
+            paddingRight: 5,
+          }}
           onClickEvent={() => history.push(`/app/edit-job/new/${creative._id}`)}
         />
       )}

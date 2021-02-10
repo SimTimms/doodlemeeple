@@ -12,7 +12,6 @@ export default function FeatureCardHorizontal({
   buttonTwo,
 }) {
   const classes = useStyles();
-  console.log(meta);
   return (
     <Paper p="0">
       <div className={classes.postHeader}>

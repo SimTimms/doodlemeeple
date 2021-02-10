@@ -4,7 +4,6 @@ import { Mutation } from 'react-apollo';
 import { DECLINE_CONTRACT } from '../../data/mutations';
 
 export default function ActionSetOne({ contract, history, setTabNbrTwo }) {
-  console.log(contract);
   return (
     <BorderBox w={300}>
       <IconButton

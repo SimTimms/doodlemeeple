@@ -42,12 +42,13 @@ export function Column(props) {
 }
 
 export function Row(props) {
-  const { children, a, j, wrap, w, b, pb, v, mb, br, bg, h, o } = props;
+  const { children, a, j, wrap, w, b, pb, pl, v, mb, br, bg, h, o } = props;
   const align = a ? a : 'center';
   const justify = j ? j : 'center';
   const width = w ? w : '100%';
   const border = b ? b : '';
   const paddingBottom = pb ? pb : '';
+  const paddingLeft = pl ? pl : '';
   const marginBottom = mb ? mb : '';
   const borderRadius = br ? br : '';
   const background = bg ? bg : '';
@@ -65,6 +66,7 @@ export function Row(props) {
         flexWrap: wrap,
         border,
         paddingBottom,
+        paddingLeft,
         marginBottom,
         borderRadius,
         background,
