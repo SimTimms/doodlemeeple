@@ -7,6 +7,13 @@ export const useStyles = makeStyles((theme) => {
       height: 300,
       background: theme.palette.primary.main,
     },
+    excerptBack: {
+      background: theme.palette.secondary.main,
+      width: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     mobile: { width: '100%', background: theme.palette.primary.main },
     header4: {
       color: '#fff',
@@ -32,8 +39,8 @@ export const useStyles = makeStyles((theme) => {
     },
     articlePanel: {
       minWidth: '100%',
-      minHeight: 300,
-      maxHeight: 300,
+      minHeight: 186,
+      maxHeight: 186,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       display: 'flex',

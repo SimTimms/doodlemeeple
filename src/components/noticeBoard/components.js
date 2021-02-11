@@ -29,20 +29,19 @@ export function FeaturedCreative({ history, featuredArticle }) {
               className={classes.articlePanel}
               style={{
                 backgroundImage: `url(${media})`,
-                boxShadow: 'inset 0px -120px 20px -10px rgb(0,0,0,0.8)',
+              }}
+            ></div>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                width: '100%',
+                flexDirection: 'column',
               }}
             >
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  width: '100%',
-                  flexDirection: 'column',
-                  paddingTop: 10,
-                }}
-              >
-                <Row pb={10}>
+              <div className={classes.excerptBack}>
+                <Row pb={10} pt={10}>
                   <img
                     src={data.userById ? data.userById.profileImg : device}
                     alt=""
@@ -57,48 +56,46 @@ export function FeaturedCreative({ history, featuredArticle }) {
                     </Typography>
                   </Column>
                 </Row>
-                <Row>
-                  <div className={classes.options}>
+              </div>
+              <Row>
+                <div className={classes.options}>
+                  <IconButton
+                    color="text-white-mini"
+                    disabled={false}
+                    onClickEvent={() => {
+                      history.push(`/app/public-preview/${featuredArticle.id}`);
+                    }}
+                    icon="face"
+                    title="View Profile"
+                    styleOverride={null}
+                    type="button"
+                    iconPos="left"
+                  />
+                  <div
+                    style={{
+                      height: 20,
+                      borderLeft: '1px solid rgba(255,255,255,0.4)',
+                    }}
+                  ></div>
+                  <a
+                    href={linkTo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: 'none' }}
+                  >
                     <IconButton
                       color="text-white-mini"
                       disabled={false}
-                      onClickEvent={() => {
-                        history.push(
-                          `/app/public-preview/${featuredArticle.id}`
-                        );
-                      }}
-                      icon="face"
-                      title="View Profile"
+                      onClickEvent={() => {}}
+                      icon="article"
+                      title="Read Article"
                       styleOverride={null}
                       type="button"
-                      iconPos="left"
+                      iconPos="right"
                     />
-                    <div
-                      style={{
-                        height: 20,
-                        borderLeft: '1px solid rgba(255,255,255,0.4)',
-                      }}
-                    ></div>
-                    <a
-                      href={linkTo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ textDecoration: 'none' }}
-                    >
-                      <IconButton
-                        color="text-white-mini"
-                        disabled={false}
-                        onClickEvent={() => {}}
-                        icon="article"
-                        title="Read Article"
-                        styleOverride={null}
-                        type="button"
-                        iconPos="right"
-                      />
-                    </a>
-                  </div>
-                </Row>
-              </div>
+                  </a>
+                </div>
+              </Row>
             </div>
           </Column>
         ) : loading ? (
