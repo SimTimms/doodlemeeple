@@ -39,8 +39,8 @@ export const useStyles = makeStyles((theme) => {
     },
     articlePanel: {
       minWidth: '100%',
-      minHeight: 186,
-      maxHeight: 186,
+      minHeight: 188,
+      maxHeight: 188,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       display: 'flex',
