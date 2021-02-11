@@ -25,6 +25,23 @@ export function FeaturedCreative({ history, featuredArticle }) {
           : null;
         return loading ? null : data ? (
           <Column>
+            <div className={classes.excerptBack}>
+              <Row pb={10} pt={10}>
+                <img
+                  src={data.userById ? data.userById.profileImg : device}
+                  alt=""
+                  className={classes.articleAvatar}
+                />
+                <Column a="flex-end" p="0 10px 0 0 ">
+                  <Typography variant="h6" style={{ color: '#fff' }}>
+                    {excerpt}
+                  </Typography>
+                  <Typography variant="body1" style={{ color: '#fff' }}>
+                    {title}
+                  </Typography>
+                </Column>
+              </Row>
+            </div>
             <div
               className={classes.articlePanel}
               style={{
@@ -40,23 +57,6 @@ export function FeaturedCreative({ history, featuredArticle }) {
                 flexDirection: 'column',
               }}
             >
-              <div className={classes.excerptBack}>
-                <Row pb={10} pt={10}>
-                  <img
-                    src={data.userById ? data.userById.profileImg : device}
-                    alt=""
-                    className={classes.articleAvatar}
-                  />
-                  <Column a="flex-end" p="0 10px 0 0 ">
-                    <Typography variant="h6" style={{ color: '#fff' }}>
-                      {excerpt}
-                    </Typography>
-                    <Typography variant="body1" style={{ color: '#fff' }}>
-                      {title}
-                    </Typography>
-                  </Column>
-                </Row>
-              </div>
               <Row>
                 <div className={classes.options}>
                   <IconButton

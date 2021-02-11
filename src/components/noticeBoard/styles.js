@@ -43,6 +43,7 @@ export const useStyles = makeStyles((theme) => {
       maxHeight: 188,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
       display: 'flex',
       alignItems: 'flex-end',
     },
