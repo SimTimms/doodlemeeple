@@ -12,7 +12,8 @@ import badgeFeatured from '../../assets/badgeFeatured.png';
 import badgeBird from '../../assets/badgeBird.png';
 import badgeFlower from '../../assets/badgeFlower.png';
 import badgeFlowerPink from '../../assets/badgeFlowerPink.png';
-import badgeLeaf from '../../assets/badgeLeaf.png';
+import badgeStar from '../../assets/badgeStar.png';
+import badgeFirst from '../../assets/badgeFirst.png';
 
 export default function ProfileCard({
   history,
@@ -85,7 +86,7 @@ export default function ProfileCard({
             badge.badgeType === 'featured' &&
               badgeArr.push(
                 <img
-                  src={badgeFlower}
+                  src={badgeStar}
                   title="This creative has been featured!"
                   key={`badge_${index}_${creative._id}`}
                   style={{ maxHeight: 16, maxWidth: 16, margin: 2 }}
@@ -94,7 +95,7 @@ export default function ProfileCard({
             badge.badgeType === 'early' &&
               badgeArr.push(
                 <img
-                  src={badgeLeaf}
+                  src={badgeFirst}
                   title="This creative was one of the first to join!"
                   key={`badge_${index}_${creative._id}`}
                   style={{ maxHeight: 16, maxWidth: 16, margin: 2 }}
