@@ -308,11 +308,8 @@ export function NoStripe({ history }) {
             type="graphic-artist"
             history={history}
           />
-          <CategoryBox
-            title="World Builders"
-            type="world-builder"
-            history={history}
-          />
+
+          <CategoryBox title="Marketing" type="marketing" history={history} />
         </Row>
         <Row o={0.8}>
           <CategoryBoxMini type="reviewer" title="Reviewer" history={history} />
@@ -324,7 +321,7 @@ export function NoStripe({ history }) {
           />
           <CategoryBoxMini
             type="marketing"
-            title="Marketing"
+            title="World Builders"
             history={history}
           />
         </Row>
