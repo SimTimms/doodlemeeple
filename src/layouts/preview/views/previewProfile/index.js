@@ -104,22 +104,50 @@ export function PreviewProfile({ history, profileId, publicView }) {
               <HeaderThree str="Social" />
               <DividerMini />
               <Row>
-                <SocialIcon
-                  img={social.socialLinkedIn}
-                  link={userProfile.linkedIn}
-                />
-                <SocialIcon
-                  img={social.socialFacebook}
-                  link={userProfile.facebook}
-                />
-                <SocialIcon
-                  img={social.socialTwitter}
-                  link={userProfile.twitter}
-                />
-                <SocialIcon
-                  img={social.socialInstagram}
-                  link={userProfile.instagram}
-                />
+                {userProfile.linkedIn && (
+                  <SocialIcon
+                    img={social.socialLinkedIn}
+                    link={
+                      userProfile.linkedIn.indexOf('https://linkedin.com') ===
+                      -1
+                        ? `https://www.linkedin.com/in/${userProfile.linkedIn}`
+                        : userProfile.linkedIn
+                    }
+                  />
+                )}
+                {userProfile.facebook && (
+                  <SocialIcon
+                    img={social.socialFacebook}
+                    link={
+                      userProfile.facebook.indexOf('https://facebook.com') ===
+                      -1
+                        ? `https://facebook.com/${userProfile.facebook}`
+                        : userProfile.facebook
+                    }
+                  />
+                )}
+                {userProfile.twitter && (
+                  <SocialIcon
+                    img={social.socialTwitter}
+                    link={
+                      userProfile.twitter.indexOf('https://twitter.com') === -1
+                        ? `https://twitter.com/${userProfile.twitter}`
+                        : userProfile.twitter
+                    }
+                  />
+                )}
+                {userProfile.instagram && (
+                  <SocialIcon
+                    img={social.socialInstagram}
+                    link={
+                      userProfile.instagram.indexOf(
+                        'https://www.instagram.com/'
+                      ) === -1
+                        ? `https://www.instagram.com/${userProfile.instagram}`
+                        : userProfile.instagram
+                    }
+                  />
+                )}
                 <SocialIcon img={social.socialSkype} link={userProfile.skype} />
                 <SocialIcon
                   img={social.iconWebsite}
