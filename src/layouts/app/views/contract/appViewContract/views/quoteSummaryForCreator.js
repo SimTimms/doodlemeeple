@@ -94,7 +94,7 @@ export default function QuoteSummaryCreator({
       <Divider />
 
       <Paper>
-        {contractStatus === 'accepted' && (
+        {/*contractStatus === 'accepted' && (
           <NoticeBox
             title="Payment Required"
             color="warning"
@@ -104,7 +104,7 @@ export default function QuoteSummaryCreator({
         )}. Payment is required to continue.`}
             actionTitle="Pay Now"
           />
-        )}
+        )*/}
         {!openContract && contractData.status !== 'paid' && (
           <ContractSummaryForCreative contractData={contractData} />
         )}

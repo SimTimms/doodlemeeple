@@ -6,12 +6,14 @@ import clsx from 'clsx';
 import { UPLOAD_IMAGE, DELETE_IMAGE } from '../../data/mutations';
 import { Mutation } from 'react-apollo';
 
-function MediaGallery({ items, edit, setImages, galleryId }) {
+function MediaGallery({ items, edit, setImages, galleryId, ...props }) {
   const seedID = Math.floor(Math.random());
   const [mediaViewer, setMediaViewer] = React.useState(null);
   const [saveImage, setSaveImage] = React.useState(null);
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
+  const { sectionType } = props;
+
   return (
     <div className={classes.root} style={{ background: 'none', padding: 0 }}>
       {!mediaViewer ? (
@@ -72,7 +74,11 @@ function MediaGallery({ items, edit, setImages, galleryId }) {
             >
               <Mutation
                 mutation={UPLOAD_IMAGE}
-                variables={{ img: saveImage, galleryId: galleryId }}
+                variables={{
+                  img: saveImage,
+                  galleryId: galleryId,
+                  category: sectionType,
+                }}
                 onCompleted={(data) => {
                   let imageArray = Object.assign([], items);
                   imageArray = [
@@ -97,6 +103,7 @@ function MediaGallery({ items, edit, setImages, galleryId }) {
                       cbDelete={null}
                       hasFile={false}
                       size="2MB PNG JPG GIF"
+                      imageCategory={sectionType}
                     />
                   );
                 }}

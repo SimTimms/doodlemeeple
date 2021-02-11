@@ -4,14 +4,16 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 
 export function Column(props) {
-  const { children, a, j, w, p, b, br, h } = props;
+  const { children, a, j, w, p, b, br, h, bg, m } = props;
   const align = a ? a : 'center';
   const width = w ? w : '100%';
   const height = h ? h : '';
   const justify = j ? j : 'center';
   const padding = p ? p : 0;
   const border = b ? b : 'none';
+  const background = bg ? bg : '';
   const borderRadius = br ? br : 0;
+  const margin = m ? m : 0;
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
 
@@ -26,6 +28,8 @@ export function Column(props) {
         borderRadius,
         boxSizing: 'border-box',
         height,
+        background,
+        margin,
       }}
       className={clsx({
         [classes.desktop]: true,
@@ -38,13 +42,21 @@ export function Column(props) {
 }
 
 export function Row(props) {
-  const { children, a, j, wrap, w, b } = props;
+  const { children, a, j, wrap, w, b, pb, pt, pl, v, mb, br, bg, h, o } = props;
   const align = a ? a : 'center';
   const justify = j ? j : 'center';
   const width = w ? w : '100%';
   const border = b ? b : '';
+  const paddingBottom = pb ? pb : '';
+  const paddingTop = pt ? pt : '';
+  const paddingLeft = pl ? pl : '';
+  const marginBottom = mb ? mb : '';
+  const borderRadius = br ? br : '';
+  const background = bg ? bg : '';
+  const height = h ? h : '';
+  const opacity = o ? o : '';
 
-  return (
+  return v === 'none' ? null : (
     <div
       style={{
         display: 'flex',
@@ -54,6 +66,14 @@ export function Row(props) {
         justifyContent: justify,
         flexWrap: wrap,
         border,
+        paddingBottom,
+        paddingLeft,
+        paddingTop,
+        marginBottom,
+        borderRadius,
+        background,
+        height,
+        opacity,
       }}
     >
       {children}

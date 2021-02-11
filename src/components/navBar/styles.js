@@ -17,21 +17,22 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: 'none',
     borderBottom: '1px solid #ddd',
   },
-  appBarNoSidebar: {
-    paddingLeft: 0,
-  },
+
   appBarMobile: {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    height: 94,
-    paddingTop: 14,
+    height: 64,
     boxSizing: 'border-box',
+    borderBottom: '1px solid #ddd',
   },
   appBarShift: {
     paddingLeft: drawerWidth,
     width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -59,5 +60,8 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  appBarNoSidebar: {
+    paddingLeft: 0,
   },
 }));

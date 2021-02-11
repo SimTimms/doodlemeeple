@@ -1,14 +1,15 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { Column, IconButton, Divider, LoadIcon, Row } from '../';
-import { Mutation } from 'react-apollo';
+import { Column, IconButton, LoadIcon, Row } from '../';
+import { Mutation, Query } from 'react-apollo';
 import { SET_AS_CREATOR } from '../../data/mutations';
-import stripeButton from '../../assets/stripe_button.png';
 import stripeLogoSM from '../../assets/stripe_logo_sm.png';
-import { Query } from 'react-apollo';
 import { PROFILE_FEATURED } from '../../data/queries';
 import device from '../../assets/device.svg';
+import { excerptReplace } from '../../utils/excerptReplace';
+import miniOne from '../../assets/miniOne.jpg';
+import { CategoryBox, CategoryBoxMini } from './categoryBox';
 
 export function FeaturedCreative({ history, featuredArticle }) {
   const classes = useStyles();
@@ -18,60 +19,87 @@ export function FeaturedCreative({ history, featuredArticle }) {
       {({ data, loading }) => {
         const linkTo = featuredArticle.article.linkTo;
         const title = featuredArticle.article.title;
+        const excerpt = excerptReplace(featuredArticle.article.excerpt);
         const media = featuredArticle.article.image['wp:featuredmedia']
           ? featuredArticle.article.image['wp:featuredmedia']['0'].source_url
           : null;
-
-        return data ? (
+        return loading ? null : data ? (
           <Column>
+            <div className={classes.excerptBack}>
+              <Row pb={10} pt={10}>
+                <img
+                  src={data.userById ? data.userById.profileImg : device}
+                  alt=""
+                  className={classes.articleAvatar}
+                />
+                <Column a="flex-end" p="0 10px 0 0 ">
+                  <Typography variant="h6" style={{ color: '#fff' }}>
+                    {excerpt}
+                  </Typography>
+                  <Typography variant="body1" style={{ color: '#fff' }}>
+                    {title}
+                  </Typography>
+                </Column>
+              </Row>
+            </div>
             <div
               className={classes.articlePanel}
               style={{
                 backgroundImage: `url(${media})`,
               }}
             ></div>
-            <img
-              src={data.userById ? data.userById.profileImg : device}
-              alt=""
-              className={classes.articleAvatar}
-            />
-            <Typography variant="h6" style={{ color: '#fff' }}>
-              {title}
-            </Typography>
-            <Row>
-              <IconButton
-                color="text-white-mini"
-                disabled={false}
-                onClickEvent={() => {
-                  history.push(`/app/public-preview/${featuredArticle.id}`);
-                }}
-                icon=""
-                title="profile"
-                styleOverride={null}
-                type="button"
-                iconPos="right"
-              />
-              <a
-                href={linkTo}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ textDecoration: 'none' }}
-              >
-                <IconButton
-                  color="text-white-mini"
-                  disabled={false}
-                  onClickEvent={() => {}}
-                  icon=""
-                  title="article"
-                  styleOverride={null}
-                  type="button"
-                />
-              </a>
-            </Row>
-            <Divider />
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                width: '100%',
+                flexDirection: 'column',
+              }}
+            >
+              <Row>
+                <div className={classes.options}>
+                  <IconButton
+                    color="text-white-mini"
+                    disabled={false}
+                    onClickEvent={() => {
+                      history.push(`/app/public-preview/${featuredArticle.id}`);
+                    }}
+                    icon="face"
+                    title="View Profile"
+                    styleOverride={null}
+                    type="button"
+                    iconPos="left"
+                  />
+                  <div
+                    style={{
+                      height: 20,
+                      borderLeft: '1px solid rgba(255,255,255,0.4)',
+                    }}
+                  ></div>
+                  <a
+                    href={linkTo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <IconButton
+                      color="text-white-mini"
+                      disabled={false}
+                      onClickEvent={() => {}}
+                      icon="article"
+                      title="Read Article"
+                      styleOverride={null}
+                      type="button"
+                      iconPos="right"
+                    />
+                  </a>
+                </div>
+              </Row>
+            </div>
           </Column>
         ) : loading ? (
-          <div className={classes.articlePanel}>addasdas</div>
+          <div className={classes.articlePanel}>Loading</div>
         ) : (
           <LoadIcon />
         );
@@ -121,7 +149,7 @@ export function AddASkill({ profile, history, setProfile }) {
 
   return (
     <Column>
-      <Typography variant="h5" className={classes.header5}>
+      <Typography variant="h6" className={classes.header5}>
         Your profile isn't complete.
       </Typography>
       <Typography variant="h6" className={classes.header6}>
@@ -257,51 +285,83 @@ export function StripeError() {
   );
 }
 
-export function NoStripe() {
+export function NoStripe({ history }) {
   const classes = useStyles();
 
   return (
-    <Column>
-      <Typography variant="h4" className={classes.header4}>
-        Connect to{' '}
-        <a
-          href="https://stripe.com"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <img src={stripeLogoSM} alt="STRIPE" style={{ width: 100 }} />
-        </a>{' '}
-        for payments
-      </Typography>
-      <Typography variant="h6" style={{ color: '#fff', textAlign: 'center' }}>
-        It's simple to do, just click below to begin
-      </Typography>
-      <Divider />
-      {
-        <Column>
-          <a
-            href={`https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_STRIPE_CLIENT}&scope=read_write&redirect_uri=${process.env.REACT_APP_STRIPE_REDIRECT}`}
-          >
-            <img src={stripeButton} style={{ width: 200 }} alt="" />
-          </a>
+    <Column a="space-between" j="space-between" h={300}>
+      <Column h="100%" a="center" j="center" bg="#111">
+        <Row>
+          <CategoryBox
+            title="Miniature Painters"
+            type="mini-painter"
+            history={history}
+          />
+          <CategoryBox
+            img={miniOne}
+            title="Artists"
+            type="artist"
+            history={history}
+          />
+          <CategoryBox
+            title="Graphic Artists"
+            type="graphic-artist"
+            history={history}
+          />
+        </Row>
+        <Row o={0.8}>
+          <CategoryBoxMini type="reviewer" title="Reviewer" history={history} />
+          <CategoryBoxMini type="voice-actor" title="Voice" history={history} />
+          <CategoryBoxMini
+            type="video-editor"
+            title="Video"
+            history={history}
+          />
+          <CategoryBoxMini
+            type="marketing"
+            title="Marketing"
+            history={history}
+          />
+        </Row>
+        <Row o={0.6}>
+          <CategoryBoxMini
+            type="games-developer"
+            title="Developer"
+            history={history}
+          />
+          <CategoryBoxMini
+            type="proof-reader"
+            title="Proof Reader"
+            history={history}
+          />
+          <CategoryBoxMini
+            type="translator"
+            title="Translator"
+            history={history}
+          />
+          <CategoryBoxMini
+            type="play-tester"
+            img={miniOne}
+            title="Play Tester"
+            history={history}
+          />
+        </Row>
+      </Column>
 
-          <a
-            href="https://doodlemeeple.com/connecting-with-stripe"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              textDecoration: 'none',
-              color: 'rgba(255,255,255,0.5)',
-              marginTop: 5,
-            }}
-          >
-            <Typography variant="body1">Read More</Typography>
-          </a>
-        </Column>
-      }
+      <Column>
+        <IconButton
+          color="text-white-mini"
+          disabled={false}
+          onClickEvent={() => {
+            history.push('/app/creative-roster');
+          }}
+          icon="chevron_right"
+          title="All Categories"
+          styleOverride={null}
+          type="button"
+          iconPos="right"
+        />
+      </Column>
     </Column>
   );
 }

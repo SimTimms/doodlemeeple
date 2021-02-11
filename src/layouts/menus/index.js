@@ -27,6 +27,8 @@ const StyledButtonFooter = withStyles({
     height: 28,
     margin: 5,
     padding: '0 ',
+    fontSize: 12,
+    fontWeight: 400,
   },
 })(Button);
 
@@ -77,6 +79,8 @@ export function PublicMenu({ history }) {
           onClick={() => {
             Cookies.remove('token');
             Cookies.remove('userId');
+            localStorage.removeItem('featureArticle');
+            localStorage.removeItem('posts');
             history.push(`/`);
           }}
         >
@@ -110,7 +114,7 @@ export function PublicFooterMenu() {
       >
         <StyledButtonFooter>Privacy Policy</StyledButtonFooter>
       </a>
-      <a href="mailto:info@doodlemeeplecom" style={{ textDecoration: 'none' }}>
+      <a href="mailto:info@doodlemeeple.com" style={{ textDecoration: 'none' }}>
         <StyledButtonFooter>info@doodlemeeple.com</StyledButtonFooter>
       </a>
     </div>

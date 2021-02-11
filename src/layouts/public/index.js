@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginCard from './views/LoginCard';
+import LoginPage from './views/LoginPage';
 import Registry from './views/register';
 import { Content } from '../../components';
 import { StyledNavBar, Footer } from '../../components';
@@ -36,19 +36,13 @@ export function PublicLayout(props) {
         center={true}
         sidebarMissing={true}
       >
-        <img src={logo} style={{ height: 40 }} alt="DoodleMeeple Logo" />
+        <img src={logo} style={{ maxHeight: 40 }} alt="DoodleMeeple Logo" />
       </StyledNavBar>
       <Content>
         {page === 'login' ? (
-          <div className={classes.backgroundWrapper}>
-            <div className={classes.backgroundLogin}> </div>
-            <div className={classes.cover}></div>
-            <LoginCard history={props.history} forwardTo={null} />
-          </div>
+          <LoginPage history={props.history} forwardTo={null} />
         ) : page === 'register' ? (
-          <div className={classes.backgroundSignup}>
-            <Registry campaignId={token} />
-          </div>
+          <Registry campaignId={token} history={props.history} />
         ) : page === 'password-forgot' ? (
           <div className={classes.backgroundSignup}>
             <PasswordForgot history={props.history} />
@@ -62,11 +56,7 @@ export function PublicLayout(props) {
             <Deleted />
           </div>
         ) : (
-          <div className={classes.backgroundWrapper}>
-            <div className={classes.backgroundLogin}> </div>
-            <div className={classes.cover}></div>
-            <LoginCard history={props.history} forwardTo={props.location} />
-          </div>
+          <LoginPage history={props.history} forwardTo={props.location} />
         )}
       </Content>
 

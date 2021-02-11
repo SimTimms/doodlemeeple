@@ -107,7 +107,7 @@ export default function CheckListDash({ job, setTabNbr, history }) {
               setTabNbr={setTabNbr}
               color={color[1] === 1 ? color[2] : 0}
             />
-            <DividerWithBorder />
+            {/*
             <ItemQuotePaid
               paid={paid}
               pending={pending}
@@ -125,18 +125,19 @@ export default function CheckListDash({ job, setTabNbr, history }) {
               color={color[3] === 1 ? color[4] : 0}
               jobHasContract={jobHasContract}
               paid={paid}
-            />
+            />*/}
             <DividerWithBorder />
             <ItemLeaveReview
               paid={false}
               setTabNbr={setTabNbr}
               color={color[4] === 1 ? color[5] : 0}
             />
+            {/*
             <DividerWithBorder />
             <ItemCloseJob
               setTabNbr={setTabNbr}
               color={color[4] === 1 ? color[6] : 0}
-            />
+            />*/}
           </Column>
           <DividerMini />
         </Paper>

@@ -1,11 +1,10 @@
 import React from 'react';
-import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { JOB } from '../../../../data/queries';
-import { ArtistLineup, Creatives } from './components';
+import { ArtistLineup, Creatives, Creative } from './components';
 
-export function PickArtist({ jobId, history, favourites }) {
+export function PickArtist({ jobId, history, favourites, creativeId }) {
   const classes = useStyles();
   const [job, setJob] = React.useState({
     name: '',
@@ -42,48 +41,57 @@ export function PickArtist({ jobId, history, favourites }) {
   }
 
   return (
-    <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div className={classes.root}>
-        <ArtistLineup
-          removeInviteList={removeInviteList}
-          inviteList={inviteList}
-          history={history}
-          job={job}
-        />
+    <div className={classes.root}>
+      <ArtistLineup
+        removeInviteList={removeInviteList}
+        inviteList={inviteList}
+        history={history}
+        job={job}
+      />
 
-        <div style={{ width: '100%', marginTop: 50 }}>
-          <Creatives
-            history={history}
-            favourites={favourites}
-            job={job}
-            inviteList={inviteList}
-            updateInviteList={updateInviteList}
-            removeInviteList={removeInviteList}
-          />
-        </div>
-        <Query
-          query={JOB}
-          variables={{ jobId: jobId }}
-          fetchPolicy="network-only"
-          onCompleted={(data) => {
-            data.jobById && setJob({ ...data.jobById });
-            setInviteList(
-              data.jobById.invites.map((invite) => {
-                return {
-                  name: invite.receiver.name,
-                  img: invite.receiver.profileImg,
-                  _id: invite.receiver._id,
-                  inviteId: invite._id,
-                };
-              })
-            );
-          }}
-        >
-          {({ data }) => {
-            return null;
-          }}
-        </Query>
+      {creativeId && (
+        <Creative
+          history={history}
+          favourites={favourites}
+          job={job}
+          inviteList={inviteList}
+          updateInviteList={updateInviteList}
+          removeInviteList={removeInviteList}
+          creativeId={creativeId}
+        />
+      )}
+      <div style={{ width: '100%', marginTop: 50 }}>
+        <Creatives
+          history={history}
+          favourites={favourites}
+          job={job}
+          inviteList={inviteList}
+          updateInviteList={updateInviteList}
+          removeInviteList={removeInviteList}
+        />
       </div>
-    </Slide>
+      <Query
+        query={JOB}
+        variables={{ jobId: jobId }}
+        fetchPolicy="network-only"
+        onCompleted={(data) => {
+          data.jobById && setJob({ ...data.jobById });
+          setInviteList(
+            data.jobById.invites.map((invite) => {
+              return {
+                name: invite.receiver.name,
+                img: invite.receiver.profileImg,
+                _id: invite.receiver._id,
+                inviteId: invite._id,
+              };
+            })
+          );
+        }}
+      >
+        {({ data }) => {
+          return null;
+        }}
+      </Query>
+    </div>
   );
 }

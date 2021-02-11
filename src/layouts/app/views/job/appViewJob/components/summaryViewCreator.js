@@ -56,18 +56,6 @@ export default function SummaryViewCreator({
             setTabNbr={setTabNbr}
           />
         )}
-        {tabNbr === 2 && (
-          <Column>
-            <InvitesView
-              invites={job.invites}
-              setConversationUser={setConversationUser}
-              setTabNbr={setTabNbr}
-              refreshDashboard={() => {
-                setRefreshCount(refreshCount + 1);
-              }}
-            />
-          </Column>
-        )}
         {tabNbr === 3 && (
           <BorderBox w={700}>
             <FullContractComponent

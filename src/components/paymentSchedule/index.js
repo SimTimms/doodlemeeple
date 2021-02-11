@@ -55,7 +55,7 @@ export default function PaymentSchedule({ contractData, isClient }) {
           )}
           <TableRow className={classes.subtotal}>
             <TableCell align="left" style={{ color: '#fff' }}>
-              Subtotal
+              Total Payout
             </TableCell>
             <TableCell align="right" style={{ color: '#fff' }}>
               {contractData.cost}
@@ -64,7 +64,7 @@ export default function PaymentSchedule({ contractData, isClient }) {
               {contractData.currency}
             </TableCell>
           </TableRow>
-
+          {/*
           <TableRow className={classes.subtotal}>
             <TableCell align="left" style={{ color: '#fff' }}>
               DoodleMeeple Fee
@@ -78,6 +78,7 @@ export default function PaymentSchedule({ contractData, isClient }) {
               {contractData.currency}
             </TableCell>
           </TableRow>
+             
 
           <TableRow className={classes.total}>
             <TableCell align="left" style={{ color: '#fff', fontSize: 18 }}>
@@ -91,7 +92,7 @@ export default function PaymentSchedule({ contractData, isClient }) {
             <TableCell align="right" style={{ color: '#fff', fontSize: 18 }}>
               {contractData.currency}
             </TableCell>
-          </TableRow>
+          </TableRow> */}
         </TableBody>
       </Table>
     </TableContainer>

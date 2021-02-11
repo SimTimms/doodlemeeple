@@ -47,7 +47,7 @@ export default function SectionQuestions({ setJob, job }) {
         </Row>
         <Row j="space-between">
           <Typography variant="body1" align="center">
-            Are funds available right to pay for this project?
+            Are funds available to pay for this project?
           </Typography>
           <IconButton
             color="text-dark"

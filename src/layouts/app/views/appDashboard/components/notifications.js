@@ -42,46 +42,17 @@ export function Notifications() {
           );
         })}
         {notificationArray.length === 0 && (
-          <Card className={classes.card}>
-            <div className={classes.rowWrapper}>
-              <div className={classes.messageButton}>
-                <div
-                  className={clsx({
-                    [classes.notifications]: true,
-                  })}
-                  style={{ border: '2px solid #ccc' }}
-                >
-                  <Icon style={{ color: '#ccc' }}>more_horiz</Icon>
-                </div>
-                <div className={classes.profileWrapper}>
-                  <div className={classes.wrapperOne}>
-                    <div className={classes.messageDetails}>
-                      <div
-                        className={classes.rowWrapper}
-                        style={{ justifyContent: 'space-between' }}
-                      >
-                        <Typography
-                          style={{ color: '#aaa' }}
-                          variant="caption"
-                          component="p"
-                        >
-                          <b> No Notifications</b>
-                        </Typography>
-                        <Typography
-                          variant="caption"
-                          style={{ color: '#aaa' }}
-                          component="p"
-                        ></Typography>
-                      </div>
-                      <Typography color="textPrimary" component="p">
-                        You have no notifications
-                      </Typography>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Card>
+          <NotificationComponent
+            notification={{
+              linkTo: '',
+              title: 'No Notifications',
+              message: 'You have no new notifications',
+              createdAt: new Date(),
+            }}
+            key={`notification_${0}`}
+            setNotificationArray={setNotificationArray}
+            notificationArray={notificationArray}
+          />
         )}
       </div>
     </div>

@@ -1,7 +1,12 @@
 import React from 'react';
 import { MediaGallery } from '../../../../../../components';
 
-export function MediaGalleryObject({ images, setImages, index, galleryId }) {
+export function MediaGalleryObjectProfile({
+  images,
+  setImages,
+  galleryId,
+  sectionType,
+}) {
   images = images ? images : [];
   return (
     <div
@@ -22,6 +27,7 @@ export function MediaGalleryObject({ images, setImages, index, galleryId }) {
         edit={true}
         setImages={setImages}
         galleryId={galleryId}
+        sectionType={sectionType}
       />
     </div>
   );

@@ -10,9 +10,20 @@ export const CREATIVES = gql`
       profileImg
       stripeID
       stripeClientId
+      badges {
+        badgeType
+        link
+      }
       viewCount
       paymentMethod
       responsePercent
+      facebook
+      skype
+      publicEmail
+      website
+      twitter
+      linkedIn
+      instagram
       likedMe {
         _id
         receiver {
@@ -476,6 +487,7 @@ export const JOB_CREATIVE = gql`
           _id
           name
           profileImg
+          publicEmail
         }
         job {
           _id
@@ -517,6 +529,7 @@ export const JOB_CREATIVE = gql`
         _id
         name
         profileImg
+        publicEmail
       }
       job {
         _id
@@ -544,6 +557,7 @@ export const JOB_CREATIVE = gql`
           _id
           email
           name
+          publicEmail
         }
         activeContract {
           _id
@@ -807,6 +821,10 @@ export const COUNTS = gql`
       invites
       messages
       quotes
+      jobs
+      socials
+      contact
+      skills
     }
   }
 `;
@@ -845,11 +863,15 @@ export const PROFILE = gql`
       acceptsRoyalties
       acceptsUnfunded
       onboarding
-      favourites {
-        receiver {
-          _id
-        }
-      }
+      facebook
+      twitter
+      website
+      instagram
+      linkedIn
+      publicEmail
+      skype
+      phone
+
       sections {
         _id
         summary
@@ -888,6 +910,36 @@ export const PROFILE_PREVIEW = gql`
       summary
       profileBG
       profileImg
+      stripeID
+      stripeClientId
+      viewCount
+      paymentMethod
+      responsePercent
+      facebook
+      skype
+      publicEmail
+      website
+      twitter
+      linkedIn
+      instagram
+      likedMe {
+        _id
+        receiver {
+          _id
+        }
+        user {
+          _id
+        }
+      }
+      favourites {
+        _id
+        receiver {
+          _id
+        }
+        user {
+          _id
+        }
+      }
     }
   }
 `;
@@ -898,6 +950,14 @@ export const PROFILE_FEATURED = gql`
       _id
       profileImg
       autosave
+    }
+  }
+`;
+
+export const CATEGORY_IMAGES = gql`
+  query CategoryImages($type: [String]) {
+    imageCategory(type: $type) {
+      img
     }
   }
 `;
@@ -953,6 +1013,7 @@ export const SECTIONS_PREVIEW = gql`
       summary
       showreel
       type
+      referenceImage
       gallery {
         _id
         summary

@@ -6,6 +6,7 @@ export const SIGNUP_MUTATION = gql`
     $email: String!
     $password: String!
     $campaignId: String
+    $available: Boolean
   ) {
     userCreateOne(
       record: {
@@ -13,6 +14,7 @@ export const SIGNUP_MUTATION = gql`
         email: $email
         password: $password
         campaignId: $campaignId
+        available: $available
       }
     ) {
       recordId
@@ -458,6 +460,14 @@ export const UPDATE_USER_MUTATION = gql`
     $profileImg: String
     $creativeTrue: Boolean
     $creatorTrue: Boolean
+    $facebook: String
+    $twitter: String
+    $website: String
+    $instagram: String
+    $linkedIn: String
+    $publicEmail: String
+    $skype: String
+    $phone: String
   ) {
     userUpdateOne(
       record: {
@@ -467,6 +477,14 @@ export const UPDATE_USER_MUTATION = gql`
         profileImg: $profileImg
         creativeTrue: $creativeTrue
         creatorTrue: $creatorTrue
+        facebook: $facebook
+        twitter: $twitter
+        website: $website
+        instagram: $instagram
+        linkedIn: $linkedIn
+        publicEmail: $publicEmail
+        skype: $skype
+        phone: $phone
       }
     ) {
       recordId
@@ -516,8 +534,10 @@ export const UPDATE_GALLERY_SECTION_MUTATION = gql`
 `;
 
 export const UPLOAD_IMAGE = gql`
-  mutation UploadImage($img: String!, $galleryId: MongoID!) {
-    imageCreateOne(record: { img: $img, gallery: $galleryId }) {
+  mutation UploadImage($img: String!, $galleryId: MongoID!, $category: String) {
+    imageCreateOne(
+      record: { img: $img, gallery: $galleryId, category: $category }
+    ) {
       recordId
       record {
         img

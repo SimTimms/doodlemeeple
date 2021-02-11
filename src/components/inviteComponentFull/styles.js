@@ -40,5 +40,8 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     position: 'relative',
     marginRight: 20,
+    cursor: 'pointer',
+    '&:hover': { opacity: 0.8 },
   },
+  clickable: { cursor: 'pointer', '&:hover': { opacity: 0.8 } },
 }));

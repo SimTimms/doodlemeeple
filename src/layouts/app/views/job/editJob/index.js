@@ -35,12 +35,13 @@ import PageZero from './components/pageZero';
 import { unlock, checkLength } from './unlock';
 import { initialState } from './initialState';
 
-export default function EditJob({ jobId, history }) {
+export default function EditJob({ jobId, history, creativeId }) {
   const classes = useStyles();
   const [loading, setLoading] = React.useState(jobId === 'new' ? false : true);
   const [job, setJob] = React.useState(initialState);
   const [locked, setLocked] = React.useState(false);
   const [qComplete, setQComplete] = React.useState(false);
+  const [savedCreative, setSavedCreative] = React.useState(false);
 
   useEffect(() => {
     setLocked(
@@ -50,7 +51,8 @@ export default function EditJob({ jobId, history }) {
         !checkLength(job.creativeSummary, 'creativeSummary') ||
         job.keywords.length === 0
     );
-  }, [job, setLocked]);
+    creativeId && setSavedCreative(creativeId);
+  }, [job, setLocked, creativeId]);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -80,8 +82,8 @@ export default function EditJob({ jobId, history }) {
               {(mutation) => {
                 return (
                   <NoticeBoardSecondary
-                    title="Create a Project Title"
-                    subTitle=""
+                    title="Create a Project"
+                    subTitle="Tell your chosen creatives about the job you're offering"
                     onClickEvent={() => mutation()}
                     buttonLocked={job.name.length < 10}
                     lockedMsg={`${10 - job.name.length} characters required `}
@@ -144,7 +146,7 @@ export default function EditJob({ jobId, history }) {
                     title=""
                     subTitle="Add details to unlock more options"
                     onClickEvent={() =>
-                      history.push(`/app/pick-artist/${jobId}`)
+                      history.push(`/app/pick-artist/${jobId}/${savedCreative}`)
                     }
                     buttonLocked={locked}
                     lockedMsg={unlock(job)}

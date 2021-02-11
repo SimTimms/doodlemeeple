@@ -4,7 +4,7 @@ import { Card, Testimonials, Projects } from './components';
 import {
   ColumnWrapper,
   ColumnWrapperFull,
-  HeaderTwo,
+  HeaderThree,
   Text,
 } from '../../../../../../../components';
 import { TYPE_HELPER } from '../../../../../../../utils';
@@ -30,9 +30,12 @@ function GallerySection({ section }) {
         alignItems: 'center',
       }}
     >
+      <ColumnWrapper>
+        <HeaderThree str={TYPE_HELPER(type)} />
+        <Text str={summary} />
+      </ColumnWrapper>
       {showreel && (
         <ColumnWrapper>
-          <HeaderTwo str="Feature" />
           <ReactPlayer
             url={showreel}
             playing
@@ -53,11 +56,6 @@ function GallerySection({ section }) {
           />
         </ColumnWrapper>
       )}
-
-      <ColumnWrapper>
-        <HeaderTwo str={TYPE_HELPER(type)} />
-        <Text str={summary} />
-      </ColumnWrapper>
       {gallery.images.length > 0 && (
         <ColumnWrapperFull>
           <div
@@ -80,7 +78,7 @@ function GallerySection({ section }) {
       )}
       {testimonials.length > 0 && (
         <ColumnWrapper>
-          <HeaderTwo str="Testimonials" />
+          <HeaderThree str="Testimonials" />
           <div
             style={{
               width: '100%',
@@ -97,7 +95,7 @@ function GallerySection({ section }) {
       )}
       {notableProjects.length > 0 && (
         <ColumnWrapper>
-          <HeaderTwo str="Projects" />
+          <HeaderThree str="Projects" />
           <div
             style={{
               width: '100%',

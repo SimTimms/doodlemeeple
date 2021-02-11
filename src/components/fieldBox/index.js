@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
-import { CurrencySelector } from '../';
+import { CurrencySelector, Column, Row, Divider } from '../';
 import clsx from 'clsx';
 
 export default function FieldBox({ title, value, onChangeEvent, ...props }) {
@@ -15,110 +15,98 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
     warning,
     size,
     multiline,
-    titlePos,
     width,
     type,
+    icon,
   } = props;
   value = value ? value : '';
   return (
-    <div className={classes.one} style={{ width: width ? '' : '100%' }}>
-      <div
-        className={classes.two}
-        style={{
-          alignItems: multiline ? 'flex-start' : 'center',
-        }}
-      >
-        {(!titlePos || titlePos === 'left') && (
+    <Column w={width ? '' : '100%'}>
+      <Column a="flex-start">
+        <div
+          className={clsx({
+            [classes.small]: true,
+            [classes.hide]: title === '',
+          })}
+        >
           <Typography
-            className={clsx({
-              [classes.tiny]: size === 'xs',
-              [classes.small]: true,
-              [classes.medium]: size === 'm',
-              [classes.large]: size === 'l',
-            })}
-            style={{ display: title === '' ? 'none' : '' }}
+            className={classes.inputLabel}
+            style={{ marginLeft: icon && 44 }}
           >{`${title}`}</Typography>
-        )}
-
+          <Row j="flex-end" w={70}>
+            <Typography className={classes.inputLabel}>{`${
+              maxLength > 0 && maxLength - value.length
+            }`}</Typography>
+            {(warning !== '' || info !== '') && (
+              <Icon
+                className={classes.helpIcon}
+                onClick={() => {
+                  infoOpen === false ? setInfoOpen(true) : setInfoOpen(false);
+                }}
+              >
+                {infoOpen === false ? 'info' : 'keyboard_arrow_up'}
+              </Icon>
+            )}
+          </Row>
+        </div>
         {multiline ? (
-          <textarea
-            rows={3}
-            className={classes.root}
-            placeholder={placeholder}
-            value={value.substring(0, maxLength)}
-            onChange={(e) => {
-              const eReplaced =
-                replaceMode === 'loose'
-                  ? e.target.value.replace(
-                      /[^A-Za-z0-9&:;|/\\?!@£$%*()_ ,-."`'[]\n]/g,
-                      ''
-                    )
-                  : replaceMode === 'tight'
-                  ? e.target.value.replace(/[^A-Za-z -0-9]/g, '')
-                  : e.target.value;
+          <Row>
+            {icon && <img src={icon} className={classes.socialIcon} />}
+            <textarea
+              rows={3}
+              className={classes.input}
+              placeholder={placeholder}
+              value={value.substring(0, maxLength)}
+              onChange={(e) => {
+                const eReplaced =
+                  replaceMode === 'loose'
+                    ? e.target.value.replace(
+                        /[^A-Za-z0-9&:;|/\\?!@£$%*()_ ,-."`'[]\n]/g,
+                        ''
+                      )
+                    : replaceMode === 'tight'
+                    ? e.target.value.replace(/[^A-Za-z -0-9]/g, '')
+                    : e.target.value;
 
-              onChangeEvent(eReplaced.substring(0, maxLength));
-            }}
-          />
+                onChangeEvent(eReplaced.substring(0, maxLength));
+              }}
+            />
+          </Row>
         ) : replaceMode === 'currency' ? (
           <CurrencySelector
             selectedCurrency={value}
             onChangeEvent={onChangeEvent}
           />
         ) : (
-          <input
-            className={clsx({
-              [classes.root]: true,
-              [classes.tiny]: size === 'xs',
-            })}
-            style={{ width: width ? width : '100%' }}
-            placeholder={placeholder}
-            value={value.substring(0, maxLength)}
-            type={type ? type : 'text'}
-            onChange={(e) => {
-              const eReplaced =
-                replaceMode === 'loose'
-                  ? e.target.value.replace(
-                      /[^A-Za-z0-9&:;|/\\?!@£$%*()_ ,-."`'[\]\n]/g,
-                      ''
-                    )
-                  : replaceMode === 'number'
-                  ? e.target.value.replace(/[^0-9'\n]/g, '')
-                  : replaceMode === 'tight'
-                  ? e.target.value.replace(/[^A-Za-z \-0-9]/g, '')
-                  : e.target.value;
-              onChangeEvent(eReplaced.substring(0, maxLength));
-            }}
-          />
+          <Row>
+            {icon && <img src={icon} className={classes.socialIcon} />}
+            <input
+              className={clsx({
+                [classes.input]: true,
+                [classes.tiny]: size === 'xs',
+              })}
+              style={{ width: width ? width : '100%' }}
+              placeholder={placeholder}
+              value={value.substring(0, maxLength)}
+              type={type ? type : 'text'}
+              onChange={(e) => {
+                const eReplaced =
+                  replaceMode === 'loose'
+                    ? e.target.value.replace(
+                        /[^A-Za-z0-9&:;|/\\?!@£$%*()_ ,-."`'[\]\n]/g,
+                        ''
+                      )
+                    : replaceMode === 'number'
+                    ? e.target.value.replace(/[^0-9'\n]/g, '')
+                    : replaceMode === 'tight'
+                    ? e.target.value.replace(/[^A-Za-z \-0-9]/g, '')
+                    : e.target.value;
+                onChangeEvent(eReplaced.substring(0, maxLength));
+              }}
+            />
+          </Row>
         )}
-
-        {maxLength > 0 && titlePos !== 'right' && (
-          <Typography style={{ marginLeft: 5, fontSize: 12, width: 30 }}>{`${
-            maxLength - value.length
-          }`}</Typography>
-        )}
-        {(warning !== '' || info !== '') && (
-          <Icon
-            className={classes.helpIcon}
-            onClick={() => {
-              infoOpen === false ? setInfoOpen(true) : setInfoOpen(false);
-            }}
-          >
-            {infoOpen === false ? 'info' : 'keyboard_arrow_up'}
-          </Icon>
-        )}
-        {titlePos === 'right' && (
-          <Typography
-            style={{ marginLeft: 5 }}
-            className={clsx({
-              [classes.tiny]: size === 'xs',
-              [classes.small]: true,
-              [classes.medium]: size === 'm',
-              [classes.large]: size === 'l',
-            })}
-          >{`${title}`}</Typography>
-        )}
-      </div>
+      </Column>
       <div
         className={clsx({
           [classes.openClose]: true,
@@ -126,11 +114,16 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
         })}
       >
         <Typography variant="body1" className={classes.descriptionBox}>
-          {info} <br />
-          <br />
-          {warning !== '' && <span style={{ fontWeight: 900 }}>{warning}</span>}
+          {info}
+          {warning !== '' && (
+            <span style={{ fontWeight: 900 }}>
+              <br />
+              <br />
+              {warning}
+            </span>
+          )}
         </Typography>
       </div>
-    </div>
+    </Column>
   );
 }

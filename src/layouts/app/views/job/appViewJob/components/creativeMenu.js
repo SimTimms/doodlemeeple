@@ -72,7 +72,7 @@ export default function CreativeMenu({
             active={tabNbr === 7}
           />
         )}
-        {activeContract && (
+        {/*activeContract && (
           <MenuButtonShortcut
             text={{
               name: 'Payments',
@@ -86,7 +86,7 @@ export default function CreativeMenu({
             column={true}
             active={tabNbr === 4}
           />
-        )}
+          )*/}
       </TopMenuWrapper>
     </div>
   );

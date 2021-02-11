@@ -1,6 +1,5 @@
 import React from 'react';
 import { Column, Row } from '../../../../../../../components';
-import NotificationDash from './NotificationDash';
 import InvitesDash from './InvitesDash';
 import CreativeDash from './CreativeDash';
 import CheckListDash from './CheckListDash';
@@ -37,7 +36,6 @@ export function CreativeDashboard({
           userContractStatus={userContractStatus}
           contractData={contractData}
         />
-        <NotificationDash jobId={job.job._id} />
       </Row>
     </Column>
   );
@@ -60,7 +58,6 @@ export function CreatorDashboard({
         })}
       >
         <CheckListDash job={job} setTabNbr={setTabNbr} history={history} />
-        <NotificationDash jobId={job._id} />
         {!job.activeContract && (
           <InvitesDash
             invites={job.invites}

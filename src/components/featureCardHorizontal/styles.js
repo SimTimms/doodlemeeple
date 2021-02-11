@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'flex-start',
     justifyContent: 'flex-end',
     flexDirection: 'column',
-    boxShadow: 'inset 0px -60px 20px -10px rgb(0,0,0,0.8)',
+    boxShadow: 'inset 0px -40px 20px -10px rgb(22, 38, 37,0.8)',
   },
   postHeader: {
     bottom: 0,

@@ -33,8 +33,8 @@ export default function Speculative({ acceptsSpeculative }) {
               icon={!speculative ? 'toggle_off' : 'toggle_on'}
               title={
                 !speculative
-                  ? 'I quote for jobs starting within 4 weeks'
-                  : 'I will quote for speculative briefs'
+                  ? 'I only quote for jobs starting soon'
+                  : 'I will quote on any job'
               }
               disabled={false}
               color="text-dark"

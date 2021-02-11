@@ -32,7 +32,7 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   notificationNeutral: {
-    color: theme.palette.primary.main,
+    fontSize: 12,
   },
   notificationGood: {
     color: theme.palette.secondary.main,
@@ -62,7 +62,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   messageButton: {
     width: '100%',
-    lineHeight: 0.6,
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'nowrap',
@@ -75,6 +74,8 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 0,
     boxShadow: '3px 3px 5px rgba(0,0,0,0.2)',
     marginBottom: 5,
+    background: '#fff',
+    borderRadius: 4,
   },
   profileWrapper: {
     display: 'flex',
@@ -82,7 +83,6 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
-    borderRight: '1px solid #ddd',
     paddingTop: 5,
     paddingBottom: 5,
   },

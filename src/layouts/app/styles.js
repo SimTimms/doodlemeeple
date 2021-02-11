@@ -38,5 +38,5 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     background: '#efeff5',
   },
-  contentMobile: { marginLeft: 140 },
+  contentMobile: { width: '100%', marginLeft: 0 },
 }));

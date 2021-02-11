@@ -1,103 +1,110 @@
 import React from 'react';
-import { Typography, useMediaQuery } from '@material-ui/core';
+import { Typography, useMediaQuery, Zoom } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Column, Row, IconButton, Divider } from '../';
-import {
-  AddASkill,
-  StripeRequired,
-  StripeError,
-  NoStripe,
-  WelcomeToDM,
-  FeaturedCreative,
-} from './components';
+import { NoStripe, FeaturedCreative } from './components';
+import clsx from 'clsx';
 
-export default function NoticeBoard({
-  profile,
-  history,
-  featuredArticle,
-  setProfile,
-}) {
+export default function NoticeBoard({ profile, history, featuredArticle }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
-  const addASkill =
-    profile.sections.length === 0 && profile.creatorTrue !== true;
-  const stripeStatus = profile.stripeStatus;
-  const stripeError =
-    profile.stripeID && (stripeStatus === 'false' || stripeStatus === 'error');
-  const noStripe =
-    !profile.stripeID && !profile.stripeClientId && profile.creativeTrue;
+
   return (
-    <div className={classes.root}>
+    <div
+      className={clsx({
+        [classes.root]: !mobile,
+        [classes.mobile]: mobile,
+      })}
+    >
       <Row>
         {!profile.creativeTrue && !profile.creatorTrue ? (
-          <Column>
+          <Column h="100%">
             <Divider />
             <Typography variant="h5" style={{ color: '#fff' }} align="center">
-              Are you a Creative or Creator?
+              Are you here to{' '}
+              <span style={{ fontWeight: 900, fontSize: 26 }}>find work</span>,
+              or
             </Typography>
+            <Typography variant="h5" style={{ color: '#fff' }} align="center">
+              to{' '}
+              <span style={{ fontWeight: 900, fontSize: 26 }}>post a job</span>?
+            </Typography>
+
             <IconButton
-              title="Update your Profile"
+              title="Let us know"
               color="text-white"
-              icon="face"
+              icon="touch_app"
+              zoom={true}
+              clickSound={true}
               styleOverride={{ marginBottom: 20, marginTop: 20 }}
-              onClickEvent={() => history.push('/app/edit-profile/')}
+              onClickEvent={() => {
+                history.push('/app/edit-profile/');
+              }}
             />
+
             <Divider />
           </Column>
         ) : profile.onboarding !== 'complete' &&
-          (!profile.profileBG || !profile.profileImg || !profile.summary) ? (
+          (!profile.profileBG ||
+            !profile.profileImg ||
+            !profile.summary ||
+            profile.sections.length === 0) ? (
           <Column>
             <Divider />
             <Typography variant="h5" className={classes.header5}>
-              Let's get your profile ready
+              {profile.sections.length === 0
+                ? 'Your profile still needs work'
+                : "Let's get your profile ready"}
             </Typography>
             <Typography variant="h6" className={classes.header6}>
               {!profile.profileBG
                 ? 'Set a Feature Image to continue'
                 : !profile.profileImg
                 ? 'Please add a profile image'
+                : profile.sections.length === 0
+                ? 'Add a skill to your profile'
                 : 'Write something about yourself in the summary'}
             </Typography>
+
             <IconButton
-              title="Create a Profile"
+              title="Update your Profile"
               color="text-white"
               icon="face"
+              zoom={true}
+              clickSound={true}
               styleOverride={{ marginBottom: 20, marginTop: 20 }}
-              onClickEvent={() => history.push('/app/edit-profile/')}
+              onClickEvent={() => {
+                history.push('/app/edit-profile/');
+              }}
             />
 
             <Divider />
           </Column>
-        ) : (
-          <Row>
-            {addASkill ? (
-              <AddASkill
-                profile={profile}
-                history={history}
-                setProfile={setProfile}
-              />
-            ) : stripeError ? (
-              !stripeStatus ? (
-                <StripeRequired />
-              ) : (
-                <StripeError />
-              )
-            ) : noStripe ? (
-              <NoStripe />
-            ) : (
-              <WelcomeToDM profile={profile} history={history} />
-            )}
+        ) : !mobile ? (
+          <Row a="flex-start">
+            <NoStripe history={history} />
+
             {featuredArticle.id && (
-              <Row>
-                {!mobile && (
-                  <FeaturedCreative
-                    featuredArticle={featuredArticle}
-                    history={history}
-                  />
-                )}
-              </Row>
+              <Column bg="#222">
+                <FeaturedCreative
+                  featuredArticle={featuredArticle}
+                  history={history}
+                />
+              </Column>
             )}
           </Row>
+        ) : (
+          <Column>
+            <NoStripe history={history} />
+            {featuredArticle.id && (
+              <Column bg="#222">
+                <FeaturedCreative
+                  featuredArticle={featuredArticle}
+                  history={history}
+                />
+              </Column>
+            )}
+          </Column>
         )}
       </Row>
     </div>

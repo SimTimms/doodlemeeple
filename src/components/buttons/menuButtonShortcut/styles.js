@@ -12,8 +12,6 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     marginRight: 0,
     position: 'relative',
-    boxShadow:
-      'inset 1px 1px 1px rgba(255,255,255,0.4),inset -1px -1px 1px rgba(0,0,0,0.2)',
     '&:visited': {
       background: 'none',
     },
@@ -29,8 +27,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     marginRight: 0,
     position: 'relative',
-    boxShadow:
-      'inset 1px 1px 1px rgba(0,0,0,0.1),inset -1px -1px 1px rgba(0,0,0,0.2)',
+
     '&:visited': {
       background: 'none',
     },
@@ -57,11 +54,9 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     fontSize: 14,
     padding: 5,
-    background: '#c3c3d6',
+    border: '1px solid #c3c3d6',
     borderRadius: '50%',
     textAlign: 'center',
-    boxShadow:
-      'inset 1px 1px 1px rgba(255,255,255,0.7),inset -1px -1px 1px rgba(0,0,0,0.1)',
   },
   backHover: {
     '&:hover': {

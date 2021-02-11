@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import { LoadIcon, MenuButtonShortcut, Row } from '../../../../components';
 import { Creatives } from './components';
 import { TYPE_HELPER } from '../../../../utils';
 
-export default function CreativeRoster({ theme, history, favourites }) {
+export default function CreativeRoster({ history, favourites, groupIn }) {
   const classes = useStyles();
   const [loading] = React.useState(false);
   const [filter, setFilter] = React.useState(['artist']);
-  const [group, setGroup] = React.useState('artist');
+  const [group, setGroup] = React.useState(null);
+  useEffect(() => {
+    setFilter(groupIn ? groupIn : 'artist');
+  }, [groupIn]);
+
   const artistTypes = [
     'graphic-artist',
     '3d-artist',

@@ -16,6 +16,7 @@ import Paper from './paper';
 import ContentHeader from './headers/contentHeader';
 import StripeCheckout from './stripeCheckout';
 import Payments from './payments';
+import MiniDashCreator from './miniDashCreator';
 import PaymentTermsWithdraw from './paymentTermsWithdraw';
 import MessageComponent from './messageComponent';
 import PaymentElement from './paymentElement';
@@ -160,6 +161,7 @@ export {
   FavouriteButton,
   Availability,
   Speculative,
+  MiniDashCreator,
   InviteButton,
   NoticeBoard,
   NoticeBoardSecondary,

@@ -32,17 +32,14 @@ import {
 } from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 import pageHeaders from './pageHeaders';
-import twitterImage from '../../assets/twitter.png';
-import facebookImage from '../../assets/facebook.png';
-import linkedInImage from '../../assets/linkedIn.png';
-import instaImage from '../../assets/insta.png';
+import * as social from '../../assets/social';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('home');
   const [favourites, setFavourites] = React.useState([]);
   const [profile, setProfile] = React.useState(null);
   const pageJump = props.match ? props.match.params.page : null;
-  const mobile = useMediaQuery('(max-width:700px)');
+  const mobile = useMediaQuery('(max-width:800px)');
   const { history } = props;
 
   //TODO: I guess this is proper dirty
@@ -50,6 +47,14 @@ function AppLayout(props) {
     ? props.match
       ? props.match.params.pathParam
         ? props.match.params.pathParam
+        : null
+      : null
+    : null;
+
+  const pathParam2 = props
+    ? props.match
+      ? props.match.params.pathParam2
+        ? props.match.params.pathParam2
         : null
       : null
     : null;
@@ -86,18 +91,9 @@ function AppLayout(props) {
     count: 0,
   };
 
-  const creativeRoster = {
-    name: '',
-    icon: 'image',
-    link: () => history.push('/app/creative-roster'),
-    color: '#fff',
-    count: 0,
-    title: 'View a sample of the Creative Roster',
-  };
-
   const twitter = {
     name: '',
-    icon: twitterImage,
+    icon: social.socialTwitter,
     link: 'https://twitter.com/doodlemeeple',
     color: '#fff',
     count: 0,
@@ -105,21 +101,21 @@ function AppLayout(props) {
 
   const facebook = {
     name: '',
-    icon: facebookImage,
+    icon: social.socialFacebook,
     link: 'https://www.facebook.com/doodlemeeple/',
     color: '#fff',
     count: 0,
   };
   const linkedIn = {
     name: '',
-    icon: linkedInImage,
+    icon: social.socialLinkedIn,
     link: 'https://www.linkedin.com/company/72550979',
     color: '#fff',
     count: 0,
   };
   const insta = {
     name: '',
-    icon: instaImage,
+    icon: social.socialInstagram,
     link: 'https://www.instagram.com/doodlemeeple/',
     color: '#fff',
     count: 0,
@@ -135,6 +131,7 @@ function AppLayout(props) {
 
         <div>
           <Row>
+            {/*
             <MenuButtonShortcut
               text={{
                 name: twitter.name,
@@ -185,7 +182,8 @@ function AppLayout(props) {
                 borderRight: '1px solid #ddd',
                 marginRight: 10,
               }}
-            ></div>
+            ></div>*/}
+            {/*
             <MenuButtonShortcut
               text={{
                 name: creativeRoster.name,
@@ -201,7 +199,7 @@ function AppLayout(props) {
             <MenuButtonShortcut
               text={{
                 name: helpButton.name,
-                color: '',
+                color: '#222',
                 icon: helpButton.icon,
                 count: 0,
               }}
@@ -209,7 +207,7 @@ function AppLayout(props) {
               active={false}
               noPad={true}
               title={helpButton.title}
-            />
+            />*/}
           </Row>
         </div>
       </StyledNavBar>
@@ -245,11 +243,22 @@ function AppLayout(props) {
           ) : page === 'failed-payment' ? (
             <AppFailedPayment history={history} />
           ) : page === 'creative-roster' ? (
-            <CreativeRoster
-              theme={props.theme}
-              history={history}
-              favourites={favourites}
-            />
+            <Query query={FAVOURITES} fetchPolicy="network-only">
+              {({ data, loading }) => {
+                return loading
+                  ? null
+                  : data && (
+                      <CreativeRoster
+                        theme={props.theme}
+                        history={history}
+                        favourites={data.profile.favourites.map(
+                          (fav) => fav.receiver && fav.receiver._id
+                        )}
+                        groupIn={pathParam && pathParam}
+                      />
+                    );
+              }}
+            </Query>
           ) : page === 'account' ? (
             <Account history={history} />
           ) : page === 'stripe-connect' ? (
@@ -281,7 +290,11 @@ function AppLayout(props) {
               history={history}
             />
           ) : page === 'edit-job' ? (
-            <EditJob jobId={pathParam} history={history} />
+            <EditJob
+              jobId={pathParam}
+              history={history}
+              creativeId={pathParam2}
+            />
           ) : page === 'view-job' && profile ? (
             <AppViewJob jobId={pathParam} history={history} />
           ) : page === 'view-proposal' ? (
@@ -300,33 +313,28 @@ function AppLayout(props) {
               history={history}
             />
           ) : page === 'pick-artist' ? (
-            <PickArtist
-              theme={props.theme}
-              jobId={pathParam}
-              autosaveIsOn={true}
-              history={history}
-              favourites={favourites}
-            />
+            <Query query={FAVOURITES} fetchPolicy="network-only">
+              {({ data, loading }) => {
+                return loading ? null : (
+                  <PickArtist
+                    theme={props.theme}
+                    jobId={pathParam}
+                    creativeId={pathParam2}
+                    autosaveIsOn={true}
+                    history={history}
+                    favourites={data.profile.favourites.map(
+                      (fav) => fav.receiver && fav.receiver._id
+                    )}
+                  />
+                );
+              }}
+            </Query>
           ) : page === 'create-quote' ? (
             <NewQuote projectId={pathParam} />
           ) : null}
         </ContentTop>
       </main>
-      <Query
-        query={FAVOURITES}
-        onCompleted={(data) => {
-          setFavourites(
-            data.profile.favourites.map(
-              (fav) => fav.receiver && fav.receiver._id
-            )
-          );
-        }}
-        fetchPolicy="network-only"
-      >
-        {({ data }) => {
-          return null;
-        }}
-      </Query>
+
       <Query
         query={PROFILE}
         onCompleted={(data) => {

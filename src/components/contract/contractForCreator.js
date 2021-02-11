@@ -127,31 +127,11 @@ export default function FullContractComponent({ contractData, ...props }) {
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
           <b>6.1</b> The Client will be charged a total fee of{' '}
-          {`${parseInt(contractData.cost) + parseInt(contractData.cost) * 0.1}
+          {`${parseInt(contractData.cost) + parseInt(contractData.cost) * 0.0}
 ${contractData.currency} `}
-          for the Services (the "Payment"), the Payment is distributed as
-          follows:
+          for the Services (the "Payment")
         </Typography>
-        <Typography style={{ marginLeft: 80 }}>
-          <b>6.1.1</b>{' '}
-          {`${Math.round(
-            contractData.cost - Math.round(contractData.cost * 0.1)
-          )} ${
-            contractData.currency
-          } to be paid to the Creative (the "Creative Payment")`}
-        </Typography>
-        <Typography style={{ marginLeft: 80 }}>
-          <b>6.1.2</b>{' '}
-          {`${Math.round(contractData.cost * 0.1)} ${
-            contractData.currency
-          } to be paid by the Creator to DoodleMeeple (the "Creator Commission Fee").`}
-        </Typography>
-        <Typography style={{ marginLeft: 80 }}>
-          <b>6.1.3</b>{' '}
-          {`${Math.round(contractData.cost * 0.1)} ${
-            contractData.currency
-          } to be paid by the Creative to DoodleMeeple (the "Creative Commission Fee").`}
-        </Typography>
+
         <Divider />
         <Typography>
           <b>7. PAYMENT TERMS:</b>
@@ -180,13 +160,11 @@ ${contractData.currency} `}
         )}
         <Typography style={{ marginLeft: 40 }}>
           <b>7.2</b> The Creative will commence and/or continue to fulfil the
-          Services upon notification of payment(s) to DoodleMeeple according to
-          the Payment Schedule.
+          Services upon payment(s) according to the Payment Schedule.
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
-          <b>7.3</b> DoodleMeeple will release funds to the Creative upon
-          approval from both Parties that the Services have been completed
-          according to the Payment Schedule
+          <b>7.3</b> The Creator will release funds to the Creative according to
+          the Payment Schedule
         </Typography>
         <Divider />
         <Typography>

@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
-import Slide from '@material-ui/core/Slide';
 import { Notifications } from './components/notifications';
 import { Posts } from './components/Posts';
-import axios from 'axios';
 import {
   FieldTitleDashboard,
   Divider,
   NoticeBoard,
+  MiniDashCreator,
+  Column,
 } from '../../../../components';
 import { useStyles } from './styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
+import { getPosts, getFeatured } from './getPosts';
 
 export default function AppDashboard({ history, profile, setProfile }) {
   const classes = useStyles();
@@ -22,88 +23,49 @@ export default function AppDashboard({ history, profile, setProfile }) {
   });
 
   useEffect(() => {
-    let didCancel = false;
-    const axiosCancel = axios.CancelToken.source();
-    if (!didCancel) {
-      axios
-        .get(
-          'https://doodlemeeple.com/wp-json/wp/v2/posts?_embed&categories=1',
-          { cancelToken: axiosCancel.token }
-        )
-        .then((response) => {
-          setPosts(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    const cacheData = JSON.parse(localStorage.getItem('featureArticle'));
+    const cacheExists = cacheData;
+    const cachePostsData = JSON.parse(localStorage.getItem('posts'));
+    const cachePostsExists = cachePostsData;
 
-      axios
-        .get(
-          'https://doodlemeeple.com/wp-json/wp/v2/posts?_embed&categories=2',
-          { cancelToken: axiosCancel.token }
-        )
-        .then((response) => {
-          setFeaturedArticle({
-            id: response.data[0].slug,
-            article: {
-              title: response.data[0].title.rendered,
-              image: response.data[0]._embedded,
-              linkTo: response.data[0].link,
-            },
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      axios
-        .get(
-          'https://doodlemeeple.com/wp-json/wp/v2/posts?_embed&categories=4',
-          { cancelToken: axiosCancel.token }
-        )
-        .then((response) => {})
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    return () => {
-      didCancel = true;
-      axiosCancel.cancel('Axios request canceled.');
-    };
+    !cachePostsExists ? getPosts(setPosts) : setPosts(cachePostsData);
+    !cacheExists
+      ? getFeatured(setFeaturedArticle)
+      : setFeaturedArticle(cacheData);
   }, []);
 
   return (
-    <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div style={{ width: '100%' }}>
-        <NoticeBoard
-          profile={profile}
-          setProfile={setProfile}
-          history={history}
-          featuredArticle={featuredArticle}
-        />
-        <div className={classes.dashboardGrid}>
-          <div className={classes.gridRow}>
-            <div
-              className={`${clsx({
-                [classes.column]: true,
-                [classes.columnMobile]: mobile,
-              })}`}
-            >
-              <FieldTitleDashboard name="Notifications" inline={false} a="c" />
-              <Divider />
-              <Notifications />
-            </div>
-            {mobile && <Divider />}
-            <div
-              className={`${clsx({
-                [classes.columnRight]: true,
-                [classes.columnMobile]: mobile,
-              })}`}
-            >
-              <Posts posts={posts ? posts : []} />
-            </div>
+    <Column>
+      <MiniDashCreator profile={profile} history={history} />
+      <NoticeBoard
+        profile={profile}
+        setProfile={setProfile}
+        history={history}
+        featuredArticle={featuredArticle}
+      />
+      <div className={classes.dashboardGrid}>
+        <div className={classes.gridRow}>
+          <div
+            className={`${clsx({
+              [classes.column]: true,
+              [classes.columnMobile]: mobile,
+            })}`}
+          >
+            <FieldTitleDashboard name="Notifications" inline={false} a="c" />
+            <Divider />
+            <Notifications />
+          </div>
+          {mobile && <Divider />}
+          <div
+            className={`${clsx({
+              [classes.columnRight]: true,
+              [classes.columnMobile]: mobile,
+            })}`}
+          >
+            <Posts posts={posts ? posts : []} />
           </div>
         </div>
       </div>
-    </Slide>
+    </Column>
   );
 }

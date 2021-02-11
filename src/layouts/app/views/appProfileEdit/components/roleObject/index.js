@@ -7,8 +7,14 @@ import {
   IconButton,
   Column,
 } from '../../../../../../components';
+import click from '../../../../../../assets/notification_simple-01.wav';
 
 export default function RoleObject({ profile, setProfile, SignupMutation }) {
+  const clickAudio = new Audio(click);
+  const playSound = (audioFile) => {
+    audioFile.play();
+  };
+
   return (
     <DMCard>
       <InlineHeader>
@@ -22,6 +28,7 @@ export default function RoleObject({ profile, setProfile, SignupMutation }) {
             styleOverride={{ width: '100%' }}
             iconPos="right"
             onClickEvent={() => {
+              playSound(clickAudio);
               setProfile({
                 ...profile,
                 creativeTrue: true,
@@ -36,6 +43,7 @@ export default function RoleObject({ profile, setProfile, SignupMutation }) {
             iconPos="right"
             styleOverride={{ width: '100%' }}
             onClickEvent={() => {
+              playSound(clickAudio);
               setProfile({
                 ...profile,
                 creativeTrue: false,
@@ -50,6 +58,7 @@ export default function RoleObject({ profile, setProfile, SignupMutation }) {
             iconPos="right"
             styleOverride={{ width: '100%' }}
             onClickEvent={() => {
+              playSound(clickAudio);
               setProfile({
                 ...profile,
                 creativeTrue: true,

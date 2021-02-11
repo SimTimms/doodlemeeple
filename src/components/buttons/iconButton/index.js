@@ -1,9 +1,10 @@
-import React from 'react';
-import { Button, Icon } from '@material-ui/core';
+import React, { useEffect, useContext } from 'react';
+import { Button, Icon, Zoom } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
+import playSound from '../../../utils/playSound';
 
-export default function IconButton(props) {
+function ButtonObj({ ...props }) {
   const classes = useStyles();
   const {
     disabled,
@@ -14,7 +15,10 @@ export default function IconButton(props) {
     styleOverride,
     type,
     iconPos,
-  } = props;
+    clickSound,
+    zoom,
+  } = props.props;
+
   return (
     <Button
       type={type}
@@ -32,7 +36,10 @@ export default function IconButton(props) {
         [classes.iconButtonDisabled]: disabled,
       })}
       disabled={disabled}
-      onClick={() => onClickEvent()}
+      onClick={() => {
+        clickSound && playSound('click');
+        onClickEvent();
+      }}
       style={styleOverride && styleOverride}
     >
       {icon !== '' && iconPos !== 'right' && (
@@ -75,5 +82,17 @@ export default function IconButton(props) {
         </Icon>
       )}
     </Button>
+  );
+}
+export default function IconButton(props) {
+  const { zoom } = props;
+  return zoom ? (
+    <Zoom in={true} timeout={500}>
+      <div>
+        <ButtonObj props={props} />
+      </div>
+    </Zoom>
+  ) : (
+    <ButtonObj props={props} />
   );
 }

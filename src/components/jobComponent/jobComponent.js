@@ -16,13 +16,14 @@ export default function JobComponent({ job, game, history }) {
   const paid = job.submitted === 'paid';
   const closed = job.submitted === 'closed';
   const complete = job.submitted === 'complete';
+  const draft = job.submitted === 'draft';
 
   return (
     <CardComponent
       onClickEvent={() => {
-        job.submitted
-          ? history.push(`/app/view-job/${job._id}`)
-          : history.push(`/app/edit-job/${job._id}`);
+        draft
+          ? history.push(`/app/edit-job/${job._id}`)
+          : history.push(`/app/view-job/${job._id}`);
       }}
     >
       <Row>

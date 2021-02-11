@@ -3,6 +3,7 @@ import {
   FieldBox,
   Column,
   CardComponent,
+  DividerMini,
 } from '../../../../../../../components';
 import autosave from '../../../../../../../utils/autosave';
 
@@ -30,6 +31,7 @@ export default function Section1({ setJob, job, mutation }) {
           size="m"
           multiline={false}
         />
+        <DividerMini />
         <FieldBox
           title="Genre/Style of Project"
           value={job.genre}

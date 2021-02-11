@@ -1,0 +1,66 @@
+import { makeStyles } from '@material-ui/core/styles';
+
+export const useStyles = makeStyles((theme) => {
+  return {
+    catBox: {
+      backgroundColor: theme.palette.primary.main,
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      display: 'flex',
+      border: '4px solid #111',
+      position: 'relative',
+      cursor: 'pointer',
+      '&:first-child': { borderLeft: '8px solid #111' },
+      '&:last-child': { borderRight: '8px solid #111' },
+      '&:hover': { opacity: 0.8 },
+    },
+    sizeLarge: {
+      width: '33.3%',
+      maxWidth: 300,
+      maxHeight: 150,
+      minHeight: 150,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    sizeSmall: {
+      width: '25%',
+      maxWidth: 300,
+      maxHeight: 40,
+      minHeight: 40,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 6,
+    },
+    catBoxArtist: {
+      color: 'rgba(255,255,255,0.8)',
+      width: '100%',
+      fontSize: 10,
+      position: 'absolute',
+      top: 0,
+      background: 'rgba(0,0,0,0.2)',
+    },
+    catBoxTitleMain: {
+      color: '#000',
+      background: 'rgba(255,255,255,0.8)',
+      paddingTop: 3,
+      paddingBottom: 3,
+      width: '100%',
+      height: 42,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      boxShadow: ' 0px 20px 10px 10px rgb(0,0,0,0.4)',
+      fontSize: 12,
+    },
+    catBoxTitleSecondary: {
+      color: '#fff',
+      fontSize: 10,
+      letterSpacing: 1,
+      width: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  };
+});

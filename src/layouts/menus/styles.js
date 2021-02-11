@@ -64,12 +64,19 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
   },
   drawerRoot: {
-    paddingTop: 16,
     position: 'fixed',
     zIndex: 10,
     width: drawerWidth,
   },
-  drawerOpenTablet: {},
+  drawerOpenTablet: { width: '100%' },
+  drawerClosed: {
+    zIndex: 10,
+    minHeight: 66,
+    maxHeight: 66,
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
   icon: {
     minWidth: 30,
     borderRight: '1px solid #ddd',

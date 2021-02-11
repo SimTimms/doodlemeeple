@@ -3,7 +3,7 @@ import { BorderBox, IconButton } from '../';
 import { Mutation } from 'react-apollo';
 import { DECLINE_CONTRACT } from '../../data/mutations';
 
-export default function ActionSetOne({ contract, setTabNbr, setTabNbrTwo }) {
+export default function ActionSetOne({ contract, history, setTabNbrTwo }) {
   return (
     <BorderBox w={300}>
       <IconButton
@@ -27,7 +27,7 @@ export default function ActionSetOne({ contract, setTabNbr, setTabNbrTwo }) {
         variables={{
           contractId: contract._id,
         }}
-        onCompleted={() => setTabNbr(-1)}
+        onCompleted={() => history.push(`/app/view-job/${contract.job}`)}
       >
         {(mutation) => {
           return (
