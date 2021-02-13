@@ -81,7 +81,7 @@ export default function ProfileCard({
         }}
       >
         <Row j="flex-start" w="100px" paddingLeft={5}>
-          {creative.badges.map((badge, index) => {
+          {/*creative.badges.map((badge, index) => {
             const badgeArr = [];
             badge.badgeType === 'featured' &&
               badgeArr.push(
@@ -103,7 +103,7 @@ export default function ProfileCard({
               );
 
             return badgeArr;
-          })}
+          })*/}
         </Row>
         <Row j="flex-end" w="100px">
           <div
