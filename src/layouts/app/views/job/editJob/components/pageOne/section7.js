@@ -31,7 +31,7 @@ export default function Section7({ setJob, job, mutation }) {
             });
           }}
           replaceMode="loose"
-          info="You may like to add some extra requirements here. Please be aware that by asking for source files and not just the final deliverable, your Creative may increase their fees."
+          info="You may like to add some extra requirements here. Please be aware that by asking for source files and not just the final deliverable, your Contractor may increase their fees."
           warning=""
           size="s"
           multiline={true}

@@ -54,7 +54,7 @@ export default function PaymentTerm({
           <div className={classes.root}>
             <Typography variant="body1" style={{ width: 200 }}>{`3.${
               index + 1
-            }: The Creative shall receive `}</Typography>
+            }: The Contractor shall receive `}</Typography>
             <TextField
               id={'deposit'}
               value={values.percent}

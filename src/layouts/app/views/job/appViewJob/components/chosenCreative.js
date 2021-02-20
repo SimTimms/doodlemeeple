@@ -21,7 +21,7 @@ export default function ChosenCreative({
   return (
     <ColumnWrapper>
       <Column j="center" a="center">
-        <HeaderTwo str="Your Creative" />
+        <HeaderTwo str="Your Contractor" />
         <Divider />
 
         {job.invites.map((invite, index) => (

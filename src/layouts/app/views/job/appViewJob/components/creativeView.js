@@ -27,7 +27,7 @@ export default function CreativeView({
       <div className={classes.rootRow}>
         <ColumnWrapper>
           <Column j="center" a="center">
-            <HeaderTwo str="Project Creator" />
+            <HeaderTwo str="Project Client" />
             <Divider />
             <CardComponent styleOverride={{ width: 400 }}>
               <Row j="flex-start" a="center">

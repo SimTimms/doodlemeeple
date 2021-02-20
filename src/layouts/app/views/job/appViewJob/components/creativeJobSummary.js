@@ -43,7 +43,7 @@ export default function CreativeJobSummary({
                 ) : invite.data.status === 'accepted' ? (
                   <Meta str="You have already quoted for this job" />
                 ) : closed ? (
-                  <Meta str="The Creator closed this job" />
+                  <Meta str="The Client closed this job" />
                 ) : complete ? (
                   <Meta str="This job is complete" />
                 ) : (

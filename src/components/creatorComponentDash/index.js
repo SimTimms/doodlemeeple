@@ -33,7 +33,7 @@ export default function CreatorComponentDash({
           ></div>
           <Column a="flex-start">
             <Typography style={{ fontSize: 12 }}>{user.name}</Typography>
-            <Typography style={{ fontSize: 12 }}>Creator</Typography>
+            <Typography style={{ fontSize: 12 }}>Client</Typography>
             {accepted && (
               <Typography style={{ fontSize: 12 }}>
                 {user.publicEmail}

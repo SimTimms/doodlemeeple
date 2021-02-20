@@ -43,7 +43,7 @@ export default function CreativeRoster({ history, favourites, groupIn }) {
         <Row j="center">
           <MenuButtonShortcut
             text={{
-              name: 'Visual & Creative',
+              name: 'Visual & Contractor',
               color: '#222',
               icon: null,
               count: 0,

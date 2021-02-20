@@ -4,7 +4,7 @@ import { Query } from 'react-apollo';
 import { PROFILE_PREVIEW } from '../../../../../data/queries';
 import { Column, ProfileCard, Divider } from '../../../../../components';
 
-export default function Creative({
+export default function Contractor({
   favourites,
   job,
   removeInviteList,

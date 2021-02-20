@@ -13,7 +13,7 @@ export function unlock(job) {
         minLengths.summary - job.summary.length
       } more characters to continue`
     : job.creativeSummary.length < minLengths.creativeSummary
-    ? `Provide a Creative Summary with ${
+    ? `Provide a Contractor Summary with ${
         minLengths.creativeSummary - job.creativeSummary.length
       } more characters to continue`
     : job.keywords.length === 0

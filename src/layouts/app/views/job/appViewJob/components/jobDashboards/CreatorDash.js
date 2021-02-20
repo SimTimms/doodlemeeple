@@ -10,7 +10,7 @@ import {
 export default function CreatorDash({ creator, setConversationUser }) {
   return (
     <Column w="50%" p={10}>
-      <FieldTitleDashboard name="Creator" inline={false} />
+      <FieldTitleDashboard name="Client" inline={false} />
       <Paper p={10}>
         <CreatorComponentDash
           user={creator}

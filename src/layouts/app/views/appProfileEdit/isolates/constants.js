@@ -14,4 +14,4 @@ export const avatar =
 
 export const feature = 'Attract attention to your profile with a feature image';
 
-export const preference = `Personalise you experience, let us know if you're a Contractor, Client or Both`;
+export const preference = `Personalise you experience, let us know if you're a Client, Client or Both`;

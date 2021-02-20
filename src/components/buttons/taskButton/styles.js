@@ -19,12 +19,17 @@ export const useStyles = makeStyles((theme) => ({
   },
   warning: {
     background: theme.palette.error.main,
-    '&:hover': { background: theme.palette.warning.light },
+    '&:hover': { background: theme.palette.error.light },
   },
-  taskIcon: { color: 'rgba(255,255,255,0.5)', fontSize: 12, marginRight: 4 },
-  taskTitle: { color: '#fff', marginLeft: 5, marginRight: 5 },
+  taskIcon: { color: 'rgba(255,255,255,0.6)', fontSize: 12, marginRight: 4 },
+  taskTitle: {
+    color: 'rgba(255,255,255,0.8)',
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 4,
+  },
   taskSubTitle: {
-    color: 'rgba(255,255,255,0.4)',
+    color: 'rgba(255,255,255,0.6)',
     fontSize: 10,
   },
 }));

@@ -32,7 +32,7 @@ export default function ContractSummaryForCreator({ contractData }) {
       <Row j="flex-start" a="flex-start">
         <Typography
           className={classes.alignLeft}
-        >{`Creative Skills: `}</Typography>
+        >{`Contractor Skills: `}</Typography>
         <Typography>
           {job.keywords.map((keyword, index) => {
             return index === 0 ? keyword : `, ${keyword}`;
@@ -41,7 +41,7 @@ export default function ContractSummaryForCreator({ contractData }) {
       </Row>
       <Divider />
       <Divider />
-      <FieldTitleDashboard name="Creative's Terms" inline={false} />
+      <FieldTitleDashboard name="Contractor's Terms" inline={false} />
       <Divider />
       <Row j="flex-start" a="flex-start">
         <Typography className={classes.alignLeft}>{`Total Cost: `}</Typography>

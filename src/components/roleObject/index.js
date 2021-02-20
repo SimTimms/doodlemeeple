@@ -3,7 +3,13 @@ import autosave from '../../utils/autosave';
 import { IconTitle, InlineHeader, DMCard, IconButton, Column } from '../';
 import click from '../../assets/notification_simple-01.wav';
 
-export default function RoleObject({ profile, setProfile, SignupMutation }) {
+export default function RoleObject({
+  profile,
+  setProfile,
+  SignupMutation,
+  ...props
+}) {
+  const { onClickEvent } = props;
   const clickAudio = new Audio(click);
   const playSound = (audioFile) => {
     audioFile.play();
@@ -29,6 +35,7 @@ export default function RoleObject({ profile, setProfile, SignupMutation }) {
                 creatorTrue: false,
               });
               autosave(SignupMutation, 'username');
+              onClickEvent();
             }}
           />
           <IconButton
@@ -44,6 +51,7 @@ export default function RoleObject({ profile, setProfile, SignupMutation }) {
                 creatorTrue: true,
               });
               autosave(SignupMutation, 'username');
+              onClickEvent();
             }}
           />
           <IconButton
@@ -59,6 +67,7 @@ export default function RoleObject({ profile, setProfile, SignupMutation }) {
                 creatorTrue: true,
               });
               autosave(SignupMutation, 'username');
+              onClickEvent();
             }}
           />
         </div>

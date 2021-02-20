@@ -6,7 +6,6 @@ import profileComplete from '../../utils/profileComplete';
 import preferencesSet from '../../utils/preferencesSet';
 
 export default function MiniDashCreator({ history, profile }) {
-  console.log(preferencesSet(profile));
   return (
     <Row bg="#fff" j="space-between">
       <Query query={COUNTS} fetchPolicy="network-only">
@@ -18,9 +17,9 @@ export default function MiniDashCreator({ history, profile }) {
             <Row wrap="wrap" pb={5}>
               {!preferencesSet(profile) && (
                 <TaskButton
-                  title="Creator or Creative"
-                  subTitle="profile"
-                  icon="brush"
+                  title="Client or Contractor"
+                  subTitle="Preference"
+                  icon="settings"
                   color="secondary"
                   clickSound={true}
                   zoom={true}
@@ -33,7 +32,8 @@ export default function MiniDashCreator({ history, profile }) {
               {profileComplete(profile) && (
                 <TaskButton
                   title="Preview your Profile"
-                  icon="face"
+                  subTitle="Preference"
+                  icon="settings"
                   color="secondary"
                   clickSound={true}
                   zoom={true}
@@ -48,7 +48,7 @@ export default function MiniDashCreator({ history, profile }) {
                   title="Describe Yourself"
                   subTitle="Profile"
                   icon="face"
-                  color="secondary"
+                  color="warning"
                   clickSound={true}
                   zoom={true}
                   onClickEvent={() => history.push('/app/edit-profile/summary')}
@@ -60,7 +60,7 @@ export default function MiniDashCreator({ history, profile }) {
                   title="Upload a Profile Picture"
                   subTitle="Profile"
                   icon="face"
-                  color="secondary"
+                  color="warning"
                   clickSound={true}
                   zoom={true}
                   onClickEvent={() => history.push('/app/edit-profile/avatar')}
@@ -71,18 +71,30 @@ export default function MiniDashCreator({ history, profile }) {
                 <TaskButton
                   title="Add Feature Image"
                   subTitle="Profile"
-                  icon="image"
-                  color="secondary"
+                  icon="face"
+                  color="warning"
                   clickSound={true}
                   zoom={true}
                   onClickEvent={() => history.push('/app/edit-profile/feature')}
                   styleOverride={{ marginLeft: 10 }}
                 />
               )}
+              {data.counts.skills === 0 && (
+                <TaskButton
+                  title="Add a Skill"
+                  subTitle="Profile"
+                  icon="face"
+                  color="warning"
+                  clickSound={true}
+                  zoom={true}
+                  onClickEvent={() => history.push('/app/edit-profile/skill')}
+                  styleOverride={{ marginLeft: 10 }}
+                />
+              )}
               {data.counts.jobs === 0 && profile.creatorTrue && (
                 <TaskButton
                   title="Post a Job"
-                  subTitle="Profile"
+                  subTitle="Projects"
                   icon="work"
                   color="primary"
                   clickSound={true}
@@ -94,8 +106,8 @@ export default function MiniDashCreator({ history, profile }) {
               {data.counts.socials === 0 && (
                 <TaskButton
                   title="Add Socials"
-                  subTitle="Profile"
-                  icon="facebook"
+                  subTitle="Contact"
+                  icon="mail"
                   color="secondary"
                   clickSound={true}
                   zoom={true}
@@ -106,24 +118,12 @@ export default function MiniDashCreator({ history, profile }) {
               {data.counts.contact === 0 && (
                 <TaskButton
                   title="Add Contact"
-                  subTitle="Profile"
+                  subTitle="Contact"
                   icon="mail"
                   color="secondary"
                   clickSound={true}
                   zoom={true}
                   onClickEvent={() => history.push('/app/edit-profile/contact')}
-                  styleOverride={{ marginLeft: 10 }}
-                />
-              )}
-              {data.counts.skills === 0 && (
-                <TaskButton
-                  title="Add a Skill"
-                  subTitle="Profile"
-                  icon="brush"
-                  color="secondary"
-                  clickSound={true}
-                  zoom={true}
-                  onClickEvent={() => history.push('/app/edit-profile/skill')}
                   styleOverride={{ marginLeft: 10 }}
                 />
               )}
