@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
-import { CurrencySelector, Column, Row, Divider } from '../';
+import { CurrencySelector, Column, Row } from '../';
 import clsx from 'clsx';
 
 export default function FieldBox({ title, value, onChangeEvent, ...props }) {
@@ -51,7 +51,7 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
         </div>
         {multiline ? (
           <Row>
-            {icon && <img src={icon} className={classes.socialIcon} />}
+            {icon && <img src={icon} className={classes.socialIcon} alt="" />}
             <textarea
               rows={3}
               className={classes.input}
@@ -79,7 +79,7 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
           />
         ) : (
           <Row>
-            {icon && <img src={icon} className={classes.socialIcon} />}
+            {icon && <img src={icon} className={classes.socialIcon} alt="" />}
             <input
               className={clsx({
                 [classes.input]: true,

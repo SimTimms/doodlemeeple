@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 5,
     boxShadow: 'inset 3px 3px 10px rgba(0,0,0,0.05)',
     border: '1px solid #ddd',
-    background: 'rgba(0,0,0,0.025)',
+    background: '#fff',
     boxSizing: 'border-box',
     outline: 'none',
     fontSize: 14,

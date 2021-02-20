@@ -6,6 +6,9 @@ export const useStyles = makeStyles((theme) => {
       width: '100%',
       height: 300,
       background: theme.palette.primary.main,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     excerptBack: {
       background: theme.palette.secondary.main,
@@ -14,7 +17,7 @@ export const useStyles = makeStyles((theme) => {
       alignItems: 'center',
       justifyContent: 'center',
     },
-    mobile: { width: '100%', background: theme.palette.primary.main },
+
     header4: {
       color: '#fff',
       textAlign: 'center',

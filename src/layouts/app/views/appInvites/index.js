@@ -11,7 +11,6 @@ import {
   InviteComponent,
   DividerWithBorder,
   Paper,
-  FieldTitleDashboard,
 } from '../../../../components';
 import CreativeInvitesMenu from './creativeInvitesMenu';
 //Other
@@ -29,16 +28,6 @@ export default function AppInvites({ history }) {
           <CreativeInvitesMenu setTabNbr={setTabNbr} tabNbr={tabNbr} />
           <Divider />
           <Column w={600}>
-            <FieldTitleDashboard
-              name={
-                tabNbr === 1
-                  ? 'Invites'
-                  : tabNbr === 2
-                  ? 'Active Jobs'
-                  : 'History'
-              }
-              inline={false}
-            />
             {inviteArray.length > 0 && (
               <Paper p={10}>
                 {inviteArray.map((invite, index) => {

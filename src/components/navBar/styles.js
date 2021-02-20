@@ -53,6 +53,8 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginRight: 10,
+    marginLeft: 10,
   },
   appBarChildMobile: {
     width: '100%',

@@ -14,7 +14,6 @@ import {
   Text,
   BorderBox,
   HeaderThree,
-  NoticeBox,
 } from '../../../../../../components';
 import { toaster } from '../../../../../../utils/toaster';
 import { DECLINE_CONTRACT } from '../../../../../../data/mutations';
@@ -22,7 +21,6 @@ import { FAVOURITES } from '../../../../../../data/queries';
 import { Mutation, Query } from 'react-apollo';
 import { useStyles } from './styles';
 import clsx from 'clsx';
-import moment from 'moment';
 import Cookies from 'js-cookie';
 
 export default function QuoteSummaryCreator({

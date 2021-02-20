@@ -33,7 +33,7 @@ export function HeaderTwo({ str }) {
   return (
     <div className={classes.headerWrapper}>
       <div className={classes.headerLine}></div>
-      <Typography variant="h5" className={classes.descriptionTitle}>
+      <Typography variant="h6" className={classes.descriptionTitle}>
         {str}
       </Typography>
       <div className={classes.headerLine}></div>

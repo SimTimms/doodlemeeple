@@ -6,7 +6,6 @@ import { JOBS } from '../../../../../data/queries';
 import {
   Column,
   LoadIcon,
-  IconButton,
   FieldTitleDashboard,
   Divider,
   JobComponent,
@@ -25,13 +24,7 @@ export default function Jobs({ history, theme }) {
         {tabNbr === 1 && (
           <Column w={600}>
             <Divider />
-            <IconButton
-              title="Create a Brief"
-              onClickEvent={() => {
-                history.push(`/app/edit-job/new`);
-              }}
-              icon="add"
-            />
+
             <Column a="center" j="flex-start">
               <Query
                 query={JOBS}

@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Column,
   FieldTitleDashboard,
-  InviteComponentDash,
   InviteComponentFull,
   Paper,
 } from '../../../../../../../components';

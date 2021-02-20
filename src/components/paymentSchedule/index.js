@@ -11,9 +11,7 @@ import { useStyles } from './styles';
 
 export default function PaymentSchedule({ contractData, isClient }) {
   const classes = useStyles();
-  const creativeCommission = 0.9;
-  const creatorCommission = 1.1;
-  const doodleMeeplePercent = 0.1;
+
   let totalCount = 0;
   return (
     <TableContainer style={{ paddingTop: 0 }}>

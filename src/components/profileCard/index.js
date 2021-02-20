@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-
 import { Card, Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import { InviteButton, IconButton, Column, Row } from '../';
@@ -8,12 +7,6 @@ import { ADD_FAVOURITE, CREATE_INVITE } from '../../data/mutations';
 import clsx from 'clsx';
 import Cookies from 'js-cookie';
 import imageOptimiser from '../../utils/imageOptimiser';
-import badgeFeatured from '../../assets/badgeFeatured.png';
-import badgeBird from '../../assets/badgeBird.png';
-import badgeFlower from '../../assets/badgeFlower.png';
-import badgeFlowerPink from '../../assets/badgeFlowerPink.png';
-import badgeStar from '../../assets/badgeStar.png';
-import badgeFirst from '../../assets/badgeFirst.png';
 
 export default function ProfileCard({
   history,

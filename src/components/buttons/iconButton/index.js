@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import { Button, Icon, Zoom } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
@@ -16,7 +16,7 @@ function ButtonObj({ ...props }) {
     type,
     iconPos,
     clickSound,
-    zoom,
+    likeSound,
   } = props.props;
 
   return (
@@ -38,6 +38,7 @@ function ButtonObj({ ...props }) {
       disabled={disabled}
       onClick={() => {
         clickSound && playSound('click');
+        likeSound && playSound('like');
         onClickEvent();
       }}
       style={styleOverride && styleOverride}

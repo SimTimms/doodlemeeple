@@ -1,13 +1,7 @@
 import React from 'react';
-import autosave from '../../../../../../utils/autosave';
-import {
-  IconTitle,
-  InlineHeader,
-  DMCard,
-  IconButton,
-  Column,
-} from '../../../../../../components';
-import click from '../../../../../../assets/notification_simple-01.wav';
+import autosave from '../../utils/autosave';
+import { IconTitle, InlineHeader, DMCard, IconButton, Column } from '../';
+import click from '../../assets/notification_simple-01.wav';
 
 export default function RoleObject({ profile, setProfile, SignupMutation }) {
   const clickAudio = new Audio(click);

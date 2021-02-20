@@ -20,7 +20,6 @@ import { UPDATE_USER_MUTATION } from '../../../../data/mutations';
 import { readableErrors } from '../../../../utils/readableErrors';
 import { toaster } from '../../../../utils/toaster';
 import autosave from '../../../../utils/autosave';
-import RoleObject from './components/roleObject';
 import * as social from '../../../../assets/social';
 import SocialHeader from './socialHeader';
 import ContactHeader from './contactHeader';
@@ -93,17 +92,6 @@ export default function AppProfileEdit({
 
             {loading ? (
               <LoadIcon />
-            ) : (profile.creativeTrue === null &&
-                profile.creatorTrue === null) ||
-              (profile.creativeTrue === false &&
-                profile.creatorTrue === false) ? (
-              <div className={classes.root}>
-                <RoleObject
-                  profile={profile}
-                  setProfile={setProfile}
-                  SignupMutation={SignupMutation}
-                />
-              </div>
             ) : (
               <div className={classes.root}>
                 <DMCard>
@@ -308,15 +296,17 @@ export default function AppProfileEdit({
                 </DMCard>
                 {sections &&
                   sections.map((section, index) => (
-                    <GallerySection
-                      key={`section_${index}`}
-                      index={index}
-                      sections={sections}
-                      setSections={setSections}
-                      section={section}
-                      autosaveIsOn={true}
-                      setChanges={addChanges}
-                    />
+                    <DMCard>
+                      <GallerySection
+                        key={`section_${index}`}
+                        index={index}
+                        sections={sections}
+                        setSections={setSections}
+                        section={section}
+                        autosaveIsOn={true}
+                        setChanges={addChanges}
+                      />
+                    </DMCard>
                   ))}
                 <DMCard>
                   {sections.length < 3 && hasNew() === 0 && (

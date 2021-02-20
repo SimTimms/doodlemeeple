@@ -16,8 +16,6 @@ import {
   InviteReplied,
   ItemViewJob,
   ItemQuoteAcceptedCreative,
-  ItemQuotePaid,
-  ItemCreativePaid,
 } from './CheckListItems';
 import { nameShortener } from '../../../../../../../utils';
 
@@ -54,7 +52,6 @@ export default function CheckListCreativeDash({
   const jobData = job.job;
   const paid = jobData.submitted === 'paid' || jobData.submitted === 'complete';
   const cost = contractData ? contractData.cost : 0;
-  const currency = contractData ? contractData.currency : 'GBP';
   const submitted = contractData && contractData.status === 'submitted';
   const finished = job.job.submitted === 'complete';
   const closed = job.job.submitted === 'closed';

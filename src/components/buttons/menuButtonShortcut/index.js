@@ -3,6 +3,8 @@ import { ListItem, Icon, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import { Row } from '../../';
+import MenuButtonIcon from './MenuButtonIcon';
+import MenuButtonImage from './MenuButtonImage';
 
 export default function MenuButtonShortcut({ text, ...props }) {
   const classes = useStyles();
@@ -15,7 +17,9 @@ export default function MenuButtonShortcut({ text, ...props }) {
     imageIcon,
     noPad,
     title,
+    iconPos,
   } = props;
+  const isLeft = !iconPos || iconPos === 'left';
 
   return (
     <a
@@ -38,61 +42,17 @@ export default function MenuButtonShortcut({ text, ...props }) {
           [classes.buttonRoot]: true,
           [classes.active]: active,
           [classes.buttonRootColumn]: column,
-          [classes.buttonRootNoBackHover]: text.name === '',
         })}
       >
-        <div
-          className={clsx({
-            [classes.iconButton]: !imageIcon,
-            [classes.iconButtonImage]: imageIcon,
-            [classes.iconIconColumn]: column,
-            [classes.iconButtonOnly]: text.name === '',
-            [classes.iconTextOnly]: !text.icon && !imageIcon,
-          })}
-        >
-          {imageIcon ? (
-            <img
-              src={imageIcon}
-              className={clsx({
-                [classes.iconImage]: true,
-                [classes.iconIconNoMargin]: text.name === '',
-              })}
-              style={{ color: text.color }}
-              alt=""
-            />
-          ) : (
-            <Icon
-              className={clsx({
-                [classes.iconIcon]: true,
-                [classes.iconIconNoMargin]: text.name === '',
-                [classes.dark]: text.color === 'white',
-                [classes.warning]: text.back
-                  ? text.back === 'warning'
-                    ? true
-                    : false
-                  : false,
-                [classes.primary]: text.back
-                  ? text.back === 'primary'
-                    ? true
-                    : false
-                  : false,
-                [classes.secondary]: text.back
-                  ? text.back === 'secondary'
-                    ? true
-                    : false
-                  : false,
-                [classes.borderSecondary]: text.border === 'secondary',
-                [classes.borderWarning]: text.border === 'warning',
-                [classes.backHover]: text.name === '',
-              })}
-              style={{ color: text.color }}
-            >
-              {text.icon}
-            </Icon>
-          )}
-        </div>
+        {isLeft && imageIcon ? (
+          <MenuButtonImage imageIcon={imageIcon} text={text} />
+        ) : (
+          isLeft && <MenuButtonIcon text={text} />
+        )}
         <Row
-          j={text.count > 0 ? 'space-between' : column ? 'center' : 'flex-end'}
+          j={
+            text.count > 0 ? 'space-between' : column ? 'center' : 'flex-start'
+          }
           w="100%"
         >
           {text.count > 0 &&
@@ -103,16 +63,20 @@ export default function MenuButtonShortcut({ text, ...props }) {
             ))}
           <Typography
             className={clsx({
-              [classes.button]: true,
+              [classes.buttonText]: true,
               [classes.buttonColumn]: column,
-              [classes.spaceAbove]: column,
               [classes.iconTextOnlyButton]: !text.icon && !imageIcon,
+              [classes.dark]: text.color === 'light',
             })}
-            style={{ color: text.color }}
           >
             {text.name}
           </Typography>
         </Row>
+        {!isLeft && imageIcon ? (
+          <MenuButtonImage imageIcon={imageIcon} text={text} />
+        ) : (
+          !isLeft && <MenuButtonIcon text={text} />
+        )}
       </ListItem>
     </a>
   );

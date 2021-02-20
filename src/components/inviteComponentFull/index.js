@@ -72,29 +72,30 @@ export default function InviteComponentFull({
               </Typography>
             </Column>
           </Row>
-
-          <MenuButtonShortcut
-            text={{
-              name: '',
-              color: '#222',
-              icon: 'request_quote',
-              count: contract ? 1 : 0,
-              back: '',
-            }}
-            onClickEvent={() =>
-              contract
-                ? !display
-                  ? setDisplay(true)
-                  : setDisplay(false)
-                : null
-            }
-            active={false}
-          />
+          {quoted && (
+            <MenuButtonShortcut
+              text={{
+                name: '',
+                color: '#222',
+                icon: 'request_quote',
+                count: contract ? 1 : 0,
+                back: '',
+              }}
+              onClickEvent={() =>
+                contract
+                  ? !display
+                    ? setDisplay(true)
+                    : setDisplay(false)
+                  : null
+              }
+              active={false}
+            />
+          )}
 
           {invite.status !== 'declined' && (
             <MenuButtonShortcut
               text={{
-                name: '',
+                name: 'Chat',
                 color: '#222',
                 icon: 'chat',
                 count: 0,

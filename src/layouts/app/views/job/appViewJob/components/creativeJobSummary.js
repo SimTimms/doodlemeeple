@@ -10,7 +10,6 @@ import {
 } from '../../../../../../components';
 import CreativeActions from '../components/creativeActions';
 import CreativeActionsTwo from '../components/creativeActionsTwo';
-import ClientNotification from '../components/clientNotifications';
 import JobSummaryComponent from './jobSummaryComponent';
 
 export default function CreativeJobSummary({

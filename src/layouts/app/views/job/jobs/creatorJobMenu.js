@@ -10,7 +10,7 @@ export default function CreatorJobMenu({ tabNbr, setTabNbr }) {
       <TopMenuWrapper j="center">
         <MenuButtonShortcut
           text={{
-            name: 'Briefs',
+            name: 'Projects',
             color: '#fff',
             icon: 'work',
             count: 0,

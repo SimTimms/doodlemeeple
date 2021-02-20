@@ -13,6 +13,7 @@ import FormInput from './formInput';
 import Form from './form';
 import CardHeader from './headers';
 import Paper from './paper';
+import RoleObject from './roleObject';
 import ContentHeader from './headers/contentHeader';
 import StripeCheckout from './stripeCheckout';
 import Payments from './payments';
@@ -42,6 +43,7 @@ import FavouriteButton from './buttons/favouriteButton';
 import InviteButton from './buttons/inviteButton';
 import CreateMessage from './buttons/createMessage';
 import IconButton from './buttons/iconButton';
+import TaskButton from './buttons/taskButton';
 import InviteComponentFull from './inviteComponentFull';
 import MenuButton from './buttons/menuButton';
 import CreateQuoteButton from './buttons/createQuote';
@@ -152,6 +154,7 @@ export {
   Divider,
   DividerWithBorder,
   SectionWrapper,
+  RoleObject,
   InlineHeader,
   IconTitle,
   TabButton,
@@ -167,6 +170,7 @@ export {
   NoticeBoardSecondary,
   Widget,
   IconButton,
+  TaskButton,
   ProfileCard,
   ProfileCardCreative,
   ProfileCardCreator,

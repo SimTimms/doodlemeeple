@@ -2,7 +2,6 @@ import React from 'react';
 import { Column, Row } from '../../../../../../../components';
 import InvitesDash from './InvitesDash';
 import CreativeDash from './CreativeDash';
-import CheckListDash from './CheckListDash';
 import CheckListCreativeDash from './CheckListCreativeDash';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
@@ -57,7 +56,7 @@ export function CreatorDashboard({
           [classes.mobile]: mobile,
         })}
       >
-        <CheckListDash job={job} setTabNbr={setTabNbr} history={history} />
+        {/* <CheckListDash job={job} setTabNbr={setTabNbr} history={history} />*/}
         {!job.activeContract && (
           <InvitesDash
             invites={job.invites}
