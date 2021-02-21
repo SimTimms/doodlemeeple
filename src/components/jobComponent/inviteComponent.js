@@ -79,8 +79,8 @@ export default function InviteComponent({ invite, history }) {
 
                 <MenuButtonShortcut
                   text={{
-                    name: '',
-                    color: '#fff',
+                    name: 'Open',
+                    color: 'light',
                     icon: completed
                       ? ''
                       : unopened || opened || quoted || accepted

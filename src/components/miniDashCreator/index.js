@@ -2,7 +2,6 @@ import React from 'react';
 import { TaskButton, Row } from '../';
 import { Query } from 'react-apollo';
 import { COUNTS } from '../../data/queries';
-import profileComplete from '../../utils/profileComplete';
 import preferencesSet from '../../utils/preferencesSet';
 
 export default function MiniDashCreator({ history, profile }) {
@@ -15,6 +14,38 @@ export default function MiniDashCreator({ history, profile }) {
           }
           return (
             <Row wrap="wrap" pb={5}>
+              {data.counts.messages > 0 && (
+                <TaskButton
+                  title={
+                    data.counts.jobs === 1
+                      ? 'You have an unread message'
+                      : 'You have unread messages'
+                  }
+                  subTitle="Messages"
+                  icon="mail"
+                  color="warning"
+                  clickSound={true}
+                  zoom={true}
+                  onClickEvent={() => history.push('/messages/conversations')}
+                  styleOverride={{ marginLeft: 10 }}
+                />
+              )}
+              {data.counts.jobs > 0 && (
+                <TaskButton
+                  title={
+                    data.counts.jobs === 1
+                      ? 'Check in on your project'
+                      : 'Check in on your projects'
+                  }
+                  subTitle="Projects"
+                  icon="casino"
+                  color="warning"
+                  clickSound={true}
+                  zoom={true}
+                  onClickEvent={() => history.push('/app/projects')}
+                  styleOverride={{ marginLeft: 10 }}
+                />
+              )}
               {!preferencesSet(profile) && (
                 <TaskButton
                   title="Client or Contractor"
@@ -25,20 +56,6 @@ export default function MiniDashCreator({ history, profile }) {
                   zoom={true}
                   onClickEvent={() =>
                     history.push('/app/edit-profile/preference')
-                  }
-                  styleOverride={{ marginLeft: 10 }}
-                />
-              )}
-              {profileComplete(profile) && (
-                <TaskButton
-                  title="Preview your Profile"
-                  subTitle="Preference"
-                  icon="settings"
-                  color="secondary"
-                  clickSound={true}
-                  zoom={true}
-                  onClickEvent={() =>
-                    history.push(`/app/public-preview/${profile._id}`)
                   }
                   styleOverride={{ marginLeft: 10 }}
                 />

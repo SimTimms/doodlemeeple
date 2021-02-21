@@ -3,10 +3,10 @@ import { useStyles } from './styles';
 import { Column, Divider } from '../';
 import * as CONSTANTS from './constants';
 import profileComplete from '../../utils/profileComplete';
-
+import getRole from '../../utils/getRole';
 export default function NoticeBoard({ profile }) {
   const classes = useStyles();
-
+  const role = getRole(profile);
   return (
     <div className={classes.root}>
       {!profileComplete(profile) ? (
@@ -15,11 +15,17 @@ export default function NoticeBoard({ profile }) {
           <Divider />
           {CONSTANTS.WELCOME_SUB}
         </Column>
+      ) : role === 'creative' || role === 'creator' || role === 'both' ? (
+        <Column h="100%">
+          {CONSTANTS.SET_UP}
+          <Divider />
+          {CONSTANTS.SET_UP_SUB}
+        </Column>
       ) : (
         <Column h="100%">
-          {CONSTANTS.SET_UP_CREATIVE}
+          {CONSTANTS.SET_UP_NONE}
           <Divider />
-          {CONSTANTS.SET_UP_CREATIVE_SUB}
+          {CONSTANTS.SET_UP_NONE_SUB}
         </Column>
       )}
     </div>

@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Column, Row, MenuButtonShortcut } from '../';
 
-export default function CreatorComponentDash({
+export default function ProjectComponentDash({
   user,
   setConversationUser,
   declined,

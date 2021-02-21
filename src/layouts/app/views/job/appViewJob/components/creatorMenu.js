@@ -19,7 +19,7 @@ export default function CreatorMenu({
         <MenuButtonShortcut
           text={{
             name: 'Dashboard',
-            color: '#fff',
+            color: 'light',
             icon: 'dashboard',
             count: 0,
           }}
@@ -31,8 +31,8 @@ export default function CreatorMenu({
         />
         <MenuButtonShortcut
           text={{
-            name: 'Job Details',
-            color: '#fff',
+            name: 'Project Details',
+            color: 'light',
             icon: 'list_alt',
             count: 0,
           }}
@@ -47,7 +47,7 @@ export default function CreatorMenu({
           <MenuButtonShortcut
             text={{
               name: 'Contract',
-              color: '#fff',
+              color: 'light',
               icon: 'request_quote',
               count: 0,
             }}

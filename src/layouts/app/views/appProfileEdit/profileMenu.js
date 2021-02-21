@@ -8,7 +8,7 @@ export default function ProfileMenu({ tabNbr, setTabNbr, history, profile }) {
         <MenuButtonShortcut
           text={{
             name: 'Profile',
-            color: '#fff',
+            color: 'light',
             icon: 'face',
             count: 0,
           }}
@@ -21,7 +21,7 @@ export default function ProfileMenu({ tabNbr, setTabNbr, history, profile }) {
         <MenuButtonShortcut
           text={{
             name: 'Preview',
-            color: '#fff',
+            color: 'light',
             icon: 'preview',
             count: 0,
           }}
@@ -34,7 +34,7 @@ export default function ProfileMenu({ tabNbr, setTabNbr, history, profile }) {
         <MenuButtonShortcut
           text={{
             name: 'Preferences',
-            color: '#fff',
+            color: 'light',
             icon: 'settings',
             count: 0,
           }}

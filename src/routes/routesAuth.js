@@ -31,7 +31,7 @@ export default function AuthRoutes({ theme, props: { ...props } }) {
         <Route
           path="/"
           exact
-          render={() => <Redirect push to="/app/projects" />}
+          render={() => <Redirect push to="/app/tasks" />}
         />
       </Elements>
     </Switch>

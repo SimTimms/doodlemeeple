@@ -25,3 +25,27 @@ export const SET_UP_CREATIVE_SUB = (
     clients can invite you to their projects
   </Typography>
 );
+
+export const SET_UP = (
+  <Typography variant="h3" style={{ color: '#fff' }} align="center">
+    Tasks
+  </Typography>
+);
+
+export const SET_UP_SUB = (
+  <Typography variant="h6" style={{ color: '#fff' }} align="center">
+    You'll see tasks here when you need to take an action
+  </Typography>
+);
+
+export const SET_UP_NONE = (
+  <Typography variant="h3" style={{ color: '#fff' }} align="center">
+    Choose your role
+  </Typography>
+);
+
+export const SET_UP_NONE_SUB = (
+  <Typography variant="h6" style={{ color: '#fff' }} align="center">
+    You can select to be a Client, Contractor, or both
+  </Typography>
+);

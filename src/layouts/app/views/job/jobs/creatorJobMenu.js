@@ -11,7 +11,7 @@ export default function CreatorJobMenu({ tabNbr, setTabNbr }) {
         <MenuButtonShortcut
           text={{
             name: 'Projects',
-            color: '#fff',
+            color: 'light',
             icon: 'work',
             count: 0,
           }}
@@ -24,7 +24,7 @@ export default function CreatorJobMenu({ tabNbr, setTabNbr }) {
         <MenuButtonShortcut
           text={{
             name: 'History',
-            color: '#fff',
+            color: 'light',
             icon: 'history',
             count: 0,
           }}

@@ -12,7 +12,7 @@ export default function RoleObject({
   const { onClickEvent } = props;
   const clickAudio = new Audio(click);
   const playSound = (audioFile) => {
-    audioFile.play();
+    // audioFile.play();
   };
 
   return (
