@@ -14,6 +14,8 @@ import {
   UnlockInfo,
   PaymentTerms,
   EditContractButton,
+  NoticeBoard,
+  NoticeBoardSecondary,
 } from '../../../../../../../../components';
 import Menu from './menu';
 import QuoteDetails from './quoteDetails';
@@ -47,152 +49,155 @@ export default function EditProposalForm({
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div style={{ width: '100%' }}>
-        <Paper pt={'0'}>
-          {contractData.status === 'submitted' ? (
-            <Column>
-              <Divider />
-              <ContractSummaryForCreative contractData={contractData} />
-              <EditContractButton
-                contract={contractData}
-                setContract={setContract}
-                title="Retract and/or Edit"
-              />
-            </Column>
-          ) : (
-            <Column>
-              <Mutation
-                mutation={UPDATE_CONTRACT}
-                variables={{
-                  ...contractData,
-                }}
-                onCompleted={(data) => {
-                  toaster('Autosave');
-                  setDetailsLock(false);
-                }}
-              >
-                {(mutation) => {
-                  return (
-                    <div className={classes.root}>
-                      <Menu tab={{ tabNbr: tabNbr, setTabNbr: setTabNbr }} />
-                      <Divider />
-                      {tabNbr === 0 && (
-                        <QuoteDetails
-                          setContract={setContract}
-                          contract={contractData}
-                          mutation={mutation}
-                          menu={
-                            <BorderBox w={300} mb={0}>
-                              <Meta str="Continue onto payment & milestones" />
-                              <IconButton
-                                title="Next"
-                                onClickEvent={() => setTabNbr(1)}
-                                styleOverride={{ width: '100%' }}
-                                icon="chevron_right"
-                                iconPos="right"
-                              />
-                            </BorderBox>
-                          }
-                        />
-                      )}
+        <NoticeBoardSecondary>
+          <Paper pt={'0'}>
+            {contractData.status === 'submitted' ? (
+              <Column>
+                <Divider />
+                <ContractSummaryForCreative contractData={contractData} />
+                <EditContractButton
+                  contract={contractData}
+                  setContract={setContract}
+                  title="Retract and/or Edit"
+                />
+              </Column>
+            ) : (
+              <Column>
+                <Mutation
+                  mutation={UPDATE_CONTRACT}
+                  variables={{
+                    ...contractData,
+                  }}
+                  onCompleted={(data) => {
+                    toaster('Autosave');
+                    setDetailsLock(false);
+                  }}
+                >
+                  {(mutation) => {
+                    return (
+                      <div className={classes.root}>
+                        <Menu tab={{ tabNbr: tabNbr, setTabNbr: setTabNbr }} />
+                        <Divider />
 
-                      {tabNbr === 1 && (
-                        <PaymentTerms
-                          percentLock={percentLock}
-                          setPercentLock={setPercentLock}
-                          contract={contractData}
-                          setContract={setContract}
-                          calculatePercent={calculatePercent}
-                          setDetailsLock={setDetailsLock}
-                          detailsLock={detailsLock}
-                          mutation={mutation}
-                          menu={
-                            <BorderBox w={300} mb={0}>
-                              <Column>
-                                <Meta str="Continue to Summary" />
+                        {tabNbr === 0 && (
+                          <QuoteDetails
+                            setContract={setContract}
+                            contract={contractData}
+                            mutation={mutation}
+                            menu={
+                              <BorderBox w={300} mb={0}>
+                                <Meta str="Continue onto payment & milestones" />
                                 <IconButton
                                   title="Next"
-                                  onClickEvent={() => setTabNbr(2)}
+                                  onClickEvent={() => setTabNbr(1)}
                                   styleOverride={{ width: '100%' }}
                                   icon="chevron_right"
                                   iconPos="right"
                                 />
-                                <IconButton
-                                  title="Back"
-                                  icon=""
-                                  color="text-dark"
-                                  onClickEvent={() => {
-                                    setTabNbr(0);
-                                  }}
-                                  styleOverride={{ margin: 0, padding: 0 }}
-                                />
-                              </Column>
-                            </BorderBox>
-                          }
-                        />
-                      )}
-                      {tabNbr === 2 && (
-                        <div style={{ width: '100%' }}>
-                          <ContractSummaryForCreative
-                            contractData={contractData}
+                              </BorderBox>
+                            }
                           />
-                          {lockSubmit && (
-                            <Column>
-                              <UnlockInfo str="WARNING! You need to set a START DATE, COST and a NOTE to continue." />
-                              <IconButton
-                                title="Go back and complete"
-                                icon="chevron_left"
-                                onClickEvent={() => setTabNbr(0)}
-                                color="primary"
-                              />
-                            </Column>
-                          )}
+                        )}
 
-                          {percentLock.status ? (
-                            <UnlockInfo str="WARNING! Your milestone payments exceed the contract total, please adjust to continue." />
-                          ) : (
-                            !lockSubmit && (
-                              <BorderBox w={300}>
-                                {!percentLock.status && (
-                                  <Meta str="Is everything OK?" />
-                                )}
+                        {tabNbr === 1 && (
+                          <PaymentTerms
+                            percentLock={percentLock}
+                            setPercentLock={setPercentLock}
+                            contract={contractData}
+                            setContract={setContract}
+                            calculatePercent={calculatePercent}
+                            setDetailsLock={setDetailsLock}
+                            detailsLock={detailsLock}
+                            mutation={mutation}
+                            menu={
+                              <BorderBox w={300} mb={0}>
+                                <Column>
+                                  <Meta str="Continue to Summary" />
+                                  <IconButton
+                                    title="Next"
+                                    onClickEvent={() => setTabNbr(2)}
+                                    styleOverride={{ width: '100%' }}
+                                    icon="chevron_right"
+                                    iconPos="right"
+                                  />
+                                  <IconButton
+                                    title="Back"
+                                    icon=""
+                                    color="text-dark"
+                                    onClickEvent={() => {
+                                      setTabNbr(0);
+                                    }}
+                                    styleOverride={{ margin: 0, padding: 0 }}
+                                  />
+                                </Column>
+                              </BorderBox>
+                            }
+                          />
+                        )}
+                        {tabNbr === 2 && (
+                          <div style={{ width: '100%' }}>
+                            <ContractSummaryForCreative
+                              contractData={contractData}
+                            />
+                            {lockSubmit && (
+                              <Column>
+                                <UnlockInfo str="WARNING! You need to set a START DATE, COST and a NOTE to continue." />
                                 <IconButton
-                                  title="Continue"
+                                  title="Go back and complete"
                                   icon="chevron_left"
-                                  onClickEvent={() => setTabNbr(3)}
+                                  onClickEvent={() => setTabNbr(0)}
                                   color="primary"
                                 />
-                              </BorderBox>
-                            )
-                          )}
-                        </div>
-                      )}
-                      {tabNbr === 3 && (
-                        <div style={{ width: '100%' }}>
-                          <FullContractComponent
-                            contractData={contractData}
-                            history={history}
-                            setContract={setContract}
-                          />
+                              </Column>
+                            )}
 
-                          <BorderBox w={300}>
-                            <Meta str="Submit to Client" />
-                            <SubmitContractButton
-                              contract={contractData}
-                              setTabNbr={setTabNbr}
+                            {percentLock.status ? (
+                              <UnlockInfo str="WARNING! Your milestone payments exceed the contract total, please adjust to continue." />
+                            ) : (
+                              !lockSubmit && (
+                                <BorderBox w={300}>
+                                  {!percentLock.status && (
+                                    <Meta str="Is everything OK?" />
+                                  )}
+                                  <IconButton
+                                    title="Continue"
+                                    icon="chevron_left"
+                                    onClickEvent={() => setTabNbr(3)}
+                                    color="primary"
+                                  />
+                                </BorderBox>
+                              )
+                            )}
+                          </div>
+                        )}
+                        {tabNbr === 3 && (
+                          <div style={{ width: '100%' }}>
+                            <FullContractComponent
+                              contractData={contractData}
+                              history={history}
                               setContract={setContract}
                             />
-                          </BorderBox>
-                        </div>
-                      )}
 
-                      <Divider />
-                    </div>
-                  );
-                }}
-              </Mutation>
-            </Column>
-          )}
-        </Paper>
+                            <BorderBox w={300}>
+                              <Meta str="Submit to Client" />
+                              <SubmitContractButton
+                                contract={contractData}
+                                setTabNbr={setTabNbr}
+                                setContract={setContract}
+                              />
+                            </BorderBox>
+                          </div>
+                        )}
+
+                        <Divider />
+                      </div>
+                    );
+                  }}
+                </Mutation>
+              </Column>
+            )}
+          </Paper>
+        </NoticeBoardSecondary>
       </div>
     </Slide>
   );

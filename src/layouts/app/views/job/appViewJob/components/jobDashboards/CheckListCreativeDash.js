@@ -2,15 +2,12 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import {
   Column,
-  FieldTitleDashboard,
   Widget,
   Divider,
-  DividerMini,
   CreatorComponentDash,
-  IconButton,
-  TaskButton,
+  ProjectComponentDash,
 } from '../../../../../../../components';
-import { nameShortener } from '../../../../../../../utils';
+import { TaskQuote } from '../../../../../../../modules/tasks';
 
 export default function CheckListCreativeDash({
   declined,
@@ -50,18 +47,13 @@ export default function CheckListCreativeDash({
   return (
     <Column w={300} p={10}>
       <Widget p={10}>
-        <FieldTitleDashboard name="Project Details" inline={false} a="c" />
-        <DividerMini />
         <ProjectComponentDash
           jobName={job.job.name}
           jobSummary={job.job.summary}
+          setTabNbr={setTabNbr}
         />
-        <Typography variant="body1" align="left">
-          {nameShortener(job.job.summary, 60)}
-        </Typography>
-        <Divider />
-        <FieldTitleDashboard name={`Project Owner`} inline={false} a="c" />
-        <DividerMini />
+      </Widget>
+      <Widget p={10}>
         <CreatorComponentDash
           user={job.creator}
           setConversationUser={setConversationUser}
@@ -71,21 +63,16 @@ export default function CheckListCreativeDash({
           closed={closed}
           accepted={activeContract}
         />
-        <Divider />
+      </Widget>
 
+      <Widget p={10}>
         <Column>
-          <FieldTitleDashboard name="Tasks" inline={false} a="c" />
+          <Typography variant="body1">Tasks</Typography>
+          <Typography variant="body1" style={{ fontSize: 10 }}>
+            Complete these to keep your contract moving
+          </Typography>
           <Divider />
-          <TaskButton
-            title="Describe Yourself"
-            subTitle="Profile"
-            icon="face"
-            color="warning"
-            clickSound={true}
-            zoom={true}
-            onClickEvent={() => history.push('/app/edit-profile/summary')}
-            styleOverride={{ marginLeft: 10 }}
-          />
+          <TaskQuote setTabNbr={setTabNbr} />
         </Column>
       </Widget>
     </Column>

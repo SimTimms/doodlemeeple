@@ -17,6 +17,7 @@ import FullContract from './views/fullContract';
 import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
 import { EditJob, Jobs, AppViewJob } from './views/job';
+import { EditQuote } from '../../modules/quotes';
 import { AppViewContract, EditContract } from './views/contract';
 import Withdraw from './views/withdraw';
 import ViewProposal from './views/viewProposal';
@@ -200,6 +201,12 @@ function AppLayout(props) {
             />
           ) : page === 'edit-job' ? (
             <EditJob
+              jobId={pathParam}
+              history={history}
+              creativeId={pathParam2}
+            />
+          ) : page === 'edit-quote' ? (
+            <EditQuote
               jobId={pathParam}
               history={history}
               creativeId={pathParam2}

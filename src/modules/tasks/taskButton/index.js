@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Icon, Zoom, Typography } from '@material-ui/core';
-import { Column, Row } from '../../';
+import { Column, Row } from '../../../components';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import playSound from '../../../utils/playSound';
@@ -46,7 +46,6 @@ function ButtonObj({ ...props }) {
           >
             {icon}
           </Icon>
-
           <Typography className={classes.taskSubTitle}>{subTitle}</Typography>
         </Row>
         <Typography className={classes.taskTitle}>{title}</Typography>

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Column, Row } from '../../../../../../../components';
+import { useMediaQuery, Typography } from '@material-ui/core';
+import { Column, Row, Divider } from '../../../../../../../components';
 import InvitesDash from './InvitesDash';
 import CreativeDash from './CreativeDash';
 import CheckListCreativeDash from './CheckListCreativeDash';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 import { useStyles } from './styles';
-
+import { TaskQuote } from '../../../../../../../modules/tasks';
 export function CreativeDashboard({
   job,
   setConversationUser,

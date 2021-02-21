@@ -1,8 +1,10 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
+import { Column, IconButton } from '../';
 
 export default function Widget({ children, ...props }) {
-  const { pt, p, pb, pl, pr } = props;
+  const { pt, p, pb, pl, pr, title, btnIcon, btnTitle, btnEvent } = props;
   const classes = useStyles();
 
   return (
@@ -15,7 +17,7 @@ export default function Widget({ children, ...props }) {
         paddingBottom: pb ? pb : p ? p : 30,
       }}
     >
-      {children}
+      <Column>{children}</Column>
     </div>
   );
 }

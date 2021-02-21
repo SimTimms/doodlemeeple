@@ -8,6 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     flexDirection: 'column',
   },
+
   countsStyle: {
     position: 'absolute',
     top: -5,

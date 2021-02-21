@@ -8,6 +8,8 @@ export const useStyles = makeStyles((theme) => ({
     borderLeft: '1px solid rgba(0,0,0,0.05)',
     borderRight: '1px solid rgba(0,0,0,0.1)',
     borderBottom: '1px solid rgba(0,0,0,0.1)',
+    marginLeft: 2,
+    marginRight: 2,
   },
   primary: {
     background: theme.palette.primary.main,

@@ -19,6 +19,7 @@ import StripeCheckout from './stripeCheckout';
 import Payments from './payments';
 import MiniDashCreator from './miniDashCreator';
 import PaymentTermsWithdraw from './paymentTermsWithdraw';
+import ProjectComponentDash from './projectComponentDash';
 import MessageComponent from './messageComponent';
 import PaymentElement from './paymentElement';
 import CurrencySelector from './currencySelector';
@@ -43,7 +44,6 @@ import FavouriteButton from './buttons/favouriteButton';
 import InviteButton from './buttons/inviteButton';
 import CreateMessage from './buttons/createMessage';
 import IconButton from './buttons/iconButton';
-import TaskButton from './buttons/taskButton';
 import InviteComponentFull from './inviteComponentFull';
 import MenuButton from './buttons/menuButton';
 import CreateQuoteButton from './buttons/createQuote';
@@ -170,7 +170,7 @@ export {
   NoticeBoardSecondary,
   Widget,
   IconButton,
-  TaskButton,
+  ProjectComponentDash,
   ProfileCard,
   ProfileCardCreative,
   ProfileCardCreator,

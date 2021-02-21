@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { Column, Row, MenuButtonShortcut } from '../';
+import { Column, Row, IconButton } from '../';
 
 export default function CreatorComponentDash({
   user,
@@ -22,7 +22,7 @@ export default function CreatorComponentDash({
         boxSizing: 'border-box',
       }}
     >
-      <Row j="space-between" a="center">
+      <Column j="space-between" a="center">
         <div
           className={classes.profileButton}
           title="View full profile"
@@ -35,8 +35,9 @@ export default function CreatorComponentDash({
               }}
               className={classes.profileThumb}
             ></div>
-            <Column a="flex-start">
+            <Column a="flex-end">
               <Typography style={{ fontSize: 12 }}>{user.name}</Typography>
+              <Typography style={{ fontSize: 10 }}>Project Owner</Typography>
               {accepted && (
                 <Typography style={{ fontSize: 12 }}>
                   {user.publicEmail}
@@ -47,20 +48,15 @@ export default function CreatorComponentDash({
         </div>
 
         {!declined && !closed && (
-          <MenuButtonShortcut
-            text={{
-              name: 'Chat',
-              color: 'light',
-              icon: 'chat',
-              count: messages,
-              back: 'primary',
-            }}
-            title="Chat with the project owner"
+          <IconButton
+            icon="chat"
+            title="Chat"
             onClickEvent={() => setConversationUser(user)}
             active={false}
+            styleOverride={{ width: '100%' }}
           />
         )}
-      </Row>
+      </Column>
     </div>
   );
 }
