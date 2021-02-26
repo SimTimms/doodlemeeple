@@ -76,7 +76,7 @@ export default function LoginPage({ history, forwardTo }) {
                 ) {
                   history.replace(forwardTo.pathname);
                 } else {
-                  history.replace('/app/dashboard');
+                  history.replace('/app/tasks');
                 }
               }
             }}

@@ -71,7 +71,6 @@ export const useStyles = makeStyles((theme) => ({
   card: {
     width: '100%',
     margin: 0,
-    borderRadius: 0,
     boxShadow: '3px 3px 5px rgba(0,0,0,0.2)',
     marginBottom: 5,
     background: '#fff',

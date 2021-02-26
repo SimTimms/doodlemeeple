@@ -168,8 +168,8 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                 <Card className={classes.card}>
                   <div style={{ padding: 10 }}>
                     <FieldTitle
-                      name="2. Job Details"
-                      description="Briefly summarise the job. Example: Images for 24 fantasy cards. Need 24 high resolution card images, each image will be full colour and in a fantasy style."
+                      name="2. Project Details"
+                      description="Briefly summarise the project. Example: Images for 24 fantasy cards. Need 24 high resolution card images, each image will be full colour and in a fantasy style."
                       warning=""
                       inline={false}
                     />
@@ -222,7 +222,7 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                 <Card className={classes.card}>
                   <div style={{ padding: 10 }}>
                     <FieldTitle
-                      name="3. Your Creative"
+                      name="3. Your Contractor"
                       description="Start to describe your ideal creative. Example: A digital artist with a focus on high fantasy"
                       warning=""
                       inline={false}
@@ -230,7 +230,7 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                     <TextField
                       id={'creative-summary'}
                       value={job.creativeSummary}
-                      label={`Creative Summary ${
+                      label={`Contractor Summary ${
                         job.creativeSummary
                           ? `(${86 - job.creativeSummary.length})`
                           : ''

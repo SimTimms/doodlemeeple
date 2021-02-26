@@ -158,10 +158,10 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.error.main,
   },
 
-  iconButtonIconTextMini: {
-    color: '#222',
-  },
   iconRight: { marginLeft: 10 },
   iconLeft: { marginRight: 10 },
   noTitle: { marginLeft: 0, marginRight: 0 },
+  iconButtonIconTextMini: {
+    color: theme.palette.primary.main,
+  },
 }));

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Divider, Drawer, List, useMediaQuery, Icon } from '@material-ui/core';
+import { Divider, Drawer, List, useMediaQuery } from '@material-ui/core';
 import { useStyles } from '../styles';
-import Cookies from 'js-cookie';
 import clsx from 'clsx';
 import { Query } from 'react-apollo';
 import { COUNTS } from '../../../data/queries';
-import logo from '../../../assets/dm_device.png';
-import { MenuButtonShortcut, Row } from '../../../components';
+import { MenuButtonShortcut } from '../../../components';
+import menuArray from './menuArray';
+import DmDevice from './DmDevice';
 
 export default function AppDrawer({
   history,
@@ -17,9 +17,10 @@ export default function AppDrawer({
 }) {
   const { drawerOpenTablet, drawerRoot, drawerClosed } = useStyles();
 
-  const { page, profile } = props;
+  const { profile } = props;
   const mobile = useMediaQuery('(max-width:800px)');
   const [isOpen, setIsOpen] = React.useState(false);
+  const [page, setPage] = React.useState('Tasks');
   const [counts, setCounts] = React.useState({
     invites: 0,
     messages: 0,
@@ -37,134 +38,11 @@ export default function AppDrawer({
         }),
       }}
     >
-      <div
-        style={{
-          minHeight: 64,
-          display: 'flex',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-          cursor: 'pointer',
-          width: '100%',
-        }}
-        onClick={() => setIsOpen(isOpen ? false : true)}
-      >
-        <Row a="center" j="center">
-          <img
-            src={logo}
-            style={{
-              maxHeight: 37,
-              maxWidth: 34,
-            }}
-            alt="DoodleMeeple Man"
-          />
-          {mobile && (
-            <Icon style={{ color: '#222', marginLeft: 10 }}>menu</Icon>
-          )}
-        </Row>
-      </div>
+      <DmDevice isOpen={isOpen} setIsOpen={setIsOpen} />
       <Divider />
       <List onClick={() => setIsOpen(false)}>
-        {page !== 'dashboard' && (
-          <div>
-            {[
-              {
-                name: 'Back',
-                icon: 'chevron_left',
-                link: () => {
-                  history.goBack();
-                },
-                count: null,
-              },
-            ].map((text, index) => (
-              <MenuButtonShortcut
-                text={{
-                  name: text.name,
-                  color: '#222',
-                  icon: text.icon,
-                  count: text.count,
-                }}
-                onClickEvent={() => {
-                  text.link();
-                  handleDrawerClose();
-                }}
-                active={false}
-                key={`shortcut_${index}`}
-                countIcon="star"
-              />
-            ))}
-          </div>
-        )}
         <div>
-          {[
-            {
-              name: 'Home',
-              icon: 'home',
-              link: () => history.push('/app/dashboard'),
-              count: null,
-            },
-            {
-              name: profile.creativeTrue ? 'Creative Dash' : 'hide',
-              icon: 'brush',
-              link: () => history.push('/app/invites'),
-              count: counts.invites > 0 && {
-                icon: 'local_post_office',
-                count: counts.invites,
-              },
-            },
-            {
-              name: 'Projects',
-              icon: 'casino',
-              link: () => history.push('/app/jobs'),
-              count: { icon: 'star', count: counts.quotes },
-            },
-            {
-              name:
-                profile.creativeTrue || profile.creatorTrue
-                  ? 'Messages'
-                  : 'hide',
-              icon: 'chat',
-              link: () => history.push('/messages/conversations'),
-              color: '',
-              count:
-                counts.messages > 0
-                  ? { icon: 'local_post_office', count: counts.messages }
-                  : { icon: 'mail', count: counts.messages },
-            },
-
-            {
-              name: 'My Profile',
-              icon: 'face',
-              link: () => history.push('/app/edit-profile'),
-              count: !profile.profileBG
-                ? { icon: 'star', count: counts.quotes }
-                : null,
-            },
-            {
-              name: 'Account',
-              icon: 'account_balance',
-              link: () => history.push('/app/account'),
-              count: null,
-            } /*
-            {
-              name: 'Games',
-              icon: 'casino',
-              link: () => history.push('/app/games'),
-              color: '#444',
-              count: null,
-            },*/,
-            {
-              name: 'Logout',
-              icon: 'exit_to_app',
-              link: () => {
-                Cookies.remove('token');
-                Cookies.remove('userId');
-                localStorage.removeItem('featureArticle');
-                localStorage.removeItem('posts');
-                history.replace(`/`);
-              },
-              count: null,
-            },
-          ].map(
+          {menuArray(history, counts, profile).map(
             (text, index) =>
               text.name !== 'hide' && (
                 <MenuButtonShortcut
@@ -175,10 +53,11 @@ export default function AppDrawer({
                     count: text.count ? text.count.count : 0,
                   }}
                   onClickEvent={() => {
+                    setPage(text.name);
                     text.link();
                     handleDrawerClose();
                   }}
-                  active={false}
+                  active={text.name === page}
                   key={`menu_${index}`}
                   countIcon={text.count ? text.count.icon : 'star'}
                 />

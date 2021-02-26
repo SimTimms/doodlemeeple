@@ -1,6 +1,32 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
+  buttonRoot: {
+    justifyContent: 'space-between',
+    paddingBottom: 8,
+  },
+  active: {
+    background: theme.palette.primary.main,
+    color: '#fff',
+    '&:hover': {
+      background: theme.palette.primary.main,
+    },
+  },
+  buttonRootColumn: {
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    paddingBottom: 8,
+    width: 120,
+  },
+  buttonText: {
+    textAlign: 'right',
+    fontSize: 12,
+    marginLeft: 10,
+    marginRight: 10,
+    color: 'inherit',
+  },
+  buttonColumn: { marginLeft: 0, marginRight: 0, marginTop: 4 },
+  iconTextOnlyButton: { marginLeft: 0, marginRight: 0 },
   iconButton: {
     display: 'flex',
     alignItems: 'center',
@@ -45,16 +71,18 @@ export const useStyles = makeStyles((theme) => ({
     width: 24,
     borderRadius: '50%',
     textAlign: 'center',
+    minWidth: 26,
+    maxWidth: 26,
+    maxHeight: 26,
+    minHeight: 26,
   },
   iconIcon: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: '#fff',
     position: 'relative',
     fontSize: 14,
     padding: 5,
-    border: '1px solid #c3c3d6',
     borderRadius: '50%',
     textAlign: 'center',
   },
@@ -94,7 +122,6 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    color: '#444',
   },
   count: {
     background: theme.palette.error.main,
@@ -114,28 +141,14 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: 10,
     zIndex: 2,
   },
-  spaceAbove: { marginTop: 4 },
-  button: { textAlign: 'right', color: '#222', fontSize: 12, marginLeft: 10 },
-  buttonColumn: { marginLeft: 0 },
-  buttonRoot: {
-    justifyContent: 'space-between',
-    paddingBottom: 8,
-  },
-  buttonRootNoBackHover: {
-    '&:hover': {
-      background: 'none !important',
-    },
-  },
-  buttonRootColumn: {
-    justifyContent: 'space-between',
-    flexDirection: 'column',
-    paddingBottom: 8,
-    width: 120,
-  },
-  active: {
-    borderBottom: `2px solid ${theme.palette.primary.main}`,
-    background: 'rgba(255,255,255,0.2)',
-  },
+
   iconTextOnly: { display: 'none' },
-  iconTextOnlyButton: { marginLeft: 0 },
+
+  isOn: {
+    backgroundColor: theme.palette.primary.main,
+    color: '#fff !important',
+  },
+  isOff: {
+    color: '#222 !important',
+  },
 }));

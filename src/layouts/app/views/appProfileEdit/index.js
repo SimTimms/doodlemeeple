@@ -6,8 +6,11 @@ import ProfileMenu from './profileMenu';
 import TabProfile from './tabProfile';
 import TabPreferences from './tabPreferences';
 import { initialState } from './initialState';
+import Isolates from './isolates';
+import { Column } from '../../../../components';
 
-export default function AppProfileEdit({ theme, history }) {
+export default function AppProfileEdit({ history, ...props }) {
+  const { isolate } = props;
   const classes = useStyles();
   const [profile, setProfile] = React.useState(initialState);
   const [sections, setSections] = React.useState([]);
@@ -16,24 +19,39 @@ export default function AppProfileEdit({ theme, history }) {
 
   return (
     <div className={classes.root}>
-      <ProfileMenu
-        tabNbr={tabNbr}
-        setTabNbr={setTabNbr}
-        history={history}
-        profile={profile}
-      />
-
-      {tabNbr === 0 ? (
-        <TabProfile
+      {isolate ? (
+        <Isolates
+          isolate={isolate}
           profile={profile}
           loading={loading}
           setProfile={setProfile}
           sections={sections}
           setSections={setSections}
+          history={history}
         />
       ) : (
-        <TabPreferences setProfile={setProfile} profile={profile} />
+        <Column w="100%">
+          <ProfileMenu
+            tabNbr={tabNbr}
+            setTabNbr={setTabNbr}
+            history={history}
+            profile={profile}
+          />
+          {tabNbr === 0 ? (
+            <TabProfile
+              profile={profile}
+              loading={loading}
+              setProfile={setProfile}
+              sections={sections}
+              setSections={setSections}
+              isolate={isolate}
+            />
+          ) : (
+            <TabPreferences setProfile={setProfile} profile={profile} />
+          )}
+        </Column>
       )}
+
       <Query
         query={PROFILE}
         fetchPolicy="network-only"

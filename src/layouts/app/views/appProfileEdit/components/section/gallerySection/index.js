@@ -15,6 +15,7 @@ import {
   SectionWrapper,
   UnlockInfo,
   FieldBox,
+  Column,
 } from '../../../../../../../components';
 import Testimonials from '../../testimonials';
 import Projects from '../../projects';
@@ -106,11 +107,12 @@ function GallerySection({
             }
           >
             <div
+              style={{ width: '100%' }}
               className={clsx({
                 [classes.deleteSection]: deleting,
               })}
             >
-              <div>
+              <Column w="100%" p={10}>
                 <FieldBox
                   value={summary}
                   title="Summary"
@@ -194,7 +196,7 @@ function GallerySection({
                     />
                   </div>
                 )}
-              </div>
+              </Column>
             </div>
           </SectionWrapper>
         );

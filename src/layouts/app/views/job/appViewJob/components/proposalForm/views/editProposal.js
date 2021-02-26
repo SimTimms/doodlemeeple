@@ -14,6 +14,7 @@ import {
   UnlockInfo,
   PaymentTerms,
   EditContractButton,
+  NoticeBoardSecondary,
 } from '../../../../../../../../components';
 import Menu from './menu';
 import QuoteDetails from './quoteDetails';
@@ -75,6 +76,7 @@ export default function EditProposalForm({
                     <div className={classes.root}>
                       <Menu tab={{ tabNbr: tabNbr, setTabNbr: setTabNbr }} />
                       <Divider />
+
                       {tabNbr === 0 && (
                         <QuoteDetails
                           setContract={setContract}

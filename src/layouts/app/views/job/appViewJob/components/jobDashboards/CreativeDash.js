@@ -10,7 +10,7 @@ export default function CreativeDash({ setConversationUser, job, history }) {
   return (
     <Column w="50%" p={10}>
       <Paper p={10}>
-        <FieldTitleDashboard name="Creative" inline={false} />
+        <FieldTitleDashboard name="Contractor" inline={false} />
         <InviteComponentDash
           setConversationUser={setConversationUser}
           job={job}

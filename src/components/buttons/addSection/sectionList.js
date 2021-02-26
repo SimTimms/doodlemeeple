@@ -62,7 +62,7 @@ export default function SectionList({
         {userType.creative && (
           <MenuButtonShortcut
             text={{
-              name: 'Creative',
+              name: 'Contractor',
               color: '#222',
               icon: 'chevron_right',
               count: 0,
@@ -121,7 +121,7 @@ export default function SectionList({
         )}
         {(page === 0 || page === 2) && (
           <Column>
-            <HeaderTwo str="Visual Art and Creative Writing" />
+            <HeaderTwo str="Visual Art and Contractor Writing" />
             <Divider />
             {ARTIST_TYPES.map((type, index) => (
               <ArtistCard

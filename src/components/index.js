@@ -13,11 +13,13 @@ import FormInput from './formInput';
 import Form from './form';
 import CardHeader from './headers';
 import Paper from './paper';
+import RoleObject from './roleObject';
 import ContentHeader from './headers/contentHeader';
 import StripeCheckout from './stripeCheckout';
 import Payments from './payments';
-import MiniDashCreator from './miniDashCreator';
+import TaskComponent from './taskComponent';
 import PaymentTermsWithdraw from './paymentTermsWithdraw';
+import ProjectComponentDash from './projectComponentDash';
 import MessageComponent from './messageComponent';
 import PaymentElement from './paymentElement';
 import CurrencySelector from './currencySelector';
@@ -152,6 +154,7 @@ export {
   Divider,
   DividerWithBorder,
   SectionWrapper,
+  RoleObject,
   InlineHeader,
   IconTitle,
   TabButton,
@@ -161,12 +164,13 @@ export {
   FavouriteButton,
   Availability,
   Speculative,
-  MiniDashCreator,
+  TaskComponent,
   InviteButton,
   NoticeBoard,
   NoticeBoardSecondary,
   Widget,
   IconButton,
+  ProjectComponentDash,
   ProfileCard,
   ProfileCardCreative,
   ProfileCardCreator,

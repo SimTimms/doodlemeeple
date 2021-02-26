@@ -1,11 +1,10 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { PROFILE_PREVIEW } from '../../../../../data/queries';
 import { Column, ProfileCard, Divider } from '../../../../../components';
 
-export default function Creative({
+export default function Contractor({
   favourites,
   job,
   removeInviteList,
@@ -14,7 +13,6 @@ export default function Creative({
   history,
   creativeId,
 }) {
-  const classes = useStyles();
   return (
     <Query
       query={PROFILE_PREVIEW}

@@ -13,6 +13,7 @@ import {
   IconButton,
   Row,
   Divider,
+  RoleObject,
 } from '../../../../components';
 import { Mutation } from 'react-apollo';
 import GallerySection from './components/section/gallerySection';
@@ -20,7 +21,6 @@ import { UPDATE_USER_MUTATION } from '../../../../data/mutations';
 import { readableErrors } from '../../../../utils/readableErrors';
 import { toaster } from '../../../../utils/toaster';
 import autosave from '../../../../utils/autosave';
-import RoleObject from './components/roleObject';
 import * as social from '../../../../assets/social';
 import SocialHeader from './socialHeader';
 import ContactHeader from './contactHeader';
@@ -34,6 +34,7 @@ export default function AppProfileEdit({
 }) {
   const classes = useStyles();
   const [changes, setChanges] = React.useState(0);
+  const [showRole, setShowRole] = React.useState(false);
   const [visible, setVisible] = React.useState({
     publicEmail: false,
     website: false,
@@ -93,17 +94,13 @@ export default function AppProfileEdit({
 
             {loading ? (
               <LoadIcon />
-            ) : (profile.creativeTrue === null &&
-                profile.creatorTrue === null) ||
-              (profile.creativeTrue === false &&
-                profile.creatorTrue === false) ? (
-              <div className={classes.root}>
-                <RoleObject
-                  profile={profile}
-                  setProfile={setProfile}
-                  SignupMutation={SignupMutation}
-                />
-              </div>
+            ) : showRole ? (
+              <RoleObject
+                profile={profile}
+                setProfile={setProfile}
+                SignupMutation={SignupMutation}
+                onClickEvent={() => setShowRole(false)}
+              />
             ) : (
               <div className={classes.root}>
                 <DMCard>
@@ -139,10 +136,10 @@ export default function AppProfileEdit({
                     <Row j="space-between">
                       <Typography>{`You're registered as a ${
                         profile.creativeTrue && profile.creatorTrue
-                          ? 'Creative and a Creator'
+                          ? 'Contractor and a Client'
                           : profile.creativeTrue
-                          ? 'Creative'
-                          : 'Creator'
+                          ? 'Contractor'
+                          : 'Client'
                       } `}</Typography>
                       <IconButton
                         title="Change"
@@ -150,11 +147,7 @@ export default function AppProfileEdit({
                         iconPos="right"
                         color="primary"
                         onClickEvent={() => {
-                          setProfile({
-                            ...profile,
-                            creativeTrue: false,
-                            creatorTrue: false,
-                          });
+                          setShowRole(true);
                         }}
                       />
                     </Row>
@@ -308,15 +301,17 @@ export default function AppProfileEdit({
                 </DMCard>
                 {sections &&
                   sections.map((section, index) => (
-                    <GallerySection
-                      key={`section_${index}`}
-                      index={index}
-                      sections={sections}
-                      setSections={setSections}
-                      section={section}
-                      autosaveIsOn={true}
-                      setChanges={addChanges}
-                    />
+                    <DMCard>
+                      <GallerySection
+                        key={`section_${index}`}
+                        index={index}
+                        sections={sections}
+                        setSections={setSections}
+                        section={section}
+                        autosaveIsOn={true}
+                        setChanges={addChanges}
+                      />
+                    </DMCard>
                   ))}
                 <DMCard>
                   {sections.length < 3 && hasNew() === 0 && (

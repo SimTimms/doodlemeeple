@@ -11,7 +11,7 @@ export default function CreativeInvitesMenu({ tabNbr, setTabNbr }) {
         <MenuButtonShortcut
           text={{
             name: 'Invites',
-            color: '#fff',
+            color: 'light',
             icon: 'local_post_office',
             count: 0,
           }}
@@ -21,6 +21,7 @@ export default function CreativeInvitesMenu({ tabNbr, setTabNbr }) {
           active={tabNbr === 1}
           column={true}
         />
+        {/*
         <MenuButtonShortcut
           text={{
             name: 'Jobs',
@@ -33,11 +34,11 @@ export default function CreativeInvitesMenu({ tabNbr, setTabNbr }) {
           }}
           active={tabNbr === 2}
           column={true}
-        />
+        />*/}
         <MenuButtonShortcut
           text={{
             name: 'History',
-            color: '#fff',
+            color: 'light',
             icon: 'history',
             count: 0,
           }}

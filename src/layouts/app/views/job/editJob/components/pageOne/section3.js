@@ -35,7 +35,7 @@ export default function Section3({ setJob, job, mutation }) {
             });
           }}
           replaceMode="loose"
-          info={`Depending on the type of Creative, you're looking to hire, it's great to get a handle on what you need. Explain what size or aspect ratio you need images/videos. Explain what output file types you need. Sometimes just explaining what the art is used for is enough, `}
+          info={`Depending on the type of Contractor, you're looking to hire, it's great to get a handle on what you need. Explain what size or aspect ratio you need images/videos. Explain what output file types you need. Sometimes just explaining what the art is used for is enough, `}
           warning={`Example: "each image will take up the top half of a poker sized playing card", "this is for my Kickstarter introduction video", "I need blind testing on my almost finished rules" can help. Try to give as much information as you can."`}
           size="s"
           multiline={true}

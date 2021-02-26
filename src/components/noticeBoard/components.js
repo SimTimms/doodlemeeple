@@ -135,7 +135,7 @@ export function WelcomeToDM({ profile, history }) {
           history.push(`/app/creative-roster`);
         }}
         icon=""
-        title="View the Creative Roster"
+        title="View the Contractor Roster"
         styleOverride={null}
         type="button"
         iconPos="right"
@@ -153,8 +153,8 @@ export function AddASkill({ profile, history, setProfile }) {
         Your profile isn't complete.
       </Typography>
       <Typography variant="h6" className={classes.header6}>
-        You'll need to add at least 1 skill section to be listed on the Creative
-        Roster.
+        You'll need to add at least 1 skill section to be listed on the
+        Contractor Roster.
       </Typography>
       <IconButton
         title="Add a Skill"

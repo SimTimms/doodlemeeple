@@ -14,7 +14,6 @@ import {
   Text,
   BorderBox,
   HeaderThree,
-  NoticeBox,
 } from '../../../../../../components';
 import { toaster } from '../../../../../../utils/toaster';
 import { DECLINE_CONTRACT } from '../../../../../../data/mutations';
@@ -22,7 +21,6 @@ import { FAVOURITES } from '../../../../../../data/queries';
 import { Mutation, Query } from 'react-apollo';
 import { useStyles } from './styles';
 import clsx from 'clsx';
-import moment from 'moment';
 import Cookies from 'js-cookie';
 
 export default function QuoteSummaryCreator({
@@ -66,7 +64,7 @@ export default function QuoteSummaryCreator({
       <Column j="center" a="center">
         {userId !== contractData.user._id ? (
           <Column>
-            <HeaderTwo str={`Creative`} />
+            <HeaderTwo str={`Contractor`} />
             <ProfileCardCreative
               history={history}
               creative={contractData.user}
@@ -77,7 +75,7 @@ export default function QuoteSummaryCreator({
           </Column>
         ) : (
           <Column>
-            <HeaderTwo str={`Creator`} />
+            <HeaderTwo str={`Client`} />
             <ProfileCardCreator
               history={history}
               user={contractData.job.user}
@@ -144,7 +142,7 @@ export default function QuoteSummaryCreator({
 
                   {declineWarning && (
                     <Column j="center" a="center">
-                      <Text str="You will be unable to continue conversations with this Creative about this particular job." />{' '}
+                      <Text str="You will be unable to continue conversations with this Contractor about this particular job." />{' '}
                       <Text str="Do you wish to continue?" />
                     </Column>
                   )}

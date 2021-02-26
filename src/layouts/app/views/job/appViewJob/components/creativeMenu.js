@@ -19,7 +19,7 @@ export default function CreativeMenu({
         <MenuButtonShortcut
           text={{
             name: 'Dashboard',
-            color: '#FFF',
+            color: 'light',
             icon: 'dashboard',
             count: 0,
           }}
@@ -31,8 +31,8 @@ export default function CreativeMenu({
         />
         <MenuButtonShortcut
           text={{
-            name: 'Job Details',
-            color: '#FFF',
+            name: 'Project Details',
+            color: 'light',
             icon: 'work',
             count: 0,
           }}
@@ -46,7 +46,7 @@ export default function CreativeMenu({
           <MenuButtonShortcut
             text={{
               name: 'My Quote',
-              color: '#FFF',
+              color: 'light',
               icon: 'request_quote',
               count: 0,
             }}
@@ -61,7 +61,7 @@ export default function CreativeMenu({
           <MenuButtonShortcut
             text={{
               name: 'Contract',
-              color: '#FFF',
+              color: 'light',
               icon: 'request_quote',
               count: 0,
             }}

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Slide } from '@material-ui/core';
 import { useStyles } from '../styles';
 import {
   Column,
@@ -12,6 +11,7 @@ import CreativeMenu from './creativeMenu';
 import EditProposalForm from './proposalForm/views/editProposal';
 import PaymentsView from './paymentsView';
 import CreativeJobSummary from './creativeJobSummary';
+import DeclineInviteView from './declineInviteView';
 
 export default function SummaryViewCreative({ job, history }) {
   const classes = useStyles();
@@ -21,7 +21,6 @@ export default function SummaryViewCreative({ job, history }) {
   const [messages, setMessages] = React.useState([]);
   const [contract, setContract] = React.useState();
   const [invite, setInvite] = React.useState({});
-
   const jobHasBeenAwarded = job.job.activeContract;
   const activeContract =
     job.job.activeContract && job.contract
@@ -37,76 +36,77 @@ export default function SummaryViewCreative({ job, history }) {
     setInvite(job.invite);
   }, [job]);
   return (
-    <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div className={classes.root}>
-        <CreativeMenu
-          tabNbr={tabNbr}
-          setTabNbr={setTabNbr}
-          activeContract={activeContract}
-          closed={closed}
-        />
-        {tabNbr === -1 && (
-          <Column>
-            <CreativeDashboard
-              job={job}
-              contractData={contract}
-              setConversationUser={setConversationUser}
-              setTabNbr={setTabNbr}
-              invite={{ data: invite, setData: setInvite }}
-              history={history}
-              jobHasBeenAwarded={jobHasBeenAwarded}
-              activeContract={activeContract}
-              userContractStatus={userContractStatus}
-            />
-          </Column>
-        )}
-        {tabNbr === 1 && (
-          <Column>
-            <CreativeJobSummary
-              job={job}
-              history={history}
-              invite={{ data: invite, setData: setInvite }}
-              setTabNbr={setTabNbr}
-              userContract={userContract}
-              userContractStatus={userContractStatus}
-            />
-          </Column>
-        )}
-        {tabNbr === 6 && contract ? (
-          <EditProposalForm
+    <div className={classes.root}>
+      <CreativeMenu
+        tabNbr={tabNbr}
+        setTabNbr={setTabNbr}
+        activeContract={activeContract}
+        closed={closed}
+      />
+      {tabNbr === -1 && (
+        <Column>
+          <CreativeDashboard
+            job={job}
             contractData={contract}
-            setContract={setContract}
-            history={history}
-          />
-        ) : (
-          tabNbr === 6 && (
-            <CreateQuoteButton
-              jobId={jobData._id}
-              contract={contract}
-              setContract={setContract}
-            />
-          )
-        )}
-        {tabNbr === 4 && (
-          <Column>
-            <PaymentsView job={{ jobData: jobData, setJobData: null }} />
-          </Column>
-        )}
-        {tabNbr === 7 && <FullContractComponent contractData={job.contract} />}
-        {conversationUser && (
-          <ChatView
-            job={jobData}
-            setPageNbr={setPageNbr}
-            jobId={jobData._id}
-            conversationUser={conversationUser}
-            pageNbr={pageNbr}
             setConversationUser={setConversationUser}
-            setMessages={setMessages}
-            messages={messages}
+            setTabNbr={setTabNbr}
+            invite={{ data: invite, setData: setInvite }}
             history={history}
+            jobHasBeenAwarded={jobHasBeenAwarded}
+            activeContract={activeContract}
+            userContractStatus={userContractStatus}
           />
-        )}
-      </div>
-    </Slide>
+        </Column>
+      )}
+      {tabNbr === 1 && (
+        <Column>
+          <CreativeJobSummary
+            job={job}
+            history={history}
+            invite={{ data: invite, setData: setInvite }}
+            setTabNbr={setTabNbr}
+            userContract={userContract}
+            userContractStatus={userContractStatus}
+          />
+        </Column>
+      )}
+      {tabNbr === 6 && contract ? (
+        <EditProposalForm
+          contractData={contract}
+          setContract={setContract}
+          history={history}
+        />
+      ) : (
+        tabNbr === 6 && (
+          <CreateQuoteButton
+            jobId={jobData._id}
+            contract={contract}
+            setContract={setContract}
+          />
+        )
+      )}
+      {tabNbr === 4 && (
+        <Column>
+          <PaymentsView job={{ jobData: jobData, setJobData: null }} />
+        </Column>
+      )}
+      {tabNbr === 7 && <FullContractComponent contractData={job.contract} />}
+      {tabNbr === 8 && (
+        <DeclineInviteView inviteId={invite._id} history={history} />
+      )}
+      {conversationUser && (
+        <ChatView
+          job={jobData}
+          setPageNbr={setPageNbr}
+          jobId={jobData._id}
+          conversationUser={conversationUser}
+          pageNbr={pageNbr}
+          setConversationUser={setConversationUser}
+          setMessages={setMessages}
+          messages={messages}
+          history={history}
+        />
+      )}
+    </div>
   );
 }

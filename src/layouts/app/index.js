@@ -1,9 +1,11 @@
 import React from 'react';
 import { useStyles } from './styles';
-import { useMediaQuery, Typography } from '@material-ui/core';
+import { useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 import AppDrawer from '../menus/appDrawer';
 import AppDashboard from './views/appDashboard';
+import TaskDashboard from './views/taskDashboard';
+import NotificationDashboard from './views/notificationDashboard';
 import AppInvites from './views/appInvites';
 import AppHelp from './views/appHelp';
 import AppFailedPayment from './views/appFailedPayment';
@@ -16,6 +18,7 @@ import FullContract from './views/fullContract';
 import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
 import { EditJob, Jobs, AppViewJob } from './views/job';
+import { EditQuote } from '../../modules/quotes';
 import { AppViewContract, EditContract } from './views/contract';
 import Withdraw from './views/withdraw';
 import ViewProposal from './views/viewProposal';
@@ -23,20 +26,18 @@ import { PickArtist } from './views/pickArtist';
 import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
-import { FAVOURITES, PROFILE } from '../../data/queries';
+import { FAVOURITES, PROFILE, PREVIEW_CONTRACT } from '../../data/queries';
 import {
   ContentTop,
   StyledNavBar,
-  Row,
   MenuButtonShortcut,
+  IconButton,
 } from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
-import pageHeaders from './pageHeaders';
-import * as social from '../../assets/social';
+import logout from '../../utils/logout';
 
 function AppLayout(props) {
-  const [page, setPage] = React.useState('home');
-  const [favourites, setFavourites] = React.useState([]);
+  const [page, setPage] = React.useState('tasks');
   const [profile, setProfile] = React.useState(null);
   const pageJump = props.match ? props.match.params.page : null;
   const mobile = useMediaQuery('(max-width:800px)');
@@ -81,135 +82,36 @@ function AppLayout(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  const helpButton = {
-    name: '',
-    title: 'What to do if you need help',
-    icon: 'contact_support',
-    link: () => history.push('/app/help'),
-    color: '#222',
-    count: 0,
-  };
-
-  const twitter = {
-    name: '',
-    icon: social.socialTwitter,
-    link: 'https://twitter.com/doodlemeeple',
-    color: '#fff',
-    count: 0,
-  };
-
-  const facebook = {
-    name: '',
-    icon: social.socialFacebook,
-    link: 'https://www.facebook.com/doodlemeeple/',
-    color: '#fff',
-    count: 0,
-  };
-  const linkedIn = {
-    name: '',
-    icon: social.socialLinkedIn,
-    link: 'https://www.linkedin.com/company/72550979',
-    color: '#fff',
-    count: 0,
-  };
-  const insta = {
-    name: '',
-    icon: social.socialInstagram,
-    link: 'https://www.instagram.com/doodlemeeple/',
-    color: '#fff',
-    count: 0,
-  };
-
   return (
     <div className={classes.root}>
       <ToastContainer />
       <StyledNavBar open={open} history={history} theme={props.theme}>
-        <Typography variant="h6">{`${
-          profile ? profile.name : ''
-        } - ${pageHeaders(page)}`}</Typography>
-
-        <div>
-          <Row>
-            {/*
-            <MenuButtonShortcut
-              text={{
-                name: twitter.name,
-                color: '',
-                count: 0,
-              }}
-              href={twitter.link}
-              imageIcon={twitter.icon}
-              active={false}
-              noPad={true}
-            />
-            <MenuButtonShortcut
-              text={{
-                name: linkedIn.name,
-                color: '',
-                count: 0,
-              }}
-              href={linkedIn.link}
-              imageIcon={linkedIn.icon}
-              active={false}
-              noPad={true}
-            />
-            <MenuButtonShortcut
-              text={{
-                name: insta.name,
-                color: '',
-                count: 0,
-              }}
-              href={insta.link}
-              imageIcon={insta.icon}
-              active={false}
-              noPad={true}
-            />
-            <MenuButtonShortcut
-              text={{
-                name: facebook.name,
-                color: '',
-                count: 0,
-              }}
-              href={facebook.link}
-              imageIcon={facebook.icon}
-              active={false}
-              noPad={true}
-            />
-            <div
-              style={{
-                height: '30px',
-                borderRight: '1px solid #ddd',
-                marginRight: 10,
-              }}
-            ></div>*/}
-            {/*
-            <MenuButtonShortcut
-              text={{
-                name: creativeRoster.name,
-                color: '',
-                icon: creativeRoster.icon,
-                count: 0,
-              }}
-              onClickEvent={creativeRoster.link}
-              active={false}
-              noPad={true}
-              title={creativeRoster.title}
-            />
-            <MenuButtonShortcut
-              text={{
-                name: helpButton.name,
-                color: '#222',
-                icon: helpButton.icon,
-                count: 0,
-              }}
-              onClickEvent={helpButton.link}
-              active={false}
-              noPad={true}
-              title={helpButton.title}
-            />*/}
-          </Row>
-        </div>
+        {page === 'projects' ? (
+          <IconButton
+            title="Create a Project"
+            onClickEvent={() => {
+              history.push(`/app/edit-job/new`);
+            }}
+            icon="add"
+          />
+        ) : (
+          <div></div>
+        )}
+        <MenuButtonShortcut
+          text={{
+            name: profile ? profile.name : 'fetching...',
+            color: '#222',
+            icon: 'face',
+            count: 0,
+          }}
+          onClickEvent={() => {
+            history.push('/app/edit-profile');
+          }}
+          active={false}
+          imageIcon={profile && profile.profileImg}
+          countIcon="star"
+          iconPos="right"
+        />
       </StyledNavBar>
       {profile && (
         <AppDrawer
@@ -230,6 +132,18 @@ function AppLayout(props) {
         <ContentTop style={{ width: '100%' }}>
           {page === 'dashboard' && profile ? (
             <AppDashboard
+              history={history}
+              profile={profile}
+              setProfile={setProfile}
+            />
+          ) : page === 'tasks' && profile ? (
+            <TaskDashboard
+              history={history}
+              profile={profile}
+              setProfile={setProfile}
+            />
+          ) : page === 'notifications' && profile ? (
+            <NotificationDashboard
               history={history}
               profile={profile}
               setProfile={setProfile}
@@ -269,10 +183,14 @@ function AppLayout(props) {
             <ProjectSubmitted history={history} />
           ) : page === 'games' ? (
             <Games history={history} />
-          ) : page === 'jobs' ? (
+          ) : page === 'projects' ? (
             <Jobs history={history} theme={props.theme} />
           ) : page === 'edit-profile' ? (
-            <AppProfileEdit theme={props.theme} history={history} />
+            <AppProfileEdit
+              theme={props.theme}
+              history={history}
+              isolate={pathParam}
+            />
           ) : page === 'edit-game' ? (
             <EditGame
               theme={props.theme}
@@ -295,6 +213,24 @@ function AppLayout(props) {
               history={history}
               creativeId={pathParam2}
             />
+          ) : page === 'edit-quote' ? (
+            <Query
+              query={PREVIEW_CONTRACT}
+              variables={{ contractId: pathParam }}
+              fetchPolicy="network-only"
+            >
+              {({ data, loading }) => {
+                return loading
+                  ? null
+                  : data && (
+                      <EditQuote
+                        history={history}
+                        jobId={pathParam}
+                        contractData={data.contractById}
+                      />
+                    );
+              }}
+            </Query>
           ) : page === 'view-job' && profile ? (
             <AppViewJob jobId={pathParam} history={history} />
           ) : page === 'view-proposal' ? (
@@ -341,6 +277,9 @@ function AppLayout(props) {
           setProfile(data.profile);
         }}
         fetchPolicy="network-only"
+        onError={(error) => {
+          logout(history);
+        }}
       >
         {({ data }) => {
           return null;

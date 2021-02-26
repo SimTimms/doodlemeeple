@@ -13,11 +13,8 @@ import {
 import {
   ItemPosted,
   ItemInvites,
-  ItemCreativePaid,
   ItemLeaveReview,
   ItemQuoteAccepted,
-  ItemCloseJob,
-  ItemQuotePaid,
 } from './CheckListItems';
 
 export default function CheckListDash({ job, setTabNbr, history }) {
@@ -28,11 +25,10 @@ export default function CheckListDash({ job, setTabNbr, history }) {
   const accepted = job.submitted === 'accepted';
   const closed = job.submitted === 'closed';
   const finished = job.submitted === 'complete';
-  const { paymentTerms, cost, currency, status } = job.activeContract
+  const { paymentTerms, cost } = job.activeContract
     ? job.activeContract
     : { paymentTerms: [], cost: 0, currency: 'GBP', status: null };
   const paidOutArr = paymentTerms.filter((term) => term.paid === 'success');
-  const pending = status === 'pending';
   let totalPaid = 0;
   for (let i = 0; i < paidOutArr.length; i++) {
     totalPaid += paidOutArr[i].percent;

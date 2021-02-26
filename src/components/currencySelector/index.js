@@ -21,7 +21,7 @@ export default function CurrencySelector({ selectedCurrency, onChangeEvent }) {
           onChangeEvent(e.target.value);
         }}
         label="Age"
-        style={{ borderRadius: 5, marginLeft: 10 }}
+        style={{ borderRadius: 5 }}
       >
         {currencyArray.map((item, index) => {
           return (

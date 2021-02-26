@@ -9,7 +9,6 @@ import {
 } from '../../../../../../components';
 import { CreatorDashboard } from './jobDashboards/';
 import ChatView from '../components/chatView';
-import InvitesView from './invitesView';
 import PaymentsView from './paymentsView';
 import CreatorMenu from './creatorMenu';
 import CreatorJobSummary from './creatorJobSummary';

@@ -11,9 +11,9 @@ export const TYPE_HELPER = (typeIn) => {
     case 'artist':
       return 'Artist';
     case 'creator':
-      return 'Creator';
+      return 'Client';
     case 'reviewer':
-      return 'Reviewer/Content Creator';
+      return 'Reviewer/Content Client';
     case 'marketing':
       return 'Marketing';
     case 'games-developer':
@@ -29,7 +29,7 @@ export const TYPE_HELPER = (typeIn) => {
     case 'translator':
       return 'Translator';
     case 'world-builder':
-      return 'World Builder/Creative Writer';
+      return 'World Builder/Contractor Writer';
     case 'play-tester':
       return 'Play Tester';
     default:

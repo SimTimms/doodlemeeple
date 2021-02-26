@@ -4,7 +4,7 @@ import { useStyles } from './styles';
 export default function SocialIcon({ img, link }) {
   const classes = useStyles();
 
-  return link !== '' && link !== null && link != undefined ? (
+  return link !== '' && link !== null && link !== undefined ? (
     <a
       href={
         link.indexOf('http') === -1 && link.indexOf('https') === -1
@@ -15,7 +15,7 @@ export default function SocialIcon({ img, link }) {
       rel="noopener noreferrer"
       style={{ textDecoration: 'none' }}
     >
-      <img src={img} className={classes.socialIcon} />
+      <img src={img} className={classes.socialIcon} alt="" />
     </a>
   ) : null;
 }

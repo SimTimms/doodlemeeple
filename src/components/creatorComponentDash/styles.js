@@ -23,6 +23,11 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.error.main,
     color: '#fff',
   },
+  profileButton: {
+    width: '100%',
+    cursor: 'pointer',
+    '&:hover': { backgroundColor: 'rgba(0,0,0,0.05)' },
+  },
   profileThumb: {
     backgroundColor: '#ddd',
     backgroundSize: 'cover',

@@ -51,9 +51,9 @@ export default function SkillTree({ profile, setProfile }) {
     <Column>
       {xp}
       <Row a="flex-start">
-        <ClassButton title="Creator" icon="work" on={false} />
+        <ClassButton title="Client" icon="work" on={false} />
         <Column b="1px solid rgba(255,255,255,0.2)" br={5} p={5}>
-          <ClassButton title="Creative" icon="brush" on={false} />
+          <ClassButton title="Contractor" icon="brush" on={false} />
           <Row a="flex-start">
             <Column>
               <ClassButton title="3D" icon="lock" on={false} />

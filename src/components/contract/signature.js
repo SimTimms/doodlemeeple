@@ -16,7 +16,7 @@ export default function Signature({ contractData, onAccept, onDecline }) {
               width: '100%',
             }}
           >
-            <Meta str="By clicking Accept you will enter into a binding contract with the Creative." />
+            <Meta str="By clicking Accept you will enter into a binding contract with the Contractor." />
             <Mutation
               mutation={SIGN_CONTRACT}
               variables={{
@@ -76,7 +76,7 @@ export default function Signature({ contractData, onAccept, onDecline }) {
               contractData.signedBy.name
             } (the "Client") on ${moment(contractData.signedDate).format(
               'LLLL'
-            )} GMT and ${contractData.user.name} (the "Creative") on ${moment(
+            )} GMT and ${contractData.user.name} (the "Contractor") on ${moment(
               contractData.signedcreatedAtDate
             ).format('LLLL')} GMT`}
           />

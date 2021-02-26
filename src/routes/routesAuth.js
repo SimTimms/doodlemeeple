@@ -5,7 +5,6 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import PreviewLayout from '../layouts/preview';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import Cookies from 'js-cookie';
 
 export default function AuthRoutes({ theme, props: { ...props } }) {
   const stripePromise = loadStripe(
@@ -32,7 +31,7 @@ export default function AuthRoutes({ theme, props: { ...props } }) {
         <Route
           path="/"
           exact
-          render={() => <Redirect push to="/app/dashboard" />}
+          render={() => <Redirect push to="/app/tasks" />}
         />
       </Elements>
     </Switch>

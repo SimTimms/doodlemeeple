@@ -11,7 +11,7 @@ export default function ItemResponse({ contract, setTabNbr }) {
       <Column a="space-between">
         <Row j="space-start" w={270}>
           <Typography style={{ marginRight: 10, width: 80 }}>
-            Creator:
+            Client:
           </Typography>
           <Typography
             className={clsx({

@@ -24,6 +24,7 @@ export default function themeDesigner() {
     ...theme.palette.error,
     main: '#ff4081',
     dark: '#d81b60',
+    light: '#FF669A',
   };
   theme.typography.h1 = {
     fontFamily: ['Quicksand'].join(','),

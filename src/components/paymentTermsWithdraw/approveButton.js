@@ -47,8 +47,8 @@ export default function ApproveButton({
           </Typography>
         ) : response === 'stripe_required' ? (
           <Typography>
-            There is an issue with the Creative's STRIPE account. They have been
-            notified. Please try again later.
+            There is an issue with the Contractor's STRIPE account. They have
+            been notified. Please try again later.
           </Typography>
         ) : (
           <IconButton

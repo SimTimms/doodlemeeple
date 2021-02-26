@@ -14,6 +14,7 @@ export default function InviteComponent({ invite, history }) {
   const opened = invite.status === 'read';
   const quoted = invite.status === 'quote_sent';
   const rejected = invite.status === 'rejected';
+  const draft = invite.status === 'draft';
   const accepted = invite.status === 'accepted';
   const inviteJob = invite.job ? invite.job : null;
   const completed = inviteJob ? inviteJob.submitted === 'complete' : false;
@@ -57,19 +58,22 @@ export default function InviteComponent({ invite, history }) {
                       style={{ fontSize: 12 }}
                       className={clsx({
                         [classes.dull]: true,
-                        [classes.red]: unopened || declined || rejected,
+                        [classes.red]:
+                          unopened || declined || rejected || draft || opened,
                       })}
                     >
-                      {completed
+                      {draft
+                        ? 'Task: Complete your quote'
+                        : completed
                         ? 'Completed'
                         : declined
                         ? 'Declined'
                         : unopened
                         ? 'Unread'
                         : opened
-                        ? 'Opened'
+                        ? 'Task: Respond to Invite'
                         : quoted
-                        ? 'Quoted'
+                        ? 'Quote Submitted'
                         : rejected
                         ? 'Rejected'
                         : accepted && 'Accepted'}
@@ -79,11 +83,11 @@ export default function InviteComponent({ invite, history }) {
 
                 <MenuButtonShortcut
                   text={{
-                    name: '',
-                    color: '#fff',
+                    name: 'View',
+                    color: 'light',
                     icon: completed
                       ? ''
-                      : unopened || opened || quoted || accepted
+                      : unopened || opened || quoted || accepted || draft
                       ? 'local_post_office'
                       : '',
                     count: invite.messages,
