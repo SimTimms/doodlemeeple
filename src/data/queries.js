@@ -825,6 +825,7 @@ export const COUNTS = gql`
       socials
       contact
       skills
+      draftQuotes
     }
   }
 `;

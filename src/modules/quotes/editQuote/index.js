@@ -1,30 +1,69 @@
 import React, { useEffect } from 'react';
-import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
-
-import { checkLength } from './unlock';
 import { initialState } from './initialState';
+import {
+  NoticeBoardSecondary,
+  Column,
+  CardComponent,
+  LoadIcon,
+} from '../../../components';
+import { UPDATE_CONTRACT } from '../../../data/mutations';
+import { StartDate, Cost } from './components';
+import { useMutation } from 'react-apollo';
+import charsRemaining from '../../../utils/charsRemaining';
+import { TITLES, SUB_TITLES } from './constants';
 
-export default function EditQuote({ jobId, history, creativeId }) {
+export default function EditQuote({ jobId, history, contractData }) {
   const classes = useStyles();
-  const [job, setJob] = React.useState(initialState);
-  const [locked, setLocked] = React.useState(false);
-  const [savedCreative, setSavedCreative] = React.useState(false);
-
+  const [field, setField] = React.useState(0);
+  const [contract, setContract] = React.useState(null);
+  const fieldArray = ['startDate', 'cost', 'notes'];
+  const [updateContract] = useMutation(UPDATE_CONTRACT);
   useEffect(() => {
-    setLocked(
-      !checkLength(job.name, 'name') ||
-        !checkLength(job.genre, 'genre') ||
-        !checkLength(job.summary, 'summary') ||
-        !checkLength(job.creativeSummary, 'creativeSummary') ||
-        job.keywords.length === 0
-    );
-    creativeId && setSavedCreative(creativeId);
-  }, [job, setLocked, creativeId]);
+    contractData.startDate = !contractData.startDate
+      ? ''
+      : contractData.startDate;
+    setContract({ ...contractData });
+  }, [contractData]);
 
-  return (
-    <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div className={classes.root}></div>
-    </Slide>
+  return !contract ? (
+    <LoadIcon />
+  ) : (
+    <NoticeBoardSecondary
+      className={classes.root}
+      title={TITLES[fieldArray[field]]}
+      subTitle={SUB_TITLES[fieldArray[field]]}
+      onClickEvent={() => {
+        updateContract({
+          variables: {
+            ...contract,
+          },
+        });
+        setField(field + 1);
+      }}
+      backEvent={field > 0 ? () => setField((field += -1)) : null}
+      buttonLocked={
+        charsRemaining(contract[fieldArray[field]], fieldArray[field]) > 0
+      }
+      lockedMsg={`Add ${charsRemaining(
+        contract[fieldArray[field]],
+        fieldArray[field]
+      )} more character${
+        charsRemaining(contract[fieldArray[field]], fieldArray[field]) === 1
+          ? ''
+          : 's'
+      }`}
+    >
+      <Column w={300}>
+        <CardComponent locked={false}>
+          {fieldArray[field] === 'startDate' && (
+            <StartDate contract={contract} setContract={setContract} />
+          )}
+          {fieldArray[field] === 'cost' && (
+            <Cost contract={contract} setContract={setContract} />
+          )}
+        </CardComponent>
+      </Column>
+    </NoticeBoardSecondary>
   );
 }

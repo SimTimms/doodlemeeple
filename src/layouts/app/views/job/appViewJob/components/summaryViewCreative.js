@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Slide } from '@material-ui/core';
 import { useStyles } from '../styles';
 import {
   Column,
@@ -21,7 +20,6 @@ export default function SummaryViewCreative({ job, history }) {
   const [messages, setMessages] = React.useState([]);
   const [contract, setContract] = React.useState();
   const [invite, setInvite] = React.useState({});
-
   const jobHasBeenAwarded = job.job.activeContract;
   const activeContract =
     job.job.activeContract && job.contract

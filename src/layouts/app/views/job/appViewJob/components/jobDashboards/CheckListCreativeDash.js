@@ -7,7 +7,7 @@ import {
   CreatorComponentDash,
   ProjectComponentDash,
 } from '../../../../../../../components';
-import { TaskQuote } from '../../../../../../../modules/tasks';
+import { TaskQuote, SubmitQuote } from '../../../../../../../modules/tasks';
 
 export default function CheckListCreativeDash({
   declined,
@@ -34,10 +34,11 @@ export default function CheckListCreativeDash({
     }
     return totalPaid;
   }
-
+  console.log(job);
   const accepted = invite.status === 'accepted';
   const unopened = invite.status === 'unopened';
-  const quoted = userContractStatus !== null;
+  const draft = contractData && contractData.status === 'draft' ? true : false;
+  const quoted = contractData ? true : false;
   const rejected = invite.status === 'declined';
   const jobData = job.job;
   const paid = jobData.submitted === 'paid' || jobData.submitted === 'complete';
@@ -72,7 +73,10 @@ export default function CheckListCreativeDash({
             Complete these to keep your contract moving
           </Typography>
           <Divider />
-          <TaskQuote setTabNbr={setTabNbr} />
+          {!quoted && <TaskQuote history={history} jobId={job.job._id} />}
+          {draft && (
+            <SubmitQuote history={history} quoteId={contractData._id} />
+          )}
         </Column>
       </Widget>
     </Column>

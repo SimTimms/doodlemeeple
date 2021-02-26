@@ -25,7 +25,7 @@ import { PickArtist } from './views/pickArtist';
 import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
-import { FAVOURITES, PROFILE } from '../../data/queries';
+import { FAVOURITES, PROFILE, PREVIEW_CONTRACT } from '../../data/queries';
 import {
   ContentTop,
   StyledNavBar,
@@ -206,11 +206,23 @@ function AppLayout(props) {
               creativeId={pathParam2}
             />
           ) : page === 'edit-quote' ? (
-            <EditQuote
-              jobId={pathParam}
-              history={history}
-              creativeId={pathParam2}
-            />
+            <Query
+              query={PREVIEW_CONTRACT}
+              variables={{ contractId: pathParam }}
+              fetchPolicy="network-only"
+            >
+              {({ data, loading }) => {
+                return loading
+                  ? null
+                  : data && (
+                      <EditQuote
+                        history={history}
+                        jobId={pathParam}
+                        contractData={data.contractById}
+                      />
+                    );
+              }}
+            </Query>
           ) : page === 'view-job' && profile ? (
             <AppViewJob jobId={pathParam} history={history} />
           ) : page === 'view-proposal' ? (

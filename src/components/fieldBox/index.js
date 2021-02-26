@@ -35,7 +35,7 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
           >{`${title}`}</Typography>
           <Row j="flex-end" w={70}>
             <Typography className={classes.inputLabel}>{`${
-              maxLength > 0 && maxLength - value.length
+              maxLength > 0 ? maxLength - value.length : ''
             }`}</Typography>
             {(warning !== '' || info !== '') && (
               <Icon

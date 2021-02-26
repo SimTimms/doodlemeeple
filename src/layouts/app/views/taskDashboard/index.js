@@ -1,5 +1,5 @@
 import React from 'react';
-import { NoticeBoard, MiniDashCreator, Column } from '../../../../components';
+import { NoticeBoard, TaskComponent, Column } from '../../../../components';
 
 export default function TaskDashboard({ history, profile, setProfile }) {
   return (
@@ -9,7 +9,7 @@ export default function TaskDashboard({ history, profile, setProfile }) {
         setProfile={setProfile}
         history={history}
       />
-      <MiniDashCreator profile={profile} history={history} />
+      <TaskComponent profile={profile} history={history} />
     </Column>
   );
 }

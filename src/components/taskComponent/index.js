@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row } from '../';
+import { Row, LoadIcon } from '../';
 import { Query } from 'react-apollo';
 import { COUNTS } from '../../data/queries';
 import preferencesSet from '../../utils/preferencesSet';
@@ -14,9 +14,10 @@ import {
   TaskPostJob,
   TaskSocials,
   TaskContact,
+  SubmitQuote,
 } from '../../modules/tasks';
 
-export default function MiniDashCreator({ history, profile }) {
+export default function TaskComponent({ history, profile }) {
   return (
     <Row bg="#fff" j="space-between">
       <Query query={COUNTS} fetchPolicy="network-only">
@@ -24,25 +25,31 @@ export default function MiniDashCreator({ history, profile }) {
           if (loading) {
             return null;
           }
-          return (
+
+          const { messages, jobs, skills, socials, contact, draftQuotes } =
+            data && data.counts ? data.counts : {};
+
+          console.log(data);
+          return data ? (
             <Row wrap="wrap" pb={5}>
-              {data.counts.messages > 0 && (
+              {messages > 0 && (
                 <TaskUnreadMessages data={data} history={history} />
               )}
-              {data.counts.jobs > 0 && (
-                <TaskCheckProject data={data} history={history} />
-              )}
+              {jobs > 0 && <TaskCheckProject data={data} history={history} />}
               {!preferencesSet(profile) && <TaskRole history={history} />}
               {!profile.summary && <TaskSummary history={history} />}
               {!profile.profileImg && <TaskAvatar history={history} />}
               {!profile.profileBG && <TaskFeature history={history} />}
-              {data.counts.skills === 0 && <TaskSkill history={history} />}
-              {data.counts.jobs === 0 && profile.creatorTrue && (
+              {skills === 0 && <TaskSkill history={history} />}
+              {jobs === 0 && profile.creatorTrue && (
                 <TaskPostJob history={history} />
               )}
-              {data.counts.socials === 0 && <TaskSocials history={history} />}
-              {data.counts.contact === 0 && <TaskContact history={history} />}
+              {socials === 0 && <TaskSocials history={history} />}
+              {contact === 0 && <TaskContact history={history} />}
+              {draftQuotes > 0 && <SubmitQuote history={history} />}
             </Row>
+          ) : (
+            <LoadIcon />
           );
         }}
       </Query>

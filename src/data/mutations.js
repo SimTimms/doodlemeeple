@@ -240,9 +240,10 @@ export const CREATE_CONTRACT = gql`
     $currency: String!
     $cost: String!
     $jobId: MongoID!
+    $status: String!
   ) {
     contractCreateOne(
-      record: { currency: $currency, cost: $cost, job: $jobId }
+      record: { currency: $currency, cost: $cost, job: $jobId, status: $status }
     ) {
       recordId
       record {

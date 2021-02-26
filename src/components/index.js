@@ -17,7 +17,7 @@ import RoleObject from './roleObject';
 import ContentHeader from './headers/contentHeader';
 import StripeCheckout from './stripeCheckout';
 import Payments from './payments';
-import MiniDashCreator from './miniDashCreator';
+import TaskComponent from './taskComponent';
 import PaymentTermsWithdraw from './paymentTermsWithdraw';
 import ProjectComponentDash from './projectComponentDash';
 import MessageComponent from './messageComponent';
@@ -164,7 +164,7 @@ export {
   FavouriteButton,
   Availability,
   Speculative,
-  MiniDashCreator,
+  TaskComponent,
   InviteButton,
   NoticeBoard,
   NoticeBoardSecondary,

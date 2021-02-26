@@ -1,5 +1,8 @@
 import React from 'react';
 import { TaskButton } from '../';
+import { Mutation } from 'react-apollo';
+import { CREATE_CONTRACT } from '../../../data/mutations';
+import { toaster } from '../../../utils/toaster';
 
 export function TaskUnreadMessages({ data, history }) {
   return (
@@ -145,16 +148,49 @@ export function TaskContact({ history }) {
   );
 }
 
-export function TaskQuote({ setTabNbr }) {
+export function SubmitQuote({ history, quoteId }) {
   return (
     <TaskButton
-      title="Create a Quote"
-      subTitle="Invites"
-      icon="mail"
+      title="Complete your quote"
+      subTitle="Quotes"
+      icon="request_quote"
       color="warning"
       clickSound={true}
       zoom={true}
-      onClickEvent={() => setTabNbr(6)}
+      onClickEvent={() =>
+        quoteId
+          ? history.push(`/app/edit-quote/${quoteId}`)
+          : history.push(`/app/invites`)
+      }
     />
+  );
+}
+
+export function TaskQuote({ history, jobId }) {
+  return (
+    <Mutation
+      mutation={CREATE_CONTRACT}
+      variables={{ currency: 'GBP', cost: '100', jobId, status: 'draft' }}
+      onCompleted={(data) => {
+        toaster('Created');
+        history.push(`/app/edit-quote/${data.contractCreateOne._id}`);
+      }}
+    >
+      {(mutation) => {
+        return (
+          <TaskButton
+            title="Create a quote"
+            subTitle="Quotes"
+            icon="request_quote"
+            color="warning"
+            clickSound={true}
+            zoom={true}
+            onClickEvent={() => {
+              mutation();
+            }}
+          />
+        );
+      }}
+    </Mutation>
   );
 }

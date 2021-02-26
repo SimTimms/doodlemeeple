@@ -49,7 +49,7 @@ export default function AppInvites({ history }) {
           variables={{
             status:
               tabNbr === 1
-                ? ['unopened', 'read', 'quote_sent']
+                ? ['unopened', 'read', 'quote_sent', 'draft']
                 : tabNbr === 2
                 ? ['accepted']
                 : ['declined', 'rejected', 'closed', 'complete'],

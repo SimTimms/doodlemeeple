@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { NoticeBoard, MiniDashCreator, Column } from '../../../../components';
+import { NoticeBoard, TaskComponent, Column } from '../../../../components';
 import { getFeatured } from './getPosts';
 
 export default function AppDashboard({ history, profile, setProfile }) {
@@ -25,7 +25,6 @@ export default function AppDashboard({ history, profile, setProfile }) {
         history={history}
         featuredArticle={featuredArticle}
       />
-      <MiniDashCreator profile={profile} history={history} />
     </Column>
   );
 }

@@ -11,6 +11,7 @@ import {
   TaskSocials,
   TaskContact,
   TaskQuote,
+  SubmitQuote,
 } from './taskConstants';
 
 export {
@@ -26,4 +27,5 @@ export {
   TaskSocials,
   TaskContact,
   TaskQuote,
+  SubmitQuote,
 };
