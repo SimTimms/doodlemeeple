@@ -1,9 +1,10 @@
 import React from 'react';
 import { useStyles } from './styles';
-import { Column, Divider } from '../';
+import { Column, Divider } from '../../../../../components';
 import * as CONSTANTS from './constants';
-import profileComplete from '../../utils/profileComplete';
-import getRole from '../../utils/getRole';
+import profileComplete from '../../../../../utils/profileComplete';
+import getRole from '../../../../../utils/getRole';
+
 export default function NoticeBoard({ profile }) {
   const classes = useStyles();
   const role = getRole(profile);

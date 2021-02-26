@@ -14,7 +14,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  dull: { color: '#444' },
+  dull: { color: theme.palette.primary.main },
   red: { color: theme.palette.error.main },
   green: { color: theme.palette.secondary.main },
   profileThumb: {

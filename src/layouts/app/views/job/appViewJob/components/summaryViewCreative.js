@@ -11,6 +11,7 @@ import CreativeMenu from './creativeMenu';
 import EditProposalForm from './proposalForm/views/editProposal';
 import PaymentsView from './paymentsView';
 import CreativeJobSummary from './creativeJobSummary';
+import DeclineInviteView from './declineInviteView';
 
 export default function SummaryViewCreative({ job, history }) {
   const classes = useStyles();
@@ -90,6 +91,9 @@ export default function SummaryViewCreative({ job, history }) {
         </Column>
       )}
       {tabNbr === 7 && <FullContractComponent contractData={job.contract} />}
+      {tabNbr === 8 && (
+        <DeclineInviteView inviteId={invite._id} history={history} />
+      )}
       {conversationUser && (
         <ChatView
           job={jobData}

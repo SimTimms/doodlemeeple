@@ -32,7 +32,7 @@ export function TaskCheckProject({ data, history }) {
       }
       subTitle="Projects"
       icon="casino"
-      color="warning"
+      color="secondary"
       clickSound={true}
       zoom={true}
       onClickEvent={() => history.push('/app/projects')}
@@ -134,6 +134,21 @@ export function TaskSocials({ history }) {
     />
   );
 }
+
+export function TaskInvites({ history }) {
+  return (
+    <TaskButton
+      title="Respond to Invites"
+      subTitle="Invites"
+      icon="mail"
+      color="warning"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => history.push('/app/invites')}
+    />
+  );
+}
+
 export function TaskContact({ history }) {
   return (
     <TaskButton
@@ -148,13 +163,13 @@ export function TaskContact({ history }) {
   );
 }
 
-export function SubmitQuote({ history, quoteId }) {
+export function TaskSubmitQuote({ history, quoteId }) {
   return (
     <TaskButton
       title="Complete your quote"
       subTitle="Quotes"
       icon="request_quote"
-      color="warning"
+      color="secondary"
       clickSound={true}
       zoom={true}
       onClickEvent={() =>
@@ -182,7 +197,7 @@ export function TaskQuote({ history, jobId }) {
             title="Create a quote"
             subTitle="Quotes"
             icon="request_quote"
-            color="warning"
+            color="secondary"
             clickSound={true}
             zoom={true}
             onClickEvent={() => {
@@ -192,5 +207,35 @@ export function TaskQuote({ history, jobId }) {
         );
       }}
     </Mutation>
+  );
+}
+
+export function TaskDeclineInvite({ setTabNbr }) {
+  return (
+    <TaskButton
+      title="Decline this Invite"
+      subTitle="Quotes"
+      icon="request_quote"
+      color="warning"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => {
+        setTabNbr(8);
+      }}
+    />
+  );
+}
+
+export function TaskEditQuote({ history, setTabNbr }) {
+  return (
+    <TaskButton
+      title="Edit or Retract your quote"
+      subTitle="Optional"
+      icon="request_quote"
+      color="secondary"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => setTabNbr(6)}
+    />
   );
 }

@@ -8,10 +8,13 @@ import {
   TaskFeature,
   TaskSkill,
   TaskPostJob,
+  TaskInvites,
   TaskSocials,
   TaskContact,
   TaskQuote,
-  SubmitQuote,
+  TaskSubmitQuote,
+  TaskEditQuote,
+  TaskDeclineInvite,
 } from './taskConstants';
 
 export {
@@ -22,10 +25,13 @@ export {
   TaskSummary,
   TaskAvatar,
   TaskFeature,
+  TaskInvites,
   TaskSkill,
   TaskPostJob,
   TaskSocials,
   TaskContact,
   TaskQuote,
-  SubmitQuote,
+  TaskSubmitQuote,
+  TaskEditQuote,
+  TaskDeclineInvite,
 };

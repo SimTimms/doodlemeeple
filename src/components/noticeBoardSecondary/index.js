@@ -23,7 +23,7 @@ export default function NoticeBoardSecondary({
           <Typography
             variant="h6"
             align="center"
-            style={{ color: '#fff', marginBottom: 10 }}
+            style={{ color: '#fff', marginBottom: 10, maxWidth: 500 }}
           >
             {subTitle}
           </Typography>
@@ -34,17 +34,19 @@ export default function NoticeBoardSecondary({
         {buttonLocked ? (
           <UnlockInfo str={lockedMsg} c="#fff" />
         ) : (
-          <Slide direction="up" in={true} mountOnEnter unmountOnExit>
-            <div>
-              <IconButton
-                title="Continue"
-                icon="chevron_right"
-                iconPos="right"
-                color="text-white"
-                onClickEvent={() => onClickEvent()}
-              />
-            </div>
-          </Slide>
+          onClickEvent !== null && (
+            <Slide direction="up" in={true} mountOnEnter unmountOnExit>
+              <div>
+                <IconButton
+                  title="Continue"
+                  icon="chevron_right"
+                  iconPos="right"
+                  color="text-white"
+                  onClickEvent={() => onClickEvent()}
+                />
+              </div>
+            </Slide>
+          )
         )}
         {backEvent ? (
           <IconButton

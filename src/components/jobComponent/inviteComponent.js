@@ -59,7 +59,7 @@ export default function InviteComponent({ invite, history }) {
                       className={clsx({
                         [classes.dull]: true,
                         [classes.red]:
-                          unopened || declined || rejected || draft,
+                          unopened || declined || rejected || draft || opened,
                       })}
                     >
                       {draft
@@ -71,9 +71,9 @@ export default function InviteComponent({ invite, history }) {
                         : unopened
                         ? 'Unread'
                         : opened
-                        ? 'Opened'
+                        ? 'Task: Respond to Invite'
                         : quoted
-                        ? 'Quoted'
+                        ? 'Quote Submitted'
                         : rejected
                         ? 'Rejected'
                         : accepted && 'Accepted'}

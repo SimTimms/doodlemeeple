@@ -8,7 +8,7 @@ import {
 
 export default function InvitesDash({ invites, setConversationUser, history }) {
   return (
-    <Column w="50%" p={10}>
+    <Column w="50%" p={10} j="center">
       <Paper p={10}>
         <FieldTitleDashboard name="Invited Creatives" inline={false} />
         {invites.map((invite, index) => {

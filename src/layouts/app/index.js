@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import AppDrawer from '../menus/appDrawer';
 import AppDashboard from './views/appDashboard';
 import TaskDashboard from './views/taskDashboard';
+import NotificationDashboard from './views/notificationDashboard';
 import AppInvites from './views/appInvites';
 import AppHelp from './views/appHelp';
 import AppFailedPayment from './views/appFailedPayment';
@@ -33,6 +34,7 @@ import {
   IconButton,
 } from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
+import logout from '../../utils/logout';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('tasks');
@@ -136,6 +138,12 @@ function AppLayout(props) {
             />
           ) : page === 'tasks' && profile ? (
             <TaskDashboard
+              history={history}
+              profile={profile}
+              setProfile={setProfile}
+            />
+          ) : page === 'notifications' && profile ? (
+            <NotificationDashboard
               history={history}
               profile={profile}
               setProfile={setProfile}
@@ -269,6 +277,9 @@ function AppLayout(props) {
           setProfile(data.profile);
         }}
         fetchPolicy="network-only"
+        onError={(error) => {
+          logout(history);
+        }}
       >
         {({ data }) => {
           return null;

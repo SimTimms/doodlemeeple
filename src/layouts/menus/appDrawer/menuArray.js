@@ -53,6 +53,12 @@ export default function menuArray(history, counts, profile) {
       count: null,
     },
     {
+      name: 'Notifications',
+      icon: 'task_alt',
+      link: () => history.push('/app/notifications'),
+      count: null,
+    },
+    {
       name: 'Logout',
       icon: 'exit_to_app',
       link: () => {
