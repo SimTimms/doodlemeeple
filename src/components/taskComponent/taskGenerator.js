@@ -13,6 +13,8 @@ import {
   TaskContact,
   TaskSubmitQuote,
   TaskInvites,
+  TaskCloseProject,
+  TaskSubmitDraftProject,
 } from '../../modules/tasks';
 import preferencesSet from '../../utils/preferencesSet';
 import { useStyles } from './styles';
@@ -28,15 +30,22 @@ export default function TaskGenerator({
   contact,
   draftQuotes,
   invites,
+  totalDeclined,
+  draftJobs,
 }) {
   const classes = useStyles();
   const elementArray = [];
   if (messages > 0) {
     elementArray.push(<TaskUnreadMessages data={data} history={history} />);
   }
-  if (jobs > 0) {
+  if (totalDeclined > 0) {
+    elementArray.push(<TaskCloseProject data={data} history={history} />);
+  } else if (draftJobs > 0) {
+    elementArray.push(<TaskSubmitDraftProject data={data} history={history} />);
+  } else if (jobs > 0) {
     elementArray.push(<TaskCheckProject data={data} history={history} />);
   }
+
   if (!preferencesSet(profile)) {
     elementArray.push(<TaskRole history={history} />);
   }

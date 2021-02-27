@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography, Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Column, Divider, DividerMini, IconButton, UnlockInfo } from '../';
+import clsx from 'clsx';
 
 export default function NoticeBoardSecondary({
   children,
@@ -13,9 +14,14 @@ export default function NoticeBoardSecondary({
   ...props
 }) {
   const classes = useStyles();
-  const { backEvent } = props;
+  const { backEvent, subMenu } = props;
   return (
-    <div className={classes.noticeArea}>
+    <div
+      className={clsx({
+        [classes.noticeArea]: true,
+        [classes.noticeAreaWithSubMenu]: subMenu,
+      })}
+    >
       <Column>
         <Typography variant="h4">{title}</Typography>
         <DividerMini />

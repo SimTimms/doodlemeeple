@@ -12,6 +12,7 @@ export default function JobComponent({ job, game, history }) {
   );
   const contractsIn = job.contracts.length > 0;
   const submitted = job.submitted === 'submitted';
+  const totalDecline = job.submitted === 'totalDecline';
   const accepted = job.submitted === 'accepted';
   const paid = job.submitted === 'paid';
   const closed = job.submitted === 'closed';
@@ -50,8 +51,9 @@ export default function JobComponent({ job, game, history }) {
             className={clsx({
               [classes.cardSummaryNeutral]: true,
               [classes.cardSummary]: true,
-              [classes.cardSummaryWarning]: submitted || contractsIn,
-              [classes.cardSummaryGood]: paid || accepted,
+              [classes.cardSummaryWarning]:
+                contractsIn || totalDecline || draft,
+              [classes.cardSummaryGood]: paid || accepted || submitted,
             })}
           >
             {complete
@@ -66,7 +68,9 @@ export default function JobComponent({ job, game, history }) {
               ? 'Paid & Active'
               : contractsIn
               ? 'Quotes Received'
-              : 'Draft'}
+              : totalDecline
+              ? 'Inactive: All invites declined'
+              : 'Task: Finish and submit'}
           </Typography>
         </Column>
         {job.invites.map((invite, index) => {

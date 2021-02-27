@@ -826,6 +826,8 @@ export const COUNTS = gql`
       contact
       skills
       draftQuotes
+      totalDeclined
+      draftJobs
     }
   }
 `;

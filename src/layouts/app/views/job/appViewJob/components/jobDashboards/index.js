@@ -1,6 +1,6 @@
 import React from 'react';
 import { Column, Row, LoadIcon } from '../../../../../../../components';
-import InvitesDash from './InvitesDash';
+import ProjectDash from './ProjectDash';
 import CreativeDash from './CreativeDash';
 import CheckListCreativeDash from './CheckListCreativeDash';
 
@@ -46,11 +46,13 @@ export function CreatorDashboard({
   return (
     <Column a="center">
       {!job.activeContract && (
-        <InvitesDash
+        <ProjectDash
           invites={job.invites}
           setConversationUser={setConversationUser}
           jobClosed={job.submitted === 'closed'}
           history={history}
+          job={job}
+          setTabNbr={setTabNbr}
         />
       )}
       {job.activeContract && (

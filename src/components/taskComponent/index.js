@@ -21,6 +21,8 @@ export default function TaskComponent({ history, profile }) {
             contact,
             draftQuotes,
             invites,
+            totalDeclined,
+            draftJobs,
           } = data && data.counts ? data.counts : {};
 
           return data ? (
@@ -36,6 +38,8 @@ export default function TaskComponent({ history, profile }) {
                 contact={contact}
                 draftQuotes={draftQuotes}
                 invites={invites}
+                totalDeclined={totalDeclined}
+                draftJobs={draftJobs}
               />
             </Row>
           ) : (

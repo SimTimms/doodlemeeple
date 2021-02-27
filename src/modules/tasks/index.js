@@ -15,6 +15,9 @@ import {
   TaskSubmitQuote,
   TaskEditQuote,
   TaskDeclineInvite,
+  TaskCloseProject,
+  TaskCloseThisProject,
+  TaskSubmitDraftProject,
 } from './taskConstants';
 
 export {
@@ -34,4 +37,7 @@ export {
   TaskSubmitQuote,
   TaskEditQuote,
   TaskDeclineInvite,
+  TaskCloseProject,
+  TaskCloseThisProject,
+  TaskSubmitDraftProject,
 };

@@ -12,6 +12,7 @@ import ChatView from '../components/chatView';
 import PaymentsView from './paymentsView';
 import CreatorMenu from './creatorMenu';
 import CreatorJobSummary from './creatorJobSummary';
+import CloseJobView from '../components/closeJobView';
 
 export default function SummaryViewCreator({
   job,
@@ -78,6 +79,11 @@ export default function SummaryViewCreator({
               refreshCount={refreshCount}
               setRefreshCount={setRefreshCount}
             />
+          </Column>
+        )}
+        {tabNbr === 7 && (
+          <Column>
+            <CloseJobView jobId={job._id} history={history} />
           </Column>
         )}
         {conversationUser && (

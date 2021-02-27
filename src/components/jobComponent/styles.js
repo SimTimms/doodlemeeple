@@ -77,7 +77,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   cardSummary: { overflow: 'hidden' },
   cardSummaryNeutral: {
-    color: '#444',
+    color: theme.palette.primary.main,
   },
   cardSummaryWarning: { color: theme.palette.error.main },
   cardSummaryGood: { color: theme.palette.secondary.main },

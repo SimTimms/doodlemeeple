@@ -40,6 +40,51 @@ export function TaskCheckProject({ data, history }) {
   );
 }
 
+export function TaskSubmitDraftProject({ data, history }) {
+  return (
+    <TaskButton
+      title={
+        data.counts.draftJobs === 1
+          ? 'Submit your Project'
+          : 'Submit your projects'
+      }
+      subTitle="Projects"
+      icon="casino"
+      color="secondary"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => history.push(`/app/view-job/${}`)}
+    />
+  );
+}
+
+export function TaskCloseProject({ data, history }) {
+  return (
+    <TaskButton
+      title="Close an inactive project"
+      subTitle="Projects"
+      icon="casino"
+      color="warning"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => history.push('/app/projects')}
+    />
+  );
+}
+
+export function TaskCloseThisProject({ setTabNbr, history }) {
+  return (
+    <TaskButton
+      title="Close this project"
+      subTitle="Projects"
+      icon="casino"
+      color="warning"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => setTabNbr(7)}
+    />
+  );
+}
 export function TaskRole({ history }) {
   return (
     <TaskButton

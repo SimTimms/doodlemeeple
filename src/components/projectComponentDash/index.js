@@ -8,7 +8,6 @@ export default function ProjectComponentDash({
   jobSummary,
   setTabNbr,
 }) {
-  const classes = useStyles();
   return (
     <Column j="space-between" a="center">
       <Column j="space-between" a="center">

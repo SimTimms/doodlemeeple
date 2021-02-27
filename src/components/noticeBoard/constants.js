@@ -28,14 +28,13 @@ export const SET_UP_CREATIVE_SUB = (
 
 export const SET_UP = (
   <Typography variant="h3" style={{ color: '#fff' }} align="center">
-    You're Good!
+    Tasks
   </Typography>
 );
 
 export const SET_UP_SUB = (
   <Typography variant="h6" style={{ color: '#fff' }} align="center">
-    You don't have anything that needs doing right now but you'll see tasks here
-    when you need to take an action.
+    You'll see tasks here when you need to take an action.
   </Typography>
 );
 

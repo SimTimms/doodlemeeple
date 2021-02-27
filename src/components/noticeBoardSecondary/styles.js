@@ -12,4 +12,7 @@ export const useStyles = makeStyles((theme) => ({
       'linear-gradient(180deg, rgba(52,190,177,1) 0%, rgba(52,190,177,1) 53%, rgba(39,168,156,1) 100%)',
     '& h4': { color: '#fff' },
   },
+  noticeAreaWithSubMenu: {
+    minHeight: 'calc(100vh - 124px)',
+  },
 }));
