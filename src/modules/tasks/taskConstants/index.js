@@ -53,7 +53,7 @@ export function TaskSubmitDraftProject({ data, history }) {
       color="secondary"
       clickSound={true}
       zoom={true}
-      onClickEvent={() => history.push(`/app/view-job/${}`)}
+      onClickEvent={() => history.push(`/app/view-job/${'d'}`)}
     />
   );
 }
