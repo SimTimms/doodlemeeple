@@ -35,9 +35,11 @@ export default function TaskGenerator({
 }) {
   const classes = useStyles();
   const elementArray = [];
+
   if (messages > 0) {
     elementArray.push(<TaskUnreadMessages data={data} history={history} />);
   }
+
   if (totalDeclined > 0) {
     elementArray.push(<TaskCloseProject data={data} history={history} />);
   } else if (draftJobs > 0) {
