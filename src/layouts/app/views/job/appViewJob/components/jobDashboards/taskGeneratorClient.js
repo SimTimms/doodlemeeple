@@ -13,13 +13,14 @@ export default function TaskGeneratorClient({
   contracts,
   setOpenQuoteId,
   history,
+  accepted,
 }) {
   const classes = useStyles();
   const elementArray = [];
   const noContracts = contracts.length === 0;
   const isDraft = job.submitted === 'draft';
 
-  {
+  !accepted &&
     contracts.map((contract, index) => {
       elementArray.push(
         <TaskOpenQuote
@@ -28,7 +29,7 @@ export default function TaskGeneratorClient({
         />
       );
     }, elementArray);
-  }
+
   isDraft &&
     elementArray.push(
       <TaskContinueWithJobDraft history={history} jobId={job._id} />

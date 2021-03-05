@@ -63,6 +63,7 @@ export default function ProjectDash({
                 contracts={job.contracts}
                 setOpenQuoteId={setOpenQuoteId}
                 history={history}
+                accepted={accepted}
               />
             </Row>
           </Column>
