@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStyles } from './styles';
 import { useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 import AppDrawer from '../menus/appDrawer';
 import AppDashboard from './views/appDashboard';
 import TaskDashboard from './views/taskDashboard';
+import CommunityPage from './views/communityPage';
 import NotificationDashboard from './views/notificationDashboard';
 import AppInvites from './views/appInvites';
 import AppHelp from './views/appHelp';
@@ -38,6 +39,7 @@ import logout from '../../utils/logout';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('tasks');
+  const [activeButton, setActiveButton] = React.useState('Tasks');
   const [profile, setProfile] = React.useState(null);
   const pageJump = props.match ? props.match.params.page : null;
   const mobile = useMediaQuery('(max-width:800px)');
@@ -82,6 +84,16 @@ function AppLayout(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  function drawerButtonChange(url, page) {
+    setActiveButton(page);
+    history.push(url);
+  }
+
+  useEffect(() => {
+    setActiveButton(page);
+  }, [page]);
+
   return (
     <div className={classes.root}>
       <ToastContainer />
@@ -119,7 +131,7 @@ function AppLayout(props) {
           handleDrawerOpen={handleDrawerOpen}
           open={open}
           history={history}
-          page={page}
+          activeButton={activeButton}
           profile={profile}
         />
       )}
@@ -141,6 +153,7 @@ function AppLayout(props) {
               history={history}
               profile={profile}
               setProfile={setProfile}
+              drawerButtonChange={drawerButtonChange}
             />
           ) : page === 'notifications' && profile ? (
             <NotificationDashboard
@@ -241,6 +254,8 @@ function AppLayout(props) {
             <FullContract contractId={pathParam} history={history} />
           ) : page === 'edit-contract' ? (
             <EditContract contractId={pathParam} history={history} />
+          ) : page === 'community' ? (
+            <CommunityPage history={history} />
           ) : page === 'public-preview' ? (
             <PreviewProfile
               profileId={pathParam}

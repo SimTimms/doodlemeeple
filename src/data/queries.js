@@ -828,6 +828,7 @@ export const COUNTS = gql`
       draftQuotes
       totalDeclined
       draftJobs
+      unansweredQuotes
     }
   }
 `;

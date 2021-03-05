@@ -25,7 +25,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   taskIcon: { color: 'rgba(255,255,255,0.6)', fontSize: 12, marginRight: 4 },
   taskTitle: {
-    color: 'rgba(255,255,255,0.8)',
+    color: 'rgba(255,255,255,0.9)',
     marginLeft: 5,
     marginRight: 5,
     marginTop: 4,

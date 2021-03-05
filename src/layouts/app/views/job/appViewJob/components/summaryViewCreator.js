@@ -13,7 +13,7 @@ import PaymentsView from './paymentsView';
 import CreatorMenu from './creatorMenu';
 import CreatorJobSummary from './creatorJobSummary';
 import CloseJobView from '../components/closeJobView';
-
+import QuotePreview from './quotePreview';
 export default function SummaryViewCreator({
   job,
   history,

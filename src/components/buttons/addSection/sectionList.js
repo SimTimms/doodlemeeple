@@ -23,6 +23,7 @@ export default function SectionList({
   useEffect(() => {
     setPage(userType.creator ? 1 : 0);
   }, [userType]);
+
   return (
     <div
       className={clsx({

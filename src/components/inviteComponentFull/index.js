@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
@@ -9,6 +9,7 @@ import {
   FullContractComponent,
   BorderBox,
   Signature,
+  DividerWithBorder,
 } from '../';
 import clsx from 'clsx';
 import { PREVIEW_CONTRACT } from '../../data/queries';
@@ -21,6 +22,7 @@ export default function InviteComponentFull({
   contract,
   setTabNbr,
   history,
+  isOpen,
 }) {
   const classes = useStyles();
   const [display, setDisplay] = React.useState(false);
@@ -29,6 +31,10 @@ export default function InviteComponentFull({
   const quoted = invite.status === 'quote_sent';
   const read = invite.status === 'read';
   const declined = invite.status === 'declined';
+
+  useEffect(() => {
+    setDisplay(isOpen);
+  }, [isOpen]);
 
   return (
     <div style={{ width: '100%', opacity: declined && 0.5 }}>
@@ -67,7 +73,7 @@ export default function InviteComponentFull({
                   : read
                   ? 'Opened'
                   : quoted
-                  ? 'Quoted'
+                  ? 'Task: Reply to Quote'
                   : declined && 'Declined'}
               </Typography>
             </Column>
@@ -114,57 +120,43 @@ export default function InviteComponentFull({
           >
             {({ data }) => {
               return data ? (
-                <div
-                  style={{
-                    background: '#efeff5',
-                    marginTop: 20,
-                    width: '100%',
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '100%',
-                      background: '#fff',
-                      boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-                    }}
-                  >
-                    {tabNbrTwo === 0 && (
-                      <BorderBox>
-                        <ContractSummaryForCreator
-                          contractData={data.contractById}
+                <Column>
+                  {tabNbrTwo === 0 && (
+                    <Column>
+                      <DividerWithBorder />
+                      <ContractSummaryForCreator
+                        contractData={data.contractById}
+                      />
+                      <DividerWithBorder />
+                      {contract.status !== 'accepted' && (
+                        <ActionSetOne
+                          setTabNbrTwo={setTabNbrTwo}
+                          setTabNbr={setTabNbr}
+                          contract={contract}
+                          history={history}
                         />
-                        {contract.status !== 'accepted' && (
-                          <ActionSetOne
-                            setTabNbrTwo={setTabNbrTwo}
-                            setTabNbr={setTabNbr}
-                            contract={contract}
-                            history={history}
-                          />
-                        )}
-                      </BorderBox>
-                    )}
-                    {tabNbrTwo === 1 && (
-                      <BorderBox>
-                        <FullContractComponent
-                          contractData={data.contractById}
-                        />
-                        <Signature
-                          contractData={contract}
-                          onAccept={() => {
-                            history.push(
-                              `/app/view-job/${data.contractById.job._id}`
-                            );
-                          }}
-                          onDecline={() =>
-                            history.push(
-                              `/app/view-job/${data.contractById.job._id}`
-                            )
-                          }
-                        />
-                      </BorderBox>
-                    )}
-                  </div>
-                </div>
+                      )}
+                    </Column>
+                  )}
+                  {tabNbrTwo === 1 && (
+                    <BorderBox>
+                      <FullContractComponent contractData={data.contractById} />
+                      <Signature
+                        contractData={contract}
+                        onAccept={() => {
+                          history.push(
+                            `/app/view-job/${data.contractById.job._id}`
+                          );
+                        }}
+                        onDecline={() =>
+                          history.push(
+                            `/app/view-job/${data.contractById.job._id}`
+                          )
+                        }
+                      />
+                    </BorderBox>
+                  )}
+                </Column>
               ) : null;
             }}
           </Query>

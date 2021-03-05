@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Divider, Drawer, List, useMediaQuery } from '@material-ui/core';
 import { useStyles } from '../styles';
 import clsx from 'clsx';
@@ -16,8 +16,7 @@ export default function AppDrawer({
   ...props
 }) {
   const { drawerOpenTablet, drawerRoot, drawerClosed } = useStyles();
-
-  const { profile } = props;
+  const { profile, activeButton } = props;
   const mobile = useMediaQuery('(max-width:800px)');
   const [isOpen, setIsOpen] = React.useState(false);
   const [page, setPage] = React.useState('Tasks');
@@ -26,6 +25,10 @@ export default function AppDrawer({
     messages: 0,
     quotes: 0,
   });
+
+  useEffect(() => {
+    setPage(activeButton);
+  }, [activeButton]);
 
   return (
     <Drawer
@@ -53,11 +56,11 @@ export default function AppDrawer({
                     count: text.count ? text.count.count : 0,
                   }}
                   onClickEvent={() => {
-                    setPage(text.name);
+                    setPage(text.machineName);
                     text.link();
                     handleDrawerClose();
                   }}
-                  active={text.name === page}
+                  active={text.machineName === page}
                   key={`menu_${index}`}
                   countIcon={text.count ? text.count.icon : 'star'}
                 />

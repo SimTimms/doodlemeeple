@@ -3,6 +3,7 @@ import { Column, Row, LoadIcon } from '../../../../../../../components';
 import ProjectDash from './ProjectDash';
 import CreativeDash from './CreativeDash';
 import CheckListCreativeDash from './CheckListCreativeDash';
+import QuotePreview from '../quotePreview';
 
 export function CreativeDashboard({
   job,

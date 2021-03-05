@@ -15,6 +15,8 @@ import {
   TaskInvites,
   TaskCloseProject,
   TaskSubmitDraftProject,
+  TaskCommunity,
+  UnansweredQuotes,
 } from '../../modules/tasks';
 import preferencesSet from '../../utils/preferencesSet';
 import { useStyles } from './styles';
@@ -32,6 +34,8 @@ export default function TaskGenerator({
   invites,
   totalDeclined,
   draftJobs,
+  unansweredQuotes,
+  drawerButtonChange,
 }) {
   const classes = useStyles();
   const elementArray = [];
@@ -86,9 +90,14 @@ export default function TaskGenerator({
   if (invites > 0) {
     elementArray.push(<TaskInvites history={history} />);
   }
+
+  if (unansweredQuotes > 0) {
+    elementArray.push(<UnansweredQuotes history={history} />);
+  }
+
   return elementArray.length > 0 ? (
     elementArray
   ) : (
-    <Typography className={classes.noTask}>No Tasks</Typography>
+    <TaskCommunity drawerButtonChange={drawerButtonChange} />
   );
 }

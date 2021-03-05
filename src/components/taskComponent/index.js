@@ -4,7 +4,11 @@ import { Query } from 'react-apollo';
 import { COUNTS } from '../../data/queries';
 import TaskGenerator from './taskGenerator';
 
-export default function TaskComponent({ history, profile }) {
+export default function TaskComponent({
+  history,
+  profile,
+  drawerButtonChange,
+}) {
   return (
     <Row bg="#fff" j="space-between">
       <Query query={COUNTS} fetchPolicy="network-only">
@@ -12,7 +16,7 @@ export default function TaskComponent({ history, profile }) {
           if (loading) {
             return null;
           }
-
+          console.log(data);
           const {
             messages,
             jobs,
@@ -23,8 +27,9 @@ export default function TaskComponent({ history, profile }) {
             invites,
             totalDeclined,
             draftJobs,
+            unansweredQuotes,
           } = data && data.counts ? data.counts : {};
-
+          console.log(data);
           return data ? (
             <Row wrap="wrap" pb={5}>
               <TaskGenerator
@@ -40,6 +45,8 @@ export default function TaskComponent({ history, profile }) {
                 invites={invites}
                 totalDeclined={totalDeclined}
                 draftJobs={draftJobs}
+                unansweredQuotes={unansweredQuotes}
+                drawerButtonChange={drawerButtonChange}
               />
             </Row>
           ) : (

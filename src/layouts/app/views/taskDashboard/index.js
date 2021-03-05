@@ -1,7 +1,12 @@
 import React from 'react';
 import { NoticeBoard, TaskComponent, Column } from '../../../../components';
 
-export default function TaskDashboard({ history, profile, setProfile }) {
+export default function TaskDashboard({
+  history,
+  profile,
+  setProfile,
+  drawerButtonChange,
+}) {
   return (
     <Column>
       <NoticeBoard
@@ -9,7 +14,11 @@ export default function TaskDashboard({ history, profile, setProfile }) {
         setProfile={setProfile}
         history={history}
       />
-      <TaskComponent profile={profile} history={history} />
+      <TaskComponent
+        profile={profile}
+        history={history}
+        drawerButtonChange={drawerButtonChange}
+      />
     </Column>
   );
 }

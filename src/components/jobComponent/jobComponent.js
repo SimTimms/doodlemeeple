@@ -18,6 +18,21 @@ export default function JobComponent({ job, game, history }) {
   const closed = job.submitted === 'closed';
   const complete = job.submitted === 'complete';
   const draft = job.submitted === 'draft';
+  const hasNewQuote = contractsArr.map((item) => item.status === 'submitted');
+
+  const status = totalDecline
+    ? 'totalDecline'
+    : hasNewQuote.length > 0
+    ? 'newQuote'
+    : contractsIn
+    ? 'hasContracts'
+    : submitted
+    ? 'jobSubmitted'
+    : accepted
+    ? 'jobAccepted'
+    : closed
+    ? 'jobClosed'
+    : draft && 'jobDraft ';
 
   return (
     <CardComponent
@@ -52,11 +67,18 @@ export default function JobComponent({ job, game, history }) {
               [classes.cardSummaryNeutral]: true,
               [classes.cardSummary]: true,
               [classes.cardSummaryWarning]:
-                contractsIn || totalDecline || draft,
-              [classes.cardSummaryGood]: paid || accepted || submitted,
+                status === 'hasContracts' ||
+                status === 'totalDecline' ||
+                status === 'jobDraft' ||
+                status === 'newQuote' ||
+                draft,
+              [classes.cardSummaryGood]:
+                status === 'jobAccepted' || status === 'jobSubmitted',
             })}
           >
-            {complete
+            {hasNewQuote.length > 0
+              ? 'Task: Reply to Quote'
+              : complete
               ? 'Completed'
               : submitted
               ? 'Invites sent'
@@ -70,7 +92,7 @@ export default function JobComponent({ job, game, history }) {
               ? 'Quotes Received'
               : totalDecline
               ? 'Inactive: All invites declined'
-              : 'Task: Finish and submit'}
+              : draft && 'Task: Finish and submit'}
           </Typography>
         </Column>
         {job.invites.map((invite, index) => {

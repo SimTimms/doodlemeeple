@@ -18,6 +18,9 @@ import {
   TaskCloseProject,
   TaskCloseThisProject,
   TaskSubmitDraftProject,
+  TaskCommunity,
+  UnansweredQuotes,
+  TaskOpenQuote,
 } from './taskConstants';
 
 export {
@@ -40,4 +43,7 @@ export {
   TaskCloseProject,
   TaskCloseThisProject,
   TaskSubmitDraftProject,
+  TaskCommunity,
+  UnansweredQuotes,
+  TaskOpenQuote,
 };
