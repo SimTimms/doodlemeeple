@@ -18,28 +18,27 @@ export default function JobComponent({ job, game, history }) {
   const closed = job.submitted === 'closed';
   const complete = job.submitted === 'complete';
   const draft = job.submitted === 'draft';
-  const hasNewQuote = contractsArr.map((item) => item.status === 'submitted');
-
+  const hasNewQuote = contractsArr.filter(
+    (item) => item.status === 'submitted'
+  );
+  console.log(hasNewQuote);
   const status = totalDecline
     ? 'totalDecline'
     : hasNewQuote.length > 0
     ? 'newQuote'
+    : accepted
+    ? 'jobAccepted'
     : contractsIn
     ? 'hasContracts'
     : submitted
     ? 'jobSubmitted'
-    : accepted
-    ? 'jobAccepted'
     : closed
     ? 'jobClosed'
     : draft && 'jobDraft ';
-
   return (
     <CardComponent
       onClickEvent={() => {
-        draft
-          ? history.push(`/app/edit-job/${job._id}`)
-          : history.push(`/app/view-job/${job._id}`);
+        history.push(`/app/view-job/${job._id}`);
       }}
     >
       <Row>
@@ -85,7 +84,7 @@ export default function JobComponent({ job, game, history }) {
               : closed
               ? 'Closed'
               : accepted
-              ? 'Awaiting Payment'
+              ? 'In Progress'
               : paid
               ? 'Paid & Active'
               : contractsIn

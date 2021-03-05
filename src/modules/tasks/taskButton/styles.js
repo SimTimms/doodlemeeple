@@ -10,6 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     borderBottom: '1px solid rgba(0,0,0,0.1)',
     marginLeft: 2,
     marginRight: 2,
+    width: 180,
   },
   primary: {
     background: theme.palette.primary.main,
@@ -23,12 +24,17 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.error.main,
     '&:hover': { background: theme.palette.error.light },
   },
+  grey: {
+    background: '#ababba',
+    '&:hover': { background: '#bebed1' },
+  },
   taskIcon: { color: 'rgba(255,255,255,0.6)', fontSize: 12, marginRight: 4 },
   taskTitle: {
     color: 'rgba(255,255,255,0.9)',
     marginLeft: 5,
     marginRight: 5,
     marginTop: 4,
+    fontWeight: 700,
   },
   taskSubTitle: {
     color: 'rgba(255,255,255,0.6)',

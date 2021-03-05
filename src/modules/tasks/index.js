@@ -21,6 +21,7 @@ import {
   TaskCommunity,
   UnansweredQuotes,
   TaskOpenQuote,
+  TaskContinueWithJobDraft,
 } from './taskConstants';
 
 export {
@@ -46,4 +47,5 @@ export {
   TaskCommunity,
   UnansweredQuotes,
   TaskOpenQuote,
+  TaskContinueWithJobDraft,
 };

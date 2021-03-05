@@ -46,23 +46,14 @@ export function CreatorDashboard({
 }) {
   return (
     <Column a="center">
-      {!job.activeContract && (
-        <ProjectDash
-          invites={job.invites}
-          setConversationUser={setConversationUser}
-          jobClosed={job.submitted === 'closed'}
-          history={history}
-          job={job}
-          setTabNbr={setTabNbr}
-        />
-      )}
-      {job.activeContract && (
-        <CreativeDash
-          setConversationUser={setConversationUser}
-          history={history}
-          job={job}
-        />
-      )}
+      <ProjectDash
+        invites={job.invites}
+        setConversationUser={setConversationUser}
+        jobClosed={job.submitted === 'closed'}
+        history={history}
+        job={job}
+        setTabNbr={setTabNbr}
+      />
     </Column>
   );
 }

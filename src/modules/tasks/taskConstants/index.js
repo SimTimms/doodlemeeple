@@ -30,7 +30,7 @@ export function TaskCheckProject({ data, history }) {
           ? 'Check in on your project'
           : 'Check in on your projects'
       }
-      subTitle="Projects"
+      subTitle="Project"
       icon="work"
       color="secondary"
       clickSound={true}
@@ -48,7 +48,7 @@ export function TaskSubmitDraftProject({ data, history }) {
           ? 'Submit your Project'
           : 'Submit your projects'
       }
-      subTitle="Projects"
+      subTitle="Project"
       icon="work"
       color="secondary"
       clickSound={true}
@@ -62,7 +62,7 @@ export function TaskCloseProject({ data, history }) {
   return (
     <TaskButton
       title="Close an inactive project"
-      subTitle="Projects"
+      subTitle="Project"
       icon="work"
       color="secondary"
       clickSound={true}
@@ -76,9 +76,9 @@ export function TaskCloseThisProject({ setTabNbr, history }) {
   return (
     <TaskButton
       title="Close this project"
-      subTitle="Projects"
-      icon="work"
-      color="secondary"
+      subTitle="Optional"
+      icon="alt_route"
+      color="grey"
       clickSound={true}
       zoom={true}
       onClickEvent={() => setTabNbr(7)}
@@ -90,7 +90,7 @@ export function TaskOpenQuote({ setOpenQuoteId }) {
   return (
     <TaskButton
       title="Reply to a Quote"
-      subTitle="Projects"
+      subTitle="Project"
       icon="work"
       color="secondary"
       clickSound={true}
@@ -104,7 +104,7 @@ export function UnansweredQuotes({ history }) {
   return (
     <TaskButton
       title="You have a Quote"
-      subTitle="Projects"
+      subTitle="Project"
       icon="work"
       color="secondary"
       clickSound={true}
@@ -185,12 +185,26 @@ export function TaskPostJob({ history }) {
   return (
     <TaskButton
       title="Post a Job"
-      subTitle="Projects"
+      subTitle="Project"
       icon="work"
       color="primary"
       clickSound={true}
       zoom={true}
       onClickEvent={() => history.push('/app/edit-job/new')}
+    />
+  );
+}
+
+export function TaskContinueWithJobDraft({ jobId, history }) {
+  return (
+    <TaskButton
+      title="Submit this Project"
+      subTitle="Project"
+      icon="work"
+      color="primary"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => history.push(`/app/edit-job/${jobId}`)}
     />
   );
 }
@@ -306,7 +320,7 @@ export function TaskEditQuote({ history, setTabNbr }) {
       title="Edit or Retract your quote"
       subTitle="Optional"
       icon="alt_route"
-      color="secondary"
+      color="grey"
       clickSound={true}
       zoom={true}
       onClickEvent={() => setTabNbr(6)}
@@ -320,7 +334,7 @@ export function TaskCommunity({ drawerButtonChange }) {
       title="Check out the community page"
       subTitle="Optional"
       icon="alt_route"
-      color="primary"
+      color="grey"
       clickSound={true}
       zoom={true}
       onClickEvent={() => drawerButtonChange('/app/community', 'Community')}

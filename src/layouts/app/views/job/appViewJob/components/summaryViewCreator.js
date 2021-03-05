@@ -13,7 +13,6 @@ import PaymentsView from './paymentsView';
 import CreatorMenu from './creatorMenu';
 import CreatorJobSummary from './creatorJobSummary';
 import CloseJobView from '../components/closeJobView';
-import QuotePreview from './quotePreview';
 export default function SummaryViewCreator({
   job,
   history,
@@ -26,10 +25,11 @@ export default function SummaryViewCreator({
   const [tabNbr, setTabNbr] = React.useState(-1);
   const [messages, setMessages] = React.useState([]);
   const [jobData, setJobData] = React.useState(null);
-
+  const jobClosed = job.submitted === 'closed';
   useEffect(() => {
     setJobData({ ...job });
-  }, [job]);
+    setTabNbr(jobClosed ? 1 : -1);
+  }, [job, jobClosed]);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -38,7 +38,7 @@ export default function SummaryViewCreator({
           tabNbr={tabNbr}
           setTabNbr={setTabNbr}
           activeContract={job.activeContract}
-          jobClosed={job.submitted === 'closed'}
+          jobClosed={jobClosed}
         />
         {tabNbr === -1 && jobData && (
           <Column>

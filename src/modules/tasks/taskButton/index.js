@@ -28,6 +28,7 @@ function ButtonObj({ ...props }) {
         [classes.primary]: color === 'primary',
         [classes.secondary]: color === 'secondary',
         [classes.warning]: color === 'warning',
+        [classes.grey]: color === 'grey',
       })}
       disabled={disabled}
       onClick={() => {
@@ -46,7 +47,13 @@ function ButtonObj({ ...props }) {
           >
             {icon}
           </Icon>
-          <Typography className={classes.taskSubTitle}>{subTitle}</Typography>
+          <Typography
+            className={clsx({
+              [classes.taskSubTitle]: true,
+            })}
+          >
+            {subTitle}
+          </Typography>
         </Row>
         <Typography className={classes.taskTitle}>{title}</Typography>
       </Column>

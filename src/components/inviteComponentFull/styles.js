@@ -43,5 +43,7 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     '&:hover': { opacity: 0.8 },
   },
+
+  contactIcon: { width: 20, marginRight: 10 },
   clickable: { cursor: 'pointer', '&:hover': { opacity: 0.8 } },
 }));
