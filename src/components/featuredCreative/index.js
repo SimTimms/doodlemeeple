@@ -2,16 +2,13 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Column, IconButton, LoadIcon, Row } from '../';
-import { Mutation, Query } from 'react-apollo';
-import { SET_AS_CREATOR } from '../../data/mutations';
-import stripeLogoSM from '../../assets/stripe_logo_sm.png';
+import { Query } from 'react-apollo';
+
 import { PROFILE_FEATURED } from '../../data/queries';
 import device from '../../assets/device.svg';
 import { excerptReplace } from '../../utils/excerptReplace';
-import miniOne from '../../assets/miniOne.jpg';
-import { CategoryBox, CategoryBoxMini } from './categoryBox';
 
-export function FeaturedCreative({ history, featuredArticle }) {
+export default function FeaturedCreative({ history, featuredArticle }) {
   const classes = useStyles();
 
   return (

@@ -17,7 +17,23 @@ export function TaskUnreadMessages({ data, history }) {
       color="warning"
       clickSound={true}
       zoom={true}
-      onClickEvent={() => history.push('/messages/conversations')}
+      onClickEvent={() => history.push('/app/conversations')}
+    />
+  );
+}
+
+export function TaskPatreon({ data, history }) {
+  return (
+    <TaskButton
+      title="Perk up your account"
+      subTitle="Patreon"
+      icon="work"
+      color="primary"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() =>
+        (window.location = 'https://www.patreon.com/doodlemeeple')
+      }
     />
   );
 }
@@ -26,9 +42,7 @@ export function TaskCheckProject({ data, history }) {
   return (
     <TaskButton
       title={
-        data.counts.jobs === 1
-          ? 'Check in on your project'
-          : 'Check in on your projects'
+        data.counts.jobs === 1 ? 'Check your project' : 'Check your projects'
       }
       subTitle="Project"
       icon="work"
@@ -61,7 +75,7 @@ export function TaskSubmitDraftProject({ data, history }) {
 export function TaskCloseProject({ data, history }) {
   return (
     <TaskButton
-      title="Close an inactive project"
+      title="Close inactive project"
       subTitle="Project"
       icon="work"
       color="secondary"

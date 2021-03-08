@@ -16,6 +16,8 @@ export const CREATIVES = gql`
       badges {
         badgeType
         link
+        badgeIcon
+        description
       }
       viewCount
       paymentMethod
@@ -151,37 +153,6 @@ export const GET_MESSAGES = gql`
       job {
         _id
         name
-      }
-    }
-  }
-`;
-
-export const CONVERSATION = gql`
-  query GetConversation($conversationId: String!, $page: Int!) {
-    getConversation(conversationId: $conversationId, page: $page) {
-      id
-      createdAt
-      messages {
-        id
-        messageStr
-        createdAt
-        sender {
-          id
-          name
-          profileImg
-        }
-      }
-      participants {
-        id
-        name
-        profileImg
-      }
-      job {
-        id
-        name
-        game {
-          backgroundImg
-        }
       }
     }
   }

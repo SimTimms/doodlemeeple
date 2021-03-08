@@ -30,7 +30,7 @@ export default function menuArray(history, counts, profile) {
       name: profile.creativeTrue || profile.creatorTrue ? 'Messages' : 'hide',
       icon: 'chat',
       machineName: 'messages',
-      link: () => history.push('/messages/conversations'),
+      link: () => history.push('/app/conversations'),
       color: '',
       count:
         counts.messages > 0

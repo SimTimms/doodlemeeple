@@ -1,42 +1,63 @@
 import React, { useEffect } from 'react';
-import { Button, Icon } from '@material-ui/core';
+import { Icon, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
-import { toaster } from '../../../utils/toaster';
+import { Mutation } from 'react-apollo';
+import { ADD_FAVOURITE } from '../../../data/mutations';
 
-export default function FavouriteButton({ styleAdd, mutation, favourite }) {
+export default function FavouriteButton({ favourite, creative }) {
   const classes = useStyles();
-  const [on, setOn] = React.useState(false);
+
+  const [isFav, setIsFav] = React.useState(false);
+  const [favCount, setFavCount] = React.useState(0);
 
   useEffect(() => {
-    setOn(favourite);
-  }, [favourite]);
+    setIsFav(favourite);
+    setFavCount(creative.likedMe.length);
+  }, [favourite, creative]);
 
   return (
-    <Button
-      variant="contained"
-      className={clsx({
-        [classes.root]: true,
-        [classes.on]: on,
-      })}
-      style={styleAdd || styleAdd}
-      onClick={() => {
-        toaster(
-          !on ? (
-            <Icon className={classes.iconOn}>favorite</Icon>
-          ) : (
-            <Icon className={classes.iconOff}>favorite_border</Icon>
-          )
-        );
-        on === true ? setOn(false) : setOn(true);
-        mutation();
+    <Mutation
+      mutation={ADD_FAVOURITE}
+      variables={{
+        id: creative._id,
       }}
     >
-      {on ? (
-        <Icon style={{ color: '#fff' }}>favorite</Icon>
-      ) : (
-        <Icon style={{ color: '#fff' }}>favorite_border</Icon>
-      )}
-    </Button>
+      {(mutation) => {
+        return (
+          <div
+            className={`${classes.smallActionWrapper} ${classes.top}`}
+            onClick={() => {
+              setIsFav(isFav ? false : true);
+              setFavCount(isFav ? favCount - 1 : favCount + 1);
+              mutation();
+            }}
+            title={
+              favCount === 1
+                ? `1 person has liked this creative`
+                : `${favCount} people have liked this creative`
+            }
+            style={{ marginRight: 3 }}
+          >
+            <Icon
+              className={clsx({
+                [classes.favIcon]: true,
+                [classes.favIconDark]: !isFav,
+              })}
+            >
+              favorite
+            </Icon>
+            <Typography
+              className={clsx({
+                [classes.actionText]: true,
+                [classes.actionTextDark]: !isFav,
+              })}
+            >
+              {favCount}
+            </Typography>
+          </div>
+        );
+      }}
+    </Mutation>
   );
 }

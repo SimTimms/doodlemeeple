@@ -6,8 +6,8 @@ import {
   Widget,
   Divider,
   Row,
-} from '../../../../../../../components';
-import TaskGeneratorClient from './taskGeneratorClient';
+} from '../../components';
+import { TaskGeneratorClient } from '../../modules/tasks';
 
 export default function ProjectDash({
   invites,
@@ -52,9 +52,6 @@ export default function ProjectDash({
         <Widget p={10}>
           <Column>
             <Typography variant="body1">Tasks</Typography>
-            <Typography variant="body1" style={{ fontSize: 10 }}>
-              Complete these to keep your contract moving
-            </Typography>
             <Divider />
             <Row>
               <TaskGeneratorClient

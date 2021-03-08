@@ -22,9 +22,12 @@ import {
   UnansweredQuotes,
   TaskOpenQuote,
   TaskContinueWithJobDraft,
+  TaskPatreon,
 } from './taskConstants';
-
+import TaskGeneratorClient from './generators';
 export {
+  TaskPatreon,
+  TaskGeneratorClient,
   TaskButton,
   TaskUnreadMessages,
   TaskCheckProject,

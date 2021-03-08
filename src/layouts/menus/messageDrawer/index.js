@@ -43,7 +43,7 @@ export function MessageDrawer(props) {
           {
             name: 'Back',
             icon: <ChevronLeft />,
-            link: '/messages/conversations',
+            link: '/app/conversations',
           },
         ].map((text, index) => (
           <Link to={text.link} className={link} key={text.name}>

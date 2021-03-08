@@ -11,6 +11,7 @@ import AppInvites from './views/appInvites';
 import AppHelp from './views/appHelp';
 import AppFailedPayment from './views/appFailedPayment';
 import AppProfileEdit from './views/appProfileEdit';
+import ConversationModule from './views/conversations';
 import Beta from './views/beta';
 import CreativeRoster from './views/creativeRoster';
 import { Account } from './views/account';
@@ -148,6 +149,8 @@ function AppLayout(props) {
               profile={profile}
               setProfile={setProfile}
             />
+          ) : page === 'conversations' ? (
+            <ConversationModule history={history} />
           ) : page === 'tasks' && profile ? (
             <TaskDashboard
               history={history}

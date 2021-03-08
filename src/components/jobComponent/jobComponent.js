@@ -21,7 +21,6 @@ export default function JobComponent({ job, game, history }) {
   const hasNewQuote = contractsArr.filter(
     (item) => item.status === 'submitted'
   );
-  console.log(hasNewQuote);
   const status = totalDecline
     ? 'totalDecline'
     : hasNewQuote.length > 0
@@ -96,11 +95,11 @@ export default function JobComponent({ job, game, history }) {
         </Column>
         {job.invites.map((invite, index) => {
           const contractFromArray =
-            invite.reciever && contractsArr.indexOf(invite.receiver._id);
+            invite.receiver && contractsArr.indexOf(invite.receiver._id);
           const thisContract =
-            invite.reciever && job.contracts[contractFromArray];
+            invite.receiver && job.contracts[contractFromArray];
           const thisStatus =
-            invite.reciever && thisContract ? thisContract.status : null;
+            invite.receiver && thisContract ? thisContract.status : null;
           return !invite.receiver ? (
             <div
               className={classes.profileThumb}

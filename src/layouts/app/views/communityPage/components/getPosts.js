@@ -1,4 +1,6 @@
+import React from 'react';
 import axios from 'axios';
+import { FeaturedCreative } from '../../../../../components';
 
 export function getPosts(setPosts) {
   let didCancel = false;
@@ -18,7 +20,7 @@ export function getPosts(setPosts) {
   }
 }
 
-export function getFeatured(setFeaturedArticle) {
+export function FeaturedArticle({ history }) {
   let didCancel = false;
   const axiosCancel = axios.CancelToken.source();
   if (!didCancel) {
@@ -40,10 +42,15 @@ export function getFeatured(setFeaturedArticle) {
           'featureArticle',
           JSON.stringify(featuredArticleData)
         );
-        setFeaturedArticle(featuredArticleData);
+        return (
+          <FeaturedCreative
+            history={history}
+            featuredArticle={featuredArticleData}
+          />
+        );
       })
       .catch((error) => {
-        console.log(error);
+        return null;
       });
   }
 }

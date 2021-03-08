@@ -17,6 +17,7 @@ import {
   TaskSubmitDraftProject,
   TaskCommunity,
   UnansweredQuotes,
+  TaskPatreon,
 } from '../../modules/tasks';
 import preferencesSet from '../../utils/preferencesSet';
 import { useStyles } from './styles';
@@ -50,6 +51,7 @@ export default function TaskGenerator({
     elementArray.push(<TaskSubmitDraftProject data={data} history={history} />);
   } else if (jobs > 0) {
     elementArray.push(<TaskCheckProject data={data} history={history} />);
+    elementArray.push(<TaskPatreon data={data} history={history} />);
   }
 
   if (!preferencesSet(profile)) {

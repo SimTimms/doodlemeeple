@@ -7,4 +7,11 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     flexWrap: 'nowrap',
   },
+  header: {
+    background: theme.palette.primary.main,
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 }));

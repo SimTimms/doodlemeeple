@@ -10,6 +10,7 @@ export default function CreatorMenu({
   setTabNbr,
   activeContract,
   jobClosed,
+  setConversationUser,
 }) {
   const classes = useStyles();
 
@@ -26,6 +27,7 @@ export default function CreatorMenu({
             }}
             onClickEvent={() => {
               setTabNbr(-1);
+              setConversationUser(null);
             }}
             column={true}
             active={tabNbr === -1}
@@ -60,21 +62,6 @@ export default function CreatorMenu({
             active={tabNbr === 3}
           />
         )}
-        {/*
-          <MenuButtonShortcut
-            text={{
-              name: 'Payments',
-              color: '#fff',
-              icon: 'credit_card',
-              count: 0,
-            }}
-            onClickEvent={() => {
-              setTabNbr(4);
-            }}
-            column={true}
-            active={tabNbr === 4}
-          />
-          */}
       </TopMenuWrapper>
     </div>
   );

@@ -4,7 +4,7 @@ import {
   TaskCloseThisProject,
   TaskOpenQuote,
   TaskContinueWithJobDraft,
-} from '../../../../../../../modules/tasks';
+} from '../../../modules/tasks';
 import { useStyles } from './styles';
 
 export default function TaskGeneratorClient({
@@ -39,6 +39,6 @@ export default function TaskGeneratorClient({
   return elementArray.length > 0 ? (
     elementArray
   ) : (
-    <Typography className={classes.noTask}>No Tasks</Typography>
+    <Typography className={classes.noTask}>You have no tasks</Typography>
   );
 }

@@ -1,9 +1,6 @@
 import React from 'react';
-import { Column, Row, LoadIcon } from '../../../../../../../components';
-import ProjectDash from './ProjectDash';
-import CreativeDash from './CreativeDash';
+import { Column, Row } from '../../../../../../../components';
 import CheckListCreativeDash from './CheckListCreativeDash';
-import QuotePreview from '../quotePreview';
 
 export function CreativeDashboard({
   job,
@@ -34,26 +31,6 @@ export function CreativeDashboard({
           contractData={contractData}
         />
       </Row>
-    </Column>
-  );
-}
-
-export function CreatorDashboard({
-  job,
-  setConversationUser,
-  setTabNbr,
-  history,
-}) {
-  return (
-    <Column a="center">
-      <ProjectDash
-        invites={job.invites}
-        setConversationUser={setConversationUser}
-        jobClosed={job.submitted === 'closed'}
-        history={history}
-        job={job}
-        setTabNbr={setTabNbr}
-      />
     </Column>
   );
 }

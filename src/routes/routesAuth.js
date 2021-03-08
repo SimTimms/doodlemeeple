@@ -24,10 +24,11 @@ export default function AuthRoutes({ theme, props: { ...props } }) {
             <PreviewLayout {...props} theme={theme} publicView={false} />
           )}
         />
+        {/*
         <Route
           path="/messages/:page/:pathParam?"
           render={(props) => <MessagesLayout {...props} theme={theme} />}
-        />
+        />*/}
         <Route
           path="/"
           exact

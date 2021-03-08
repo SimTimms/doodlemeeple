@@ -1,0 +1,36 @@
+import { makeStyles } from '@material-ui/core/styles';
+export const useStyles = makeStyles((theme) => ({
+  favWrapper: {
+    width: '100%',
+    height: '32px',
+    marginTop: '-40px',
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  background: {
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
+    height: 100,
+    width: '100%',
+    position: 'relative',
+    cursor: 'pointer',
+  },
+  noBG: { minHeight: 0, maxHeight: 0, height: 0 },
+  noProfile: { display: 'none' },
+  creativeCardBackground: {
+    minWidth: 80,
+    maxWidth: 80,
+    minHeight: 80,
+    maxHeight: 80,
+    borderRadius: '50%',
+    border: '5px solid #fff',
+    marginTop: -50,
+    cursor: 'pointer',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
+    position: 'relative',
+  },
+  profileNoBG: { marginTop: 10 },
+}));

@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   wrapper: {
-    boxSizing: 'border-box',
     textAlign: 'left',
     background: '#fff',
     borderRadius: 5,
