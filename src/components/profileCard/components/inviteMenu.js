@@ -24,12 +24,6 @@ export default function InviteMenu({ history, creative, favourite, ...props }) {
         color="text-dark"
         icon=""
         iconPos="right"
-        styleOverride={{
-          paddingTop: 3,
-          paddingBottom: 3,
-          paddingLeft: 5,
-          paddingRight: 5,
-        }}
         onClickEvent={() => history.push(`/app/edit-job/new/${creative._id}`)}
       />
     );

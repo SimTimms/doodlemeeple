@@ -2,7 +2,6 @@ import React from 'react';
 import { ConversationById } from './viewConversation';
 import { Query } from 'react-apollo';
 import { GET_MESSAGES } from '../../data/queries';
-import { Column } from '../../components';
 
 export default function ChatViewById({
   conversationObj,
@@ -12,6 +11,7 @@ export default function ChatViewById({
   const [refreshCount, setRefreshCount] = React.useState(0);
   const [messages, setMessages] = React.useState([]);
   const [pageNbr, setPageNbr] = React.useState(0);
+
   return conversationObj.receiver ? (
     <Query
       query={GET_MESSAGES}
@@ -22,9 +22,9 @@ export default function ChatViewById({
         count: refreshCount,
       }}
       fetchPolicy="network-only"
-      onCompleted={(data) =>
-        setMessages([...data.getMessages.reverse(), ...messages])
-      }
+      onCompleted={(data) => {
+        setMessages([...data.getMessages.reverse(), ...messages]);
+      }}
     >
       {({ data }) => {
         return data ? (

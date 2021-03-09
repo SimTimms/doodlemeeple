@@ -11,6 +11,7 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: 270,
     position: 'relative',
     boxShadow: '10px 10px 20px rgba(0,0,0,0.2)',
+    paddingBottom: 10,
   },
   creativeCardNoShadow: { boxShadow: 'none' },
   creativeCardWrapper: {
@@ -45,7 +46,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   creativeCardInvited: {
     boxShadow: `0 0 20px ${theme.palette.primary.light}`,
-    border: `1px solid ${theme.palette.primary.light}`,
   },
   favIconNull: {
     color: '#ccc',

@@ -82,9 +82,6 @@ export default function ArtistLineup({
             </div>
           </div>
           <SubmitBrief job={job} history={history} inviteList={inviteList} />
-          {inviteList.length < 1 && (
-            <UnlockInfo str="Please select at least 1 creative" c="#fff" />
-          )}
         </Column>
       </div>
     </Column>

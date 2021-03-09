@@ -27,17 +27,15 @@ export default function Invite({ history, creative, favourite, ...props }) {
       >
         {(mutation) => {
           return (
-            <div>
-              <InviteButton
-                mutation={() => {
-                  !disabled
-                    ? mutation()
-                    : disabled && invite.length > 0 && mutation();
-                }}
-                invite={invite.length > 0 ? true : false}
-                disabled={invite.length > 0 ? false : disabled}
-              />
-            </div>
+            <InviteButton
+              mutation={() => {
+                !disabled
+                  ? mutation()
+                  : disabled && invite.length > 0 && mutation();
+              }}
+              invite={invite.length > 0 ? true : false}
+              disabled={invite.length > 0 ? false : disabled}
+            />
           );
         }}
       </Mutation>

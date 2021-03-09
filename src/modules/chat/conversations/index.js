@@ -38,7 +38,7 @@ export default function Conversations({ history, setConversationObj }) {
                   setConversationObj({
                     jobId: conversation.job._id,
                     receiver:
-                      userId === conversation.receiver
+                      userId === conversation.receiver._id
                         ? conversation.sender
                         : conversation.receiver,
                   });

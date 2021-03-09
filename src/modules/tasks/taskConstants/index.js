@@ -7,11 +7,7 @@ import { toaster } from '../../../utils/toaster';
 export function TaskUnreadMessages({ data, history }) {
   return (
     <TaskButton
-      title={
-        data.counts.jobs === 1
-          ? 'You have an unread message'
-          : 'You have unread messages'
-      }
+      title={`Read Message${data.counts.jobs > 1 ? 's' : ''}`}
       subTitle="Messages"
       icon="mail"
       color="warning"

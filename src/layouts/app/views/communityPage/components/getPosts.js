@@ -1,4 +1,5 @@
 import React from 'react';
+
 import axios from 'axios';
 import { FeaturedCreative } from '../../../../../components';
 
@@ -21,9 +22,11 @@ export function getPosts(setPosts) {
 }
 
 export function FeaturedArticle({ history }) {
+  const [article, setArticle] = React.useState(null);
   let didCancel = false;
   const axiosCancel = axios.CancelToken.source();
-  if (!didCancel) {
+  const cacheData = JSON.parse(localStorage.getItem('featureArticle'));
+  if (!didCancel && !cacheData) {
     axios
       .get('https://doodlemeeple.com/wp-json/wp/v2/posts?_embed&categories=2', {
         cancelToken: axiosCancel.token,
@@ -42,15 +45,13 @@ export function FeaturedArticle({ history }) {
           'featureArticle',
           JSON.stringify(featuredArticleData)
         );
-        return (
-          <FeaturedCreative
-            history={history}
-            featuredArticle={featuredArticleData}
-          />
-        );
+        setArticle(featuredArticleData);
       })
-      .catch((error) => {
-        return null;
-      });
+      .catch((error) => {});
   }
+  return cacheData ? (
+    <FeaturedCreative history={history} featuredArticle={cacheData} />
+  ) : article ? (
+    <FeaturedCreative history={history} featuredArticle={article} />
+  ) : null;
 }
