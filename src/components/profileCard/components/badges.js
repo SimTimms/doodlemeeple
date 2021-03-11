@@ -5,10 +5,12 @@ import * as badges from '../../../assets/badge';
 
 export default function Badges({ creative }) {
   return !creative.badges ? null : (
-    <Row j="center" w="100%" pl={5}>
+    <Row j="flex-start" pl={5}>
       {creative.badges.map((badge, index) => {
+        if (index > 3) {
+          return;
+        }
         const badgeArr = [];
-        console.log(badge);
         badgeArr.push(
           <img
             src={badges[badge.badgeIcon]}

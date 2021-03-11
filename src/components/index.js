@@ -88,6 +88,8 @@ import UnlockInfoReverse from './unlockInfoReverse';
 import NotificationComponent from './notificationComponent';
 import GalleryCard from './galleryCard';
 import FeaturedCreative from './featuredCreative';
+import CreativeRosterProfiles from './creativeRosterProfiles';
+
 import {
   Header,
   SubHeader,
@@ -105,6 +107,7 @@ import {
 import { Column, Row, TopMenuWrapper, RowCheckList } from './blocks';
 
 export {
+  CreativeRosterProfiles,
   FeaturedCreative,
   CreatorComponentDash,
   TopMenuWrapper,

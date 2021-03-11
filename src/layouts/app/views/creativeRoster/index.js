@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react';
 import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
-import { LoadIcon, MenuButtonShortcut, Row } from '../../../../components';
-import { Creatives } from './components';
+import {
+  LoadIcon,
+  MenuButtonShortcut,
+  Row,
+  CreativeRosterProfiles,
+} from '../../../../components';
 import { TYPE_HELPER } from '../../../../utils';
 
 export default function CreativeRoster({ history, favourites, groupIn }) {
@@ -125,7 +129,11 @@ export default function CreativeRoster({ history, favourites, groupIn }) {
               />
             ))}
         </Row>
-        <Creatives history={history} favourites={favourites} filter={filter} />
+        <CreativeRosterProfiles
+          history={history}
+          favourites={favourites}
+          filter={filter}
+        />
       </div>
     </Slide>
   );

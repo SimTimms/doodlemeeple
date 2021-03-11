@@ -1,21 +1,19 @@
 import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
-import { CREATIVES } from '../../../../../data/queries';
-import {
-  ProfileCard,
-  IconButton,
-  LoadIcon,
-  Divider,
-} from '../../../../../components';
+import { CREATIVES } from '../../data/queries';
+import { ProfileCard, IconButton, LoadIcon, Divider } from '../../components';
 
-export default function Creatives({ favourites, history, filter, ...props }) {
+export default function CreativeRosterProfiles({
+  favourites,
+  history,
+  filter,
+}) {
   const classes = useStyles();
   const [creativeArray, setCreativeArray] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [noMore, setNoMore] = React.useState(false);
   const [existingFilter, setExistingFilter] = React.useState(false);
-
   return (
     <div
       style={{

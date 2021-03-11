@@ -3,8 +3,8 @@ import { Card } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Column } from '../';
 import clsx from 'clsx';
+import { FavouriteButton } from '../';
 import {
-  FavMenu,
   BgImg,
   ProfileImg,
   ProfileName,
@@ -32,14 +32,17 @@ export default function ProfileCard({
     >
       <BgImg history={history} creative={creative} />
       <ProfileImg history={history} creative={creative} />
-      <FavMenu creative={creative} favourite={favourite} />
+
+      <div className={classes.favWrapper}>
+        <Badges creative={creative} />
+        <FavouriteButton favourite={favourite} creative={creative} />
+      </div>
       <Column j="center" a="center">
         <ProfileName
           creative={creative}
           favourite={favourite}
           history={history}
         />
-        <Badges creative={creative} />
       </Column>
       <InviteMenu
         history={history}

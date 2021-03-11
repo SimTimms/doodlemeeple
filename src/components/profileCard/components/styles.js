@@ -1,14 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
-  favWrapper: {
-    width: '100%',
-    height: '32px',
-    marginTop: '-40px',
-    position: 'relative',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
   background: {
     backgroundSize: 'cover',
     backgroundPosition: 'center center',

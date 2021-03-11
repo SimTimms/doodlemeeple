@@ -33,6 +33,15 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-end',
   },
+  favWrapper: {
+    width: '100%',
+    height: '32px',
+    marginTop: '-40px',
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   actionsWrapper: {
     display: 'flex',
     padding: 5,
