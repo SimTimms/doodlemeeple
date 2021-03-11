@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from '@material-ui/core';
 import { useStyles } from './styles';
-import { IconButton, Column } from '../';
+import { Column } from '../';
 import clsx from 'clsx';
 import {
   FavMenu,
@@ -34,7 +34,11 @@ export default function ProfileCard({
       <ProfileImg history={history} creative={creative} />
       <FavMenu creative={creative} favourite={favourite} />
       <Column j="center" a="center">
-        <ProfileName creative={creative} favourite={favourite} />
+        <ProfileName
+          creative={creative}
+          favourite={favourite}
+          history={history}
+        />
         <Badges creative={creative} />
       </Column>
       <InviteMenu

@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton } from '../../';
 
-export default function ProfileCard({ history, creative }) {
+export default function ProfileName({ history, creative }) {
   return (
     <IconButton
       title={creative.name}
