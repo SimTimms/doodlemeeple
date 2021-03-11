@@ -17,6 +17,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexWrap: 'nowrap',
     minWidth: 'auto',
+    minHeight: 38,
     justifyContent: 'space-between',
     color: '#fff',
     '&:hover': {
@@ -97,6 +98,19 @@ export const useStyles = makeStyles((theme) => ({
       background: '#efeff5',
     },
   },
+  iconButtonTextGrey: {
+    background: '#c0c0d8',
+    border: 'none',
+    boxShadow: 'none',
+    margin: 0,
+    letterSpacing: 1.3,
+    justifyContent: 'center',
+    textShadow: '3px 3px 4px rgba(0,0,0,0.1)',
+    textTransform: 'none',
+    '&:hover': {
+      background: '#a1a1c5',
+    },
+  },
   iconButtonTextError: {
     background: 'rgba(0,0,0,0)',
     color: theme.palette.error.main,
@@ -112,8 +126,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   iconButtonWarning: {
     background: theme.palette.error.main,
-    border: `1px solid ${theme.palette.error.main}`,
-
     '&:hover': {
       background: theme.palette.error.dark,
     },
@@ -130,8 +142,6 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
     fontSize: 12,
     padding: 3,
-    borderRadius: '50%',
-    border: '1px solid rgba(255,255,255,0.4)',
   },
   iconButtonIconText: {
     color: '#aaa',
@@ -144,6 +154,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   iconButtonIconTextDark: {
     color: '#444',
+  },
+  iconButtonIconTextGrey: {
+    color: '#fff',
   },
   iconButtonIconWhite: {
     color: '#fff',

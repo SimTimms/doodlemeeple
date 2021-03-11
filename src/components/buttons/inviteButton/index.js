@@ -10,15 +10,23 @@ export default function InviteButton({ mutation, invite, disabled }) {
 
   return (
     <IconButton
-      title={on ? 'Invited' : disabled ? ' 5 Max' : 'invite'}
-      color={on ? 'primary' : 'text-dark'}
+      title={on ? '' : disabled ? ' 5 Max' : ''}
+      color={on ? 'secondary' : 'grey'}
       disabled={disabled}
       type="button"
       iconPos="right"
       onClickEvent={() => {
         mutation();
       }}
-      icon={disabled ? '' : on ? 'local_post_office' : 'local_post_office'}
+      description="Invite this creative"
+      styleOverride={{
+        width: '100%',
+        borderRadius: 0,
+        margin: 0,
+        justifyContent: 'center',
+        color: '#fff',
+      }}
+      icon={disabled ? '' : on ? 'mail' : 'drafts'}
     />
   );
 }

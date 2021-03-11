@@ -14,10 +14,10 @@ export default function Section4({ setJob, job, mutation }) {
     !checkLength(job.summary, 'summary');
 
   return (
-    <CardComponent locked={locked} lockedMsg="Contractor Summary">
+    <CardComponent locked={locked} lockedMsg="Creative Summary">
       <Column a="center" j="center">
         <FieldBox
-          title="Contractor Summary"
+          title="Creative Summary"
           value={job.creativeSummary}
           maxLength={500}
           placeholder="A digital artist with a focus on high fantasy...."

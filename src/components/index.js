@@ -55,7 +55,7 @@ import FieldTitleDashboard from './fieldTitleDashboard';
 import FieldBox from './fieldBox';
 import InfoBox from './infoBox';
 import FieldTitleWrapper from './fieldTitle/FieldTitleWrapper';
-import ProfileCard from './profileCard';
+import { ProfileCard, ProfileCardBlank } from './profileCard';
 import { ProfileCardCreative, ProfileCardCreator } from './profileCardBasic';
 import BorderBox from './borderBox';
 import IconBox from './iconBox';
@@ -177,6 +177,7 @@ export {
   IconButton,
   ProjectComponentDash,
   ProfileCard,
+  ProfileCardBlank,
   ProfileCardCreative,
   ProfileCardCreator,
   FieldTitle,

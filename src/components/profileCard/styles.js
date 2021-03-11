@@ -1,5 +1,19 @@
 import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
+  profileCardBlank: {
+    margin: 10,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    border: '1px solid #ddd',
+    minWidth: 270,
+    maxWidth: 270,
+    minHeight: 210,
+    maxHeight: 210,
+    position: 'relative',
+    background: 'rgba(0,0,0,0.1)',
+  },
   creativeCard: {
     margin: 10,
     display: 'flex',
@@ -11,7 +25,7 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: 270,
     position: 'relative',
     boxShadow: '10px 10px 20px rgba(0,0,0,0.2)',
-    paddingBottom: 10,
+    background: '#fff',
   },
   creativeCardNoShadow: { boxShadow: 'none' },
   creativeCardWrapper: {

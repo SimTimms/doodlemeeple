@@ -22,9 +22,7 @@ export default function ProjectDash({
     <Column w={600} p={10} j="center">
       {invites.length > 0 && (
         <Widget p={10}>
-          <Typography>
-            {accepted ? 'Contractor' : 'Invited Creatives'}
-          </Typography>
+          <Typography>{accepted ? 'Creative' : 'Invited Creatives'}</Typography>
           {invites.map((invite, index) => {
             const contractSubmitted = invite.job.contracts.filter(
               (contract) => contract.user._id === invite.receiver._id

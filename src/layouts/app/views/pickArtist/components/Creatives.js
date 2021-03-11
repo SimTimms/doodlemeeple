@@ -38,20 +38,7 @@ export default function Creatives({
         fetchPolicy="network-only"
         onCompleted={(data) => {
           data.getCreatives.length === 0 && setNoMore(true);
-          setCreativeArray([...data.getCreatives]);
-          {
-            /*
-          filter === existingFilter &&
-            setCreativeArray([...creativeArray, ...data.getCreatives]);
-
-          if (filter !== existingFilter) {
-            setCreativeArray([...data.getCreatives]);
-            setExistingFilter(filter);
-            setNoMore(false);
-            setPage(0);
-          }
-        */
-          }
+          setCreativeArray([...creativeArray, ...data.getCreatives]);
         }}
       >
         {({ data, loading }) => {

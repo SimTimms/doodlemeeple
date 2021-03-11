@@ -17,6 +17,7 @@ function ButtonObj({ ...props }) {
     iconPos,
     clickSound,
     likeSound,
+    description,
   } = props.props;
 
   return (
@@ -33,6 +34,7 @@ function ButtonObj({ ...props }) {
         [classes.iconButtonTextDark]: color === 'text-dark',
         [classes.iconButtonTextError]: color === 'text-error',
         [classes.iconButtonTextMini]: color === 'text-mini',
+        [classes.iconButtonTextGrey]: color === 'grey',
         [classes.iconButtonDisabled]: disabled,
       })}
       disabled={disabled}
@@ -42,6 +44,7 @@ function ButtonObj({ ...props }) {
         onClickEvent();
       }}
       style={styleOverride && styleOverride}
+      title={description && description}
     >
       {icon !== '' && iconPos !== 'right' && (
         <Icon
@@ -55,6 +58,7 @@ function ButtonObj({ ...props }) {
             [classes.iconButtonIconTextDark]: color === 'text-dark',
             [classes.iconButtonIconTextError]: color === 'text-error',
             [classes.iconButtonIconTextMini]: color === 'text-mini',
+            [classes.iconButtonIconTextGrey]: color === 'grey',
             [classes.iconLeft]: iconPos !== 'right',
             [classes.noTitle]: title === '',
           })}
@@ -75,6 +79,7 @@ function ButtonObj({ ...props }) {
             [classes.iconButtonIconTextDark]: color === 'text-dark',
             [classes.iconButtonIconTextMini]: color === 'text-mini',
             [classes.iconButtonIconTextError]: color === 'text-error',
+            [classes.iconButtonIconTextGrey]: color === 'grey',
             [classes.iconRight]: iconPos === 'right',
             [classes.noTitle]: title === '',
           })}

@@ -61,7 +61,7 @@ export default function ContractSummary({ contractData, contractStatus }) {
         <Divider />
         <HeaderThree str="Payment Schedule" />
         <TextLeft
-          str={`DoodleMeeple will release funds to the Contractor according to this payment schedule:`}
+          str={`DoodleMeeple will release funds to the Creative according to this payment schedule:`}
         />
         <TextLeft
           str={`${parseInt(contractData.cost) * 0.1} ${

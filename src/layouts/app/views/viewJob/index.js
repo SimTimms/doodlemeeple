@@ -222,7 +222,7 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                 <Card className={classes.card}>
                   <div style={{ padding: 10 }}>
                     <FieldTitle
-                      name="3. Your Contractor"
+                      name="3. Your Creative"
                       description="Start to describe your ideal creative. Example: A digital artist with a focus on high fantasy"
                       warning=""
                       inline={false}
@@ -230,7 +230,7 @@ export function EditJob({ theme, jobId, autosaveIsOn, history, favourites }) {
                     <TextField
                       id={'creative-summary'}
                       value={job.creativeSummary}
-                      label={`Contractor Summary ${
+                      label={`Creative Summary ${
                         job.creativeSummary
                           ? `(${86 - job.creativeSummary.length})`
                           : ''

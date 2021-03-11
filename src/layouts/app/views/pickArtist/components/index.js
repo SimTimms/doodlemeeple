@@ -1,6 +1,6 @@
 import ArtistLineup from './ArtistLineup';
 import Creatives from './Creatives';
-import Contractor from './Creative';
+import Creative from './Creative';
 import SubmitBrief from './SubmitBrief';
 
-export { ArtistLineup, Creatives, SubmitBrief, Contractor };
+export { ArtistLineup, Creatives, SubmitBrief, Creative };

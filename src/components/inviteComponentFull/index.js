@@ -38,7 +38,16 @@ export default function InviteComponentFull({
     setDisplay(isOpen);
   }, [isOpen]);
 
-  return (
+  return !invite.receiver ? (
+    <Column>
+      <Row j="center" a="center" w="100%" bg="rgba(0,0,0,0.2)" pt={10} pb={10}>
+        <Typography style={{ color: '#fff' }}>
+          This user no longer exists
+        </Typography>
+      </Row>
+      <DividerWithBorder />
+    </Column>
+  ) : (
     <div style={{ width: '100%', opacity: declined && 0.5 }}>
       <Column>
         <Row j="space-between" a="center">

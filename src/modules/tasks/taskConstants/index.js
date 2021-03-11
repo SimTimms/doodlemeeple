@@ -127,7 +127,7 @@ export function UnansweredQuotes({ history }) {
 export function TaskRole({ history }) {
   return (
     <TaskButton
-      title="Client or Contractor"
+      title="Client or Creative"
       subTitle="Preference"
       icon="work"
       color="secondary"

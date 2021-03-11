@@ -2,7 +2,13 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { CREATIVES } from '../../data/queries';
-import { ProfileCard, IconButton, LoadIcon, Divider } from '../../components';
+import {
+  ProfileCard,
+  ProfileCardBlank,
+  IconButton,
+  LoadIcon,
+  Divider,
+} from '../../components';
 
 export default function CreativeRosterProfiles({
   favourites,
@@ -14,23 +20,17 @@ export default function CreativeRosterProfiles({
   const [page, setPage] = React.useState(0);
   const [noMore, setNoMore] = React.useState(false);
   const [existingFilter, setExistingFilter] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
+  console.log(loading);
   return (
-    <div
-      style={{
-        width: '100%',
-        marginTop: 50,
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-      }}
-    >
+    <div className={classes.cardWrapper}>
       <Query
         query={CREATIVES}
         variables={{ type: filter, page: page, job: null }}
         fetchPolicy="network-only"
         onCompleted={(data) => {
+          setLoading(false);
           data.getCreatives.length === 0 && setNoMore(true);
-
           filter === existingFilter &&
             setCreativeArray([...creativeArray, ...data.getCreatives]);
 
@@ -44,7 +44,15 @@ export default function CreativeRosterProfiles({
       >
         {({ data, loading }) => {
           return loading ? (
-            <LoadIcon />
+            <div className={classes.cardWrapper}>
+              <ProfileCardBlank />
+              <ProfileCardBlank />
+              <ProfileCardBlank />
+              <ProfileCardBlank />
+              <ProfileCardBlank />
+              <ProfileCardBlank />
+              <ProfileCardBlank />
+            </div>
           ) : data ? (
             <div className={classes.creativeWrapper}></div>
           ) : null;

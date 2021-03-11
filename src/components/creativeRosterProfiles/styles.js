@@ -8,6 +8,12 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     flexDirection: 'column',
   },
+  cardWrapper: {
+    width: '100%',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
   iconButton: {
     cursor: 'pointer',
     background: theme.palette.primary.main,

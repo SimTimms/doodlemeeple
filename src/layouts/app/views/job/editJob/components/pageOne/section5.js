@@ -29,7 +29,7 @@ export default function Section5({ setJob, job, mutation }) {
       <Column a="center" j="center">
         <FieldTitle
           name="Keywords"
-          description="Choose the skills that you're looking for, we'll automatically filter the Contractor Roster based on these keywords"
+          description="Choose the skills that you're looking for, we'll automatically filter the Creative Roster based on these keywords"
           warning=""
           inline={false}
         />
@@ -51,7 +51,7 @@ export default function Section5({ setJob, job, mutation }) {
               />
               <MenuButtonShortcut
                 text={{
-                  name: 'Contractor',
+                  name: 'Creative',
                   color: '#222',
                   icon: 'chevron_right',
                   count: 0,

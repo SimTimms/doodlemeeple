@@ -48,7 +48,7 @@ export default function FullContractComponent({ contractData, ...props }) {
           </span>*/}
         </Typography>
         <Typography>
-          <b>Contractor:</b>
+          <b>Creative:</b>
           {` ${contractData.user.name}`}
           {/*
           <span className={classes.id}>
@@ -57,27 +57,27 @@ export default function FullContractComponent({ contractData, ...props }) {
         </Typography>
         <Divider />
         <Typography variant="h5">
-          The Client and Contractor (the “Party” or “Parties”) agree as follows:
+          The Client and Creative (the “Party” or “Parties”) agree as follows:
         </Typography>
         <Divider />
         <Typography>
           <b>1. BACKGROUND:</b>
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
-          <b>1.1</b> The Client is of the opinion that the Contractor has the
+          <b>1.1</b> The Client is of the opinion that the Creative has the
           necessary qualifications, experience and abilities to provide services
           to the Client.
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
-          <b>1.2</b> The Contractor is agreeable to providing such services to
-          the Client on the terms and conditions set out in this Agreement.
+          <b>1.2</b> The Creative is agreeable to providing such services to the
+          Client on the terms and conditions set out in this Agreement.
         </Typography>
         <Divider />
         <Typography>
           <b>2. SERVICES:</b>
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
-          <b>2.1</b> The Client agrees to engage the Contractor to provide the
+          <b>2.1</b> The Client agrees to engage the Creative to provide the
           Client with the following services (the "Services"):
         </Typography>
         <Typography style={{ marginLeft: 40, marginTop: 20 }}>
@@ -137,15 +137,15 @@ ${contractData.currency} `}
           <b>7. PAYMENT TERMS:</b>
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
-          <b>7.1</b> The Client agrees to pay the Contractor the Payment
-          according to the payment terms as follows (The Payment Schedule):
+          <b>7.1</b> The Client agrees to pay the Creative the Payment according
+          to the payment terms as follows (The Payment Schedule):
         </Typography>
         {contractData.paymentTerms.map((term, index) => {
           paymentTermsSum = paymentTermsSum - term.percent;
           return (
             <Typography key={`term_${index}`} style={{ marginLeft: 80 }}>
               <b>{`7.1.${index + 1}: `}</b>
-              {`The Contractor shall receive ${term.percent} ${contractData.currency} upon ${term.description}`}
+              {`The Creative shall receive ${term.percent} ${contractData.currency} upon ${term.description}`}
             </Typography>
           );
         })}
@@ -159,12 +159,12 @@ ${contractData.currency} `}
           </Typography>
         )}
         <Typography style={{ marginLeft: 40 }}>
-          <b>7.2</b> The Contractor will commence and/or continue to fulfil the
+          <b>7.2</b> The Creative will commence and/or continue to fulfil the
           Services upon payment(s) according to the Payment Schedule.
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
-          <b>7.3</b> The Client will release funds to the Contractor according
-          to the Payment Schedule
+          <b>7.3</b> The Client will release funds to the Creative according to
+          the Payment Schedule
         </Typography>
         <Divider />
         <Typography>
@@ -172,7 +172,7 @@ ${contractData.currency} `}
         </Typography>
         <Typography style={{ marginLeft: 40 }}>
           <b>8.1</b> This agreement is subject to the additional terms and/or
-          notes set out by the Contractor as follows:
+          notes set out by the Creative as follows:
         </Typography>
         <Typography style={{ marginLeft: 80 }}>
           <b>8.1.1</b>{' '}

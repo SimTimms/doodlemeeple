@@ -8,6 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     cursor: 'pointer',
   },
+  actionsWrapper: { width: '100%' },
   noBG: { minHeight: 0, maxHeight: 0, height: 0 },
   noProfile: { display: 'none' },
   creativeCardBackground: {
