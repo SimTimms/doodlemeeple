@@ -45,13 +45,11 @@ export default function ProfileCard({
         <Badges creative={creative} />
         <FavouriteButton favourite={favourite} creative={creative} />
       </div>
-      <Column j="center" a="center">
-        <ProfileName
-          creative={creative}
-          favourite={favourite}
-          history={history}
-        />
-      </Column>
+      <ProfileName
+        creative={creative}
+        favourite={favourite}
+        history={history}
+      />
       <InviteMenu
         history={history}
         creative={creative}

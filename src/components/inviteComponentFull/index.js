@@ -10,6 +10,7 @@ import {
   BorderBox,
   Signature,
   DividerWithBorder,
+  UserDeleted,
 } from '../';
 import clsx from 'clsx';
 import { PREVIEW_CONTRACT, JOB_CONTACT_DETAILS } from '../../data/queries';
@@ -40,11 +41,7 @@ export default function InviteComponentFull({
 
   return !invite.receiver ? (
     <Column>
-      <Row j="center" a="center" w="100%" bg="rgba(0,0,0,0.2)" pt={10} pb={10}>
-        <Typography style={{ color: '#fff' }}>
-          This user no longer exists
-        </Typography>
-      </Row>
+      <UserDeleted />
       <DividerWithBorder />
     </Column>
   ) : (

@@ -89,6 +89,7 @@ import NotificationComponent from './notificationComponent';
 import GalleryCard from './galleryCard';
 import FeaturedCreative from './featuredCreative';
 import CreativeRosterProfiles from './creativeRosterProfiles';
+import UserDeleted from './userDeleted';
 
 import {
   Header,
@@ -107,6 +108,7 @@ import {
 import { Column, Row, TopMenuWrapper, RowCheckList } from './blocks';
 
 export {
+  UserDeleted,
   CreativeRosterProfiles,
   FeaturedCreative,
   CreatorComponentDash,

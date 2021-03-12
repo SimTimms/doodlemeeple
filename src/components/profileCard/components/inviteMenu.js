@@ -10,7 +10,7 @@ export default function InviteMenu({ history, creative, favourite, ...props }) {
     return userId === creative._id ? (
       <IconButton
         title="PROFILE"
-        color="primary"
+        color="grey"
         icon=""
         iconPos="right"
         onClickEvent={() => history.push(`/app/public-preview/${creative._id}`)}
@@ -19,7 +19,6 @@ export default function InviteMenu({ history, creative, favourite, ...props }) {
           borderRadius: 0,
           margin: 0,
           justifyContent: 'center',
-          backgroundColor: '#cfcfe1',
         }}
       />
     ) : updateInviteList && Cookies.get('userId') !== creative._id ? (
@@ -45,7 +44,6 @@ export default function InviteMenu({ history, creative, favourite, ...props }) {
           borderRadius: 0,
           margin: 0,
           justifyContent: 'center',
-          backgroundColor: '#cfcfe1',
         }}
       />
     );

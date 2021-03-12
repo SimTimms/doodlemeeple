@@ -8,6 +8,7 @@ import {
   InviteComponent,
   DividerWithBorder,
   Paper,
+  UserDeleted,
 } from '../../../../components';
 import CreativeInvitesMenu from './creativeInvitesMenu';
 import { useStyles } from './styles';
@@ -28,7 +29,9 @@ export default function AppInvites({ history }) {
             {inviteArray.length > 0 && (
               <Paper p={10}>
                 {inviteArray.map((invite, index) => {
-                  return (
+                  return !invite.sender ? (
+                    <UserDeleted />
+                  ) : (
                     <Column>
                       {index > 0 && <DividerWithBorder />}
                       <InviteComponent
