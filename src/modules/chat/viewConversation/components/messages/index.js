@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
+import { useMediaQuery } from '@material-ui/core';
 import { Message } from '../message';
 import { CreateMessage } from '../../../../../components';
 import { useStyles } from './styles';
+import clsx from 'clsx';
 
 export default function Messages({
   messages,
@@ -15,6 +17,7 @@ export default function Messages({
   const [messagesEnd, setMessagesEnd] = React.useState(null);
   const [viewer, setViewer] = React.useState(null);
   const classes = useStyles();
+  const mobile = useMediaQuery('(max-width:800px)');
 
   useEffect(() => {
     messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' });
@@ -61,7 +64,12 @@ export default function Messages({
           }}
         ></div>
       </div>
-      <div className={classes.createMessage}>
+      <div
+        className={clsx({
+          [classes.createMessage]: true,
+          [classes.createMessageMobile]: mobile,
+        })}
+      >
         <CreateMessage
           updateMessageArray={updateMessageArray}
           jobId={jobId}

@@ -14,6 +14,9 @@ export const useStyles = makeStyles((theme) => ({
     paddingLeft: 140,
     borderRadius: 0,
   },
+  createMessageMobile: {
+    paddingLeft: 0,
+  },
   cardGrid: {
     width: '100%',
     maxWidth: 500,

@@ -14,7 +14,6 @@ export default function CreateMessage({
 }) {
   const [newMessage, setNewMessage] = React.useState('');
   const [uploadURL, setUploadURL] = React.useState('');
-
   const classes = useStyles();
   return (
     <Column>
