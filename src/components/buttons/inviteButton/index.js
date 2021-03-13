@@ -10,8 +10,8 @@ export default function InviteButton({ mutation, invite, disabled }) {
 
   return (
     <IconButton
-      title={on ? '' : disabled ? ' 5 Max' : ''}
-      color={on ? 'secondary' : 'grey'}
+      title={on ? '' : disabled ? ' 5 Max' : 'INVITE'}
+      color={on ? 'secondary' : 'text-dark'}
       disabled={disabled}
       type="button"
       iconPos="right"
@@ -22,11 +22,11 @@ export default function InviteButton({ mutation, invite, disabled }) {
       styleOverride={{
         width: '100%',
         borderRadius: 0,
+        borderTop: '1px solid #ddd',
         margin: 0,
         justifyContent: 'center',
-        color: '#fff',
       }}
-      icon={disabled ? '' : on ? 'mail' : 'drafts'}
+      icon={disabled ? '' : on ? 'mail' : ''}
     />
   );
 }

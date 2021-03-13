@@ -123,7 +123,7 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     justifyContent: 'flex-end',
   },
-  card: { width: 350, margin: '5px 0 0 0' },
+  card: { maxWidth: 450, width: '100%', margin: '5px 0 0 0' },
   title: {
     fontSize: 14,
   },

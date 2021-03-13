@@ -79,7 +79,7 @@ export default function MessageComponent({
                   </Typography>
                 </div>
                 <Typography
-                  style={{ textAlign: 'right' }}
+                  style={{ textAlign: 'right', fontSize: 12 }}
                   variant="body1"
                   component="p"
                 >
