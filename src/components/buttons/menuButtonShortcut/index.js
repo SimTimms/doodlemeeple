@@ -18,6 +18,7 @@ export default function MenuButtonShortcut({ text, ...props }) {
     noPad,
     title,
     iconPos,
+    styleOverride,
   } = props;
   const isLeft = !iconPos || iconPos === 'left';
 
@@ -31,6 +32,7 @@ export default function MenuButtonShortcut({ text, ...props }) {
       target="_blank"
       rel="noopener noreferrer"
       title={title && title}
+      style={styleOverride && styleOverride}
     >
       <ListItem
         button

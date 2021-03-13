@@ -106,25 +106,32 @@ function AppLayout(props) {
               history.push(`/app/edit-job/new`);
             }}
             icon="add"
+            styleOverride={{
+              position: 'relative',
+              zIndex: 100,
+              marginRight: 'auto',
+            }}
           />
         ) : (
           <div></div>
         )}
-        <MenuButtonShortcut
-          text={{
-            name: profile ? profile.name : 'fetching...',
-            color: '#222',
-            icon: 'face',
-            count: 0,
-          }}
-          onClickEvent={() => {
-            history.push('/app/edit-profile');
-          }}
-          active={false}
-          imageIcon={profile && profile.profileImg}
-          countIcon="star"
-          iconPos="right"
-        />
+        {!mobile && (
+          <MenuButtonShortcut
+            text={{
+              name: profile ? profile.name : 'fetching...',
+              color: '#222',
+              icon: 'face',
+              count: 0,
+            }}
+            onClickEvent={() => {
+              history.push('/app/edit-profile');
+            }}
+            active={false}
+            imageIcon={profile && profile.profileImg}
+            countIcon="star"
+            iconPos="right"
+          />
+        )}
       </StyledNavBar>
       {profile && (
         <AppDrawer
