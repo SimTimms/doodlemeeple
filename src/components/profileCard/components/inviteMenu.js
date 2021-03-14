@@ -10,13 +10,14 @@ export default function InviteMenu({ history, creative, favourite, ...props }) {
     return userId === creative._id ? (
       <IconButton
         title="PROFILE"
-        color="grey"
+        color="text-dark"
         icon=""
         iconPos="right"
         onClickEvent={() => history.push(`/app/public-preview/${creative._id}`)}
         styleOverride={{
           width: '100%',
           borderRadius: 0,
+          borderTop: '1px solid #eee',
           margin: 0,
           justifyContent: 'center',
         }}
@@ -35,13 +36,14 @@ export default function InviteMenu({ history, creative, favourite, ...props }) {
     ) : (
       <IconButton
         title="HIRE"
-        color="secondary"
+        color="text-dark"
         icon=""
         iconPos="right"
         onClickEvent={() => history.push(`/app/edit-job/new/${creative._id}`)}
         styleOverride={{
           width: '100%',
           borderRadius: 0,
+          borderTop: '1px solid #eee',
           margin: 0,
           justifyContent: 'center',
         }}

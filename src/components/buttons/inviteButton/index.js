@@ -22,7 +22,7 @@ export default function InviteButton({ mutation, invite, disabled }) {
       styleOverride={{
         width: '100%',
         borderRadius: 0,
-        borderTop: '1px solid #ddd',
+        borderTop: '1px solid #eee',
         margin: 0,
         justifyContent: 'center',
       }}
