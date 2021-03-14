@@ -8,7 +8,7 @@ export function CreativeCategories({ history }) {
   const classes = useStyles();
 
   return (
-    <Column a="space-between" j="space-between" h={300}>
+    <Column a="space-between" j="space-between" h={312}>
       <Column a="center" j="center">
         <Row>
           <CategoryBox

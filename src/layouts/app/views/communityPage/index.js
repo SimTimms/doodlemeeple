@@ -13,12 +13,13 @@ import dmPatreon from '../../../../assets/dmPatreon.jpg';
 
 export default function CommunityPage({ history }) {
   return (
-    <Row wrap="wrap" j="space-around">
-      <Column w="40%">
+    <Row wrap="wrap" j="space-around" a="flex-start">
+      <Column w="50%">
         <CardComponent
           styleOverride={{
-            boxShadow: '5px 5px 10px rgba(0,0,0,0.1)',
             marginTop: 10,
+            borderRadius: 0,
+            paddingBottom: 10,
           }}
         >
           <Typography variant="h6">The Creative Roster</Typography>
@@ -26,11 +27,11 @@ export default function CommunityPage({ history }) {
           <CreativeCategories history={history} />
         </CardComponent>
       </Column>
-      <Column w="40%">
+      <Column w="50%">
         <CardComponent
           styleOverride={{
-            boxShadow: '5px 5px 10px rgba(0,0,0,0.1)',
             marginTop: 10,
+            borderRadius: 0,
           }}
         >
           <Typography variant="h6">Featured Artist</Typography>
