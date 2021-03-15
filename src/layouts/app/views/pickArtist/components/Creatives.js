@@ -37,7 +37,10 @@ export default function Creatives({
         variables={{ type: job.keywords, page: page, job: job._id }}
         fetchPolicy="network-only"
         onCompleted={(data) => {
-          data.getCreatives.length === 0 && setNoMore(true);
+          console.log(data);
+          creativeArray.length > 0 &&
+            data.getCreatives.length === 0 &&
+            setNoMore(true);
           setCreativeArray([...creativeArray, ...data.getCreatives]);
         }}
       >
