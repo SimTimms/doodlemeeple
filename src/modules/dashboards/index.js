@@ -19,12 +19,18 @@ export default function ProjectDash({
   const [openQuoteId, setOpenQuoteId] = React.useState(null);
   const accepted = job.submitted === 'accepted' ? true : false;
   const draft = job.submitted === 'draft' ? true : false;
+  const inviteFiltered = accepted
+    ? invites.filter(
+        (invite) => invite.receiver._id === job.assignedCreative._id
+      )
+    : invites;
   return (
     <Column w={600} p={10} j="center">
       {invites.length > 0 && !draft && (
         <Widget p={10}>
           <Typography>{accepted ? 'Creative' : 'Invited Creatives'}</Typography>
-          {invites.map((invite, index) => {
+
+          {inviteFiltered.map((invite, index) => {
             const contractSubmitted = invite.job.contracts.filter(
               (contract) => contract.user._id === invite.receiver._id
             );

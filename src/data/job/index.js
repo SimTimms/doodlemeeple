@@ -295,6 +295,11 @@ export const JOBS = gql`
       name
       submitted
       backgroundImg
+      assignedCreative {
+        _id
+        name
+        profileImg
+      }
       contracts {
         _id
         user {
