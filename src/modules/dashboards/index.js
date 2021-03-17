@@ -24,6 +24,7 @@ export default function ProjectDash({
         (invite) => invite.receiver._id === job.assignedCreative._id
       )
     : invites;
+
   return (
     <Column w={600} p={10} j="center">
       {invites.length > 0 && !draft && (
