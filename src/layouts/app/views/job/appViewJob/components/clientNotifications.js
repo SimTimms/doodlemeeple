@@ -7,7 +7,7 @@ export default function ClientNotification({ jobStatus, job, history }) {
       <NoticeBox
         title="Payment Required"
         color="warning"
-        subTitle="Your Contractor cannot start work until the deposit has been paid"
+        subTitle="Your Creative cannot start work until the deposit has been paid"
         actionTitle="Deposit Funds"
         actionEvent={() => {
           history.push(`/app/view-contract/${job.contracts[0]._id}`);

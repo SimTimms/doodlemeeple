@@ -136,9 +136,9 @@ export default function AppProfileEdit({
                     <Row j="space-between">
                       <Typography>{`You're registered as a ${
                         profile.creativeTrue && profile.creatorTrue
-                          ? 'Contractor and a Client'
+                          ? 'Creative and a Client'
                           : profile.creativeTrue
-                          ? 'Contractor'
+                          ? 'Creative'
                           : 'Client'
                       } `}</Typography>
                       <IconButton

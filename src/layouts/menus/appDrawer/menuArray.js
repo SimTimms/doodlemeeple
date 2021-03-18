@@ -4,13 +4,15 @@ export default function menuArray(history, counts, profile) {
   return [
     {
       name: 'Projects',
-      icon: 'casino',
+      icon: 'work',
+      machineName: 'projects',
       link: () => history.push('/app/projects'),
       count: { icon: 'star', count: counts.quotes },
     },
     {
-      name: profile.creativeTrue ? 'Invites' : 'hide',
+      name: 'Invites',
       icon: 'mail',
+      machineName: 'invites',
       link: () => history.push('/app/invites'),
       count: counts.invites > 0 && {
         icon: 'local_post_office',
@@ -18,22 +20,17 @@ export default function menuArray(history, counts, profile) {
       },
     },
     {
-      name: 'Jobs',
-      icon: 'work',
-      link: () => history.push('/app/dashboard'),
-      count: null,
-    },
-
-    {
       name: 'Community',
       icon: 'group_work',
+      machineName: 'community',
       link: () => history.push('/app/community'),
       count: null,
     },
     {
       name: profile.creativeTrue || profile.creatorTrue ? 'Messages' : 'hide',
       icon: 'chat',
-      link: () => history.push('/messages/conversations'),
+      machineName: 'messages',
+      link: () => history.push('/app/conversations'),
       color: '',
       count:
         counts.messages > 0
@@ -43,24 +40,21 @@ export default function menuArray(history, counts, profile) {
     {
       name: 'Account',
       icon: 'account_balance',
+      machineName: 'account',
       link: () => history.push('/app/account'),
       count: null,
     },
     {
       name: 'Tasks',
       icon: 'task_alt',
+      machineName: 'tasks',
       link: () => history.push('/app/tasks'),
-      count: null,
-    },
-    {
-      name: 'Notifications',
-      icon: 'task_alt',
-      link: () => history.push('/app/notifications'),
       count: null,
     },
     {
       name: 'Logout',
       icon: 'exit_to_app',
+      machineName: 'logout',
       link: () => {
         Cookies.remove('token');
         Cookies.remove('userId');

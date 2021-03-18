@@ -1,48 +1,12 @@
 import React from 'react';
 import { useStyles } from './styles';
-import { Row, Divider, PaymentSchedule, FieldTitleDashboard } from '../';
-import moment from 'moment';
+import { Row, Divider } from '../';
 import { Typography } from '@material-ui/core';
 
 export default function ContractSummaryForCreator({ contractData }) {
   const classes = useStyles();
-  const { job } = contractData;
   return (
     <div className={classes.root}>
-      <FieldTitleDashboard name="About the Job" inline={false} />
-      <Divider />
-      <Row j="flex-start">
-        <Typography className={classes.alignLeft}>{`Name: `}</Typography>
-        <Typography className={classes.alignLeftOnly}>{job.name}</Typography>
-      </Row>
-      <Row j="flex-start">
-        <Typography className={classes.alignLeft}>{`Posted by: `}</Typography>
-        <Typography className={classes.alignLeftOnly}>
-          {job.user.name}
-        </Typography>
-      </Row>
-      <Row j="flex-start" a="flex-start">
-        <Typography className={classes.alignLeft}>{`Summary: `}</Typography>
-        <Typography className={classes.alignLeftOnly}>{job.summary}</Typography>
-      </Row>
-      <Row j="flex-start" a="flex-start">
-        <Typography className={classes.alignLeft}>{`Date: `}</Typography>
-        <Typography>{moment(job.createdAt).format('LLLL')}</Typography>
-      </Row>
-      <Row j="flex-start" a="flex-start">
-        <Typography
-          className={classes.alignLeft}
-        >{`Contractor Skills: `}</Typography>
-        <Typography>
-          {job.keywords.map((keyword, index) => {
-            return index === 0 ? keyword : `, ${keyword}`;
-          })}
-        </Typography>
-      </Row>
-      <Divider />
-      <Divider />
-      <FieldTitleDashboard name="Contractor's Terms" inline={false} />
-      <Divider />
       <Row j="flex-start" a="flex-start">
         <Typography className={classes.alignLeft}>{`Total Cost: `}</Typography>
         <Typography>{`${contractData.cost} ${contractData.currency}`}</Typography>
@@ -77,11 +41,6 @@ export default function ContractSummaryForCreator({ contractData }) {
           <Typography className={classes.warning}>Not Provided</Typography>
         )}
       </Row>
-      <Divider />
-      <Divider />
-      <FieldTitleDashboard name="Payment Schedule" inline={false} />
-      <Divider />
-      <PaymentSchedule contractData={contractData} isClient={true} />
     </div>
   );
 }

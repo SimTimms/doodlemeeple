@@ -2,7 +2,7 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { JOB } from '../../../../data/queries';
-import { ArtistLineup, Creatives, Contractor } from './components';
+import { ArtistLineup, Creatives, Creative } from './components';
 
 export function PickArtist({ jobId, history, favourites, creativeId }) {
   const classes = useStyles();
@@ -50,7 +50,7 @@ export function PickArtist({ jobId, history, favourites, creativeId }) {
       />
 
       {creativeId && (
-        <Contractor
+        <Creative
           history={history}
           favourites={favourites}
           job={job}
@@ -60,7 +60,7 @@ export function PickArtist({ jobId, history, favourites, creativeId }) {
           creativeId={creativeId}
         />
       )}
-      <div style={{ width: '100%', marginTop: 50 }}>
+      <div style={{ width: '100%' }}>
         <Creatives
           history={history}
           favourites={favourites}

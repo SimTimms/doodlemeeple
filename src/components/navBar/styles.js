@@ -18,15 +18,6 @@ export const useStyles = makeStyles((theme) => ({
     borderBottom: '1px solid #ddd',
   },
 
-  appBarMobile: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    height: 64,
-    boxSizing: 'border-box',
-    borderBottom: '1px solid #ddd',
-  },
   appBarShift: {
     paddingLeft: drawerWidth,
     width: '100%',
@@ -37,6 +28,16 @@ export const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
+  },
+  appBarMobile: {
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    height: 64,
+    boxSizing: 'border-box',
+    borderBottom: '1px solid #ddd',
+    padding: 0,
   },
   appBarShiftMobile: {
     width: `100%`,

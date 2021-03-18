@@ -1,10 +1,9 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { Column, IconButton } from '../';
+import { Column } from '../';
 
 export default function Widget({ children, ...props }) {
-  const { pt, p, pb, pl, pr, title, btnIcon, btnTitle, btnEvent } = props;
+  const { pt, p, pb, pl, pr } = props;
   const classes = useStyles();
 
   return (

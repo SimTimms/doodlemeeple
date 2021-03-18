@@ -21,8 +21,8 @@ export const SET_UP_CREATIVE = (
 
 export const SET_UP_CREATIVE_SUB = (
   <Typography variant="h6" style={{ color: '#fff' }} align="center">
-    Now your profile is ready you'll show up on the Contractor Roster and
-    clients can invite you to their projects
+    Now your profile is ready you'll show up on the Creative Roster and clients
+    can invite you to their projects
   </Typography>
 );
 
@@ -47,6 +47,6 @@ export const SET_UP_NONE = (
 
 export const SET_UP_NONE_SUB = (
   <Typography variant="h6" style={{ color: '#fff' }} align="center">
-    You can select to be a Client, Contractor, or both
+    You can select to be a Client, Creative, or both
   </Typography>
 );

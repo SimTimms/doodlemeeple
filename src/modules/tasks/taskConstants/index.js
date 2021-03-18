@@ -7,17 +7,29 @@ import { toaster } from '../../../utils/toaster';
 export function TaskUnreadMessages({ data, history }) {
   return (
     <TaskButton
-      title={
-        data.counts.jobs === 1
-          ? 'You have an unread message'
-          : 'You have unread messages'
-      }
+      title={`Read Message${data.counts.jobs > 1 ? 's' : ''}`}
       subTitle="Messages"
       icon="mail"
       color="warning"
       clickSound={true}
       zoom={true}
-      onClickEvent={() => history.push('/messages/conversations')}
+      onClickEvent={() => history.push('/app/conversations')}
+    />
+  );
+}
+
+export function TaskPatreon({ data, history }) {
+  return (
+    <TaskButton
+      title="Perk up your account"
+      subTitle="Patreon"
+      icon="work"
+      color="primary"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() =>
+        (window.location = 'https://www.patreon.com/doodlemeeple')
+      }
     />
   );
 }
@@ -26,12 +38,84 @@ export function TaskCheckProject({ data, history }) {
   return (
     <TaskButton
       title={
-        data.counts.jobs === 1
-          ? 'Check in on your project'
-          : 'Check in on your projects'
+        data.counts.jobs === 1 ? 'Check your project' : 'Check your projects'
       }
-      subTitle="Projects"
-      icon="casino"
+      subTitle="Project"
+      icon="work"
+      color="secondary"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => history.push('/app/projects')}
+    />
+  );
+}
+
+export function TaskSubmitDraftProject({ data, history }) {
+  return (
+    <TaskButton
+      title={
+        data.counts.draftJobs === 1
+          ? 'Submit your Project'
+          : 'Submit your projects'
+      }
+      subTitle="Project"
+      icon="work"
+      color="secondary"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => history.push('/app/projects')}
+    />
+  );
+}
+
+export function TaskCloseProject({ data, history }) {
+  return (
+    <TaskButton
+      title="Close inactive project"
+      subTitle="Project"
+      icon="work"
+      color="secondary"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => history.push('/app/projects')}
+    />
+  );
+}
+
+export function TaskCloseThisProject({ setTabNbr, history }) {
+  return (
+    <TaskButton
+      title="Close this project"
+      subTitle="Optional"
+      icon="alt_route"
+      color="grey"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => setTabNbr(7)}
+    />
+  );
+}
+
+export function TaskOpenQuote({ setOpenQuoteId }) {
+  return (
+    <TaskButton
+      title="Reply to a Quote"
+      subTitle="Project"
+      icon="work"
+      color="secondary"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => setOpenQuoteId()}
+    />
+  );
+}
+
+export function UnansweredQuotes({ history }) {
+  return (
+    <TaskButton
+      title="You have a Quote"
+      subTitle="Project"
+      icon="work"
       color="secondary"
       clickSound={true}
       zoom={true}
@@ -43,9 +127,9 @@ export function TaskCheckProject({ data, history }) {
 export function TaskRole({ history }) {
   return (
     <TaskButton
-      title="Client or Contractor"
+      title="Client or Creative"
       subTitle="Preference"
-      icon="settings"
+      icon="work"
       color="secondary"
       clickSound={true}
       zoom={true}
@@ -111,12 +195,26 @@ export function TaskPostJob({ history }) {
   return (
     <TaskButton
       title="Post a Job"
-      subTitle="Projects"
+      subTitle="Project"
       icon="work"
       color="primary"
       clickSound={true}
       zoom={true}
       onClickEvent={() => history.push('/app/edit-job/new')}
+    />
+  );
+}
+
+export function TaskContinueWithJobDraft({ jobId, history }) {
+  return (
+    <TaskButton
+      title="Submit this Project"
+      subTitle="Project"
+      icon="work"
+      color="primary"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => history.push(`/app/edit-job/${jobId}`)}
     />
   );
 }
@@ -188,7 +286,7 @@ export function TaskQuote({ history, jobId }) {
       variables={{ currency: 'GBP', cost: '100', jobId, status: 'draft' }}
       onCompleted={(data) => {
         toaster('Created');
-        history.push(`/app/edit-quote/${data.contractCreateOne._id}`);
+        history.push(`/app/edit-quote/${data.contractCreateOne.recordId}`);
       }}
     >
       {(mutation) => {
@@ -231,11 +329,25 @@ export function TaskEditQuote({ history, setTabNbr }) {
     <TaskButton
       title="Edit or Retract your quote"
       subTitle="Optional"
-      icon="request_quote"
-      color="secondary"
+      icon="alt_route"
+      color="grey"
       clickSound={true}
       zoom={true}
       onClickEvent={() => setTabNbr(6)}
+    />
+  );
+}
+
+export function TaskCommunity({ drawerButtonChange }) {
+  return (
+    <TaskButton
+      title="Check out the community page"
+      subTitle="Optional"
+      icon="alt_route"
+      color="grey"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => drawerButtonChange('/app/community', 'Community')}
     />
   );
 }

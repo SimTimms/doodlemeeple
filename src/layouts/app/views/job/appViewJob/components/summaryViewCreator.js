@@ -7,28 +7,23 @@ import {
   FullContractComponent,
   Signature,
 } from '../../../../../../components';
-import { CreatorDashboard } from './jobDashboards/';
-import ChatView from '../components/chatView';
-import PaymentsView from './paymentsView';
+import { ChatViewByJob } from '../../../../../../modules/chat';
 import CreatorMenu from './creatorMenu';
 import CreatorJobSummary from './creatorJobSummary';
+import CloseJobView from '../components/closeJobView';
+import ProjectDash from '../../../../../../modules/dashboards';
 
-export default function SummaryViewCreator({
-  job,
-  history,
-  refreshCount,
-  setRefreshCount,
-}) {
+export default function SummaryViewCreator({ job, history }) {
   const classes = useStyles();
   const [conversationUser, setConversationUser] = React.useState(null);
-  const [pageNbr, setPageNbr] = React.useState(0);
   const [tabNbr, setTabNbr] = React.useState(-1);
-  const [messages, setMessages] = React.useState([]);
   const [jobData, setJobData] = React.useState(null);
+  const jobClosed = job.submitted === 'closed';
 
   useEffect(() => {
     setJobData({ ...job });
-  }, [job]);
+    setTabNbr(jobClosed ? 1 : -1);
+  }, [job, jobClosed]);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -37,25 +32,33 @@ export default function SummaryViewCreator({
           tabNbr={tabNbr}
           setTabNbr={setTabNbr}
           activeContract={job.activeContract}
-          jobClosed={job.submitted === 'closed'}
+          jobClosed={jobClosed}
+          setConversationUser={setConversationUser}
         />
-        {tabNbr === -1 && jobData && (
+        {conversationUser ? (
+          <ChatViewByJob
+            job={job}
+            conversationUser={conversationUser}
+            setConversationUser={setConversationUser}
+            history={history}
+          />
+        ) : tabNbr === -1 && jobData ? (
           <Column>
-            <CreatorDashboard
-              job={jobData}
+            <ProjectDash
+              invites={job.invites}
               setConversationUser={setConversationUser}
-              setTabNbr={setTabNbr}
+              jobClosed={job.submitted === 'closed'}
               history={history}
+              job={job}
+              setTabNbr={setTabNbr}
             />
           </Column>
-        )}
-        {tabNbr === 1 && (
+        ) : tabNbr === 1 ? (
           <CreatorJobSummary
             jobData={{ data: jobData, setData: setJobData }}
             setTabNbr={setTabNbr}
           />
-        )}
-        {tabNbr === 3 && (
+        ) : tabNbr === 3 ? (
           <BorderBox w={700}>
             <FullContractComponent
               contractData={job.activeContract}
@@ -70,28 +73,12 @@ export default function SummaryViewCreator({
               onDecline={() => setTabNbr(-1)}
             />
           </BorderBox>
-        )}
-        {tabNbr === 4 && (
-          <Column>
-            <PaymentsView
-              job={{ jobData: jobData, setJobData: setJobData }}
-              refreshCount={refreshCount}
-              setRefreshCount={setRefreshCount}
-            />
-          </Column>
-        )}
-        {conversationUser && (
-          <ChatView
-            job={job}
-            setPageNbr={setPageNbr}
-            jobId={job._id}
-            conversationUser={conversationUser}
-            pageNbr={pageNbr}
-            setConversationUser={setConversationUser}
-            setMessages={setMessages}
-            messages={messages}
-            history={history}
-          />
+        ) : (
+          tabNbr === 7 && (
+            <Column>
+              <CloseJobView jobId={job._id} history={history} />
+            </Column>
+          )
         )}
       </div>
     </Slide>

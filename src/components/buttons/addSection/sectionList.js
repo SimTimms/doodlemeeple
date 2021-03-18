@@ -23,6 +23,7 @@ export default function SectionList({
   useEffect(() => {
     setPage(userType.creator ? 1 : 0);
   }, [userType]);
+
   return (
     <div
       className={clsx({
@@ -62,7 +63,7 @@ export default function SectionList({
         {userType.creative && (
           <MenuButtonShortcut
             text={{
-              name: 'Contractor',
+              name: 'Creative',
               color: '#222',
               icon: 'chevron_right',
               count: 0,
@@ -121,7 +122,7 @@ export default function SectionList({
         )}
         {(page === 0 || page === 2) && (
           <Column>
-            <HeaderTwo str="Visual Art and Contractor Writing" />
+            <HeaderTwo str="Visual Art and Creative Writing" />
             <Divider />
             {ARTIST_TYPES.map((type, index) => (
               <ArtistCard

@@ -4,6 +4,7 @@ import { Column, Divider } from '../';
 import * as CONSTANTS from './constants';
 import profileComplete from '../../utils/profileComplete';
 import getRole from '../../utils/getRole';
+
 export default function NoticeBoard({ profile }) {
   const classes = useStyles();
   const role = getRole(profile);

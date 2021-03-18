@@ -13,6 +13,11 @@ import {
   TaskContact,
   TaskSubmitQuote,
   TaskInvites,
+  TaskCloseProject,
+  TaskSubmitDraftProject,
+  TaskCommunity,
+  UnansweredQuotes,
+  TaskPatreon,
 } from '../../modules/tasks';
 import preferencesSet from '../../utils/preferencesSet';
 import { useStyles } from './styles';
@@ -28,15 +33,27 @@ export default function TaskGenerator({
   contact,
   draftQuotes,
   invites,
+  totalDeclined,
+  draftJobs,
+  unansweredQuotes,
+  drawerButtonChange,
 }) {
   const classes = useStyles();
   const elementArray = [];
+
   if (messages > 0) {
     elementArray.push(<TaskUnreadMessages data={data} history={history} />);
   }
-  if (jobs > 0) {
+
+  if (totalDeclined > 0) {
+    elementArray.push(<TaskCloseProject data={data} history={history} />);
+  } else if (draftJobs > 0) {
+    elementArray.push(<TaskSubmitDraftProject data={data} history={history} />);
+  } else if (jobs > 0) {
     elementArray.push(<TaskCheckProject data={data} history={history} />);
+    elementArray.push(<TaskPatreon data={data} history={history} />);
   }
+
   if (!preferencesSet(profile)) {
     elementArray.push(<TaskRole history={history} />);
   }
@@ -75,9 +92,14 @@ export default function TaskGenerator({
   if (invites > 0) {
     elementArray.push(<TaskInvites history={history} />);
   }
+
+  if (unansweredQuotes > 0) {
+    elementArray.push(<UnansweredQuotes history={history} />);
+  }
+
   return elementArray.length > 0 ? (
     elementArray
   ) : (
-    <Typography className={classes.noTask}>No Tasks</Typography>
+    <TaskCommunity drawerButtonChange={drawerButtonChange} />
   );
 }

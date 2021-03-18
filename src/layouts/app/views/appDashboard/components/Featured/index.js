@@ -123,7 +123,7 @@ export function Featured({ posts, history }) {
                   component="h6"
                   variant="h6"
                 >
-                  Professional Contractor Talent
+                  Professional Creative Talent
                 </Typography>
               </div>
               {/*

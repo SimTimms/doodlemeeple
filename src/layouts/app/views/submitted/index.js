@@ -37,7 +37,7 @@ export function ProjectSubmitted({ history }) {
               disabled={false}
               iconPos="right"
               onClickEvent={() => {
-                history.push('/app/jobs');
+                history.push('/app/projects');
               }}
               color="primary"
               type="button"

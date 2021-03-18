@@ -20,7 +20,6 @@ export default function TaskGenerator({
 }) {
   const classes = useStyles();
   const elementArray = [];
-
   if (noQuote) {
     elementArray.push(<TaskQuote history={history} jobId={job.job._id} />);
   }

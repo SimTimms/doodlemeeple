@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
@@ -9,11 +9,14 @@ import {
   FullContractComponent,
   BorderBox,
   Signature,
+  DividerWithBorder,
+  UserDeleted,
 } from '../';
 import clsx from 'clsx';
-import { PREVIEW_CONTRACT } from '../../data/queries';
-import { Query } from 'react-apollo';
+import { PREVIEW_CONTRACT, JOB_CONTACT_DETAILS } from '../../data/queries';
 import ActionSetOne from './ActionSetOne';
+import { Query } from 'react-apollo';
+import * as social from '../../assets/social';
 
 export default function InviteComponentFull({
   invite,
@@ -21,6 +24,9 @@ export default function InviteComponentFull({
   contract,
   setTabNbr,
   history,
+  isOpen,
+  contactDetails,
+  jobId,
 }) {
   const classes = useStyles();
   const [display, setDisplay] = React.useState(false);
@@ -29,8 +35,16 @@ export default function InviteComponentFull({
   const quoted = invite.status === 'quote_sent';
   const read = invite.status === 'read';
   const declined = invite.status === 'declined';
+  useEffect(() => {
+    setDisplay(isOpen);
+  }, [isOpen]);
 
-  return (
+  return !invite.receiver ? (
+    <Column>
+      <UserDeleted />
+      <DividerWithBorder />
+    </Column>
+  ) : (
     <div style={{ width: '100%', opacity: declined && 0.5 }}>
       <Column>
         <Row j="space-between" a="center">
@@ -67,7 +81,7 @@ export default function InviteComponentFull({
                   : read
                   ? 'Opened'
                   : quoted
-                  ? 'Quoted'
+                  ? 'Task: Reply to Quote'
                   : declined && 'Declined'}
               </Typography>
             </Column>
@@ -106,6 +120,102 @@ export default function InviteComponentFull({
             />
           )}
         </Row>
+
+        <Column>
+          <DividerWithBorder />
+          {contactDetails && (
+            <Query
+              query={JOB_CONTACT_DETAILS}
+              variables={{ jobId: jobId }}
+              fetchPolicy="network-only"
+            >
+              {({ data }) => {
+                if (data) {
+                  const {
+                    email,
+                    publicEmail,
+                    linkedIn,
+                    twitter,
+                    facebook,
+                    website,
+                    instagram,
+                    skype,
+                  } = data.jobById.assignedCreative;
+                  return (
+                    <Column>
+                      <Row a="center" j="flex-start" mb={5}>
+                        <img
+                          src={social.iconEmail}
+                          className={classes.contactIcon}
+                        />
+                        <Typography>
+                          {publicEmail ? publicEmail : email}
+                        </Typography>
+                      </Row>
+                      {linkedIn && (
+                        <Row a="center" j="flex-start" mb={5}>
+                          <img
+                            src={social.socialLinkedIn}
+                            className={classes.contactIcon}
+                          />
+                          <Typography>{linkedIn}</Typography>
+                        </Row>
+                      )}
+                      {twitter && (
+                        <Row a="center" j="flex-start" mb={5}>
+                          <img
+                            src={social.socialTwitter}
+                            className={classes.contactIcon}
+                          />
+                          <Typography>{twitter}</Typography>
+                        </Row>
+                      )}
+                      {facebook && (
+                        <Row a="center" j="flex-start" mb={5}>
+                          <img
+                            src={social.socialFacebook}
+                            className={classes.contactIcon}
+                          />
+                          <Typography>{facebook}</Typography>
+                        </Row>
+                      )}
+                      {instagram && (
+                        <Row a="center" j="flex-start" mb={5}>
+                          <img
+                            src={social.socialInstagram}
+                            className={classes.contactIcon}
+                          />
+                          <Typography>{instagram}</Typography>
+                        </Row>
+                      )}
+
+                      {skype && (
+                        <Row a="center" j="flex-start" mb={5}>
+                          <img
+                            src={social.socialSkype}
+                            className={classes.contactIcon}
+                          />
+                          <Typography>{skype}</Typography>
+                        </Row>
+                      )}
+                      {website && (
+                        <Row a="center" j="flex-start">
+                          <img
+                            src={social.iconWebsite}
+                            className={classes.contactIcon}
+                          />
+                          <Typography>{website}</Typography>
+                        </Row>
+                      )}
+                    </Column>
+                  );
+                } else {
+                  return null;
+                }
+              }}
+            </Query>
+          )}
+        </Column>
         {contract && display && (
           <Query
             query={PREVIEW_CONTRACT}
@@ -114,57 +224,43 @@ export default function InviteComponentFull({
           >
             {({ data }) => {
               return data ? (
-                <div
-                  style={{
-                    background: '#efeff5',
-                    marginTop: 20,
-                    width: '100%',
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '100%',
-                      background: '#fff',
-                      boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-                    }}
-                  >
-                    {tabNbrTwo === 0 && (
-                      <BorderBox>
-                        <ContractSummaryForCreator
-                          contractData={data.contractById}
+                <Column>
+                  {tabNbrTwo === 0 && (
+                    <Column>
+                      <DividerWithBorder />
+                      <ContractSummaryForCreator
+                        contractData={data.contractById}
+                      />
+                      <DividerWithBorder />
+                      {contract.status !== 'accepted' && (
+                        <ActionSetOne
+                          setTabNbrTwo={setTabNbrTwo}
+                          setTabNbr={setTabNbr}
+                          contract={contract}
+                          history={history}
                         />
-                        {contract.status !== 'accepted' && (
-                          <ActionSetOne
-                            setTabNbrTwo={setTabNbrTwo}
-                            setTabNbr={setTabNbr}
-                            contract={contract}
-                            history={history}
-                          />
-                        )}
-                      </BorderBox>
-                    )}
-                    {tabNbrTwo === 1 && (
-                      <BorderBox>
-                        <FullContractComponent
-                          contractData={data.contractById}
-                        />
-                        <Signature
-                          contractData={contract}
-                          onAccept={() => {
-                            history.push(
-                              `/app/view-job/${data.contractById.job._id}`
-                            );
-                          }}
-                          onDecline={() =>
-                            history.push(
-                              `/app/view-job/${data.contractById.job._id}`
-                            )
-                          }
-                        />
-                      </BorderBox>
-                    )}
-                  </div>
-                </div>
+                      )}
+                    </Column>
+                  )}
+                  {tabNbrTwo === 1 && (
+                    <BorderBox>
+                      <FullContractComponent contractData={data.contractById} />
+                      <Signature
+                        contractData={contract}
+                        onAccept={() => {
+                          history.push(
+                            `/app/view-job/${data.contractById.job._id}`
+                          );
+                        }}
+                        onDecline={() =>
+                          history.push(
+                            `/app/view-job/${data.contractById.job._id}`
+                          )
+                        }
+                      />
+                    </BorderBox>
+                  )}
+                </Column>
               ) : null;
             }}
           </Query>

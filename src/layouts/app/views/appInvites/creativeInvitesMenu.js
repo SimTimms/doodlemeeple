@@ -21,20 +21,6 @@ export default function CreativeInvitesMenu({ tabNbr, setTabNbr }) {
           active={tabNbr === 1}
           column={true}
         />
-        {/*
-        <MenuButtonShortcut
-          text={{
-            name: 'Jobs',
-            color: '#fff',
-            icon: 'work',
-            count: 0,
-          }}
-          onClickEvent={() => {
-            setTabNbr(2);
-          }}
-          active={tabNbr === 2}
-          column={true}
-        />*/}
         <MenuButtonShortcut
           text={{
             name: 'History',

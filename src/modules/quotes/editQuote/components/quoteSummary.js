@@ -14,6 +14,13 @@ export default function QuoteSummary({ contract, setContract }) {
       <DividerMini />
       <Typography variant="body1">
         <span>
+          <b>Estimated Completion:</b>
+        </span>
+        {` ${contract.deadline}`}
+      </Typography>
+      <DividerMini />
+      <Typography variant="body1">
+        <span>
           <b>Cost:</b>
         </span>
         {` ${contract.cost} ${contract.currency}`}

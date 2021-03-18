@@ -15,9 +15,19 @@ import {
   TaskSubmitQuote,
   TaskEditQuote,
   TaskDeclineInvite,
+  TaskCloseProject,
+  TaskCloseThisProject,
+  TaskSubmitDraftProject,
+  TaskCommunity,
+  UnansweredQuotes,
+  TaskOpenQuote,
+  TaskContinueWithJobDraft,
+  TaskPatreon,
 } from './taskConstants';
-
+import TaskGeneratorClient from './generators';
 export {
+  TaskPatreon,
+  TaskGeneratorClient,
   TaskButton,
   TaskUnreadMessages,
   TaskCheckProject,
@@ -34,4 +44,11 @@ export {
   TaskSubmitQuote,
   TaskEditQuote,
   TaskDeclineInvite,
+  TaskCloseProject,
+  TaskCloseThisProject,
+  TaskSubmitDraftProject,
+  TaskCommunity,
+  UnansweredQuotes,
+  TaskOpenQuote,
+  TaskContinueWithJobDraft,
 };

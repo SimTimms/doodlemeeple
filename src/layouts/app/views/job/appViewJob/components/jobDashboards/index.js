@@ -1,7 +1,5 @@
 import React from 'react';
-import { Column, Row, LoadIcon } from '../../../../../../../components';
-import InvitesDash from './InvitesDash';
-import CreativeDash from './CreativeDash';
+import { Column, Row } from '../../../../../../../components';
 import CheckListCreativeDash from './CheckListCreativeDash';
 
 export function CreativeDashboard({
@@ -33,33 +31,6 @@ export function CreativeDashboard({
           contractData={contractData}
         />
       </Row>
-    </Column>
-  );
-}
-
-export function CreatorDashboard({
-  job,
-  setConversationUser,
-  setTabNbr,
-  history,
-}) {
-  return (
-    <Column a="center">
-      {!job.activeContract && (
-        <InvitesDash
-          invites={job.invites}
-          setConversationUser={setConversationUser}
-          jobClosed={job.submitted === 'closed'}
-          history={history}
-        />
-      )}
-      {job.activeContract && (
-        <CreativeDash
-          setConversationUser={setConversationUser}
-          history={history}
-          job={job}
-        />
-      )}
     </Column>
   );
 }

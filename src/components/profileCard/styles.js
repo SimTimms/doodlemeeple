@@ -1,5 +1,19 @@
 import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
+  profileCardBlank: {
+    margin: 10,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    border: '1px solid #ddd',
+    minWidth: 270,
+    maxWidth: 270,
+    minHeight: 210,
+    maxHeight: 210,
+    position: 'relative',
+    background: 'rgba(0,0,0,0.1)',
+  },
   creativeCard: {
     margin: 10,
     display: 'flex',
@@ -11,6 +25,7 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: 270,
     position: 'relative',
     boxShadow: '10px 10px 20px rgba(0,0,0,0.2)',
+    background: '#fff',
   },
   creativeCardNoShadow: { boxShadow: 'none' },
   creativeCardWrapper: {
@@ -23,30 +38,6 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
     borderBottom: '1px solid #ddd',
   },
-  background: {
-    backgroundSize: 'cover',
-    backgroundPosition: 'center center',
-    height: 100,
-    width: '100%',
-    position: 'relative',
-    cursor: 'pointer',
-  },
-  noBG: { minHeight: 0, maxHeight: 0, height: 0 },
-  noProfile: { display: 'none' },
-  creativeCardBackground: {
-    minWidth: 80,
-    maxWidth: 80,
-    minHeight: 80,
-    maxHeight: 80,
-    borderRadius: '50%',
-    border: '5px solid #fff',
-    marginTop: -50,
-    cursor: 'pointer',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center center',
-    position: 'relative',
-  },
-  profileNoBG: { marginTop: 10 },
   creativeCardDetails: {
     padding: 20,
     paddingTop: 0,
@@ -55,6 +46,15 @@ export const useStyles = makeStyles((theme) => ({
   actions: {
     display: 'flex',
     justifyContent: 'flex-end',
+  },
+  favWrapper: {
+    width: '100%',
+    height: '32px',
+    marginTop: '-40px',
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   actionsWrapper: {
     display: 'flex',
@@ -69,7 +69,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   creativeCardInvited: {
     boxShadow: `0 0 20px ${theme.palette.primary.light}`,
-    border: `1px solid ${theme.palette.primary.light}`,
   },
   favIconNull: {
     color: '#ccc',

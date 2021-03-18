@@ -55,7 +55,7 @@ import FieldTitleDashboard from './fieldTitleDashboard';
 import FieldBox from './fieldBox';
 import InfoBox from './infoBox';
 import FieldTitleWrapper from './fieldTitle/FieldTitleWrapper';
-import ProfileCard from './profileCard';
+import { ProfileCard, ProfileCardBlank } from './profileCard';
 import { ProfileCardCreative, ProfileCardCreator } from './profileCardBasic';
 import BorderBox from './borderBox';
 import IconBox from './iconBox';
@@ -87,6 +87,10 @@ import UnlockInfo from './unlockInfo';
 import UnlockInfoReverse from './unlockInfoReverse';
 import NotificationComponent from './notificationComponent';
 import GalleryCard from './galleryCard';
+import FeaturedCreative from './featuredCreative';
+import CreativeRosterProfiles from './creativeRosterProfiles';
+import UserDeleted from './userDeleted';
+
 import {
   Header,
   SubHeader,
@@ -104,6 +108,9 @@ import {
 import { Column, Row, TopMenuWrapper, RowCheckList } from './blocks';
 
 export {
+  UserDeleted,
+  CreativeRosterProfiles,
+  FeaturedCreative,
   CreatorComponentDash,
   TopMenuWrapper,
   NotificationComponent,
@@ -172,6 +179,7 @@ export {
   IconButton,
   ProjectComponentDash,
   ProfileCard,
+  ProfileCardBlank,
   ProfileCardCreative,
   ProfileCardCreator,
   FieldTitle,

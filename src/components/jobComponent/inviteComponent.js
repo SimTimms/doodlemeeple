@@ -69,7 +69,7 @@ export default function InviteComponent({ invite, history }) {
                         : declined
                         ? 'Declined'
                         : unopened
-                        ? 'Unread'
+                        ? 'Task: Open this Invite'
                         : opened
                         ? 'Task: Respond to Invite'
                         : quoted
@@ -83,7 +83,7 @@ export default function InviteComponent({ invite, history }) {
 
                 <MenuButtonShortcut
                   text={{
-                    name: 'View',
+                    name: 'Open',
                     color: 'light',
                     icon: completed
                       ? ''
@@ -91,15 +91,7 @@ export default function InviteComponent({ invite, history }) {
                       ? 'local_post_office'
                       : '',
                     count: invite.messages,
-                    back: completed
-                      ? ''
-                      : unopened
-                      ? 'warning'
-                      : opened || quoted
-                      ? 'primary'
-                      : accepted
-                      ? 'secondary'
-                      : '',
+                    back: 'primary',
                   }}
                   onClickEvent={() => {
                     invite.status === 'unopened' && mutation();

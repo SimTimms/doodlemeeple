@@ -35,9 +35,7 @@ export default function Conversations({ history, setConversationArgs }) {
                 count={conversation.count}
                 title={conversation.job.name}
                 onClickEvent={() => {
-                  history.replace(
-                    `/messages/conversations/${conversation.job._id}`
-                  );
+                  history.replace(`/app/conversations/${conversation.job._id}`);
                   setConversationArgs({
                     jobId: conversation.job._id,
                     conversationUser:

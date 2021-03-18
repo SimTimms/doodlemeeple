@@ -18,7 +18,7 @@ export default function JobSummaryComponent({ job }) {
       <Typography noWrap={false}>{job.summary}</Typography>
       <Divider />
       <Divider />
-      <HeaderThree str="Contractor Summary" />
+      <HeaderThree str="Creative Summary" />
       <Divider />
       <Typography>{job.creativeSummary}</Typography>
       <Divider />

@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStyles } from './styles';
 import { useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 import AppDrawer from '../menus/appDrawer';
 import AppDashboard from './views/appDashboard';
 import TaskDashboard from './views/taskDashboard';
+import CommunityPage from './views/communityPage';
 import NotificationDashboard from './views/notificationDashboard';
 import AppInvites from './views/appInvites';
 import AppHelp from './views/appHelp';
 import AppFailedPayment from './views/appFailedPayment';
 import AppProfileEdit from './views/appProfileEdit';
+import ConversationModule from './views/conversations';
 import Beta from './views/beta';
 import CreativeRoster from './views/creativeRoster';
 import { Account } from './views/account';
@@ -38,6 +40,7 @@ import logout from '../../utils/logout';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('tasks');
+  const [activeButton, setActiveButton] = React.useState('Tasks');
   const [profile, setProfile] = React.useState(null);
   const pageJump = props.match ? props.match.params.page : null;
   const mobile = useMediaQuery('(max-width:800px)');
@@ -82,6 +85,16 @@ function AppLayout(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  function drawerButtonChange(url, page) {
+    setActiveButton(page);
+    history.push(url);
+  }
+
+  useEffect(() => {
+    setActiveButton(page);
+  }, [page]);
+
   return (
     <div className={classes.root}>
       <ToastContainer />
@@ -93,25 +106,32 @@ function AppLayout(props) {
               history.push(`/app/edit-job/new`);
             }}
             icon="add"
+            styleOverride={{
+              position: 'relative',
+              zIndex: 100,
+              marginRight: 'auto',
+            }}
           />
         ) : (
           <div></div>
         )}
-        <MenuButtonShortcut
-          text={{
-            name: profile ? profile.name : 'fetching...',
-            color: '#222',
-            icon: 'face',
-            count: 0,
-          }}
-          onClickEvent={() => {
-            history.push('/app/edit-profile');
-          }}
-          active={false}
-          imageIcon={profile && profile.profileImg}
-          countIcon="star"
-          iconPos="right"
-        />
+        {!mobile && (
+          <MenuButtonShortcut
+            text={{
+              name: profile ? profile.name : 'fetching...',
+              color: '#222',
+              icon: 'face',
+              count: 0,
+            }}
+            onClickEvent={() => {
+              history.push('/app/edit-profile');
+            }}
+            active={false}
+            imageIcon={profile && profile.profileImg}
+            countIcon="star"
+            iconPos="right"
+          />
+        )}
       </StyledNavBar>
       {profile && (
         <AppDrawer
@@ -119,7 +139,7 @@ function AppLayout(props) {
           handleDrawerOpen={handleDrawerOpen}
           open={open}
           history={history}
-          page={page}
+          activeButton={activeButton}
           profile={profile}
         />
       )}
@@ -136,11 +156,14 @@ function AppLayout(props) {
               profile={profile}
               setProfile={setProfile}
             />
+          ) : page === 'conversations' ? (
+            <ConversationModule history={history} />
           ) : page === 'tasks' && profile ? (
             <TaskDashboard
               history={history}
               profile={profile}
               setProfile={setProfile}
+              drawerButtonChange={drawerButtonChange}
             />
           ) : page === 'notifications' && profile ? (
             <NotificationDashboard
@@ -241,6 +264,8 @@ function AppLayout(props) {
             <FullContract contractId={pathParam} history={history} />
           ) : page === 'edit-contract' ? (
             <EditContract contractId={pathParam} history={history} />
+          ) : page === 'community' ? (
+            <CommunityPage history={history} />
           ) : page === 'public-preview' ? (
             <PreviewProfile
               profileId={pathParam}

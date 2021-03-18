@@ -30,7 +30,7 @@ export default function ItemCreativePaid({
               [classes.dull]: true,
             })}
           >
-            Contractor Paid:{' '}
+            Creative Paid:{' '}
             <b>
               {`${totalPaid} / ${cost} 
               ${currency}`}

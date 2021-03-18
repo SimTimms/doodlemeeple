@@ -10,25 +10,29 @@ export default function CreatorMenu({
   setTabNbr,
   activeContract,
   jobClosed,
+  setConversationUser,
 }) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <TopMenuWrapper j="center">
-        <MenuButtonShortcut
-          text={{
-            name: 'Dashboard',
-            color: 'light',
-            icon: 'dashboard',
-            count: 0,
-          }}
-          onClickEvent={() => {
-            setTabNbr(-1);
-          }}
-          column={true}
-          active={tabNbr === -1}
-        />
+        {!jobClosed && (
+          <MenuButtonShortcut
+            text={{
+              name: 'Dashboard',
+              color: 'light',
+              icon: 'dashboard',
+              count: 0,
+            }}
+            onClickEvent={() => {
+              setTabNbr(-1);
+              setConversationUser(null);
+            }}
+            column={true}
+            active={tabNbr === -1}
+          />
+        )}
         <MenuButtonShortcut
           text={{
             name: 'Project Details',
@@ -58,21 +62,6 @@ export default function CreatorMenu({
             active={tabNbr === 3}
           />
         )}
-        {/*
-          <MenuButtonShortcut
-            text={{
-              name: 'Payments',
-              color: '#fff',
-              icon: 'credit_card',
-              count: 0,
-            }}
-            onClickEvent={() => {
-              setTabNbr(4);
-            }}
-            column={true}
-            active={tabNbr === 4}
-          />
-          */}
       </TopMenuWrapper>
     </div>
   );

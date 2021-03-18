@@ -29,7 +29,7 @@ export const TYPE_HELPER = (typeIn) => {
     case 'translator':
       return 'Translator';
     case 'world-builder':
-      return 'World Builder/Contractor Writer';
+      return 'World Builder/Creative Writer';
     case 'play-tester':
       return 'Play Tester';
     default:
