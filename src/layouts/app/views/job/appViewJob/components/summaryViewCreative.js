@@ -6,7 +6,7 @@ import {
   FullContractComponent,
 } from '../../../../../../components';
 import { CreativeDashboard } from './jobDashboards/';
-import ChatView from '../components/chatView';
+import { ChatViewByJob } from '../../../../../../modules/chat';
 import CreativeMenu from './creativeMenu';
 import EditProposalForm from './proposalForm/views/editProposal';
 import PaymentsView from './paymentsView';
@@ -35,6 +35,7 @@ export default function SummaryViewCreative({ job, history }) {
     setContract(job.contract);
     setInvite(job.invite);
   }, [job]);
+
   return (
     <div className={classes.root}>
       <CreativeMenu
@@ -43,20 +44,30 @@ export default function SummaryViewCreative({ job, history }) {
         activeContract={activeContract}
         closed={closed}
       />
-      {tabNbr === -1 && (
-        <Column>
-          <CreativeDashboard
-            job={job}
-            contractData={contract}
-            setConversationUser={setConversationUser}
-            setTabNbr={setTabNbr}
-            invite={{ data: invite, setData: setInvite }}
-            history={history}
-            jobHasBeenAwarded={jobHasBeenAwarded}
-            activeContract={activeContract}
-            userContractStatus={userContractStatus}
-          />
-        </Column>
+
+      {conversationUser ? (
+        <ChatViewByJob
+          job={job.job}
+          conversationUser={conversationUser}
+          setConversationUser={setConversationUser}
+          history={history}
+        />
+      ) : (
+        tabNbr === -1 && (
+          <Column>
+            <CreativeDashboard
+              job={job}
+              contractData={contract}
+              setConversationUser={setConversationUser}
+              setTabNbr={setTabNbr}
+              invite={{ data: invite, setData: setInvite }}
+              history={history}
+              jobHasBeenAwarded={jobHasBeenAwarded}
+              activeContract={activeContract}
+              userContractStatus={userContractStatus}
+            />
+          </Column>
+        )
       )}
       {tabNbr === 1 && (
         <Column>
@@ -93,19 +104,6 @@ export default function SummaryViewCreative({ job, history }) {
       {tabNbr === 7 && <FullContractComponent contractData={job.contract} />}
       {tabNbr === 8 && (
         <DeclineInviteView inviteId={invite._id} history={history} />
-      )}
-      {conversationUser && (
-        <ChatView
-          job={jobData}
-          setPageNbr={setPageNbr}
-          jobId={jobData._id}
-          conversationUser={conversationUser}
-          pageNbr={pageNbr}
-          setConversationUser={setConversationUser}
-          setMessages={setMessages}
-          messages={messages}
-          history={history}
-        />
       )}
     </div>
   );

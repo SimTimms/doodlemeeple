@@ -46,7 +46,6 @@ export default function CheckListCreativeDash({
           accepted={activeContract}
         />
       </Widget>
-
       <Widget p={10}>
         <Column>
           <Typography variant="body1">Tasks</Typography>
