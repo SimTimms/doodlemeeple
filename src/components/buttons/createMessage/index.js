@@ -49,12 +49,12 @@ export default function CreateMessage({
                 <TextField
                   id={'type'}
                   label="Message"
-                  inputProps={{ maxLength: 512 }}
+                  inputProps={{ maxLength: 5124 }}
                   multiline
                   type="text"
                   value={newMessage}
                   onChange={(e) => {
-                    setNewMessage(e.target.value.substring(0, 512));
+                    setNewMessage(e.target.value.substring(0, 5124));
                   }}
                   margin="normal"
                   variant="outlined"
