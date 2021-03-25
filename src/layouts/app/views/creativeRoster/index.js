@@ -40,7 +40,7 @@ export default function CreativeRoster({ history, favourites, groupIn }) {
     'translator',
     'play-tester',
   ];
-  const industryTypes = ['creator', 'manufacturer', 'pubisher'];
+  const industryTypes = ['creator', 'manufacturer', 'publisher'];
   return loading ? (
     <LoadIcon />
   ) : (
