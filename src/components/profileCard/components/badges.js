@@ -14,7 +14,7 @@ export default function Badges({ creative }) {
         badgeArr.push(
           <img
             src={badges[badge.badgeIcon]}
-            title={badges[badge.description]}
+            title={badge.description}
             key={`badge_${index}_${creative._id}`}
             style={{ maxHeight: 16, maxWidth: 16, margin: 2 }}
           />
