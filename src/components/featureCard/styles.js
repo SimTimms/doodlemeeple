@@ -127,7 +127,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   messageButton: {
     width: '100%',
-    lineHeight: 0.6,
+    lineHeight: 1,
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'wrap',
