@@ -31,144 +31,59 @@ export default function SectionList({
         [classes.skillWrapperOpen]: display,
       })}
     >
-      <Row j="center">
-        {userType.creative && (
-          <MenuButtonShortcut
-            text={{
-              name: 'Show All',
-              color: '#222',
-              icon: 'chevron_right',
-              count: 0,
-            }}
-            onClickEvent={() => {
-              setPage(0);
-            }}
-            active={page === 0}
-          />
-        )}
-        {userType.creator && (
-          <MenuButtonShortcut
-            text={{
-              name: 'Project Creators',
-              color: '#222',
-              icon: 'work',
-              count: 0,
-            }}
-            onClickEvent={() => {
-              setPage(1);
-            }}
-            active={page === 1}
-          />
-        )}
-        {userType.creative && (
-          <MenuButtonShortcut
-            text={{
-              name: 'Creative',
-              color: '#222',
-              icon: 'chevron_right',
-              count: 0,
-            }}
-            onClickEvent={() => {
-              setPage(2);
-            }}
-            active={page === 2}
-          />
-        )}
-        {userType.creative && (
-          <MenuButtonShortcut
-            text={{
-              name: 'Marketing/Campaign',
-              color: '#222',
-              icon: 'chevron_right',
-              count: 0,
-            }}
-            onClickEvent={() => {
-              setPage(3);
-            }}
-            active={page === 3}
-          />
-        )}
-        {userType.creative && (
-          <MenuButtonShortcut
-            text={{
-              name: 'Development',
-              color: '#222',
-              icon: 'chevron_right',
-              count: 0,
-            }}
-            onClickEvent={() => {
-              setPage(4);
-            }}
-            active={page === 4}
-          />
-        )}
-      </Row>
       <Column>
-        {(page === 0 || page === 1) && userType.creator && (
-          <Column>
-            <HeaderTwo str="Project Creators" />
-            <Divider />
-            {CREATOR_TYPES.map((type, index) => (
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type={type}
-                key={`creator_${index}`}
-              />
-            ))}
-            <Divider />
-          </Column>
-        )}
-        {(page === 0 || page === 2) && (
-          <Column>
-            <HeaderTwo str="Visual Art and Creative Writing" />
-            <Divider />
-            {ARTIST_TYPES.map((type, index) => (
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type={type}
-                key={`artist_${index}`}
-              />
-            ))}
-            <Divider />
-          </Column>
-        )}
-        {(page === 0 || page === 3) && (
-          <Column>
-            <HeaderTwo str="Marketing and Campaign Management" />
-            <Divider />
-            {MARKETING_TYPES.map((type, index) => (
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type={type}
-                key={`marketing_${index}`}
-              />
-            ))}
-            <Divider />
-          </Column>
-        )}
-        {(page === 0 || page === 4) && (
-          <Column>
-            <HeaderTwo str="Development" />
-            <Divider />
-            {DEVELOPMENT_TYPES.map((type, index) => (
-              <ArtistCard
-                setDisplay={setDisplay}
-                sections={sections}
-                setSections={setSections}
-                type={type}
-                key={`dev_${index}`}
-              />
-            ))}
+        <HeaderTwo str="Industry" />
+        <Divider />
+        {CREATOR_TYPES.map((type, index) => (
+          <ArtistCard
+            setDisplay={setDisplay}
+            sections={sections}
+            setSections={setSections}
+            type={type}
+            key={`creator_${index}`}
+          />
+        ))}
+        <Divider />
 
-            <Divider />
-          </Column>
-        )}
+        <HeaderTwo str="Visual Art and Creative Writing" />
+        <Divider />
+        {ARTIST_TYPES.map((type, index) => (
+          <ArtistCard
+            setDisplay={setDisplay}
+            sections={sections}
+            setSections={setSections}
+            type={type}
+            key={`artist_${index}`}
+          />
+        ))}
+        <Divider />
+
+        <HeaderTwo str="Marketing and Campaign Management" />
+        <Divider />
+        {MARKETING_TYPES.map((type, index) => (
+          <ArtistCard
+            setDisplay={setDisplay}
+            sections={sections}
+            setSections={setSections}
+            type={type}
+            key={`marketing_${index}`}
+          />
+        ))}
+        <Divider />
+
+        <HeaderTwo str="Development" />
+        <Divider />
+        {DEVELOPMENT_TYPES.map((type, index) => (
+          <ArtistCard
+            setDisplay={setDisplay}
+            sections={sections}
+            setSections={setSections}
+            type={type}
+            key={`dev_${index}`}
+          />
+        ))}
+
+        <Divider />
       </Column>
     </div>
   );

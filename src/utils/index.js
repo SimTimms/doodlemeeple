@@ -11,7 +11,9 @@ export const TYPE_HELPER = (typeIn) => {
     case 'artist':
       return 'Artist';
     case 'creator':
-      return 'Client';
+      return 'Creator';
+    case 'publisher':
+      return 'Publisher';
     case 'reviewer':
       return 'Reviewer/Content Client';
     case 'marketing':
@@ -32,11 +34,15 @@ export const TYPE_HELPER = (typeIn) => {
       return 'World Builder/Creative Writer';
     case 'play-tester':
       return 'Play Tester';
+    case 'manufacturer':
+      return 'Manufacturer';
+    case 'designer':
+      return 'Game Designer';
     default:
       return typeIn;
   }
 };
-export const CREATOR_TYPES = ['creator'];
+export const CREATOR_TYPES = ['creator', 'publisher', 'manufacturer'];
 export const ARTIST_TYPES = [
   'graphic-artist',
   '3d-artist',
@@ -54,6 +60,7 @@ export const MARKETING_TYPES = [
 export const DEVELOPMENT_TYPES = [
   'rulebook-editor',
   'games-developer',
+  'designer',
   'proof-reader',
   'translator',
   'play-tester',
