@@ -514,6 +514,9 @@ export const PROFILE = gql`
       _id
       name
       summary
+      badges {
+        badgeType
+      }
       profileBG
       profileImg
       autosave

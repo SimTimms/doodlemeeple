@@ -216,7 +216,7 @@ export function contact(props) {
 }
 
 export function skill(props) {
-  const { sections, setSections, display, setDisplay } = props;
+  const { sections, setSections, display, setDisplay, profile } = props;
 
   return (
     <DMCard>
@@ -228,6 +228,7 @@ export function skill(props) {
             setSections={setSections}
             sections={sections}
             userType={'both'}
+            badges={profile.badges}
           />
         )}
         {sections &&

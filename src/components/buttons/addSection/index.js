@@ -6,13 +6,20 @@ import clsx from 'clsx';
 import SectionList from './sectionList';
 import { IconButton } from '../../';
 
-function AddSection({ setSections, sections, userType }) {
+function AddSection({ setSections, sections, userType, ...props }) {
   const [display, setDisplay] = React.useState(false);
   const classes = useStyles();
+  const { badges } = props;
+  const maxSkill = badges
+    ? badges.filter((badge) => badge.badgeType === 'golden').length > 0
+      ? 6
+      : 3
+    : 3;
+
   return (
     <div>
       <IconButton
-        title={`Add a Skill (${3 - sections.length})`}
+        title={`Add a Skill (${maxSkill - sections.length})`}
         likeSound={true}
         onClickEvent={() => (display ? setDisplay(false) : setDisplay(true))}
         styleOverride={{ marginLeft: 'auto', marginRight: 'auto' }}

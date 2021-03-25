@@ -31,7 +31,7 @@ export function ArtistCard({ setDisplay, sections, setSections, type }) {
         setSections(newSections);
       }}
     >
-      <Typography variant="body1" align="center" style={{ width: '100%' }}>
+      <Typography variant="body1" align="left" style={{ width: '100%' }}>
         {TYPE_HELPER(type)}
       </Typography>
     </Card>
