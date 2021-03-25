@@ -19,6 +19,7 @@ export function preference(props) {
       profile={profile}
       setProfile={setProfile}
       SignupMutation={SignupMutation}
+      onClickeEvent={() => null}
     />
   );
 }
