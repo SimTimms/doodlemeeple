@@ -40,6 +40,7 @@ export default function CreativeRoster({ history, favourites, groupIn }) {
     'translator',
     'play-tester',
   ];
+  const industryTypes = ['creator', 'manufacturer', 'pubisher'];
   return loading ? (
     <LoadIcon />
   ) : (
@@ -82,6 +83,18 @@ export default function CreativeRoster({ history, favourites, groupIn }) {
             }}
             active={group === 'development'}
           />
+          <MenuButtonShortcut
+            text={{
+              name: 'Industry',
+              color: '#222',
+              icon: null,
+              count: 0,
+            }}
+            onClickEvent={() => {
+              setGroup('industry');
+            }}
+            active={group === 'industry'}
+          />
         </Row>
         <Row j="center">
           {group === 'artist' &&
@@ -116,6 +129,21 @@ export default function CreativeRoster({ history, favourites, groupIn }) {
             ))}
           {group === 'development' &&
             developmentTypes.map((type) => (
+              <MenuButtonShortcut
+                text={{
+                  name: TYPE_HELPER(type),
+                  color: '#222',
+                  icon: null,
+                  count: 0,
+                }}
+                onClickEvent={() => {
+                  setFilter([type]);
+                }}
+                active={filter[0] === type}
+              />
+            ))}
+          {group === 'industry' &&
+            industryTypes.map((type) => (
               <MenuButtonShortcut
                 text={{
                   name: TYPE_HELPER(type),
