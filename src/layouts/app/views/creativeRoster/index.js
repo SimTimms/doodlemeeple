@@ -36,6 +36,7 @@ export default function CreativeRoster({ history, favourites, groupIn }) {
     'rulebook-editor',
     'games-developer',
     'proof-reader',
+    'designer',
     'translator',
     'play-tester',
   ];
