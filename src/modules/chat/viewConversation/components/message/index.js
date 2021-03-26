@@ -63,7 +63,11 @@ export function Message({ message, history, setViewer }) {
                   </Typography>
                 </div>
                 {message.type !== 'upload' ? (
-                  <Typography color="textPrimary" component="p">
+                  <Typography
+                    color="textPrimary"
+                    component="p"
+                    style={{ maxWidth: '300px', overflowWrap: 'break-word' }}
+                  >
                     {message.messageStr.indexOf('QUOTE SUBMITTED:') === -1 ? (
                       message.messageStr
                     ) : !isUserMessage ? (
