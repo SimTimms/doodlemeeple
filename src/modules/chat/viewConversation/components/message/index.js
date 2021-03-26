@@ -14,8 +14,8 @@ export function Message({ message, history, setViewer }) {
   return (
     <Card
       className={clsx({
-        [classes.card]: true,
-        [classes.card]: mobile,
+        [classes.card]: isUserMessage,
+        [classes.cardMobile]: mobile,
         [classes.cardOther]: !isUserMessage,
         [classes.cardOtherMobile]: !isUserMessage && mobile,
       })}
@@ -72,6 +72,7 @@ export function Message({ message, history, setViewer }) {
                       maxWidth: '500px',
                       overflowWrap: 'break-word',
                       fontFamily: 'arial, sans-serif',
+                      lineHeight: 1.3,
                     }}
                   >
                     {message.messageStr.indexOf('QUOTE SUBMITTED:') === -1 ? (
