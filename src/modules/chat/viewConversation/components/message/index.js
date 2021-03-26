@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Card } from '@material-ui/core';
+import { Typography, Card, useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 import { useStyles } from './styles';
 import { timeDifferenceForDate } from '../../../../../utils/dates';
@@ -10,12 +10,14 @@ import device from '../../../../../assets/device.svg';
 export function Message({ message, history, setViewer }) {
   const classes = useStyles();
   const isUserMessage = message.sender._id !== Cookies.get('userId');
-
+  const mobile = useMediaQuery('(max-width:800px)');
   return (
     <Card
       className={clsx({
         [classes.card]: true,
+        [classes.card]: mobile,
         [classes.cardOther]: !isUserMessage,
+        [classes.cardOtherMobile]: !isUserMessage && mobile,
       })}
     >
       <div className={classes.rowWrapper}>
@@ -66,7 +68,11 @@ export function Message({ message, history, setViewer }) {
                   <Typography
                     color="textPrimary"
                     component="p"
-                    style={{ maxWidth: '300px', overflowWrap: 'break-word' }}
+                    style={{
+                      maxWidth: '500px',
+                      overflowWrap: 'break-word',
+                      fontFamily: 'arial, sans-serif',
+                    }}
                   >
                     {message.messageStr.indexOf('QUOTE SUBMITTED:') === -1 ? (
                       message.messageStr

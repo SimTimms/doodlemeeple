@@ -96,8 +96,17 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
   },
   card: { margin: '5px auto 0 0', boxShadow: '3px 3px 10px rgba(0,0,0,0.2)' },
+  cardMobile: {
+    margin: 5,
+    boxShadow: '3px 3px 10px rgba(0,0,0,0.2)',
+    width: '90%',
+  },
   cardOther: {
     margin: '5px 0 0 auto',
+  },
+  cardOtherMobile: {
+    margin: 5,
+    width: '90%',
   },
   name: { color: '#aaa' },
   nameOther: { color: theme.palette.primary.light },
