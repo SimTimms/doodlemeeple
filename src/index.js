@@ -4,7 +4,7 @@ import RouterComponent from './RouterComponent';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ReactGA from 'react-ga';
 
-const trackingId = 'UA-193139614'; // Replace with your Google Analytics tracking ID
+const trackingId = 'G-TGWQGWN3D2'; // Replace with your Google Analytics tracking ID
 ReactGA.initialize(trackingId);
 
 ReactGA.pageview(window.location.pathname + window.location.search);
