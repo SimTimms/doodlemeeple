@@ -10,66 +10,66 @@ export default function themeDesigner() {
   });
   theme.palette.primary = {
     ...theme.palette.primary,
-    main: '#57499e',
-    light: '#b5a8f7',
-    dark: '#433878',
+    main: process.env.REACT_APP_PALETTE_PM,
+    light: process.env.REACT_APP_PALETTE_PL,
+    dark: process.env.REACT_APP_PALETTE_PD,
   };
   theme.palette.secondary = {
     ...theme.palette.secondary,
-    main: '#34BEB1',
-    light: '#79D1CB',
-    dark: '#248c82',
+    main: process.env.REACT_APP_PALETTE_SM,
+    light: process.env.REACT_APP_PALETTE_SL,
+    dark: process.env.REACT_APP_PALETTE_SD,
   };
   theme.palette.error = {
     ...theme.palette.error,
-    main: '#ff4081',
-    dark: '#d81b60',
-    light: '#FF669A',
+    main: process.env.REACT_APP_PALETTE_EM,
+    dark: process.env.REACT_APP_PALETTE_EL,
+    light: process.env.REACT_APP_PALETTE_ED,
   };
   theme.typography.h1 = {
-    fontFamily: ['Quicksand'].join(','),
+    fontFamily: [process.env.REACT_APP_THEME_FONT].join(','),
     fontSize: 38,
     margin: 0,
     fontWeight: 600,
   };
   theme.typography.h2 = {
-    fontFamily: ['Quicksand'].join(','),
+    fontFamily: [process.env.REACT_APP_THEME_FONT].join(','),
     fontSize: 32,
     margin: 0,
     fontWeight: 200,
   };
   theme.typography.h3 = {
-    fontFamily: ['Quicksand'].join(','),
+    fontFamily: [process.env.REACT_APP_THEME_FONT].join(','),
     fontSize: 28,
     margin: 0,
     fontWeight: 200,
   };
   theme.typography.h4 = {
-    fontFamily: ['Quicksand'].join(','),
+    fontFamily: [process.env.REACT_APP_THEME_FONT].join(','),
     fontSize: 24,
     margin: 0,
     fontWeight: 600,
   };
   theme.typography.h5 = {
-    fontFamily: ['Quicksand'].join(','),
+    fontFamily: [process.env.REACT_APP_THEME_FONT].join(','),
     fontSize: 20,
     margin: 0,
     fontWeight: 200,
   };
   theme.typography.h6 = {
-    fontFamily: ['Quicksand'].join(','),
+    fontFamily: [process.env.REACT_APP_THEME_FONT].join(','),
     fontSize: 16,
     margin: 0,
     fontWeight: 200,
   };
   theme.typography.body1 = {
-    fontFamily: ['Quicksand'].join(','),
+    fontFamily: [process.env.REACT_APP_THEME_FONT].join(','),
     fontSize: 14,
     margin: 0,
     fontWeight: 400,
   };
   theme.typography.button = {
-    fontFamily: ['Quicksand'].join(','),
+    fontFamily: [process.env.REACT_APP_THEME_FONT].join(','),
     fontSize: 14,
     fontWeight: 900,
     color: theme.palette.primary.main,
