@@ -1,7 +1,6 @@
 import React from 'react';
 import autosave from '../../utils/autosave';
 import { IconTitle, InlineHeader, DMCard, IconButton, Column } from '../';
-import click from '../../assets/notification_simple-01.wav';
 
 export default function RoleObject({
   profile,
@@ -10,10 +9,6 @@ export default function RoleObject({
   ...props
 }) {
   const { onClickEvent } = props;
-  const clickAudio = new Audio(click);
-  const playSound = (audioFile) => {
-    // audioFile.play();
-  };
 
   return (
     <DMCard>
@@ -28,7 +23,6 @@ export default function RoleObject({
             styleOverride={{ width: '100%' }}
             iconPos="right"
             onClickEvent={() => {
-              playSound(clickAudio);
               setProfile({
                 ...profile,
                 creativeTrue: true,
@@ -44,7 +38,6 @@ export default function RoleObject({
             iconPos="right"
             styleOverride={{ width: '100%' }}
             onClickEvent={() => {
-              playSound(clickAudio);
               setProfile({
                 ...profile,
                 creativeTrue: false,
@@ -60,7 +53,6 @@ export default function RoleObject({
             iconPos="right"
             styleOverride={{ width: '100%' }}
             onClickEvent={() => {
-              playSound(clickAudio);
               setProfile({
                 ...profile,
                 creativeTrue: true,

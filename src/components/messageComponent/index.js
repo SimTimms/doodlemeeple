@@ -3,7 +3,6 @@ import { Typography, Button, Icon } from '@material-ui/core';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import { useStyles } from './styles';
-import device from '../../assets/device.svg';
 
 export default function MessageComponent({
   history,
@@ -36,7 +35,9 @@ export default function MessageComponent({
                   })}
                   style={{
                     backgroundImage: `url(${
-                      user.profileImg ? user.profileImg : device
+                      user.profileImg
+                        ? user.profileImg
+                        : process.env.REACT_APP_DEVICE
                     })`,
                   }}
                 />

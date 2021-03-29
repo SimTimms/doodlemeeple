@@ -8,9 +8,12 @@ export function getPosts(setPosts) {
   const axiosCancel = axios.CancelToken.source();
   if (!didCancel) {
     axios
-      .get('https://doodlemeeple.com/wp-json/wp/v2/posts?_embed&categories=1', {
-        cancelToken: axiosCancel.token,
-      })
+      .get(
+        `${process.env.REACT_APP_WEBSITE}/wp-json/wp/v2/posts?_embed&categories=1`,
+        {
+          cancelToken: axiosCancel.token,
+        }
+      )
       .then((response) => {
         localStorage.setItem('posts', JSON.stringify(response.data));
         setPosts(response.data);
@@ -28,9 +31,12 @@ export function FeaturedArticle({ history }) {
   const cacheData = JSON.parse(localStorage.getItem('featureArticle'));
   if (!didCancel && !cacheData) {
     axios
-      .get('https://doodlemeeple.com/wp-json/wp/v2/posts?_embed&categories=2', {
-        cancelToken: axiosCancel.token,
-      })
+      .get(
+        `${process.env.REACT_APP_WEBSITE}/wp-json/wp/v2/posts?_embed&categories=2`,
+        {
+          cancelToken: axiosCancel.token,
+        }
+      )
       .then((response) => {
         const featuredArticleData = {
           id: response.data[0].slug,

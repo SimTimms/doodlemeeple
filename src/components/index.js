@@ -15,13 +15,10 @@ import CardHeader from './headers';
 import Paper from './paper';
 import RoleObject from './roleObject';
 import ContentHeader from './headers/contentHeader';
-import StripeCheckout from './stripeCheckout';
 import Payments from './payments';
 import TaskComponent from './taskComponent';
-import PaymentTermsWithdraw from './paymentTermsWithdraw';
 import ProjectComponentDash from './projectComponentDash';
 import MessageComponent from './messageComponent';
-import PaymentElement from './paymentElement';
 import CurrencySelector from './currencySelector';
 import DeclineInvite from './buttons/declineInvite';
 import CheckListItem from './checkListItem';
@@ -157,7 +154,6 @@ export {
   DeleteButton,
   DMCard,
   ActionWrapper,
-  StripeCheckout,
   Divider,
   DividerWithBorder,
   SectionWrapper,
@@ -191,7 +187,6 @@ export {
   TabWrapper,
   ActionButton,
   AddSection,
-  PaymentTermsWithdraw,
   FileGallery,
   FormInput,
   MessageComponent,
@@ -217,7 +212,6 @@ export {
   Payments,
   BorderBox,
   HeaderThree,
-  PaymentElement,
   MenuButton,
   MenuButtonShortcut,
   JobComponent,

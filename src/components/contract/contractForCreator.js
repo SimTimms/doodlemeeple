@@ -191,15 +191,15 @@ ${contractData.currency} `}
           conditions as follows:
         </Typography>
         <Typography style={{ marginLeft: 80 }}>
-          <b>9.1.1</b>{' '}
-          <a href="https://doodlemeeple.com/terms-of-service/">
-            https://doodlemeeple.com/terms-of-service/
+          <b>9.1.1</b>
+          <a href={process.env.REACT_APP_TERMS_LINK}>
+            {process.env.REACT_APP_TERMS_LINK}
           </a>
         </Typography>
         <Typography style={{ marginLeft: 80 }}>
-          <b>9.1.2</b>{' '}
-          <a href="https://doodlemeeple.com/privacy-policy/">
-            https://doodlemeeple.com/privacy-policy/
+          <b>9.1.2</b>
+          <a href={process.env.REACT_APP_PRIVACY_LINK}>
+            {process.env.REACT_APP_PRIVACY_LINK}
           </a>
         </Typography>
         <Typography style={{ marginLeft: 80 }}>

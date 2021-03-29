@@ -15,10 +15,10 @@ function PreviewLayout(props) {
     <div>
       <Column>
         <a
-          href={`https://app.doodlemeeple.com/register/profile-link-${pathParam}`}
+          href={`${process.env.REACT_APP_URL}/register/profile-link-${pathParam}`}
         >
           <IconButton
-            title="Hire this professional and more at DoodleMeeple.com"
+            title={`Hire this professional and more at ${process.env.REACT_APP_COMPANY_PUBLIC_NAME}.com`}
             color="text-dark"
           />
         </a>

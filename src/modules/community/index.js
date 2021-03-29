@@ -1,7 +1,6 @@
 import React from 'react';
 import { Column, IconButton, Row } from '../../components';
 import { useStyles } from './styles';
-import miniOne from '../../assets/miniOne.jpg';
 import { CategoryBox, CategoryBoxMini } from './categoryBox';
 
 export function CreativeCategories({ history }) {
@@ -16,12 +15,7 @@ export function CreativeCategories({ history }) {
             type="mini-painter"
             history={history}
           />
-          <CategoryBox
-            img={miniOne}
-            title="Artists"
-            type="artist"
-            history={history}
-          />
+          <CategoryBox title="Artists" type="artist" history={history} />
           <CategoryBox
             title="Graphic Artists"
             type="graphic-artist"
@@ -54,7 +48,6 @@ export function CreativeCategories({ history }) {
           />
           <CategoryBoxMini
             type="play-tester"
-            img={miniOne}
             title="Play Tester"
             history={history}
           />

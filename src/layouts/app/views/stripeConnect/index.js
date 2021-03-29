@@ -35,9 +35,9 @@ export function StripeConnect({ history, searchValues }) {
             </Typography>
             <Divider />
             <Typography align="center">
-              Awesome! We're nearly done, we've got your Stripe account details
-              and just need your confirmation to confirm the link with
-              DoodleMeeple
+              {`Awesome! We're nearly done, we've got your Stripe account details
+              and just need your confirmation to confirm the link with $
+              ${process.env.REACT_APP_COMPANY_PUBLIC_NAME}`}
             </Typography>
             <Divider />
             <Meta

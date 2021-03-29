@@ -8,7 +8,6 @@ import { PasswordForgot } from './views/passwordForgot';
 import { PasswordReset } from './views/passwordReset';
 import Deleted from './views/deleted';
 import { useStyles } from './styles';
-import logo from '../../assets/logo.svg';
 
 export function PublicLayout(props) {
   const [page, setPage] = React.useState('home');
@@ -36,7 +35,11 @@ export function PublicLayout(props) {
         center={true}
         sidebarMissing={true}
       >
-        <img src={logo} style={{ maxHeight: 40 }} alt="DoodleMeeple Logo" />
+        <img
+          src={process.env.REACT_APP_DEVICE}
+          style={{ maxHeight: 40 }}
+          alt={`${process.env.REACT_APP_COMPANY_PUBLIC_NAME} Logo`}
+        />
       </StyledNavBar>
       <Content>
         {page === 'login' ? (

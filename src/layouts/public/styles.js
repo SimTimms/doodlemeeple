@@ -1,24 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
-import smithy from '../../assets/smithy.jpg';
-import jumping from '../../assets/jumping.jpg';
-import dragon from '../../assets/dragon.jpg';
 
 export const useStyles = makeStyles((theme) => ({
   root: {},
   background: {
-    backgroundImage: `url(${smithy})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center center',
     width: '100%',
     minHeight: 400,
     padding: 10,
   },
   backgroundSignup: {
-    backgroundImage: `url(${jumping})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center center',
     width: '100%',
     minHeight: 400,
     padding: 10,
@@ -39,10 +28,6 @@ export const useStyles = makeStyles((theme) => ({
     left: 0,
   },
   backgroundLogin: {
-    backgroundImage: `url(${dragon})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'top center',
     filter: 'grayscale(100%)',
     width: '100%',
     minHeight: '100%',

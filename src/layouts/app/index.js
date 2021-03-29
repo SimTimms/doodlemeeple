@@ -9,13 +9,10 @@ import CommunityPage from './views/communityPage';
 import NotificationDashboard from './views/notificationDashboard';
 import AppInvites from './views/appInvites';
 import AppHelp from './views/appHelp';
-import AppFailedPayment from './views/appFailedPayment';
 import AppProfileEdit from './views/appProfileEdit';
 import ConversationModule from './views/conversations';
-import Beta from './views/beta';
 import CreativeRoster from './views/creativeRoster';
 import { Account } from './views/account';
-import { StripeConnect } from './views/stripeConnect';
 import FullContract from './views/fullContract';
 import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
@@ -173,12 +170,8 @@ function AppLayout(props) {
             />
           ) : page === 'help' ? (
             <AppHelp history={history} />
-          ) : page === 'beta' ? (
-            <Beta history={history} />
           ) : page === 'help' ? (
             <AppHelp history={history} />
-          ) : page === 'failed-payment' ? (
-            <AppFailedPayment history={history} />
           ) : page === 'creative-roster' ? (
             <Query query={FAVOURITES} fetchPolicy="network-only">
               {({ data, loading }) => {
@@ -198,8 +191,6 @@ function AppLayout(props) {
             </Query>
           ) : page === 'account' ? (
             <Account history={history} />
-          ) : page === 'stripe-connect' ? (
-            <StripeConnect history={history} searchValues={searchValues} />
           ) : page === 'invites' ? (
             <AppInvites history={history} />
           ) : page === 'submitted' ? (

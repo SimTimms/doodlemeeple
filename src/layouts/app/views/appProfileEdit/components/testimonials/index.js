@@ -17,7 +17,7 @@ function Testimonials({ testimonials, setTestimonials, sectionId }) {
     <div style={{ width: '100%' }}>
       <FieldTitle
         name="Testimonials"
-        description="Ask for some references from previous clients to add to give your profile credibility. Please ask for permission from the referee. It's imperative that DoodleMeeple showcases the best in the industry, references will be spot checked by DoodleMeeple at random, please do not be offended if yours are."
+        description={`Ask for some references from previous clients to add to give your profile credibility. Please ask for permission from the referee. It's imperative that ${process.env.REACT_APP_COMPANY_PUBLIC_NAME} showcases the best in the industry, references will be spot checked by ${process.env.REACT_APP_COMPANY_PUBLIC_NAME} at random, please do not be offended if yours are.`}
         warning=""
         inline={false}
       />

@@ -28,7 +28,7 @@ export function TaskPatreon({ data, history }) {
       clickSound={true}
       zoom={true}
       onClickEvent={() =>
-        (window.location = 'https://www.patreon.com/doodlemeeple')
+        (window.location = process.env.REACT_APP_PATREON_LINK)
       }
     />
   );

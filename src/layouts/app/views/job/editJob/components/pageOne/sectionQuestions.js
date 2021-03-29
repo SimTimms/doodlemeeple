@@ -93,7 +93,7 @@ export default function SectionQuestions({ setJob, job }) {
         <Row j="space-between">
           <Typography variant="body1" align="center">
             Have you read the{' '}
-            <a href="https://doodlemeeple.com/terms-of-service/">
+            <a href={`${process.env.REACT_APP_INFO_EMAIL}/terms-of-service/`}>
               terms of service?
             </a>
           </Typography>

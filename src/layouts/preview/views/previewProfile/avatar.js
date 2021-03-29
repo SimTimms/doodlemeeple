@@ -1,6 +1,5 @@
 import React from 'react';
 import { useStyles } from './styles';
-import logoDevice from '../../../../assets/dm_device.png';
 
 export default function Avatar({ img }) {
   const classes = useStyles();
@@ -9,7 +8,9 @@ export default function Avatar({ img }) {
     <div
       className={classes.avatar}
       style={{
-        backgroundImage: img ? `url(${img}` : `url(${logoDevice})`,
+        backgroundImage: img
+          ? `url(${img}`
+          : `url(${process.env.REACT_APP_DEVICE})`,
       }}
     ></div>
   );

@@ -9,7 +9,6 @@ import {
   CardComponent,
 } from '../../../../components';
 import { FeaturedArticle } from './components/getPosts';
-import dmPatreon from '../../../../assets/dmPatreon.jpg';
 
 export default function CommunityPage({ history }) {
   return (
@@ -49,8 +48,11 @@ export default function CommunityPage({ history }) {
         >
           <Typography variant="h6">Support us on Patreon</Typography>
           <DividerMini />
-          <a href="https://www.patreon.com/doodlemeeple">
-            <img src={dmPatreon} style={{ width: '100%' }} />
+          <a href={process.env.REACT_APP_PATREON_LINK}>
+            <img
+              src={process.env.REACT_APP_PATREON}
+              style={{ width: '100%' }}
+            />
           </a>
         </CardComponent>
       </Column>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Slide, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import logo from '../../../../assets/logo.svg';
 import {
   Header,
   ColumnWrapper,
@@ -77,7 +76,11 @@ export function PreviewProfile({ history, profileId, publicView }) {
             className={classes.profileWrapper}
           >
             {userProfile.profileBG === null && (
-              <img src={logo} style={{ width: 500 }} alt="" />
+              <img
+                src={process.env.REACT_APP_DEVICE}
+                style={{ width: 500 }}
+                alt=""
+              />
             )}
           </div>
           <ColumnWrapper>
