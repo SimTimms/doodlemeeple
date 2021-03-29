@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { NoticeBoard, TaskComponent, Column } from '../../../../components';
+import { NoticeBoard, Column } from '../../../../components';
 import { getFeatured } from './getPosts';
 
 export default function AppDashboard({ history, profile, setProfile }) {

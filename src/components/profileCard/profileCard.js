@@ -1,8 +1,7 @@
 import React from 'react';
 import { useStyles } from './styles';
-import { Column } from '../';
 import clsx from 'clsx';
-import { FavouriteButton, CardComponent } from '../';
+import { FavouriteButton } from '../';
 import {
   BgImg,
   ProfileImg,

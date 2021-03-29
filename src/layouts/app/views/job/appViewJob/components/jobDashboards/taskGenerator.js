@@ -7,7 +7,6 @@ import {
   TaskDeclineInvite,
 } from '../../../../../../../modules/tasks';
 import { useStyles } from './styles';
-import { Row } from '../../../../../../../components';
 
 export default function TaskGenerator({
   history,

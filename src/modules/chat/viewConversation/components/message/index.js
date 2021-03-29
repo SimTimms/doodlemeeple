@@ -6,7 +6,7 @@ import { timeDifferenceForDate } from '../../../../../utils/dates';
 import { IconButton } from '../../../../../components';
 import Cookies from 'js-cookie';
 
-export function Message({ message, history, setViewer }) {
+export function Message({ message, history }) {
   const classes = useStyles();
   const isUserMessage = message.sender._id !== Cookies.get('userId');
   const mobile = useMediaQuery('(max-width:800px)');
@@ -120,7 +120,6 @@ export function Message({ message, history, setViewer }) {
                   <img
                     src={message.messageStr}
                     style={{ maxWidth: 300, cursor: 'pointer' }}
-                    onClick={() => setViewer(message.messageStr)}
                     alt=""
                   />
                 )}

@@ -10,20 +10,14 @@ import {
   Divider,
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
-import { PROFILE, GET_STRIPE } from '../../../../data/queries';
-import stripeButton from '../../../../assets/stripe_button.png';
-import {
-  DELETE_ACCOUNT,
-  DELETE_STRIPE_ACCOUNT,
-} from '../../../../data/mutations';
+import { PROFILE } from '../../../../data/queries';
+import { DELETE_ACCOUNT } from '../../../../data/mutations';
 import Cookies from 'js-cookie';
-import { SaveButton } from './components';
 
 export function Account({ history, searchValues }) {
   const classes = useStyles();
   const [email, setEmail] = React.useState('');
   const [isCreative, setIsCreative] = React.useState(false);
-  const [refresh, setRefresh] = React.useState(0);
   const [confirm, setConfirm] = React.useState(false);
   const [errors, setError] = React.useState({
     email: null,

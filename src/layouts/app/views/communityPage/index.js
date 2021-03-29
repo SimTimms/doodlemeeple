@@ -52,6 +52,7 @@ export default function CommunityPage({ history }) {
             <img
               src={process.env.REACT_APP_PATREON}
               style={{ width: '100%' }}
+              alt=""
             />
           </a>
         </CardComponent>

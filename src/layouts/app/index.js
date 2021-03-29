@@ -60,14 +60,6 @@ function AppLayout(props) {
       : null
     : null;
 
-  const searchValues = props
-    ? props.location
-      ? props.location.search
-        ? props.location.search
-        : null
-      : null
-    : null;
-
   if (pageJump !== page) {
     setPage(pageJump);
   }

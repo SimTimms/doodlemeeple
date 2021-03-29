@@ -23,7 +23,6 @@ export function Account({ history }) {
 
   const [errors, setError] = React.useState({
     email: null,
-    stripe: null,
   });
 
   return (

@@ -3,12 +3,7 @@ import { useStyles } from '../styles';
 import { ColumnWrapper, Column } from '../../../../../../components';
 import ProposalForm from '../components/proposalForm';
 
-export default function ProposalView({
-  jobId,
-  setProposalOpen,
-  history,
-  stripeID,
-}) {
+export default function ProposalView({ jobId, setProposalOpen, history }) {
   const classes = useStyles();
 
   return (
@@ -19,7 +14,6 @@ export default function ProposalView({
             jobId={jobId}
             setProposalOpen={setProposalOpen}
             history={history}
-            stripeID={stripeID}
           />
         </Column>
       </ColumnWrapper>

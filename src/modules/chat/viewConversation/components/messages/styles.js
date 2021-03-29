@@ -6,7 +6,6 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     boxSizing: 'border-box',
     background: '#fff',
-    borderRadius: '10px 10px 0 0',
     marginTop: 10,
     position: 'fixed',
     bottom: 0,

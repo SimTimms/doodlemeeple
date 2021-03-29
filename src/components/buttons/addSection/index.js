@@ -30,7 +30,6 @@ function AddSection({ setSections, sections, userType, ...props }) {
         setDisplay={setDisplay}
         setSections={setSections}
         sections={sections}
-        userType={userType}
       />
       <CardContent
         className={clsx({

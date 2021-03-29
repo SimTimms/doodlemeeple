@@ -147,6 +147,7 @@ export default function InviteComponentFull({
                         <img
                           src={social.iconEmail}
                           className={classes.contactIcon}
+                          alt=""
                         />
                         <Typography>
                           {publicEmail ? publicEmail : email}
@@ -157,6 +158,7 @@ export default function InviteComponentFull({
                           <img
                             src={social.socialLinkedIn}
                             className={classes.contactIcon}
+                            alt=""
                           />
                           <Typography>{linkedIn}</Typography>
                         </Row>
@@ -166,6 +168,7 @@ export default function InviteComponentFull({
                           <img
                             src={social.socialTwitter}
                             className={classes.contactIcon}
+                            alt=""
                           />
                           <Typography>{twitter}</Typography>
                         </Row>
@@ -175,6 +178,7 @@ export default function InviteComponentFull({
                           <img
                             src={social.socialFacebook}
                             className={classes.contactIcon}
+                            alt=""
                           />
                           <Typography>{facebook}</Typography>
                         </Row>
@@ -184,6 +188,7 @@ export default function InviteComponentFull({
                           <img
                             src={social.socialInstagram}
                             className={classes.contactIcon}
+                            alt=""
                           />
                           <Typography>{instagram}</Typography>
                         </Row>
@@ -194,6 +199,7 @@ export default function InviteComponentFull({
                           <img
                             src={social.socialSkype}
                             className={classes.contactIcon}
+                            alt=""
                           />
                           <Typography>{skype}</Typography>
                         </Row>
@@ -203,6 +209,7 @@ export default function InviteComponentFull({
                           <img
                             src={social.iconWebsite}
                             className={classes.contactIcon}
+                            alt=""
                           />
                           <Typography>{website}</Typography>
                         </Row>

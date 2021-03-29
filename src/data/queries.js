@@ -11,8 +11,6 @@ export const CREATIVES = gql`
       summary
       profileBG
       profileImg
-      stripeID
-      stripeClientId
       badges {
         badgeType
         link
@@ -255,16 +253,6 @@ export const INVITE_BY_ID = gql`
           name
         }
       }
-    }
-  }
-`;
-
-export const GET_STRIPE = gql`
-  {
-    getStripe {
-      object
-      details_submitted
-      payouts_enabled
     }
   }
 `;
@@ -523,9 +511,6 @@ export const PROFILE = gql`
       email
       creatorTrue
       creativeTrue
-      stripeID
-      stripeStatus
-      stripeClientId
       paymentMethod
       available
       acceptsSpeculative
@@ -579,8 +564,6 @@ export const PROFILE_PREVIEW = gql`
       summary
       profileBG
       profileImg
-      stripeID
-      stripeClientId
       viewCount
       paymentMethod
       responsePercent

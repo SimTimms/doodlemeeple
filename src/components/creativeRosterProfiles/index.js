@@ -6,7 +6,6 @@ import {
   ProfileCard,
   ProfileCardBlank,
   IconButton,
-  LoadIcon,
   Divider,
 } from '../../components';
 

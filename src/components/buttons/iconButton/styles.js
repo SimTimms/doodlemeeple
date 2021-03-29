@@ -35,14 +35,7 @@ export const useStyles = makeStyles((theme) => ({
       background: '#eaeaea',
     },
   },
-  iconButtonStripe: {
-    backgroundImage: '-webkit-linear-gradient(#28A0E5, #015E94)',
-    color: '#fff',
-    boxShadow: '2px 2px 5px rgba(0,0,0,0.1)',
-    '&:hover': {
-      background: '#015E94',
-    },
-  },
+
   iconButtonText: {
     background: 'rgba(0,0,0,0)',
     color: '#aaa',
@@ -164,9 +157,7 @@ export const useStyles = makeStyles((theme) => ({
   iconButtonIconSecondary: {
     color: '#fff',
   },
-  iconButtonIconStripe: {
-    color: '#fff',
-  },
+
   iconButtonIconTextError: {
     color: theme.palette.error.main,
   },

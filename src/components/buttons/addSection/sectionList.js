@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import { ArtistCard } from './ArtistCard';
-import { Divider, Column, HeaderTwo, MenuButtonShortcut, Row } from '../../';
+import { Divider, Column, HeaderTwo } from '../../';
 import {
   ARTIST_TYPES,
   MARKETING_TYPES,
@@ -13,16 +13,10 @@ import {
 export default function SectionList({
   setSections,
   sections,
-  userType,
   setDisplay,
   display,
 }) {
-  const [page, setPage] = React.useState(0);
   const classes = useStyles();
-
-  useEffect(() => {
-    setPage(userType.creator ? 1 : 0);
-  }, [userType]);
 
   return (
     <div

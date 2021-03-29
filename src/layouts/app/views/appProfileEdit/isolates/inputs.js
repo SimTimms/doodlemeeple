@@ -227,7 +227,6 @@ export function skill(props) {
             setDisplay={setDisplay}
             setSections={setSections}
             sections={sections}
-            userType={'both'}
             badges={profile.badges}
           />
         )}

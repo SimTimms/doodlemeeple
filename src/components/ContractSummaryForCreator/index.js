@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStyles } from './styles';
-import { Row, Divider } from '../';
+import { Row } from '../';
 import { Typography } from '@material-ui/core';
 
 export default function ContractSummaryForCreator({ contractData }) {

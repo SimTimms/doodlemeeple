@@ -3,7 +3,7 @@ import { Icon, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Mutation } from 'react-apollo';
 import { REMOVE_INVITE } from '../../../../../data/mutations';
-import { Column, UnlockInfo } from '../../../../../components';
+import { Column } from '../../../../../components';
 import SubmitBrief from './SubmitBrief';
 
 export default function ArtistLineup({

@@ -1,4 +1,3 @@
-import { Typography } from '@material-ui/core';
 import React from 'react';
 import {
   TaskUnreadMessages,
@@ -20,7 +19,6 @@ import {
   TaskPatreon,
 } from '../../modules/tasks';
 import preferencesSet from '../../utils/preferencesSet';
-import { useStyles } from './styles';
 
 export default function TaskGenerator({
   messages,
@@ -38,7 +36,6 @@ export default function TaskGenerator({
   unansweredQuotes,
   drawerButtonChange,
 }) {
-  const classes = useStyles();
   const elementArray = [];
 
   if (messages > 0) {

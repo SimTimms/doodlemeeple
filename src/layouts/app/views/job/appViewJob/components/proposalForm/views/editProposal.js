@@ -14,7 +14,6 @@ import {
   UnlockInfo,
   PaymentTerms,
   EditContractButton,
-  NoticeBoardSecondary,
 } from '../../../../../../../../components';
 import Menu from './menu';
 import QuoteDetails from './quoteDetails';
