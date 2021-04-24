@@ -19,8 +19,7 @@ export default function CreativeRosterProfiles({
   const [page, setPage] = React.useState(0);
   const [noMore, setNoMore] = React.useState(false);
   const [existingFilter, setExistingFilter] = React.useState(false);
-  const [loading, setLoading] = React.useState(true);
-  console.log(loading);
+
   return (
     <div className={classes.cardWrapper}>
       <Query
@@ -28,7 +27,6 @@ export default function CreativeRosterProfiles({
         variables={{ type: filter, page: page, job: null }}
         fetchPolicy="network-only"
         onCompleted={(data) => {
-          setLoading(false);
           data.getCreatives.length === 0 && setNoMore(true);
           filter === existingFilter &&
             setCreativeArray([...creativeArray, ...data.getCreatives]);

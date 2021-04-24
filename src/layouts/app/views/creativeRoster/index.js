@@ -12,8 +12,9 @@ import { TYPE_HELPER } from '../../../../utils';
 export default function CreativeRoster({ history, favourites, groupIn }) {
   const classes = useStyles();
   const [loading] = React.useState(false);
-  const [filter, setFilter] = React.useState(['artist']);
+  const [filter, setFilter] = React.useState([]);
   const [group, setGroup] = React.useState(null);
+
   useEffect(() => {
     setFilter(groupIn ? groupIn : 'artist');
   }, [groupIn]);
@@ -158,11 +159,13 @@ export default function CreativeRoster({ history, favourites, groupIn }) {
               />
             ))}
         </Row>
-        <CreativeRosterProfiles
-          history={history}
-          favourites={favourites}
-          filter={filter}
-        />
+        {filter.length > 0 && (
+          <CreativeRosterProfiles
+            history={history}
+            favourites={favourites}
+            filter={filter}
+          />
+        )}
       </div>
     </Slide>
   );
