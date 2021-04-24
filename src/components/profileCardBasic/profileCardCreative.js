@@ -56,7 +56,7 @@ export default function ProfileCardCreative({ history, creative, favourite }) {
           position: 'relative',
         }}
       ></div>
-      <Mutation
+      {/* <Mutation
         mutation={ADD_FAVOURITE}
         variables={{
           id: creative._id,
@@ -82,6 +82,7 @@ export default function ProfileCardCreative({ history, creative, favourite }) {
           );
         }}
       </Mutation>
+      */}
 
       <Column j="center" a="center">
         <IconButton
