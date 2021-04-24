@@ -1,15 +1,8 @@
 import React from 'react';
+import { useStyles } from './styles';
 
 export default function DividerWithBorder() {
-  return (
-    <div
-      style={{
-        width: '100%',
-        marginTop: 10,
-        marginBottom: 10,
-        display: 'flex',
-        borderTop: '1px dotted #ddd',
-      }}
-    ></div>
-  );
+  const classes = useStyles();
+
+  return <div className={classes.root}></div>;
 }

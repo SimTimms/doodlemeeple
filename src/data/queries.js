@@ -18,25 +18,8 @@ export const CREATIVES = gql`
         description
       }
       viewCount
-      paymentMethod
       responsePercent
-      facebook
-      skype
-      publicEmail
-      website
-      twitter
-      linkedIn
-      instagram
       likedMe {
-        _id
-        receiver {
-          _id
-        }
-        user {
-          _id
-        }
-      }
-      favourites {
         _id
         receiver {
           _id

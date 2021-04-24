@@ -7,7 +7,7 @@ import {
   IconButton,
   CardComponent,
   Column,
-  DividerWithBorder,
+  Divider,
   DividerMini,
 } from '../../../../components';
 import { sharedStyles } from '../styles';
@@ -53,7 +53,7 @@ export default function LoginPage({ history, forwardTo }) {
         <Column>
           <Typography variant="h5">Welcome</Typography>
           <Typography>Please Login</Typography>
-          <DividerWithBorder />
+          <Divider />
         </Column>
         <Column>
           <Mutation
@@ -136,7 +136,7 @@ export default function LoginPage({ history, forwardTo }) {
             }}
           </Mutation>
         </Column>
-        <DividerWithBorder />
+        <Divider />
         <Column>
           <Typography
             component="p"

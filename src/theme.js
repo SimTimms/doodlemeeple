@@ -7,6 +7,17 @@ export default function themeDesigner() {
       fontSize: 12,
       fontWeight: 600,
     },
+    palette: {
+      wrap: {
+        main: process.env.REACT_APP_PALETTE_WRAP_MAIN,
+        light: process.env.REACT_APP_PALETTE_WRAP_LIGHT,
+        dark: process.env.REACT_APP_PALETTE_WRAP_DARK,
+        text: process.env.REACT_APP_PALETTE_WRAP_TEXT,
+      },
+      input: {
+        background: process.env.REACT_APP_PALETTE_INPUT_BACKGROUND,
+      },
+    },
   });
   theme.palette.primary = {
     ...theme.palette.primary,

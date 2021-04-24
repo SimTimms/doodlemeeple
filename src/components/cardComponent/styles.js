@@ -7,8 +7,8 @@ export const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
-    backgroundColor: '#fff',
-    border: `1px solid #fff`,
+    backgroundColor: theme.palette.wrap.main,
+    border: theme.palette.wrap.light,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -16,6 +16,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: 10,
     boxShadow: 'none',
     boxSizing: 'border-box',
+    color: theme.palette.wrap.text,
   },
   cardLocked: {
     padding: 0,

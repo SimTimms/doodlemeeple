@@ -1,19 +1,13 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import { useStyles } from './styles';
 
-const StyledTextField = withStyles({
-  root: {
-    margin: 3,
-    width: '100%',
-  },
-})(TextField);
-
-function FormInput(props) {
+export default function FormInput(props) {
   const fieldValue = props.fieldValue;
+  const classes = useStyles();
 
   return (
-    <StyledTextField
+    <TextField
       id={props.fieldName}
       label={props.fieldTitle}
       value={fieldValue}
@@ -22,10 +16,12 @@ function FormInput(props) {
       }}
       type={props.type}
       margin="normal"
-      variant="outlined"
+      variant="standard"
       inputProps={props.inputProps}
       onKeyPress={props.onKeyPress}
+      InputProps={{
+        className: classes.container,
+      }}
     />
   );
 }
-export default FormInput;
