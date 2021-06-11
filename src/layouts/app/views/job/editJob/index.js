@@ -110,7 +110,7 @@ export default function EditJob({ jobId, history, creativeId }) {
                 return (
                   <NoticeBoardSecondary
                     title=""
-                    subTitle="Let's begin with a few questions"
+                    subTitle="Terms of Service"
                     onClickEvent={() => mutation()}
                     buttonLocked={!job.termsAccepted}
                     lockedMsg="You must read and accept the terms of service"

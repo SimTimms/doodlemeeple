@@ -23,6 +23,7 @@ export default function SectionQuestions({ setJob, job }) {
   return (
     <Paper>
       <Column a="flex-start">
+        {/*
         <Row j="space-between">
           <Typography variant="body1" align="center">
             Are you hoping to start work within 4 weeks?
@@ -90,6 +91,7 @@ export default function SectionQuestions({ setJob, job }) {
             }}
           />
         </Row>
+          */}
         <Row j="space-between">
           <Typography variant="body1" align="center">
             Have you read the{' '}

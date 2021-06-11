@@ -17,6 +17,20 @@ export default function AuthRoutes({ theme, props: { ...props } }) {
         )}
       />
       <Route
+        path="/register/:pathParam?"
+        render={(props) => (
+          <Route
+            path="/"
+            render={() => (
+              <Redirect
+                push
+                to={`/app/edit-job/new/${props.match.params.pathParam}`}
+              />
+            )}
+          />
+        )}
+      />
+      <Route
         path="/public-preview/:pathParam?"
         render={(props) => (
           <PreviewLayout {...props} theme={theme} publicView={false} />
