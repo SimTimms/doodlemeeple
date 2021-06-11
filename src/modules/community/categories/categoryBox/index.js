@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
-import { CATEGORY_IMAGES } from '../../../data/queries';
+import { CATEGORY_IMAGES } from '../../../../data/queries';
 
 export function CategoryBox({ title, type, history }) {
   const classes = useStyles();

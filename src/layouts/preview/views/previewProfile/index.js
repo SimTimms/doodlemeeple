@@ -55,14 +55,16 @@ export function PreviewProfile({ history, profileId, publicView, ...props }) {
         }}
       </Query>
       <div className={classes.root}>
-        <IconButton
-          title="Close"
-          icon="close"
-          color="primary"
-          onClickEvent={() => {
-            setFullProfile(null);
-          }}
-        ></IconButton>
+        {setFullProfile && (
+          <IconButton
+            title="Close"
+            icon="close"
+            color="primary"
+            onClickEvent={() => {
+              setFullProfile(null);
+            }}
+          ></IconButton>
+        )}
         {!publicView && profileId === userId && (
           <div
             style={{

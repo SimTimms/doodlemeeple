@@ -1,6 +1,9 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { CreativeCategories } from '../../../../modules/community';
+import {
+  CreativeCategories,
+  CreativeMini,
+} from '../../../../modules/community';
 import {
   Row,
   Column,
@@ -13,6 +16,12 @@ import { FeaturedArticle } from './components/getPosts';
 export default function CommunityPage({ history }) {
   return (
     <Row wrap="wrap" j="space-around" a="flex-start">
+      <Row wrap="wrap" j="space-around" a="flex-start">
+        <Typography variant="h6" style={{ marginTop: 20 }}>
+          Recently Completed Profiles
+        </Typography>
+        <CreativeMini history={history} />
+      </Row>
       <Column w="50%">
         <CardComponent
           styleOverride={{
