@@ -14,7 +14,7 @@ import {
 import { styles } from './styles';
 import { sharedStyles } from '../../styles';
 import { Mutation } from 'react-apollo';
-import { SIGNUP_MUTATION } from '../../../../../data/mutations';
+import { SIGNUP_MUTATION } from '../../../../../data/authorisation';
 import { readableErrors } from '../../../../../utils/readableErrors';
 import { validate } from 'email-validator';
 

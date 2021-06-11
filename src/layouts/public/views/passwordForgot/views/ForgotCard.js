@@ -12,7 +12,7 @@ import {
 import { styles } from './styles';
 import { sharedStyles } from '../../styles';
 import { Mutation } from 'react-apollo';
-import { PASSWORD_FORGOT_MUTATION } from '../../../../../data/mutations';
+import { PASSWORD_FORGOT_MUTATION } from '../../../../../data/authorisation';
 import { PROFILE_EMAIL } from '../../../../../utils/dataLengths';
 import { ErrorBox, Form, FormInput } from '../../../../../components';
 import { validate } from 'email-validator';
@@ -84,14 +84,14 @@ export default function ForgotCard({ history, setPage }) {
             <Mutation
               mutation={PASSWORD_FORGOT_MUTATION}
               variables={{ email }}
-              onCompleted={async data => {
+              onCompleted={async (data) => {
                 setPage(1);
               }}
-              onError={error => {
+              onError={(error) => {
                 setPage(1);
               }}
             >
-              {passwordForgotMutation => {
+              {(passwordForgotMutation) => {
                 return (
                   <Button
                     onClick={() => {

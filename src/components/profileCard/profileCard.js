@@ -24,7 +24,10 @@ export default function ProfileCard({
     removeInviteList,
     disabled,
     loading,
+    setFullProfile,
   } = props;
+
+  console.log(setFullProfile);
 
   return loading ? (
     <div className={classes.loading}></div>
@@ -37,8 +40,16 @@ export default function ProfileCard({
         [classes.creativeCardInvited]: invite && invite.length > 0,
       })}
     >
-      <BgImg history={history} creative={creative} />
-      <ProfileImg history={history} creative={creative} />
+      <BgImg
+        history={history}
+        creative={creative}
+        setFullProfile={setFullProfile ? setFullProfile : null}
+      />
+      <ProfileImg
+        history={history}
+        creative={creative}
+        setFullProfile={setFullProfile ? setFullProfile : null}
+      />
 
       <div className={classes.favWrapper}>
         <Badges creative={creative} />
@@ -48,6 +59,7 @@ export default function ProfileCard({
         creative={creative}
         favourite={favourite}
         history={history}
+        setFullProfile={props.setFullProfile ? props.setFullProfile : null}
       />
       <InviteMenu
         history={history}

@@ -8,6 +8,7 @@ import {
   IconButton,
   Divider,
 } from '../../components';
+import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 
 export default function CreativeRosterProfiles({
   favourites,
@@ -19,7 +20,11 @@ export default function CreativeRosterProfiles({
   const [page, setPage] = React.useState(0);
   const [noMore, setNoMore] = React.useState(false);
   const [existingFilter, setExistingFilter] = React.useState(false);
+  const [fullProfile, setFullProfile] = React.useState(false);
 
+  function fullProfileToggle(id) {
+    id === setFullProfile ? setFullProfile(null) : setFullProfile(id);
+  }
   return (
     <div className={classes.cardWrapper}>
       <Query
@@ -55,7 +60,14 @@ export default function CreativeRosterProfiles({
           ) : null;
         }}
       </Query>
-
+      {fullProfile && (
+        <PreviewProfile
+          profileId={fullProfile}
+          publicView={true}
+          history={history}
+          setFullProfile={fullProfileToggle}
+        />
+      )}
       {creativeArray.map((creative, index) => {
         return (
           <ProfileCard
@@ -63,11 +75,11 @@ export default function CreativeRosterProfiles({
             creative={creative}
             favourite={favourites.indexOf(creative._id) > -1 ? true : false}
             key={`creative_${index}`}
+            setFullProfile={fullProfileToggle}
           />
         );
       })}
       <Divider />
-
       <IconButton
         title={!noMore ? 'More' : 'Done'}
         icon="keyboard_arrow_down"

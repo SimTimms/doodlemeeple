@@ -15,7 +15,10 @@ export default function Creatives({ favourites, history, filter, ...props }) {
   const [page, setPage] = React.useState(0);
   const [noMore, setNoMore] = React.useState(false);
   const [existingFilter, setExistingFilter] = React.useState(false);
+  const [fullProfile, setFullProfile] = React.useState(false);
+  c;
 
+  function fullProfileToggle(id) {}
   return (
     <div
       style={{
@@ -60,6 +63,7 @@ export default function Creatives({ favourites, history, filter, ...props }) {
             creative={creative}
             favourite={favourites.indexOf(creative._id) > -1 ? true : false}
             key={`creative_${index}`}
+            setFullProfile={fullProfileToggle}
           />
         );
       })}

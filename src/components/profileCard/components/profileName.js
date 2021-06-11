@@ -1,11 +1,15 @@
 import React from 'react';
 import { IconButton } from '../../';
 
-export default function ProfileName({ history, creative }) {
+export default function ProfileName({ history, creative, setFullProfile }) {
   return (
     <IconButton
       title={creative.name}
-      onClickEvent={() => history.push(`/app/public-preview/${creative._id}`)}
+      onClickEvent={() =>
+        setFullProfile
+          ? setFullProfile(creative._id)
+          : history.push(`/app/public-preview/${creative._id}`)
+      }
       color="text-dark"
       disabled={false}
       iconPos="right"
