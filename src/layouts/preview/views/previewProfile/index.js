@@ -130,7 +130,7 @@ export function PreviewProfile({ history, profileId, publicView, ...props }) {
                 <SocialIcon
                   img={social.socialLinkedIn}
                   link={
-                    userProfile.linkedIn.indexOf('https://linkedin.com') === -1
+                    userProfile.linkedIn.indexOf('linkedin.com') === -1
                       ? `https://www.linkedin.com/in/${userProfile.linkedIn}`
                       : userProfile.linkedIn
                   }
@@ -140,7 +140,7 @@ export function PreviewProfile({ history, profileId, publicView, ...props }) {
                 <SocialIcon
                   img={social.socialFacebook}
                   link={
-                    userProfile.facebook.indexOf('https://facebook.com') === -1
+                    userProfile.facebook.indexOf('facebook.com') === -1
                       ? `https://facebook.com/${userProfile.facebook}`
                       : userProfile.facebook
                   }
@@ -150,7 +150,7 @@ export function PreviewProfile({ history, profileId, publicView, ...props }) {
                 <SocialIcon
                   img={social.socialTwitter}
                   link={
-                    userProfile.twitter.indexOf('https://twitter.com') === -1
+                    userProfile.twitter.indexOf('twitter.com') === -1
                       ? `https://twitter.com/${userProfile.twitter}`
                       : userProfile.twitter
                   }
@@ -160,9 +160,7 @@ export function PreviewProfile({ history, profileId, publicView, ...props }) {
                 <SocialIcon
                   img={social.socialInstagram}
                   link={
-                    userProfile.instagram.indexOf(
-                      'https://www.instagram.com/'
-                    ) === -1
+                    userProfile.instagram.indexOf('instagram.com/') === -1
                       ? `https://www.instagram.com/${userProfile.instagram}`
                       : userProfile.instagram
                   }
