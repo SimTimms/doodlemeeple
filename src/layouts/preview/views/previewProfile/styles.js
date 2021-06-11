@@ -10,6 +10,10 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     position: 'relative',
   },
+  shareLink: {
+    color: theme.palette.primary.main,
+    textDecoration: 'underline',
+  },
   popup: {
     position: 'fixed',
     zIndex: 100,

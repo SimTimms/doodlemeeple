@@ -65,6 +65,7 @@ export function PreviewProfile({ history, profileId, publicView, ...props }) {
             }}
           ></IconButton>
         )}
+
         {!publicView && profileId === userId && (
           <div
             style={{
@@ -115,6 +116,7 @@ export function PreviewProfile({ history, profileId, publicView, ...props }) {
           >
             <Avatar img={userProfile.profileImg} />
             <Header str={userProfile.name} />
+
             <Text
               str={
                 userProfile.summary !== ''
@@ -169,6 +171,18 @@ export function PreviewProfile({ history, profileId, publicView, ...props }) {
               <SocialIcon img={social.socialSkype} link={userProfile.skype} />
               <SocialIcon img={social.iconWebsite} link={userProfile.website} />
             </Row>
+            <Divider />
+            <HeaderThree str="Profile Address" />
+            <Divider />
+            <a
+              href={`${process.env.REACT_APP_URL}/preview/${profileId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Typography
+                className={classes.shareLink}
+              >{`${process.env.REACT_APP_URL}/preview/${profileId}`}</Typography>
+            </a>
             <Divider />
             <HeaderThree str="Skills" />
             <Row>
