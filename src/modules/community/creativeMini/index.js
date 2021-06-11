@@ -25,61 +25,18 @@ export function CreativeMini({ history }) {
           return data
             ? data.creativeMinis.map((res) => (
                 <div
-                  style={{
-                    width: 180,
-                    height: 200,
-                    paddingTop: 30,
-                    display: 'flex',
-                    alignItems: 'center',
-                    flexDirection: 'column',
-                    cursor: 'pointer',
-                    marginLeft: 6,
-                    marginRight: 6,
-                  }}
+                  className={classes.root}
                   onClick={() => history.push(`/app/public-preview/${res._id}`)}
                 >
                   <div
-                    style={{
-                      backgroundColor: '#fff',
-                      backgroundImage: `url(${res.profileImg})`,
-                      minWidth: 84,
-                      maxWidth: 84,
-                      minHeight: 84,
-                      maxHeight: 84,
-                      marginBottom: -42,
-                      border: '3px solid #fff',
-                      borderRadius: '50%',
-                      backgroundSize: 'cover',
-                      position: 'relative',
-                      zIndex: 2,
-                      boxShadow: '3px 3px 5px rgba(0,0,0,0.2)',
-                    }}
+                    className={classes.avatar}
+                    style={{ backgroundImage: `url(${res.profileImg})` }}
                   ></div>
                   <div
-                    style={{
-                      background: `url(${res.profileBG})`,
-                      width: 180,
-                      height: 120,
-                      backgroundSize: 'cover',
-                      borderRadius: 10,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'flex-end',
-                      flexDirection: 'column',
-                      padding: 3,
-                      boxShadow: '3px 3px 5px rgba(0,0,0,0.2)',
-                    }}
+                    className={classes.bgImg}
+                    style={{ backgroundImage: `url(${res.profileBG})` }}
                   >
-                    <div
-                      style={{
-                        background: '#fff',
-                        padding: 5,
-                        boxSizing: 'border-box',
-                        borderRadius: '0 0 8px 8px',
-                        width: '100%',
-                        textAlign: 'center',
-                      }}
-                    >
+                    <div className={classes.details} style={{}}>
                       <Typography variant="h6" style={{ fontSize: 14 }}>
                         {res.name}
                       </Typography>
