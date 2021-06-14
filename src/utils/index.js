@@ -1,3 +1,5 @@
+import { toaster } from './toaster';
+export { toaster };
 export const TYPE_HELPER = (typeIn) => {
   switch (typeIn) {
     case 'graphic-artist':

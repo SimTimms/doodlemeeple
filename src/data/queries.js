@@ -1,8 +1,5 @@
 import gql from 'graphql-tag';
 
-import { JOBS, JOB_CREATIVE, JOB, JOB_CONTACT_DETAILS } from './job';
-export { JOBS, JOB_CREATIVE, JOB, JOB_CONTACT_DETAILS };
-
 export const CREATIVES = gql`
   query GetCreatives($type: [String], $job: MongoID, $page: Int) {
     getCreatives(type: $type, page: $page, job: $job) {

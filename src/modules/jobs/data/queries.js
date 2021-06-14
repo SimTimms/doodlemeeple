@@ -1,25 +1,5 @@
 import gql from 'graphql-tag';
 
-export const JOB_CONTACT_DETAILS = gql`
-  query GetJob($jobId: MongoID!) {
-    jobById(_id: $jobId) {
-      assignedCreative {
-        _id
-        name
-        email
-        profileImg
-        publicEmail
-        facebook
-        twitter
-        linkedIn
-        website
-        skype
-        instagram
-      }
-    }
-  }
-`;
-
 export const JOB = gql`
   query GetJob($jobId: MongoID!) {
     jobById(_id: $jobId) {
@@ -283,6 +263,66 @@ export const JOB_CREATIVE = gql`
         status
         messages
         _id
+      }
+    }
+  }
+`;
+
+export const JOBS = gql`
+  query GetJobs($status: [String]) {
+    jobsByUser(status: $status) {
+      _id
+      name
+      submitted
+      backgroundImg
+      assignedCreative {
+        _id
+        name
+        profileImg
+      }
+      contracts {
+        _id
+        user {
+          _id
+        }
+        status
+      }
+      game {
+        _id
+        name
+        backgroundImg
+      }
+      invites {
+        status
+        messages
+        job {
+          _id
+        }
+        receiver {
+          _id
+          name
+          profileImg
+        }
+      }
+    }
+  }
+`;
+
+export const JOB_CONTACT_DETAILS = gql`
+  query GetJob($jobId: MongoID!) {
+    jobById(_id: $jobId) {
+      assignedCreative {
+        _id
+        name
+        email
+        profileImg
+        publicEmail
+        facebook
+        twitter
+        linkedIn
+        website
+        skype
+        instagram
       }
     }
   }

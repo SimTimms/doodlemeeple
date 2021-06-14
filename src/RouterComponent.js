@@ -2,13 +2,11 @@ import React from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import { ApolloProvider } from 'react-apollo';
-import { ApolloClient } from 'apollo-client';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { createHttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
 import themeDesigner from './theme';
-import AuthRoutes from './routes/routesAuth';
+import RoutesAuth from './routes/routesAuth';
 import PublicRoutes from './routes/routesPublic';
 
 function RouterComponent(props) {
@@ -28,14 +26,14 @@ function RouterComponent(props) {
   });
 
   const client = new ApolloClient({
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache({ addTypename: false }),
+    uri: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
   });
 
   return (
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
-        {authToken && <AuthRoutes props={props} theme={theme} />}
+        {authToken && <RoutesAuth props={props} theme={theme} />}
         {!authToken && <PublicRoutes props={props} theme={theme} />}
       </ApolloProvider>
     </ThemeProvider>

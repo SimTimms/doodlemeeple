@@ -1,7 +1,9 @@
 import Cookies from 'js-cookie';
+import * as JOB_MODULE from '../../../modules/jobs';
 
 export default function menuArray(history, counts, profile) {
   return [
+    JOB_MODULE.menuButton(history),
     {
       name: 'Projects',
       icon: 'work',
