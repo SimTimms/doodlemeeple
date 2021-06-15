@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import Slide from '@material-ui/core/Slide';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { styles } from './styles';
-import { sharedStyles } from '../../styles';
+import { sharedStyles } from '../../sharedStyles';
 import clsx from 'clsx';
 
 export default function RegisterCard() {

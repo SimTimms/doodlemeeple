@@ -14,7 +14,7 @@ export function SaveButton({ email, errors, setError }) {
     !emailPass && (passed = false);
 
     setError({
-      email: !emailPass ? 'Valid email require' : null,
+      email: !emailPass ? 'Valid email required' : null,
     });
 
     passed && mutation();

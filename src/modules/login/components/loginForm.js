@@ -43,7 +43,8 @@ export default function LoginForm({ parameters }) {
         }
       }
     },
-    onError({ error }) {
+    onError(error) {
+      console.log(error);
       setStatus(`Try Again`);
       setError(readableErrors(error, errors));
     },

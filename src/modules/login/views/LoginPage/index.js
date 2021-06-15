@@ -5,9 +5,6 @@ import {
   Column,
   Divider,
   DividerMini,
-  Footer,
-  PublicFooterMenu,
-  StyledNavBar,
 } from '../../components/sharedComponents';
 import { sharedStyles } from '../sharedStyles';
 import { LoginForm } from '../../components';
@@ -37,73 +34,65 @@ export default function LoginPage({ history, forwardTo }) {
   }
 
   return (
-    <div className={classes.root}>
-      <StyledNavBar
-        open={false}
-        history={history}
-        center={true}
-        sidebarMissing={true}
+    <div className={classes.pageWrapper}>
+      <CardComponent
+        styleOverride={{
+          width: 400,
+          boxShadow: '5px 5px 20px rgba(0,0,0,0.2)',
+        }}
       >
-        <img
-          src={process.env.REACT_APP_DEVICE}
-          style={{ maxHeight: 40 }}
-          alt={`${process.env.REACT_APP_COMPANY_PUBLIC_NAME} Logo`}
-        />
-      </StyledNavBar>
-      <div className={classes.pageWrapper}>
-        <CardComponent
-          styleOverride={{
-            width: 400,
-            boxShadow: '5px 5px 20px rgba(0,0,0,0.2)',
-          }}
-        >
-          <Column>
-            <Typography variant="h5">Welcome</Typography>
-            <Typography>Please Login</Typography>
-            <Divider />
-          </Column>
-          <Column>
-            <LoginForm
-              parameters={{
-                email,
-                password,
-                forwardTo,
-                history,
-                setStatus,
-                setError,
-                errors,
-                setEmail,
-                loginSubmit,
-                setPassword,
-                loginStatus,
-              }}
-            />
-          </Column>
-          <Divider />
-          <Column>
-            <Typography
-              component="p"
-              style={{ textAlign: 'center', fontSize: 12, cursor: 'pointer' }}
-              color="primary"
-              onClick={() => history.push('/password-forgot')}
-            >
-              Forgotten your password?
-            </Typography>
-            <DividerMini />
-            <Typography
-              component="p"
-              style={{ textAlign: 'center', fontSize: 12, cursor: 'pointer' }}
-              color="primary"
-              onClick={() => history.push('/register')}
-            >
-              Don't have an account?
-            </Typography>
-          </Column>
-        </CardComponent>
-      </div>
-      <Footer>
-        <PublicFooterMenu />
-      </Footer>
+        <Column>
+          <Typography variant="h5">Welcome</Typography>
+          <Typography>Please Login</Typography>
+        </Column>
+        <Column>
+          <LoginForm
+            parameters={{
+              email,
+              password,
+              forwardTo,
+              history,
+              setStatus,
+              setError,
+              errors,
+              setEmail,
+              loginSubmit,
+              setPassword,
+              loginStatus,
+            }}
+          />
+        </Column>
+        <Divider />
+        <Column>
+          <Typography
+            component="p"
+            style={{
+              textAlign: 'center',
+              fontSize: 12,
+              cursor: 'pointer',
+              textDecoration: 'underline',
+            }}
+            color="primary"
+            onClick={() => history.push('/new-password')}
+          >
+            Reset password
+          </Typography>
+          <DividerMini />
+          <Typography
+            component="p"
+            style={{
+              textAlign: 'center',
+              fontSize: 12,
+              cursor: 'pointer',
+              textDecoration: 'underline',
+            }}
+            color="primary"
+            onClick={() => history.push('/register')}
+          >
+            Register
+          </Typography>
+        </Column>
+      </CardComponent>
     </div>
   );
 }
