@@ -11,7 +11,7 @@ import {
   TaskInvites,
   TaskSocials,
   TaskContact,
-  TaskQuote,
+  //TaskQuote,
   TaskSubmitQuote,
   TaskEditQuote,
   TaskDeclineInvite,
@@ -25,6 +25,7 @@ import {
   TaskPatreon,
 } from './taskConstants';
 import TaskGeneratorClient from './generators';
+
 export {
   TaskPatreon,
   TaskGeneratorClient,
@@ -40,7 +41,7 @@ export {
   TaskPostJob,
   TaskSocials,
   TaskContact,
-  TaskQuote,
+  // TaskQuote,
   TaskSubmitQuote,
   TaskEditQuote,
   TaskDeclineInvite,

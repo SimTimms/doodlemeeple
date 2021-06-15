@@ -4,7 +4,7 @@ import { Typography, Button, useMediaQuery, Icon } from '@material-ui/core';
 import { Uploader } from '../../components';
 import clsx from 'clsx';
 import { UPLOAD_IMAGE, DELETE_IMAGE } from '../../data/mutations';
-import { Mutation } from 'react-apollo';
+import { useMutation } from '@apollo/client';
 
 function MediaGallery({ items, edit, setImages, galleryId, ...props }) {
   const seedID = Math.floor(Math.random());
@@ -19,11 +19,53 @@ function MediaGallery({ items, edit, setImages, galleryId, ...props }) {
       : 6
     : 6;
 
+  const [uploadImage] = useMutation(
+    UPLOAD_IMAGE,
+    {
+      variables: {
+        img: saveImage,
+        galleryId: galleryId,
+        category: sectionType,
+      },
+    },
+    {
+      onCompleted({ imageCreateOne }) {
+        let imageArray = Object.assign([], items);
+        imageArray = [
+          ...imageArray,
+          {
+            _id: imageCreateOne.recordId,
+            img: imageCreateOne.record.img,
+          },
+        ];
+        setImages(imageArray);
+      },
+    }
+  );
+  /*
+  const [deleteImage] = useMutation(
+    DELETE_IMAGE,
+    {
+      variables: {
+        id: tile._id,
+      },
+    },
+    {
+      onCompleted({ imageCreateOne }) {
+        let imageArray = Object.assign([], items);
+        imageArray = imageArray.filter(
+          (arrItem) => arrItem.img !== imageCreateOne.img
+        );
+        setImages(imageArray);
+      },
+    }
+  );
+*/
   return (
     <div className={classes.root} style={{ background: 'none', padding: 0 }}>
       {!mediaViewer ? (
         <div className={classes.gridList} style={{ background: 'none' }}>
-          {items.map((tile, index) => (
+          {/*items.map((tile, index) => (
             <div
               key={`${tile.img}_${seedID}_${index}`}
               className={clsx({
@@ -37,32 +79,16 @@ function MediaGallery({ items, edit, setImages, galleryId, ...props }) {
                 border: '5px solid #fff',
               }}
             >
-              <Mutation
-                mutation={DELETE_IMAGE}
-                variables={{ id: tile._id }}
-                onCompleted={(data) => {
-                  let imageArray = Object.assign([], items);
-                  imageArray = imageArray.filter(
-                    (arrItem) => arrItem.img !== tile.img
-                  );
-                  setImages(imageArray);
+              <Button
+                className={classes.iconButton}
+                onClick={() => {
+                  deleteImage();
                 }}
               >
-                {(mutation) => {
-                  return (
-                    <Button
-                      className={classes.iconButton}
-                      onClick={() => {
-                        mutation();
-                      }}
-                    >
-                      <Icon className={classes.iconButtonIcon}>delete</Icon>
-                    </Button>
-                  );
-                }}
-              </Mutation>
+                <Icon className={classes.iconButtonIcon}>delete</Icon>
+              </Button>
             </div>
-          ))}
+              ))*/}
 
           {edit && items.length < maxImages && (
             <div
@@ -77,42 +103,18 @@ function MediaGallery({ items, edit, setImages, galleryId, ...props }) {
                 border: '5px solid #fff',
               }}
             >
-              <Mutation
-                mutation={UPLOAD_IMAGE}
-                variables={{
-                  img: saveImage,
-                  galleryId: galleryId,
-                  category: sectionType,
+              <Uploader
+                cbImage={(url) => {
+                  setSaveImage(url);
+                  uploadImage();
                 }}
-                onCompleted={(data) => {
-                  let imageArray = Object.assign([], items);
-                  imageArray = [
-                    ...imageArray,
-                    {
-                      _id: data.imageCreateOne.recordId,
-                      img: data.imageCreateOne.record.img,
-                    },
-                  ];
-                  setImages(imageArray);
-                }}
-              >
-                {(mutation) => {
-                  return (
-                    <Uploader
-                      cbImage={(url) => {
-                        setSaveImage(url);
-                        mutation();
-                      }}
-                      styleOverride={null}
-                      className={null}
-                      cbDelete={null}
-                      hasFile={false}
-                      size="2MB PNG JPG GIF"
-                      imageCategory={sectionType}
-                    />
-                  );
-                }}
-              </Mutation>
+                styleOverride={null}
+                className={null}
+                cbDelete={null}
+                hasFile={false}
+                size="2MB PNG JPG GIF"
+                imageCategory={sectionType}
+              />
             </div>
           )}
         </div>

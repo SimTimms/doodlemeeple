@@ -1,7 +1,7 @@
 import React from 'react';
 import { TaskButton } from '../';
-import { Mutation } from 'react-apollo';
-import { CREATE_CONTRACT } from '../../../data/mutations';
+//import { Mutation } from 'react-apollo';
+//import { CREATE_CONTRACT } from '../../../data/mutations';
 import { toaster } from '../../../utils/toaster';
 
 export function TaskUnreadMessages({ data, history }) {
@@ -278,7 +278,7 @@ export function TaskSubmitQuote({ history, quoteId }) {
     />
   );
 }
-
+/*
 export function TaskQuote({ history, jobId }) {
   return (
     <Mutation
@@ -307,7 +307,7 @@ export function TaskQuote({ history, jobId }) {
     </Mutation>
   );
 }
-
+*/
 export function TaskDeclineInvite({ setTabNbr }) {
   return (
     <TaskButton

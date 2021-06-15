@@ -29,7 +29,22 @@ export default function ProjectDash({
             const contractSubmitted = invite.job.contracts.filter(
               (contract) => contract.user._id === invite.receiver._id
             );
-            return null;
+            return (
+              <InviteComponentFull
+                invite={invite}
+                key={`invite-${index}`}
+                setConversationUser={setConversationUser}
+                contract={contractSubmitted[0]}
+                history={history}
+                jobId={job._id}
+                contactDetails={accepted}
+                isOpen={
+                  openQuoteId === contractSubmitted && contractSubmitted[0]._id
+                    ? true
+                    : false
+                }
+              />
+            );
           })}
         </Widget>
       )}

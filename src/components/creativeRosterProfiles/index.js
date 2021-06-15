@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStyles } from './styles';
-import { Query } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import { CREATIVES } from '../../data/queries';
 import {
   ProfileCard,
@@ -8,7 +8,7 @@ import {
   IconButton,
   Divider,
 } from '../../components';
-import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
+//import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 
 export default function CreativeRosterProfiles({
   favourites,
@@ -21,53 +21,43 @@ export default function CreativeRosterProfiles({
   const [noMore, setNoMore] = React.useState(false);
   const [existingFilter, setExistingFilter] = React.useState(false);
   const [fullProfile, setFullProfile] = React.useState(false);
+  const [query, { loading }] = useQuery(
+    CREATIVES,
+    {
+      variables: { type: filter, page: page, job: null },
+    },
+    {
+      onCompleted({ getCreatives }) {
+        getCreatives.length === 0 && setNoMore(true);
+        filter === existingFilter &&
+          setCreativeArray([...creativeArray, ...getCreatives]);
 
+        if (filter !== existingFilter) {
+          setCreativeArray([...getCreatives]);
+          setExistingFilter(filter);
+          setNoMore(false);
+          setPage(0);
+        }
+      },
+    }
+  );
+  useEffect(() => {
+    query();
+  }, [query]);
   function fullProfileToggle(id) {
     id === setFullProfile ? setFullProfile(null) : setFullProfile(id);
   }
+  if (loading) return 'Loading...';
   return (
     <div className={classes.cardWrapper}>
-      <Query
-        query={CREATIVES}
-        variables={{ type: filter, page: page, job: null }}
-        fetchPolicy="network-only"
-        onCompleted={(data) => {
-          data.getCreatives.length === 0 && setNoMore(true);
-          filter === existingFilter &&
-            setCreativeArray([...creativeArray, ...data.getCreatives]);
-
-          if (filter !== existingFilter) {
-            setCreativeArray([...data.getCreatives]);
-            setExistingFilter(filter);
-            setNoMore(false);
-            setPage(0);
-          }
-        }}
-      >
-        {({ data, loading }) => {
-          return loading ? (
-            <div className={classes.cardWrapper}>
-              <ProfileCardBlank />
-              <ProfileCardBlank />
-              <ProfileCardBlank />
-              <ProfileCardBlank />
-              <ProfileCardBlank />
-              <ProfileCardBlank />
-              <ProfileCardBlank />
-            </div>
-          ) : data ? (
-            <div className={classes.creativeWrapper}></div>
-          ) : null;
-        }}
-      </Query>
-      {fullProfile && (
+      {/*fullProfile && (
         <PreviewProfile
           profileId={fullProfile}
           publicView={true}
           history={history}
           setFullProfile={fullProfileToggle}
         />
-      )}
+      )*/}
       {creativeArray.map((creative, index) => {
         return (
           <ProfileCard

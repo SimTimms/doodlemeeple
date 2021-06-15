@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { Card, Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import { IconButton, Column } from '../';
-import { Mutation } from 'react-apollo';
+import { useMutation } from '@apollo/client';
+
 import { ADD_FAVOURITE } from '../../data/mutations';
 import clsx from 'clsx';
 
@@ -56,7 +57,17 @@ export default function ProfileCardCreative({ history, creative, favourite }) {
           position: 'relative',
         }}
       ></div>
-      {/* <Mutation
+      {/* 
+      //TODO Create a component for this button
+      const [mutation, { loading }] = useMutation(
+    MUTATION_NAME,
+    {
+      variables: {},
+    },
+    {
+      onCompleted() {},
+    }
+  );<Mutation
         mutation={ADD_FAVOURITE}
         variables={{
           id: creative._id,

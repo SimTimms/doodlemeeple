@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { REMOVE_NOTIFICATION_MUTATION } from '../../data/mutations';
-import { Mutation } from 'react-apollo';
+import { useMutation } from '@apollo/client';
+
 import { timeDifferenceForDate } from '../../utils/dates';
 import { nameShortener } from '../../utils';
 import clsx from 'clsx';
@@ -15,6 +16,15 @@ export default function NotificationComponent({
   notificationArray,
 }) {
   const classes = useStyles();
+  const [RemoveNotificationMutation, { loading }] = useMutation(
+    REMOVE_NOTIFICATION_MUTATION,
+    {
+      variables: { id: notification._id },
+    },
+    {
+      onCompleted() {},
+    }
+  );
   return (
     <div className={classes.card}>
       <div className={classes.rowWrapper}>
@@ -59,34 +69,23 @@ export default function NotificationComponent({
           </div>
         </Link>
         {notification.title !== 'No Notifications' && (
-          <Mutation
-            mutation={REMOVE_NOTIFICATION_MUTATION}
-            variables={{
-              id: notification._id,
+          <MenuButtonShortcut
+            text={{
+              name: '',
+              icon: 'close',
+              count: 0,
+              back: '',
+              color: '#222',
             }}
-          >
-            {(RemoveNotificationMutation) => {
-              return (
-                <MenuButtonShortcut
-                  text={{
-                    name: '',
-                    icon: 'close',
-                    count: 0,
-                    back: '',
-                    color: '#222',
-                  }}
-                  onClickEvent={() => {
-                    RemoveNotificationMutation();
-                    const notificationArrayFiltered = notificationArray.filter(
-                      (item) => item._id !== notification._id
-                    );
-                    setNotificationArray(notificationArrayFiltered);
-                  }}
-                  active={false}
-                />
+            onClickEvent={() => {
+              RemoveNotificationMutation();
+              const notificationArrayFiltered = notificationArray.filter(
+                (item) => item._id !== notification._id
               );
+              setNotificationArray(notificationArrayFiltered);
             }}
-          </Mutation>
+            active={false}
+          />
         )}
       </div>
     </div>

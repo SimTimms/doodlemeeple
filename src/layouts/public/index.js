@@ -1,11 +1,9 @@
 import React from 'react';
-import LoginPage from './views/LoginPage';
-import Registry from './views/register';
+//import Registry from './views/register';
 import { Content } from '../../components';
-import { StyledNavBar, Footer } from '../../components';
-import { PublicFooterMenu } from '../menus';
-import { PasswordForgot } from './views/passwordForgot';
-import { PasswordReset } from './views/passwordReset';
+import { StyledNavBar, Footer, PublicFooterMenu } from '../../components';
+//import { PasswordForgot } from './views/passwordForgot';
+//import { PasswordReset } from './views/passwordReset';
 import Deleted from './views/deleted';
 import { useStyles } from './styles';
 
@@ -42,9 +40,7 @@ export function PublicLayout(props) {
         />
       </StyledNavBar>
       <Content>
-        {page === 'login' ? (
-          <LoginPage history={props.history} forwardTo={null} />
-        ) : page === 'register' ? (
+        {/*: page === 'register' ? (
           <Registry campaignId={token} history={props.history} />
         ) : page === 'password-forgot' ? (
           <div className={classes.backgroundSignup}>
@@ -60,7 +56,7 @@ export function PublicLayout(props) {
           </div>
         ) : (
           <LoginPage history={props.history} forwardTo={props.location} />
-        )}
+        )*/}
       </Content>
 
       <Footer>

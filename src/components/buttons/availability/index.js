@@ -8,7 +8,7 @@ import { useMutation } from '@apollo/client';
 export default function Availability({ available }) {
   const classes = useStyles();
   const [availability, setAvailability] = React.useState(true);
-  const [saveMessage, { loading }] = useMutation(
+  const [updateAvailability, { loading }] = useMutation(
     UPDATE_AVAILABILITY,
     {
       variables: { available: availability ? false : true },
@@ -25,7 +25,7 @@ export default function Availability({ available }) {
   }, [available]);
 
   function changeAvailable() {
-    saveMessage();
+    updateAvailability();
     setAvailability(availability ? false : true);
   }
   if (loading) return <div>Loading</div>;
