@@ -8,11 +8,12 @@ import {
 } from '../../components/sharedComponents';
 import { sharedStyles } from '../sharedStyles';
 import { LoginForm } from '../../components';
-
+import { themeStyles } from '../../../../themeStyles';
 const CHECKING = 'Checking...';
 
 export default function LoginPage({ history, forwardTo }) {
   const classes = sharedStyles();
+  const globalClasses = themeStyles();
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [errors, setError] = React.useState({
@@ -66,12 +67,7 @@ export default function LoginPage({ history, forwardTo }) {
         <Column>
           <Typography
             component="p"
-            style={{
-              textAlign: 'center',
-              fontSize: 12,
-              cursor: 'pointer',
-              textDecoration: 'underline',
-            }}
+            className={globalClasses.textButton}
             color="primary"
             onClick={() => history.push('/new-password')}
           >
@@ -80,12 +76,7 @@ export default function LoginPage({ history, forwardTo }) {
           <DividerMini />
           <Typography
             component="p"
-            style={{
-              textAlign: 'center',
-              fontSize: 12,
-              cursor: 'pointer',
-              textDecoration: 'underline',
-            }}
+            className={globalClasses.textButton}
             color="primary"
             onClick={() => history.push('/register')}
           >
