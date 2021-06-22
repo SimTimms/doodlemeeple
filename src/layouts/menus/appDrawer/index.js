@@ -8,10 +8,9 @@ import { MenuButtonShortcut } from '../../../components';
 import menuArray from './menuArray';
 import DmDevice from './DmDevice';
 import BlankDrawer from './blankDrawer';
-import { ProfileContext } from '../../../context';
+import { ProfileContext, HistoryContext } from '../../../context';
 
 export default function AppDrawer({
-  history,
   handleDrawerClose,
   handleDrawerOpen,
   open,
@@ -48,44 +47,48 @@ export default function AppDrawer({
         !profile ? (
           <BlankDrawer />
         ) : (
-          <Drawer
-            variant="permanent"
-            classes={{
-              paper: clsx({
-                [drawerRoot]: true,
-                [drawerOpenTablet]: mobile,
-                [drawerClosed]: !isOpen && mobile,
-              }),
-            }}
-          >
-            <DmDevice isOpen={isOpen} setIsOpen={setIsOpen} />
-            <Divider />
-            <List onClick={() => setIsOpen(false)}>
-              <div>
-                {menuArray(history, counts, profile).map(
-                  (text, index) =>
-                    text.name !== 'hide' && (
-                      <MenuButtonShortcut
-                        text={{
-                          name: text.name,
-                          color: '#222',
-                          icon: text.icon,
-                          count: text.count ? text.count.count : 0,
-                        }}
-                        onClickEvent={() => {
-                          setPage(text.machineName);
-                          text.link();
-                          handleDrawerClose();
-                        }}
-                        active={text.machineName === page}
-                        key={`menu_${index}`}
-                        countIcon={text.count ? text.count.icon : 'star'}
-                      />
-                    )
-                )}
-              </div>
-            </List>
-          </Drawer>
+          <HistoryContext.Consumer>
+            {(history) => (
+              <Drawer
+                variant="permanent"
+                classes={{
+                  paper: clsx({
+                    [drawerRoot]: true,
+                    [drawerOpenTablet]: mobile,
+                    [drawerClosed]: !isOpen && mobile,
+                  }),
+                }}
+              >
+                <DmDevice isOpen={isOpen} setIsOpen={setIsOpen} />
+                <Divider />
+                <List onClick={() => setIsOpen(false)}>
+                  <div>
+                    {menuArray(history, counts, profile).map(
+                      (text, index) =>
+                        text.name !== 'hide' && (
+                          <MenuButtonShortcut
+                            text={{
+                              name: text.name,
+                              color: '#222',
+                              icon: text.icon,
+                              count: text.count ? text.count.count : 0,
+                            }}
+                            onClickEvent={() => {
+                              setPage(text.machineName);
+                              text.link();
+                              handleDrawerClose();
+                            }}
+                            active={text.machineName === page}
+                            key={`menu_${index}`}
+                            countIcon={text.count ? text.count.icon : 'star'}
+                          />
+                        )
+                    )}
+                  </div>
+                </List>
+              </Drawer>
+            )}
+          </HistoryContext.Consumer>
         )
       }
     </ProfileContext.Consumer>

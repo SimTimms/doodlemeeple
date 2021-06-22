@@ -10,13 +10,14 @@ import { DashboardRoutes } from '../../modules/dashboards';
 import { PROFILE } from '../../data/queries';
 import logout from '../../utils/logout';
 import { useQuery } from '@apollo/client';
-import { StyledNavBar, MenuButtonShortcut } from '../../components';
+import { StyledNavBar, ContentTop } from '../../components';
 import { ToastContainer } from 'react-toastify';
 import { useStyles } from './styles';
 import LoggedOut from './views';
 import AppDrawer from '../../layouts/menus/appDrawer';
 import { ProfileContext, HistoryContext } from '../../context';
 import { ProfileAvatarButton } from '../../buttons';
+import clsx from 'clsx';
 export default function RoutesAuth({ theme, props: { ...props } }) {
   const [profile, setProfile] = React.useState(null);
   const { history } = props;
@@ -44,14 +45,19 @@ export default function RoutesAuth({ theme, props: { ...props } }) {
             handleDrawerClose={() => null}
             handleDrawerOpen={() => null}
             open={true}
-            history={history}
             activeButton={null}
-            profile={profile}
           />
-          <Switch>
-            {JobRoutes(props)}
-            {DashboardRoutes(props)}
-            {/*
+          <main
+            className={clsx({
+              [classes.content]: true,
+              [classes.contentMobile]: mobile,
+            })}
+          >
+            <ContentTop style={{ width: '100%' }}>
+              <Switch>
+                {JobRoutes(props)}
+                {DashboardRoutes(props)}
+                {/*
         <Route
           path="/app/:page/:pathParam1?/:pathParam2?"
           render={(props) => (
@@ -96,12 +102,14 @@ export default function RoutesAuth({ theme, props: { ...props } }) {
           exact
           render={() => <Redirect push to="/app/tasks" />}
         />*/}
-            <Route
-              path="/logout"
-              exact
-              render={() => <LoggedOut history={history} />}
-            />
-          </Switch>
+                <Route
+                  path="/logout"
+                  exact
+                  render={() => <LoggedOut history={history} />}
+                />
+              </Switch>
+            </ContentTop>
+          </main>
         </HistoryContext.Provider>
       </ProfileContext.Provider>
     </div>

@@ -8,7 +8,7 @@ export default function menuArray(history, counts, profile) {
       name: 'Projects',
       icon: 'work',
       machineName: 'projects',
-      link: () => history.push('/app/projects'),
+      link: () => history.push('/projects'),
       count: { icon: 'star', count: counts.quotes },
     },
     {

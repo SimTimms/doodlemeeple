@@ -41,7 +41,7 @@ export {
   TaskPostJob,
   TaskSocials,
   TaskContact,
-  // TaskQuote,
+  //TaskQuote,
   TaskSubmitQuote,
   TaskEditQuote,
   TaskDeclineInvite,

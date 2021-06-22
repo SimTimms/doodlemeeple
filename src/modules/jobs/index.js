@@ -1,3 +1,3 @@
-import JobRoutes from './routes';
-import menuButton from './menuButton';
+import JobRoutes from './src/routes';
+import menuButton from './src/menuButton';
 export { JobRoutes, menuButton };
