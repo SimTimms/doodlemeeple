@@ -68,7 +68,6 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     color: '#fff',
     position: 'relative',
-    width: 24,
     borderRadius: '50%',
     textAlign: 'center',
     minWidth: 26,

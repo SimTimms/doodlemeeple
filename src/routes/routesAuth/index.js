@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useMediaQuery } from '@material-ui/core';
+
 //import AppLayout from '../../layouts/app';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 //import PreviewLayout from '../../layouts/preview';
 import { JobRoutes } from '../../modules/jobs';
 import { DashboardRoutes } from '../../modules/dashboards';
@@ -8,24 +10,48 @@ import { DashboardRoutes } from '../../modules/dashboards';
 import { PROFILE } from '../../data/queries';
 import logout from '../../utils/logout';
 import { useQuery } from '@apollo/client';
-
+import { StyledNavBar, MenuButtonShortcut } from '../../components';
+import { ToastContainer } from 'react-toastify';
+import { useStyles } from './styles';
+import LoggedOut from './views';
+import AppDrawer from '../../layouts/menus/appDrawer';
+import { ProfileContext, HistoryContext } from '../../context';
+import { ProfileAvatarButton } from '../../buttons';
 export default function RoutesAuth({ theme, props: { ...props } }) {
   const [profile, setProfile] = React.useState(null);
   const { history } = props;
+  const classes = useStyles();
+  const mobile = useMediaQuery('(max-width:800px)');
+
   const { loading, error, data } = useQuery(PROFILE, {
     onCompleted({ profile }) {
       setProfile(profile);
     },
     onError(error) {
-      console.log(error);
       logout(history);
     },
   });
+
   return (
-    <Switch>
-      {JobRoutes(props)}
-      {DashboardRoutes(props)}
-      {/*
+    <div className={classes.root}>
+      <ToastContainer />
+      <ProfileContext.Provider value={profile}>
+        <HistoryContext.Provider value={history}>
+          <StyledNavBar open={true}>
+            {!mobile && <ProfileAvatarButton />}
+          </StyledNavBar>
+          <AppDrawer
+            handleDrawerClose={() => null}
+            handleDrawerOpen={() => null}
+            open={true}
+            history={history}
+            activeButton={null}
+            profile={profile}
+          />
+          <Switch>
+            {JobRoutes(props)}
+            {DashboardRoutes(props)}
+            {/*
         <Route
           path="/app/:page/:pathParam1?/:pathParam2?"
           render={(props) => (
@@ -70,6 +96,14 @@ export default function RoutesAuth({ theme, props: { ...props } }) {
           exact
           render={() => <Redirect push to="/app/tasks" />}
         />*/}
-    </Switch>
+            <Route
+              path="/logout"
+              exact
+              render={() => <LoggedOut history={history} />}
+            />
+          </Switch>
+        </HistoryContext.Provider>
+      </ProfileContext.Provider>
+    </div>
   );
 }

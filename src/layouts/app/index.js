@@ -68,7 +68,7 @@ function AppLayout(props) {
         {!mobile && (
           <MenuButtonShortcut
             text={{
-              name: profile ? profile.name : 'fetching...',
+              name: profile ? profile.name : 'Fetching...',
               color: '#222',
               icon: 'face',
               count: 0,

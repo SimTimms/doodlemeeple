@@ -51,7 +51,7 @@ export const useStyles = makeStyles((theme) => ({
     height: '100%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     marginRight: 10,
     marginLeft: 10,
@@ -60,7 +60,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-between',
     alignItems: 'center',
   },
   appBarNoSidebar: {

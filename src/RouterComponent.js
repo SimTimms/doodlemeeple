@@ -2,7 +2,12 @@ import React from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
 import { setContext } from 'apollo-link-context';
 import themeDesigner from './theme';
 import RoutesAuth from './routes/routesAuth';
@@ -11,6 +16,10 @@ import PublicRoutes from './routes/routesPublic';
 function RouterComponent(props) {
   const authToken = Cookies.get('token');
   const theme = themeDesigner();
+
+  const httpLink = createHttpLink({
+    uri: `${process.env.REACT_APP_API}/graphql`,
+  });
 
   const authLink = setContext((_, { headers }) => {
     return {
@@ -22,7 +31,7 @@ function RouterComponent(props) {
   });
 
   const client = new ApolloClient({
-    uri: process.env.REACT_APP_API,
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache(),
   });
   return (

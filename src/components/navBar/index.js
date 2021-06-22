@@ -31,9 +31,6 @@ function StyledNavBar(props) {
             [classes.appBarChild]: !mobile,
             [classes.appBarChildMobile]: mobile,
           })}
-          style={{
-            justifyContent: center ? 'center' : 'space-between',
-          }}
         >
           {children}
         </div>

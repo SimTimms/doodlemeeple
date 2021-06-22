@@ -32,6 +32,7 @@ export default function LoginForm({ parameters }) {
   const [loginMutation, { loading }] = useMutation(LOGIN_MUTATION, {
     variables: { email: email, password: password },
     async onCompleted({ userLogin }) {
+      console.log('hd');
       const { token } = userLogin;
       if (token) {
         const tokenDecode = jwtDecode(token);
@@ -43,6 +44,7 @@ export default function LoginForm({ parameters }) {
       }
     },
     onError(error) {
+      console.log(error);
       setStatus(`Try Again`);
       setError(readableErrors(error, errors));
     },
