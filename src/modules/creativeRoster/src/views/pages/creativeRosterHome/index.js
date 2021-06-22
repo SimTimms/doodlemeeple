@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useQuery } from '@apollo/client';
 import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
@@ -8,12 +9,23 @@ import {
   CreativeRosterProfiles,
 } from '../../../../components';
 import { TYPE_HELPER } from '../../../../utils';
+import { FAVOURITES } from '../../../../data/queries';
 
-export default function CreativeRoster({ history, favourites, groupIn }) {
+export default function CreativeRosterHome({ history, groupIn }) {
   const classes = useStyles();
-  const [loading] = React.useState(false);
   const [filter, setFilter] = React.useState([]);
   const [group, setGroup] = React.useState(null);
+  const [favourites, setFavourites] = React.useState([]);
+  const [query, { loading }] = useQuery(FAVOURITES, {
+    onCompleted({ profile }) {
+      setFavourites(
+        profile.favourites.filter((fav) => fav.receiver && fav.receiver._id)
+      );
+    },
+  });
+  useEffect(() => {
+    query();
+  }, [query]);
 
   useEffect(() => {
     setFilter(groupIn ? groupIn : 'artist');

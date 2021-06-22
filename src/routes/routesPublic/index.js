@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 //import { AboutLayout } from '../layouts';
 //import PreviewLayout from '../layouts/preview';
 import { PublicLayout } from '../../layouts/public';
-import { LoginRoutes } from '../../modules/login';
+import { LoginRoutes } from '../../modules/loginModule';
 
 export default function PublicRoutes({ theme, props: { ...props } }) {
   return (
@@ -23,12 +23,11 @@ export default function PublicRoutes({ theme, props: { ...props } }) {
         path="/:page/:token"
         render={(props) => <PublicLayout {...props} theme={theme} />}
       />
-        */}
+       
       <Route
         path="/:page"
         render={(props) => <PublicLayout {...props} theme={theme} />}
-      />
-      <Route path="/" exact render={() => <Redirect push to="/login" />} />
+      /> */}
     </Switch>
   );
 }

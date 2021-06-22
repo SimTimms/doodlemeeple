@@ -1,9 +1,8 @@
 import React from 'react';
-import ForgotCard from './views/ForgotCard';
-import ThanksCard from './views/ThanksCard';
+import { ForgotCard, ThanksCard } from './components/';
 import { sharedStyles } from '../sharedStyles';
 
-export default function PasswordForgot({ history }) {
+export default function PasswordResetPage({ history }) {
   const classes = sharedStyles();
 
   const [page, setPage] = React.useState(0);
@@ -12,6 +11,8 @@ export default function PasswordForgot({ history }) {
       <ForgotCard history={history} setPage={setPage} />
     </div>
   ) : (
-    <ThanksCard history={history} setPage={setPage} />
+    <div className={classes.pageWrapper}>
+      <ThanksCard history={history} setPage={setPage} />
+    </div>
   );
 }

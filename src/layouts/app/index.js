@@ -23,7 +23,7 @@ import ViewProposal from './views/viewProposal';
 import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
-import { FAVOURITES, PROFILE, PREVIEW_CONTRACT } from '../../data/queries';
+import { FAVOURITES, PREVIEW_CONTRACT } from '../../data/queries';
 import { ContentTop, StyledNavBar, MenuButtonShortcut } from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 import { pathParam } from './helpers';
@@ -126,22 +126,11 @@ function AppLayout(props) {
           ) : page === 'help' ? (
             <AppHelp history={history} />
           ) : page === 'creative-roster' ? (
-            <Query query={FAVOURITES} fetchPolicy="network-only">
-              {({ data, loading }) => {
-                return loading
-                  ? null
-                  : data && (
-                      <CreativeRoster
-                        theme={props.theme}
-                        history={history}
-                        favourites={data.profile.favourites.map(
-                          (fav) => fav.receiver && fav.receiver._id
-                        )}
-                        groupIn={pathParams.pathParam1 && pathParams.pathParam1}
-                      />
-                    );
-              }}
-            </Query>
+            <CreativeRoster
+              theme={props.theme}
+              history={history}
+              groupIn={pathParams.pathParam1 && pathParams.pathParam1}
+            />
           ) : page === 'account' ? (
             <Account history={history} />
           ) : page === 'invites' ? (

@@ -1,17 +1,25 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
-import { Form, FormInput, ErrorBox, IconButton } from './sharedComponents';
-import { LOGIN_MUTATION } from '../data';
-import * as LENGTHS from './sharedUtils';
+import {
+  Form,
+  FormInput,
+  ErrorBox,
+  IconButton,
+} from '../../../imports/sharedComponents';
+import { LOGIN_MUTATION } from '../../data';
 import Cookies from 'js-cookie';
-import { readableErrors } from './sharedUtils';
+import {
+  readableErrors,
+  PROFILE_NAME,
+  PROFILE_EMAIL,
+  PROFILE_PASSWORD,
+} from '../../../imports/sharedUtils';
 import jwtDecode from 'jwt-decode';
 
 export default function LoginForm({ parameters }) {
   const {
     email,
     password,
-    forwardTo,
     history,
     setStatus,
     setError,
@@ -31,20 +39,10 @@ export default function LoginForm({ parameters }) {
         await Cookies.set('userId', tokenDecode.userId, {
           expires: 7,
         });
-
-        if (
-          forwardTo !== null &&
-          forwardTo.pathname !== undefined &&
-          forwardTo.pathname !== '/login'
-        ) {
-          history.replace(forwardTo.pathname);
-        } else {
-          history.replace('/app/tasks');
-        }
+        history.replace('/dashboard');
       }
     },
     onError(error) {
-      console.log(error);
       setStatus(`Try Again`);
       setError(readableErrors(error, errors));
     },
@@ -56,10 +54,8 @@ export default function LoginForm({ parameters }) {
         fieldName="emailAddress"
         fieldValue={email}
         setFieldValue={setEmail}
-        fieldTitle={`Email ${
-          email ? `(${LENGTHS.PROFILE_EMAIL - email.length})` : ''
-        }`}
-        inputProps={{ maxLength: LENGTHS.PROFILE_EMAIL }}
+        fieldTitle={`Email ${email ? `(${PROFILE_EMAIL - email.length})` : ''}`}
+        inputProps={{ maxLength: PROFILE_EMAIL }}
         onKeyPress={(event) => {
           if (event.key === 'Enter') {
             loginSubmit(loginMutation);
@@ -72,9 +68,9 @@ export default function LoginForm({ parameters }) {
         setFieldValue={setPassword}
         type="password"
         fieldTitle={`Password ${
-          password ? `(${LENGTHS.PROFILE_PASSWORD - password.length})` : ''
+          password ? `(${PROFILE_PASSWORD - password.length})` : ''
         }`}
-        inputProps={{ maxLength: LENGTHS.PROFILE_PASSWORD }}
+        inputProps={{ maxLength: PROFILE_PASSWORD }}
         onKeyPress={(event) => {
           if (event.key === 'Enter') {
             loginSubmit(loginMutation);

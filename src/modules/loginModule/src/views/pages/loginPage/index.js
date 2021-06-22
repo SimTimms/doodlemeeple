@@ -5,15 +5,15 @@ import {
   Column,
   Divider,
   DividerMini,
-} from '../../components/sharedComponents';
+} from '../../../../imports/sharedComponents';
+import { themeStyles } from '../../../../imports/sharedStyles';
 import { sharedStyles } from '../sharedStyles';
 import { LoginForm } from '../../components';
-import { themeStyles } from '../../../../themeStyles';
 const CHECKING = 'Checking...';
 
-export default function LoginPage({ history, forwardTo }) {
+export default function LoginPage({ history }) {
   const classes = sharedStyles();
-  const globalClasses = themeStyles();
+  const themeClasses = themeStyles();
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [errors, setError] = React.useState({
@@ -51,7 +51,6 @@ export default function LoginPage({ history, forwardTo }) {
             parameters={{
               email,
               password,
-              forwardTo,
               history,
               setStatus,
               setError,
@@ -67,16 +66,16 @@ export default function LoginPage({ history, forwardTo }) {
         <Column>
           <Typography
             component="p"
-            className={globalClasses.textButton}
+            className={themeClasses.textButton}
             color="primary"
             onClick={() => history.push('/new-password')}
           >
-            Reset password
+            Reset Password
           </Typography>
           <DividerMini />
           <Typography
             component="p"
-            className={globalClasses.textButton}
+            className={themeClasses.textButton}
             color="primary"
             onClick={() => history.push('/register')}
           >

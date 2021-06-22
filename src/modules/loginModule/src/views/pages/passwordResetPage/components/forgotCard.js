@@ -1,16 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import {
-  CardContent,
-  Typography,
-  useMediaQuery,
-  Slide,
-} from '@material-ui/core';
-import { styles } from './styles';
-import { sharedStyles } from '../../sharedStyles';
+import { Typography, Slide } from '@material-ui/core';
+import { themeStyles } from '../../../../../imports/sharedStyles';
 import { useMutation } from '@apollo/client';
-import { PASSWORD_FORGOT_MUTATION } from '../../../data';
-import { PROFILE_EMAIL } from '../../../../../utils/dataLengths';
+import { PASSWORD_FORGOT_MUTATION } from '../../../../data';
+import { PROFILE_EMAIL } from '../../../../../imports/sharedUtils';
 import {
   ErrorBox,
   Form,
@@ -19,17 +12,15 @@ import {
   Column,
   Divider,
   IconButton,
-} from '../../../../../components';
+} from '../../../../../imports/sharedComponents';
 import { validate } from 'email-validator';
-import clsx from 'clsx';
 
 export default function ForgotCard({ history, setPage }) {
-  const classes = { ...styles(), ...sharedStyles() };
+  const classes = themeStyles();
   const [email, setEmail] = React.useState('');
   const [errors, setError] = React.useState({
     email: null,
   });
-  const mobile = useMediaQuery('(max-width:800px)');
   const [mutation, { loading }] = useMutation(PASSWORD_FORGOT_MUTATION, {
     variables: { email },
     async onCompleted({ userLogin }) {
@@ -56,12 +47,7 @@ export default function ForgotCard({ history, setPage }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.cardWrapper}>
-        <CardComponent
-          styleOverride={{
-            width: 400,
-            boxShadow: '5px 5px 20px rgba(0,0,0,0.2)',
-          }}
-        >
+        <CardComponent>
           <Column>
             <Typography variant="h5">Forgot your password?</Typography>
             <Typography>
