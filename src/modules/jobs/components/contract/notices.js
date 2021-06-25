@@ -1,5 +1,5 @@
 import React from 'react';
-import { NoticeBox } from '../';
+import { NoticeBox } from '../../../../components';
 
 export default function Notices({ status }) {
   return (

@@ -3,7 +3,7 @@ import { useStyles } from '../styles';
 import {
   MenuButtonShortcut,
   TopMenuWrapper,
-} from '../../../components/sharedComponents';
+} from '../../../../imports/sharedComponents';
 
 export default function CreatorMenu({
   tabNbr,

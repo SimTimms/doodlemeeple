@@ -7,7 +7,7 @@ import {
   Paper,
   BorderBox,
   IconButton,
-} from '../../../components/sharedComponents';
+} from '../../../../imports/sharedComponents';
 import CreativeActions from '../components/creativeActions';
 import CreativeActionsTwo from '../components/creativeActionsTwo';
 import JobSummaryComponent from './jobSummaryComponent';

@@ -1,5 +1,10 @@
 import React from 'react';
-import { IconButton, ActionWrapper, BorderBox, Meta } from '../';
+import {
+  IconButton,
+  ActionWrapper,
+  BorderBox,
+  Meta,
+} from '../../../../components';
 import { useMutation } from '@apollo/client';
 import { SIGN_CONTRACT, DECLINE_CONTRACT } from '../../data/mutations';
 import moment from 'moment';

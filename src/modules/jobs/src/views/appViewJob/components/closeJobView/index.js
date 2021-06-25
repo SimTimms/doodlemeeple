@@ -8,7 +8,7 @@ import {
   IconButton,
 } from '../../../../../../../../imports/sharedComponents';
 import { Mutation } from 'react-apollo';
-import { CLOSE_JOB } from '../../../data';
+import { CLOSE_JOB } from '../../../../../data';
 
 export default function CloseJobView({ jobId, history }) {
   const classes = useStyles();

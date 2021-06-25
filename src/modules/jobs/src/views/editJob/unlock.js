@@ -22,5 +22,6 @@ export function unlock(job) {
 }
 
 export function checkLength(strIn, field) {
+  if (!strIn) return false;
   return strIn.length >= minLengths[field];
 }

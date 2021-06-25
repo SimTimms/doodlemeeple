@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Slide, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   LoadIcon,
@@ -11,19 +11,12 @@ import {
   CardComponent,
   NoticeBoardSecondary,
   IconButton,
-} from '../../components/sharedComponents';
-import { Query } from 'react-apollo';
-import { Mutation } from 'react-apollo';
-import {
-  UPDATE_JOB,
-  REMOVE_JOB,
-  CREATE_JOB,
-  SUBMIT_PUBLIC_BRIEF,
-} from '../../data';
-import { JOB } from '../../data';
+} from '../../../imports/sharedComponents';
+import { useQuery, useMutation } from '@apollo/client';
+import { UPDATE_JOB, REMOVE_JOB, SUBMIT_PUBLIC_BRIEF } from '../../../data';
+import { JOB } from '../../../data';
 import { toaster } from '../sharedUtils';
 import {
-  SectionQuestions,
   Section1,
   Section2,
   Section3,
@@ -33,18 +26,73 @@ import {
   Section7,
   Section8,
 } from './components/pageOne';
-import PageZero from './components/pageZero';
+import Terms from '../terms';
 import { unlock, checkLength } from './unlock';
 import { initialState } from './initialState';
 
-export default function EditJob({ jobId, history, creativeId }) {
+export default function EditJob({ history, creativeId, ...props }) {
   const classes = useStyles();
-  const [loading, setLoading] = React.useState(jobId === 'new' ? false : true);
   const [job, setJob] = React.useState(initialState);
   const [locked, setLocked] = React.useState(false);
   const [qComplete, setQComplete] = React.useState(false);
   const [savedCreative, setSavedCreative] = React.useState(false);
   const [isPublic, setIsPublic] = React.useState(false);
+  const jobId = props.match.params.jobId;
+
+  const { jobLoading, error, data } = useQuery(JOB, {
+    variables: { jobId },
+    onCompleted({ jobById }) {
+      jobById &&
+        setJob({
+          ...jobById,
+        });
+    },
+  });
+
+  const [removeJob, { removeLoading }] = useMutation(
+    REMOVE_JOB,
+    {
+      variables: {
+        id: jobId,
+      },
+    },
+    {
+      onCompleted() {
+        toaster('Deleted');
+        history.replace(`/app/jobs`);
+      },
+    }
+  );
+
+  const [submitPublicBrief, { publicLoading }] = useMutation(
+    SUBMIT_PUBLIC_BRIEF,
+    {
+      variables: {
+        jobId: job._id,
+      },
+    },
+    {
+      onCompleted() {
+        history.push('/app/submitted');
+      },
+    }
+  );
+
+  const [updateJob, { updateLoading }] = useMutation(
+    UPDATE_JOB,
+    {
+      variables: {
+        ...job,
+        _id: jobId,
+        gallery: job.gallery._id,
+      },
+    },
+    {
+      onCompleted({ jobCreateOne }) {
+        toaster('Saved...');
+      },
+    }
+  );
 
   useEffect(() => {
     setLocked(
@@ -59,295 +107,100 @@ export default function EditJob({ jobId, history, creativeId }) {
   }, [job, setLocked, creativeId]);
 
   return (
-    <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div className={classes.root}>
-        <Column j="center">
-          {loading ? (
-            <LoadIcon />
-          ) : jobId === 'new' ? (
-            <Mutation
-              mutation={CREATE_JOB}
-              variables={{
-                name: job.name,
-                summary: '',
-                creativeSummary: '',
-                location: job.location,
-                showreel: job.showreel,
-                type: job.type,
-                gameId: job.gameId,
-                submitted: job.submitted,
-              }}
-              onCompleted={(data) => {
-                toaster('Autosave');
-                const newjobId = data.jobCreateOne.recordId;
-                history.replace(`/app/edit-job/${newjobId}`);
-              }}
-            >
-              {(mutation) => {
-                return (
-                  <NoticeBoardSecondary
-                    title="Create a Project"
-                    subTitle="Tell your chosen creatives about the job you're offering"
-                    onClickEvent={() => mutation()}
-                    buttonLocked={job.name.length < 10}
-                    lockedMsg={`${10 - job.name.length} characters required `}
-                  >
-                    <PageZero history={history} setJob={setJob} job={job} />
-                  </NoticeBoardSecondary>
-                );
-              }}
-            </Mutation>
-          ) : !qComplete ? (
-            <Mutation
-              mutation={UPDATE_JOB}
-              variables={{
-                ...job,
-                _id: jobId,
-                gallery: job.gallery._id,
-              }}
-              onCompleted={(data) => {
-                toaster('Saved...');
-                setQComplete(true);
-              }}
-            >
-              {(mutation) => {
-                return (
-                  <NoticeBoardSecondary
-                    title=""
-                    subTitle="Terms of Service"
-                    onClickEvent={() => mutation()}
-                    buttonLocked={!job.termsAccepted}
-                    lockedMsg="You must read and accept the terms of service"
-                  >
-                    {
-                      <div style={{ padding: '10px 10px 0 10px' }}>
-                        {
-                          <Column>
-                            <SectionQuestions setJob={setJob} job={job} />
-                          </Column>
-                        }
-                      </div>
-                    }
-                  </NoticeBoardSecondary>
-                );
-              }}
-            </Mutation>
-          ) : isPublic ? (
-            <Mutation
-              mutation={SUBMIT_PUBLIC_BRIEF}
-              variables={{
-                jobId: job._id,
-              }}
-              onCompleted={() => {
-                history.push('/app/submitted');
-              }}
-            >
-              {(mutation) => {
-                return (
-                  <div
-                    style={{
-                      width: '100%',
-                      maxWidth: 500,
-                      background: '#fff',
-                      padding: 20,
-                    }}
-                  >
-                    <Column j="center" a="center">
-                      <Typography variant="h5">Submit this job?</Typography>
-                      <Typography
-                        variant="body1"
-                        style={{
-                          textAlign: 'center',
-                          paddingTop: 10,
-                          paddingBottom: 10,
-                        }}
-                      >
-                        You will be unable to modify this project after this
-                        stage.
-                      </Typography>
+    <div className={classes.root}>
+      <Column j="center">
+        {job._id === 'new' ? (
+          <div>Loading</div>
+        ) : job.termsAccepted ? (
+          <Terms setJob={setJob} job={job} />
+        ) : isPublic ? (
+          <div
+            style={{
+              width: '100%',
+              maxWidth: 500,
+              background: '#fff',
+              padding: 20,
+            }}
+          >
+            <Column j="center" a="center">
+              <Typography variant="h5">Submit this job?</Typography>
+              <Typography
+                variant="body1"
+                style={{
+                  textAlign: 'center',
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                }}
+              >
+                You will be unable to modify this project after this stage.
+              </Typography>
 
-                      <IconButton
-                        onClickEvent={() => {
-                          mutation();
-                        }}
-                        icon="chevron_right"
-                        title="Submit"
-                        iconPos="right"
-                        styleOverride={null}
-                        type="button"
-                        color="warning"
-                      />
-                    </Column>
-                  </div>
-                );
-              }}
-            </Mutation>
-          ) : (
-            <Mutation
-              mutation={UPDATE_JOB}
-              variables={{
-                ...job,
-                _id: jobId,
-                gallery: job.gallery._id,
-              }}
-              onCompleted={(data) => {
-                toaster('Autosave');
-              }}
-            >
-              {(mutation) => {
-                return (
-                  <NoticeBoardSecondary
-                    title=""
-                    subTitle="Add details to unlock more options"
-                    onClickEvent={() => {
-                      history.push(
-                        `/app/pick-artist/${jobId}/${savedCreative}`
-                      );
-                    }}
-                    buttonLocked={locked}
-                    lockedMsg={unlock(job)}
-                  >
-                    {job._id !== 'new' && (
-                      <div style={{ padding: '10px 10px 0 10px' }}>
-                        {job.submitted && job.submitted !== 'draft' ? (
-                          <UnlockInfo str="This project has been submitted and can't be modified" />
-                        ) : (
-                          <Column w={600}>
-                            <Section1
-                              setJob={setJob}
-                              job={job}
-                              mutation={mutation}
-                            />
-                            <Divider />
-                            <Section2
-                              setJob={setJob}
-                              job={job}
-                              mutation={mutation}
-                            />
-                            <Divider />
-                            <Section4
-                              setJob={setJob}
-                              job={job}
-                              mutation={mutation}
-                            />
-                            <Divider />
-                            <Section5
-                              setJob={setJob}
-                              job={job}
-                              mutation={mutation}
-                            />
-                            <Divider />
-                            <Section8
-                              setJob={setJob}
-                              job={job}
-                              mutation={mutation}
-                            />
-                            <Divider />
-                            <Section3
-                              setJob={setJob}
-                              job={job}
-                              mutation={mutation}
-                            />
-                            <Divider />
-                            <Section6
-                              setJob={setJob}
-                              job={job}
-                              mutation={mutation}
-                            />
-                            <Divider />
-                            <Section7
-                              setJob={setJob}
-                              job={job}
-                              mutation={mutation}
-                            />
-                            <Divider />
-                            {job.submitted && job.submitted === 'draft' && (
-                              <CardComponent>
-                                <Mutation
-                                  mutation={REMOVE_JOB}
-                                  variables={{
-                                    id: jobId,
-                                  }}
-                                  onCompleted={(data) => {
-                                    toaster('Deleted');
-                                    history.replace(`/app/jobs`);
-                                  }}
-                                >
-                                  {(mutation) => {
-                                    return (
-                                      <FieldTitleDashboard
-                                        name="Delete Project"
-                                        inline={false}
-                                        a="l"
-                                        menu={
-                                          jobId !== 'new' ? (
-                                            <DeleteButton
-                                              mutation={mutation}
-                                              str=""
-                                            />
-                                          ) : null
-                                        }
-                                      />
-                                    );
-                                  }}
-                                </Mutation>
-                              </CardComponent>
-                            )}
-                          </Column>
-                        )}
-                      </div>
+              <IconButton
+                onClickEvent={() => {
+                  submitPublicBrief();
+                }}
+                icon="chevron_right"
+                title="Submit"
+                iconPos="right"
+                styleOverride={null}
+                type="button"
+                color="warning"
+              />
+            </Column>
+          </div>
+        ) : (
+          <NoticeBoardSecondary
+            title=""
+            subTitle="Add details to unlock more options"
+            onClickEvent={() => {
+              history.push(`/app/pick-artist/${jobId}/${savedCreative}`);
+            }}
+            buttonLocked={locked}
+            lockedMsg={unlock(job)}
+          >
+            {job._id !== 'new' && (
+              <div style={{ padding: '10px 10px 0 10px' }}>
+                {job.submitted && job.submitted !== 'draft' ? (
+                  <UnlockInfo str="This project has been submitted and can't be modified" />
+                ) : (
+                  <Column w={600}>
+                    <Section1 setJob={setJob} job={job} mutation={updateJob} />
+                    <Divider />
+                    <Section2 setJob={setJob} job={job} mutation={updateJob} />
+                    <Divider />
+                    <Section4 setJob={setJob} job={job} mutation={updateJob} />
+                    <Divider />
+                    <Section5 setJob={setJob} job={job} mutation={updateJob} />
+                    <Divider />
+                    <Section8 setJob={setJob} job={job} mutation={updateJob} />
+                    <Divider />
+                    <Section3 setJob={setJob} job={job} mutation={updateJob} />
+                    <Divider />
+                    <Section6 setJob={setJob} job={job} mutation={updateJob} />
+                    <Divider />
+                    <Section7 setJob={setJob} job={job} mutation={updateJob} />
+                    <Divider />
+                    {job.submitted && job.submitted === 'draft' && (
+                      <CardComponent>
+                        <FieldTitleDashboard
+                          name="Delete Project"
+                          inline={false}
+                          a="l"
+                          menu={
+                            jobId !== 'new' ? (
+                              <DeleteButton mutation={removeJob} str="" />
+                            ) : null
+                          }
+                        />
+                      </CardComponent>
                     )}
-                  </NoticeBoardSecondary>
-                );
-              }}
-            </Mutation>
-          )}
-
-          {jobId !== 'new' && (
-            <Query
-              query={JOB}
-              variables={{ jobId: jobId }}
-              fetchPolicy="network-only"
-              onCompleted={(data) => {
-                setLoading(false);
-                data.jobById &&
-                  setJob({
-                    ...data.jobById,
-                    name: data.jobById.name ? data.jobById.name : '',
-                    genre: data.jobById.genre ? data.jobById.genre : '',
-                    summary: data.jobById.summary ? data.jobById.summary : '',
-                    scope: data.jobById.scope ? data.jobById.scope : '',
-                    budget: data.jobById.budget ? data.jobById.budget : '',
-                    extra: data.jobById.extra ? data.jobById.extra : '',
-                    gallery: data.jobById.gallery ? data.jobById.gallery : '',
-                    termsAccepted: data.jobById.termsAccepted
-                      ? data.jobById.termsAccepted
-                      : false,
-                    funded: data.jobById.funded ? data.jobById.funded : false,
-                    speculative: data.jobById.speculative
-                      ? data.jobById.speculative
-                      : false,
-                    inLieu: data.jobById.inLieu ? data.jobById.inLieu : false,
-                    timeframe: data.jobById.timeframe
-                      ? data.jobById.timeframe
-                      : '',
-                    mechanics: data.jobById.mechanics
-                      ? data.jobById.mechanics
-                      : '',
-                    creativeSummary: data.jobById.creativeSummary
-                      ? data.jobById.creativeSummary
-                      : '',
-                    gameId: data.jobById.game ? data.jobById.game._id : null,
-                  });
-              }}
-            >
-              {({ data }) => {
-                return null;
-              }}
-            </Query>
-          )}
-        </Column>
-      </div>
-    </Slide>
+                  </Column>
+                )}
+              </div>
+            )}
+          </NoticeBoardSecondary>
+        )}
+      </Column>
+    </div>
   );
 }

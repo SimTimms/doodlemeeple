@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+//import { CREATE_CONTRACT } from '../../../data/mutations';
 
 export const UPDATE_CONTRACT = gql`
   mutation UpdateContract(

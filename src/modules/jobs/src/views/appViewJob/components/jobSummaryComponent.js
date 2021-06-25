@@ -7,7 +7,7 @@ import {
   Divider,
   GalleryCard,
   DividerMini,
-} from '../../../components/sharedComponents';
+} from '../../../../imports/sharedComponents';
 import ReactPlayer from 'react-player';
 import { nameShortener } from '../../sharedUtils';
 

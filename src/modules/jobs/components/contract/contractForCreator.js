@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { Divider, Row } from '../';
+import { Divider, Row } from '../../../../components';
 import { useStyles } from './styles';
 import Notices from './notices';
 import moment from 'moment';

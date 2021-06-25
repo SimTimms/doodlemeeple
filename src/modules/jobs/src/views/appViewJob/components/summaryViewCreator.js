@@ -6,7 +6,7 @@ import {
   BorderBox,
   FullContractComponent,
 } from '../../../../imports/sharedComponents';
-import { Signature } from '../../../../components';
+import { Signature } from '../../../../components/contract';
 //import { ChatViewByJob } from '../../../../chat';
 import CreatorMenu from './creatorMenu';
 import CreatorJobSummary from './creatorJobSummary';

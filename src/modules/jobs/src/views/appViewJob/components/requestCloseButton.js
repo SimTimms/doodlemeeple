@@ -6,10 +6,10 @@ import {
   LoadIcon,
   Meta,
   Divider,
-} from '../../../components/sharedComponents';
+} from '../../../../imports/sharedComponents';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../sharedUtils';
-import { CLOSE_EARLY } from '../../../data';
+import { CLOSE_EARLY } from '../../../../data';
 
 export default function RequestCloseButton({ job, setTabNbr }) {
   const classes = useStyles();

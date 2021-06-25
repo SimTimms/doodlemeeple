@@ -8,7 +8,7 @@ import {
   IconButton,
 } from '../../../../../imports/sharedComponents';
 import { Mutation } from 'react-apollo';
-import { DECLINE_INVITE } from '../../../data';
+import { DECLINE_INVITE } from '../../../../../data';
 
 export default function DeclineInviteView({ inviteId, history }) {
   const classes = useStyles();

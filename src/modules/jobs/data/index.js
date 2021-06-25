@@ -13,11 +13,14 @@ import {
   DECLINE_CONTRACT,
   SIGN_CONTRACT,
   SUBMIT_CONTRACT,
+  ACCEPT_TERMS,
 } from './mutations';
+import { INITIAL_STATE } from './initialState';
 
 import { JOBS, JOB, JOB_CONTACT_DETAILS, JOB_CREATIVE } from './queries';
 
 export {
+  ACCEPT_TERMS,
   JOB_CONTACT_DETAILS,
   JOB,
   JOB_CREATIVE,
@@ -36,4 +39,5 @@ export {
   DECLINE_CONTRACT,
   SIGN_CONTRACT,
   SUBMIT_CONTRACT,
+  INITIAL_STATE,
 };

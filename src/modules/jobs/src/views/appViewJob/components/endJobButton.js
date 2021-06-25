@@ -6,10 +6,10 @@ import {
   LoadIcon,
   Meta,
   Divider,
-} from '../../../components/sharedComponents';
+} from '../../../../imports/sharedComponents';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../sharedUtils';
-import { COMPLETE_JOB } from '../../../data';
+import { COMPLETE_JOB } from '../../../../data';
 
 export default function EndJobButton({ job, setTabNbr }) {
   const classes = useStyles();

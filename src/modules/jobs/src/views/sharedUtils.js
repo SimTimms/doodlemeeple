@@ -1,4 +1,4 @@
-import autosave from '../../../utils/autosave';
+import autosave from '../../../../utils/autosave';
 import {
   ARTIST_TYPES,
   MARKETING_TYPES,
@@ -7,7 +7,7 @@ import {
   TYPE_HELPER,
   nameShortener,
   toaster,
-} from '../../../utils';
+} from '../../../../utils';
 
 export {
   autosave,

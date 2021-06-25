@@ -1,9 +1,7 @@
 import React from 'react';
 import { useStyles } from '../styles';
-import {
-  IconButton,
-  DeclineInvite,
-} from '../../../../imports/sharedComponents';
+import { IconButton } from '../../../../imports/sharedComponents';
+import { DeclineInvite } from '../../../../components';
 
 export default function CreativeActions({
   inviteId,

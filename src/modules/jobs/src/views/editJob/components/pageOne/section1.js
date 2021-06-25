@@ -5,7 +5,7 @@ import {
   CardComponent,
   DividerMini,
 } from '../../../../../imports/sharedComponents';
-import { autosave } from '../../../imports/sharedUtils';
+import { autosave } from '../../../../../imports/sharedUtils';
 
 export default function Section1({ setJob, job, mutation }) {
   const locked = false;

@@ -4,7 +4,7 @@ import {
   Column,
   CreateQuoteButton,
   FullContractComponent,
-} from '../../../components/sharedComponents';
+} from '../../../../../../../imports/sharedComponents';
 import { CreativeDashboard } from './jobDashboards/';
 //import { ChatViewByJob } from '../../../../../modules/chat';
 import CreativeMenu from './creativeMenu';

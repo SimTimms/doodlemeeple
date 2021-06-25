@@ -132,6 +132,12 @@ export const CREATE_JOB = gql`
   }
 `;
 
+export const ACCEPT_TERMS = gql`
+  mutation AcceptTerms($termsAccepted: Boolean!, $_id: MongoID!) {
+    acceptTerms(termsAccepted: $termsAccepted, _id: $_id)
+  }
+`;
+
 export const REMOVE_JOB = gql`
   mutation RemoveJob($id: MongoID!) {
     jobRemoveById(_id: $id) {

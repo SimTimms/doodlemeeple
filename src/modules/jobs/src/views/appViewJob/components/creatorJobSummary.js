@@ -1,7 +1,7 @@
 import React from 'react';
 import { Slide } from '@material-ui/core';
 import { useStyles } from '../styles';
-import { Column, Paper } from '../../../components/sharedComponents';
+import { Column, Paper } from '../../../../imports/sharedComponents';
 import CloseJobButton from './closeJobButton';
 import EndJobButton from './endJobButton';
 import RequestCloseButton from './requestCloseButton';
