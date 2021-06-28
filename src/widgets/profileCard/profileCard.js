@@ -67,12 +67,12 @@ export default function ProfileCard({ creative }) {
       <Column a="center" bg="#333" p="3px 0 3px 0" h={60}>
         <Column w={160}>
           <Row j="space-around">
-            {linkedin && (
+            {linkedIn && (
               <a
                 href={`${
-                  linkedin.indexOf('linkedin.com/') === -1
-                    ? `https://www.linkedin.com/${linkedin}`
-                    : linkedin
+                  linkedIn.indexOf('linkedin.com/') === -1
+                    ? `https://www.linkedin.com/${linkedIn}`
+                    : linkedIn
                 }`}
                 target="_blank"
                 rel="noopener noreferrer"
