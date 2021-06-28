@@ -118,7 +118,11 @@ export default function ProfileCard({ creative }) {
         </Column>
         {creative.website && (
           <a
-            href={`${creative.website}`}
+            href={`${
+              creative.website.indexOf('http') === -1
+                ? `https://${creative.website}`
+                : creative.website
+            }`}
             target="_blank"
             rel="noopener noreferrer"
             className={classes.website}
