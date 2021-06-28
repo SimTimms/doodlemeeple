@@ -3,10 +3,15 @@ import { Route, Switch } from 'react-router-dom';
 import { AboutLayout } from '../layouts';
 import PreviewLayout from '../layouts/preview';
 import { PublicLayout } from '../layouts/public';
+import FeaturedCreativeWidget from '../widgets';
 
 export default function PublicRoutes({ theme, props: { ...props } }) {
   return (
     <Switch>
+      <Route
+        path="/featured-creative-widget"
+        render={(props) => <FeaturedCreativeWidget />}
+      />
       <Route
         path="/public-preview/:pathParam?"
         render={(props) => (
@@ -24,6 +29,7 @@ export default function PublicRoutes({ theme, props: { ...props } }) {
         path="/:page"
         render={(props) => <PublicLayout {...props} theme={theme} />}
       />
+
       <Route
         path="/"
         render={(props) => <PublicLayout {...props} theme={theme} />}
