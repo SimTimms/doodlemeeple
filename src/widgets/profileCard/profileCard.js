@@ -16,6 +16,11 @@ export default function ProfileCard({ creative }) {
     !creative.instagram &&
     !creative.website &&
     !creative.publicEmail;
+
+  const linkedIn = !creative.linkedIn ? null : creative.linkedIn;
+  const twitter = !creative.twitter ? null : creative.twitter;
+  const facebook = !creative.facebook ? null : creative.facebook;
+  const instagram = !creative.instagram ? null : creative.instagram;
   return (
     <div
       className={clsx({
@@ -62,12 +67,12 @@ export default function ProfileCard({ creative }) {
       <Column a="center" bg="#333" p="3px 0 3px 0" h={60}>
         <Column w={160}>
           <Row j="space-around">
-            {creative.linkedIn && (
+            {linkedin && (
               <a
                 href={`${
-                  creative.linkedin.indexOf('linkedin.com/') === -1
-                    ? `https://www.linkedin.com/${creative.linkedin}`
-                    : creative.linkedin
+                  linkedin.indexOf('linkedin.com/') === -1
+                    ? `https://www.linkedin.com/${linkedin}`
+                    : linkedin
                 }`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -75,12 +80,12 @@ export default function ProfileCard({ creative }) {
                 style={{ backgroundImage: `url(${socials.socialLinkedIn})` }}
               ></a>
             )}
-            {creative.facebook && (
+            {facebook && (
               <a
                 href={`${
-                  creative.facebook.indexOf('facebook.com/') === -1
-                    ? `https://www.facebook.com/${creative.facebook}`
-                    : creative.facebook
+                  facebook.indexOf('facebook.com/') === -1
+                    ? `https://www.facebook.com/${facebook}`
+                    : facebook
                 }`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -88,12 +93,12 @@ export default function ProfileCard({ creative }) {
                 style={{ backgroundImage: `url(${socials.socialFacebook})` }}
               ></a>
             )}
-            {creative.twitter && (
+            {twitter && (
               <a
                 href={`${
-                  creative.twitter.indexOf('twitter.com/') === -1
-                    ? `https://www.twitter.com/${creative.twitter}`
-                    : creative.twitter
+                  twitter.indexOf('twitter.com/') === -1
+                    ? `https://www.twitter.com/${twitter}`
+                    : twitter
                 }`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -101,12 +106,12 @@ export default function ProfileCard({ creative }) {
                 style={{ backgroundImage: `url(${socials.socialTwitter})` }}
               ></a>
             )}
-            {creative.instagram && (
+            {instagram && (
               <a
                 href={`${
-                  creative.instagram.indexOf('instagram.com/') === -1
-                    ? `https://www.instagram.com/${creative.instagram}`
-                    : creative.instagram
+                  instagram.indexOf('instagram.com/') === -1
+                    ? `https://www.instagram.com/${instagram}`
+                    : instagram
                 }`}
                 target="_blank"
                 rel="noopener noreferrer"
