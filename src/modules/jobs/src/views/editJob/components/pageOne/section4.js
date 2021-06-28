@@ -20,6 +20,7 @@ export default function Section4({ setJob, job, mutation }) {
           title="Creative Summary"
           value={job.creativeSummary}
           maxLength={500}
+          minLength={20}
           placeholder="A digital artist with a focus on high fantasy...."
           onChangeEvent={(e) => {
             autosave(mutation);

@@ -11,7 +11,7 @@ import { Row } from '../';
 import clsx from 'clsx';
 
 export default function CardComponent({ children, ...props }) {
-  const { styleOverride, onClickEvent, locked, lockedMsg } = props;
+  const { styleOverride, onClickEvent, locked, lockedMsg, classAdd } = props;
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
   return (
@@ -21,6 +21,7 @@ export default function CardComponent({ children, ...props }) {
         [classes.clickable]: onClickEvent,
         [classes.cardLocked]: locked,
         [classes.cardMobile]: mobile,
+        [classAdd]: classAdd,
       })}
       style={styleOverride && styleOverride}
       onClick={() => (onClickEvent ? onClickEvent() : () => {})}
@@ -33,7 +34,6 @@ export default function CardComponent({ children, ...props }) {
         <Row>
           <Icon className={classes.locked}>lock</Icon>
           <Typography
-            align="center"
             className={clsx({
               [classes.cardTitle]: true,
               [classes.cardTitleLocked]: locked,

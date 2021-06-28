@@ -49,7 +49,7 @@ export default function MenuButtonShortcut({ text, ...props }) {
         {isLeft && imageIcon ? (
           <MenuButtonImage imageIcon={imageIcon} text={text} />
         ) : (
-          isLeft && <MenuButtonIcon text={text} />
+          isLeft && text.icon && <MenuButtonIcon text={text} />
         )}
         <Row
           j={

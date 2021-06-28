@@ -1,11 +1,13 @@
+import { Typography } from '@material-ui/core';
 import React from 'react';
 import {
   FieldBox,
   Column,
   CardComponent,
+  UnlockInfo,
 } from '../../../../../imports/sharedComponents';
 import { autosave } from '../../../../../imports/sharedUtils';
-import { checkLength } from '../../unlock';
+import { checkLength, unlock } from '../../unlock';
 
 export default function Section2({ setJob, job, mutation }) {
   const locked =
@@ -18,6 +20,7 @@ export default function Section2({ setJob, job, mutation }) {
           title="Project Summary"
           value={job.summary}
           maxLength={1024}
+          minLength={30}
           placeholder="24 unique images of monsters and heroes to be delivered by end of July....."
           onChangeEvent={(e) => {
             autosave(mutation);

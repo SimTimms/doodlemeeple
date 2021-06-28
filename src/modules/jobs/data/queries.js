@@ -1,5 +1,45 @@
 import gql from 'graphql-tag';
 
+export const PROFILE_PREVIEW = gql`
+  query ProfilePreview($userId: MongoID!) {
+    userById(_id: $userId) {
+      _id
+      name
+      summary
+      profileBG
+      profileImg
+      viewCount
+      paymentMethod
+      responsePercent
+      facebook
+      skype
+      publicEmail
+      website
+      twitter
+      linkedIn
+      instagram
+      likedMe {
+        _id
+        receiver {
+          _id
+        }
+        user {
+          _id
+        }
+      }
+      favourites {
+        _id
+        receiver {
+          _id
+        }
+        user {
+          _id
+        }
+      }
+    }
+  }
+`;
+
 export const JOB = gql`
   query GetJob($jobId: MongoID!) {
     jobById(_id: $jobId) {

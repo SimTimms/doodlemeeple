@@ -35,6 +35,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: 12,
   },
   inputLabel: { fontSize: 10 },
+  minLength: { color: theme.palette.error.main },
   small: {
     display: 'flex',
     width: '100%',

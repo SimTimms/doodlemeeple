@@ -1,13 +1,8 @@
 import React from 'react';
 import { useStyles } from './styles';
-import { Query } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import { CREATIVES } from '../../../../../data/queries';
-import {
-  ProfileCard,
-  IconButton,
-  LoadIcon,
-  Divider,
-} from '../../../../../components';
+import { ProfileCard, IconButton, Divider } from '../../../../../components';
 
 export default function Creatives({
   favourites,
@@ -21,6 +16,14 @@ export default function Creatives({
   const [creativeArray, setCreativeArray] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [noMore, setNoMore] = React.useState(false);
+
+  const { loading, error, data } = useQuery(CREATIVES, {
+    variables: { type: job.keywords, page: page, job: job._id },
+    onCompleted({ getCreatives }) {
+      creativeArray.length > 0 && getCreatives.length === 0 && setNoMore(true);
+      setCreativeArray([...creativeArray, ...getCreatives]);
+    },
+  });
   return (
     <div
       style={{
@@ -31,26 +34,7 @@ export default function Creatives({
         justifyContent: 'center',
       }}
     >
-      <Query
-        query={CREATIVES}
-        variables={{ type: job.keywords, page: page, job: job._id }}
-        fetchPolicy="network-only"
-        onCompleted={(data) => {
-          console.log(data);
-          creativeArray.length > 0 &&
-            data.getCreatives.length === 0 &&
-            setNoMore(true);
-          setCreativeArray([...creativeArray, ...data.getCreatives]);
-        }}
-      >
-        {({ data, loading }) => {
-          return loading ? (
-            <LoadIcon />
-          ) : data ? (
-            <div className={classes.creativeWrapper}></div>
-          ) : null;
-        }}
-      </Query>
+      <div className={classes.creativeWrapper}></div>
 
       {creativeArray.map((creative, index) => {
         return (

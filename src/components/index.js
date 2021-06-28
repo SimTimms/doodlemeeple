@@ -78,7 +78,6 @@ import UnlockInfoReverse from './unlockInfoReverse';
 import NotificationComponent from './notificationComponent';
 import GalleryCard from './galleryCard';
 import FeaturedCreative from './featuredCreative';
-import CreativeRosterProfiles from './creativeRosterProfiles';
 import UserDeleted from './userDeleted';
 import PublicFooterMenu from './publicFooterMenu';
 
@@ -101,7 +100,6 @@ import { Column, Row, TopMenuWrapper, RowCheckList } from './blocks';
 export {
   PublicFooterMenu,
   UserDeleted,
-  CreativeRosterProfiles,
   FeaturedCreative,
   CreatorComponentDash,
   TopMenuWrapper,

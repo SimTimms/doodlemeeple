@@ -17,6 +17,7 @@ export default function Section1({ setJob, job, mutation }) {
           title="Project Title"
           value={job.name}
           maxLength={46}
+          minLength={10}
           placeholder="24 Fantasy Images for Card Game"
           onChangeEvent={(e) => {
             autosave(mutation);
@@ -36,6 +37,7 @@ export default function Section1({ setJob, job, mutation }) {
           title="Genre/Style of Project"
           value={job.genre}
           maxLength={126}
+          minLength={3}
           placeholder="Fantasy, similar to Studio Ghibli"
           onChangeEvent={(e) => {
             autosave(mutation);

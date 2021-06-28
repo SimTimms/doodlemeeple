@@ -1,3 +1,3 @@
-import { HistoryContext } from '../../../context';
+import { HistoryContext, FavouritesContext } from '../../../context';
 
-export { HistoryContext };
+export { HistoryContext, FavouritesContext };

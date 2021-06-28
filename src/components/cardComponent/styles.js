@@ -20,18 +20,17 @@ export const useStyles = makeStyles((theme) => ({
   },
   cardLocked: {
     padding: 0,
-    background: 'rgba(255,255,255,0.2)',
-    border: `1px solid #fff`,
+    background: 'rgba(0,0,0,0.1)',
+    border: `1px solid rgba(0,0,0,0.1)`,
   },
   cardTitle: { width: '100%' },
-  cardTitleLocked: { padding: 10 },
+  cardTitleLocked: { padding: 10, color: 'rgba(0,0,0,0.4)' },
   clickable: {
     cursor: 'pointer',
     '&:hover': { boxShadow: '5px 5px 10px rgba(0,0,0,0.1)' },
   },
   locked: {
-    color: '#fff',
-    borderRadius: '3px 0 0 3px',
+    color: 'rgba(0,0,0,0.2)',
     padding: 4,
   },
   cardMobile: { width: '100%' },

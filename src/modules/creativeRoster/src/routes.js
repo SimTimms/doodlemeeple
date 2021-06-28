@@ -1,20 +1,21 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { CreativeRosterHome } from './views';
+import { HistoryContext } from '../imports/sharedContext';
 
-export default function CreativeRosterRoutes({ history, pathParams }) {
+export default function CreativeRosterRoutes(props) {
   return (
-    <Switch>
-      <Route
-        path="/creative-roster"
-        exact
-        render={(props) => (
-          <CreativeRosterHome
-            history={history}
-            groupIn={pathParams.pathParam1 && pathParams.pathParam1}
+    <HistoryContext.Consumer>
+      {(history) => (
+        <Switch>
+          <Route
+            path="/creative-roster/:jobId/:savedArtist?"
+            render={(props) => (
+              <CreativeRosterHome history={history} {...props} />
+            )}
           />
-        )}
-      />
-    </Switch>
+        </Switch>
+      )}
+    </HistoryContext.Consumer>
   );
 }

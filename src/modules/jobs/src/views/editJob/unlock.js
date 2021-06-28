@@ -1,5 +1,13 @@
 const minLengths = { name: 10, genre: 3, summary: 30, creativeSummary: 20 };
 export function unlock(job) {
+  const titleStr = `Provide a Title with ${
+    minLengths.name - job.name.length
+  } more characters to continue`;
+
+  if (!job.genre) job.genre = '';
+  if (!job.summary) job.summary = '';
+  if (!job.creativeSummary) job.creativeSummary = '';
+
   return job.name.length < minLengths.name
     ? `Provide a Title with ${
         minLengths.name - job.name.length

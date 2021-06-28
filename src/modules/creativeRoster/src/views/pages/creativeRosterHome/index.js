@@ -6,26 +6,24 @@ import {
   LoadIcon,
   MenuButtonShortcut,
   Row,
-  CreativeRosterProfiles,
-} from '../../../../components';
-import { TYPE_HELPER } from '../../../../utils';
-import { FAVOURITES } from '../../../../data/queries';
+} from '../../../../imports/sharedComponents';
+import { CreativeRosterProfiles } from '../../components';
+import { TYPE_HELPER } from '../../../../imports/sharedUtils';
+import { FAVOURITES } from '../../../data';
 
 export default function CreativeRosterHome({ history, groupIn }) {
   const classes = useStyles();
   const [filter, setFilter] = React.useState([]);
   const [group, setGroup] = React.useState(null);
   const [favourites, setFavourites] = React.useState([]);
-  const [query, { loading }] = useQuery(FAVOURITES, {
+
+  const { loading, error, data } = useQuery(FAVOURITES, {
     onCompleted({ profile }) {
       setFavourites(
         profile.favourites.filter((fav) => fav.receiver && fav.receiver._id)
       );
     },
   });
-  useEffect(() => {
-    query();
-  }, [query]);
 
   useEffect(() => {
     setFilter(groupIn ? groupIn : 'artist');

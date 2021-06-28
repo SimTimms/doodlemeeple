@@ -14,12 +14,23 @@ import {
   SIGN_CONTRACT,
   SUBMIT_CONTRACT,
   ACCEPT_TERMS,
+  REMOVE_INVITE,
+  SUBMIT_BRIEF,
 } from './mutations';
 import { INITIAL_STATE } from './initialState';
 
-import { JOBS, JOB, JOB_CONTACT_DETAILS, JOB_CREATIVE } from './queries';
+import {
+  JOBS,
+  JOB,
+  JOB_CONTACT_DETAILS,
+  JOB_CREATIVE,
+  PROFILE_PREVIEW,
+} from './queries';
 
 export {
+  PROFILE_PREVIEW,
+  SUBMIT_BRIEF,
+  REMOVE_INVITE,
   ACCEPT_TERMS,
   JOB_CONTACT_DETAILS,
   JOB,

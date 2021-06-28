@@ -42,7 +42,7 @@ export default function Section5({ setJob, job, mutation }) {
                 text={{
                   name: 'Creative',
                   color: '#222',
-                  icon: 'chevron_right',
+                  icon: null,
                   count: 0,
                 }}
                 onClickEvent={() => {
@@ -54,7 +54,7 @@ export default function Section5({ setJob, job, mutation }) {
                 text={{
                   name: 'Marketing',
                   color: '#222',
-                  icon: 'chevron_right',
+                  icon: null,
                   count: 0,
                 }}
                 onClickEvent={() => {
@@ -66,7 +66,7 @@ export default function Section5({ setJob, job, mutation }) {
                 text={{
                   name: 'Development',
                   color: '#222',
-                  icon: 'chevron_right',
+                  icon: null,
                   count: 0,
                 }}
                 onClickEvent={() => {
@@ -78,13 +78,13 @@ export default function Section5({ setJob, job, mutation }) {
                 text={{
                   name: 'Industry',
                   color: '#222',
-                  icon: 'chevron_right',
+                  icon: null,
                   count: 0,
                 }}
                 onClickEvent={() => {
                   setPage(4);
                 }}
-                active={page === 3}
+                active={page === 4}
               />
             </Row>
             <Divider />

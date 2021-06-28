@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { useStyles } from './styles';
 import { useQuery } from '@apollo/client';
-import { CREATIVES } from '../../data/queries';
+import { CREATIVES } from '../../../data';
 import {
   ProfileCard,
-  ProfileCardBlank,
   IconButton,
   Divider,
-} from '../../components';
-//import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
+} from '../../../../imports/sharedComponents';
 
 export default function CreativeRosterProfiles({
   favourites,
@@ -21,29 +19,23 @@ export default function CreativeRosterProfiles({
   const [noMore, setNoMore] = React.useState(false);
   const [existingFilter, setExistingFilter] = React.useState(false);
   const [fullProfile, setFullProfile] = React.useState(false);
-  const [query, { loading }] = useQuery(
-    CREATIVES,
-    {
-      variables: { type: filter, page: page, job: null },
-    },
-    {
-      onCompleted({ getCreatives }) {
-        getCreatives.length === 0 && setNoMore(true);
-        filter === existingFilter &&
-          setCreativeArray([...creativeArray, ...getCreatives]);
 
-        if (filter !== existingFilter) {
-          setCreativeArray([...getCreatives]);
-          setExistingFilter(filter);
-          setNoMore(false);
-          setPage(0);
-        }
-      },
-    }
-  );
-  useEffect(() => {
-    query();
-  }, [query]);
+  const { loading, error, data } = useQuery(CREATIVES, {
+    variables: { type: filter, page: page, job: null },
+    onCompleted({ getCreatives }) {
+      getCreatives.length === 0 && setNoMore(true);
+      filter === existingFilter &&
+        setCreativeArray([...creativeArray, ...getCreatives]);
+
+      if (filter !== existingFilter) {
+        setCreativeArray([...getCreatives]);
+        setExistingFilter(filter);
+        setNoMore(false);
+        setPage(0);
+      }
+    },
+  });
+
   function fullProfileToggle(id) {
     id === setFullProfile ? setFullProfile(null) : setFullProfile(id);
   }

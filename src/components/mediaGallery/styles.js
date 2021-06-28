@@ -8,6 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
     padding: '5px 3px 5px 3px',
+    width: '100%',
   },
   image: {
     background: 'none',

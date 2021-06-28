@@ -1,10 +1,11 @@
 import React from 'react';
 import { useStyles } from './styles';
-import { Query } from 'react-apollo';
-import { JOB } from '../../../../data';
+import { useQuery } from '@apollo/client';
+import { JOB } from '../../data';
 import { ArtistLineup, Creatives, Creative } from './components';
+import { FavouritesContext } from '../../imports/sharedContext';
 
-export function PickArtist({ jobId, history, favourites, creativeId }) {
+export default function PickArtist({ history, ...props }) {
   const classes = useStyles();
   const [job, setJob] = React.useState({
     name: '',
@@ -22,6 +23,24 @@ export function PickArtist({ jobId, history, favourites, creativeId }) {
     submitted: false,
   });
   const [inviteList, setInviteList] = React.useState([]);
+  const jobId = props.match.params.jobId;
+  const creativeId = props.match.params.creativeId;
+  const { loading, error, data } = useQuery(JOB, {
+    variables: { jobId: jobId },
+    onCompleted({ jobById }) {
+      jobById && setJob({ ...jobById });
+      setInviteList(
+        jobById.invites.map((invite) => {
+          return {
+            name: invite.receiver.name,
+            img: invite.receiver.profileImg,
+            _id: invite.receiver._id,
+            inviteId: invite._id,
+          };
+        })
+      );
+    },
+  });
 
   function updateInviteList(newItem, inviteId) {
     setInviteList([
@@ -49,49 +68,35 @@ export function PickArtist({ jobId, history, favourites, creativeId }) {
         job={job}
       />
 
-      {creativeId && (
-        <Creative
-          history={history}
-          favourites={favourites}
-          job={job}
-          inviteList={inviteList}
-          updateInviteList={updateInviteList}
-          removeInviteList={removeInviteList}
-          creativeId={creativeId}
-        />
+      {creativeId !== 'false' && (
+        <FavouritesContext.Consumer>
+          {(favourites) => (
+            <Creative
+              history={history}
+              favourites={favourites}
+              job={job}
+              inviteList={inviteList}
+              updateInviteList={updateInviteList}
+              removeInviteList={removeInviteList}
+              creativeId={creativeId}
+            />
+          )}
+        </FavouritesContext.Consumer>
       )}
       <div style={{ width: '100%' }}>
-        <Creatives
-          history={history}
-          favourites={favourites}
-          job={job}
-          inviteList={inviteList}
-          updateInviteList={updateInviteList}
-          removeInviteList={removeInviteList}
-        />
+        <FavouritesContext.Consumer>
+          {(favourites) => (
+            <Creatives
+              history={history}
+              favourites={favourites}
+              job={job}
+              inviteList={inviteList}
+              updateInviteList={updateInviteList}
+              removeInviteList={removeInviteList}
+            />
+          )}
+        </FavouritesContext.Consumer>
       </div>
-      <Query
-        query={JOB}
-        variables={{ jobId: jobId }}
-        fetchPolicy="network-only"
-        onCompleted={(data) => {
-          data.jobById && setJob({ ...data.jobById });
-          setInviteList(
-            data.jobById.invites.map((invite) => {
-              return {
-                name: invite.receiver.name,
-                img: invite.receiver.profileImg,
-                _id: invite.receiver._id,
-                inviteId: invite._id,
-              };
-            })
-          );
-        }}
-      >
-        {({ data }) => {
-          return null;
-        }}
-      </Query>
     </div>
   );
 }

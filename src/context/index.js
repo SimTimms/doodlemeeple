@@ -8,3 +8,7 @@ export const ProfileContext = React.createContext({
 export const HistoryContext = React.createContext({
   history: null,
 });
+
+export const FavouritesContext = React.createContext({
+  favourites: null,
+});

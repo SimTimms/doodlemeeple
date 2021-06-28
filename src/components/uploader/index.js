@@ -69,6 +69,7 @@ function Uploader({
             .put(signedRequest, file, options)
             .then((result) => {
               setStatusMessage('');
+              console.log(result);
               cbImage(url);
               toaster('Saved');
             })

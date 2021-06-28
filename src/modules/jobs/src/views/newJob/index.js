@@ -34,12 +34,13 @@ export default function NewJob({ history }) {
           lockedMsg={`${10 - job.name.length} characters required `}
         >
           <Column>
-            <CardComponent className={classes.card}>
+            <CardComponent classAdd={classes.card}>
               <Column a="center" j="center">
                 <FieldBox
                   title="Project Title"
                   value={job.name}
                   maxLength={86}
+                  minLength={10}
                   placeholder="24 full colour images..."
                   onChangeEvent={(e) => {
                     setJob({

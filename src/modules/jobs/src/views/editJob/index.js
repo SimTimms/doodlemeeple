@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
-  LoadIcon,
   UnlockInfo,
   Divider,
   Column,
@@ -34,7 +33,6 @@ export default function EditJob({ history, creativeId, ...props }) {
   const classes = useStyles();
   const [job, setJob] = React.useState(initialState);
   const [locked, setLocked] = React.useState(false);
-  const [qComplete, setQComplete] = React.useState(false);
   const [savedCreative, setSavedCreative] = React.useState(false);
   const [isPublic, setIsPublic] = React.useState(false);
   const jobId = props.match.params.jobId;
@@ -64,7 +62,7 @@ export default function EditJob({ history, creativeId, ...props }) {
     }
   );
 
-  const [submitPublicBrief, { publicLoading }] = useMutation(
+  const [submitPublicBrief] = useMutation(
     SUBMIT_PUBLIC_BRIEF,
     {
       variables: {
@@ -78,7 +76,7 @@ export default function EditJob({ history, creativeId, ...props }) {
     }
   );
 
-  const [updateJob, { updateLoading }] = useMutation(
+  const [updateJob] = useMutation(
     UPDATE_JOB,
     {
       variables: {
@@ -153,7 +151,7 @@ export default function EditJob({ history, creativeId, ...props }) {
             title=""
             subTitle="Add details to unlock more options"
             onClickEvent={() => {
-              history.push(`/app/pick-artist/${jobId}/${savedCreative}`);
+              history.push(`/job/pick-artist/${jobId}/${savedCreative}`);
             }}
             buttonLocked={locked}
             lockedMsg={unlock(job)}
@@ -165,19 +163,12 @@ export default function EditJob({ history, creativeId, ...props }) {
                 ) : (
                   <Column w={600}>
                     <Section1 setJob={setJob} job={job} mutation={updateJob} />
-                    <Divider />
                     <Section2 setJob={setJob} job={job} mutation={updateJob} />
-                    <Divider />
                     <Section4 setJob={setJob} job={job} mutation={updateJob} />
-                    <Divider />
                     <Section5 setJob={setJob} job={job} mutation={updateJob} />
-                    <Divider />
                     <Section8 setJob={setJob} job={job} mutation={updateJob} />
-                    <Divider />
                     <Section3 setJob={setJob} job={job} mutation={updateJob} />
-                    <Divider />
                     <Section6 setJob={setJob} job={job} mutation={updateJob} />
-                    <Divider />
                     <Section7 setJob={setJob} job={job} mutation={updateJob} />
                     <Divider />
                     {job.submitted && job.submitted === 'draft' && (

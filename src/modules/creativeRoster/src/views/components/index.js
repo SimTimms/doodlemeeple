@@ -1,4 +1,5 @@
-import ArtistLineup from './ArtistLineup';
+import ArtistLineup from './artistLineup';
 import SubmitBrief from './SubmitBrief';
+import CreativeRosterProfiles from './creativeRosterProfiles';
 
-export { ArtistLineup, SubmitBrief };
+export { ArtistLineup, SubmitBrief, CreativeRosterProfiles };

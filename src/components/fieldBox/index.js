@@ -9,6 +9,7 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
   const classes = useStyles();
   const {
     maxLength,
+    minLength,
     replaceMode,
     placeholder,
     info,
@@ -32,7 +33,9 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
           <Typography
             className={classes.inputLabel}
             style={{ marginLeft: icon && 44 }}
-          >{`${title}`}</Typography>
+          >
+            {title}
+          </Typography>
           <Row j="flex-end" w={70}>
             <Typography className={classes.inputLabel}>{`${
               maxLength > 0 ? maxLength - value.length : ''
@@ -106,6 +109,14 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
             />
           </Row>
         )}
+        <Typography
+          className={`${(classes.minLength, classes.inputLabel)}`}
+          style={{ marginLeft: icon && 44, marginTop: 3 }}
+        >{`${
+          minLength > 0 && value.length < minLength
+            ? `${minLength - value.length} characters required`
+            : ''
+        }`}</Typography>
       </Column>
       <div
         className={clsx({

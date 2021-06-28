@@ -3,8 +3,9 @@ import { useStyles } from './styles';
 import { Typography, Button, useMediaQuery, Icon } from '@material-ui/core';
 import { Uploader } from '../../components';
 import clsx from 'clsx';
-import { UPLOAD_IMAGE, DELETE_IMAGE } from '../../data/mutations';
+import { UPLOAD_IMAGE } from '../../data/mutations';
 import { useMutation } from '@apollo/client';
+import ImageTile from './imageTile';
 
 function MediaGallery({ items, edit, setImages, galleryId, ...props }) {
   const seedID = Math.floor(Math.random());
@@ -19,76 +20,32 @@ function MediaGallery({ items, edit, setImages, galleryId, ...props }) {
       : 6
     : 6;
 
-  const [uploadImage] = useMutation(
-    UPLOAD_IMAGE,
-    {
-      variables: {
-        img: saveImage,
-        galleryId: galleryId,
-        category: sectionType,
-      },
+  const [uploadImage] = useMutation(UPLOAD_IMAGE, {
+    variables: {
+      img: saveImage,
+      galleryId: galleryId,
+      category: sectionType,
     },
-    {
-      onCompleted({ imageCreateOne }) {
-        let imageArray = Object.assign([], items);
-        imageArray = [
-          ...imageArray,
-          {
-            _id: imageCreateOne.recordId,
-            img: imageCreateOne.record.img,
-          },
-        ];
-        setImages(imageArray);
-      },
-    }
-  );
-  /*
-  const [deleteImage] = useMutation(
-    DELETE_IMAGE,
-    {
-      variables: {
-        id: tile._id,
-      },
+    onCompleted({ imageCreateOne }) {
+      let imageArray = Object.assign([], items);
+      imageArray = [
+        ...imageArray,
+        {
+          _id: imageCreateOne.recordId,
+          img: imageCreateOne.record.img,
+        },
+      ];
+      setImages(imageArray);
     },
-    {
-      onCompleted({ imageCreateOne }) {
-        let imageArray = Object.assign([], items);
-        imageArray = imageArray.filter(
-          (arrItem) => arrItem.img !== imageCreateOne.img
-        );
-        setImages(imageArray);
-      },
-    }
-  );
-*/
+  });
+
   return (
     <div className={classes.root} style={{ background: 'none', padding: 0 }}>
       {!mediaViewer ? (
         <div className={classes.gridList} style={{ background: 'none' }}>
-          {/*items.map((tile, index) => (
-            <div
-              key={`${tile.img}_${seedID}_${index}`}
-              className={clsx({
-                [classes.image]: true,
-                [classes.imageMobile]: mobile,
-              })}
-              style={{
-                backgroundImage: `url(${tile.img})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center center',
-                border: '5px solid #fff',
-              }}
-            >
-              <Button
-                className={classes.iconButton}
-                onClick={() => {
-                  deleteImage();
-                }}
-              >
-                <Icon className={classes.iconButtonIcon}>delete</Icon>
-              </Button>
-            </div>
-              ))*/}
+          {items.map((tile) => (
+            <ImageTile items={items} setImages={setImages} imgData={tile} />
+          ))}
 
           {edit && items.length < maxImages && (
             <div

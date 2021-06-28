@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { HistoryContext } from '../imports/sharedContext';
 import { EditJob, NewJob } from './views';
+import PickArtist from '../components/pickArtist';
 
 export default function JobRoutes(props) {
   return (
@@ -21,6 +22,10 @@ export default function JobRoutes(props) {
           <Route
             path="/job/edit/:jobId"
             render={(props) => <EditJob {...props} history={history} />}
+          />
+          <Route
+            path="/job/pick-artist/:jobId/:creativeId?"
+            render={(props) => <PickArtist {...props} history={history} />}
           />
         </Switch>
       )}

@@ -6,8 +6,9 @@ import { Switch, Route } from 'react-router-dom';
 //import PreviewLayout from '../../layouts/preview';
 import { JobRoutes } from '../../modules/jobs';
 import { DashboardRoutes } from '../../modules/dashboards';
+import { CreativeRosterRoutes } from '../../modules/creativeRoster';
 //import { Query } from 'react-apollo';
-import { PROFILE } from '../../data/queries';
+import { PROFILE, FAVOURITES } from '../../data/queries';
 import logout from '../../utils/logout';
 import { useQuery } from '@apollo/client';
 import { StyledNavBar, ContentTop } from '../../components';
@@ -15,11 +16,16 @@ import { ToastContainer } from 'react-toastify';
 import { useStyles } from './styles';
 import LoggedOut from './views';
 import AppDrawer from '../../layouts/menus/appDrawer';
-import { ProfileContext, HistoryContext } from '../../context';
+import {
+  ProfileContext,
+  HistoryContext,
+  FavouritesContext,
+} from '../../context';
 import { ProfileAvatarButton } from '../../buttons';
 import clsx from 'clsx';
 export default function RoutesAuth({ theme, props: { ...props } }) {
   const [profile, setProfile] = React.useState(null);
+  const [favourites, setFavourites] = React.useState(null);
   const { history } = props;
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
@@ -33,30 +39,39 @@ export default function RoutesAuth({ theme, props: { ...props } }) {
     },
   });
 
+  const {} = useQuery(FAVOURITES, {
+    onCompleted({ profile }) {
+      console.log(profile);
+      setFavourites(profile.favourites);
+    },
+  });
+
   return (
     <div className={classes.root}>
       <ToastContainer />
       <ProfileContext.Provider value={profile}>
         <HistoryContext.Provider value={history}>
-          <StyledNavBar open={true}>
-            {!mobile && <ProfileAvatarButton />}
-          </StyledNavBar>
-          <AppDrawer
-            handleDrawerClose={() => null}
-            handleDrawerOpen={() => null}
-            open={true}
-            activeButton={null}
-          />
-          <main
-            className={clsx({
-              [classes.content]: true,
-              [classes.contentMobile]: mobile,
-            })}
-          >
-            <ContentTop style={{ width: '100%' }}>
-              <Switch>
+          <FavouritesContext.Provider value={favourites}>
+            <StyledNavBar open={true}>
+              {!mobile && <ProfileAvatarButton />}
+            </StyledNavBar>
+            <AppDrawer
+              handleDrawerClose={() => null}
+              handleDrawerOpen={() => null}
+              open={true}
+              activeButton={null}
+            />
+            <main
+              className={clsx({
+                [classes.content]: true,
+                [classes.contentMobile]: mobile,
+              })}
+            >
+              <ContentTop style={{ width: '100%' }}>
                 {JobRoutes(props)}
+                {CreativeRosterRoutes(props)}
                 {DashboardRoutes(props)}
+
                 {/*
         <Route
           path="/app/:page/:pathParam1?/:pathParam2?"
@@ -102,14 +117,16 @@ export default function RoutesAuth({ theme, props: { ...props } }) {
           exact
           render={() => <Redirect push to="/app/tasks" />}
         />*/}
-                <Route
-                  path="/logout"
-                  exact
-                  render={() => <LoggedOut history={history} />}
-                />
-              </Switch>
-            </ContentTop>
-          </main>
+                <Switch>
+                  <Route
+                    path="/logout"
+                    exact
+                    render={() => <LoggedOut history={history} />}
+                  />
+                </Switch>
+              </ContentTop>
+            </main>
+          </FavouritesContext.Provider>
         </HistoryContext.Provider>
       </ProfileContext.Provider>
     </div>

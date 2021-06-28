@@ -27,7 +27,6 @@ export default function JobSummaryComponent({ job }) {
         <Column>
           <HeaderThree str="Reference Images" />
           <Divider />
-
           <Column>
             <div
               style={{
