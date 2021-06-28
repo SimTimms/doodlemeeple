@@ -22,6 +22,7 @@ export const FEATURED_CREATIVES_WIDGET = gql`
       linkedIn
       instagram
       website
+      publicEmail
     }
   }
 `;

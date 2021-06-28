@@ -33,6 +33,13 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
     width: '100%',
     textAlign: 'center',
+    fontSize: 12,
+  },
+  email: {
+    textDecoration: 'none',
+    width: '100%',
+    fontSize: 12,
+    color: theme.palette.primary.main,
   },
   divider: {
     width: '60%',

@@ -4,7 +4,7 @@ import { Query } from 'react-apollo';
 import { FEATURED_CREATIVES_WIDGET } from './data';
 import { ProfileCard } from './profileCard';
 
-export default function FeaturedCreativeWidget() {
+export default function CreativeRosterWidget() {
   const classes = useStyles();
   const [creativeArray, setCreativeArray] = React.useState([]);
 

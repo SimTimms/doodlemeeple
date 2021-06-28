@@ -9,6 +9,13 @@ import { nameShortener } from '../../utils';
 
 export default function ProfileCard({ creative }) {
   const classes = useStyles();
+  const allIsNull =
+    !creative.facebook &&
+    !creative.twitter &&
+    !creative.linkedIn &&
+    !creative.instagram &&
+    !creative.website &&
+    !creative.publicEmail;
   return (
     <div
       className={clsx({
@@ -33,6 +40,18 @@ export default function ProfileCard({ creative }) {
                 (section, index) => `${index > 0 ? ', ' : ''} ${section.type}`
               )}
             </Typography>
+            {creative.publicEmail && (
+              <a
+                href={`mailto:${creative.publicEmail}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={classes.email}
+              >
+                <Typography className={classes.email}>
+                  {`${creative.publicEmail}`}{' '}
+                </Typography>
+              </a>
+            )}
           </Column>
         </Row>
         <div className={classes.divider}></div>
@@ -88,7 +107,18 @@ export default function ProfileCard({ creative }) {
             rel="noopener noreferrer"
             className={classes.website}
           >
-            <Typography>{`${creative.website}`}</Typography>
+            <Typography className={classes.website}>Visit Website</Typography>
+          </a>
+        )}
+
+        {allIsNull && (
+          <a
+            href={`${process.env.REACT_APP_URL}/public-preview/${creative._id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={classes.website}
+          >
+            <Typography>Profile</Typography>
           </a>
         )}
       </Column>
