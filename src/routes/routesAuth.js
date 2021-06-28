@@ -2,7 +2,7 @@ import React from 'react';
 import AppLayout from '../layouts/app';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PreviewLayout from '../layouts/preview';
-import FeaturedCreativeWidget from '../widgets';
+import { FeaturedCreativeWidget, CreativeRosterWidget } from '../widgets';
 
 export default function AuthRoutes({ theme, props: { ...props } }) {
   return (
@@ -10,6 +10,10 @@ export default function AuthRoutes({ theme, props: { ...props } }) {
       <Route
         path="/featured-creative-widget"
         render={(props) => <FeaturedCreativeWidget />}
+      />
+      <Route
+        path="/creative-roster-widget"
+        render={(props) => <CreativeRosterWidget />}
       />
       <Route
         path="/app/:page/:pathParam?/:pathParam2?"
