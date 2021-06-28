@@ -64,7 +64,11 @@ export default function ProfileCard({ creative }) {
           <Row j="space-around">
             {creative.linkedIn && (
               <a
-                href={`${creative.linkedIn}`}
+                href={`${
+                  creative.linkedin.indexOf('linkedin.com/') === -1
+                    ? `https://www.linkedin.com/${creative.linkedin}`
+                    : creative.linkedin
+                }`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={classes.social}
@@ -73,7 +77,11 @@ export default function ProfileCard({ creative }) {
             )}
             {creative.facebook && (
               <a
-                href={`${creative.facebook}`}
+                href={`${
+                  creative.facebook.indexOf('facebook.com/') === -1
+                    ? `https://www.facebook.com/${creative.facebook}`
+                    : creative.facebook
+                }`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={classes.social}
@@ -82,7 +90,11 @@ export default function ProfileCard({ creative }) {
             )}
             {creative.twitter && (
               <a
-                href={`${creative.twitter}`}
+                href={`${
+                  creative.twitter.indexOf('twitter.com/') === -1
+                    ? `https://www.twitter.com/${creative.twitter}`
+                    : creative.twitter
+                }`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={classes.social}
@@ -91,7 +103,11 @@ export default function ProfileCard({ creative }) {
             )}
             {creative.instagram && (
               <a
-                href={`${creative.instagram}`}
+                href={`${
+                  creative.instagram.indexOf('instagram.com/') === -1
+                    ? `https://www.instagram.com/${creative.instagram}`
+                    : creative.instagram
+                }`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={classes.social}
