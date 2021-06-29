@@ -88,7 +88,7 @@ export default function Filters({
                 }}
                 onClickEvent={() => {
                   setFilter([type]);
-                  setCreativeArray([]);
+                  type !== filter[0] && setCreativeArray([]);
                 }}
                 active={filter[0] === type}
               />
@@ -104,7 +104,7 @@ export default function Filters({
                 }}
                 onClickEvent={() => {
                   setFilter([type]);
-                  setCreativeArray([]);
+                  type !== filter[0] && setCreativeArray([]);
                 }}
                 active={filter[0] === type}
               />
@@ -120,7 +120,7 @@ export default function Filters({
                 }}
                 onClickEvent={() => {
                   setFilter([type]);
-                  setCreativeArray([]);
+                  type !== filter[0] && setCreativeArray([]);
                 }}
                 active={filter[0] === type}
               />
@@ -136,7 +136,7 @@ export default function Filters({
                 }}
                 onClickEvent={() => {
                   setFilter([type]);
-                  setCreativeArray([]);
+                  type !== filter[0] && setCreativeArray([]);
                 }}
                 active={filter[0] === type}
               />
