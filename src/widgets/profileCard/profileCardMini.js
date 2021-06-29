@@ -217,20 +217,24 @@ export default function ProfileCardMini({ creative, setLarge, history }) {
             )}
           </Row>
         </Column>
-        <IconButton
-          title="Hire on DoodleMeeple"
-          color="text-dark"
-          icon=""
-          iconPos="right"
-          onClickEvent={() => history.push(`/app/edit-job/new/${creative._id}`)}
-          styleOverride={{
-            width: '100%',
-            borderRadius: 0,
-            borderTop: '1px solid #eee',
-            margin: 0,
-            justifyContent: 'center',
-          }}
-        />
+        {history && (
+          <IconButton
+            title="Hire on DoodleMeeple"
+            color="text-dark"
+            icon=""
+            iconPos="right"
+            onClickEvent={() =>
+              history.push(`/app/edit-job/new/${creative._id}`)
+            }
+            styleOverride={{
+              width: '100%',
+              borderRadius: 0,
+              borderTop: '1px solid #eee',
+              margin: 0,
+              justifyContent: 'center',
+            }}
+          />
+        )}
       </Column>
     </div>
   );
