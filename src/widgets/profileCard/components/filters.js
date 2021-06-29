@@ -17,6 +17,7 @@ export default function Filters({
   group,
   setGroup,
   setPage,
+  setEndPage,
 }) {
   const classes = useStyles();
   const [loading] = React.useState(false);
@@ -91,6 +92,7 @@ export default function Filters({
                   setFilter([type]);
                   type !== filter[0] && setCreativeArray([]);
                   setPage(0);
+                  setEndPage(false);
                 }}
                 active={filter[0] === type}
               />
@@ -108,6 +110,7 @@ export default function Filters({
                   setFilter([type]);
                   type !== filter[0] && setCreativeArray([]);
                   setPage(0);
+                  setEndPage(false);
                 }}
                 active={filter[0] === type}
               />
@@ -125,6 +128,7 @@ export default function Filters({
                   setFilter([type]);
                   type !== filter[0] && setCreativeArray([]);
                   setPage(0);
+                  setEndPage(false);
                 }}
                 active={filter[0] === type}
               />
@@ -142,6 +146,7 @@ export default function Filters({
                   setFilter([type]);
                   type !== filter[0] && setCreativeArray([]);
                   setPage(0);
+                  setEndPage(false);
                 }}
                 active={filter[0] === type}
               />
