@@ -73,8 +73,13 @@ export default function ProfileCard({ creative }) {
               target="_blank"
               rel="noopener noreferrer"
               className={classes.social}
-              style={{ backgroundImage: `url(${dmDevice})` }}
-            ></a>
+            >
+              <img
+                src={dmDevice}
+                className={classes.socialImg}
+                alt="Doodle Meeple"
+              />
+            </a>
             {linkedIn && (
               <a
                 href={`${
@@ -85,8 +90,13 @@ export default function ProfileCard({ creative }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={classes.social}
-                style={{ backgroundImage: `url(${socials.socialLinkedIn})` }}
-              ></a>
+              >
+                <img
+                  src={socials.socialLinkedIn}
+                  className={classes.socialImg}
+                  alt="LinkedIn"
+                />
+              </a>
             )}
             {facebook && (
               <a
@@ -98,8 +108,13 @@ export default function ProfileCard({ creative }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={classes.social}
-                style={{ backgroundImage: `url(${socials.socialFacebook})` }}
-              ></a>
+              >
+                <img
+                  src={socials.socialFacebook}
+                  className={classes.socialImg}
+                  alt="Facebook"
+                />
+              </a>
             )}
             {twitter && (
               <a
@@ -111,8 +126,13 @@ export default function ProfileCard({ creative }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={classes.social}
-                style={{ backgroundImage: `url(${socials.socialTwitter})` }}
-              ></a>
+              >
+                <img
+                  src={socials.socialTwitter}
+                  className={classes.socialImg}
+                  alt="Twitter"
+                />
+              </a>
             )}
             {instagram && (
               <a
@@ -124,8 +144,13 @@ export default function ProfileCard({ creative }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={classes.social}
-                style={{ backgroundImage: `url(${socials.socialInstagram})` }}
-              ></a>
+              >
+                <img
+                  src={socials.socialInstagram}
+                  className={classes.socialImg}
+                  alt="Instagram"
+                />
+              </a>
             )}
           </Row>
         </Column>

@@ -42,7 +42,8 @@ export function Column(props) {
 }
 
 export function Row(props) {
-  const { children, a, j, wrap, w, b, pb, pt, pl, v, mb, br, bg, h, o } = props;
+  const { children, a, j, wrap, w, b, pb, pt, pl, v, mb, br, bg, h, o, of } =
+    props;
   const align = a ? a : 'center';
   const justify = j ? j : 'center';
   const width = w ? w : '100%';
@@ -55,6 +56,7 @@ export function Row(props) {
   const background = bg ? bg : '';
   const height = h ? h : '';
   const opacity = o ? o : '';
+  const overflow = of ? of : '';
 
   return v === 'none' ? null : (
     <div
@@ -74,6 +76,7 @@ export function Row(props) {
         background,
         height,
         opacity,
+        overflow,
       }}
     >
       {children}

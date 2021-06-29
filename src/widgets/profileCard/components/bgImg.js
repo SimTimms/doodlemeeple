@@ -2,21 +2,20 @@ import React from 'react';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 
-export default function BgImg({ creative }) {
+export default function BgImg({ previewImage, onClick }) {
   const classes = useStyles();
 
   return (
     <div
       style={{
         backgroundImage:
-          creative.profileBG !== '' && creative.profileBG
-            ? `url(${creative.profileBG})`
-            : '#eee',
+          previewImage !== '' && previewImage ? `url(${previewImage})` : '#eee',
       }}
       className={clsx({
         [classes.background]: true,
-        [classes.noBG]: !creative.profileBG,
+        [classes.noBG]: !previewImage,
       })}
+      onClick={() => onClick()}
     ></div>
   );
 }
