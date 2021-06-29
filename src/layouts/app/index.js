@@ -34,6 +34,7 @@ import {
 } from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 import logout from '../../utils/logout';
+import CreativeRosterWidget from '../../widgets/creativeRoster';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('tasks');
@@ -169,16 +170,7 @@ function AppLayout(props) {
               {({ data, loading }) => {
                 return loading
                   ? null
-                  : data && (
-                      <CreativeRoster
-                        theme={props.theme}
-                        history={history}
-                        favourites={data.profile.favourites.map(
-                          (fav) => fav.receiver && fav.receiver._id
-                        )}
-                        groupIn={pathParam && pathParam}
-                      />
-                    );
+                  : data && <CreativeRosterWidget history={history} />;
               }}
             </Query>
           ) : page === 'account' ? (

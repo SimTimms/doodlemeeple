@@ -1,5 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
+  filterRoot: {
+    background: '#fff',
+    width: '100%',
+    paddingTop: 3,
+    paddingBottom: 3,
+  },
   background: {
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
@@ -9,6 +15,14 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     position: 'relative',
     cursor: 'pointer',
+  },
+  divider: {
+    width: '60%',
+    borderTop: '1px solid #ddd',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    paddingBottom: 3,
+    marginTop: 3,
   },
   actionsWrapper: { width: '100%' },
   noBG: { minHeight: 0, maxHeight: 0, height: 0 },

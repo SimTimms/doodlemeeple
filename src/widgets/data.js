@@ -36,8 +36,8 @@ export const FEATURED_CREATIVES_WIDGET = gql`
 `;
 
 export const CREATIVE_ROSTER_WIDGET = gql`
-  query creativeRosterWidget($page: Int) {
-    creativeRosterWidget(page: $page) {
+  query creativeRosterWidget($page: Int, $filter: [String]) {
+    creativeRosterWidget(page: $page, filter: $filter) {
       _id
       name
       profileBG

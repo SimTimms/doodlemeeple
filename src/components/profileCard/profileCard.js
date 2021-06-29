@@ -27,8 +27,6 @@ export default function ProfileCard({
     setFullProfile,
   } = props;
 
-  console.log(setFullProfile);
-
   return loading ? (
     <div className={classes.loading}></div>
   ) : (

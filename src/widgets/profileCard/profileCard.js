@@ -9,6 +9,7 @@ import * as socials from '../../assets/social';
 import dmDevice from '../../assets/dmDevice.png';
 import { PROFILE_IMAGES } from '../data';
 import imageOptimiser from '../../utils/imageOptimiser';
+import { nameShortener } from '../../utils';
 
 export default function ProfileCard({ creative, setLarge }) {
   const classes = useStyles();
@@ -53,17 +54,19 @@ export default function ProfileCard({ creative, setLarge }) {
           }}
         </Query>
       </Row>
-      <Row h={40} w="100%" bg="#222" of="hidden">
-        {images.map((image) => {
+      <Row h={60} w="100%" bg="#222" of="hidden">
+        {images.map((image, index) => {
+          if (index > 4) return null;
           return (
-            <img
-              src={imageOptimiser(image.img)}
+            <div
               className={classes.imageThumb}
+              style={{ backgroundImage: `url(${imageOptimiser(image.img)})` }}
               onMouseEnter={() => setPreviewImage(image.img)}
               onClick={() => {
+                setPreviewImage(image.img);
                 setLarge(image.img);
               }}
-            />
+            ></div>
           );
         })}
       </Row>
@@ -101,8 +104,14 @@ export default function ProfileCard({ creative, setLarge }) {
           )}
         </Column>
       </Row>
-
-      <Column a="center" bg="#eee" p="0" h={40}>
+      {creative.summary && <div className={classes.divider}></div>}
+      {creative.summary && (
+        <Typography align="center" className={classes.summary}>
+          {nameShortener(creative.summary ? creative.summary : '', 60)}
+        </Typography>
+      )}
+      <div className={classes.divider}></div>
+      <Column a="center" p="0" h={40}>
         <Column w={'100%'}>
           <Row j="space-between" w="100%">
             <Row j="flex-start" w={160}>

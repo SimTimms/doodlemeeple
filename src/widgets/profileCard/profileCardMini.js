@@ -4,14 +4,14 @@ import { useStyles } from './styles';
 import clsx from 'clsx';
 import { Query } from 'react-apollo';
 import { BgImg, ProfileImg } from './components';
-import { Row, Column } from '../../components';
+import { Row, Column, IconButton } from '../../components';
 import * as socials from '../../assets/social';
 import dmDevice from '../../assets/dmDevice.png';
 import { PROFILE_IMAGES } from '../data';
 import imageOptimiser from '../../utils/imageOptimiser';
 import { nameShortener } from '../../utils';
 
-export default function ProfileCardMini({ creative, setLarge }) {
+export default function ProfileCardMini({ creative, setLarge, history }) {
   const classes = useStyles();
 
   const linkedIn = !creative.linkedIn ? null : creative.linkedIn;
@@ -111,7 +111,7 @@ export default function ProfileCardMini({ creative, setLarge }) {
         </Typography>
       )}
       <div className={classes.divider}></div>
-      <Column a="center" p="0" h={40}>
+      <Column a="center" p="0" h={70}>
         <Column w={'100%'}>
           <Row j="space-between" w="100%">
             <Row j="flex-start" w={160}>
@@ -217,6 +217,20 @@ export default function ProfileCardMini({ creative, setLarge }) {
             )}
           </Row>
         </Column>
+        <IconButton
+          title="Hire on DoodleMeeple"
+          color="text-dark"
+          icon=""
+          iconPos="right"
+          onClickEvent={() => history.push(`/app/edit-job/new/${creative._id}`)}
+          styleOverride={{
+            width: '100%',
+            borderRadius: 0,
+            borderTop: '1px solid #eee',
+            margin: 0,
+            justifyContent: 'center',
+          }}
+        />
       </Column>
     </div>
   );
