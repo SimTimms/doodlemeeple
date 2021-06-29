@@ -16,6 +16,7 @@ export default function Filters({
   setCreativeArray,
   group,
   setGroup,
+  setPage,
 }) {
   const classes = useStyles();
   const [loading] = React.useState(false);
@@ -89,6 +90,7 @@ export default function Filters({
                 onClickEvent={() => {
                   setFilter([type]);
                   type !== filter[0] && setCreativeArray([]);
+                  setPage(0);
                 }}
                 active={filter[0] === type}
               />
@@ -105,6 +107,7 @@ export default function Filters({
                 onClickEvent={() => {
                   setFilter([type]);
                   type !== filter[0] && setCreativeArray([]);
+                  setPage(0);
                 }}
                 active={filter[0] === type}
               />
@@ -121,6 +124,7 @@ export default function Filters({
                 onClickEvent={() => {
                   setFilter([type]);
                   type !== filter[0] && setCreativeArray([]);
+                  setPage(0);
                 }}
                 active={filter[0] === type}
               />
@@ -137,6 +141,7 @@ export default function Filters({
                 onClickEvent={() => {
                   setFilter([type]);
                   type !== filter[0] && setCreativeArray([]);
+                  setPage(0);
                 }}
                 active={filter[0] === type}
               />

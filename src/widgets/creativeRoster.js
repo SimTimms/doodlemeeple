@@ -25,6 +25,7 @@ export default function CreativeRosterWidget({ history }) {
           setCreativeArray={setCreativeArray}
           group={group}
           setGroup={setGroup}
+          setPage={setPage}
         />
         <Row wrap="wrap" w="100%">
           {large !== null && <BigImage large={large} setLarge={setLarge} />}
