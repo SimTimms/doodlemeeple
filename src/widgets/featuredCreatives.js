@@ -2,14 +2,17 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { FEATURED_CREATIVES_WIDGET } from './data';
-import { ProfileCard } from './profileCard';
+import { ProfileCardMini } from './profileCard/';
+import BigImage from './profileCard/components/bigImage';
 
 export default function FeaturedCreativeWidget() {
   const classes = useStyles();
   const [creativeArray, setCreativeArray] = React.useState([]);
+  const [large, setLarge] = React.useState(null);
 
   return (
     <div className={classes.root}>
+      {large !== null && <BigImage large={large} setLarge={setLarge} />}
       <Query
         query={FEATURED_CREATIVES_WIDGET}
         fetchPolicy="network-only"
@@ -20,7 +23,11 @@ export default function FeaturedCreativeWidget() {
         {() => {
           return creativeArray.map((creative, index) => {
             return (
-              <ProfileCard creative={creative} key={`creative_${index}`} />
+              <ProfileCardMini
+                creative={creative}
+                key={`creative_${index}`}
+                setLarge={setLarge}
+              />
             );
           });
         }}

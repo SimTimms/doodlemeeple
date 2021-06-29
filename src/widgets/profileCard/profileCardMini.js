@@ -9,6 +9,7 @@ import * as socials from '../../assets/social';
 import dmDevice from '../../assets/dmDevice.png';
 import { PROFILE_IMAGES } from '../data';
 import imageOptimiser from '../../utils/imageOptimiser';
+import { nameShortener } from '../../utils';
 
 export default function ProfileCardMini({ creative, setLarge }) {
   const classes = useStyles();
@@ -101,6 +102,12 @@ export default function ProfileCardMini({ creative, setLarge }) {
           )}
         </Column>
       </Row>
+      {creative.summary && <div className={classes.divider}></div>}
+      {creative.summary && (
+        <Typography align="center" className={classes.summary}>
+          {nameShortener(creative.summary ? creative.summary : '', 60)}
+        </Typography>
+      )}
 
       <Column a="center" bg="#eee" p="0" h={40}>
         <Column w={'100%'}>
