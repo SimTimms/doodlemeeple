@@ -29,7 +29,7 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: '2px 2px 3px rgba(0,0,0,0.2)',
   },
   website: {
-    textDecoration: 'none',
+    textDecoration: 'underline',
     color: '#fff',
     width: '100%',
     textAlign: 'center',

@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import { BgImg, ProfileImg } from './components';
 import { Row, Column } from '../../components';
 import * as socials from '../../assets/social';
+import dmDevice from '../../assets/dmDevice.png';
 import { nameShortener } from '../../utils';
 
 export default function ProfileCard({ creative }) {
@@ -66,7 +67,14 @@ export default function ProfileCard({ creative }) {
       </a>
       <Column a="center" bg="#333" p="3px 0 3px 0" h={60}>
         <Column w={160}>
-          <Row j="space-around">
+          <Row j="center">
+            <a
+              href={`${process.env.REACT_APP_URL}/public-preview/${creative._id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={classes.social}
+              style={{ backgroundImage: `url(${dmDevice})` }}
+            ></a>
             {linkedIn && (
               <a
                 href={`${
@@ -132,7 +140,7 @@ export default function ProfileCard({ creative }) {
             rel="noopener noreferrer"
             className={classes.website}
           >
-            <Typography className={classes.website}>Visit Website</Typography>
+            <Typography className={classes.website}>Website</Typography>
           </a>
         )}
 
