@@ -6,7 +6,7 @@ import { Row } from '../../components';
 
 export default function KickstarterWidget() {
   return (
-    <Row>
+    <Row wrap="wrap">
       <Query query={FEATURED_KICKSTARTER_WIDGET} fetchPolicy="network-only">
         {({ data, loading }) => {
           if (data)
