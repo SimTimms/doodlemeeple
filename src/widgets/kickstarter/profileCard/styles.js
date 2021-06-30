@@ -13,6 +13,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     boxShadow: '10px 10px 20px rgba(0,0,0,0.2)',
     background: '#fff',
+    height: 300,
   },
   divider: {
     width: '60%',

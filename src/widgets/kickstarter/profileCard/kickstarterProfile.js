@@ -4,9 +4,7 @@ import { useStyles } from './styles';
 import clsx from 'clsx';
 import { BgImg } from './components';
 import { Row, Column } from '../../../components';
-import { nameShortener } from '../../../utils';
 import kickstarterImage from '../kick.png';
-import ksCheck from '../kscheck.jpg';
 
 export default function KickstarterProfile({ kickstarter }) {
   const classes = useStyles();
@@ -16,36 +14,32 @@ export default function KickstarterProfile({ kickstarter }) {
         [classes.creativeCard]: true,
       })}
     >
-      <Row>
-        <BgImg
-          previewImage={kickstarter.featuredImage}
-          onClick={() => {
-            // setLarge(previewImage);
-          }}
-        />
-      </Row>
-
-      <Row>
-        <Column a="center">
-          <a
-            href={`${process.env.REACT_APP_URL}/public-preview/${kickstarter._id}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ textDecoration: 'none', color: '#222', width: '100%' }}
-          >
-            <Typography
-              style={{
-                fontWeight: 'bold',
-                textDecoration: 'underline',
-                textAlign: 'center',
-              }}
+      <Column j="space-between" h="100%">
+        <Column j="flex-start">
+          <BgImg previewImage={kickstarter.featuredImage} onClick={() => {}} />
+          <Row j="flex-start">
+            <a
+              href={`${kickstarter.url}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: 'none', color: '#222', width: '100%' }}
             >
-              {kickstarter.name}
-            </Typography>
-          </a>
+              <Typography
+                style={{
+                  fontWeight: 'bold',
+                  textDecoration: 'underline',
+                  textAlign: 'center',
+                  fontSize: 16,
+                  marginTop: 5,
+                  marginBottom: 5,
+                }}
+              >
+                {kickstarter.name}
+              </Typography>
+            </a>
+          </Row>
         </Column>
-      </Row>
-      <Column a="center" p="0">
+
         {kickstarter.summary && (
           <Typography align="center" className={classes.summary}>
             {kickstarter.summary}
