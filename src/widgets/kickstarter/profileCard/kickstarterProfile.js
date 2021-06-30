@@ -49,7 +49,12 @@ export default function KickstarterProfile({ kickstarter }) {
 
         <Column w="120px">
           <Typography>Support us on</Typography>
-          <a href={kickstarter.url} style={{ cursor: 'pointer', marginTop: 5 }}>
+          <a
+            href={kickstarter.url}
+            style={{ cursor: 'pointer', marginTop: 5 }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               src={kickstarterImage}
               style={{ width: '100%', marginBottom: 5 }}
