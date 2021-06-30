@@ -3,7 +3,11 @@ import { Route, Switch } from 'react-router-dom';
 import { AboutLayout } from '../layouts';
 import PreviewLayout from '../layouts/preview';
 import { PublicLayout } from '../layouts/public';
-import { FeaturedCreativeWidget, CreativeRosterWidget } from '../widgets';
+import {
+  FeaturedCreativeWidget,
+  CreativeRosterWidget,
+  KickstarterWidget,
+} from '../widgets';
 
 export default function PublicRoutes({ theme, props: { ...props } }) {
   return (
@@ -15,6 +19,10 @@ export default function PublicRoutes({ theme, props: { ...props } }) {
       <Route
         path="/creative-roster-widget"
         render={(props) => <CreativeRosterWidget />}
+      />
+      <Route
+        path="/featured-kickstarters"
+        render={(props) => <KickstarterWidget />}
       />
       <Route
         path="/public-preview/:pathParam?"

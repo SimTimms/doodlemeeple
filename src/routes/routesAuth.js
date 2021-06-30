@@ -2,7 +2,12 @@ import React from 'react';
 import AppLayout from '../layouts/app';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PreviewLayout from '../layouts/preview';
-import { FeaturedCreativeWidget, CreativeRosterWidget } from '../widgets';
+import {
+  FeaturedCreativeWidget,
+  CreativeRosterWidget,
+  KickstarterWidget,
+  KickstarterForm,
+} from '../widgets';
 
 export default function AuthRoutes({ theme, props: { ...props } }) {
   return (
@@ -15,6 +20,11 @@ export default function AuthRoutes({ theme, props: { ...props } }) {
         path="/creative-roster-widget"
         render={(props) => <CreativeRosterWidget />}
       />
+      <Route
+        path="/featured-kickstarters"
+        render={(props) => <KickstarterWidget />}
+      />
+      <Route path="/kickstarter" render={(props) => <KickstarterForm />} />
       <Route
         path="/app/:page/:pathParam?/:pathParam2?"
         render={(props) => <AppLayout {...props} theme={theme} />}

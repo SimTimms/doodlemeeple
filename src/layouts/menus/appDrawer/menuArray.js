@@ -27,6 +27,13 @@ export default function menuArray(history, counts, profile) {
       count: null,
     },
     {
+      name: 'Kickstarter',
+      icon: 'group_work',
+      machineName: 'kickstarter',
+      link: () => history.push('/app/kickstarter'),
+      count: null,
+    },
+    {
       name: profile.creativeTrue || profile.creatorTrue ? 'Messages' : 'hide',
       icon: 'chat',
       machineName: 'messages',
