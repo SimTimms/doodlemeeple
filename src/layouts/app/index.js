@@ -11,7 +11,8 @@ import AppInvites from './views/appInvites';
 import AppHelp from './views/appHelp';
 import AppProfileEdit from './views/appProfileEdit';
 import ConversationModule from './views/conversations';
-import CreativeRoster from './views/creativeRoster';
+import PickJobType from './views/job/editJob/components/pickJobType';
+import ConfirmJob from './views/job/editJob/components/confirmJob';
 import { Account } from './views/account';
 import FullContract from './views/fullContract';
 import { ProjectSubmitted } from './views/submitted';
@@ -265,6 +266,14 @@ function AppLayout(props) {
                 );
               }}
             </Query>
+          ) : page === 'choose-job-type' ? (
+            <PickJobType
+              jobId={pathParam}
+              creativeId={pathParam2}
+              history={history}
+            />
+          ) : page === 'confirm-job' ? (
+            <ConfirmJob jobId={pathParam} history={history} />
           ) : page === 'create-quote' ? (
             <NewQuote projectId={pathParam} />
           ) : null}

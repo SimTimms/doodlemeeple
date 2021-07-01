@@ -2,7 +2,7 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { CREATIVE_ROSTER_WIDGET } from './data';
-import { ProfileCardMini } from './profileCard';
+import { ProfileCard } from './profileCard';
 import { Filters } from './profileCard/components';
 import BigImage from './profileCard/components/bigImage';
 import { IconButton, Column, Row } from '../components';
@@ -45,7 +45,7 @@ export default function CreativeRosterWidget({ history }) {
             {() => {
               return creativeArray.map((creative, index) => {
                 return (
-                  <ProfileCardMini
+                  <ProfileCard
                     creative={creative}
                     key={`creative_${index}`}
                     setLarge={setLarge}

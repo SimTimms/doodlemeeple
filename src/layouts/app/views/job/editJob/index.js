@@ -146,7 +146,9 @@ export default function EditJob({ jobId, history, creativeId }) {
                     title=""
                     subTitle="Add details to unlock more options"
                     onClickEvent={() =>
-                      history.push(`/app/pick-artist/${jobId}/${savedCreative}`)
+                      history.push(
+                        `/app/choose-job-type/${jobId}/${savedCreative}`
+                      )
                     }
                     buttonLocked={locked}
                     lockedMsg={unlock(job)}

@@ -104,14 +104,9 @@ export default function ProfileCardMini({ creative, setLarge, history }) {
           )}
         </Column>
       </Row>
-      {creative.summary && <div className={classes.divider}></div>}
-      {creative.summary && (
-        <Typography align="center" className={classes.summary}>
-          {nameShortener(creative.summary ? creative.summary : '', 60)}
-        </Typography>
-      )}
+
       <div className={classes.divider}></div>
-      <Column a="center" p="0" h={70}>
+      <Column a="center" p="0" h={40}>
         <Column w={'100%'}>
           <Row j="space-between" w="100%">
             <Row j="flex-start" w={160}>
@@ -217,24 +212,6 @@ export default function ProfileCardMini({ creative, setLarge, history }) {
             )}
           </Row>
         </Column>
-        {history && (
-          <IconButton
-            title="Hire on DoodleMeeple"
-            color="text-dark"
-            icon=""
-            iconPos="right"
-            onClickEvent={() =>
-              history.push(`/app/edit-job/new/${creative._id}`)
-            }
-            styleOverride={{
-              width: '100%',
-              borderRadius: 0,
-              borderTop: '1px solid #eee',
-              margin: 0,
-              justifyContent: 'center',
-            }}
-          />
-        )}
       </Column>
     </div>
   );

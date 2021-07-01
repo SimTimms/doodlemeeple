@@ -2,10 +2,10 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { FEATURED_CREATIVES_WIDGET } from './data';
-import { ProfileCard } from './profileCard/';
+import { ProfileCardMini } from './profileCard/';
 import BigImage from './profileCard/components/bigImage';
 
-export default function FeaturedCreativeWidget() {
+export default function FeaturedCreativeMiniWidget() {
   const classes = useStyles();
   const [creativeArray, setCreativeArray] = React.useState([]);
   const [large, setLarge] = React.useState(null);
@@ -23,7 +23,7 @@ export default function FeaturedCreativeWidget() {
         {() => {
           return creativeArray.map((creative, index) => {
             return (
-              <ProfileCard
+              <ProfileCardMini
                 creative={creative}
                 key={`creative_${index}`}
                 setLarge={setLarge}

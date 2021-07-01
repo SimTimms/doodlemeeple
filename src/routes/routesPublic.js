@@ -5,6 +5,7 @@ import PreviewLayout from '../layouts/preview';
 import { PublicLayout } from '../layouts/public';
 import {
   FeaturedCreativeWidget,
+  FeaturedCreativeMiniWidget,
   CreativeRosterWidget,
   KickstarterWidget,
 } from '../widgets';
@@ -15,6 +16,11 @@ export default function PublicRoutes({ theme, props: { ...props } }) {
       <Route
         path="/featured-creative-widget"
         render={(props) => <FeaturedCreativeWidget />}
+      />
+
+      <Route
+        path="/featured-creative-mini-widget"
+        render={(props) => <FeaturedCreativeMiniWidget />}
       />
       <Route
         path="/creative-roster-widget"

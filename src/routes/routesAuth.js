@@ -7,6 +7,7 @@ import {
   CreativeRosterWidget,
   KickstarterWidget,
   KickstarterForm,
+  FeaturedCreativeMiniWidget,
 } from '../widgets';
 
 export default function AuthRoutes({ theme, props: { ...props } }) {
@@ -15,6 +16,10 @@ export default function AuthRoutes({ theme, props: { ...props } }) {
       <Route
         path="/featured-creative-widget"
         render={(props) => <FeaturedCreativeWidget />}
+      />
+      <Route
+        path="/featured-creative-mini-widget"
+        render={(props) => <FeaturedCreativeMiniWidget />}
       />
       <Route
         path="/creative-roster-widget"
