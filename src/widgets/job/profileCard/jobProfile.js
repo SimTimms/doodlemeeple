@@ -3,10 +3,15 @@ import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import { BgImg } from './components';
-import { Row, Column, IconButton } from '../../../components';
+import { Column, IconButton } from '../../../components';
 import { nameShortener } from '../../../utils';
+import Cookies from 'js-cookie';
+import PublicProfileButton from './components/publicProfileButton';
+import AppProfileButton from './components/appProfileButton';
 
-export default function JobProfile({ job }) {
+export default function JobProfile({ job, history }) {
+  const userId = Cookies.get('userId');
+
   const classes = useStyles();
   return (
     <div
@@ -40,24 +45,11 @@ export default function JobProfile({ job }) {
         )}
 
         <div className={classes.divider}></div>
-        <a
-          href={`/job-description/${job._id}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            textDecoration: 'none',
-            color: '#222',
-            textAlign: 'center',
-          }}
-        >
-          <IconButton
-            color="text-dark"
-            title="Full Description"
-            icon=""
-            styleOverride={{ marginTop: 0 }}
-            onClickEvent={() => {}}
-          />
-        </a>
+        {!userId ? (
+          <PublicProfileButton jobId={job._id} />
+        ) : (
+          <AppProfileButton jobId={job._id} history={history} />
+        )}
       </Column>
     </div>
   );

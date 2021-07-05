@@ -128,6 +128,7 @@ export const JOB = gql`
         _id
         name
         email
+        profileImg
       }
       invites {
         status
@@ -322,8 +323,11 @@ export const JOBS = gql`
       }
       contracts {
         _id
+        status
         user {
           _id
+          name
+          profileImg
         }
         status
       }

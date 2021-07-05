@@ -4,7 +4,8 @@ import { JOB_WIDGET } from './data';
 import JobDescription from './jobDescription';
 import { Row } from '../../components';
 
-export default function JobDescriptionWidget({ jobId }) {
+export default function JobDescriptionWidget({ jobId, ...props }) {
+  const { history } = props;
   return (
     <Row wrap="wrap">
       <Query
@@ -14,7 +15,7 @@ export default function JobDescriptionWidget({ jobId }) {
       >
         {({ data }) => {
           if (data) {
-            return <JobDescription job={data.jobWidget} />;
+            return <JobDescription job={data.jobWidget} history={history} />;
           }
 
           return null;

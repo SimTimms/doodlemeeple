@@ -124,24 +124,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-  count: {
-    background: theme.palette.error.main,
-    borderRadius: '50%',
-    minHeight: 16,
-    maxHeight: 16,
-    minWidth: 16,
-    maxWidth: 16,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: -10,
-    marginRight: 5,
-    marginTop: -15,
-    color: '#fff',
-    border: '2px solid #fff',
-    fontSize: 10,
-    zIndex: 2,
-  },
+ 
 
   iconTextOnly: { display: 'none' },
 

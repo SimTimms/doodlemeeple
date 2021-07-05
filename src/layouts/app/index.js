@@ -216,7 +216,7 @@ function AppLayout(props) {
               history={history}
             />
           ) : page === 'job-description' ? (
-            <JobDescriptionWidget jobId={pathParam} />
+            <JobDescriptionWidget jobId={pathParam} history={history} />
           ) : page === 'edit-job' ? (
             <EditJob
               jobId={pathParam}

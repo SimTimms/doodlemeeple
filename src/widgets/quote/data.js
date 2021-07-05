@@ -15,6 +15,7 @@ export const QUOTE_VIEW_WIDGET = gql`
         name
         website
         publicEmail
+        profileImg
       }
       job {
         _id

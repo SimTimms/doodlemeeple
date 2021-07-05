@@ -12,7 +12,6 @@ export default function JobPosts({ history }) {
   return (
     <Column w={600}>
       <Divider />
-
       <Column a="center" j="flex-start">
         <Query
           query={JOBS}

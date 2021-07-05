@@ -1,7 +1,6 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
+import { Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
-import Icon from '@material-ui/core/Icon';
 import { CardComponent, Column, Row } from '../';
 import clsx from 'clsx';
 
@@ -96,6 +95,26 @@ export default function JobComponent({ job, game, history }) {
               : draft && 'Task: Finish and submit'}
           </Typography>
         </Column>
+        <Column a="center">
+          <Row j="flex-end">
+            {job.contracts.map((contract, index) => {
+              if (contract.status === 'submitted')
+                return (
+                  <div key={`invite_${index}`} title={`${contract.user.name}`}>
+                    <div
+                      style={{
+                        backgroundImage: `url(${contract.user.profileImg})`,
+                      }}
+                      className={classes.profileThumb}
+                    >
+                      <Icon className={classes.count}>mail</Icon>
+                    </div>
+                  </div>
+                );
+            })}
+          </Row>
+        </Column>
+
         {assignedCreative ? (
           <div key={`invite_1`} title={`${assignedCreative.name} Active`}>
             <div

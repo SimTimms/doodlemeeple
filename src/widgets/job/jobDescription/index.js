@@ -7,8 +7,12 @@ import { Row, Column, IconButton } from '../../../components';
 import imageOptimiser from '../../../utils/imageOptimiser';
 import BigImage from '../../bigImage';
 import ReactPlayer from 'react-player';
+import Cookies from 'js-cookie';
+import { Mutation } from 'react-apollo';
+import { CREATE_CONTRACT } from '../../../data/mutations';
 
-export default function JobDescription({ job }) {
+export default function JobDescription({ job, history }) {
+  const userId = Cookies.get('userId');
   const classes = useStyles();
   const [large, setLarge] = React.useState(null);
   const [previewImage, setPreviewImage] = React.useState(null);
@@ -126,19 +130,19 @@ export default function JobDescription({ job }) {
           </Column>
         )}
         <Column>
-          <div className={classes.divider}></div>
           {job.submitted === 'accepted' && (
             <Typography style={{ marginBottom: 20, marginTop: 10 }}>
               This job has been assigned
             </Typography>
           )}
-          {job.submitted !== 'accepted' && (
+          {job.submitted !== 'accepted' && !userId && (
             <a
               href={`/app/view-public-job/${job._id}`}
               target="_blank"
               rel="noopener noreferrer"
               style={{ textDecoration: 'none' }}
             >
+              <div className={classes.divider}></div>
               <IconButton
                 title="Apply on DoodleMeeple"
                 icon="chevron_right"
@@ -146,6 +150,39 @@ export default function JobDescription({ job }) {
                 onClickEvent={() => {}}
               />
             </a>
+          )}
+          {userId && userId !== job.user._id && (
+            <Mutation
+              mutation={CREATE_CONTRACT}
+              variables={{
+                currency: 'GBP',
+                cost: '100',
+                jobId: job._id,
+                status: '',
+              }}
+              onCompleted={(data) => {
+                history.push(
+                  `/app/edit-quote/${data.contractCreateOne.recordId}`
+                );
+              }}
+            >
+              {(mutation) => {
+                return (
+                  <Column>
+                    <div className={classes.divider}></div>
+                    <IconButton
+                      disabled={false}
+                      color="warning"
+                      title={'Create a Quote'}
+                      icon="fact_check"
+                      onClickEvent={() => {
+                        mutation();
+                      }}
+                    />
+                  </Column>
+                );
+              }}
+            </Mutation>
           )}
           {job.contactEmail && job.submitted !== 'accepted' && (
             <Column>

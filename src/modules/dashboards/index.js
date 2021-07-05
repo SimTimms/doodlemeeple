@@ -37,7 +37,11 @@ export default function ProjectDash({
       {job.isPublic && accepted && (
         <Widget p={10}>
           <Typography>Your Creative</Typography>
-          <ChosenCreative user={job.assignedCreative} history={history} />
+          <ChosenCreative
+            user={job.assignedCreative}
+            history={history}
+            setConversationUser={setConversationUser}
+          />
         </Widget>
       )}
       {invites.length > 0 && !draft && (

@@ -15,4 +15,5 @@ export const useStyles = makeStyles((theme) => ({
     paddingRight: 10,
     fontWeight: '700',
   },
+  avatar: { borderRadius: '50%', width: 30, height: 30, marginLeft: 10 },
 }));
