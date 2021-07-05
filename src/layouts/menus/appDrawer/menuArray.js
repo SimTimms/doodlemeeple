@@ -3,21 +3,33 @@ import Cookies from 'js-cookie';
 export default function menuArray(history, counts, profile) {
   return [
     {
-      name: 'Projects',
+      name: 'Jobs',
       icon: 'work',
       machineName: 'projects',
       link: () => history.push('/app/projects'),
       count: { icon: 'star', count: counts.quotes },
     },
+
     {
-      name: 'Invites',
+      name: 'Quotes Out',
       icon: 'mail',
-      machineName: 'invites',
-      link: () => history.push('/app/invites'),
-      count: counts.invites > 0 && {
-        icon: 'local_post_office',
-        count: counts.invites,
-      },
+      machineName: 'quotes-out',
+      link: () => history.push('/app/quotes-out'),
+      count: 0,
+    },
+    {
+      name: 'Quotes In',
+      icon: 'mail',
+      machineName: 'quotes-in',
+      link: () => history.push('/app/quotes-in'),
+      count: 0,
+    },
+    {
+      name: 'Job Board',
+      icon: 'work',
+      machineName: 'job-board',
+      link: () => history.push('/app/job-board'),
+      count: 0,
     },
     {
       name: 'Community',

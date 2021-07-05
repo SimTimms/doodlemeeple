@@ -79,8 +79,10 @@ export default function JobComponent({ job, game, history }) {
               ? 'Task: Reply to Quote'
               : complete
               ? 'Completed'
-              : submitted
+              : submitted && !job.isPublic
               ? 'Invites sent'
+              : submitted && job.isPublic
+              ? 'Submitted'
               : closed
               ? 'Closed'
               : accepted

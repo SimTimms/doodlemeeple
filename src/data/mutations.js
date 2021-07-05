@@ -325,6 +325,7 @@ export const ADD_FAVOURITE = gql`
 export const UPDATE_JOB = gql`
   mutation UpdateJob(
     $_id: MongoID!
+    $contactEmail: String
     $name: String
     $img: String
     $summary: String
@@ -349,6 +350,7 @@ export const UPDATE_JOB = gql`
     jobUpdateById(
       record: {
         _id: $_id
+        contactEmail: $contactEmail
         name: $name
         img: $img
         summary: $summary

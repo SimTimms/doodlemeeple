@@ -1,0 +1,48 @@
+import { makeStyles } from '@material-ui/core/styles';
+export const useStyles = makeStyles((theme) => ({
+  creativeCard: {
+    margin: 10,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    border: '1px solid #ddd',
+    minWidth: 270,
+    width: '100%',
+    maxWidth: 500,
+    position: 'relative',
+    boxShadow: '10px 10px 20px rgba(0,0,0,0.2)',
+    background: '#fff',
+  },
+  imageThumb: {
+    height: 54,
+    width: '20%',
+    marginLeft: 2,
+    marginRight: 2,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  },
+  divider: {
+    width: '60%',
+    borderTop: '1px solid #ddd',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    paddingBottom: 6,
+    marginTop: 6,
+  },
+  summary: { paddingBottom: 6, paddingLeft: 10, paddingRight: 10 },
+  title: {
+    paddingBottom: 6,
+    paddingLeft: 10,
+    paddingRight: 10,
+    fontWeight: '700',
+  },
+  meta: { fontStyle: 'italic', marginBottom: 6, fontSize: 12 },
+  jobName: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 16,
+    marginTop: 5,
+    marginBottom: 5,
+  },
+}));

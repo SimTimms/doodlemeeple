@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
     background: '#fff',
   },
   imageThumb: {
-    height: 54,
+    minHeight: 54,
     width: '20%',
     marginLeft: 2,
     marginRight: 2,

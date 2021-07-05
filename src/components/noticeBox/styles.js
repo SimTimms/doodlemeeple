@@ -8,11 +8,10 @@ export const useStyles = makeStyles((theme) => ({
     padding: 15,
     boxSizing: 'border-box',
     marginBottom: 20,
+    background: theme.palette.primary.main,
   },
   primary: {
     width: '100%',
-    border: `2px solid ${theme.palette.primary.main}`,
-    background: '#fff',
     color: theme.palette.primary.main,
     textAlign: 'center',
   },

@@ -20,16 +20,6 @@ export default function TaskGeneratorClient({
   const noContracts = contracts.length === 0;
   const isDraft = job.submitted === 'draft';
 
-  !accepted &&
-    contracts.map((contract, index) => {
-      elementArray.push(
-        <TaskOpenQuote
-          setOpenQuoteId={() => setOpenQuoteId(contract._id)}
-          key={`task_${index}`}
-        />
-      );
-    }, elementArray);
-
   isDraft &&
     elementArray.push(
       <TaskContinueWithJobDraft history={history} jobId={job._id} />

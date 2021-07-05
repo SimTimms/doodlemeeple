@@ -9,8 +9,6 @@ export default function ProfileImg({ creative }) {
     <div
       className={clsx({
         [classes.creativeCardBackground]: true,
-        [classes.noProfile]: !creative.profileImg,
-        [classes.profileNoBG]: !creative.profileBG,
       })}
       style={{
         backgroundImage:

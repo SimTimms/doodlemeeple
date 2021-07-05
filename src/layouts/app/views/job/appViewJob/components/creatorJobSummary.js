@@ -6,6 +6,7 @@ import CloseJobButton from './closeJobButton';
 import EndJobButton from './endJobButton';
 import RequestCloseButton from './requestCloseButton';
 import JobSummaryComponent from './jobSummaryComponent';
+import { JobDescriptionWidget } from '../../../../../../widgets';
 
 export default function CreatorJobSummary({ jobData, setTabNbr }) {
   const classes = useStyles();
@@ -20,20 +21,20 @@ export default function CreatorJobSummary({ jobData, setTabNbr }) {
   return (
     <Slide direction="up" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <Paper pt={16}>
-          <Column>
-            <JobSummaryComponent job={job} />
-          </Column>
-          {job.submitted !== 'closed' && job.submitted !== 'complete' && (
+        <Column>
+          <JobDescriptionWidget jobId={job._id} />
+        </Column>
+        {job.submitted !== 'closed' &&
+          job.submitted !== 'complete' &&
+          job.submitted !== 'accepted' && (
             <CloseJobButton job={jobData} setTabNbr={setTabNbr} />
           )}
-          {job.submitted === 'paid' && allPaid && (
-            <EndJobButton job={jobData} setTabNbr={setTabNbr} />
-          )}
-          {job.submitted === 'paid' && !allPaid && (
-            <RequestCloseButton job={jobData} setTabNbr={setTabNbr} />
-          )}
-        </Paper>
+        {job.submitted === 'paid' && allPaid && (
+          <EndJobButton job={jobData} setTabNbr={setTabNbr} />
+        )}
+        {job.submitted === 'paid' && !allPaid && (
+          <RequestCloseButton job={jobData} setTabNbr={setTabNbr} />
+        )}
       </div>
     </Slide>
   );

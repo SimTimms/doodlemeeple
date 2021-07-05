@@ -23,8 +23,6 @@ export default function AppInvites({ history }) {
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <Column w="100%">
-          <CreativeInvitesMenu setTabNbr={setTabNbr} tabNbr={tabNbr} />
-          <Divider />
           <Column w={600}>
             {inviteArray.length > 0 && (
               <Paper p={10}>

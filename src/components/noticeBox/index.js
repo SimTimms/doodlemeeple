@@ -16,17 +16,18 @@ export default function NoticeBox({ title, ...props }) {
         [classes.warning]: color === 'warning',
       })}
     >
-      <Typography variant="h4">{title}</Typography>
+      <Typography variant="h4" style={{ color: '#fff' }}>
+        {title}
+      </Typography>
       <Typography
         variant="body1"
         style={{
-          background: '#fff',
           marginTop: 10,
           marginBottom: 6,
           padding: 20,
           borderRadius: 5,
           fontSize: 16,
-          color: '#222',
+          color: '#fff',
         }}
       >
         {subTitle}

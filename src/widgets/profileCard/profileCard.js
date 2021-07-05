@@ -22,8 +22,8 @@ export default function ProfileCard({ creative, setLarge, history }) {
   const [images, setImages] = React.useState([]);
 
   useEffect(() => {
-    setPreviewImage(creative.profileBG);
-    setImages([{ img: creative.profileBG }]);
+    creative.profileBG && setPreviewImage(creative.profileBG);
+    creative.profileBG && setImages([{ img: creative.profileBG }]);
   }, [creative]);
 
   return (
@@ -45,7 +45,7 @@ export default function ProfileCard({ creative, setLarge, history }) {
           fetchPolicy="network-only"
           variables={{ userId: creative._id }}
           onCompleted={({ profileImages }) => {
-            setImages([{ img: creative.profileBG }, ...profileImages]);
+            setImages([...images, ...profileImages]);
           }}
         >
           {({ loading, data }) => {
@@ -55,20 +55,24 @@ export default function ProfileCard({ creative, setLarge, history }) {
         </Query>
       </Row>
       <Row h={60} w="100%" bg="#222" of="hidden">
-        {images.map((image, index) => {
-          if (index > 4) return null;
-          return (
-            <div
-              className={classes.imageThumb}
-              style={{ backgroundImage: `url(${imageOptimiser(image.img)})` }}
-              onMouseEnter={() => setPreviewImage(image.img)}
-              onClick={() => {
-                setPreviewImage(image.img);
-                setLarge(image.img);
-              }}
-            ></div>
-          );
-        })}
+        {images.length === 0 && (
+          <Typography style={{ color: '#fff' }}>No Images</Typography>
+        )}
+        {images.length > 0 &&
+          images.map((image, index) => {
+            if (index > 4) return null;
+            return (
+              <div
+                className={classes.imageThumb}
+                style={{ backgroundImage: `url(${imageOptimiser(image.img)})` }}
+                onMouseEnter={() => setPreviewImage(image.img)}
+                onClick={() => {
+                  setPreviewImage(image.img);
+                  setLarge(image.img);
+                }}
+              ></div>
+            );
+          })}
       </Row>
       <Row>
         <ProfileImg creative={creative} />

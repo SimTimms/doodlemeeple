@@ -208,7 +208,7 @@ export function TaskPostJob({ history }) {
 export function TaskContinueWithJobDraft({ jobId, history }) {
   return (
     <TaskButton
-      title="Submit this Project"
+      title="Continue Editing"
       subTitle="Project"
       icon="work"
       color="primary"

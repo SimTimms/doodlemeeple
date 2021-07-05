@@ -1,4 +1,5 @@
 export default function imageOptimiser(imageURL) {
+  if (!imageURL) return '';
   let optimisedImage = imageURL.replace(
     'https://dm-uploads-uk.s3.amazonaws.com/',
     'https://dm-upload-resize.s3.amazonaws.com/small/'

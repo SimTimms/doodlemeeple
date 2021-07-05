@@ -24,8 +24,8 @@ export default function FeaturedCreative({ history, featuredArticle }) {
               <Row pb={10} pt={10}>
                 <img
                   src={
-                    data.userById
-                      ? data.userById.profileImg
+                    data.featuredProfile
+                      ? data.featuredProfile.profileImg
                       : process.env.REACT_APP_DEVICE
                   }
                   alt=""

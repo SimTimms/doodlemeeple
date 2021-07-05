@@ -3,7 +3,7 @@ import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { FEATURED_CREATIVES_WIDGET } from './data';
 import { ProfileCardMini } from './profileCard/';
-import BigImage from './profileCard/components/bigImage';
+import BigImage from './bigImage';
 
 export default function FeaturedCreativeMiniWidget() {
   const classes = useStyles();

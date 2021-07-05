@@ -8,6 +8,7 @@ import {
   FeaturedCreativeMiniWidget,
   CreativeRosterWidget,
   KickstarterWidget,
+  JobDescriptionWidget,
 } from '../widgets';
 
 export default function PublicRoutes({ theme, props: { ...props } }) {
@@ -17,7 +18,6 @@ export default function PublicRoutes({ theme, props: { ...props } }) {
         path="/featured-creative-widget"
         render={(props) => <FeaturedCreativeWidget />}
       />
-
       <Route
         path="/featured-creative-mini-widget"
         render={(props) => <FeaturedCreativeMiniWidget />}
@@ -29,6 +29,12 @@ export default function PublicRoutes({ theme, props: { ...props } }) {
       <Route
         path="/featured-kickstarters"
         render={(props) => <KickstarterWidget />}
+      />
+      <Route
+        path="/job-description/:jobId"
+        render={(props) => (
+          <JobDescriptionWidget jobId={props.match.params.jobId} />
+        )}
       />
       <Route
         path="/public-preview/:pathParam?"
@@ -47,7 +53,6 @@ export default function PublicRoutes({ theme, props: { ...props } }) {
         path="/:page"
         render={(props) => <PublicLayout {...props} theme={theme} />}
       />
-
       <Route
         path="/"
         render={(props) => <PublicLayout {...props} theme={theme} />}

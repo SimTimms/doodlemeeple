@@ -6,8 +6,10 @@ import {
   Widget,
   Divider,
   Row,
+  ChosenCreative,
 } from '../../components';
 import { TaskGeneratorClient } from '../../modules/tasks';
+import { ResponsesWidget } from '../../widgets';
 
 export default function ProjectDash({
   invites,
@@ -24,12 +26,29 @@ export default function ProjectDash({
         (invite) => invite.receiver._id === job.assignedCreative._id
       )
     : invites;
-
   return (
     <Column w={600} p={10} j="center">
+      {job.isPublic && !accepted && (
+        <Widget p={10}>
+          <Typography>Responses</Typography>
+          <ResponsesWidget jobId={job._id} history={history} />
+        </Widget>
+      )}
+      {job.isPublic && accepted && (
+        <Widget p={10}>
+          <Typography>Your Creative</Typography>
+          <ChosenCreative user={job.assignedCreative} history={history} />
+        </Widget>
+      )}
       {invites.length > 0 && !draft && (
         <Widget p={10}>
-          <Typography>{accepted ? 'Creative' : 'Invited Creatives'}</Typography>
+          {!job.isPublic ? (
+            <Typography>
+              {accepted ? 'Creative' : 'Invited Creatives'}
+            </Typography>
+          ) : (
+            <Typography>Responses</Typography>
+          )}
 
           {inviteFiltered.map((invite, index) => {
             const contractSubmitted = invite.job.contracts.filter(

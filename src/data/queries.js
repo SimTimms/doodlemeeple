@@ -1,7 +1,13 @@
 import gql from 'graphql-tag';
 
-import { JOBS, JOB_CREATIVE, JOB, JOB_CONTACT_DETAILS } from './job';
-export { JOBS, JOB_CREATIVE, JOB, JOB_CONTACT_DETAILS };
+import {
+  JOBS,
+  JOB_CREATIVE,
+  JOB,
+  JOB_CONTACT_DETAILS,
+  JOB_RESPONSES,
+} from './job';
+export { JOBS, JOB_CREATIVE, JOB, JOB_CONTACT_DETAILS, JOB_RESPONSES };
 
 export const CREATIVES = gql`
   query GetCreatives($type: [String], $job: MongoID, $page: Int) {
@@ -315,8 +321,8 @@ export const GET_CONTRACT = gql`
 
 export const GET_CONTRACT_ID = gql`
   query GetContractId($contractId: String!) {
-    getContractId(contractId: $contractId) {
-      id
+    contractById(_id: $contractId) {
+      _id
       notes
       deadline
       startDate
@@ -326,25 +332,9 @@ export const GET_CONTRACT_ID = gql`
       signedBy
       status
       updatedAt
-      payments {
-        id
-        amount
-        currency
-        status
-        paidBy {
-          id
-          name
-        }
-        contract {
-          id
-        }
-        paymentId
-        createdAt
-        updatedAt
-      }
       user {
         email
-        id
+        _id
         name
         profileImg
       }
@@ -581,7 +571,7 @@ export const PROFILE_PREVIEW = gql`
 
 export const PROFILE_FEATURED = gql`
   query ProfilePreview($userId: MongoID!) {
-    userById(_id: $userId) {
+    featuredProfile(userId: $userId) {
       _id
       profileImg
       autosave

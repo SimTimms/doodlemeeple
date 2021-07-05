@@ -8,6 +8,7 @@ import {
   KickstarterWidget,
   KickstarterForm,
   FeaturedCreativeMiniWidget,
+  JobDescriptionWidget,
 } from '../widgets';
 
 export default function AuthRoutes({ theme, props: { ...props } }) {
@@ -30,6 +31,13 @@ export default function AuthRoutes({ theme, props: { ...props } }) {
         render={(props) => <KickstarterWidget />}
       />
       <Route path="/kickstarter" render={(props) => <KickstarterForm />} />
+
+      <Route
+        path="/job-description/:jobId"
+        render={(props) => (
+          <JobDescriptionWidget jobId={props.match.params.jobId} />
+        )}
+      />
       <Route
         path="/app/:page/:pathParam?/:pathParam2?"
         render={(props) => <AppLayout {...props} theme={theme} />}

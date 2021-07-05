@@ -11,6 +11,8 @@ import {
   JobComponent,
 } from '../../../../../components';
 import CreatorJobMenu from './creatorJobMenu';
+import JobPosts from './jobPosts';
+import AppInvites from '../../../views/appInvites';
 
 export default function Jobs({ history, theme }) {
   const classes = useStyles();
@@ -21,99 +23,8 @@ export default function Jobs({ history, theme }) {
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <CreatorJobMenu tabNbr={tabNbr} setTabNbr={setTabNbr} />
-        {tabNbr === 1 && (
-          <Column w={600}>
-            <Divider />
-
-            <Column a="center" j="flex-start">
-              <Query
-                query={JOBS}
-                fetchPolicy="network-only"
-                variables={{
-                  status: [
-                    'draft',
-                    'submitted',
-                    'totalDecline',
-                    'paid',
-                    'accepted',
-                  ],
-                }}
-                onCompleted={() => {
-                  setLoading(false);
-                }}
-              >
-                {({ data, loading }) => {
-                  const activeJobs = data
-                    ? data.jobsByUser.map((job, index) => {
-                        return (
-                          job.submitted && (
-                            <JobComponent
-                              key={`project_${index}`}
-                              job={job}
-                              game={job.game ? job.game : { name: '' }}
-                              history={history}
-                            />
-                          )
-                        );
-                      })
-                    : null;
-
-                  return loading ? (
-                    <LoadIcon />
-                  ) : activeJobs ? (
-                    activeJobs.length > 0 ? (
-                      <Column a="center" j="flex-start">
-                        <Divider />
-                        {activeJobs}
-                      </Column>
-                    ) : null
-                  ) : null;
-                }}
-              </Query>
-            </Column>
-            <Column a="center" j="flex-start">
-              {loading && <LoadIcon />}
-              <Query
-                query={JOBS}
-                fetchPolicy="network-only"
-                variables={{ status: [''] }}
-                onCompleted={() => {
-                  setLoading(false);
-                }}
-              >
-                {({ data }) => {
-                  const activeJobs = data
-                    ? data.jobsByUser.map((job, index) => {
-                        return (
-                          <JobComponent
-                            key={`project_${index}`}
-                            job={job}
-                            game={job.game ? job.game : { name: '' }}
-                            history={history}
-                          />
-                        );
-                      })
-                    : null;
-
-                  return activeJobs ? (
-                    activeJobs.length > 0 ? (
-                      <Column a="center" j="flex-start">
-                        <Divider />
-                        <FieldTitleDashboard
-                          name="Drafts"
-                          inline={false}
-                          a="l"
-                        />
-                        <Divider />
-                        {activeJobs}
-                      </Column>
-                    ) : null
-                  ) : null;
-                }}
-              </Query>
-            </Column>
-          </Column>
-        )}
+        {tabNbr === 1 && <JobPosts history={history} />}
+        {tabNbr === 3 && <AppInvites history={history} />}
         {tabNbr === 2 && (
           <Column w={600}>
             <Column a="center" j="flex-start">

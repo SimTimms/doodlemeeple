@@ -13,13 +13,14 @@ import AppProfileEdit from './views/appProfileEdit';
 import ConversationModule from './views/conversations';
 import PickJobType from './views/job/editJob/components/pickJobType';
 import ConfirmJob from './views/job/editJob/components/confirmJob';
+import SubmitJob from './views/job/editJob/components/submitJob';
 import { Account } from './views/account';
 import FullContract from './views/fullContract';
 import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
-import { EditJob, Jobs, AppViewJob } from './views/job';
+import { EditJob, Jobs, AppViewJob, AppViewJobPublic } from './views/job';
 import { EditQuote } from '../../modules/quotes';
-import { AppViewContract, EditContract } from './views/contract';
+import { EditContract } from './views/contract';
 import Withdraw from './views/withdraw';
 import ViewProposal from './views/viewProposal';
 import { PickArtist } from './views/pickArtist';
@@ -36,6 +37,13 @@ import {
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 import logout from '../../utils/logout';
 import CreativeRosterWidget from '../../widgets/creativeRoster';
+import {
+  QuoteInWidget,
+  QuoteOutWidget,
+  QuoteViewWidget,
+  JobBoardWidget,
+  FullContractWidget,
+} from '../../widgets';
 
 function AppLayout(props) {
   const [page, setPage] = React.useState('tasks');
@@ -212,6 +220,12 @@ function AppLayout(props) {
               history={history}
               creativeId={pathParam2}
             />
+          ) : page === 'quotes-out' ? (
+            <QuoteOutWidget history={history} />
+          ) : page === 'quotes-in' ? (
+            <QuoteInWidget history={history} />
+          ) : page === 'view-quote' ? (
+            <QuoteViewWidget history={history} quoteId={pathParam} />
           ) : page === 'edit-quote' ? (
             <Query
               query={PREVIEW_CONTRACT}
@@ -232,12 +246,20 @@ function AppLayout(props) {
             </Query>
           ) : page === 'view-job' && profile ? (
             <AppViewJob jobId={pathParam} history={history} />
+          ) : page === 'contract' && profile ? (
+            <AppViewJob jobId={pathParam} history={history} />
+          ) : page === 'view-public-job' && profile ? (
+            <AppViewJobPublic jobId={pathParam} history={history} />
+          ) : page === 'job-board' && profile ? (
+            <JobBoardWidget history={history} />
           ) : page === 'view-proposal' ? (
             <ViewProposal jobId={pathParam} history={history} />
           ) : page === 'view-contract' ? (
-            <AppViewContract contractId={pathParam} history={history} />
+            <EditContract contractId={pathParam} history={history} />
           ) : page === 'view-full-contract' ? (
             <FullContract contractId={pathParam} history={history} />
+          ) : page === 'view-sign-full-contract' ? (
+            <FullContractWidget contractId={pathParam} history={history} />
           ) : page === 'edit-contract' ? (
             <EditContract contractId={pathParam} history={history} />
           ) : page === 'community' ? (
@@ -274,6 +296,8 @@ function AppLayout(props) {
             />
           ) : page === 'confirm-job' ? (
             <ConfirmJob jobId={pathParam} history={history} />
+          ) : page === 'submit-job' ? (
+            <SubmitJob jobId={pathParam} history={history} />
           ) : page === 'create-quote' ? (
             <NewQuote projectId={pathParam} />
           ) : null}

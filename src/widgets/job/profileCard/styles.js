@@ -13,7 +13,6 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     boxShadow: '10px 10px 20px rgba(0,0,0,0.2)',
     background: '#fff',
-    height: 300,
   },
   divider: {
     width: '60%',
@@ -21,6 +20,8 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     paddingBottom: 6,
+    marginTop: 6,
   },
   summary: { paddingBottom: 6, paddingLeft: 10, paddingRight: 10 },
+  meta: { fontStyle: 'italic', marginBottom: 6, fontSize: 12 },
 }));

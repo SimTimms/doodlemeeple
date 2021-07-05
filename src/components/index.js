@@ -46,7 +46,12 @@ import MenuButton from './buttons/menuButton';
 import CreateQuoteButton from './buttons/createQuote';
 import MenuButtonShortcut from './buttons/menuButtonShortcut';
 import FieldTitle from './fieldTitle';
-import { JobComponent, InviteComponent } from './jobComponent';
+import {
+  JobComponent,
+  InviteComponent,
+  ResponseComponent,
+  ChosenCreative,
+} from './jobComponent';
 import InviteComponentDash from './inviteComponentDash';
 import FieldTitleDashboard from './fieldTitleDashboard';
 import FieldBox from './fieldBox';
@@ -105,6 +110,8 @@ import {
 import { Column, Row, TopMenuWrapper, RowCheckList } from './blocks';
 
 export {
+  ResponseComponent,
+  ChosenCreative,
   UserDeleted,
   CreativeRosterProfiles,
   FeaturedCreative,

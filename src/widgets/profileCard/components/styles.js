@@ -9,7 +9,7 @@ export const useStyles = makeStyles((theme) => ({
   background: {
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    backgroundColor: '#333',
+    backgroundColor: theme.palette.primary.main,
     backgroundPosition: 'center center',
     height: 120,
     width: '100%',
