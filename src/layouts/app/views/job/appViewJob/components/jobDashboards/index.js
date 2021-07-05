@@ -13,13 +13,11 @@ export function CreativeDashboard({
   userContractStatus,
   contractData,
 }) {
-  const declined = invite.data.status === 'declined';
-
   return (
     <Column>
       <Row a="flex-start">
         <CheckListCreativeDash
-          declined={declined}
+          declined={invite && invite.data && invite.data.status === 'declined'}
           invite={invite.data}
           setTabNbr={setTabNbr}
           job={job}

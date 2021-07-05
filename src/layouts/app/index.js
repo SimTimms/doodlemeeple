@@ -43,6 +43,7 @@ import {
   QuoteViewWidget,
   JobBoardWidget,
   FullContractWidget,
+  JobDescriptionWidget,
 } from '../../widgets';
 
 function AppLayout(props) {
@@ -214,6 +215,8 @@ function AppLayout(props) {
               autosaveIsOn={true}
               history={history}
             />
+          ) : page === 'job-description' ? (
+            <JobDescriptionWidget jobId={pathParam} />
           ) : page === 'edit-job' ? (
             <EditJob
               jobId={pathParam}

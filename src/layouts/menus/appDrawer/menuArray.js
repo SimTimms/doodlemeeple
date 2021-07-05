@@ -9,21 +9,6 @@ export default function menuArray(history, counts, profile) {
       link: () => history.push('/app/projects'),
       count: { icon: 'star', count: counts.quotes },
     },
-
-    {
-      name: 'Quotes Out',
-      icon: 'mail',
-      machineName: 'quotes-out',
-      link: () => history.push('/app/quotes-out'),
-      count: 0,
-    },
-    {
-      name: 'Quotes In',
-      icon: 'mail',
-      machineName: 'quotes-in',
-      link: () => history.push('/app/quotes-in'),
-      count: 0,
-    },
     {
       name: 'Job Board',
       icon: 'work',

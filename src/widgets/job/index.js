@@ -3,6 +3,7 @@ import JobDescriptionWidget from './jobDescriptionWidget';
 import JobBoardWidget from './jobBoardWidget';
 import ResponsesWidget from './responsesWidget';
 import FullContractWidget from './fullContractWidget';
+import QuoteComponent from './quoteComponent';
 
 export {
   JobWidget,
@@ -10,4 +11,5 @@ export {
   JobBoardWidget,
   ResponsesWidget,
   FullContractWidget,
+  QuoteComponent,
 };

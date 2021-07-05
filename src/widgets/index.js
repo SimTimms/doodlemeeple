@@ -10,6 +10,7 @@ import {
   JobBoardWidget,
   ResponsesWidget,
   FullContractWidget,
+  QuoteComponent,
 } from './job';
 
 export {
@@ -26,4 +27,5 @@ export {
   QuoteOutWidget,
   QuoteInWidget,
   QuoteViewWidget,
+  QuoteComponent,
 };

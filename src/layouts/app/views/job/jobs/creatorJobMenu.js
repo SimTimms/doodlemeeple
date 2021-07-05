@@ -36,6 +36,19 @@ export default function CreatorJobMenu({ tabNbr, setTabNbr }) {
         />
         <MenuButtonShortcut
           text={{
+            name: 'Quotes',
+            color: 'light',
+            icon: 'work',
+            count: 0,
+          }}
+          onClickEvent={() => {
+            setTabNbr(4);
+          }}
+          active={tabNbr === 4}
+          column={true}
+        />
+        <MenuButtonShortcut
+          text={{
             name: 'History',
             color: 'light',
             icon: 'history',

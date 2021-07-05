@@ -31,10 +31,12 @@ export const QUOTE_WIDGET = gql`
       status
       cost
       job {
+        _id
         name
         user {
           _id
           name
+          profileImg
         }
       }
     }

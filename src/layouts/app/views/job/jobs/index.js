@@ -13,6 +13,7 @@ import {
 import CreatorJobMenu from './creatorJobMenu';
 import JobPosts from './jobPosts';
 import AppInvites from '../../../views/appInvites';
+import { QuoteOutWidget } from '../../../../../widgets';
 
 export default function Jobs({ history, theme }) {
   const classes = useStyles();
@@ -25,6 +26,7 @@ export default function Jobs({ history, theme }) {
         <CreatorJobMenu tabNbr={tabNbr} setTabNbr={setTabNbr} />
         {tabNbr === 1 && <JobPosts history={history} />}
         {tabNbr === 3 && <AppInvites history={history} />}
+        {tabNbr === 4 && <QuoteOutWidget history={history} />}
         {tabNbr === 2 && (
           <Column w={600}>
             <Column a="center" j="flex-start">
