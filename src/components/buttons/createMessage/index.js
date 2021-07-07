@@ -20,7 +20,7 @@ export default function CreateMessage({
       <div className={classes.header}>
         <IconButton
           icon="close"
-          title="Close"
+          title="Close Chat"
           disabled={false}
           color="text-white-mini"
           onClickEvent={() => {

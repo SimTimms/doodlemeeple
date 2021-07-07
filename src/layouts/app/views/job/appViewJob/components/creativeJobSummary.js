@@ -71,7 +71,7 @@ export default function CreativeJobSummary({
                 inviteId={invite.data._id}
                 onClickEvent={() => {
                   invite.setData({ ...invite, status: null });
-                  setTabNbr(6);
+                  history.push(`/app/edit-quote/${job.job._id}`);
                 }}
                 onDeclineEvent={() => {
                   invite.setData({ ...invite, status: 'declined' });

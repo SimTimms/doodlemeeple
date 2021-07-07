@@ -7,6 +7,7 @@ import clsx from 'clsx';
 export default function QuoteComponent({ contract, history }) {
   const classes = useStyles();
   const accepted = contract.status === 'accepted';
+  const declined = contract.status === 'declined';
   if (!contract.job) return null;
   return (
     <Paper p={10}>
@@ -39,7 +40,7 @@ export default function QuoteComponent({ contract, history }) {
               </Typography>
             </Column>
           </Row>
-          {!accepted ? (
+          {!accepted && !declined ? (
             <MenuButtonShortcut
               text={{
                 name: 'Edit',
@@ -64,7 +65,7 @@ export default function QuoteComponent({ contract, history }) {
                 back: 'primary',
               }}
               onClickEvent={() => {
-                history.push(`/app/view-job/${contract.job._id}`);
+                history.push(`/app/view-quote-job/${contract.job._id}`);
               }}
               active={false}
               countIcon="star"

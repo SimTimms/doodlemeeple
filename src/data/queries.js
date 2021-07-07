@@ -6,8 +6,16 @@ import {
   JOB,
   JOB_CONTACT_DETAILS,
   JOB_RESPONSES,
+  JOB_CONTRACT,
 } from './job';
-export { JOBS, JOB_CREATIVE, JOB, JOB_CONTACT_DETAILS, JOB_RESPONSES };
+export {
+  JOBS,
+  JOB_CREATIVE,
+  JOB,
+  JOB_CONTACT_DETAILS,
+  JOB_RESPONSES,
+  JOB_CONTRACT,
+};
 
 export const CREATIVES = gql`
   query GetCreatives($type: [String], $job: MongoID, $page: Int) {
@@ -452,6 +460,8 @@ export const COUNTS = gql`
       totalDeclined
       draftJobs
       unansweredQuotes
+      quotesDeclined
+      quotesAccepted
     }
   }
 `;

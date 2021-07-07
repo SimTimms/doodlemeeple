@@ -8,6 +8,8 @@ import {
   TaskFeature,
   TaskSkill,
   TaskPostJob,
+  TaskQuoteDeclined,
+  TaskQuoteAccepted,
   TaskSocials,
   TaskContact,
   TaskSubmitQuote,
@@ -17,85 +19,106 @@ import {
   TaskCommunity,
   UnansweredQuotes,
   TaskPatreon,
+  TaskJobBoard,
 } from '../../modules/tasks';
 import preferencesSet from '../../utils/preferencesSet';
 
 export default function TaskGenerator({
-  messages,
-  profile,
   data,
   history,
-  skills,
-  jobs,
-  socials,
-  contact,
-  draftQuotes,
-  invites,
-  totalDeclined,
-  draftJobs,
-  unansweredQuotes,
   drawerButtonChange,
+  ...props
 }) {
   const elementArray = [];
+  const {
+    messages,
+    profile,
+    skills,
+    jobs,
+    socials,
+    contact,
+    draftQuotes,
+    invites,
+    totalDeclined,
+    draftJobs,
+    unansweredQuotes,
+    quotesDeclined,
+    quotesAccepted,
+  } = props;
 
-  if (messages > 0) {
-    elementArray.push(<TaskUnreadMessages data={data} history={history} />);
+  if (messages && !jobs && !draftQuotes && !profile && !invites) {
+    if (messages > 0) {
+      elementArray.push(<TaskUnreadMessages data={data} history={history} />);
+    }
   }
 
-  if (totalDeclined > 0) {
-    elementArray.push(<TaskCloseProject data={data} history={history} />);
-  } else if (draftJobs > 0) {
-    elementArray.push(<TaskSubmitDraftProject data={data} history={history} />);
-  } else if (jobs > 0) {
-    elementArray.push(<TaskCheckProject data={data} history={history} />);
+  if (jobs) {
+    if (totalDeclined > 0) {
+      elementArray.push(<TaskCloseProject data={data} history={history} />);
+    }
+    if (draftJobs > 0) {
+      elementArray.push(
+        <TaskSubmitDraftProject data={data} history={history} />
+      );
+    }
+    if (unansweredQuotes > 0) {
+      elementArray.push(<UnansweredQuotes history={history} />);
+    }
+  }
+
+  if (profile) {
+    if (!preferencesSet(profile)) {
+      elementArray.push(<TaskRole history={history} />);
+    }
+
+    if (!profile.summary) {
+      elementArray.push(<TaskSummary history={history} />);
+    }
+
+    if (!profile.profileImg) {
+      elementArray.push(<TaskAvatar history={history} />);
+    }
+
+    if (!profile.profileBG) {
+      elementArray.push(<TaskFeature history={history} />);
+    }
+
+    if (skills === 0) {
+      elementArray.push(<TaskSkill history={history} />);
+    }
+
+    if (socials === 0) {
+      elementArray.push(<TaskSocials history={history} />);
+    }
+
+    if (contact === 0) {
+      elementArray.push(<TaskContact history={history} />);
+    }
+
     elementArray.push(<TaskPatreon data={data} history={history} />);
   }
 
-  if (!preferencesSet(profile)) {
-    elementArray.push(<TaskRole history={history} />);
-  }
-  if (!profile.summary) {
-    elementArray.push(<TaskSummary history={history} />);
-  }
+  if (draftQuotes || invites || quotesDeclined || quotesAccepted) {
+    if (draftQuotes > 0) {
+      elementArray.push(<TaskSubmitQuote history={history} />);
+    }
 
-  if (!profile.profileImg) {
-    elementArray.push(<TaskAvatar history={history} />);
-  }
+    if (quotesDeclined > 0) {
+      elementArray.push(<TaskQuoteDeclined history={history} />);
+    }
 
-  if (!profile.profileBG) {
-    elementArray.push(<TaskFeature history={history} />);
-  }
+    if (quotesAccepted > 0) {
+      elementArray.push(<TaskQuoteAccepted history={history} />);
+    }
 
-  if (skills === 0) {
-    elementArray.push(<TaskSkill history={history} />);
+    if (invites > 0) {
+      elementArray.push(<TaskInvites history={history} />);
+    }
   }
-
-  if (jobs === 0 && profile.creatorTrue) {
-    elementArray.push(<TaskPostJob history={history} />);
-  }
-
-  if (socials === 0) {
-    elementArray.push(<TaskSocials history={history} />);
-  }
-
-  if (contact === 0) {
-    elementArray.push(<TaskContact history={history} />);
-  }
-
-  if (draftQuotes > 0) {
-    elementArray.push(<TaskSubmitQuote history={history} />);
-  }
-
-  if (invites > 0) {
-    elementArray.push(<TaskInvites history={history} />);
-  }
-
-  if (unansweredQuotes > 0) {
-    elementArray.push(<UnansweredQuotes history={history} />);
-  }
-
   return elementArray.length > 0 ? (
     elementArray
+  ) : invites === 0 && draftQuotes === 0 ? (
+    <TaskJobBoard drawerButtonChange={drawerButtonChange} />
   ) : (
     <TaskCommunity drawerButtonChange={drawerButtonChange} />
   );

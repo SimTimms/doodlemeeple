@@ -165,6 +165,7 @@ export default function JobDescription({ job, history }) {
                   `/app/edit-quote/${data.contractCreateOne.recordId}`
                 );
               }}
+              onError={() => {}}
             >
               {(mutation) => {
                 return (
@@ -190,7 +191,10 @@ export default function JobDescription({ job, history }) {
               <Typography className={classes.title}>
                 You may also send applications to
               </Typography>
-              <Typography className={classes.summary}>
+              <Typography
+                className={classes.summary}
+                style={{ marginBottom: 10 }}
+              >
                 {job.contactEmail}
               </Typography>
             </Column>

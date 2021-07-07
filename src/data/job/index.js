@@ -32,6 +32,18 @@ export const JOB_RESPONSES = gql`
   }
 `;
 
+export const JOB_CONTRACT = gql`
+  query jobContract($jobId: MongoID!) {
+    jobContract(jobId: $jobId) {
+      _id
+      user {
+        _id
+      }
+      status
+    }
+  }
+`;
+
 export const JOB = gql`
   query GetJob($jobId: MongoID!) {
     jobById(_id: $jobId) {

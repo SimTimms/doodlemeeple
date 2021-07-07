@@ -35,7 +35,7 @@ export default function PublicInviteComponent({ invite, history }) {
             style={{ width: '100%', cursor: 'pointer' }}
             onClick={() => {
               invite.status === 'unopened' && mutation();
-              history.push(`/app/view-job/${invite.job._id}/${invite._id}`);
+              history.push(`/app/job-description/${invite.job._id}`);
             }}
           >
             <Column>
@@ -95,9 +95,7 @@ export default function PublicInviteComponent({ invite, history }) {
                   }}
                   onClickEvent={() => {
                     invite.status === 'unopened' && mutation();
-                    history.push(
-                      `/app/view-job/${invite.job._id}/${invite._id}`
-                    );
+                    history.push(`/app/job-description/${invite.job._id}`);
                   }}
                   active={false}
                   countIcon="star"

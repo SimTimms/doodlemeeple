@@ -11,9 +11,7 @@ export default function TaskGeneratorClient({
   setTabNbr,
   job,
   contracts,
-  setOpenQuoteId,
   history,
-  accepted,
 }) {
   const classes = useStyles();
   const elementArray = [];
@@ -26,9 +24,10 @@ export default function TaskGeneratorClient({
     );
   (noContracts || job.submitted === 'totalDecline') &&
     elementArray.push(<TaskCloseThisProject setTabNbr={setTabNbr} />);
+
   return elementArray.length > 0 ? (
     elementArray
   ) : (
-    <Typography className={classes.noTask}>You have no tasks</Typography>
+    <Typography style={{ fontStyle: 'italic' }}>You have no tasks</Typography>
   );
 }

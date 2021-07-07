@@ -25,16 +25,7 @@ export default function ResponseComponent({ contract, history }) {
             ></div>
             <Column a="flex-start">
               <Typography style={{ fontSize: 12 }}>
-                {`Invite from ${contract.user.name} for ${contract.job.name}`}
-              </Typography>
-              <Typography
-                style={{ fontSize: 12 }}
-                className={clsx({
-                  [classes.dull]: true,
-                  [classes.red]: false,
-                })}
-              >
-                Task: Review
+                {`Quote from ${contract.user.name} for ${contract.job.name}`}
               </Typography>
             </Column>
           </Row>

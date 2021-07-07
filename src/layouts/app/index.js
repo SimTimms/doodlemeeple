@@ -18,7 +18,13 @@ import { Account } from './views/account';
 import FullContract from './views/fullContract';
 import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
-import { EditJob, Jobs, AppViewJob, AppViewJobPublic } from './views/job';
+import {
+  EditJob,
+  Jobs,
+  AppViewJob,
+  AppViewQuoteJob,
+  AppViewJobPublic,
+} from './views/job';
 import { EditQuote } from '../../modules/quotes';
 import { EditContract } from './views/contract';
 import Withdraw from './views/withdraw';
@@ -101,7 +107,7 @@ function AppLayout(props) {
       <StyledNavBar open={open} history={history} theme={props.theme}>
         {page === 'projects' ? (
           <IconButton
-            title="Create a Project"
+            title="Create a Job"
             onClickEvent={() => {
               history.push(`/app/edit-job/new`);
             }}
@@ -111,6 +117,7 @@ function AppLayout(props) {
               zIndex: 100,
               marginRight: 'auto',
             }}
+            color="warning"
           />
         ) : (
           <div></div>
@@ -192,7 +199,7 @@ function AppLayout(props) {
           ) : page === 'games' ? (
             <Games history={history} />
           ) : page === 'projects' ? (
-            <Jobs history={history} theme={props.theme} />
+            <Jobs history={history} tab={pathParam} />
           ) : page === 'edit-profile' ? (
             <AppProfileEdit
               theme={props.theme}
@@ -249,6 +256,8 @@ function AppLayout(props) {
             </Query>
           ) : page === 'view-job' && profile ? (
             <AppViewJob jobId={pathParam} history={history} />
+          ) : page === 'view-quote-job' && profile ? (
+            <AppViewQuoteJob jobId={pathParam} history={history} />
           ) : page === 'contract' && profile ? (
             <AppViewJob jobId={pathParam} history={history} />
           ) : page === 'view-public-job' && profile ? (

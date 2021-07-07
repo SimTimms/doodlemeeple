@@ -4,11 +4,11 @@ export const useStyles = makeStyles((theme) => {
   return {
     root: {
       width: '100%',
-      height: 300,
-      background: theme.palette.primary.main,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      background: '#fff',
+      paddingTop: 5,
     },
     excerptBack: {
       background: theme.palette.secondary.main,

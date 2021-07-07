@@ -81,7 +81,6 @@ export default function ProjectDash({
         <Widget p={10}>
           <Column>
             <Typography variant="body1">Tasks</Typography>
-            <Divider />
             <Row>
               <TaskGeneratorClient
                 setTabNbr={setTabNbr}

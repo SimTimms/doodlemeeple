@@ -1,8 +1,9 @@
 import React from 'react';
-import { Row, LoadIcon } from '../';
+import { Row, Column, LoadIcon } from '../';
 import { Query } from 'react-apollo';
 import { COUNTS } from '../../data/queries';
 import TaskGenerator from './taskGenerator';
+import { Typography } from '@material-ui/core';
 
 export default function TaskComponent({
   history,
@@ -16,7 +17,6 @@ export default function TaskComponent({
           if (loading) {
             return null;
           }
-          console.log(data);
           const {
             messages,
             jobs,
@@ -26,28 +26,56 @@ export default function TaskComponent({
             draftQuotes,
             invites,
             totalDeclined,
+            quotesDeclined,
+            quotesAccepted,
             draftJobs,
             unansweredQuotes,
           } = data && data.counts ? data.counts : {};
-          console.log(data);
           return data ? (
-            <Row wrap="wrap" pb={5}>
-              <TaskGenerator
-                messages={messages}
-                profile={profile}
-                data={data}
-                history={history}
-                skills={skills}
-                jobs={jobs}
-                socials={socials}
-                contact={contact}
-                draftQuotes={draftQuotes}
-                invites={invites}
-                totalDeclined={totalDeclined}
-                draftJobs={draftJobs}
-                unansweredQuotes={unansweredQuotes}
-                drawerButtonChange={drawerButtonChange}
-              />
+            <Row wrap="wrap" a="flex-start">
+              <Column m={10} j="flex-start" w="20%">
+                <Typography>Messages</Typography>
+                <TaskGenerator
+                  messages={messages}
+                  data={data}
+                  history={history}
+                  drawerButtonChange={drawerButtonChange}
+                />
+              </Column>
+              <Column m={10} j="flex-start" w="20%">
+                <Typography>Jobs</Typography>
+                <TaskGenerator
+                  data={data}
+                  history={history}
+                  jobs={jobs}
+                  unansweredQuotes={unansweredQuotes}
+                  drawerButtonChange={drawerButtonChange}
+                />
+              </Column>
+              <Column m={10} j="flex-start" w="20%">
+                <Typography>Invites and Quotes</Typography>
+                <TaskGenerator
+                  data={data}
+                  history={history}
+                  draftQuotes={draftQuotes}
+                  invites={invites}
+                  quotesDeclined={quotesDeclined}
+                  quotesAccepted={quotesAccepted}
+                  drawerButtonChange={drawerButtonChange}
+                />
+              </Column>
+              <Column m={10} j="flex-start" w="20%">
+                <Typography>Profile</Typography>
+                <TaskGenerator
+                  profile={profile}
+                  data={data}
+                  history={history}
+                  skills={skills}
+                  socials={socials}
+                  contact={contact}
+                  drawerButtonChange={drawerButtonChange}
+                />
+              </Column>
             </Row>
           ) : (
             <LoadIcon />

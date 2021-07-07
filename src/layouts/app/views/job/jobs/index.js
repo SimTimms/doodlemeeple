@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
@@ -15,17 +15,21 @@ import JobPosts from './jobPosts';
 import AppInvites from '../../../views/appInvites';
 import { QuoteOutWidget } from '../../../../../widgets';
 
-export default function Jobs({ history, theme }) {
+export default function Jobs({ history, tab }) {
   const classes = useStyles();
   const [loading, setLoading] = React.useState(true);
   const [tabNbr, setTabNbr] = React.useState(1);
+
+  useEffect(() => {
+    setTabNbr(tab === 'quotes' ? 4 : 1);
+  }, [tab]);
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <CreatorJobMenu tabNbr={tabNbr} setTabNbr={setTabNbr} />
         {tabNbr === 1 && <JobPosts history={history} />}
-        {tabNbr === 3 && <AppInvites history={history} />}
+        {tabNbr === 3 && <AppInvites history={history} setTabNbr={setTabNbr} />}
         {tabNbr === 4 && <QuoteOutWidget history={history} />}
         {tabNbr === 2 && (
           <Column w={600}>

@@ -93,7 +93,7 @@ export default function QuoteViewWidget({ quoteId, history }) {
                           </Column>
                           <IconButton
                             icon="chat"
-                            color="text-dark"
+                            color="warning"
                             title="Chat"
                             onClickEvent={() =>
                               setConversationUser(data.contractById.user)
@@ -138,6 +138,22 @@ export default function QuoteViewWidget({ quoteId, history }) {
                         </Typography>
                       </Column>
                     </Column>
+
+                    <IconButton
+                      title="Interested"
+                      color="primary"
+                      icon="keyboard_arrow_right"
+                      disabled={false}
+                      onClickEvent={() => {
+                        history.push(
+                          `/app/view-sign-full-contract/${data.contractById._id}`
+                        );
+                      }}
+                      styleOverride={{ margin: 'auto', width: 200 }}
+                      type="button"
+                      iconPos="right"
+                    />
+                    <DividerMini />
                     <Mutation
                       mutation={DECLINE_CONTRACT}
                       variables={{
@@ -166,21 +182,6 @@ export default function QuoteViewWidget({ quoteId, history }) {
                         );
                       }}
                     </Mutation>
-                    <DividerMini />
-                    <IconButton
-                      title="Interested"
-                      color="primary"
-                      icon="keyboard_arrow_right"
-                      disabled={false}
-                      onClickEvent={() => {
-                        history.push(
-                          `/app/view-sign-full-contract/${data.contractById._id}`
-                        );
-                      }}
-                      styleOverride={{ margin: 'auto', width: 200 }}
-                      type="button"
-                      iconPos="right"
-                    />
                   </Column>
                 )}
               </CardComponent>

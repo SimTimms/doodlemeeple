@@ -25,10 +25,6 @@ function ButtonObj({ ...props }) {
       type={type}
       className={clsx({
         [classes.taskRoot]: true,
-        [classes.primary]: color === 'primary',
-        [classes.secondary]: color === 'secondary',
-        [classes.warning]: color === 'warning',
-        [classes.grey]: color === 'grey',
       })}
       disabled={disabled}
       onClick={() => {
@@ -38,23 +34,39 @@ function ButtonObj({ ...props }) {
       }}
       style={styleOverride && styleOverride}
     >
-      <Column>
-        <Row j="flex-end" a="center">
-          <Icon
-            className={clsx({
-              [classes.taskIcon]: true,
-            })}
-          >
-            {icon}
-          </Icon>
-          <Typography
-            className={clsx({
-              [classes.taskSubTitle]: true,
-            })}
-          >
-            {subTitle}
-          </Typography>
-        </Row>
+      <Column j="space-between">
+        <div
+          className={clsx({
+            [classes.primary]: color === 'primary',
+            [classes.secondary]: color === 'secondary',
+            [classes.warning]: color === 'warning',
+            [classes.grey]: color === 'grey',
+            [classes.blue]: color === 'blue',
+          })}
+          style={{
+            width: '100%',
+            borderRadius: '3px 3px 0 0',
+            padding: 3,
+            boxSizing: 'border-box',
+          }}
+        >
+          <Row j="flex-start" a="center" bg="primary">
+            <Icon
+              className={clsx({
+                [classes.taskIcon]: true,
+              })}
+            >
+              {icon}
+            </Icon>
+            <Typography
+              className={clsx({
+                [classes.taskSubTitle]: true,
+              })}
+            >
+              {subTitle}
+            </Typography>
+          </Row>
+        </div>
         <Typography className={classes.taskTitle}>{title}</Typography>
       </Column>
     </Button>
@@ -64,7 +76,7 @@ export default function TaskButton(props) {
   const { zoom } = props;
   return zoom ? (
     <Zoom in={true} timeout={500}>
-      <div>
+      <div style={{ width: '100%', textAlign: 'center' }}>
         <ButtonObj props={props} />
       </div>
     </Zoom>
