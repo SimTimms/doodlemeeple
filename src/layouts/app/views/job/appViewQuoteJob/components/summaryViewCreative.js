@@ -8,7 +8,7 @@ import {
 import { CreativeDashboard } from './jobDashboards/';
 import { ChatViewByJob } from '../../../../../../modules/chat';
 import CreativeMenu from './creativeMenu';
-import EditProposalForm from './proposalForm/views/editProposal';
+
 import CreativeJobSummary from './creativeJobSummary';
 import DeclineInviteView from './declineInviteView';
 
@@ -77,21 +77,7 @@ export default function SummaryViewCreative({ job, history }) {
           />
         </Column>
       )}
-      {tabNbr === 6 && contract ? (
-        <EditProposalForm
-          contractData={contract}
-          setContract={setContract}
-          history={history}
-        />
-      ) : (
-        tabNbr === 6 && (
-          <CreateQuoteButton
-            jobId={jobData._id}
-            contract={contract}
-            setContract={setContract}
-          />
-        )
-      )}
+
       {tabNbr === 7 && <FullContractComponent contractData={job.contract} />}
       {tabNbr === 8 && (
         <DeclineInviteView inviteId={invite._id} history={history} />
