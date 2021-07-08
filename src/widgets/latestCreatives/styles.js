@@ -10,4 +10,14 @@ export const useStyles = makeStyles((theme) => ({
     paddingBottom: 20,
     boxSizing: 'border-box',
   },
+  dashboard: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    flexWrap: 'wrap',
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
+    boxSizing: 'border-box',
+  },
 }));

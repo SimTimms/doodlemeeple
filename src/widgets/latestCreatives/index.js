@@ -4,14 +4,20 @@ import { Query } from 'react-apollo';
 import { LATEST_CREATIVES_WIDGET } from './data';
 import { ProfileCardMini } from '../profileCard/';
 import BigImage from '../bigImage';
+import clsx from 'clsx';
 
-export default function LatestCreativesWidget() {
+export default function LatestCreativesWidget({ ...props }) {
   const classes = useStyles();
   const [creativeArray, setCreativeArray] = React.useState([]);
   const [large, setLarge] = React.useState(null);
-
+  const { dashboard } = props;
   return (
-    <div className={classes.root}>
+    <div
+      className={clsx({
+        [classes.root]: true,
+        [classes.dashboard]: dashboard,
+      })}
+    >
       {large !== null && <BigImage large={large} setLarge={setLarge} />}
       <Query
         query={LATEST_CREATIVES_WIDGET}
