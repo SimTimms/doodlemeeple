@@ -49,6 +49,9 @@ export default function ProfileCard({ creative, setLarge, history }) {
           variables={{ userId: creative._id }}
           onCompleted={({ profileImages }) => {
             setImages([...images, ...profileImages]);
+            !creative.profileBG &&
+              profileImages.length > 0 &&
+              setPreviewImage(profileImages[0].img);
           }}
         >
           {({ loading, data }) => {
