@@ -1,5 +1,6 @@
 import FeaturedCreativeWidget from './featuredCreatives';
 import FeaturedCreativeMiniWidget from './featuredCreativesMini';
+import LatestCreativesWidget from './latestCreatives';
 import CreativeRosterWidget from './creativeRoster';
 import KickstarterForm from './kickstarter/kickstarterForm';
 import KickstarterWidget from './kickstarter';
@@ -8,6 +9,7 @@ import {
   JobWidget,
   JobDescriptionWidget,
   JobBoardWidget,
+  JobBoardMiniWidget,
   ResponsesWidget,
   FullContractWidget,
   QuoteComponent,
@@ -24,8 +26,10 @@ export {
   JobWidget,
   JobDescriptionWidget,
   JobBoardWidget,
+  JobBoardMiniWidget,
   QuoteOutWidget,
   QuoteInWidget,
   QuoteViewWidget,
   QuoteComponent,
+  LatestCreativesWidget,
 };

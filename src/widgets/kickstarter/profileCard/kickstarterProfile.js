@@ -58,6 +58,7 @@ export default function KickstarterProfile({ kickstarter }) {
             <img
               src={kickstarterImage}
               style={{ width: '100%', marginBottom: 5 }}
+              alt="Kickstarter"
             />
           </a>
         </Column>

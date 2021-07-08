@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react';
 import { useStyles } from '../styles';
-import {
-  Column,
-  CreateQuoteButton,
-  FullContractComponent,
-} from '../../../../../../components';
+import { Column, FullContractComponent } from '../../../../../../components';
 import { CreativeDashboard } from './jobDashboards/';
 import { ChatViewByJob } from '../../../../../../modules/chat';
 import CreativeMenu from './creativeMenu';
@@ -25,7 +21,6 @@ export default function SummaryViewCreative({ job, history }) {
       : false;
   const userContract = job.contract && job.contract._id;
   const userContractStatus = job.contract && job.contract.status;
-  const jobData = job.job;
   const closed = job.job.submitted === 'closed';
 
   useEffect(() => {

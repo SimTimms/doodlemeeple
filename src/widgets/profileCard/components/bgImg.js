@@ -1,10 +1,11 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 
-export default function BgImg({ previewImage, onClick }) {
+export default function BgImg({ previewImage, onClick, ...props }) {
   const classes = useStyles();
-
+  const { skill } = props;
   return (
     <div
       style={{
@@ -13,9 +14,12 @@ export default function BgImg({ previewImage, onClick }) {
       }}
       className={clsx({
         [classes.background]: true,
-        [classes.noBG]: !previewImage,
       })}
       onClick={() => onClick()}
-    ></div>
+    >
+      {!previewImage && skill && (
+        <Typography className={classes.skillName}>{skill}</Typography>
+      )}
+    </div>
   );
 }

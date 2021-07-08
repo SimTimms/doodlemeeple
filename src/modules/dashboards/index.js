@@ -4,7 +4,6 @@ import {
   Column,
   InviteComponentFull,
   Widget,
-  Divider,
   Row,
   ChosenCreative,
 } from '../../components';

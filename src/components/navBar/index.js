@@ -32,7 +32,7 @@ function StyledNavBar(props) {
             [classes.appBarChildMobile]: mobile,
           })}
           style={{
-            justifyContent: center ? 'center' : 'space-between',
+            justifyContent: center ? 'center' : 'flex-end',
           }}
         >
           {children}

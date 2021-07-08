@@ -7,7 +7,7 @@ import { BgImg, ProfileImg } from './components';
 import { Row, Column, IconButton } from '../../components';
 import * as socials from '../../assets/social';
 import dmDevice from '../../assets/dmDevice.png';
-import { PROFILE_IMAGES } from '../data';
+import { PROFILE_IMAGES } from './data';
 import imageOptimiser from '../../utils/imageOptimiser';
 import { nameShortener } from '../../utils';
 
@@ -115,7 +115,7 @@ export default function ProfileCard({ creative, setLarge, history }) {
         </Typography>
       )}
       <div className={classes.divider}></div>
-      <Column a="center" p="0" h={70}>
+      <Column a="center" p="0 0 10px 0">
         <Column w={'100%'}>
           <Row j="space-between" w="100%">
             <Row j="flex-start" w={160}>

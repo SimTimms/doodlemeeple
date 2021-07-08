@@ -36,7 +36,7 @@ export default function CreatorJobMenu({ tabNbr, setTabNbr }) {
         />
         <MenuButtonShortcut
           text={{
-            name: 'Quotes',
+            name: 'My Work',
             color: 'light',
             icon: 'work',
             count: 0,

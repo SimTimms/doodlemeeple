@@ -7,7 +7,7 @@ export default function Badges({ creative }) {
     <Row j="flex-start" pl={5}>
       {creative.badges.map((badge, index) => {
         if (index > 3) {
-          return;
+          return null;
         }
         const badgeArr = [];
         badgeArr.push(

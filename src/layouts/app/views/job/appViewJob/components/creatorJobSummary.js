@@ -1,11 +1,10 @@
 import React from 'react';
 import { Slide } from '@material-ui/core';
 import { useStyles } from '../styles';
-import { Column, Paper } from '../../../../../../components';
+import { Column } from '../../../../../../components';
 import CloseJobButton from './closeJobButton';
 import EndJobButton from './endJobButton';
 import RequestCloseButton from './requestCloseButton';
-import JobSummaryComponent from './jobSummaryComponent';
 import { JobDescriptionWidget } from '../../../../../../widgets';
 
 export default function CreatorJobSummary({ jobData, setTabNbr }) {

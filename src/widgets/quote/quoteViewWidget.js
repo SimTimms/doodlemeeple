@@ -43,6 +43,7 @@ export default function QuoteViewWidget({ quoteId, history }) {
                           <img
                             src={data.contractById.user.profileImg}
                             className={classes.avatar}
+                            alt="Profile"
                           />
                           <Column>
                             <a

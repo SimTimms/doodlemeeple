@@ -6,12 +6,22 @@ import {
   LoadIcon,
   Divider,
   JobComponent,
+  DividerWithBorder,
+  IconButton,
 } from '../../../../../components';
 
 export default function JobPosts({ history }) {
   return (
     <Column w={600}>
-      <Divider />
+      <IconButton
+        title="Create a Job"
+        onClickEvent={() => {
+          history.push(`/app/edit-job/new`);
+        }}
+        icon="add"
+        color="primary"
+      />
+      <DividerWithBorder />
       <Column a="center" j="flex-start">
         <Query
           query={JOBS}
@@ -48,7 +58,6 @@ export default function JobPosts({ history }) {
             ) : activeJobs ? (
               activeJobs.length > 0 ? (
                 <Column a="center" j="flex-start">
-                  <Divider />
                   {activeJobs}
                 </Column>
               ) : null

@@ -16,7 +16,6 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
     boxShadow: '0 4px 10px rgba(0,0,0,0.2)',
   },
-
   appBarShift: {
     paddingLeft: drawerWidth,
     width: '100%',

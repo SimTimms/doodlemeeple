@@ -7,18 +7,18 @@ export function CreativeCategories({ history }) {
   const classes = useStyles();
 
   return (
-    <Column a="space-between" j="space-between" h={312}>
+    <Column a="space-between" j="space-between">
       <Column a="center" j="center">
         <Row>
-          <CategoryBox
-            title="Miniature Painters"
+          <CategoryBoxMini type="artist" title="Artist" history={history} />
+          <CategoryBoxMini
             type="mini-painter"
+            title="Miniature Painters"
             history={history}
           />
-          <CategoryBox title="Artists" type="artist" history={history} />
-          <CategoryBox
-            title="Graphic Artists"
+          <CategoryBoxMini
             type="graphic-artist"
+            title="Graphic Artists"
             history={history}
           />
         </Row>

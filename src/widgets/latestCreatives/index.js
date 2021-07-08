@@ -1,11 +1,11 @@
 import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
-import { FEATURED_CREATIVES_WIDGET } from './data';
-import { ProfileCard } from './profileCard/';
-import BigImage from './bigImage';
+import { LATEST_CREATIVES_WIDGET } from './data';
+import { ProfileCardMini } from '../profileCard/';
+import BigImage from '../bigImage';
 
-export default function FeaturedCreativeWidget() {
+export default function LatestCreativesWidget() {
   const classes = useStyles();
   const [creativeArray, setCreativeArray] = React.useState([]);
   const [large, setLarge] = React.useState(null);
@@ -14,16 +14,16 @@ export default function FeaturedCreativeWidget() {
     <div className={classes.root}>
       {large !== null && <BigImage large={large} setLarge={setLarge} />}
       <Query
-        query={FEATURED_CREATIVES_WIDGET}
+        query={LATEST_CREATIVES_WIDGET}
         fetchPolicy="network-only"
         onCompleted={(data) => {
-          setCreativeArray([...data.featuredCreativesWidget]);
+          setCreativeArray([...data.latestCreativesWidget]);
         }}
       >
         {() => {
           return creativeArray.map((creative, index) => {
             return (
-              <ProfileCard
+              <ProfileCardMini
                 creative={creative}
                 key={`creative_${index}`}
                 setLarge={setLarge}

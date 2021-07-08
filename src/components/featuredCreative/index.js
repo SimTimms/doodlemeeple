@@ -41,12 +41,7 @@ export default function FeaturedCreative({ history, featuredArticle }) {
                 </Column>
               </Row>
             </div>
-            <div
-              className={classes.articlePanel}
-              style={{
-                backgroundImage: `url(${media})`,
-              }}
-            ></div>
+
             <div
               style={{
                 display: 'flex',

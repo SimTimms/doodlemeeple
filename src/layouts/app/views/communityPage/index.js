@@ -1,9 +1,6 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import {
-  CreativeCategories,
-  CreativeMini,
-} from '../../../../modules/community';
+import { CreativeCategories } from '../../../../modules/community';
 import {
   Row,
   Column,
@@ -12,41 +9,46 @@ import {
   CardComponent,
 } from '../../../../components';
 import { FeaturedArticle } from './components/getPosts';
+import { LatestCreativesWidget, JobBoardMiniWidget } from '../../../../widgets';
 
 export default function CommunityPage({ history }) {
   return (
     <Row wrap="wrap" j="space-around" a="flex-start">
       <Row wrap="wrap" j="space-around" a="flex-start">
-        <Typography variant="h6" style={{ marginTop: 20 }}>
-          Recently Completed Profiles
-        </Typography>
-        <CreativeMini history={history} />
-      </Row>
-      <Column w="50%">
-        <CardComponent
-          styleOverride={{
-            marginTop: 10,
-            borderRadius: 0,
-            paddingBottom: 10,
-          }}
-        >
-          <Typography variant="h6">The Creative Roster</Typography>
-          <DividerMini />
-          <CreativeCategories history={history} />
-        </CardComponent>
-      </Column>
-      <Column w="50%">
-        <CardComponent
-          styleOverride={{
-            marginTop: 10,
-            borderRadius: 0,
-          }}
-        >
-          <Typography variant="h6">Featured Artist</Typography>
-          <DividerMini />
+        <Column w="50%">
+          <CardComponent
+            styleOverride={{
+              borderRadius: 0,
+              paddingBottom: 10,
+            }}
+          >
+            <CreativeCategories history={history} />
+          </CardComponent>
+        </Column>
+        <Column w="50%" h="100%" p="10px 0 10px 0">
           <FeaturedArticle history={history} />
-        </CardComponent>
-      </Column>
+        </Column>
+      </Row>
+      <Row wrap="wrap" j="space-around" a="flex-start">
+        <Typography
+          variant="h6"
+          style={{ marginTop: 20, width: '100%', paddingLeft: 30 }}
+          align="left"
+        >
+          Newest Profiles
+        </Typography>
+        <LatestCreativesWidget history={history} />
+      </Row>
+      <Row wrap="wrap" j="space-around" a="flex-start">
+        <Typography
+          variant="h6"
+          style={{ marginTop: 20, width: '100%', paddingLeft: 30 }}
+        >
+          Jobs
+        </Typography>
+        <JobBoardMiniWidget history={history} />
+      </Row>
+
       <DividerWithBorder />
       <Column w="50%">
         <CardComponent

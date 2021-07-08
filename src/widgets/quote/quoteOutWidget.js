@@ -2,7 +2,6 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { QUOTE_WIDGET } from './data';
 import { Column } from '../../components';
-import { QuoteCard } from './quoteCard';
 import { QuoteComponent } from '../../widgets';
 
 export default function QuoteOutWidget({ history }) {

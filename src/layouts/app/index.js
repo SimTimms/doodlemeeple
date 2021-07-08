@@ -34,12 +34,7 @@ import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
 import { FAVOURITES, PROFILE, PREVIEW_CONTRACT } from '../../data/queries';
-import {
-  ContentTop,
-  StyledNavBar,
-  MenuButtonShortcut,
-  IconButton,
-} from '../../components';
+import { ContentTop, StyledNavBar, MenuButtonShortcut } from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 import logout from '../../utils/logout';
 import CreativeRosterWidget from '../../widgets/creativeRoster';
@@ -52,7 +47,7 @@ import {
   JobDescriptionWidget,
 } from '../../widgets';
 
-function AppLayout(props) {
+export default function AppLayout(props) {
   const [page, setPage] = React.useState('tasks');
   const [activeButton, setActiveButton] = React.useState('Tasks');
   const [profile, setProfile] = React.useState(null);
@@ -105,27 +100,10 @@ function AppLayout(props) {
     <div className={classes.root}>
       <ToastContainer />
       <StyledNavBar open={open} history={history} theme={props.theme}>
-        {page === 'projects' ? (
-          <IconButton
-            title="Create a Job"
-            onClickEvent={() => {
-              history.push(`/app/edit-job/new`);
-            }}
-            icon="add"
-            styleOverride={{
-              position: 'relative',
-              zIndex: 100,
-              marginRight: 'auto',
-            }}
-            color="warning"
-          />
-        ) : (
-          <div></div>
-        )}
         {!mobile && (
           <MenuButtonShortcut
             text={{
-              name: profile ? profile.name : 'fetching...',
+              name: profile ? profile.name : 'Fetching...',
               color: '#222',
               icon: 'face',
               count: 0,
@@ -333,5 +311,3 @@ function AppLayout(props) {
     </div>
   );
 }
-
-export default AppLayout;

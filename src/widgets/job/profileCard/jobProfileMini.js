@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
 import PublicProfileButton from './components/publicProfileButton';
 import AppProfileButton from './components/appProfileButton';
 
-export default function JobProfile({ job, history }) {
+export default function JobProfileMini({ job, history }) {
   const userId = Cookies.get('userId');
 
   const classes = useStyles();

@@ -98,7 +98,7 @@ export default function JobComponent({ job, game, history }) {
         <Column a="center">
           <Row j="flex-end">
             {job.contracts.map((contract, index) => {
-              if (contract.status === 'submitted')
+              if (contract.status === 'submitted') {
                 return (
                   <div key={`invite_${index}`} title={`${contract.user.name}`}>
                     <div
@@ -111,6 +111,8 @@ export default function JobComponent({ job, game, history }) {
                     </div>
                   </div>
                 );
+              }
+              return null;
             })}
           </Row>
         </Column>

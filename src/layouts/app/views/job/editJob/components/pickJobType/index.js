@@ -1,20 +1,17 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { useStyles } from './styles';
 import { Mutation } from 'react-apollo';
 import { SET_PUBLIC_JOB } from '../../../../../../../data/mutations';
 import {
   NoticeBoardSecondary,
   Paper,
   Column,
-  Row,
   IconButton,
 } from '../../../../../../../components';
 import autosave from '../../../../../../../utils/autosave';
 import { toaster } from '../../../../../../../utils/toaster';
 
 export default function PickJobType({ jobId, creativeId, history }) {
-  //  const classes = useStyles();
   const [isPublic, setIsPublic] = React.useState(false);
 
   return (

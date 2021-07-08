@@ -144,7 +144,7 @@ export function UnansweredQuotes({ history }) {
       color="warning"
       clickSound={true}
       zoom={true}
-      onClickEvent={() => history.push('/app/projects')}
+      onClickEvent={() => history.push('/app/projects/jobs')}
     />
   );
 }
@@ -267,7 +267,7 @@ export function TaskInvites({ history }) {
       color="primary"
       clickSound={true}
       zoom={true}
-      onClickEvent={() => history.push('/app/invites')}
+      onClickEvent={() => history.push('/app/projects/invites')}
     />
   );
 }

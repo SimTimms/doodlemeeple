@@ -8,8 +8,9 @@ import imageOptimiser from '../../../utils/imageOptimiser';
 import BigImage from '../../bigImage';
 import ReactPlayer from 'react-player';
 import Cookies from 'js-cookie';
-import { Mutation } from 'react-apollo';
+import { Mutation, Query } from 'react-apollo';
 import { CREATE_CONTRACT } from '../../../data/mutations';
+import { JOB_CONTRACT } from '../../../data/queries';
 
 export default function JobDescription({ job, history }) {
   const userId = Cookies.get('userId');
@@ -151,39 +152,64 @@ export default function JobDescription({ job, history }) {
               />
             </a>
           )}
-          {userId && userId !== job.user._id && (
-            <Mutation
-              mutation={CREATE_CONTRACT}
-              variables={{
-                currency: 'GBP',
-                cost: '100',
-                jobId: job._id,
-                status: '',
-              }}
-              onCompleted={(data) => {
-                history.push(
-                  `/app/edit-quote/${data.contractCreateOne.recordId}`
-                );
-              }}
-              onError={() => {}}
+          {userId && userId !== job.user._id && job.submitted !== 'accepted' && (
+            <Query
+              query={JOB_CONTRACT}
+              variables={{ jobId: job._id }}
+              fetchPolicy="network-only"
+              onCompleted={(data) => null}
             >
-              {(mutation) => {
-                return (
+              {({ data }) => {
+                console.log(data);
+                return data && data.jobContract ? (
                   <Column>
                     <div className={classes.divider}></div>
                     <IconButton
                       disabled={false}
                       color="warning"
-                      title={'Create a Quote'}
+                      title={'Edit Quote'}
                       icon="fact_check"
                       onClickEvent={() => {
-                        mutation();
+                        history.push(`/app/edit-quote/${data.jobContract._id}`);
                       }}
                     />
                   </Column>
+                ) : (
+                  <Mutation
+                    mutation={CREATE_CONTRACT}
+                    variables={{
+                      currency: 'GBP',
+                      cost: '100',
+                      jobId: job._id,
+                      status: '',
+                    }}
+                    onCompleted={(data) => {
+                      history.push(
+                        `/app/edit-quote/${data.contractCreateOne.recordId}`
+                      );
+                    }}
+                    onError={() => {}}
+                  >
+                    {(mutation) => {
+                      return (
+                        <Column>
+                          <div className={classes.divider}></div>
+                          <IconButton
+                            disabled={false}
+                            color="warning"
+                            title={'Create a Quote'}
+                            icon="fact_check"
+                            onClickEvent={() => {
+                              mutation();
+                            }}
+                          />
+                        </Column>
+                      );
+                    }}
+                  </Mutation>
                 );
               }}
-            </Mutation>
+            </Query>
           )}
           {job.contactEmail && job.submitted !== 'accepted' && (
             <Column>

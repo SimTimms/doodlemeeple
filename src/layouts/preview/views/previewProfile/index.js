@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slide, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   Header,

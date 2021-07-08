@@ -18,6 +18,16 @@ export const JOB_RESPONSES_WIDGET = gql`
   }
 `;
 
+export const JOB_BOARD_MINI_WIDGET = gql`
+  query jobBoardMiniWidget {
+    jobBoardMiniWidget {
+      _id
+      name
+      genre
+    }
+  }
+`;
+
 export const JOB_BOARD_WIDGET = gql`
   query jobBoardWidget {
     jobBoardWidget {

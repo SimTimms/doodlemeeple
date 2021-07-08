@@ -2,10 +2,8 @@ import { Typography } from '@material-ui/core';
 import React from 'react';
 import {
   TaskCloseThisProject,
-  TaskOpenQuote,
   TaskContinueWithJobDraft,
 } from '../../../modules/tasks';
-import { useStyles } from './styles';
 
 export default function TaskGeneratorClient({
   setTabNbr,
@@ -13,7 +11,6 @@ export default function TaskGeneratorClient({
   contracts,
   history,
 }) {
-  const classes = useStyles();
   const elementArray = [];
   const noContracts = contracts.length === 0;
   const isDraft = job.submitted === 'draft';

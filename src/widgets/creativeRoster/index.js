@@ -2,10 +2,10 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { CREATIVE_ROSTER_WIDGET } from './data';
-import { ProfileCard } from './profileCard';
-import { Filters } from './profileCard/components';
-import BigImage from './bigImage';
-import { IconButton, Column, Row } from '../components';
+import { ProfileCard } from '../profileCard';
+import { Filters } from '../profileCard/components';
+import BigImage from '../bigImage';
+import { IconButton, Column, Row } from '../../components';
 
 export default function CreativeRosterWidget({ history }) {
   const classes = useStyles();

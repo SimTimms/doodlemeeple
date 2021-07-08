@@ -21,7 +21,9 @@ export default function Jobs({ history, tab }) {
   const [tabNbr, setTabNbr] = React.useState(1);
 
   useEffect(() => {
-    setTabNbr(tab === 'quotes' ? 4 : 1);
+    setTabNbr(
+      tab === 'quotes' ? 4 : tab === 'invites' ? 3 : tab === 'jobs' ? 1 : 1
+    );
   }, [tab]);
 
   return (

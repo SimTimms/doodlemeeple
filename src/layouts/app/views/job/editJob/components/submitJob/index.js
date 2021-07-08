@@ -1,6 +1,5 @@
 import React from 'react';
 import { NoticeBoardSecondary } from '../../../../../../../components';
-import { JobWidget } from '../../../../../../../widgets';
 import { SUBMIT_BRIEF } from '../../../../../../../data/mutations';
 import { Mutation } from 'react-apollo';
 

@@ -25,10 +25,8 @@ export default function TaskComponent({
             contact,
             draftQuotes,
             invites,
-            totalDeclined,
             quotesDeclined,
             quotesAccepted,
-            draftJobs,
             unansweredQuotes,
           } = data && data.counts ? data.counts : {};
           return data ? (

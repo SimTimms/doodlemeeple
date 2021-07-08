@@ -29,7 +29,7 @@ export const useStyles = makeStyles((theme) => {
     },
     catBoxArtist: {
       color: 'rgba(255,255,255,1)',
-      fontSize: 10,
+      fontSize: 14,
       position: 'absolute',
       top: 0,
       background: 'rgba(0,0,0,0.2)',
@@ -49,12 +49,13 @@ export const useStyles = makeStyles((theme) => {
     },
     catBoxTitleSecondary: {
       color: '#fff',
-      fontSize: 10,
+      fontSize: 12,
       letterSpacing: 1,
       width: '100%',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      textAlign: 'center',
     },
   };
 });

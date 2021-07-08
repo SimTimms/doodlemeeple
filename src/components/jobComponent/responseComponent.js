@@ -2,7 +2,6 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { MenuButtonShortcut, Column, Row } from '../';
-import clsx from 'clsx';
 
 export default function ResponseComponent({ contract, history }) {
   const classes = useStyles();

@@ -4,20 +4,13 @@ import { useStyles } from './styles';
 import clsx from 'clsx';
 import { Query } from 'react-apollo';
 import { BgImg, ProfileImg } from './components';
-import { Row, Column, IconButton } from '../../components';
-import * as socials from '../../assets/social';
-import dmDevice from '../../assets/dmDevice.png';
-import { PROFILE_IMAGES } from '../data';
+import { Row, Column } from '../../components';
+import { PROFILE_IMAGES } from './data';
 import imageOptimiser from '../../utils/imageOptimiser';
-import { nameShortener } from '../../utils';
 
 export default function ProfileCardMini({ creative, setLarge, history }) {
   const classes = useStyles();
 
-  const linkedIn = !creative.linkedIn ? null : creative.linkedIn;
-  const twitter = !creative.twitter ? null : creative.twitter;
-  const facebook = !creative.facebook ? null : creative.facebook;
-  const instagram = !creative.instagram ? null : creative.instagram;
   const [previewImage, setPreviewImage] = React.useState(null);
   const [images, setImages] = React.useState([]);
 
@@ -38,6 +31,9 @@ export default function ProfileCardMini({ creative, setLarge, history }) {
           onClick={() => {
             setLarge(previewImage);
           }}
+          skill={creative.sections.map((section, index) =>
+            index > 0 ? ` | ${section.type}` : section.type
+          )}
         />
 
         <Query
@@ -104,115 +100,6 @@ export default function ProfileCardMini({ creative, setLarge, history }) {
           )}
         </Column>
       </Row>
-
-      <div className={classes.divider}></div>
-      <Column a="center" p="0" h={40}>
-        <Column w={'100%'}>
-          <Row j="space-between" w="100%">
-            <Row j="flex-start" w={160}>
-              <a
-                href={`${process.env.REACT_APP_URL}/public-preview/${creative._id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={classes.social}
-              >
-                <img
-                  src={dmDevice}
-                  className={classes.socialImg}
-                  alt="Doodle Meeple"
-                />
-              </a>
-              {linkedIn && (
-                <a
-                  href={`${
-                    linkedIn.indexOf('linkedin.com/') === -1
-                      ? `https://www.linkedin.com/${linkedIn}`
-                      : linkedIn
-                  }`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={classes.social}
-                >
-                  <img
-                    src={socials.socialLinkedIn}
-                    className={classes.socialImg}
-                    alt="LinkedIn"
-                  />
-                </a>
-              )}
-              {facebook && (
-                <a
-                  href={`${
-                    facebook.indexOf('facebook.com/') === -1
-                      ? `https://www.facebook.com/${facebook}`
-                      : facebook
-                  }`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={classes.social}
-                >
-                  <img
-                    src={socials.socialFacebook}
-                    className={classes.socialImg}
-                    alt="Facebook"
-                  />
-                </a>
-              )}
-              {twitter && (
-                <a
-                  href={`${
-                    twitter.indexOf('twitter.com/') === -1
-                      ? `https://www.twitter.com/${twitter}`
-                      : twitter
-                  }`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={classes.social}
-                >
-                  <img
-                    src={socials.socialTwitter}
-                    className={classes.socialImg}
-                    alt="Twitter"
-                  />
-                </a>
-              )}
-              {instagram && (
-                <a
-                  href={`${
-                    instagram.indexOf('instagram.com/') === -1
-                      ? `https://www.instagram.com/${instagram}`
-                      : instagram
-                  }`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={classes.social}
-                >
-                  <img
-                    src={socials.socialInstagram}
-                    className={classes.socialImg}
-                    alt="Instagram"
-                  />
-                </a>
-              )}
-            </Row>
-
-            {creative.website && (
-              <a
-                href={`${
-                  creative.website.indexOf('http') === -1
-                    ? `https://${creative.website}`
-                    : creative.website
-                }`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={classes.website}
-              >
-                <Typography className={classes.website}>Website</Typography>
-              </a>
-            )}
-          </Row>
-        </Column>
-      </Column>
     </div>
   );
 }

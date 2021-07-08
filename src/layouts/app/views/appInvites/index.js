@@ -4,7 +4,6 @@ import { INVITES } from '../../../../data/queries';
 import { Slide } from '@material-ui/core';
 import {
   Column,
-  Divider,
   InviteComponent,
   DividerWithBorder,
   Paper,

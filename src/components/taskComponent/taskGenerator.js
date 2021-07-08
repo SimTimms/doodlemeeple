@@ -1,13 +1,11 @@
 import React from 'react';
 import {
   TaskUnreadMessages,
-  TaskCheckProject,
   TaskRole,
   TaskSummary,
   TaskAvatar,
   TaskFeature,
   TaskSkill,
-  TaskPostJob,
   TaskQuoteDeclined,
   TaskQuoteAccepted,
   TaskSocials,
