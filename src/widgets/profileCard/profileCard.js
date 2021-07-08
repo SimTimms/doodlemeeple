@@ -38,6 +38,9 @@ export default function ProfileCard({ creative, setLarge, history }) {
           onClick={() => {
             setLarge(previewImage);
           }}
+          skill={creative.sections.map((section, index) =>
+            index > 0 ? ` | ${section.type}` : section.type
+          )}
         />
 
         <Query
