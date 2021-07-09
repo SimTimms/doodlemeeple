@@ -72,7 +72,7 @@ export default function JobProfile({ job, history }) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {job.externalLink}
+                  View Job
                 </a>
               </Typography>
             </Column>
