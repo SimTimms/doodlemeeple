@@ -33,7 +33,7 @@ export default function Conversations({ history, setConversationObj }) {
                 subtitle={`${conversation.sender.name}, ${conversation.receiver.name}`}
                 profiles={[conversation.sender, conversation.receiver]}
                 count={conversation.count}
-                title={conversation.job.name}
+                title="Conversation"
                 onClickEvent={() => {
                   setConversationObj({
                     jobId: conversation.job._id,
