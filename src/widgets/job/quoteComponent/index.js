@@ -9,6 +9,7 @@ export default function QuoteComponent({ contract, history }) {
   const accepted = contract.status === 'accepted';
   const declined = contract.status === 'declined';
   if (!contract.job) return null;
+  if (!contract.job.user) return null;
   return (
     <Paper p={10}>
       <Column>
