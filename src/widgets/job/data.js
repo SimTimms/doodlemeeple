@@ -24,6 +24,12 @@ export const JOB_BOARD_MINI_WIDGET = gql`
       _id
       name
       genre
+      summary
+      isPublic
+      isExternal
+      externalLink
+      externalSource
+      sourceLink
     }
   }
 `;
