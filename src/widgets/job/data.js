@@ -35,6 +35,8 @@ export const JOB_BOARD_WIDGET = gql`
       isPublic
       isExternal
       externalLink
+      externalSource
+      sourceLink
       approved
       name
       contactEmail

@@ -38,10 +38,18 @@ export default function JobProfile({ job, history }) {
             <Typography className={classes.jobName}>{job.name}</Typography>
           </Row>
 
-          {job.genre && (
-            <Typography align="center" className={classes.meta}>
-              {`Genre: ${job.genre}`}
-            </Typography>
+          {job.isExternal ? (
+            <a href={job.sourceLink} target="_blank" rel="noopener noreferrer">
+              <Typography align="center" className={classes.meta}>
+                {`Source: ${job.externalSource}`}
+              </Typography>
+            </a>
+          ) : (
+            job.genre && (
+              <Typography align="center" className={classes.meta}>
+                {`Genre: ${job.genre}`}
+              </Typography>
+            )
           )}
         </Column>
         {job.summary && (
