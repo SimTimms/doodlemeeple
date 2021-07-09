@@ -16,7 +16,7 @@ export default function SubmitJob({ jobId, history }) {
         return (
           <NoticeBoardSecondary
             title="Submit this job to the job board?"
-            subTitle="Click continue to submit this job"
+            subTitle="Click continue to submit this job, it will appear on the job board after approval by DoodleMeeple admin"
             onClickEvent={() => mutation()}
             buttonLocked={false}
             lockedMsg={''}
