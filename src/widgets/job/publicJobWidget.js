@@ -7,14 +7,7 @@ import { Row } from '../../components';
 export default function PublicJobWidget({ ...props }) {
   const { history } = props;
   return (
-    <Row
-      wrap="wrap"
-      j="space-around"
-      a="flex-start"
-      pb="20px"
-      pl="20px"
-      pr="20px"
-    >
+    <Row j="flex-start" a="flex-start" pb="20px" pl="20px" pr="20px" of="auto">
       <Query query={JOB_BOARD_MINI_WIDGET} fetchPolicy="network-only">
         {({ data }) => {
           if (data)
