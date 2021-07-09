@@ -6,7 +6,14 @@ import { Row } from '../../components';
 
 export default function KickstarterWidget() {
   return (
-    <Row wrap="wrap">
+    <Row
+      wrap="wrap"
+      j="space-around"
+      a="flex-start"
+      pb="20px"
+      pl="20px"
+      pr="20px"
+    >
       <Query query={FEATURED_KICKSTARTER_WIDGET} fetchPolicy="network-only">
         {({ data, loading }) => {
           if (data)

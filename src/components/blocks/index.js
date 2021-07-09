@@ -42,8 +42,25 @@ export function Column(props) {
 }
 
 export function Row(props) {
-  const { children, a, j, wrap, w, b, pb, pt, pl, v, mb, br, bg, h, o, of } =
-    props;
+  const {
+    children,
+    a,
+    j,
+    wrap,
+    w,
+    b,
+    pb,
+    pt,
+    pl,
+    pr,
+    v,
+    mb,
+    br,
+    bg,
+    h,
+    o,
+    of,
+  } = props;
   const align = a ? a : 'center';
   const justify = j ? j : 'center';
   const width = w ? w : '100%';
@@ -51,6 +68,7 @@ export function Row(props) {
   const paddingBottom = pb ? pb : '';
   const paddingTop = pt ? pt : '';
   const paddingLeft = pl ? pl : '';
+  const paddingRight = pr ? pr : '';
   const marginBottom = mb ? mb : '';
   const borderRadius = br ? br : '';
   const background = bg ? bg : '';
@@ -70,6 +88,7 @@ export function Row(props) {
         border,
         paddingBottom,
         paddingLeft,
+        paddingRight,
         paddingTop,
         marginBottom,
         borderRadius,
@@ -77,6 +96,7 @@ export function Row(props) {
         height,
         opacity,
         overflow,
+        boxSizing: 'border-box',
       }}
     >
       {children}

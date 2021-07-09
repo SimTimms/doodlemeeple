@@ -17,8 +17,8 @@ import {
 
 export default function CommunityPage({ history }) {
   return (
-    <Row wrap="wrap" a="flex-start" j="space-around">
-      <Row w={900} j="space-between" a="flex-start">
+    <Row wrap="wrap" a="flex-start" j="space-around" w={1024}>
+      <Row j="space-around" a="flex-start">
         <Column w="45%">
           <DividerMini />
 
@@ -36,21 +36,21 @@ export default function CommunityPage({ history }) {
         </Column>
       </Row>
       <DividerWithBorder />
-      <Column w={1200}>
+      <Column>
         <DividerMini />
         <Typography>Latest Profiles</Typography>
         <DividerMini />
         <LatestCreativesWidget history={history} dashboard={true} />
       </Column>
       <DividerWithBorder />
-      <Column w={600}>
+      <Column>
         <DividerMini />
         <Typography>Jobs</Typography>
         <DividerMini />
         <JobBoardMiniWidget history={history} dashboard={true} />
       </Column>
 
-      <Column w={600}>
+      <Column>
         <DividerMini />
         <Typography>Kickstarters</Typography>
         <DividerMini />
