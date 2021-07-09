@@ -15,7 +15,7 @@ export const TYPE_HELPER = (typeIn) => {
     case 'publisher':
       return 'Publisher';
     case 'reviewer':
-      return 'Reviewer/Content Client';
+      return 'Reviewer/Content Creator';
     case 'marketing':
       return 'Marketing';
     case 'games-developer':
