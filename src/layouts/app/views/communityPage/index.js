@@ -49,7 +49,7 @@ export default function CommunityPage({ history }) {
         <DividerMini />
         <JobBoardMiniWidget history={history} dashboard={true} />
       </Column>
-
+      <DividerWithBorder />
       <Column>
         <DividerMini />
         <Typography>Kickstarters</Typography>
