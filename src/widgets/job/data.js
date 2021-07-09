@@ -33,6 +33,9 @@ export const JOB_BOARD_WIDGET = gql`
     jobBoardWidget {
       _id
       isPublic
+      isExternal
+      externalLink
+      approved
       name
       contactEmail
       genre
@@ -64,6 +67,7 @@ export const JOB_WIDGET = gql`
     jobWidget(jobId: $jobId) {
       _id
       isPublic
+      approved
       name
       contactEmail
       genre

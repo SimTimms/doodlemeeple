@@ -152,65 +152,69 @@ export default function JobDescription({ job, history }) {
               />
             </a>
           )}
-          {userId && userId !== job.user._id && job.submitted !== 'accepted' && (
-            <Query
-              query={JOB_CONTRACT}
-              variables={{ jobId: job._id }}
-              fetchPolicy="network-only"
-              onCompleted={(data) => null}
-            >
-              {({ data }) => {
-                console.log(data);
-                return data && data.jobContract ? (
-                  <Column>
-                    <div className={classes.divider}></div>
-                    <IconButton
-                      disabled={false}
-                      color="warning"
-                      title={'Edit Quote'}
-                      icon="fact_check"
-                      onClickEvent={() => {
-                        history.push(`/app/edit-quote/${data.jobContract._id}`);
+          {userId &&
+            userId !== job.user._id &&
+            job.submitted !== 'accepted' &&
+            !job.isExternal && (
+              <Query
+                query={JOB_CONTRACT}
+                variables={{ jobId: job._id }}
+                fetchPolicy="network-only"
+                onCompleted={(data) => null}
+              >
+                {({ data }) => {
+                  return data && data.jobContract ? (
+                    <Column>
+                      <div className={classes.divider}></div>
+                      <IconButton
+                        disabled={false}
+                        color="warning"
+                        title={'Edit Quote'}
+                        icon="fact_check"
+                        onClickEvent={() => {
+                          history.push(
+                            `/app/edit-quote/${data.jobContract._id}`
+                          );
+                        }}
+                      />
+                    </Column>
+                  ) : (
+                    <Mutation
+                      mutation={CREATE_CONTRACT}
+                      variables={{
+                        currency: 'GBP',
+                        cost: '100',
+                        jobId: job._id,
+                        status: '',
                       }}
-                    />
-                  </Column>
-                ) : (
-                  <Mutation
-                    mutation={CREATE_CONTRACT}
-                    variables={{
-                      currency: 'GBP',
-                      cost: '100',
-                      jobId: job._id,
-                      status: '',
-                    }}
-                    onCompleted={(data) => {
-                      history.push(
-                        `/app/edit-quote/${data.contractCreateOne.recordId}`
-                      );
-                    }}
-                    onError={() => {}}
-                  >
-                    {(mutation) => {
-                      return (
-                        <Column>
-                          <div className={classes.divider}></div>
-                          <IconButton
-                            disabled={false}
-                            color="warning"
-                            title={'Create a Quote'}
-                            icon="fact_check"
-                            onClickEvent={() => {
-                              mutation();
-                            }}
-                          />
-                        </Column>
-                      );
-                    }}
-                  </Mutation>
-                );
-              }}
-            </Query>
-          )}
+                      onCompleted={(data) => {
+                        history.push(
+                          `/app/edit-quote/${data.contractCreateOne.recordId}`
+                        );
+                      }}
+                      onError={() => {}}
+                    >
+                      {(mutation) => {
+                        return (
+                          <Column>
+                            <div className={classes.divider}></div>
+                            <IconButton
+                              disabled={false}
+                              color="warning"
+                              title={'Create a Quote'}
+                              icon="fact_check"
+                              onClickEvent={() => {
+                                mutation();
+                              }}
+                            />
+                          </Column>
+                        );
+                      }}
+                    </Mutation>
+                  );
+                }}
+              </Query>
+            )}
           {job.contactEmail && job.submitted !== 'accepted' && (
             <Column>
               <div className={classes.divider}></div>

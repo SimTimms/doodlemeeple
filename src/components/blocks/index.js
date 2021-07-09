@@ -55,11 +55,14 @@ export function Row(props) {
     pr,
     v,
     mb,
+    mt,
+    mr,
     br,
     bg,
     h,
     o,
     of,
+    className,
   } = props;
   const align = a ? a : 'center';
   const justify = j ? j : 'center';
@@ -70,6 +73,8 @@ export function Row(props) {
   const paddingLeft = pl ? pl : '';
   const paddingRight = pr ? pr : '';
   const marginBottom = mb ? mb : '';
+  const marginRight = mr ? mr : '';
+  const marginTop = mt ? mt : '';
   const borderRadius = br ? br : '';
   const background = bg ? bg : '';
   const height = h ? h : '';
@@ -91,6 +96,8 @@ export function Row(props) {
         paddingRight,
         paddingTop,
         marginBottom,
+        marginTop,
+        marginRight,
         borderRadius,
         background,
         height,
@@ -98,6 +105,7 @@ export function Row(props) {
         overflow,
         boxSizing: 'border-box',
       }}
+      class={className ? className : null}
     >
       {children}
     </div>
