@@ -9,11 +9,13 @@ import {
   KickstarterForm,
   FeaturedCreativeMiniWidget,
   JobDescriptionWidget,
+  PublicJobWidget,
 } from '../widgets';
 
 export default function AuthRoutes({ theme, props: { ...props } }) {
   return (
     <Switch>
+      <Route path="/public-jobs" render={(props) => <PublicJobWidget />} />
       <Route
         path="/featured-creative-widget"
         render={(props) => <FeaturedCreativeWidget />}

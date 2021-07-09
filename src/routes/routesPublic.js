@@ -9,6 +9,7 @@ import {
   CreativeRosterWidget,
   KickstarterWidget,
   JobDescriptionWidget,
+  PublicJobWidget,
 } from '../widgets';
 
 export default function PublicRoutes({ theme, props: { ...props } }) {
@@ -30,6 +31,7 @@ export default function PublicRoutes({ theme, props: { ...props } }) {
         path="/featured-kickstarters"
         render={(props) => <KickstarterWidget />}
       />
+      <Route path="/public-jobs" render={(props) => <PublicJobWidget />} />
       <Route
         path="/job-description/:jobId"
         render={(props) => (

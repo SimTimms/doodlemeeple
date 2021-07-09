@@ -10,12 +10,14 @@ import {
   JobDescriptionWidget,
   JobBoardWidget,
   JobBoardMiniWidget,
+  PublicJobWidget,
   ResponsesWidget,
   FullContractWidget,
   QuoteComponent,
 } from './job';
 
 export {
+  PublicJobWidget,
   FullContractWidget,
   ResponsesWidget,
   FeaturedCreativeWidget,
