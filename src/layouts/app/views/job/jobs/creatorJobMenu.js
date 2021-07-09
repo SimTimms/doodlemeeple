@@ -12,7 +12,7 @@ export default function CreatorJobMenu({ tabNbr, setTabNbr }) {
           text={{
             name: 'Job Posts',
             color: 'light',
-            icon: 'work',
+            icon: 'grid_view',
             count: 0,
           }}
           onClickEvent={() => {
@@ -25,7 +25,7 @@ export default function CreatorJobMenu({ tabNbr, setTabNbr }) {
           text={{
             name: 'Invites',
             color: 'light',
-            icon: 'work',
+            icon: 'local_activity',
             count: 0,
           }}
           onClickEvent={() => {
