@@ -89,15 +89,23 @@ export const useStyles = makeStyles((theme) => ({
   },
   messageButton: {
     width: '100%',
-    lineHeight: 0.6,
+    lineHeight: 1,
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'nowrap',
     justifyContent: 'flex-end',
   },
   card: { margin: '5px auto 0 0', boxShadow: '3px 3px 10px rgba(0,0,0,0.2)' },
+  cardMobile: {
+    margin: '5px auto 0 0',
+    width: '90%',
+  },
   cardOther: {
     margin: '5px 0 0 auto',
+  },
+  cardOtherMobile: {
+    margin: '5px 0 0 auto',
+    width: '90%',
   },
   name: { color: '#aaa' },
   nameOther: { color: theme.palette.primary.light },
@@ -131,6 +139,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     padding: 10,
     width: '100%',
+    boxSizing:'border-box'
   },
   avatarWrapper: {
     display: 'flex',

@@ -15,7 +15,6 @@ export default function Messages({
   setMessages,
 }) {
   const [messagesEnd, setMessagesEnd] = React.useState(null);
-  const [viewer, setViewer] = React.useState(null);
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
 
@@ -52,7 +51,6 @@ export default function Messages({
                 key={`message_${index}`}
                 message={message}
                 history={history}
-                setViewer={setViewer}
               />
             )
           );

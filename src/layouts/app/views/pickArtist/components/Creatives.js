@@ -21,7 +21,6 @@ export default function Creatives({
   const [creativeArray, setCreativeArray] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [noMore, setNoMore] = React.useState(false);
-  const [existingFilter, setExistingFilter] = React.useState(false);
   return (
     <div
       style={{

@@ -12,8 +12,9 @@ import { TYPE_HELPER } from '../../../../utils';
 export default function CreativeRoster({ history, favourites, groupIn }) {
   const classes = useStyles();
   const [loading] = React.useState(false);
-  const [filter, setFilter] = React.useState(['artist']);
+  const [filter, setFilter] = React.useState([]);
   const [group, setGroup] = React.useState(null);
+
   useEffect(() => {
     setFilter(groupIn ? groupIn : 'artist');
   }, [groupIn]);
@@ -36,9 +37,11 @@ export default function CreativeRoster({ history, favourites, groupIn }) {
     'rulebook-editor',
     'games-developer',
     'proof-reader',
+    'designer',
     'translator',
     'play-tester',
   ];
+  const industryTypes = ['creator', 'manufacturer', 'publisher'];
   return loading ? (
     <LoadIcon />
   ) : (
@@ -80,6 +83,18 @@ export default function CreativeRoster({ history, favourites, groupIn }) {
               setGroup('development');
             }}
             active={group === 'development'}
+          />
+          <MenuButtonShortcut
+            text={{
+              name: 'Industry',
+              color: '#222',
+              icon: null,
+              count: 0,
+            }}
+            onClickEvent={() => {
+              setGroup('industry');
+            }}
+            active={group === 'industry'}
           />
         </Row>
         <Row j="center">
@@ -128,12 +143,29 @@ export default function CreativeRoster({ history, favourites, groupIn }) {
                 active={filter[0] === type}
               />
             ))}
+          {group === 'industry' &&
+            industryTypes.map((type) => (
+              <MenuButtonShortcut
+                text={{
+                  name: TYPE_HELPER(type),
+                  color: '#222',
+                  icon: null,
+                  count: 0,
+                }}
+                onClickEvent={() => {
+                  setFilter([type]);
+                }}
+                active={filter[0] === type}
+              />
+            ))}
         </Row>
-        <CreativeRosterProfiles
-          history={history}
-          favourites={favourites}
-          filter={filter}
-        />
+        {filter.length > 0 && (
+          <CreativeRosterProfiles
+            history={history}
+            favourites={favourites}
+            filter={filter}
+          />
+        )}
       </div>
     </Slide>
   );

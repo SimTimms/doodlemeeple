@@ -63,7 +63,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   cardMedia: { borderRadius: '50%', border: '10px solid #ddd', width: 140 },
   cardLink: {
-    lineHeight: 0.6,
+    lineHeight: 1,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center ',

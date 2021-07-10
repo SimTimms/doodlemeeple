@@ -5,7 +5,7 @@ export function AboutPage(props) {
   return (
     <div>
       <Typography variant="h4" color="textPrimary">
-        About DoodleMeeple
+        {`About ${process.env.REACT_APP_COMPANY_PUBLIC_NAME}`}
       </Typography>
       <Typography color="textPrimary" gutterBottom>
         Sed ut perspiciatis unde omnis iste natus error sit voluptatem

@@ -11,7 +11,6 @@ import TaskGenerator from './taskGenerator';
 
 export default function CheckListCreativeDash({
   declined,
-  invite,
   setTabNbr,
   setConversationUser,
   job,
@@ -41,7 +40,6 @@ export default function CheckListCreativeDash({
           setConversationUser={setConversationUser}
           declined={declined}
           history={history}
-          messages={invite.messages}
           closed={closed}
           accepted={activeContract}
         />
@@ -49,7 +47,7 @@ export default function CheckListCreativeDash({
       <Widget p={10}>
         <Column>
           <Typography variant="body1">Tasks</Typography>
-          <Typography variant="body1" style={{ fontSize: 10 }}>
+          <Typography variant="body1" style={{ fontSize: 12 }}>
             Complete these to keep your contract moving
           </Typography>
           <Divider />

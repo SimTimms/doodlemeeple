@@ -10,15 +10,41 @@ export default function CreatorJobMenu({ tabNbr, setTabNbr }) {
       <TopMenuWrapper j="center">
         <MenuButtonShortcut
           text={{
-            name: 'Projects',
+            name: 'Job Posts',
             color: 'light',
-            icon: 'work',
+            icon: 'grid_view',
             count: 0,
           }}
           onClickEvent={() => {
             setTabNbr(1);
           }}
           active={tabNbr === 1}
+          column={true}
+        />
+        <MenuButtonShortcut
+          text={{
+            name: 'Invites',
+            color: 'light',
+            icon: 'local_activity',
+            count: 0,
+          }}
+          onClickEvent={() => {
+            setTabNbr(3);
+          }}
+          active={tabNbr === 3}
+          column={true}
+        />
+        <MenuButtonShortcut
+          text={{
+            name: 'My Work',
+            color: 'light',
+            icon: 'work',
+            count: 0,
+          }}
+          onClickEvent={() => {
+            setTabNbr(4);
+          }}
+          active={tabNbr === 4}
           column={true}
         />
         <MenuButtonShortcut

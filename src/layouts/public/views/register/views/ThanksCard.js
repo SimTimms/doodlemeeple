@@ -36,7 +36,7 @@ export default function RegisterCard({ setPage }) {
               component="p"
               style={{ textAlign: 'center' }}
             >
-              You can now login to DoodleMeeple
+              {`You can now login to ${process.env.REACT_APP_COMPANY_PUBLIC_NAME}`}
             </Typography>
           </CardContent>
           <Divider />

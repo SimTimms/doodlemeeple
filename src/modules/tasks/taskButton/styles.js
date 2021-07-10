@@ -2,15 +2,18 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   taskRoot: {
-    marginTop: 5,
+    marginTop: 10,
     boxShadow: '3px 3px 5px rgba(0,0,0,0.2)',
     borderTop: '1px solid rgba(0,0,0,0.05)',
     borderLeft: '1px solid rgba(0,0,0,0.05)',
     borderRight: '1px solid rgba(0,0,0,0.1)',
     borderBottom: '1px solid rgba(0,0,0,0.1)',
-    marginLeft: 2,
-    marginRight: 2,
-    width: 180,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: '100%',
+    maxWidth: 280,
+    padding: 0,
+    marginBottom: 10,
   },
   primary: {
     background: theme.palette.primary.main,
@@ -28,13 +31,18 @@ export const useStyles = makeStyles((theme) => ({
     background: '#ababba',
     '&:hover': { background: '#bebed1' },
   },
+  blue: {
+    background: '#4287f5',
+    '&:hover': { background: '#4167f0' },
+  },
   taskIcon: { color: 'rgba(255,255,255,0.6)', fontSize: 12, marginRight: 4 },
   taskTitle: {
-    color: 'rgba(255,255,255,0.9)',
+    color: '#222',
     marginLeft: 5,
     marginRight: 5,
     marginTop: 4,
-    fontWeight: 700,
+    paddingBottom: 10,
+    paddingTop: 5,
   },
   taskSubTitle: {
     color: 'rgba(255,255,255,0.6)',

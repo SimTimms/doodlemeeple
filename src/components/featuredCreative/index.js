@@ -3,9 +3,7 @@ import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Column, IconButton, LoadIcon, Row } from '../';
 import { Query } from 'react-apollo';
-
 import { PROFILE_FEATURED } from '../../data/queries';
-import device from '../../assets/device.svg';
 import { excerptReplace } from '../../utils/excerptReplace';
 
 export default function FeaturedCreative({ history, featuredArticle }) {
@@ -25,7 +23,11 @@ export default function FeaturedCreative({ history, featuredArticle }) {
             <div className={classes.excerptBack}>
               <Row pb={10} pt={10}>
                 <img
-                  src={data.userById ? data.userById.profileImg : device}
+                  src={
+                    data.featuredProfile
+                      ? data.featuredProfile.profileImg
+                      : process.env.REACT_APP_DEVICE
+                  }
                   alt=""
                   className={classes.articleAvatar}
                 />
@@ -39,12 +41,7 @@ export default function FeaturedCreative({ history, featuredArticle }) {
                 </Column>
               </Row>
             </div>
-            <div
-              className={classes.articlePanel}
-              style={{
-                backgroundImage: `url(${media})`,
-              }}
-            ></div>
+
             <div
               style={{
                 display: 'flex',

@@ -1,25 +1,49 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { AboutLayout, StripeSuccess } from '../layouts';
+import { AboutLayout } from '../layouts';
 import PreviewLayout from '../layouts/preview';
 import { PublicLayout } from '../layouts/public';
+import {
+  FeaturedCreativeWidget,
+  FeaturedCreativeMiniWidget,
+  CreativeRosterWidget,
+  KickstarterWidget,
+  JobDescriptionWidget,
+  PublicJobWidget,
+} from '../widgets';
 
 export default function PublicRoutes({ theme, props: { ...props } }) {
   return (
     <Switch>
+      <Route
+        path="/featured-creative-widget"
+        render={(props) => <FeaturedCreativeWidget />}
+      />
+      <Route
+        path="/featured-creative-mini-widget"
+        render={(props) => <FeaturedCreativeMiniWidget />}
+      />
+      <Route
+        path="/creative-roster-widget"
+        render={(props) => <CreativeRosterWidget />}
+      />
+      <Route
+        path="/featured-kickstarters"
+        render={(props) => <KickstarterWidget />}
+      />
+      <Route path="/public-jobs" render={(props) => <PublicJobWidget />} />
+      <Route
+        path="/job-description/:jobId"
+        render={(props) => (
+          <JobDescriptionWidget jobId={props.match.params.jobId} />
+        )}
+      />
       <Route
         path="/public-preview/:pathParam?"
         render={(props) => (
           <PreviewLayout {...props} theme={theme} publicView={true} />
         )}
       />
-      <Route
-        path="/onboard-user/refresh/"
-        render={(props) => <StripeSuccess {...props} history={props.history} />}
-      />
-      <Route path="/stripe-success">
-        <StripeSuccess history={props.history} />
-      </Route>
       <Route path="/about">
         <AboutLayout theme={theme} />
       </Route>

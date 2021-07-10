@@ -53,7 +53,7 @@ export default function ContractSummary({ contractData, contractStatus }) {
         <TextLeft
           str={`${parseInt(contractData.cost) * 0.1} ${
             contractData.currency
-          } - The DoodleMeeple commission on this quote will be ${
+          } - The ${process.env.company} commission on this quote will be ${
             parseInt(contractData.cost) * 0.1
           } ${contractData.currency}`}
         />
@@ -61,7 +61,7 @@ export default function ContractSummary({ contractData, contractStatus }) {
         <Divider />
         <HeaderThree str="Payment Schedule" />
         <TextLeft
-          str={`DoodleMeeple will release funds to the Creative according to this payment schedule:`}
+          str={`${process.env.REACT_APP_COMPANY_PUBLIC_NAME} will release funds to the Creative according to this payment schedule:`}
         />
         <TextLeft
           str={`${parseInt(contractData.cost) * 0.1} ${

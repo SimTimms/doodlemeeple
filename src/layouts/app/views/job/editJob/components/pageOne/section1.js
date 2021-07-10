@@ -33,6 +33,25 @@ export default function Section1({ setJob, job, mutation }) {
         />
         <DividerMini />
         <FieldBox
+          title="Email Address (Optional)"
+          value={job.contactEmail}
+          maxLength={46}
+          placeholder="mycompany@email.com"
+          onChangeEvent={(e) => {
+            autosave(mutation);
+            setJob({
+              ...job,
+              contactEmail: e,
+            });
+          }}
+          replaceMode="loose"
+          info={`You may supply an email address that candidates can contact you on`}
+          warning={``}
+          size="m"
+          multiline={false}
+        />
+        <DividerMini />
+        <FieldBox
           title="Genre/Style of Project"
           value={job.genre}
           maxLength={126}

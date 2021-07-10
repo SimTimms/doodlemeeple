@@ -35,12 +35,10 @@ export default function Creative({
                 favourite={
                   favourites.indexOf(data.userById._id) > -1 ? true : false
                 }
-                gameId={job.gameId}
                 jobId={job._id}
                 invite={inviteList.filter((filterItem) => {
                   return filterItem._id === data.userById._id;
                 })}
-                key={`creative_${220002}`}
                 updateInviteList={updateInviteList}
                 removeInviteList={removeInviteList}
                 disabled={inviteList.length >= 5 ? true : false}

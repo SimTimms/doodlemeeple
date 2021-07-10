@@ -62,35 +62,6 @@ export default function PaymentSchedule({ contractData, isClient }) {
               {contractData.currency}
             </TableCell>
           </TableRow>
-          {/*
-          <TableRow className={classes.subtotal}>
-            <TableCell align="left" style={{ color: '#fff' }}>
-              DoodleMeeple Fee
-            </TableCell>
-            <TableCell align="right" style={{ color: '#fff' }}>
-              {isClient
-                ? Math.round(contractData.cost * doodleMeeplePercent)
-                : -Math.round(contractData.cost * doodleMeeplePercent)}
-            </TableCell>
-            <TableCell align="right" style={{ color: '#fff' }}>
-              {contractData.currency}
-            </TableCell>
-          </TableRow>
-             
-
-          <TableRow className={classes.total}>
-            <TableCell align="left" style={{ color: '#fff', fontSize: 18 }}>
-              {isClient ? 'Total Due' : 'Total Payout'}
-            </TableCell>
-            <TableCell align="right" style={{ color: '#fff', fontSize: 18 }}>
-              {isClient
-                ? parseInt(`${contractData.cost * creatorCommission}`)
-                : parseInt(`${contractData.cost * creativeCommission}`)}
-            </TableCell>
-            <TableCell align="right" style={{ color: '#fff', fontSize: 18 }}>
-              {contractData.currency}
-            </TableCell>
-          </TableRow> */}
         </TableBody>
       </Table>
     </TableContainer>

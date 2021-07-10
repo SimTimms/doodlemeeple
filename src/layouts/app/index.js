@@ -9,19 +9,24 @@ import CommunityPage from './views/communityPage';
 import NotificationDashboard from './views/notificationDashboard';
 import AppInvites from './views/appInvites';
 import AppHelp from './views/appHelp';
-import AppFailedPayment from './views/appFailedPayment';
 import AppProfileEdit from './views/appProfileEdit';
 import ConversationModule from './views/conversations';
-import Beta from './views/beta';
-import CreativeRoster from './views/creativeRoster';
+import PickJobType from './views/job/editJob/components/pickJobType';
+import ConfirmJob from './views/job/editJob/components/confirmJob';
+import SubmitJob from './views/job/editJob/components/submitJob';
 import { Account } from './views/account';
-import { StripeConnect } from './views/stripeConnect';
 import FullContract from './views/fullContract';
 import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame, Games } from './views/game';
-import { EditJob, Jobs, AppViewJob } from './views/job';
+import {
+  EditJob,
+  Jobs,
+  AppViewJob,
+  AppViewQuoteJob,
+  AppViewJobPublic,
+} from './views/job';
 import { EditQuote } from '../../modules/quotes';
-import { AppViewContract, EditContract } from './views/contract';
+import { EditContract } from './views/contract';
 import Withdraw from './views/withdraw';
 import ViewProposal from './views/viewProposal';
 import { PickArtist } from './views/pickArtist';
@@ -29,16 +34,20 @@ import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
 import { FAVOURITES, PROFILE, PREVIEW_CONTRACT } from '../../data/queries';
-import {
-  ContentTop,
-  StyledNavBar,
-  MenuButtonShortcut,
-  IconButton,
-} from '../../components';
+import { ContentTop, StyledNavBar, MenuButtonShortcut } from '../../components';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 import logout from '../../utils/logout';
+import CreativeRosterWidget from '../../widgets/creativeRoster';
+import {
+  QuoteInWidget,
+  QuoteOutWidget,
+  QuoteViewWidget,
+  JobBoardWidget,
+  FullContractWidget,
+  JobDescriptionWidget,
+} from '../../widgets';
 
-function AppLayout(props) {
+export default function AppLayout(props) {
   const [page, setPage] = React.useState('tasks');
   const [activeButton, setActiveButton] = React.useState('Tasks');
   const [profile, setProfile] = React.useState(null);
@@ -59,14 +68,6 @@ function AppLayout(props) {
     ? props.match
       ? props.match.params.pathParam2
         ? props.match.params.pathParam2
-        : null
-      : null
-    : null;
-
-  const searchValues = props
-    ? props.location
-      ? props.location.search
-        ? props.location.search
         : null
       : null
     : null;
@@ -99,26 +100,10 @@ function AppLayout(props) {
     <div className={classes.root}>
       <ToastContainer />
       <StyledNavBar open={open} history={history} theme={props.theme}>
-        {page === 'projects' ? (
-          <IconButton
-            title="Create a Project"
-            onClickEvent={() => {
-              history.push(`/app/edit-job/new`);
-            }}
-            icon="add"
-            styleOverride={{
-              position: 'relative',
-              zIndex: 100,
-              marginRight: 'auto',
-            }}
-          />
-        ) : (
-          <div></div>
-        )}
         {!mobile && (
           <MenuButtonShortcut
             text={{
-              name: profile ? profile.name : 'fetching...',
+              name: profile ? profile.name : 'Fetching...',
               color: '#222',
               icon: 'face',
               count: 0,
@@ -173,33 +158,18 @@ function AppLayout(props) {
             />
           ) : page === 'help' ? (
             <AppHelp history={history} />
-          ) : page === 'beta' ? (
-            <Beta history={history} />
           ) : page === 'help' ? (
             <AppHelp history={history} />
-          ) : page === 'failed-payment' ? (
-            <AppFailedPayment history={history} />
           ) : page === 'creative-roster' ? (
             <Query query={FAVOURITES} fetchPolicy="network-only">
               {({ data, loading }) => {
                 return loading
                   ? null
-                  : data && (
-                      <CreativeRoster
-                        theme={props.theme}
-                        history={history}
-                        favourites={data.profile.favourites.map(
-                          (fav) => fav.receiver && fav.receiver._id
-                        )}
-                        groupIn={pathParam && pathParam}
-                      />
-                    );
+                  : data && <CreativeRosterWidget history={history} />;
               }}
             </Query>
           ) : page === 'account' ? (
             <Account history={history} />
-          ) : page === 'stripe-connect' ? (
-            <StripeConnect history={history} searchValues={searchValues} />
           ) : page === 'invites' ? (
             <AppInvites history={history} />
           ) : page === 'submitted' ? (
@@ -207,7 +177,7 @@ function AppLayout(props) {
           ) : page === 'games' ? (
             <Games history={history} />
           ) : page === 'projects' ? (
-            <Jobs history={history} theme={props.theme} />
+            <Jobs history={history} tab={pathParam} />
           ) : page === 'edit-profile' ? (
             <AppProfileEdit
               theme={props.theme}
@@ -230,12 +200,20 @@ function AppLayout(props) {
               autosaveIsOn={true}
               history={history}
             />
+          ) : page === 'job-description' ? (
+            <JobDescriptionWidget jobId={pathParam} history={history} />
           ) : page === 'edit-job' ? (
             <EditJob
               jobId={pathParam}
               history={history}
               creativeId={pathParam2}
             />
+          ) : page === 'quotes-out' ? (
+            <QuoteOutWidget history={history} />
+          ) : page === 'quotes-in' ? (
+            <QuoteInWidget history={history} />
+          ) : page === 'view-quote' ? (
+            <QuoteViewWidget history={history} quoteId={pathParam} />
           ) : page === 'edit-quote' ? (
             <Query
               query={PREVIEW_CONTRACT}
@@ -256,12 +234,22 @@ function AppLayout(props) {
             </Query>
           ) : page === 'view-job' && profile ? (
             <AppViewJob jobId={pathParam} history={history} />
+          ) : page === 'view-quote-job' && profile ? (
+            <AppViewQuoteJob jobId={pathParam} history={history} />
+          ) : page === 'contract' && profile ? (
+            <AppViewJob jobId={pathParam} history={history} />
+          ) : page === 'view-public-job' && profile ? (
+            <AppViewJobPublic jobId={pathParam} history={history} />
+          ) : page === 'job-board' && profile ? (
+            <JobBoardWidget history={history} />
           ) : page === 'view-proposal' ? (
             <ViewProposal jobId={pathParam} history={history} />
           ) : page === 'view-contract' ? (
-            <AppViewContract contractId={pathParam} history={history} />
+            <EditContract contractId={pathParam} history={history} />
           ) : page === 'view-full-contract' ? (
             <FullContract contractId={pathParam} history={history} />
+          ) : page === 'view-sign-full-contract' ? (
+            <FullContractWidget contractId={pathParam} history={history} />
           ) : page === 'edit-contract' ? (
             <EditContract contractId={pathParam} history={history} />
           ) : page === 'community' ? (
@@ -290,6 +278,16 @@ function AppLayout(props) {
                 );
               }}
             </Query>
+          ) : page === 'choose-job-type' ? (
+            <PickJobType
+              jobId={pathParam}
+              creativeId={pathParam2}
+              history={history}
+            />
+          ) : page === 'confirm-job' ? (
+            <ConfirmJob jobId={pathParam} history={history} />
+          ) : page === 'submit-job' ? (
+            <SubmitJob jobId={pathParam} history={history} />
           ) : page === 'create-quote' ? (
             <NewQuote projectId={pathParam} />
           ) : null}
@@ -313,5 +311,3 @@ function AppLayout(props) {
     </div>
   );
 }
-
-export default AppLayout;

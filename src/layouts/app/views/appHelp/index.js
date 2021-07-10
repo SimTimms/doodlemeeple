@@ -33,9 +33,11 @@ export default function AppHelp({ history }) {
             >
               Visit our FAQ page for answers to some of the most common
               questions:
-              <a href="https://doodlemeeple.com/faq" style={{ color: '#444' }}>
-                {' '}
-                https://doodlemeeple.com/faq
+              <a
+                href={`${process.env.REACT_APP_WEBSITE}/faq`}
+                style={{ color: '#444' }}
+              >
+                {`${process.env.REACT_APP_WEBSITE}/faq`}
               </a>
             </Typography>
             <Typography
@@ -52,18 +54,11 @@ export default function AppHelp({ history }) {
               style={{ textAlign: 'center' }}
               gutterBottom
             >
-              <a href="mailto:tim@doodlemeeple.com" style={{ color: '#444' }}>
-                tim@doodlemeeple.com
-              </a>
-            </Typography>
-            <Typography
-              variant="body1"
-              color="textPrimary"
-              style={{ textAlign: 'center' }}
-              gutterBottom
-            >
-              <a href="mailto:jamie@doodlemeeple.com" style={{ color: '#444' }}>
-                jamie@doodlemeeple.com
+              <a
+                href={`mailto:${process.env.REACT_APP_INFO_EMAIL}`}
+                style={{ color: '#444' }}
+              >
+                {process.env.REACT_APP_INFO_EMAIL}
               </a>
             </Typography>
           </Column>

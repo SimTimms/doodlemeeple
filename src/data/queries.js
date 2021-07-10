@@ -1,7 +1,21 @@
 import gql from 'graphql-tag';
 
-import { JOBS, JOB_CREATIVE, JOB, JOB_CONTACT_DETAILS } from './job';
-export { JOBS, JOB_CREATIVE, JOB, JOB_CONTACT_DETAILS };
+import {
+  JOBS,
+  JOB_CREATIVE,
+  JOB,
+  JOB_CONTACT_DETAILS,
+  JOB_RESPONSES,
+  JOB_CONTRACT,
+} from './job';
+export {
+  JOBS,
+  JOB_CREATIVE,
+  JOB,
+  JOB_CONTACT_DETAILS,
+  JOB_RESPONSES,
+  JOB_CONTRACT,
+};
 
 export const CREATIVES = gql`
   query GetCreatives($type: [String], $job: MongoID, $page: Int) {
@@ -11,8 +25,6 @@ export const CREATIVES = gql`
       summary
       profileBG
       profileImg
-      stripeID
-      stripeClientId
       badges {
         badgeType
         link
@@ -20,25 +32,8 @@ export const CREATIVES = gql`
         description
       }
       viewCount
-      paymentMethod
       responsePercent
-      facebook
-      skype
-      publicEmail
-      website
-      twitter
-      linkedIn
-      instagram
       likedMe {
-        _id
-        receiver {
-          _id
-        }
-        user {
-          _id
-        }
-      }
-      favourites {
         _id
         receiver {
           _id
@@ -259,16 +254,6 @@ export const INVITE_BY_ID = gql`
   }
 `;
 
-export const GET_STRIPE = gql`
-  {
-    getStripe {
-      object
-      details_submitted
-      payouts_enabled
-    }
-  }
-`;
-
 export const GET_PAYMENT_TERMS = gql`
   query GetPaymentTerms($contractId: String!) {
     getPaymentTerms(contractId: $contractId) {
@@ -344,8 +329,8 @@ export const GET_CONTRACT = gql`
 
 export const GET_CONTRACT_ID = gql`
   query GetContractId($contractId: String!) {
-    getContractId(contractId: $contractId) {
-      id
+    contractById(_id: $contractId) {
+      _id
       notes
       deadline
       startDate
@@ -355,25 +340,9 @@ export const GET_CONTRACT_ID = gql`
       signedBy
       status
       updatedAt
-      payments {
-        id
-        amount
-        currency
-        status
-        paidBy {
-          id
-          name
-        }
-        contract {
-          id
-        }
-        paymentId
-        createdAt
-        updatedAt
-      }
       user {
         email
-        id
+        _id
         name
         profileImg
       }
@@ -491,6 +460,8 @@ export const COUNTS = gql`
       totalDeclined
       draftJobs
       unansweredQuotes
+      quotesDeclined
+      quotesAccepted
     }
   }
 `;
@@ -514,15 +485,15 @@ export const PROFILE = gql`
       _id
       name
       summary
+      badges {
+        badgeType
+      }
       profileBG
       profileImg
       autosave
       email
       creatorTrue
       creativeTrue
-      stripeID
-      stripeStatus
-      stripeClientId
       paymentMethod
       available
       acceptsSpeculative
@@ -576,8 +547,6 @@ export const PROFILE_PREVIEW = gql`
       summary
       profileBG
       profileImg
-      stripeID
-      stripeClientId
       viewCount
       paymentMethod
       responsePercent
@@ -612,7 +581,7 @@ export const PROFILE_PREVIEW = gql`
 
 export const PROFILE_FEATURED = gql`
   query ProfilePreview($userId: MongoID!) {
-    userById(_id: $userId) {
+    featuredProfile(userId: $userId) {
       _id
       profileImg
       autosave

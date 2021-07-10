@@ -95,10 +95,10 @@ export default function EditQuote({ jobId, history, contractData }) {
           )}
           {fieldArray[field] === 'submitted' && (
             <IconButton
-              title="Invite Dashboard"
+              title="Job Dashboard"
               icon="mail"
               styleOverride={{ margin: 'auto' }}
-              onClickEvent={() => history.push('/app/invites')}
+              onClickEvent={() => history.push('/app/projects/quotes')}
             />
           )}
         </CardComponent>

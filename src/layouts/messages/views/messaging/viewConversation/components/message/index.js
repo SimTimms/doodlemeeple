@@ -5,7 +5,6 @@ import { useStyles } from './styles';
 import { timeDifferenceForDate } from '../../../../../../../utils/dates';
 import { IconButton } from '../../../../../../../components';
 import Cookies from 'js-cookie';
-import device from '../../../../../../../assets/device.svg';
 
 export function Message({ message, history, setViewer }) {
   const classes = useStyles();
@@ -31,7 +30,9 @@ export function Message({ message, history, setViewer }) {
                   [classes.icon]: true,
                 })}
                 src={
-                  message.sender.profileImg ? message.sender.profileImg : device
+                  message.sender.profileImg
+                    ? message.sender.profileImg
+                    : process.env.REACT_APP_DEVICE
                 }
                 alt=""
               />
@@ -127,7 +128,9 @@ export function Message({ message, history, setViewer }) {
                   [classes.icon]: true,
                 })}
                 src={
-                  message.sender.profileImg ? message.sender.profileImg : device
+                  message.sender.profileImg
+                    ? message.sender.profileImg
+                    : process.env.REACT_APP_DEVICE
                 }
                 alt=""
               />

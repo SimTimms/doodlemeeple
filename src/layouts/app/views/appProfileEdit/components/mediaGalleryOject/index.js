@@ -6,8 +6,10 @@ export function MediaGalleryObjectProfile({
   setImages,
   galleryId,
   sectionType,
+  ...props
 }) {
   images = images ? images : [];
+  const { badges } = props;
   return (
     <div
       style={{
@@ -28,6 +30,7 @@ export function MediaGalleryObjectProfile({
         setImages={setImages}
         galleryId={galleryId}
         sectionType={sectionType}
+        badges={badges}
       />
     </div>
   );

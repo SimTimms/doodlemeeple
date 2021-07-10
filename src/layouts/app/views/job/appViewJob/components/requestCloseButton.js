@@ -34,8 +34,7 @@ export default function RequestCloseButton({ job, setTabNbr }) {
       ) : (
         <BorderBox w={300}>
           <Meta
-            str="
-            This will notify DoodleMeeple that you wish to close this unfinished job"
+            str={`This will notify ${process.env.REACT_APP_COMPANY_PUBLIC_NAME} that you wish to close this unfinished job`}
           />
           <Divider />
           <Meta

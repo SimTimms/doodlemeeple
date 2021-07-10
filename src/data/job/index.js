@@ -20,14 +20,40 @@ export const JOB_CONTACT_DETAILS = gql`
   }
 `;
 
+export const JOB_RESPONSES = gql`
+  query jobResponsesWidget {
+    jobResponsesWidget {
+      _id
+      user {
+        _id
+      }
+      status
+    }
+  }
+`;
+
+export const JOB_CONTRACT = gql`
+  query jobContract($jobId: MongoID!) {
+    jobContract(jobId: $jobId) {
+      _id
+      user {
+        _id
+      }
+      status
+    }
+  }
+`;
+
 export const JOB = gql`
   query GetJob($jobId: MongoID!) {
     jobById(_id: $jobId) {
       _id
       name
+      contactEmail
       keywords
       genre
       scope
+      isPublic
       mechanics
       timeframe
       budget
@@ -113,6 +139,8 @@ export const JOB = gql`
       assignedCreative {
         _id
         name
+        email
+        profileImg
       }
       invites {
         status
@@ -249,11 +277,13 @@ export const JOB_CREATIVE = gql`
       }
       job {
         _id
+        isPublic
         name
         summary
         createdAt
         creativeSummary
         keywords
+        contactEmail
         submitted
         scope
         mechanics
@@ -293,17 +323,23 @@ export const JOBS = gql`
     jobsByUser(status: $status) {
       _id
       name
+      isPublic
+      contactEmail
       submitted
       backgroundImg
       assignedCreative {
         _id
         name
         profileImg
+        email
       }
       contracts {
         _id
+        status
         user {
           _id
+          name
+          profileImg
         }
         status
       }

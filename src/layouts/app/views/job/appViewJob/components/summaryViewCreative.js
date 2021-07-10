@@ -9,16 +9,13 @@ import { CreativeDashboard } from './jobDashboards/';
 import { ChatViewByJob } from '../../../../../../modules/chat';
 import CreativeMenu from './creativeMenu';
 import EditProposalForm from './proposalForm/views/editProposal';
-import PaymentsView from './paymentsView';
 import CreativeJobSummary from './creativeJobSummary';
 import DeclineInviteView from './declineInviteView';
 
 export default function SummaryViewCreative({ job, history }) {
   const classes = useStyles();
   const [conversationUser, setConversationUser] = React.useState(null);
-  const [pageNbr, setPageNbr] = React.useState(0);
   const [tabNbr, setTabNbr] = React.useState(-1);
-  const [messages, setMessages] = React.useState([]);
   const [contract, setContract] = React.useState();
   const [invite, setInvite] = React.useState({});
   const jobHasBeenAwarded = job.job.activeContract;
@@ -44,7 +41,6 @@ export default function SummaryViewCreative({ job, history }) {
         activeContract={activeContract}
         closed={closed}
       />
-
       {conversationUser ? (
         <ChatViewByJob
           job={job.job}
@@ -95,11 +91,6 @@ export default function SummaryViewCreative({ job, history }) {
             setContract={setContract}
           />
         )
-      )}
-      {tabNbr === 4 && (
-        <Column>
-          <PaymentsView job={{ jobData: jobData, setJobData: null }} />
-        </Column>
       )}
       {tabNbr === 7 && <FullContractComponent contractData={job.contract} />}
       {tabNbr === 8 && (

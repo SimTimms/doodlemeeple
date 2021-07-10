@@ -7,7 +7,7 @@ import { Mutation } from 'react-apollo';
 import { UPDATE_INVITE } from '../../data/mutations';
 import { nameShortener } from '../../utils';
 
-export default function InviteComponent({ invite, history }) {
+export default function InviteComponent({ invite, history, setTabNbr }) {
   const classes = useStyles();
   const declined = invite.status === 'declined';
   const unopened = invite.status === 'unopened';
@@ -35,7 +35,9 @@ export default function InviteComponent({ invite, history }) {
             style={{ width: '100%', cursor: 'pointer' }}
             onClick={() => {
               invite.status === 'unopened' && mutation();
-              history.push(`/app/view-job/${invite.job._id}/${invite._id}`);
+              quoted
+                ? setTabNbr(4)
+                : history.push(`/app/job-description/${invite.job._id}`);
             }}
           >
             <Column>
@@ -83,7 +85,7 @@ export default function InviteComponent({ invite, history }) {
 
                 <MenuButtonShortcut
                   text={{
-                    name: 'Open',
+                    name: quoted ? 'Quotes' : 'Open',
                     color: 'light',
                     icon: completed
                       ? ''
@@ -93,12 +95,7 @@ export default function InviteComponent({ invite, history }) {
                     count: invite.messages,
                     back: 'primary',
                   }}
-                  onClickEvent={() => {
-                    invite.status === 'unopened' && mutation();
-                    history.push(
-                      `/app/view-job/${invite.job._id}/${invite._id}`
-                    );
-                  }}
+                  onClickEvent={() => null}
                   active={false}
                   countIcon="star"
                 />

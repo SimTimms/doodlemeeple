@@ -10,6 +10,21 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     position: 'relative',
   },
+  shareLink: {
+    color: theme.palette.primary.main,
+    textDecoration: 'underline',
+  },
+  popup: {
+    position: 'fixed',
+    zIndex: 100,
+    left: 0,
+    top: 0,
+    background: '#fff',
+    height: '100vh',
+    overflow: 'auto',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
   card: { width: '100%' },
   header: {
     minHeight: 300,

@@ -1,19 +1,15 @@
 import React, { useEffect } from 'react';
-import { Card, Typography, Icon } from '@material-ui/core';
+import { Card, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import { IconButton, Column } from '../';
-import { Mutation } from 'react-apollo';
-import { ADD_FAVOURITE } from '../../data/mutations';
 import clsx from 'clsx';
 
 export default function ProfileCardCreative({ history, creative, favourite }) {
   const classes = useStyles();
   const [isFav, setIsFav] = React.useState(false);
-  const [favCount, setFavCount] = React.useState(0);
 
   useEffect(() => {
     setIsFav(favourite);
-    setFavCount(creative.likedMe.length);
   }, [favourite, creative]);
 
   return (
@@ -56,7 +52,7 @@ export default function ProfileCardCreative({ history, creative, favourite }) {
           position: 'relative',
         }}
       ></div>
-      <Mutation
+      {/* <Mutation
         mutation={ADD_FAVOURITE}
         variables={{
           id: creative._id,
@@ -82,6 +78,7 @@ export default function ProfileCardCreative({ history, creative, favourite }) {
           );
         }}
       </Mutation>
+      */}
 
       <Column j="center" a="center">
         <IconButton

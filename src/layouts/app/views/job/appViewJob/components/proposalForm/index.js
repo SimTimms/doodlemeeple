@@ -9,7 +9,7 @@ import {
   EditContractButton,
 } from '../../../../../../../components';
 
-export default function ProposalForm({ jobId, history, stripeID }) {
+export default function ProposalForm({ jobId }) {
   const [contract, setContract] = React.useState({
     _id: '',
     notes: '',

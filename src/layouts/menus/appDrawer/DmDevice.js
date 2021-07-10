@@ -1,6 +1,5 @@
 import React from 'react';
 import { useMediaQuery, Icon } from '@material-ui/core';
-import logo from '../../../assets/dm_device.png';
 import { Row } from '../../../components';
 
 export default function DmDevice({ isOpen, setIsOpen }) {
@@ -20,12 +19,12 @@ export default function DmDevice({ isOpen, setIsOpen }) {
     >
       <Row a="center" j="center">
         <img
-          src={logo}
+          src={process.env.REACT_APP_DEVICE}
           style={{
             maxHeight: 37,
             maxWidth: 34,
           }}
-          alt="DoodleMeeple Man"
+          alt={`${process.env.REACT_APP_COMPANY_PUBLIC_NAME} Man`}
         />
         {mobile && <Icon style={{ color: '#222', marginLeft: 10 }}>menu</Icon>}
       </Row>

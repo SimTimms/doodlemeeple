@@ -25,7 +25,6 @@ function ButtonObj({ ...props }) {
       type={type}
       className={clsx({
         [classes.iconButton]: true,
-        [classes.iconButtonStripe]: color === 'stripe',
         [classes.iconButtonSecondary]: color === 'secondary',
         [classes.iconButtonWarning]: color === 'warning',
         [classes.iconButtonText]: color === 'text',
@@ -50,7 +49,6 @@ function ButtonObj({ ...props }) {
         <Icon
           className={clsx({
             [classes.iconButtonIcon]: true,
-            [classes.iconButtonIconStripe]: color === 'stripe',
             [classes.iconButtonIconSecondary]: color === 'secondary',
             [classes.iconButtonIconText]: color === 'text',
             [classes.iconButtonIconTextWhite]: color === 'text-white',
@@ -71,7 +69,6 @@ function ButtonObj({ ...props }) {
         <Icon
           className={clsx({
             [classes.iconButtonIcon]: true,
-            [classes.iconButtonIconStripe]: color === 'stripe',
             [classes.iconButtonIconSecondary]: color === 'secondary',
             [classes.iconButtonIconText]: color === 'text',
             [classes.iconButtonIconTextWhite]: color === 'text-white',

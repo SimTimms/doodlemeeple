@@ -38,7 +38,7 @@ function GallerySection({
   const [notableProjects, setNotableProjects] = React.useState([]);
   const [testimonials, setTestimonials] = React.useState([]);
   const [deleting, setDeleting] = React.useState(false);
-  const { setChanges } = props;
+  const { setChanges, badges } = props;
   const imageFilter =
     images !== undefined
       ? images.map((item) => {
@@ -182,6 +182,7 @@ function GallerySection({
                       index={index}
                       galleryId={section.gallery._id}
                       sectionType={section.type}
+                      badges={badges}
                     />
                     <Projects
                       projects={notableProjects}

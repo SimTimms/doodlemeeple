@@ -129,15 +129,4 @@ export const useStyles = makeStyles((theme) => ({
   actionTextDark: {
     color: '#fff',
   },
-  stripeBoxNull: {
-    width: 30,
-    background: '#ccc',
-    display: 'flex',
-    alignItems: 'center',
-    padding: '1px 3px 1px 3px',
-    borderRadius: 2,
-  },
-  stripeBox: {
-    background: theme.palette.primary.main,
-  },
 }));

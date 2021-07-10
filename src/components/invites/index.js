@@ -2,7 +2,6 @@ import React from 'react';
 import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
 import CardMedia from '@material-ui/core/CardMedia';
-import tim from '../../assets/tim.jpg';
 
 function InvitesWidget({ invites, setInvite, edit }) {
   const classes = useStyles();
@@ -23,7 +22,7 @@ function InvitesWidget({ invites, setInvite, edit }) {
               className={classes.inviteRemove}
               onClick={() => {
                 const newInviteArr = invites.filter(
-                  item => item.id !== invite.id,
+                  (item) => item.id !== invite.id
                 );
                 setInvite(newInviteArr);
               }}
@@ -43,7 +42,7 @@ function InvitesWidget({ invites, setInvite, edit }) {
                 ...invites,
                 {
                   id: Math.floor(Math.random() * 100),
-                  profileImg: tim,
+                  profileImg: '',
                   name: 'Tim Simms',
                 },
               ];

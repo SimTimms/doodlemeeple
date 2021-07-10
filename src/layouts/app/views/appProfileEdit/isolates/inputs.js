@@ -19,6 +19,7 @@ export function preference(props) {
       profile={profile}
       setProfile={setProfile}
       SignupMutation={SignupMutation}
+      onClickEvent={() => null}
     />
   );
 }
@@ -215,7 +216,7 @@ export function contact(props) {
 }
 
 export function skill(props) {
-  const { sections, setSections, display, setDisplay } = props;
+  const { sections, setSections, display, setDisplay, profile } = props;
 
   return (
     <DMCard>
@@ -226,7 +227,7 @@ export function skill(props) {
             setDisplay={setDisplay}
             setSections={setSections}
             sections={sections}
-            userType={'both'}
+            badges={profile.badges}
           />
         )}
         {sections &&

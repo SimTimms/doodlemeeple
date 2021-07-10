@@ -9,7 +9,6 @@ import { PREVIEW_CONTRACT, GET_MESSAGES } from '../../../../../data/queries';
 import { Query } from 'react-apollo';
 import QuoteSummaryCreator from './views/quoteSummaryForCreator';
 import Chat from './views/chat';
-import PaymentElement from './views/payments';
 import Cookies from 'js-cookie';
 
 export default function AppViewContract({ contractId, history }) {
@@ -69,10 +68,6 @@ export default function AppViewContract({ contractId, history }) {
                       display={tabs[1]}
                       conversationId={conversationId}
                       history={history}
-                    />
-                    <PaymentElement
-                      display={tabs[2]}
-                      contractData={contractData}
                     />
                   </div>
                 </Column>

@@ -62,7 +62,10 @@ export function PublicMenu({ history }) {
         [classes.menuWrapperMobile]: mobile,
       })}`}
     >
-      <a href="https://doodlemeeple.com" style={{ textDecoration: 'none' }}>
+      <a
+        href={`${process.env.REACT_APP_INFO_EMAIL}`}
+        style={{ textDecoration: 'none' }}
+      >
         <StyledButton>Home</StyledButton>
       </a>
       {authToken && (
@@ -103,19 +106,22 @@ export function PublicFooterMenu() {
         <StyledButtonFooter>Register</StyledButtonFooter>
       </Link>
       <a
-        href="https://doodlemeeple.com/terms-of-service/"
+        href={process.env.REACT_APP_TERMS_LINK}
         style={{ textDecoration: 'none' }}
       >
         <StyledButtonFooter>Terms of Service</StyledButtonFooter>
       </a>
       <a
-        href="https://doodlemeeple.com/privacy-policy/"
+        href={process.env.REACT_APP_PRIVACY_LINK}
         style={{ textDecoration: 'none' }}
       >
         <StyledButtonFooter>Privacy Policy</StyledButtonFooter>
       </a>
-      <a href="mailto:info@doodlemeeple.com" style={{ textDecoration: 'none' }}>
-        <StyledButtonFooter>info@doodlemeeple.com</StyledButtonFooter>
+      <a
+        href={`mailto:${process.env.REACT_APP_INFO_EMAIL}`}
+        style={{ textDecoration: 'none' }}
+      >
+        <StyledButtonFooter>Contact</StyledButtonFooter>
       </a>
     </div>
   );

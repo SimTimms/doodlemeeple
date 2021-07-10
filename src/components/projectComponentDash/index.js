@@ -1,7 +1,6 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { useStyles } from './styles';
-import { Column, IconButton, DividerMini } from '../';
+import { Column, IconButton } from '../';
 
 export default function ProjectComponentDash({
   jobName,
@@ -12,7 +11,7 @@ export default function ProjectComponentDash({
     <Column j="space-between" a="center">
       <Column j="space-between" a="center">
         <Typography variant="body1">{jobName}</Typography>
-        <Typography variant="body1" style={{ fontSize: 10 }}>
+        <Typography variant="body1" style={{ fontSize: 12 }}>
           {jobSummary}
         </Typography>
         <IconButton

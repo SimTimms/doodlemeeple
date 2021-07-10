@@ -10,21 +10,14 @@ import {
   Divider,
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
-import { PROFILE, GET_STRIPE } from '../../../../data/queries';
-import stripeButton from '../../../../assets/stripe_button.png';
-import {
-  DELETE_ACCOUNT,
-  DELETE_STRIPE_ACCOUNT,
-} from '../../../../data/mutations';
+import { PROFILE } from '../../../../data/queries';
+import { DELETE_ACCOUNT } from '../../../../data/mutations';
 import Cookies from 'js-cookie';
-import { requestStripe } from '../../../../utils/stripe';
-import { SaveButton } from './components';
 
 export function Account({ history, searchValues }) {
   const classes = useStyles();
   const [email, setEmail] = React.useState('');
   const [isCreative, setIsCreative] = React.useState(false);
-  const [refresh, setRefresh] = React.useState(0);
   const [confirm, setConfirm] = React.useState(false);
   const [errors, setError] = React.useState({
     email: null,
@@ -72,79 +65,6 @@ export function Account({ history, searchValues }) {
             <SaveButton email={email} errors={errors} setError={setError} />
           </Paper>
 
-          {isCreative && (
-            <Paper pt={10}>
-              <FieldTitleDashboard name="Stripe" inline={false} a="c" />
-              <Divider />
-              <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_IK62p427A6Ilh5CyeAxMeoOxans1qDbR&scope=read_write&redirect_uri=http://localhost:3000/app/stripe-connect">
-                aa
-              </a>
-              <Query
-                query={GET_STRIPE}
-                variables={{ refresh }}
-                fetchPolicy="network-only"
-              >
-                {({ data }) => {
-                  return data ? (
-                    data.getStripe.object !== 'account' ? (
-                      <img
-                        src={stripeButton}
-                        onClick={() => {
-                          requestStripe(history);
-                        }}
-                        style={{ width: 200 }}
-                        alt=""
-                      />
-                    ) : !data.getStripe.payouts_enabled ? (
-                      <Column>
-                        <Typography className={classes.status}>
-                          Your Stripe account hasn't been verified, please login
-                          to your Stripe dashboard to continue.
-                        </Typography>
-                        <Divider />
-                        <a href="https://dashboard.stripe.com/login">
-                          <Typography>Login to Stripe</Typography>
-                        </a>
-                        <Mutation
-                          mutation={DELETE_STRIPE_ACCOUNT}
-                          onCompleted={(data) => {
-                            setRefresh(refresh + 1);
-                          }}
-                        >
-                          {(mutation) => {
-                            return (
-                              <IconButton
-                                title="Delete Stripe Account"
-                                onClickEvent={() => mutation()}
-                              />
-                            );
-                          }}
-                        </Mutation>
-                      </Column>
-                    ) : (
-                      <Column>
-                        <Mutation
-                          mutation={DELETE_STRIPE_ACCOUNT}
-                          onCompleted={(data) => {
-                            setRefresh(refresh + 1);
-                          }}
-                        >
-                          {(mutation) => {
-                            return (
-                              <IconButton
-                                title="Delete Stripe Account"
-                                onClickEvent={() => mutation()}
-                              />
-                            );
-                          }}
-                        </Mutation>
-                      </Column>
-                    )
-                  ) : null;
-                }}
-              </Query>
-            </Paper>
-          )}
           <Paper pt={10}>
             <FieldTitleDashboard
               name="Delete Account Permanently"

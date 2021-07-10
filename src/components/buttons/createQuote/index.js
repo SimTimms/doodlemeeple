@@ -23,6 +23,7 @@ export default function CreateQuoteButton({
             currency: 'GBP',
             cost: '100',
             jobId,
+            status: '',
           }}
           onCompleted={(data) => {
             toaster('Created');

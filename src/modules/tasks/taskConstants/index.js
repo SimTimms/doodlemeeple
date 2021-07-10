@@ -4,13 +4,40 @@ import { Mutation } from 'react-apollo';
 import { CREATE_CONTRACT } from '../../../data/mutations';
 import { toaster } from '../../../utils/toaster';
 
+export function TaskQuoteAccepted({ history }) {
+  return (
+    <TaskButton
+      title={`Quote Accepted!`}
+      subTitle="Quotes"
+      icon="thumb_up"
+      color="warning"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => history.push('/app/projects/quotes')}
+    />
+  );
+}
+export function TaskQuoteDeclined({ history }) {
+  return (
+    <TaskButton
+      title={`Your quote was declined`}
+      subTitle="Quotes"
+      icon="request_quote"
+      color="warning"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => history.push('/app/projects/quotes')}
+    />
+  );
+}
+
 export function TaskUnreadMessages({ data, history }) {
   return (
     <TaskButton
       title={`Read Message${data.counts.jobs > 1 ? 's' : ''}`}
       subTitle="Messages"
       icon="mail"
-      color="warning"
+      color="blue"
       clickSound={true}
       zoom={true}
       onClickEvent={() => history.push('/app/conversations')}
@@ -18,17 +45,17 @@ export function TaskUnreadMessages({ data, history }) {
   );
 }
 
-export function TaskPatreon({ data, history }) {
+export function TaskPatreon() {
   return (
     <TaskButton
-      title="Perk up your account"
-      subTitle="Patreon"
-      icon="work"
-      color="primary"
+      title="Visit our Patreon"
+      subTitle="Optional"
+      icon="alt_route"
+      color="grey"
       clickSound={true}
       zoom={true}
       onClickEvent={() =>
-        (window.location = 'https://www.patreon.com/doodlemeeple')
+        (window.location = process.env.REACT_APP_PATREON_LINK)
       }
     />
   );
@@ -40,9 +67,9 @@ export function TaskCheckProject({ data, history }) {
       title={
         data.counts.jobs === 1 ? 'Check your project' : 'Check your projects'
       }
-      subTitle="Project"
+      subTitle="Job"
       icon="work"
-      color="secondary"
+      color="warning"
       clickSound={true}
       zoom={true}
       onClickEvent={() => history.push('/app/projects')}
@@ -54,13 +81,11 @@ export function TaskSubmitDraftProject({ data, history }) {
   return (
     <TaskButton
       title={
-        data.counts.draftJobs === 1
-          ? 'Submit your Project'
-          : 'Submit your projects'
+        data.counts.draftJobs === 1 ? 'Submit your Job' : 'Submit your projects'
       }
-      subTitle="Project"
+      subTitle="Job"
       icon="work"
-      color="secondary"
+      color="warning"
       clickSound={true}
       zoom={true}
       onClickEvent={() => history.push('/app/projects')}
@@ -72,9 +97,9 @@ export function TaskCloseProject({ data, history }) {
   return (
     <TaskButton
       title="Close inactive project"
-      subTitle="Project"
+      subTitle="Job"
       icon="work"
-      color="secondary"
+      color="warning"
       clickSound={true}
       zoom={true}
       onClickEvent={() => history.push('/app/projects')}
@@ -100,9 +125,9 @@ export function TaskOpenQuote({ setOpenQuoteId }) {
   return (
     <TaskButton
       title="Reply to a Quote"
-      subTitle="Project"
+      subTitle="Job"
       icon="work"
-      color="secondary"
+      color="warning"
       clickSound={true}
       zoom={true}
       onClickEvent={() => setOpenQuoteId()}
@@ -114,12 +139,12 @@ export function UnansweredQuotes({ history }) {
   return (
     <TaskButton
       title="You have a Quote"
-      subTitle="Project"
+      subTitle="Job"
       icon="work"
-      color="secondary"
+      color="warning"
       clickSound={true}
       zoom={true}
-      onClickEvent={() => history.push('/app/projects')}
+      onClickEvent={() => history.push('/app/projects/jobs')}
     />
   );
 }
@@ -130,7 +155,7 @@ export function TaskRole({ history }) {
       title="Client or Creative"
       subTitle="Preference"
       icon="work"
-      color="secondary"
+      color="warning"
       clickSound={true}
       zoom={true}
       onClickEvent={() => history.push('/app/edit-profile/preference')}
@@ -195,9 +220,9 @@ export function TaskPostJob({ history }) {
   return (
     <TaskButton
       title="Post a Job"
-      subTitle="Project"
+      subTitle="Job"
       icon="work"
-      color="primary"
+      color="warning"
       clickSound={true}
       zoom={true}
       onClickEvent={() => history.push('/app/edit-job/new')}
@@ -208,10 +233,10 @@ export function TaskPostJob({ history }) {
 export function TaskContinueWithJobDraft({ jobId, history }) {
   return (
     <TaskButton
-      title="Submit this Project"
-      subTitle="Project"
+      title="Continue Editing"
+      subTitle="Job"
       icon="work"
-      color="primary"
+      color="warning"
       clickSound={true}
       zoom={true}
       onClickEvent={() => history.push(`/app/edit-job/${jobId}`)}
@@ -225,7 +250,7 @@ export function TaskSocials({ history }) {
       title="Add Socials"
       subTitle="Contact"
       icon="mail"
-      color="secondary"
+      color="warning"
       clickSound={true}
       zoom={true}
       onClickEvent={() => history.push('/app/edit-profile/social')}
@@ -239,10 +264,10 @@ export function TaskInvites({ history }) {
       title="Respond to Invites"
       subTitle="Invites"
       icon="mail"
-      color="warning"
+      color="primary"
       clickSound={true}
       zoom={true}
-      onClickEvent={() => history.push('/app/invites')}
+      onClickEvent={() => history.push('/app/projects/invites')}
     />
   );
 }
@@ -253,7 +278,7 @@ export function TaskContact({ history }) {
       title="Add Contact"
       subTitle="Contact"
       icon="mail"
-      color="secondary"
+      color="warning"
       clickSound={true}
       zoom={true}
       onClickEvent={() => history.push('/app/edit-profile/contact')}
@@ -267,7 +292,7 @@ export function TaskSubmitQuote({ history, quoteId }) {
       title="Complete your quote"
       subTitle="Quotes"
       icon="request_quote"
-      color="secondary"
+      color="primary"
       clickSound={true}
       zoom={true}
       onClickEvent={() =>
@@ -295,7 +320,7 @@ export function TaskQuote({ history, jobId }) {
             title="Create a quote"
             subTitle="Quotes"
             icon="request_quote"
-            color="secondary"
+            color="primary"
             clickSound={true}
             zoom={true}
             onClickEvent={() => {
@@ -314,7 +339,7 @@ export function TaskDeclineInvite({ setTabNbr }) {
       title="Decline this Invite"
       subTitle="Quotes"
       icon="request_quote"
-      color="warning"
+      color="primary"
       clickSound={true}
       zoom={true}
       onClickEvent={() => {
@@ -341,13 +366,27 @@ export function TaskEditQuote({ history, setTabNbr }) {
 export function TaskCommunity({ drawerButtonChange }) {
   return (
     <TaskButton
-      title="Check out the community page"
+      title="See what's new"
       subTitle="Optional"
       icon="alt_route"
       color="grey"
       clickSound={true}
       zoom={true}
       onClickEvent={() => drawerButtonChange('/app/community', 'Community')}
+    />
+  );
+}
+
+export function TaskJobBoard({ drawerButtonChange }) {
+  return (
+    <TaskButton
+      title="Browse the Job Board"
+      subTitle="Optional"
+      icon="alt_route"
+      color="grey"
+      clickSound={true}
+      zoom={true}
+      onClickEvent={() => drawerButtonChange('/app/job-board', 'Community')}
     />
   );
 }

@@ -12,7 +12,12 @@ function MediaGallery({ items, edit, setImages, galleryId, ...props }) {
   const [saveImage, setSaveImage] = React.useState(null);
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
-  const { sectionType } = props;
+  const { sectionType, badges } = props;
+  const maxImages = badges
+    ? badges.filter((badge) => badge.badgeType === 'golden').length > 0
+      ? 12
+      : 6
+    : 6;
 
   return (
     <div className={classes.root} style={{ background: 'none', padding: 0 }}>
@@ -59,7 +64,7 @@ function MediaGallery({ items, edit, setImages, galleryId, ...props }) {
             </div>
           ))}
 
-          {edit && items.length < 6 && (
+          {edit && items.length < maxImages && (
             <div
               className={clsx({
                 [classes.image]: true,

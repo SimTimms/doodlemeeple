@@ -1,3 +1,5 @@
-export const PROFILE_NAME = 22;
-export const PROFILE_EMAIL = 320;
-export const PROFILE_PASSWORD = 22;
+const PROFILE_NAME = 22;
+const PROFILE_EMAIL = 320;
+const PROFILE_PASSWORD = 22;
+
+export { PROFILE_NAME, PROFILE_EMAIL, PROFILE_PASSWORD };

@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   buttonRoot: {
     justifyContent: 'space-between',
     paddingBottom: 8,
+    borderRadius: 2,
   },
   active: {
     background: theme.palette.primary.main,

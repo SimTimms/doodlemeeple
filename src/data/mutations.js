@@ -1,47 +1,8 @@
 import gql from 'graphql-tag';
 
-export const SIGNUP_MUTATION = gql`
-  mutation SignupMutation(
-    $name: String!
-    $email: String!
-    $password: String!
-    $campaignId: String
-    $available: Boolean
-  ) {
-    userCreateOne(
-      record: {
-        name: $name
-        email: $email
-        password: $password
-        campaignId: $campaignId
-        available: $available
-      }
-    ) {
-      recordId
-    }
-  }
-`;
-export const DELETE_STRIPE_ACCOUNT = gql`
-  mutation deleteStripe {
-    deleteStripe
-  }
-`;
-
-export const DISCONNECT_STRIPE_ACCOUNT = gql`
-  mutation disconnectStripeAccount {
-    disconnectStripe
-  }
-`;
-
 export const REQUEST_WITHDRAW = gql`
   mutation RequestWithdraw($_id: MongoID!) {
     requestWithdraw(_id: $_id)
-  }
-`;
-
-export const CONNECT_STRIPE = gql`
-  mutation connectStripe($token: String!) {
-    connectStripe(token: $token)
   }
 `;
 
@@ -364,6 +325,7 @@ export const ADD_FAVOURITE = gql`
 export const UPDATE_JOB = gql`
   mutation UpdateJob(
     $_id: MongoID!
+    $contactEmail: String
     $name: String
     $img: String
     $summary: String
@@ -388,6 +350,7 @@ export const UPDATE_JOB = gql`
     jobUpdateById(
       record: {
         _id: $_id
+        contactEmail: $contactEmail
         name: $name
         img: $img
         summary: $summary
@@ -410,6 +373,14 @@ export const UPDATE_JOB = gql`
         genre: $genre
       }
     ) {
+      recordId
+    }
+  }
+`;
+
+export const SET_PUBLIC_JOB = gql`
+  mutation UpdateJob($_id: MongoID!, $isPublic: Boolean) {
+    jobUpdateById(record: { _id: $_id, isPublic: $isPublic }) {
       recordId
     }
   }
@@ -705,27 +676,5 @@ export const CREATE_MESSAGE = gql`
         }
       }
     }
-  }
-`;
-
-export const LOGIN_MUTATION = gql`
-  mutation LoginMutation($email: String!, $password: String!) {
-    userLogin(email: $email, password: $password) {
-      token
-    }
-  }
-`;
-
-export const PASSWORD_FORGOT_MUTATION = gql`
-  mutation PasswordForgotMutation($email: String!) {
-    passwordForgot(email: $email) {
-      _id
-    }
-  }
-`;
-
-export const PASSWORD_RESET_MUTATION = gql`
-  mutation PasswordResetMutation($password: String!, $token: String!) {
-    passwordReset(password: $password, token: $token)
   }
 `;

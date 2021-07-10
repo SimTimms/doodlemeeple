@@ -14,7 +14,7 @@ import {
 import { styles } from './styles';
 import { sharedStyles } from '../../styles';
 import { Mutation } from 'react-apollo';
-import { SIGNUP_MUTATION } from '../../../../../data/mutations';
+import { SIGNUP_MUTATION } from '../../../../../data/authorisation';
 import { readableErrors } from '../../../../../utils/readableErrors';
 import { validate } from 'email-validator';
 
@@ -115,7 +115,7 @@ export default function RegisterCard({ setPage, ...props }) {
               setEmail(e);
             }}
             replaceMode=""
-            placeholder="Example: info@doodlemeeple.com"
+            placeholder={`Example: ${process.env.REACT_APP_INFO_EMAIL}`}
             info="Your email address, used for logging into your account. This will not be displayed to other users"
             warning=""
             size="s"
@@ -175,11 +175,13 @@ export default function RegisterCard({ setPage, ...props }) {
             }}
           </Mutation>
           <DividerWithBorder />
-          <Meta str={`By registering you agree to the DoodleMeeple`} />
+          <Meta
+            str={`By registering you agree to the ${process.env.REACT_APP_COMPANY_PUBLIC_NAME}`}
+          />
           <Meta
             str={
               <a
-                href="https://doodlemeeple.com/terms-of-service/"
+                href={process.env.REACT_APP_TERMS_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -190,7 +192,7 @@ export default function RegisterCard({ setPage, ...props }) {
           <Meta
             str={
               <a
-                href="https://doodlemeeple.com/privacy-policy/"
+                href={process.env.REACT_APP_PRIVACY_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
               >

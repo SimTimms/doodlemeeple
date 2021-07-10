@@ -3,31 +3,28 @@ import Cookies from 'js-cookie';
 export default function menuArray(history, counts, profile) {
   return [
     {
-      name: 'Projects',
+      name: 'Work',
       icon: 'work',
       machineName: 'projects',
       link: () => history.push('/app/projects'),
       count: { icon: 'star', count: counts.quotes },
     },
     {
-      name: 'Invites',
-      icon: 'mail',
-      machineName: 'invites',
-      link: () => history.push('/app/invites'),
-      count: counts.invites > 0 && {
-        icon: 'local_post_office',
-        count: counts.invites,
-      },
+      name: 'Job Board',
+      icon: 'grid_view',
+      machineName: 'job-board',
+      link: () => history.push('/app/job-board'),
+      count: 0,
     },
     {
       name: 'Community',
-      icon: 'group_work',
+      icon: 'people',
       machineName: 'community',
       link: () => history.push('/app/community'),
       count: null,
     },
     {
-      name: profile.creativeTrue || profile.creatorTrue ? 'Messages' : 'hide',
+      name: 'Messages',
       icon: 'chat',
       machineName: 'messages',
       link: () => history.push('/app/conversations'),
@@ -39,7 +36,7 @@ export default function menuArray(history, counts, profile) {
     },
     {
       name: 'Account',
-      icon: 'account_balance',
+      icon: 'account_circle',
       machineName: 'account',
       link: () => history.push('/app/account'),
       count: null,

@@ -8,7 +8,6 @@ export default function CreatorComponentDash({
   setConversationUser,
   declined,
   history,
-  messages,
   closed,
   accepted,
 }) {
@@ -37,7 +36,7 @@ export default function CreatorComponentDash({
             ></div>
             <Column a="flex-end">
               <Typography style={{ fontSize: 12 }}>{user.name}</Typography>
-              <Typography style={{ fontSize: 10 }}>Project Owner</Typography>
+              <Typography style={{ fontSize: 12 }}>Project Owner</Typography>
               {accepted && (
                 <Typography style={{ fontSize: 12 }}>
                   {user.publicEmail}

@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => {
       justifyContent: 'center',
     },
     excerptBack: {
-      background: theme.palette.secondary.main,
+      background: theme.palette.primary.dark,
       width: '100%',
       display: 'flex',
       alignItems: 'center',
@@ -49,9 +49,10 @@ export const useStyles = makeStyles((theme) => {
       backgroundPosition: 'center',
       display: 'flex',
       alignItems: 'flex-end',
+      backgroundColor: '#fff',
     },
     options: {
-      backgroundColor: theme.palette.secondary.dark,
+      backgroundColor: theme.palette.primary.main,
       width: '100%',
       display: 'flex',
       justifyContent: 'center',

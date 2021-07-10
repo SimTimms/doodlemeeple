@@ -13,7 +13,7 @@ import { Form, FormInput, ErrorBox } from '../../../../../components';
 import { styles } from './styles';
 import { sharedStyles } from '../../styles';
 import { Mutation } from 'react-apollo';
-import { PASSWORD_RESET_MUTATION } from '../../../../../data/mutations';
+import { PASSWORD_RESET_MUTATION } from '../../../../../data/authorisation';
 import clsx from 'clsx';
 
 var passwordValidator = require('password-validator');
@@ -108,7 +108,7 @@ export default function ResetCard({ setPage, token }) {
             <Mutation
               mutation={PASSWORD_RESET_MUTATION}
               variables={{ password, token }}
-              onCompleted={async data => {
+              onCompleted={async (data) => {
                 data.passwordReset === true
                   ? setPage(1)
                   : setButtonStatus({
@@ -116,14 +116,14 @@ export default function ResetCard({ setPage, token }) {
                       action: submitChecks,
                     });
               }}
-              onError={error => {
+              onError={(error) => {
                 setButtonStatus({
                   value: 'Invalid Token',
                   action: submitChecks,
                 });
               }}
             >
-              {passwordResetMutation => {
+              {(passwordResetMutation) => {
                 return (
                   <div>
                     <Button

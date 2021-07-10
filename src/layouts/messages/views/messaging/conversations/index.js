@@ -52,7 +52,6 @@ export default function Conversations({ history, setConversationArgs }) {
         </div>
         <Query
           query={CONVERSATIONS}
-          variables={{ status: 'submitted' }}
           onCompleted={(data) => {
             setConversationArray(data.getConversations);
           }}

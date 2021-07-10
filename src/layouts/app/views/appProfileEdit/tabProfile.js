@@ -25,12 +25,13 @@ import * as social from '../../../../assets/social';
 import SocialHeader from './socialHeader';
 import ContactHeader from './contactHeader';
 
-export default function AppProfileEdit({
+export default function TabProfile({
   profile,
   loading,
   setProfile,
   sections,
   setSections,
+  ...props
 }) {
   const classes = useStyles();
   const [changes, setChanges] = React.useState(0);
@@ -49,6 +50,12 @@ export default function AppProfileEdit({
     email: null,
     password: null,
   });
+  const { badges } = props;
+  const maxSkill = badges
+    ? badges.filter((badge) => badge.badgeType === 'golden').length > 0
+      ? 6
+      : 3
+    : 3;
 
   useEffect(() => {
     setVisible({
@@ -310,16 +317,17 @@ export default function AppProfileEdit({
                         section={section}
                         autosaveIsOn={true}
                         setChanges={addChanges}
+                        badges={profile.badges}
                       />
                     </DMCard>
                   ))}
                 <DMCard>
-                  {sections.length < 3 && hasNew() === 0 && (
+                  {sections.length < maxSkill && hasNew() === 0 && (
                     <InlineHeader>
                       <IconTitle icon="brush" title="Skills" />
                     </InlineHeader>
                   )}
-                  {sections.length < 3 && hasNew() === 0 && (
+                  {sections.length < maxSkill && hasNew() === 0 && (
                     <AddSection
                       setSections={setSections}
                       sections={sections}
@@ -327,6 +335,7 @@ export default function AppProfileEdit({
                         creative: profile.creativeTrue,
                         creator: profile.creatorTrue,
                       }}
+                      badges={profile.badges}
                     />
                   )}
                 </DMCard>

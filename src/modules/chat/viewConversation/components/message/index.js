@@ -1,21 +1,22 @@
 import React from 'react';
-import { Typography, Card } from '@material-ui/core';
+import { Typography, Card, useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 import { useStyles } from './styles';
 import { timeDifferenceForDate } from '../../../../../utils/dates';
 import { IconButton } from '../../../../../components';
 import Cookies from 'js-cookie';
-import device from '../../../../../assets/device.svg';
 
-export function Message({ message, history, setViewer }) {
+export function Message({ message, history }) {
   const classes = useStyles();
   const isUserMessage = message.sender._id !== Cookies.get('userId');
-
+  const mobile = useMediaQuery('(max-width:800px)');
   return (
     <Card
       className={clsx({
-        [classes.card]: true,
+        [classes.card]: isUserMessage,
+        [classes.cardMobile]: mobile,
         [classes.cardOther]: !isUserMessage,
+        [classes.cardOtherMobile]: !isUserMessage && mobile,
       })}
     >
       <div className={classes.rowWrapper}>
@@ -31,7 +32,9 @@ export function Message({ message, history, setViewer }) {
                   [classes.icon]: true,
                 })}
                 src={
-                  message.sender.profileImg ? message.sender.profileImg : device
+                  message.sender.profileImg
+                    ? message.sender.profileImg
+                    : process.env.REACT_APP_DEVICE
                 }
                 alt=""
               />
@@ -63,7 +66,16 @@ export function Message({ message, history, setViewer }) {
                   </Typography>
                 </div>
                 {message.type !== 'upload' ? (
-                  <Typography color="textPrimary" component="p">
+                  <Typography
+                    color="textPrimary"
+                    component="p"
+                    style={{
+                      maxWidth: '500px',
+                      overflowWrap: 'break-word',
+                      fontFamily: 'arial, sans-serif',
+                      lineHeight: 1.3,
+                    }}
+                  >
                     {message.messageStr.indexOf('QUOTE SUBMITTED:') === -1 ? (
                       message.messageStr
                     ) : !isUserMessage ? (
@@ -108,7 +120,6 @@ export function Message({ message, history, setViewer }) {
                   <img
                     src={message.messageStr}
                     style={{ maxWidth: 300, cursor: 'pointer' }}
-                    onClick={() => setViewer(message.messageStr)}
                     alt=""
                   />
                 )}
@@ -127,7 +138,9 @@ export function Message({ message, history, setViewer }) {
                   [classes.icon]: true,
                 })}
                 src={
-                  message.sender.profileImg ? message.sender.profileImg : device
+                  message.sender.profileImg
+                    ? message.sender.profileImg
+                    : process.env.REACT_APP_DEVICE
                 }
                 alt=""
               />

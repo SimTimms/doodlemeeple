@@ -20,7 +20,6 @@ export default function NoticeBoard({ profile }) {
         ) : role === 'creative' || role === 'creator' || role === 'both' ? (
           <Column h="100%">
             {CONSTANTS.SET_UP}
-            <Divider />
             {CONSTANTS.SET_UP_SUB}
           </Column>
         ) : (
@@ -30,6 +29,9 @@ export default function NoticeBoard({ profile }) {
             {CONSTANTS.SET_UP_NONE_SUB}
           </Column>
         )}
+        <div
+          style={{ width: '100%', borderTop: '1px solid #ddd', marginTop: 10 }}
+        />
       </Column>
     </div>
   );

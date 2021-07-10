@@ -9,38 +9,58 @@ import {
   CardComponent,
 } from '../../../../components';
 import { FeaturedArticle } from './components/getPosts';
-import dmPatreon from '../../../../assets/dmPatreon.jpg';
+import {
+  LatestCreativesWidget,
+  JobBoardMiniWidget,
+  KickstarterWidget,
+} from '../../../../widgets';
 
 export default function CommunityPage({ history }) {
   return (
-    <Row wrap="wrap" j="space-around" a="flex-start">
-      <Column w="50%">
-        <CardComponent
-          styleOverride={{
-            marginTop: 10,
-            borderRadius: 0,
-            paddingBottom: 10,
-          }}
-        >
-          <Typography variant="h6">The Creative Roster</Typography>
+    <Row wrap="wrap" a="flex-start" j="space-around" w={1024}>
+      <Row j="space-around" a="flex-start">
+        <Column w="45%">
+          <DividerMini />
+
+          <Typography>Categories</Typography>
+          <DividerMini />
           <DividerMini />
           <CreativeCategories history={history} />
-        </CardComponent>
-      </Column>
-      <Column w="50%">
-        <CardComponent
-          styleOverride={{
-            marginTop: 10,
-            borderRadius: 0,
-          }}
-        >
-          <Typography variant="h6">Featured Artist</Typography>
+        </Column>
+        <Column w="45%">
+          <DividerMini />
+          <Typography>Featured</Typography>
+          <DividerMini />
           <DividerMini />
           <FeaturedArticle history={history} />
-        </CardComponent>
+        </Column>
+      </Row>
+      <DividerWithBorder />
+      <Column>
+        <DividerMini />
+        <Typography>Latest Profiles</Typography>
+        <DividerMini />
+        <LatestCreativesWidget history={history} dashboard={true} />
       </Column>
       <DividerWithBorder />
-      <Column w="50%">
+      <Column>
+        <DividerMini />
+        <Typography>Jobs</Typography>
+        <DividerMini />
+        <JobBoardMiniWidget history={history} dashboard={true} />
+      </Column>
+      <DividerWithBorder />
+      <Column>
+        <DividerMini />
+        <Typography>Kickstarters</Typography>
+        <DividerMini />
+        <KickstarterWidget history={history} dashboard={true} />
+      </Column>
+      <DividerWithBorder />
+      <Column w={500}>
+        <DividerMini />
+        <Typography>Patreon</Typography>
+        <DividerMini />
         <CardComponent
           styleOverride={{
             boxShadow: '5px 5px 10px rgba(0,0,0,0.1)',
@@ -49,8 +69,12 @@ export default function CommunityPage({ history }) {
         >
           <Typography variant="h6">Support us on Patreon</Typography>
           <DividerMini />
-          <a href="https://www.patreon.com/doodlemeeple">
-            <img src={dmPatreon} style={{ width: '100%' }} />
+          <a href={process.env.REACT_APP_PATREON_LINK}>
+            <img
+              src={process.env.REACT_APP_PATREON}
+              style={{ width: '100%' }}
+              alt=""
+            />
           </a>
         </CardComponent>
       </Column>

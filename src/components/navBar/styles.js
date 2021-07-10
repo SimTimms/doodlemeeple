@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const drawerWidth = 140;
 export const useStyles = makeStyles((theme) => ({
   root: {
-    background: '#fff',
+    background: theme.palette.wrap.main,
     zIndex: 9,
     color: theme.palette.primary.main,
   },
@@ -14,10 +14,8 @@ export const useStyles = makeStyles((theme) => ({
     height: 64,
     position: 'relative',
     boxSizing: 'border-box',
-    boxShadow: 'none',
-    borderBottom: '1px solid #ddd',
+    boxShadow: '0 4px 10px rgba(0,0,0,0.2)',
   },
-
   appBarShift: {
     paddingLeft: drawerWidth,
     width: '100%',

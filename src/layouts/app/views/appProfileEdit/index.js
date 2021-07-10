@@ -45,6 +45,7 @@ export default function AppProfileEdit({ history, ...props }) {
               sections={sections}
               setSections={setSections}
               isolate={isolate}
+              badges={profile.badges}
             />
           ) : (
             <TabPreferences setProfile={setProfile} profile={profile} />

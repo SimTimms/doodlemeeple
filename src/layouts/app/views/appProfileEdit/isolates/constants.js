@@ -3,11 +3,9 @@ export const summary =
 
 export const social = 'Add your social media accounts';
 
-export const contact =
-  'Add the contact details. These will be available to your connections on DoodleMeeple';
+export const contact = `Add the contact details. These will be available to your connections on ${process.env.REACT_APP_COMPANY_PUBLIC_NAME}`;
 
-export const skill =
-  'Skills define how you will be found on DoodleMeeple, add your top skill now then add up to 2 more later in your profile';
+export const skill = `Skills define how you will be found on ${process.env.REACT_APP_COMPANY_PUBLIC_NAME}, add your top skill now then add up to 2 more later in your profile`;
 
 export const avatar =
   'Upload a photo, image or logo that represents you or your company';
