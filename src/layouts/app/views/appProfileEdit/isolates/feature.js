@@ -21,7 +21,7 @@ export default function FeatureComponent({
           autosave(SignupMutation, 'image');
         }}
         cbDelete={() => {
-          setProfile({ ...profile, profileBG: null });
+          setProfile({ ...profile, profileBG: '' });
           autosave(SignupMutation, 'image');
         }}
         styleOverride={null}

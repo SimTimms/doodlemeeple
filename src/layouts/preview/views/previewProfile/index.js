@@ -22,6 +22,7 @@ import imageOptimiser from '../../../../utils/imageOptimiser';
 import { initialState } from './initialState';
 import Cookies from 'js-cookie';
 import clsx from 'clsx';
+import { FullProfileCard } from '../../../../widgets/profileCard';
 
 export function PreviewProfile({ history, profileId, publicView, ...props }) {
   const classes = useStyles();
@@ -31,6 +32,7 @@ export function PreviewProfile({ history, profileId, publicView, ...props }) {
   const [sections, setSections] = React.useState([]);
   const [page, setPage] = React.useState(-1);
   const userId = Cookies.get('userId');
+  const [large, setLarge] = React.useState(null);
 
   const { setFullProfile } = props;
 
@@ -41,19 +43,6 @@ export function PreviewProfile({ history, profileId, publicView, ...props }) {
         [classes.popup]: setFullProfile,
       })}
     >
-      <Query
-        query={PROFILE_PREVIEW}
-        variables={{ userId: profileId }}
-        onCompleted={(data) => {
-          setUserProfile({
-            ...data.userById,
-          });
-        }}
-      >
-        {({ data }) => {
-          return null;
-        }}
-      </Query>
       <div className={classes.root}>
         {setFullProfile && (
           <IconButton
@@ -85,7 +74,8 @@ export function PreviewProfile({ history, profileId, publicView, ...props }) {
             ></IconButton>
           </div>
         )}
-
+        <FullProfileCard history={history} creativeId={profileId} />
+        {/*
         <div
           style={{
             backgroundImage:
@@ -231,7 +221,7 @@ export function PreviewProfile({ history, profileId, publicView, ...props }) {
           {({ data }) => {
             return null;
           }}
-        </Query>
+        </Query>   */}
       </div>
     </div>
   );
