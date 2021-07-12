@@ -45,10 +45,8 @@ export default function KickstarterProfile({ kickstarter }) {
             {kickstarter.summary}
           </Typography>
         )}
-        <div className={classes.divider}></div>
 
         <Column w="120px">
-          <Typography>Support us on</Typography>
           <a
             href={kickstarter.url}
             style={{ cursor: 'pointer', marginTop: 5 }}
@@ -57,7 +55,7 @@ export default function KickstarterProfile({ kickstarter }) {
           >
             <img
               src={kickstarterImage}
-              style={{ width: '100%', marginBottom: 5 }}
+              style={{ width: '100%', marginBottom: 5, maxWidth: 120 }}
               alt="Kickstarter"
             />
           </a>

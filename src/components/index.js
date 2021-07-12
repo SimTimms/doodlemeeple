@@ -48,6 +48,7 @@ import MenuButtonShortcut from './buttons/menuButtonShortcut';
 import FieldTitle from './fieldTitle';
 import {
   JobComponent,
+  KickstarterComponent,
   InviteComponent,
   ResponseComponent,
   ChosenCreative,

@@ -3,7 +3,7 @@ import FeaturedCreativeMiniWidget from './featuredCreativesMini';
 import LatestCreativesWidget from './latestCreatives';
 import CreativeRosterWidget from './creativeRoster';
 import KickstarterForm from './kickstarter/kickstarterForm';
-import KickstarterWidget from './kickstarter';
+import { FeaturedKickstarters, Kickstarters } from './kickstarter';
 import { QuoteOutWidget, QuoteInWidget, QuoteViewWidget } from './quote';
 
 import {
@@ -24,7 +24,8 @@ export {
   FeaturedCreativeWidget,
   CreativeRosterWidget,
   KickstarterForm,
-  KickstarterWidget,
+  FeaturedKickstarters,
+  Kickstarters,
   FeaturedCreativeMiniWidget,
   JobWidget,
   JobDescriptionWidget,

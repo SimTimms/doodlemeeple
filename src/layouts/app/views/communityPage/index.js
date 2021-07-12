@@ -12,7 +12,7 @@ import { FeaturedArticle } from './components/getPosts';
 import {
   LatestCreativesWidget,
   JobBoardMiniWidget,
-  KickstarterWidget,
+  FeaturedKickstarters,
 } from '../../../../widgets';
 
 export default function CommunityPage({ history }) {
@@ -54,7 +54,7 @@ export default function CommunityPage({ history }) {
         <DividerMini />
         <Typography>Kickstarters</Typography>
         <DividerMini />
-        <KickstarterWidget history={history} dashboard={true} />
+        <FeaturedKickstarters history={history} dashboard={true} />
       </Column>
       <DividerWithBorder />
       <Column w={500}>
