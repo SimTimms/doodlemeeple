@@ -4,7 +4,6 @@ import { JOBS } from '../../../../../data/queries';
 import {
   Column,
   LoadIcon,
-  Divider,
   JobComponent,
   DividerWithBorder,
   IconButton,

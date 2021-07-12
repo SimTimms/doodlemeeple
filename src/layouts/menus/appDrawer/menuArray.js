@@ -17,10 +17,24 @@ export default function menuArray(history, counts, profile) {
       count: 0,
     },
     {
-      name: 'Community',
-      icon: 'people',
+      name: 'Browse',
+      icon: 'home',
       machineName: 'community',
       link: () => history.push('/app/community'),
+      count: null,
+    },
+    {
+      name: 'Professionals',
+      icon: 'chevron_right',
+      machineName: 'creative-roster',
+      link: () => history.push('/app/creative-roster'),
+      count: null,
+    },
+    {
+      name: 'Kickstarters',
+      icon: 'chevron_right',
+      machineName: 'kickstarters',
+      link: () => history.push('/app/kickstarters'),
       count: null,
     },
     {

@@ -4,9 +4,10 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 
 export function Column(props) {
-  const { children, a, j, w, p, b, br, h, bg, m } = props;
+  const { children, a, j, w, p, b, br, h, bg, m, mw } = props;
   const align = a ? a : 'center';
   const width = w ? w : '100%';
+  const maxWidth = mw ? mw : '100%';
   const height = h ? h : '';
   const justify = j ? j : 'center';
   const padding = p ? p : 0;
@@ -30,6 +31,7 @@ export function Column(props) {
         height,
         background,
         margin,
+        maxWidth,
       }}
       className={clsx({
         [classes.desktop]: true,

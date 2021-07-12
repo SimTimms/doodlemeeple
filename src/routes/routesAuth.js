@@ -5,7 +5,7 @@ import PreviewLayout from '../layouts/preview';
 import {
   FeaturedCreativeWidget,
   CreativeRosterWidget,
-  KickstarterWidget,
+  FeaturedKickstarters,
   KickstarterForm,
   FeaturedCreativeMiniWidget,
   JobDescriptionWidget,
@@ -30,9 +30,8 @@ export default function AuthRoutes({ theme, props: { ...props } }) {
       />
       <Route
         path="/featured-kickstarters"
-        render={(props) => <KickstarterWidget />}
+        render={(props) => <FeaturedKickstarters />}
       />
-      <Route path="/kickstarter" render={(props) => <KickstarterForm />} />
 
       <Route
         path="/job-description/:jobId"

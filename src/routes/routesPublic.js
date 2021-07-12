@@ -7,7 +7,7 @@ import {
   FeaturedCreativeWidget,
   FeaturedCreativeMiniWidget,
   CreativeRosterWidget,
-  KickstarterWidget,
+  FeaturedKickstarters,
   JobDescriptionWidget,
   PublicJobWidget,
 } from '../widgets';
@@ -29,7 +29,7 @@ export default function PublicRoutes({ theme, props: { ...props } }) {
       />
       <Route
         path="/featured-kickstarters"
-        render={(props) => <KickstarterWidget />}
+        render={(props) => <FeaturedKickstarters />}
       />
       <Route path="/public-jobs" render={(props) => <PublicJobWidget />} />
       <Route

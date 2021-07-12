@@ -45,6 +45,7 @@ import {
   JobBoardWidget,
   FullContractWidget,
   JobDescriptionWidget,
+  Kickstarters,
 } from '../../widgets';
 
 export default function AppLayout(props) {
@@ -234,6 +235,8 @@ export default function AppLayout(props) {
             </Query>
           ) : page === 'view-job' && profile ? (
             <AppViewJob jobId={pathParam} history={history} />
+          ) : page === 'kickstarters' ? (
+            <Kickstarters history={history} />
           ) : page === 'view-quote-job' && profile ? (
             <AppViewQuoteJob jobId={pathParam} history={history} />
           ) : page === 'contract' && profile ? (
