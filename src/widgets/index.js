@@ -5,6 +5,7 @@ import CreativeRosterWidget from './creativeRoster';
 import KickstarterForm from './kickstarter/kickstarterForm';
 import { FeaturedKickstarters, Kickstarters } from './kickstarter';
 import { QuoteOutWidget, QuoteInWidget, QuoteViewWidget } from './quote';
+
 import {
   JobWidget,
   JobDescriptionWidget,

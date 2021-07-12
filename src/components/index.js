@@ -93,6 +93,7 @@ import GalleryCard from './galleryCard';
 import FeaturedCreative from './featuredCreative';
 import CreativeRosterProfiles from './creativeRosterProfiles';
 import UserDeleted from './userDeleted';
+import LargeImage from './largeImage';
 
 import {
   Header,
@@ -111,6 +112,7 @@ import {
 import { Column, Row, TopMenuWrapper, RowCheckList } from './blocks';
 
 export {
+  LargeImage,
   ResponseComponent,
   ChosenCreative,
   UserDeleted,

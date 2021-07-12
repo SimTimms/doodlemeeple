@@ -146,7 +146,7 @@ export default function RegisterCard({ setPage, ...props }) {
             mutation={SIGNUP_MUTATION}
             variables={{ name, email, password, campaignId, available: true }}
             onError={(error) => {
-              setButtonStatus(error.toString());
+              setButtonStatus(error);
               setError(readableErrors(error, errors));
             }}
             onCompleted={(a, b) => {
