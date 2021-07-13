@@ -7,10 +7,14 @@ import {
   Row,
   CardComponent,
 } from '../../../components';
-import clsx from 'clsx';
 
 export default function KickstarterComponent({ kickstarter, setKickstarter }) {
   const classes = useStyles();
+  const pending =
+    kickstarter.name != '' &&
+    kickstarter.url &&
+    kickstarter.summary &&
+    kickstarter.featuredImage;
 
   return (
     <CardComponent styleOverride={{ maxWidth: 400 }}>
@@ -32,6 +36,9 @@ export default function KickstarterComponent({ kickstarter, setKickstarter }) {
               <Column a="flex-start">
                 <Typography style={{ fontSize: 12 }}>
                   {kickstarter.name}
+                </Typography>
+                <Typography style={{ fontSize: 12 }} className={classes.dull}>
+                  {pending ? 'Pending Approval' : 'Draft'}
                 </Typography>
               </Column>
             </Row>

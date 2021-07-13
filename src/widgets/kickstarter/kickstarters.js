@@ -35,7 +35,7 @@ export default function Kickstarters() {
         />
         <MenuButtonShortcut
           text={{
-            name: 'My Kickstarters',
+            name: 'My Kickstarter',
             color: 'light',
             icon: 'travel_explore',
             count: 0,

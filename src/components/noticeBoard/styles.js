@@ -7,8 +7,9 @@ export const useStyles = makeStyles((theme) => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: '#fff',
       paddingTop: 5,
+      background: theme.palette.primary.main,
+      color: '#fff',
     },
     excerptBack: {
       background: theme.palette.secondary.main,

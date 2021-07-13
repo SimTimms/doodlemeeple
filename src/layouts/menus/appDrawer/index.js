@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { Divider, Drawer, List, useMediaQuery } from '@material-ui/core';
+import {
+  Divider,
+  Drawer,
+  List,
+  useMediaQuery,
+  DividerWithBorder,
+} from '@material-ui/core';
 import { useStyles } from '../styles';
 import clsx from 'clsx';
 import { Query } from 'react-apollo';

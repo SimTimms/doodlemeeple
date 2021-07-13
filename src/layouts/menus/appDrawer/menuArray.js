@@ -3,25 +3,44 @@ import Cookies from 'js-cookie';
 export default function menuArray(history, counts, profile) {
   return [
     {
+      name: 'Tasks',
+      icon: 'task_alt',
+      machineName: 'tasks',
+      link: () => history.push('/app/tasks'),
+      count: null,
+    },
+    {
       name: 'Work',
       icon: 'work',
       machineName: 'projects',
       link: () => history.push('/app/projects'),
       count: { icon: 'star', count: counts.quotes },
     },
+
     {
-      name: 'Job Board',
-      icon: 'grid_view',
-      machineName: 'job-board',
-      link: () => history.push('/app/job-board'),
-      count: 0,
+      name: 'Messages',
+      icon: 'chat',
+      machineName: 'messages',
+      link: () => history.push('/app/conversations'),
+      color: '',
+      count:
+        counts.messages > 0
+          ? { icon: 'local_post_office', count: counts.messages }
+          : { icon: 'mail', count: counts.messages },
     },
     {
-      name: 'Browse',
+      name: 'Community',
       icon: 'home',
       machineName: 'community',
       link: () => history.push('/app/community'),
       count: null,
+    },
+    {
+      name: 'Job Board',
+      icon: 'chevron_right',
+      machineName: 'job-board',
+      link: () => history.push('/app/job-board'),
+      count: 0,
     },
     {
       name: 'Professionals',
@@ -38,17 +57,6 @@ export default function menuArray(history, counts, profile) {
       count: null,
     },
     {
-      name: 'Messages',
-      icon: 'chat',
-      machineName: 'messages',
-      link: () => history.push('/app/conversations'),
-      color: '',
-      count:
-        counts.messages > 0
-          ? { icon: 'local_post_office', count: counts.messages }
-          : { icon: 'mail', count: counts.messages },
-    },
-    {
       name: 'Account',
       icon: 'account_circle',
       machineName: 'account',
@@ -56,15 +64,15 @@ export default function menuArray(history, counts, profile) {
       count: null,
     },
     {
-      name: 'Tasks',
-      icon: 'task_alt',
-      machineName: 'tasks',
-      link: () => history.push('/app/tasks'),
+      name: 'Profile',
+      icon: 'chevron_right',
+      machineName: 'edit-profile',
+      link: () => history.push('/app/edit-profile'),
       count: null,
     },
     {
       name: 'Logout',
-      icon: 'exit_to_app',
+      icon: 'chevron_right',
       machineName: 'logout',
       link: () => {
         Cookies.remove('token');

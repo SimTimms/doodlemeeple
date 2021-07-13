@@ -18,7 +18,7 @@ export default function NoticeBoard({ profile }) {
             {CONSTANTS.WELCOME_SUB}
           </Column>
         ) : role === 'creative' || role === 'creator' || role === 'both' ? (
-          <Column h="100%">
+          <Column h="100%" m="0 0 10px 0">
             {CONSTANTS.SET_UP}
             {CONSTANTS.SET_UP_SUB}
           </Column>
@@ -29,9 +29,6 @@ export default function NoticeBoard({ profile }) {
             {CONSTANTS.SET_UP_NONE_SUB}
           </Column>
         )}
-        <div
-          style={{ width: '100%', borderTop: '1px solid #ddd', marginTop: 10 }}
-        />
       </Column>
     </div>
   );
