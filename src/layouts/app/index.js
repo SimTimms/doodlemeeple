@@ -17,7 +17,7 @@ import SubmitJob from './views/job/editJob/components/submitJob';
 import { Account } from './views/account';
 import FullContract from './views/fullContract';
 import { ProjectSubmitted } from './views/submitted';
-import { EditGame, PreviewGame, Games } from './views/game';
+import { EditGame, PreviewGame } from './views/game';
 import {
   EditJob,
   Jobs,
@@ -46,6 +46,7 @@ import {
   FullContractWidget,
   JobDescriptionWidget,
   Kickstarters,
+  Games,
 } from '../../widgets';
 
 export default function AppLayout(props) {
@@ -175,8 +176,6 @@ export default function AppLayout(props) {
             <AppInvites history={history} />
           ) : page === 'submitted' ? (
             <ProjectSubmitted history={history} />
-          ) : page === 'games' ? (
-            <Games history={history} />
           ) : page === 'projects' ? (
             <Jobs history={history} tab={pathParam} />
           ) : page === 'edit-profile' ? (
@@ -237,6 +236,8 @@ export default function AppLayout(props) {
             <AppViewJob jobId={pathParam} history={history} />
           ) : page === 'kickstarters' ? (
             <Kickstarters history={history} />
+          ) : page === 'games' ? (
+            <Games history={history} />
           ) : page === 'view-quote-job' && profile ? (
             <AppViewQuoteJob jobId={pathParam} history={history} />
           ) : page === 'contract' && profile ? (

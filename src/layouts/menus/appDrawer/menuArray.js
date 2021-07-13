@@ -50,6 +50,13 @@ export default function menuArray(history, counts, profile) {
       count: null,
     },
     {
+      name: 'Games',
+      icon: 'chevron_right',
+      machineName: 'games',
+      link: () => history.push('/app/games'),
+      count: null,
+    },
+    {
       name: 'Kickstarters',
       icon: 'chevron_right',
       machineName: 'kickstarters',
