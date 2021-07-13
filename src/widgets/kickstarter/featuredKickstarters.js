@@ -9,7 +9,7 @@ export default function FeaturedKickstarters() {
     <Row
       j="flex-start"
       a="flex-start"
-      pb="20px"
+      pb="40px"
       pl="20px"
       pr="20px"
       of="auto"
