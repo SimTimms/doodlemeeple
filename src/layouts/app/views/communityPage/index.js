@@ -17,7 +17,7 @@ import {
 
 export default function CommunityPage({ history }) {
   return (
-    <Row wrap="wrap" a="flex-start" j="space-around" w={1024}>
+    <Row wrap="wrap" a="flex-start" j="space-around" w="100%">
       <Row j="space-around" a="flex-start">
         <Column w="45%">
           <DividerMini />
