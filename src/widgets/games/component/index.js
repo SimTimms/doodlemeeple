@@ -10,8 +10,7 @@ import {
 
 export default function GameComponent({ game, setGame }) {
   const classes = useStyles();
-  const pending =
-    game.name != '' && game.url && game.summary && game.featuredImage;
+  const pending = game.name != '' && game.summary && game.featuredImage;
 
   return (
     <CardComponent styleOverride={{ maxWidth: 400 }}>

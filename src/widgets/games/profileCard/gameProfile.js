@@ -44,10 +44,12 @@ export default function GameProfile({ game }) {
             {game.summary}
           </Typography>
         )}
-        {game.url && (
+        {game.url ? (
           <a href={`${game.url}`} target="_blank" rel="noopener noreferrer">
             <IconButton title="Website" icon="" onClickEvent={() => {}} />
           </a>
+        ) : (
+          <div></div>
         )}
       </Column>
     </div>
