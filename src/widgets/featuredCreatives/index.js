@@ -4,6 +4,7 @@ import { Query } from 'react-apollo';
 import { FEATURED_CREATIVES_WIDGET } from './data';
 import { ProfileCard } from '../profileCard/';
 import BigImage from '../bigImage';
+import { Row } from '../../components';
 
 export default function FeaturedCreativeWidget() {
   const classes = useStyles();
