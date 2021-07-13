@@ -72,14 +72,14 @@ export default function menuArray(history, counts, profile) {
     },
     {
       name: 'Profile',
-      icon: 'chevron_right',
+      icon: 'face',
       machineName: 'edit-profile',
       link: () => history.push('/app/edit-profile'),
       count: null,
     },
     {
       name: 'Logout',
-      icon: 'chevron_right',
+      icon: 'logout',
       machineName: 'logout',
       link: () => {
         Cookies.remove('token');
