@@ -6,7 +6,15 @@ import { Row } from '../../components';
 
 export default function FeaturedKickstarters() {
   return (
-    <Row j="flex-start" a="flex-start" pb="20px" pl="20px" pr="20px" of="auto">
+    <Row
+      j="flex-start"
+      a="flex-start"
+      pb="20px"
+      pl="20px"
+      pr="20px"
+      of="auto"
+      w="100%"
+    >
       <Query query={FEATURED_KICKSTARTER_WIDGET} fetchPolicy="network-only">
         {({ data, loading }) => {
           if (data)

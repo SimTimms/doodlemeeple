@@ -12,7 +12,7 @@ export default function FeaturedCreativeWidget() {
   const [large, setLarge] = React.useState(null);
 
   return (
-    <Row of="auto" a="flex-start" j="flex-start">
+    <Row of="auto" a="flex-start" j="flex-start" w="100%">
       {large !== null && <BigImage large={large} setLarge={setLarge} />}
       <Query
         query={FEATURED_CREATIVES_WIDGET}
