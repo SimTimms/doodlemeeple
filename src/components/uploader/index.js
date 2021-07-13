@@ -70,7 +70,6 @@ function Uploader({
             .then((result) => {
               setStatusMessage('');
               cbImage(url);
-              toaster('Saved');
             })
             .catch((error) => {
               setStatusMessage(error);
@@ -82,7 +81,6 @@ function Uploader({
       })
       .catch((error) => {
         setStatusMessage('Error');
-        console.log(error);
       });
   }
 
