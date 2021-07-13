@@ -11,7 +11,7 @@ export default function FeaturedCreativeWidget() {
   const [large, setLarge] = React.useState(null);
 
   return (
-    <div className={classes.root}>
+    <Row of="auto">
       {large !== null && <BigImage large={large} setLarge={setLarge} />}
       <Query
         query={FEATURED_CREATIVES_WIDGET}
@@ -32,6 +32,6 @@ export default function FeaturedCreativeWidget() {
           });
         }}
       </Query>
-    </div>
+    </Row>
   );
 }
