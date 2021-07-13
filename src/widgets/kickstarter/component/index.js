@@ -11,7 +11,7 @@ import {
 export default function KickstarterComponent({ kickstarter, setKickstarter }) {
   const classes = useStyles();
   const pending =
-    kickstarter.name != '' &&
+    kickstarter.name !== '' &&
     kickstarter.url &&
     kickstarter.summary &&
     kickstarter.featuredImage;
