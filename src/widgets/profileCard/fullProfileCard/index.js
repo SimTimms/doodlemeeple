@@ -11,7 +11,6 @@ import {
   LargeImage,
   Divider,
   DividerMini,
-  HeaderThree,
 } from '../../../components';
 import { PROFILE_PREVIEW } from '../data';
 import { nameShortener } from '../../../utils';
