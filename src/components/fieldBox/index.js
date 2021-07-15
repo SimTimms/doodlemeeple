@@ -93,7 +93,7 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
                 const eReplaced =
                   replaceMode === 'loose'
                     ? e.target.value.replace(
-                        /[^A-Za-z0-9&:;|/\\?!@£$%*()_ ,-."`'[\]\n]/g,
+                        /[^A-Za-z0-9&:;|/\\?!@=£$%*()_ ,-."`'[\]\n]/g,
                         ''
                       )
                     : replaceMode === 'number'
