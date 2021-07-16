@@ -1,13 +1,14 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { MenuButtonShortcut, Column, Row } from '../';
+import { IconButton, Column, Row, DividerWithBorder } from '../';
 import clsx from 'clsx';
 import { Mutation } from 'react-apollo';
 import { UPDATE_INVITE } from '../../data/mutations';
 import { nameShortener } from '../../utils';
+import { JobDescriptionWidget } from '../../widgets';
 
-export default function InviteComponent({ invite, history, setTabNbr }) {
+export default function InviteComponent({ invite }) {
   const classes = useStyles();
   const declined = invite.status === 'declined';
   const unopened = invite.status === 'unopened';
@@ -18,6 +19,7 @@ export default function InviteComponent({ invite, history, setTabNbr }) {
   const accepted = invite.status === 'accepted';
   const inviteJob = invite.job ? invite.job : null;
   const completed = inviteJob ? inviteJob.submitted === 'complete' : false;
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return !inviteJob ? (
     <Typography>Deleted</Typography>
@@ -35,9 +37,7 @@ export default function InviteComponent({ invite, history, setTabNbr }) {
             style={{ width: '100%', cursor: 'pointer' }}
             onClick={() => {
               invite.status === 'unopened' && mutation();
-              quoted
-                ? setTabNbr(4)
-                : history.push(`/app/job-description/${invite.job._id}`);
+              isOpen ? setIsOpen(false) : setIsOpen(true);
             }}
           >
             <Column>
@@ -82,24 +82,25 @@ export default function InviteComponent({ invite, history, setTabNbr }) {
                     </Typography>
                   </Column>
                 </Row>
-
-                <MenuButtonShortcut
-                  text={{
-                    name: quoted ? 'Quotes' : 'Open',
-                    color: 'light',
-                    icon: completed
+                <IconButton
+                  title={quoted ? 'Quotes' : 'View'}
+                  color="primary"
+                  icon={
+                    completed
                       ? ''
                       : unopened || opened || quoted || accepted || draft
                       ? 'local_post_office'
-                      : '',
-                    count: invite.messages,
-                    back: 'primary',
-                  }}
+                      : ''
+                  }
                   onClickEvent={() => null}
-                  active={false}
-                  countIcon="star"
                 />
               </Row>
+              {isOpen && (
+                <Column>
+                  <DividerWithBorder />
+                  <JobDescriptionWidget jobId={invite.job._id} />
+                </Column>
+              )}
             </Column>
           </div>
         );

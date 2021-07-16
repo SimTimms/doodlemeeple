@@ -12,7 +12,7 @@ import {
 import { useStyles } from './styles';
 import NoInvite from './noInvite';
 
-export default function AppInvites({ history, setTabNbr }) {
+export default function InviteDashboard({ history, setTabNbr }) {
   const classes = useStyles();
   const [inviteArray, setInviteArray] = React.useState([]);
 
@@ -52,9 +52,6 @@ export default function AppInvites({ history, setTabNbr }) {
               'quote_sent',
               'draft',
               'accepted',
-              'declined',
-              'rejected',
-              'closed',
               'complete',
             ],
           }}

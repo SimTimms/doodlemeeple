@@ -13,16 +13,16 @@ import { COUNTS } from '../../../data/queries';
 import { MenuButtonShortcut } from '../../../components';
 import menuArray from './menuArray';
 import DmDevice from './DmDevice';
+import { ProfileContext, HistoryContext } from '../../../context';
 
 export default function AppDrawer({
-  history,
   handleDrawerClose,
   handleDrawerOpen,
   open,
   ...props
 }) {
   const { drawerOpenTablet, drawerRoot, drawerClosed } = useStyles();
-  const { profile, activeButton } = props;
+  const { activeButton } = props;
   const mobile = useMediaQuery('(max-width:800px)');
   const [isOpen, setIsOpen] = React.useState(false);
   const [page, setPage] = React.useState('Tasks');
@@ -37,58 +37,66 @@ export default function AppDrawer({
   }, [activeButton]);
 
   return (
-    <Drawer
-      variant="permanent"
-      classes={{
-        paper: clsx({
-          [drawerRoot]: true,
-          [drawerOpenTablet]: mobile,
-          [drawerClosed]: !isOpen && mobile,
-        }),
-      }}
-    >
-      <DmDevice isOpen={isOpen} setIsOpen={setIsOpen} />
-      <Divider />
-      <List onClick={() => setIsOpen(false)}>
-        <div>
-          {menuArray(history, counts, profile).map(
-            (text, index) =>
-              text.name !== 'hide' && (
-                <MenuButtonShortcut
-                  text={{
-                    name: text.name,
-                    color: '#222',
-                    icon: text.icon,
-                    count: text.count ? text.count.count : 0,
-                  }}
-                  onClickEvent={() => {
-                    setPage(text.machineName);
-                    text.link();
-                    handleDrawerClose();
-                  }}
-                  active={text.machineName === page}
-                  key={`menu_${index}`}
-                  countIcon={text.count ? text.count.icon : 'star'}
-                />
-              )
+    <HistoryContext.Consumer>
+      {(history) => (
+        <ProfileContext.Consumer>
+          {(profile) => (
+            <Drawer
+              variant="permanent"
+              classes={{
+                paper: clsx({
+                  [drawerRoot]: true,
+                  [drawerOpenTablet]: mobile,
+                  [drawerClosed]: !isOpen && mobile,
+                }),
+              }}
+            >
+              <DmDevice isOpen={isOpen} setIsOpen={setIsOpen} />
+              <Divider />
+              <List onClick={() => setIsOpen(false)}>
+                <div>
+                  {menuArray(history, counts, profile).map(
+                    (text, index) =>
+                      text.name !== 'hide' && (
+                        <MenuButtonShortcut
+                          text={{
+                            name: text.name,
+                            color: '#222',
+                            icon: text.icon,
+                            count: text.count ? text.count.count : 0,
+                          }}
+                          onClickEvent={() => {
+                            setPage(text.machineName);
+                            text.link();
+                            handleDrawerClose();
+                          }}
+                          active={text.machineName === page}
+                          key={`menu_${index}`}
+                          countIcon={text.count ? text.count.icon : 'star'}
+                        />
+                      )
+                  )}
+                </div>
+              </List>
+              <Query
+                query={COUNTS}
+                onCompleted={(data) => {
+                  setCounts({
+                    invites: data.counts.invites,
+                    messages: data.counts.messages,
+                    quotes: data.counts.quotes,
+                  });
+                }}
+                fetchPolicy="network-only"
+              >
+                {({ data }) => {
+                  return null;
+                }}
+              </Query>
+            </Drawer>
           )}
-        </div>
-      </List>
-      <Query
-        query={COUNTS}
-        onCompleted={(data) => {
-          setCounts({
-            invites: data.counts.invites,
-            messages: data.counts.messages,
-            quotes: data.counts.quotes,
-          });
-        }}
-        fetchPolicy="network-only"
-      >
-        {({ data }) => {
-          return null;
-        }}
-      </Query>
-    </Drawer>
+        </ProfileContext.Consumer>
+      )}
+    </HistoryContext.Consumer>
   );
 }

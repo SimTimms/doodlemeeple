@@ -5,6 +5,10 @@ export const ProfileContext = React.createContext({
   updateProfileContext: () => {},
 });
 
+export const UserContext = React.createContext({
+  userId: null,
+});
+
 export const HistoryContext = React.createContext({
   history: null,
 });

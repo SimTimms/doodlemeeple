@@ -6,6 +6,7 @@ import {
   BorderBox,
   FullContractComponent,
   Signature,
+  IconButton,
 } from '../../../../../../components';
 import { ChatViewByJob } from '../../../../../../modules/chat';
 import CreatorMenu from './creatorMenu';
@@ -52,6 +53,7 @@ export default function SummaryViewCreator({ job, history }) {
               job={job}
               setTabNbr={setTabNbr}
             />
+            <IconButton title="Close Job" icon="delete" />
           </Column>
         ) : tabNbr === 1 ? (
           <CreatorJobSummary

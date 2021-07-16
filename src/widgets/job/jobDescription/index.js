@@ -3,16 +3,19 @@ import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import { BgImg } from './components';
-import { Row, Column, IconButton } from '../../../components';
+import {
+  Row,
+  Column,
+  IconButton,
+  DividerWithBorder,
+  CardComponent,
+} from '../../../components';
 import imageOptimiser from '../../../utils/imageOptimiser';
 import BigImage from '../../bigImage';
 import ReactPlayer from 'react-player';
 import Cookies from 'js-cookie';
-import { Mutation, Query } from 'react-apollo';
-import { CREATE_CONTRACT } from '../../../data/mutations';
-import { JOB_CONTRACT } from '../../../data/queries';
 
-export default function JobDescription({ job, history }) {
+export default function JobDescription({ job }) {
   const userId = Cookies.get('userId');
   const classes = useStyles();
   const [large, setLarge] = React.useState(null);
@@ -22,11 +25,7 @@ export default function JobDescription({ job, history }) {
   }, [job]);
 
   return (
-    <div
-      className={clsx({
-        [classes.creativeCard]: true,
-      })}
-    >
+    <CardComponent>
       {large !== null && <BigImage large={large} setLarge={setLarge} />}
       <Column j="space-between" h="100%">
         <Column j="flex-start">
@@ -36,6 +35,7 @@ export default function JobDescription({ job, history }) {
               {`Genre: ${job.genre}`}
             </Typography>
           )}
+          <DividerWithBorder />
         </Column>
         {job.summary && (
           <Column a="flex-start">
@@ -45,7 +45,7 @@ export default function JobDescription({ job, history }) {
         )}
         {job.creativeSummary && (
           <Column a="flex-start">
-            <div className={classes.divider}></div>
+            <DividerWithBorder />
             <Typography className={classes.title}>Creative Summary</Typography>
             <Typography className={classes.summary}>
               {job.creativeSummary}
@@ -54,7 +54,7 @@ export default function JobDescription({ job, history }) {
         )}
         {job.showreel && (
           <Column a="flex-start">
-            <div className={classes.divider}></div>
+            <DividerWithBorder />
             <Typography className={classes.title}>Video Message</Typography>
             <ReactPlayer
               url={job.showreel}
@@ -70,21 +70,21 @@ export default function JobDescription({ job, history }) {
         )}
         {job.timeframe && (
           <Column a="flex-start">
-            <div className={classes.divider}></div>
+            <DividerWithBorder />
             <Typography className={classes.title}>Timeframe</Typography>
             <Typography className={classes.summary}>{job.timeframe}</Typography>
           </Column>
         )}
         {job.budget && (
           <Column a="flex-start">
-            <div className={classes.divider}></div>
+            <DividerWithBorder />
             <Typography className={classes.title}>Budget</Typography>
             <Typography className={classes.summary}>{job.budget}</Typography>
           </Column>
         )}
         {job.gallery.images.length > 0 && (
           <Column a="flex-start">
-            <div className={classes.divider}></div>
+            <DividerWithBorder />
             <Typography className={classes.title}>Reference Images</Typography>
             <BgImg
               previewImage={previewImage}
@@ -111,30 +111,33 @@ export default function JobDescription({ job, history }) {
         )}
         {job.scope && (
           <Column a="flex-start">
-            <div className={classes.divider}></div>
+            <DividerWithBorder />
             <Typography className={classes.title}>Scope</Typography>
             <Typography className={classes.summary}>{job.scope}</Typography>
           </Column>
         )}
         {job.mechanics && (
           <Column a="flex-start">
-            <div className={classes.divider}></div>
+            <DividerWithBorder />
             <Typography className={classes.title}>Mechanics</Typography>
             <Typography className={classes.summary}>{job.mechanics}</Typography>
           </Column>
         )}
         {job.extra && (
           <Column a="flex-start">
-            <div className={classes.divider}></div>
+            <DividerWithBorder />
             <Typography className={classes.title}>Notes</Typography>
             <Typography className={classes.summary}>{job.extra}</Typography>
           </Column>
         )}
         <Column>
           {job.submitted === 'accepted' && (
-            <Typography style={{ marginBottom: 20, marginTop: 10 }}>
-              This job has been assigned
-            </Typography>
+            <Column>
+              <DividerWithBorder />
+              <Typography className={classes.notify}>
+                This job has been assigned
+              </Typography>
+            </Column>
           )}
           {job.submitted !== 'accepted' && !userId && (
             <a
@@ -143,7 +146,7 @@ export default function JobDescription({ job, history }) {
               rel="noopener noreferrer"
               style={{ textDecoration: 'none' }}
             >
-              <div className={classes.divider}></div>
+              <DividerWithBorder />
               <IconButton
                 title="Apply on DoodleMeeple"
                 icon="chevron_right"
@@ -152,72 +155,10 @@ export default function JobDescription({ job, history }) {
               />
             </a>
           )}
-          {userId &&
-            userId !== job.user._id &&
-            job.submitted !== 'accepted' &&
-            !job.isExternal && (
-              <Query
-                query={JOB_CONTRACT}
-                variables={{ jobId: job._id }}
-                fetchPolicy="network-only"
-                onCompleted={(data) => null}
-              >
-                {({ data }) => {
-                  return data && data.jobContract ? (
-                    <Column>
-                      <div className={classes.divider}></div>
-                      <IconButton
-                        disabled={false}
-                        color="warning"
-                        title={'Edit Quote'}
-                        icon="fact_check"
-                        onClickEvent={() => {
-                          history.push(
-                            `/app/edit-quote/${data.jobContract._id}`
-                          );
-                        }}
-                      />
-                    </Column>
-                  ) : (
-                    <Mutation
-                      mutation={CREATE_CONTRACT}
-                      variables={{
-                        currency: 'GBP',
-                        cost: '100',
-                        jobId: job._id,
-                        status: '',
-                      }}
-                      onCompleted={(data) => {
-                        history.push(
-                          `/app/edit-quote/${data.contractCreateOne.recordId}`
-                        );
-                      }}
-                      onError={() => {}}
-                    >
-                      {(mutation) => {
-                        return (
-                          <Column>
-                            <div className={classes.divider}></div>
-                            <IconButton
-                              disabled={false}
-                              color="warning"
-                              title={'Create a Quote'}
-                              icon="fact_check"
-                              onClickEvent={() => {
-                                mutation();
-                              }}
-                            />
-                          </Column>
-                        );
-                      }}
-                    </Mutation>
-                  );
-                }}
-              </Query>
-            )}
+
           {job.contactEmail && job.submitted !== 'accepted' && (
             <Column>
-              <div className={classes.divider}></div>
+              <DividerWithBorder />
               <Typography className={classes.title}>
                 You may also send applications to
               </Typography>
@@ -231,6 +172,6 @@ export default function JobDescription({ job, history }) {
           )}
         </Column>
       </Column>
-    </div>
+    </CardComponent>
   );
 }

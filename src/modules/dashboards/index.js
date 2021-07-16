@@ -4,10 +4,8 @@ import {
   Column,
   InviteComponentFull,
   Widget,
-  Row,
   ChosenCreative,
 } from '../../components';
-import { TaskGeneratorClient } from '../../modules/tasks';
 import { ResponsesWidget } from '../../widgets';
 
 export default function ProjectDash({
@@ -74,23 +72,6 @@ export default function ProjectDash({
               />
             );
           })}
-        </Widget>
-      )}
-      {job.submitted !== 'closed' && (
-        <Widget p={10}>
-          <Column>
-            <Typography variant="body1">Tasks</Typography>
-            <Row>
-              <TaskGeneratorClient
-                setTabNbr={setTabNbr}
-                job={job}
-                contracts={job.contracts}
-                setOpenQuoteId={setOpenQuoteId}
-                history={history}
-                accepted={accepted}
-              />
-            </Row>
-          </Column>
         </Widget>
       )}
     </Column>

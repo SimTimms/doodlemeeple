@@ -17,6 +17,7 @@ import RoleObject from './roleObject';
 import ContentHeader from './headers/contentHeader';
 import Payments from './payments';
 import TaskComponent from './taskComponent';
+import TaskMiniComponent from './taskMiniComponent';
 import ProjectComponentDash from './projectComponentDash';
 import MessageComponent from './messageComponent';
 import CurrencySelector from './currencySelector';
@@ -126,6 +127,7 @@ export {
   GalleryCard,
   Column,
   Row,
+  TaskMiniComponent,
   PaymentSchedule,
   InlineHeaderWarning,
   FeatureCardInvite,
