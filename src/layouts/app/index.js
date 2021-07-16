@@ -99,6 +99,8 @@ export default function AppLayout(props) {
   }, [page]);
 
   return (
+        <HistoryContext.Provider value={history}>
+</HistoryContext.Provider>
     <div className={classes.root}>
       <ToastContainer />
       <StyledNavBar open={open} history={history} theme={props.theme}>
