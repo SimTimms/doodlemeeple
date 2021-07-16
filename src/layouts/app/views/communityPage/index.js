@@ -7,6 +7,7 @@ import {
   DividerMini,
   DividerWithBorder,
   CardComponent,
+  TaskComponent,
 } from '../../../../components';
 import { FeaturedArticle } from './components/getPosts';
 import {
@@ -21,7 +22,7 @@ export default function CommunityPage({ history }) {
       <Row j="space-around" a="flex-start">
         <Column w="45%">
           <DividerMini />
-
+          <TaskComponent profile={profile} history={history} />
           <Typography>Categories</Typography>
           <DividerMini />
           <DividerMini />
