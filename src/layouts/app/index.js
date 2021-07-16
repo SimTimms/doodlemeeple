@@ -48,6 +48,7 @@ import {
   Kickstarters,
   Games,
 } from '../../widgets';
+import { ProfileContext, HistoryContext } from '../../context';
 
 export default function AppLayout(props) {
   const [page, setPage] = React.useState('tasks');
@@ -99,221 +100,223 @@ export default function AppLayout(props) {
   }, [page]);
 
   return (
-        <HistoryContext.Provider value={history}>
-</HistoryContext.Provider>
-    <div className={classes.root}>
-      <ToastContainer />
-      <StyledNavBar open={open} history={history} theme={props.theme}>
-        {!mobile && (
-          <MenuButtonShortcut
-            text={{
-              name: profile ? profile.name : 'Fetching...',
-              color: '#222',
-              icon: 'face',
-              count: 0,
-            }}
-            onClickEvent={() => {
-              history.push('/app/edit-profile');
-            }}
-            active={false}
-            imageIcon={profile && profile.profileImg}
-            countIcon="star"
-            iconPos="right"
-          />
-        )}
-      </StyledNavBar>
-      {profile && (
-        <AppDrawer
-          handleDrawerClose={handleDrawerClose}
-          handleDrawerOpen={handleDrawerOpen}
-          open={open}
-          history={history}
-          activeButton={activeButton}
-          profile={profile}
-        />
-      )}
-      <main
-        className={clsx({
-          [classes.content]: true,
-          [classes.contentMobile]: mobile,
-        })}
-      >
-        <ContentTop style={{ width: '100%' }}>
-          {page === 'dashboard' && profile ? (
-            <AppDashboard
+    <HistoryContext.Provider value={history}>
+      <ProfileContext.Provider value={profile}>
+        <div className={classes.root}>
+          <ToastContainer />
+          <StyledNavBar open={open} history={history} theme={props.theme}>
+            {!mobile && (
+              <MenuButtonShortcut
+                text={{
+                  name: profile ? profile.name : 'Fetching...',
+                  color: '#222',
+                  icon: 'face',
+                  count: 0,
+                }}
+                onClickEvent={() => {
+                  history.push('/app/edit-profile');
+                }}
+                active={false}
+                imageIcon={profile && profile.profileImg}
+                countIcon="star"
+                iconPos="right"
+              />
+            )}
+          </StyledNavBar>
+          {profile && (
+            <AppDrawer
+              handleDrawerClose={handleDrawerClose}
+              handleDrawerOpen={handleDrawerOpen}
+              open={open}
               history={history}
+              activeButton={activeButton}
               profile={profile}
-              setProfile={setProfile}
             />
-          ) : page === 'conversations' ? (
-            <ConversationModule history={history} />
-          ) : page === 'tasks' && profile ? (
-            <TaskDashboard
-              history={history}
-              profile={profile}
-              setProfile={setProfile}
-              drawerButtonChange={drawerButtonChange}
-            />
-          ) : page === 'notifications' && profile ? (
-            <NotificationDashboard
-              history={history}
-              profile={profile}
-              setProfile={setProfile}
-            />
-          ) : page === 'help' ? (
-            <AppHelp history={history} />
-          ) : page === 'help' ? (
-            <AppHelp history={history} />
-          ) : page === 'creative-roster' ? (
-            <Query query={FAVOURITES} fetchPolicy="network-only">
-              {({ data, loading }) => {
-                return loading
-                  ? null
-                  : data && <CreativeRosterWidget history={history} />;
-              }}
-            </Query>
-          ) : page === 'account' ? (
-            <Account history={history} />
-          ) : page === 'invites' ? (
-            <AppInvites history={history} />
-          ) : page === 'submitted' ? (
-            <ProjectSubmitted history={history} />
-          ) : page === 'projects' ? (
-            <Jobs history={history} tab={pathParam} />
-          ) : page === 'edit-profile' ? (
-            <AppProfileEdit
-              theme={props.theme}
-              history={history}
-              isolate={pathParam}
-            />
-          ) : page === 'edit-game' ? (
-            <EditGame
-              theme={props.theme}
-              gameId={pathParam}
-              autosaveIsOn={true}
-              history={history}
-            />
-          ) : page === 'withdraw' ? (
-            <Withdraw contractId={pathParam} history={history} />
-          ) : page === 'view-game' ? (
-            <PreviewGame
-              theme={props.theme}
-              gameId={pathParam}
-              autosaveIsOn={true}
-              history={history}
-            />
-          ) : page === 'job-description' ? (
-            <JobDescriptionWidget jobId={pathParam} history={history} />
-          ) : page === 'edit-job' ? (
-            <EditJob
-              jobId={pathParam}
-              history={history}
-              creativeId={pathParam2}
-            />
-          ) : page === 'quotes-out' ? (
-            <QuoteOutWidget history={history} />
-          ) : page === 'quotes-in' ? (
-            <QuoteInWidget history={history} />
-          ) : page === 'view-quote' ? (
-            <QuoteViewWidget history={history} quoteId={pathParam} />
-          ) : page === 'edit-quote' ? (
-            <Query
-              query={PREVIEW_CONTRACT}
-              variables={{ contractId: pathParam }}
-              fetchPolicy="network-only"
-            >
-              {({ data, loading }) => {
-                return loading
-                  ? null
-                  : data && (
-                      <EditQuote
-                        history={history}
+          )}
+          <main
+            className={clsx({
+              [classes.content]: true,
+              [classes.contentMobile]: mobile,
+            })}
+          >
+            <ContentTop style={{ width: '100%' }}>
+              {page === 'dashboard' && profile ? (
+                <AppDashboard
+                  history={history}
+                  profile={profile}
+                  setProfile={setProfile}
+                />
+              ) : page === 'conversations' ? (
+                <ConversationModule history={history} />
+              ) : page === 'tasks' && profile ? (
+                <TaskDashboard
+                  history={history}
+                  profile={profile}
+                  setProfile={setProfile}
+                  drawerButtonChange={drawerButtonChange}
+                />
+              ) : page === 'notifications' && profile ? (
+                <NotificationDashboard
+                  history={history}
+                  profile={profile}
+                  setProfile={setProfile}
+                />
+              ) : page === 'help' ? (
+                <AppHelp history={history} />
+              ) : page === 'help' ? (
+                <AppHelp history={history} />
+              ) : page === 'creative-roster' ? (
+                <Query query={FAVOURITES} fetchPolicy="network-only">
+                  {({ data, loading }) => {
+                    return loading
+                      ? null
+                      : data && <CreativeRosterWidget history={history} />;
+                  }}
+                </Query>
+              ) : page === 'account' ? (
+                <Account history={history} />
+              ) : page === 'invites' ? (
+                <AppInvites history={history} />
+              ) : page === 'submitted' ? (
+                <ProjectSubmitted history={history} />
+              ) : page === 'projects' ? (
+                <Jobs history={history} tab={pathParam} />
+              ) : page === 'edit-profile' ? (
+                <AppProfileEdit
+                  theme={props.theme}
+                  history={history}
+                  isolate={pathParam}
+                />
+              ) : page === 'edit-game' ? (
+                <EditGame
+                  theme={props.theme}
+                  gameId={pathParam}
+                  autosaveIsOn={true}
+                  history={history}
+                />
+              ) : page === 'withdraw' ? (
+                <Withdraw contractId={pathParam} history={history} />
+              ) : page === 'view-game' ? (
+                <PreviewGame
+                  theme={props.theme}
+                  gameId={pathParam}
+                  autosaveIsOn={true}
+                  history={history}
+                />
+              ) : page === 'job-description' ? (
+                <JobDescriptionWidget jobId={pathParam} history={history} />
+              ) : page === 'edit-job' ? (
+                <EditJob
+                  jobId={pathParam}
+                  history={history}
+                  creativeId={pathParam2}
+                />
+              ) : page === 'quotes-out' ? (
+                <QuoteOutWidget history={history} />
+              ) : page === 'quotes-in' ? (
+                <QuoteInWidget history={history} />
+              ) : page === 'view-quote' ? (
+                <QuoteViewWidget history={history} quoteId={pathParam} />
+              ) : page === 'edit-quote' ? (
+                <Query
+                  query={PREVIEW_CONTRACT}
+                  variables={{ contractId: pathParam }}
+                  fetchPolicy="network-only"
+                >
+                  {({ data, loading }) => {
+                    return loading
+                      ? null
+                      : data && (
+                          <EditQuote
+                            history={history}
+                            jobId={pathParam}
+                            contractData={data.contractById}
+                          />
+                        );
+                  }}
+                </Query>
+              ) : page === 'view-job' && profile ? (
+                <AppViewJob jobId={pathParam} history={history} />
+              ) : page === 'kickstarters' ? (
+                <Kickstarters history={history} />
+              ) : page === 'games' ? (
+                <Games history={history} />
+              ) : page === 'view-quote-job' && profile ? (
+                <AppViewQuoteJob jobId={pathParam} history={history} />
+              ) : page === 'contract' && profile ? (
+                <AppViewJob jobId={pathParam} history={history} />
+              ) : page === 'view-public-job' && profile ? (
+                <AppViewJobPublic jobId={pathParam} history={history} />
+              ) : page === 'job-board' && profile ? (
+                <JobBoardWidget history={history} />
+              ) : page === 'view-proposal' ? (
+                <ViewProposal jobId={pathParam} history={history} />
+              ) : page === 'view-contract' ? (
+                <EditContract contractId={pathParam} history={history} />
+              ) : page === 'view-full-contract' ? (
+                <FullContract contractId={pathParam} history={history} />
+              ) : page === 'view-sign-full-contract' ? (
+                <FullContractWidget contractId={pathParam} history={history} />
+              ) : page === 'edit-contract' ? (
+                <EditContract contractId={pathParam} history={history} />
+              ) : page === 'community' ? (
+                <CommunityPage history={history} />
+              ) : page === 'public-preview' ? (
+                <PreviewProfile
+                  profileId={pathParam}
+                  theme={props.theme}
+                  publicView={true}
+                  history={history}
+                />
+              ) : page === 'pick-artist' ? (
+                <Query query={FAVOURITES} fetchPolicy="network-only">
+                  {({ data, loading }) => {
+                    return loading ? null : (
+                      <PickArtist
+                        theme={props.theme}
                         jobId={pathParam}
-                        contractData={data.contractById}
+                        creativeId={pathParam2}
+                        autosaveIsOn={true}
+                        history={history}
+                        favourites={data.profile.favourites.map(
+                          (fav) => fav.receiver && fav.receiver._id
+                        )}
                       />
                     );
-              }}
-            </Query>
-          ) : page === 'view-job' && profile ? (
-            <AppViewJob jobId={pathParam} history={history} />
-          ) : page === 'kickstarters' ? (
-            <Kickstarters history={history} />
-          ) : page === 'games' ? (
-            <Games history={history} />
-          ) : page === 'view-quote-job' && profile ? (
-            <AppViewQuoteJob jobId={pathParam} history={history} />
-          ) : page === 'contract' && profile ? (
-            <AppViewJob jobId={pathParam} history={history} />
-          ) : page === 'view-public-job' && profile ? (
-            <AppViewJobPublic jobId={pathParam} history={history} />
-          ) : page === 'job-board' && profile ? (
-            <JobBoardWidget history={history} />
-          ) : page === 'view-proposal' ? (
-            <ViewProposal jobId={pathParam} history={history} />
-          ) : page === 'view-contract' ? (
-            <EditContract contractId={pathParam} history={history} />
-          ) : page === 'view-full-contract' ? (
-            <FullContract contractId={pathParam} history={history} />
-          ) : page === 'view-sign-full-contract' ? (
-            <FullContractWidget contractId={pathParam} history={history} />
-          ) : page === 'edit-contract' ? (
-            <EditContract contractId={pathParam} history={history} />
-          ) : page === 'community' ? (
-            <CommunityPage history={history} />
-          ) : page === 'public-preview' ? (
-            <PreviewProfile
-              profileId={pathParam}
-              theme={props.theme}
-              publicView={true}
-              history={history}
-            />
-          ) : page === 'pick-artist' ? (
-            <Query query={FAVOURITES} fetchPolicy="network-only">
-              {({ data, loading }) => {
-                return loading ? null : (
-                  <PickArtist
-                    theme={props.theme}
-                    jobId={pathParam}
-                    creativeId={pathParam2}
-                    autosaveIsOn={true}
-                    history={history}
-                    favourites={data.profile.favourites.map(
-                      (fav) => fav.receiver && fav.receiver._id
-                    )}
-                  />
-                );
-              }}
-            </Query>
-          ) : page === 'choose-job-type' ? (
-            <PickJobType
-              jobId={pathParam}
-              creativeId={pathParam2}
-              history={history}
-            />
-          ) : page === 'confirm-job' ? (
-            <ConfirmJob jobId={pathParam} history={history} />
-          ) : page === 'submit-job' ? (
-            <SubmitJob jobId={pathParam} history={history} />
-          ) : page === 'create-quote' ? (
-            <NewQuote projectId={pathParam} />
-          ) : null}
-        </ContentTop>
-      </main>
+                  }}
+                </Query>
+              ) : page === 'choose-job-type' ? (
+                <PickJobType
+                  jobId={pathParam}
+                  creativeId={pathParam2}
+                  history={history}
+                />
+              ) : page === 'confirm-job' ? (
+                <ConfirmJob jobId={pathParam} history={history} />
+              ) : page === 'submit-job' ? (
+                <SubmitJob jobId={pathParam} history={history} />
+              ) : page === 'create-quote' ? (
+                <NewQuote projectId={pathParam} />
+              ) : null}
+            </ContentTop>
+          </main>
 
-      <Query
-        query={PROFILE}
-        onCompleted={(data) => {
-          setProfile(data.profile);
-        }}
-        fetchPolicy="network-only"
-        onError={(error) => {
-          logout(history);
-        }}
-      >
-        {({ data }) => {
-          return null;
-        }}
-      </Query>
-    </div>
+          <Query
+            query={PROFILE}
+            onCompleted={(data) => {
+              setProfile(data.profile);
+            }}
+            fetchPolicy="network-only"
+            onError={(error) => {
+              logout(history);
+            }}
+          >
+            {({ data }) => {
+              return null;
+            }}
+          </Query>
+        </div>
+      </ProfileContext.Provider>
+    </HistoryContext.Provider>
   );
 }

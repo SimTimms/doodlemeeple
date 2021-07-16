@@ -15,6 +15,7 @@ import {
   JobBoardMiniWidget,
   FeaturedKickstarters,
 } from '../../../../widgets';
+import { ProfileContext, HistoryContext } from '../../context';
 
 export default function CommunityPage({ history }) {
   return (
