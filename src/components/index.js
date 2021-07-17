@@ -49,13 +49,13 @@ import MenuButtonShortcut from './buttons/menuButtonShortcut';
 import FieldTitle from './fieldTitle';
 import {
   JobComponent,
-  KickstarterComponent,
   InviteComponent,
   ResponseComponent,
   ChosenCreative,
 } from './jobComponent';
 import InviteComponentDash from './inviteComponentDash';
 import FieldTitleDashboard from './fieldTitleDashboard';
+import TabPage from './tabPage';
 import FieldBox from './fieldBox';
 import InfoBox from './infoBox';
 import FieldTitleWrapper from './fieldTitle/FieldTitleWrapper';
@@ -145,6 +145,7 @@ export {
   ColumnWrapper,
   FeatureCard,
   TextArray,
+  TabPage,
   FieldBox,
   CardComponent,
   InfoBox,

@@ -11,20 +11,20 @@ import AppInvites from './views/inviteDashboard';
 import AppHelp from './views/appHelp';
 import AppProfileEdit from './views/appProfileEdit';
 import ConversationModule from './views/conversations';
-import PickJobType from './views/job/editJob/components/pickJobType';
-import ConfirmJob from './views/job/editJob/components/confirmJob';
-import SubmitJob from './views/job/editJob/components/submitJob';
+import PickJobType from '../../widgets/editJob/components/pickJobType';
+import ConfirmJob from '../../widgets/editJob/components/confirmJob';
+import SubmitJob from '../../widgets/editJob/components/submitJob';
 import { Account } from './views/account';
 import FullContract from './views/fullContract';
 import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame } from './views/game';
 import {
-  EditJob,
-  Jobs,
+  WorkDashboard,
   AppViewJob,
   AppViewQuoteJob,
   AppViewJobPublic,
 } from './views/job';
+import NewJobDashboard from './views/job/workDashboard/newJobDashboard';
 import { EditQuote } from '../../modules/quotes';
 import { EditContract } from './views/contract';
 import Withdraw from './views/withdraw';
@@ -47,6 +47,7 @@ import {
   JobDescriptionWidget,
   Kickstarters,
   Games,
+  EditJob,
   InviteDetails,
 } from '../../widgets';
 import { ProfileContext, HistoryContext, UserContext } from '../../context';
@@ -184,7 +185,9 @@ export default function AppLayout(props) {
                 ) : page === 'submitted' ? (
                   <ProjectSubmitted history={history} />
                 ) : page === 'projects' ? (
-                  <Jobs history={history} tab={pathParam} />
+                  <WorkDashboard history={history} tab={pathParam} />
+                ) : page === 'new-job-post' ? (
+                  <NewJobDashboard history={history} tab={pathParam} />
                 ) : page === 'edit-profile' ? (
                   <AppProfileEdit
                     theme={props.theme}

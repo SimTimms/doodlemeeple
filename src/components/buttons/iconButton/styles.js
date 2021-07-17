@@ -16,7 +16,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
     display: 'flex',
     flexWrap: 'nowrap',
-    minWidth: 'auto',
+    width: 160,
     minHeight: 38,
     justifyContent: 'space-between',
     color: '#fff',

@@ -7,12 +7,15 @@ import {
   FullContractComponent,
   Signature,
   IconButton,
+  LoadIcon,
 } from '../../../../../../components';
 import { ChatViewByJob } from '../../../../../../modules/chat';
 import CreatorMenu from './creatorMenu';
 import CreatorJobSummary from './creatorJobSummary';
 import CloseJobView from '../components/closeJobView';
 import ProjectDash from '../../../../../../modules/dashboards';
+import { CLOSE_JOB } from './data';
+import { Mutation } from 'react-apollo';
 
 export default function SummaryViewCreator({ job, history }) {
   const classes = useStyles();
@@ -25,35 +28,71 @@ export default function SummaryViewCreator({ job, history }) {
     setJobData({ ...job });
     setTabNbr(jobClosed ? 1 : -1);
   }, [job, jobClosed]);
-
+  if (!jobData) return <LoadIcon />;
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <CreatorMenu
           tabNbr={tabNbr}
           setTabNbr={setTabNbr}
-          activeContract={job.activeContract}
+          activeContract={jobData.activeContract}
           jobClosed={jobClosed}
           setConversationUser={setConversationUser}
         />
         {conversationUser ? (
           <ChatViewByJob
-            job={job}
+            job={jobData}
             conversationUser={conversationUser}
             setConversationUser={setConversationUser}
             history={history}
           />
         ) : tabNbr === -1 && jobData ? (
           <Column>
+            {jobData.submitted === 'closed' && <Column>Closed</Column>}
             <ProjectDash
-              invites={job.invites}
+              invites={jobData.invites}
               setConversationUser={setConversationUser}
-              jobClosed={job.submitted === 'closed'}
+              jobClosed={jobData.submitted === 'closed'}
               history={history}
-              job={job}
+              job={jobData}
               setTabNbr={setTabNbr}
             />
-            <IconButton title="Close Job" icon="delete" />
+            <Mutation
+              mutation={CLOSE_JOB}
+              variables={{ jobId: jobData._id }}
+              onCompleted={(data) => {
+                setJobData({ ...jobData, submitted: 'closed' });
+                console.log(jobData);
+              }}
+            >
+              {(mutation) => {
+                return (
+                  <IconButton
+                    title="Close Job"
+                    icon="delete"
+                    onClickEvent={() => mutation()}
+                  />
+                );
+              }}
+            </Mutation>
+            <Mutation
+              mutation={CLOSE_JOB}
+              variables={{ jobId: jobData._id }}
+              onCompleted={(data) => {
+                setJobData({ ...jobData, submitted: 'closed' });
+                console.log(jobData);
+              }}
+            >
+              {(mutation) => {
+                return (
+                  <IconButton
+                    title="Reopen Job"
+                    icon="check"
+                    onClickEvent={() => mutation()}
+                  />
+                );
+              }}
+            </Mutation>
           </Column>
         ) : tabNbr === 1 ? (
           <CreatorJobSummary
@@ -63,12 +102,12 @@ export default function SummaryViewCreator({ job, history }) {
         ) : tabNbr === 3 ? (
           <BorderBox w={700}>
             <FullContractComponent
-              contractData={job.activeContract}
-              job={job}
+              contractData={jobData.activeContract}
+              job={jobData}
               history={history}
             />
             <Signature
-              contractData={job.activeContract}
+              contractData={jobData.activeContract}
               onAccept={() => {
                 setTabNbr(-1);
               }}
@@ -78,7 +117,7 @@ export default function SummaryViewCreator({ job, history }) {
         ) : (
           tabNbr === 7 && (
             <Column>
-              <CloseJobView jobId={job._id} history={history} />
+              <CloseJobView jobId={jobData._id} history={history} />
             </Column>
           )
         )}

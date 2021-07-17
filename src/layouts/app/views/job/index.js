@@ -1,7 +1,6 @@
-import Jobs from './jobs';
-import EditJob from './editJob';
+import WorkDashboard from './workDashboard';
 import AppViewJob from './appViewJob';
 import AppViewJobPublic from './appViewJobPublic';
 import AppViewQuoteJob from './appViewQuoteJob';
 
-export { Jobs, EditJob, AppViewJob, AppViewJobPublic, AppViewQuoteJob };
+export { WorkDashboard, AppViewJob, AppViewJobPublic, AppViewQuoteJob };

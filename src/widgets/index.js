@@ -7,6 +7,7 @@ import { FeaturedKickstarters, Kickstarters } from './kickstarter';
 import { FeaturedGames, Games } from './games';
 import { QuoteOutWidget, QuoteInWidget, QuoteViewWidget } from './quote';
 import InviteDetails from './inviteDetails';
+import EditJob from './editJob';
 
 import {
   JobWidget,
@@ -20,6 +21,7 @@ import {
 } from './job';
 
 export {
+  EditJob,
   InviteDetails,
   FeaturedGames,
   Games,

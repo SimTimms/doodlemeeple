@@ -26,7 +26,7 @@ import { toaster } from '../../../../../utils/toaster';
 import autosave from '../../../../../utils/autosave';
 import { errorMessages } from '../../../../../utils/readableErrors';
 
-export default function EditGame({ theme, gameId, autosaveIsOn, history }) {
+export default function EditGame({ gameId, history }) {
   const classes = useStyles();
   const [game, setGame] = React.useState({
     name: '',

@@ -8,7 +8,6 @@ import {
 import { PREVIEW_CONTRACT, GET_MESSAGES } from '../../../../../data/queries';
 import { Query } from 'react-apollo';
 import QuoteSummaryCreator from './views/quoteSummaryForCreator';
-import Chat from './views/chat';
 import Cookies from 'js-cookie';
 
 export default function AppViewContract({ contractId, history }) {
@@ -21,7 +20,6 @@ export default function AppViewContract({ contractId, history }) {
     status: null,
   });
   const [job, setJob] = React.useState({ id: null, user: { id: '' } });
-  const [conversationId, setConversationId] = React.useState(null);
   const userId = Cookies.get('userId');
 
   return (
@@ -63,32 +61,12 @@ export default function AppViewContract({ contractId, history }) {
                         history={history}
                       />
                     )}
-
-                    <Chat
-                      display={tabs[1]}
-                      conversationId={conversationId}
-                      history={history}
-                    />
                   </div>
                 </Column>
               )
             );
           }}
         </Query>
-        {job.id && conversationId === null && (
-          <Query
-            query={GET_MESSAGES}
-            variables={{ jobId: job.id, userId: contract.user.id }}
-            fetchPolicy="network-only"
-            onCompleted={(data) => {
-              setConversationId(data.determineConversationId);
-            }}
-          >
-            {({ data }) => {
-              return null;
-            }}
-          </Query>
-        )}
       </div>
     </Slide>
   );
