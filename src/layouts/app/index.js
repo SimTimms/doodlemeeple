@@ -11,7 +11,6 @@ import AppInvites from './views/inviteDashboard';
 import AppHelp from './views/appHelp';
 import AppProfileEdit from './views/appProfileEdit';
 import ConversationModule from './views/conversations';
-import PickJobType from '../../widgets/editJob/components/pickJobType';
 import ConfirmJob from '../../widgets/editJob/components/confirmJob';
 import SubmitJob from '../../widgets/editJob/components/submitJob';
 import { Account } from './views/account';
@@ -25,6 +24,7 @@ import {
   AppViewJobPublic,
 } from './views/job';
 import NewJobDashboard from './views/job/workDashboard/newJobDashboard';
+import UpdateJobDashboard from './views/job/workDashboard/updateJobDashboard';
 import { EditQuote } from '../../modules/quotes';
 import { EditContract } from './views/contract';
 import Withdraw from './views/withdraw';
@@ -47,10 +47,14 @@ import {
   JobDescriptionWidget,
   Kickstarters,
   Games,
-  EditJob,
   InviteDetails,
 } from '../../widgets';
-import { ProfileContext, HistoryContext, UserContext } from '../../context';
+import {
+  ProfileContext,
+  HistoryContext,
+  UserContext,
+  CreativeContext,
+} from '../../context';
 import Cookies from 'js-cookie';
 
 export default function AppLayout(props) {
@@ -187,7 +191,13 @@ export default function AppLayout(props) {
                 ) : page === 'projects' ? (
                   <WorkDashboard history={history} tab={pathParam} />
                 ) : page === 'new-job-post' ? (
-                  <NewJobDashboard history={history} tab={pathParam} />
+                  <CreativeContext.Provider value={pathParam}>
+                    <NewJobDashboard />
+                  </CreativeContext.Provider>
+                ) : page === 'update-job' ? (
+                  <CreativeContext.Provider>
+                    <UpdateJobDashboard jobId={pathParam} />
+                  </CreativeContext.Provider>
                 ) : page === 'edit-profile' ? (
                   <AppProfileEdit
                     theme={props.theme}
@@ -212,12 +222,6 @@ export default function AppLayout(props) {
                   />
                 ) : page === 'job-description' ? (
                   <JobDescriptionWidget jobId={pathParam} history={history} />
-                ) : page === 'edit-job' ? (
-                  <EditJob
-                    jobId={pathParam}
-                    history={history}
-                    creativeId={pathParam2}
-                  />
                 ) : page === 'quotes-out' ? (
                   <QuoteOutWidget history={history} />
                 ) : page === 'quotes-in' ? (
@@ -282,25 +286,20 @@ export default function AppLayout(props) {
                   <Query query={FAVOURITES} fetchPolicy="network-only">
                     {({ data, loading }) => {
                       return loading ? null : (
-                        <PickArtist
-                          theme={props.theme}
-                          jobId={pathParam}
-                          creativeId={pathParam2}
-                          autosaveIsOn={true}
-                          history={history}
-                          favourites={data.profile.favourites.map(
-                            (fav) => fav.receiver && fav.receiver._id
-                          )}
-                        />
+                        <CreativeContext.Provider>
+                          <PickArtist
+                            theme={props.theme}
+                            jobId={pathParam}
+                            autosaveIsOn={true}
+                            history={history}
+                            favourites={data.profile.favourites.map(
+                              (fav) => fav.receiver && fav.receiver._id
+                            )}
+                          />
+                        </CreativeContext.Provider>
                       );
                     }}
                   </Query>
-                ) : page === 'choose-job-type' ? (
-                  <PickJobType
-                    jobId={pathParam}
-                    creativeId={pathParam2}
-                    history={history}
-                  />
                 ) : page === 'confirm-job' ? (
                   <ConfirmJob jobId={pathParam} history={history} />
                 ) : page === 'submit-job' ? (

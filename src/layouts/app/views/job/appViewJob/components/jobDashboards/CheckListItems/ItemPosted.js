@@ -40,7 +40,7 @@ export default function ItemPosted({
           back: color === 1 ? 'secondary' : color === 2 ? 'warning' : '',
         }}
         onClickEvent={() =>
-          draft ? history.push(`/app/edit-job/${jobId}`) : setTabNbr(1)
+          draft ? history.push(`/app/update-job/${jobId}`) : setTabNbr(1)
         }
         active={false}
       />

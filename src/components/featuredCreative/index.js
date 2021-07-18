@@ -15,9 +15,7 @@ export default function FeaturedCreative({ history, featuredArticle }) {
         const linkTo = featuredArticle.article.linkTo;
         const title = featuredArticle.article.title;
         const excerpt = excerptReplace(featuredArticle.article.excerpt);
-        const media = featuredArticle.article.image['wp:featuredmedia']
-          ? featuredArticle.article.image['wp:featuredmedia']['0'].source_url
-          : null;
+
         return loading ? null : data ? (
           <Column>
             <div className={classes.excerptBack}>

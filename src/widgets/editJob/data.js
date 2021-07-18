@@ -106,128 +106,18 @@ export const JOB = gql`
       speculative
       inLieu
       termsAccepted
-      gallery {
-        _id
-        summary
-        images {
-          _id
-          img
-        }
-      }
-      activeContract {
-        _id
-        notes
-        deadline
-        startDate
-        cost
-        currency
-        status
-        updatedAt
-        signedBy {
-          _id
-          name
-        }
-        signedDate
-        payments {
-          _id
-          amount
-          currency
-          status
-          paidBy {
-            _id
-            name
-          }
-          contract {
-            _id
-          }
-          paymentId
-          createdAt
-          updatedAt
-        }
-        user {
-          email
-          _id
-          name
-          profileImg
-        }
-        job {
-          _id
-          name
-          summary
-          createdAt
-          creativeSummary
-          keywords
-          gallery {
-            _id
-            summary
-            images {
-              _id
-              img
-            }
-          }
-          user {
-            _id
-            email
-            name
-          }
-        }
-        paymentTerms {
-          _id
-          percent
-          description
-          updatedAt
-          paid
-          status
-        }
-      }
-      assignedCreative {
-        _id
-        name
-        email
-        profileImg
-      }
-      invites {
-        status
-        messages
-        receiver {
-          _id
-          name
-          profileImg
-        }
-      }
-      contracts {
-        _id
-        status
-        user {
-          _id
-        }
-      }
       img
       summary
       location
       creativeSummary
       submitted
       paid
-      user {
+      gallery {
         _id
-        name
-        profileImg
-      }
-      invites {
-        _id
-        receiver {
+        summary
+        images {
           _id
-          name
-          profileImg
-        }
-        job {
-          contracts {
-            status
-            _id
-            user {
-              _id
-            }
-          }
+          img
         }
       }
       showreel

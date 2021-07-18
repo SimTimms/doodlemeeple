@@ -322,14 +322,6 @@ export const ADD_FAVOURITE = gql`
   }
 `;
 
-export const SET_PUBLIC_JOB = gql`
-  mutation UpdateJob($_id: MongoID!, $isPublic: Boolean) {
-    jobUpdateById(record: { _id: $_id, isPublic: $isPublic }) {
-      recordId
-    }
-  }
-`;
-
 export const CLOSE_JOB = gql`
   mutation closeJob($_id: MongoID!) {
     closeJob(_id: $_id) {

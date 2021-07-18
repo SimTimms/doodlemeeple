@@ -42,7 +42,9 @@ export default function JobComponent({ job }) {
       {(history) => (
         <CardComponent
           onClickEvent={() => {
-            history.push(`/app/view-job/${job._id}`);
+            draft
+              ? history.push(`/app/update-job/${job._id}`)
+              : history.push(`/app/view-job/${job._id}`);
           }}
         >
           <Row>

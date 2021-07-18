@@ -16,3 +16,7 @@ export const HistoryContext = React.createContext({
 export const FavouritesContext = React.createContext({
   favourites: null,
 });
+
+export const CreativeContext = React.createContext({
+  _id: null,
+});

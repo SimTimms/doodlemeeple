@@ -13,9 +13,6 @@ export const initialState = {
   inLieu: false,
   keywords: [],
   location: '',
-  gallery: {
-    images: [],
-  },
   showreel: '',
   type: 'job',
   creativeSummary: '',

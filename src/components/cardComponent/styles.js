@@ -20,6 +20,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   cardLocked: {
     padding: 0,
+    marginBottom: 5,
     background: 'rgba(255,255,255,0.2)',
     border: `1px solid #fff`,
   },

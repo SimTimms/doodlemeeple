@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Column, TabPage, IconButton } from '../../../../../components';
 import CreatorJobMenu from './creatorJobMenu';
 import JobPosts from './jobPosts';
 import InviteDashboard from '../../../views/inviteDashboard';
-import { QuoteOutWidget, EditJob } from '../../../../../widgets';
+import { QuoteOutWidget, UpdateJob } from '../../../../../widgets';
 import JobHistory from './jobHistory';
 
 export default function WorkDashboard({ history, tab }) {
@@ -60,7 +59,7 @@ export default function WorkDashboard({ history, tab }) {
             />
           }
         >
-          <EditJob jobId={'new'} history={history} />
+          <UpdateJob jobId={'new'} history={history} />
         </TabPage>
       )}
       {tabNbr === 3 && (

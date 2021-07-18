@@ -39,7 +39,7 @@ export default function InviteMenu({ history, creative, favourite, ...props }) {
       color="text-dark"
       icon=""
       iconPos="right"
-      onClickEvent={() => history.push(`/app/edit-job/new/${creative._id}`)}
+      onClickEvent={() => history.push(`/app/new-job-post/${creative._id}`)}
       styleOverride={{
         width: '100%',
         borderRadius: 0,

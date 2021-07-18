@@ -57,7 +57,7 @@ export default function AuthRoutes({ theme, props: { ...props } }) {
             render={() => (
               <Redirect
                 push
-                to={`/app/edit-job/new/${props.match.params.pathParam}`}
+                to={`/app/new-job-post/${props.match.params.pathParam}`}
               />
             )}
           />

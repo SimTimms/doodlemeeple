@@ -23,7 +23,7 @@ export default function SectionQuestions({ setJob, job }) {
       styleOverride={{
         width: 150,
         border: '1px solid #ccc',
-        marginLeft: 10,
+        marginBottom: 20,
       }}
     />
   );

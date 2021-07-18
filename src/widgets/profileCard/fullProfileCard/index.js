@@ -158,7 +158,7 @@ export default function FullProfileCard({ history, creativeId }) {
                       icon=""
                       iconPos="right"
                       onClickEvent={() =>
-                        history.push(`/app/edit-job/new/${creative._id}`)
+                        history.push(`/app/new-job-post/${creative._id}`)
                       }
                       styleOverride={{
                         width: '100%',

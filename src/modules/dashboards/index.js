@@ -15,7 +15,6 @@ export default function ProjectDash({
   job,
   setTabNbr,
 }) {
-  const [openQuoteId, setOpenQuoteId] = React.useState(null);
   const accepted = job.submitted === 'accepted' ? true : false;
   const draft = job.submitted === 'draft' ? true : false;
   const inviteFiltered = accepted
@@ -64,11 +63,7 @@ export default function ProjectDash({
                 history={history}
                 jobId={job._id}
                 contactDetails={accepted}
-                isOpen={
-                  openQuoteId === contractSubmitted && contractSubmitted[0]._id
-                    ? true
-                    : false
-                }
+                isOpen={true}
               />
             );
           })}

@@ -1,5 +1,14 @@
 const minLengths = { name: 10, genre: 3, summary: 30, creativeSummary: 20 };
 export function unlock(job) {
+  if (!job.name)
+    return `Provide a Title with ${minLengths.name} more characters to continue`;
+  if (!job.genre)
+    return `Provide some genre or style guidance with ${minLengths.genre} more characters to continue`;
+  if (!job.summary)
+    return `Provide a summary with ${minLengths.summary} more characters to continue`;
+  if (!job.creativeSummary)
+    return `Provide a Creative Summary with ${minLengths.creativeSummary} more characters to continue`;
+  if (!job.keywords) return `Choose at least 1 keyword to continue`;
   return job.name.length < minLengths.name
     ? `Provide a Title with ${
         minLengths.name - job.name.length
@@ -22,5 +31,6 @@ export function unlock(job) {
 }
 
 export function checkLength(strIn, field) {
+  if (!strIn) return false;
   return strIn.length >= minLengths[field];
 }

@@ -225,7 +225,7 @@ export function TaskPostJob({ history }) {
       color="warning"
       clickSound={true}
       zoom={true}
-      onClickEvent={() => history.push('/app/edit-job/new')}
+      onClickEvent={() => history.push('/app/new-job-post')}
     />
   );
 }
@@ -239,7 +239,7 @@ export function TaskContinueWithJobDraft({ jobId, history }) {
       color="warning"
       clickSound={true}
       zoom={true}
-      onClickEvent={() => history.push(`/app/edit-job/${jobId}`)}
+      onClickEvent={() => history.push(`/app/update-job/${jobId}`)}
     />
   );
 }
