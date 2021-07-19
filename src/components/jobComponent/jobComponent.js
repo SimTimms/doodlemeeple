@@ -80,8 +80,10 @@ export default function JobComponent({ job }) {
                   ? 'Completed'
                   : submitted && !job.isPublic
                   ? 'Invites sent'
-                  : submitted && job.isPublic
-                  ? 'Submitted'
+                  : submitted && job.isPublic && !job.approved
+                  ? 'Waiting for Approval'
+                  : submitted && job.isPublic && job.approved
+                  ? 'Job is Live'
                   : closed
                   ? 'Closed'
                   : accepted

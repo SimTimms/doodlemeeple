@@ -22,6 +22,7 @@ export const UPDATE_JOB = gql`
     $funded: Boolean
     $speculative: Boolean
     $termsAccepted: Boolean
+    $isPublic: Boolean
     $inLieu: Boolean
     $keywords: [String]
   ) {
@@ -47,6 +48,7 @@ export const UPDATE_JOB = gql`
         timeframe: $timeframe
         extra: $extra
         budget: $budget
+        isPublic: $isPublic
         scope: $scope
         genre: $genre
       }

@@ -321,6 +321,7 @@ export const JOBS = gql`
       contactEmail
       submitted
       backgroundImg
+      approved
       assignedCreative {
         _id
         name

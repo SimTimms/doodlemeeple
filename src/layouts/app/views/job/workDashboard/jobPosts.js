@@ -22,6 +22,8 @@ export default function JobPosts() {
           }}
         >
           {({ data, loading }) => {
+            console.log(data);
+
             return loading ? (
               <LoadIcon />
             ) : data ? (
