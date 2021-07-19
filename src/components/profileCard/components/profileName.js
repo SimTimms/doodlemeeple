@@ -23,6 +23,7 @@ export default function ProfileName({ history, creative, setFullProfile }) {
           textDecoration: 'underline',
           marginTop: 0,
           marginBottom: 0,
+          justifyContent: 'center',
         }}
         type="button"
       />

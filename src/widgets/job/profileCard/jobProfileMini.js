@@ -8,7 +8,7 @@ import { Column, Row } from '../../../components';
 import { nameShortener } from '../../../utils';
 import Cookies from 'js-cookie';
 import PublicProfileButton from './components/publicProfileButton';
-import AppProfileButton from './components/appProfileButton';
+import JobDescriptionButton from './components/jobDescriptionButton';
 import dmDevice from '../../../assets/dmDevice.png';
 
 export default function JobProfileMini({ job, history }) {
@@ -62,7 +62,7 @@ export default function JobProfileMini({ job, history }) {
         {!userId && !job.isExternal ? (
           <PublicProfileButton jobId={job._id} />
         ) : userId && !job.isExternal ? (
-          <AppProfileButton jobId={job._id} history={history} />
+          <JobDescriptionButton jobId={job._id} history={history} />
         ) : (
           job.isExternal && (
             <Column>

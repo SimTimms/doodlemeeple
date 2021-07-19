@@ -62,6 +62,7 @@ export default function SummaryViewCreator({ job, history }) {
                 variables={{ jobId: jobData._id }}
                 onCompleted={(data) => {
                   setJobData({ ...jobData, submitted: 'draft' });
+                  history.push('/app/projects');
                 }}
               >
                 {(mutation) => {
@@ -88,7 +89,10 @@ export default function SummaryViewCreator({ job, history }) {
                     <IconButton
                       title="Close Job"
                       icon="delete"
-                      onClickEvent={() => mutation()}
+                      onClickEvent={() => {
+                        mutation();
+                        history.push('/app/projects/history');
+                      }}
                     />
                   );
                 }}
