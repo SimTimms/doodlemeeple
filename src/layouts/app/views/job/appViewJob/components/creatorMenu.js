@@ -17,22 +17,20 @@ export default function CreatorMenu({
   return (
     <div className={classes.root}>
       <TopMenuWrapper j="center">
-        {!jobClosed && (
-          <MenuButtonShortcut
-            text={{
-              name: 'Dashboard',
-              color: 'light',
-              icon: 'dashboard',
-              count: 0,
-            }}
-            onClickEvent={() => {
-              setTabNbr(-1);
-              setConversationUser(null);
-            }}
-            column={true}
-            active={tabNbr === -1}
-          />
-        )}
+        <MenuButtonShortcut
+          text={{
+            name: 'Dashboard',
+            color: 'light',
+            icon: 'dashboard',
+            count: 0,
+          }}
+          onClickEvent={() => {
+            setTabNbr(-1);
+            setConversationUser(null);
+          }}
+          column={true}
+          active={tabNbr === -1}
+        />
         <MenuButtonShortcut
           text={{
             name: 'Project Details',

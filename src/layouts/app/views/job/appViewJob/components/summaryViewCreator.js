@@ -14,7 +14,7 @@ import CreatorMenu from './creatorMenu';
 import CreatorJobSummary from './creatorJobSummary';
 import CloseJobView from '../components/closeJobView';
 import ProjectDash from '../../../../../../modules/dashboards';
-import { CLOSE_JOB } from './data';
+import { CLOSE_JOB, OPEN_JOB } from './data';
 import { Mutation } from 'react-apollo';
 
 export default function SummaryViewCreator({ job, history }) {
@@ -48,7 +48,6 @@ export default function SummaryViewCreator({ job, history }) {
           />
         ) : tabNbr === -1 && jobData ? (
           <Column>
-            {jobData.submitted === 'closed' && <Column>Closed</Column>}
             <ProjectDash
               invites={jobData.invites}
               setConversationUser={setConversationUser}
@@ -57,42 +56,44 @@ export default function SummaryViewCreator({ job, history }) {
               job={jobData}
               setTabNbr={setTabNbr}
             />
-            <Mutation
-              mutation={CLOSE_JOB}
-              variables={{ jobId: jobData._id }}
-              onCompleted={(data) => {
-                setJobData({ ...jobData, submitted: 'closed' });
-                console.log(jobData);
-              }}
-            >
-              {(mutation) => {
-                return (
-                  <IconButton
-                    title="Close Job"
-                    icon="delete"
-                    onClickEvent={() => mutation()}
-                  />
-                );
-              }}
-            </Mutation>
-            <Mutation
-              mutation={CLOSE_JOB}
-              variables={{ jobId: jobData._id }}
-              onCompleted={(data) => {
-                setJobData({ ...jobData, submitted: 'closed' });
-                console.log(jobData);
-              }}
-            >
-              {(mutation) => {
-                return (
-                  <IconButton
-                    title="Reopen Job"
-                    icon="check"
-                    onClickEvent={() => mutation()}
-                  />
-                );
-              }}
-            </Mutation>
+            {jobData.submitted === 'closed' ? (
+              <Mutation
+                mutation={OPEN_JOB}
+                variables={{ jobId: jobData._id }}
+                onCompleted={(data) => {
+                  setJobData({ ...jobData, submitted: 'draft' });
+                }}
+              >
+                {(mutation) => {
+                  return (
+                    <IconButton
+                      title="Reopen Job"
+                      icon="check"
+                      onClickEvent={() => mutation()}
+                    />
+                  );
+                }}
+              </Mutation>
+            ) : (
+              <Mutation
+                mutation={CLOSE_JOB}
+                variables={{ jobId: jobData._id }}
+                onCompleted={(data) => {
+                  setJobData({ ...jobData, submitted: 'closed' });
+                  console.log(jobData);
+                }}
+              >
+                {(mutation) => {
+                  return (
+                    <IconButton
+                      title="Close Job"
+                      icon="delete"
+                      onClickEvent={() => mutation()}
+                    />
+                  );
+                }}
+              </Mutation>
+            )}
           </Column>
         ) : tabNbr === 1 ? (
           <CreatorJobSummary

@@ -31,7 +31,6 @@ export default function AppViewJob({ jobId, history }) {
             }}
           </Query>
         )}
-
         <Query
           query={JOB_CREATIVE}
           variables={{ jobId: jobId }}

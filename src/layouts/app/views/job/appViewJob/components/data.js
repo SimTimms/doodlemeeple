@@ -7,3 +7,11 @@ export const CLOSE_JOB = gql`
     }
   }
 `;
+
+export const OPEN_JOB = gql`
+  mutation openJob($jobId: MongoID!) {
+    openJob(_id: $jobId) {
+      _id
+    }
+  }
+`;
