@@ -46,6 +46,7 @@ import InviteComponentFull from './inviteComponentFull';
 import MenuButton from './buttons/menuButton';
 import CreateQuoteButton from './buttons/createQuote';
 import MenuButtonShortcut from './buttons/menuButtonShortcut';
+import TopMenuButton from './buttons/topMenuButton';
 import FieldTitle from './fieldTitle';
 import {
   JobComponent,
@@ -113,6 +114,7 @@ import {
 import { Column, Row, TopMenuWrapper, RowCheckList } from './blocks';
 
 export {
+  TopMenuButton,
   LargeImage,
   ResponseComponent,
   ChosenCreative,

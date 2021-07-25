@@ -2,7 +2,7 @@ import React from 'react';
 import { IconButton } from '../../../../components';
 import { HistoryContext } from '../../../../context';
 
-export default function JobDescriptionButton({ jobId, history }) {
+export default function JobDescriptionButton({ jobId }) {
   return (
     <HistoryContext.Consumer>
       {(history) => (

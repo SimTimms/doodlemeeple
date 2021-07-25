@@ -1,19 +1,11 @@
 import React, { useEffect } from 'react';
-import {
-  Divider,
-  Drawer,
-  List,
-  useMediaQuery,
-  DividerWithBorder,
-} from '@material-ui/core';
+import { Divider, Drawer, List, useMediaQuery } from '@material-ui/core';
 import { useStyles } from '../styles';
 import clsx from 'clsx';
-import { Query } from 'react-apollo';
-import { COUNTS } from '../../../data/queries';
 import { MenuButtonShortcut } from '../../../components';
-import menuArray from './menuArray';
+import menuArray from '../../menuArray';
 import DmDevice from './DmDevice';
-import { ProfileContext, HistoryContext } from '../../../context';
+import { CountContext, HistoryContext } from '../../../context';
 
 export default function AppDrawer({
   handleDrawerClose,
@@ -26,11 +18,6 @@ export default function AppDrawer({
   const mobile = useMediaQuery('(max-width:800px)');
   const [isOpen, setIsOpen] = React.useState(false);
   const [page, setPage] = React.useState('Tasks');
-  const [counts, setCounts] = React.useState({
-    invites: 0,
-    messages: 0,
-    quotes: 0,
-  });
 
   useEffect(() => {
     setPage(activeButton);
@@ -39,23 +26,23 @@ export default function AppDrawer({
   return (
     <HistoryContext.Consumer>
       {(history) => (
-        <ProfileContext.Consumer>
-          {(profile) => (
-            <Drawer
-              variant="permanent"
-              classes={{
-                paper: clsx({
-                  [drawerRoot]: true,
-                  [drawerOpenTablet]: mobile,
-                  [drawerClosed]: !isOpen && mobile,
-                }),
-              }}
-            >
-              <DmDevice isOpen={isOpen} setIsOpen={setIsOpen} />
-              <Divider />
-              <List onClick={() => setIsOpen(false)}>
-                <div>
-                  {menuArray(history, counts, profile).map(
+        <CountContext.Consumer>
+          {(counts) => {
+            return (
+              <Drawer
+                variant="permanent"
+                classes={{
+                  paper: clsx({
+                    [drawerRoot]: true,
+                    [drawerOpenTablet]: mobile,
+                    [drawerClosed]: !isOpen && mobile,
+                  }),
+                }}
+              >
+                <DmDevice isOpen={isOpen} setIsOpen={setIsOpen} />
+                <Divider />
+                <List onClick={() => setIsOpen(false)}>
+                  {menuArray(history, counts).map(
                     (text, index) =>
                       text.name !== 'hide' && (
                         <MenuButtonShortcut
@@ -76,26 +63,11 @@ export default function AppDrawer({
                         />
                       )
                   )}
-                </div>
-              </List>
-              <Query
-                query={COUNTS}
-                onCompleted={(data) => {
-                  setCounts({
-                    invites: data.counts.invites,
-                    messages: data.counts.messages,
-                    quotes: data.counts.quotes,
-                  });
-                }}
-                fetchPolicy="network-only"
-              >
-                {({ data }) => {
-                  return null;
-                }}
-              </Query>
-            </Drawer>
-          )}
-        </ProfileContext.Consumer>
+                </List>
+              </Drawer>
+            );
+          }}
+        </CountContext.Consumer>
       )}
     </HistoryContext.Consumer>
   );

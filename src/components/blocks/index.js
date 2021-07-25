@@ -4,7 +4,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 
 export function Column(props) {
-  const { children, a, j, w, p, b, br, h, bg, m, mw } = props;
+  const { children, a, j, w, p, b, br, h, bg, m, mw, classAdd, onClickEvent } =
+    props;
   const align = a ? a : 'center';
   const width = w ? w : '100%';
   const maxWidth = mw ? mw : '100%';
@@ -36,7 +37,9 @@ export function Column(props) {
       className={clsx({
         [classes.desktop]: true,
         [classes.mobile]: mobile,
+        [classAdd]: classAdd,
       })}
+      onClick={onClickEvent ? onClickEvent : null}
     >
       {children}
     </div>

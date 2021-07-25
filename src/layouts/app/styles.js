@@ -32,11 +32,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    marginLeft: 140,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     background: '#efeff5',
+    width: '100%',
   },
-  contentMobile: { width: '100%', marginLeft: 0 },
 }));

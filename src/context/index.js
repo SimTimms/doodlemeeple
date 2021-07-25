@@ -20,3 +20,9 @@ export const FavouritesContext = React.createContext({
 export const CreativeContext = React.createContext({
   _id: null,
 });
+
+export const CountContext = React.createContext({
+  invites: 0,
+  messages: 0,
+  quotes: 0,
+});

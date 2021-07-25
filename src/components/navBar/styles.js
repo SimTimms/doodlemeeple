@@ -7,17 +7,12 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
   },
   appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
     height: 64,
     position: 'relative',
     boxSizing: 'border-box',
     boxShadow: '0 4px 10px rgba(0,0,0,0.2)',
   },
   appBarShift: {
-    paddingLeft: drawerWidth,
     width: '100%',
     display: 'flex',
     alignItems: 'center',
@@ -28,10 +23,10 @@ export const useStyles = makeStyles((theme) => ({
     }),
   },
   appBarMobile: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+
     height: 64,
     boxSizing: 'border-box',
     borderBottom: '1px solid #ddd',
@@ -40,10 +35,6 @@ export const useStyles = makeStyles((theme) => ({
   appBarShiftMobile: {
     width: `100%`,
     marginLeft: 0,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   },
   appBarChild: {
     width: '100%',

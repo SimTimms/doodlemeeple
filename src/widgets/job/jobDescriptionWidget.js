@@ -82,30 +82,34 @@ export default function JobDescriptionWidget({ jobId, ...props }) {
                                           mutation();
                                         }}
                                       />
-                                      <Mutation
-                                        mutation={DECLINE_INVITE}
-                                        variables={{
-                                          jobId: job._id,
-                                        }}
-                                        onCompleted={() => {
-                                          history.push('/app/projects/history');
-                                        }}
-                                        onError={() => {}}
-                                      >
-                                        {(declineInvite) => {
-                                          return (
-                                            <IconButton
-                                              disabled={false}
-                                              color="grey"
-                                              title={'Decline Invite'}
-                                              icon="fact_check"
-                                              onClickEvent={() => {
-                                                declineInvite();
-                                              }}
-                                            />
-                                          );
-                                        }}
-                                      </Mutation>
+                                      {!job.isPublic && (
+                                        <Mutation
+                                          mutation={DECLINE_INVITE}
+                                          variables={{
+                                            jobId: job._id,
+                                          }}
+                                          onCompleted={() => {
+                                            history.push(
+                                              '/app/projects/history'
+                                            );
+                                          }}
+                                          onError={() => {}}
+                                        >
+                                          {(declineInvite) => {
+                                            return (
+                                              <IconButton
+                                                disabled={false}
+                                                color="grey"
+                                                title={'Decline Invite'}
+                                                icon="fact_check"
+                                                onClickEvent={() => {
+                                                  declineInvite();
+                                                }}
+                                              />
+                                            );
+                                          }}
+                                        </Mutation>
+                                      )}
                                     </Column>
                                   );
                                 }}
