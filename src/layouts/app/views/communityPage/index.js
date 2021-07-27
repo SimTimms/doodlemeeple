@@ -31,20 +31,7 @@ export default function CommunityPage() {
               <FeaturedCreativeHomeWidget />
             </Row>
           </Column>
-          <Row j="space-around" a="flex-start">
-            <Column w="45%">
-              <Typography>Categories</Typography>
-              <DividerMini />
-              <DividerMini />
-              <CreativeCategories history={history} />
-            </Column>
-            <Column w="45%">
-              <DividerMini />
-              <Typography>Featured</Typography>
-              <DividerMini />
-              <DividerMini />
-            </Column>
-          </Row>
+
           <DividerWithBorder />
           <Column>
             <DividerMini />

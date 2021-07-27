@@ -2,7 +2,7 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { LATEST_CREATIVES_WIDGET } from './data';
-import { ProfileCardMini } from '../profileCard/';
+import { ProfileCardMacro } from '../profileCard/';
 import BigImage from '../bigImage';
 import clsx from 'clsx';
 
@@ -29,7 +29,7 @@ export default function LatestCreativesWidget({ ...props }) {
         {() => {
           return creativeArray.map((creative, index) => {
             return (
-              <ProfileCardMini
+              <ProfileCardMacro
                 creative={creative}
                 key={`creative_${index}`}
                 setLarge={setLarge}

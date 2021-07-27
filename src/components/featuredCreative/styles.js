@@ -18,6 +18,7 @@ export const useStyles = makeStyles((theme) => {
       backgroundPosition: 'bottom',
       width: '100%',
       padding: 30,
+      boxSizing: 'border-box',
     },
     excerpt: { color: '#fff' },
     excerptAuthor: { color: 'rgba(255,255,255,0.6)' },
