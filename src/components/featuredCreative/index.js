@@ -5,6 +5,7 @@ import { Column, IconButton, LoadIcon, Row } from '../';
 import { Query } from 'react-apollo';
 import { PROFILE_FEATURED } from '../../data/queries';
 import { excerptReplace } from '../../utils/excerptReplace';
+import final from '../../assets/final.jpg';
 
 export default function FeaturedCreative({ history, featuredArticle }) {
   const classes = useStyles();
@@ -18,75 +19,24 @@ export default function FeaturedCreative({ history, featuredArticle }) {
 
         return loading ? null : data ? (
           <Column>
-            <div className={classes.excerptBack}>
+            <div
+              className={classes.excerptBack}
+              style={{ backgroundImage: `url(${final})` }}
+            >
               <Row pb={10} pt={10}>
-                <img
-                  src={
-                    data.featuredProfile
-                      ? data.featuredProfile.profileImg
-                      : process.env.REACT_APP_DEVICE
-                  }
-                  alt=""
-                  className={classes.articleAvatar}
-                />
-                <Column a="flex-end" p="0 10px 0 0 ">
-                  <Typography variant="h6" style={{ color: '#fff' }}>
+                <Column a="flex-end" p="40px" w={700} bg="rgb(57,53,78)">
+                  <Typography variant="h5" className={classes.excerpt}>
                     {excerpt}
                   </Typography>
-                  <Typography variant="body1" style={{ color: '#fff' }}>
+                  <Typography variant="body1" className={classes.excerptAuthor}>
                     {title}
                   </Typography>
-                </Column>
-              </Row>
-            </div>
-
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                width: '100%',
-                flexDirection: 'column',
-              }}
-            >
-              <Row>
-                <div className={classes.options}>
-                  <IconButton
-                    color="text-white-mini"
-                    disabled={false}
-                    onClickEvent={() => {
-                      history.push(`/app/public-preview/${featuredArticle.id}`);
-                    }}
-                    icon="face"
-                    title="View Profile"
-                    styleOverride={null}
-                    type="button"
-                    iconPos="left"
-                  />
-                  <div
-                    style={{
-                      height: 20,
-                      borderLeft: '1px solid rgba(255,255,255,0.4)',
-                    }}
-                  ></div>
-                  <a
-                    href={linkTo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ textDecoration: 'none' }}
-                  >
-                    <IconButton
-                      color="text-white-mini"
-                      disabled={false}
-                      onClickEvent={() => {}}
-                      icon="article"
-                      title="Read Article"
-                      styleOverride={null}
-                      type="button"
-                      iconPos="right"
-                    />
+                  <a href={linkTo} target="_blank" rel="noopener noreferrer">
+                    <Typography variant="body1" className={classes.excerptLink}>
+                      Read Full Article
+                    </Typography>
                   </a>
-                </div>
+                </Column>
               </Row>
             </div>
           </Column>

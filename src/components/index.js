@@ -46,6 +46,7 @@ import InviteComponentFull from './inviteComponentFull';
 import MenuButton from './buttons/menuButton';
 import CreateQuoteButton from './buttons/createQuote';
 import MenuButtonShortcut from './buttons/menuButtonShortcut';
+import MenuButtonSecondary from './buttons/menuButtonSecondary';
 import TopMenuButton from './buttons/topMenuButton';
 import FieldTitle from './fieldTitle';
 import {
@@ -111,7 +112,13 @@ import {
   HeaderThree,
   TextLeft,
 } from './textParts';
-import { Column, Row, TopMenuWrapper, RowCheckList } from './blocks';
+import {
+  Column,
+  Row,
+  TopMenuWrapper,
+  RowCheckList,
+  LeftMenuWrapper,
+} from './blocks';
 
 export {
   TopMenuButton,
@@ -123,6 +130,7 @@ export {
   FeaturedCreative,
   CreatorComponentDash,
   TopMenuWrapper,
+  LeftMenuWrapper,
   NotificationComponent,
   ProfileAvatar,
   UnlockInfoReverse,
@@ -147,6 +155,7 @@ export {
   ColumnWrapper,
   FeatureCard,
   TextArray,
+  MenuButtonSecondary,
   TabPage,
   FieldBox,
   CardComponent,

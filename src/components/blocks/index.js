@@ -68,6 +68,7 @@ export function Row(props) {
     o,
     of,
     className,
+    onClickEvent,
   } = props;
   const align = a ? a : 'center';
   const justify = j ? j : 'center';
@@ -111,6 +112,7 @@ export function Row(props) {
         boxSizing: 'border-box',
       }}
       class={className ? className : null}
+      onClick={() => (onClickEvent ? onClickEvent() : null)}
     >
       {children}
     </div>
@@ -161,4 +163,10 @@ export function TopMenuWrapper(props) {
       {children}
     </div>
   );
+}
+
+export function LeftMenuWrapper({ children }) {
+  const classes = useStyles();
+
+  return <div className={classes.leftMenuWrapper}>{children}</div>;
 }

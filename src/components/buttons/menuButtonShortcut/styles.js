@@ -21,7 +21,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   buttonText: {
     textAlign: 'right',
-    fontSize: 12,
     marginLeft: 10,
     marginRight: 10,
     color: 'inherit',
@@ -82,7 +81,6 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
-    fontSize: 14,
     padding: 5,
     borderRadius: '50%',
     textAlign: 'center',
@@ -123,6 +121,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    fontSize: '1rem',
   },
   count: {
     background: theme.palette.error.main,

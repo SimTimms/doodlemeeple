@@ -2,21 +2,29 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from './styles';
 import {
-  DividerWithBorder,
   Column,
   Row,
-  TopMenuWrapper,
+  LeftMenuWrapper,
   MenuButtonShortcut,
+  MenuButtonSecondary,
 } from '../';
 
-export default function TabPage({ title, menu, children, ...props }) {
+export default function TabPage({
+  title,
+  activePrimary,
+  activeSecondary,
+  menu,
+  children,
+  ...props
+}) {
   const classes = useStyles();
-  const topMenu = props.topMenu;
+  const primaryMenu = props.primaryMenu;
+  const secondaryMenu = props.secondaryMenu;
   return (
     <Column>
-      {topMenu && (
-        <TopMenuWrapper j="center">
-          {topMenu.map((menuItem) => {
+      {primaryMenu && (
+        <LeftMenuWrapper>
+          {primaryMenu.map((menuItem) => {
             return (
               <MenuButtonShortcut
                 text={{
@@ -26,17 +34,37 @@ export default function TabPage({ title, menu, children, ...props }) {
                   count: 0,
                 }}
                 onClickEvent={menuItem.link}
-                active={false}
+                active={activePrimary === menuItem.machineName ? true : false}
                 column={true}
               />
             );
           })}
-        </TopMenuWrapper>
+        </LeftMenuWrapper>
       )}
-      <Typography className={classes.tabTitle}>{title}</Typography>
-      <Row mt={10}>{menu}</Row>
-      <DividerWithBorder />
-      {children}
+      {title && <Typography className={classes.tabTitle}>{title}</Typography>}
+      <Column a="flex-start">
+        {secondaryMenu && (
+          <div className={classes.secondaryMenuWrapper}>
+            {secondaryMenu.map((menuItem) => {
+              return (
+                <MenuButtonSecondary
+                  title={menuItem.name}
+                  icon={menuItem.icon}
+                  onClickEvent={menuItem.link}
+                  active={
+                    activeSecondary === menuItem.machineName ? true : false
+                  }
+                />
+              );
+            })}
+          </div>
+        )}
+
+        <div className={classes.tabPageContent}>
+          {menu && <Row mt={10}>{menu}</Row>}
+          {children}
+        </div>
+      </Column>
     </Column>
   );
 }

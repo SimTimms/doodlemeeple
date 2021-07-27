@@ -8,6 +8,15 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.primary.dark,
     boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
   },
+  leftMenuWrapper: {
+    display: 'flex',
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    background: theme.palette.primary.dark,
+    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+    height: 68,
+  },
   desktop: { display: 'flex', flexDirection: 'column' },
   mobile: { width: '100%' },
 }));

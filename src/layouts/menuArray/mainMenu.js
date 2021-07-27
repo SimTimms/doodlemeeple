@@ -1,27 +1,36 @@
 import Cookies from 'js-cookie';
 
-export default function menuArray(history, counts) {
+export default function menuArray(history, counts, onClickEvent) {
   return [
     {
       name: 'Home',
       icon: 'home',
-      machineName: 'community',
-      link: () => history.push('/app/community'),
+      machineName: 'home',
+      link: () => history.push('/app/home'),
       count: null,
       postsMenu: [
         {
           name: 'Community',
           icon: 'home',
           machineName: 'community',
-          link: () => history.push('/app/community'),
+          link: () => onClickEvent('community'),
           count: null,
         },
         {
           name: 'Games',
           icon: 'casino',
           machineName: 'games',
-          link: () => history.push('/app/games'),
+          link: () => onClickEvent('games'),
           count: null,
+          gamesMenu: [
+            {
+              name: 'Browse',
+              icon: 'casino',
+              machineName: 'browse_games',
+              link: () => onClickEvent(),
+              count: 0,
+            },
+          ],
         },
         {
           name: 'Kickstarters',
@@ -73,7 +82,6 @@ export default function menuArray(history, counts) {
           ? { icon: 'local_post_office', count: counts.messages }
           : { icon: 'mail', count: counts.messages },
     },
-
     {
       name: 'Account',
       icon: 'account_circle',

@@ -3,7 +3,7 @@ import { Divider, Drawer, List, useMediaQuery } from '@material-ui/core';
 import { useStyles } from '../styles';
 import clsx from 'clsx';
 import { MenuButtonShortcut } from '../../../components';
-import menuArray from '../../menuArray';
+import { mainMenu } from '../../menuArray';
 import DmDevice from './DmDevice';
 import { CountContext, HistoryContext } from '../../../context';
 
@@ -42,7 +42,7 @@ export default function AppDrawer({
                 <DmDevice isOpen={isOpen} setIsOpen={setIsOpen} />
                 <Divider />
                 <List onClick={() => setIsOpen(false)}>
-                  {menuArray(history, counts).map(
+                  {mainMenu(history, counts).map(
                     (text, index) =>
                       text.name !== 'hide' && (
                         <MenuButtonShortcut

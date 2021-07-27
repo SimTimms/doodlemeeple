@@ -1,7 +1,5 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import Icon from '@material-ui/core/Icon';
-
 import { CreativeCategories } from '../../../../modules/community';
 import {
   Row,
@@ -9,96 +7,88 @@ import {
   DividerMini,
   DividerWithBorder,
   CardComponent,
-  TaskMiniComponent,
-  TabPage,
-  IconButton,
 } from '../../../../components';
 import { FeaturedArticle } from './components/getPosts';
 import {
   LatestCreativesWidget,
   JobBoardMiniWidget,
   FeaturedKickstarters,
+  FeaturedCreativeHomeWidget,
 } from '../../../../widgets';
 import { HistoryContext } from '../../../../context';
-import menuArray from '../../../menuArray';
 
 export default function CommunityPage() {
   return (
     <HistoryContext.Consumer>
       {(history) => (
-        <TabPage
-          title="Home"
-          topMenu={
-            menuArray(history, {}).filter(
-              (item) => item.machineName === 'community'
-            )[0].postsMenu
-          }
-          menu={null}
-        >
-          <Row wrap="wrap" a="flex-start" j="space-around" w="100%">
-            <TaskMiniComponent history={history} />
-            <Row j="space-around" a="flex-start">
-              <Column w="45%">
-                <DividerMini />
-
-                <Typography>Categories</Typography>
-                <DividerMini />
-                <DividerMini />
-                <CreativeCategories history={history} />
-              </Column>
-              <Column w="45%">
-                <DividerMini />
-                <Typography>Featured</Typography>
-                <DividerMini />
-                <DividerMini />
-                <FeaturedArticle history={history} />
-              </Column>
+        <Row wrap="wrap" a="flex-start" j="space-around" w="100%">
+          <FeaturedArticle history={history} />
+          <Column p={'10px 10px 0 10px'} a="flex-start">
+            <Typography style={{ fontSize: '1.2rem', paddingBottom: 10 }}>
+              Featured Professionals
+            </Typography>
+            <Row>
+              <FeaturedCreativeHomeWidget />
             </Row>
-            <DividerWithBorder />
-            <Column>
+          </Column>
+          <Row j="space-around" a="flex-start">
+            <Column w="45%">
+              <Typography>Categories</Typography>
               <DividerMini />
-              <Typography>Latest Profiles</Typography>
               <DividerMini />
-              <LatestCreativesWidget history={history} dashboard={true} />
+              <CreativeCategories history={history} />
             </Column>
-            <DividerWithBorder />
-            <Column>
+            <Column w="45%">
               <DividerMini />
-              <Typography>Jobs</Typography>
+              <Typography>Featured</Typography>
               <DividerMini />
-              <JobBoardMiniWidget history={history} dashboard={true} />
-            </Column>
-            <DividerWithBorder />
-            <Column>
               <DividerMini />
-              <Typography>Kickstarters</Typography>
-              <DividerMini />
-              <FeaturedKickstarters history={history} dashboard={true} />
-            </Column>
-            <DividerWithBorder />
-            <Column w={500}>
-              <DividerMini />
-              <Typography>Patreon</Typography>
-              <DividerMini />
-              <CardComponent
-                styleOverride={{
-                  boxShadow: '5px 5px 10px rgba(0,0,0,0.1)',
-                  marginTop: 10,
-                }}
-              >
-                <Typography variant="h6">Support us on Patreon</Typography>
-                <DividerMini />
-                <a href={process.env.REACT_APP_PATREON_LINK}>
-                  <img
-                    src={process.env.REACT_APP_PATREON}
-                    style={{ width: '100%' }}
-                    alt=""
-                  />
-                </a>
-              </CardComponent>
             </Column>
           </Row>
-        </TabPage>
+          <DividerWithBorder />
+          <Column>
+            <DividerMini />
+            <Typography>Latest Profiles</Typography>
+            <DividerMini />
+            <LatestCreativesWidget history={history} dashboard={true} />
+          </Column>
+          <DividerWithBorder />
+          <Column>
+            <DividerMini />
+            <Typography>Jobs</Typography>
+            <DividerMini />
+            <JobBoardMiniWidget history={history} dashboard={true} />
+          </Column>
+          <DividerWithBorder />
+          <Column>
+            <DividerMini />
+            <Typography>Kickstarters</Typography>
+            <DividerMini />
+            <FeaturedKickstarters history={history} dashboard={true} />
+          </Column>
+          <DividerWithBorder />
+          <Column w={500}>
+            <DividerMini />
+            <Typography>Patreon</Typography>
+            <DividerMini />
+            <CardComponent
+              styleOverride={{
+                boxShadow: '5px 5px 10px rgba(0,0,0,0.1)',
+                marginTop: 10,
+              }}
+            >
+              <Typography variant="h6">Support us on Patreon</Typography>
+              <DividerMini />
+              <a href={process.env.REACT_APP_PATREON_LINK}>
+                <img
+                  src={process.env.REACT_APP_PATREON}
+                  style={{ width: '100%' }}
+                  alt=""
+                />
+              </a>
+            </CardComponent>
+          </Column>
+        </Row>
       )}
     </HistoryContext.Consumer>
   );

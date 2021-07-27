@@ -1,5 +1,6 @@
 import FeaturedCreativeWidget from './featuredCreatives';
 import FeaturedCreativeMiniWidget from './featuredCreativesMini';
+import FeaturedCreativeHomeWidget from './featuredCreativesHome';
 import LatestCreativesWidget from './latestCreatives';
 import CreativeRosterWidget from './creativeRoster';
 import KickstarterForm from './kickstarter/kickstarterForm';
@@ -35,6 +36,7 @@ export {
   FeaturedKickstarters,
   Kickstarters,
   FeaturedCreativeMiniWidget,
+  FeaturedCreativeHomeWidget,
   JobWidget,
   JobDescriptionWidget,
   JobBoardWidget,
