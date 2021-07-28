@@ -1,7 +1,7 @@
-export default function gameMenu(history, counts, onClickEvent) {
+export default function gameMenu(onClickEvent) {
   return [
     {
-      name: 'Browse Games',
+      name: 'Browse',
       icon: 'casino',
       machineName: 'games',
       link: () => onClickEvent('games'),
@@ -12,6 +12,13 @@ export default function gameMenu(history, counts, onClickEvent) {
       icon: 'casino',
       machineName: 'my_games',
       link: () => onClickEvent('my_games'),
+      count: null,
+    },
+    {
+      name: 'Create',
+      icon: 'add',
+      machineName: 'create_game',
+      link: () => onClickEvent('create_game'),
       count: null,
     },
   ];

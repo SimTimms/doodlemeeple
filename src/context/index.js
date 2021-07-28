@@ -26,3 +26,8 @@ export const CountContext = React.createContext({
   messages: 0,
   quotes: 0,
 });
+
+export const GameContext = React.createContext({
+  gameId: null,
+  updateGameContext: () => {},
+});

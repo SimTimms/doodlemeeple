@@ -5,14 +5,9 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     paddingBottom: 8,
     borderRadius: 2,
-  },
-  active: {
-    background: theme.palette.primary.main,
     color: '#fff',
-    '&:hover': {
-      background: theme.palette.primary.main,
-    },
   },
+
   buttonRootColumn: {
     justifyContent: 'space-between',
     flexDirection: 'column',
@@ -23,7 +18,7 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'right',
     marginLeft: 10,
     marginRight: 10,
-    color: 'inherit',
+    fontSize: '1rem',
   },
   buttonColumn: { marginLeft: 0, marginRight: 0, marginTop: 4 },
   iconTextOnlyButton: { marginLeft: 0, marginRight: 0 },
@@ -84,10 +79,19 @@ export const useStyles = makeStyles((theme) => ({
     padding: 5,
     borderRadius: '50%',
     textAlign: 'center',
+    fontSize: '1rem',
+    background: 'rgba(255,255,255,0.3)',
   },
   backHover: {
     '&:hover': {
       opacity: 0.4,
+    },
+  },
+  active: {
+    background: theme.palette.error.main,
+    color: '#fff',
+    '&:hover': {
+      background: theme.palette.error.main,
     },
   },
   borderSecondary: {
@@ -115,7 +119,6 @@ export const useStyles = makeStyles((theme) => ({
   iconIconColumn: {
     marginRight: 0,
   },
-  dark: { color: theme.palette.primary.light },
   link: {
     textDecoration: 'none',
     display: 'flex',

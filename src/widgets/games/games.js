@@ -1,23 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Query } from 'react-apollo';
 import { GAME_WIDGET, MY_GAMES } from './data';
 import { GameProfile } from './profileCard';
 import { GameForm } from './';
-import { Row, Column, IconButton } from '../../components';
+import { Row, Column, Divider } from '../../components';
 import GameComponent from './component';
 import { HistoryContext } from '../../context';
 
-export default function Games() {
-  const [tab, setTab] = React.useState(0);
+export default function Games({ setSecondaryPage, secondaryPage }) {
   const [game, setGame] = React.useState(null);
+
+  useEffect(() => {
+    game && setSecondaryPage('create_game');
+    secondaryPage !== 'create_game' && setGame(null);
+  }, [game, secondaryPage]);
 
   return (
     <HistoryContext.Consumer>
       {(history) => (
         <Row wrap="wrap" a="flex-start" j="space-around" w="100%">
-          {game ? (
+          {secondaryPage === 'create_game' ? (
             <GameForm gameData={game} setGameData={setGame} />
-          ) : tab === 0 ? (
+          ) : secondaryPage === 'games' ? (
             <Row
               wrap="wrap"
               j="space-around"
@@ -37,23 +41,9 @@ export default function Games() {
               </Query>
             </Row>
           ) : (
-            tab === 1 && (
+            secondaryPage === 'my_games' && (
               <Column>
-                <IconButton
-                  title="Create Game"
-                  icon="add"
-                  onClickEvent={() => {
-                    setGame({
-                      name: '',
-                      logo: '',
-                      featuredImage: '',
-                      summary: '',
-                      url: '',
-                      showreel: '',
-                      _id: 'new',
-                    });
-                  }}
-                />
+                <Divider />
                 <Query query={MY_GAMES} fetchPolicy="network-only">
                   {({ data, loading }) => {
                     if (data)

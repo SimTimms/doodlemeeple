@@ -42,14 +42,13 @@ export default function MenuButtonShortcut({ text, ...props }) {
         }}
         className={clsx({
           [classes.buttonRoot]: true,
-          [classes.active]: active,
           [classes.buttonRootColumn]: column,
         })}
       >
         {isLeft && imageIcon ? (
           <MenuButtonImage imageIcon={imageIcon} text={text} />
         ) : (
-          isLeft && text.icon && <MenuButtonIcon text={text} />
+          isLeft && text.icon && <MenuButtonIcon text={text} active={active} />
         )}
         <Row
           j={
@@ -67,8 +66,6 @@ export default function MenuButtonShortcut({ text, ...props }) {
             className={clsx({
               [classes.buttonText]: true,
               [classes.buttonColumn]: column,
-              [classes.iconTextOnlyButton]: !text.icon && !imageIcon,
-              [classes.dark]: text.color === 'light',
             })}
           >
             {text.name}

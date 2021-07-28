@@ -8,20 +8,28 @@ import { Games } from '../../../../widgets';
 export default function HomePage() {
   const [primaryPage, setPrimaryPage] = React.useState('community');
   const [secondaryPage, setSecondaryPage] = React.useState('dashboard');
-  console.log(secondaryPage);
+
+  function setPages(primaryPage) {
+    setPrimaryPage(primaryPage);
+    setSecondaryPage(
+      primaryPage === 'community'
+        ? 'dashboard'
+        : primaryPage === 'games' && 'games'
+    );
+  }
   return (
     <HistoryContext.Consumer>
       {(history) => (
         <TabPage
           title={null}
           primaryMenu={
-            mainMenu(history, {}, setPrimaryPage).filter(
+            mainMenu(history, {}, setPages).filter(
               (item) => item.machineName === 'home'
             )[0].postsMenu
           }
           secondaryMenu={
             primaryPage === 'games'
-              ? gameMenu(history, {}, setSecondaryPage)
+              ? gameMenu(setSecondaryPage)
               : primaryPage === 'community' &&
                 communityMenu(history, {}, setSecondaryPage)
           }
@@ -30,7 +38,12 @@ export default function HomePage() {
           activeSecondary={secondaryPage}
         >
           {primaryPage === 'community' && <CommunityPage />}
-          {primaryPage === 'games' && <Games />}
+          {primaryPage === 'games' && (
+            <Games
+              setSecondaryPage={setSecondaryPage}
+              secondaryPage={secondaryPage}
+            />
+          )}
         </TabPage>
       )}
     </HistoryContext.Consumer>

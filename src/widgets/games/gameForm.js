@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { useStyles } from './styles';
 import {
-  IconButton,
+  MenuButtonStandard,
   FieldBox,
   Column,
   Uploader,
   Divider,
-  DeleteButton,
 } from '../../components';
 import { Mutation } from 'react-apollo';
 import { CREATE_GAME, UPDATE_GAME, REMOVE_GAME } from './data';
@@ -138,17 +137,13 @@ export default function GameForm({ ...props }) {
             >
               {(mutation) => {
                 return (
-                  <IconButton
+                  <MenuButtonStandard
                     title="Create"
                     icon="add"
-                    color="primary"
                     disabled={game.name.length < 1}
                     onClickEvent={() => {
                       mutation();
                     }}
-                    styleOverride={null}
-                    type="button"
-                    iconPos="right"
                   />
                 );
               }}
@@ -167,17 +162,13 @@ export default function GameForm({ ...props }) {
               >
                 {(updateMutation) => {
                   return (
-                    <IconButton
+                    <MenuButtonStandard
                       title="Update"
-                      icon="add"
-                      color="primary"
+                      icon="update"
                       disabled={false}
                       onClickEvent={() => {
                         updateMutation();
                       }}
-                      styleOverride={{ width: '100%' }}
-                      type="button"
-                      iconPos="right"
                     />
                   );
                 }}
@@ -194,19 +185,14 @@ export default function GameForm({ ...props }) {
               >
                 {(deleteMutation) => {
                   return (
-                    <IconButton
+                    <MenuButtonStandard
                       title={deleteConfirm ? 'Confirm' : 'Delete'}
                       icon="delete"
-                      color="warning"
-                      disabled={false}
                       onClickEvent={() => {
                         deleteConfirm
                           ? deleteMutation()
                           : setDeleteConfirm(true);
                       }}
-                      styleOverride={{ width: '100%' }}
-                      type="button"
-                      iconPos="right"
                     />
                   );
                 }}

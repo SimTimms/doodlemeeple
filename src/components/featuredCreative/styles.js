@@ -20,9 +20,9 @@ export const useStyles = makeStyles((theme) => {
       padding: 30,
       boxSizing: 'border-box',
     },
-    excerpt: { color: '#fff' },
-    excerptAuthor: { color: 'rgba(255,255,255,0.6)' },
-    excerptLink: { color: theme.palette.primary.light, fontWeight: 900 },
+    excerpt: { color: '#222' },
+    excerptAuthor: { color: 'rgba(0,0,0,0.6)' },
+    excerptLink: { color: theme.palette.primary.main, fontWeight: 900 },
     header4: {
       color: '#222',
       textAlign: 'center',

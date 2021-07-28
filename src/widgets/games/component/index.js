@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
-  MenuButtonShortcut,
+  MenuButtonStandard,
   Column,
   Row,
   CardComponent,
@@ -14,12 +14,7 @@ export default function GameComponent({ game, setGame }) {
 
   return (
     <CardComponent styleOverride={{ maxWidth: 400 }}>
-      <div
-        style={{ width: '100%', cursor: 'pointer' }}
-        onClick={() => {
-          setGame(game);
-        }}
-      >
+      <div style={{ width: '100%', cursor: 'pointer' }}>
         <Column>
           <Row j="space-between" a="center">
             <Row a="center" j="flex-start">
@@ -36,17 +31,11 @@ export default function GameComponent({ game, setGame }) {
                 </Typography>
               </Column>
             </Row>
-            <MenuButtonShortcut
-              text={{
-                name: 'Edit',
-                color: 'light',
-                icon: 'edit',
-                count: 0,
-                back: 'primary',
-              }}
-              onClickEvent={() => null}
+            <MenuButtonStandard
+              title="Edit"
+              icon="edit"
+              onClickEvent={() => setGame(game)}
               active={false}
-              countIcon="star"
             />
           </Row>
         </Column>

@@ -9,6 +9,13 @@ export const useStyles = makeStyles((theme) => ({
     padding: 20,
     boxSizing: 'border-box',
   },
+  subTitle: {
+    fontSize: '1.2rem',
+    paddingBottom: 10,
+    paddingTop: 10,
+    paddingLeft: 10,
+    marginTop: 30,
+  },
   gridRow: {
     display: 'flex',
     flexDirection: 'row',

@@ -16,7 +16,7 @@ export const useStyles = makeStyles((theme) => ({
   cursor: {
     cursor: 'pointer',
     transition: 'all 0.2s ',
-    color: theme.palette.primary.light,
+    color: '#fff',
     '&:hover': {
       background: 'rgba(0,0,0,0.3)',
     },

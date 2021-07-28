@@ -15,11 +15,14 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: '3px 3px 5px rgba(0,0,0,0.1)',
   },
   secondaryMenuWrapper: {
-    backgroundColor: '#fff',
+    backgroundColor: theme.palette.primary.dark,
     width: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    boxShadow: '0px 10px 10px rgba(0,0,0,0.4)',
+    padding: '10px 0 10px 0',
+    borderBottom: '1px solid rgba(255,255,255,0.15)',
   },
   tabPageContent: {
     overflow: 'auto',

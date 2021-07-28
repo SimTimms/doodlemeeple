@@ -39,6 +39,13 @@ export default function menuArray(history, counts, onClickEvent) {
           link: () => history.push('/app/kickstarters'),
           count: null,
         },
+        {
+          name: 'Events',
+          icon: 'chevron_right',
+          machineName: 'events',
+          link: () => history.push('/app/kickstarters'),
+          count: null,
+        },
       ],
     },
     {

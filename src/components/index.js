@@ -46,8 +46,9 @@ import InviteComponentFull from './inviteComponentFull';
 import MenuButton from './buttons/menuButton';
 import CreateQuoteButton from './buttons/createQuote';
 import MenuButtonShortcut from './buttons/menuButtonShortcut';
-import MenuButtonSecondary from './buttons/menuButtonSecondary';
+import MenuButtonStandard from './buttons/menuButtonStandard';
 import TopMenuButton from './buttons/topMenuButton';
+import MenuButtonSecondary from './buttons/menuButtonSecondary';
 import FieldTitle from './fieldTitle';
 import {
   JobComponent,
@@ -137,6 +138,7 @@ export {
   GalleryCard,
   Column,
   Row,
+  MenuButtonSecondary,
   TaskMiniComponent,
   PaymentSchedule,
   InlineHeaderWarning,
@@ -155,7 +157,7 @@ export {
   ColumnWrapper,
   FeatureCard,
   TextArray,
-  MenuButtonSecondary,
+  MenuButtonStandard,
   TabPage,
   FieldBox,
   CardComponent,

@@ -1,6 +1,6 @@
 import React from 'react';
+import { useStyles } from './styles';
 import { Typography } from '@material-ui/core';
-import { CreativeCategories } from '../../../../modules/community';
 import {
   Row,
   Column,
@@ -18,13 +18,15 @@ import {
 import { HistoryContext } from '../../../../context';
 
 export default function CommunityPage() {
+  const classes = useStyles();
+
   return (
     <HistoryContext.Consumer>
       {(history) => (
         <Row wrap="wrap" a="flex-start" j="space-around" w="100%">
           <FeaturedArticle history={history} />
-          <Column p={'10px 10px 0 10px'} a="flex-start">
-            <Typography style={{ fontSize: '1.2rem', paddingBottom: 10 }}>
+          <Column a="flex-start">
+            <Typography className={classes.subTitle}>
               Featured Professionals
             </Typography>
             <Row>
@@ -32,11 +34,10 @@ export default function CommunityPage() {
             </Row>
           </Column>
 
-          <DividerWithBorder />
-          <Column>
-            <DividerMini />
-            <Typography>Latest Profiles</Typography>
-            <DividerMini />
+          <Column a="flex-start">
+            <Typography className={classes.subTitle}>
+              Latest Profiles
+            </Typography>
             <LatestCreativesWidget history={history} dashboard={true} />
           </Column>
           <DividerWithBorder />
