@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    width: '25%',
+    minWidth: '280px',
     position: 'relative',
     background: '#fff',
     border: '3px solid #efeff5;',

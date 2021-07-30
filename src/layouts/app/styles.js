@@ -44,7 +44,7 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     background: '#efeff5',
-    width: '100vw',
+    width: 'calc(100vw - 200px)',
     height: '100vh',
   },
 }));

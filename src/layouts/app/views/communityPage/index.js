@@ -29,7 +29,7 @@ export default function CommunityPage() {
             <Typography className={classes.subTitle}>
               Featured Professionals
             </Typography>
-            <Row>
+            <Row of="auto">
               <FeaturedCreativeHomeWidget />
             </Row>
           </Column>
