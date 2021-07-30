@@ -5,6 +5,7 @@ import {
   FieldBox,
   Column,
   Uploader,
+  DividerMini,
   Divider,
 } from '../../components';
 import { Mutation } from 'react-apollo';
@@ -120,6 +121,7 @@ export default function GameForm({ ...props }) {
             size="s"
             multiline={false}
           />
+          <Divider />
 
           {game._id === 'new' ? (
             <Mutation
@@ -150,7 +152,6 @@ export default function GameForm({ ...props }) {
             </Mutation>
           ) : (
             <Column mw={200}>
-              <Divider />
               <Mutation
                 mutation={UPDATE_GAME}
                 variables={{
@@ -173,6 +174,7 @@ export default function GameForm({ ...props }) {
                   );
                 }}
               </Mutation>
+              <DividerMini />
               <Mutation
                 mutation={REMOVE_GAME}
                 variables={{
@@ -186,8 +188,8 @@ export default function GameForm({ ...props }) {
                 {(deleteMutation) => {
                   return (
                     <MenuButtonStandard
-                      title={deleteConfirm ? 'Confirm' : 'Delete'}
-                      icon="delete"
+                      title={deleteConfirm ? 'Confirm Deletion' : 'Delete'}
+                      type="delete"
                       onClickEvent={() => {
                         deleteConfirm
                           ? deleteMutation()

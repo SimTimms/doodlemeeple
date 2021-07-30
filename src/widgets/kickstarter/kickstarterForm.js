@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useStyles } from './styles';
 import {
-  IconButton,
+  MenuButtonStandard,
   FieldBox,
   Column,
   Uploader,
+  DividerMini,
   Divider,
-  DeleteButton,
 } from '../../components';
 import { Mutation } from 'react-apollo';
 import {
@@ -71,7 +71,7 @@ export default function KickstarterForm({ ...props }) {
             }}
             replaceMode="loose"
             placeholder="Example: Mouse Stompa"
-            info="What's this project or game called?"
+            info="What's this project or kickstarter called?"
             warning=""
             size="s"
             multiline={false}
@@ -88,7 +88,7 @@ export default function KickstarterForm({ ...props }) {
             }}
             replaceMode="loose"
             placeholder="Example: Mouse Stompa"
-            info="What's this project or game called?"
+            info="What's this project or kickstarter called?"
             warning=""
             size="s"
             multiline={true}
@@ -105,7 +105,7 @@ export default function KickstarterForm({ ...props }) {
             }}
             replaceMode="loose"
             placeholder="Example: Mouse Stompa"
-            info="What's this project or game called?"
+            info="What's this project or kickstarter called?"
             warning=""
             size="s"
             multiline={false}
@@ -122,11 +122,12 @@ export default function KickstarterForm({ ...props }) {
             }}
             replaceMode="loose"
             placeholder="Example: Mouse Stompa"
-            info="What's this project or game called?"
+            info="What's this project or kickstarter called?"
             warning=""
             size="s"
             multiline={false}
           />
+          <Divider />
 
           {kickstarter._id === 'new' ? (
             <Mutation
@@ -144,24 +145,19 @@ export default function KickstarterForm({ ...props }) {
             >
               {(mutation) => {
                 return (
-                  <IconButton
+                  <MenuButtonStandard
                     title="Create"
                     icon="add"
-                    color="primary"
                     disabled={kickstarter.name.length < 1}
                     onClickEvent={() => {
                       mutation();
                     }}
-                    styleOverride={null}
-                    type="button"
-                    iconPos="right"
                   />
                 );
               }}
             </Mutation>
           ) : (
             <Column mw={200}>
-              <Divider />
               <Mutation
                 mutation={UPDATE_KICKSTARTER}
                 variables={{
@@ -173,21 +169,18 @@ export default function KickstarterForm({ ...props }) {
               >
                 {(updateMutation) => {
                   return (
-                    <IconButton
+                    <MenuButtonStandard
                       title="Update"
-                      icon="add"
-                      color="primary"
+                      icon="update"
                       disabled={false}
                       onClickEvent={() => {
                         updateMutation();
                       }}
-                      styleOverride={{ width: '100%' }}
-                      type="button"
-                      iconPos="right"
                     />
                   );
                 }}
               </Mutation>
+              <DividerMini />
               <Mutation
                 mutation={REMOVE_KICKSTARTER}
                 variables={{
@@ -200,19 +193,14 @@ export default function KickstarterForm({ ...props }) {
               >
                 {(deleteMutation) => {
                   return (
-                    <IconButton
-                      title={deleteConfirm ? 'Confirm' : 'Delete'}
-                      icon="delete"
-                      color="warning"
-                      disabled={false}
+                    <MenuButtonStandard
+                      title={deleteConfirm ? 'Confirm Deletion' : 'Delete'}
+                      type="delete"
                       onClickEvent={() => {
                         deleteConfirm
                           ? deleteMutation()
                           : setDeleteConfirm(true);
                       }}
-                      styleOverride={{ width: '100%' }}
-                      type="button"
-                      iconPos="right"
                     />
                   );
                 }}

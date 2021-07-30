@@ -48,8 +48,6 @@ import {
   JobBoardWidget,
   FullContractWidget,
   JobDescriptionWidget,
-  Kickstarters,
-  Games,
   InviteDetails,
 } from '../../widgets';
 import {
@@ -229,8 +227,6 @@ export default function AppLayout(props) {
                   </Query>
                 ) : page === 'view-job' ? (
                   <AppViewJob jobId={pathParam} history={history} />
-                ) : page === 'kickstarters' ? (
-                  <Kickstarters history={history} />
                 ) : page === 'view-quote-job' ? (
                   <AppViewQuoteJob jobId={pathParam} history={history} />
                 ) : page === 'contract' ? (

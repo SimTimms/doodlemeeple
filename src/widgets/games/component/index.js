@@ -25,17 +25,16 @@ export default function GameComponent({ game, setGame }) {
                 className={classes.profileThumb}
               ></div>
               <Column a="flex-start">
-                <Typography style={{ fontSize: 12 }}>{game.name}</Typography>
-                <Typography style={{ fontSize: 12 }} className={classes.dull}>
+                <Typography>{game.name}</Typography>
+                <Typography className={classes.dull}>
                   {pending ? 'Live' : 'Draft'}
                 </Typography>
               </Column>
             </Row>
             <MenuButtonStandard
               title="Edit"
-              icon="edit"
               onClickEvent={() => setGame(game)}
-              active={false}
+              disabled={false}
             />
           </Row>
         </Column>

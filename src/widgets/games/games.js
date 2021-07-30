@@ -11,8 +11,8 @@ export default function Games({ setSecondaryPage, secondaryPage }) {
   const [game, setGame] = React.useState(null);
 
   useEffect(() => {
-    game && setSecondaryPage('create_game');
     secondaryPage !== 'create_game' && setGame(null);
+    game && setSecondaryPage('create_game');
   }, [game, secondaryPage]);
 
   return (
@@ -20,6 +20,8 @@ export default function Games({ setSecondaryPage, secondaryPage }) {
       {(history) => (
         <Row wrap="wrap" a="flex-start" j="space-around" w="100%">
           {secondaryPage === 'create_game' ? (
+            <GameForm gameData={game} setGameData={setGame} />
+          ) : game ? (
             <GameForm gameData={game} setGameData={setGame} />
           ) : secondaryPage === 'games' ? (
             <Row

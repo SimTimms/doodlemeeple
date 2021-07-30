@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import { BgImg } from './components';
-import { Row, Column, IconButton } from '../../../components';
+import { Row, Column, MenuButtonStandard, Divider } from '../../../components';
 
 export default function GameProfile({ game }) {
   const classes = useStyles();
@@ -45,8 +45,14 @@ export default function GameProfile({ game }) {
           </Typography>
         )}
         {game.url ? (
-          <a href={`${game.url}`} target="_blank" rel="noopener noreferrer">
-            <IconButton title="Website" icon="" onClickEvent={() => {}} />
+          <a
+            href={`${game.url}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: 'none' }}
+          >
+            <MenuButtonStandard title="Website" onClickEvent={() => {}} />
+            <Divider />
           </a>
         ) : (
           <div></div>

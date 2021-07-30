@@ -1,8 +1,8 @@
-export default function communityMenu(history, counts, onClickEvent) {
+export default function communityMenu(onClickEvent) {
   return [
     {
       name: 'Dashboard',
-      icon: 'face',
+      icon: 'dashboard',
       machineName: 'dashboard',
       link: () => onClickEvent('dashboard'),
       count: null,
