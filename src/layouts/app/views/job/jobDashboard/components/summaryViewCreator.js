@@ -13,11 +13,19 @@ import { ChatViewByJob } from '../../../../../../modules/chat';
 import CreatorMenu from './creatorMenu';
 import CreatorJobSummary from './creatorJobSummary';
 import CloseJobView from '../components/closeJobView';
+import CloseJobButton from './closeJobButton';
+
 import ProjectDash from '../../../../../../modules/dashboards';
 import { CLOSE_JOB, OPEN_JOB } from './data';
 import { Mutation } from 'react-apollo';
 
-export default function SummaryViewCreator({ job, history }) {
+export default function SummaryViewCreator({
+  job,
+  history,
+  page,
+  pageValues,
+  setPageValues,
+}) {
   const classes = useStyles();
   const [conversationUser, setConversationUser] = React.useState(null);
   const [tabNbr, setTabNbr] = React.useState(-1);
@@ -32,13 +40,6 @@ export default function SummaryViewCreator({ job, history }) {
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
-        <CreatorMenu
-          tabNbr={tabNbr}
-          setTabNbr={setTabNbr}
-          activeContract={jobData.activeContract}
-          jobClosed={jobClosed}
-          setConversationUser={setConversationUser}
-        />
         {conversationUser ? (
           <ChatViewByJob
             job={jobData}
@@ -46,7 +47,7 @@ export default function SummaryViewCreator({ job, history }) {
             setConversationUser={setConversationUser}
             history={history}
           />
-        ) : tabNbr === -1 && jobData ? (
+        ) : page === 'job_dashboard' ? (
           <Column>
             <ProjectDash
               invites={jobData.invites}
@@ -76,30 +77,14 @@ export default function SummaryViewCreator({ job, history }) {
                 }}
               </Mutation>
             ) : (
-              <Mutation
-                mutation={CLOSE_JOB}
-                variables={{ jobId: jobData._id }}
-                onCompleted={(data) => {
-                  setJobData({ ...jobData, submitted: 'closed' });
-                  console.log(jobData);
-                }}
-              >
-                {(mutation) => {
-                  return (
-                    <IconButton
-                      title="Close Job"
-                      icon="delete"
-                      onClickEvent={() => {
-                        mutation();
-                        history.push('/app/projects/history');
-                      }}
-                    />
-                  );
-                }}
-              </Mutation>
+              <CloseJobButton
+                job={job}
+                setPageValues={setPageValues}
+                pageValues={pageValues}
+              />
             )}
           </Column>
-        ) : tabNbr === 1 ? (
+        ) : page === 'job_details' ? (
           <CreatorJobSummary
             jobData={{ data: jobData, setData: setJobData }}
             setTabNbr={setTabNbr}

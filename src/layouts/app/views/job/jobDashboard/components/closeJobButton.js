@@ -11,7 +11,7 @@ import { Mutation } from 'react-apollo';
 import { toaster } from '../../../../../../utils/toaster';
 import { CLOSE_JOB } from '../../../../../../data/mutations';
 
-export default function CloseJobButton({ job, setTabNbr }) {
+export default function CloseJobButton({ job, setPageValues, pageValues }) {
   const classes = useStyles();
   const [closeConfirm, setCloseConfirm] = React.useState(false);
   const [deleting, setDeleting] = React.useState(false);
@@ -47,11 +47,11 @@ export default function CloseJobButton({ job, setTabNbr }) {
           <Mutation
             mutation={CLOSE_JOB}
             variables={{
-              _id: job.data._id,
+              _id: job._id,
             }}
             onCompleted={(data) => {
-              job.setData({ ...job.data, submitted: 'closed' });
-              setTabNbr(-1);
+              // job.setData({ ...job, submitted: 'closed' });
+              setPageValues({ ...pageValues, primaryPage: 'history' });
               toaster('Project Closed');
             }}
           >

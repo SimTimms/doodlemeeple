@@ -21,10 +21,20 @@ export default function JobDashboardPage({ pageValues, setPageValues }) {
                 {({ data }) => {
                   return !data ? null : pageValues.secondaryPage ===
                     'job_dashboard' ? (
-                    <JobDashboard setJobId={setPageValues} />
+                    <JobDashboard
+                      setPageValues={setPageValues}
+                      pageValues={pageValues}
+                      jobData={data.jobById}
+                      page="job_dashboard"
+                    />
                   ) : (
                     pageValues.secondaryPage === 'job_details' && (
-                      <JobDashboard setJobId={setPageValues} />
+                      <JobDashboard
+                        setPageValues={setPageValues}
+                        pageValues={pageValues}
+                        jobData={data.jobById}
+                        page="job_details"
+                      />
                     )
                   );
                 }}
