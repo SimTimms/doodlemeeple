@@ -20,4 +20,5 @@ export const useStyles = makeStyles((theme) => ({
   },
   desktop: { display: 'flex', flexDirection: 'column' },
   mobile: { width: '100%' },
+  title: {},
 }));

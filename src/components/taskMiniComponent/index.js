@@ -58,7 +58,7 @@ export default function TaskMiniComponent({ history }) {
                   })}
                   title="Work"
                   onClick={() =>
-                    hasQuotes ? history.push('/app/projects/') : null
+                    hasQuotes ? history.push('/app/work/') : null
                   }
                 >
                   work

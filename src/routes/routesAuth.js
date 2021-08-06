@@ -6,7 +6,6 @@ import {
   FeaturedCreativeWidget,
   CreativeRosterWidget,
   FeaturedKickstarters,
-  KickstarterForm,
   FeaturedCreativeMiniWidget,
   JobDescriptionWidget,
   PublicJobWidget,
@@ -69,7 +68,7 @@ export default function AuthRoutes({ theme, props: { ...props } }) {
           <PreviewLayout {...props} theme={theme} publicView={false} />
         )}
       />
-      <Route path="/" exact render={() => <Redirect push to="/app/tasks" />} />
+      <Route path="/" exact render={() => <Redirect push to="/app/home" />} />
     </Switch>
   );
 }

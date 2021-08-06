@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useStyles } from './styles';
 import { Column, TabPage, IconButton } from '../../../../../components';
-import CreatorJobMenu from './creatorJobMenu';
 import JobPosts from './jobPosts';
 import InviteDashboard from '../../../views/inviteDashboard';
 import { QuoteOutWidget, UpdateJob } from '../../../../../widgets';
@@ -27,7 +26,6 @@ export default function WorkDashboard({ history, tab }) {
 
   return (
     <div className={classes.root}>
-      <CreatorJobMenu tabNbr={tabNbr} setTabNbr={setTabNbr} />
       {tabNbr === 1 && (
         <TabPage
           title="Job Posts"

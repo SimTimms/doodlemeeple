@@ -28,5 +28,8 @@ export const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
     height: 'calc(100vh - 100px)',
     width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
   },
 }));

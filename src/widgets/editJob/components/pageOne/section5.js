@@ -6,7 +6,8 @@ import {
   Row,
   Divider,
   FieldTitle,
-  MenuButtonShortcut,
+  MenuButtonTab,
+  MenuButtonMulti,
 } from '../../../../components';
 import autosave from '../../../../utils/autosave';
 import {
@@ -17,7 +18,6 @@ import {
   TYPE_HELPER,
 } from '../../../../utils';
 import { checkLength } from '../../unlock';
-
 
 export default function Section5({ setJob, job, mutation }) {
   const [page, setPage] = React.useState(1);
@@ -39,68 +39,40 @@ export default function Section5({ setJob, job, mutation }) {
         <div style={{ width: 450 }}>
           <Column>
             <Row j="space-between">
-              <MenuButtonShortcut
-                text={{
-                  name: 'Creative',
-                  color: '#222',
-                  icon: 'chevron_right',
-                  count: 0,
-                }}
+              <MenuButtonTab
+                title="Visual"
                 onClickEvent={() => {
                   setPage(1);
                 }}
                 active={page === 1}
               />
-              <MenuButtonShortcut
-                text={{
-                  name: 'Marketing',
-                  color: '#222',
-                  icon: 'chevron_right',
-                  count: 0,
-                }}
+              <MenuButtonTab
+                title="Marketing"
                 onClickEvent={() => {
                   setPage(2);
                 }}
                 active={page === 2}
               />
-              <MenuButtonShortcut
-                text={{
-                  name: 'Development',
-                  color: '#222',
-                  icon: 'chevron_right',
-                  count: 0,
-                }}
+              <MenuButtonTab
+                title="Development"
                 onClickEvent={() => {
                   setPage(3);
                 }}
                 active={page === 3}
               />
-              <MenuButtonShortcut
-                text={{
-                  name: 'Industry',
-                  color: '#222',
-                  icon: 'chevron_right',
-                  count: 0,
-                }}
+              <MenuButtonTab
+                title="Industry"
                 onClickEvent={() => {
                   setPage(4);
                 }}
-                active={page === 3}
+                active={page === 4}
               />
             </Row>
             <Divider />
             {(page === -1 || page === 1) &&
               ARTIST_TYPES.map((type) => (
-                <IconButton
+                <MenuButtonMulti
                   title={TYPE_HELPER(type)}
-                  icon={
-                    job.keywords.indexOf(type) > -1
-                      ? 'local_post_office'
-                      : 'add'
-                  }
-                  color={
-                    job.keywords.indexOf(type) > -1 ? 'primary' : 'text-dark'
-                  }
                   onClickEvent={() => {
                     setJob({
                       ...job,
@@ -111,26 +83,15 @@ export default function Section5({ setJob, job, mutation }) {
                     });
                     autosave(mutation);
                   }}
-                  styleOverride={{
-                    width: '100%',
-                    margin: 0,
-                    marginBottom: 5,
-                  }}
+                  active={job.keywords.indexOf(type) > -1 ? true : false}
                   iconPos="right"
                 />
               ))}
             {(page === -1 || page === 2) &&
               MARKETING_TYPES.map((type) => (
-                <IconButton
+                <MenuButtonMulti
                   title={TYPE_HELPER(type)}
-                  icon={
-                    job.keywords.indexOf(type) > -1
-                      ? 'local_post_office'
-                      : 'add'
-                  }
-                  color={
-                    job.keywords.indexOf(type) > -1 ? 'primary' : 'text-dark'
-                  }
+                  active={job.keywords.indexOf(type) > -1 ? true : false}
                   onClickEvent={() => {
                     setJob({
                       ...job,
@@ -141,26 +102,13 @@ export default function Section5({ setJob, job, mutation }) {
                     });
                     autosave(mutation);
                   }}
-                  styleOverride={{
-                    width: '100%',
-                    margin: 0,
-                    marginBottom: 5,
-                  }}
-                  iconPos="right"
                 />
-              ))}{' '}
+              ))}
             {(page === -1 || page === 3) &&
               DEVELOPMENT_TYPES.map((type) => (
-                <IconButton
+                <MenuButtonMulti
                   title={TYPE_HELPER(type)}
-                  icon={
-                    job.keywords.indexOf(type) > -1
-                      ? 'local_post_office'
-                      : 'add'
-                  }
-                  color={
-                    job.keywords.indexOf(type) > -1 ? 'primary' : 'text-dark'
-                  }
+                  active={job.keywords.indexOf(type) > -1 ? true : false}
                   onClickEvent={() => {
                     setJob({
                       ...job,
@@ -171,26 +119,13 @@ export default function Section5({ setJob, job, mutation }) {
                     });
                     autosave(mutation);
                   }}
-                  styleOverride={{
-                    width: '100%',
-                    margin: 0,
-                    marginBottom: 5,
-                  }}
-                  iconPos="right"
                 />
               ))}
             {(page === -1 || page === 4) &&
               CREATOR_TYPES.map((type) => (
-                <IconButton
+                <MenuButtonMulti
                   title={TYPE_HELPER(type)}
-                  icon={
-                    job.keywords.indexOf(type) > -1
-                      ? 'local_post_office'
-                      : 'add'
-                  }
-                  color={
-                    job.keywords.indexOf(type) > -1 ? 'primary' : 'text-dark'
-                  }
+                  active={job.keywords.indexOf(type) > -1 ? true : false}
                   onClickEvent={() => {
                     setJob({
                       ...job,
@@ -201,12 +136,6 @@ export default function Section5({ setJob, job, mutation }) {
                     });
                     autosave(mutation);
                   }}
-                  styleOverride={{
-                    width: '100%',
-                    margin: 0,
-                    marginBottom: 5,
-                  }}
-                  iconPos="right"
                 />
               ))}
           </Column>

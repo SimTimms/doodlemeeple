@@ -32,7 +32,6 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: 20,
     borderRadius: 5,
     width: '100%',
-    fontSize: 12,
   },
   inputLabel: { fontSize: 10 },
   small: {
@@ -65,7 +64,7 @@ export const useStyles = makeStyles((theme) => ({
   helpIcon: {
     marginLeft: 5,
     cursor: 'pointer',
-    color: theme.palette.primary.light,
+    color: theme.palette.secondary.main,
     fontSize: 16,
     lineHeight: 1.1,
     '&:hover': {

@@ -9,6 +9,11 @@ export const UserContext = React.createContext({
   userId: null,
 });
 
+export const MenuContext = React.createContext({
+  jobPage: { primaryPage: null, secondaryPage: null, jobId: null },
+  updateMenuContext: { secondary: () => {}, primary: () => {} },
+});
+
 export const HistoryContext = React.createContext({
   history: null,
 });
@@ -29,5 +34,4 @@ export const CountContext = React.createContext({
 
 export const GameContext = React.createContext({
   gameId: null,
-  updateGameContext: () => {},
 });

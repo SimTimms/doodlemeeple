@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useStyles } from './styles';
-import { useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 import AppDashboard from './views/appDashboard';
 import TaskDashboard from './views/taskDashboard';
 import HomePage from './views/homePage';
+import WorkPage from './views/workPage';
 import NotificationDashboard from './views/notificationDashboard';
 import AppInvites from './views/inviteDashboard';
 import AppHelp from './views/appHelp';
@@ -18,7 +18,7 @@ import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame } from './views/game';
 import {
   WorkDashboard,
-  AppViewJob,
+  JobDashboard,
   AppViewQuoteJob,
   AppViewJobPublic,
 } from './views/job';
@@ -61,17 +61,20 @@ import Cookies from 'js-cookie';
 import PrimaryMenu from './primaryMenu';
 
 export default function AppLayout(props) {
-  const [page, setPage] = React.useState('tasks');
-  const [activeButton, setActiveButton] = React.useState('Tasks');
-  const [profile, setProfile] = React.useState(null);
-  const pageJump = props.match ? props.match.params.page : null;
   const { history } = props;
-  const userId = Cookies.get('userId');
+
+  const [page, setPage] = React.useState('home');
+  const [profile, setProfile] = React.useState(null);
   const [counts, setCounts] = React.useState({
     invites: 0,
     messages: 0,
     quotes: 0,
   });
+
+  const classes = useStyles();
+  const pageJump = props.match ? props.match.params.page : null;
+  const userId = Cookies.get('userId');
+
   //TODO: I guess this is proper dirty
   const pathParam = props
     ? props.match
@@ -81,37 +84,13 @@ export default function AppLayout(props) {
       : null
     : null;
 
-  const pathParam2 = props
-    ? props.match
-      ? props.match.params.pathParam2
-        ? props.match.params.pathParam2
-        : null
-      : null
-    : null;
-
   if (pageJump !== page) {
     setPage(pageJump);
   }
 
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
   function drawerButtonChange(url, page) {
-    setActiveButton(page);
     history.push(url);
   }
-
-  useEffect(() => {
-    setActiveButton(page);
-  }, [page]);
 
   return (
     <HistoryContext.Provider value={history}>
@@ -226,11 +205,11 @@ export default function AppLayout(props) {
                     }}
                   </Query>
                 ) : page === 'view-job' ? (
-                  <AppViewJob jobId={pathParam} history={history} />
+                  <JobDashboard jobId={pathParam} history={history} />
                 ) : page === 'view-quote-job' ? (
                   <AppViewQuoteJob jobId={pathParam} history={history} />
                 ) : page === 'contract' ? (
-                  <AppViewJob jobId={pathParam} history={history} />
+                  <JobDashboard jobId={pathParam} history={history} />
                 ) : page === 'view-public-job' ? (
                   <AppViewJobPublic jobId={pathParam} history={history} />
                 ) : page === 'job-board' ? (
@@ -250,6 +229,8 @@ export default function AppLayout(props) {
                   <EditContract contractId={pathParam} history={history} />
                 ) : page === 'home' ? (
                   <HomePage />
+                ) : page === 'work' ? (
+                  <WorkPage />
                 ) : page === 'public-preview' ? (
                   <PreviewProfile
                     profileId={pathParam}

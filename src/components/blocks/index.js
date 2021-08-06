@@ -1,7 +1,13 @@
 import React from 'react';
 import { useStyles } from './styles';
+import { Typography } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
+
+export function Title({ title }) {
+  const classes = useStyles();
+  return <Typography className={classes.title}>{title}</Typography>;
+}
 
 export function Column(props) {
   const { children, a, j, w, p, b, br, h, bg, m, mw, classAdd, onClickEvent } =

@@ -11,7 +11,7 @@ import Tab2 from './tab2';
 import Tab3 from './tab3';
 import Tab4 from './tab4';
 
-export default function EditJob({ jobId }) {
+export default function UpdateJob({ jobId }) {
   const classes = useStyles();
   const [job, setJob] = React.useState(null);
   const [tab, setTab] = React.useState(1);
@@ -29,8 +29,7 @@ export default function EditJob({ jobId }) {
       ...job,
     });
   }
-
-  if (!job)
+  if (!job && jobId !== 'new')
     return (
       <Query
         query={JOB}

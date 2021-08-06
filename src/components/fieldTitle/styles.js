@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
   helpIcon: {
     marginLeft: 5,
     cursor: 'pointer',
-    color: theme.palette.primary.light,
+    color: theme.palette.secondary.main,
     fontSize: 16,
     lineHeight: 1.1,
     '&:hover': {

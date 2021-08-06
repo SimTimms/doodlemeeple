@@ -47,6 +47,8 @@ import MenuButton from './buttons/menuButton';
 import CreateQuoteButton from './buttons/createQuote';
 import MenuButtonShortcut from './buttons/menuButtonShortcut';
 import MenuButtonStandard from './buttons/menuButtonStandard';
+import MenuButtonMulti from './buttons/menuButtonMulti';
+import MenuButtonTab from './buttons/menuButtonTab';
 import TopMenuButton from './buttons/topMenuButton';
 import MenuButtonSecondary from './buttons/menuButtonSecondary';
 import FieldTitle from './fieldTitle';
@@ -119,9 +121,11 @@ import {
   TopMenuWrapper,
   RowCheckList,
   LeftMenuWrapper,
+  Title,
 } from './blocks';
 
 export {
+  Title,
   TopMenuButton,
   LargeImage,
   ResponseComponent,
@@ -174,6 +178,8 @@ export {
   NoticeBox,
   FullContractComponent,
   Paper,
+  MenuButtonTab,
+  MenuButtonMulti,
   ViewContractButton,
   EditContractButton,
   ContractSummary,

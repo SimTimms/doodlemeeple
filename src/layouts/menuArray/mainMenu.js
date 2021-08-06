@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-export default function menuArray(history, counts, onClickEvent) {
+export default function mainMenu(history, counts, onClickEvent) {
   return [
     {
       name: 'Home',
@@ -58,25 +58,9 @@ export default function menuArray(history, counts, onClickEvent) {
     {
       name: 'Work',
       icon: 'work',
-      machineName: 'projects',
-      link: () => history.push('/app/projects'),
+      machineName: 'work',
+      link: () => history.push('/app/work'),
       count: { icon: 'star', count: counts.quotes },
-      subMenu: [
-        {
-          name: 'Job Board',
-          icon: 'chevron_right',
-          machineName: 'job-board',
-          link: () => history.push('/app/job-board'),
-          count: 0,
-        },
-        {
-          name: 'Professionals',
-          icon: 'chevron_right',
-          machineName: 'creative-roster',
-          link: () => history.push('/app/creative-roster'),
-          count: null,
-        },
-      ],
     },
     {
       name: 'Messages',

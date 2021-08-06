@@ -4,7 +4,7 @@ import {
   Column,
   Divider,
   DividerMini,
-  IconButton,
+  MenuButtonStandard,
   UnlockInfo,
   CardComponent,
 } from '../';
@@ -20,8 +20,10 @@ export default function NoticeBoardSecondary({
 }) {
   const { backEvent } = props;
   return (
-    <Column w={700} m="10px 0 0 0">
-      <CardComponent>
+    <Column p="10px 10px 0 10px" m={'10px 0 40px 0'}>
+      <CardComponent
+        styleOverride={{ maxWidth: 800, marginLeft: 10, marginRight: 10 }}
+      >
         <Column>
           <Typography>{title}</Typography>
           <DividerMini />
@@ -34,7 +36,8 @@ export default function NoticeBoardSecondary({
             onClickEvent !== null && (
               <Slide direction="up" in={true} mountOnEnter unmountOnExit>
                 <div>
-                  <IconButton
+                  <Divider />
+                  <MenuButtonStandard
                     title="Continue"
                     icon="chevron_right"
                     iconPos="right"
@@ -46,7 +49,7 @@ export default function NoticeBoardSecondary({
             )
           )}
           {backEvent ? (
-            <IconButton
+            <MenuButtonStandard
               title="Back"
               icon=""
               iconPos="left"
@@ -55,6 +58,7 @@ export default function NoticeBoardSecondary({
             />
           ) : null}
         </Column>
+        <Divider />
       </CardComponent>
     </Column>
   );

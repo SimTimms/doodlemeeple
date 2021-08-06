@@ -1,5 +1,5 @@
 import React from 'react';
-import { Column, NoticeBoardSecondary } from '../../../components';
+import { Column, NoticeBoardSecondary, Divider } from '../../../components';
 import { Mutation } from 'react-apollo';
 import { UPDATE_JOB } from '../data';
 import { toaster } from '../../../utils/toaster';

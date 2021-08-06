@@ -3,7 +3,7 @@ import { Column } from '../../../components';
 import Button from './button';
 import { mainMenu } from '../../menuArray';
 import { useStyles } from './styles';
-import dmDevice from '../../../assets/dmDevice.png';
+import dmDevice from '../../../assets/dmChibi.png';
 import { HistoryContext, CountContext } from '../../../context';
 
 export default function PrimaryMenu({ profile, page }) {
