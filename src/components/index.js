@@ -122,9 +122,11 @@ import {
   RowCheckList,
   LeftMenuWrapper,
   Title,
+  MainTitle,
 } from './blocks';
 
 export {
+  MainTitle,
   Title,
   TopMenuButton,
   LargeImage,

@@ -9,7 +9,7 @@ import NewJobName from './components/newJobName';
 import { initialState } from './initialState';
 import { HistoryContext } from '../../context';
 
-export default function CreateJob() {
+export default function CreateJob({ pageValues }) {
   const classes = useStyles();
   const [job, setJob] = React.useState(initialState);
 

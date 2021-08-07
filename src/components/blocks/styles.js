@@ -20,5 +20,5 @@ export const useStyles = makeStyles((theme) => ({
   },
   desktop: { display: 'flex', flexDirection: 'column' },
   mobile: { width: '100%' },
-  title: {},
+  mainTitle: { fontSize: '1.2rem', color: theme.palette.error.main },
 }));

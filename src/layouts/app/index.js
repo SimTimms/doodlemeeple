@@ -111,7 +111,7 @@ export default function AppLayout(props) {
                     profile={profile}
                     setProfile={setProfile}
                   />
-                ) : page === 'conversations' ? (
+                ) : page === 'messages' ? (
                   <ConversationModule history={history} />
                 ) : page === 'invite-details' ? (
                   <InviteDetails jobId={pathParam} />
@@ -204,8 +204,6 @@ export default function AppLayout(props) {
                           );
                     }}
                   </Query>
-                ) : page === 'view-job' ? (
-                  <JobDashboard jobId={pathParam} history={history} />
                 ) : page === 'view-quote-job' ? (
                   <AppViewQuoteJob jobId={pathParam} history={history} />
                 ) : page === 'contract' ? (

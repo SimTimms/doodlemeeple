@@ -11,6 +11,7 @@ import {
   Signature,
   DividerWithBorder,
   UserDeleted,
+  MenuButtonStandard,
 } from '../';
 import clsx from 'clsx';
 import { PREVIEW_CONTRACT, JOB_CONTACT_DETAILS } from '../../data/queries';
@@ -107,14 +108,8 @@ export default function InviteComponentFull({
           )}
 
           {invite.status !== 'declined' && (
-            <MenuButtonShortcut
-              text={{
-                name: 'Chat',
-                color: '#222',
-                icon: 'chat',
-                count: 0,
-                back: '',
-              }}
+            <MenuButtonStandard
+              title="Chat"
               onClickEvent={() => setConversationUser(invite.receiver)}
               active={false}
             />

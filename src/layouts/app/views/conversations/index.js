@@ -1,6 +1,8 @@
 import React from 'react';
 import Conversations from '../../../../modules/chat/conversations';
 import { ChatViewById } from '../../../../modules/chat';
+import { TabPage } from '../../../../components';
+import { messageMenu } from '../../../menuArray';
 
 export default function ConversationModule({ history }) {
   const [conversationObj, setConversationObj] = React.useState({
@@ -13,7 +15,14 @@ export default function ConversationModule({ history }) {
   }
 
   return (
-    <div style={{ width: '400px', margin: 'auto' }}>
+    <TabPage
+      title={null}
+      primaryMenu={messageMenu()}
+      secondaryMenu={null}
+      menu={null}
+      activePrimary={'messages'}
+      activeSecondary={''}
+    >
       {!conversationObj.receiver ? (
         <Conversations
           history={history}
@@ -25,6 +34,6 @@ export default function ConversationModule({ history }) {
           setConversationUser={() => setConversationUser()}
         />
       )}
-    </div>
+    </TabPage>
   );
 }

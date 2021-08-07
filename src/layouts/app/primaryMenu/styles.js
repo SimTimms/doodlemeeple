@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   column: {
     background: theme.palette.primary.dark,
     height: '100vh',
+    zIndex: 2,
   },
   columnActive: {
     background: theme.palette.error.main,

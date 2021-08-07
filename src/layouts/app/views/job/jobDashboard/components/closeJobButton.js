@@ -22,7 +22,7 @@ export default function CloseJobButton({ job, setPageValues, pageValues }) {
     <div className={classes.actionWrapper}>
       {!closeConfirm ? (
         <BorderBox w={300}>
-          <Meta str="Permanently close this job?" />
+          <Meta str="Close this job?" />
           <IconButton
             color="warning"
             icon="close"
@@ -36,8 +36,7 @@ export default function CloseJobButton({ job, setPageValues, pageValues }) {
         <BorderBox w={300}>
           <Meta
             str="
-            This will permanently close the project. Your chosen creatives will
-            be unable to send a quote or discuss this job further."
+            This will close the project. Your chosen creatives will be unable to send a quote or discuss this job further."
           />
           <Divider />
           <Meta

@@ -6,17 +6,16 @@ import {
   BorderBox,
   FullContractComponent,
   Signature,
-  IconButton,
+  MenuButtonStandard,
   LoadIcon,
 } from '../../../../../../components';
 import { ChatViewByJob } from '../../../../../../modules/chat';
-import CreatorMenu from './creatorMenu';
 import CreatorJobSummary from './creatorJobSummary';
 import CloseJobView from '../components/closeJobView';
 import CloseJobButton from './closeJobButton';
 
 import ProjectDash from '../../../../../../modules/dashboards';
-import { CLOSE_JOB, OPEN_JOB } from './data';
+import { OPEN_JOB } from './data';
 import { Mutation } from 'react-apollo';
 
 export default function SummaryViewCreator({
@@ -62,14 +61,18 @@ export default function SummaryViewCreator({
                 mutation={OPEN_JOB}
                 variables={{ jobId: jobData._id }}
                 onCompleted={(data) => {
-                  setJobData({ ...jobData, submitted: 'draft' });
-                  history.push('/app/projects');
+                  setPageValues({
+                    ...pageValues,
+                    primaryPage: 'job_posts',
+                    secondaryPage: 'job_ads',
+                    jobId: null,
+                  });
                 }}
               >
                 {(mutation) => {
                   return (
-                    <IconButton
-                      title="Reopen Job"
+                    <MenuButtonStandard
+                      title="Restore Job Ad"
                       icon="check"
                       onClickEvent={() => mutation()}
                     />

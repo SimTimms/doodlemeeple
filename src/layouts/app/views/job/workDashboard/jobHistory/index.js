@@ -1,12 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import { JOB_HISTORY } from './data';
-import {
-  Column,
-  FieldTitleDashboard,
-  Divider,
-  JobComponent,
-} from '../../../../../../components';
+import { Column, JobComponent, Divider } from '../../../../../../components';
 
 export default function JobHistory() {
   return (
@@ -21,9 +16,7 @@ export default function JobHistory() {
         return jobHistory ? (
           <Column a="center" j="flex-start">
             <Divider />
-            <FieldTitleDashboard name="Job History" inline={false} a="l" />
-            <Divider />
-            <div style={{ width: '100%', opacity: 0.4 }}>{jobHistory}</div>
+            {jobHistory}
           </Column>
         ) : null;
       }}

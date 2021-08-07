@@ -1,9 +1,5 @@
 import React from 'react';
 import SummaryViewCreator from './components/summaryViewCreator';
-import SummaryViewCreative from './components/summaryViewCreative';
-import { Query } from 'react-apollo';
-import { JOB, JOB_CREATIVE } from '../../../../../data/queries';
-import Cookies from 'js-cookie';
 import { MenuContext, HistoryContext } from '../../../../../context';
 
 export default function JobDashboard({

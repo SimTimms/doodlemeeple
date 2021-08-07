@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     color: '#fff',
     '&:hover': {
-      background: theme.palette.primary.dark,
+      background: theme.palette.error.main,
     },
     '&:visited': {
       background: 'red',

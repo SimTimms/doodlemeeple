@@ -9,6 +9,11 @@ export function Title({ title }) {
   return <Typography className={classes.title}>{title}</Typography>;
 }
 
+export function MainTitle({ title }) {
+  const classes = useStyles();
+  return <Typography className={classes.mainTitle}>{title}</Typography>;
+}
+
 export function Column(props) {
   const { children, a, j, w, p, b, br, h, bg, m, mw, classAdd, onClickEvent } =
     props;

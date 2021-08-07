@@ -41,13 +41,12 @@ export default function JobComponent({ job }) {
   return (
     <MenuContext.Consumer>
       {(menu) => {
-        console.log(menu);
         return (
           <HistoryContext.Consumer>
             {(history) => (
               <CardComponent
                 onClickEvent={() => {
-                  !submitted
+                  draft
                     ? menu.updateMenuContext({
                         ...menu.jobPage,
                         secondaryPage: 'create_job_ad',

@@ -1,10 +1,9 @@
 import React from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, Typography } from '@material-ui/core';
 import { Mutation } from 'react-apollo';
 import { CREATE_MESSAGE } from '../../../data/mutations';
 import { useStyles } from './styles';
-import { IconButton } from '../../';
-import { Uploader, Row, Column } from '../../';
+import { MenuButtonStandard, IconButton, Uploader, Row, Column } from '../../';
 
 export default function CreateMessage({
   updateMessageArray,
@@ -17,18 +16,13 @@ export default function CreateMessage({
   const classes = useStyles();
   return (
     <Column>
-      <div className={classes.header}>
-        <IconButton
-          icon="close"
-          title="Close Chat"
-          disabled={false}
-          color="text-white-mini"
-          onClickEvent={() => {
-            setConversationUser(null);
-          }}
-          type="button"
-          iconPos="right"
-        />
+      <div
+        className={classes.header}
+        onClick={() => {
+          setConversationUser(null);
+        }}
+      >
+        <Typography>Close Chat</Typography>
       </div>
       <Row j="center" a="center">
         <Mutation

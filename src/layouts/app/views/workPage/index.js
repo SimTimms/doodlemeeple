@@ -6,11 +6,11 @@ import {
   workMenuSecondary,
   jobDashboardSecondary,
 } from '../../../menuArray';
-import JobDashboard from '../job/jobDashboard';
 import { QuoteOutWidget, UpdateJob } from '../../../../widgets';
 import { MenuContext } from '../../../../context';
 import JobPostsPage from './jobPostsPage';
 import JobDashboardPage from './jobDashboardPage';
+import JobHistory from '../job/workDashboard/jobHistory';
 
 export default function WorkPage() {
   const [pageValues, setPageValues] = React.useState({
@@ -52,6 +52,11 @@ export default function WorkPage() {
               />
             ) : pageValues.primaryPage === 'job_posts' ? (
               <JobPostsPage
+                pageValues={pageValues}
+                setPageValues={setPageValues}
+              />
+            ) : pageValues.primaryPage === 'history' ? (
+              <JobHistory
                 pageValues={pageValues}
                 setPageValues={setPageValues}
               />

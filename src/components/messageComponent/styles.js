@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
     height: '100%',
     width: '100%',
     minWidth: 0,
-    background: theme.palette.primary.main,
+    background: theme.palette.error.main,
     padding: 0,
     borderRadius: 0,
     color: '#fff',

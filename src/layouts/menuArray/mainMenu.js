@@ -66,7 +66,7 @@ export default function mainMenu(history, counts, onClickEvent) {
       name: 'Messages',
       icon: 'chat',
       machineName: 'messages',
-      link: () => history.push('/app/conversations'),
+      link: () => history.push('/app/messages'),
       color: '',
       count:
         counts.messages > 0
