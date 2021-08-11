@@ -32,14 +32,6 @@ export default function PrimaryMenu({ profile, page }) {
                     />
                   );
                 })}
-                <Button
-                  menuItem={{
-                    name: profile ? profile.name : 'Fetching...',
-                    icon: 'face',
-                    image: profile && profile.profileImg,
-                    link: () => history.push('/app/edit-profile'),
-                  }}
-                />
               </Column>
             );
           }}

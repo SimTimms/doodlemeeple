@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   rootWarning: {
     textAlign: 'right',
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     color: '#fff',
     display: 'flex',
     justifyContent: 'space-between',

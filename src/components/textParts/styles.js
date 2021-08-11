@@ -61,7 +61,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   meta: {
     fontSize: 12,
-    color: theme.palette.primary.main,
+    color: '#222',
     boxSizing: 'border-box',
     width: '100%',
     textAlign: 'center',

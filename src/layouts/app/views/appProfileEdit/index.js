@@ -2,21 +2,36 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { PROFILE } from '../../../../data/queries';
-import ProfileMenu from './profileMenu';
 import TabProfile from './tabProfile';
 import TabPreferences from './tabPreferences';
-import { initialState } from './initialState';
 import Isolates from './isolates';
 import { Column } from '../../../../components';
 
 export default function AppProfileEdit({ history, ...props }) {
   const { isolate } = props;
   const classes = useStyles();
-  const [profile, setProfile] = React.useState(initialState);
+  const [profile, setProfile] = React.useState(null);
   const [sections, setSections] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [tabNbr, setTabNbr] = React.useState(0);
 
+  if (!profile) {
+    return (
+      <Query
+        query={PROFILE}
+        fetchPolicy="network-only"
+        onCompleted={(data) => {
+          setProfile({ ...data.profile });
+          setLoading(false);
+          setSections(data.profile.sections);
+        }}
+      >
+        {() => {
+          return null;
+        }}
+      </Query>
+    );
+  }
   return (
     <div className={classes.root}>
       {isolate ? (
@@ -31,12 +46,6 @@ export default function AppProfileEdit({ history, ...props }) {
         />
       ) : (
         <Column w="100%">
-          <ProfileMenu
-            tabNbr={tabNbr}
-            setTabNbr={setTabNbr}
-            history={history}
-            profile={profile}
-          />
           {tabNbr === 0 ? (
             <TabProfile
               profile={profile}
@@ -52,20 +61,6 @@ export default function AppProfileEdit({ history, ...props }) {
           )}
         </Column>
       )}
-
-      <Query
-        query={PROFILE}
-        fetchPolicy="network-only"
-        onCompleted={(data) => {
-          setProfile({ ...data.profile });
-          setLoading(false);
-          setSections(data.profile.sections);
-        }}
-      >
-        {() => {
-          return null;
-        }}
-      </Query>
     </div>
   );
 }

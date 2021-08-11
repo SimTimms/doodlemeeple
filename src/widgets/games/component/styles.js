@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
   },
   count: {
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     borderRadius: '50%',
     minHeight: 16,
     maxHeight: 16,
@@ -33,7 +33,7 @@ export const useStyles = makeStyles((theme) => ({
     zIndex: 2,
   },
   dull: { color: theme.palette.primary.main },
-  red: { color: theme.palette.error.main },
+  red: { color: theme.palette.primary.main },
   green: { color: theme.palette.secondary.main },
   profileThumb: {
     backgroundColor: '#ddd',
@@ -63,7 +63,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     color: '#fff',
     zIndex: 10,
   },
@@ -97,7 +97,7 @@ export const useStyles = makeStyles((theme) => ({
   cardSummaryNeutral: {
     color: theme.palette.primary.main,
   },
-  cardSummaryWarning: { color: theme.palette.error.main },
+  cardSummaryWarning: { color: theme.palette.primary.main },
   cardSummaryGood: { color: theme.palette.secondary.main },
   cardSummaryAmber: { color: theme.palette.warning.main },
   cardEmpty: {

@@ -36,6 +36,7 @@ export default function TabPage({
                 onClickEvent={menuItem.link}
                 active={activePrimary === menuItem.machineName ? true : false}
                 column={true}
+                disabled={menuItem.disabled}
               />
             );
           })}
@@ -54,6 +55,7 @@ export default function TabPage({
                   active={
                     activeSecondary === menuItem.machineName ? true : false
                   }
+                  disabled={menuItem.disabled}
                 />
               );
             })}

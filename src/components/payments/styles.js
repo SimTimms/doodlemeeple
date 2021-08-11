@@ -10,5 +10,5 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
   },
   good: { background: theme.palette.secondary.main },
-  red: { background: theme.palette.error.main },
+  red: { background: theme.palette.primary.main },
 }));

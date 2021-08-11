@@ -20,7 +20,7 @@ export const useStyles = makeStyles((theme) => {
       cursor: 'pointer',
     },
     countIconOn: {
-      backgroundColor: theme.palette.error.main,
+      backgroundColor: theme.palette.primary.main,
     },
     notificationTitle: { color: 'rgba(255,255,255,0.5)', fontSize: '0.8em' },
   };

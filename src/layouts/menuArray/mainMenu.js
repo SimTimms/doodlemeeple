@@ -39,13 +39,13 @@ export default function mainMenu(history, counts, onClickEvent) {
           link: () => onClickEvent('kickstarters'),
           count: null,
         },
-        {
+        /*{
           name: 'Events',
           icon: 'event',
           machineName: 'events',
           link: () => onClickEvent('events'),
           count: null,
-        },
+        },*/
       ],
     },
     {
@@ -54,6 +54,13 @@ export default function mainMenu(history, counts, onClickEvent) {
       machineName: 'tasks',
       link: () => history.push('/app/tasks'),
       count: null,
+    },
+    {
+      name: 'Job Ads',
+      icon: 'post_add',
+      machineName: 'jobs',
+      link: () => history.push('/app/jobs'),
+      count: { icon: 'star', count: counts.quotes },
     },
     {
       name: 'Work',

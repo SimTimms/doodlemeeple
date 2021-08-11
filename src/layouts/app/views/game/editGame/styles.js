@@ -13,7 +13,7 @@ export const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: 14,
   },
-  error: { background: theme.palette.error.main, color: '#fff', padding: 5 },
+  error: { background: theme.palette.primary.main, color: '#fff', padding: 5 },
   avatar: {
     borderRadius: '50%',
     border: '10px solid #fff',

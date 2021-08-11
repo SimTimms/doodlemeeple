@@ -19,6 +19,7 @@ export default function MenuButtonShortcut({ text, ...props }) {
     title,
     iconPos,
     styleOverride,
+    disabled,
   } = props;
   const isLeft = !iconPos || iconPos === 'left';
 
@@ -43,6 +44,7 @@ export default function MenuButtonShortcut({ text, ...props }) {
         className={clsx({
           [classes.buttonRoot]: true,
           [classes.buttonRootColumn]: column,
+          [classes.disabled]: disabled,
         })}
       >
         {isLeft && imageIcon ? (

@@ -6,6 +6,7 @@ import {
   LoadIcon,
   Meta,
   Divider,
+  MenuButtonStandard,
 } from '../../../../../../components';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../../../../../utils/toaster';
@@ -23,13 +24,11 @@ export default function CloseJobButton({ job, setPageValues, pageValues }) {
       {!closeConfirm ? (
         <BorderBox w={300}>
           <Meta str="Close this job?" />
-          <IconButton
-            color="warning"
-            icon="close"
+          <Divider />
+          <MenuButtonStandard
             title="Close Job"
             onClickEvent={() => setCloseConfirm(true)}
-            styleOverride={{ width: '100%' }}
-            iconPos="right"
+            type="delete"
           />
         </BorderBox>
       ) : (
@@ -43,29 +42,31 @@ export default function CloseJobButton({ job, setPageValues, pageValues }) {
             str="
         Continue?"
           />
+          <Divider />
+
           <Mutation
             mutation={CLOSE_JOB}
             variables={{
               _id: job._id,
             }}
             onCompleted={(data) => {
-              // job.setData({ ...job, submitted: 'closed' });
-              setPageValues({ ...pageValues, primaryPage: 'history' });
+              setPageValues({
+                ...pageValues,
+                primaryPage: 'job_history',
+                jobId: null,
+              });
               toaster('Project Closed');
             }}
           >
             {(mutation) => {
               return (
-                <IconButton
-                  color="warning"
-                  icon="warning"
+                <MenuButtonStandard
                   title="Confirm"
                   onClickEvent={() => {
                     setDeleting(true);
                     mutation();
                   }}
-                  styleOverride={{ width: '100%' }}
-                  iconPos="right"
+                  type="delete"
                 />
               );
             }}

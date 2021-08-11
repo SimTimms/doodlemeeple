@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: 20,
   },
   declined: {
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
   },
   wrapper: {
     margin: 40,

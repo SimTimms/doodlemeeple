@@ -23,10 +23,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   cursorActive: {
     transition: 'all 0.2s ',
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     color: '#fff',
     '&:hover': {
-      background: theme.palette.error.dark,
+      background: theme.palette.primary.light,
     },
   },
 }));

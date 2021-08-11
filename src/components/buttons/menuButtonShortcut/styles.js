@@ -88,20 +88,20 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   active: {
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     color: '#fff',
     '&:hover': {
-      background: theme.palette.error.main,
+      background: theme.palette.primary.main,
     },
   },
   borderSecondary: {
     background: `${theme.palette.secondary.main}`,
   },
   borderWarning: {
-    background: `${theme.palette.error.main}`,
+    background: `${theme.palette.primary.main}`,
   },
   warning: {
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     boxShadow:
       'inset 1px 1px 1px rgba(255,255,255,0.4),inset -1px -1px 1px rgba(0,0,0,0.2)',
   },
@@ -127,7 +127,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '1rem',
   },
   count: {
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     borderRadius: '50%',
     minHeight: 16,
     maxHeight: 16,
@@ -154,4 +154,5 @@ export const useStyles = makeStyles((theme) => ({
   isOff: {
     color: '#222 !important',
   },
+  disabled: { opacity: 0.5 },
 }));

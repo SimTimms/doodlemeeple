@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { IconButton, Column, Row, DividerWithBorder } from '../';
+import { MenuButtonStandard, Column, Row, DividerWithBorder } from '../';
 import clsx from 'clsx';
 import { Mutation } from 'react-apollo';
 import { UPDATE_INVITE } from '../../data/mutations';
@@ -33,15 +33,16 @@ export default function InviteComponent({ invite }) {
     >
       {(mutation) => {
         return (
-          <div
-            style={{ width: '100%', cursor: 'pointer' }}
-            onClick={() => {
-              invite.status === 'unopened' && mutation();
-              isOpen ? setIsOpen(false) : setIsOpen(true);
-            }}
-          >
+          <div style={{ width: '100%', cursor: 'pointer' }}>
             <Column>
-              <Row j="space-between" a="center">
+              <Row
+                j="space-between"
+                a="center"
+                onClick={() => {
+                  invite.status === 'unopened' && mutation();
+                  isOpen ? setIsOpen(false) : setIsOpen(true);
+                }}
+              >
                 <Row a="center" j="flex-start">
                   <div
                     style={{
@@ -82,8 +83,8 @@ export default function InviteComponent({ invite }) {
                     </Typography>
                   </Column>
                 </Row>
-                <IconButton
-                  title={quoted ? 'Quotes' : 'View'}
+                <MenuButtonStandard
+                  title={quoted ? 'Quotes' : isOpen ? 'Hide' : 'Show'}
                   color="primary"
                   icon={
                     completed
@@ -92,7 +93,9 @@ export default function InviteComponent({ invite }) {
                       ? 'local_post_office'
                       : ''
                   }
-                  onClickEvent={() => null}
+                  onClickEvent={() =>
+                    isOpen ? setIsOpen(false) : setIsOpen(true)
+                  }
                 />
               </Row>
               {isOpen && (

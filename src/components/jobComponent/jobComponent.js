@@ -43,22 +43,15 @@ export default function JobComponent({ job }) {
       {(menu) => {
         return (
           <HistoryContext.Consumer>
-            {(history) => (
+            {() => (
               <CardComponent
                 onClickEvent={() => {
-                  draft
-                    ? menu.updateMenuContext({
-                        ...menu.jobPage,
-                        secondaryPage: 'create_job_ad',
-                        primaryPage: 'job_posts',
-                        jobId: job._id,
-                      })
-                    : menu.updateMenuContext({
-                        ...menu.jobPage,
-                        primaryPage: 'job_dashboard',
-                        secondaryPage: 'job_dashboard',
-                        jobId: job._id,
-                      });
+                  menu.updateMenuContext({
+                    ...menu.jobPage,
+                    primaryPage: 'job_dashboard',
+                    secondaryPage: 'job_dashboard',
+                    jobId: job._id,
+                  });
                 }}
                 styleOverride={{
                   maxWidth: 400,

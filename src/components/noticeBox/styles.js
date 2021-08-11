@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   warning: {
     width: '100%',
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     color: '#fff',
     textAlign: 'center',
   },

@@ -31,6 +31,7 @@ export const useStyles = makeStyles((theme) => ({
     minHeight: 26,
     minWidth: 26,
     color: '#fff',
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
   },
+  disabled: { opacity: 0.4 },
 }));

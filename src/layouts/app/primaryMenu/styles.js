@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     zIndex: 2,
   },
   columnActive: {
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     height: '100vh',
   },
   deviceWrapper: {

@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-
 export const sharedStyles = makeStyles((theme) => ({
   card: {
     maxWidth: 512,
@@ -18,7 +17,7 @@ export const sharedStyles = makeStyles((theme) => ({
   pageWrapper: {
     width: '100%',
     height: 'calc(100vh - 122px)',
-    background: theme.palette.primary.main,
+    background: '#ddd',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

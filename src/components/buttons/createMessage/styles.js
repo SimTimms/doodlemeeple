@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
   },
   header: {
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     width: '100%',
     display: 'flex',
     alignItems: 'center',

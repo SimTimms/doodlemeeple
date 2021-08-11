@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     cursor: 'pointer',
     borderRadius: 2,
-    background: theme.palette.secondary.main,
+    background: theme.palette.primary.main,
     boxShadow: '3px 3px 6px rgba(0,0,0,0.2)',
     padding: 5,
     paddingLeft: 20,

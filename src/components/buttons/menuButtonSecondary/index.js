@@ -8,6 +8,7 @@ export default function MenuButtonSecondary({
   active,
   onClickEvent,
   icon,
+  disabled,
 }) {
   const classes = useStyles();
 
@@ -17,6 +18,7 @@ export default function MenuButtonSecondary({
         className={clsx({
           [classes.circle]: true,
           [classes.circleOn]: active,
+          [classes.disabled]: disabled,
         })}
       >
         <Icon className={classes.icon}>{icon}</Icon>

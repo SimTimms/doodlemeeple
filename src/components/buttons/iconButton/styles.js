@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     color: '#fff',
     '&:hover': {
-      background: theme.palette.error.main,
+      background: theme.palette.primary.main,
     },
     '&:visited': {
       background: 'red',
@@ -106,7 +106,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   iconButtonTextError: {
     background: 'rgba(0,0,0,0)',
-    color: theme.palette.error.main,
+    color: theme.palette.primary.main,
     border: 'none',
     boxShadow: 'none',
     justifyContent: 'center',
@@ -118,7 +118,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   iconButtonWarning: {
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     '&:hover': {
       background: theme.palette.error.dark,
     },
@@ -159,7 +159,7 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   iconButtonIconTextError: {
-    color: theme.palette.error.main,
+    color: theme.palette.primary.main,
   },
 
   iconRight: { marginLeft: 10 },

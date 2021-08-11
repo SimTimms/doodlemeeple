@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   top: { top: 0, borderRadius: '0 0 0 5px' },
   favIcon: {
-    color: theme.palette.error.main,
+    color: theme.palette.primary.main,
   },
   favIconDark: { color: '#ccc' },
   actionText: {

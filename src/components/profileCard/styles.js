@@ -81,7 +81,7 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   favIcon: {
-    color: theme.palette.error.main,
+    color: theme.palette.primary.main,
   },
   countIcon: { color: theme.palette.primary.main },
   favIconBad: {

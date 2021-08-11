@@ -14,12 +14,12 @@ export default function communityMenu(onClickEvent) {
       link: () => onClickEvent('profiles'),
       count: null,
     },
-    {
+    /*{
       name: 'Blog',
       icon: 'blog',
       machineName: 'blog',
       link: () => onClickEvent('blog'),
       count: null,
-    },
+    },*/
   ];
 }

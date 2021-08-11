@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: 500,
     position: 'relative',
   },
-  notify: { marginTop: 10, color: theme.palette.error.main },
+  notify: { marginTop: 10, color: theme.palette.primary.main },
   imageThumb: {
     height: 54,
     width: '20%',

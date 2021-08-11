@@ -4,7 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
-  warning: { color: theme.palette.error.main },
+  warning: { color: theme.palette.primary.main },
   alignLeft: {
     fontWeight: 900,
     marginRight: 10,

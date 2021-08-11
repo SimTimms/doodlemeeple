@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import AppDashboard from './views/appDashboard';
 import TaskDashboard from './views/taskDashboard';
 import HomePage from './views/homePage';
 import WorkPage from './views/workPage';
+import JobPage from './views/jobPage';
 import NotificationDashboard from './views/notificationDashboard';
 import AppInvites from './views/inviteDashboard';
 import AppHelp from './views/appHelp';
@@ -22,7 +23,6 @@ import {
   AppViewQuoteJob,
   AppViewJobPublic,
 } from './views/job';
-import NewJobDashboard from './views/job/workDashboard/newJobDashboard';
 import UpdateJobDashboard from './views/job/workDashboard/updateJobDashboard';
 import { EditQuote } from '../../modules/quotes';
 import { EditContract } from './views/contract';
@@ -148,10 +148,6 @@ export default function AppLayout(props) {
                   <ProjectSubmitted history={history} />
                 ) : page === 'projects' ? (
                   <WorkDashboard history={history} tab={pathParam} />
-                ) : page === 'new-job-post' ? (
-                  <CreativeContext.Provider value={pathParam}>
-                    <NewJobDashboard />
-                  </CreativeContext.Provider>
                 ) : page === 'update-job' ? (
                   <CreativeContext.Provider>
                     <UpdateJobDashboard jobId={pathParam} />
@@ -206,8 +202,6 @@ export default function AppLayout(props) {
                   </Query>
                 ) : page === 'view-quote-job' ? (
                   <AppViewQuoteJob jobId={pathParam} history={history} />
-                ) : page === 'contract' ? (
-                  <JobDashboard jobId={pathParam} history={history} />
                 ) : page === 'view-public-job' ? (
                   <AppViewJobPublic jobId={pathParam} history={history} />
                 ) : page === 'job-board' ? (
@@ -229,6 +223,8 @@ export default function AppLayout(props) {
                   <HomePage />
                 ) : page === 'work' ? (
                   <WorkPage />
+                ) : page === 'jobs' ? (
+                  <JobPage />
                 ) : page === 'public-preview' ? (
                   <PreviewProfile
                     profileId={pathParam}

@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
     height: '100%',
     width: '100%',
     minWidth: 0,
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     padding: 0,
     borderRadius: 0,
     color: '#fff',
@@ -57,7 +57,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundPosition: 'center',
   },
   count: {
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     borderRadius: '50%',
     minHeight: 16,
     maxHeight: 16,

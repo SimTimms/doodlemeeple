@@ -33,49 +33,34 @@ export default function CommunityPage() {
               <FeaturedCreativeHomeWidget />
             </Row>
           </Column>
-
           <Column a="flex-start">
             <Typography className={classes.subTitle}>
-              Latest Profiles
+              Recent Additions
             </Typography>
             <LatestCreativesWidget history={history} dashboard={true} />
           </Column>
-          <DividerWithBorder />
-          <Column>
-            <DividerMini />
-            <Typography>Jobs</Typography>
-            <DividerMini />
+          <Column a="flex-start">
+            <Typography className={classes.subTitle}>Job Posts</Typography>
             <JobBoardMiniWidget history={history} dashboard={true} />
           </Column>
-          <DividerWithBorder />
-          <Column>
-            <DividerMini />
-            <Typography>Kickstarters</Typography>
-            <DividerMini />
+          <Column a="flex-start">
+            <Typography className={classes.subTitle}>
+              Kickstarter Ads
+            </Typography>
             <FeaturedKickstarters history={history} dashboard={true} />
           </Column>
-          <DividerWithBorder />
-          <Column w={500}>
-            <DividerMini />
-            <Typography>Patreon</Typography>
-            <DividerMini />
-            <CardComponent
-              styleOverride={{
-                boxShadow: '5px 5px 10px rgba(0,0,0,0.1)',
-                marginTop: 10,
-              }}
-            >
-              <Typography variant="h6">Support us on Patreon</Typography>
-              <DividerMini />
-              <a href={process.env.REACT_APP_PATREON_LINK}>
-                <img
-                  src={process.env.REACT_APP_PATREON}
-                  style={{ width: '100%' }}
-                  alt=""
-                />
-              </a>
-            </CardComponent>
+          {/*
+          <Column a="flex-start">
+            <Typography className={classes.subTitle}>Patreon</Typography>
+            <a href={process.env.REACT_APP_PATREON_LINK}>
+              <img
+                src={process.env.REACT_APP_PATREON}
+                style={{ width: '100%' }}
+                alt=""
+              />
+            </a>
           </Column>
+          */}
         </Row>
       )}
     </HistoryContext.Consumer>

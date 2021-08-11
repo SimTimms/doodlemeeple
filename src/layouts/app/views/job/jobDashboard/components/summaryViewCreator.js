@@ -13,7 +13,6 @@ import { ChatViewByJob } from '../../../../../../modules/chat';
 import CreatorJobSummary from './creatorJobSummary';
 import CloseJobView from '../components/closeJobView';
 import CloseJobButton from './closeJobButton';
-
 import ProjectDash from '../../../../../../modules/dashboards';
 import { OPEN_JOB } from './data';
 import { Mutation } from 'react-apollo';
@@ -56,6 +55,7 @@ export default function SummaryViewCreator({
               job={jobData}
               setTabNbr={setTabNbr}
             />
+
             {jobData.submitted === 'closed' ? (
               <Mutation
                 mutation={OPEN_JOB}

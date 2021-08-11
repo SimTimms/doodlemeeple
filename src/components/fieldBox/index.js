@@ -18,6 +18,7 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
     width,
     type,
     icon,
+    password,
   } = props;
   value = value ? value : '';
   return (

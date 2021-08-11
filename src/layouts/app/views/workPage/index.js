@@ -1,21 +1,16 @@
 import React from 'react';
 import { TabPage } from '../../../../components';
 import { HistoryContext } from '../../../../context';
-import {
-  workMenu,
-  workMenuSecondary,
-  jobDashboardSecondary,
-} from '../../../menuArray';
-import { QuoteOutWidget, UpdateJob } from '../../../../widgets';
+import { workMenu } from '../../../menuArray';
 import { MenuContext } from '../../../../context';
-import JobPostsPage from './jobPostsPage';
-import JobDashboardPage from './jobDashboardPage';
-import JobHistory from '../job/workDashboard/jobHistory';
+import WorkHistory from './workHistory';
+import InviteDashboard from '../inviteDashboard';
+import MyWorkDashboard from '../myWorkDashboard';
 
 export default function WorkPage() {
   const [pageValues, setPageValues] = React.useState({
-    primaryPage: 'job_posts',
-    secondaryPage: 'job_ads',
+    primaryPage: 'invites',
+    secondaryPage: null,
     jobId: null,
   });
 
@@ -35,33 +30,22 @@ export default function WorkPage() {
           <TabPage
             title={null}
             primaryMenu={workMenu(pageValues, setPageValues)}
-            secondaryMenu={
-              pageValues.primaryPage === 'job_posts'
-                ? workMenuSecondary(pageValues, setPageValues)
-                : pageValues.primaryPage === 'job_dashboard' &&
-                  jobDashboardSecondary(pageValues, setPageValues)
-            }
+            secondaryMenu={null}
             menu={null}
             activePrimary={pageValues.primaryPage}
             activeSecondary={pageValues.secondaryPage}
           >
-            {pageValues.primaryPage === 'job_dashboard' ? (
-              <JobDashboardPage
-                pageValues={pageValues}
-                setPageValues={setPageValues}
-              />
-            ) : pageValues.primaryPage === 'job_posts' ? (
-              <JobPostsPage
-                pageValues={pageValues}
-                setPageValues={setPageValues}
-              />
-            ) : pageValues.primaryPage === 'history' ? (
-              <JobHistory
-                pageValues={pageValues}
-                setPageValues={setPageValues}
-              />
+            {pageValues.primaryPage === 'invites' ? (
+              <InviteDashboard />
+            ) : pageValues.primaryPage === 'my_work' ? (
+              <MyWorkDashboard />
             ) : (
-              <UpdateJob jobId={pageValues.jobId} />
+              pageValues.primaryPage === 'history' && (
+                <WorkHistory
+                  pageValues={pageValues}
+                  setPageValues={setPageValues}
+                />
+              )
             )}
           </TabPage>
         )}

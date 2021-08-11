@@ -60,7 +60,7 @@ export const useStyles = makeStyles((theme) => ({
     border: `1px solid ${theme.palette.primary.light}`,
   },
   favIcon: {
-    color: theme.palette.error.main,
+    color: theme.palette.primary.main,
     fontSize: 16,
     padding: 10,
     paddingTop: 3,

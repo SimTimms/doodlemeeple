@@ -66,8 +66,8 @@ export const useStyles = makeStyles((theme) => ({
     border: `2px solid ${theme.palette.secondary.main}`,
   },
   notificationBad: {
-    background: theme.palette.error.main,
-    border: `2px solid ${theme.palette.error.main}`,
+    background: theme.palette.primary.main,
+    border: `2px solid ${theme.palette.primary.main}`,
   },
   notificationProfile: {
     background: theme.palette.secondary.main,

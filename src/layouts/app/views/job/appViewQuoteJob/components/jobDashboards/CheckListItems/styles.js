@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
   },
   dull: { background: '#efeff5', color: '#444', boxShadow: 'none' },
-  red: { background: theme.palette.error.main },
+  red: { background: theme.palette.primary.main },
   amber: { background: theme.palette.warning.main },
   green: { background: theme.palette.secondary.main },
   primary: { background: theme.palette.primary.main },

@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme) => {
       minHeight: 32,
       maxHeight: 32,
       borderRadius: '50%',
-      background: theme.palette.error.main,
+      background: theme.palette.primary.main,
     },
     deleteButtonConfirmYes: {
       marginLeft: 5,
@@ -28,7 +28,7 @@ export const useStyles = makeStyles((theme) => {
       minHeight: 32,
       maxHeight: 32,
       borderRadius: '5px 0 0 5px',
-      background: theme.palette.error.main,
+      background: theme.palette.primary.main,
       color: '#fff',
       display: 'flex',
       flexDirection: 'row',

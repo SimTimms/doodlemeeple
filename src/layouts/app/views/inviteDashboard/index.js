@@ -46,14 +46,7 @@ export default function InviteDashboard({ history, setTabNbr }) {
           query={INVITES}
           fetchPolicy="network-only"
           variables={{
-            status: [
-              'unopened',
-              'read',
-              'quote_sent',
-              'draft',
-              'accepted',
-              'complete',
-            ],
+            status: ['unopened', 'read', 'draft'],
           }}
           onCompleted={(data) => {
             setInviteArray(data.invitesByUser);

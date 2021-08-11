@@ -96,10 +96,10 @@ export const useStyles = makeStyles((theme) => ({
     background: `${theme.palette.secondary.main}`,
   },
   borderWarning: {
-    background: `${theme.palette.error.main}`,
+    background: `${theme.palette.primary.main}`,
   },
   warning: {
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     boxShadow:
       'inset 1px 1px 1px rgba(255,255,255,0.4),inset -1px -1px 1px rgba(0,0,0,0.2)',
   },
@@ -125,7 +125,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
   },
   count: {
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     borderRadius: '50%',
     minHeight: 16,
     maxHeight: 16,

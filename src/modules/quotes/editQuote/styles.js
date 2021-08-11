@@ -91,5 +91,5 @@ export const useStyles = makeStyles((theme) => ({
     height: 300,
     padding: 10,
   },
-  error: { background: theme.palette.error.main, color: '#fff', padding: 5 },
+  error: { background: theme.palette.primary.main, color: '#fff', padding: 5 },
 }));

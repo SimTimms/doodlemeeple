@@ -5,13 +5,11 @@ export const styles = makeStyles({
     display: 'flex',
     flexAlign: 'center',
     justifyContent: 'center',
-    background: '#efeff5',
   },
   contentMobile: {
     marginTop: 0,
     display: 'flex',
     flexAlign: 'center',
     justifyContent: 'center',
-    background: '#efeff5',
   },
 });

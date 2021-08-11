@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
-export const JOB_HISTORY = gql`
-  query jobHistory {
-    jobHistory {
+export const WORK_HISTORY = gql`
+  query workHistory {
+    workHistory {
       _id
       name
       genre

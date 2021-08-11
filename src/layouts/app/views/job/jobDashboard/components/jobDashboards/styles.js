@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   mobile: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
   dull: { color: '#ddd', boxShadow: 'none' },
-  red: { color: theme.palette.error.main },
+  red: { color: theme.palette.primary.main },
   amber: { color: theme.palette.warning.main },
   green: { color: theme.palette.secondary.main },
   status: {
@@ -33,6 +33,6 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
   },
   statusRed: {
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
   },
 }));

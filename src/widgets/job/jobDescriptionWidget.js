@@ -1,6 +1,12 @@
 import React from 'react';
 import JobDescription from './jobDescription';
-import { Row, Column, IconButton, CardComponent } from '../../components';
+import {
+  Row,
+  Column,
+  CardComponent,
+  MenuButtonStandard,
+  Divider,
+} from '../../components';
 import { Mutation, Query } from 'react-apollo';
 import {
   DECLINE_INVITE,
@@ -42,7 +48,7 @@ export default function JobDescriptionWidget({ jobId, ...props }) {
                           {({ data }) => {
                             return data && data.jobContract ? (
                               <Column>
-                                <IconButton
+                                <MenuButtonStandard
                                   disabled={false}
                                   color="warning"
                                   title={'Edit Quote'}
@@ -73,7 +79,7 @@ export default function JobDescriptionWidget({ jobId, ...props }) {
                                 {(mutation) => {
                                   return (
                                     <Column>
-                                      <IconButton
+                                      <MenuButtonStandard
                                         disabled={false}
                                         color="warning"
                                         title={'Create a Quote'}
@@ -82,6 +88,7 @@ export default function JobDescriptionWidget({ jobId, ...props }) {
                                           mutation();
                                         }}
                                       />
+                                      <Divider />
                                       {!job.isPublic && (
                                         <Mutation
                                           mutation={DECLINE_INVITE}
@@ -97,14 +104,12 @@ export default function JobDescriptionWidget({ jobId, ...props }) {
                                         >
                                           {(declineInvite) => {
                                             return (
-                                              <IconButton
-                                                disabled={false}
-                                                color="grey"
+                                              <MenuButtonStandard
                                                 title={'Decline Invite'}
-                                                icon="fact_check"
                                                 onClickEvent={() => {
                                                   declineInvite();
                                                 }}
+                                                type="delete"
                                               />
                                             );
                                           }}

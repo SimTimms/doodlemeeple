@@ -9,7 +9,7 @@ import NewJobName from './components/newJobName';
 import { initialState } from './initialState';
 import { HistoryContext } from '../../context';
 
-export default function CreateJob({ pageValues }) {
+export default function CreateJob({ pageValues, setPageValues }) {
   const classes = useStyles();
   const [job, setJob] = React.useState(initialState);
 
@@ -32,7 +32,12 @@ export default function CreateJob({ pageValues }) {
                 }}
                 onCompleted={(data) => {
                   toaster('Saved');
-                  history.push(`/app/update-job/${data.jobCreateOne.recordId}`);
+                  setPageValues({
+                    ...pageValues,
+                    jobId: data.jobCreateOne.recordId,
+                    primaryPage: 'job_dashboard',
+                    secondaryPage: 'edit_job',
+                  });
                 }}
               >
                 {(mutation) => {

@@ -13,7 +13,7 @@ export const useStyles = makeStyles((theme) => ({
     margin: 3,
   },
   active: {
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     borderRadius: 2,
     boxShadow: '3px 3px 6px rgba(0,0,0,0.2)',
     color: '#fff',

@@ -47,6 +47,6 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: 6,
     fontSize: 12,
     textDecoration: 'none',
-    color: theme.palette.error.main,
+    color: theme.palette.primary.main,
   },
 }));

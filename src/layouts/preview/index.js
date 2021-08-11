@@ -4,7 +4,9 @@ import { Content, IconButton, Column } from '../../components';
 
 function PreviewLayout(props) {
   const pathParam = props
-    ? props.match
+    ? props.profileId
+      ? props.profileId
+      : props.match
       ? props.match.params.pathParam
         ? props.match.params.pathParam
         : null
