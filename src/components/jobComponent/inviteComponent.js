@@ -8,7 +8,7 @@ import { UPDATE_INVITE } from '../../data/mutations';
 import { nameShortener } from '../../utils';
 import { JobDescriptionWidget } from '../../widgets';
 
-export default function InviteComponent({ invite }) {
+export default function InviteComponent({ invite, onClickEvent }) {
   const classes = useStyles();
   const declined = invite.status === 'declined';
   const unopened = invite.status === 'unopened';
@@ -21,9 +21,7 @@ export default function InviteComponent({ invite }) {
   const completed = inviteJob ? inviteJob.submitted === 'complete' : false;
   const [isOpen, setIsOpen] = React.useState(false);
 
-  return !inviteJob ? (
-    <Typography>Deleted</Typography>
-  ) : (
+  return !inviteJob ? null : (
     <Mutation
       mutation={UPDATE_INVITE}
       variables={{
@@ -93,9 +91,7 @@ export default function InviteComponent({ invite }) {
                       ? 'local_post_office'
                       : ''
                   }
-                  onClickEvent={() =>
-                    isOpen ? setIsOpen(false) : setIsOpen(true)
-                  }
+                  onClickEvent={() => onClickEvent()}
                 />
               </Row>
               {isOpen && (

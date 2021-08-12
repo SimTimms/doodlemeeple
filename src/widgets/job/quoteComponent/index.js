@@ -1,10 +1,16 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { MenuButtonShortcut, Column, Row, Paper } from '../../../components';
+import {
+  MenuButtonShortcut,
+  MenuButtonStandard,
+  Column,
+  Row,
+  Paper,
+} from '../../../components';
 import clsx from 'clsx';
 
-export default function QuoteComponent({ contract, history }) {
+export default function QuoteComponent({ contract, onClickEvent }) {
   const classes = useStyles();
   const accepted = contract.status === 'accepted';
   const declined = contract.status === 'declined';
@@ -24,9 +30,7 @@ export default function QuoteComponent({ contract, history }) {
             <Column a="flex-start">
               <Typography
                 style={{ fontSize: 12, cursor: 'pointer' }}
-                onClick={() =>
-                  history.push(`/app/job-description/${contract.job._id}`)
-                }
+                onClick={() => onClickEvent()}
               >
                 {`Quote for ${contract.job.name}`}
               </Typography>
@@ -42,19 +46,11 @@ export default function QuoteComponent({ contract, history }) {
             </Column>
           </Row>
           {!accepted && !declined ? (
-            <MenuButtonShortcut
-              text={{
-                name: 'Edit',
-                color: 'light',
-                icon: 'edit',
-                count: 0,
-                back: 'primary',
-              }}
+            <MenuButtonStandard
+              title="Edit"
               onClickEvent={() => {
-                history.push(`/app/edit-quote/${contract._id}`);
+                onClickEvent();
               }}
-              active={false}
-              countIcon="star"
             />
           ) : (
             <MenuButtonShortcut
@@ -66,7 +62,7 @@ export default function QuoteComponent({ contract, history }) {
                 back: 'primary',
               }}
               onClickEvent={() => {
-                history.push(`/app/view-quote-job/${contract.job._id}`);
+                onClickEvent();
               }}
               active={false}
               countIcon="star"

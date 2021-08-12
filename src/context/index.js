@@ -10,7 +10,12 @@ export const UserContext = React.createContext({
 });
 
 export const MenuContext = React.createContext({
-  jobPage: { primaryPage: null, secondaryPage: null, jobId: null },
+  jobPage: {
+    primaryPage: null,
+    secondaryPage: null,
+    jobId: null,
+    inviteId: null,
+  },
   updateMenuContext: { secondary: () => {}, primary: () => {} },
 });
 

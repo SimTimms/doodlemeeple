@@ -1,7 +1,11 @@
 import React from 'react';
 import { TabPage } from '../../../../components';
 import { HistoryContext } from '../../../../context';
-import { workMenu } from '../../../menuArray';
+import {
+  workMenu,
+  workMenuSecondary,
+  inviteMenuSecondary,
+} from '../../../menuArray';
 import { MenuContext } from '../../../../context';
 import WorkHistory from './workHistory';
 import InviteDashboard from '../inviteDashboard';
@@ -10,8 +14,9 @@ import MyWorkDashboard from '../myWorkDashboard';
 export default function WorkPage() {
   const [pageValues, setPageValues] = React.useState({
     primaryPage: 'invites',
-    secondaryPage: null,
+    secondaryPage: 'invite_list',
     jobId: null,
+    inviteId: null,
   });
 
   return (
@@ -21,6 +26,7 @@ export default function WorkPage() {
           primaryPage: pageValues.primaryPage,
           secondaryPage: pageValues.secondaryPage,
           jobId: pageValues.jobId,
+          inviteId: pageValues.inviteId,
         },
         updateMenuContext: setPageValues,
       }}
@@ -30,7 +36,12 @@ export default function WorkPage() {
           <TabPage
             title={null}
             primaryMenu={workMenu(pageValues, setPageValues)}
-            secondaryMenu={null}
+            secondaryMenu={
+              pageValues.primaryPage === 'my_work'
+                ? workMenuSecondary(pageValues, setPageValues)
+                : pageValues.primaryPage === 'invites' &&
+                  inviteMenuSecondary(pageValues, setPageValues)
+            }
             menu={null}
             activePrimary={pageValues.primaryPage}
             activeSecondary={pageValues.secondaryPage}
@@ -38,7 +49,10 @@ export default function WorkPage() {
             {pageValues.primaryPage === 'invites' ? (
               <InviteDashboard />
             ) : pageValues.primaryPage === 'my_work' ? (
-              <MyWorkDashboard />
+              <MyWorkDashboard
+                pageValues={pageValues}
+                setPageValues={setPageValues}
+              />
             ) : (
               pageValues.primaryPage === 'history' && (
                 <WorkHistory

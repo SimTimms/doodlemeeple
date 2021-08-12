@@ -10,7 +10,10 @@ import messageMenu from './messageMenu';
 import workMenuSecondary from './workMenuSecondary';
 import jobDashboardSecondary from './jobDashboardSecondary';
 import profileMenu from './profileMenu';
+import inviteMenuSecondary from './inviteMenuSecondary';
+
 export {
+  inviteMenuSecondary,
   mainMenu,
   gameMenu,
   messageMenu,
