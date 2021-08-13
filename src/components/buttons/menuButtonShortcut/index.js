@@ -20,6 +20,7 @@ export default function MenuButtonShortcut({ text, ...props }) {
     iconPos,
     styleOverride,
     disabled,
+    count,
   } = props;
   const isLeft = !iconPos || iconPos === 'left';
 
@@ -47,23 +48,21 @@ export default function MenuButtonShortcut({ text, ...props }) {
           [classes.disabled]: disabled,
         })}
       >
-        {isLeft && imageIcon ? (
-          <MenuButtonImage imageIcon={imageIcon} text={text} />
-        ) : (
-          isLeft && text.icon && <MenuButtonIcon text={text} active={active} />
-        )}
-        <Row
-          j={
-            text.count > 0 ? 'space-between' : column ? 'center' : 'flex-start'
-          }
-          w="100%"
-        >
+        <Row>
+          {isLeft && imageIcon ? (
+            <MenuButtonImage imageIcon={imageIcon} text={text} />
+          ) : (
+            isLeft &&
+            text.icon && <MenuButtonIcon text={text} active={active} />
+          )}
           {text.count > 0 &&
             (!countIcon ? (
               <Typography className={classes.count}>{text.count}</Typography>
             ) : (
               <Icon className={classes.count}>{countIcon}</Icon>
             ))}
+        </Row>
+        <Row j={'center'} w="100%">
           <Typography
             className={clsx({
               [classes.buttonText]: true,

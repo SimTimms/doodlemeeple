@@ -67,7 +67,7 @@ export default function mainMenu(history, counts, onClickEvent) {
       icon: 'work',
       machineName: 'work',
       link: () => history.push('/app/work'),
-      count: { icon: 'star', count: counts.quotes },
+      count: { icon: 'star', count: counts.invites },
     },
     {
       name: 'Messages',

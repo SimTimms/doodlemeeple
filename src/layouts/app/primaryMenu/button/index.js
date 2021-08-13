@@ -4,7 +4,8 @@ import { Row } from '../../../../components';
 import { Icon, Typography } from '@material-ui/core';
 
 export default function Button({ menuItem, isActive }) {
-  const { name, icon, link, image } = menuItem;
+  console.log(menuItem);
+  const { name, icon, link, image, count } = menuItem;
   const classes = useStyles();
   return (
     <Row
@@ -19,6 +20,11 @@ export default function Button({ menuItem, isActive }) {
         <Icon className={classes.icon}>{icon}</Icon>
       )}
       <Typography className={classes.title}>{name}</Typography>
+      {count && count.count > 0 && (
+        <div className={classes.countIcon}>
+          <Typography>{count && count.count}</Typography>
+        </div>
+      )}
     </Row>
   );
 }

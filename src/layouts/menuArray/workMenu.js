@@ -9,6 +9,7 @@ export default function workMenu(pageValues, onClickEvent) {
           ...pageValues,
           primaryPage: 'invites',
           secondaryPage: 'invite_list',
+          jobId: null,
         }),
       count: null,
     },
@@ -21,6 +22,7 @@ export default function workMenu(pageValues, onClickEvent) {
           ...pageValues,
           primaryPage: 'quotes',
           secondaryPage: 'quote_list',
+          jobId: null,
         }),
       count: null,
     },
@@ -33,6 +35,7 @@ export default function workMenu(pageValues, onClickEvent) {
           ...pageValues,
           primaryPage: 'my_work',
           secondaryPage: 'active_work',
+          jobId: null,
         }),
     },
     {

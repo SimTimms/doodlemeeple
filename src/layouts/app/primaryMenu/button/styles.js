@@ -29,4 +29,16 @@ export const useStyles = makeStyles((theme) => ({
       background: theme.palette.primary.light,
     },
   },
+  countIcon: {
+    borderRadius: 2,
+    background: theme.palette.secondary.main,
+    width: 20,
+    height: 20,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 'auto',
+    marginRight: 10,
+    color: theme.palette.primary.dark,
+  },
 }));

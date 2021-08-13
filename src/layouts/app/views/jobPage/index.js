@@ -1,6 +1,6 @@
 import React from 'react';
 import { TabPage } from '../../../../components';
-import { HistoryContext } from '../../../../context';
+import { HistoryContext, CountContext } from '../../../../context';
 import {
   jobMenu,
   jobMenuSecondary,
@@ -30,48 +30,54 @@ export default function JobPage() {
         updateMenuContext: setPageValues,
       }}
     >
-      <HistoryContext.Consumer>
-        {(history) => (
-          <TabPage
-            title={null}
-            primaryMenu={jobMenu(pageValues, setPageValues)}
-            secondaryMenu={
-              pageValues.primaryPage === 'job_posts'
-                ? jobMenuSecondary(pageValues, setPageValues)
-                : pageValues.primaryPage === 'job_dashboard' &&
-                  jobDashboardSecondary(pageValues, setPageValues)
-            }
-            menu={null}
-            activePrimary={pageValues.primaryPage}
-            activeSecondary={pageValues.secondaryPage}
-          >
-            {pageValues.primaryPage === 'job_dashboard' ? (
-              <JobDashboardPage
-                pageValues={pageValues}
-                setPageValues={setPageValues}
-              />
-            ) : pageValues.primaryPage === 'job_board' ? (
-              <JobBoardWidget />
-            ) : pageValues.primaryPage === 'job_posts' &&
-              pageValues.secondaryPage === 'job_ads' ? (
-              <JobPosts />
-            ) : pageValues.primaryPage === 'job_posts' &&
-              pageValues.secondaryPage === 'create_job_ad' ? (
-              <CreateJob
-                pageValues={pageValues}
-                setPageValues={setPageValues}
-              />
-            ) : (
-              pageValues.primaryPage === 'job_history' && (
-                <JobHistory
-                  pageValues={pageValues}
-                  setPageValues={setPageValues}
-                />
-              )
-            )}
-          </TabPage>
-        )}
-      </HistoryContext.Consumer>
+      <CountContext.Consumer>
+        {(counts) => {
+          return (
+            <HistoryContext.Consumer>
+              {(history) => (
+                <TabPage
+                  title={null}
+                  primaryMenu={jobMenu(counts, pageValues, setPageValues)}
+                  secondaryMenu={
+                    pageValues.primaryPage === 'job_posts'
+                      ? jobMenuSecondary(pageValues, setPageValues)
+                      : pageValues.primaryPage === 'job_dashboard' &&
+                        jobDashboardSecondary(pageValues, setPageValues)
+                  }
+                  menu={null}
+                  activePrimary={pageValues.primaryPage}
+                  activeSecondary={pageValues.secondaryPage}
+                >
+                  {pageValues.primaryPage === 'job_dashboard' ? (
+                    <JobDashboardPage
+                      pageValues={pageValues}
+                      setPageValues={setPageValues}
+                    />
+                  ) : pageValues.primaryPage === 'job_board' ? (
+                    <JobBoardWidget />
+                  ) : pageValues.primaryPage === 'job_posts' &&
+                    pageValues.secondaryPage === 'job_ads' ? (
+                    <JobPosts />
+                  ) : pageValues.primaryPage === 'job_posts' &&
+                    pageValues.secondaryPage === 'create_job_ad' ? (
+                    <CreateJob
+                      pageValues={pageValues}
+                      setPageValues={setPageValues}
+                    />
+                  ) : (
+                    pageValues.primaryPage === 'job_history' && (
+                      <JobHistory
+                        pageValues={pageValues}
+                        setPageValues={setPageValues}
+                      />
+                    )
+                  )}
+                </TabPage>
+              )}
+            </HistoryContext.Consumer>
+          );
+        }}
+      </CountContext.Consumer>
     </MenuContext.Provider>
   );
 }
