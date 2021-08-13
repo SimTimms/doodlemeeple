@@ -41,9 +41,7 @@ export default function WorkDashboard({ history, tab }) {
           <UpdateJob jobId={'new'} history={history} />
         </TabPage>
       )}
-      {tabNbr === 3 && (
-        <InviteDashboard history={history} setTabNbr={setTabNbr} />
-      )}
+
       {tabNbr === 4 && <QuoteOutWidget history={history} />}
     </div>
   );

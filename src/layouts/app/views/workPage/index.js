@@ -5,10 +5,12 @@ import {
   workMenu,
   workMenuSecondary,
   inviteMenuSecondary,
+  quoteMenuSecondary,
 } from '../../../menuArray';
 import { MenuContext } from '../../../../context';
 import WorkHistory from './workHistory';
 import InviteDashboard from '../inviteDashboard';
+import QuoteDashboard from '../quoteDashboard';
 import MyWorkDashboard from '../myWorkDashboard';
 
 export default function WorkPage() {
@@ -17,6 +19,7 @@ export default function WorkPage() {
     secondaryPage: 'invite_list',
     jobId: null,
     inviteId: null,
+    contractId: null,
   });
 
   return (
@@ -27,6 +30,7 @@ export default function WorkPage() {
           secondaryPage: pageValues.secondaryPage,
           jobId: pageValues.jobId,
           inviteId: pageValues.inviteId,
+          contractId: pageValues.contractId,
         },
         updateMenuContext: setPageValues,
       }}
@@ -39,8 +43,10 @@ export default function WorkPage() {
             secondaryMenu={
               pageValues.primaryPage === 'my_work'
                 ? workMenuSecondary(pageValues, setPageValues)
-                : pageValues.primaryPage === 'invites' &&
-                  inviteMenuSecondary(pageValues, setPageValues)
+                : pageValues.primaryPage === 'invites'
+                ? inviteMenuSecondary(pageValues, setPageValues)
+                : pageValues.primaryPage === 'quotes' &&
+                  quoteMenuSecondary(pageValues, setPageValues)
             }
             menu={null}
             activePrimary={pageValues.primaryPage}
@@ -48,6 +54,8 @@ export default function WorkPage() {
           >
             {pageValues.primaryPage === 'invites' ? (
               <InviteDashboard />
+            ) : pageValues.primaryPage === 'quotes' ? (
+              <QuoteDashboard />
             ) : pageValues.primaryPage === 'my_work' ? (
               <MyWorkDashboard
                 pageValues={pageValues}

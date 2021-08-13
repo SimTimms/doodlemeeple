@@ -20,7 +20,7 @@ export default function NoticeBoardSecondary({
 }) {
   const { backEvent } = props;
   return (
-    <Column p="10px 10px 0 10px" m={'10px 0 40px 0'}>
+    <Column p="10px 10px 0 10px">
       <CardComponent
         styleOverride={{ maxWidth: 800, marginLeft: 10, marginRight: 10 }}
       >
@@ -44,6 +44,7 @@ export default function NoticeBoardSecondary({
                     color="primary"
                     onClickEvent={() => onClickEvent()}
                   />
+                  <DividerMini />
                 </div>
               </Slide>
             )

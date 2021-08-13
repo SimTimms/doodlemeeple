@@ -1,27 +1,27 @@
-export default function inviteMenuSecondary(pageValues, onClickEvent) {
+export default function quoteMenuSecondary(pageValues, onClickEvent) {
   return [
     {
-      name: 'Invite List',
+      name: 'Quote List',
       icon: 'local_activity',
-      machineName: 'invite_list',
+      machineName: 'quote_list',
       link: () =>
         onClickEvent({
           ...pageValues,
-          secondaryPage: 'invite_list',
+          secondaryPage: 'quote_list',
           jobId: null,
           inviteId: null,
         }),
       count: null,
     },
-    pageValues.inviteId
+    pageValues.contractId
       ? {
-          name: 'Viewing Invite',
+          name: 'Editing Quote',
           icon: 'local_activity',
-          machineName: 'view_invite',
+          machineName: 'view_quote',
           link: () =>
             onClickEvent({
               ...pageValues,
-              secondaryPage: 'view_invite',
+              secondaryPage: 'view_quote',
               jobId: null,
               inviteId: null,
             }),
@@ -30,7 +30,7 @@ export default function inviteMenuSecondary(pageValues, onClickEvent) {
       : {
           name: 'Locked',
           icon: 'lock',
-          machineName: 'view_invite',
+          machineName: 'view_quote',
           link: () => null,
           count: null,
           disabled: true,

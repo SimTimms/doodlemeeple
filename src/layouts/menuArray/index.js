@@ -11,8 +11,10 @@ import workMenuSecondary from './workMenuSecondary';
 import jobDashboardSecondary from './jobDashboardSecondary';
 import profileMenu from './profileMenu';
 import inviteMenuSecondary from './inviteMenuSecondary';
+import quoteMenuSecondary from './quoteMenuSecondary';
 
 export {
+  quoteMenuSecondary,
   inviteMenuSecondary,
   mainMenu,
   gameMenu,

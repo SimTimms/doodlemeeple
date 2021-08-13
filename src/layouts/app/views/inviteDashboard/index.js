@@ -17,9 +17,6 @@ export default function InviteDashboard({ history }) {
             {menu.jobPage.secondaryPage === 'invite_list' && (
               <InviteListPage history={history} menu={menu} />
             )}
-            {menu.jobPage.secondaryPage === 'quotes' && (
-              <QuoteListPage menu={menu} />
-            )}
             {menu.jobPage.secondaryPage === 'view_invite' && (
               <JobDescriptionWidget jobId={menu.jobPage.jobId} />
             )}

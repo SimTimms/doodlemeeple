@@ -7,16 +7,16 @@ export default function JobHistory() {
   return (
     <Query query={JOB_HISTORY} fetchPolicy="network-only">
       {({ data }) => {
-        const workHistory = data
-          ? data.workHistory.map((work, index) => {
+        const jobHistory = data
+          ? data.jobHistory.map((work, index) => {
               return <JobComponent key={`work_${index}`} job={work} />;
             })
           : null;
 
-        return workHistory ? (
+        return jobHistory ? (
           <Column a="center" j="flex-start">
             <Divider />
-            {workHistory}
+            {jobHistory}
           </Column>
         ) : null;
       }}
