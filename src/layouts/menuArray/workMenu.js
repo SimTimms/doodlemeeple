@@ -32,7 +32,7 @@ export default function workMenu(pageValues, onClickEvent) {
         onClickEvent({
           ...pageValues,
           primaryPage: 'my_work',
-          secondaryPage: 'quotes',
+          secondaryPage: 'active_work',
         }),
     },
     {
@@ -41,5 +41,25 @@ export default function workMenu(pageValues, onClickEvent) {
       machineName: 'history',
       link: () => onClickEvent({ ...pageValues, primaryPage: 'history' }),
     },
+    pageValues.jobId
+      ? {
+          name: 'Dashboard',
+          icon: 'local_activity',
+          machineName: 'work_dashboard',
+          link: () =>
+            onClickEvent({
+              ...pageValues,
+              secondaryPage: 'work_dashboard_home',
+            }),
+          count: null,
+        }
+      : {
+          name: 'Locked',
+          icon: 'lock',
+          machineName: 'work_dashboard',
+          link: () => null,
+          count: null,
+          disabled: true,
+        },
   ];
 }

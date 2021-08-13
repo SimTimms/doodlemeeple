@@ -14,13 +14,6 @@ export default function ProjectComponentDash({
         <Typography variant="body1" style={{ fontSize: 12 }}>
           {jobSummary}
         </Typography>
-        <IconButton
-          icon="work"
-          title="Project Details"
-          onClickEvent={() => setTabNbr(1)}
-          active={false}
-          styleOverride={{ width: '100%' }}
-        />
       </Column>
     </Column>
   );

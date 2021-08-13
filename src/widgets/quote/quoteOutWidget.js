@@ -4,10 +4,14 @@ import { QUOTE_WIDGET } from './data';
 import { Column } from '../../components';
 import { QuoteComponent } from '../../widgets';
 
-export default function QuoteOutWidget({ menu }) {
+export default function QuoteOutWidget({ menu, status }) {
   return (
     <Column w={400}>
-      <Query query={QUOTE_WIDGET} fetchPolicy="network-only">
+      <Query
+        query={QUOTE_WIDGET}
+        variables={{ status: status }}
+        fetchPolicy="network-only"
+      >
         {({ data }) => {
           if (data)
             return data.quoteWidget.map((contract, index) => (

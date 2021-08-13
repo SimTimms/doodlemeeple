@@ -3,7 +3,7 @@ import { TabPage } from '../../../../components';
 import { HistoryContext } from '../../../../context';
 import {
   workMenu,
-  workMenuSecondary,
+  workDashboardSecondary,
   inviteMenuSecondary,
   quoteMenuSecondary,
 } from '../../../menuArray';
@@ -12,6 +12,7 @@ import WorkHistory from './workHistory';
 import InviteDashboard from '../inviteDashboard';
 import QuoteDashboard from '../quoteDashboard';
 import MyWorkDashboard from '../myWorkDashboard';
+import WorkDashboard from './workDashboard';
 
 export default function WorkPage() {
   const [pageValues, setPageValues] = React.useState({
@@ -41,8 +42,8 @@ export default function WorkPage() {
             title={null}
             primaryMenu={workMenu(pageValues, setPageValues)}
             secondaryMenu={
-              pageValues.primaryPage === 'my_work'
-                ? workMenuSecondary(pageValues, setPageValues)
+              pageValues.primaryPage === 'work_dashboard'
+                ? workDashboardSecondary(pageValues, setPageValues)
                 : pageValues.primaryPage === 'invites'
                 ? inviteMenuSecondary(pageValues, setPageValues)
                 : pageValues.primaryPage === 'quotes' &&
@@ -61,6 +62,8 @@ export default function WorkPage() {
                 pageValues={pageValues}
                 setPageValues={setPageValues}
               />
+            ) : pageValues.primaryPage === 'work_dashboard' ? (
+              <WorkDashboard />
             ) : (
               pageValues.primaryPage === 'history' && (
                 <WorkHistory

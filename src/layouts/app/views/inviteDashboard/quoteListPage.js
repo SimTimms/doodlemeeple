@@ -7,7 +7,10 @@ export default function QuoteListPage({ onClickEvent }) {
 
   return (
     <div className={classes.root}>
-      <QuoteOutWidget onClickEvent={onClickEvent} />
+      <QuoteOutWidget
+        onClickEvent={onClickEvent}
+        status={['draft', '', 'submitted']}
+      />
     </div>
   );
 }

@@ -11,7 +11,7 @@ import { Row } from '../';
 import clsx from 'clsx';
 
 export default function CardComponent({ children, ...props }) {
-  const { styleOverride, onClickEvent, locked, lockedMsg } = props;
+  const { styleOverride, onClickEvent, locked, lockedMsg, type } = props;
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
   return (
@@ -21,6 +21,7 @@ export default function CardComponent({ children, ...props }) {
         [classes.clickable]: onClickEvent,
         [classes.cardLocked]: locked,
         [classes.cardMobile]: mobile,
+        [classes.dark]: type === 'dark',
       })}
       style={styleOverride && styleOverride}
       onClick={() => (onClickEvent ? onClickEvent() : () => {})}

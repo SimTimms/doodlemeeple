@@ -24,8 +24,8 @@ export const QUOTE_VIEW_WIDGET = gql`
   }
 `;
 export const QUOTE_WIDGET = gql`
-  query quoteWidget {
-    quoteWidget {
+  query quoteWidget($status: [String]) {
+    quoteWidget(status: $status) {
       _id
       deadline
       startDate

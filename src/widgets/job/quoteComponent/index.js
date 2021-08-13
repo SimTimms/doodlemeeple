@@ -2,11 +2,10 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
-  MenuButtonShortcut,
   MenuButtonStandard,
   Column,
   Row,
-  Paper,
+  CardComponent,
 } from '../../../components';
 import clsx from 'clsx';
 
@@ -14,10 +13,20 @@ export default function QuoteComponent({ contract, onClickEvent }) {
   const classes = useStyles();
   const accepted = contract.status === 'accepted';
   const declined = contract.status === 'declined';
-  if (!contract.job) return null;
-  if (!contract.job.user) return null;
+  if (!contract.job)
+    return (
+      <CardComponent type="dark">
+        <Typography>This Job No Longer Exists</Typography>
+      </CardComponent>
+    );
+  if (!contract.job.user)
+    return (
+      <CardComponent type="dark">
+        <Typography>This User No Longer Exists</Typography>
+      </CardComponent>
+    );
   return (
-    <Paper p={10}>
+    <CardComponent p={10}>
       <Column>
         <Row j="space-between" a="center">
           <Row a="center" j="flex-start">
@@ -53,23 +62,15 @@ export default function QuoteComponent({ contract, onClickEvent }) {
               }}
             />
           ) : (
-            <MenuButtonShortcut
-              text={{
-                name: 'Dashboard',
-                color: 'light',
-                icon: 'dashboard',
-                count: 0,
-                back: 'primary',
-              }}
+            <MenuButtonStandard
+              title="Dashboard"
               onClickEvent={() => {
                 onClickEvent();
               }}
-              active={false}
-              countIcon="star"
             />
           )}
         </Row>
       </Column>
-    </Paper>
+    </CardComponent>
   );
 }

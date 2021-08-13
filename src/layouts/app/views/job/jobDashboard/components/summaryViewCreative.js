@@ -3,16 +3,21 @@ import { useStyles } from '../styles';
 import {
   Column,
   CreateQuoteButton,
+  Divider,
   FullContractComponent,
 } from '../../../../../../components';
-import { CreativeDashboard } from './jobDashboards/';
 import { ChatViewByJob } from '../../../../../../modules/chat';
-import CreativeMenu from './creativeMenu';
 import EditProposalForm from './proposalForm/views/editProposal';
 import CreativeJobSummary from './creativeJobSummary';
 import DeclineInviteView from './declineInviteView';
+import CheckListCreativeDash from '../components/jobDashboards/CheckListCreativeDash';
 
-export default function SummaryViewCreative({ job, history }) {
+export default function SummaryViewCreative({
+  job,
+  history,
+  setPageValues,
+  pageValues,
+}) {
   const classes = useStyles();
   const [conversationUser, setConversationUser] = React.useState(null);
   const [tabNbr, setTabNbr] = React.useState(-1);
@@ -35,12 +40,6 @@ export default function SummaryViewCreative({ job, history }) {
 
   return (
     <div className={classes.root}>
-      <CreativeMenu
-        tabNbr={tabNbr}
-        setTabNbr={setTabNbr}
-        activeContract={activeContract}
-        closed={closed}
-      />
       {conversationUser ? (
         <ChatViewByJob
           job={job.job}
@@ -49,23 +48,26 @@ export default function SummaryViewCreative({ job, history }) {
           history={history}
         />
       ) : (
-        tabNbr === -1 && (
+        pageValues.secondaryPage === 'work_dashboard_home' && (
           <Column>
-            <CreativeDashboard
-              job={job}
-              contractData={contract}
-              setConversationUser={setConversationUser}
+            <CheckListCreativeDash
+              declined={
+                invite && invite.data && invite.data.status === 'declined'
+              }
+              invite={invite.data}
               setTabNbr={setTabNbr}
-              invite={{ data: invite, setData: setInvite }}
+              job={job}
               history={history}
+              setConversationUser={setConversationUser}
               jobHasBeenAwarded={jobHasBeenAwarded}
               activeContract={activeContract}
               userContractStatus={userContractStatus}
+              contractData={job.contract}
             />
           </Column>
         )
       )}
-      {tabNbr === 1 && (
+      {pageValues.secondaryPage === 'work_description' && (
         <Column>
           <CreativeJobSummary
             job={job}
@@ -77,12 +79,11 @@ export default function SummaryViewCreative({ job, history }) {
           />
         </Column>
       )}
-      {tabNbr === 6 && contract ? (
-        <EditProposalForm
-          contractData={contract}
-          setContract={setContract}
-          history={history}
-        />
+      {pageValues.secondaryPage === 'work_contract' && contract ? (
+        <Column w={800}>
+          <Divider />
+          <FullContractComponent contractData={contract} />
+        </Column>
       ) : (
         tabNbr === 6 && (
           <CreateQuoteButton

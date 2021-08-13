@@ -17,12 +17,7 @@ import { Account } from './views/account';
 import FullContract from './views/fullContract';
 import { ProjectSubmitted } from './views/submitted';
 import { EditGame, PreviewGame } from './views/game';
-import {
-  WorkDashboard,
-  JobDashboard,
-  AppViewQuoteJob,
-  AppViewJobPublic,
-} from './views/job';
+import { AppViewQuoteJob, AppViewJobPublic } from './views/job';
 import UpdateJobDashboard from './views/job/workDashboard/updateJobDashboard';
 import { EditQuote } from '../../modules/quotes';
 import { EditContract } from './views/contract';
@@ -43,7 +38,6 @@ import logout from '../../utils/logout';
 import CreativeRosterWidget from '../../widgets/creativeRoster';
 import {
   QuoteInWidget,
-  QuoteOutWidget,
   QuoteViewWidget,
   JobBoardWidget,
   FullContractWidget,
@@ -146,8 +140,6 @@ export default function AppLayout(props) {
                   <AppInvites history={history} />
                 ) : page === 'submitted' ? (
                   <ProjectSubmitted history={history} />
-                ) : page === 'projects' ? (
-                  <WorkDashboard history={history} tab={pathParam} />
                 ) : page === 'update-job' ? (
                   <CreativeContext.Provider>
                     <UpdateJobDashboard jobId={pathParam} />
@@ -176,8 +168,6 @@ export default function AppLayout(props) {
                   />
                 ) : page === 'job-description' ? (
                   <JobDescriptionWidget jobId={pathParam} history={history} />
-                ) : page === 'quotes-out' ? (
-                  <QuoteOutWidget history={history} />
                 ) : page === 'quotes-in' ? (
                   <QuoteInWidget history={history} />
                 ) : page === 'view-quote' ? (

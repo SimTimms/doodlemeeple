@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   card: {
     width: '100%',
     marginBottom: 5,
+    marginTop: 5,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
@@ -36,4 +37,5 @@ export const useStyles = makeStyles((theme) => ({
     padding: 4,
   },
   cardMobile: { width: '100%' },
+  dark: { color: '#fff', background: theme.palette.primary.dark },
 }));

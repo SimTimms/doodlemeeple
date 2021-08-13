@@ -7,7 +7,7 @@ import jobMenu from './jobMenu';
 import jobMenuSecondary from './jobMenuSecondary';
 import taskMenu from './taskMenu';
 import messageMenu from './messageMenu';
-import workMenuSecondary from './workMenuSecondary';
+import workDashboardSecondary from './workDashboardSecondary';
 import jobDashboardSecondary from './jobDashboardSecondary';
 import profileMenu from './profileMenu';
 import inviteMenuSecondary from './inviteMenuSecondary';
@@ -23,7 +23,7 @@ export {
   kickstarterMenu,
   workMenu,
   taskMenu,
-  workMenuSecondary,
+  workDashboardSecondary,
   jobDashboardSecondary,
   profileMenu,
   jobMenuSecondary,

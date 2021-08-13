@@ -7,7 +7,7 @@ export default function QuoteListPage({ menu }) {
 
   return (
     <div className={classes.root}>
-      <QuoteOutWidget menu={menu} />
+      <QuoteOutWidget menu={menu} status={['draft', '', 'submitted']} />
     </div>
   );
 }
