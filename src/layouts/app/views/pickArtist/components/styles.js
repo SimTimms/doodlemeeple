@@ -14,8 +14,7 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    background:
-      'linear-gradient(180deg, rgba(52,190,177,1) 0%, rgba(52,190,177,1) 53%, rgba(39,168,156,1) 100%)',
+
     '& h4': { color: '#fff' },
   },
   iconButton: {
@@ -60,11 +59,11 @@ export const useStyles = makeStyles((theme) => ({
     maxHeight: 60,
     backgroundSize: 'cover',
     borderRadius: '50%',
-    border: '3px solid #fff',
+    border: `2px solid ${theme.palette.primary.dark}`,
     boxShadow: '3px 3px 5px rgba(0,0,0,0.2)',
     marginRight: 10,
     '&:hover': {
-      border: `3px solid ${theme.palette.secondary.main}`,
+      border: `2px solid ${theme.palette.secondary.main}`,
     },
   },
   miniProfileBlank: {
@@ -102,13 +101,13 @@ export const useStyles = makeStyles((theme) => ({
     zIndex: 50,
   },
   closeIcon: {
-    background: '#fff',
+    background: theme.palette.primary.dark,
     position: 'absolute',
     borderRadius: '50%',
     cursor: 'pointer',
-
+    color: '#fff',
     '&:hover': {
-      background: theme.palette.primary.main,
+      background: theme.palette.secondary.main,
       color: '#fff',
     },
   },

@@ -13,7 +13,7 @@ import { Section3, Section6, Section7, Section8 } from '../components/pageOne';
 import { unlock } from '../unlock';
 import { HistoryContext } from '../../../context';
 
-export default function Tab4({ job, setJob, locked }) {
+export default function Tab4({ job, setJob, locked, setTab }) {
   return (
     <Mutation
       mutation={UPDATE_JOB}
@@ -31,11 +31,7 @@ export default function Tab4({ job, setJob, locked }) {
               <NoticeBoardSecondary
                 title=""
                 subTitle="Add more optional details"
-                onClickEvent={() =>
-                  job.isPublic
-                    ? history.push(`/app/confirm-job/${job._id}`)
-                    : history.push(`/app/pick-artist/${job._id}`)
-                }
+                onClickEvent={() => (job.isPublic ? setTab(6) : setTab(5))}
                 buttonLocked={locked}
                 lockedMsg={unlock(job)}
               >

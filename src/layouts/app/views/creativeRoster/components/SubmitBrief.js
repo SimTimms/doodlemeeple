@@ -52,8 +52,8 @@ export default function SubmitBrief({ job, history, inviteList }) {
                   paddingBottom: 10,
                 }}
               >
-                You will be unable to modify this project or send invites to any
-                other creatives after this stage.
+                You will be unabled to modify this project or send invites to
+                any other creatives after this stage.
               </Typography>
 
               <IconButton

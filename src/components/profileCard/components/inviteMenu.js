@@ -7,22 +7,8 @@ export default function InviteMenu({ history, creative, favourite, ...props }) {
   const userId = Cookies.get('userId');
   const { jobId, invite, updateInviteList, removeInviteList, disabled } = props;
 
-  return userId === creative._id ? (
-    <IconButton
-      title="PROFILE"
-      color="text-dark"
-      icon=""
-      iconPos="right"
-      onClickEvent={() => history.push(`/app/public-preview/${creative._id}`)}
-      styleOverride={{
-        width: '100%',
-        borderRadius: 0,
-        borderTop: '1px solid #eee',
-        margin: 0,
-        justifyContent: 'center',
-      }}
-    />
-  ) : updateInviteList && Cookies.get('userId') !== creative._id ? (
+  return userId === creative._id ? null : updateInviteList &&
+    Cookies.get('userId') !== creative._id ? (
     <InviteButton
       history={history}
       creative={creative}

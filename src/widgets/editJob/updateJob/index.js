@@ -10,13 +10,13 @@ import Tab1 from './tab1';
 import Tab2 from './tab2';
 import Tab3 from './tab3';
 import Tab4 from './tab4';
+import Tab5 from './tab5';
 
 export default function UpdateJob({ jobId }) {
   const classes = useStyles();
   const [job, setJob] = React.useState(null);
   const [tab, setTab] = React.useState(1);
   const [locked, setLocked] = React.useState(false);
-
   function setJobAndCheck(job) {
     setLocked(
       !checkLength(job.name, 'name') ||
@@ -78,9 +78,16 @@ export default function UpdateJob({ jobId }) {
                   locked={locked}
                   setTab={setTab}
                 />
+              ) : tab === 4 ? (
+                <Tab4
+                  job={job}
+                  setJob={setJobAndCheck}
+                  locked={locked}
+                  setTab={setTab}
+                />
               ) : (
-                tab === 4 && (
-                  <Tab4
+                tab === 5 && (
+                  <Tab5
                     job={job}
                     setJob={setJobAndCheck}
                     locked={locked}

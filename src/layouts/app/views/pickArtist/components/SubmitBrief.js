@@ -2,27 +2,26 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { Mutation } from 'react-apollo';
 import { SUBMIT_BRIEF } from '../../../../../data/mutations';
-import { IconButton, Column, Row } from '../../../../../components';
+import {
+  MenuButtonStandard,
+  Column,
+  Divider,
+  DividerMini,
+} from '../../../../../components';
 
-export default function SubmitBrief({ job, history, inviteList }) {
+export default function SubmitBrief({ job, inviteList }) {
   const [page, setPage] = React.useState(0);
 
   return page === 0 ? (
     <Column j="center" a="center">
-      <Row>
-        <IconButton
-          onClickEvent={() => {
-            setPage(1);
-          }}
-          disabled={inviteList.length > 0 ? false : true}
-          icon="chevron_right"
-          title="Continue"
-          iconPos="right"
-          styleOverride={{ marginLeft: 5, minWidth: 120 }}
-          type="button"
-          color="primary"
-        />
-      </Row>
+      <MenuButtonStandard
+        onClickEvent={() => {
+          setPage(1);
+        }}
+        disabled={inviteList.length > 0 ? false : true}
+        title="Continue"
+      />
+      <Divider />
     </Column>
   ) : (
     <Mutation
@@ -30,9 +29,7 @@ export default function SubmitBrief({ job, history, inviteList }) {
       variables={{
         jobId: job._id,
       }}
-      onCompleted={() => {
-        history.push('/app/submitted');
-      }}
+      onCompleted={() => {}}
     >
       {(mutation) => {
         return (
@@ -42,6 +39,7 @@ export default function SubmitBrief({ job, history, inviteList }) {
               maxWidth: 500,
               background: '#fff',
               padding: 20,
+              marginBottom: 20,
             }}
           >
             <Column j="center" a="center">
@@ -58,29 +56,21 @@ export default function SubmitBrief({ job, history, inviteList }) {
                 other creatives after this stage.
               </Typography>
 
-              <IconButton
+              <MenuButtonStandard
                 onClickEvent={() => {
                   mutation();
                 }}
                 disabled={inviteList.length > 0 ? false : true}
-                icon="chevron_right"
                 title="Submit"
-                iconPos="right"
-                styleOverride={null}
-                type="button"
-                color="warning"
               />
-              <IconButton
+              <DividerMini />
+              <MenuButtonStandard
                 onClickEvent={() => {
                   setPage(0);
                 }}
                 disabled={inviteList.length > 0 ? false : true}
-                icon=""
                 title="Cancel"
-                iconPos="right"
-                styleOverride={null}
-                type="button"
-                color="text-mini"
+                type="delete"
               />
             </Column>
           </div>
