@@ -21,13 +21,13 @@ export const useStyles = makeStyles((theme) => {
       boxSizing: 'border-box',
     },
     excerpt: {
-      color: '#fff',
+      color: theme.palette.primary.dark,
       fontSize: '2rem',
-      textShadow: '3px 0px 10px rgba(0,0,0,1)',
+      textShadow: '3px 3px 5px rgba(0,0,0,0.3)',
       fontWeight: 500,
     },
-    excerptAuthor: { color: '#fff' },
-    excerptLink: { color: theme.palette.primary.main, fontWeight: 900 },
+    excerptAuthor: { color: theme.palette.primary.dark, fontSize: '1rem' },
+    excerptLink: { color: theme.palette.primary.dark },
     header4: {
       color: '#222',
       textAlign: 'center',

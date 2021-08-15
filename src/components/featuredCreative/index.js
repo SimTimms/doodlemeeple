@@ -19,12 +19,9 @@ export default function FeaturedCreative({ history, featuredArticle }) {
 
         return loading ? null : data ? (
           <Column>
-            <div
-              className={classes.excerptBack}
-              style={{ backgroundImage: `url(${final})` }}
-            >
+            <div className={classes.excerptBack}>
               <Row pb={10} pt={10}>
-                <Column a="flex-end" p="20px" w={700} bg="rgba(0,0,0,0.4)">
+                <Column a="flex-end" p="20px" w={700}>
                   <Typography variant="h5" className={classes.excerpt}>
                     {excerpt}
                   </Typography>
