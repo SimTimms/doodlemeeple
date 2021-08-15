@@ -52,6 +52,7 @@ export default function TabPage({
                   title={menuItem.name}
                   icon={menuItem.icon}
                   onClickEvent={menuItem.link}
+                  count={menuItem.count}
                   active={
                     activeSecondary === menuItem.machineName ? true : false
                   }

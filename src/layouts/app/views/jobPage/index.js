@@ -40,7 +40,7 @@ export default function JobPage() {
                   primaryMenu={jobMenu(counts, pageValues, setPageValues)}
                   secondaryMenu={
                     pageValues.primaryPage === 'job_posts'
-                      ? jobMenuSecondary(pageValues, setPageValues)
+                      ? jobMenuSecondary(counts, pageValues, setPageValues)
                       : pageValues.primaryPage === 'job_dashboard' &&
                         jobDashboardSecondary(pageValues, setPageValues)
                   }

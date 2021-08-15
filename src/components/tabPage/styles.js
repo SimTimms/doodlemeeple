@@ -31,5 +31,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-start',
+    padding: 5,
+    boxSizing: 'border-box',
   },
 }));

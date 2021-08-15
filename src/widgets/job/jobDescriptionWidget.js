@@ -5,7 +5,7 @@ import {
   Column,
   CardComponent,
   MenuButtonStandard,
-  Divider,
+  DividerMini,
 } from '../../components';
 import { Mutation, Query } from 'react-apollo';
 import {
@@ -34,95 +34,96 @@ export default function JobDescriptionWidget({ jobId, ...props }) {
                   <Column w={500} m="20px 0 0 0">
                     <CardComponent>
                       <JobDescription job={data.jobWidget} history={history} />
-                    </CardComponent>
-                    {userId &&
-                      userId !== job.user._id &&
-                      job.submitted !== 'accepted' &&
-                      !job.isExternal && (
-                        <Query
-                          query={JOB_CONTRACT}
-                          variables={{ jobId: job._id }}
-                          fetchPolicy="network-only"
-                          onCompleted={(data) => null}
-                        >
-                          {({ data }) => {
-                            return data && data.jobContract ? (
-                              <Column>
-                                <MenuButtonStandard
-                                  disabled={false}
-                                  color="warning"
-                                  title={'Edit Quote'}
-                                  icon="fact_check"
-                                  onClickEvent={() => {
+
+                      {userId &&
+                        userId !== job.user._id &&
+                        job.submitted !== 'accepted' &&
+                        !job.isExternal && (
+                          <Query
+                            query={JOB_CONTRACT}
+                            variables={{ jobId: job._id }}
+                            fetchPolicy="network-only"
+                            onCompleted={(data) => null}
+                          >
+                            {({ data }) => {
+                              return data && data.jobContract ? (
+                                <Column>
+                                  <MenuButtonStandard
+                                    disabled={false}
+                                    color="warning"
+                                    title={'Edit Quote'}
+                                    icon="fact_check"
+                                    onClickEvent={() => {
+                                      history.push(
+                                        `/app/edit-quote/${data.jobContract._id}`
+                                      );
+                                    }}
+                                  />
+                                </Column>
+                              ) : (
+                                <Mutation
+                                  mutation={CREATE_CONTRACT}
+                                  variables={{
+                                    currency: 'GBP',
+                                    cost: '100',
+                                    jobId: job._id,
+                                    status: '',
+                                  }}
+                                  onCompleted={(data) => {
                                     history.push(
-                                      `/app/edit-quote/${data.jobContract._id}`
+                                      `/app/edit-quote/${data.contractCreateOne.recordId}`
                                     );
                                   }}
-                                />
-                              </Column>
-                            ) : (
-                              <Mutation
-                                mutation={CREATE_CONTRACT}
-                                variables={{
-                                  currency: 'GBP',
-                                  cost: '100',
-                                  jobId: job._id,
-                                  status: '',
-                                }}
-                                onCompleted={(data) => {
-                                  history.push(
-                                    `/app/edit-quote/${data.contractCreateOne.recordId}`
-                                  );
-                                }}
-                                onError={() => {}}
-                              >
-                                {(mutation) => {
-                                  return (
-                                    <Column>
-                                      <MenuButtonStandard
-                                        disabled={false}
-                                        color="warning"
-                                        title={'Create a Quote'}
-                                        icon="fact_check"
-                                        onClickEvent={() => {
-                                          mutation();
-                                        }}
-                                      />
-                                      <Divider />
-                                      {!job.isPublic && (
-                                        <Mutation
-                                          mutation={DECLINE_INVITE}
-                                          variables={{
-                                            jobId: job._id,
+                                  onError={() => {}}
+                                >
+                                  {(mutation) => {
+                                    return (
+                                      <Column>
+                                        <MenuButtonStandard
+                                          disabled={false}
+                                          color="warning"
+                                          title={'Create a Quote'}
+                                          icon="fact_check"
+                                          onClickEvent={() => {
+                                            mutation();
                                           }}
-                                          onCompleted={() => {
-                                            history.push(
-                                              '/app/projects/history'
-                                            );
-                                          }}
-                                          onError={() => {}}
-                                        >
-                                          {(declineInvite) => {
-                                            return (
-                                              <MenuButtonStandard
-                                                title={'Decline Invite'}
-                                                onClickEvent={() => {
-                                                  declineInvite();
-                                                }}
-                                                type="delete"
-                                              />
-                                            );
-                                          }}
-                                        </Mutation>
-                                      )}
-                                    </Column>
-                                  );
-                                }}
-                              </Mutation>
-                            );
-                          }}
-                        </Query>
-                      )}
+                                        />
+                                        <DividerMini />
+                                        {!job.isPublic && (
+                                          <Mutation
+                                            mutation={DECLINE_INVITE}
+                                            variables={{
+                                              jobId: job._id,
+                                            }}
+                                            onCompleted={() => {
+                                              history.push(
+                                                '/app/projects/history'
+                                              );
+                                            }}
+                                            onError={() => {}}
+                                          >
+                                            {(declineInvite) => {
+                                              return (
+                                                <MenuButtonStandard
+                                                  title={'Decline Invite'}
+                                                  onClickEvent={() => {
+                                                    declineInvite();
+                                                  }}
+                                                  type="delete"
+                                                />
+                                              );
+                                            }}
+                                          </Mutation>
+                                        )}
+                                      </Column>
+                                    );
+                                  }}
+                                </Mutation>
+                              );
+                            }}
+                          </Query>
+                        )}
+                    </CardComponent>
                   </Column>
                 );
               }

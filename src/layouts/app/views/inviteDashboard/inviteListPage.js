@@ -18,6 +18,7 @@ export default function InviteListPage({ history, menu }) {
               return !invite.sender ? null : (
                 <Column>
                   <InviteComponent
+                    key={`invite_${index}`}
                     invite={invite}
                     onClickEvent={() =>
                       menu.updateMenuContext({

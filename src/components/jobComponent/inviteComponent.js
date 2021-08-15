@@ -1,7 +1,13 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { MenuButtonStandard, Column, Row, DividerWithBorder } from '../';
+import {
+  MenuButtonStandard,
+  Column,
+  Row,
+  DividerWithBorder,
+  CardComponent,
+} from '../';
 import clsx from 'clsx';
 import { Mutation } from 'react-apollo';
 import { UPDATE_INVITE } from '../../data/mutations';
@@ -31,7 +37,7 @@ export default function InviteComponent({ invite, onClickEvent }) {
     >
       {(mutation) => {
         return (
-          <div style={{ width: '100%', cursor: 'pointer' }}>
+          <CardComponent>
             <Column>
               <Row
                 j="space-between"
@@ -101,7 +107,7 @@ export default function InviteComponent({ invite, onClickEvent }) {
                 </Column>
               )}
             </Column>
-          </div>
+          </CardComponent>
         );
       }}
     </Mutation>

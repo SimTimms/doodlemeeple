@@ -1,5 +1,18 @@
-export default function workMenu(pageValues, onClickEvent) {
+export default function workMenu(counts, pageValues, onClickEvent) {
   return [
+    {
+      name: 'My Work',
+      icon: 'work',
+      machineName: 'my_work',
+      link: () =>
+        onClickEvent({
+          ...pageValues,
+          primaryPage: 'my_work',
+          secondaryPage: 'active_work',
+          jobId: null,
+        }),
+      count: counts.myWork,
+    },
     {
       name: 'Invites',
       icon: 'local_activity',
@@ -11,7 +24,7 @@ export default function workMenu(pageValues, onClickEvent) {
           secondaryPage: 'invite_list',
           jobId: null,
         }),
-      count: null,
+      count: counts.invites,
     },
     {
       name: 'Quotes',
@@ -24,20 +37,9 @@ export default function workMenu(pageValues, onClickEvent) {
           secondaryPage: 'quote_list',
           jobId: null,
         }),
-      count: null,
+      count: counts.quotes,
     },
-    {
-      name: 'My Work',
-      icon: 'work',
-      machineName: 'my_work',
-      link: () =>
-        onClickEvent({
-          ...pageValues,
-          primaryPage: 'my_work',
-          secondaryPage: 'active_work',
-          jobId: null,
-        }),
-    },
+
     {
       name: 'History',
       icon: 'history',

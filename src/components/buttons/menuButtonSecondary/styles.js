@@ -15,6 +15,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
     fontSize: '1rem',
     textAlign: 'center',
+    whiteSpace: 'nowrap',
   },
   icon: { fontSize: '1rem' },
   circle: {
@@ -34,4 +35,17 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.primary.main,
   },
   disabled: { opacity: 0.4 },
+  count: {
+    background: theme.palette.secondary.main,
+    borderRadius: 2,
+    minHeight: 16,
+    maxHeight: 16,
+    minWidth: 16,
+    maxWidth: 16,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: theme.palette.primary.dark,
+    zIndex: 2,
+  },
 }));

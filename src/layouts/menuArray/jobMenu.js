@@ -1,5 +1,4 @@
 export default function jobMenu(counts, pageValues, onClickEvent) {
-  console.log(counts.invites);
   return [
     {
       name: 'Job Board',
@@ -25,7 +24,7 @@ export default function jobMenu(counts, pageValues, onClickEvent) {
           secondaryPage: 'job_ads',
           jobId: null,
         }),
-      count: counts.quotes,
+      count: counts.jobAds,
     },
     {
       name: 'History',

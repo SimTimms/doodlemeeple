@@ -60,9 +60,14 @@ export default function AppLayout(props) {
   const [page, setPage] = React.useState('home');
   const [profile, setProfile] = React.useState(null);
   const [counts, setCounts] = React.useState({
+    jobAds: 0,
+    myJobAds: 0,
+    work: 0,
+    myWork: 0,
     invites: 0,
-    messages: 0,
+    inviteList: 0,
     quotes: 0,
+    messages: 0,
   });
 
   const classes = useStyles();
@@ -267,9 +272,18 @@ export default function AppLayout(props) {
                 query={COUNTS}
                 onCompleted={(data) => {
                   setCounts({
+                    jobAds: data.counts.unansweredQuotes,
+                    myJobAds: data.counts.unansweredQuotes,
+                    work:
+                      data.counts.invites +
+                      data.counts.quotesDeclined +
+                      data.counts.quotesAccepted,
+                    myWork: 0,
                     invites: data.counts.invites,
+                    inviteList: data.counts.invites,
+                    quotes:
+                      data.counts.quotesDeclined + data.counts.quotesAccepted,
                     messages: data.counts.messages,
-                    quotes: data.counts.quotes,
                   });
                 }}
                 fetchPolicy="network-only"

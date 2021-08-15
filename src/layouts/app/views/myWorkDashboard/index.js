@@ -10,7 +10,6 @@ export default function MyWorkDashboard({ pageValues }) {
     <div className={classes.root}>
       <Column w="100%">
         <Column w={600}>
-          <DividerMini />
           {pageValues.secondaryPage === 'active_work' && <ActiveWork />}
         </Column>
       </Column>

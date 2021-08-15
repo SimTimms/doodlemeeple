@@ -1,11 +1,11 @@
-export default function jobMenuSecondary(pageValues, onClickEvent) {
+export default function jobMenuSecondary(counts, pageValues, onClickEvent) {
   return [
     {
       name: 'My Job Ads',
       icon: 'dynamic_feed',
       machineName: 'job_ads',
       link: () => onClickEvent({ ...pageValues, secondaryPage: 'job_ads' }),
-      count: null,
+      count: counts.myJobAds,
     },
     {
       name: 'Create Ad',

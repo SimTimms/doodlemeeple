@@ -60,14 +60,14 @@ export default function mainMenu(history, counts, onClickEvent) {
       icon: 'post_add',
       machineName: 'jobs',
       link: () => history.push('/app/jobs'),
-      count: { icon: 'star', count: counts.quotes },
+      count: { icon: 'star', count: counts.jobAds },
     },
     {
       name: 'Work',
       icon: 'work',
       machineName: 'work',
       link: () => history.push('/app/work'),
-      count: { icon: 'star', count: counts.invites },
+      count: { icon: 'star', count: counts.work },
     },
     {
       name: 'Messages',

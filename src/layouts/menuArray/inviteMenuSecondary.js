@@ -1,4 +1,4 @@
-export default function inviteMenuSecondary(pageValues, onClickEvent) {
+export default function inviteMenuSecondary(counts, pageValues, onClickEvent) {
   return [
     {
       name: 'Invite List',
@@ -11,7 +11,7 @@ export default function inviteMenuSecondary(pageValues, onClickEvent) {
           jobId: null,
           inviteId: null,
         }),
-      count: null,
+      count: counts.inviteList,
     },
     pageValues.inviteId
       ? {
