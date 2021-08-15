@@ -1,13 +1,7 @@
 import React from 'react';
 import { useStyles } from './styles';
 import { Typography } from '@material-ui/core';
-import {
-  Row,
-  Column,
-  DividerMini,
-  DividerWithBorder,
-  CardComponent,
-} from '../../../../components';
+import { Row, Column } from '../../../../components';
 import { FeaturedArticle } from './components/getPosts';
 import {
   LatestCreativesWidget,

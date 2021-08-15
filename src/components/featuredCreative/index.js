@@ -24,7 +24,7 @@ export default function FeaturedCreative({ history, featuredArticle }) {
               style={{ backgroundImage: `url(${final})` }}
             >
               <Row pb={10} pt={10}>
-                <Column a="flex-end" p="20px" w={700} bg="rgba(255,255,255,1)">
+                <Column a="flex-end" p="20px" w={700} bg="rgba(0,0,0,0.4)">
                   <Typography variant="h5" className={classes.excerpt}>
                     {excerpt}
                   </Typography>
