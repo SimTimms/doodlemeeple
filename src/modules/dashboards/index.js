@@ -41,35 +41,29 @@ export default function ProjectDash({
           />
         </Widget>
       )}
-      {invites.length > 0 && !draft && (
-        <Widget p={10}>
-          {!job.isPublic ? (
-            <Typography>
-              {accepted ? 'Creative' : 'Invited Creatives'}
-            </Typography>
-          ) : (
-            <Typography>Responses</Typography>
-          )}
-
-          {inviteFiltered.map((invite, index) => {
-            const contractSubmitted = invite.job.contracts.filter(
-              (contract) => contract.user._id === invite.receiver._id
-            );
-            return (
-              <InviteComponentFull
-                invite={invite}
-                key={`invite-${index}`}
-                setConversationUser={setConversationUser}
-                contract={contractSubmitted[0]}
-                history={history}
-                jobId={job._id}
-                contactDetails={accepted}
-                isOpen={true}
-              />
-            );
-          })}
-        </Widget>
+      {invites.length > 0 && !draft && !job.isPublic ? (
+        <Typography>{accepted ? 'Creative' : 'Invited Creatives'}</Typography>
+      ) : (
+        <Typography>Responses</Typography>
       )}
+
+      {inviteFiltered.map((invite, index) => {
+        const contractSubmitted = invite.job.contracts.filter(
+          (contract) => contract.user._id === invite.receiver._id
+        );
+        return (
+          <InviteComponentFull
+            invite={invite}
+            key={`invite-${index}`}
+            setConversationUser={setConversationUser}
+            contract={contractSubmitted[0]}
+            history={history}
+            jobId={job._id}
+            contactDetails={accepted}
+            isOpen={false}
+          />
+        );
+      })}
     </Column>
   );
 }

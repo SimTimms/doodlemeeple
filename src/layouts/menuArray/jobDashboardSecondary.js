@@ -1,5 +1,21 @@
-export default function jobDashboardSecondary(pageValues, onClickEvent) {
+export default function jobDashboardSecondary(
+  counts,
+  pageValues,
+  onClickEvent
+) {
   return [
+    {
+      name: 'Back',
+      icon: 'chevron_left',
+      machineName: 'back',
+      link: () =>
+        onClickEvent({
+          ...pageValues,
+          primaryPage: 'job_posts',
+          secondaryPage: 'job_ads',
+        }),
+      count: null,
+    },
     {
       name: 'Dashboard',
       icon: 'dashboard',
@@ -8,8 +24,20 @@ export default function jobDashboardSecondary(pageValues, onClickEvent) {
         onClickEvent({ ...pageValues, secondaryPage: 'job_dashboard' }),
       count: null,
     },
+
     {
-      name: 'Description',
+      name: 'Quotes',
+      icon: 'list_alt',
+      machineName: 'quotes_in',
+      link: () =>
+        onClickEvent({
+          ...pageValues,
+          secondaryPage: 'quotes_in',
+        }),
+      count: counts.jobAds,
+    },
+    {
+      name: 'Ad Preview',
       icon: 'list_alt',
       machineName: 'job_details',
       link: () =>

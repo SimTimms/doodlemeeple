@@ -2,12 +2,12 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
-import { Row, Column, IconButton } from '../../../components';
+import { Row, Column, MenuButtonStandard } from '../../../components';
 import { nameShortener } from '../../../utils';
+import { MenuContext } from '../../../context';
 
 export default function QuoteInCard({ contract }) {
   const classes = useStyles();
-  if (!contract.job) return null;
   return (
     <div
       className={clsx({
@@ -18,30 +18,33 @@ export default function QuoteInCard({ contract }) {
         <Row j="space-between">
           <Column a="flex-start">
             <Typography className={classes.title} component="h1">
-              {nameShortener(contract.job.name, 60)}
+              {contract.cost} {contract.currency}
             </Typography>
             <a
-              href={`${process.env.REACT_APP_URL}/public-preview/${contract.job.user._id}`}
+              href={`${process.env.REACT_APP_URL}/public-preview/${contract.user._id}`}
               target="_blank"
               rel="noopener noreferrer"
               className={classes.meta}
             >
               <Typography className={classes.meta} component="h1">
-                {nameShortener(contract.job.user.name, 60)}
+                {nameShortener(contract.user.name, 60)}
               </Typography>
             </a>
           </Column>
-          <a
-            href={`/app/view-quote/${contract._id}`}
-            style={{ textDecoration: 'none' }}
-          >
-            <IconButton
-              title="View"
-              color="primary"
-              icon="visibility"
-              onClickEvent={() => {}}
-            />
-          </a>
+          <MenuContext.Consumer>
+            {(menu) => (
+              <MenuButtonStandard
+                title="View"
+                onClickEvent={() => {
+                  menu.updateMenuContext({
+                    ...menu.jobPage,
+                    secondaryPage: 'view_quote',
+                    contractId: contract._id,
+                  });
+                }}
+              />
+            )}
+          </MenuContext.Consumer>
         </Row>
       </Column>
     </div>

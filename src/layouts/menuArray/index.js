@@ -12,6 +12,7 @@ import jobDashboardSecondary from './jobDashboardSecondary';
 import profileMenu from './profileMenu';
 import inviteMenuSecondary from './inviteMenuSecondary';
 import quoteMenuSecondary from './quoteMenuSecondary';
+import quoteViewMenu from './quoteViewMenu';
 
 export {
   quoteMenuSecondary,
@@ -28,4 +29,5 @@ export {
   profileMenu,
   jobMenuSecondary,
   jobMenu,
+  quoteViewMenu,
 };

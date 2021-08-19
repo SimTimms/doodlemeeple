@@ -5,6 +5,7 @@ import {
   jobMenu,
   jobMenuSecondary,
   jobDashboardSecondary,
+  quoteViewMenu,
 } from '../../../menuArray';
 import { CreateJob, JobBoardWidget } from '../../../../widgets';
 import { MenuContext } from '../../../../context';
@@ -39,16 +40,19 @@ export default function JobPage() {
                   title={null}
                   primaryMenu={jobMenu(counts, pageValues, setPageValues)}
                   secondaryMenu={
-                    pageValues.primaryPage === 'job_posts'
-                      ? jobMenuSecondary(counts, pageValues, setPageValues)
-                      : pageValues.primaryPage === 'job_dashboard' &&
-                        jobDashboardSecondary(pageValues, setPageValues)
+                    pageValues.primaryPage === 'editing_job' &&
+                    pageValues.secondaryPage === 'view_quote'
+                      ? quoteViewMenu(pageValues, setPageValues)
+                      : pageValues.primaryPage === 'editing_job'
+                      ? jobDashboardSecondary(counts, pageValues, setPageValues)
+                      : pageValues.primaryPage === 'job_posts' &&
+                        jobMenuSecondary(counts, pageValues, setPageValues)
                   }
                   menu={null}
                   activePrimary={pageValues.primaryPage}
                   activeSecondary={pageValues.secondaryPage}
                 >
-                  {pageValues.primaryPage === 'job_dashboard' ? (
+                  {pageValues.primaryPage === 'editing_job' ? (
                     <JobDashboardPage
                       pageValues={pageValues}
                       setPageValues={setPageValues}

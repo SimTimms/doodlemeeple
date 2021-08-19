@@ -4,6 +4,7 @@ import { useStyles } from './styles';
 import { CardComponent, Column, Row } from '../';
 import clsx from 'clsx';
 import { HistoryContext, MenuContext } from '../../context';
+import { nameShortener } from '../../utils';
 
 export default function JobComponent({ job }) {
   const classes = useStyles();
@@ -48,7 +49,7 @@ export default function JobComponent({ job }) {
                 onClickEvent={() => {
                   menu.updateMenuContext({
                     ...menu.jobPage,
-                    primaryPage: 'job_dashboard',
+                    primaryPage: 'editing_job',
                     secondaryPage: 'job_dashboard',
                     jobId: job._id,
                   });
@@ -67,7 +68,7 @@ export default function JobComponent({ job }) {
                       style={{ width: '100%' }}
                       className={classes.cardSummary}
                     >
-                      {job.name}
+                      {nameShortener(job.name, 14)}
                     </Typography>
 
                     <Typography
@@ -80,10 +81,8 @@ export default function JobComponent({ job }) {
                           status === 'hasContracts' ||
                           status === 'totalDecline' ||
                           status === 'jobDraft' ||
-                          status === 'newQuote' ||
-                          draft,
-                        [classes.cardSummaryGood]:
-                          status === 'jobAccepted' || status === 'jobSubmitted',
+                          status === 'newQuote',
+                        [classes.cardSummaryGood]: status === 'jobAccepted',
                       })}
                     >
                       {hasNewQuote.length > 0
@@ -110,30 +109,7 @@ export default function JobComponent({ job }) {
                     </Typography>
                   </Column>
                   <Column a="center">
-                    <Row j="flex-end">
-                      {job.contracts
-                        ? job.contracts.map((contract, index) => {
-                            if (contract.status === 'submitted') {
-                              return (
-                                <div
-                                  key={`invite_${index}`}
-                                  title={`${contract.user.name}`}
-                                >
-                                  <div
-                                    style={{
-                                      backgroundImage: `url(${contract.user.profileImg})`,
-                                    }}
-                                    className={classes.profileThumb}
-                                  >
-                                    <Icon className={classes.count}>mail</Icon>
-                                  </div>
-                                </div>
-                              );
-                            }
-                            return null;
-                          })
-                        : null}
-                    </Row>
+                    <Row j="flex-end"></Row>
                   </Column>
 
                   {assignedCreative ? (
@@ -159,14 +135,7 @@ export default function JobComponent({ job }) {
                         invite.receiver && thisContract
                           ? thisContract.status
                           : null;
-                      return !invite.receiver ? (
-                        <div
-                          className={classes.profileThumb}
-                          title="User account no longer available"
-                        >
-                          X
-                        </div>
-                      ) : (
+                      return (
                         <div
                           key={`invite_${index}`}
                           title={`${invite.receiver.name} ${
@@ -177,7 +146,13 @@ export default function JobComponent({ job }) {
                             style={{
                               backgroundImage: `url(${invite.receiver.profileImg})`,
                             }}
-                            className={classes.profileThumb}
+                            className={clsx({
+                              [classes.profileThumb]: true,
+                              [classes.profileThumbNotification]:
+                                (contractFromArray > -1 &&
+                                  thisStatus === 'submitted') ||
+                                invite.messages,
+                            })}
                           >
                             {invite.status === 'declined' && (
                               <div className={classes.declined}></div>

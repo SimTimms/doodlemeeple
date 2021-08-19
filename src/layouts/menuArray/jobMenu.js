@@ -41,14 +41,14 @@ export default function jobMenu(counts, pageValues, onClickEvent) {
       ? {
           name: 'Editing Job',
           icon: 'edit',
-          machineName: 'job_dashboard',
+          machineName: 'editing_job',
           link: () =>
             onClickEvent({
               ...pageValues,
               primaryPage: 'job_dashboard',
-              secondaryPage: 'job_dashboard',
+              secondaryPage: 'editing_job',
             }),
-          count: null,
+          count: counts.jobAds,
         }
       : {
           name: 'Locked',

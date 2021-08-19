@@ -8,7 +8,6 @@ export default function ChatViewByJob({
   job,
   conversationUser,
   setConversationUser,
-  history,
 }) {
   const [refreshCount, setRefreshCount] = React.useState(0);
   const [messages, setMessages] = React.useState([]);
@@ -33,7 +32,6 @@ export default function ChatViewByJob({
           <Column>
             {conversationUser && (
               <ConversationByJob
-                history={history}
                 receiver={conversationUser}
                 jobId={job._id}
                 messages={messages}

@@ -5,7 +5,7 @@ import { Column, IconButton, LoadIcon, Row } from '../';
 import { Query } from 'react-apollo';
 import { PROFILE_FEATURED } from '../../data/queries';
 import { excerptReplace } from '../../utils/excerptReplace';
-import final from '../../assets/final.jpg';
+import { Fade } from '@material-ui/core';
 
 export default function FeaturedCreative({ history, featuredArticle }) {
   const classes = useStyles();
@@ -21,19 +21,39 @@ export default function FeaturedCreative({ history, featuredArticle }) {
           <Column>
             <div className={classes.excerptBack}>
               <Row pb={10} pt={10}>
-                <Column a="flex-end" p="20px" w={700}>
-                  <Typography variant="h5" className={classes.excerpt}>
-                    {excerpt}
-                  </Typography>
-                  <Typography variant="body1" className={classes.excerptAuthor}>
-                    {title}
-                  </Typography>
-                  <a href={linkTo} target="_blank" rel="noopener noreferrer">
-                    <Typography variant="body1" className={classes.excerptLink}>
-                      Read Full Article
-                    </Typography>
-                  </a>
-                </Column>
+                <Fade in={true} timeout={3000}>
+                  <div
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <Column a="flex-end" p="20px" w={700}>
+                      <Typography variant="h5" className={classes.excerpt}>
+                        {excerpt}
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        className={classes.excerptAuthor}
+                      >
+                        {title}
+                      </Typography>
+                      <a
+                        href={linkTo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Typography
+                          variant="body1"
+                          className={classes.excerptLink}
+                        >
+                          Read Full Article
+                        </Typography>
+                      </a>
+                    </Column>
+                  </div>
+                </Fade>
               </Row>
             </div>
           </Column>

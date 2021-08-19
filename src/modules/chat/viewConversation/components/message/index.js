@@ -6,7 +6,7 @@ import { timeDifferenceForDate } from '../../../../../utils/dates';
 import { IconButton } from '../../../../../components';
 import Cookies from 'js-cookie';
 
-export function Message({ message, history }) {
+export function Message({ message }) {
   const classes = useStyles();
   const isUserMessage = message.sender._id !== Cookies.get('userId');
   const mobile = useMediaQuery('(max-width:800px)');

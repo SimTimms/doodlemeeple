@@ -4,7 +4,6 @@ import Messages from './components/messages';
 import { Row } from '../../../components';
 
 export default function ConversationByJob({
-  history,
   receiver,
   jobId,
   messages,
@@ -18,7 +17,6 @@ export default function ConversationByJob({
     <div className={classes.root}>
       <Messages
         messages={messages}
-        history={history}
         receiver={receiver}
         jobId={jobId}
         pageNbr={pageNbr}

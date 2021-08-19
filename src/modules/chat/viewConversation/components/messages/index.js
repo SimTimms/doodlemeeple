@@ -8,7 +8,6 @@ import clsx from 'clsx';
 export default function Messages({
   messages,
   moreButton,
-  history,
   jobId,
   receiver,
   setConversationUser,
@@ -47,11 +46,7 @@ export default function Messages({
         {messages.map((message, index) => {
           return (
             message.sender && (
-              <Message
-                key={`message_${index}`}
-                message={message}
-                history={history}
-              />
+              <Message key={`message_${index}`} message={message} />
             )
           );
         })}

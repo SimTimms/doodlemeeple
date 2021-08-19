@@ -68,6 +68,7 @@ export default function AppLayout(props) {
     inviteList: 0,
     quotes: 0,
     messages: 0,
+    quotesIn: 0,
   });
 
   const classes = useStyles();
@@ -175,8 +176,6 @@ export default function AppLayout(props) {
                   <JobDescriptionWidget jobId={pathParam} history={history} />
                 ) : page === 'quotes-in' ? (
                   <QuoteInWidget history={history} />
-                ) : page === 'view-quote' ? (
-                  <QuoteViewWidget history={history} quoteId={pathParam} />
                 ) : page === 'edit-quote' ? (
                   <Query
                     query={PREVIEW_CONTRACT}

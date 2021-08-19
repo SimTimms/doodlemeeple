@@ -27,7 +27,11 @@ export default function InviteComponent({ invite, onClickEvent }) {
   const completed = inviteJob ? inviteJob.submitted === 'complete' : false;
   const [isOpen, setIsOpen] = React.useState(false);
 
-  return !inviteJob ? null : (
+  return !inviteJob ? (
+    <CardComponent type="dark">
+      <Typography>This Job No Longer Exists</Typography>
+    </CardComponent>
+  ) : (
     <Mutation
       mutation={UPDATE_INVITE}
       variables={{

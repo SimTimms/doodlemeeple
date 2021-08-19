@@ -45,19 +45,17 @@ export const QUOTE_WIDGET = gql`
 `;
 
 export const QUOTE_IN_WIDGET = gql`
-  query quoteInWidget {
-    quoteInWidget {
+  query quoteInWidget($jobId: MongoID!) {
+    quoteInWidget(jobId: $jobId) {
       _id
       deadline
       startDate
       status
       cost
-      job {
+      currency
+      user {
+        _id
         name
-        user {
-          _id
-          name
-        }
       }
     }
   }

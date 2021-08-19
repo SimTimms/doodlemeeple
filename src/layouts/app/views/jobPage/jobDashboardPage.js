@@ -3,7 +3,11 @@ import JobDashboard from '../job/jobDashboard';
 import { MenuContext, HistoryContext } from '../../../../context';
 import { Query } from 'react-apollo';
 import { JOB } from '../../../../data/queries';
-import { UpdateJob } from '../../../../widgets/';
+import {
+  UpdateJob,
+  QuoteInWidget,
+  QuoteViewWidget,
+} from '../../../../widgets/';
 
 export default function JobDashboardPage({ pageValues, setPageValues }) {
   return (
@@ -35,6 +39,10 @@ export default function JobDashboardPage({ pageValues, setPageValues }) {
                       jobData={data.jobById}
                       page="job_details"
                     />
+                  ) : pageValues.secondaryPage === 'quotes_in' ? (
+                    <QuoteInWidget jobId={pageValues.jobId} />
+                  ) : pageValues.secondaryPage === 'view_quote' ? (
+                    <QuoteViewWidget s quoteId={pageValues.contractId} />
                   ) : (
                     pageValues.secondaryPage === 'edit_job' && (
                       <UpdateJob jobId={pageValues.jobId} />
