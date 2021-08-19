@@ -1,7 +1,8 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 import { Query } from 'react-apollo';
 import { QUOTE_IN_WIDGET } from './data';
-import { Column } from '../../components';
+import { Column, CardComponent } from '../../components';
 import { QuoteInCard } from './quoteCard';
 
 export default function QuoteInWidget({ jobId }) {
@@ -13,6 +14,13 @@ export default function QuoteInWidget({ jobId }) {
         fetchPolicy="network-only"
       >
         {({ data }) => {
+          if (data && data.quoteInWidget.length === 0) {
+            return (
+              <CardComponent type="dark">
+                <Typography>No Quotes Yet</Typography>
+              </CardComponent>
+            );
+          }
           if (data)
             return data.quoteInWidget.map((contract, index) => (
               <QuoteInCard contract={contract} key={`contract_${index}`} />

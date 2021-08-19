@@ -16,9 +16,11 @@ import JobPosts from './components/jobPosts';
 export default function JobPage() {
   const [pageValues, setPageValues] = React.useState({
     primaryPage: 'job_board',
-    secondaryPage: null,
+    secondaryPage: 'dashboard',
     jobId: null,
   });
+
+  console.log(pageValues);
 
   return (
     <MenuContext.Provider

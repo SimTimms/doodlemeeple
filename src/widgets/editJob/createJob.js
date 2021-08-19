@@ -35,7 +35,7 @@ export default function CreateJob({ pageValues, setPageValues }) {
                   setPageValues({
                     ...pageValues,
                     jobId: data.jobCreateOne.recordId,
-                    primaryPage: 'job_dashboard',
+                    primaryPage: 'editing_job',
                     secondaryPage: 'edit_job',
                   });
                 }}

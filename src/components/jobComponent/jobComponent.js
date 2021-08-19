@@ -70,7 +70,6 @@ export default function JobComponent({ job }) {
                     >
                       {nameShortener(job.name, 14)}
                     </Typography>
-
                     <Typography
                       variant="body2"
                       component="p"
@@ -89,7 +88,7 @@ export default function JobComponent({ job }) {
                         ? 'Task: Reply to Quote'
                         : complete
                         ? 'Completed'
-                        : submitted && !job.isPublic
+                        : submitted && !job.isPublic && contractsIn === false
                         ? 'Invites sent'
                         : submitted && job.isPublic && !job.approved
                         ? 'Waiting for Approval'
@@ -111,7 +110,6 @@ export default function JobComponent({ job }) {
                   <Column a="center">
                     <Row j="flex-end"></Row>
                   </Column>
-
                   {assignedCreative ? (
                     <div
                       key={`invite_1`}
@@ -155,7 +153,16 @@ export default function JobComponent({ job }) {
                             })}
                           >
                             {invite.status === 'declined' && (
-                              <div className={classes.declined}></div>
+                              <div className={classes.declined}>
+                                <Typography
+                                  style={{
+                                    fontSize: 46,
+                                    marginTop: '-2px',
+                                  }}
+                                >
+                                  X
+                                </Typography>
+                              </div>
                             )}
                             {contractFromArray > -1 &&
                               thisStatus === 'submitted' && (

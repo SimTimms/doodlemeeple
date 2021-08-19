@@ -139,6 +139,7 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: -16,
     color: theme.palette.primary.dark,
     zIndex: 2,
+    fontSize: 10,
   },
 
   iconTextOnly: { display: 'none' },

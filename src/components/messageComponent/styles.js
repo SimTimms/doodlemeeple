@@ -68,7 +68,6 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     marginLeft: -5,
     marginRight: 5,
-    marginTop: -25,
     color: '#fff',
     border: '2px solid #fff',
     fontSize: 10,

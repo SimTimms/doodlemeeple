@@ -85,18 +85,6 @@ export default function InviteComponentFull({
                 </Typography>
               </Column>
             </Row>
-            {quoted && (
-              <MenuButtonStandard
-                title="Quote"
-                onClickEvent={() =>
-                  contract
-                    ? !display
-                      ? setDisplay(true)
-                      : setDisplay(false)
-                    : null
-                }
-              />
-            )}
 
             {invite.status !== 'declined' && (
               <MenuButtonStandard

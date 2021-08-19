@@ -4,7 +4,6 @@ import { Row } from '../../../../components';
 import { Icon, Typography } from '@material-ui/core';
 
 export default function Button({ menuItem, isActive }) {
-  console.log(menuItem);
   const { name, icon, link, image, count } = menuItem;
   const classes = useStyles();
   return (

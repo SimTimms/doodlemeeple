@@ -57,7 +57,7 @@ export default function MenuButtonShortcut({ text, ...props }) {
           )}
           {text.count > 0 &&
             (!countIcon ? (
-              <Typography className={classes.count}>{text.count}</Typography>
+              <Icon className={classes.count}>star</Icon>
             ) : (
               <Icon className={classes.count}>{countIcon}</Icon>
             ))}

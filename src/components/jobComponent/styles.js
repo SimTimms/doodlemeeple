@@ -44,7 +44,6 @@ export const useStyles = makeStyles((theme) => ({
     minHeight: 40,
     maxHeight: 40,
     marginRight: 5,
-    marginLeft: -25,
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
@@ -82,6 +81,8 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    color: '#fff',
+    fontSize: 30,
   },
   gameImg: {
     width: 180,

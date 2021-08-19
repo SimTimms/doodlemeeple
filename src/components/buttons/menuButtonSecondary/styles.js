@@ -47,5 +47,6 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     color: theme.palette.primary.dark,
     zIndex: 2,
+    fontSize: 10,
   },
 }));
