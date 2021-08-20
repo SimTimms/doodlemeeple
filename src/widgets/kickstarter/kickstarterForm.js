@@ -15,6 +15,7 @@ import {
   REMOVE_KICKSTARTER,
 } from './data';
 import { toaster } from '../../utils/toaster';
+import { MenuContext } from '../../context';
 
 export default function KickstarterForm({ ...props }) {
   const classes = useStyles();
@@ -130,32 +131,39 @@ export default function KickstarterForm({ ...props }) {
           <Divider />
 
           {kickstarter._id === 'new' ? (
-            <Mutation
-              mutation={CREATE_KICKSTARTER}
-              variables={{
-                ...kickstarter,
-              }}
-              onCompleted={(data) => {
-                toaster('Saved');
-                setKickstarter({
-                  ...kickstarter,
-                  _id: data.kickstarterCreateOne.recordId,
-                });
-              }}
-            >
-              {(mutation) => {
+            <MenuContext.Consumer>
+              {(menu) => {
+                console.log(menu);
                 return (
-                  <MenuButtonStandard
-                    title="Create"
-                    icon="add"
-                    disabled={kickstarter.name.length < 1}
-                    onClickEvent={() => {
-                      mutation();
+                  <Mutation
+                    mutation={CREATE_KICKSTARTER}
+                    variables={{
+                      ...kickstarter,
                     }}
-                  />
+                    onCompleted={() => {
+                      toaster('Saved');
+                      menu.updateMenuContext({
+                        ...menu.jobPage,
+                        secondaryPage: 'my_kickstarters',
+                      });
+                    }}
+                  >
+                    {(mutation) => {
+                      return (
+                        <MenuButtonStandard
+                          title="Create"
+                          icon="add"
+                          disabled={kickstarter.name.length < 1}
+                          onClickEvent={() => {
+                            mutation();
+                          }}
+                        />
+                      );
+                    }}
+                  </Mutation>
                 );
               }}
-            </Mutation>
+            </MenuContext.Consumer>
           ) : (
             <Column mw={200}>
               <Mutation

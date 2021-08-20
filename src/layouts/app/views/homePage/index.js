@@ -1,8 +1,8 @@
 import React from 'react';
 import { TabPage } from '../../../../components';
-import { HistoryContext } from '../../../../context';
+import { HistoryContext, MenuContext } from '../../../../context';
 import {
-  mainMenu,
+  homeMenu,
   gameMenu,
   kickstarterMenu,
   communityMenu,
@@ -11,66 +11,55 @@ import CommunityPage from '../communityPage';
 import { Games, CreativeRosterWidget, Kickstarters } from '../../../../widgets';
 
 export default function HomePage() {
-  const [primaryPage, setPrimaryPage] = React.useState('community');
-  const [secondaryPage, setSecondaryPage] = React.useState('dashboard');
-
-  function setPages(primaryPage) {
-    setPrimaryPage(primaryPage);
-    setSecondaryPage(
-      primaryPage === 'community'
-        ? 'dashboard'
-        : primaryPage === 'games'
-        ? 'games'
-        : primaryPage === 'kickstarters' && 'kickstarters'
-    );
-  }
+  const [pageValues, setPageValues] = React.useState({
+    primaryPage: 'community',
+    secondaryPage: 'dashboard',
+    kickstarterId: null,
+    gameId: null,
+  });
 
   return (
-    <HistoryContext.Consumer>
-      {(history) => (
-        <TabPage
-          title={null}
-          primaryMenu={
-            mainMenu(history, {}, setPages).filter(
-              (item) => item.machineName === 'home'
-            )[0].postsMenu
-          }
-          secondaryMenu={
-            primaryPage === 'games'
-              ? gameMenu(setSecondaryPage)
-              : primaryPage === 'community'
-              ? communityMenu(setSecondaryPage)
-              : primaryPage === 'kickstarters' &&
-                kickstarterMenu(setSecondaryPage)
-          }
-          menu={null}
-          activePrimary={primaryPage}
-          activeSecondary={secondaryPage}
-        >
-          {primaryPage === 'community' && secondaryPage === 'dashboard' ? (
-            <CommunityPage />
-          ) : (
-            secondaryPage === 'profiles' && (
-              <CreativeRosterWidget
-                setSecondaryPage={setSecondaryPage}
-                secondaryPage={secondaryPage}
-              />
-            )
-          )}
-          {primaryPage === 'games' && (
-            <Games
-              setSecondaryPage={setSecondaryPage}
-              secondaryPage={secondaryPage}
-            />
-          )}
-          {primaryPage === 'kickstarters' && (
-            <Kickstarters
-              setSecondaryPage={setSecondaryPage}
-              secondaryPage={secondaryPage}
-            />
-          )}
-        </TabPage>
-      )}
-    </HistoryContext.Consumer>
+    <MenuContext.Provider
+      value={{
+        homePage: {
+          primaryPage: pageValues.primaryPage,
+          secondaryPage: pageValues.secondaryPage,
+          kickstarterId: pageValues.kickstarterId,
+          gameId: pageValues.gameId,
+        },
+        updateMenuContext: setPageValues,
+      }}
+    >
+      <HistoryContext.Consumer>
+        {(history) => (
+          <TabPage
+            title={null}
+            primaryMenu={homeMenu(pageValues, setPageValues)}
+            secondaryMenu={
+              pageValues.primaryPage === 'games'
+                ? gameMenu(pageValues, setPageValues)
+                : pageValues.primaryPage === 'community'
+                ? communityMenu(pageValues, setPageValues)
+                : pageValues.primaryPage === 'kickstarters' &&
+                  kickstarterMenu(pageValues, setPageValues)
+            }
+            menu={null}
+            activePrimary={pageValues.primaryPage}
+            activeSecondary={pageValues.secondaryPage}
+          >
+            {pageValues.primaryPage === 'community' &&
+            pageValues.secondaryPage === 'dashboard' ? (
+              <CommunityPage />
+            ) : (
+              pageValues.secondaryPage === 'profiles' && (
+                <CreativeRosterWidget />
+              )
+            )}
+            {pageValues.primaryPage === 'games' && <Games />}
+            {pageValues.primaryPage === 'kickstarters' && <Kickstarters />}
+          </TabPage>
+        )}
+      </HistoryContext.Consumer>
+    </MenuContext.Provider>
   );
 }

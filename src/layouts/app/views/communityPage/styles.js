@@ -12,9 +12,13 @@ export const useStyles = makeStyles((theme) => ({
   subTitle: {
     fontSize: '1.2rem',
     paddingBottom: 10,
-    paddingTop: 10,
     paddingLeft: 10,
-    marginTop: 30,
+  },
+  summary: {
+    fontSize: '1rem',
+    paddingBottom: 10,
+    paddingLeft: 10,
+    opacity: 0.6,
   },
   gridRow: {
     display: 'flex',

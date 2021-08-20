@@ -71,13 +71,15 @@ export default function JobDescriptionWidget({ jobId, ...props }) {
                                         jobId: job._id,
                                         status: '',
                                       }}
-                                      onCompleted={(data) => {
+                                      onCompleted={() => {
                                         menu.updateMenuContext({
-                                          ...menu.jobPage,
-                                          primaryPage: 'quotes',
-                                          secondaryPage: 'quote_list',
-                                          inviteId: null,
-                                          jobId: job._id,
+                                          jobPage: {
+                                            ...menu.jobPage,
+                                            primaryPage: 'quotes',
+                                            secondaryPage: 'quote_list',
+                                            inviteId: null,
+                                            jobId: job._id,
+                                          },
                                         });
                                       }}
                                       onError={() => {}}

@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-export default function mainMenu(history, counts, onClickEvent) {
+export default function mainMenu(history, counts) {
   return [
     {
       name: 'Home',
@@ -8,45 +8,6 @@ export default function mainMenu(history, counts, onClickEvent) {
       machineName: 'home',
       link: () => history.push('/app/home'),
       count: null,
-      postsMenu: [
-        {
-          name: 'Community',
-          icon: 'home',
-          machineName: 'community',
-          link: () => onClickEvent('community'),
-          count: null,
-        },
-        {
-          name: 'Games',
-          icon: 'casino',
-          machineName: 'games',
-          link: () => onClickEvent('games'),
-          count: null,
-          gamesMenu: [
-            {
-              name: 'Browse',
-              icon: 'casino',
-              machineName: 'browse_games',
-              link: () => onClickEvent(),
-              count: 0,
-            },
-          ],
-        },
-        {
-          name: 'Kickstarters',
-          icon: 'view_in_ar',
-          machineName: 'kickstarters',
-          link: () => onClickEvent('kickstarters'),
-          count: null,
-        },
-        /*{
-          name: 'Events',
-          icon: 'event',
-          machineName: 'events',
-          link: () => onClickEvent('events'),
-          count: null,
-        },*/
-      ],
     },
     {
       name: 'Notifications',

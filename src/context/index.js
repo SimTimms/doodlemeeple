@@ -17,6 +17,12 @@ export const MenuContext = React.createContext({
     inviteId: null,
     contractId: null,
   },
+  homePage: {
+    primaryPage: null,
+    secondaryPage: null,
+    kickstarterId: null,
+    gameId: null,
+  },
   updateMenuContext: { secondary: () => {}, primary: () => {} },
 });
 

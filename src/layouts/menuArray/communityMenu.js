@@ -1,17 +1,25 @@
-export default function communityMenu(onClickEvent) {
+export default function communityMenu(pageValues, setPageValues) {
   return [
     {
       name: 'Dashboard',
       icon: 'dashboard',
       machineName: 'dashboard',
-      link: () => onClickEvent('dashboard'),
+      link: () =>
+        setPageValues({
+          ...pageValues,
+          secondaryPage: 'dashboard',
+        }),
       count: null,
     },
     {
       name: 'Profiles',
       icon: 'face',
       machineName: 'profiles',
-      link: () => onClickEvent('profiles'),
+      link: () =>
+        setPageValues({
+          ...pageValues,
+          secondaryPage: 'profiles',
+        }),
       count: null,
     },
     /*{

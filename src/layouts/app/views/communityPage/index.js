@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStyles } from './styles';
 import { Typography } from '@material-ui/core';
-import { Row, Column } from '../../../../components';
+import { Row, Column, DividerWithBorder } from '../../../../components';
 import { FeaturedArticle } from './components/getPosts';
 import {
   LatestCreativesWidget,
@@ -19,27 +19,43 @@ export default function CommunityPage() {
       {(history) => (
         <Row wrap="wrap" a="flex-start" j="space-around" w="100%">
           <FeaturedArticle history={history} />
+          <DividerWithBorder />
           <Column a="flex-start">
             <Typography className={classes.subTitle}>
               Featured Professionals
+            </Typography>
+            <Typography className={classes.summary}>
+              The best profiles chosen by us this week
             </Typography>
             <Row of="auto">
               <FeaturedCreativeHomeWidget />
             </Row>
           </Column>
           <Column a="flex-start">
+            <DividerWithBorder />
             <Typography className={classes.subTitle}>
-              Recent Additions
+              Recent Sign-ups
+            </Typography>
+            <Typography className={classes.summary}>
+              Professionals that have recently registered
             </Typography>
             <LatestCreativesWidget history={history} dashboard={true} />
           </Column>
           <Column a="flex-start">
+            <DividerWithBorder />
             <Typography className={classes.subTitle}>Job Posts</Typography>
+            <Typography className={classes.summary}>
+              Jobs that anyone can apply for
+            </Typography>
             <JobBoardMiniWidget history={history} dashboard={true} />
           </Column>
           <Column a="flex-start">
+            <DividerWithBorder />
             <Typography className={classes.subTitle}>
               Kickstarter Ads
+            </Typography>
+            <Typography className={classes.summary}>
+              A selection of kickstarter campaigns ads
             </Typography>
             <FeaturedKickstarters history={history} dashboard={true} />
           </Column>

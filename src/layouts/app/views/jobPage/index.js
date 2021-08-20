@@ -20,8 +20,6 @@ export default function JobPage() {
     jobId: null,
   });
 
-  console.log(pageValues);
-
   return (
     <MenuContext.Provider
       value={{

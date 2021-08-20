@@ -4,6 +4,7 @@ import communityMenu from './communityMenu';
 import kickstarterMenu from './kickstarterMenu';
 import workMenu from './workMenu';
 import jobMenu from './jobMenu';
+import homeMenu from './homeMenu';
 import jobMenuSecondary from './jobMenuSecondary';
 import taskMenu from './taskMenu';
 import messageMenu from './messageMenu';
@@ -30,4 +31,5 @@ export {
   jobMenuSecondary,
   jobMenu,
   quoteViewMenu,
+  homeMenu,
 };
