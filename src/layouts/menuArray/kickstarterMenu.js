@@ -13,7 +13,11 @@ export default function kickstarterMenu(pageValues, setPageValues) {
       icon: 'dynamic_feed',
       machineName: 'my_kickstarters',
       link: () =>
-        setPageValues({ ...pageValues, secondaryPage: 'my_kickstarters' }),
+        setPageValues({
+          ...pageValues,
+          secondaryPage: 'my_kickstarters',
+          kickstarterId: null,
+        }),
       count: null,
     },
     {
@@ -21,7 +25,11 @@ export default function kickstarterMenu(pageValues, setPageValues) {
       icon: 'add_circle',
       machineName: 'create_kickstarter',
       link: () =>
-        setPageValues({ ...pageValues, secondaryPage: 'create_kickstarter' }),
+        setPageValues({
+          ...pageValues,
+          secondaryPage: 'create_kickstarter',
+          kickstarterId: 'new',
+        }),
       count: null,
     },
   ];

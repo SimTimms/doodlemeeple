@@ -7,8 +7,9 @@ import {
   Row,
   CardComponent,
 } from '../../../components';
+import { MenuContext } from '../../../context';
 
-export default function KickstarterComponent({ kickstarter, setKickstarter }) {
+export default function KickstarterComponent({ kickstarter }) {
   const classes = useStyles();
   const pending =
     kickstarter.name !== '' && kickstarter.summary && kickstarter.featuredImage;
@@ -32,11 +33,21 @@ export default function KickstarterComponent({ kickstarter, setKickstarter }) {
                 </Typography>
               </Column>
             </Row>
-            <MenuButtonStandard
-              title="Edit"
-              onClickEvent={() => setKickstarter(kickstarter)}
-              disabled={false}
-            />
+            <MenuContext.Consumer>
+              {(menu) => (
+                <MenuButtonStandard
+                  title="Edit"
+                  onClickEvent={() =>
+                    menu.updateMenuContext({
+                      ...menu.homePage,
+                      kickstarterId: kickstarter._id,
+                      secondaryPage: 'create_kickstarter',
+                    })
+                  }
+                  disabled={false}
+                />
+              )}
+            </MenuContext.Consumer>
           </Row>
         </Column>
       </div>

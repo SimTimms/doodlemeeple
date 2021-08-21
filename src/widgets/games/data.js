@@ -19,6 +19,19 @@ export const REMOVE_GAME = gql`
     }
   }
 `;
+
+export const GAME_BY_ID = gql`
+  query gameById($_id: MongoID!) {
+    gameById(_id: $_id) {
+      _id
+      name
+      summary
+      featuredImage
+      url
+    }
+  }
+`;
+
 export const GAME_WIDGET = gql`
   {
     gameWidget {

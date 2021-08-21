@@ -19,6 +19,19 @@ export const REMOVE_KICKSTARTER = gql`
     }
   }
 `;
+
+export const KICKSTARTER_BY_ID = gql`
+  query kickstarterById($_id: MongoID!) {
+    kickstarterById(_id: $_id) {
+      _id
+      name
+      summary
+      featuredImage
+      url
+    }
+  }
+`;
+
 export const KICKSTARTER_WIDGET = gql`
   {
     kickstarterWidget {

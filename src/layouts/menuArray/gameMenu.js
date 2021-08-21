@@ -19,7 +19,11 @@ export default function gameMenu(pageValues, setPageValues) {
       icon: 'add_circle',
       machineName: 'create_game',
       link: () =>
-        setPageValues({ ...pageValues, secondaryPage: 'create_game' }),
+        setPageValues({
+          ...pageValues,
+          secondaryPage: 'create_game',
+          gameId: 'new',
+        }),
       count: null,
     },
   ];
