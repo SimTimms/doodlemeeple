@@ -86,13 +86,11 @@ export default function JobDescriptionWidget({ jobId }) {
                                           }}
                                           onCompleted={() => {
                                             menu.updateMenuContext({
-                                              jobPage: {
-                                                ...menu.jobPage,
-                                                primaryPage: 'quotes',
-                                                secondaryPage: 'quote_list',
-                                                inviteId: null,
-                                                jobId: job._id,
-                                              },
+                                              ...menu.jobPage,
+                                              primaryPage: 'quotes',
+                                              secondaryPage: 'quote_list',
+                                              inviteId: null,
+                                              jobId: job._id,
                                             });
                                             history.push(
                                               `/app/work/quotes:quote_list`
@@ -120,9 +118,10 @@ export default function JobDescriptionWidget({ jobId }) {
                                                       jobId: job._id,
                                                     }}
                                                     onCompleted={() => {
-                                                      history.push(
-                                                        '/app/projects/history'
-                                                      );
+                                                      menu.updateMenuContext({
+                                                        ...menu.jobPage,
+                                                        primaryPage: 'history',
+                                                      });
                                                     }}
                                                     onError={() => {}}
                                                   >

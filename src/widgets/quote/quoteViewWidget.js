@@ -151,7 +151,11 @@ export default function QuoteViewWidget({ quoteId }) {
                             icon="keyboard_arrow_right"
                             disabled={false}
                             onClickEvent={() => {
-                              menu.updateMenuContext({ ...menu.jobPage });
+                              menu.updateMenuContext({
+                                ...menu.jobPage,
+                                secondaryPage: 'contract',
+                                contractId: data.contractById._id,
+                              });
                             }}
                             styleOverride={{ margin: 'auto', width: 200 }}
                             type="button"

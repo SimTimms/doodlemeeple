@@ -68,7 +68,7 @@ export default function JobComponent({ job }) {
                       style={{ width: '100%' }}
                       className={classes.cardSummary}
                     >
-                      {nameShortener(job.name, 14)}
+                      {nameShortener(job.name, 24)}
                     </Typography>
                     <Typography
                       variant="body2"
@@ -85,7 +85,7 @@ export default function JobComponent({ job }) {
                       })}
                     >
                       {hasNewQuote.length > 0
-                        ? 'Task: Reply to Quote'
+                        ? 'Quote Recieved'
                         : complete
                         ? 'Completed'
                         : submitted && !job.isPublic && contractsIn === false

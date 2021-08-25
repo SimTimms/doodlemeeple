@@ -49,7 +49,6 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
-    filter: 'brightness(50%)',
   },
   profileThumbNotification: {
     border: `2px solid ${theme.palette.secondary.main}`,

@@ -100,6 +100,7 @@ import FeaturedCreative from './featuredCreative';
 import CreativeRosterProfiles from './creativeRosterProfiles';
 import UserDeleted from './userDeleted';
 import LargeImage from './largeImage';
+import StatusBadge from './statusBadge';
 
 import {
   Header,
@@ -126,6 +127,7 @@ import {
 } from './blocks';
 
 export {
+  StatusBadge,
   MainTitle,
   Title,
   TopMenuButton,

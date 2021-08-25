@@ -53,9 +53,20 @@ export const QUOTE_IN_WIDGET = gql`
       status
       cost
       currency
+      seenByJobOwner
       user {
         _id
         name
+        profileImg
+      }
+      job {
+        _id
+        name
+        user {
+          _id
+          name
+          profileImg
+        }
       }
     }
   }

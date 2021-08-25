@@ -7,6 +7,7 @@ import {
   Row,
   DividerWithBorder,
   CardComponent,
+  StatusBadge,
 } from '../';
 import clsx from 'clsx';
 import { Mutation } from 'react-apollo';
@@ -23,6 +24,7 @@ export default function InviteComponent({ invite, onClickEvent }) {
   const rejected = invite.status === 'rejected';
   const draft = invite.status === 'draft';
   const accepted = invite.status === 'accepted';
+  const jobClosed = invite.status === 'closed';
   const inviteJob = invite.job ? invite.job : null;
   const completed = inviteJob ? inviteJob.submitted === 'complete' : false;
   const [isOpen, setIsOpen] = React.useState(false);
@@ -65,44 +67,44 @@ export default function InviteComponent({ invite, onClickEvent }) {
                         30
                       )}`}
                     </Typography>
-                    <Typography
-                      style={{ fontSize: 12 }}
-                      className={clsx({
-                        [classes.dull]: true,
-                        [classes.red]:
-                          unopened || declined || rejected || draft || opened,
-                      })}
-                    >
-                      {draft
-                        ? 'Task: Complete your quote'
-                        : completed
-                        ? 'Completed'
-                        : declined
-                        ? 'Declined'
-                        : unopened
-                        ? 'Task: Open this Invite'
-                        : opened
-                        ? 'Task: Respond to Invite'
-                        : quoted
-                        ? 'Quote Submitted'
-                        : rejected
-                        ? 'Rejected'
-                        : accepted && 'Accepted'}
-                    </Typography>
+                    <StatusBadge
+                      status={
+                        draft
+                          ? 'Complete your quote'
+                          : completed
+                          ? 'Completed'
+                          : declined
+                          ? 'Declined'
+                          : unopened
+                          ? 'Open this Invite'
+                          : opened
+                          ? 'Respond to Invite'
+                          : quoted
+                          ? 'Quote Submitted'
+                          : rejected
+                          ? 'Rejected'
+                          : jobClosed
+                          ? 'Job Closed'
+                          : accepted && 'Accepted'
+                      }
+                      red={null}
+                    />
                   </Column>
                 </Row>
-                <MenuButtonStandard
-                  title={quoted ? 'Quotes' : isOpen ? 'Hide' : 'Show'}
-                  color="primary"
-                  icon={
-                    completed
-                      ? ''
-                      : unopened || opened || quoted || accepted || draft
-                      ? 'local_post_office'
-                      : ''
-                  }
-                  onClickEvent={() => onClickEvent()}
-                />
+                {!declined && !jobClosed && (
+                  <MenuButtonStandard
+                    title={quoted ? 'Quotes' : isOpen ? 'Hide' : 'Show'}
+                    color="primary"
+                    icon={
+                      completed
+                        ? ''
+                        : unopened || opened || quoted || accepted || draft
+                        ? 'local_post_office'
+                        : ''
+                    }
+                    onClickEvent={() => onClickEvent()}
+                  />
+                )}
               </Row>
               {isOpen && (
                 <Column>

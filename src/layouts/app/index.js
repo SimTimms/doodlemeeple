@@ -275,11 +275,11 @@ export default function AppLayout(props) {
                       data.counts.invites +
                       data.counts.quotesDeclined +
                       data.counts.quotesAccepted,
-                    myWork: 0,
+                    myWork: data.counts.quotesAccepted,
                     invites: data.counts.invites,
                     inviteList: data.counts.invites,
-                    quotes:
-                      data.counts.quotesDeclined + data.counts.quotesAccepted,
+                    quotes: 0,
+                    history: data.counts.quotesDeclined,
                     messages: data.counts.messages,
                   });
                 }}

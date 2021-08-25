@@ -31,7 +31,7 @@ export default function InviteComponentFull({
   const [display, setDisplay] = React.useState(false);
   const [tabNbrTwo, setTabNbrTwo] = React.useState(0);
   const unread = invite.status === 'unopened';
-  const quoted = invite.status === 'quote_sent';
+  const quoted = contract && contract.status === 'submitted' ? true : false;
   const read = invite.status === 'read';
   const declined = invite.status === 'declined';
   useEffect(() => {
@@ -80,7 +80,7 @@ export default function InviteComponentFull({
                     : read
                     ? 'Opened'
                     : quoted
-                    ? 'Task: Reply to Quote'
+                    ? 'Quote Recieved'
                     : declined && 'Declined'}
                 </Typography>
               </Column>

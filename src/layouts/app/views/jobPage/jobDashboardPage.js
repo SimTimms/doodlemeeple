@@ -7,6 +7,7 @@ import {
   UpdateJob,
   QuoteInWidget,
   QuoteViewWidget,
+  FullContractWidget,
 } from '../../../../widgets/';
 
 export default function JobDashboardPage({ pageValues, setPageValues }) {
@@ -42,7 +43,9 @@ export default function JobDashboardPage({ pageValues, setPageValues }) {
                   ) : pageValues.secondaryPage === 'quotes_in' ? (
                     <QuoteInWidget jobId={pageValues.jobId} />
                   ) : pageValues.secondaryPage === 'view_quote' ? (
-                    <QuoteViewWidget s quoteId={pageValues.contractId} />
+                    <QuoteViewWidget quoteId={pageValues.contractId} />
+                  ) : pageValues.secondaryPage === 'contract' ? (
+                    <FullContractWidget contractId={pageValues.contractId} />
                   ) : (
                     pageValues.secondaryPage === 'edit_job' && (
                       <UpdateJob jobId={pageValues.jobId} />

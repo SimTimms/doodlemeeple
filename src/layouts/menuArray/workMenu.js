@@ -45,6 +45,7 @@ export default function workMenu(counts, pageValues, onClickEvent) {
       icon: 'history',
       machineName: 'history',
       link: () => onClickEvent({ ...pageValues, primaryPage: 'history' }),
+      count: counts.history,
     },
     pageValues.jobId
       ? {

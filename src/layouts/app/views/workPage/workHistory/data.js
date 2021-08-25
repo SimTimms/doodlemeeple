@@ -1,40 +1,62 @@
 import gql from 'graphql-tag';
 
-export const WORK_HISTORY = gql`
-  query workHistory {
-    workHistory {
+export const INVITE_HISTORY = gql`
+  query inviteHistory {
+    inviteHistory {
       _id
-      name
-      genre
-      scope
-      isPublic
-      mechanics
-      timeframe
-      budget
-      extra
-      funded
-      speculative
-      inLieu
-      termsAccepted
-      gallery {
-        _id
-        summary
-        images {
-          _id
-          img
-        }
-      }
-      summary
-      location
-      creativeSummary
-      user {
+      status
+      receiver {
         _id
         name
         profileImg
       }
-      showreel
-      type
+      sender {
+        name
+        profileImg
+        _id
+      }
+      job {
+        _id
+        name
+        user {
+          _id
+          email
+          name
+          profileImg
+        }
+      }
+    }
+  }
+`;
+
+export const CONTRACT_HISTORY = gql`
+  query contractHistory {
+    contractHistory {
+      _id
+      notes
+      deadline
+      startDate
+      cost
+      currency
+      status
+      updatedAt
       createdAt
+      seenByOwner
+      user {
+        name
+        profileImg
+        _id
+      }
+      job {
+        _id
+        name
+        user {
+          _id
+          email
+          name
+          profileImg
+        }
+      }
     }
   }
 `;

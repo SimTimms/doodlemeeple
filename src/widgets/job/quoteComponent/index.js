@@ -6,6 +6,7 @@ import {
   Column,
   Row,
   CardComponent,
+  StatusBadge,
 } from '../../../components';
 import clsx from 'clsx';
 
@@ -13,6 +14,9 @@ export default function QuoteComponent({ contract, onClickEvent }) {
   const classes = useStyles();
   const accepted = contract.status === 'accepted';
   const declined = contract.status === 'declined';
+  const closed = contract.status === 'closed';
+  const deleted = contract.status === 'deleted';
+  const unseen = contract.seenByOwner === false;
   if (!contract.job)
     return (
       <CardComponent type="dark">
@@ -34,7 +38,10 @@ export default function QuoteComponent({ contract, onClickEvent }) {
               style={{
                 backgroundImage: `url(${contract.job.user.profileImg})`,
               }}
-              className={classes.profileThumb}
+              className={clsx({
+                [classes.profileThumb]: true,
+                [classes.unseen]: (declined && unseen) || (accepted && unseen),
+              })}
             ></div>
             <Column a="flex-start">
               <Typography
@@ -43,18 +50,13 @@ export default function QuoteComponent({ contract, onClickEvent }) {
               >
                 {`Quote for ${contract.job.name}`}
               </Typography>
-              <Typography
-                style={{ fontSize: 12 }}
-                className={clsx({
-                  [classes.dull]: true,
-                  [classes.red]: false,
-                })}
-              >
-                {contract.status}
-              </Typography>
+              <StatusBadge
+                status={contract.status === '' ? 'Draft' : contract.status}
+                red={(declined && unseen) || (accepted && unseen)}
+              />
             </Column>
           </Row>
-          {!accepted && !declined ? (
+          {!accepted && !declined && !closed && !deleted ? (
             <MenuButtonStandard
               title="Edit"
               onClickEvent={() => {
@@ -62,12 +64,14 @@ export default function QuoteComponent({ contract, onClickEvent }) {
               }}
             />
           ) : (
-            <MenuButtonStandard
-              title="Dashboard"
-              onClickEvent={() => {
-                onClickEvent();
-              }}
-            />
+            accepted && (
+              <MenuButtonStandard
+                title="Dashboard"
+                onClickEvent={() => {
+                  onClickEvent();
+                }}
+              />
+            )
           )}
         </Row>
       </Column>

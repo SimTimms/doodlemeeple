@@ -10,6 +10,7 @@ export default function MenuButtonStandard({
   type,
 }) {
   const classes = useStyles();
+  const [confirm, setConfirm] = React.useState(false);
 
   return (
     <div
@@ -17,9 +18,21 @@ export default function MenuButtonStandard({
         [classes.buttonWrapper]: true,
         [classes.delete]: type === 'delete',
       })}
-      onClick={() => !disabled && onClickEvent()}
+      onClick={() =>
+        disabled
+          ? null
+          : type === 'delete' && !confirm
+          ? setConfirm(true)
+          : onClickEvent()
+      }
     >
-      <Typography className={classes.title}>{title}</Typography>
+      <Typography className={classes.title}>
+        {type === 'delete' && !confirm
+          ? title
+          : type === 'delete' && confirm
+          ? 'Confirm'
+          : title}
+      </Typography>
     </div>
   );
 }

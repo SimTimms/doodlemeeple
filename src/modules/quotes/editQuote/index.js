@@ -14,12 +14,14 @@ import charsRemaining from '../../../utils/charsRemaining';
 import replaceNulls from '../../../utils/replaceNulls';
 import { TITLES, SUB_TITLES } from './constants';
 import { MenuContext } from '../../../context';
+import MiniDash from './miniDash';
 
 export default function EditQuote({ contractData }) {
   const classes = useStyles();
   const [field, setField] = React.useState(0);
   const [contract, setContract] = React.useState(null);
   const fieldArray = [
+    'miniDash',
     'startDate',
     'deadline',
     'cost',
@@ -46,7 +48,9 @@ export default function EditQuote({ contractData }) {
       title={TITLES[fieldArray[field]]}
       subTitle={SUB_TITLES[fieldArray[field]]}
       onClickEvent={
-        field < fieldArray.length - 1
+        field == 0
+          ? null
+          : field < fieldArray.length - 1
           ? () => {
               fieldArray[field] !== 'summary'
                 ? updateContract({
@@ -79,6 +83,7 @@ export default function EditQuote({ contractData }) {
     >
       <Column w={400}>
         <CardComponent locked={false}>
+          {fieldArray[field] === 'miniDash' && <MiniDash contract={contract} />}
           {fieldArray[field] === 'startDate' && (
             <StartDate contract={contract} setContract={setContract} />
           )}

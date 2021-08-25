@@ -42,8 +42,9 @@ export default function JobPage() {
                   title={null}
                   primaryMenu={jobMenu(counts, pageValues, setPageValues)}
                   secondaryMenu={
-                    pageValues.primaryPage === 'editing_job' &&
-                    pageValues.secondaryPage === 'view_quote'
+                    (pageValues.primaryPage === 'editing_job' &&
+                      pageValues.secondaryPage === 'view_quote') ||
+                    pageValues.secondaryPage === 'contract'
                       ? quoteViewMenu(pageValues, setPageValues)
                       : pageValues.primaryPage === 'editing_job'
                       ? jobDashboardSecondary(counts, pageValues, setPageValues)

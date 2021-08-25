@@ -26,7 +26,9 @@ export default function MenuButtonSecondary({
         >
           <Icon className={classes.icon}>{icon}</Icon>
         </div>
-        {count && count > 0 && <Icon className={classes.count}>star</Icon>}
+        {count && count > 0 ? (
+          <Icon className={classes.count}>star</Icon>
+        ) : null}
       </Row>
       <Typography className={classes.title}>{title}</Typography>
     </div>
