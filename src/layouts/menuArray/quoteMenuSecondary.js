@@ -1,4 +1,4 @@
-export default function quoteMenuSecondary(pageValues, onClickEvent) {
+export default function quoteMenuSecondary(counts, pageValues, onClickEvent) {
   return [
     {
       name: 'Quote List',
@@ -11,7 +11,7 @@ export default function quoteMenuSecondary(pageValues, onClickEvent) {
           jobId: null,
           inviteId: null,
         }),
-      count: null,
+      count: counts.quote_list,
     },
     pageValues.contractId
       ? {

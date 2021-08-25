@@ -37,7 +37,7 @@ export default function jobMenu(counts, pageValues, onClickEvent) {
           jobId: null,
         }),
     },
-    pageValues.jobId
+    pageValues.jobId && pageValues.primaryPage !== 'job_board'
       ? {
           name: 'Editing Job',
           icon: 'edit',

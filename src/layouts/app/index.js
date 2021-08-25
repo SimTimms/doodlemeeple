@@ -172,8 +172,6 @@ export default function AppLayout(props) {
                     autosaveIsOn={true}
                     history={history}
                   />
-                ) : page === 'job-description' ? (
-                  <JobDescriptionWidget jobId={pathParam} history={history} />
                 ) : page === 'quotes-in' ? (
                   <QuoteInWidget history={history} />
                 ) : page === 'edit-quote' ? (
@@ -216,7 +214,7 @@ export default function AppLayout(props) {
                 ) : page === 'home' ? (
                   <HomePage />
                 ) : page === 'work' ? (
-                  <WorkPage />
+                  <WorkPage jumpTo={pathParam} />
                 ) : page === 'jobs' ? (
                   <JobPage />
                 ) : page === 'public-preview' ? (

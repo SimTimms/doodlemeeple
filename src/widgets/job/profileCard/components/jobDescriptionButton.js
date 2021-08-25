@@ -1,21 +1,25 @@
 import React from 'react';
 import { IconButton } from '../../../../components';
-import { HistoryContext } from '../../../../context';
+import { MenuContext } from '../../../../context';
 
 export default function JobDescriptionButton({ jobId }) {
   return (
-    <HistoryContext.Consumer>
-      {(history) => (
+    <MenuContext.Consumer>
+      {(menu) => (
         <IconButton
           color="text-dark"
           title="Full Description"
           icon=""
           styleOverride={{ marginTop: 0 }}
           onClickEvent={() => {
-            history.push(`/app/job-description/${jobId}`);
+            menu.updateMenuContext({
+              ...menu.jobPage,
+              jobId,
+              secondaryPage: 'viewing_job',
+            });
           }}
         />
       )}
-    </HistoryContext.Consumer>
+    </MenuContext.Consumer>
   );
 }

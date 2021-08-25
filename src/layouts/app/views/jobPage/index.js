@@ -6,12 +6,14 @@ import {
   jobMenuSecondary,
   jobDashboardSecondary,
   quoteViewMenu,
+  jobBoardMenu,
 } from '../../../menuArray';
-import { CreateJob, JobBoardWidget } from '../../../../widgets';
+import { CreateJob } from '../../../../widgets';
 import { MenuContext } from '../../../../context';
 import JobDashboardPage from './jobDashboardPage';
 import JobHistory from './jobHistory';
 import JobPosts from './components/jobPosts';
+import JobBoardPage from './jobBoardPage';
 
 export default function JobPage() {
   const [pageValues, setPageValues] = React.useState({
@@ -45,8 +47,11 @@ export default function JobPage() {
                       ? quoteViewMenu(pageValues, setPageValues)
                       : pageValues.primaryPage === 'editing_job'
                       ? jobDashboardSecondary(counts, pageValues, setPageValues)
-                      : pageValues.primaryPage === 'job_posts' &&
-                        jobMenuSecondary(counts, pageValues, setPageValues)
+                      : pageValues.primaryPage === 'job_posts'
+                      ? jobMenuSecondary(counts, pageValues, setPageValues)
+                      : pageValues.primaryPage === 'job_board' &&
+                        pageValues.jobId &&
+                        jobBoardMenu(pageValues, setPageValues)
                   }
                   menu={null}
                   activePrimary={pageValues.primaryPage}
@@ -58,7 +63,7 @@ export default function JobPage() {
                       setPageValues={setPageValues}
                     />
                   ) : pageValues.primaryPage === 'job_board' ? (
-                    <JobBoardWidget />
+                    <JobBoardPage pageValues={pageValues} />
                   ) : pageValues.primaryPage === 'job_posts' &&
                     pageValues.secondaryPage === 'job_ads' ? (
                     <JobPosts />
