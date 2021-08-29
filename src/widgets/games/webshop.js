@@ -4,31 +4,64 @@ import {
   Column,
   CardComponent,
   MenuButtonStandard,
+  Row,
+  DividerMini,
 } from '../../components';
 import { Typography } from '@material-ui/core';
 
-export default function Webshop({ webshopIn, game, setGame, newMode }) {
+export default function Webshop({
+  webshopIn,
+  game,
+  setGame,
+  newMode,
+  setStore,
+  index,
+}) {
   const [webshop, setWebshop] = React.useState({
     name: '',
     url: '',
     price: '',
   });
   const [editMode, setEditMode] = React.useState(false);
-
   useEffect(() => {
-    setWebshop(webshopIn);
+    setWebshop({ index: index, ...webshopIn });
     newMode && setEditMode(true);
-  }, [webshopIn, newMode]);
+  }, [webshopIn, newMode, index]);
 
   if (!editMode) {
     return (
-      <CardComponent type="premium">
-        <Typography>asd</Typography>
-      </CardComponent>
+      <Column w="100%">
+        <Row w="100%" j="space-between">
+          <Row w="100%" j="space-between" pr={10}>
+            <Typography>{webshop.name}</Typography>
+            <Typography>{webshop.price}</Typography>
+          </Row>
+          <MenuButtonStandard
+            icon="edit"
+            mr={true}
+            onClickEvent={() => setStore({ ...webshop, index: index })}
+          />
+          <MenuButtonStandard
+            icon="delete"
+            type="delete"
+            onClickEvent={() =>
+              setGame({
+                ...game,
+                webshop: [
+                  ...game.webshop.filter(
+                    (value, arrIndex) => index !== arrIndex
+                  ),
+                ],
+              })
+            }
+          />
+        </Row>
+        <DividerMini />
+      </Column>
     );
   }
   return (
-    <CardComponent type="premium" premiumId="Where to buy">
+    <CardComponent>
       <Column a="center" j="center">
         <FieldBox
           value={webshop.name}
@@ -66,8 +99,8 @@ export default function Webshop({ webshopIn, game, setGame, newMode }) {
         />
         <FieldBox
           value={webshop.price}
-          title="Price (USD)"
-          maxLength={512}
+          title="Price"
+          maxLength={10}
           onChangeEvent={(e) => {
             setWebshop({
               ...webshop,
@@ -75,18 +108,49 @@ export default function Webshop({ webshopIn, game, setGame, newMode }) {
             });
           }}
           replaceMode="loose"
-          placeholder="Example: 59.99"
+          placeholder="Example: £59.99, 50.00 USD"
           info="How much can someone expect to pay for your game at this online store."
           warning=""
           size="s"
           multiline={false}
         />
-        <MenuButtonStandard
-          title="Create"
-          onClickEvent={() =>
-            setGame({ ...game, webshop: [...game.webshop, webshop] })
-          }
-        />
+        <DividerMini />
+        {webshop.index === null ? (
+          <MenuButtonStandard
+            title="Create"
+            onClickEvent={() => {
+              setGame({
+                ...game,
+                webshop: [
+                  ...game.webshop,
+                  {
+                    name: webshop.name,
+                    url: webshop.url,
+                    price: webshop.price,
+                  },
+                ],
+              });
+              setStore(null);
+            }}
+          />
+        ) : (
+          <MenuButtonStandard
+            title="Save"
+            onClickEvent={() => {
+              let newArr = [...game.webshop];
+              newArr.splice(webshop.index, 1, {
+                name: webshop.name,
+                url: webshop.url,
+                price: webshop.price,
+              });
+              setGame({
+                ...game,
+                webshop: newArr,
+              });
+              setStore(null);
+            }}
+          />
+        )}
       </Column>
     </CardComponent>
   );

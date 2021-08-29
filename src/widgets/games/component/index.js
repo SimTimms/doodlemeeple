@@ -35,7 +35,7 @@ export default function GameComponent({ game }) {
                   </Column>
                 </Row>
                 <MenuButtonStandard
-                  title="Edit"
+                  icon="edit"
                   onClickEvent={() =>
                     menu.updateMenuContext({
                       ...menu.homePage,

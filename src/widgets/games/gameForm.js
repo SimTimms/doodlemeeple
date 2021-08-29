@@ -1,4 +1,5 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import {
   MenuButtonStandard,
@@ -7,6 +8,7 @@ import {
   Uploader,
   DividerMini,
   Divider,
+  CardComponent,
 } from '../../components';
 import { Mutation, Query } from 'react-apollo';
 import { CREATE_GAME, UPDATE_GAME, REMOVE_GAME, GAME_BY_ID } from './data';
@@ -16,18 +18,30 @@ import Webshop from './webshop';
 
 export default function GameForm() {
   const classes = useStyles();
-  const [game, setGame] = React.useState({
-    name: '',
-    logo: '',
-    featuredImage: '',
-    summary: '',
-    url: '',
-    showreel: '',
-    price: '',
-    webshop: null,
-    _id: 'new',
-  });
+  const [game, setGame] = React.useState(null);
   const [deleteConfirm, setDeleteConfirm] = React.useState(false);
+  const [store, setStore] = React.useState(null);
+  console.log(store);
+  if (!game) {
+    return (
+      <MenuContext.Consumer>
+        {(menu) => (
+          <Query
+            query={GAME_BY_ID}
+            fetchPolicy="network-only"
+            variables={{ _id: menu.homePage.gameId }}
+            onCompleted={(data) =>
+              data.gameById !== null && setGame({ ...data.gameById })
+            }
+          >
+            {({ data }) => {
+              return null;
+            }}
+          </Query>
+        )}
+      </MenuContext.Consumer>
+    );
+  }
   return (
     <MenuContext.Consumer>
       {(menu) => (
@@ -125,16 +139,38 @@ export default function GameForm() {
                 multiline={false}
               />
               <Divider />
-              {game.webshop &&
-                game.webshop.map((webshop) => (
-                  <Webshop webshopIn={webshop} setGame={setGame} game={game} />
-                ))}
-              <Webshop
-                webshopIn={{ name: '', url: '', price: '' }}
-                setGame={setGame}
-                game={game}
-                newMode={true}
-              />
+              <CardComponent type="premium" premiumId="Online Stores">
+                {game.webshop &&
+                  game.webshop.map((webshop, index) => (
+                    <Webshop
+                      webshopIn={{ ...webshop }}
+                      setGame={setGame}
+                      game={game}
+                      key={`${index}_${Math.random().toString(36)}`}
+                      setStore={setStore}
+                      index={index}
+                    />
+                  ))}
+                {!store ? (
+                  <Typography
+                    className={classes.newStore}
+                    onClick={() =>
+                      setStore({ index: null, name: '', url: '', price: '' })
+                    }
+                  >
+                    + Add an online store listing
+                  </Typography>
+                ) : (
+                  <Webshop
+                    webshopIn={store}
+                    setGame={setGame}
+                    game={game}
+                    newMode={true}
+                    setStore={setStore}
+                    index={null}
+                  />
+                )}
+              </CardComponent>
 
               <Divider />
               {game._id === 'new' ? (
@@ -224,18 +260,6 @@ export default function GameForm() {
               )}
             </Column>
           </div>
-          <Query
-            query={GAME_BY_ID}
-            fetchPolicy="network-only"
-            variables={{ _id: menu.homePage.gameId }}
-            onCompleted={(data) =>
-              data.gameById !== null && setGame({ ...data.gameById })
-            }
-          >
-            {({ data }) => {
-              return null;
-            }}
-          </Query>
         </div>
       )}
     </MenuContext.Consumer>

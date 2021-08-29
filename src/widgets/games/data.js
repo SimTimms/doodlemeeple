@@ -54,6 +54,7 @@ export const GAME_WIDGET = gql`
       webshop {
         name
         url
+        price
       }
     }
   }

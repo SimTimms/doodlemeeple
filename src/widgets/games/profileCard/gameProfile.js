@@ -49,19 +49,39 @@ export default function GameProfile({ game }) {
             {game.price}
           </Typography>
         )}
-        {game.url ? (
-          <a
-            href={`${game.url}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ textDecoration: 'none' }}
-          >
-            <MenuButtonStandard title="Website" onClickEvent={() => {}} />
-            <Divider />
-          </a>
-        ) : (
-          <div></div>
-        )}
+        <Column w="100%">
+          <Row w="100%" j="space-around">
+            {game.webshop.map((webshop) => (
+              <a
+                href={`${webshop.url}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'none' }}
+              >
+                <MenuButtonStandard
+                  title={`${webshop.name} ${webshop.price ? 'from' : ''} ${
+                    webshop.price ? webshop.price : ''
+                  }`}
+                  icon="shopping_cart"
+                  onClickEvent={() => {}}
+                />
+              </a>
+            ))}
+            {game.url ? (
+              <a
+                href={`${game.url}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'none' }}
+              >
+                <MenuButtonStandard title="Website" onClickEvent={() => {}} />
+              </a>
+            ) : (
+              <div></div>
+            )}
+          </Row>
+          <Divider />
+        </Column>
       </Column>
     </div>
   );

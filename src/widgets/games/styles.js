@@ -18,4 +18,10 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     height: 160,
   },
+  newStore: {
+    color: theme.palette.primary.main,
+    textDecoration: 'underline',
+    cursor: 'pointer',
+    paddingTop: 5,
+  },
 }));
