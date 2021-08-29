@@ -10,6 +10,7 @@ import {
   FeaturedCreativeHomeWidget,
 } from '../../../../widgets';
 import { HistoryContext } from '../../../../context';
+import SubTitle from './subTitle';
 
 export default function CommunityPage() {
   const classes = useStyles();
@@ -18,42 +19,48 @@ export default function CommunityPage() {
     <HistoryContext.Consumer>
       {(history) => (
         <Row wrap="wrap" a="flex-start" j="space-around" w="100%">
-          <FeaturedArticle history={history} />
-          <DividerWithBorder />
-          <Column a="flex-start">
-            <Typography className={classes.subTitle}>
-              Featured Professionals
-            </Typography>
+          <Column a="flex-start" w="100%">
+            <SubTitle
+              title="Articles"
+              menuStr="All Posts"
+              onClickEvent={() => {}}
+            />
+            <FeaturedArticle history={history} />
+          </Column>
+          <Column a="flex-start" w="100%">
+            <SubTitle
+              title="Featured Professionals"
+              menuStr="View All"
+              onClickEvent={() => {}}
+            />
             <Typography className={classes.summary}>
               The best profiles chosen by us this week
             </Typography>
-            <Row of="auto">
+            <Row w="100%" wrap="flex-wrap">
               <FeaturedCreativeHomeWidget />
             </Row>
           </Column>
           <Column a="flex-start">
-            <DividerWithBorder />
-            <Typography className={classes.subTitle}>
-              Recent Sign-ups
-            </Typography>
+            <SubTitle
+              title="New to DoodleMeeple"
+              menuStr="View All"
+              onClickEvent={() => {}}
+            />
             <Typography className={classes.summary}>
               Professionals that have recently registered
             </Typography>
             <LatestCreativesWidget history={history} dashboard={true} />
           </Column>
           <Column a="flex-start">
-            <DividerWithBorder />
-            <Typography className={classes.subTitle}>Job Posts</Typography>
-            <Typography className={classes.summary}>
-              Jobs that anyone can apply for
-            </Typography>
+            <SubTitle title="Jobs" menuStr="View All" onClickEvent={() => {}} />
             <JobBoardMiniWidget history={history} dashboard={true} />
           </Column>
           <Column a="flex-start">
-            <DividerWithBorder />
-            <Typography className={classes.subTitle}>
-              Kickstarter Ads
-            </Typography>
+            <SubTitle
+              title="Kickstarters"
+              menuStr="View All"
+              onClickEvent={() => {}}
+            />
             <Typography className={classes.summary}>
               A selection of kickstarter campaigns ads
             </Typography>

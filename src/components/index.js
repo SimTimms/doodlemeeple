@@ -62,6 +62,7 @@ import InviteComponentDash from './inviteComponentDash';
 import FieldTitleDashboard from './fieldTitleDashboard';
 import TabPage from './tabPage';
 import FieldBox from './fieldBox';
+import InputLabel from './fieldBox/inputLabel';
 import InfoBox from './infoBox';
 import FieldTitleWrapper from './fieldTitle/FieldTitleWrapper';
 import { ProfileCard, ProfileCardBlank } from './profileCard';
@@ -252,4 +253,5 @@ export {
   MenuButtonShortcut,
   JobComponent,
   InviteComponent,
+  InputLabel,
 };

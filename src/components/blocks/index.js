@@ -28,7 +28,7 @@ export function Column(props) {
   const borderRadius = br ? br : 0;
   const margin = m ? m : 0;
   const classes = useStyles();
-  const mobile = useMediaQuery('(max-width:800px)');
+  const mobile = useMediaQuery('(max-width:600px)');
 
   return (
     <div

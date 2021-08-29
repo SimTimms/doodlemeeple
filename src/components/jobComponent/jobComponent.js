@@ -103,7 +103,7 @@ export default function JobComponent({ job }) {
                         : contractsIn
                         ? 'Quotes Received'
                         : totalDecline
-                        ? 'Inactive: All invites declined'
+                        ? 'All invites declined'
                         : draft && 'Draft'}
                     </Typography>
                   </Column>

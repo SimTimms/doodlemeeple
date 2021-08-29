@@ -38,4 +38,5 @@ export const useStyles = makeStyles((theme) => ({
   },
   cardMobile: { width: '100%' },
   dark: { color: '#fff', background: theme.palette.primary.dark },
+  premium: { border: `1px solid ${theme.palette.primary.dark}` },
 }));

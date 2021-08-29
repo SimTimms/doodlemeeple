@@ -104,7 +104,7 @@ export default function JobDescriptionWidget({ jobId }) {
                                                 <MenuButtonStandard
                                                   disabled={false}
                                                   color="warning"
-                                                  title={'Create a Quote'}
+                                                  title={'Apply'}
                                                   icon="fact_check"
                                                   onClickEvent={() => {
                                                     mutation();

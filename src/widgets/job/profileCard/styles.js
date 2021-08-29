@@ -48,6 +48,6 @@ export const useStyles = makeStyles((theme) => ({
     paddingBottom: 6,
     marginTop: 6,
   },
-  summary: { paddingBottom: 6, paddingLeft: 10, paddingRight: 10 },
+  summary: { paddingBottom: 6 },
   meta: { fontStyle: 'italic', marginBottom: 6, fontSize: 12 },
 }));

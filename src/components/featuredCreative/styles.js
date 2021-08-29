@@ -19,6 +19,7 @@ export const useStyles = makeStyles((theme) => {
       width: '100%',
       padding: 30,
       boxSizing: 'border-box',
+      minHeight: 300,
     },
     excerpt: {
       color: theme.palette.primary.dark,
@@ -27,7 +28,7 @@ export const useStyles = makeStyles((theme) => {
       fontWeight: 500,
     },
     excerptAuthor: { color: theme.palette.primary.dark, fontSize: '1rem' },
-    excerptLink: { color: theme.palette.primary.dark },
+    excerptLink: { color: theme.palette.primary.main },
     header4: {
       color: '#222',
       textAlign: 'center',

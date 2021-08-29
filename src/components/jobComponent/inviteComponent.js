@@ -9,7 +9,6 @@ import {
   CardComponent,
   StatusBadge,
 } from '../';
-import clsx from 'clsx';
 import { Mutation } from 'react-apollo';
 import { UPDATE_INVITE } from '../../data/mutations';
 import { nameShortener } from '../../utils';

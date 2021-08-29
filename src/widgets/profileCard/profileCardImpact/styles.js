@@ -1,11 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   creativeCard: {
-    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    minWidth: '280px',
     position: 'relative',
     background: '#fff',
     border: '3px solid #efeff5;',

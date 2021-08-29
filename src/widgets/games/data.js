@@ -28,6 +28,13 @@ export const GAME_BY_ID = gql`
       summary
       featuredImage
       url
+      price
+      webshop {
+        _id
+        name
+        url
+        price
+      }
     }
   }
 `;
@@ -40,6 +47,14 @@ export const GAME_WIDGET = gql`
       summary
       featuredImage
       url
+      price
+      user {
+        name
+      }
+      webshop {
+        name
+        url
+      }
     }
   }
 `;
@@ -58,12 +73,19 @@ export const MY_GAMES = gql`
 `;
 
 export const CREATE_GAME = gql`
+  type Webshop {
+    name: String
+    url: String
+    price: String
+  }
+
   mutation gameCreateOne(
     $name: String
     $summary: String
     $url: String
     $featuredImage: String
     $showreel: String
+    $webshop: WebshopSchema
   ) {
     gameCreateOne(
       record: {
@@ -72,6 +94,7 @@ export const CREATE_GAME = gql`
         url: $url
         featuredImage: $featuredImage
         showreel: $showreel
+        webshop: [$webshop]
       }
     ) {
       recordId
@@ -87,6 +110,8 @@ export const UPDATE_GAME = gql`
     $url: String
     $featuredImage: String
     $showreel: String
+    $price: String
+    $webshop: [GameWebshopInput]
   ) {
     gameUpdateById(
       record: {
@@ -96,6 +121,8 @@ export const UPDATE_GAME = gql`
         url: $url
         featuredImage: $featuredImage
         showreel: $showreel
+        price: $price
+        webshop: $webshop
       }
     ) {
       recordId

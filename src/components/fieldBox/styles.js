@@ -33,7 +33,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 5,
     width: '100%',
   },
-  inputLabel: { fontSize: 10 },
+  inputLabel: { fontSize: '0.8rem', marginTop: 5 },
   small: {
     display: 'flex',
     width: '100%',

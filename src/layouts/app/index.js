@@ -38,10 +38,8 @@ import logout from '../../utils/logout';
 import CreativeRosterWidget from '../../widgets/creativeRoster';
 import {
   QuoteInWidget,
-  QuoteViewWidget,
   JobBoardWidget,
   FullContractWidget,
-  JobDescriptionWidget,
   InviteDetails,
 } from '../../widgets';
 import {
@@ -156,15 +154,6 @@ export default function AppLayout(props) {
                     history={history}
                     isolate={pathParam}
                   />
-                ) : page === 'edit-game' ? (
-                  <EditGame
-                    theme={props.theme}
-                    gameId={pathParam}
-                    autosaveIsOn={true}
-                    history={history}
-                  />
-                ) : page === 'withdraw' ? (
-                  <Withdraw contractId={pathParam} history={history} />
                 ) : page === 'view-game' ? (
                   <PreviewGame
                     theme={props.theme}

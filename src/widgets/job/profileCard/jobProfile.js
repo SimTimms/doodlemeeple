@@ -1,64 +1,52 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
-import clsx from 'clsx';
 import { BgImg } from './components';
-import { Column, Row } from '../../../components';
+import {
+  Column,
+  Row,
+  CardComponent,
+  DividerWithBorder,
+  MenuButtonStandard,
+} from '../../../components';
 import { nameShortener } from '../../../utils';
 import Cookies from 'js-cookie';
 import PublicProfileButton from './components/publicProfileButton';
 import JobDescriptionButton from './components/jobDescriptionButton';
-import dmDevice from '../../../assets/dmDevice.png';
 
 export default function JobProfile({ job, history }) {
   const userId = Cookies.get('userId');
 
   const classes = useStyles();
   return (
-    <div
-      className={clsx({
-        [classes.creativeCard]: true,
-      })}
-    >
-      <Column j="space-between" h="100%">
-        <Column j="flex-start">
+    <CardComponent>
+      <Column j="space-between" a="flex-start" h="100%">
+        <Column j="flex-start" a="flex-start">
           <BgImg previewImage={job.backgroundImg} onClick={() => {}} />
-          <Row a="center" j="center" mt={5}>
-            {job.isExternal ? (
-              <Row className={classes.external} mr={5}>
-                <Icon>link</Icon>
-              </Row>
-            ) : (
-              <div
-                className={classes.externalDm}
-                style={{ backgroundImage: `url(${dmDevice})` }}
-              ></div>
-            )}
+          <Row a="flex-start" j="flex-start" mt={5}>
             <Typography className={classes.jobName}>{job.name}</Typography>
           </Row>
-
           {job.isExternal ? (
             <a href={job.sourceLink} target="_blank" rel="noopener noreferrer">
-              <Typography align="center" className={classes.meta}>
+              <Typography className={classes.meta}>
                 {`Source: ${job.externalSource}`}
               </Typography>
             </a>
           ) : (
             job.genre && (
-              <Typography align="center" className={classes.meta}>
+              <Typography className={classes.meta}>
                 {`Genre: ${job.genre}`}
               </Typography>
             )
           )}
         </Column>
         {job.summary && (
-          <Typography align="center" className={classes.summary}>
-            {nameShortener(job.summary, 120)}
+          <Typography className={classes.summary}>
+            {nameShortener(job.summary, 320)}
           </Typography>
         )}
 
-        <div className={classes.divider}></div>
+        <DividerWithBorder />
         {!userId && !job.isExternal ? (
           <PublicProfileButton jobId={job._id} />
         ) : userId && !job.isExternal ? (
@@ -79,6 +67,6 @@ export default function JobProfile({ job, history }) {
           )
         )}
       </Column>
-    </div>
+    </CardComponent>
   );
 }

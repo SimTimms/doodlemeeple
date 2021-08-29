@@ -38,7 +38,7 @@ export default function InviteListPage({ history, menu }) {
         query={INVITES}
         fetchPolicy="network-only"
         variables={{
-          status: ['unopened', 'read'],
+          status: ['unopened', 'read', 'draft'],
         }}
         onCompleted={(data) => {
           setInviteArray(data.invitesByUser);

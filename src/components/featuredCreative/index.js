@@ -16,7 +16,11 @@ export default function FeaturedCreative({ history, featuredArticle }) {
         const title = featuredArticle.article.title;
         const excerpt = excerptReplace(featuredArticle.article.excerpt);
 
-        return loading ? null : data ? (
+        return loading ? (
+          <Column>
+            <div className={classes.excerptBack}></div>
+          </Column>
+        ) : data ? (
           <Column>
             <div className={classes.excerptBack}>
               <Row pb={10} pt={10}>

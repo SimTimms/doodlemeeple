@@ -41,7 +41,7 @@ export default function AppViewJobPublic({ jobId, history }) {
                       <IconButton
                         disabled={false}
                         color="warning"
-                        title={'Create a Quote'}
+                        title={'Apply'}
                         icon="fact_check"
                         onClickEvent={() => {
                           mutation();

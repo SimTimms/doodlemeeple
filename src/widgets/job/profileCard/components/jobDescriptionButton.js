@@ -1,12 +1,12 @@
 import React from 'react';
-import { IconButton } from '../../../../components';
+import { MenuButtonStandard } from '../../../../components';
 import { MenuContext } from '../../../../context';
 
 export default function JobDescriptionButton({ jobId }) {
   return (
     <MenuContext.Consumer>
       {(menu) => (
-        <IconButton
+        <MenuButtonStandard
           color="text-dark"
           title="Full Description"
           icon=""

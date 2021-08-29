@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useStyles } from './styles';
 import {
   MenuButtonStandard,
@@ -12,8 +12,9 @@ import { Mutation, Query } from 'react-apollo';
 import { CREATE_GAME, UPDATE_GAME, REMOVE_GAME, GAME_BY_ID } from './data';
 import { toaster } from '../../utils/toaster';
 import { MenuContext } from '../../context';
+import Webshop from './webshop';
 
-export default function GameForm({ ...props }) {
+export default function GameForm() {
   const classes = useStyles();
   const [game, setGame] = React.useState({
     name: '',
@@ -22,6 +23,8 @@ export default function GameForm({ ...props }) {
     summary: '',
     url: '',
     showreel: '',
+    price: '',
+    webshop: null,
     _id: 'new',
   });
   const [deleteConfirm, setDeleteConfirm] = React.useState(false);
@@ -103,6 +106,7 @@ export default function GameForm({ ...props }) {
                 size="s"
                 multiline={false}
               />
+
               <FieldBox
                 value={game.showreel}
                 title="showreel"
@@ -121,7 +125,18 @@ export default function GameForm({ ...props }) {
                 multiline={false}
               />
               <Divider />
+              {game.webshop &&
+                game.webshop.map((webshop) => (
+                  <Webshop webshopIn={webshop} setGame={setGame} game={game} />
+                ))}
+              <Webshop
+                webshopIn={{ name: '', url: '', price: '' }}
+                setGame={setGame}
+                game={game}
+                newMode={true}
+              />
 
+              <Divider />
               {game._id === 'new' ? (
                 <Mutation
                   mutation={CREATE_GAME}

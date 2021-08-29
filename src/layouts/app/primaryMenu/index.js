@@ -6,7 +6,7 @@ import { useStyles } from './styles';
 import dmDevice from '../../../assets/dmChibi.png';
 import { HistoryContext, CountContext } from '../../../context';
 
-export default function PrimaryMenu({ profile, page }) {
+export default function PrimaryMenu({ page }) {
   const classes = useStyles();
 
   return (

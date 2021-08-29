@@ -44,6 +44,11 @@ export default function GameProfile({ game }) {
             {game.summary}
           </Typography>
         )}
+        {game.price && (
+          <Typography align="center" className={classes.summary}>
+            {game.price}
+          </Typography>
+        )}
         {game.url ? (
           <a
             href={`${game.url}`}
