@@ -125,9 +125,11 @@ import {
   LeftMenuWrapper,
   Title,
   MainTitle,
+  Grid,
 } from './blocks';
 
 export {
+  Grid,
   StatusBadge,
   MainTitle,
   Title,

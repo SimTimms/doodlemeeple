@@ -4,6 +4,11 @@ import { Typography } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 
+export function Grid(props) {
+  const classes = useStyles();
+  return <div className={classes.grid}>{props.children}</div>;
+}
+
 export function Title({ title }) {
   const classes = useStyles();
   return <Typography className={classes.title}>{title}</Typography>;

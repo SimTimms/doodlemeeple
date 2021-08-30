@@ -13,7 +13,7 @@ export default function MenuButtonStandard({
 }) {
   const classes = useStyles();
   const [confirm, setConfirm] = React.useState(false);
-  const { ml, mr, mt, mb } = props;
+  const { ml, mr, mt, mb, fullWidth } = props;
 
   return (
     <div
@@ -24,6 +24,7 @@ export default function MenuButtonStandard({
         [classes.mr]: mr,
         [classes.mt]: mt,
         [classes.mb]: mb,
+        [classes.fullWidth]: fullWidth,
       })}
       onClick={() =>
         disabled
@@ -37,11 +38,19 @@ export default function MenuButtonStandard({
         {type === 'delete' && !confirm ? (
           icon && !title ? (
             <Icon className={classes.title}>{icon}</Icon>
+          ) : icon && title ? (
+            <div className={classes.titleWithIcon}>
+              <Icon className={classes.titleIcon}>{icon}</Icon>
+              {title}
+            </div>
           ) : (
             title && title
           )
         ) : type === 'delete' && confirm ? (
-          'Confirm'
+          <div className={classes.titleWithIcon}>
+            <Icon className={classes.titleIcon}>warning</Icon>
+            Confirm Delete
+          </div>
         ) : icon && !title ? (
           <Icon className={classes.title}>{icon}</Icon>
         ) : icon && title ? (

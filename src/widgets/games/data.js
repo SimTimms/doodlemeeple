@@ -49,6 +49,7 @@ export const GAME_WIDGET = gql`
       url
       price
       user {
+        _id
         name
       }
       webshop {

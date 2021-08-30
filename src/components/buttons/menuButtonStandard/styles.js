@@ -12,17 +12,20 @@ export const useStyles = makeStyles((theme) => ({
     padding: 5,
     paddingLeft: 10,
     paddingRight: 10,
+    boxSizing: 'border-box',
   },
   delete: { background: theme.palette.error.main },
   title: {
     color: '#fff',
     fontSize: '1rem',
     textAlign: 'center',
+    width: '100%',
   },
   titleWithIcon: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    width: '100%',
   },
   titleIcon: {
     color: '#fff',
@@ -46,4 +49,5 @@ export const useStyles = makeStyles((theme) => ({
   mr: { marginRight: 10 },
   mb: { marginBottom: 10 },
   mt: { marginTop: 10 },
+  fullWidth: { width: '100%' },
 }));

@@ -66,7 +66,7 @@ export default function Webshop({
         <FieldBox
           value={webshop.name}
           title="Online Store Name"
-          maxLength={86}
+          maxLength={26}
           onChangeEvent={(e) => {
             setWebshop({
               ...webshop,

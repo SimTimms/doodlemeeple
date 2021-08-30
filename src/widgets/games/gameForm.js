@@ -203,7 +203,7 @@ export default function GameForm() {
                   }}
                 </Mutation>
               ) : (
-                <Column mw={200}>
+                <Column w={140}>
                   <Mutation
                     mutation={UPDATE_GAME}
                     variables={{
@@ -218,6 +218,7 @@ export default function GameForm() {
                         <MenuButtonStandard
                           title="Update"
                           icon="update"
+                          fullWidth={true}
                           disabled={false}
                           onClickEvent={() => {
                             updateMutation();
@@ -245,8 +246,12 @@ export default function GameForm() {
                     {(deleteMutation) => {
                       return (
                         <MenuButtonStandard
-                          title={deleteConfirm ? 'Confirm Deletion' : 'Delete'}
+                          title={
+                            deleteConfirm ? 'Confirm Deletion' : 'Delete Game'
+                          }
                           type="delete"
+                          icon="delete"
+                          fullWidth={true}
                           onClickEvent={() => {
                             deleteConfirm
                               ? deleteMutation()
@@ -256,6 +261,7 @@ export default function GameForm() {
                       );
                     }}
                   </Mutation>
+                  <Divider />
                 </Column>
               )}
             </Column>
