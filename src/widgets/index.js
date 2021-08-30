@@ -4,6 +4,8 @@ import FeaturedCreativeHomeWidget from './featuredCreativesHome';
 import LatestCreativesWidget from './latestCreatives';
 import CreativeRosterWidget from './creativeRoster';
 import KickstarterForm from './kickstarter/kickstarterForm';
+import MyPostForm from './myPosts/myPostForm';
+import { MyPosts, PublicPostsWidget } from './myPosts';
 import { FeaturedKickstarters, Kickstarters } from './kickstarter';
 import { FeaturedGames, Games } from './games';
 import { QuoteOutWidget, QuoteInWidget, QuoteViewWidget } from './quote';
@@ -22,6 +24,9 @@ import {
 } from './job';
 
 export {
+  PublicPostsWidget,
+  MyPostForm,
+  MyPosts,
   UpdateJob,
   CreateJob,
   InviteDetails,

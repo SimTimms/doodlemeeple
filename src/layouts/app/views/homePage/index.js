@@ -6,15 +6,22 @@ import {
   gameMenu,
   kickstarterMenu,
   communityMenu,
+  myPostsMenu,
 } from '../../../menuArray';
 import CommunityPage from '../communityPage';
-import { Games, CreativeRosterWidget, Kickstarters } from '../../../../widgets';
+import {
+  Games,
+  CreativeRosterWidget,
+  Kickstarters,
+  MyPosts,
+} from '../../../../widgets';
 
 export default function HomePage() {
   const [pageValues, setPageValues] = React.useState({
     primaryPage: 'community',
     secondaryPage: 'dashboard',
     kickstarterId: null,
+    myPostId: null,
     gameId: null,
   });
 
@@ -25,6 +32,7 @@ export default function HomePage() {
           primaryPage: pageValues.primaryPage,
           secondaryPage: pageValues.secondaryPage,
           kickstarterId: pageValues.kickstarterId,
+          myPostId: pageValues.myPostId,
           gameId: pageValues.gameId,
         },
         updateMenuContext: setPageValues,
@@ -40,8 +48,10 @@ export default function HomePage() {
                 ? gameMenu(pageValues, setPageValues)
                 : pageValues.primaryPage === 'community'
                 ? communityMenu(pageValues, setPageValues)
-                : pageValues.primaryPage === 'kickstarters' &&
-                  kickstarterMenu(pageValues, setPageValues)
+                : pageValues.primaryPage === 'kickstarters'
+                ? kickstarterMenu(pageValues, setPageValues)
+                : pageValues.primaryPage === 'my_posts' &&
+                  myPostsMenu(pageValues, setPageValues)
             }
             menu={null}
             activePrimary={pageValues.primaryPage}
@@ -57,6 +67,7 @@ export default function HomePage() {
             )}
             {pageValues.primaryPage === 'games' && <Games />}
             {pageValues.primaryPage === 'kickstarters' && <Kickstarters />}
+            {pageValues.primaryPage === 'my_posts' && <MyPosts />}
           </TabPage>
         )}
       </HistoryContext.Consumer>

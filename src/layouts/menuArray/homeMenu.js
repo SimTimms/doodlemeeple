@@ -36,5 +36,17 @@ export default function homeMenu(pageValues, setPageValues) {
         }),
       count: null,
     },
+    {
+      name: 'My Posts',
+      icon: 'post_add',
+      machineName: 'my_posts',
+      link: () =>
+        setPageValues({
+          ...pageValues,
+          primaryPage: 'my_posts',
+          secondaryPage: 'my_posts',
+        }),
+      count: null,
+    },
   ];
 }

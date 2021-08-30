@@ -4,9 +4,19 @@ import { Typography } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 
-export function Grid(props) {
+export function Grid({ cols, ...props }) {
   const classes = useStyles();
-  return <div className={classes.grid}>{props.children}</div>;
+  return (
+    <div
+      className={clsx({
+        [classes.gridThree]: true,
+        [classes.gridOne]: cols === 1,
+        [classes.gridTwo]: cols === 2,
+      })}
+    >
+      {props.children}
+    </div>
+  );
 }
 
 export function Title({ title }) {

@@ -15,8 +15,10 @@ import inviteMenuSecondary from './inviteMenuSecondary';
 import quoteMenuSecondary from './quoteMenuSecondary';
 import quoteViewMenu from './quoteViewMenu';
 import jobBoardMenu from './jobBoardMenu';
+import myPostsMenu from './myPostsMenu';
 
 export {
+  myPostsMenu,
   jobBoardMenu,
   quoteMenuSecondary,
   inviteMenuSecondary,

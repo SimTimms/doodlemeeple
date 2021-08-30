@@ -8,6 +8,7 @@ import {
   JobBoardMiniWidget,
   FeaturedKickstarters,
   FeaturedCreativeHomeWidget,
+  PublicPostsWidget,
 } from '../../../../widgets';
 import { HistoryContext } from '../../../../context';
 import SubTitle from './subTitle';
@@ -27,6 +28,17 @@ export default function CommunityPage() {
             />
             <FeaturedArticle history={history} />
           </Column>
+          <Column a="flex-start" w="100%">
+            <SubTitle
+              title="News & Updates"
+              menuStr="View All"
+              onClickEvent={() => {}}
+            />
+            <Row w="100%" wrap="flex-wrap">
+              <PublicPostsWidget />
+            </Row>
+          </Column>
+
           <Column a="flex-start" w="100%">
             <SubTitle
               title="Featured Professionals"
