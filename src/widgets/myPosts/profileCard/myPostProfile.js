@@ -3,8 +3,8 @@ import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import { BgImg } from './components';
-import { Row, Column } from '../../../components';
-
+import { Row, Column, HrefLink, DividerMini } from '../../../components';
+import { timeDifferenceForDate } from '../../../utils/dates';
 export default function MyPostProfile({ myPost }) {
   const classes = useStyles();
   return (
@@ -23,31 +23,41 @@ export default function MyPostProfile({ myPost }) {
 
         <Column a="flex-start">
           <Column a="flex-start">
-            <Typography>{myPost.user.name}</Typography>
-            <a
-              href={`${myPost.url}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ textDecoration: 'none', color: '#222', width: '100%' }}
+            <HrefLink
+              title={myPost.user.name}
+              url={`/public-preview/${myPost.user._id}`}
+            />
+            <Typography style={{ fontSize: '0.8rem' }}>
+              {timeDifferenceForDate(myPost.createdAt)}
+            </Typography>
+
+            <Typography
+              style={{
+                fontWeight: 'bold',
+                fontSize: 16,
+                marginTop: 5,
+              }}
             >
-              <Typography
-                style={{
-                  fontWeight: 'bold',
-                  fontSize: 16,
-                  marginTop: 5,
-                  marginBottom: 5,
-                }}
-              >
-                {myPost.name}
-              </Typography>
-            </a>
-            <BgImg previewImage={myPost.featuredImage} onClick={() => {}} />
+              {myPost.name}
+            </Typography>
 
             {myPost.summary && (
-              <Typography className={classes.summary}>
-                {myPost.summary}
-              </Typography>
+              <Column w="100%">
+                <DividerMini />
+                <Typography className={classes.summary}>
+                  {myPost.summary}
+                </Typography>
+              </Column>
             )}
+            {myPost.url && <HrefLink title={myPost.url} url={myPost.url} />}
+            {myPost.featuredImage && (
+              <Column w="100%">
+                <DividerMini />
+                <BgImg previewImage={myPost.featuredImage} onClick={() => {}} />
+              </Column>
+            )}
+
+            <DividerMini />
           </Column>
           <a
             href={myPost.url}

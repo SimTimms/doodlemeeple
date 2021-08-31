@@ -26,24 +26,6 @@ export const PROFILE_PREVIEW = gql`
       twitter
       linkedIn
       instagram
-      likedMe {
-        _id
-        receiver {
-          _id
-        }
-        user {
-          _id
-        }
-      }
-      favourites {
-        _id
-        receiver {
-          _id
-        }
-        user {
-          _id
-        }
-      }
       sections {
         _id
         type

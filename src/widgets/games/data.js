@@ -75,19 +75,13 @@ export const MY_GAMES = gql`
 `;
 
 export const CREATE_GAME = gql`
-  type Webshop {
-    name: String
-    url: String
-    price: String
-  }
-
   mutation gameCreateOne(
     $name: String
     $summary: String
     $url: String
     $featuredImage: String
     $showreel: String
-    $webshop: WebshopSchema
+    $webshop: [GameWebshopInput]
   ) {
     gameCreateOne(
       record: {
@@ -96,7 +90,7 @@ export const CREATE_GAME = gql`
         url: $url
         featuredImage: $featuredImage
         showreel: $showreel
-        webshop: [$webshop]
+        webshop: $webshop
       }
     ) {
       recordId

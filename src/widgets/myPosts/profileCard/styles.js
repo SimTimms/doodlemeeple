@@ -31,5 +31,5 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: 'auto',
     paddingBottom: 6,
   },
-  summary: { paddingBottom: 6, paddingRight: 10 },
+  summary: { paddingBottom: 6, paddingRight: 5, width: '100%' },
 }));

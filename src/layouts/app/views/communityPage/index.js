@@ -30,7 +30,7 @@ export default function CommunityPage() {
           </Column>
           <Column a="flex-start" w="100%">
             <SubTitle
-              title="News & Updates"
+              title="Community Posts"
               menuStr="View All"
               onClickEvent={() => {}}
             />

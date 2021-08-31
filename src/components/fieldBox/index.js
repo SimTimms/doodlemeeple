@@ -8,6 +8,7 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
   const classes = useStyles();
   const {
     maxLength,
+    minLength,
     replaceMode,
     placeholder,
     info,
@@ -33,6 +34,7 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
             icon={icon}
             value={value}
             maxLength={maxLength}
+            minLength={minLength}
             info={info}
             warning={warning}
             icon={icon}

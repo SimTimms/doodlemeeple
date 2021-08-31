@@ -24,7 +24,6 @@ export default function HomePage() {
     myPostId: null,
     gameId: null,
   });
-
   return (
     <MenuContext.Provider
       value={{

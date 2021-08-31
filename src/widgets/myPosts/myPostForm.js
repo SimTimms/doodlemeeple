@@ -10,14 +10,11 @@ import {
   Divider,
 } from '../../components';
 import { Mutation, Query } from 'react-apollo';
-import {
-  CREATE_MY_POST,
-  UPDATE_MY_POST,
-  REMOVE_MY_POST,
-  MY_POST_BY_ID,
-} from './data';
+import { CREATE_MY_POST, REMOVE_MY_POST, MY_POST_BY_ID } from './data';
 import { toaster } from '../../utils/toaster';
 import { MenuContext } from '../../context';
+import PostToBoard from './postToBoard';
+import Update from './update';
 
 export default function MyPostForm({ ...props }) {
   const classes = useStyles();
@@ -72,6 +69,7 @@ export default function MyPostForm({ ...props }) {
                   value={myPost.name}
                   title="Post Header"
                   maxLength={26}
+                  minLength={5}
                   onChangeEvent={(e) => {
                     setMyPost({
                       ...myPost,
@@ -123,17 +121,17 @@ export default function MyPostForm({ ...props }) {
                 <Divider />
 
                 {myPost._id === 'new' ? (
-                  <Column>
+                  <Column mw={200}>
                     <Mutation
                       mutation={CREATE_MY_POST}
                       variables={{
                         ...myPost,
                       }}
-                      onCompleted={() => {
+                      onCompleted={(data) => {
                         toaster('Saved');
                         menu.updateMenuContext({
                           ...menu.homePage,
-                          secondaryPage: 'my_posts',
+                          myPostId: data.myPostCreateOne.recordId,
                         });
                       }}
                     >
@@ -142,7 +140,8 @@ export default function MyPostForm({ ...props }) {
                           <MenuButtonStandard
                             title="Create"
                             icon="add"
-                            disabled={myPost.name.length < 1}
+                            fullWidth={true}
+                            disabled={myPost.name.length < 5}
                             onClickEvent={() => {
                               mutation();
                             }}
@@ -153,52 +152,9 @@ export default function MyPostForm({ ...props }) {
                   </Column>
                 ) : (
                   <Column mw={200}>
-                    <Mutation
-                      mutation={UPDATE_MY_POST}
-                      variables={{
-                        ...myPost,
-                      }}
-                      onCompleted={(data) => {
-                        toaster('Saved');
-                      }}
-                    >
-                      {(updateMutation) => {
-                        return (
-                          <MenuButtonStandard
-                            title="Update"
-                            icon="update"
-                            disabled={false}
-                            onClickEvent={() => {
-                              updateMutation();
-                            }}
-                          />
-                        );
-                      }}
-                    </Mutation>
+                    <Update myPost={myPost} />
                     <DividerMini />
-                    <Mutation
-                      mutation={UPDATE_MY_POST}
-                      variables={{
-                        ...myPost,
-                        approved: true,
-                      }}
-                      onCompleted={(data) => {
-                        toaster('Posted');
-                      }}
-                    >
-                      {(updateMutation) => {
-                        return (
-                          <MenuButtonStandard
-                            title="Post to Board"
-                            icon="mail"
-                            disabled={false}
-                            onClickEvent={() => {
-                              updateMutation();
-                            }}
-                          />
-                        );
-                      }}
-                    </Mutation>
+                    <PostToBoard myPost={myPost} setMyPost={setMyPost} />
                     <DividerMini />
                     <Mutation
                       mutation={REMOVE_MY_POST}
@@ -221,11 +177,13 @@ export default function MyPostForm({ ...props }) {
                               deleteConfirm ? 'Confirm Deletion' : 'Delete'
                             }
                             type="delete"
+                            icon="delete"
                             onClickEvent={() => {
                               deleteConfirm
                                 ? deleteMutation()
                                 : setDeleteConfirm(true);
                             }}
+                            fullWidth={true}
                           />
                         );
                       }}

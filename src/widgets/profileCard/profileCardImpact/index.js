@@ -3,12 +3,12 @@ import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import { Query } from 'react-apollo';
-import { BgImg, ProfileImg } from '../components';
-import { Row, Column } from '../../../components';
+import { BgImg, ProfileImg, Badges } from '../components';
+import { Row, Column, HrefLink } from '../../../components';
 import { PROFILE_IMAGES } from '../data';
 import imageOptimiser from '../../../utils/imageOptimiser';
 
-export default function ProfileCardImpact({ creative, setLarge, history }) {
+export default function ProfileCardImpact({ creative, setLarge }) {
   const classes = useStyles();
 
   const [previewImage, setPreviewImage] = React.useState(null);
@@ -69,34 +69,24 @@ export default function ProfileCardImpact({ creative, setLarge, history }) {
       <Row>
         <ProfileImg creative={creative} />
         <Column a="flex-start">
-          <a
-            href={`${process.env.REACT_APP_URL}/public-preview/${creative._id}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ textDecoration: 'none', color: '#222', width: '100%' }}
-          >
-            <Typography
-              style={{ fontWeight: 'bold', textDecoration: 'underline' }}
-            >
-              {creative.name}
-            </Typography>
-          </a>
+          <Row j="space-between" pr={10}>
+            <HrefLink
+              title={creative.name}
+              url={`${process.env.REACT_APP_URL}/public-preview/${creative._id}`}
+            />
+            <Badges creative={creative} />
+          </Row>
+
           <Typography className={classes.types}>
             {creative.sections.map(
               (section, index) => `${index > 0 ? ', ' : ''} ${section.type}`
             )}
           </Typography>
           {creative.publicEmail && (
-            <a
-              href={`mailto:${creative.publicEmail}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={classes.email}
-            >
-              <Typography className={classes.email}>
-                {`${creative.publicEmail}`}{' '}
-              </Typography>
-            </a>
+            <HrefLink
+              title={creative.publicEmail}
+              url={`mailto:${creative.publicEmail}`}
+            />
           )}
         </Column>
       </Row>

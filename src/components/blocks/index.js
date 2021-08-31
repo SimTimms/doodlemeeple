@@ -88,6 +88,7 @@ export function Row(props) {
     mb,
     mt,
     mr,
+    mw,
     br,
     bg,
     h,
@@ -112,6 +113,7 @@ export function Row(props) {
   const height = h ? h : '';
   const opacity = o ? o : '';
   const overflow = of ? of : '';
+  const maxWidth = mw ? mw : '';
 
   return v === 'none' ? null : (
     <div
@@ -135,6 +137,7 @@ export function Row(props) {
         height,
         opacity,
         overflow,
+        maxWidth,
         boxSizing: 'border-box',
       }}
       class={className ? className : null}

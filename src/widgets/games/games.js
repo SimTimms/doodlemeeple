@@ -10,8 +10,6 @@ import { MenuContext } from '../../context';
 export default function Games() {
   const [game, setGame] = React.useState(null);
 
-  useEffect(() => {}, []);
-
   return (
     <MenuContext.Consumer>
       {(menu) => (

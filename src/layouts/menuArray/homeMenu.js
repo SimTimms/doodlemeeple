@@ -13,6 +13,18 @@ export default function homeMenu(pageValues, setPageValues) {
       count: null,
     },
     {
+      name: 'Posts',
+      icon: 'post_add',
+      machineName: 'my_posts',
+      link: () =>
+        setPageValues({
+          ...pageValues,
+          primaryPage: 'my_posts',
+          secondaryPage: 'all_posts',
+        }),
+      count: null,
+    },
+    {
       name: 'Games',
       icon: 'casino',
       machineName: 'games',
@@ -33,18 +45,6 @@ export default function homeMenu(pageValues, setPageValues) {
           ...pageValues,
           primaryPage: 'kickstarters',
           secondaryPage: 'kickstarters',
-        }),
-      count: null,
-    },
-    {
-      name: 'My Posts',
-      icon: 'post_add',
-      machineName: 'my_posts',
-      link: () =>
-        setPageValues({
-          ...pageValues,
-          primaryPage: 'my_posts',
-          secondaryPage: 'my_posts',
         }),
       count: null,
     },

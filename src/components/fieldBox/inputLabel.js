@@ -8,6 +8,7 @@ export default function InputLabel({
   title,
   value,
   maxLength,
+  minLength,
   info,
   warning,
   icon,
@@ -27,10 +28,24 @@ export default function InputLabel({
           className={classes.inputLabel}
           style={{ marginLeft: icon && 44 }}
         >{`${title}`}</Typography>
-        <Row j="flex-end" w={70}>
-          <Typography className={classes.inputLabel}>{`${
-            maxLength > 0 ? maxLength - value.length : ''
-          }`}</Typography>
+        <Row j="flex-end" w={100}>
+          {minLength - value.length > 0 ? (
+            <Typography
+              className={clsx({
+                [classes.inputLabel]: true,
+                [classes.inputLabelRed]: true,
+              })}
+            >{`min. ${
+              minLength > 0 ? minLength - value.length : ''
+            }`}</Typography>
+          ) : (
+            maxLength - value.length > 0 && (
+              <Typography className={classes.inputLabel}>{`max. ${
+                maxLength > 0 ? maxLength - value.length : ''
+              }`}</Typography>
+            )
+          )}
+
           {(warning !== '' || info !== '') && (
             <Icon
               className={classes.helpIcon}

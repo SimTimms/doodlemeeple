@@ -18,30 +18,18 @@ import Webshop from './webshop';
 
 export default function GameForm() {
   const classes = useStyles();
-  const [game, setGame] = React.useState(null);
+  const [game, setGame] = React.useState({
+    _id: 'new',
+    name: '',
+    summary: '',
+    featureImage: '',
+    webshop: [],
+    url: '',
+    showreel: '',
+  });
   const [deleteConfirm, setDeleteConfirm] = React.useState(false);
   const [store, setStore] = React.useState(null);
-  console.log(store);
-  if (!game) {
-    return (
-      <MenuContext.Consumer>
-        {(menu) => (
-          <Query
-            query={GAME_BY_ID}
-            fetchPolicy="network-only"
-            variables={{ _id: menu.homePage.gameId }}
-            onCompleted={(data) =>
-              data.gameById !== null && setGame({ ...data.gameById })
-            }
-          >
-            {({ data }) => {
-              return null;
-            }}
-          </Query>
-        )}
-      </MenuContext.Consumer>
-    );
-  }
+
   return (
     <MenuContext.Consumer>
       {(menu) => (
@@ -73,6 +61,7 @@ export default function GameForm() {
                 value={game.name}
                 title="Project Name"
                 maxLength={86}
+                minLength={1}
                 onChangeEvent={(e) => {
                   setGame({
                     ...game,
@@ -178,6 +167,7 @@ export default function GameForm() {
                   mutation={CREATE_GAME}
                   variables={{
                     ...game,
+                    _id: null,
                   }}
                   onCompleted={() => {
                     toaster('Saved');
@@ -266,6 +256,20 @@ export default function GameForm() {
               )}
             </Column>
           </div>
+          {menu.homePage.gameId !== 'new' && game._id === 'new' && (
+            <Query
+              query={GAME_BY_ID}
+              fetchPolicy="network-only"
+              variables={{ _id: menu.homePage.gameId }}
+              onCompleted={(data) =>
+                data.gameById !== null && setGame({ ...data.gameById })
+              }
+            >
+              {({ data }) => {
+                return null;
+              }}
+            </Query>
+          )}
         </div>
       )}
     </MenuContext.Consumer>

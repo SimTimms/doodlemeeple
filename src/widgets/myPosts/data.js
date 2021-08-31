@@ -12,10 +12,12 @@ export const MY_POST_BY_ID = gql`
   query myPostById($_id: MongoID!) {
     myPostById(_id: $_id) {
       _id
+      createdAt
       name
       summary
       featuredImage
       url
+      approved
     }
   }
 `;
@@ -24,6 +26,7 @@ export const MY_POSTS_WIDGET = gql`
   {
     myPostsWidget {
       _id
+      createdAt
       name
       summary
       featuredImage

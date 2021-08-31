@@ -1,6 +1,18 @@
 export default function myPostsMenu(pageValues, setPageValues) {
   return [
     {
+      name: 'Browse',
+      icon: 'travel_explore',
+      machineName: 'all_posts',
+      link: () =>
+        setPageValues({
+          ...pageValues,
+          secondaryPage: 'all_posts',
+          myPostId: null,
+        }),
+      count: null,
+    },
+    {
       name: 'My Posts',
       icon: 'dynamic_feed',
       machineName: 'my_posts',
@@ -8,7 +20,7 @@ export default function myPostsMenu(pageValues, setPageValues) {
         setPageValues({
           ...pageValues,
           secondaryPage: 'my_posts',
-          postId: null,
+          myPostId: null,
         }),
       count: null,
     },

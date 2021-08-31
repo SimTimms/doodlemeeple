@@ -15,6 +15,7 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
   },
   delete: { background: theme.palette.error.main },
+  disabled: { background: '#aaa', boxShadow: 'none' },
   title: {
     color: '#fff',
     fontSize: '1rem',
