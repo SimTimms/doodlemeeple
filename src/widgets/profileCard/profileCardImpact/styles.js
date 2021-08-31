@@ -6,7 +6,8 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     position: 'relative',
     background: '#fff',
-    border: '3px solid #efeff5;',
+    border: '1px solid #ddd;',
+    margin: 3,
   },
   imageThumb: {
     minHeight: 54,

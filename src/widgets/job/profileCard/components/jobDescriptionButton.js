@@ -10,6 +10,7 @@ export default function JobDescriptionButton({ jobId }) {
           color="text-dark"
           title="Full Description"
           icon=""
+          mb={true}
           styleOverride={{ marginTop: 0 }}
           onClickEvent={() => {
             menu.updateMenuContext({

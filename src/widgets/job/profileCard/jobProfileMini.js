@@ -25,15 +25,10 @@ export default function JobProfileMini({ job, history }) {
         <Column j="flex-start">
           <BgImg previewImage={job.backgroundImg} onClick={() => {}} />
           <Row a="center" j="center" mt={5}>
-            {job.isExternal ? (
+            {job.isExternal && (
               <Row className={classes.external} mr={5}>
                 <Icon>link</Icon>
               </Row>
-            ) : (
-              <div
-                className={classes.externalDm}
-                style={{ backgroundImage: `url(${dmDevice})` }}
-              ></div>
             )}
             <Typography className={classes.jobName}>{job.name}</Typography>
           </Row>

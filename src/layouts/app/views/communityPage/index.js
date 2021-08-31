@@ -74,7 +74,7 @@ export default function CommunityPage() {
               onClickEvent={() => {}}
             />
             <Typography className={classes.summary}>
-              A selection of kickstarter campaigns ads
+              Kickstarter campaigns posted by community members
             </Typography>
             <FeaturedKickstarters history={history} dashboard={true} />
           </Column>
