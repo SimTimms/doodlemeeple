@@ -36,4 +36,9 @@ export const useStyles = makeStyles((theme) => ({
     gridTemplateColumns: '1fr 1fr ',
     width: '100%',
   },
+  gridFour: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr 1fr 1fr ',
+    width: '100%',
+  },
 }));

@@ -12,6 +12,7 @@ export function Grid({ cols, ...props }) {
         [classes.gridThree]: true,
         [classes.gridOne]: cols === 1,
         [classes.gridTwo]: cols === 2,
+        [classes.gridFour]: cols === 4,
       })}
     >
       {props.children}

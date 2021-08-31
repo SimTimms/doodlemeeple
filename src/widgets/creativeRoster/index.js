@@ -9,7 +9,7 @@ import BigImage from '../bigImage';
 import {
   IconButton,
   Column,
-  Row,
+  Grid,
   CardComponent,
   Divider,
 } from '../../components';
@@ -35,7 +35,7 @@ export default function CreativeRosterWidget({ history }) {
           setPage={setPage}
           setEndPage={setEndPage}
         />
-        <Row wrap="wrap" w={900}>
+        <Grid cols={4}>
           {large !== null && <BigImage large={large} setLarge={setLarge} />}
           <Query
             query={CREATIVE_ROSTER_WIDGET}
@@ -75,7 +75,7 @@ export default function CreativeRosterWidget({ history }) {
               });
             }}
           </Query>
-        </Row>
+        </Grid>
         {!endPage && creativeArray.length > 0 && (
           <IconButton
             title="Load More"
