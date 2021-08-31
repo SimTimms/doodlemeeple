@@ -11,6 +11,7 @@ export const useStyles = makeStyles((theme) => ({
     background: '#fff',
     margin: 5,
   },
+  featureImage: { maxWidth: 500 },
   avatar: {
     minWidth: 40,
     maxWidth: 40,

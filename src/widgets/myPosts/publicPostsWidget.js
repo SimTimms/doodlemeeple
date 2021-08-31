@@ -6,7 +6,7 @@ import { Grid } from '../../components';
 
 export default function PublicPosts() {
   return (
-    <Grid cols={2}>
+    <Grid cols={3}>
       <Query query={MY_POSTS_WIDGET} fetchPolicy="network-only">
         {({ data }) => {
           if (data) {
