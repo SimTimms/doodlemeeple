@@ -104,6 +104,7 @@ import UserDeleted from './userDeleted';
 import LargeImage from './largeImage';
 import StatusBadge from './statusBadge';
 import HrefLink from './hrefLink';
+import Avatar from './avatar';
 import {
   Header,
   SubHeader,
@@ -140,6 +141,7 @@ export {
   ResponseComponent,
   ChosenCreative,
   UserDeleted,
+  Avatar,
   CreativeRosterProfiles,
   FeaturedCreative,
   CreatorComponentDash,

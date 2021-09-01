@@ -29,6 +29,11 @@ export const GAME_BY_ID = gql`
       featuredImage
       url
       price
+      user {
+        _id
+        name
+        profileImg
+      }
       webshop {
         _id
         name

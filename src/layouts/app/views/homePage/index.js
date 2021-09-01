@@ -7,6 +7,7 @@ import {
   kickstarterMenu,
   communityMenu,
   myPostsMenu,
+  gameProfileMenu,
 } from '../../../menuArray';
 import CommunityPage from '../communityPage';
 import {
@@ -15,6 +16,7 @@ import {
   Kickstarters,
   MyPosts,
 } from '../../../../widgets';
+import GameProfileFull from '../../../../widgets/games/profileCard/gameProfileFull';
 
 export default function HomePage() {
   const [pageValues, setPageValues] = React.useState({
@@ -24,6 +26,7 @@ export default function HomePage() {
     myPostId: null,
     gameId: null,
   });
+  console.log(pageValues);
   return (
     <MenuContext.Provider
       value={{
@@ -41,7 +44,11 @@ export default function HomePage() {
         {(history) => (
           <TabPage
             title={null}
-            primaryMenu={homeMenu(pageValues, setPageValues)}
+            primaryMenu={
+              pageValues.primaryPage === 'game_profile'
+                ? gameProfileMenu(pageValues, setPageValues)
+                : homeMenu(pageValues, setPageValues)
+            }
             secondaryMenu={
               pageValues.primaryPage === 'games'
                 ? gameMenu(pageValues, setPageValues)
@@ -67,6 +74,7 @@ export default function HomePage() {
             {pageValues.primaryPage === 'games' && <Games />}
             {pageValues.primaryPage === 'kickstarters' && <Kickstarters />}
             {pageValues.primaryPage === 'my_posts' && <MyPosts />}
+            {pageValues.primaryPage === 'game_profile' && <GameProfileFull />}
           </TabPage>
         )}
       </HistoryContext.Consumer>

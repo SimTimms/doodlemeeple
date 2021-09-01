@@ -1,5 +1,6 @@
 import mainMenu from './mainMenu';
 import gameMenu from './gameMenu';
+import gameProfileMenu from './gameProfileMenu';
 import communityMenu from './communityMenu';
 import kickstarterMenu from './kickstarterMenu';
 import workMenu from './workMenu';
@@ -24,6 +25,7 @@ export {
   inviteMenuSecondary,
   mainMenu,
   gameMenu,
+  gameProfileMenu,
   messageMenu,
   communityMenu,
   kickstarterMenu,

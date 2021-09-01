@@ -12,6 +12,8 @@ import {
 } from '../../../components';
 import OnlineStores from './onlineStore';
 import GamePosts from './gamePosts';
+import { MenuContext } from '../../../context';
+
 export default function GameProfile({ game }) {
   const classes = useStyles();
   return (
@@ -24,14 +26,23 @@ export default function GameProfile({ game }) {
         <Column j="flex-start">
           <BgImg previewImage={game.featuredImage} onClick={() => {}} />
           <Row j="space-between" w="100%" pl={5} pr={5}>
-            <a
-              href={`${game.url}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ textDecoration: 'none', color: '#222' }}
-            >
-              <Typography className={classes.gameName}>{game.name}</Typography>
-            </a>
+            <MenuContext.Consumer>
+              {(menu) => (
+                <Typography
+                  className={classes.gameName}
+                  onClick={() =>
+                    menu.updateMenuContext({
+                      ...menu.homePage,
+                      primaryPage: 'game_profile',
+                      gameId: game._id,
+                    })
+                  }
+                >
+                  {game.name}
+                </Typography>
+              )}
+            </MenuContext.Consumer>
+
             <a
               href={`/public-preview/${game.user._id}`}
               target="_blank"
@@ -52,7 +63,7 @@ export default function GameProfile({ game }) {
         )}
 
         {game.webshop.length > 0 && <OnlineStores webshops={game.webshop} />}
-        {game.gamePost.length > 0 && <GamePosts gamePosts={game.gamePost} />}
+
         <Column w="100%">
           <DividerWithBorder />
           {game.url ? (

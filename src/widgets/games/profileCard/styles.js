@@ -21,6 +21,16 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: 5,
     marginBottom: 5,
     color: theme.palette.primary.main,
+    cursor: 'pointer',
+  },
+  gameNameNoLink: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: '1.2rem',
+    marginTop: 5,
+    marginBottom: 5,
+    color: '#222',
+    cursor: 'pointer',
   },
   authorName: {
     fontWeight: 'bold',
