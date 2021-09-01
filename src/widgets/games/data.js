@@ -35,6 +35,13 @@ export const GAME_BY_ID = gql`
         url
         price
       }
+      gamePost {
+        name
+        url
+        video
+        img
+        summary
+      }
     }
   }
 `;
@@ -56,6 +63,13 @@ export const GAME_WIDGET = gql`
         name
         url
         price
+      }
+      gamePost {
+        name
+        url
+        video
+        img
+        summary
       }
     }
   }
@@ -82,6 +96,7 @@ export const CREATE_GAME = gql`
     $featuredImage: String
     $showreel: String
     $webshop: [GameWebshopInput]
+    $gamePost: [GameGamePostInput]
   ) {
     gameCreateOne(
       record: {
@@ -91,6 +106,7 @@ export const CREATE_GAME = gql`
         featuredImage: $featuredImage
         showreel: $showreel
         webshop: $webshop
+        gamePost: $gamePost
       }
     ) {
       recordId
@@ -108,6 +124,7 @@ export const UPDATE_GAME = gql`
     $showreel: String
     $price: String
     $webshop: [GameWebshopInput]
+    $gamePost: [GameGamePostInput]
   ) {
     gameUpdateById(
       record: {
@@ -119,6 +136,7 @@ export const UPDATE_GAME = gql`
         showreel: $showreel
         price: $price
         webshop: $webshop
+        gamePost: $gamePost
       }
     ) {
       recordId

@@ -11,6 +11,7 @@ import {
   DividerWithBorder,
 } from '../../../components';
 import OnlineStores from './onlineStore';
+import GamePosts from './gamePosts';
 export default function GameProfile({ game }) {
   const classes = useStyles();
   return (
@@ -51,6 +52,7 @@ export default function GameProfile({ game }) {
         )}
 
         {game.webshop.length > 0 && <OnlineStores webshops={game.webshop} />}
+        {game.gamePost.length > 0 && <GamePosts gamePosts={game.gamePost} />}
         <Column w="100%">
           <DividerWithBorder />
           {game.url ? (

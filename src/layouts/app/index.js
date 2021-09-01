@@ -205,7 +205,7 @@ export default function AppLayout(props) {
                 ) : page === 'work' ? (
                   <WorkPage jumpTo={pathParam} />
                 ) : page === 'jobs' ? (
-                  <JobPage />
+                  <JobPage jumpTo={pathParam} />
                 ) : page === 'public-preview' ? (
                   <PreviewProfile
                     profileId={pathParam}

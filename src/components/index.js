@@ -51,6 +51,7 @@ import MenuButtonMulti from './buttons/menuButtonMulti';
 import MenuButtonTab from './buttons/menuButtonTab';
 import TopMenuButton from './buttons/topMenuButton';
 import MenuButtonSecondary from './buttons/menuButtonSecondary';
+import MenuButtonCircle from './buttons/menuButtonCircle';
 import FieldTitle from './fieldTitle';
 import {
   JobComponent,
@@ -164,6 +165,7 @@ export {
   PaymentTerms,
   TextLeft,
   TextDivider,
+  MenuButtonCircle,
   DividerMini,
   ColumnWrapperFull,
   ColumnWrapper,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TabPage } from '../../../../components';
 import {
   workMenu,
@@ -15,12 +15,24 @@ import WorkDashboard from './workDashboard';
 
 export default function WorkPage({ jumpTo }) {
   const [pageValues, setPageValues] = React.useState({
-    primaryPage: jumpTo ? jumpTo.split(':')[0] : 'my_work',
-    secondaryPage: jumpTo ? jumpTo.split(':')[1] : 'active_work',
+    primaryPage: 'my_work',
+    secondaryPage: 'active_work',
     jobId: null,
     inviteId: null,
     contractId: null,
   });
+
+  useEffect(() => {
+    jumpTo &&
+      setPageValues({
+        ...pageValues,
+        primaryPage: jumpTo.split(':')[0],
+        secondaryPage: jumpTo.split(':')[1],
+        jobId: null,
+        inviteId: null,
+        contractId: null,
+      });
+  }, [jumpTo]);
 
   return (
     <MenuContext.Provider

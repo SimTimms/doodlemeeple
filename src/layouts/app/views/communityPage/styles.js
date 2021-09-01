@@ -10,14 +10,16 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
   },
   subTitle: {
-    fontSize: '1.4rem',
     background: theme.palette.primary.dark,
     marginLeft: -5,
-    color: '#fff',
     borderRadius: '0 3px 3px 0',
     padding: 5,
     paddingRight: 15,
     paddingLeft: 15,
+  },
+  subTitleText: {
+    fontSize: '1.4rem',
+    color: '#fff',
   },
   menuStr: {
     fontSize: '1rem',
