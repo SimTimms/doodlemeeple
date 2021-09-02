@@ -15,7 +15,7 @@ export default function MyPosts() {
       {(menu) => (
         <Row wrap="wrap" a="flex-start" j="space-around" w="100%">
           {menu.homePage.secondaryPage === 'create_my_post' ? (
-            <MyPostForm />
+            <MyPostForm postId={menu.homePage.myPostId} />
           ) : menu.homePage.secondaryPage === 'all_posts' ? (
             <Column w={400}>
               <Grid cols={1}>

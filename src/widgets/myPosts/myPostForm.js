@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStyles } from './styles';
 import {
   MenuButtonStandard,
@@ -18,6 +18,7 @@ import Update from './update';
 
 export default function MyPostForm({ ...props }) {
   const classes = useStyles();
+  const { type, objectId, postId } = props;
   const [myPost, setMyPost] = React.useState({
     name: '',
     logo: '',
@@ -26,8 +27,18 @@ export default function MyPostForm({ ...props }) {
     url: '',
     showreel: '',
     _id: 'new',
+    type: type ? type : 'public',
+    game: type === 'game' ? objectId : null,
   });
   const [deleteConfirm, setDeleteConfirm] = React.useState(false);
+
+  useEffect(() => {
+    setMyPost({
+      ...myPost,
+      type: type ? type : 'public',
+      game: type === 'game' ? objectId : null,
+    });
+  }, [type, objectId]);
 
   return (
     <MenuContext.Consumer>
@@ -65,24 +76,26 @@ export default function MyPostForm({ ...props }) {
                     imageCategory="myPost"
                   />
                 </div>
-                <FieldBox
-                  value={myPost.name}
-                  title="Post Header"
-                  maxLength={26}
-                  minLength={5}
-                  onChangeEvent={(e) => {
-                    setMyPost({
-                      ...myPost,
-                      name: e,
-                    });
-                  }}
-                  replaceMode="loose"
-                  placeholder="Example: My new game"
-                  info="What's this post about?"
-                  warning=""
-                  size="s"
-                  multiline={false}
-                />
+                {type === 'public' && (
+                  <FieldBox
+                    value={myPost.name}
+                    title="Post Header"
+                    maxLength={26}
+                    minLength={5}
+                    onChangeEvent={(e) => {
+                      setMyPost({
+                        ...myPost,
+                        name: e,
+                      });
+                    }}
+                    replaceMode="loose"
+                    placeholder="Example: My new game"
+                    info="What's this post about?"
+                    warning=""
+                    size="s"
+                    multiline={false}
+                  />
+                )}
                 <FieldBox
                   value={myPost.summary}
                   title="Content"
@@ -100,23 +113,25 @@ export default function MyPostForm({ ...props }) {
                   size="s"
                   multiline={true}
                 />
-                <FieldBox
-                  value={myPost.url}
-                  title="URL"
-                  maxLength={512}
-                  onChangeEvent={(e) => {
-                    setMyPost({
-                      ...myPost,
-                      url: e,
-                    });
-                  }}
-                  replaceMode="loose"
-                  placeholder="Example: https://mywebshop.com"
-                  info="Add a link if you'd like"
-                  warning=""
-                  size="s"
-                  multiline={false}
-                />
+                {type === 'public' && (
+                  <FieldBox
+                    value={myPost.url}
+                    title="URL"
+                    maxLength={512}
+                    onChangeEvent={(e) => {
+                      setMyPost({
+                        ...myPost,
+                        url: e,
+                      });
+                    }}
+                    replaceMode="loose"
+                    placeholder="Example: https://mywebshop.com"
+                    info="Add a link if you'd like"
+                    warning=""
+                    size="s"
+                    multiline={false}
+                  />
+                )}
 
                 <Divider />
 
@@ -195,7 +210,7 @@ export default function MyPostForm({ ...props }) {
             <Query
               query={MY_POST_BY_ID}
               fetchPolicy="network-only"
-              variables={{ _id: menu.homePage.myPostId }}
+              variables={{ _id: postId }}
               onCompleted={(data) =>
                 data.myPostById !== null && setMyPost({ ...data.myPostById })
               }

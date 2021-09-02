@@ -22,6 +22,25 @@ export const MY_POST_BY_ID = gql`
   }
 `;
 
+export const GAME_POSTS_WIDGET = gql`
+  query myPostMany($gameId: MongoID) {
+    myPostMany(filter: { game: $gameId }) {
+      _id
+      createdAt
+      name
+      summary
+      featuredImage
+      url
+      approved
+      user {
+        name
+        _id
+        profileImg
+      }
+    }
+  }
+`;
+
 export const MY_POSTS_WIDGET = gql`
   {
     myPostsWidget {
@@ -61,6 +80,8 @@ export const CREATE_MY_POST = gql`
     $url: String
     $featuredImage: String
     $showreel: String
+    $type: String
+    $game: MongoID
   ) {
     myPostCreateOne(
       record: {
@@ -69,6 +90,8 @@ export const CREATE_MY_POST = gql`
         url: $url
         featuredImage: $featuredImage
         showreel: $showreel
+        type: $type
+        game: $game
       }
     ) {
       recordId
@@ -85,6 +108,8 @@ export const UPDATE_MY_POST = gql`
     $featuredImage: String
     $showreel: String
     $approved: Boolean
+    $type: String
+    $game: MongoID
   ) {
     myPostUpdateById(
       record: {
@@ -95,6 +120,8 @@ export const UPDATE_MY_POST = gql`
         featuredImage: $featuredImage
         showreel: $showreel
         approved: $approved
+        type: $type
+        game: $game
       }
     ) {
       recordId

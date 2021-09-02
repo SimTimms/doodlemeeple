@@ -20,6 +20,26 @@ export const REMOVE_GAME = gql`
   }
 `;
 
+export const POSTS_BY_GAME = gql`
+  query postsByGame($_id: MongoID!) {
+    postsByGame(_id: $_id) {
+      name
+      logo
+      featuredImage
+      summary
+      url
+      showreel
+      type
+      approved
+      user {
+        _id
+        name
+        profileImg
+      }
+    }
+  }
+`;
+
 export const GAME_BY_ID = gql`
   query gameById($_id: MongoID!) {
     gameById(_id: $_id) {
