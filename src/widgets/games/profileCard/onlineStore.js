@@ -10,7 +10,6 @@ import {
 export default function OnlineStores({ webshops }) {
   return (
     <Column w="100%">
-      <DividerWithBorder />
       <Column w={300}>
         {webshops.map((webshop, index) => (
           <a

@@ -24,7 +24,11 @@ export const MY_POST_BY_ID = gql`
 
 export const GAME_POSTS_WIDGET = gql`
   query myPostMany($gameId: MongoID) {
-    myPostMany(filter: { game: $gameId }) {
+    myPostMany(
+      filter: { game: $gameId }
+      limit: 5
+      sort: CREATEDAT__UPDATEDAT_DESC
+    ) {
       _id
       createdAt
       name
@@ -95,6 +99,16 @@ export const CREATE_MY_POST = gql`
       }
     ) {
       recordId
+      record {
+        createdAt
+        summary
+        _id
+        user {
+          name
+          _id
+          profileImg
+        }
+      }
     }
   }
 `;

@@ -3,9 +3,7 @@ import { useStyles } from './styles';
 import {
   MenuButtonStandard,
   FieldBox,
-  InputLabel,
   Column,
-  Uploader,
   DividerMini,
   Divider,
 } from '../../components';
@@ -18,7 +16,7 @@ import Update from './update';
 
 export default function MyPostForm({ ...props }) {
   const classes = useStyles();
-  const { type, objectId, postId } = props;
+  const { type, objectId, postId, updateEvent, comments } = props;
   const [myPost, setMyPost] = React.useState({
     name: '',
     logo: '',
@@ -47,58 +45,11 @@ export default function MyPostForm({ ...props }) {
           <div className={classes.menuRoot}>
             <div style={{ padding: 10, maxWidth: 400, margin: 'auto' }}>
               <Column a="center" j="center">
-                <InputLabel
-                  title="Image"
-                  icon={null}
-                  value={null}
-                  maxLength={null}
-                  info={'Include an image with this post.....if you want.'}
-                  warning={''}
-                />
-                <div
-                  className={classes.image}
-                  style={{
-                    backgroundImage: `url(${myPost.featuredImage})`,
-                  }}
-                >
-                  <Uploader
-                    cbImage={(url) => {
-                      setMyPost({
-                        ...myPost,
-                        featuredImage: url,
-                      });
-                    }}
-                    styleOverride={null}
-                    className={null}
-                    cbDelete={null}
-                    hasFile={false}
-                    size="2MB PNG JPG GIF"
-                    imageCategory="myPost"
-                  />
-                </div>
-
-                <FieldBox
-                  value={myPost.name}
-                  title="Post Header"
-                  maxLength={26}
-                  minLength={5}
-                  onChangeEvent={(e) => {
-                    setMyPost({
-                      ...myPost,
-                      name: e,
-                    });
-                  }}
-                  replaceMode="loose"
-                  placeholder="Example: My new game"
-                  info="What's this post about?"
-                  warning=""
-                  size="s"
-                  multiline={false}
-                />
                 <FieldBox
                   value={myPost.summary}
-                  title="Content"
+                  title="Comment"
                   maxLength={256}
+                  minLength={3}
                   onChangeEvent={(e) => {
                     setMyPost({
                       ...myPost,
@@ -112,25 +63,6 @@ export default function MyPostForm({ ...props }) {
                   size="s"
                   multiline={true}
                 />
-                {type === 'public' && (
-                  <FieldBox
-                    value={myPost.url}
-                    title="URL"
-                    maxLength={512}
-                    onChangeEvent={(e) => {
-                      setMyPost({
-                        ...myPost,
-                        url: e,
-                      });
-                    }}
-                    replaceMode="loose"
-                    placeholder="Example: https://mywebshop.com"
-                    info="Add a link if you'd like"
-                    warning=""
-                    size="s"
-                    multiline={false}
-                  />
-                )}
 
                 <Divider />
 
@@ -143,10 +75,7 @@ export default function MyPostForm({ ...props }) {
                       }}
                       onCompleted={(data) => {
                         toaster('Saved');
-                        menu.updateMenuContext({
-                          ...menu.homePage,
-                          myPostId: data.myPostCreateOne.recordId,
-                        });
+                        updateEvent([data.myPostCreateOne.record, ...comments]);
                       }}
                     >
                       {(mutation) => {
@@ -155,7 +84,7 @@ export default function MyPostForm({ ...props }) {
                             title="Create"
                             icon="add"
                             fullWidth={true}
-                            disabled={myPost.name.length < 5}
+                            disabled={myPost.summary.length < 3}
                             onClickEvent={() => {
                               mutation();
                             }}

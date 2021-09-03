@@ -41,4 +41,5 @@ export const useStyles = makeStyles((theme) => ({
     gridTemplateColumns: '1fr 1fr 1fr 1fr ',
     width: '100%',
   },
+  title: { fontWeight: 'bold' },
 }));

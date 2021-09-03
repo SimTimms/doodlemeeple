@@ -5,6 +5,6 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     marginTop: 10,
     marginBottom: 10,
-    borderTop: `1px solid #cecbdc`,
+    borderTop: `1px solid rgba(0,0,0,0.05)`,
   },
 }));
