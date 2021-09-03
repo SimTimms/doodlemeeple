@@ -69,6 +69,11 @@ export const DEVELOPMENT_TYPES = [
 export function nameShortener(strIn, length) {
   return strIn.length > length ? `${strIn.substring(0, length)}...` : strIn;
 }
+
+export function randomKey() {
+  return Math.random().toString(36);
+}
+
 export function calculatePercent(paymentTermsArray, contractTotal, currency) {
   const totalInt = parseInt(contractTotal);
   let response = {

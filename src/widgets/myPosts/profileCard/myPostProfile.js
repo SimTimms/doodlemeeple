@@ -3,10 +3,23 @@ import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import { BgImg } from './components';
-import { Row, Column, HrefLink, DividerMini } from '../../../components';
+import {
+  Row,
+  Column,
+  HrefLink,
+  DividerMini,
+  MenuButtonStandard,
+} from '../../../components';
 import { timeDifferenceForDate } from '../../../utils/dates';
-export default function MyPostProfile({ myPost }) {
+import { Mutation } from 'react-apollo';
+import { REMOVE_MY_POST } from '../data';
+import { toaster } from '../../../utils/toaster';
+import Cookies from 'js-cookie';
+
+export default function MyPostProfile({ myPost, onDeleteEvent }) {
   const classes = useStyles();
+  const userId = Cookies.get('userId');
+
   return (
     <div
       className={clsx({
@@ -23,14 +36,37 @@ export default function MyPostProfile({ myPost }) {
 
         <Column a="flex-start">
           <Column a="flex-start">
-            <HrefLink
-              title={myPost.user.name}
-              url={`/public-preview/${myPost.user._id}`}
-            />
+            <Row j="space-between">
+              <HrefLink
+                title={myPost.user.name}
+                url={`/public-preview/${myPost.user._id}`}
+              />
+              {userId === myPost.user._id && (
+                <Mutation
+                  mutation={REMOVE_MY_POST}
+                  variables={{
+                    _id: myPost._id,
+                  }}
+                  onCompleted={() => {
+                    toaster('Deleted');
+                    onDeleteEvent && onDeleteEvent();
+                  }}
+                >
+                  {(mutation) => {
+                    return (
+                      <MenuButtonStandard
+                        type="delete"
+                        icon="delete"
+                        onClickEvent={() => mutation()}
+                      />
+                    );
+                  }}
+                </Mutation>
+              )}
+            </Row>
             <Typography style={{ fontSize: '0.8rem' }}>
               {timeDifferenceForDate(myPost.createdAt)}
             </Typography>
-
             <Typography
               style={{
                 fontWeight: 'bold',

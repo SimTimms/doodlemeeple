@@ -16,7 +16,6 @@ import GamePosts from './gamePosts';
 import { MenuContext } from '../../../context';
 import { Query } from 'react-apollo';
 import { GAME_BY_ID } from '../data';
-import GamePostForm from '../../../widgets/myPosts/gamePostForm';
 import GamePostWidget from '../../../widgets/myPosts/gamePostWidget';
 
 export default function GameProfileFull() {

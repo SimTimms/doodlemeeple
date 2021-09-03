@@ -21,6 +21,9 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '1rem',
     textAlign: 'center',
     width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   titleWithIcon: {
     display: 'flex',

@@ -4,6 +4,7 @@ import { GAME_POSTS_WIDGET } from './data';
 import { MyPostProfile } from './profileCard';
 import { Column, Grid } from '../../components';
 import GamePostForm from './gamePostForm';
+import { randomKey } from '../../utils';
 
 export default function GamePostWidget({ gameId, withForm }) {
   const [comments, setComments] = React.useState(null);
@@ -35,7 +36,17 @@ export default function GamePostWidget({ gameId, withForm }) {
 
       <Grid cols={1}>
         {comments !== null
-          ? comments.map((myPost) => <MyPostProfile myPost={myPost} />)
+          ? comments.map((myPost, index) => (
+              <MyPostProfile
+                key={`post_${randomKey()}`}
+                myPost={myPost}
+                onDeleteEvent={() => {
+                  setComments([
+                    ...comments.filter((item) => item._id !== myPost._id),
+                  ]);
+                }}
+              />
+            ))
           : null}
       </Grid>
     </Column>
