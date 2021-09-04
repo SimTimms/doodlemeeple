@@ -11,7 +11,6 @@ import {
   DividerWithBorder,
 } from '../../../components';
 import OnlineStores from './onlineStore';
-import GamePosts from './gamePosts';
 import { MenuContext } from '../../../context';
 
 export default function GameProfile({ game }) {

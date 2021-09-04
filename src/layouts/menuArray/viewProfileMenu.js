@@ -13,13 +13,13 @@ export default function viewProfileMenu(pageValues, setPageValues) {
       count: null,
     },
     {
-      name: 'Skills',
-      icon: 'face',
-      machineName: 'skills',
+      name: 'Games',
+      icon: 'casino',
+      machineName: 'user_games',
       link: () =>
         setPageValues({
           ...pageValues,
-          primaryPage: 'skills',
+          primaryPage: 'user_games',
           secondaryPage: null,
         }),
       count: null,

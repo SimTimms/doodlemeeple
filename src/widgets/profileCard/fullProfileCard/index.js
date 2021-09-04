@@ -111,8 +111,17 @@ export default function FullProfileCard({ history, creativeId }) {
                 </Column>
                 <Column a="flex-start" j="flex-start" mw={300} w="50%">
                   <Column w="100%" a="flex-start">
-                    <Divider />
-                    <MainTitle title="Share" />
+                    <DividerWithBorder />
+                    <MainTitle title="Options" />
+                    <DividerMini />
+                    <MenuButtonStandard
+                      title="Hire on DoodleMeeple"
+                      icon=""
+                      onClickEvent={() =>
+                        history.push(`/app/new-job-post/${creative._id}`)
+                      }
+                      fullWidth={true}
+                    />
                     <DividerMini />
                     {shareLink ? (
                       <Typography
@@ -121,8 +130,9 @@ export default function FullProfileCard({ history, creativeId }) {
                       >{`${process.env.REACT_APP_URL}/preview/${creative._id}`}</Typography>
                     ) : (
                       <MenuButtonStandard
-                        title="Show Link"
+                        title="Share Link"
                         onClickEvent={() => setShareLink(true)}
+                        fullWidth={true}
                       />
                     )}
                   </Column>
@@ -156,28 +166,6 @@ export default function FullProfileCard({ history, creativeId }) {
                   )}
                 </Column>
               </Row>
-              <Column w={600}>
-                <Column a="center" p="0 0 10px 0">
-                  {history && (
-                    <IconButton
-                      title="Hire on DoodleMeeple"
-                      color="text-dark"
-                      icon=""
-                      iconPos="right"
-                      onClickEvent={() =>
-                        history.push(`/app/new-job-post/${creative._id}`)
-                      }
-                      styleOverride={{
-                        width: '100%',
-                        borderRadius: 0,
-                        borderTop: '1px solid #eee',
-                        margin: 0,
-                        justifyContent: 'center',
-                      }}
-                    />
-                  )}
-                </Column>
-              </Column>
             </Column>
           );
         }}
