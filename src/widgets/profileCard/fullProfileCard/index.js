@@ -11,12 +11,17 @@ import {
   LargeImage,
   Divider,
   DividerMini,
+  DividerWithBorder,
+  HrefLink,
+  MainTitle,
+  SubTitle,
+  MenuButtonStandard,
 } from '../../../components';
+import { Badges } from '../components';
 import { PROFILE_PREVIEW } from '../data';
 import { nameShortener } from '../../../utils';
 import { TYPE_HELPER } from '../../../utils';
 import ImageThumbs from './imageThumbs';
-import Name from './name';
 import Socials from './socials';
 import GallerySection from './gallerySection';
 
@@ -25,7 +30,7 @@ export default function FullProfileCard({ history, creativeId }) {
 
   const [previewImage, setPreviewImage] = React.useState(null);
   const [large, setLarge] = React.useState(null);
-  const [page, setPage] = React.useState(0);
+  const [page, setPage] = React.useState(-1);
   const [shareLink, setShareLink] = React.useState(false);
 
   return (
@@ -35,6 +40,7 @@ export default function FullProfileCard({ history, creativeId }) {
       })}
     >
       <LargeImage large={large} setLarge={setLarge} />
+
       <Query
         query={PROFILE_PREVIEW}
         fetchPolicy="network-only"
@@ -46,111 +52,112 @@ export default function FullProfileCard({ history, creativeId }) {
           !previewImage && setPreviewImage(data.userById.profileBG);
           return (
             <Column>
-              <Column>
-                <BgImg
-                  previewImage={previewImage}
-                  onClick={() => {
-                    setLarge(previewImage);
-                  }}
-                  skill={creative.sections}
-                />
-                <ImageThumbs
-                  creativeId={creative._id}
-                  profileBG={creative.profileBG}
-                  setPreviewImage={setPreviewImage}
-                  setLarge={setLarge}
-                />
-              </Column>
-              <Column w={600}>
-                <Name creative={creative} />
+              <BgImg
+                previewImage={previewImage}
+                onClick={() => {
+                  setLarge(previewImage);
+                }}
+                skill={creative.sections}
+              />
+              <ImageThumbs
+                creativeId={creative._id}
+                profileBG={creative.profileBG}
+                setPreviewImage={setPreviewImage}
+                setLarge={setLarge}
+              />
 
-                <Divider />
-                <Typography align="center" className={classes.summary}>
-                  {nameShortener(creative.summary ? creative.summary : '', 60)}
-                </Typography>
-                {creative.sections.length > 1 && (
-                  <Column bg="#333" w={400}>
-                    <DividerMini />
-                    <Typography
-                      className={classes.catTitle}
-                      align="center"
-                      style={{ color: '#bbb' }}
-                    >
-                      Select a Skill
-                    </Typography>
-                    <DividerMini />
-                    <Row pl={10} pr={10}>
-                      {creative.sections &&
-                        creative.sections.map((section, index) => {
-                          return (
-                            <Typography
-                              className={classes.catTitle}
-                              align="center"
-                              style={{ cursor: 'pointer' }}
-                              onClick={() => setPage(index)}
-                            >{`${TYPE_HELPER(section.type)}`}</Typography>
-                          );
-                        })}
-                    </Row>
-                    <DividerMini />
-                  </Column>
-                )}
-                {creative.sections &&
-                  creative.sections.map((section, index) => {
-                    return (
-                      (index === page || page === -1) && (
-                        <GallerySection
-                          section={section}
-                          key={`section_${index}`}
-                        />
-                      )
-                    );
-                  })}
-                <Column a="center" p="0 0 10px 0">
-                  <Column w={400}>
-                    <Column w={400} bg="#ddd">
-                      <Typography style={{ color: '#222', padding: 5 }}>
-                        Social
-                      </Typography>
-                    </Column>
+              <Row a="flex-start" j="space-between">
+                <Column j="flex-start" w="100%" mw={700}>
+                  <DividerWithBorder />
+                  <Row j="space-between" w="100%">
+                    <MainTitle title={creative.name} />
+                    <Badges creative={creative} />
+                  </Row>
+                  <Divider />
+                  <Typography align="left" className={classes.summary}>
+                    {creative.summary}
+                  </Typography>
+                  <Column w="100%" a="flex-start">
+                    <DividerWithBorder />
+                    <SubTitle title="Skills" />
                     <Divider />
-                    <Row j="space-between" w="100%">
-                      <Socials creative={creative} />
-                      {creative.website && (
-                        <a
-                          href={`${
-                            creative.website.indexOf('http') === -1
-                              ? `https://${creative.website}`
-                              : creative.website
-                          }`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={classes.website}
-                        >
-                          <Typography className={classes.website}>
-                            Website
-                          </Typography>
-                        </a>
-                      )}
-                    </Row>
+                    {creative.sections &&
+                      creative.sections.map((section, index) => {
+                        return (
+                          <Typography
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => setPage(index)}
+                          >{`${TYPE_HELPER(section.type)}`}</Typography>
+                        );
+                      })}
+                    {creative.sections.length > 1 && (
+                      <Typography
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => setPage(-1)}
+                      >{`View All`}</Typography>
+                    )}
+                    {creative.sections &&
+                      creative.sections.map((section, index) => {
+                        return (
+                          (index === page || page === -1) && (
+                            <GallerySection
+                              section={section}
+                              key={`section_${index}`}
+                            />
+                          )
+                        );
+                      })}
                   </Column>
-                  <Column w={400}>
+                </Column>
+                <Column a="flex-start" j="flex-start" mw={300} w="50%">
+                  <Column w="100%" a="flex-start">
                     <Divider />
+                    <MainTitle title="Share" />
+                    <DividerMini />
                     {shareLink ? (
                       <Typography
                         className={classes.shareLink}
-                        onClick={() => setShareLink(false)}
                         style={{ cursor: 'pointer' }}
                       >{`${process.env.REACT_APP_URL}/preview/${creative._id}`}</Typography>
                     ) : (
-                      <Typography
-                        className={classes.shareLink}
-                        onClick={() => setShareLink(true)}
-                        style={{ cursor: 'pointer' }}
-                      >{`Share This Profile`}</Typography>
+                      <MenuButtonStandard
+                        title="Show Link"
+                        onClickEvent={() => setShareLink(true)}
+                      />
                     )}
-                    <Divider />
                   </Column>
+                  <Column w="100%" a="flex-start">
+                    <DividerWithBorder />
+                    <MainTitle title="Social" />
+                    <DividerMini />
+                    <Socials creative={creative} />
+                  </Column>
+                  {creative.website && (
+                    <Column w="100%" a="flex-start">
+                      <DividerWithBorder />
+                      <MainTitle title="Website" />
+                      <DividerMini />
+                      <HrefLink
+                        title={creative.website}
+                        url={creative.website}
+                      />
+                    </Column>
+                  )}
+                  {creative.publicEmail && (
+                    <Column w="100%" a="flex-start">
+                      <DividerWithBorder />
+                      <MainTitle title="Email" />
+                      <DividerMini />
+                      <HrefLink
+                        title={creative.publicEmail}
+                        url={`mailto:${creative.publicEmail}`}
+                      />
+                    </Column>
+                  )}
+                </Column>
+              </Row>
+              <Column w={600}>
+                <Column a="center" p="0 0 10px 0">
                   {history && (
                     <IconButton
                       title="Hire on DoodleMeeple"

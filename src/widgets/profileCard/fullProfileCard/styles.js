@@ -5,11 +5,8 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    border: '1px solid #ddd',
     width: '100%',
     position: 'relative',
-    boxShadow: '10px 10px 20px rgba(0,0,0,0.2)',
-    background: '#fff',
   },
   skillName: {
     color: '#fff',
@@ -79,8 +76,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   summary: {
     paddingBottom: 6,
-    paddingLeft: 10,
-    paddingRight: 10,
     marginBottom: 10,
   },
   types: { fontStyle: 'italic', fontSize: 12 },

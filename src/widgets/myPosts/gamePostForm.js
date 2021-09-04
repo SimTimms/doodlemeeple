@@ -67,7 +67,7 @@ export default function MyPostForm({ ...props }) {
                 <Divider />
 
                 {myPost._id === 'new' ? (
-                  <Column mw={200}>
+                  <Column mw={100}>
                     <Mutation
                       mutation={CREATE_MY_POST}
                       variables={{
@@ -81,7 +81,7 @@ export default function MyPostForm({ ...props }) {
                       {(mutation) => {
                         return (
                           <MenuButtonStandard
-                            title="Create"
+                            title="Submit"
                             icon="add"
                             fullWidth={true}
                             disabled={myPost.summary.length < 3}

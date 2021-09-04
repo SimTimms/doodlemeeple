@@ -105,6 +105,8 @@ import LargeImage from './largeImage';
 import StatusBadge from './statusBadge';
 import HrefLink from './hrefLink';
 import Avatar from './avatar';
+import SubTitle from './subTitle';
+import GridCard from './gridCard';
 import {
   Header,
   SubHeader,
@@ -131,6 +133,8 @@ import {
 } from './blocks';
 
 export {
+  GridCard,
+  SubTitle,
   HrefLink,
   Grid,
   StatusBadge,

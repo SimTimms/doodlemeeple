@@ -3,7 +3,10 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     textDecoration: 'none',
     color: theme.palette.primary.main,
-    fontWeight: 500,
+    fontWeight: 'bold',
     '&:hover': { color: theme.palette.secondary.dark },
+  },
+  underline: {
+    textDecoration: 'underline',
   },
 }));

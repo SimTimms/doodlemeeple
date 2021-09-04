@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { BgImg } from './components';
@@ -10,6 +10,7 @@ import {
   Divider,
   MainTitle,
   HrefLink,
+  SubTitle,
 } from '../../../components';
 import OnlineStores from './onlineStore';
 import GamePosts from './gamePosts';
@@ -38,10 +39,11 @@ export default function GameProfileFull() {
                   <BgImg previewImage={game.featuredImage} onClick={() => {}} />
                   <Row a="flex-start" j="space-between">
                     <Column j="flex-start" w="100%" mw={700}>
+                      <DividerWithBorder />
                       <Row j="space-between" w="100%">
                         <MainTitle title={game.name} />
                         <a
-                          href={`/public-preview/${game.user._id}`}
+                          href={`/app/public-preview/${game.user._id}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{
@@ -62,7 +64,7 @@ export default function GameProfileFull() {
                       )}
                       <Column w="100%" a="flex-start">
                         <DividerWithBorder />
-                        <MainTitle title="Website" />
+                        <SubTitle title="Website" />
                         <Divider />
                         {game.url ? (
                           <HrefLink url={game.url} title={game.url} />
@@ -73,7 +75,7 @@ export default function GameProfileFull() {
                       {game.gamePost.length > 0 && (
                         <Column w="100%" a="flex-start">
                           <DividerWithBorder />
-                          <MainTitle title="Updates" />
+                          <SubTitle title="Updates" />
                           <Divider />
                           <GamePosts
                             gamePosts={game.gamePost}

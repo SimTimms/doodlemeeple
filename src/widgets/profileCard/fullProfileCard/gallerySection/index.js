@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactPlayer from 'react-player';
-import { Card, Testimonials, Projects } from './components';
+import { Testimonials, Projects, Card } from './components';
 import {
-  ColumnWrapperFull,
   Column,
   Divider,
-  Text,
+  DividerMini,
+  SubTitle,
+  MainTitle,
+  Grid,
+  GridCard,
 } from '../../../../components';
 import { Typography } from '@material-ui/core';
 
@@ -17,27 +20,17 @@ function GallerySection({ section }) {
   return section.id === 'new' ? (
     <div>New</div>
   ) : (
-    <div
-      style={{
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
-        marginTop: 20,
-      }}
-    >
-      <Column w={400} bg="#ddd">
-        <Typography style={{ color: '#222', padding: 5 }}>
-          {TYPE_HELPER(type)}
-        </Typography>
-      </Column>
-      <Column>
-        <Text str={summary} />
-        <Divider />
+    <Column>
+      <Divider />
+      <SubTitle title={TYPE_HELPER(type)} />
+      <Column a="flex-start">
+        <SubTitle title="Summary" short={true} />
+        <Typography>{summary}</Typography>
       </Column>
       {showreel && (
-        <Column>
+        <Column a="flex-start">
+          <SubTitle title="Showreel" short={true} />
+          <DividerMini />
           <ReactPlayer
             url={showreel}
             playing
@@ -46,7 +39,6 @@ function GallerySection({ section }) {
             style={{
               background: '#333',
               width: '100%',
-              marginTop: 20,
             }}
             config={{
               youtube: {
@@ -59,30 +51,25 @@ function GallerySection({ section }) {
         </Column>
       )}
       {gallery.images.length > 0 && (
-        <ColumnWrapperFull>
-          <div
-            style={{
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'flex-start',
-              flexWrap: 'wrap',
-              boxSizing: 'border-box',
-            }}
-          >
+        <Column a="flex-start">
+          <Divider />
+          <SubTitle title="Gallery" short={true} />
+          <Divider />
+          <Grid>
             {gallery.images.map((item, index) => {
-              return <Card img={`${item.img}`} key={`img_${index}`} />;
+              return (
+                <GridCard>
+                  <Card img={`${item.img}`} key={`img_${index}`} />
+                </GridCard>
+              );
             })}
-          </div>
-        </ColumnWrapperFull>
+          </Grid>
+        </Column>
       )}
       {testimonials.length > 0 && (
-        <Column>
-          <Column w={400} bg="#ddd">
-            <Typography style={{ color: '#222', padding: 5 }}>
-              Testimonials
-            </Typography>
-          </Column>
+        <Column a="flex-start">
+          <Divider />
+          <SubTitle title="Testimonials" short={true} />
 
           <div
             style={{
@@ -99,12 +86,9 @@ function GallerySection({ section }) {
         </Column>
       )}
       {notableProjects.length > 0 && (
-        <Column>
-          <Column w={400} bg="#ddd" m="20px 0 0 0">
-            <Typography style={{ color: '#222', padding: 5 }}>
-              Projects
-            </Typography>
-          </Column>
+        <Column a="flex-start">
+          <Divider />
+          <SubTitle title="Projects" short={true} />
           <div
             style={{
               width: '100%',
@@ -118,7 +102,7 @@ function GallerySection({ section }) {
           </div>
         </Column>
       )}
-    </div>
+    </Column>
   );
 }
 

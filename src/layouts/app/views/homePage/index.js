@@ -26,7 +26,6 @@ export default function HomePage() {
     myPostId: null,
     gameId: null,
   });
-  console.log(pageValues);
   return (
     <MenuContext.Provider
       value={{

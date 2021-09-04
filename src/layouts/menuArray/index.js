@@ -17,8 +17,10 @@ import quoteMenuSecondary from './quoteMenuSecondary';
 import quoteViewMenu from './quoteViewMenu';
 import jobBoardMenu from './jobBoardMenu';
 import myPostsMenu from './myPostsMenu';
+import viewProfileMenu from './viewProfileMenu';
 
 export {
+  viewProfileMenu,
   myPostsMenu,
   jobBoardMenu,
   quoteMenuSecondary,

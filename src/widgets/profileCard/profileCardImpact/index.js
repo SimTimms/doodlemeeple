@@ -72,7 +72,8 @@ export default function ProfileCardImpact({ creative, setLarge }) {
           <Row j="space-between" pr={10}>
             <HrefLink
               title={creative.name}
-              url={`${process.env.REACT_APP_URL}/public-preview/${creative._id}`}
+              url={`/app/public-preview/${creative._id}`}
+              underline={true}
             />
             <Badges creative={creative} />
           </Row>

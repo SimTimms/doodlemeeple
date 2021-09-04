@@ -1,8 +1,11 @@
 import React from 'react';
 import { PreviewProfile } from './views/previewProfile';
 import { Content, IconButton, Column } from '../../components';
+import Cookies from 'js-cookie';
 
 function PreviewLayout(props) {
+  const userId = Cookies.get('userId');
+
   const pathParam = props
     ? props.profileId
       ? props.profileId
@@ -15,14 +18,16 @@ function PreviewLayout(props) {
 
   return (
     <div>
-      <Column>
-        <a href={`${process.env.REACT_APP_URL}/register/${pathParam}`}>
-          <IconButton
-            title={`register at ${process.env.REACT_APP_COMPANY_PUBLIC_NAME}.com`}
-            color="text-dark"
-          />
-        </a>
-      </Column>
+      {!userId && (
+        <Column>
+          <a href={`${process.env.REACT_APP_URL}/register/${pathParam}`}>
+            <IconButton
+              title={`register at ${process.env.REACT_APP_COMPANY_PUBLIC_NAME}.com`}
+              color="text-dark"
+            />
+          </a>
+        </Column>
+      )}
 
       <Content>
         <PreviewProfile

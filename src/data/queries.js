@@ -557,6 +557,12 @@ export const PROFILE_PREVIEW = gql`
       twitter
       linkedIn
       instagram
+      badges {
+        badgeType
+        link
+        badgeIcon
+        description
+      }
       likedMe {
         _id
         receiver {

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
+import clsx from 'clsx';
 
-export default function HrefLink({ url, title }) {
+export default function HrefLink({ url, title, underline }) {
   const classes = useStyles();
   return (
     <a
@@ -11,7 +12,14 @@ export default function HrefLink({ url, title }) {
       rel="noopener noreferrer"
       className={classes.root}
     >
-      <Typography className={classes.root}>{title}</Typography>
+      <Typography
+        className={clsx({
+          [classes.root]: true,
+          [classes.underline]: underline,
+        })}
+      >
+        {title}
+      </Typography>
     </a>
   );
 }
