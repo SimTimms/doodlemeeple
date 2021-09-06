@@ -8,6 +8,7 @@ import {
   communityMenu,
   myPostsMenu,
   gameProfileMenu,
+  viewProfileMenu,
 } from '../../../menuArray';
 import CommunityPage from '../communityPage';
 import {
@@ -17,6 +18,7 @@ import {
   MyPosts,
 } from '../../../../widgets';
 import GameProfileFull from '../../../../widgets/games/profileCard/gameProfileFull';
+import { PreviewProfile } from '../../../../layouts/preview/views/previewProfile';
 
 export default function HomePage() {
   const [pageValues, setPageValues] = React.useState({
@@ -25,6 +27,7 @@ export default function HomePage() {
     kickstarterId: null,
     myPostId: null,
     gameId: null,
+    userId: null,
   });
   return (
     <MenuContext.Provider
@@ -35,6 +38,7 @@ export default function HomePage() {
           kickstarterId: pageValues.kickstarterId,
           myPostId: pageValues.myPostId,
           gameId: pageValues.gameId,
+          userId: pageValues.userId,
         },
         updateMenuContext: setPageValues,
       }}
@@ -43,14 +47,15 @@ export default function HomePage() {
         {(history) => (
           <TabPage
             title={null}
-            primaryMenu={
-              pageValues.primaryPage === 'game_profile'
-                ? gameProfileMenu(pageValues, setPageValues)
-                : homeMenu(pageValues, setPageValues)
-            }
+            primaryMenu={homeMenu(pageValues, setPageValues)}
             secondaryMenu={
               pageValues.primaryPage === 'games'
-                ? gameMenu(pageValues, setPageValues)
+                ? pageValues.secondaryPage === 'game_profile'
+                  ? gameProfileMenu(pageValues, setPageValues)
+                  : pageValues.secondaryPage === 'game_user_profile' ||
+                    pageValues.secondaryPage === 'user_games'
+                  ? viewProfileMenu(pageValues, setPageValues)
+                  : gameMenu(pageValues, setPageValues)
                 : pageValues.primaryPage === 'community'
                 ? communityMenu(pageValues, setPageValues)
                 : pageValues.primaryPage === 'kickstarters'
@@ -70,10 +75,18 @@ export default function HomePage() {
                 <CreativeRosterWidget />
               )
             )}
-            {pageValues.primaryPage === 'games' && <Games />}
+            {pageValues.primaryPage === 'games' &&
+            pageValues.secondaryPage === 'games' ? (
+              <Games />
+            ) : pageValues.secondaryPage === 'game_profile' ? (
+              <GameProfileFull />
+            ) : (
+              pageValues.secondaryPage === 'game_user_profile' && (
+                <PreviewProfile profileId={pageValues.userId} />
+              )
+            )}
             {pageValues.primaryPage === 'kickstarters' && <Kickstarters />}
             {pageValues.primaryPage === 'my_posts' && <MyPosts />}
-            {pageValues.primaryPage === 'game_profile' && <GameProfileFull />}
           </TabPage>
         )}
       </HistoryContext.Consumer>

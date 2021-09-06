@@ -23,6 +23,7 @@ export const MenuContext = React.createContext({
     kickstarterId: null,
     myPostId: null,
     gameId: null,
+    userId: null,
   },
   profilePage: {
     primaryPage: null,

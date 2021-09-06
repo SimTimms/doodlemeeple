@@ -35,7 +35,7 @@ export default function GameProfileFull() {
             if (data) {
               const game = data.gameById;
               return (
-                <Column j="space-between">
+                <Column j="space-between" w="100%">
                   <BgImg previewImage={game.featuredImage} onClick={() => {}} />
                   <Row a="flex-start" j="space-between">
                     <Column j="flex-start" w="100%" mw={700}>

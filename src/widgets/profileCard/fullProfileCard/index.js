@@ -41,11 +41,7 @@ export default function FullProfileCard({ history, creativeId }) {
     >
       <LargeImage large={large} setLarge={setLarge} />
 
-      <Query
-        query={PROFILE_PREVIEW}
-        fetchPolicy="network-only"
-        variables={{ userId: creativeId }}
-      >
+      <Query query={PROFILE_PREVIEW} variables={{ userId: creativeId }}>
         {({ loading, data }) => {
           if (!data) return null;
           const creative = data.userById;

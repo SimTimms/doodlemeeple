@@ -21,66 +21,70 @@ export default function GameProfile({ game }) {
         [classes.creativeCard]: true,
       })}
     >
-      <Column j="space-between" h="100%">
-        <Column j="flex-start">
-          <BgImg previewImage={game.featuredImage} onClick={() => {}} />
-          <Row j="space-between" w="100%" pl={5} pr={5}>
-            <MenuContext.Consumer>
-              {(menu) => (
+      <MenuContext.Consumer>
+        {(menu) => (
+          <Column j="space-between" h="100%">
+            <Column j="flex-start">
+              <BgImg previewImage={game.featuredImage} onClick={() => {}} />
+              <Row j="space-between" w="100%" pl={5} pr={5}>
                 <Typography
                   className={classes.gameName}
                   onClick={() =>
                     menu.updateMenuContext({
                       ...menu.homePage,
-                      primaryPage: 'game_profile',
+                      secondaryPage: 'game_profile',
                       gameId: game._id,
                     })
                   }
                 >
                   {game.name}
                 </Typography>
-              )}
-            </MenuContext.Consumer>
 
-            <a
-              href={`/public-preview/${game.user._id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ textDecoration: 'none', color: '#222' }}
-            >
-              <Typography className={classes.authorName}>
-                {game.user.name}
+                <Typography
+                  className={classes.authorName}
+                  onClick={() =>
+                    menu.updateMenuContext({
+                      ...menu.homePage,
+                      secondaryPage: 'game_user_profile',
+                      userId: game.user._id,
+                    })
+                  }
+                >
+                  {game.user.name}
+                </Typography>
+              </Row>
+            </Column>
+
+            {game.summary && (
+              <Typography align="center" className={classes.summary}>
+                {game.summary}
               </Typography>
-            </a>
-          </Row>
-        </Column>
+            )}
 
-        {game.summary && (
-          <Typography align="center" className={classes.summary}>
-            {game.summary}
-          </Typography>
+            {game.webshop.length > 0 && (
+              <OnlineStores webshops={game.webshop} />
+            )}
+
+            <Column w="100%">
+              <DividerWithBorder />
+              {game.url ? (
+                <a
+                  href={`${game.url}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <MenuButtonStandard title="Website" onClickEvent={() => {}} />
+                </a>
+              ) : (
+                <div></div>
+              )}
+
+              <DividerMini />
+            </Column>
+          </Column>
         )}
-
-        {game.webshop.length > 0 && <OnlineStores webshops={game.webshop} />}
-
-        <Column w="100%">
-          <DividerWithBorder />
-          {game.url ? (
-            <a
-              href={`${game.url}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ textDecoration: 'none' }}
-            >
-              <MenuButtonStandard title="Website" onClickEvent={() => {}} />
-            </a>
-          ) : (
-            <div></div>
-          )}
-
-          <DividerMini />
-        </Column>
-      </Column>
+      </MenuContext.Consumer>
     </div>
   );
 }
