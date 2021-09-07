@@ -1,6 +1,5 @@
 import React from 'react';
 import { useStyles } from './styles';
-import clsx from 'clsx';
 import AppDashboard from './views/appDashboard';
 import TaskDashboard from './views/taskDashboard';
 import HomePage from './views/homePage';

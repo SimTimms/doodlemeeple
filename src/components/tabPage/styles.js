@@ -10,6 +10,13 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  mainHeader: {
+    color: '#fff',
+    fontSize: '1.8rem',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+  },
   secondaryMenu: {
     backgroundColor: '#fff',
     boxShadow: '3px 3px 5px rgba(0,0,0,0.1)',

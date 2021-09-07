@@ -16,7 +16,6 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.primary.dark,
     zIndex: 1,
     height: 68,
-    borderBottom: '1px solid rgba(255,255,255,0.15)',
   },
   desktop: { display: 'flex', flexDirection: 'column' },
   mobile: { width: '100%' },

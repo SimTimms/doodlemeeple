@@ -36,6 +36,11 @@ export const MenuContext = React.createContext({
   updateMenuContext: { secondary: () => {}, primary: () => {} },
 });
 
+export const MainMenuContext = React.createContext({
+  primaryPage: null,
+  updateMenuContext: () => {},
+});
+
 export const HistoryContext = React.createContext({
   history: null,
 });

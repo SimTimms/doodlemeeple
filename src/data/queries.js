@@ -508,7 +508,6 @@ export const PROFILE = gql`
       publicEmail
       skype
       phone
-
       sections {
         _id
         summary

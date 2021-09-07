@@ -24,6 +24,7 @@ export default function TabPage({
   return (
     <Column>
       <PrimaryMenuWrapper>
+        <Typography className={classes.mainHeader}>{title && title}</Typography>
         {primaryMenu &&
           primaryMenu.map((menuItem) => {
             return (
@@ -42,7 +43,6 @@ export default function TabPage({
             );
           })}
       </PrimaryMenuWrapper>
-      {title && <Typography className={classes.tabTitle}>{title}</Typography>}
       <Column a="flex-start">
         {secondaryMenu && (
           <div className={classes.secondaryMenuWrapper}>

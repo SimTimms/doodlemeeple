@@ -11,6 +11,7 @@ import themeDesigner from './theme';
 import AuthRoutes from './routes/routesAuth';
 import PublicRoutes from './routes/routesPublic';
 import ProfileRoutes from './routes/routesProfile';
+import { MainMenuContext } from './context';
 
 function RouterComponent(props) {
   const authToken = Cookies.get('token');
@@ -27,6 +28,9 @@ function RouterComponent(props) {
       },
     };
   });
+  const [mainMenuValues, setMainMenuValues] = React.useState({
+    primaryPage: 'profile',
+  });
 
   const client = new ApolloClient({
     link: authLink.concat(httpLink),
@@ -36,9 +40,16 @@ function RouterComponent(props) {
   return (
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
-        {authToken && <AuthRoutes props={props} theme={theme} />}
-        {!authToken && <PublicRoutes props={props} theme={theme} />}
-        <ProfileRoutes props={props} />
+        <MainMenuContext.Provider
+          value={{
+            primaryPage: mainMenuValues.primaryPage,
+            updateMenuContext: setMainMenuValues,
+          }}
+        >
+          {authToken && <AuthRoutes props={props} theme={theme} />}
+          {!authToken && <PublicRoutes props={props} theme={theme} />}
+          <ProfileRoutes props={props} />
+        </MainMenuContext.Provider>
       </ApolloProvider>
     </ThemeProvider>
   );
