@@ -4,6 +4,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import imageOptimiser from '../../../../../utils/imageOptimiser';
+import { randomKey } from '../../../../../utils';
 
 function titleReplace(titleIn) {
   const titleOut = titleIn === 'graphic-artist' ? 'Graphic Artist' : 'Artist';
@@ -90,7 +91,10 @@ export function Testimonials({ testimonials }) {
   const classes = useStyles();
   const testimonialElements = testimonials.map((item) => {
     return item.summary ? (
-      <div className={classes.testimonialWrapper}>
+      <div
+        className={classes.testimonialWrapper}
+        key={`testimonial_${randomKey()}`}
+      >
         {item.image && (
           <div
             style={{

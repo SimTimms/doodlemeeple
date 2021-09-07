@@ -50,6 +50,8 @@ import {
 } from '../../context';
 import Cookies from 'js-cookie';
 import PrimaryMenu from './primaryMenu';
+import { mainMenu } from '../menuArray';
+import { MainWrapper, ContentScroll } from '../../components';
 
 export default function AppLayout(props) {
   const { history } = props;
@@ -94,14 +96,10 @@ export default function AppLayout(props) {
       <ProfileContext.Provider value={profile}>
         <UserContext.Provider value={userId}>
           <CountContext.Provider value={counts}>
-            <div className={classes.root}>
+            <MainWrapper>
               <ToastContainer />
-              <PrimaryMenu profile={profile} page={page} />
-              <main
-                className={clsx({
-                  [classes.content]: true,
-                })}
-              >
+              <PrimaryMenu page={page} mainMenu={mainMenu} />
+              <ContentScroll>
                 {page === 'dashboard' && profile ? (
                   <AppDashboard
                     history={history}
@@ -205,7 +203,7 @@ export default function AppLayout(props) {
                   <WorkPage jumpTo={pathParam} />
                 ) : page === 'jobs' ? (
                   <JobPage jumpTo={pathParam} />
-                ) : page === 'public-preview' ? (
+                ) : page === 'user-profile' ? (
                   <PreviewProfile
                     profileId={pathParam}
                     theme={props.theme}
@@ -237,8 +235,7 @@ export default function AppLayout(props) {
                 ) : page === 'create-quote' ? (
                   <NewQuote projectId={pathParam} />
                 ) : null}
-              </main>
-
+              </ContentScroll>
               <Query
                 query={PROFILE}
                 onCompleted={(data) => {
@@ -277,7 +274,7 @@ export default function AppLayout(props) {
                   return null;
                 }}
               </Query>
-            </div>
+            </MainWrapper>
           </CountContext.Provider>
         </UserContext.Provider>
       </ProfileContext.Provider>

@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 import { GAME_WIDGET_BY_USER } from './data';
 import { GameProfile } from '../../../../widgets/games/profileCard';
 import { Grid } from '../../../../components';
-
+import { randomKey } from '../../../../utils';
 export default function GamesPage({ userId }) {
   return (
     <Grid>
@@ -14,7 +14,9 @@ export default function GamesPage({ userId }) {
       >
         {({ data }) => {
           if (data)
-            return data.gameMany.map((game) => <GameProfile game={game} />);
+            return data.gameMany.map((game) => (
+              <GameProfile game={game} key={`game_${randomKey()}`} />
+            ));
           return null;
         }}
       </Query>

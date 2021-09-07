@@ -45,7 +45,7 @@ export default function GameProfile({ game }) {
                   onClick={() =>
                     menu.updateMenuContext({
                       ...menu.homePage,
-                      secondaryPage: 'game_user_profile',
+                      secondaryPage: 'user_profile',
                       userId: game.user._id,
                     })
                   }

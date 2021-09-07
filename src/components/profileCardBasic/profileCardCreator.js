@@ -50,7 +50,7 @@ export default function ProfileCardCreator({ history, user }) {
       <Column j="center" a="center">
         <IconButton
           title={user.name}
-          onClickEvent={() => history.push(`/public-preview/${user._id}`)}
+          onClickEvent={() => history.push(`/user-profile/${user._id}`)}
           color="text-dark"
           disabled={false}
           iconPos="right"

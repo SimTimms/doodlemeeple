@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  Row,
-  Column,
-  MenuButtonStandard,
-  DividerMini,
-  DividerWithBorder,
-} from '../../../components';
+import { Column, MenuButtonStandard } from '../../../components';
+import { randomKey } from '../../../utils';
 
 export default function OnlineStores({ webshops }) {
   return (
@@ -17,6 +12,7 @@ export default function OnlineStores({ webshops }) {
             target="_blank"
             rel="noopener noreferrer"
             style={{ textDecoration: 'none', width: '100%' }}
+            key={randomKey()}
           >
             <MenuButtonStandard
               title={`${webshop.name} ${webshop.price ? 'from' : ''} ${

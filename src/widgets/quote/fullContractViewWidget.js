@@ -28,7 +28,7 @@ export default function FullContractViewWidget({ quoteId, history }) {
                         Creative
                       </Typography>
                       <a
-                        href={`${process.env.REACT_APP_URL}/public-preview/${data.contractById.user._id}`}
+                        href={`${process.env.REACT_APP_URL}/user-profile/${data.contractById.user._id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{

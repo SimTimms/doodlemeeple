@@ -83,7 +83,7 @@ export default function ProfileCardCreative({ history, creative, favourite }) {
       <Column j="center" a="center">
         <IconButton
           title={creative.name}
-          onClickEvent={() => history.push(`/public-preview/${creative._id}`)}
+          onClickEvent={() => history.push(`/user-profile/${creative._id}`)}
           color="text-dark"
           disabled={false}
           iconPos="right"

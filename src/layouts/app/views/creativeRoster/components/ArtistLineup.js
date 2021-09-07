@@ -58,7 +58,7 @@ export default function ArtistLineup({
               </Mutation>
               <div
                 onClick={() => {
-                  history.push(`/public-preview/${artist._id}`);
+                  history.push(`/user-profile/${artist._id}`);
                 }}
                 className={classes.button}
               >

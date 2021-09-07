@@ -54,7 +54,7 @@ export default function InviteComponentFull({
                 }}
                 className={`${classes.clickable} ${classes.profileThumb}`}
                 onClick={() =>
-                  history.push(`/app/public-preview/${invite.receiver._id}`)
+                  history.push(`/app/user-profile/${invite.receiver._id}`)
                 }
               ></div>
               <Column a="flex-start">
@@ -62,7 +62,7 @@ export default function InviteComponentFull({
                   style={{ fontSize: 12 }}
                   className={classes.clickable}
                   onClick={() =>
-                    history.push(`/app/public-preview/${invite.receiver._id}`)
+                    history.push(`/app/user-profile/${invite.receiver._id}`)
                   }
                 >
                   {invite.receiver.name}

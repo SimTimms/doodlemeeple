@@ -4,10 +4,11 @@ import { useStyles } from './styles';
 import {
   Column,
   Row,
-  LeftMenuWrapper,
+  PrimaryMenuWrapper,
   MenuButtonShortcut,
   MenuButtonSecondary,
 } from '../';
+import clsx from 'clsx';
 
 export default function TabPage({
   title,
@@ -22,9 +23,9 @@ export default function TabPage({
   const secondaryMenu = props.secondaryMenu;
   return (
     <Column>
-      {primaryMenu && (
-        <LeftMenuWrapper>
-          {primaryMenu.map((menuItem) => {
+      <PrimaryMenuWrapper>
+        {primaryMenu &&
+          primaryMenu.map((menuItem) => {
             return (
               <MenuButtonShortcut
                 text={{
@@ -40,8 +41,7 @@ export default function TabPage({
               />
             );
           })}
-        </LeftMenuWrapper>
-      )}
+      </PrimaryMenuWrapper>
       {title && <Typography className={classes.tabTitle}>{title}</Typography>}
       <Column a="flex-start">
         {secondaryMenu && (
@@ -63,7 +63,12 @@ export default function TabPage({
           </div>
         )}
 
-        <div className={classes.tabPageContent}>
+        <div
+          className={clsx({
+            [classes.tabPageContent]: true,
+            [classes.tabPageContentSingle]: !primaryMenu,
+          })}
+        >
           {menu && <Row mt={10}>{menu}</Row>}
           {children}
         </div>

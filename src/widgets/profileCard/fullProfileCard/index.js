@@ -7,7 +7,6 @@ import BgImg from './bgImg';
 import {
   Row,
   Column,
-  IconButton,
   LargeImage,
   Divider,
   DividerMini,
@@ -19,8 +18,7 @@ import {
 } from '../../../components';
 import { Badges } from '../components';
 import { PROFILE_PREVIEW } from '../data';
-import { nameShortener } from '../../../utils';
-import { TYPE_HELPER } from '../../../utils';
+import { TYPE_HELPER, randomKey } from '../../../utils';
 import ImageThumbs from './imageThumbs';
 import Socials from './socials';
 import GallerySection from './gallerySection';
@@ -41,11 +39,17 @@ export default function FullProfileCard({ history, creativeId }) {
     >
       <LargeImage large={large} setLarge={setLarge} />
 
-      <Query query={PROFILE_PREVIEW} variables={{ userId: creativeId }}>
+      <Query
+        query={PROFILE_PREVIEW}
+        variables={{ userId: creativeId }}
+        onCompleted={(data) =>
+          !previewImage && setPreviewImage(data.userById.profileBG)
+        }
+      >
         {({ loading, data }) => {
           if (!data) return null;
           const creative = data.userById;
-          !previewImage && setPreviewImage(data.userById.profileBG);
+
           return (
             <Column>
               <BgImg
@@ -83,6 +87,7 @@ export default function FullProfileCard({ history, creativeId }) {
                           <Typography
                             style={{ cursor: 'pointer' }}
                             onClick={() => setPage(index)}
+                            key={randomKey()}
                           >{`${TYPE_HELPER(section.type)}`}</Typography>
                         );
                       })}
@@ -98,7 +103,7 @@ export default function FullProfileCard({ history, creativeId }) {
                           (index === page || page === -1) && (
                             <GallerySection
                               section={section}
-                              key={`section_${index}`}
+                              key={`section_${index}_${randomKey()}`}
                             />
                           )
                         );

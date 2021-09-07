@@ -5,6 +5,7 @@ export const styles = makeStyles({
     display: 'flex',
     flexAlign: 'center',
     justifyContent: 'center',
+    width: '100%',
   },
   contentMobile: {
     marginTop: 0,

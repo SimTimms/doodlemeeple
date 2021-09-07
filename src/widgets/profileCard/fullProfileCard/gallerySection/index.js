@@ -6,13 +6,11 @@ import {
   Divider,
   DividerMini,
   SubTitle,
-  MainTitle,
   Grid,
   GridCard,
 } from '../../../../components';
 import { Typography } from '@material-ui/core';
-
-import { TYPE_HELPER } from '../../../../utils';
+import { TYPE_HELPER, randomKey } from '../../../../utils';
 
 function GallerySection({ section }) {
   const { summary, gallery, notableProjects, testimonials, showreel, type } =
@@ -58,7 +56,7 @@ function GallerySection({ section }) {
           <Grid>
             {gallery.images.map((item, index) => {
               return (
-                <GridCard>
+                <GridCard key={`item_${randomKey()}`}>
                   <Card img={`${item.img}`} key={`img_${index}`} />
                 </GridCard>
               );

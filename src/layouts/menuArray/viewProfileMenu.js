@@ -1,4 +1,4 @@
-export default function viewProfileMenu(pageValues, setPageValues) {
+export default function viewProfileMenu(pageValues, setPageValues, backValues) {
   return [
     {
       name: 'Back',
@@ -7,19 +7,18 @@ export default function viewProfileMenu(pageValues, setPageValues) {
       link: () =>
         setPageValues({
           ...pageValues,
-          primaryPage: 'games',
-          secondaryPage: 'games',
+          ...backValues,
         }),
       count: null,
     },
     {
       name: 'Profile',
       icon: 'face',
-      machineName: 'game_user_profile',
+      machineName: 'user_profile',
       link: () =>
         setPageValues({
           ...pageValues,
-          secondaryPage: 'game_user_profile',
+          secondaryPage: 'user_profile',
         }),
       count: null,
     },

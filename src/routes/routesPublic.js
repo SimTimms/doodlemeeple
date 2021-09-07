@@ -38,12 +38,7 @@ export default function PublicRoutes({ theme, props: { ...props } }) {
           <JobDescriptionWidget jobId={props.match.params.jobId} />
         )}
       />
-      <Route
-        path="/public-preview/:pathParam?"
-        render={(props) => (
-          <PreviewLayout {...props} theme={theme} publicView={true} />
-        )}
-      />
+
       <Route path="/about">
         <AboutLayout theme={theme} />
       </Route>

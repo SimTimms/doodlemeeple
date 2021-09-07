@@ -33,7 +33,7 @@ export default function CreativeView({
               <Row j="flex-start" a="center">
                 <Row j="flex-start" a="center">
                   <ProfileAvatar
-                    profilePage={`/app/public-preview/${job.user._id}`}
+                    profilePage={`/app/user-profile/${job.user._id}`}
                     title={job.user.name}
                     bgImg={job.user.profileImg}
                     history={history}

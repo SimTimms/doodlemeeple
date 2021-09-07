@@ -1,10 +1,11 @@
 import React from 'react';
 import { PreviewProfile } from './views/previewProfile';
-import { Content, IconButton, Column } from '../../components';
-import Cookies from 'js-cookie';
+import { Content, MainWrapper, ContentScroll, TabPage } from '../../components';
+import PrimaryMenu from '../app/primaryMenu';
+import { previewProfileMenu } from '../menuArray';
 
 function PreviewLayout(props) {
-  const userId = Cookies.get('userId');
+  const [page, setPage] = React.useState('home');
 
   const pathParam = props
     ? props.profileId
@@ -17,27 +18,28 @@ function PreviewLayout(props) {
     : null;
 
   return (
-    <div>
-      {!userId && (
-        <Column>
-          <a href={`${process.env.REACT_APP_URL}/register/${pathParam}`}>
-            <IconButton
-              title={`register at ${process.env.REACT_APP_COMPANY_PUBLIC_NAME}.com`}
-              color="text-dark"
+    <MainWrapper>
+      <PrimaryMenu page={page} mainMenu={previewProfileMenu} />
+      <ContentScroll>
+        <Content>
+          <TabPage
+            title={null}
+            primaryMenu={null}
+            secondaryMenu={null}
+            menu={null}
+            activePrimary={null}
+            activeSecondary={null}
+          >
+            <PreviewProfile
+              profileId={pathParam}
+              theme={props.theme}
+              publicView={props.publicView}
+              history={props.history}
             />
-          </a>
-        </Column>
-      )}
-
-      <Content>
-        <PreviewProfile
-          profileId={pathParam}
-          theme={props.theme}
-          publicView={props.publicView}
-          history={props.history}
-        />
-      </Content>
-    </div>
+          </TabPage>
+        </Content>
+      </ContentScroll>
+    </MainWrapper>
   );
 }
 

@@ -34,4 +34,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: 5,
     boxSizing: 'border-box',
   },
+  tabPageContentSingle: {
+    height: 'calc(100vh - 68px)',
+  },
 }));

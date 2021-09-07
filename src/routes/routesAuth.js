@@ -62,12 +62,7 @@ export default function AuthRoutes({ theme, props: { ...props } }) {
           />
         )}
       />
-      <Route
-        path="/public-preview/:pathParam?"
-        render={(props) => (
-          <PreviewLayout {...props} theme={theme} publicView={false} />
-        )}
-      />
+
       <Route path="/" exact render={() => <Redirect push to="/app/home" />} />
     </Switch>
   );

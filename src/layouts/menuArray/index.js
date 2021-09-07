@@ -1,3 +1,4 @@
+import previewProfileMenu from './previewProfileMenu';
 import mainMenu from './mainMenu';
 import gameMenu from './gameMenu';
 import gameProfileMenu from './gameProfileMenu';
@@ -27,6 +28,7 @@ export {
   inviteMenuSecondary,
   mainMenu,
   gameMenu,
+  previewProfileMenu,
   gameProfileMenu,
   messageMenu,
   communityMenu,

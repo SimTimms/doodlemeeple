@@ -7,6 +7,7 @@ import { BgImg, ProfileImg, Badges } from '../components';
 import { Row, Column, HrefLink } from '../../../components';
 import { PROFILE_IMAGES } from '../data';
 import imageOptimiser from '../../../utils/imageOptimiser';
+import { MenuContext } from '../../../context';
 
 export default function ProfileCardImpact({ creative, setLarge }) {
   const classes = useStyles();
@@ -20,77 +21,83 @@ export default function ProfileCardImpact({ creative, setLarge }) {
   }, [creative]);
 
   return (
-    <div
-      className={clsx({
-        [classes.creativeCard]: true,
-      })}
-    >
-      <Row>
-        <BgImg
-          previewImage={previewImage}
-          onClick={() => {
-            setLarge(previewImage);
-          }}
-          skill={creative.sections.map((section, index) =>
-            index > 0 ? ` | ${section.type}` : section.type
-          )}
-        />
-
-        <Query
-          query={PROFILE_IMAGES}
-          fetchPolicy="network-only"
-          variables={{ userId: creative._id }}
-          onCompleted={({ profileImages }) => {
-            setImages([{ img: creative.profileBG }, ...profileImages]);
-          }}
+    <MenuContext.Consumer>
+      {(menu) => (
+        <div
+          className={clsx({
+            [classes.creativeCard]: true,
+          })}
         >
-          {({ loading, data }) => {
-            if (loading) return 'Loading';
-            return null;
-          }}
-        </Query>
-      </Row>
-      <Row h={60} w="100%" bg="#222" of="hidden">
-        {images.map((image, index) => {
-          if (index > 4) return null;
-          return (
-            <div
-              className={classes.imageThumb}
-              style={{ backgroundImage: `url(${imageOptimiser(image.img)})` }}
-              onMouseEnter={() => setPreviewImage(image.img)}
+          <Row>
+            <BgImg
+              previewImage={previewImage}
               onClick={() => {
-                setPreviewImage(image.img);
-                setLarge(image.img);
+                setLarge(previewImage);
               }}
-            ></div>
-          );
-        })}
-      </Row>
-      <Row>
-        <ProfileImg creative={creative} />
-        <Column a="flex-start">
-          <Row j="space-between" pr={10}>
-            <HrefLink
-              title={creative.name}
-              url={`/app/public-preview/${creative._id}`}
-              underline={true}
+              skill={creative.sections.map((section, index) =>
+                index > 0 ? ` | ${section.type}` : section.type
+              )}
             />
-            <Badges creative={creative} />
-          </Row>
 
-          <Typography className={classes.types}>
-            {creative.sections.map(
-              (section, index) => `${index > 0 ? ', ' : ''} ${section.type}`
-            )}
-          </Typography>
-          {creative.publicEmail && (
-            <HrefLink
-              title={creative.publicEmail}
-              url={`mailto:${creative.publicEmail}`}
-            />
-          )}
-        </Column>
-      </Row>
-    </div>
+            <Query
+              query={PROFILE_IMAGES}
+              fetchPolicy="network-only"
+              variables={{ userId: creative._id }}
+              onCompleted={({ profileImages }) => {
+                setImages([{ img: creative.profileBG }, ...profileImages]);
+              }}
+            >
+              {({ loading, data }) => {
+                if (loading) return 'Loading';
+                return null;
+              }}
+            </Query>
+          </Row>
+          <Row h={60} w="100%" bg="#222" of="hidden">
+            {images.map((image, index) => {
+              if (index > 4) return null;
+              return (
+                <div
+                  className={classes.imageThumb}
+                  style={{
+                    backgroundImage: `url(${imageOptimiser(image.img)})`,
+                  }}
+                  onMouseEnter={() => setPreviewImage(image.img)}
+                  onClick={() => {
+                    setPreviewImage(image.img);
+                    setLarge(image.img);
+                  }}
+                ></div>
+              );
+            })}
+          </Row>
+          <Row>
+            <ProfileImg creative={creative} />
+            <Column a="flex-start">
+              <Row j="space-between" pr={10}>
+                <HrefLink
+                  title={creative.name}
+                  url={`/user-profile/${creative._id}`}
+                  underline={true}
+                />
+                <Badges creative={creative} />
+              </Row>
+
+              <Typography className={classes.types}>
+                {creative.sections.map(
+                  (section, index) => `${index > 0 ? ', ' : ''} ${section.type}`
+                )}
+              </Typography>
+              {creative.publicEmail && (
+                <HrefLink
+                  title={creative.publicEmail}
+                  url={`mailto:${creative.publicEmail}`}
+                />
+              )}
+            </Column>
+          </Row>
+        </div>
+      )}
+    </MenuContext.Consumer>
   );
 }

@@ -48,7 +48,7 @@ export default function QuoteViewWidget({ quoteId }) {
                             />
                             <Column>
                               <a
-                                href={`${process.env.REACT_APP_URL}/public-preview/${data.contractById.user._id}`}
+                                href={`${process.env.REACT_APP_URL}/user-profile/${data.contractById.user._id}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 style={{

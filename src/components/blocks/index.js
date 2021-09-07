@@ -195,8 +195,8 @@ export function TopMenuWrapper(props) {
   );
 }
 
-export function LeftMenuWrapper({ children }) {
+export function PrimaryMenuWrapper({ children }) {
   const classes = useStyles();
 
-  return <div className={classes.leftMenuWrapper}>{children}</div>;
+  return <div className={classes.PrimaryMenuWrapper}>{children}</div>;
 }

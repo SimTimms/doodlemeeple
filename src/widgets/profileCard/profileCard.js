@@ -84,7 +84,7 @@ export default function ProfileCard({ creative, setLarge, history }) {
         <ProfileImg creative={creative} />
         <Column a="flex-start">
           <a
-            href={`${process.env.REACT_APP_URL}/public-preview/${creative._id}`}
+            href={`${process.env.REACT_APP_URL}/user-profile/${creative._id}`}
             target="_blank"
             rel="noopener noreferrer"
             style={{ textDecoration: 'none', color: '#222', width: '100%' }}
@@ -126,7 +126,7 @@ export default function ProfileCard({ creative, setLarge, history }) {
           <Row j="space-between" w="100%">
             <Row j="flex-start" w={160}>
               <a
-                href={`${process.env.REACT_APP_URL}/public-preview/${creative._id}`}
+                href={`${process.env.REACT_APP_URL}/user-profile/${creative._id}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={classes.social}

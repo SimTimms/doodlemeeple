@@ -39,7 +39,7 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
             <Row j="space-between">
               <HrefLink
                 title={myPost.user.name}
-                url={`/public-preview/${myPost.user._id}`}
+                url={`/user-profile/${myPost.user._id}`}
               />
               {userId === myPost.user._id && (
                 <Mutation

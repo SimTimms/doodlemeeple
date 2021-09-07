@@ -107,6 +107,8 @@ import HrefLink from './hrefLink';
 import Avatar from './avatar';
 import SubTitle from './subTitle';
 import GridCard from './gridCard';
+import MainWrapper from './mainWrapper';
+import ContentScroll from './contentScroll';
 import {
   Header,
   SubHeader,
@@ -126,13 +128,15 @@ import {
   Row,
   TopMenuWrapper,
   RowCheckList,
-  LeftMenuWrapper,
+  PrimaryMenuWrapper,
   Title,
   MainTitle,
   Grid,
 } from './blocks';
 
 export {
+  ContentScroll,
+  MainWrapper,
   GridCard,
   SubTitle,
   HrefLink,
@@ -150,7 +154,7 @@ export {
   FeaturedCreative,
   CreatorComponentDash,
   TopMenuWrapper,
-  LeftMenuWrapper,
+  PrimaryMenuWrapper,
   NotificationComponent,
   ProfileAvatar,
   UnlockInfoReverse,

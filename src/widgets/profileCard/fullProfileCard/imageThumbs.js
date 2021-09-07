@@ -5,6 +5,7 @@ import { Query } from 'react-apollo';
 import { Row } from '../../../components';
 import { PROFILE_IMAGES } from '../data';
 import imageOptimiser from '../../../utils/imageOptimiser';
+import { randomKey } from '../../../utils';
 
 export default function ImageThumbs({
   profileBG,
@@ -50,6 +51,7 @@ export default function ImageThumbs({
                         setPreviewImage(image.img);
                         setLarge(image.img);
                       }}
+                      key={`imageThumb_${randomKey()}`}
                     ></div>
                   );
                 })}

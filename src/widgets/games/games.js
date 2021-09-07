@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Query } from 'react-apollo';
 import { GAME_WIDGET, MY_GAMES } from './data';
 import { GameProfile } from './profileCard';
@@ -6,6 +6,7 @@ import { GameForm } from './';
 import { Row, Column, Divider, Grid } from '../../components';
 import GameComponent from './component';
 import { MenuContext } from '../../context';
+import { randomKey } from '../../utils';
 
 export default function Games() {
   const [game, setGame] = React.useState(null);
@@ -18,11 +19,11 @@ export default function Games() {
             <GameForm gameData={game} setGameData={setGame} />
           ) : menu.homePage.secondaryPage === 'games' ? (
             <Grid>
-              <Query query={GAME_WIDGET} fetchPolicy="network-only">
+              <Query query={GAME_WIDGET}>
                 {({ data }) => {
                   if (data)
-                    return data.gameWidget.map((game) => (
-                      <GameProfile game={game} />
+                    return data.gameWidget.map((game, index) => (
+                      <GameProfile game={game} key={randomKey()} />
                     ));
                   return null;
                 }}

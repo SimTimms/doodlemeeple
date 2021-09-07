@@ -1,12 +1,11 @@
 import React from 'react';
 import { Column } from '../../../components';
 import Button from './button';
-import { mainMenu } from '../../menuArray';
 import { useStyles } from './styles';
 import dmDevice from '../../../assets/dmDevice.png';
 import { HistoryContext, CountContext } from '../../../context';
 
-export default function PrimaryMenu({ page }) {
+export default function PrimaryMenu({ page, mainMenu }) {
   const classes = useStyles();
 
   return (

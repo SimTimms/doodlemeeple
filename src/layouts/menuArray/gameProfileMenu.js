@@ -13,7 +13,7 @@ export default function gameProfileMenu(pageValues, setPageValues) {
       count: null,
     },
     {
-      name: 'Game',
+      name: 'Game Profile',
       icon: 'casino',
       machineName: 'game_profile',
       link: () => setPageValues({ ...pageValues, secondaryPage: 'games' }),
