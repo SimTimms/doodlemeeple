@@ -131,25 +131,24 @@ export default function MyPostForm({ ...props }) {
                   size="s"
                   multiline={false}
                 />
-                {type === 'public' && (
-                  <FieldBox
-                    value={myPost.url}
-                    title="URL"
-                    maxLength={512}
-                    onChangeEvent={(e) => {
-                      setMyPost({
-                        ...myPost,
-                        url: e,
-                      });
-                    }}
-                    replaceMode="loose"
-                    placeholder="Example: https://mywebshop.com"
-                    info="Add a link if you'd like"
-                    warning=""
-                    size="s"
-                    multiline={false}
-                  />
-                )}
+
+                <FieldBox
+                  value={myPost.url}
+                  title="URL"
+                  maxLength={512}
+                  onChangeEvent={(e) => {
+                    setMyPost({
+                      ...myPost,
+                      url: e,
+                    });
+                  }}
+                  replaceMode="loose"
+                  placeholder="Example: https://mywebshop.com"
+                  info="Add a link if you'd like"
+                  warning=""
+                  size="s"
+                  multiline={false}
+                />
 
                 <Divider />
 
