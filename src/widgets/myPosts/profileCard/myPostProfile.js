@@ -3,6 +3,7 @@ import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import { BgImg } from './components';
+import ReactPlayer from 'react-player';
 import {
   Row,
   Column,
@@ -36,7 +37,7 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
 
         <Column a="flex-start">
           <Column a="flex-start">
-            <Row j="space-between">
+            <Row j="space-between" a="flex-start" h={20}>
               <HrefLink
                 title={myPost.user.name}
                 url={`/user-profile/${myPost.user._id}`}
@@ -76,7 +77,35 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
             >
               {myPost.name}
             </Typography>
-
+            {myPost.featuredImage && (
+              <Column w="100%">
+                <DividerMini />
+                <BgImg previewImage={myPost.featuredImage} onClick={() => {}} />
+              </Column>
+            )}
+            {myPost.showreel && (
+              <Column w="100%">
+                <DividerMini />
+                <ReactPlayer
+                  url={myPost.showreel}
+                  playing
+                  controls={true}
+                  muted={true}
+                  style={{
+                    background: '#333',
+                    width: '100%',
+                  }}
+                  config={{
+                    youtube: {
+                      embedOptions: { modestbranding: 1, autoplay: 0 },
+                      playerVars: { modestbranding: 1, autoplay: 0 },
+                    },
+                  }}
+                  height={120}
+                  width="100%"
+                />
+              </Column>
+            )}
             {myPost.summary && (
               <Column w="100%">
                 <DividerMini />
@@ -86,12 +115,6 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
               </Column>
             )}
             {myPost.url && <HrefLink title={myPost.url} url={myPost.url} />}
-            {myPost.featuredImage && (
-              <Column w="100%">
-                <DividerMini />
-                <BgImg previewImage={myPost.featuredImage} onClick={() => {}} />
-              </Column>
-            )}
 
             <DividerMini />
           </Column>

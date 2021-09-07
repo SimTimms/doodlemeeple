@@ -112,6 +112,25 @@ export default function MyPostForm({ ...props }) {
                   size="s"
                   multiline={true}
                 />
+
+                <FieldBox
+                  value={myPost.showreel}
+                  title="Video"
+                  maxLength={226}
+                  minLength={5}
+                  onChangeEvent={(e) => {
+                    setMyPost({
+                      ...myPost,
+                      showreel: e,
+                    });
+                  }}
+                  replaceMode="loose"
+                  placeholder="Example: https://youtube.com?my_vid"
+                  info="Include a video"
+                  warning=""
+                  size="s"
+                  multiline={false}
+                />
                 {type === 'public' && (
                   <FieldBox
                     value={myPost.url}

@@ -18,6 +18,7 @@ export const MY_POST_BY_ID = gql`
       featuredImage
       url
       approved
+      showreel
     }
   }
 `;
@@ -53,6 +54,7 @@ export const MY_POSTS_WIDGET = gql`
       name
       summary
       featuredImage
+      showreel
       url
       user {
         _id
