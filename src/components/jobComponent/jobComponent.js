@@ -93,24 +93,7 @@ export default function JobComponent({ job }) {
                         : draft && 'Draft'}
                     </Typography>
                   </Column>
-                  <Column a="center">
-                    <Row j="flex-end">
-                      <MenuButtonStandard
-                        title="View Job"
-                        onClickEvent={() => {
-                          menu.updateMenuContext({
-                            ...menu,
-                            jobPage: {
-                              ...menu.jobPage,
-                              primaryPage: 'editing_job',
-                              secondaryPage: 'job_dashboard',
-                              jobId: job._id,
-                            },
-                          });
-                        }}
-                      />
-                    </Row>
-                  </Column>
+
                   {assignedCreative ? (
                     <div
                       key={`invite_1`}
@@ -189,6 +172,24 @@ export default function JobComponent({ job }) {
                       );
                     })
                   ) : null}
+                  <Column a="center">
+                    <Row j="flex-end">
+                      <MenuButtonStandard
+                        title="View Job"
+                        onClickEvent={() => {
+                          menu.updateMenuContext({
+                            ...menu,
+                            jobPage: {
+                              ...menu.jobPage,
+                              primaryPage: 'editing_job',
+                              secondaryPage: 'job_dashboard',
+                              jobId: job._id,
+                            },
+                          });
+                        }}
+                      />
+                    </Row>
+                  </Column>
                 </Row>
               </CardComponent>
             )}

@@ -24,7 +24,6 @@ export default function CheckListCreativeDash({
         <ProjectComponentDash
           jobName={job.job.name}
           jobSummary={job.job.summary}
-          setTabNbr={setTabNbr}
         />
       </Widget>
 

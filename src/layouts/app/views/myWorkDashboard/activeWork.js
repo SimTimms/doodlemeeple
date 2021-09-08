@@ -27,10 +27,13 @@ export default function ActiveWork() {
                           contract={contract}
                           onClickEvent={() =>
                             menu.updateMenuContext({
-                              ...menu.jobPage,
-                              primaryPage: 'work_dashboard',
-                              secondaryPage: 'work_dashboard_home',
-                              jobId: contract.job._id,
+                              ...menu,
+                              workPage: {
+                                ...menu.workPage,
+                                primaryPage: 'work_dashboard',
+                                secondaryPage: 'work_dashboard_home',
+                                jobId: contract.job._id,
+                              },
                             })
                           }
                         />
