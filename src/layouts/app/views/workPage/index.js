@@ -20,7 +20,7 @@ export default function WorkPage() {
         <MenuContext.Consumer>
           {(menu) => (
             <TabPage
-              title={menu.workPage.primaryPage}
+              title={null}
               primaryMenu={workMenu(counts, menu)}
               secondaryMenu={
                 menu.workPage.primaryPage === 'work_dashboard'

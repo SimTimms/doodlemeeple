@@ -1,18 +1,17 @@
-export default function jobDashboardSecondary(
-  counts,
-  pageValues,
-  onClickEvent
-) {
+export default function jobDashboardSecondary(counts, menu) {
   return [
     {
       name: 'Back',
       icon: 'chevron_left',
       machineName: 'back',
       link: () =>
-        onClickEvent({
-          ...pageValues,
-          primaryPage: 'job_posts',
-          secondaryPage: 'job_ads',
+        menu.updateMenuContext({
+          ...menu,
+          jobPage: {
+            ...menu.jobPage,
+            primaryPage: 'job_posts',
+            secondaryPage: 'job_ads',
+          },
         }),
       count: null,
     },
@@ -21,7 +20,14 @@ export default function jobDashboardSecondary(
       icon: 'dashboard',
       machineName: 'job_dashboard',
       link: () =>
-        onClickEvent({ ...pageValues, secondaryPage: 'job_dashboard' }),
+        menu.updateMenuContext({
+          ...menu,
+          jobPage: {
+            ...menu.jobPage,
+            secondaryPage: 'job_dashboard',
+          },
+        }),
+
       count: null,
     },
 
@@ -30,9 +36,12 @@ export default function jobDashboardSecondary(
       icon: 'list_alt',
       machineName: 'quotes_in',
       link: () =>
-        onClickEvent({
-          ...pageValues,
-          secondaryPage: 'quotes_in',
+        menu.updateMenuContext({
+          ...menu,
+          jobPage: {
+            ...menu.jobPage,
+            secondaryPage: 'quotes_in',
+          },
         }),
       count: counts.jobAds,
     },
@@ -41,9 +50,12 @@ export default function jobDashboardSecondary(
       icon: 'list_alt',
       machineName: 'job_details',
       link: () =>
-        onClickEvent({
-          ...pageValues,
-          secondaryPage: 'job_details',
+        menu.updateMenuContext({
+          ...menu,
+          jobPage: {
+            ...menu.jobPage,
+            secondaryPage: 'job_details',
+          },
         }),
       count: null,
     },
@@ -52,9 +64,12 @@ export default function jobDashboardSecondary(
       icon: 'edit',
       machineName: 'edit_job',
       link: () =>
-        onClickEvent({
-          ...pageValues,
-          secondaryPage: 'edit_job',
+        menu.updateMenuContext({
+          ...menu,
+          jobPage: {
+            ...menu.jobPage,
+            secondaryPage: 'edit_job',
+          },
         }),
       count: null,
     },

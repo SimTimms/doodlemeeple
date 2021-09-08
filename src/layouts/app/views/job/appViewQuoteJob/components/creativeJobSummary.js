@@ -29,12 +29,6 @@ export default function CreativeJobSummary({
       <div className={classes.root}>
         <Paper pt={16}>
           <Column>
-            {/*
-            <ClientNotification
-              jobStatus={job.job.submitted}
-              job={job}
-              history={history}
-          />*/}
             <JobSummaryComponent job={job.job} />
             {!userContract ? (
               <BorderBox w={300}>

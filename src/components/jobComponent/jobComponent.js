@@ -48,10 +48,13 @@ export default function JobComponent({ job }) {
               <CardComponent
                 onClickEvent={() => {
                   menu.updateMenuContext({
-                    ...menu.jobPage,
-                    primaryPage: 'editing_job',
-                    secondaryPage: 'job_dashboard',
-                    jobId: job._id,
+                    ...menu,
+                    jobPage: {
+                      ...menu.jobPage,
+                      primaryPage: 'editing_job',
+                      secondaryPage: 'job_dashboard',
+                      jobId: job._id,
+                    },
                   });
                 }}
                 styleOverride={{

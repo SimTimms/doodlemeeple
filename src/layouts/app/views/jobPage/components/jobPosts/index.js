@@ -31,7 +31,7 @@ export default function JobPosts() {
               </Typography>
             </Column>
           ) : (
-            <Grid cols={3}>
+            <Grid cols={1}>
               <Divider />
               {data.jobsByUser.map((job, index) => {
                 return (

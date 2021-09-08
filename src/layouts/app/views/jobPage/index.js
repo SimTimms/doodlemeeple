@@ -50,7 +50,7 @@ export default function JobPage({ jumpTo }) {
                   <JobPosts />
                 ) : menu.jobPage.primaryPage === 'job_posts' &&
                   menu.jobPage.secondaryPage === 'create_job_ad' ? (
-                  <CreateJob />
+                  <CreateJob menu={menu} />
                 ) : (
                   menu.jobPage.primaryPage === 'job_history' && <JobHistory />
                 )}

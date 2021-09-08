@@ -181,8 +181,6 @@ export default function AppLayout(props) {
                               );
                         }}
                       </Query>
-                    ) : menuContext.primaryPage === 'view-quote-job' ? (
-                      <AppViewQuoteJob jobId={pathParam} history={history} />
                     ) : menuContext.primaryPage === 'view-public-job' ? (
                       <AppViewJobPublic jobId={pathParam} history={history} />
                     ) : menuContext.primaryPage === 'job-board' ? (

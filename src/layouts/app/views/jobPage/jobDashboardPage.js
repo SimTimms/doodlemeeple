@@ -10,7 +10,7 @@ import {
   FullContractWidget,
 } from '../../../../widgets/';
 
-export default function JobDashboardPage({ pageValues, setPageValues }) {
+export default function JobDashboardPage() {
   return (
     <MenuContext.Consumer>
       {(menu) => (
@@ -26,16 +26,16 @@ export default function JobDashboardPage({ pageValues, setPageValues }) {
               return !data ? null : menu.jobPage.secondaryPage ===
                 'job_dashboard' ? (
                 <JobDashboard jobData={data.jobById} page="job_dashboard" />
-              ) : pageValues.secondaryPage === 'job_details' ? (
+              ) : menu.jobPage.secondaryPage === 'job_details' ? (
                 <JobDashboard jobData={data.jobById} page="job_details" />
-              ) : pageValues.secondaryPage === 'quotes_in' ? (
+              ) : menu.jobPage.secondaryPage === 'quotes_in' ? (
                 <QuoteInWidget jobId={menu.jobPage.jobId} />
-              ) : pageValues.secondaryPage === 'view_quote' ? (
+              ) : menu.jobPage.secondaryPage === 'view_quote' ? (
                 <QuoteViewWidget quoteId={menu.workPage.contractId} />
-              ) : pageValues.secondaryPage === 'contract' ? (
+              ) : menu.jobPage.secondaryPage === 'contract' ? (
                 <FullContractWidget contractId={menu.workPage.contractId} />
               ) : (
-                pageValues.secondaryPage === 'edit_job' && (
+                menu.jobPage.secondaryPage === 'edit_job' && (
                   <UpdateJob jobId={menu.jobPage.jobId} />
                 )
               );
