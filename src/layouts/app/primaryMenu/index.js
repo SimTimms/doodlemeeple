@@ -3,13 +3,9 @@ import { Column } from '../../../components';
 import Button from './button';
 import { useStyles } from './styles';
 import dmDevice from '../../../assets/dmDevice.png';
-import {
-  HistoryContext,
-  CountContext,
-  MainMenuContext,
-} from '../../../context';
+import { HistoryContext, CountContext, MenuContext } from '../../../context';
 
-export default function PrimaryMenu({ page, mainMenu }) {
+export default function PrimaryMenu({ mainMenu }) {
   const classes = useStyles();
 
   return (
@@ -17,8 +13,8 @@ export default function PrimaryMenu({ page, mainMenu }) {
       {(history) => (
         <CountContext.Consumer>
           {(counts) => (
-            <MainMenuContext.Consumer>
-              {(mainMenuContext) => {
+            <MenuContext.Consumer>
+              {(menuContext) => {
                 return (
                   <Column
                     j="flex-start"
@@ -29,23 +25,20 @@ export default function PrimaryMenu({ page, mainMenu }) {
                     <div className={classes.deviceWrapper}>
                       <img src={dmDevice} className={classes.device} />
                     </div>
-                    {mainMenu(history, counts, mainMenuContext).map(
-                      (menuItem) => {
-                        return (
-                          <Button
-                            menuItem={menuItem}
-                            isActive={
-                              mainMenuContext.primaryPage ===
-                              menuItem.machineName
-                            }
-                          />
-                        );
-                      }
-                    )}
+                    {mainMenu(history, counts, menuContext).map((menuItem) => {
+                      return (
+                        <Button
+                          menuItem={menuItem}
+                          isActive={
+                            menuContext.primaryPage === menuItem.machineName
+                          }
+                        />
+                      );
+                    })}
                   </Column>
                 );
               }}
-            </MainMenuContext.Consumer>
+            </MenuContext.Consumer>
           )}
         </CountContext.Consumer>
       )}

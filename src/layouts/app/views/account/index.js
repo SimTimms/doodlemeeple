@@ -4,10 +4,10 @@ import { TabPage } from '../../../../components';
 import { profileMenu } from '../../../menuArray';
 import AccountPage from './accountPage';
 import AppProfileEdit from '../appProfileEdit';
-import PreviewLayout from '../../../preview';
 import TabPreferences from '../appProfileEdit/tabPreferences';
 import Cookies from 'js-cookie';
 import { HistoryContext } from '../../../../context';
+import { PreviewProfile } from '../../../preview/views/previewProfile';
 
 export function Account() {
   const classes = useStyles();
@@ -27,11 +27,11 @@ export function Account() {
         >
           <div className={classes.root}>
             {primaryPage === 'profile' && <AppProfileEdit />}
-            {primaryPage === 'preview' && (
-              <PreviewLayout publicView={false} profileId={userId} />
-            )}
             {primaryPage === 'preferences' && <TabPreferences />}
             {primaryPage === 'account' && <AccountPage />}
+            {primaryPage === 'preview' && (
+              <PreviewProfile profileId={userId} publicView={true} />
+            )}
           </div>
         </TabPage>
       )}

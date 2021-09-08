@@ -4,7 +4,7 @@ import Icon from '@material-ui/core/Icon';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import SectionList from './sectionList';
-import { IconButton } from '../../';
+import { MenuButtonStandard, Column, DividerMini } from '../../';
 
 function AddSection({ setSections, sections, userType, ...props }) {
   const [display, setDisplay] = React.useState(false);
@@ -17,14 +17,16 @@ function AddSection({ setSections, sections, userType, ...props }) {
     : 3;
 
   return (
-    <div>
-      <IconButton
+    <Column>
+      <DividerMini />
+      <MenuButtonStandard
         title={`Add a Skill (${maxSkill - sections.length})`}
-        likeSound={true}
         onClickEvent={() => (display ? setDisplay(false) : setDisplay(true))}
         styleOverride={{ marginLeft: 'auto', marginRight: 'auto' }}
         icon="brush"
       />
+      <DividerMini />
+
       <SectionList
         display={display}
         setDisplay={setDisplay}
@@ -42,7 +44,7 @@ function AddSection({ setSections, sections, userType, ...props }) {
       >
         <Icon style={{ fontSize: 18, color: '#aaa' }}>keyboard_arrow_up</Icon>
       </CardContent>
-    </div>
+    </Column>
   );
 }
 

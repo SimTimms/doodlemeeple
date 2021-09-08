@@ -61,6 +61,7 @@ export default function JobDescriptionWidget({ jobId }) {
                                             icon="fact_check"
                                             onClickEvent={() => {
                                               menu.updateMenuContext({
+                                                primaryPage: 'work',
                                                 jobPage: {
                                                   ...menu.jobPage,
                                                   primaryPage: 'quotes',
@@ -69,9 +70,6 @@ export default function JobDescriptionWidget({ jobId }) {
                                                   jobId: job._id,
                                                 },
                                               });
-                                              history.push(
-                                                `/app/work/quotes:quote_list`
-                                              );
                                             }}
                                           />
                                         </Column>

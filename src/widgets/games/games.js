@@ -1,24 +1,24 @@
 import React from 'react';
 import { Query } from 'react-apollo';
+import { Typography } from '@material-ui/core';
 import { GAME_WIDGET, MY_GAMES } from './data';
 import { GameProfile } from './profileCard';
 import { GameForm } from './';
-import { Row, Column, Divider, Grid } from '../../components';
+import { Row, Column, Grid, CardComponent } from '../../components';
 import GameComponent from './component';
 import { MenuContext } from '../../context';
 import { randomKey } from '../../utils';
 
 export default function Games() {
   const [game, setGame] = React.useState(null);
-
   return (
     <MenuContext.Consumer>
       {(menu) => (
-        <Row wrap="wrap" a="flex-start" j="space-around" w="100%">
+        <Row w="100%">
           {menu.homePage.secondaryPage === 'create_game' ? (
             <GameForm gameData={game} setGameData={setGame} />
           ) : menu.homePage.secondaryPage === 'games' ? (
-            <Grid>
+            <Grid cols={3}>
               <Query query={GAME_WIDGET}>
                 {({ data }) => {
                   if (data)
@@ -31,14 +31,24 @@ export default function Games() {
             </Grid>
           ) : (
             menu.homePage.secondaryPage === 'my_games' && (
-              <Column>
-                <Divider />
+              <Column w="100%">
                 <Query query={MY_GAMES} fetchPolicy="network-only">
                   {({ data }) => {
                     if (data)
-                      return data.myGames.map((game) => (
-                        <GameComponent game={game} />
-                      ));
+                      if (data.myGames.length === 0) {
+                        return (
+                          <CardComponent type="dark">
+                            <Typography>
+                              You haven't posted any games
+                            </Typography>
+                          </CardComponent>
+                        );
+                      } else {
+                        return data.myGames.map((game) => (
+                          <GameComponent game={game} />
+                        ));
+                      }
+
                     return null;
                   }}
                 </Query>

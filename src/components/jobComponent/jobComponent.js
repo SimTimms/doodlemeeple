@@ -55,7 +55,6 @@ export default function JobComponent({ job }) {
                   });
                 }}
                 styleOverride={{
-                  maxWidth: 400,
                   marginLeft: 10,
                   marginRight: 10,
                 }}

@@ -7,9 +7,7 @@ export default function JobDescriptionButton({ jobId }) {
     <MenuContext.Consumer>
       {(menu) => (
         <MenuButtonStandard
-          color="text-dark"
           title="Full Description"
-          icon=""
           mb={true}
           styleOverride={{ marginTop: 0 }}
           onClickEvent={() => {

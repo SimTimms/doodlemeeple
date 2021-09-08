@@ -19,7 +19,7 @@ export default function JobProfile({ job, history }) {
 
   const classes = useStyles();
   return (
-    <CardComponent>
+    <div className={classes.creativeCard}>
       <Column j="space-between" a="flex-start" h="100%">
         <Column j="flex-start" a="flex-start">
           <BgImg previewImage={job.backgroundImg} onClick={() => {}} />
@@ -67,6 +67,6 @@ export default function JobProfile({ job, history }) {
           )
         )}
       </Column>
-    </CardComponent>
+    </div>
   );
 }

@@ -20,25 +20,10 @@ export const useStyles = makeStyles((theme) => ({
   desktop: { display: 'flex', flexDirection: 'column' },
   mobile: { width: '100%' },
   mainTitle: { fontSize: '1.2rem', color: theme.palette.primary.dark },
-  gridThree: {
+  grid: {
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr 1fr',
     width: '100%',
   },
-  gridOne: {
-    display: 'grid',
-    gridTemplateColumns: '1fr',
-    width: '100%',
-  },
-  gridTwo: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr ',
-    width: '100%',
-  },
-  gridFour: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr 1fr 1fr ',
-    width: '100%',
-  },
+
   title: { fontWeight: 'bold' },
 }));

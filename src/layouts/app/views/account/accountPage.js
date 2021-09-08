@@ -9,6 +9,7 @@ import {
   Paper,
   FieldTitleDashboard,
   Divider,
+  MenuButtonStandard,
 } from '../../../../components';
 import { Query, Mutation } from 'react-apollo';
 import { PROFILE } from '../../../../data/queries';
@@ -65,7 +66,7 @@ export default function AccountPage({ history }) {
             a="c"
           />
           <Divider />
-          <IconButton
+          <MenuButtonStandard
             onClickEvent={() => {
               setConfirm(true);
             }}

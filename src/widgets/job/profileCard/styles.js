@@ -1,12 +1,15 @@
 import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   creativeCard: {
-    margin: 3,
+    margin: 10,
+    padding: 5,
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
     border: '1px solid #ddd',
     position: 'relative',
+    boxShadow: '10px 10px 20px rgba(0,0,0,0.2)',
     background: '#fff',
   },
   jobName: {

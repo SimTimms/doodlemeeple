@@ -3,7 +3,7 @@ import { PreviewProfile } from './views/previewProfile';
 import { Content, MainWrapper, ContentScroll, TabPage } from '../../components';
 import PrimaryMenu from '../app/primaryMenu';
 import { previewProfileMenu } from '../menuArray';
-import { MainMenuContext } from '../../context';
+import { MenuContext } from '../../context';
 import GamesPage from './views/previewProfile/gamesPage';
 import JobAdsPage from './views/previewProfile/jobAdsPage';
 import KickstarterPage from './views/previewProfile/kickstarterPage';
@@ -22,8 +22,8 @@ function PreviewLayout(props) {
     : null;
 
   return (
-    <MainMenuContext.Consumer>
-      {(mainMenuContext) => (
+    <MenuContext.Consumer>
+      {(menuContext) => (
         <MainWrapper>
           <PrimaryMenu mainMenu={previewProfileMenu} />
           <ContentScroll>
@@ -43,7 +43,7 @@ function PreviewLayout(props) {
                       activePrimary={null}
                       activeSecondary={null}
                     >
-                      {mainMenuContext.primaryPage === 'profile' && (
+                      {menuContext.primaryPage === 'profile' && (
                         <PreviewProfile
                           profileId={pathParam}
                           theme={props.theme}
@@ -51,13 +51,13 @@ function PreviewLayout(props) {
                           history={props.history}
                         />
                       )}
-                      {mainMenuContext.primaryPage === 'games' && (
+                      {menuContext.primaryPage === 'games' && (
                         <GamesPage userId={pathParam} />
                       )}
-                      {mainMenuContext.primaryPage === 'jobs' && (
+                      {menuContext.primaryPage === 'jobs' && (
                         <JobAdsPage userId={pathParam} />
                       )}
-                      {mainMenuContext.primaryPage === 'kickstarters' && (
+                      {menuContext.primaryPage === 'kickstarters' && (
                         <KickstarterPage userId={pathParam} />
                       )}
                     </TabPage>
@@ -68,7 +68,7 @@ function PreviewLayout(props) {
           </ContentScroll>
         </MainWrapper>
       )}
-    </MainMenuContext.Consumer>
+    </MenuContext.Consumer>
   );
 }
 

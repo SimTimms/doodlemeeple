@@ -7,7 +7,7 @@ import { Grid } from '../../components';
 export default function JobBoardMiniWidget({ ...props }) {
   const { history } = props;
   return (
-    <Grid>
+    <Grid cols={3}>
       <Query query={JOB_BOARD_MINI_WIDGET} fetchPolicy="network-only">
         {({ data }) => {
           if (data)

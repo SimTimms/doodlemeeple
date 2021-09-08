@@ -20,7 +20,7 @@ export default function LatestCreativesWidget({ ...props }) {
       })}
     >
       {large !== null && <BigImage large={large} setLarge={setLarge} />}
-      <Grid>
+      <Grid cols={3}>
         <Query
           query={LATEST_CREATIVES_WIDGET}
           fetchPolicy="network-only"

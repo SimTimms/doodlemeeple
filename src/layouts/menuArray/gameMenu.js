@@ -1,17 +1,37 @@
-export default function gameMenu(pageValues, setPageValues) {
+export default function gameMenu(menu) {
   return [
     {
       name: 'Browse',
       icon: 'travel_explore',
       machineName: 'games',
-      link: () => setPageValues({ ...pageValues, secondaryPage: 'games' }),
+      link: () =>
+        menu.updateMenuContext({
+          primaryPage: 'home',
+          jobPage: { ...menu.jobPage },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+            secondaryPage: 'games',
+            gameId: null,
+          },
+        }),
       count: null,
     },
     {
       name: 'My Games',
       icon: 'dynamic_feed',
       machineName: 'my_games',
-      link: () => setPageValues({ ...pageValues, secondaryPage: 'my_games' }),
+      link: () =>
+        menu.updateMenuContext({
+          primaryPage: 'home',
+          jobPage: { ...menu.jobPage },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+            secondaryPage: 'my_games',
+            gameId: null,
+          },
+        }),
       count: null,
     },
     {
@@ -19,10 +39,15 @@ export default function gameMenu(pageValues, setPageValues) {
       icon: 'add_circle',
       machineName: 'create_game',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          secondaryPage: 'create_game',
-          gameId: 'new',
+        menu.updateMenuContext({
+          primaryPage: 'home',
+          jobPage: { ...menu.jobPage },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+            secondaryPage: 'create_game',
+            gameId: 'new',
+          },
         }),
       count: null,
     },

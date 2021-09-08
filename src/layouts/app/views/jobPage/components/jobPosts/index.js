@@ -6,6 +6,7 @@ import {
   LoadIcon,
   JobComponent,
   Divider,
+  Grid,
 } from '../../../../../../components';
 import { Typography } from '@material-ui/core';
 
@@ -30,7 +31,7 @@ export default function JobPosts() {
               </Typography>
             </Column>
           ) : (
-            <Column a="center" j="flex-start">
+            <Grid cols={3}>
               <Divider />
               {data.jobsByUser.map((job, index) => {
                 return (
@@ -39,7 +40,7 @@ export default function JobPosts() {
                   )
                 );
               })}
-            </Column>
+            </Grid>
           )
         ) : null;
       }}

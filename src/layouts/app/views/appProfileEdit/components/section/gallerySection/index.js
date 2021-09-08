@@ -117,6 +117,7 @@ function GallerySection({
                   value={summary}
                   title="Summary"
                   maxLength={256}
+                  minLength={1}
                   onChangeEvent={(e) => {
                     autosave(mutation, 'summary');
                     setSummary(e);
@@ -140,13 +141,14 @@ function GallerySection({
                       value={showreel}
                       title="Showreel"
                       maxLength={256}
+                      minLength={7}
                       onChangeEvent={(e) => {
                         autosave(mutation, 'summary');
                         setShowreel(e);
                       }}
                       replaceMode="none"
                       placeholder=""
-                      info="Grab the attention of a client with a short video (we recommend about 30 seconds). Please enter the URL you'd like to embed."
+                      info="Grab the attention of a client with a short video (we recommend about 30 seconds). Please enter the URL you'd like to embed, including https:// or http://."
                       warning=""
                       size="s"
                       multiline={false}

@@ -21,6 +21,7 @@ export default function Filters({
 }) {
   const classes = useStyles();
   const [loading] = React.useState(false);
+  const [filterStr, setFilterStr] = React.useState(null);
 
   return loading ? (
     <LoadIcon />

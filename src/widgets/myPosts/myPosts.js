@@ -13,12 +13,12 @@ export default function MyPosts() {
   return (
     <MenuContext.Consumer>
       {(menu) => (
-        <Row wrap="wrap" a="flex-start" j="space-around" w="100%">
+        <Row wrap="wrap" a="flex-start" j="flex-start" w="100%">
           {menu.homePage.secondaryPage === 'create_my_post' ? (
             <MyPostForm postId={menu.homePage.myPostId} />
           ) : menu.homePage.secondaryPage === 'all_posts' ? (
-            <Column w={400}>
-              <Grid cols={1}>
+            <Column w="100%">
+              <Grid cols={3}>
                 <Query query={MY_POSTS_WIDGET} fetchPolicy="network-only">
                   {({ data }) => {
                     if (data) {

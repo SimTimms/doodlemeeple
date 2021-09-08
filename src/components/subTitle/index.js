@@ -4,7 +4,13 @@ import { Typography } from '@material-ui/core';
 import { Row, Column, DividerMini, Divider, MenuButtonCircle } from '../';
 import clsx from 'clsx';
 
-export default function SubTitle({ title, menuStr, primaryButton, short }) {
+export default function SubTitle({
+  title,
+  menuStr,
+  primaryButton,
+  short,
+  onClickEvent,
+}) {
   const classes = useStyles();
 
   return (
@@ -34,7 +40,14 @@ export default function SubTitle({ title, menuStr, primaryButton, short }) {
             />
           )}
         </Row>
-        <Typography className={classes.menuStr}>{menuStr}</Typography>
+        {menuStr && (
+          <Typography
+            className={classes.menuStr}
+            onClick={() => onClickEvent()}
+          >
+            {menuStr}
+          </Typography>
+        )}
       </Row>
       <DividerMini />
     </Column>

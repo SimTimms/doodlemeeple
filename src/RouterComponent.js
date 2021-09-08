@@ -11,7 +11,7 @@ import themeDesigner from './theme';
 import AuthRoutes from './routes/routesAuth';
 import PublicRoutes from './routes/routesPublic';
 import ProfileRoutes from './routes/routesProfile';
-import { MainMenuContext } from './context';
+import { MenuContext } from './context';
 
 function RouterComponent(props) {
   const authToken = Cookies.get('token');
@@ -28,28 +28,67 @@ function RouterComponent(props) {
       },
     };
   });
-  const [mainMenuValues, setMainMenuValues] = React.useState({
-    primaryPage: 'profile',
-  });
 
   const client = new ApolloClient({
     link: authLink.concat(httpLink),
     cache: new InMemoryCache({ addTypename: false }),
   });
-
+  const [pageValues, setPageValues] = React.useState({
+    primaryPage: 'home',
+    homePage: {
+      primaryPage: 'community',
+      secondaryPage: 'dashboard',
+      kickstarterId: null,
+      myPostId: null,
+      gameId: null,
+      userId: null,
+    },
+    workPage: {
+      primaryPage: 'my_work',
+      secondaryPage: 'active_work',
+      jobId: null,
+      inviteId: null,
+      contractId: null,
+    },
+    jobPage: {
+      primaryPage: 'job_board',
+      secondaryPage: 'dashboard',
+      jobId: null,
+    },
+  });
   return (
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
-        <MainMenuContext.Provider
+        <MenuContext.Provider
           value={{
-            primaryPage: mainMenuValues.primaryPage,
-            updateMenuContext: setMainMenuValues,
+            primaryPage: pageValues.primaryPage,
+            homePage: {
+              primaryPage: pageValues.homePage.primaryPage,
+              secondaryPage: pageValues.homePage.secondaryPage,
+              kickstarterId: pageValues.homePage.kickstarterId,
+              myPostId: pageValues.homePage.myPostId,
+              gameId: pageValues.homePage.gameId,
+              userId: pageValues.homePage.userId,
+            },
+            jobPage: {
+              primaryPage: pageValues.jobPage.primaryPage,
+              secondaryPage: pageValues.jobPage.secondaryPage,
+              jobId: pageValues.jobPage.jobId,
+            },
+            workPage: {
+              primaryPage: pageValues.workPage.primaryPage,
+              secondaryPage: pageValues.workPage.secondaryPage,
+              jobId: pageValues.workPage.jobId,
+              inviteId: pageValues.workPage.inviteId,
+              contractId: pageValues.workPage.contractId,
+            },
+            updateMenuContext: setPageValues,
           }}
         >
           {authToken && <AuthRoutes props={props} theme={theme} />}
           {!authToken && <PublicRoutes props={props} theme={theme} />}
           <ProfileRoutes props={props} />
-        </MainMenuContext.Provider>
+        </MenuContext.Provider>
       </ApolloProvider>
     </ThemeProvider>
   );

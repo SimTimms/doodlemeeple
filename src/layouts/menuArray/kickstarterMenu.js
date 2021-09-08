@@ -1,11 +1,20 @@
-export default function kickstarterMenu(pageValues, setPageValues) {
+export default function kickstarterMenu(menu) {
   return [
     {
       name: 'Browse',
       icon: 'travel_explore',
       machineName: 'kickstarters',
       link: () =>
-        setPageValues({ ...pageValues, secondaryPage: 'kickstarters' }),
+        menu.updateMenuContext({
+          primaryPage: 'home',
+          jobPage: { ...menu.jobPage },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+            secondaryPage: 'kickstarters',
+            kickstarterId: null,
+          },
+        }),
       count: null,
     },
     {
@@ -13,10 +22,15 @@ export default function kickstarterMenu(pageValues, setPageValues) {
       icon: 'dynamic_feed',
       machineName: 'my_kickstarters',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          secondaryPage: 'my_kickstarters',
-          kickstarterId: null,
+        menu.updateMenuContext({
+          primaryPage: 'home',
+          jobPage: { ...menu.jobPage },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+            secondaryPage: 'my_kickstarters',
+            kickstarterId: null,
+          },
         }),
       count: null,
     },
@@ -25,10 +39,15 @@ export default function kickstarterMenu(pageValues, setPageValues) {
       icon: 'add_circle',
       machineName: 'create_kickstarter',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          secondaryPage: 'create_kickstarter',
-          kickstarterId: 'new',
+        menu.updateMenuContext({
+          primaryPage: 'home',
+          jobPage: { ...menu.jobPage },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+            secondaryPage: 'create_kickstarter',
+            gameId: 'new',
+          },
         }),
       count: null,
     },

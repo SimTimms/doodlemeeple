@@ -4,6 +4,7 @@ import { Query } from 'react-apollo';
 import { FEATURED_CREATIVES_WIDGET } from './data';
 import { ProfileCardImpact } from '../profileCard/';
 import BigImage from '../bigImage';
+import { Grid } from '../../components';
 
 export default function FeaturedCreativeHomeWidget() {
   const classes = useStyles();
@@ -11,7 +12,7 @@ export default function FeaturedCreativeHomeWidget() {
   const [large, setLarge] = React.useState(null);
 
   return (
-    <div className={classes.root}>
+    <Grid cols={3}>
       {large !== null && <BigImage large={large} setLarge={setLarge} />}
       <Query
         query={FEATURED_CREATIVES_WIDGET}
@@ -32,6 +33,6 @@ export default function FeaturedCreativeHomeWidget() {
           });
         }}
       </Query>
-    </div>
+    </Grid>
   );
 }

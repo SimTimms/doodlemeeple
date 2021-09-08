@@ -10,7 +10,15 @@ export const UserContext = React.createContext({
 });
 
 export const MenuContext = React.createContext({
+  primaryPage: null,
   jobPage: {
+    primaryPage: null,
+    secondaryPage: null,
+    jobId: null,
+    inviteId: null,
+    contractId: null,
+  },
+  workPage: {
     primaryPage: null,
     secondaryPage: null,
     jobId: null,
@@ -32,13 +40,7 @@ export const MenuContext = React.createContext({
     myPostId: null,
     gameId: null,
   },
-  back: { primaryPage: null, secondaryPage: null },
   updateMenuContext: { secondary: () => {}, primary: () => {} },
-});
-
-export const MainMenuContext = React.createContext({
-  primaryPage: null,
-  updateMenuContext: () => {},
 });
 
 export const HistoryContext = React.createContext({

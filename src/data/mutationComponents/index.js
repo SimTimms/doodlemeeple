@@ -2,14 +2,12 @@ import React from 'react';
 import { Mutation } from 'react-apollo';
 import {
   Form,
-  FormInput,
   ErrorBox,
   MenuButtonStandard,
   Divider,
   FieldBox,
 } from '../../components';
 import * as AUTH from '../authorisation';
-import * as LENGTHS from '../../utils/dataLengths';
 import Cookies from 'js-cookie';
 import { readableErrors } from '../../utils/readableErrors';
 import jwtDecode from 'jwt-decode';

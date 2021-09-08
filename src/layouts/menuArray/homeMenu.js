@@ -1,14 +1,19 @@
-export default function homeMenu(pageValues, setPageValues) {
+export default function homeMenu(menu) {
   return [
     {
       name: 'Community',
       icon: 'home',
       machineName: 'community',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          primaryPage: 'community',
-          secondaryPage: 'dashboard',
+        menu.updateMenuContext({
+          primaryPage: 'home',
+          jobPage: { ...menu.jobPage },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+            primaryPage: 'community',
+            secondaryPage: 'dashboard',
+          },
         }),
       count: null,
     },
@@ -17,11 +22,17 @@ export default function homeMenu(pageValues, setPageValues) {
       icon: 'post_add',
       machineName: 'my_posts',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          primaryPage: 'my_posts',
-          secondaryPage: 'all_posts',
+        menu.updateMenuContext({
+          primaryPage: menu.primaryPage,
+          jobPage: { ...menu.jobPage },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+            primaryPage: 'my_posts',
+            secondaryPage: 'all_posts',
+          },
         }),
+
       count: null,
     },
     {
@@ -29,10 +40,12 @@ export default function homeMenu(pageValues, setPageValues) {
       icon: 'casino',
       machineName: 'games',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          primaryPage: 'games',
-          secondaryPage: 'games',
+        menu.updateMenuContext({
+          ...menu,
+          homePage: {
+            primaryPage: 'games',
+            secondaryPage: 'games',
+          },
         }),
       count: null,
     },
@@ -41,10 +54,12 @@ export default function homeMenu(pageValues, setPageValues) {
       icon: 'view_in_ar',
       machineName: 'kickstarters',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          primaryPage: 'kickstarters',
-          secondaryPage: 'kickstarters',
+        menu.updateMenuContext({
+          ...menu,
+          homePage: {
+            primaryPage: 'kickstarters',
+            secondaryPage: 'kickstarters',
+          },
         }),
       count: null,
     },

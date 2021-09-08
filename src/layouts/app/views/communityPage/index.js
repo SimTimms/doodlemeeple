@@ -22,11 +22,15 @@ export default function CommunityPage() {
           {(menu) => (
             <Row wrap="wrap" a="flex-start" j="space-around" w="100%">
               <Column a="flex-start" w="100%">
-                <Column a="flex-start">
+                <Column a="flex-start" w="100%">
                   <SubTitle
                     title="Jobs"
                     menuStr="View All"
-                    onClickEvent={() => {}}
+                    onClickEvent={() =>
+                      menu.updateMenuContext({
+                        primaryPage: 'jobs',
+                      })
+                    }
                     primaryButton={{
                       title: 'Add',
                       icon: 'add',
@@ -46,7 +50,12 @@ export default function CommunityPage() {
                   <SubTitle
                     title="Featured Professionals"
                     menuStr="View All"
-                    onClickEvent={() => {}}
+                    onClickEvent={() => {
+                      menu.updateMenuContext({
+                        ...menu.homePage,
+                        secondaryPage: 'profiles',
+                      });
+                    }}
                   />
                   <Typography className={classes.summary}>
                     The best profiles chosen by us this week
@@ -59,7 +68,13 @@ export default function CommunityPage() {
                   <SubTitle
                     title="Community Posts"
                     menuStr="View All"
-                    onClickEvent={() => {}}
+                    onClickEvent={() => {
+                      menu.updateMenuContext({
+                        ...menu.homePage,
+                        primaryPage: 'my_posts',
+                        secondaryPage: 'all_posts',
+                      });
+                    }}
                     primaryButton={{
                       title: 'Add',
                       icon: 'add',
@@ -79,7 +94,7 @@ export default function CommunityPage() {
                 <Column a="flex-start" w="100%">
                   <SubTitle
                     title="Articles"
-                    menuStr="All Posts"
+                    menuStr={null}
                     onClickEvent={() => {}}
                   />
                   <FeaturedArticle history={history} />
@@ -88,7 +103,7 @@ export default function CommunityPage() {
                 <Column a="flex-start">
                   <SubTitle
                     title="New to DoodleMeeple"
-                    menuStr="View All"
+                    menuStr={null}
                     onClickEvent={() => {}}
                   />
                   <Typography className={classes.summary}>
@@ -101,7 +116,13 @@ export default function CommunityPage() {
                   <SubTitle
                     title="Kickstarters"
                     menuStr="View All"
-                    onClickEvent={() => {}}
+                    onClickEvent={() =>
+                      menu.updateMenuContext({
+                        ...menu.homePage,
+                        primaryPage: 'kickstarters',
+                        secondaryPage: 'kickstarters',
+                      })
+                    }
                     primaryButton={{
                       title: 'Add',
                       icon: 'add',

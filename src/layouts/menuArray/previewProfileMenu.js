@@ -19,7 +19,7 @@ export default function previewProfileMenu(history, counts, mainMenuContext) {
       icon: 'post_add',
       machineName: 'jobs',
       link: () => mainMenuContext.updateMenuContext({ primaryPage: 'jobs' }),
-      count: { icon: 'star', count: counts.jobAds },
+      count: null,
     },
     {
       name: 'Kickstarters',
@@ -27,7 +27,7 @@ export default function previewProfileMenu(history, counts, mainMenuContext) {
       machineName: 'kickstarters',
       link: () =>
         mainMenuContext.updateMenuContext({ primaryPage: 'kickstarters' }),
-      count: { icon: 'star', count: counts.work },
+      count: null,
     },
   ];
 }

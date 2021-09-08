@@ -1,14 +1,19 @@
-export default function myPostsMenu(pageValues, setPageValues) {
+export default function myPostsMenu(menu) {
   return [
     {
       name: 'Browse',
       icon: 'travel_explore',
       machineName: 'all_posts',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          secondaryPage: 'all_posts',
-          myPostId: null,
+        menu.updateMenuContext({
+          primaryPage: 'home',
+          jobPage: { ...menu.jobPage },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+            secondaryPage: 'all_posts',
+            myPostId: null,
+          },
         }),
       count: null,
     },
@@ -17,10 +22,15 @@ export default function myPostsMenu(pageValues, setPageValues) {
       icon: 'dynamic_feed',
       machineName: 'my_posts',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          secondaryPage: 'my_posts',
-          myPostId: null,
+        menu.updateMenuContext({
+          primaryPage: 'home',
+          jobPage: { ...menu.jobPage },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+            secondaryPage: 'my_posts',
+            myPostId: null,
+          },
         }),
       count: null,
     },
@@ -29,10 +39,15 @@ export default function myPostsMenu(pageValues, setPageValues) {
       icon: 'add_circle',
       machineName: 'create_my_post',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          secondaryPage: 'create_my_post',
-          myPostId: 'new',
+        menu.updateMenuContext({
+          primaryPage: 'home',
+          jobPage: { ...menu.jobPage },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+            secondaryPage: 'create_my_post',
+            myPostId: 'new',
+          },
         }),
       count: null,
     },

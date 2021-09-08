@@ -1,13 +1,19 @@
-export default function communityMenu(pageValues, setPageValues) {
+export default function communityMenu(menu) {
   return [
     {
       name: 'Dashboard',
       icon: 'dashboard',
       machineName: 'dashboard',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          secondaryPage: 'dashboard',
+        menu.updateMenuContext({
+          primaryPage: 'home',
+          jobPage: { ...menu.jobPage },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+            primaryPage: 'community',
+            secondaryPage: 'dashboard',
+          },
         }),
       count: null,
     },
@@ -16,9 +22,14 @@ export default function communityMenu(pageValues, setPageValues) {
       icon: 'face',
       machineName: 'profiles',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          secondaryPage: 'profiles',
+        menu.updateMenuContext({
+          primaryPage: 'home',
+          jobPage: { ...menu.jobPage },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+            secondaryPage: 'profiles',
+          },
         }),
       count: null,
     },
