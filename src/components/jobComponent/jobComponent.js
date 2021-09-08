@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
-import { CardComponent, Column, Row } from '../';
+import { CardComponent, Column, Row, MenuButtonStandard } from '../';
 import clsx from 'clsx';
 import { HistoryContext, MenuContext } from '../../context';
 import { nameShortener } from '../../utils';
@@ -45,23 +45,7 @@ export default function JobComponent({ job }) {
         return (
           <HistoryContext.Consumer>
             {() => (
-              <CardComponent
-                onClickEvent={() => {
-                  menu.updateMenuContext({
-                    ...menu,
-                    jobPage: {
-                      ...menu.jobPage,
-                      primaryPage: 'editing_job',
-                      secondaryPage: 'job_dashboard',
-                      jobId: job._id,
-                    },
-                  });
-                }}
-                styleOverride={{
-                  marginLeft: 10,
-                  marginRight: 10,
-                }}
-              >
+              <CardComponent>
                 <Row>
                   <Column j="flex-start" a="flex-start">
                     <Typography
@@ -110,7 +94,22 @@ export default function JobComponent({ job }) {
                     </Typography>
                   </Column>
                   <Column a="center">
-                    <Row j="flex-end"></Row>
+                    <Row j="flex-end">
+                      <MenuButtonStandard
+                        title="View Job"
+                        onClickEvent={() => {
+                          menu.updateMenuContext({
+                            ...menu,
+                            jobPage: {
+                              ...menu.jobPage,
+                              primaryPage: 'editing_job',
+                              secondaryPage: 'job_dashboard',
+                              jobId: job._id,
+                            },
+                          });
+                        }}
+                      />
+                    </Row>
                   </Column>
                   {assignedCreative ? (
                     <div

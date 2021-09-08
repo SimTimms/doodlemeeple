@@ -8,11 +8,13 @@ import {
   Signature,
   MenuButtonStandard,
   LoadIcon,
+  DividerMini,
 } from '../../../../../../components';
 import { ChatViewByJob } from '../../../../../../modules/chat';
 import CreatorJobSummary from './creatorJobSummary';
 import CloseJobView from '../components/closeJobView';
 import CloseJobButton from './closeJobButton';
+import PublishJobButton from './publishJobButton';
 import ProjectDash from '../../../../../../modules/dashboards';
 import { OPEN_JOB } from './data';
 import { Mutation } from 'react-apollo';
@@ -50,35 +52,41 @@ export default function SummaryViewCreator({ job, history, page, menu }) {
               job={jobData}
               setTabNbr={setTabNbr}
             />
-
-            {jobData.submitted === 'closed' ? (
-              <Mutation
-                mutation={OPEN_JOB}
-                variables={{ jobId: jobData._id }}
-                onCompleted={(data) => {
-                  menu.updateMenuContext({
-                    ...menu,
-                    jobPage: {
-                      primaryPage: 'job_posts',
-                      secondaryPage: 'job_ads',
-                      jobId: null,
-                    },
-                  });
-                }}
-              >
-                {(mutation) => {
-                  return (
-                    <MenuButtonStandard
-                      title="Restore Job Ad"
-                      icon="check"
-                      onClickEvent={() => mutation()}
-                    />
-                  );
-                }}
-              </Mutation>
-            ) : (
-              <CloseJobButton job={job} menu={menu} />
-            )}
+            <Column w={220}>
+              {jobData.isPublic && (
+                <PublishJobButton job={jobData} setJobData={setJobData} />
+              )}
+              {jobData.isPublic && <DividerMini />}
+              {jobData.submitted === 'closed' ? (
+                <Mutation
+                  mutation={OPEN_JOB}
+                  variables={{ jobId: jobData._id }}
+                  onCompleted={(data) => {
+                    menu.updateMenuContext({
+                      ...menu,
+                      jobPage: {
+                        primaryPage: 'job_posts',
+                        secondaryPage: 'job_ads_secondary',
+                        jobId: null,
+                      },
+                    });
+                  }}
+                >
+                  {(mutation) => {
+                    return (
+                      <MenuButtonStandard
+                        title="Restore Job Ad"
+                        icon="check"
+                        onClickEvent={() => mutation()}
+                        fullWidth={true}
+                      />
+                    );
+                  }}
+                </Mutation>
+              ) : (
+                <CloseJobButton job={job} menu={menu} />
+              )}
+            </Column>
           </Column>
         ) : page === 'job_details' ? (
           <CreatorJobSummary

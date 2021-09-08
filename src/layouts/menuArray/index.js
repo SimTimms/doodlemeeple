@@ -18,8 +18,10 @@ import quoteMenuSecondary from './quoteMenuSecondary';
 import quoteViewMenu from './quoteViewMenu';
 import jobBoardMenu from './jobBoardMenu';
 import myPostsMenu from './myPostsMenu';
+import editingJobMenu from './editingJobMenu';
 
 export {
+  editingJobMenu,
   myPostsMenu,
   jobBoardMenu,
   quoteMenuSecondary,

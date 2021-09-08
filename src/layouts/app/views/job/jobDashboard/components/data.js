@@ -15,3 +15,11 @@ export const OPEN_JOB = gql`
     }
   }
 `;
+
+export const PUBLISH_JOB = gql`
+  mutation jobUpdateById($_id: MongoID!, $approved: Boolean) {
+    jobUpdateById(record: { _id: $_id, approved: $approved }) {
+      recordId
+    }
+  }
+`;

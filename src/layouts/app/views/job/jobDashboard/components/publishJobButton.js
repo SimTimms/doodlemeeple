@@ -1,47 +1,38 @@
 import React from 'react';
 import { useStyles } from '../styles';
-import {
-  IconButton,
-  BorderBox,
-  LoadIcon,
-  Meta,
-  Divider,
-  MenuButtonStandard,
-} from '../../../../../../components';
+import { MenuButtonStandard } from '../../../../../../components';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../../../../../utils/toaster';
-import { CLOSE_JOB } from '../../../../../../data/mutations';
+import { PUBLISH_JOB } from './data';
 
-export default function CloseJobButton({ job, menu }) {
+export default function PublishJobButton({ job, setJobData }) {
   const classes = useStyles();
 
   return (
     <div className={classes.actionWrapper}>
       <Mutation
-        mutation={CLOSE_JOB}
+        mutation={PUBLISH_JOB}
         variables={{
           _id: job._id,
+          approved: job.approved ? false : true,
         }}
         onCompleted={(data) => {
-          menu.updateMenuContext({
-            ...menu,
-            jobPage: {
-              ...menu.jobPage,
-              primaryPage: 'job_history',
-              jobId: null,
-            },
+          setJobData({
+            ...job,
+            approved: job.approved ? false : true,
           });
-          toaster('Project Closed');
+          toaster(job.approved ? 'Job Removed' : 'Job Posted');
         }}
       >
         {(mutation) => {
           return (
             <MenuButtonStandard
-              title="Close Job"
+              title={
+                job.approved ? 'Remove from Job Board' : 'Post to Job Board'
+              }
               onClickEvent={() => {
                 mutation();
               }}
-              type="delete"
               fullWidth={true}
             />
           );

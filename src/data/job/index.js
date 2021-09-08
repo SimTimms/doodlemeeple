@@ -62,6 +62,7 @@ export const JOB = gql`
       speculative
       inLieu
       termsAccepted
+      approved
       gallery {
         _id
         summary

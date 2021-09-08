@@ -22,7 +22,7 @@ export default function FullContractViewWidget({ quoteId, history }) {
               <CardComponent>
                 <Column>
                   <Column w={500}>
-                    <Typography variant="h5">Quote Details</Typography>
+                    <Typography variant="h3">Quote Details</Typography>
                     <Column a="flex-start">
                       <Typography className={classes.title}>
                         Creative

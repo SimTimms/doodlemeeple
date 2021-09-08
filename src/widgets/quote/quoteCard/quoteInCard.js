@@ -56,9 +56,12 @@ export default function QuoteInCard({ contract }) {
                 title="View"
                 onClickEvent={() => {
                   menu.updateMenuContext({
-                    ...menu.jobPage,
-                    secondaryPage: 'view_quote',
-                    contractId: contract._id,
+                    ...menu,
+                    jobPage: {
+                      ...menu.jobPage,
+                      secondaryPage: 'view_quote',
+                      contractId: contract._id,
+                    },
                   });
                 }}
               />

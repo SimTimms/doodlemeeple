@@ -7,8 +7,13 @@ import {
   jobDashboardSecondary,
   quoteViewMenu,
   jobBoardMenu,
+  editingJobMenu,
 } from '../../../menuArray';
-import { CreateJob } from '../../../../widgets';
+import {
+  CreateJob,
+  QuoteViewWidget,
+  FullContractViewWidget,
+} from '../../../../widgets';
 import JobDashboardPage from './jobDashboardPage';
 import JobHistory from './jobHistory';
 import JobPosts from './components/jobPosts';
@@ -23,11 +28,15 @@ export default function JobPage({ jumpTo }) {
             return (
               <TabPage
                 title={null}
-                primaryMenu={jobMenu(counts, menu)}
+                primaryMenu={
+                  menu.jobPage.primaryPage === 'editing_job'
+                    ? editingJobMenu(menu)
+                    : jobMenu(counts, menu)
+                }
                 secondaryMenu={
                   (menu.jobPage.primaryPage === 'editing_job' &&
                     menu.jobPage.secondaryPage === 'view_quote') ||
-                  menu.jobPage.secondaryPage === 'contract'
+                  menu.jobPage.secondaryPage === 'view-contract'
                     ? quoteViewMenu(menu)
                     : menu.jobPage.primaryPage === 'editing_job'
                     ? jobDashboardSecondary(counts, menu)
@@ -42,11 +51,17 @@ export default function JobPage({ jumpTo }) {
                 activeSecondary={menu.jobPage.secondaryPage}
               >
                 {menu.jobPage.primaryPage === 'editing_job' ? (
-                  <JobDashboardPage />
+                  menu.jobPage.secondaryPage === 'view_quote' ? (
+                    <QuoteViewWidget quoteId={menu.jobPage.contractId} />
+                  ) : menu.jobPage.secondaryPage === 'view-contract' ? (
+                    <FullContractViewWidget quoteId={menu.jobPage.contractId} />
+                  ) : (
+                    <JobDashboardPage />
+                  )
                 ) : menu.jobPage.primaryPage === 'job_board' ? (
                   <JobBoardPage />
                 ) : menu.jobPage.primaryPage === 'job_posts' &&
-                  menu.jobPage.secondaryPage === 'job_ads' ? (
+                  menu.jobPage.secondaryPage === 'job_ads_secondary' ? (
                   <JobPosts />
                 ) : menu.jobPage.primaryPage === 'job_posts' &&
                   menu.jobPage.secondaryPage === 'create_job_ad' ? (

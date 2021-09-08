@@ -1,8 +1,11 @@
 import React from 'react';
+import { useStyles } from './styles';
 
 export default function Avatar({ profileImg, size }) {
+  const classes = useStyles();
   return (
     <div
+      className={classes.root}
       style={{
         minHeight: size,
         height: size,
@@ -10,10 +13,7 @@ export default function Avatar({ profileImg, size }) {
         minWidth: size,
         maxWidth: size,
         width: size,
-        background: `url(${profileImg})`,
-        backgroundSize: 'cover',
-        borderRadius: '50%',
-        overflow: 'hidden',
+        backgroundImage: `url(${profileImg})`,
       }}
     ></div>
   );

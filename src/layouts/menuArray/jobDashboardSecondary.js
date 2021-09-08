@@ -1,21 +1,6 @@
 export default function jobDashboardSecondary(counts, menu) {
   return [
     {
-      name: 'Back',
-      icon: 'chevron_left',
-      machineName: 'back',
-      link: () =>
-        menu.updateMenuContext({
-          ...menu,
-          jobPage: {
-            ...menu.jobPage,
-            primaryPage: 'job_posts',
-            secondaryPage: 'job_ads',
-          },
-        }),
-      count: null,
-    },
-    {
       name: 'Dashboard',
       icon: 'dashboard',
       machineName: 'job_dashboard',

@@ -8,7 +8,12 @@ import MyPostForm from './myPosts/myPostForm';
 import { MyPosts, PublicPostsWidget } from './myPosts';
 import { FeaturedKickstarters, Kickstarters } from './kickstarter';
 import { FeaturedGames, Games } from './games';
-import { QuoteOutWidget, QuoteInWidget, QuoteViewWidget } from './quote';
+import {
+  QuoteOutWidget,
+  QuoteInWidget,
+  QuoteViewWidget,
+  FullContractViewWidget,
+} from './quote';
 import InviteDetails from './inviteDetails';
 import { UpdateJob, CreateJob } from './editJob';
 
@@ -24,6 +29,7 @@ import {
 } from './job';
 
 export {
+  FullContractViewWidget,
   PublicPostsWidget,
   MyPostForm,
   MyPosts,

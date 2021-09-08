@@ -43,9 +43,7 @@ export default function ProjectDash({
       )}
       {invites.length > 0 && !draft && !job.isPublic ? (
         <Typography>{accepted ? 'Creative' : 'Invited Creatives'}</Typography>
-      ) : (
-        <Typography>Responses</Typography>
-      )}
+      ) : null}
 
       {inviteFiltered.map((invite, index) => {
         const contractSubmitted = invite.job.contracts.filter(

@@ -30,7 +30,7 @@ export default function jobMenu(counts, menu) {
           jobPage: {
             ...menu.jobPage,
             primaryPage: 'job_posts',
-            secondaryPage: 'job_ads',
+            secondaryPage: 'job_ads_secondary',
             jobId: null,
           },
           workPage: { ...menu.workPage },
@@ -60,34 +60,5 @@ export default function jobMenu(counts, menu) {
           },
         }),
     },
-    menu.jobPage.jobId && menu.jobPage.primaryPage !== 'job_board'
-      ? {
-          name: 'Editing Job',
-          icon: 'edit',
-          machineName: 'editing_job',
-          link: () =>
-            menu.updateMenuContext({
-              primaryPage: menu.primaryPage,
-              jobPage: {
-                ...menu.jobPage,
-                primaryPage: 'job_dashboard',
-                secondaryPage: 'editing_job',
-              },
-              workPage: { ...menu.workPage },
-              homePage: {
-                ...menu.homePage,
-              },
-            }),
-
-          count: counts.jobAds,
-        }
-      : {
-          name: 'Locked',
-          icon: 'lock',
-          machineName: 'job_dashboard',
-          link: () => null,
-          count: null,
-          disabled: true,
-        },
   ];
 }

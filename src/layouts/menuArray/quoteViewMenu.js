@@ -32,13 +32,13 @@ export default function quoteViewMenu(menu) {
       ? {
           name: 'Contract',
           icon: 'local_activity',
-          machineName: 'contract',
+          machineName: 'view-contract',
           link: () =>
             menu.updateMenuContext({
               ...menu,
               jobPage: {
                 ...menu.jobPage,
-                secondaryPage: 'contract',
+                secondaryPage: 'view-contract',
               },
             }),
           count: null,

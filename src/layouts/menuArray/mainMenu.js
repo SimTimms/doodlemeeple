@@ -35,7 +35,12 @@ export default function mainMenu(history, counts, mainMenuContext) {
       link: () =>
         mainMenuContext.updateMenuContext({
           primaryPage: 'jobs',
-          jobPage: { ...mainMenuContext.jobPage },
+          jobPage: {
+            ...mainMenuContext.jobPage,
+            jobId: null,
+            contractId: null,
+            primaryPage: 'job_board',
+          },
           workPage: { ...mainMenuContext.workPage },
           homePage: { ...mainMenuContext.homePage },
         }),
@@ -66,10 +71,7 @@ export default function mainMenu(history, counts, mainMenuContext) {
           homePage: { ...mainMenuContext.homePage },
         }),
       color: '',
-      count:
-        counts.messages > 0
-          ? { icon: 'local_post_office', count: counts.messages }
-          : { icon: 'mail', count: counts.messages },
+      count: { icon: 'local_post_office', count: counts.messages },
     },
     {
       name: 'Account',

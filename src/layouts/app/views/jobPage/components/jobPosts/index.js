@@ -25,14 +25,12 @@ export default function JobPosts() {
         ) : data ? (
           data.jobsByUser.length === 0 ? (
             <Column>
-              <Divider />
               <Typography>
                 Nothing Here - Click "Create Ad" to build a job post
               </Typography>
             </Column>
           ) : (
             <Grid cols={1}>
-              <Divider />
               {data.jobsByUser.map((job, index) => {
                 return (
                   job.submitted && (

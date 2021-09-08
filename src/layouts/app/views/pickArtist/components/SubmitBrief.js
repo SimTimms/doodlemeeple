@@ -36,7 +36,7 @@ export default function SubmitBrief({ job, inviteList }) {
             menu.updateMenuContext({
               ...menu.jobPage,
               primaryPage: 'job_posts',
-              secondaryPage: 'job_ads',
+              secondaryPage: 'job_ads_secondary',
               jobId: null,
             });
           }}

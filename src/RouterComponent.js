@@ -54,6 +54,7 @@ function RouterComponent(props) {
       primaryPage: 'job_board',
       secondaryPage: 'dashboard',
       jobId: null,
+      contractId: null,
     },
   });
   return (
@@ -74,6 +75,7 @@ function RouterComponent(props) {
               primaryPage: pageValues.jobPage.primaryPage,
               secondaryPage: pageValues.jobPage.secondaryPage,
               jobId: pageValues.jobPage.jobId,
+              contractId: pageValues.jobPage.contractId,
             },
             workPage: {
               primaryPage: pageValues.workPage.primaryPage,

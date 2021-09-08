@@ -18,7 +18,7 @@ export default function MiniDash({ contract, setField }) {
           <Typography>What would you like to do? </Typography>
           <Divider />
           <MenuButtonStandard
-            title="Edit"
+            title="Edit this Quote"
             onClickEvent={() => setField(1)}
             fullWidth={true}
           />

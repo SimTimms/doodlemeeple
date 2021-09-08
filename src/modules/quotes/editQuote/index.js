@@ -82,11 +82,11 @@ export default function EditQuote({ contractData }) {
       }`}
     >
       <Column w={400}>
+        {fieldArray[field] === 'miniDash' && (
+          <MiniDash contract={contract} setField={setField} />
+        )}
         <CardComponent locked={false}>
           <Column>
-            {fieldArray[field] === 'miniDash' && (
-              <MiniDash contract={contract} setField={setField} />
-            )}
             {fieldArray[field] === 'startDate' && (
               <StartDate contract={contract} setContract={setContract} />
             )}
