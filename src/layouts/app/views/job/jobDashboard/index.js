@@ -2,12 +2,7 @@ import React from 'react';
 import SummaryViewCreator from './components/summaryViewCreator';
 import { MenuContext, HistoryContext } from '../../../../../context';
 
-export default function JobDashboard({
-  setPageValues,
-  jobData,
-  page,
-  pageValues,
-}) {
+export default function JobDashboard({ jobData, page }) {
   const [refreshCount, setRefreshCount] = React.useState(0);
 
   return (
@@ -22,8 +17,7 @@ export default function JobDashboard({
                 refreshCount={refreshCount}
                 setRefreshCount={setRefreshCount}
                 page={page}
-                setPageValues={setPageValues}
-                pageValues={pageValues}
+                menu={menu}
               />
             </div>
           )}

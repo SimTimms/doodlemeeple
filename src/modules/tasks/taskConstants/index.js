@@ -376,17 +376,3 @@ export function TaskCommunity({ drawerButtonChange }) {
     />
   );
 }
-
-export function TaskJobBoard({ drawerButtonChange }) {
-  return (
-    <TaskButton
-      title="Browse the Job Board"
-      subTitle="Optional"
-      icon="alt_route"
-      color="grey"
-      clickSound={true}
-      zoom={true}
-      onClickEvent={() => drawerButtonChange('/app/job-board', 'Community')}
-    />
-  );
-}

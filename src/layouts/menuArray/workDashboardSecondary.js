@@ -1,13 +1,16 @@
-export default function workDashboardSecondary(pageValues, onClickEvent) {
+export default function workDashboardSecondary(menu) {
   return [
     {
       name: 'Dashboard',
       icon: 'local_activity',
       machineName: 'work_dashboard_home',
       link: () =>
-        onClickEvent({
-          ...pageValues,
-          secondaryPage: 'work_dashboard_home',
+        menu.updateMenuContext({
+          ...menu,
+          workPage: {
+            ...menu.workPage,
+            secondaryPage: 'work_dashboard_home',
+          },
         }),
       count: null,
     },
@@ -16,9 +19,12 @@ export default function workDashboardSecondary(pageValues, onClickEvent) {
       icon: 'local_activity',
       machineName: 'work_description',
       link: () =>
-        onClickEvent({
-          ...pageValues,
-          secondaryPage: 'work_description',
+        menu.updateMenuContext({
+          ...menu,
+          workPage: {
+            ...menu.workPage,
+            secondaryPage: 'work_description',
+          },
         }),
       count: null,
     },
@@ -27,9 +33,12 @@ export default function workDashboardSecondary(pageValues, onClickEvent) {
       icon: 'local_activity',
       machineName: 'work_contract',
       link: () =>
-        onClickEvent({
-          ...pageValues,
-          secondaryPage: 'work_contract',
+        menu.updateMenuContext({
+          ...menu,
+          workPage: {
+            ...menu.workPage,
+            secondaryPage: 'work_contract',
+          },
         }),
       count: null,
     },

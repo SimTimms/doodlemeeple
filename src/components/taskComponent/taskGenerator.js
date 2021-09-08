@@ -17,7 +17,6 @@ import {
   TaskCommunity,
   UnansweredQuotes,
   TaskPatreon,
-  TaskJobBoard,
 } from '../../modules/tasks';
 import preferencesSet from '../../utils/preferencesSet';
 
@@ -115,8 +114,6 @@ export default function TaskGenerator({
   }
   return elementArray.length > 0 ? (
     elementArray
-  ) : invites === 0 && draftQuotes === 0 ? (
-    <TaskJobBoard drawerButtonChange={drawerButtonChange} />
   ) : (
     <TaskCommunity drawerButtonChange={drawerButtonChange} />
   );

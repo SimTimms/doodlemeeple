@@ -1,13 +1,16 @@
-export default function quoteViewMenu(pageValues, setPageValues) {
+export default function quoteViewMenu(menu) {
   return [
     {
       name: 'Back',
       icon: 'chevron_left',
       machineName: 'back',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          secondaryPage: 'quotes_in',
+        menu.updateMenuContext({
+          ...menu,
+          jobPage: {
+            ...menu.jobPage,
+            secondaryPage: 'quotes_in',
+          },
         }),
       count: null,
     },
@@ -16,21 +19,27 @@ export default function quoteViewMenu(pageValues, setPageValues) {
       icon: 'local_activity',
       machineName: 'view_quote',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          secondaryPage: 'view_quote',
+        menu.updateMenuContext({
+          ...menu,
+          jobPage: {
+            ...menu.jobPage,
+            secondaryPage: 'view_quote',
+          },
         }),
       count: null,
     },
-    pageValues.contractId
+    menu.jobPage.contractId
       ? {
           name: 'Contract',
           icon: 'local_activity',
           machineName: 'contract',
           link: () =>
-            setPageValues({
-              ...pageValues,
-              secondaryPage: 'contract',
+            menu.updateMenuContext({
+              ...menu,
+              jobPage: {
+                ...menu.jobPage,
+                secondaryPage: 'contract',
+              },
             }),
           count: null,
         }

@@ -11,7 +11,6 @@ export default function ProfileRoutes({ theme, props: { ...props } }) {
     <MenuContext.Provider
       value={{
         primaryPage: pageValues.primaryPage,
-
         updateMenuContext: setPageValues,
       }}
     >

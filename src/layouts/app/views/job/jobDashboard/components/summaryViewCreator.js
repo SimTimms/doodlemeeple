@@ -17,13 +17,7 @@ import ProjectDash from '../../../../../../modules/dashboards';
 import { OPEN_JOB } from './data';
 import { Mutation } from 'react-apollo';
 
-export default function SummaryViewCreator({
-  job,
-  history,
-  page,
-  pageValues,
-  setPageValues,
-}) {
+export default function SummaryViewCreator({ job, history, page, menu }) {
   const classes = useStyles();
   const [conversationUser, setConversationUser] = React.useState(null);
   const [tabNbr, setTabNbr] = React.useState(-1);
@@ -34,6 +28,7 @@ export default function SummaryViewCreator({
     setJobData({ ...job });
     setTabNbr(jobClosed ? 1 : -1);
   }, [job, jobClosed]);
+
   if (!jobData) return <LoadIcon />;
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -61,11 +56,13 @@ export default function SummaryViewCreator({
                 mutation={OPEN_JOB}
                 variables={{ jobId: jobData._id }}
                 onCompleted={(data) => {
-                  setPageValues({
-                    ...pageValues,
-                    primaryPage: 'job_posts',
-                    secondaryPage: 'job_ads',
-                    jobId: null,
+                  menu.updateMenuContext({
+                    ...menu,
+                    jobPage: {
+                      primaryPage: 'job_posts',
+                      secondaryPage: 'job_ads',
+                      jobId: null,
+                    },
                   });
                 }}
               >
@@ -80,11 +77,7 @@ export default function SummaryViewCreator({
                 }}
               </Mutation>
             ) : (
-              <CloseJobButton
-                job={job}
-                setPageValues={setPageValues}
-                pageValues={pageValues}
-              />
+              <CloseJobButton job={job} menu={menu} />
             )}
           </Column>
         ) : page === 'job_details' ? (

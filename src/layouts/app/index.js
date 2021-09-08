@@ -1,5 +1,4 @@
 import React from 'react';
-import { useStyles } from './styles';
 import AppDashboard from './views/appDashboard';
 import TaskDashboard from './views/taskDashboard';
 import HomePage from './views/homePage';
@@ -10,19 +9,13 @@ import AppInvites from './views/inviteDashboard';
 import AppHelp from './views/appHelp';
 import AppProfileEdit from './views/appProfileEdit';
 import ConversationModule from './views/conversations';
-import ConfirmJob from '../../widgets/editJob/components/confirmJob';
 import SubmitJob from '../../widgets/editJob/components/submitJob';
 import { Account } from './views/account';
-import FullContract from './views/fullContract';
 import { ProjectSubmitted } from './views/submitted';
-import { PreviewGame } from './views/game';
-import { AppViewQuoteJob, AppViewJobPublic } from './views/job';
+import { AppViewJobPublic } from './views/job';
 import UpdateJobDashboard from './views/job/workDashboard/updateJobDashboard';
 import { EditQuote } from '../../modules/quotes';
 import { EditContract } from './views/contract';
-import ViewProposal from './views/viewProposal';
-import { PickArtist } from './views/pickArtist';
-import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
 import {
@@ -34,12 +27,6 @@ import {
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 import logout from '../../utils/logout';
 import CreativeRosterWidget from '../../widgets/creativeRoster';
-import {
-  QuoteInWidget,
-  JobBoardWidget,
-  FullContractWidget,
-  InviteDetails,
-} from '../../widgets';
 import {
   ProfileContext,
   HistoryContext,
@@ -108,8 +95,6 @@ export default function AppLayout(props) {
                       />
                     ) : menuContext.primaryPage === 'messages' ? (
                       <ConversationModule history={history} />
-                    ) : menuContext.primaryPage === 'invite-details' ? (
-                      <InviteDetails jobId={pathParam} />
                     ) : menuContext.primaryPage === 'tasks' && profile ? (
                       <TaskDashboard
                         history={history}
@@ -124,8 +109,6 @@ export default function AppLayout(props) {
                         profile={profile}
                         setProfile={setProfile}
                       />
-                    ) : menuContext.primaryPage === 'help' ? (
-                      <AppHelp history={history} />
                     ) : menuContext.primaryPage === 'help' ? (
                       <AppHelp history={history} />
                     ) : menuContext.primaryPage === 'creative-roster' ? (
@@ -154,15 +137,6 @@ export default function AppLayout(props) {
                         history={history}
                         isolate={pathParam}
                       />
-                    ) : menuContext.primaryPage === 'view-game' ? (
-                      <PreviewGame
-                        theme={props.theme}
-                        gameId={pathParam}
-                        autosaveIsOn={true}
-                        history={history}
-                      />
-                    ) : menuContext.primaryPage === 'quotes-in' ? (
-                      <QuoteInWidget history={history} />
                     ) : menuContext.primaryPage === 'edit-quote' ? (
                       <Query
                         query={PREVIEW_CONTRACT}
@@ -183,21 +157,7 @@ export default function AppLayout(props) {
                       </Query>
                     ) : menuContext.primaryPage === 'view-public-job' ? (
                       <AppViewJobPublic jobId={pathParam} history={history} />
-                    ) : menuContext.primaryPage === 'job-board' ? (
-                      <JobBoardWidget history={history} />
-                    ) : menuContext.primaryPage === 'view-proposal' ? (
-                      <ViewProposal jobId={pathParam} history={history} />
                     ) : menuContext.primaryPage === 'view-contract' ? (
-                      <EditContract contractId={pathParam} history={history} />
-                    ) : menuContext.primaryPage === 'view-full-contract' ? (
-                      <FullContract contractId={pathParam} history={history} />
-                    ) : menuContext.primaryPage ===
-                      'view-sign-full-contract' ? (
-                      <FullContractWidget
-                        contractId={pathParam}
-                        history={history}
-                      />
-                    ) : menuContext.primaryPage === 'edit-contract' ? (
                       <EditContract contractId={pathParam} history={history} />
                     ) : menuContext.primaryPage === 'home' ? (
                       <HomePage />
@@ -212,30 +172,8 @@ export default function AppLayout(props) {
                         publicView={true}
                         history={history}
                       />
-                    ) : menuContext.primaryPage === 'pick-artist' ? (
-                      <Query query={FAVOURITES} fetchPolicy="network-only">
-                        {({ data, loading }) => {
-                          return loading ? null : (
-                            <CreativeContext.Provider>
-                              <PickArtist
-                                theme={props.theme}
-                                jobId={pathParam}
-                                autosaveIsOn={true}
-                                history={history}
-                                favourites={data.profile.favourites.map(
-                                  (fav) => fav.receiver && fav.receiver._id
-                                )}
-                              />
-                            </CreativeContext.Provider>
-                          );
-                        }}
-                      </Query>
-                    ) : menuContext.primaryPage === 'confirm-job' ? (
-                      <ConfirmJob jobId={pathParam} history={history} />
                     ) : menuContext.primaryPage === 'submit-job' ? (
                       <SubmitJob jobId={pathParam} history={history} />
-                    ) : menuContext.primaryPage === 'create-quote' ? (
-                      <NewQuote projectId={pathParam} />
                     ) : null}
                   </ContentScroll>
                   <Query
