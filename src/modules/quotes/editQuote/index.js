@@ -83,40 +83,47 @@ export default function EditQuote({ contractData }) {
     >
       <Column w={400}>
         <CardComponent locked={false}>
-          {fieldArray[field] === 'miniDash' && <MiniDash contract={contract} />}
-          {fieldArray[field] === 'startDate' && (
-            <StartDate contract={contract} setContract={setContract} />
-          )}
-          {fieldArray[field] === 'deadline' && (
-            <EndDate contract={contract} setContract={setContract} />
-          )}
-          {fieldArray[field] === 'cost' && (
-            <Cost contract={contract} setContract={setContract} />
-          )}
-          {fieldArray[field] === 'notes' && (
-            <Notes contract={contract} setContract={setContract} />
-          )}
-          {fieldArray[field] === 'summary' && (
-            <QuoteSummary contract={contract} setContract={setContract} />
-          )}
-          {fieldArray[field] === 'submitted' && (
-            <MenuContext.Consumer>
-              {(menu) => (
-                <Column>
-                  <MenuButtonStandard
-                    title="Quote Dashboard"
-                    onClickEvent={() =>
-                      menu.updateMenuContext({
-                        ...menu.jobPage,
-                        secondaryPage: 'quote_list',
-                        contractId: null,
-                      })
-                    }
-                  />
-                </Column>
-              )}
-            </MenuContext.Consumer>
-          )}
+          <Column>
+            {fieldArray[field] === 'miniDash' && (
+              <MiniDash contract={contract} setField={setField} />
+            )}
+            {fieldArray[field] === 'startDate' && (
+              <StartDate contract={contract} setContract={setContract} />
+            )}
+            {fieldArray[field] === 'deadline' && (
+              <EndDate contract={contract} setContract={setContract} />
+            )}
+            {fieldArray[field] === 'cost' && (
+              <Cost contract={contract} setContract={setContract} />
+            )}
+            {fieldArray[field] === 'notes' && (
+              <Notes contract={contract} setContract={setContract} />
+            )}
+            {fieldArray[field] === 'summary' && (
+              <QuoteSummary contract={contract} setContract={setContract} />
+            )}
+            {fieldArray[field] === 'submitted' && (
+              <MenuContext.Consumer>
+                {(menu) => (
+                  <Column>
+                    <MenuButtonStandard
+                      title="Quote Dashboard"
+                      onClickEvent={() =>
+                        menu.updateMenuContext({
+                          ...menu,
+                          workPage: {
+                            ...menu.workPage,
+                            secondaryPage: 'quote_list',
+                            contractId: null,
+                          },
+                        })
+                      }
+                    />
+                  </Column>
+                )}
+              </MenuContext.Consumer>
+            )}
+          </Column>
         </CardComponent>
       </Column>
     </NoticeBoardSecondary>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TabPage } from '../../../../components';
 import {
   workMenu,
@@ -13,14 +13,14 @@ import QuoteDashboard from '../quoteDashboard';
 import MyWorkDashboard from '../myWorkDashboard';
 import WorkDashboard from './workDashboard';
 
-export default function WorkPage({ jumpTo }) {
+export default function WorkPage() {
   return (
     <CountContext.Consumer>
       {(counts) => (
         <MenuContext.Consumer>
           {(menu) => (
             <TabPage
-              title={null}
+              title={menu.workPage.primaryPage}
               primaryMenu={workMenu(counts, menu)}
               secondaryMenu={
                 menu.workPage.primaryPage === 'work_dashboard'
@@ -39,7 +39,7 @@ export default function WorkPage({ jumpTo }) {
               ) : menu.workPage.primaryPage === 'quotes' ? (
                 <QuoteDashboard />
               ) : menu.workPage.primaryPage === 'my_work' ? (
-                <MyWorkDashboard />
+                <MyWorkDashboard menu={menu} />
               ) : menu.workPage.primaryPage === 'work_dashboard' ? (
                 <WorkDashboard />
               ) : (

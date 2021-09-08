@@ -28,6 +28,7 @@ export default function CommunityPage() {
                     menuStr="View All"
                     onClickEvent={() =>
                       menu.updateMenuContext({
+                        ...menu,
                         primaryPage: 'jobs',
                       })
                     }
@@ -36,11 +37,14 @@ export default function CommunityPage() {
                       icon: 'add',
                       onClickEvent: () => {
                         menu.updateMenuContext({
-                          ...menu.jobPage,
-                          primaryPage: 'job_posts',
-                          secondaryPage: 'create_job_ad',
+                          ...menu,
+                          primaryPage: 'jobs',
+                          jobPage: {
+                            ...menu.jobPage,
+                            primaryPage: 'job_posts',
+                            secondaryPage: 'create_job_ad',
+                          },
                         });
-                        history.push('/app/jobs/job_posts:create_job_ad');
                       },
                     }}
                   />
@@ -52,8 +56,11 @@ export default function CommunityPage() {
                     menuStr="View All"
                     onClickEvent={() => {
                       menu.updateMenuContext({
-                        ...menu.homePage,
-                        secondaryPage: 'profiles',
+                        ...menu,
+                        homePage: {
+                          ...menu.homePage,
+                          secondaryPage: 'profiles',
+                        },
                       });
                     }}
                   />
@@ -70,9 +77,12 @@ export default function CommunityPage() {
                     menuStr="View All"
                     onClickEvent={() => {
                       menu.updateMenuContext({
-                        ...menu.homePage,
-                        primaryPage: 'my_posts',
-                        secondaryPage: 'all_posts',
+                        ...menu,
+                        homePage: {
+                          ...menu.homePage,
+                          primaryPage: 'my_posts',
+                          secondaryPage: 'all_posts',
+                        },
                       });
                     }}
                     primaryButton={{
@@ -80,9 +90,12 @@ export default function CommunityPage() {
                       icon: 'add',
                       onClickEvent: () => {
                         menu.updateMenuContext({
-                          ...menu.homepage,
-                          primaryPage: 'my_posts',
-                          secondaryPage: 'create_my_post',
+                          ...menu,
+                          homePage: {
+                            ...menu.homepage,
+                            primaryPage: 'my_posts',
+                            secondaryPage: 'create_my_post',
+                          },
                         });
                       },
                     }}
@@ -118,9 +131,12 @@ export default function CommunityPage() {
                     menuStr="View All"
                     onClickEvent={() =>
                       menu.updateMenuContext({
-                        ...menu.homePage,
-                        primaryPage: 'kickstarters',
-                        secondaryPage: 'kickstarters',
+                        ...menu,
+                        homePage: {
+                          ...menu.homepage,
+                          primaryPage: 'kickstarters',
+                          secondaryPage: 'kickstarters',
+                        },
                       })
                     }
                     primaryButton={{
@@ -128,9 +144,12 @@ export default function CommunityPage() {
                       icon: 'add',
                       onClickEvent: () => {
                         menu.updateMenuContext({
-                          ...menu.homepage,
-                          primaryPage: 'kickstarters',
-                          secondaryPage: 'create_kickstarter',
+                          ...menu,
+                          homePage: {
+                            ...menu.homepage,
+                            primaryPage: 'kickstarters',
+                            secondaryPage: 'create_kickstarter',
+                          },
                         });
                       },
                     }}

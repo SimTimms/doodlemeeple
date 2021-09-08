@@ -7,7 +7,7 @@ export default function workMenu(counts, menu, onClickEvent) {
       link: () =>
         menu.updateMenuContext({
           ...menu,
-          workMenu: {
+          workPage: {
             ...menu.workPage,
             primaryPage: 'my_work',
             secondaryPage: 'active_work',
@@ -23,7 +23,7 @@ export default function workMenu(counts, menu, onClickEvent) {
       link: () =>
         menu.updateMenuContext({
           ...menu,
-          workMenu: {
+          workPage: {
             ...menu.workPage,
             primaryPage: 'invites',
             secondaryPage: 'invite_list',
@@ -40,7 +40,7 @@ export default function workMenu(counts, menu, onClickEvent) {
       link: () =>
         menu.updateMenuContext({
           ...menu,
-          workMenu: {
+          workPage: {
             ...menu.workPage,
             primaryPage: 'quotes',
             secondaryPage: 'quote_list',
@@ -59,7 +59,7 @@ export default function workMenu(counts, menu, onClickEvent) {
       link: () =>
         menu.updateMenuContext({
           ...menu,
-          workMenu: {
+          workPage: {
             ...menu.workPage,
             primaryPage: 'history',
             secondaryPage: 'quote_list',
@@ -76,7 +76,7 @@ export default function workMenu(counts, menu, onClickEvent) {
           link: () =>
             menu.updateMenuContext({
               ...menu,
-              workMenu: {
+              workPage: {
                 ...menu.workPage,
                 secondaryPage: 'work_dashboard_home',
                 jobId: null,

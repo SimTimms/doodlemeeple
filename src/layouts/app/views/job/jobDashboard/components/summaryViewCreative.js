@@ -7,17 +7,11 @@ import {
   FullContractComponent,
 } from '../../../../../../components';
 import { ChatViewByJob } from '../../../../../../modules/chat';
-import EditProposalForm from './proposalForm/views/editProposal';
 import CreativeJobSummary from './creativeJobSummary';
 import DeclineInviteView from './declineInviteView';
 import CheckListCreativeDash from '../components/jobDashboards/CheckListCreativeDash';
 
-export default function SummaryViewCreative({
-  job,
-  history,
-  setPageValues,
-  pageValues,
-}) {
+export default function SummaryViewCreative({ job, history, menu }) {
   const classes = useStyles();
   const [conversationUser, setConversationUser] = React.useState(null);
   const [tabNbr, setTabNbr] = React.useState(-1);
@@ -48,7 +42,7 @@ export default function SummaryViewCreative({
           history={history}
         />
       ) : (
-        pageValues.secondaryPage === 'work_dashboard_home' && (
+        menu.workPage.secondaryPage === 'work_dashboard_home' && (
           <Column>
             <CheckListCreativeDash
               declined={
@@ -67,7 +61,7 @@ export default function SummaryViewCreative({
           </Column>
         )
       )}
-      {pageValues.secondaryPage === 'work_description' && (
+      {menu.workPage.secondaryPage === 'work_description' && (
         <Column>
           <CreativeJobSummary
             job={job}
@@ -79,7 +73,7 @@ export default function SummaryViewCreative({
           />
         </Column>
       )}
-      {pageValues.secondaryPage === 'work_contract' && contract ? (
+      {menu.workPage.secondaryPage === 'work_contract' && contract ? (
         <Column w={800}>
           <Divider />
           <FullContractComponent contractData={contract} />

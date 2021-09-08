@@ -1,29 +1,35 @@
-export default function quoteMenuSecondary(counts, pageValues, onClickEvent) {
+export default function quoteMenuSecondary(counts, menu) {
   return [
     {
       name: 'Quote List',
       icon: 'local_activity',
       machineName: 'quote_list',
       link: () =>
-        onClickEvent({
-          ...pageValues,
-          secondaryPage: 'quote_list',
-          jobId: null,
-          inviteId: null,
+        menu.updateMenuContext({
+          ...menu,
+          workPage: {
+            ...menu.workPage,
+            secondaryPage: 'quote_list',
+            jobId: null,
+            inviteId: null,
+          },
         }),
       count: counts.quote_list,
     },
-    pageValues.contractId
+    menu.workPage.contractId
       ? {
           name: 'Editing Quote',
           icon: 'local_activity',
           machineName: 'view_quote',
           link: () =>
-            onClickEvent({
-              ...pageValues,
-              secondaryPage: 'view_quote',
-              jobId: null,
-              inviteId: null,
+            menu.updateMenuContext({
+              ...menu,
+              workPage: {
+                ...menu.workPage,
+                secondaryPage: 'view_quote',
+                jobId: null,
+                inviteId: null,
+              },
             }),
           count: null,
         }

@@ -10,14 +10,18 @@ import { Mutation } from 'react-apollo';
 import { UPDATE_CONTRACT } from '../../../data/mutations';
 import { MenuContext } from '../../../context';
 
-export default function MiniDash({ contract }) {
+export default function MiniDash({ contract, setField }) {
   return !contract ? null : (
     <MenuContext.Consumer>
       {(menu) => (
-        <Column j="flex-start">
+        <Column j="center" w={200}>
           <Typography>What would you like to do? </Typography>
           <Divider />
-          <MenuButtonStandard title="Edit" />
+          <MenuButtonStandard
+            title="Edit"
+            onClickEvent={() => setField(1)}
+            fullWidth={true}
+          />
           <DividerMini />
           <Mutation
             mutation={UPDATE_CONTRACT}
@@ -27,11 +31,13 @@ export default function MiniDash({ contract }) {
             }}
             onCompleted={() => {
               menu.updateMenuContext({
-                ...menu.jobPage,
-                primaryPage: 'history',
-                secondaryPage: null,
-                jobId: null,
-                contractId: null,
+                ...menu,
+                workPage: {
+                  ...menu.workPage,
+                  secondaryPage: 'view_quote',
+                  jobId: null,
+                  contractId: contract._id,
+                },
               });
             }}
           >
@@ -41,6 +47,7 @@ export default function MiniDash({ contract }) {
                   title="Delete"
                   type="delete"
                   onClickEvent={() => mutation()}
+                  fullWidth={true}
                 />
               );
             }}

@@ -13,13 +13,13 @@ export default function QuoteDashboard() {
     <MenuContext.Consumer>
       {(menu) => (
         <div className={classes.root}>
-          {menu.jobPage.secondaryPage === 'quote_list' && (
+          {menu.workPage.secondaryPage === 'quote_list' && (
             <QuoteListPage menu={menu} />
           )}
-          {menu.jobPage.secondaryPage === 'view_quote' && (
+          {menu.workPage.secondaryPage === 'view_quote' && (
             <Query
               query={PREVIEW_CONTRACT}
-              variables={{ contractId: menu.jobPage.contractId }}
+              variables={{ contractId: menu.workPage.contractId }}
               fetchPolicy="network-only"
             >
               {({ data, loading }) => {

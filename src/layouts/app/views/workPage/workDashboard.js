@@ -15,13 +15,7 @@ export default function WorkDashboard() {
         >
           {({ data }) => {
             if (!data) return null;
-            return (
-              <SummaryViewCreative
-                job={data.jobChecklist}
-                setPageValues={() => menu.updateMenuContext}
-                pageValues={menu.jobPage}
-              />
-            );
+            return <SummaryViewCreative job={data.jobChecklist} menu={menu} />;
           }}
         </Query>
       )}

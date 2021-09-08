@@ -20,9 +20,12 @@ export default function QuoteOutWidget({ menu, status }) {
                 contract={contract}
                 onClickEvent={() =>
                   menu.updateMenuContext({
-                    ...menu.jobPage,
-                    secondaryPage: 'view_quote',
-                    contractId: contract._id,
+                    ...menu,
+                    workPage: {
+                      ...menu.workPage,
+                      secondaryPage: 'view_quote',
+                      contractId: contract._id,
+                    },
                   })
                 }
               />

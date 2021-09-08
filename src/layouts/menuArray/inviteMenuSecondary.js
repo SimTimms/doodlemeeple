@@ -1,29 +1,35 @@
-export default function inviteMenuSecondary(counts, pageValues, onClickEvent) {
+export default function inviteMenuSecondary(counts, menu) {
   return [
     {
       name: 'Invite List',
       icon: 'local_activity',
       machineName: 'invite_list',
       link: () =>
-        onClickEvent({
-          ...pageValues,
-          secondaryPage: 'invite_list',
-          jobId: null,
-          inviteId: null,
+        menu.updateMenuContext({
+          ...menu,
+          workPage: {
+            ...menu.workPage,
+            secondaryPage: 'invite_list',
+            jobId: null,
+            inviteId: null,
+          },
         }),
       count: counts.inviteList,
     },
-    pageValues.inviteId
+    menu.workPage.inviteId
       ? {
           name: 'Viewing Invite',
           icon: 'local_activity',
           machineName: 'view_invite',
           link: () =>
-            onClickEvent({
-              ...pageValues,
-              secondaryPage: 'view_invite',
-              jobId: null,
-              inviteId: null,
+            menu.updateMenuContext({
+              ...menu,
+              workPage: {
+                ...menu.workPage,
+                secondaryPage: 'view_invite',
+                jobId: null,
+                inviteId: null,
+              },
             }),
           count: null,
         }

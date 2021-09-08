@@ -1,12 +1,13 @@
 import React from 'react';
-import { useStyles } from './styles';
 import { Query } from 'react-apollo';
+import { Typography } from '@material-ui/core';
 import { CONVERSATIONS } from '../../../data/queries';
 import {
   MessageComponent,
   LoadIcon,
   Column,
   Divider,
+  CardComponent,
 } from '../../../components';
 import Cookies from 'js-cookie';
 
@@ -15,7 +16,11 @@ export default function Conversations({ history, setConversationObj }) {
   const userId = Cookies.get('userId');
   return (
     <Column j="flex-start">
-      <Divider />
+      {conversationArray.length === 0 && (
+        <CardComponent type="dark">
+          <Typography>No Conversations</Typography>
+        </CardComponent>
+      )}
       {conversationArray.map((conversation, index) => {
         return !conversation.sender ||
           !conversation.receiver ||

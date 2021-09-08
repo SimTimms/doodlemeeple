@@ -204,7 +204,7 @@ export default function AppLayout(props) {
                     ) : menuContext.primaryPage === 'home' ? (
                       <HomePage />
                     ) : menuContext.primaryPage === 'work' ? (
-                      <WorkPage jumpTo={pathParam} />
+                      <WorkPage />
                     ) : menuContext.primaryPage === 'jobs' ? (
                       <JobPage jumpTo={pathParam} />
                     ) : menuContext.primaryPage === 'user-profile' ? (
@@ -245,7 +245,6 @@ export default function AppLayout(props) {
                     onCompleted={(data) => {
                       setProfile(data.profile);
                     }}
-                    fetchPolicy="network-only"
                     onError={(error) => {
                       logout(history);
                     }}

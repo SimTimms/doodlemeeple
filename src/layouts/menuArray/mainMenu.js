@@ -15,7 +15,7 @@ export default function mainMenu(history, counts, mainMenuContext) {
         }),
       count: null,
     },
-    {
+    /* {
       name: 'Notifications',
       icon: 'notifications',
       machineName: 'tasks',
@@ -27,7 +27,7 @@ export default function mainMenu(history, counts, mainMenuContext) {
           homePage: { ...mainMenuContext.homePage },
         }),
       count: null,
-    },
+    },*/
     {
       name: 'Job Ads',
       icon: 'post_add',
