@@ -14,64 +14,40 @@ import MyWorkDashboard from '../myWorkDashboard';
 import WorkDashboard from './workDashboard';
 
 export default function WorkPage({ jumpTo }) {
-  const [pageValues, setPageValues] = React.useState({
-    primaryPage: 'my_work',
-    secondaryPage: 'active_work',
-    jobId: null,
-    inviteId: null,
-    contractId: null,
-  });
-
-  useEffect(() => {
-    jumpTo &&
-      setPageValues({
-        ...pageValues,
-        primaryPage: jumpTo.split(':')[0],
-        secondaryPage: jumpTo.split(':')[1],
-        jobId: null,
-        inviteId: null,
-        contractId: null,
-      });
-  }, [jumpTo]);
-
   return (
     <CountContext.Consumer>
       {(counts) => (
-        <TabPage
-          title={null}
-          primaryMenu={workMenu(counts, pageValues, setPageValues)}
-          secondaryMenu={
-            pageValues.primaryPage === 'work_dashboard'
-              ? workDashboardSecondary(pageValues, setPageValues)
-              : pageValues.primaryPage === 'invites'
-              ? inviteMenuSecondary(counts, pageValues, setPageValues)
-              : pageValues.primaryPage === 'quotes' &&
-                quoteMenuSecondary(counts, pageValues, setPageValues)
-          }
-          menu={null}
-          activePrimary={pageValues.primaryPage}
-          activeSecondary={pageValues.secondaryPage}
-        >
-          {pageValues.primaryPage === 'invites' ? (
-            <InviteDashboard />
-          ) : pageValues.primaryPage === 'quotes' ? (
-            <QuoteDashboard />
-          ) : pageValues.primaryPage === 'my_work' ? (
-            <MyWorkDashboard
-              pageValues={pageValues}
-              setPageValues={setPageValues}
-            />
-          ) : pageValues.primaryPage === 'work_dashboard' ? (
-            <WorkDashboard />
-          ) : (
-            pageValues.primaryPage === 'history' && (
-              <WorkHistory
-                pageValues={pageValues}
-                setPageValues={setPageValues}
-              />
-            )
+        <MenuContext.Consumer>
+          {(menu) => (
+            <TabPage
+              title={null}
+              primaryMenu={workMenu(counts, menu)}
+              secondaryMenu={
+                menu.workPage.primaryPage === 'work_dashboard'
+                  ? workDashboardSecondary(menu)
+                  : menu.workPage.primaryPage === 'invites'
+                  ? inviteMenuSecondary(counts, menu)
+                  : menu.workPage.primaryPage === 'quotes' &&
+                    quoteMenuSecondary(counts, menu)
+              }
+              menu={null}
+              activePrimary={menu.workPage.primaryPage}
+              activeSecondary={menu.workPage.secondaryPage}
+            >
+              {menu.workPage.primaryPage === 'invites' ? (
+                <InviteDashboard />
+              ) : menu.workPage.primaryPage === 'quotes' ? (
+                <QuoteDashboard />
+              ) : menu.workPage.primaryPage === 'my_work' ? (
+                <MyWorkDashboard />
+              ) : menu.workPage.primaryPage === 'work_dashboard' ? (
+                <WorkDashboard />
+              ) : (
+                menu.workPage.primaryPage === 'history' && <WorkHistory />
+              )}
+            </TabPage>
           )}
-        </TabPage>
+        </MenuContext.Consumer>
       )}
     </CountContext.Consumer>
   );

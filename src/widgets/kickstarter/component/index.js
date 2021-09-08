@@ -39,9 +39,12 @@ export default function KickstarterComponent({ kickstarter }) {
                   title="Edit"
                   onClickEvent={() =>
                     menu.updateMenuContext({
-                      ...menu.homePage,
-                      kickstarterId: kickstarter._id,
-                      secondaryPage: 'create_kickstarter',
+                      ...menu,
+                      homePage: {
+                        ...menu.homePage,
+                        kickstarterId: kickstarter._id,
+                        secondaryPage: 'create_kickstarter',
+                      },
                     })
                   }
                   disabled={false}

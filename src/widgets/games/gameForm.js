@@ -25,7 +25,6 @@ export default function GameForm() {
     url: '',
     showreel: '',
   });
-  const [deleteConfirm, setDeleteConfirm] = React.useState(false);
 
   return (
     <MenuContext.Consumer>
@@ -50,9 +49,12 @@ export default function GameForm() {
                     toaster('Saved');
                     menu.updateMenuContext({
                       ...menu,
-                      primaryPage: 'games',
-                      secondaryPage: 'my_games',
-                      gameId: null,
+                      homePage: {
+                        ...menu.homePage,
+                        primaryPage: 'games',
+                        secondaryPage: 'my_games',
+                        gameId: null,
+                      },
                     });
                   }}
                 >
@@ -70,7 +72,7 @@ export default function GameForm() {
                   }}
                 </Mutation>
               ) : (
-                <Column w={140}>
+                <Column w={180}>
                   <Mutation
                     mutation={UPDATE_GAME}
                     variables={{
@@ -104,25 +106,24 @@ export default function GameForm() {
                       toaster('Removed');
                       menu.updateMenuContext({
                         ...menu,
-                        primaryPage: 'games',
-                        secondaryPage: 'my_games',
-                        gameId: null,
+                        homePage: {
+                          ...menu.homePage,
+                          primaryPage: 'games',
+                          secondaryPage: 'my_games',
+                          gameId: null,
+                        },
                       });
                     }}
                   >
                     {(deleteMutation) => {
                       return (
                         <MenuButtonStandard
-                          title={
-                            deleteConfirm ? 'Confirm Deletion' : 'Delete Game'
-                          }
+                          title="Delete Game"
                           type="delete"
                           icon="delete"
                           fullWidth={true}
                           onClickEvent={() => {
-                            deleteConfirm
-                              ? deleteMutation()
-                              : setDeleteConfirm(true);
+                            deleteMutation();
                           }}
                         />
                       );

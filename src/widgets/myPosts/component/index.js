@@ -38,9 +38,12 @@ export default function MyPostComponent({ myPost }) {
                   title="Edit"
                   onClickEvent={() =>
                     menu.updateMenuContext({
-                      ...menu.homePage,
-                      myPostId: myPost._id,
-                      secondaryPage: 'create_my_post',
+                      ...menu,
+                      homePage: {
+                        ...menu.homePage,
+                        myPostId: myPost._id,
+                        secondaryPage: 'create_my_post',
+                      },
                     })
                   }
                   disabled={false}

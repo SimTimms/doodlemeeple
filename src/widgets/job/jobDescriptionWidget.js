@@ -61,9 +61,10 @@ export default function JobDescriptionWidget({ jobId }) {
                                             icon="fact_check"
                                             onClickEvent={() => {
                                               menu.updateMenuContext({
+                                                ...menu,
                                                 primaryPage: 'work',
-                                                jobPage: {
-                                                  ...menu.jobPage,
+                                                workPage: {
+                                                  ...menu.workPage,
                                                   primaryPage: 'quotes',
                                                   secondaryPage: 'quote_list',
                                                   inviteId: null,
@@ -84,15 +85,16 @@ export default function JobDescriptionWidget({ jobId }) {
                                           }}
                                           onCompleted={() => {
                                             menu.updateMenuContext({
-                                              ...menu.jobPage,
-                                              primaryPage: 'quotes',
-                                              secondaryPage: 'quote_list',
-                                              inviteId: null,
-                                              jobId: job._id,
+                                              ...menu,
+                                              primaryPage: 'work',
+                                              workPage: {
+                                                ...menu.workPage,
+                                                primaryPage: 'quotes',
+                                                secondaryPage: 'quote_list',
+                                                inviteId: null,
+                                                jobId: job._id,
+                                              },
                                             });
-                                            history.push(
-                                              `/app/work/quotes:quote_list`
-                                            );
                                           }}
                                           onError={() => {}}
                                         >

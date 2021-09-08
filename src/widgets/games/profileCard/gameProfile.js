@@ -9,6 +9,7 @@ import {
   MenuButtonStandard,
   DividerMini,
   DividerWithBorder,
+  HrefLink,
 } from '../../../components';
 import OnlineStores from './onlineStore';
 import { MenuContext } from '../../../context';
@@ -31,27 +32,22 @@ export default function GameProfile({ game }) {
                   className={classes.gameName}
                   onClick={() =>
                     menu.updateMenuContext({
-                      ...menu.homePage,
-                      secondaryPage: 'game_profile',
-                      gameId: game._id,
+                      ...menu,
+                      homePage: {
+                        ...menu.homePage,
+                        secondaryPage: 'game_profile',
+                        gameId: game._id,
+                      },
                     })
                   }
                 >
                   {game.name}
                 </Typography>
 
-                <Typography
-                  className={classes.authorName}
-                  onClick={() =>
-                    menu.updateMenuContext({
-                      ...menu.homePage,
-                      secondaryPage: 'user_profile',
-                      userId: game.user._id,
-                    })
-                  }
-                >
-                  {game.user.name}
-                </Typography>
+                <HrefLink
+                  title={game.user.name}
+                  url={`/user-profile/${game.user._id}`}
+                ></HrefLink>
               </Row>
             </Column>
 

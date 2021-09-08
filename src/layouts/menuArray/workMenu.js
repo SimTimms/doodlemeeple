@@ -1,15 +1,18 @@
-export default function workMenu(counts, pageValues, onClickEvent) {
+export default function workMenu(counts, menu, onClickEvent) {
   return [
     {
       name: 'My Work',
       icon: 'work',
       machineName: 'my_work',
       link: () =>
-        onClickEvent({
-          ...pageValues,
-          primaryPage: 'my_work',
-          secondaryPage: 'active_work',
-          jobId: null,
+        menu.updateMenuContext({
+          ...menu,
+          workMenu: {
+            ...menu.workPage,
+            primaryPage: 'my_work',
+            secondaryPage: 'active_work',
+            jobId: null,
+          },
         }),
       count: counts.myWork,
     },
@@ -18,12 +21,16 @@ export default function workMenu(counts, pageValues, onClickEvent) {
       icon: 'local_activity',
       machineName: 'invites',
       link: () =>
-        onClickEvent({
-          ...pageValues,
-          primaryPage: 'invites',
-          secondaryPage: 'invite_list',
-          jobId: null,
+        menu.updateMenuContext({
+          ...menu,
+          workMenu: {
+            ...menu.workPage,
+            primaryPage: 'invites',
+            secondaryPage: 'invite_list',
+            jobId: null,
+          },
         }),
+
       count: counts.invites,
     },
     {
@@ -31,12 +38,16 @@ export default function workMenu(counts, pageValues, onClickEvent) {
       icon: 'local_activity',
       machineName: 'quotes',
       link: () =>
-        onClickEvent({
-          ...pageValues,
-          primaryPage: 'quotes',
-          secondaryPage: 'quote_list',
-          jobId: null,
+        menu.updateMenuContext({
+          ...menu,
+          workMenu: {
+            ...menu.workPage,
+            primaryPage: 'quotes',
+            secondaryPage: 'quote_list',
+            jobId: null,
+          },
         }),
+
       count: counts.quotes,
     },
 
@@ -44,19 +55,34 @@ export default function workMenu(counts, pageValues, onClickEvent) {
       name: 'History',
       icon: 'history',
       machineName: 'history',
-      link: () => onClickEvent({ ...pageValues, primaryPage: 'history' }),
+
+      link: () =>
+        menu.updateMenuContext({
+          ...menu,
+          workMenu: {
+            ...menu.workPage,
+            primaryPage: 'history',
+            secondaryPage: 'quote_list',
+            jobId: null,
+          },
+        }),
       count: counts.history,
     },
-    pageValues.jobId
+    menu.workPage.jobId
       ? {
           name: 'Dashboard',
           icon: 'local_activity',
           machineName: 'work_dashboard',
           link: () =>
-            onClickEvent({
-              ...pageValues,
-              secondaryPage: 'work_dashboard_home',
+            menu.updateMenuContext({
+              ...menu,
+              workMenu: {
+                ...menu.workPage,
+                secondaryPage: 'work_dashboard_home',
+                jobId: null,
+              },
             }),
+
           count: null,
         }
       : {

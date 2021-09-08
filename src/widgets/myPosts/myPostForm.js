@@ -30,7 +30,6 @@ export default function MyPostForm({ ...props }) {
     type: type ? type : 'public',
     game: type === 'game' ? objectId : null,
   });
-  const [deleteConfirm, setDeleteConfirm] = React.useState(false);
 
   useEffect(() => {
     setMyPost({
@@ -162,8 +161,11 @@ export default function MyPostForm({ ...props }) {
                       onCompleted={(data) => {
                         toaster('Saved');
                         menu.updateMenuContext({
-                          ...menu.homePage,
-                          myPostId: data.myPostCreateOne.recordId,
+                          ...menu,
+                          homePage: {
+                            ...menu.homePage,
+                            myPostId: data.myPostCreateOne.recordId,
+                          },
                         });
                       }}
                     >
@@ -196,24 +198,23 @@ export default function MyPostForm({ ...props }) {
                       onCompleted={() => {
                         toaster('Removed');
                         menu.updateMenuContext({
-                          ...menu.homePage,
-                          myPostId: null,
-                          secondaryPage: 'my_posts',
+                          ...menu,
+                          homePage: {
+                            ...menu.homePage,
+                            myPostId: null,
+                            secondaryPage: 'my_posts',
+                          },
                         });
                       }}
                     >
                       {(deleteMutation) => {
                         return (
                           <MenuButtonStandard
-                            title={
-                              deleteConfirm ? 'Confirm Deletion' : 'Delete'
-                            }
+                            title={'Delete'}
                             type="delete"
                             icon="delete"
                             onClickEvent={() => {
-                              deleteConfirm
-                                ? deleteMutation()
-                                : setDeleteConfirm(true);
+                              deleteMutation();
                             }}
                             fullWidth={true}
                           />

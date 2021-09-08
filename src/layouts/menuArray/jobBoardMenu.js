@@ -1,15 +1,17 @@
-export default function jobBoardMenu(pageValues, setPageValues) {
+export default function jobBoardMenu(menu) {
   return [
     {
       name: 'Back',
       icon: 'chevron_left',
       machineName: 'back',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          primaryPage: 'job_board',
-          secondaryPage: null,
-          jobId: null,
+        menu.updateMenuContext({
+          primaryPage: menu.primaryPage,
+          jobPage: { ...menu.jobPage, jobId: null, primaryPage: 'job_board' },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+          },
         }),
       count: null,
     },
@@ -18,10 +20,17 @@ export default function jobBoardMenu(pageValues, setPageValues) {
       icon: 'work',
       machineName: 'viewing_job',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          primaryPage: 'job_board',
-          secondaryPage: 'viewing_job',
+        menu.updateMenuContext({
+          primaryPage: menu.primaryPage,
+          jobPage: {
+            ...menu.jobPage,
+            primaryPage: 'job_board',
+            secondaryPage: 'viewing_job',
+          },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+          },
         }),
       count: null,
     },

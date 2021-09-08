@@ -7,14 +7,20 @@ export default function JobDescriptionButton({ jobId }) {
     <MenuContext.Consumer>
       {(menu) => (
         <MenuButtonStandard
-          title="Full Description"
+          title="Full Description [CENTER THIS]"
           mb={true}
           styleOverride={{ marginTop: 0 }}
           onClickEvent={() => {
             menu.updateMenuContext({
-              ...menu.jobPage,
-              jobId,
-              secondaryPage: 'viewing_job',
+              primaryPage: 'jobs',
+              jobPage: {
+                ...menu.jobPage,
+                jobId: jobId,
+                primaryPage: 'job_board',
+                secondaryPage: 'viewing_job',
+              },
+              homePage: { ...menu.jobPage },
+              workPage: { ...menu.workPage },
             });
           }}
         />

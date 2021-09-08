@@ -1,24 +1,24 @@
-export default function previewProfileMenu(history, counts, mainMenuContext) {
+export default function previewProfileMenu(history, counts, menu) {
   return [
     {
       name: 'Profile',
       icon: 'face',
       machineName: 'profile',
-      link: () => mainMenuContext.updateMenuContext({ primaryPage: 'profile' }),
+      link: () => menu.updateMenuContext({ ...menu, primaryPage: 'profile' }),
       count: null,
     },
     {
       name: 'Games',
       icon: 'casino',
       machineName: 'games',
-      link: () => mainMenuContext.updateMenuContext({ primaryPage: 'games' }),
+      link: () => menu.updateMenuContext({ ...menu, primaryPage: 'games' }),
       count: null,
     },
     {
       name: 'Job Ads',
       icon: 'post_add',
       machineName: 'jobs',
-      link: () => mainMenuContext.updateMenuContext({ primaryPage: 'jobs' }),
+      link: () => menu.updateMenuContext({ ...menu, primaryPage: 'jobs' }),
       count: null,
     },
     {
@@ -26,7 +26,7 @@ export default function previewProfileMenu(history, counts, mainMenuContext) {
       icon: 'view_in_ar',
       machineName: 'kickstarters',
       link: () =>
-        mainMenuContext.updateMenuContext({ primaryPage: 'kickstarters' }),
+        menu.updateMenuContext({ ...menu, primaryPage: 'kickstarters' }),
       count: null,
     },
   ];

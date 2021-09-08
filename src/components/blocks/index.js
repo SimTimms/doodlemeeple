@@ -140,7 +140,7 @@ export function Row(props) {
         maxWidth,
         boxSizing: 'border-box',
       }}
-      class={className ? className : null}
+      className={className ? className : null}
       onClick={() => (onClickEvent ? onClickEvent() : null)}
     >
       {children}

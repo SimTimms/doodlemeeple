@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { TabPage } from '../../../../components';
-import { HistoryContext, CountContext } from '../../../../context';
+import { CountContext, MenuContext } from '../../../../context';
 import {
   jobMenu,
   jobMenuSecondary,
@@ -9,83 +9,56 @@ import {
   jobBoardMenu,
 } from '../../../menuArray';
 import { CreateJob } from '../../../../widgets';
-import { MenuContext } from '../../../../context';
 import JobDashboardPage from './jobDashboardPage';
 import JobHistory from './jobHistory';
 import JobPosts from './components/jobPosts';
 import JobBoardPage from './jobBoardPage';
 
 export default function JobPage({ jumpTo }) {
-  const [pageValues, setPageValues] = React.useState({
-    primaryPage: 'job_board',
-    secondaryPage: 'dashboard',
-    jobId: null,
-    inviteId: null,
-    contractId: null,
-  });
-  useEffect(() => {
-    jumpTo &&
-      setPageValues({
-        ...pageValues,
-        primaryPage: jumpTo ? jumpTo.split(':')[0] : pageValues.primaryPage,
-        secondaryPage: jumpTo ? jumpTo.split(':')[1] : pageValues.secondaryPage,
-        jobId: null,
-        inviteId: null,
-        contractId: null,
-      });
-  }, [jumpTo]);
-
   return (
     <CountContext.Consumer>
-      {(counts) => {
-        return (
-          <TabPage
-            title={null}
-            primaryMenu={jobMenu(counts, pageValues, setPageValues)}
-            secondaryMenu={
-              (pageValues.primaryPage === 'editing_job' &&
-                pageValues.secondaryPage === 'view_quote') ||
-              pageValues.secondaryPage === 'contract'
-                ? quoteViewMenu(pageValues, setPageValues)
-                : pageValues.primaryPage === 'editing_job'
-                ? jobDashboardSecondary(counts, pageValues, setPageValues)
-                : pageValues.primaryPage === 'job_posts'
-                ? jobMenuSecondary(counts, pageValues, setPageValues)
-                : pageValues.primaryPage === 'job_board' &&
-                  pageValues.jobId &&
-                  jobBoardMenu(pageValues, setPageValues)
-            }
-            menu={null}
-            activePrimary={pageValues.primaryPage}
-            activeSecondary={pageValues.secondaryPage}
-          >
-            {pageValues.primaryPage === 'editing_job' ? (
-              <JobDashboardPage
-                pageValues={pageValues}
-                setPageValues={setPageValues}
-              />
-            ) : pageValues.primaryPage === 'job_board' ? (
-              <JobBoardPage pageValues={pageValues} />
-            ) : pageValues.primaryPage === 'job_posts' &&
-              pageValues.secondaryPage === 'job_ads' ? (
-              <JobPosts />
-            ) : pageValues.primaryPage === 'job_posts' &&
-              pageValues.secondaryPage === 'create_job_ad' ? (
-              <CreateJob
-                pageValues={pageValues}
-                setPageValues={setPageValues}
-              />
-            ) : (
-              pageValues.primaryPage === 'job_history' && (
-                <JobHistory
-                  pageValues={pageValues}
-                  setPageValues={setPageValues}
-                />
-              )
-            )}
-          </TabPage>
-        );
-      }}
+      {(counts) => (
+        <MenuContext.Consumer>
+          {(menu) => {
+            return (
+              <TabPage
+                title={null}
+                primaryMenu={jobMenu(counts, menu)}
+                secondaryMenu={
+                  (menu.jobPage.primaryPage === 'editing_job' &&
+                    menu.jobPage.secondaryPage === 'view_quote') ||
+                  menu.jobPage.secondaryPage === 'contract'
+                    ? quoteViewMenu(menu)
+                    : menu.jobPage.primaryPage === 'editing_job'
+                    ? jobDashboardSecondary(counts, menu)
+                    : menu.jobPage.primaryPage === 'job_posts'
+                    ? jobMenuSecondary(counts, menu)
+                    : menu.jobPage.primaryPage === 'job_board' &&
+                      menu.jobPage.jobId &&
+                      jobBoardMenu(menu)
+                }
+                menu={null}
+                activePrimary={menu.jobPage.primaryPage}
+                activeSecondary={menu.jobPage.secondaryPage}
+              >
+                {menu.jobPage.primaryPage === 'editing_job' ? (
+                  <JobDashboardPage />
+                ) : menu.jobPage.primaryPage === 'job_board' ? (
+                  <JobBoardPage />
+                ) : menu.jobPage.primaryPage === 'job_posts' &&
+                  menu.jobPage.secondaryPage === 'job_ads' ? (
+                  <JobPosts />
+                ) : menu.jobPage.primaryPage === 'job_posts' &&
+                  menu.jobPage.secondaryPage === 'create_job_ad' ? (
+                  <CreateJob />
+                ) : (
+                  menu.jobPage.primaryPage === 'job_history' && <JobHistory />
+                )}
+              </TabPage>
+            );
+          }}
+        </MenuContext.Consumer>
+      )}
     </CountContext.Consumer>
   );
 }

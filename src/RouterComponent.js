@@ -87,8 +87,8 @@ function RouterComponent(props) {
         >
           {authToken && <AuthRoutes props={props} theme={theme} />}
           {!authToken && <PublicRoutes props={props} theme={theme} />}
-          <ProfileRoutes props={props} />
         </MenuContext.Provider>
+        <ProfileRoutes props={props} />
       </ApolloProvider>
     </ThemeProvider>
   );

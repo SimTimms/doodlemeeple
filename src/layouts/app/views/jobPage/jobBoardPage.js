@@ -1,10 +1,17 @@
 import React from 'react';
 import { JobBoardWidget, JobDescriptionWidget } from '../../../../widgets';
+import { MenuContext } from '../../../../context';
 
-export default function JobBoardPage({ pageValues }) {
-  return pageValues.primaryPage === 'job_board' && !pageValues.jobId ? (
-    <JobBoardWidget />
-  ) : (
-    <JobDescriptionWidget jobId={pageValues.jobId} />
+export default function JobBoardPage() {
+  return (
+    <MenuContext.Consumer>
+      {(menu) =>
+        menu.jobPage.primaryPage === 'job_board' && !menu.jobPage.jobId ? (
+          <JobBoardWidget />
+        ) : (
+          <JobDescriptionWidget jobId={menu.jobPage.jobId} />
+        )
+      }
+    </MenuContext.Consumer>
   );
 }

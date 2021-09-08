@@ -38,9 +38,12 @@ export default function GameComponent({ game }) {
                   icon="edit"
                   onClickEvent={() =>
                     menu.updateMenuContext({
-                      ...menu.homePage,
-                      gameId: game._id,
-                      secondaryPage: 'create_game',
+                      ...menu,
+                      homePage: {
+                        ...menu.homePage,
+                        gameId: game._id,
+                        secondaryPage: 'create_game',
+                      },
                     })
                   }
                   disabled={false}

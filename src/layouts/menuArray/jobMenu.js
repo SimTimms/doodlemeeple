@@ -1,15 +1,22 @@
-export default function jobMenu(counts, pageValues, onClickEvent) {
+export default function jobMenu(counts, menu) {
   return [
     {
       name: 'Job Board',
       icon: 'work',
       machineName: 'job_board',
       link: () =>
-        onClickEvent({
-          ...pageValues,
-          primaryPage: 'job_board',
-          secondaryPage: null,
-          jobId: null,
+        menu.updateMenuContext({
+          primaryPage: menu.primaryPage,
+          jobPage: {
+            ...menu.jobPage,
+            primaryPage: 'job_board',
+            secondaryPage: null,
+            jobId: null,
+          },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+          },
         }),
       count: null,
     },
@@ -18,12 +25,20 @@ export default function jobMenu(counts, pageValues, onClickEvent) {
       icon: 'work',
       machineName: 'job_posts',
       link: () =>
-        onClickEvent({
-          ...pageValues,
-          primaryPage: 'job_posts',
-          secondaryPage: 'job_ads',
-          jobId: null,
+        menu.updateMenuContext({
+          primaryPage: menu.primaryPage,
+          jobPage: {
+            ...menu.jobPage,
+            primaryPage: 'job_posts',
+            secondaryPage: 'job_ads',
+            jobId: null,
+          },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+          },
         }),
+
       count: counts.jobAds,
     },
     {
@@ -31,23 +46,39 @@ export default function jobMenu(counts, pageValues, onClickEvent) {
       icon: 'history',
       machineName: 'job_history',
       link: () =>
-        onClickEvent({
-          ...pageValues,
-          primaryPage: 'job_history',
-          jobId: null,
+        menu.updateMenuContext({
+          primaryPage: menu.primaryPage,
+          jobPage: {
+            ...menu.jobPage,
+            primaryPage: 'job_history',
+            secondaryPage: null,
+            jobId: null,
+          },
+          workPage: { ...menu.workPage },
+          homePage: {
+            ...menu.homePage,
+          },
         }),
     },
-    pageValues.jobId && pageValues.primaryPage !== 'job_board'
+    menu.jobPage.jobId && menu.jobPage.primaryPage !== 'job_board'
       ? {
           name: 'Editing Job',
           icon: 'edit',
           machineName: 'editing_job',
           link: () =>
-            onClickEvent({
-              ...pageValues,
-              primaryPage: 'job_dashboard',
-              secondaryPage: 'editing_job',
+            menu.updateMenuContext({
+              primaryPage: menu.primaryPage,
+              jobPage: {
+                ...menu.jobPage,
+                primaryPage: 'job_dashboard',
+                secondaryPage: 'editing_job',
+              },
+              workPage: { ...menu.workPage },
+              homePage: {
+                ...menu.homePage,
+              },
             }),
+
           count: counts.jobAds,
         }
       : {

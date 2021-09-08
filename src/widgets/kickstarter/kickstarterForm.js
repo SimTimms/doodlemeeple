@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useStyles } from './styles';
 import {
   MenuButtonStandard,
@@ -29,7 +29,6 @@ export default function KickstarterForm({ ...props }) {
     showreel: '',
     _id: 'new',
   });
-  const [deleteConfirm, setDeleteConfirm] = React.useState(false);
 
   return (
     <MenuContext.Consumer>
@@ -139,8 +138,11 @@ export default function KickstarterForm({ ...props }) {
                       onCompleted={() => {
                         toaster('Saved');
                         menu.updateMenuContext({
-                          ...menu.homePage,
-                          secondaryPage: 'my_kickstarters',
+                          ...menu,
+                          homePage: {
+                            ...menu.homePage,
+                            secondaryPage: 'my_kickstarters',
+                          },
                         });
                       }}
                     >
@@ -191,23 +193,22 @@ export default function KickstarterForm({ ...props }) {
                       onCompleted={() => {
                         toaster('Removed');
                         menu.updateMenuContext({
-                          ...menu.homePage,
-                          kickstarterId: null,
-                          secondaryPage: 'my_kickstarters',
+                          ...menu,
+                          homePage: {
+                            ...menu.homePage,
+                            secondaryPage: 'my_kickstarters',
+                          },
                         });
                       }}
                     >
                       {(deleteMutation) => {
                         return (
                           <MenuButtonStandard
-                            title={
-                              deleteConfirm ? 'Confirm Deletion' : 'Delete'
-                            }
+                            title="Delete"
                             type="delete"
+                            icon="delete"
                             onClickEvent={() => {
-                              deleteConfirm
-                                ? deleteMutation()
-                                : setDeleteConfirm(true);
+                              deleteMutation();
                             }}
                           />
                         );

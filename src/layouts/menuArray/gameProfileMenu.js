@@ -1,14 +1,17 @@
-export default function gameProfileMenu(pageValues, setPageValues) {
+export default function gameProfileMenu(menu) {
   return [
     {
       name: 'Back',
       icon: 'chevron_left',
       machineName: 'back',
       link: () =>
-        setPageValues({
-          ...pageValues,
-          primaryPage: 'games',
-          secondaryPage: 'games',
+        menu.updateMenuContext({
+          ...menu,
+          homePage: {
+            ...menu.homePage,
+            primaryPage: 'games',
+            secondaryPage: 'games',
+          },
         }),
       count: null,
     },
@@ -16,7 +19,14 @@ export default function gameProfileMenu(pageValues, setPageValues) {
       name: 'Game Profile',
       icon: 'casino',
       machineName: 'game_profile',
-      link: () => setPageValues({ ...pageValues, secondaryPage: 'games' }),
+      link: () =>
+        menu.updateMenuContext({
+          ...menu,
+          homePage: {
+            ...menu.homePage,
+            secondaryPage: 'game_profile',
+          },
+        }),
       count: null,
     },
   ];
