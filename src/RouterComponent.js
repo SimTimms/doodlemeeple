@@ -88,9 +88,37 @@ function RouterComponent(props) {
           }}
         >
           {authToken && <AuthRoutes props={props} theme={theme} />}
-          {!authToken && <PublicRoutes props={props} theme={theme} />}
         </MenuContext.Provider>
         <ProfileRoutes props={props} />
+        <MenuContext.Provider
+          value={{
+            primaryPage: pageValues.primaryPage,
+            homePage: {
+              primaryPage: pageValues.homePage.primaryPage,
+              secondaryPage: pageValues.homePage.secondaryPage,
+              kickstarterId: pageValues.homePage.kickstarterId,
+              myPostId: pageValues.homePage.myPostId,
+              gameId: pageValues.homePage.gameId,
+              userId: pageValues.homePage.userId,
+            },
+            jobPage: {
+              primaryPage: pageValues.jobPage.primaryPage,
+              secondaryPage: pageValues.jobPage.secondaryPage,
+              jobId: pageValues.jobPage.jobId,
+              contractId: pageValues.jobPage.contractId,
+            },
+            workPage: {
+              primaryPage: pageValues.workPage.primaryPage,
+              secondaryPage: pageValues.workPage.secondaryPage,
+              jobId: pageValues.workPage.jobId,
+              inviteId: pageValues.workPage.inviteId,
+              contractId: pageValues.workPage.contractId,
+            },
+            updateMenuContext: setPageValues,
+          }}
+        >
+          {!authToken && <PublicRoutes props={props} theme={theme} />}
+        </MenuContext.Provider>
       </ApolloProvider>
     </ThemeProvider>
   );
