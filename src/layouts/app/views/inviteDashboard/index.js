@@ -14,10 +14,10 @@ export default function InviteDashboard({ history }) {
       {(menu) => (
         <Slide direction="left" in={true} mountOnEnter unmountOnExit>
           <div className={classes.root}>
-            {menu.jobPage.secondaryPage === 'invite_list' && (
+            {menu.workPage.secondaryPage === 'invite_list' && (
               <InviteListPage history={history} menu={menu} />
             )}
-            {menu.jobPage.secondaryPage === 'view_invite' && (
+            {menu.workPage.secondaryPage === 'view_invite' && (
               <JobDescriptionWidget jobId={menu.jobPage.jobId} />
             )}
           </div>
