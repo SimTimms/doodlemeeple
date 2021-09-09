@@ -1,36 +1,19 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { Mutation } from 'react-apollo';
-import { SUBMIT_BRIEF } from '../../../../../data/mutations';
-import {
-  MenuButtonStandard,
-  Column,
-  Divider,
-  DividerMini,
-} from '../../../../../components';
-import { MenuContext } from '../../../../../context';
+import { SUBMIT_BRIEF_SINGLE } from './data';
+import { MenuButtonStandard, Column, DividerMini } from '../../../components';
+import { MenuContext } from '../../../context';
 
-export default function SubmitBrief({ job, inviteList }) {
-  const [page, setPage] = React.useState(0);
-
-  return page === 0 ? (
-    <Column j="center" a="center" w={180}>
-      <MenuButtonStandard
-        onClickEvent={() => {
-          setPage(1);
-        }}
-        disabled={inviteList.length > 0 ? false : true}
-        title="Continue"
-        fullWidth={true}
-      />
-    </Column>
-  ) : (
+export default function SubmitBriefSingle({ job, userId }) {
+  return (
     <MenuContext.Consumer>
       {(menu) => (
         <Mutation
-          mutation={SUBMIT_BRIEF}
+          mutation={SUBMIT_BRIEF_SINGLE}
           variables={{
             jobId: job._id,
+            userId,
           }}
           onCompleted={() => {
             menu.updateMenuContext({
@@ -65,27 +48,18 @@ export default function SubmitBrief({ job, inviteList }) {
                       paddingBottom: 10,
                     }}
                   >
-                    You will be unable to modify this project or send invites to
-                    any other creatives after this stage.
+                    You will be unable to send invites to any other creatives
+                    after this stage.
                   </Typography>
 
                   <MenuButtonStandard
                     onClickEvent={() => {
                       mutation();
                     }}
-                    disabled={inviteList.length > 0 ? false : true}
                     title="Submit"
                     fullWidth={true}
                   />
                   <DividerMini />
-                  <MenuButtonStandard
-                    onClickEvent={() => {
-                      setPage(0);
-                    }}
-                    disabled={inviteList.length > 0 ? false : true}
-                    title="Cancel"
-                    fullWidth={true}
-                  />
                 </Column>
               </div>
             );

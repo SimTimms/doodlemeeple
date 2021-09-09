@@ -5,7 +5,7 @@ import { useStyles } from './styles';
 import dmDevice from '../../../assets/dmDevice.png';
 import { HistoryContext, CountContext, MenuContext } from '../../../context';
 
-export default function PrimaryMenu({ mainMenu }) {
+export default function PrimaryMenu({ mainMenu, publicPage }) {
   const classes = useStyles();
 
   return (
@@ -30,7 +30,9 @@ export default function PrimaryMenu({ mainMenu }) {
                         <Button
                           menuItem={menuItem}
                           isActive={
-                            menuContext.primaryPage === menuItem.machineName
+                            publicPage
+                              ? menuContext.publicPage === menuItem.machineName
+                              : menuContext.primaryPage === menuItem.machineName
                           }
                         />
                       );

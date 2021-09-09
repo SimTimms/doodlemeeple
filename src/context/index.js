@@ -9,8 +9,15 @@ export const UserContext = React.createContext({
   userId: null,
 });
 
+export const ParamsContext = React.createContext({
+  savedUserId: null,
+  jumpPage: null,
+  updateParamsContext: () => {},
+});
+
 export const MenuContext = React.createContext({
   primaryPage: null,
+  publicPage: null,
   jobPage: {
     primaryPage: null,
     secondaryPage: null,

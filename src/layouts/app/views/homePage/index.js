@@ -7,7 +7,6 @@ import {
   communityMenu,
   myPostsMenu,
   gameProfileMenu,
-  previewProfileMenu,
 } from '../../../menuArray';
 import CommunityPage from '../communityPage';
 import {

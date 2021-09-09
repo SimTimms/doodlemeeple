@@ -10,8 +10,9 @@ import dmDevice from '../../assets/dmDevice.png';
 import { PROFILE_IMAGES } from './data';
 import imageOptimiser from '../../utils/imageOptimiser';
 import { nameShortener } from '../../utils';
+import { HistoryContext } from '../../context';
 
-export default function ProfileCard({ creative, setLarge, history }) {
+export default function ProfileCard({ creative, setLarge }) {
   const classes = useStyles();
 
   const linkedIn = !creative.linkedIn ? null : creative.linkedIn;
@@ -27,225 +28,231 @@ export default function ProfileCard({ creative, setLarge, history }) {
   }, [creative]);
 
   return (
-    <div
-      className={clsx({
-        [classes.creativeCard]: true,
-      })}
-    >
-      <Row>
-        <BgImg
-          previewImage={previewImage}
-          onClick={() => {
-            setLarge(previewImage);
-          }}
-          skill={creative.sections.map((section, index) =>
-            index > 0 ? ` | ${section.type}` : section.type
-          )}
-        />
-
-        <Query
-          query={PROFILE_IMAGES}
-          fetchPolicy="network-only"
-          variables={{ userId: creative._id }}
-          onCompleted={({ profileImages }) => {
-            setImages([...images, ...profileImages]);
-            !creative.profileBG &&
-              profileImages.length > 0 &&
-              setPreviewImage(profileImages[0].img);
-          }}
-        >
-          {({ loading, data }) => {
-            if (loading) return 'Loading';
-            return null;
-          }}
-        </Query>
-      </Row>
-      <Row h={60} w="100%" bg="#222" of="hidden">
-        {images.length === 0 && (
-          <Typography style={{ color: '#fff' }}>No Images</Typography>
-        )}
-        {images.length > 0 &&
-          images.map((image, index) => {
-            if (index > 4) return null;
-            return (
-              <div
-                className={classes.imageThumb}
-                style={{ backgroundImage: `url(${imageOptimiser(image.img)})` }}
-                onMouseEnter={() => setPreviewImage(image.img)}
-                onClick={() => {
-                  setPreviewImage(image.img);
-                  setLarge(image.img);
-                }}
-              ></div>
-            );
+    <HistoryContext.Consumer>
+      {(history) => (
+        <div
+          className={clsx({
+            [classes.creativeCard]: true,
           })}
-      </Row>
-      <Row>
-        <ProfileImg creative={creative} />
-        <Column a="flex-start">
-          <a
-            href={`${process.env.REACT_APP_URL}/user-profile/${creative._id}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ textDecoration: 'none', color: '#222', width: '100%' }}
-          >
-            <Typography
-              style={{ fontWeight: 'bold', textDecoration: 'underline' }}
+        >
+          <Row>
+            <BgImg
+              previewImage={previewImage}
+              onClick={() => {
+                setLarge(previewImage);
+              }}
+              skill={creative.sections.map((section, index) =>
+                index > 0 ? ` | ${section.type}` : section.type
+              )}
+            />
+
+            <Query
+              query={PROFILE_IMAGES}
+              fetchPolicy="network-only"
+              variables={{ userId: creative._id }}
+              onCompleted={({ profileImages }) => {
+                setImages([...images, ...profileImages]);
+                !creative.profileBG &&
+                  profileImages.length > 0 &&
+                  setPreviewImage(profileImages[0].img);
+              }}
             >
-              {creative.name}
-            </Typography>
-          </a>
-          <Typography className={classes.types}>
-            {creative.sections.map(
-              (section, index) => `${index > 0 ? ', ' : ''} ${section.type}`
+              {({ loading, data }) => {
+                if (loading) return 'Loading';
+                return null;
+              }}
+            </Query>
+          </Row>
+          <Row h={60} w="100%" bg="#222" of="hidden">
+            {images.length === 0 && (
+              <Typography style={{ color: '#fff' }}>No Images</Typography>
             )}
-          </Typography>
-          {creative.publicEmail && (
-            <a
-              href={`mailto:${creative.publicEmail}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={classes.email}
-            >
-              <Typography className={classes.email}>
-                {`${creative.publicEmail}`}{' '}
-              </Typography>
-            </a>
-          )}
-        </Column>
-      </Row>
-      {creative.summary && <div className={classes.divider}></div>}
-      {creative.summary && (
-        <Typography align="center" className={classes.summary}>
-          {nameShortener(creative.summary ? creative.summary : '', 60)}
-        </Typography>
-      )}
-      <div className={classes.divider}></div>
-      <Column a="center" p="0 0 10px 0">
-        <Column w={'100%'}>
-          <Row j="space-between" w="100%">
-            <Row j="flex-start" w={160}>
+            {images.length > 0 &&
+              images.map((image, index) => {
+                if (index > 4) return null;
+                return (
+                  <div
+                    className={classes.imageThumb}
+                    style={{
+                      backgroundImage: `url(${imageOptimiser(image.img)})`,
+                    }}
+                    onMouseEnter={() => setPreviewImage(image.img)}
+                    onClick={() => {
+                      setPreviewImage(image.img);
+                      setLarge(image.img);
+                    }}
+                  ></div>
+                );
+              })}
+          </Row>
+          <Row>
+            <ProfileImg creative={creative} />
+            <Column a="flex-start">
               <a
                 href={`${process.env.REACT_APP_URL}/user-profile/${creative._id}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={classes.social}
+                style={{ textDecoration: 'none', color: '#222', width: '100%' }}
               >
-                <img
-                  src={dmDevice}
-                  className={classes.socialImg}
-                  alt="Doodle Meeple"
-                />
+                <Typography
+                  style={{ fontWeight: 'bold', textDecoration: 'underline' }}
+                >
+                  {creative.name}
+                </Typography>
               </a>
-              {linkedIn && (
+              <Typography className={classes.types}>
+                {creative.sections.map(
+                  (section, index) => `${index > 0 ? ', ' : ''} ${section.type}`
+                )}
+              </Typography>
+              {creative.publicEmail && (
                 <a
-                  href={`${
-                    linkedIn.indexOf('linkedin.com/') === -1
-                      ? `https://www.linkedin.com/${linkedIn}`
-                      : linkedIn
-                  }`}
+                  href={`mailto:${creative.publicEmail}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={classes.social}
+                  className={classes.email}
                 >
-                  <img
-                    src={socials.socialLinkedIn}
-                    className={classes.socialImg}
-                    alt="LinkedIn"
-                  />
+                  <Typography className={classes.email}>
+                    {`${creative.publicEmail}`}{' '}
+                  </Typography>
                 </a>
               )}
-              {facebook && (
-                <a
-                  href={`${
-                    facebook.indexOf('facebook.com/') === -1
-                      ? `https://www.facebook.com/${facebook}`
-                      : facebook
-                  }`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={classes.social}
-                >
-                  <img
-                    src={socials.socialFacebook}
-                    className={classes.socialImg}
-                    alt="Facebook"
-                  />
-                </a>
-              )}
-              {twitter && (
-                <a
-                  href={`${
-                    twitter.indexOf('twitter.com/') === -1
-                      ? `https://www.twitter.com/${twitter}`
-                      : twitter
-                  }`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={classes.social}
-                >
-                  <img
-                    src={socials.socialTwitter}
-                    className={classes.socialImg}
-                    alt="Twitter"
-                  />
-                </a>
-              )}
-              {instagram && (
-                <a
-                  href={`${
-                    instagram.indexOf('instagram.com/') === -1
-                      ? `https://www.instagram.com/${instagram}`
-                      : instagram
-                  }`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={classes.social}
-                >
-                  <img
-                    src={socials.socialInstagram}
-                    className={classes.socialImg}
-                    alt="Instagram"
-                  />
-                </a>
-              )}
-            </Row>
-
-            {creative.website && (
-              <a
-                href={`${
-                  creative.website.indexOf('http') === -1
-                    ? `https://${creative.website}`
-                    : creative.website
-                }`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={classes.website}
-              >
-                <Typography className={classes.website}>Website</Typography>
-              </a>
-            )}
+            </Column>
           </Row>
-        </Column>
-        {history && (
-          <IconButton
-            title="Hire on DoodleMeeple"
-            color="text-dark"
-            icon=""
-            iconPos="right"
-            onClickEvent={() =>
-              history.push(`/app/new-job-post/${creative._id}`)
-            }
-            styleOverride={{
-              width: '100%',
-              borderRadius: 0,
-              borderTop: '1px solid #eee',
-              margin: 0,
-              justifyContent: 'center',
-            }}
-          />
-        )}
-      </Column>
-    </div>
+          {creative.summary && <div className={classes.divider}></div>}
+          {creative.summary && (
+            <Typography align="center" className={classes.summary}>
+              {nameShortener(creative.summary ? creative.summary : '', 60)}
+            </Typography>
+          )}
+          <div className={classes.divider}></div>
+          <Column a="center" p="0 0 10px 0">
+            <Column w={'100%'}>
+              <Row j="space-between" w="100%">
+                <Row j="flex-start" w={160}>
+                  <a
+                    href={`${process.env.REACT_APP_URL}/user-profile/${creative._id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={classes.social}
+                  >
+                    <img
+                      src={dmDevice}
+                      className={classes.socialImg}
+                      alt="Doodle Meeple"
+                    />
+                  </a>
+                  {linkedIn && (
+                    <a
+                      href={`${
+                        linkedIn.indexOf('linkedin.com/') === -1
+                          ? `https://www.linkedin.com/${linkedIn}`
+                          : linkedIn
+                      }`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={classes.social}
+                    >
+                      <img
+                        src={socials.socialLinkedIn}
+                        className={classes.socialImg}
+                        alt="LinkedIn"
+                      />
+                    </a>
+                  )}
+                  {facebook && (
+                    <a
+                      href={`${
+                        facebook.indexOf('facebook.com/') === -1
+                          ? `https://www.facebook.com/${facebook}`
+                          : facebook
+                      }`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={classes.social}
+                    >
+                      <img
+                        src={socials.socialFacebook}
+                        className={classes.socialImg}
+                        alt="Facebook"
+                      />
+                    </a>
+                  )}
+                  {twitter && (
+                    <a
+                      href={`${
+                        twitter.indexOf('twitter.com/') === -1
+                          ? `https://www.twitter.com/${twitter}`
+                          : twitter
+                      }`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={classes.social}
+                    >
+                      <img
+                        src={socials.socialTwitter}
+                        className={classes.socialImg}
+                        alt="Twitter"
+                      />
+                    </a>
+                  )}
+                  {instagram && (
+                    <a
+                      href={`${
+                        instagram.indexOf('instagram.com/') === -1
+                          ? `https://www.instagram.com/${instagram}`
+                          : instagram
+                      }`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={classes.social}
+                    >
+                      <img
+                        src={socials.socialInstagram}
+                        className={classes.socialImg}
+                        alt="Instagram"
+                      />
+                    </a>
+                  )}
+                </Row>
+
+                {creative.website && (
+                  <a
+                    href={`${
+                      creative.website.indexOf('http') === -1
+                        ? `https://${creative.website}`
+                        : creative.website
+                    }`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={classes.website}
+                  >
+                    <Typography className={classes.website}>Website</Typography>
+                  </a>
+                )}
+              </Row>
+            </Column>
+            {history && (
+              <IconButton
+                title="Hire on DoodleMeeple"
+                color="text-dark"
+                icon=""
+                iconPos="right"
+                onClickEvent={() =>
+                  history.push(`/app/new-job-post/${creative._id}`)
+                }
+                styleOverride={{
+                  width: '100%',
+                  borderRadius: 0,
+                  borderTop: '1px solid #eee',
+                  margin: 0,
+                  justifyContent: 'center',
+                }}
+              />
+            )}
+          </Column>
+        </div>
+      )}
+    </HistoryContext.Consumer>
   );
 }

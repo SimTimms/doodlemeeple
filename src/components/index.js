@@ -47,6 +47,7 @@ import MenuButton from './buttons/menuButton';
 import CreateQuoteButton from './buttons/createQuote';
 import MenuButtonShortcut from './buttons/menuButtonShortcut';
 import MenuButtonStandard from './buttons/menuButtonStandard';
+import MenuButtonStandardText from './buttons/menuButtonStandardText';
 import MenuButtonMulti from './buttons/menuButtonMulti';
 import MenuButtonTab from './buttons/menuButtonTab';
 import TopMenuButton from './buttons/topMenuButton';
@@ -135,6 +136,7 @@ import {
 } from './blocks';
 
 export {
+  MenuButtonStandardText,
   ContentScroll,
   MainWrapper,
   GridCard,

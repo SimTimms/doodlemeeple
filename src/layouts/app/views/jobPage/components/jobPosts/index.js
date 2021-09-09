@@ -30,15 +30,17 @@ export default function JobPosts() {
               </Typography>
             </Column>
           ) : (
-            <Grid cols={1}>
-              {data.jobsByUser.map((job, index) => {
-                return (
-                  job.submitted && (
-                    <JobComponent key={`project_${index}`} job={job} />
-                  )
-                );
-              })}
-            </Grid>
+            <Column w={500}>
+              <Grid cols={1}>
+                {data.jobsByUser.map((job, index) => {
+                  return (
+                    job.submitted && (
+                      <JobComponent key={`project_${index}`} job={job} />
+                    )
+                  );
+                })}
+              </Grid>
+            </Column>
           )
         ) : null;
       }}

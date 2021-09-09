@@ -13,7 +13,7 @@ import { Section3, Section6, Section7, Section8 } from '../components/pageOne';
 import { unlock } from '../unlock';
 import { HistoryContext, MenuContext } from '../../../context';
 
-export default function Tab4({ job, setJob, locked, setTab }) {
+export default function Tab4({ job, setJob, locked, setTab, savedUserId }) {
   return (
     <Mutation
       mutation={UPDATE_JOB}
@@ -34,7 +34,9 @@ export default function Tab4({ job, setJob, locked, setTab }) {
                     title=""
                     subTitle="Add more optional details"
                     onClickEvent={() =>
-                      !job.isPublic
+                      savedUserId
+                        ? setTab(7)
+                        : !job.isPublic
                         ? setTab(5)
                         : menu.updateMenuContext({
                             ...menu,

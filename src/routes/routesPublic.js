@@ -16,6 +16,12 @@ export default function PublicRoutes({ theme, props: { ...props } }) {
   return (
     <Switch>
       <Route
+        path="/user-profile/:pathParam"
+        render={(props) => (
+          <PreviewLayout {...props} theme={theme} publicView={true} />
+        )}
+      />
+      <Route
         path="/featured-creative-widget"
         render={(props) => <FeaturedCreativeWidget />}
       />

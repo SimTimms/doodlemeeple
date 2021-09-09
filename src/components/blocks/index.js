@@ -67,6 +67,8 @@ export function Column(props) {
         [classes.desktop]: true,
         [classes.mobile]: mobile,
         [classAdd]: classAdd,
+        [classes.primaryBack]: background === 'primary',
+        [classes.secondaryBack]: background === 'secondary',
       })}
       onClick={onClickEvent ? onClickEvent : null}
     >
@@ -200,5 +202,5 @@ export function TopMenuWrapper(props) {
 export function PrimaryMenuWrapper({ children }) {
   const classes = useStyles();
 
-  return <div className={classes.PrimaryMenuWrapper}>{children}</div>;
+  return <div className={classes.primaryMenuWrapper}>{children}</div>;
 }

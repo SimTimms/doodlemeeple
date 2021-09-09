@@ -8,7 +8,9 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.primary.dark,
     boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
   },
-  PrimaryMenuWrapper: {
+  primaryBack: { background: theme.palette.primary.main },
+  secondaryBack: { background: theme.palette.secondary.main },
+  primaryMenuWrapper: {
     display: 'flex',
     width: '100%',
     flexDirection: 'row',
