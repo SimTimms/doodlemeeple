@@ -10,7 +10,7 @@ export default function WorkDashboard() {
       {(menu) => (
         <Query
           query={JOB_CREATIVE}
-          variables={{ jobId: menu.jobPage.jobId }}
+          variables={{ jobId: menu.workPage.jobId }}
           fetchPolicy="network-only"
         >
           {({ data }) => {
