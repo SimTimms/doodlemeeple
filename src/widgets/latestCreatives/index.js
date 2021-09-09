@@ -34,7 +34,6 @@ export default function LatestCreativesWidget({ ...props }) {
                 <ProfileCardMacro
                   creative={creative}
                   key={`creative_${index}`}
-                  setLarge={setLarge}
                 />
               );
             });

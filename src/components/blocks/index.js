@@ -14,7 +14,7 @@ export function Grid({ cols, ...props }) {
         [classes.grid]: true,
       })}
       style={{
-        gridTemplateColumns: `repeat(${mobile ? 1 : desktop ? 5 : cols}, 1fr)`,
+        gridTemplateColumns: `repeat(${mobile ? 1 : desktop ? 6 : cols}, 1fr)`,
       }}
     >
       {props.children}
