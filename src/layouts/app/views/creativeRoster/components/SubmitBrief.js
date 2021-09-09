@@ -29,7 +29,15 @@ export default function SubmitBrief({ job, history, inviteList }) {
         jobId: job._id,
       }}
       onCompleted={() => {
-        history.push('/app/submitted');
+        menu.updateMenuContext({
+          ...menu,
+          jobPage: {
+            ...menu.jobPage,
+            primaryPage: 'job_posts',
+            secondaryPage: 'job_ads_secondary',
+            jobId: null,
+          },
+        });
       }}
     >
       {(mutation) => {
