@@ -7,12 +7,15 @@ import clsx from 'clsx';
 export function Grid({ cols, ...props }) {
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:900px)');
+  const desktop = useMediaQuery('(min-width:1600px)');
   return (
     <div
       className={clsx({
         [classes.grid]: true,
       })}
-      style={{ gridTemplateColumns: `repeat(${mobile ? 1 : cols}, 1fr)` }}
+      style={{
+        gridTemplateColumns: `repeat(${mobile ? 1 : desktop ? 5 : cols}, 1fr)`,
+      }}
     >
       {props.children}
     </div>
