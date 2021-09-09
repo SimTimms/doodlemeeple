@@ -18,7 +18,7 @@ export default function InviteDashboard({ history }) {
               <InviteListPage history={history} menu={menu} />
             )}
             {menu.workPage.secondaryPage === 'view_invite' && (
-              <JobDescriptionWidget jobId={menu.jobPage.jobId} />
+              <JobDescriptionWidget jobId={menu.workPage.jobId} />
             )}
           </div>
         </Slide>
