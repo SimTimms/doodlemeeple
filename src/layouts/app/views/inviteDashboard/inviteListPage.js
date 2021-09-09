@@ -22,10 +22,13 @@ export default function InviteListPage({ history, menu }) {
                     invite={invite}
                     onClickEvent={() =>
                       menu.updateMenuContext({
-                        ...menu.jobPage,
-                        secondaryPage: 'view_invite',
-                        inviteId: invite._id,
-                        jobId: invite.job._id,
+                        ...menu,
+                        workPage: {
+                          ...menu.workPage,
+                          secondaryPage: 'view_invite',
+                          inviteId: invite._id,
+                          jobId: invite.job._id,
+                        },
                       })
                     }
                   />
