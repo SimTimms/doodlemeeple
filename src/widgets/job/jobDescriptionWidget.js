@@ -119,8 +119,12 @@ export default function JobDescriptionWidget({ jobId }) {
                                                     }}
                                                     onCompleted={() => {
                                                       menu.updateMenuContext({
-                                                        ...menu.jobPage,
-                                                        primaryPage: 'history',
+                                                        ...menu,
+                                                        workPage: {
+                                                          ...menu.workPage,
+                                                          primaryPage:
+                                                            'history',
+                                                        },
                                                       });
                                                     }}
                                                     onError={() => {}}
