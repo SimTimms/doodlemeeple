@@ -6,14 +6,14 @@ import {
   CardComponent,
 } from '../../../../components';
 import { useStyles } from './styles';
-import { HistoryContext } from '../../../../context';
+import { MenuContext } from '../../../../context';
 
 export default function NoInvite() {
   const classes = useStyles();
 
   return (
-    <HistoryContext>
-      {(history) => {
+    <MenuContext.Consumer>
+      {(menu) => {
         return (
           <Column>
             <CardComponent p={10} styleOverride={{ width: 400, marginTop: 10 }}>
@@ -36,7 +36,7 @@ export default function NoInvite() {
                 <MenuButtonStandard
                   title="Profile"
                   onClickEvent={() => {
-                    history.push('/app/account');
+                    menu.updateMenuContext({ ...menu, primaryPage: 'account' });
                   }}
                 />
               </Column>
@@ -44,6 +44,6 @@ export default function NoInvite() {
           </Column>
         );
       }}
-    </HistoryContext>
+    </MenuContext.Consumer>
   );
 }
