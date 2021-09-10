@@ -12,6 +12,7 @@ import {
 import { Mutation } from 'react-apollo';
 import { UPDATE_INVITE } from '../../data/mutations';
 import { nameShortener } from '../../utils';
+import { timeDifferenceForDate } from '../../utils/dates';
 import { JobDescriptionWidget } from '../../widgets';
 
 export default function InviteComponent({ invite, onClickEvent }) {
@@ -60,12 +61,17 @@ export default function InviteComponent({ invite, onClickEvent }) {
                     className={classes.profileThumb}
                   ></div>
                   <Column a="flex-start">
-                    <Typography style={{ fontSize: 12 }}>
-                      {`Invite from ${invite.sender.name} for ${nameShortener(
-                        invite.job.name,
-                        30
-                      )}`}
-                    </Typography>
+                    <Row j="space-between">
+                      <Typography style={{ fontSize: 12 }}>
+                        {`Invite from ${invite.sender.name} for ${nameShortener(
+                          invite.job.name,
+                          30
+                        )}`}
+                      </Typography>
+                      <Typography style={{ fontSize: 12, marginRight: 10 }}>
+                        {timeDifferenceForDate(invite.createdAt)}
+                      </Typography>
+                    </Row>
                     <StatusBadge
                       status={
                         draft

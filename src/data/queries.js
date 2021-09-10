@@ -205,6 +205,7 @@ export const INVITES = gql`
   query GetInvites($status: [String]) {
     invitesByUser(status: $status) {
       status
+      createdAt
       messages
       _id
       receiver {
