@@ -95,8 +95,8 @@ export default function MyPostForm({ ...props }) {
                 />
                 <ProfileContext.Consumer>
                   {(profile) =>
-                    profile.email === 'tim-simms@hotmail.com' ||
-                    (profile.email === 'jamie@doodlemeeple.com' && (
+                    (profile.email === 'tim-simms@hotmail.com' ||
+                      profile.email === 'jamie@doodlemeeple.com') && (
                       <FieldBox
                         value={myPost.tags ? myPost.tags[0] : ''}
                         title="Tag"
@@ -115,7 +115,7 @@ export default function MyPostForm({ ...props }) {
                         size="s"
                         multiline={false}
                       />
-                    ))
+                    )
                   }
                 </ProfileContext.Consumer>
                 <FieldBox
