@@ -56,6 +56,7 @@ export const MY_POSTS_WIDGET = gql`
       featuredImage
       showreel
       url
+      tags
       user {
         _id
         name

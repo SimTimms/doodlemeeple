@@ -10,6 +10,7 @@ import {
   HrefLink,
   DividerMini,
   MenuButtonStandard,
+  StatusBadge,
 } from '../../../components';
 import { timeDifferenceForDate } from '../../../utils/dates';
 import { Mutation } from 'react-apollo';
@@ -68,15 +69,20 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
             <Typography style={{ fontSize: '0.8rem' }}>
               {timeDifferenceForDate(myPost.createdAt)}
             </Typography>
-            <Typography
-              style={{
-                fontWeight: 'bold',
-                fontSize: 16,
-                marginTop: 5,
-              }}
-            >
-              {myPost.name}
-            </Typography>
+            <Row j="space-between">
+              <Typography
+                style={{
+                  fontWeight: 'bold',
+                  fontSize: 16,
+                  marginTop: 5,
+                }}
+              >
+                {myPost.name}
+              </Typography>
+              {myPost.tags.map((tag) => (
+                <StatusBadge status={tag} />
+              ))}
+            </Row>
             {myPost.featuredImage && (
               <Column w="100%">
                 <DividerMini />
