@@ -19,6 +19,7 @@ export const MY_POST_BY_ID = gql`
       url
       approved
       showreel
+      tags
     }
   }
 `;
@@ -89,6 +90,7 @@ export const CREATE_MY_POST = gql`
     $showreel: String
     $type: String
     $game: MongoID
+    $tags: [String]
   ) {
     myPostCreateOne(
       record: {
@@ -99,6 +101,7 @@ export const CREATE_MY_POST = gql`
         showreel: $showreel
         type: $type
         game: $game
+        tags: $tags
       }
     ) {
       recordId
@@ -127,6 +130,7 @@ export const UPDATE_MY_POST = gql`
     $approved: Boolean
     $type: String
     $game: MongoID
+    $tags: [String]
   ) {
     myPostUpdateById(
       record: {
@@ -139,6 +143,7 @@ export const UPDATE_MY_POST = gql`
         approved: $approved
         type: $type
         game: $game
+        tags: $tags
       }
     ) {
       recordId

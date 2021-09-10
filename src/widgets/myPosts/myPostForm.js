@@ -12,7 +12,7 @@ import {
 import { Mutation, Query } from 'react-apollo';
 import { CREATE_MY_POST, REMOVE_MY_POST, MY_POST_BY_ID } from './data';
 import { toaster } from '../../utils/toaster';
-import { MenuContext } from '../../context';
+import { MenuContext, ProfileContext } from '../../context';
 import PostToBoard from './postToBoard';
 import Update from './update';
 
@@ -75,7 +75,6 @@ export default function MyPostForm({ ...props }) {
                     imageCategory="myPost"
                   />
                 </div>
-
                 <FieldBox
                   value={myPost.name}
                   title="Post Header"
@@ -94,6 +93,31 @@ export default function MyPostForm({ ...props }) {
                   size="s"
                   multiline={false}
                 />
+                <ProfileContext.Consumer>
+                  {(profile) =>
+                    profile.email === 'tim-simms@hotmail.com' ||
+                    (profile.email === 'jamie@doodlemeeple.com' && (
+                      <FieldBox
+                        value={myPost.tags ? myPost.tags[0] : ''}
+                        title="Tag"
+                        maxLength={26}
+                        minLength={5}
+                        onChangeEvent={(e) => {
+                          setMyPost({
+                            ...myPost,
+                            tags: [e],
+                          });
+                        }}
+                        replaceMode="loose"
+                        placeholder="Example: How To"
+                        info="Add a Tag?"
+                        warning=""
+                        size="s"
+                        multiline={false}
+                      />
+                    ))
+                  }
+                </ProfileContext.Consumer>
                 <FieldBox
                   value={myPost.summary}
                   title="Content"
