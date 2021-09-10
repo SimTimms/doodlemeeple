@@ -13,6 +13,7 @@ export default function Tab2({ job, setJob, setTab, locked, savedUserId }) {
       mutation={UPDATE_JOB}
       variables={{
         ...job,
+        inviteList: [savedUserId ? savedUserId : job.inviteList],
       }}
       onCompleted={() => {
         toaster('Saved');
