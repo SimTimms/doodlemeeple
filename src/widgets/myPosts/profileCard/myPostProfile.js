@@ -79,9 +79,8 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
               >
                 {myPost.name}
               </Typography>
-              {myPost.tags.map((tag) => (
-                <StatusBadge status={tag} />
-              ))}
+              {myPost.tags &&
+                myPost.tags.map((tag) => <StatusBadge status={tag} />)}
             </Row>
             {myPost.featuredImage && (
               <Column w="100%">
