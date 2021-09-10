@@ -28,7 +28,7 @@ export const GAME_POSTS_WIDGET = gql`
   query myPostMany($gameId: MongoID) {
     myPostMany(
       filter: { game: $gameId }
-      limit: 5
+      limit: 12
       sort: CREATEDAT__UPDATEDAT_DESC
     ) {
       _id
