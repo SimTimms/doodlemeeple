@@ -2,10 +2,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   column: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: 200,
     background: theme.palette.primary.dark,
     height: '100vh',
     zIndex: 2,
   },
+  row: { flexDirection: 'row', width: '100%' },
   columnActive: {
     background: theme.palette.primary.main,
     height: '100vh',

@@ -12,4 +12,5 @@ export const useStyles = makeStyles((theme) => ({
     height: '100vh',
     overflow: 'hidden ',
   },
+  row: { flexDirection: 'column' },
 }));

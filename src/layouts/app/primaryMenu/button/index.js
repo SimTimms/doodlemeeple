@@ -2,16 +2,22 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Row } from '../../../../components';
 import { Icon, Typography } from '@material-ui/core';
+import clsx from 'clsx';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 export default function Button({ menuItem, isActive }) {
   const { name, icon, link, image, count } = menuItem;
   const classes = useStyles();
+  const mobile = useMediaQuery('(max-width:900px)');
   return (
-    <Row
-      w="100%"
-      className={`${classes.cursor} ${isActive && classes.cursorActive}`}
-      onClickEvent={link}
-      j="flex-start"
+    <div
+      className={clsx({
+        [classes.row]: true,
+        [classes.cursor]: true,
+        [classes.cursorActive]: isActive,
+        [classes.column]: mobile,
+      })}
+      onClick={() => link()}
     >
       {image ? (
         <img className={`${classes.icon} ${classes.iconImage}`} src={image} />
@@ -24,6 +30,6 @@ export default function Button({ menuItem, isActive }) {
           <Typography>{count && count.count}</Typography>
         </div>
       )}
-    </Row>
+    </div>
   );
 }

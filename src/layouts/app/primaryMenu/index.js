@@ -1,12 +1,14 @@
 import React from 'react';
-import { Column } from '../../../components';
 import Button from './button';
 import { useStyles } from './styles';
 import dmDevice from '../../../assets/dmDevice.png';
 import { HistoryContext, CountContext, MenuContext } from '../../../context';
+import clsx from 'clsx';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 export default function PrimaryMenu({ mainMenu, publicPage }) {
   const classes = useStyles();
+  const mobile = useMediaQuery('(max-width:900px)');
 
   return (
     <HistoryContext.Consumer>
@@ -16,11 +18,11 @@ export default function PrimaryMenu({ mainMenu, publicPage }) {
             <MenuContext.Consumer>
               {(menuContext) => {
                 return (
-                  <Column
-                    j="flex-start"
-                    a="flex-start"
-                    w={200}
-                    classAdd={classes.column}
+                  <div
+                    className={clsx({
+                      [classes.column]: true,
+                      [classes.row]: mobile,
+                    })}
                   >
                     <div className={classes.deviceWrapper}>
                       <img src={dmDevice} className={classes.device} />
@@ -37,7 +39,7 @@ export default function PrimaryMenu({ mainMenu, publicPage }) {
                         />
                       );
                     })}
-                  </Column>
+                  </div>
                 );
               }}
             </MenuContext.Consumer>

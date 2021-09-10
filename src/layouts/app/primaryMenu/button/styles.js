@@ -1,6 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
+  row: { display: 'flex', alignItems: 'center', width: '100%' },
+  column: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
   title: { fontSize: '1rem' },
   icon: {
     padding: 4,

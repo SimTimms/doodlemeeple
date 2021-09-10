@@ -10,4 +10,5 @@ export const useStyles = makeStyles((theme) => ({
     width: 'calc(100vw - 200px)',
     height: '100vh',
   },
+  row: { width: '100%' },
 }));
