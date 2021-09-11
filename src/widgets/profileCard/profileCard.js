@@ -11,7 +11,7 @@ import { PROFILE_IMAGES } from './data';
 import imageOptimiser from '../../utils/imageOptimiser';
 import { nameShortener } from '../../utils';
 import { HistoryContext } from '../../context';
-
+import { timeDifferenceForDate } from '../../utils/dates';
 export default function ProfileCard({ creative, setLarge }) {
   const classes = useStyles();
 
@@ -106,7 +106,9 @@ export default function ProfileCard({ creative, setLarge }) {
                 )}
               </Typography>
               <Typography className={classes.types}>
-                {creative.lastOn}
+                {creative.lastOn
+                  ? `Last on ${timeDifferenceForDate(creative.lastOn)}`
+                  : `Hasn't logged in recently`}
               </Typography>
             </Column>
           </Row>
