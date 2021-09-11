@@ -5,7 +5,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 export default function MainWrapper(props) {
   const classes = useStyles();
-  const mobile = useMediaQuery('(max-width:900px)');
+  const mobile = useMediaQuery('(max-width:600px)');
 
   return (
     <div

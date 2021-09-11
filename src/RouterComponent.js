@@ -32,7 +32,7 @@ function RouterComponent(props) {
     link: authLink.concat(httpLink),
     cache: new InMemoryCache({ addTypename: false }),
   });
-  console.log(props.match.params);
+
   const [pageValues, setPageValues] = React.useState({
     primaryPage: 'home',
     publicPage: 'profile',

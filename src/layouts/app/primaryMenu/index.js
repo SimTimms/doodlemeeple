@@ -13,7 +13,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 export default function PrimaryMenu({ mainMenu, publicPage }) {
   const classes = useStyles();
-  const mobile = useMediaQuery('(max-width:900px)');
+  const mobile = useMediaQuery('(max-width:600px)');
 
   return (
     <HistoryContext.Consumer>

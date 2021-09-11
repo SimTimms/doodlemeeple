@@ -8,7 +8,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 export default function Button({ menuItem, isActive }) {
   const { name, icon, link, image, count } = menuItem;
   const classes = useStyles();
-  const mobile = useMediaQuery('(max-width:900px)');
+  const mobile = useMediaQuery('(max-width:600px)');
   return (
     <div
       className={clsx({
