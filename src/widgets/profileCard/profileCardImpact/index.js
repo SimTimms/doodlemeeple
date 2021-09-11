@@ -9,7 +9,7 @@ import { PROFILE_IMAGES } from '../data';
 import imageOptimiser from '../../../utils/imageOptimiser';
 import { timeDifferenceForDate } from '../../../utils/dates';
 import { MenuContext } from '../../../context';
-
+import { randomKey } from '../../../utils';
 export default function ProfileCardImpact({ creative, setLarge }) {
   const classes = useStyles();
 
@@ -68,6 +68,7 @@ export default function ProfileCardImpact({ creative, setLarge }) {
                     setPreviewImage(image.img);
                     setLarge(image.img);
                   }}
+                  key={randomKey()}
                 ></div>
               );
             })}

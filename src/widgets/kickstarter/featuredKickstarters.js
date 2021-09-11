@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 import { FEATURED_KICKSTARTER_WIDGET } from './data';
 import { KickstarterProfile } from './profileCard';
 import { Grid, Divider } from '../../components';
-
+import { randomKey } from '../../utils';
 export default function FeaturedKickstarters() {
   return (
     <Grid cols={3}>
@@ -11,7 +11,7 @@ export default function FeaturedKickstarters() {
         {({ data }) => {
           if (data)
             return data.featuredKickstarterWidget.map((kickstarter) => (
-              <KickstarterProfile kickstarter={kickstarter} />
+              <KickstarterProfile kickstarter={kickstarter} key={randomKey()} />
             ));
           return null;
         }}

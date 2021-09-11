@@ -9,6 +9,7 @@ import {
   MenuButtonSecondary,
 } from '../';
 import clsx from 'clsx';
+import { randomKey } from '../../utils';
 
 export default function TabPage({
   title,
@@ -39,6 +40,7 @@ export default function TabPage({
                 active={activePrimary === menuItem.machineName ? true : false}
                 column={true}
                 disabled={menuItem.disabled}
+                key={randomKey()}
               />
             );
           })}
@@ -57,6 +59,7 @@ export default function TabPage({
                     activeSecondary === menuItem.machineName ? true : false
                   }
                   disabled={menuItem.disabled}
+                  key={randomKey()}
                 />
               );
             })}

@@ -4,6 +4,7 @@ import { FEATURED_CREATIVES_WIDGET } from './data';
 import { ProfileCardImpact } from '../profileCard/';
 import BigImage from '../bigImage';
 import { Grid } from '../../components';
+import { randomKey } from '../../utils';
 
 export default function FeaturedCreativeHomeWidget() {
   const [creativeArray, setCreativeArray] = React.useState([]);
@@ -26,6 +27,7 @@ export default function FeaturedCreativeHomeWidget() {
                 creative={creative}
                 key={`creative_${index}`}
                 setLarge={setLarge}
+                key={randomKey()}
               />
             );
           });
