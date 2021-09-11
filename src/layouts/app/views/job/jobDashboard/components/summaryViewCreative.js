@@ -48,7 +48,7 @@ export default function SummaryViewCreative({ job, history, menu }) {
               declined={
                 invite && invite.data && invite.data.status === 'declined'
               }
-              invite={invite&&invite.data?null}
+              invite={invite ? invite.data : null}
               setTabNbr={setTabNbr}
               job={job}
               history={history}
