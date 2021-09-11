@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-export default function mainMenu(history, counts, mainMenuContext) {
+export default function mainMenu(history, counts, mainMenuContext, profile) {
   return [
     {
       name: 'Home',
@@ -85,6 +85,19 @@ export default function mainMenu(history, counts, mainMenuContext) {
           homePage: { ...mainMenuContext.homePage },
         }),
       count: null,
+    },
+    profile.email === 'tim-simms@hotmail.com' && {
+      name: 'Stats',
+      icon: 'stats',
+      machineName: 'stats',
+      link: () =>
+        mainMenuContext.updateMenuContext({
+          primaryPage: 'stats',
+          jobPage: { ...mainMenuContext.jobPage },
+          workPage: { ...mainMenuContext.workPage },
+          homePage: { ...mainMenuContext.homePage },
+        }),
+      count: { icon: 'star', count: counts.work },
     },
   ];
 }

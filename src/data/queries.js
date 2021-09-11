@@ -541,7 +541,7 @@ export const PROFILE = gql`
 
 export const PROFILE_PREVIEW = gql`
   query ProfilePreview($userId: MongoID!) {
-    userById(_id: $userId) {
+    userByIdWithTracker(_id: $userId) {
       _id
       name
       summary

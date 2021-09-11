@@ -46,12 +46,13 @@ export default function FullProfileCard({ creativeId }) {
             query={PROFILE_PREVIEW}
             variables={{ userId: creativeId }}
             onCompleted={(data) =>
-              !previewImage && setPreviewImage(data.userById.profileBG)
+              !previewImage &&
+              setPreviewImage(data.userByIdWithTracker.profileBG)
             }
           >
             {({ loading, data }) => {
               if (!data) return null;
-              const creative = data.userById;
+              const creative = data.userByIdWithTracker;
 
               return (
                 <Column>

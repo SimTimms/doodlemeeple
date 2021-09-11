@@ -40,6 +40,7 @@ import Cookies from 'js-cookie';
 import PrimaryMenu from './primaryMenu';
 import { mainMenu } from '../menuArray';
 import { MainWrapper, ContentScroll } from '../../components';
+import Stats from './stats';
 
 export default function AppLayout(props) {
   const { history } = props;
@@ -108,7 +109,13 @@ export default function AppLayout(props) {
                     <ToastContainer />
                     <PrimaryMenu mainMenu={mainMenu} />
                     <ContentScroll>
-                      {menuContext.primaryPage === 'dashboard' && profile ? (
+                      {menuContext.primaryPage === 'stats' && profile ? (
+                        <Stats
+                          history={history}
+                          profile={profile}
+                          setProfile={setProfile}
+                        />
+                      ) : menuContext.primaryPage === 'dashboard' && profile ? (
                         <AppDashboard
                           history={history}
                           profile={profile}
