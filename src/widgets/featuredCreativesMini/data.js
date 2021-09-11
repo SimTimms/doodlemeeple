@@ -5,6 +5,7 @@ export const FEATURED_CREATIVES_WIDGET = gql`
     featuredCreativesWidget {
       _id
       name
+      lastOn
       summary
       profileBG
       profileImg

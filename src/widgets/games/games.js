@@ -39,7 +39,8 @@ export default function Games() {
                         return (
                           <CardComponent type="dark">
                             <Typography>
-                              You haven't posted any games
+                              Use this space to post your games or your game
+                              concepts.
                             </Typography>
                           </CardComponent>
                         );

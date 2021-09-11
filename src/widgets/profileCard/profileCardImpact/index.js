@@ -7,6 +7,7 @@ import { BgImg, ProfileImg, Badges } from '../components';
 import { Row, Column, HrefLink } from '../../../components';
 import { PROFILE_IMAGES } from '../data';
 import imageOptimiser from '../../../utils/imageOptimiser';
+import { timeDifferenceForDate } from '../../../utils/dates';
 import { MenuContext } from '../../../context';
 
 export default function ProfileCardImpact({ creative, setLarge }) {
@@ -88,12 +89,11 @@ export default function ProfileCardImpact({ creative, setLarge }) {
                   (section, index) => `${index > 0 ? ', ' : ''} ${section.type}`
                 )}
               </Typography>
-              {creative.publicEmail && (
-                <HrefLink
-                  title={creative.publicEmail}
-                  url={`mailto:${creative.publicEmail}`}
-                />
-              )}
+              <Typography className={classes.types}>
+                {creative.lastOn
+                  ? `Last on ${timeDifferenceForDate(creative.lastOn)}`
+                  : `Hasn't logged in recently`}
+              </Typography>
             </Column>
           </Row>
         </div>

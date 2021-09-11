@@ -105,18 +105,9 @@ export default function ProfileCard({ creative, setLarge }) {
                   (section, index) => `${index > 0 ? ', ' : ''} ${section.type}`
                 )}
               </Typography>
-              {creative.publicEmail && (
-                <a
-                  href={`mailto:${creative.publicEmail}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={classes.email}
-                >
-                  <Typography className={classes.email}>
-                    {`${creative.publicEmail}`}{' '}
-                  </Typography>
-                </a>
-              )}
+              <Typography className={classes.types}>
+                {creative.lastOn}
+              </Typography>
             </Column>
           </Row>
           {creative.summary && <div className={classes.divider}></div>}

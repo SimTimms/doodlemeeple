@@ -486,6 +486,7 @@ export const PROFILE = gql`
       _id
       name
       summary
+      lastOn
       badges {
         badgeType
       }
