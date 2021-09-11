@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
@@ -7,14 +7,6 @@ import { Row, Column } from '../../components';
 
 export default function ProfileCardMacro({ creative }) {
   const classes = useStyles();
-
-  const [previewImage, setPreviewImage] = React.useState(null);
-  const [images, setImages] = React.useState([]);
-
-  useEffect(() => {
-    setPreviewImage(creative.profileBG);
-    setImages([{ img: creative.profileBG }]);
-  }, [creative]);
 
   return (
     <div

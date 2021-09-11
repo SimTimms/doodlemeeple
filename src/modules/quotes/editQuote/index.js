@@ -48,7 +48,7 @@ export default function EditQuote({ contractData }) {
       title={TITLES[fieldArray[field]]}
       subTitle={SUB_TITLES[fieldArray[field]]}
       onClickEvent={
-        field == 0
+        field === 0
           ? null
           : field < fieldArray.length - 1
           ? () => {

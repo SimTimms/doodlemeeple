@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Card } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import {
   Column,
   NoticeBoardSecondary,

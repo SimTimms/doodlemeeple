@@ -1,5 +1,4 @@
 import React from 'react';
-import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { FEATURED_CREATIVES_WIDGET } from './data';
 import { ProfileCardImpact } from '../profileCard/';
@@ -7,7 +6,6 @@ import BigImage from '../bigImage';
 import { Grid } from '../../components';
 
 export default function FeaturedCreativeHomeWidget() {
-  const classes = useStyles();
   const [creativeArray, setCreativeArray] = React.useState([]);
   const [large, setLarge] = React.useState(null);
 

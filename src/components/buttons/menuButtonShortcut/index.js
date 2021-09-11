@@ -20,7 +20,6 @@ export default function MenuButtonShortcut({ text, ...props }) {
     iconPos,
     styleOverride,
     disabled,
-    count,
   } = props;
   const isLeft = !iconPos || iconPos === 'left';
 

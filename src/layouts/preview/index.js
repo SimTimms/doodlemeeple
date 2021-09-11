@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { PreviewProfile } from './views/previewProfile';
 import { Content, MainWrapper, ContentScroll, TabPage } from '../../components';
 import PrimaryMenu from '../app/primaryMenu';

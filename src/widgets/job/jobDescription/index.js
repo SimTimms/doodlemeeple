@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import clsx from 'clsx';
 import { BgImg } from './components';
 import {
   Row,

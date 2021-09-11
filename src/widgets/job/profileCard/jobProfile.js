@@ -2,13 +2,7 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { BgImg } from './components';
-import {
-  Column,
-  Row,
-  CardComponent,
-  DividerWithBorder,
-  MenuButtonStandard,
-} from '../../../components';
+import { Column, Row, DividerWithBorder } from '../../../components';
 import { nameShortener } from '../../../utils';
 import Cookies from 'js-cookie';
 import PublicProfileButton from './components/publicProfileButton';

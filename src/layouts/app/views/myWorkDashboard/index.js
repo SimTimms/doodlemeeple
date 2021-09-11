@@ -1,5 +1,5 @@
 import React from 'react';
-import { Column, DividerMini } from '../../../../components';
+import { Column } from '../../../../components';
 import { useStyles } from './styles';
 import ActiveWork from './activeWork';
 

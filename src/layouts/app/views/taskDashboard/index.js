@@ -1,5 +1,5 @@
 import React from 'react';
-import { NoticeBoard, TaskComponent, TabPage } from '../../../../components';
+import { TaskComponent, TabPage } from '../../../../components';
 import { taskMenu } from '../../../menuArray';
 
 export default function TaskDashboard({

@@ -6,7 +6,6 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'pointer',
-    borderRadius: 2,
     background: '#7163b7;',
     boxShadow: '3px 3px 6px rgba(0,0,0,0.2)',
     padding: 5,

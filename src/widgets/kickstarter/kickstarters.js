@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 import { KICKSTARTER_WIDGET, MY_KICKSTARTERS } from './data';
 import { KickstarterProfile } from './profileCard';
 import { KickstarterForm } from './';
-import { Row, Grid, Column, Divider, CardComponent } from '../../components';
+import { Row, Grid, Column, CardComponent } from '../../components';
 import KickstarterComponent from './component';
 import { MenuContext } from '../../context';
 import { Typography } from '@material-ui/core';

@@ -1,9 +1,7 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
 import {
   Column,
   Widget,
-  Divider,
   CreatorComponentDash,
   ProjectComponentDash,
 } from '../../../../../../../components';

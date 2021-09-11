@@ -6,7 +6,6 @@ import {
   MessageComponent,
   LoadIcon,
   Column,
-  Divider,
   CardComponent,
 } from '../../../components';
 import Cookies from 'js-cookie';

@@ -1,13 +1,6 @@
 import React from 'react';
 import { useStyles } from '../styles';
-import {
-  IconButton,
-  BorderBox,
-  LoadIcon,
-  Meta,
-  Divider,
-  MenuButtonStandard,
-} from '../../../../../../components';
+import { MenuButtonStandard } from '../../../../../../components';
 import { Mutation } from 'react-apollo';
 import { toaster } from '../../../../../../utils/toaster';
 import { CLOSE_JOB } from '../../../../../../data/mutations';

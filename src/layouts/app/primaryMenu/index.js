@@ -33,7 +33,11 @@ export default function PrimaryMenu({ mainMenu, publicPage }) {
                           })}
                         >
                           <div className={classes.deviceWrapper}>
-                            <img src={dmDevice} className={classes.device} />
+                            <img
+                              src={dmDevice}
+                              className={classes.device}
+                              alt="DoodleMeeple Device"
+                            />
                           </div>
                           {mainMenu(history, counts, menuContext, profile).map(
                             (menuItem) => {

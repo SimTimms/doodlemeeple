@@ -1,5 +1,4 @@
 import React from 'react';
-import { Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import { CurrencySelector, Column, Row } from '../';
 import clsx from 'clsx';
@@ -31,7 +30,6 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
         >
           <InputLabel
             title={title}
-            icon={icon}
             value={value}
             maxLength={maxLength}
             minLength={minLength}

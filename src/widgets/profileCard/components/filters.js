@@ -1,5 +1,4 @@
 import React from 'react';
-import { Fade } from '@material-ui/core';
 import { useStyles } from './styles';
 import { LoadIcon, MenuButtonTab, Row } from '../../../components';
 import {
@@ -21,7 +20,6 @@ export default function Filters({
 }) {
   const classes = useStyles();
   const [loading] = React.useState(false);
-  const [filterStr, setFilterStr] = React.useState(null);
 
   return loading ? (
     <LoadIcon />

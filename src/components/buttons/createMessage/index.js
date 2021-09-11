@@ -3,7 +3,7 @@ import { TextField, Typography } from '@material-ui/core';
 import { Mutation } from 'react-apollo';
 import { CREATE_MESSAGE } from '../../../data/mutations';
 import { useStyles } from './styles';
-import { MenuButtonStandard, IconButton, Uploader, Row, Column } from '../../';
+import { IconButton, Uploader, Row, Column } from '../../';
 
 export default function CreateMessage({
   updateMessageArray,

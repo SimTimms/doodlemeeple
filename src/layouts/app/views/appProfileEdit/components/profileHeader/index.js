@@ -6,7 +6,6 @@ import {
   Uploader,
   ErrorBox,
   FieldBox,
-  FieldLabel,
   Row,
   Column,
 } from '../../../../../../components';

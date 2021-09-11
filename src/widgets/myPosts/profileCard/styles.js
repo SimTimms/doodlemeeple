@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   postCard: {
-    margin: 10,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TabPage } from '../../../../components';
 import { CountContext, MenuContext } from '../../../../context';
 import {

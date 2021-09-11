@@ -7,7 +7,6 @@ export default function Badges({ creative }) {
   return !creative.badges ? null : (
     <Row pl={5} mw={100} j="flex-end">
       {creative.badges.map((badge, index) => {
-        const hasPatreon = false;
         if (index > 3) {
           return null;
         }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { Column, IconButton } from '../';
+import { Column } from '../';
 
 export default function ProjectComponentDash({ jobName, jobSummary }) {
   return (

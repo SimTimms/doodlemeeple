@@ -1,6 +1,5 @@
 import React from 'react';
 import { useStyles } from './styles';
-import { Row } from '../../../../components';
 import { Icon, Typography } from '@material-ui/core';
 import clsx from 'clsx';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -20,7 +19,11 @@ export default function Button({ menuItem, isActive }) {
       onClick={() => link()}
     >
       {image ? (
-        <img className={`${classes.icon} ${classes.iconImage}`} src={image} />
+        <img
+          className={`${classes.icon} ${classes.iconImage}`}
+          src={image}
+          alt=""
+        />
       ) : (
         <Icon className={classes.icon}>{icon}</Icon>
       )}

@@ -21,7 +21,6 @@ import { toaster } from '../../../../utils/toaster';
 import autosave from '../../../../utils/autosave';
 import * as social from '../../../../assets/social';
 import SocialHeader from './socialHeader';
-import ContactHeader from './contactHeader';
 
 export default function TabProfile({
   profile,

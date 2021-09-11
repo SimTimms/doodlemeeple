@@ -37,7 +37,7 @@ export default function MyPostForm({ ...props }) {
       type: type ? type : 'public',
       game: type === 'game' ? objectId : null,
     });
-  }, [type, objectId]);
+  }, [type, objectId, myPost]);
 
   return (
     <MenuContext.Consumer>

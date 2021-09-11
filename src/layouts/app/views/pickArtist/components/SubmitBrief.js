@@ -5,7 +5,6 @@ import { SUBMIT_BRIEF } from '../../../../../data/mutations';
 import {
   MenuButtonStandard,
   Column,
-  Divider,
   DividerMini,
 } from '../../../../../components';
 import { MenuContext } from '../../../../../context';

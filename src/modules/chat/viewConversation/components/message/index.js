@@ -3,7 +3,6 @@ import { Typography, Card, useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 import { useStyles } from './styles';
 import { timeDifferenceForDate } from '../../../../../utils/dates';
-import { IconButton } from '../../../../../components';
 import Cookies from 'js-cookie';
 
 export function Message({ message }) {

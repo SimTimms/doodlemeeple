@@ -9,7 +9,6 @@ import { nameShortener } from '../../../utils';
 import Cookies from 'js-cookie';
 import PublicProfileButton from './components/publicProfileButton';
 import JobDescriptionButton from './components/jobDescriptionButton';
-import dmDevice from '../../../assets/dmDevice.png';
 
 export default function JobProfileMini({ job, history }) {
   const userId = Cookies.get('userId');

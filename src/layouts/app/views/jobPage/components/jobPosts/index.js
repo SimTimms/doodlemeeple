@@ -5,7 +5,6 @@ import {
   Column,
   LoadIcon,
   JobComponent,
-  Divider,
   Grid,
 } from '../../../../../../components';
 import { Typography } from '@material-ui/core';

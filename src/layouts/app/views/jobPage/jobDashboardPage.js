@@ -1,6 +1,6 @@
 import React from 'react';
 import JobDashboard from '../job/jobDashboard';
-import { MenuContext, HistoryContext } from '../../../../context';
+import { MenuContext } from '../../../../context';
 import { Query } from 'react-apollo';
 import { JOB } from '../../../../data/queries';
 import {

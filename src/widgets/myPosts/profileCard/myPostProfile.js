@@ -123,12 +123,6 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
 
             <DividerMini />
           </Column>
-          <a
-            href={myPost.url}
-            style={{ cursor: 'pointer', marginTop: 5 }}
-            target="_blank"
-            rel="noopener noreferrer"
-          ></a>
         </Column>
       </Row>
     </div>

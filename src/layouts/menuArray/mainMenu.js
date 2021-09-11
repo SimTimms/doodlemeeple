@@ -1,5 +1,3 @@
-import Cookies from 'js-cookie';
-
 export default function mainMenu(history, counts, mainMenuContext, profile) {
   return [
     {

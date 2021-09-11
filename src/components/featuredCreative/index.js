@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Fade } from '@material-ui/core';
 import { useStyles } from './styles';
-import { Column, IconButton, LoadIcon, Row } from '../';
+import { Column, LoadIcon, Row } from '../';
 import { Query } from 'react-apollo';
 import { PROFILE_FEATURED } from '../../data/queries';
 import { excerptReplace } from '../../utils/excerptReplace';

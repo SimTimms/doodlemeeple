@@ -3,7 +3,6 @@ import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
 import { MenuContext } from '../../../../context';
 import InviteListPage from './inviteListPage';
-import QuoteListPage from './quoteListPage';
 import { JobDescriptionWidget } from '../../../../widgets';
 
 export default function InviteDashboard({ history }) {

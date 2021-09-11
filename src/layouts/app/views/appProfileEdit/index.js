@@ -3,7 +3,6 @@ import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { PROFILE } from '../../../../data/queries';
 import TabProfile from './tabProfile';
-import TabPreferences from './tabPreferences';
 import Isolates from './isolates';
 import { Column } from '../../../../components';
 
@@ -13,7 +12,6 @@ export default function AppProfileEdit({ history, ...props }) {
   const [profile, setProfile] = React.useState(null);
   const [sections, setSections] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
-  const [tabNbr, setTabNbr] = React.useState(0);
 
   if (!profile) {
     return (
@@ -46,19 +44,15 @@ export default function AppProfileEdit({ history, ...props }) {
         />
       ) : (
         <Column w="100%">
-          {tabNbr === 0 ? (
-            <TabProfile
-              profile={profile}
-              loading={loading}
-              setProfile={setProfile}
-              sections={sections}
-              setSections={setSections}
-              isolate={isolate}
-              badges={profile.badges}
-            />
-          ) : (
-            <TabPreferences setProfile={setProfile} profile={profile} />
-          )}
+          <TabProfile
+            profile={profile}
+            loading={loading}
+            setProfile={setProfile}
+            sections={sections}
+            setSections={setSections}
+            isolate={isolate}
+            badges={profile.badges}
+          />
         </Column>
       )}
     </div>
