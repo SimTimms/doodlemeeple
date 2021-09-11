@@ -6,7 +6,7 @@ import { MyPostForm } from './';
 import { Row, Column, CardComponent, Grid } from '../../components';
 import MyPostComponent from './component';
 import { MyPostProfile } from './profileCard';
-
+import { randomKey } from '../../utils';
 import { MenuContext } from '../../context';
 
 export default function MyPosts() {
@@ -30,7 +30,7 @@ export default function MyPosts() {
                         );
                       }
                       return data.myPostsWidget.map((myPost) => (
-                        <MyPostProfile myPost={myPost} />
+                        <MyPostProfile myPost={myPost} key={randomKey()} />
                       ));
                     }
                     return null;

@@ -6,6 +6,7 @@ import NoWork from './noWork';
 import { HistoryContext, MenuContext } from '../../../../context';
 import { QUOTE_WIDGET } from '../../../../widgets/quote/data';
 import { QuoteComponent } from '../../../../widgets';
+import { randomKey } from '../../../../utils';
 
 export default function ActiveWork() {
   const classes = useStyles();
@@ -18,7 +19,7 @@ export default function ActiveWork() {
           {contractArray.length > 0 &&
             contractArray.map((contract, index) => {
               return (
-                <Column>
+                <Column key={randomKey()}>
                   <MenuContext.Consumer>
                     {(menu) => {
                       return (

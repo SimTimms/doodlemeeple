@@ -10,6 +10,7 @@ import {
 } from '../../../context';
 import clsx from 'clsx';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { randomKey } from '../../../utils';
 
 export default function PrimaryMenu({ mainMenu, publicPage }) {
   const classes = useStyles();
@@ -43,6 +44,7 @@ export default function PrimaryMenu({ mainMenu, publicPage }) {
                             (menuItem) => {
                               return (
                                 <Button
+                                  key={randomKey()}
                                   menuItem={menuItem}
                                   isActive={
                                     publicPage

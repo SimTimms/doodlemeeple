@@ -25,7 +25,6 @@ export default function FeaturedCreativeHomeWidget() {
             return (
               <ProfileCardImpact
                 creative={creative}
-                key={`creative_${index}`}
                 setLarge={setLarge}
                 key={randomKey()}
               />

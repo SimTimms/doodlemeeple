@@ -21,6 +21,7 @@ import { toaster } from '../../../../utils/toaster';
 import autosave from '../../../../utils/autosave';
 import * as social from '../../../../assets/social';
 import SocialHeader from './socialHeader';
+import { randomKey } from '../../../../utils';
 
 export default function TabProfile({
   profile,
@@ -297,7 +298,7 @@ export default function TabProfile({
                 </DMCard>
                 {sections &&
                   sections.map((section, index) => (
-                    <DMCard>
+                    <DMCard key={randomKey()}>
                       <GallerySection
                         key={`section_${index}`}
                         index={index}

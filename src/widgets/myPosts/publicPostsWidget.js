@@ -3,6 +3,7 @@ import { Query } from 'react-apollo';
 import { MY_POSTS_WIDGET } from './data';
 import { MyPostProfile } from './profileCard';
 import { Grid } from '../../components';
+import { randomKey } from '../../utils';
 
 export default function PublicPosts() {
   return (
@@ -11,7 +12,7 @@ export default function PublicPosts() {
         {({ data }) => {
           if (data) {
             return data.myPostsWidget.map((myPost) => (
-              <MyPostProfile myPost={myPost} />
+              <MyPostProfile myPost={myPost} key={randomKey()} />
             ));
           }
           return null;

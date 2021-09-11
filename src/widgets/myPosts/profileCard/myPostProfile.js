@@ -17,6 +17,7 @@ import { Mutation } from 'react-apollo';
 import { REMOVE_MY_POST } from '../data';
 import { toaster } from '../../../utils/toaster';
 import Cookies from 'js-cookie';
+import { randomKey } from '../../../utils';
 
 export default function MyPostProfile({ myPost, onDeleteEvent }) {
   const classes = useStyles();
@@ -80,7 +81,9 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
                 {myPost.name}
               </Typography>
               {myPost.tags &&
-                myPost.tags.map((tag) => <StatusBadge status={tag} />)}
+                myPost.tags.map((tag) => (
+                  <StatusBadge status={tag} key={randomKey()} />
+                ))}
             </Row>
             {myPost.featuredImage && (
               <Column w="100%">
