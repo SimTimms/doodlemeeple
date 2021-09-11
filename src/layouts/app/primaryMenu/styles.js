@@ -4,7 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   column: {
     display: 'flex',
     flexDirection: 'column',
-    width: 200,
+    width: 150,
     background: theme.palette.primary.dark,
     height: '100vh',
     zIndex: 2,
