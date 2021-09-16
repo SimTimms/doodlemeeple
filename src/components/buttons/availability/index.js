@@ -12,6 +12,7 @@ export default function Availability({ available }) {
   useEffect(() => {
     setAvailability(available);
   }, [available]);
+
   return (
     <Mutation
       mutation={UPDATE_AVAILABILITY}

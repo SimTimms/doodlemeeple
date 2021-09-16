@@ -7,7 +7,6 @@ export const styles = makeStyles({
     margin: 'auto',
   },
   borderBox: {
-    margin: 30,
     border: '1px dashed #ccc',
     padding: 20,
     boxSizing: 'border-box',

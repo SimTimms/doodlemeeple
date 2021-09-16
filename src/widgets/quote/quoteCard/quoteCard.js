@@ -21,7 +21,7 @@ export default function QuoteCard({ contract }) {
               {nameShortener(contract.job.name, 60)}
             </Typography>
             <a
-              href={`${process.env.REACT_APP_URL}/public-preview/${contract.job.user._id}`}
+              href={`${process.env.REACT_APP_URL}/user-profile/${contract.job.user._id}`}
               target="_blank"
               rel="noopener noreferrer"
               className={classes.meta}

@@ -33,7 +33,7 @@ export const SET_UP = (
 );
 
 export const SET_UP_SUB = (
-  <Typography variant="h6" align="center">
+  <Typography variant="h6" style={{ fontSize: 12 }} align="center">
     You'll see tasks here when you need to take an action.
   </Typography>
 );

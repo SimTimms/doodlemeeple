@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useStyles } from './styles';
 import { Typography, Button, Icon } from '@material-ui/core';
 import Cookies from 'js-cookie';
-import { toaster } from '../../utils/toaster';
 
 function Uploader({
   cbImage,
@@ -70,7 +69,6 @@ function Uploader({
             .then((result) => {
               setStatusMessage('');
               cbImage(url);
-              toaster('Saved');
             })
             .catch((error) => {
               setStatusMessage(error);
@@ -82,7 +80,6 @@ function Uploader({
       })
       .catch((error) => {
         setStatusMessage('Error');
-        console.log(error);
       });
   }
 

@@ -3,7 +3,7 @@ import { Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 
-export default function MenuButtonIcon({ text }) {
+export default function MenuButtonIcon({ text, active }) {
   const classes = useStyles();
 
   return (
@@ -30,6 +30,7 @@ export default function MenuButtonIcon({ text }) {
         [classes.borderSecondary]: text.border === 'secondary',
         [classes.borderWarning]: text.border === 'warning',
         [classes.backHover]: text.name === '',
+        [classes.active]: active,
       })}
     >
       {text.icon}

@@ -10,7 +10,6 @@ export const useStyles = makeStyles((theme) => ({
     textTransform: 'uppercase',
   },
   filterRoot: {
-    background: '#fff',
     width: '100%',
     paddingTop: 3,
     paddingBottom: 3,

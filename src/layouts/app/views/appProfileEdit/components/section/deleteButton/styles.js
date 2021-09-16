@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => {
       minHeight: 32,
       maxHeight: 32,
       borderRadius: '50%',
-      background: theme.palette.error.main,
+      background: theme.palette.primary.main,
       boxShadow: '5px 5px 5px rgba(0,0,0,0.2)',
     },
     deleteButtonConfirmYes: {
@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme) => {
       minHeight: 32,
       maxHeight: 32,
       borderRadius: '5px 0 0 5px',
-      background: theme.palette.error.main,
+      background: theme.palette.primary.main,
     },
     deleteButtonConfirmNo: {
       boxShadow: 'none',

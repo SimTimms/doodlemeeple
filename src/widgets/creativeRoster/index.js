@@ -1,11 +1,18 @@
 import React from 'react';
+import { Typography, Fade } from '@material-ui/core';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { CREATIVE_ROSTER_WIDGET } from './data';
 import { ProfileCard } from '../profileCard';
 import { Filters } from '../profileCard/components';
 import BigImage from '../bigImage';
-import { IconButton, Column, Row } from '../../components';
+import {
+  IconButton,
+  Column,
+  Grid,
+  CardComponent,
+  Divider,
+} from '../../components';
 
 export default function CreativeRosterWidget({ history }) {
   const classes = useStyles();
@@ -15,7 +22,7 @@ export default function CreativeRosterWidget({ history }) {
   const [endPage, setEndPage] = React.useState(false);
   const [filter, setFilter] = React.useState(['artist']);
   const [group, setGroup] = React.useState('artist');
-
+  console.log(creativeArray);
   return (
     <div className={classes.root}>
       <Column w="100%">
@@ -28,7 +35,7 @@ export default function CreativeRosterWidget({ history }) {
           setPage={setPage}
           setEndPage={setEndPage}
         />
-        <Row wrap="wrap" w="100%">
+        <Grid cols={4}>
           {large !== null && <BigImage large={large} setLarge={setLarge} />}
           <Query
             query={CREATIVE_ROSTER_WIDGET}
@@ -43,6 +50,19 @@ export default function CreativeRosterWidget({ history }) {
             }}
           >
             {() => {
+              if (creativeArray.length === 0)
+                return (
+                  <Column w={700}>
+                    <Divider />
+                    <Fade in={true} timeout={3000}>
+                      <div style={{ width: '100%' }}>
+                        <CardComponent type="dark">
+                          <Typography>No Results</Typography>
+                        </CardComponent>
+                      </div>
+                    </Fade>
+                  </Column>
+                );
               return creativeArray.map((creative, index) => {
                 return (
                   <ProfileCard
@@ -55,8 +75,8 @@ export default function CreativeRosterWidget({ history }) {
               });
             }}
           </Query>
-        </Row>
-        {!endPage && (
+        </Grid>
+        {!endPage && creativeArray.length > 0 && (
           <IconButton
             title="Load More"
             color="text-dark"

@@ -1,49 +1,74 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
+import {
+  MenuButtonStandard,
+  Column,
+  Row,
+  CardComponent,
+} from '../../../components';
+import { MenuContext } from '../../../context';
 import clsx from 'clsx';
-import { Row, Column, IconButton } from '../../../components';
-import { nameShortener } from '../../../utils';
 
 export default function QuoteInCard({ contract }) {
   const classes = useStyles();
-  if (!contract.job) return null;
+  const unseenJobOwner = contract.seenByJobOwner === false;
+
+  if (!contract.user)
+    return (
+      <CardComponent type="dark">
+        <Typography>This User No Longer Exists</Typography>
+      </CardComponent>
+    );
   return (
-    <div
-      className={clsx({
-        [classes.creativeCard]: true,
-      })}
-    >
-      <Column j="space-between" h="100%">
-        <Row j="space-between">
-          <Column a="flex-start">
-            <Typography className={classes.title} component="h1">
-              {nameShortener(contract.job.name, 60)}
-            </Typography>
-            <a
-              href={`${process.env.REACT_APP_URL}/public-preview/${contract.job.user._id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={classes.meta}
-            >
-              <Typography className={classes.meta} component="h1">
-                {nameShortener(contract.job.user.name, 60)}
+    <CardComponent p={10}>
+      <Column>
+        <Row j="space-between" a="center">
+          <Row a="center" j="flex-start">
+            <div
+              style={{
+                backgroundImage: `url(${contract.user.profileImg})`,
+              }}
+              className={clsx({
+                [classes.profileThumb]: true,
+                [classes.unseen]: unseenJobOwner,
+              })}
+            ></div>
+            <Column a="flex-start">
+              <Typography style={{ fontSize: 12, cursor: 'pointer' }}>
+                {`Quote from ${contract.user.name}`}
               </Typography>
-            </a>
-          </Column>
-          <a
-            href={`/app/view-quote/${contract._id}`}
-            style={{ textDecoration: 'none' }}
-          >
-            <IconButton
-              title="View"
-              color="primary"
-              icon="visibility"
-              onClickEvent={() => {}}
-            />
-          </a>
+              <Typography
+                style={{ fontSize: 12 }}
+                className={clsx({
+                  [classes.dull]: true,
+                  [classes.red]: unseenJobOwner,
+                })}
+              >
+                {contract.status === '' ? 'Draft' : contract.status}
+              </Typography>
+            </Column>
+          </Row>
+
+          <MenuContext.Consumer>
+            {(menu) => (
+              <MenuButtonStandard
+                title="View"
+                onClickEvent={() => {
+                  menu.updateMenuContext({
+                    ...menu,
+                    jobPage: {
+                      ...menu.jobPage,
+                      secondaryPage: 'view_quote',
+                      contractId: contract._id,
+                    },
+                  });
+                }}
+              />
+            )}
+          </MenuContext.Consumer>
         </Row>
       </Column>
-    </div>
+    </CardComponent>
   );
 }

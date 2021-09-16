@@ -3,10 +3,9 @@ import { Typography, Card, useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 import { useStyles } from './styles';
 import { timeDifferenceForDate } from '../../../../../utils/dates';
-import { IconButton } from '../../../../../components';
 import Cookies from 'js-cookie';
 
-export function Message({ message, history }) {
+export function Message({ message }) {
   const classes = useStyles();
   const isUserMessage = message.sender._id !== Cookies.get('userId');
   const mobile = useMediaQuery('(max-width:800px)');
@@ -74,47 +73,10 @@ export function Message({ message, history }) {
                       overflowWrap: 'break-word',
                       fontFamily: 'arial, sans-serif',
                       lineHeight: 1.3,
+                      whiteSpace: 'pre-line',
                     }}
                   >
-                    {message.messageStr.indexOf('QUOTE SUBMITTED:') === -1 ? (
-                      message.messageStr
-                    ) : !isUserMessage ? (
-                      <IconButton
-                        title="Quote Submitted"
-                        icon="request_quote"
-                        color="p"
-                        disabled={false}
-                        styleOverride={null}
-                        onClickEvent={() =>
-                          history.push(
-                            `/app/edit-contract/${message.messageStr.replace(
-                              'QUOTE SUBMITTED:',
-                              ''
-                            )}`
-                          )
-                        }
-                        type="button"
-                        iconPos="right"
-                      />
-                    ) : (
-                      <IconButton
-                        title="View Quote"
-                        icon="request_quote"
-                        color="warning"
-                        disabled={false}
-                        styleOverride={null}
-                        onClickEvent={() =>
-                          history.push(
-                            `/app/view-contract/${message.messageStr.replace(
-                              'QUOTE SUBMITTED:',
-                              ''
-                            )}`
-                          )
-                        }
-                        type="button"
-                        iconPos="right"
-                      />
-                    )}
+                    {message.messageStr}
                   </Typography>
                 ) : (
                   <img

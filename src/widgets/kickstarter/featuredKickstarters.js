@@ -2,27 +2,24 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { FEATURED_KICKSTARTER_WIDGET } from './data';
 import { KickstarterProfile } from './profileCard';
-import { Row } from '../../components';
-
+import { Grid, Divider } from '../../components';
+import { randomKey } from '../../utils';
 export default function FeaturedKickstarters() {
   return (
-    <Row
-      wrap="wrap"
-      j="space-around"
-      a="flex-start"
-      pb="20px"
-      pl="20px"
-      pr="20px"
-    >
+    <Grid cols={3}>
       <Query query={FEATURED_KICKSTARTER_WIDGET} fetchPolicy="network-only">
-        {({ data, loading }) => {
+        {({ data }) => {
           if (data)
             return data.featuredKickstarterWidget.map((kickstarter) => (
-              <KickstarterProfile kickstarter={kickstarter} />
+              <KickstarterProfile kickstarter={kickstarter} key={randomKey()} />
             ));
           return null;
         }}
       </Query>
-    </Row>
+      <Divider />
+      <Divider />
+      <Divider />
+      <Divider />
+    </Grid>
   );
 }

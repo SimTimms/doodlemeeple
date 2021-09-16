@@ -26,7 +26,7 @@ export default function ProfileMenu({ tabNbr, setTabNbr, history, profile }) {
             count: 0,
           }}
           onClickEvent={() => {
-            history.push(`/app/public-preview/${profile._id}`);
+            history.push(`/app/user-profile/${profile._id}`);
           }}
           active={tabNbr === 1}
           column={true}

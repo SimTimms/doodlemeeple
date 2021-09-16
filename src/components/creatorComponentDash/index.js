@@ -25,7 +25,7 @@ export default function CreatorComponentDash({
         <div
           className={classes.profileButton}
           title="View full profile"
-          onClick={() => history.push(`/app/public-preview/${user._id}`)}
+          onClick={() => history.push(`/app/user-profile/${user._id}`)}
         >
           <Row a="center" j="flex-start">
             <div

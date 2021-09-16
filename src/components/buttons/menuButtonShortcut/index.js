@@ -19,6 +19,7 @@ export default function MenuButtonShortcut({ text, ...props }) {
     title,
     iconPos,
     styleOverride,
+    disabled,
   } = props;
   const isLeft = !iconPos || iconPos === 'left';
 
@@ -42,33 +43,29 @@ export default function MenuButtonShortcut({ text, ...props }) {
         }}
         className={clsx({
           [classes.buttonRoot]: true,
-          [classes.active]: active,
           [classes.buttonRootColumn]: column,
+          [classes.disabled]: disabled,
         })}
       >
-        {isLeft && imageIcon ? (
-          <MenuButtonImage imageIcon={imageIcon} text={text} />
-        ) : (
-          isLeft && text.icon && <MenuButtonIcon text={text} />
-        )}
-        <Row
-          j={
-            text.count > 0 ? 'space-between' : column ? 'center' : 'flex-start'
-          }
-          w="100%"
-        >
+        <Row>
+          {isLeft && imageIcon ? (
+            <MenuButtonImage imageIcon={imageIcon} text={text} />
+          ) : (
+            isLeft &&
+            text.icon && <MenuButtonIcon text={text} active={active} />
+          )}
           {text.count > 0 &&
             (!countIcon ? (
-              <Typography className={classes.count}>{text.count}</Typography>
+              <Icon className={classes.count}>star</Icon>
             ) : (
               <Icon className={classes.count}>{countIcon}</Icon>
             ))}
+        </Row>
+        <Row j={'center'} w="100%">
           <Typography
             className={clsx({
               [classes.buttonText]: true,
               [classes.buttonColumn]: column,
-              [classes.iconTextOnlyButton]: !text.icon && !imageIcon,
-              [classes.dark]: text.color === 'light',
             })}
           >
             {text.name}

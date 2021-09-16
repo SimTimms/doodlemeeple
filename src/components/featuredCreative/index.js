@@ -1,7 +1,7 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, Fade } from '@material-ui/core';
 import { useStyles } from './styles';
-import { Column, IconButton, LoadIcon, Row } from '../';
+import { Column, LoadIcon, Row } from '../';
 import { Query } from 'react-apollo';
 import { PROFILE_FEATURED } from '../../data/queries';
 import { excerptReplace } from '../../utils/excerptReplace';
@@ -15,80 +15,48 @@ export default function FeaturedCreative({ history, featuredArticle }) {
         const linkTo = featuredArticle.article.linkTo;
         const title = featuredArticle.article.title;
         const excerpt = excerptReplace(featuredArticle.article.excerpt);
-        const media = featuredArticle.article.image['wp:featuredmedia']
-          ? featuredArticle.article.image['wp:featuredmedia']['0'].source_url
-          : null;
-        return loading ? null : data ? (
+
+        return loading ? (
+          <Column>
+            <div className={classes.excerptBack}></div>
+          </Column>
+        ) : data ? (
           <Column>
             <div className={classes.excerptBack}>
               <Row pb={10} pt={10}>
-                <img
-                  src={
-                    data.featuredProfile
-                      ? data.featuredProfile.profileImg
-                      : process.env.REACT_APP_DEVICE
-                  }
-                  alt=""
-                  className={classes.articleAvatar}
-                />
-                <Column a="flex-end" p="0 10px 0 0 ">
-                  <Typography variant="h6" style={{ color: '#fff' }}>
-                    {excerpt}
-                  </Typography>
-                  <Typography variant="body1" style={{ color: '#fff' }}>
-                    {title}
-                  </Typography>
-                </Column>
-              </Row>
-            </div>
-
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                width: '100%',
-                flexDirection: 'column',
-              }}
-            >
-              <Row>
-                <div className={classes.options}>
-                  <IconButton
-                    color="text-white-mini"
-                    disabled={false}
-                    onClickEvent={() => {
-                      history.push(`/app/public-preview/${featuredArticle.id}`);
-                    }}
-                    icon="face"
-                    title="View Profile"
-                    styleOverride={null}
-                    type="button"
-                    iconPos="left"
-                  />
+                <Fade in={true} timeout={3000}>
                   <div
                     style={{
-                      height: 20,
-                      borderLeft: '1px solid rgba(255,255,255,0.4)',
+                      width: '100%',
+                      display: 'flex',
+                      justifyContent: 'center',
                     }}
-                  ></div>
-                  <a
-                    href={linkTo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ textDecoration: 'none' }}
                   >
-                    <IconButton
-                      color="text-white-mini"
-                      disabled={false}
-                      onClickEvent={() => {}}
-                      icon="article"
-                      title="Read Article"
-                      styleOverride={null}
-                      type="button"
-                      iconPos="right"
-                    />
-                  </a>
-                </div>
+                    <Column a="flex-end" p="20px" w={700}>
+                      <Typography variant="h5" className={classes.excerpt}>
+                        {excerpt}
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        className={classes.excerptAuthor}
+                      >
+                        {title}
+                      </Typography>
+                      <a
+                        href={linkTo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Typography
+                          variant="body1"
+                          className={classes.excerptLink}
+                        >
+                          Read Full Article
+                        </Typography>
+                      </a>
+                    </Column>
+                  </div>
+                </Fade>
               </Row>
             </div>
           </Column>

@@ -38,7 +38,7 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.main,
   },
   notificationBad: {
-    color: theme.palette.error.main,
+    color: theme.palette.primary.main,
   },
   projectNotifications: {
     display: 'flex',

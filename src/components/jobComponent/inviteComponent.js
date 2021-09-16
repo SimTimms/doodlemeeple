@@ -1,13 +1,21 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { MenuButtonShortcut, Column, Row } from '../';
-import clsx from 'clsx';
+import {
+  MenuButtonStandard,
+  Column,
+  Row,
+  DividerWithBorder,
+  CardComponent,
+  StatusBadge,
+} from '../';
 import { Mutation } from 'react-apollo';
 import { UPDATE_INVITE } from '../../data/mutations';
 import { nameShortener } from '../../utils';
+import { timeDifferenceForDate } from '../../utils/dates';
+import { JobDescriptionWidget } from '../../widgets';
 
-export default function InviteComponent({ invite, history, setTabNbr }) {
+export default function InviteComponent({ invite, onClickEvent }) {
   const classes = useStyles();
   const declined = invite.status === 'declined';
   const unopened = invite.status === 'unopened';
@@ -16,11 +24,15 @@ export default function InviteComponent({ invite, history, setTabNbr }) {
   const rejected = invite.status === 'rejected';
   const draft = invite.status === 'draft';
   const accepted = invite.status === 'accepted';
+  const jobClosed = invite.status === 'closed';
   const inviteJob = invite.job ? invite.job : null;
   const completed = inviteJob ? inviteJob.submitted === 'complete' : false;
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return !inviteJob ? (
-    <Typography>Deleted</Typography>
+    <CardComponent type="dark">
+      <Typography>This Job No Longer Exists</Typography>
+    </CardComponent>
   ) : (
     <Mutation
       mutation={UPDATE_INVITE}
@@ -31,17 +43,16 @@ export default function InviteComponent({ invite, history, setTabNbr }) {
     >
       {(mutation) => {
         return (
-          <div
-            style={{ width: '100%', cursor: 'pointer' }}
-            onClick={() => {
-              invite.status === 'unopened' && mutation();
-              quoted
-                ? setTabNbr(4)
-                : history.push(`/app/job-description/${invite.job._id}`);
-            }}
-          >
+          <CardComponent>
             <Column>
-              <Row j="space-between" a="center">
+              <Row
+                j="space-between"
+                a="center"
+                onClick={() => {
+                  invite.status === 'unopened' && mutation();
+                  isOpen ? setIsOpen(false) : setIsOpen(true);
+                }}
+              >
                 <Row a="center" j="flex-start">
                   <div
                     style={{
@@ -50,58 +61,64 @@ export default function InviteComponent({ invite, history, setTabNbr }) {
                     className={classes.profileThumb}
                   ></div>
                   <Column a="flex-start">
-                    <Typography style={{ fontSize: 12 }}>
-                      {`Invite from ${invite.sender.name} for ${nameShortener(
-                        invite.job.name,
-                        30
-                      )}`}
-                    </Typography>
-                    <Typography
-                      style={{ fontSize: 12 }}
-                      className={clsx({
-                        [classes.dull]: true,
-                        [classes.red]:
-                          unopened || declined || rejected || draft || opened,
-                      })}
-                    >
-                      {draft
-                        ? 'Task: Complete your quote'
-                        : completed
-                        ? 'Completed'
-                        : declined
-                        ? 'Declined'
-                        : unopened
-                        ? 'Task: Open this Invite'
-                        : opened
-                        ? 'Task: Respond to Invite'
-                        : quoted
-                        ? 'Quote Submitted'
-                        : rejected
-                        ? 'Rejected'
-                        : accepted && 'Accepted'}
-                    </Typography>
+                    <Row j="space-between">
+                      <Typography style={{ fontSize: 12 }}>
+                        {`Invite from ${invite.sender.name} for ${nameShortener(
+                          invite.job.name,
+                          30
+                        )}`}
+                      </Typography>
+                      <Typography style={{ fontSize: 12, marginRight: 10 }}>
+                        {timeDifferenceForDate(invite.createdAt)}
+                      </Typography>
+                    </Row>
+                    <StatusBadge
+                      status={
+                        draft
+                          ? 'Complete your quote'
+                          : completed
+                          ? 'Completed'
+                          : declined
+                          ? 'Declined'
+                          : unopened
+                          ? 'Open this Invite'
+                          : opened
+                          ? 'Respond to Invite'
+                          : quoted
+                          ? 'Quote Submitted'
+                          : rejected
+                          ? 'Rejected'
+                          : jobClosed
+                          ? 'Job Closed'
+                          : accepted && 'Accepted'
+                      }
+                      red={null}
+                    />
                   </Column>
                 </Row>
-
-                <MenuButtonShortcut
-                  text={{
-                    name: quoted ? 'Quotes' : 'Open',
-                    color: 'light',
-                    icon: completed
-                      ? ''
-                      : unopened || opened || quoted || accepted || draft
-                      ? 'local_post_office'
-                      : '',
-                    count: invite.messages,
-                    back: 'primary',
-                  }}
-                  onClickEvent={() => null}
-                  active={false}
-                  countIcon="star"
-                />
+                {!declined && !jobClosed && (
+                  <MenuButtonStandard
+                    title={quoted ? 'Quotes' : isOpen ? 'Hide' : 'Show'}
+                    color="primary"
+                    icon={
+                      completed
+                        ? ''
+                        : unopened || opened || quoted || accepted || draft
+                        ? 'local_post_office'
+                        : ''
+                    }
+                    onClickEvent={() => onClickEvent()}
+                  />
+                )}
               </Row>
+              {isOpen && (
+                <Column>
+                  <DividerWithBorder />
+                  <JobDescriptionWidget jobId={invite.job._id} />
+                </Column>
+              )}
             </Column>
-          </div>
+          </CardComponent>
         );
       }}
     </Mutation>

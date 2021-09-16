@@ -1,33 +1,45 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  dashboardGrid: {
-    width: '100%',
+  menuWrapper: {
     display: 'flex',
+    width: '100%',
     flexDirection: 'row',
-    marginBottom: 200,
-    padding: 20,
-    boxSizing: 'border-box',
+    background: theme.palette.primary.dark,
+    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
   },
-  gridRow: {
+  primaryMenuWrapper: {
     display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
     width: '100%',
-    justifyContent: 'space-around',
+    flexDirection: 'row',
     alignItems: 'flex-start',
-    margin: 0,
+    background: theme.palette.primary.dark,
+    zIndex: 1,
+    height: 68,
+    borderBottom: '1px solid rgba(255,255,255,0.15)',
   },
-  column: { width: '50%', paddingRight: 20, boxSizing: 'border-box' },
-  columnRight: { width: '50%', paddingLeft: 20, boxSizing: 'border-box' },
-  columnMobile: { width: '100%', padding: 0 },
-  dashboardHeader: {
-    color: '#444',
-    padding: 10,
-    paddingTop: 50,
-    boxSizing: 'border-box',
-    fontWeight: 200,
+  desktop: { display: 'flex', flexDirection: 'column' },
+  mobile: { width: '100%' },
+  mainTitle: { fontSize: '1.2rem', color: theme.palette.primary.dark },
+  gridThree: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr 1fr',
+    width: '100%',
   },
-  right: { textAlign: 'right', width: '100%' },
-  dashboardHeaderMobile: { textAlign: 'center' },
+  gridOne: {
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    width: '100%',
+  },
+  gridTwo: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr ',
+    width: '100%',
+  },
+  gridFour: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr 1fr 1fr ',
+    width: '100%',
+  },
+  title: { fontWeight: 'bold' },
 }));

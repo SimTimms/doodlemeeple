@@ -5,14 +5,9 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     paddingBottom: 8,
     borderRadius: 2,
-  },
-  active: {
-    background: theme.palette.primary.main,
     color: '#fff',
-    '&:hover': {
-      background: theme.palette.primary.main,
-    },
   },
+
   buttonRootColumn: {
     justifyContent: 'space-between',
     flexDirection: 'column',
@@ -21,10 +16,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   buttonText: {
     textAlign: 'right',
-    fontSize: 12,
     marginLeft: 10,
     marginRight: 10,
-    color: 'inherit',
+    fontSize: '1rem',
   },
   buttonColumn: { marginLeft: 0, marginRight: 0, marginTop: 4 },
   iconTextOnlyButton: { marginLeft: 0, marginRight: 0 },
@@ -82,24 +76,32 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
-    fontSize: 14,
     padding: 5,
     borderRadius: '50%',
     textAlign: 'center',
+    fontSize: '1rem',
+    background: 'rgba(255,255,255,0.3)',
   },
   backHover: {
     '&:hover': {
       opacity: 0.4,
     },
   },
+  active: {
+    background: theme.palette.primary.main,
+    color: '#fff',
+    '&:hover': {
+      background: theme.palette.primary.main,
+    },
+  },
   borderSecondary: {
     background: `${theme.palette.secondary.main}`,
   },
   borderWarning: {
-    background: `${theme.palette.error.main}`,
+    background: `${theme.palette.primary.main}`,
   },
   warning: {
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     boxShadow:
       'inset 1px 1px 1px rgba(255,255,255,0.4),inset -1px -1px 1px rgba(0,0,0,0.2)',
   },
@@ -117,16 +119,16 @@ export const useStyles = makeStyles((theme) => ({
   iconIconColumn: {
     marginRight: 0,
   },
-  dark: { color: theme.palette.primary.light },
   link: {
     textDecoration: 'none',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    fontSize: '1rem',
   },
   count: {
-    background: theme.palette.error.main,
-    borderRadius: '50%',
+    background: theme.palette.secondary.main,
+    borderRadius: 2,
     minHeight: 16,
     maxHeight: 16,
     minWidth: 16,
@@ -134,13 +136,10 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: -10,
-    marginRight: 5,
-    marginTop: -15,
-    color: '#fff',
-    border: '2px solid #fff',
-    fontSize: 10,
+    marginRight: -16,
+    color: theme.palette.primary.dark,
     zIndex: 2,
+    fontSize: 10,
   },
 
   iconTextOnly: { display: 'none' },
@@ -152,4 +151,5 @@ export const useStyles = makeStyles((theme) => ({
   isOff: {
     color: '#222 !important',
   },
+  disabled: { opacity: 0.5 },
 }));

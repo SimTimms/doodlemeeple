@@ -6,7 +6,6 @@ import {
   FeaturedCreativeWidget,
   CreativeRosterWidget,
   FeaturedKickstarters,
-  KickstarterForm,
   FeaturedCreativeMiniWidget,
   JobDescriptionWidget,
   PublicJobWidget,
@@ -57,19 +56,20 @@ export default function AuthRoutes({ theme, props: { ...props } }) {
             render={() => (
               <Redirect
                 push
-                to={`/app/edit-job/new/${props.match.params.pathParam}`}
+                to={`/app/new-job-post/${props.match.params.pathParam}`}
               />
             )}
           />
         )}
       />
       <Route
-        path="/public-preview/:pathParam?"
+        path="/user-profile/:pathParam"
         render={(props) => (
-          <PreviewLayout {...props} theme={theme} publicView={false} />
+          <PreviewLayout {...props} theme={theme} publicView={true} />
         )}
       />
-      <Route path="/" exact render={() => <Redirect push to="/app/tasks" />} />
+
+      <Route path="/" exact render={() => <Redirect push to="/app/home" />} />
     </Switch>
   );
 }

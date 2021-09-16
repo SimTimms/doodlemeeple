@@ -1,10 +1,40 @@
 import React from 'react';
 import { useStyles } from './styles';
+import { Typography } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 
+export function Grid({ cols, ...props }) {
+  const classes = useStyles();
+  const mobile = useMediaQuery('(max-width:900px)');
+  const desktop = useMediaQuery('(min-width:1600px)');
+  return (
+    <div
+      className={clsx({
+        [classes.grid]: true,
+      })}
+      style={{
+        gridTemplateColumns: `repeat(${mobile ? 1 : desktop ? 6 : cols}, 1fr)`,
+      }}
+    >
+      {props.children}
+    </div>
+  );
+}
+
+export function Title({ title }) {
+  const classes = useStyles();
+  return <Typography className={classes.title}>{title}</Typography>;
+}
+
+export function MainTitle({ title }) {
+  const classes = useStyles();
+  return <Typography className={classes.mainTitle}>{title}</Typography>;
+}
+
 export function Column(props) {
-  const { children, a, j, w, p, b, br, h, bg, m, mw } = props;
+  const { children, a, j, w, p, b, br, h, bg, m, mw, classAdd, onClickEvent } =
+    props;
   const align = a ? a : 'center';
   const width = w ? w : '100%';
   const maxWidth = mw ? mw : '100%';
@@ -16,7 +46,7 @@ export function Column(props) {
   const borderRadius = br ? br : 0;
   const margin = m ? m : 0;
   const classes = useStyles();
-  const mobile = useMediaQuery('(max-width:800px)');
+  const mobile = useMediaQuery('(max-width:600px)');
 
   return (
     <div
@@ -36,7 +66,11 @@ export function Column(props) {
       className={clsx({
         [classes.desktop]: true,
         [classes.mobile]: mobile,
+        [classAdd]: classAdd,
+        [classes.primaryBack]: background === 'primary',
+        [classes.secondaryBack]: background === 'secondary',
       })}
+      onClick={onClickEvent ? onClickEvent : null}
     >
       {children}
     </div>
@@ -59,12 +93,14 @@ export function Row(props) {
     mb,
     mt,
     mr,
+    mw,
     br,
     bg,
     h,
     o,
     of,
     className,
+    onClickEvent,
   } = props;
   const align = a ? a : 'center';
   const justify = j ? j : 'center';
@@ -82,6 +118,7 @@ export function Row(props) {
   const height = h ? h : '';
   const opacity = o ? o : '';
   const overflow = of ? of : '';
+  const maxWidth = mw ? mw : '';
 
   return v === 'none' ? null : (
     <div
@@ -105,9 +142,11 @@ export function Row(props) {
         height,
         opacity,
         overflow,
+        maxWidth,
         boxSizing: 'border-box',
       }}
-      class={className ? className : null}
+      className={className ? className : null}
+      onClick={() => (onClickEvent ? onClickEvent() : null)}
     >
       {children}
     </div>
@@ -158,4 +197,10 @@ export function TopMenuWrapper(props) {
       {children}
     </div>
   );
+}
+
+export function PrimaryMenuWrapper({ children }) {
+  const classes = useStyles();
+
+  return <div className={classes.primaryMenuWrapper}>{children}</div>;
 }

@@ -23,14 +23,12 @@ import {
   TaskOpenQuote,
   TaskContinueWithJobDraft,
   TaskPatreon,
-  TaskJobBoard,
   TaskQuoteDeclined,
   TaskQuoteAccepted,
 } from './taskConstants';
 import TaskGeneratorClient from './generators';
 export {
   TaskQuoteDeclined,
-  TaskJobBoard,
   TaskPatreon,
   TaskGeneratorClient,
   TaskButton,

@@ -5,7 +5,7 @@ import {
   Column,
   CardComponent,
   LoadIcon,
-  IconButton,
+  MenuButtonStandard,
 } from '../../../components';
 import { UPDATE_CONTRACT, SUBMIT_CONTRACT } from '../../../data/mutations';
 import { StartDate, Cost, Notes, QuoteSummary, EndDate } from './components';
@@ -13,12 +13,15 @@ import { useMutation } from 'react-apollo';
 import charsRemaining from '../../../utils/charsRemaining';
 import replaceNulls from '../../../utils/replaceNulls';
 import { TITLES, SUB_TITLES } from './constants';
+import { MenuContext } from '../../../context';
+import MiniDash from './miniDash';
 
-export default function EditQuote({ jobId, history, contractData }) {
+export default function EditQuote({ contractData }) {
   const classes = useStyles();
   const [field, setField] = React.useState(0);
   const [contract, setContract] = React.useState(null);
   const fieldArray = [
+    'miniDash',
     'startDate',
     'deadline',
     'cost',
@@ -45,7 +48,9 @@ export default function EditQuote({ jobId, history, contractData }) {
       title={TITLES[fieldArray[field]]}
       subTitle={SUB_TITLES[fieldArray[field]]}
       onClickEvent={
-        field < fieldArray.length - 1
+        field === 0
+          ? null
+          : field < fieldArray.length - 1
           ? () => {
               fieldArray[field] !== 'summary'
                 ? updateContract({
@@ -77,30 +82,48 @@ export default function EditQuote({ jobId, history, contractData }) {
       }`}
     >
       <Column w={400}>
+        {fieldArray[field] === 'miniDash' && (
+          <MiniDash contract={contract} setField={setField} />
+        )}
         <CardComponent locked={false}>
-          {fieldArray[field] === 'startDate' && (
-            <StartDate contract={contract} setContract={setContract} />
-          )}
-          {fieldArray[field] === 'deadline' && (
-            <EndDate contract={contract} setContract={setContract} />
-          )}
-          {fieldArray[field] === 'cost' && (
-            <Cost contract={contract} setContract={setContract} />
-          )}
-          {fieldArray[field] === 'notes' && (
-            <Notes contract={contract} setContract={setContract} />
-          )}
-          {fieldArray[field] === 'summary' && (
-            <QuoteSummary contract={contract} setContract={setContract} />
-          )}
-          {fieldArray[field] === 'submitted' && (
-            <IconButton
-              title="Job Dashboard"
-              icon="mail"
-              styleOverride={{ margin: 'auto' }}
-              onClickEvent={() => history.push('/app/projects/quotes')}
-            />
-          )}
+          <Column>
+            {fieldArray[field] === 'startDate' && (
+              <StartDate contract={contract} setContract={setContract} />
+            )}
+            {fieldArray[field] === 'deadline' && (
+              <EndDate contract={contract} setContract={setContract} />
+            )}
+            {fieldArray[field] === 'cost' && (
+              <Cost contract={contract} setContract={setContract} />
+            )}
+            {fieldArray[field] === 'notes' && (
+              <Notes contract={contract} setContract={setContract} />
+            )}
+            {fieldArray[field] === 'summary' && (
+              <QuoteSummary contract={contract} setContract={setContract} />
+            )}
+            {fieldArray[field] === 'submitted' && (
+              <MenuContext.Consumer>
+                {(menu) => (
+                  <Column>
+                    <MenuButtonStandard
+                      title="Quote Dashboard"
+                      onClickEvent={() =>
+                        menu.updateMenuContext({
+                          ...menu,
+                          workPage: {
+                            ...menu.workPage,
+                            secondaryPage: 'quote_list',
+                            contractId: null,
+                          },
+                        })
+                      }
+                    />
+                  </Column>
+                )}
+              </MenuContext.Consumer>
+            )}
+          </Column>
         </CardComponent>
       </Column>
     </NoticeBoardSecondary>

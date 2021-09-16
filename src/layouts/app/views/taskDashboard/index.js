@@ -1,24 +1,26 @@
 import React from 'react';
-import { NoticeBoard, TaskComponent, Column } from '../../../../components';
+import { TaskComponent, TabPage } from '../../../../components';
+import { taskMenu } from '../../../menuArray';
 
 export default function TaskDashboard({
   history,
   profile,
-  setProfile,
   drawerButtonChange,
 }) {
   return (
-    <Column>
-      <NoticeBoard
-        profile={profile}
-        setProfile={setProfile}
-        history={history}
-      />
+    <TabPage
+      title={null}
+      primaryMenu={taskMenu()}
+      secondaryMenu={null}
+      menu={null}
+      activePrimary={'tasks'}
+      activeSecondary={''}
+    >
       <TaskComponent
         profile={profile}
         history={history}
         drawerButtonChange={drawerButtonChange}
       />
-    </Column>
+    </TabPage>
   );
 }

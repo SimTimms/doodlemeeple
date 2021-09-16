@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton } from '../../../../components';
 
-export default function PubicProfileButton({ jobId }) {
+export default function PublicProfileButton({ jobId }) {
   return (
     <a
       href={`/job-description/${jobId}`}

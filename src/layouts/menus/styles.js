@@ -60,7 +60,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     color: '#fff',
   },
   drawerRoot: {

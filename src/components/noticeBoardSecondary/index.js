@@ -1,8 +1,13 @@
 import React from 'react';
 import { Typography, Slide } from '@material-ui/core';
-import { useStyles } from './styles';
-import { Column, Divider, DividerMini, IconButton, UnlockInfo } from '../';
-import clsx from 'clsx';
+import {
+  Column,
+  Divider,
+  DividerMini,
+  MenuButtonStandard,
+  UnlockInfo,
+  CardComponent,
+} from '../';
 
 export default function NoticeBoardSecondary({
   children,
@@ -13,57 +18,49 @@ export default function NoticeBoardSecondary({
   lockedMsg,
   ...props
 }) {
-  const classes = useStyles();
-  const { backEvent, subMenu } = props;
+  const { backEvent } = props;
   return (
-    <div
-      className={clsx({
-        [classes.noticeArea]: true,
-        [classes.noticeAreaWithSubMenu]: subMenu,
-      })}
-    >
-      <Column>
-        <Typography variant="h4">{title}</Typography>
-        <DividerMini />
-        {subTitle !== '' && (
-          <Typography
-            variant="h6"
-            align="center"
-            style={{ color: '#fff', marginBottom: 10, maxWidth: 500 }}
-          >
-            {subTitle}
-          </Typography>
-        )}
+    <Column p="10px 10px 0 10px">
+      <CardComponent
+        styleOverride={{ maxWidth: 800, marginLeft: 10, marginRight: 10 }}
+      >
+        <Column>
+          <Typography>{title}</Typography>
+          <DividerMini />
+          {subTitle !== '' && <Typography>{subTitle}</Typography>}
+          <Divider />
+          {children}
+          {buttonLocked ? (
+            <UnlockInfo str={lockedMsg} />
+          ) : (
+            onClickEvent !== null && (
+              <Slide direction="up" in={true} mountOnEnter unmountOnExit>
+                <div>
+                  <Divider />
+                  <MenuButtonStandard
+                    title="Continue"
+                    icon="chevron_right"
+                    iconPos="right"
+                    color="primary"
+                    onClickEvent={() => onClickEvent()}
+                  />
+                  <DividerMini />
+                </div>
+              </Slide>
+            )
+          )}
+          {backEvent ? (
+            <MenuButtonStandard
+              title="Back"
+              icon=""
+              iconPos="left"
+              color="text-dark"
+              onClickEvent={() => backEvent()}
+            />
+          ) : null}
+        </Column>
         <Divider />
-        {children}
-        <Divider />
-        {buttonLocked ? (
-          <UnlockInfo str={lockedMsg} c="#fff" />
-        ) : (
-          onClickEvent !== null && (
-            <Slide direction="up" in={true} mountOnEnter unmountOnExit>
-              <div>
-                <IconButton
-                  title="Continue"
-                  icon="chevron_right"
-                  iconPos="right"
-                  color="text-white"
-                  onClickEvent={() => onClickEvent()}
-                />
-              </div>
-            </Slide>
-          )
-        )}
-        {backEvent ? (
-          <IconButton
-            title="Back"
-            icon=""
-            iconPos="left"
-            color="text-white-mini"
-            onClickEvent={() => backEvent()}
-          />
-        ) : null}
-      </Column>
-    </div>
+      </CardComponent>
+    </Column>
   );
 }

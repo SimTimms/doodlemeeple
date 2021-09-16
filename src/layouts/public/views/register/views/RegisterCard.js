@@ -2,7 +2,6 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import {
   ErrorBox,
-  IconButton,
   Meta,
   FieldBox,
   CardComponent,
@@ -10,6 +9,7 @@ import {
   DividerWithBorder,
   Divider,
   DividerMini,
+  MenuButtonStandard,
 } from '../../../../../components';
 import { styles } from './styles';
 import { sharedStyles } from '../../styles';
@@ -157,18 +157,13 @@ export default function RegisterCard({ setPage, ...props }) {
             {(SignupMutation) => {
               return (
                 <div>
-                  <IconButton
+                  <Divider />
+                  <MenuButtonStandard
                     onClickEvent={() => {
                       setButtonStatus('Checking...');
                       submitChecks(SignupMutation);
                     }}
                     title={buttonStatus}
-                    disabled={false}
-                    icon=""
-                    iconPos="right"
-                    type="button"
-                    color="primary"
-                    styleOverride={null}
                   />
                 </div>
               );

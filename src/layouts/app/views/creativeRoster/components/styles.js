@@ -99,7 +99,7 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
 
     '&:hover': {
-      background: theme.palette.error.main,
+      background: theme.palette.primary.main,
       color: '#fff',
     },
   },

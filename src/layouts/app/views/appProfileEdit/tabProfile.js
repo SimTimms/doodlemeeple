@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
-import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { ProfileHeader } from './components/profileHeader';
 import {
   AddSection,
   IconTitle,
   InlineHeader,
-  FieldTitle,
+  FieldBox,
   DMCard,
   LoadIcon,
-  FieldBox,
-  IconButton,
+  InputLabel,
   Row,
   Divider,
   RoleObject,
@@ -23,7 +21,7 @@ import { toaster } from '../../../../utils/toaster';
 import autosave from '../../../../utils/autosave';
 import * as social from '../../../../assets/social';
 import SocialHeader from './socialHeader';
-import ContactHeader from './contactHeader';
+import { randomKey } from '../../../../utils';
 
 export default function TabProfile({
   profile,
@@ -115,9 +113,9 @@ export default function TabProfile({
                     <IconTitle icon="face" title="About Me" />
                   </InlineHeader>
                   <div style={{ padding: 10 }}>
-                    <FieldTitle
-                      name="Feature Image"
-                      description="Use this space to showcase your most impressive artwork, "
+                    <InputLabel
+                      title="Feature Image"
+                      info="Use this space to showcase your most impressive artwork, "
                       warning="PNG or JPG | optimum size 1920 x 300px | 2MB Max"
                       inline={false}
                     />
@@ -135,6 +133,7 @@ export default function TabProfile({
                     />
                   </div>
                 </DMCard>
+                {/*
                 <DMCard>
                   <InlineHeader>
                     <IconTitle icon="work" title="My Roles" />
@@ -159,19 +158,13 @@ export default function TabProfile({
                       />
                     </Row>
                   </div>
-                </DMCard>
+                      </DMCard>*/}
                 <DMCard>
                   <InlineHeader>
-                    <IconTitle icon="link" title="Contact" />
+                    <IconTitle icon="mail" title="Contact" />
                   </InlineHeader>
                   <div style={{ padding: 10 }}>
-                    <ContactHeader
-                      profile={profile}
-                      visible={visible}
-                      setVisible={setVisible}
-                    />
-                    <Divider />
-                    <Row v={!visible.publicEmail && 'none'} mb={10}>
+                    <Row mb={10}>
                       <FieldBox
                         value={profile.publicEmail}
                         title="Public Email"
@@ -181,14 +174,13 @@ export default function TabProfile({
                           autosave(SignupMutation, 'publicEmail');
                         }}
                         replaceMode="loose"
-                        placeholder=""
-                        info=""
-                        warning=""
+                        placeholder="my.email@hotmail.com"
+                        info="This will be displayed to all users, both registered and those that visit the site as guests."
+                        warning="We won't use this to contact you but others may, we'd recommend leaving this blank if you don't want unsolicited contact"
                         size="s"
-                        icon={social.iconEmail}
                       />
                     </Row>
-                    <Row v={!visible.website && 'none'} mb={10}>
+                    <Row mb={10}>
                       <FieldBox
                         value={profile.website}
                         title="Website"
@@ -198,28 +190,26 @@ export default function TabProfile({
                           autosave(SignupMutation, 'website');
                         }}
                         replaceMode="loose"
-                        placeholder=""
-                        info=""
+                        placeholder="https://mywebsite.com"
+                        info="Your website, or social media page"
                         warning=""
                         size="s"
-                        icon={social.iconWebsite}
                       />
                     </Row>
-                    <Row v={!visible.skype && 'none'} mb={10}>
+                    <Row mb={10}>
                       <FieldBox
                         value={profile.skype}
                         title="Skype"
-                        maxLength={256}
+                        maxLength={86}
                         onChangeEvent={(e) => {
                           setProfile({ ...profile, skype: e });
                           autosave(SignupMutation, 'skype');
                         }}
                         replaceMode="loose"
                         placeholder=""
-                        info=""
-                        warning=""
+                        info="Your Skype ID, this will be visible to all users."
+                        warning="We won't use this to contact you but others may, we'd recommend leaving this blank if you don't want unsolicited contact"
                         size="s"
-                        icon={social.socialSkype}
                       />
                     </Row>
                   </div>
@@ -308,7 +298,7 @@ export default function TabProfile({
                 </DMCard>
                 {sections &&
                   sections.map((section, index) => (
-                    <DMCard>
+                    <DMCard key={randomKey()}>
                       <GallerySection
                         key={`section_${index}`}
                         index={index}

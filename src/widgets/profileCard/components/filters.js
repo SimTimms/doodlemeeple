@@ -1,7 +1,6 @@
 import React from 'react';
-import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
-import { LoadIcon, MenuButtonShortcut, Row } from '../../../components';
+import { LoadIcon, MenuButtonTab, Row } from '../../../components';
 import {
   TYPE_HELPER,
   CREATOR_TYPES,
@@ -25,134 +24,92 @@ export default function Filters({
   return loading ? (
     <LoadIcon />
   ) : (
-    <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-      <div className={classes.filterRoot}>
-        <Row j="center">
-          <MenuButtonShortcut
-            text={{
-              name: 'Visual & Creative',
-              color: '#222',
-              icon: null,
-              count: 0,
-            }}
-            onClickEvent={() => {
-              setGroup('artist');
-            }}
-            active={group === 'artist'}
-          />
-          <MenuButtonShortcut
-            text={{
-              name: 'Marketing',
-              color: '#222',
-              icon: null,
-              count: 0,
-            }}
-            onClickEvent={() => {
-              setGroup('marketing');
-            }}
-            active={group === 'marketing'}
-          />
-          <MenuButtonShortcut
-            text={{
-              name: 'Development',
-              color: '#222',
-              icon: null,
-              count: 0,
-            }}
-            onClickEvent={() => {
-              setGroup('development');
-            }}
-            active={group === 'development'}
-          />
-          <MenuButtonShortcut
-            text={{
-              name: 'Industry',
-              color: '#222',
-              icon: null,
-              count: 0,
-            }}
-            onClickEvent={() => {
-              setGroup('industry');
-            }}
-            active={group === 'industry'}
-          />
-        </Row>
-        <div className={classes.divider}></div>
-        <Row j="center">
-          {group === 'artist' &&
-            ARTIST_TYPES.map((type) => (
-              <MenuButtonShortcut
-                text={{
-                  name: TYPE_HELPER(type),
-                  color: '#222',
-                  icon: null,
-                  count: 0,
-                }}
-                onClickEvent={() => {
-                  setFilter([type]);
-                  type !== filter[0] && setCreativeArray([]);
-                  setPage(0);
-                  setEndPage(false);
-                }}
-                active={filter[0] === type}
-              />
-            ))}
-          {group === 'marketing' &&
-            MARKETING_TYPES.map((type) => (
-              <MenuButtonShortcut
-                text={{
-                  name: TYPE_HELPER(type),
-                  color: '#222',
-                  icon: null,
-                  count: 0,
-                }}
-                onClickEvent={() => {
-                  setFilter([type]);
-                  type !== filter[0] && setCreativeArray([]);
-                  setPage(0);
-                  setEndPage(false);
-                }}
-                active={filter[0] === type}
-              />
-            ))}
-          {group === 'development' &&
-            DEVELOPMENT_TYPES.map((type) => (
-              <MenuButtonShortcut
-                text={{
-                  name: TYPE_HELPER(type),
-                  color: '#222',
-                  icon: null,
-                  count: 0,
-                }}
-                onClickEvent={() => {
-                  setFilter([type]);
-                  type !== filter[0] && setCreativeArray([]);
-                  setPage(0);
-                  setEndPage(false);
-                }}
-                active={filter[0] === type}
-              />
-            ))}
-          {group === 'industry' &&
-            CREATOR_TYPES.map((type) => (
-              <MenuButtonShortcut
-                text={{
-                  name: TYPE_HELPER(type),
-                  color: '#222',
-                  icon: null,
-                  count: 0,
-                }}
-                onClickEvent={() => {
-                  setFilter([type]);
-                  type !== filter[0] && setCreativeArray([]);
-                  setPage(0);
-                  setEndPage(false);
-                }}
-                active={filter[0] === type}
-              />
-            ))}
-        </Row>
-      </div>
-    </Slide>
+    <div className={classes.filterRoot}>
+      <Row j="center">
+        <MenuButtonTab
+          title="Visual & Creative"
+          onClickEvent={() => {
+            setGroup('artist');
+          }}
+          active={group === 'artist'}
+        />
+        <MenuButtonTab
+          title="Marketing"
+          onClickEvent={() => {
+            setGroup('marketing');
+          }}
+          active={group === 'marketing'}
+        />
+        <MenuButtonTab
+          title="Development"
+          onClickEvent={() => {
+            setGroup('development');
+          }}
+          active={group === 'development'}
+        />
+        <MenuButtonTab
+          title="Industry"
+          onClickEvent={() => {
+            setGroup('industry');
+          }}
+          active={group === 'industry'}
+        />
+      </Row>
+      <div className={classes.divider}></div>
+      <Row j="center">
+        {group === 'artist' &&
+          ARTIST_TYPES.map((type) => (
+            <MenuButtonTab
+              title={TYPE_HELPER(type)}
+              onClickEvent={() => {
+                setFilter([type]);
+                type !== filter[0] && setCreativeArray([]);
+                setPage(0);
+                setEndPage(false);
+              }}
+              active={filter[0] === type}
+            />
+          ))}
+        {group === 'marketing' &&
+          MARKETING_TYPES.map((type) => (
+            <MenuButtonTab
+              title={TYPE_HELPER(type)}
+              onClickEvent={() => {
+                setFilter([type]);
+                type !== filter[0] && setCreativeArray([]);
+                setPage(0);
+                setEndPage(false);
+              }}
+              active={filter[0] === type}
+            />
+          ))}
+        {group === 'development' &&
+          DEVELOPMENT_TYPES.map((type) => (
+            <MenuButtonTab
+              title={TYPE_HELPER(type)}
+              onClickEvent={() => {
+                setFilter([type]);
+                type !== filter[0] && setCreativeArray([]);
+                setPage(0);
+                setEndPage(false);
+              }}
+              active={filter[0] === type}
+            />
+          ))}
+        {group === 'industry' &&
+          CREATOR_TYPES.map((type) => (
+            <MenuButtonTab
+              title={TYPE_HELPER(type)}
+              onClickEvent={() => {
+                setFilter([type]);
+                type !== filter[0] && setCreativeArray([]);
+                setPage(0);
+                setEndPage(false);
+              }}
+              active={filter[0] === type}
+            />
+          ))}
+      </Row>
+    </div>
   );
 }

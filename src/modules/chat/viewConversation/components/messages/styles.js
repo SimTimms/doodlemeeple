@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     bottom: 0,
     left: 0,
-    paddingLeft: 140,
+    paddingLeft: 200,
     borderRadius: 0,
   },
   createMessageMobile: {

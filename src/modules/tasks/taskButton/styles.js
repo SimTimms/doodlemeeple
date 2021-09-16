@@ -24,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
     '&:hover': { background: theme.palette.secondary.light },
   },
   warning: {
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     '&:hover': { background: theme.palette.error.light },
   },
   grey: {

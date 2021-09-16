@@ -205,6 +205,7 @@ export const INVITES = gql`
   query GetInvites($status: [String]) {
     invitesByUser(status: $status) {
       status
+      createdAt
       messages
       _id
       receiver {
@@ -485,6 +486,7 @@ export const PROFILE = gql`
       _id
       name
       summary
+      lastOn
       badges {
         badgeType
       }
@@ -508,7 +510,6 @@ export const PROFILE = gql`
       publicEmail
       skype
       phone
-
       sections {
         _id
         summary
@@ -541,7 +542,7 @@ export const PROFILE = gql`
 
 export const PROFILE_PREVIEW = gql`
   query ProfilePreview($userId: MongoID!) {
-    userById(_id: $userId) {
+    userByIdWithTracker(_id: $userId) {
       _id
       name
       summary
@@ -557,6 +558,12 @@ export const PROFILE_PREVIEW = gql`
       twitter
       linkedIn
       instagram
+      badges {
+        badgeType
+        link
+        badgeIcon
+        description
+      }
       likedMe {
         _id
         receiver {

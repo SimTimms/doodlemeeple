@@ -56,7 +56,7 @@ export default function InviteComponentDash({
             back: 'primary',
           }}
           onClickEvent={() => {
-            history.push(`/public-preview/${user._id}`);
+            history.push(`/user-profile/${user._id}`);
           }}
           active={false}
         />

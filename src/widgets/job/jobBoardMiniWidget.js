@@ -2,19 +2,12 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { JOB_BOARD_MINI_WIDGET } from './data';
 import { JobProfileMini } from './profileCard';
-import { Row } from '../../components';
+import { Grid } from '../../components';
 
 export default function JobBoardMiniWidget({ ...props }) {
   const { history } = props;
   return (
-    <Row
-      wrap="wrap"
-      j="space-around"
-      a="flex-start"
-      pb="20px"
-      pl="20px"
-      pr="20px"
-    >
+    <Grid cols={3}>
       <Query query={JOB_BOARD_MINI_WIDGET} fetchPolicy="network-only">
         {({ data }) => {
           if (data)
@@ -28,6 +21,6 @@ export default function JobBoardMiniWidget({ ...props }) {
           return null;
         }}
       </Query>
-    </Row>
+    </Grid>
   );
 }

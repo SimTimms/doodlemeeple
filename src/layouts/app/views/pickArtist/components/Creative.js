@@ -31,13 +31,15 @@ export default function Creative({
               </Typography>
               <ProfileCard
                 history={history}
-                creative={data.userById}
+                creative={data.userByIdWithTracker}
                 favourite={
-                  favourites.indexOf(data.userById._id) > -1 ? true : false
+                  favourites.indexOf(data.userByIdWithTracker._id) > -1
+                    ? true
+                    : false
                 }
                 jobId={job._id}
                 invite={inviteList.filter((filterItem) => {
-                  return filterItem._id === data.userById._id;
+                  return filterItem._id === data.userByIdWithTracker._id;
                 })}
                 updateInviteList={updateInviteList}
                 removeInviteList={removeInviteList}

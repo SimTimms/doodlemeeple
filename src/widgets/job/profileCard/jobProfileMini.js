@@ -8,8 +8,7 @@ import { Column, Row } from '../../../components';
 import { nameShortener } from '../../../utils';
 import Cookies from 'js-cookie';
 import PublicProfileButton from './components/publicProfileButton';
-import AppProfileButton from './components/appProfileButton';
-import dmDevice from '../../../assets/dmDevice.png';
+import JobDescriptionButton from './components/jobDescriptionButton';
 
 export default function JobProfileMini({ job, history }) {
   const userId = Cookies.get('userId');
@@ -25,15 +24,10 @@ export default function JobProfileMini({ job, history }) {
         <Column j="flex-start">
           <BgImg previewImage={job.backgroundImg} onClick={() => {}} />
           <Row a="center" j="center" mt={5}>
-            {job.isExternal ? (
+            {job.isExternal && (
               <Row className={classes.external} mr={5}>
                 <Icon>link</Icon>
               </Row>
-            ) : (
-              <div
-                className={classes.externalDm}
-                style={{ backgroundImage: `url(${dmDevice})` }}
-              ></div>
             )}
             <Typography className={classes.jobName}>{job.name}</Typography>
           </Row>
@@ -62,7 +56,7 @@ export default function JobProfileMini({ job, history }) {
         {!userId && !job.isExternal ? (
           <PublicProfileButton jobId={job._id} />
         ) : userId && !job.isExternal ? (
-          <AppProfileButton jobId={job._id} history={history} />
+          <JobDescriptionButton jobId={job._id} history={history} />
         ) : (
           job.isExternal && (
             <Column>

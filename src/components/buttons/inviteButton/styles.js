@@ -8,6 +8,6 @@ export const useStyles = makeStyles((theme) => ({
   rootOn: {
     background: theme.palette.secondary.main,
   },
-  iconOn: { color: theme.palette.error.main },
+  iconOn: { color: theme.palette.primary.main },
   iconOff: { color: '#444' },
 }));

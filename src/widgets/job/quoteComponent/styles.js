@@ -14,8 +14,17 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  dull: { color: theme.palette.primary.main },
-  red: { color: theme.palette.error.main },
+  dull: {
+    color: '#fff',
+    background: theme.palette.primary.dark,
+    padding: 3,
+    borderRadius: 2,
+    marginTop: 3,
+  },
+  red: {
+    background: theme.palette.secondary.main,
+    color: theme.palette.primary.dark,
+  },
   green: { color: theme.palette.secondary.main },
   profileThumb: {
     backgroundColor: '#ddd',
@@ -33,6 +42,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     position: 'relative',
   },
+  unseen: { border: `2px solid ${theme.palette.secondary.main}` },
   countsStyle: {
     position: 'absolute',
     top: -5,
@@ -45,7 +55,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     color: '#fff',
     zIndex: 10,
   },
@@ -79,7 +89,7 @@ export const useStyles = makeStyles((theme) => ({
   cardSummaryNeutral: {
     color: theme.palette.primary.main,
   },
-  cardSummaryWarning: { color: theme.palette.error.main },
+  cardSummaryWarning: { color: theme.palette.primary.main },
   cardSummaryGood: { color: theme.palette.secondary.main },
   cardSummaryAmber: { color: theme.palette.warning.main },
   cardEmpty: {

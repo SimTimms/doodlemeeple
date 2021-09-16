@@ -4,15 +4,8 @@ export const useStyles = makeStyles((theme) => ({
   noticeArea: {
     width: '100%',
     display: 'flex',
-    minHeight: 'calc(100vh - 104px)',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center',
-    background:
-      'linear-gradient(180deg, rgba(52,190,177,1) 0%, rgba(52,190,177,1) 53%, rgba(39,168,156,1) 100%)',
-    '& h4': { color: '#fff' },
-  },
-  noticeAreaWithSubMenu: {
-    minHeight: 'calc(100vh - 124px)',
   },
 }));

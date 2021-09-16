@@ -29,7 +29,15 @@ export default function SubmitBrief({ job, history, inviteList }) {
         jobId: job._id,
       }}
       onCompleted={() => {
-        history.push('/app/submitted');
+        menu.updateMenuContext({
+          ...menu,
+          jobPage: {
+            ...menu.jobPage,
+            primaryPage: 'job_posts',
+            secondaryPage: 'job_ads_secondary',
+            jobId: null,
+          },
+        });
       }}
     >
       {(mutation) => {
@@ -52,8 +60,8 @@ export default function SubmitBrief({ job, history, inviteList }) {
                   paddingBottom: 10,
                 }}
               >
-                You will be unable to modify this project or send invites to any
-                other creatives after this stage.
+                You will be unabled to modify this project or send invites to
+                any other creatives after this stage.
               </Typography>
 
               <IconButton

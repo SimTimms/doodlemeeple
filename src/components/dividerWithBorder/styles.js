@@ -5,7 +5,6 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     marginTop: 10,
     marginBottom: 10,
-    display: 'flex',
-    borderTop: `1px dotted ${theme.palette.primary.light}`,
+    borderTop: `1px solid rgba(0,0,0,0.05)`,
   },
 }));

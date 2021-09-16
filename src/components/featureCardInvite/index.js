@@ -44,7 +44,7 @@ export default function FeatureCardInvite({
                   variant="h6"
                   className={classes.link}
                   onClick={() => {
-                    history.push(`/public-preview/${authorId}`);
+                    history.push(`/user-profile/${authorId}`);
                   }}
                 >{`Invite from ${author}`}</Typography>
               </div>

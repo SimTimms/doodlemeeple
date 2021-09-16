@@ -22,13 +22,13 @@ export default function FullContractViewWidget({ quoteId, history }) {
               <CardComponent>
                 <Column>
                   <Column w={500}>
-                    <Typography variant="h5">Quote Details</Typography>
+                    <Typography variant="h3">Quote Details</Typography>
                     <Column a="flex-start">
                       <Typography className={classes.title}>
                         Creative
                       </Typography>
                       <a
-                        href={`${process.env.REACT_APP_URL}/public-preview/${data.contractById.user._id}`}
+                        href={`${process.env.REACT_APP_URL}/user-profile/${data.contractById.user._id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{

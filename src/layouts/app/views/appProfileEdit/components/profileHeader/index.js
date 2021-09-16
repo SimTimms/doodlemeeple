@@ -4,7 +4,6 @@ import { useStyles } from './styles';
 import clsx from 'clsx';
 import {
   Uploader,
-  FieldTitle,
   ErrorBox,
   FieldBox,
   Row,
@@ -56,12 +55,7 @@ export function ProfileHeader({
           size="1920 x 300"
         />
       </div>
-      <FieldTitle
-        name="You"
-        description="Provide your name and a photo or image of you, then tell everyone about yourself"
-        warning="PNG or JPG | optimum size 140 x 140 | 2MB Max"
-        inline={false}
-      />
+
       <Row>
         <div
           className={clsx({
@@ -116,7 +110,7 @@ export function ProfileHeader({
             }}
             replaceMode="loose"
             placeholder="Example: David Jones"
-            info="Your name"
+            info="Your name, company name, callsign, alias, etc.."
             warning=""
             size="s"
             multiline={false}
@@ -132,7 +126,7 @@ export function ProfileHeader({
             }}
             replaceMode="loose"
             placeholder="Example: Digital artist with 12 years experience..."
-            info="Coming Soon"
+            info="Tell everyone about who you are and what you do. Keep it concise, you can go into more detail about your skills in later sections"
             warning=""
             size="s"
             multiline={true}

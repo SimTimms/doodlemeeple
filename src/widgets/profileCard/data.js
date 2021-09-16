@@ -10,7 +10,7 @@ export const PROFILE_IMAGES = gql`
 
 export const PROFILE_PREVIEW = gql`
   query ProfilePreview($userId: MongoID!) {
-    userById(_id: $userId) {
+    userByIdWithTracker(_id: $userId) {
       _id
       name
       summary
@@ -26,23 +26,11 @@ export const PROFILE_PREVIEW = gql`
       twitter
       linkedIn
       instagram
-      likedMe {
-        _id
-        receiver {
-          _id
-        }
-        user {
-          _id
-        }
-      }
-      favourites {
-        _id
-        receiver {
-          _id
-        }
-        user {
-          _id
-        }
+      badges {
+        badgeType
+        link
+        badgeIcon
+        description
       }
       sections {
         _id

@@ -5,49 +5,49 @@ import { QUOTE_VIEW_WIDGET } from './data';
 import {
   Column,
   CardComponent,
-  IconButton,
+  MenuButtonStandard,
   DividerMini,
   Row,
+  Avatar,
 } from '../../components';
-import { DECLINE_CONTRACT } from '../../data/mutations';
+import { DECLINE_CONTRACT, SIGN_CONTRACT } from '../../data/mutations';
 import { useStyles } from './styles';
 import { ChatViewByJob } from '../../modules/chat';
+import { MenuContext } from '../../context';
 
-export default function QuoteViewWidget({ quoteId, history }) {
+export default function QuoteViewWidget({ quoteId }) {
   const classes = useStyles();
   const [conversationUser, setConversationUser] = React.useState(null);
   return (
-    <Column w={500}>
-      <Query
-        query={QUOTE_VIEW_WIDGET}
-        variables={{ id: quoteId }}
-        fetchPolicy="network-only"
-      >
-        {({ data }) => {
-          if (data)
-            return (
-              <CardComponent>
-                {conversationUser ? (
-                  <ChatViewByJob
-                    job={data.contractById.job}
-                    conversationUser={conversationUser}
-                    setConversationUser={setConversationUser}
-                    history={history}
-                  />
-                ) : (
+    <Column>
+      <Column w={500}>
+        <Query
+          query={QUOTE_VIEW_WIDGET}
+          variables={{ id: quoteId }}
+          fetchPolicy="network-only"
+        >
+          {({ data }) => {
+            if (data)
+              return conversationUser ? (
+                <ChatViewByJob
+                  job={data.contractById.job}
+                  conversationUser={conversationUser}
+                  setConversationUser={setConversationUser}
+                />
+              ) : (
+                <CardComponent>
                   <Column>
                     <Column w={500}>
-                      <Typography variant="h5">Quote Details</Typography>
+                      <Typography variant="h4">Quote Details</Typography>
                       <Column a="flex-start">
                         <Row>
-                          <img
-                            src={data.contractById.user.profileImg}
-                            className={classes.avatar}
-                            alt="Profile"
+                          <Avatar
+                            profileImg={data.contractById.user.profileImg}
+                            size={40}
                           />
                           <Column>
                             <a
-                              href={`${process.env.REACT_APP_URL}/public-preview/${data.contractById.user._id}`}
+                              href={`${process.env.REACT_APP_URL}/user-profile/${data.contractById.user._id}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               style={{
@@ -92,15 +92,12 @@ export default function QuoteViewWidget({ quoteId, history }) {
                               </a>
                             )}
                           </Column>
-                          <IconButton
+                          <MenuButtonStandard
                             icon="chat"
-                            color="warning"
                             title="Chat"
                             onClickEvent={() =>
                               setConversationUser(data.contractById.user)
                             }
-                            active={false}
-                            styleOverride={{ marginRight: 10 }}
                           />
                         </Row>
                       </Column>
@@ -140,56 +137,76 @@ export default function QuoteViewWidget({ quoteId, history }) {
                       </Column>
                     </Column>
 
-                    <IconButton
-                      title="Interested"
-                      color="primary"
-                      icon="keyboard_arrow_right"
-                      disabled={false}
-                      onClickEvent={() => {
-                        history.push(
-                          `/app/view-sign-full-contract/${data.contractById._id}`
-                        );
-                      }}
-                      styleOverride={{ margin: 'auto', width: 200 }}
-                      type="button"
-                      iconPos="right"
-                    />
-                    <DividerMini />
-                    <Mutation
-                      mutation={DECLINE_CONTRACT}
-                      variables={{
-                        contractId: data.contractById._id,
-                      }}
-                      onCompleted={() =>
-                        history.push(
-                          `/app/view-job/${data.contractById.job._id}`
-                        )
-                      }
-                    >
-                      {(mutation) => {
-                        return (
-                          <IconButton
-                            title="Decline"
-                            color="warning"
-                            icon="thumb_down"
-                            disabled={false}
-                            onClickEvent={() => {
-                              mutation();
+                    <MenuContext.Consumer>
+                      {(menu) => (
+                        <Column w={200}>
+                          <Mutation
+                            mutation={SIGN_CONTRACT}
+                            variables={{
+                              contractId: data.contractById._id,
                             }}
-                            styleOverride={{ margin: 'auto', width: 200 }}
-                            type="button"
-                            iconPos="right"
-                          />
-                        );
-                      }}
-                    </Mutation>
-                  </Column>
-                )}
-              </CardComponent>
-            );
-          return null;
-        }}
-      </Query>
+                            onCompleted={() =>
+                              menu.updateMenuContext({
+                                ...menu,
+                                jobPage: {
+                                  ...menu.jobPage,
+                                  secondaryPage: 'job_dashboard',
+                                  contractId: null,
+                                },
+                              })
+                            }
+                          >
+                            {(mutation) => (
+                              <MenuButtonStandard
+                                title="Accept"
+                                fullWidth={true}
+                                icon="thumb_up"
+                                onClickEvent={() => {
+                                  mutation();
+                                }}
+                              />
+                            )}
+                          </Mutation>
+                          <DividerMini />
+                          <Mutation
+                            mutation={DECLINE_CONTRACT}
+                            variables={{
+                              contractId: data.contractById._id,
+                            }}
+                            onCompleted={() =>
+                              menu.updateMenuContext({
+                                ...menu,
+                                jobPage: {
+                                  ...menu.jobPage,
+                                  secondaryPage: 'job_dashboard',
+                                  contractId: null,
+                                },
+                              })
+                            }
+                          >
+                            {(mutation) => {
+                              return (
+                                <MenuButtonStandard
+                                  title="Decline"
+                                  fullWidth={true}
+                                  icon="thumb_down"
+                                  onClickEvent={() => {
+                                    mutation();
+                                  }}
+                                />
+                              );
+                            }}
+                          </Mutation>
+                        </Column>
+                      )}
+                    </MenuContext.Consumer>
+                  </Column>{' '}
+                </CardComponent>
+              );
+            return null;
+          }}
+        </Query>
+      </Column>
     </Column>
   );
 }

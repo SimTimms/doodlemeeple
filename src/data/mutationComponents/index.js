@@ -1,8 +1,13 @@
 import React from 'react';
 import { Mutation } from 'react-apollo';
-import { Form, FormInput, ErrorBox, IconButton } from '../../components';
+import {
+  Form,
+  ErrorBox,
+  MenuButtonStandard,
+  Divider,
+  FieldBox,
+} from '../../components';
 import * as AUTH from '../authorisation';
-import * as LENGTHS from '../../utils/dataLengths';
 import Cookies from 'js-cookie';
 import { readableErrors } from '../../utils/readableErrors';
 import jwtDecode from 'jwt-decode';
@@ -42,7 +47,7 @@ export const MutationLogin = ({ parameters }) => {
           ) {
             history.replace(forwardTo.pathname);
           } else {
-            history.replace('/app/tasks');
+            history.replace('/app/home');
           }
         }
       }}
@@ -54,50 +59,45 @@ export const MutationLogin = ({ parameters }) => {
       {(LoginMutation) => {
         return (
           <Form width={200} onSubmit={(item) => alert}>
-            <FormInput
-              fieldName="emailAddress"
-              fieldValue={email}
-              setFieldValue={setEmail}
-              fieldTitle={`Email ${
-                email ? `(${LENGTHS.PROFILE_EMAIL - email.length})` : ''
-              }`}
-              inputProps={{ maxLength: LENGTHS.PROFILE_EMAIL }}
-              onKeyPress={(event) => {
-                if (event.key === 'Enter') {
-                  loginSubmit(LoginMutation);
-                }
+            <FieldBox
+              value={email}
+              title="Email Address"
+              maxLength={226}
+              onChangeEvent={(e) => {
+                setEmail(e);
               }}
+              replaceMode={null}
+              placeholder="Example: something@email.com"
+              info="The email address you used to register with DoodleMeeple"
+              warning=""
+              size="s"
+              multiline={false}
             />
-            <FormInput
-              fieldName="password"
-              fieldValue={password}
-              setFieldValue={setPassword}
+            <Divider />
+            <FieldBox
+              value={password}
+              title="Password"
+              maxLength={226}
+              onChangeEvent={(e) => {
+                setPassword(e);
+              }}
+              replaceMode={null}
+              placeholder="Example: SecretPassword123!"
+              info="The password you used to register with DoodleMeeple"
+              warning=""
+              size="s"
+              multiline={false}
               type="password"
-              fieldTitle={`Password ${
-                password
-                  ? `(${LENGTHS.PROFILE_PASSWORD - password.length})`
-                  : ''
-              }`}
-              inputProps={{ maxLength: LENGTHS.PROFILE_PASSWORD }}
-              onKeyPress={(event) => {
-                if (event.key === 'Enter') {
-                  loginSubmit(LoginMutation);
-                }
-              }}
             />
+
             <ErrorBox errorMsg={errors.passwordError} />
             <ErrorBox errorMsg={errors.noUserError} />
-            <IconButton
+            <Divider />
+            <MenuButtonStandard
               title={loginStatus}
-              icon="login"
-              disabled={false}
-              color="primary"
               onClickEvent={() => {
                 loginSubmit(LoginMutation);
               }}
-              styleOverride={null}
-              type="button"
-              iconPos="right"
             />
           </Form>
         );

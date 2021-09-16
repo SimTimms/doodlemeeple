@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 500,
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
@@ -13,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: 14,
   },
   status: {
-    border: `2px solid ${theme.palette.error.main}`,
+    border: `2px solid ${theme.palette.primary.main}`,
     padding: 10,
     color: '#222',
     borderRadius: 5,
@@ -21,7 +20,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   iconButton: {
     cursor: 'pointer',
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     padding: 5,
     margin: 5,
     color: '#fff',

@@ -1,12 +1,8 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { Column, IconButton } from '../';
+import { Column } from '../';
 
-export default function ProjectComponentDash({
-  jobName,
-  jobSummary,
-  setTabNbr,
-}) {
+export default function ProjectComponentDash({ jobName, jobSummary }) {
   return (
     <Column j="space-between" a="center">
       <Column j="space-between" a="center">
@@ -14,13 +10,6 @@ export default function ProjectComponentDash({
         <Typography variant="body1" style={{ fontSize: 12 }}>
           {jobSummary}
         </Typography>
-        <IconButton
-          icon="work"
-          title="Project Details"
-          onClickEvent={() => setTabNbr(1)}
-          active={false}
-          styleOverride={{ width: '100%' }}
-        />
       </Column>
     </Column>
   );

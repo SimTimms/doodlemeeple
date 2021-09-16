@@ -3,109 +3,58 @@ import { Query } from 'react-apollo';
 import { KICKSTARTER_WIDGET, MY_KICKSTARTERS } from './data';
 import { KickstarterProfile } from './profileCard';
 import { KickstarterForm } from './';
-import {
-  Row,
-  MenuButtonShortcut,
-  TopMenuWrapper,
-  Column,
-  IconButton,
-} from '../../components';
+import { Row, Grid, Column, CardComponent } from '../../components';
 import KickstarterComponent from './component';
+import { MenuContext } from '../../context';
+import { Typography } from '@material-ui/core';
 
 export default function Kickstarters() {
-  const [tab, setTab] = React.useState(0);
-  const [kickstarter, setKickstarter] = React.useState(null);
-
   return (
-    <Column>
-      <TopMenuWrapper j="center">
-        <MenuButtonShortcut
-          text={{
-            name: 'Browse',
-            color: 'light',
-            icon: 'travel_explore',
-            count: 0,
-          }}
-          onClickEvent={() => {
-            setKickstarter(null);
-            setTab(0);
-          }}
-          active={tab === 0}
-          column={true}
-        />
-        <MenuButtonShortcut
-          text={{
-            name: 'My Kickstarters',
-            color: 'light',
-            icon: 'travel_explore',
-            count: 0,
-          }}
-          onClickEvent={() => {
-            setKickstarter(null);
-            setTab(1);
-          }}
-          active={tab === 1}
-          column={true}
-        />
-      </TopMenuWrapper>
+    <MenuContext.Consumer>
+      {(menu) => (
+        <Row wrap="wrap" a="flex-start" j="space-around" w="100%">
+          {menu.homePage.secondaryPage === 'create_kickstarter' ? (
+            <KickstarterForm />
+          ) : menu.homePage.secondaryPage === 'kickstarters' ? (
+            <Grid cols={3}>
+              <Query query={KICKSTARTER_WIDGET} fetchPolicy="network-only">
+                {({ data }) => {
+                  if (data)
+                    return data.kickstarterWidget.map((kickstarter) => (
+                      <KickstarterProfile kickstarter={kickstarter} />
+                    ));
 
-      {kickstarter ? (
-        <KickstarterForm
-          kickstarterData={kickstarter}
-          setKickstarterData={setKickstarter}
-        />
-      ) : tab === 0 ? (
-        <Row
-          wrap="wrap"
-          j="space-around"
-          a="flex-start"
-          pb="20px"
-          pl="20px"
-          pr="20px"
-        >
-          <Query query={KICKSTARTER_WIDGET} fetchPolicy="network-only">
-            {({ data, loading }) => {
-              if (data)
-                return data.kickstarterWidget.map((kickstarter) => (
-                  <KickstarterProfile kickstarter={kickstarter} />
-                ));
-              return null;
-            }}
-          </Query>
+                  return null;
+                }}
+              </Query>
+            </Grid>
+          ) : (
+            menu.homePage.secondaryPage === 'my_kickstarters' && (
+              <Column>
+                <Query query={MY_KICKSTARTERS} fetchPolicy="network-only">
+                  {({ data }) => {
+                    if (data)
+                      if (data.myKickstarters.length === 0) {
+                        return (
+                          <CardComponent type="dark">
+                            <Typography>
+                              You haven't posted any kickstarters
+                            </Typography>
+                          </CardComponent>
+                        );
+                      } else {
+                        return data.myKickstarters.map((kickstarter) => (
+                          <KickstarterComponent kickstarter={kickstarter} />
+                        ));
+                      }
+                    return null;
+                  }}
+                </Query>
+              </Column>
+            )
+          )}
         </Row>
-      ) : (
-        tab === 1 && (
-          <Column>
-            <IconButton
-              title="Create Kickstarter Ad"
-              icon="add"
-              onClickEvent={() => {
-                setKickstarter({
-                  name: '',
-                  logo: '',
-                  featuredImage: '',
-                  summary: '',
-                  url: '',
-                  showreel: '',
-                  _id: 'new',
-                });
-              }}
-            />
-            <Query query={MY_KICKSTARTERS} fetchPolicy="network-only">
-              {({ data, loading }) => {
-                if (data)
-                  return data.myKickstarters.map((kickstarter) => (
-                    <KickstarterComponent
-                      kickstarter={kickstarter}
-                      setKickstarter={setKickstarter}
-                    />
-                  ));
-                return null;
-              }}
-            </Query>
-          </Column>
-        )
       )}
-    </Column>
+    </MenuContext.Consumer>
   );
 }

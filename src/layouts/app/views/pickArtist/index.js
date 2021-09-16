@@ -4,7 +4,7 @@ import { Query } from 'react-apollo';
 import { JOB } from '../../../../data/queries';
 import { ArtistLineup, Creatives, Creative } from './components';
 
-export function PickArtist({ jobId, history, favourites, creativeId }) {
+export function PickArtist({ jobId, favourites, creativeId }) {
   const classes = useStyles();
   const [job, setJob] = React.useState({
     name: '',
@@ -22,7 +22,6 @@ export function PickArtist({ jobId, history, favourites, creativeId }) {
     submitted: false,
   });
   const [inviteList, setInviteList] = React.useState([]);
-
   function updateInviteList(newItem, inviteId) {
     setInviteList([
       ...inviteList,
@@ -45,13 +44,11 @@ export function PickArtist({ jobId, history, favourites, creativeId }) {
       <ArtistLineup
         removeInviteList={removeInviteList}
         inviteList={inviteList}
-        history={history}
         job={job}
       />
 
       {creativeId && (
         <Creative
-          history={history}
           favourites={favourites}
           job={job}
           inviteList={inviteList}
@@ -62,7 +59,6 @@ export function PickArtist({ jobId, history, favourites, creativeId }) {
       )}
       <div style={{ width: '100%' }}>
         <Creatives
-          history={history}
           favourites={favourites}
           job={job}
           inviteList={inviteList}

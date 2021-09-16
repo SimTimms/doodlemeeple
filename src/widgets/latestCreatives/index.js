@@ -2,8 +2,9 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Query } from 'react-apollo';
 import { LATEST_CREATIVES_WIDGET } from './data';
-import { ProfileCardMini } from '../profileCard/';
+import { ProfileCardMacro } from '../profileCard/';
 import BigImage from '../bigImage';
+import { Grid } from '../../components';
 import clsx from 'clsx';
 
 export default function LatestCreativesWidget({ ...props }) {
@@ -19,25 +20,26 @@ export default function LatestCreativesWidget({ ...props }) {
       })}
     >
       {large !== null && <BigImage large={large} setLarge={setLarge} />}
-      <Query
-        query={LATEST_CREATIVES_WIDGET}
-        fetchPolicy="network-only"
-        onCompleted={(data) => {
-          setCreativeArray([...data.latestCreativesWidget]);
-        }}
-      >
-        {() => {
-          return creativeArray.map((creative, index) => {
-            return (
-              <ProfileCardMini
-                creative={creative}
-                key={`creative_${index}`}
-                setLarge={setLarge}
-              />
-            );
-          });
-        }}
-      </Query>
+      <Grid cols={3}>
+        <Query
+          query={LATEST_CREATIVES_WIDGET}
+          fetchPolicy="network-only"
+          onCompleted={(data) => {
+            setCreativeArray([...data.latestCreativesWidget]);
+          }}
+        >
+          {() => {
+            return creativeArray.map((creative, index) => {
+              return (
+                <ProfileCardMacro
+                  creative={creative}
+                  key={`creative_${index}`}
+                />
+              );
+            });
+          }}
+        </Query>
+      </Grid>
     </div>
   );
 }

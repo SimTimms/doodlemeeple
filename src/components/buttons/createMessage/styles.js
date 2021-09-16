@@ -13,5 +13,9 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 10,
+    paddingBottom: 10,
+    cursor: 'pointer',
+    color: '#fff',
   },
 }));

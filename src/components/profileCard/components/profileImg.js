@@ -7,7 +7,7 @@ export default function ProfileImg({ history, creative }) {
 
   return (
     <a
-      href={`/public-preview/${creative._id}`}
+      href={`/user-profile/${creative._id}`}
       target="_blank"
       rel="noopener noreferrer"
     >

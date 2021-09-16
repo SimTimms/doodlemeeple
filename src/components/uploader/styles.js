@@ -24,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
 
   imageIconDelete: {
     fontSize: 20,
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     borderRadius: '50%',
     padding: 5,
   },

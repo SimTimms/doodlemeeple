@@ -31,7 +31,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   iconButtonWarning: {
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     '&:hover': {
       background: theme.palette.error.dark,
     },

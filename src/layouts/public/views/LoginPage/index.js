@@ -43,7 +43,7 @@ export default function LoginPage({ history, forwardTo }) {
       >
         <Column>
           <Typography variant="h5">Welcome</Typography>
-          <Typography>Please Login</Typography>
+          <Typography>Please login</Typography>
           <Divider />
         </Column>
         <Column>
@@ -68,7 +68,6 @@ export default function LoginPage({ history, forwardTo }) {
           <Typography
             component="p"
             style={{ textAlign: 'center', fontSize: 12, cursor: 'pointer' }}
-            color="primary"
             onClick={() => history.push('/password-forgot')}
           >
             Forgotten your password?
@@ -80,7 +79,7 @@ export default function LoginPage({ history, forwardTo }) {
             color="primary"
             onClick={() => history.push('/register')}
           >
-            Don't have an account?
+            Register
           </Typography>
         </Column>
       </CardComponent>

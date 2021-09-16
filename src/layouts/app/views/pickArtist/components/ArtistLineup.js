@@ -6,12 +6,7 @@ import { REMOVE_INVITE } from '../../../../../data/mutations';
 import { Column } from '../../../../../components';
 import SubmitBrief from './SubmitBrief';
 
-export default function ArtistLineup({
-  history,
-  removeInviteList,
-  inviteList,
-  job,
-}) {
+export default function ArtistLineup({ removeInviteList, inviteList, job }) {
   const classes = useStyles();
 
   function Fillers({ count }) {
@@ -32,12 +27,7 @@ export default function ArtistLineup({
     <Column a="center" j="center">
       <div className={classes.noticeArea}>
         <Column>
-          <Typography
-            variant="body1"
-            style={{ marginTop: 5, marginBottom: 5, color: '#fff' }}
-          >
-            Choose up to 5 Creatives
-          </Typography>
+          <Typography variant="body1">Choose up to 5 Creatives</Typography>
           <div className={classes.miniProfileActionWrapper}>
             <div className={classes.miniProfileWrapper}>
               {inviteList.map((artist, index) => (
@@ -62,12 +52,7 @@ export default function ArtistLineup({
                       );
                     }}
                   </Mutation>
-                  <div
-                    onClick={() => {
-                      history.push(`/public-preview/${artist._id}`);
-                    }}
-                    className={classes.button}
-                  >
+                  <div className={classes.button}>
                     <div
                       className={classes.miniProfile}
                       style={{
@@ -81,7 +66,7 @@ export default function ArtistLineup({
               <Fillers count={inviteList.length} />
             </div>
           </div>
-          <SubmitBrief job={job} history={history} inviteList={inviteList} />
+          <SubmitBrief job={job} inviteList={inviteList} />
         </Column>
       </div>
     </Column>

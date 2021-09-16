@@ -16,6 +16,12 @@ export default function PublicRoutes({ theme, props: { ...props } }) {
   return (
     <Switch>
       <Route
+        path="/user-profile/:pathParam"
+        render={(props) => (
+          <PreviewLayout {...props} theme={theme} publicView={true} />
+        )}
+      />
+      <Route
         path="/featured-creative-widget"
         render={(props) => <FeaturedCreativeWidget />}
       />
@@ -38,15 +44,11 @@ export default function PublicRoutes({ theme, props: { ...props } }) {
           <JobDescriptionWidget jobId={props.match.params.jobId} />
         )}
       />
-      <Route
-        path="/public-preview/:pathParam?"
-        render={(props) => (
-          <PreviewLayout {...props} theme={theme} publicView={true} />
-        )}
-      />
+
       <Route path="/about">
         <AboutLayout theme={theme} />
       </Route>
+
       <Route
         path="/:page/:token"
         render={(props) => <PublicLayout {...props} theme={theme} />}

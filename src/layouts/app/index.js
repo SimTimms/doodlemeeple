@@ -1,60 +1,65 @@
 import React, { useEffect } from 'react';
-import { useStyles } from './styles';
-import { useMediaQuery } from '@material-ui/core';
-import clsx from 'clsx';
-import AppDrawer from '../menus/appDrawer';
 import AppDashboard from './views/appDashboard';
 import TaskDashboard from './views/taskDashboard';
-import CommunityPage from './views/communityPage';
+import HomePage from './views/homePage';
+import WorkPage from './views/workPage';
+import JobPage from './views/jobPage';
 import NotificationDashboard from './views/notificationDashboard';
-import AppInvites from './views/appInvites';
+import AppInvites from './views/inviteDashboard';
 import AppHelp from './views/appHelp';
 import AppProfileEdit from './views/appProfileEdit';
 import ConversationModule from './views/conversations';
-import PickJobType from './views/job/editJob/components/pickJobType';
-import ConfirmJob from './views/job/editJob/components/confirmJob';
-import SubmitJob from './views/job/editJob/components/submitJob';
+import SubmitJob from '../../widgets/editJob/components/submitJob';
 import { Account } from './views/account';
-import FullContract from './views/fullContract';
 import { ProjectSubmitted } from './views/submitted';
-import { EditGame, PreviewGame, Games } from './views/game';
-import {
-  EditJob,
-  Jobs,
-  AppViewJob,
-  AppViewQuoteJob,
-  AppViewJobPublic,
-} from './views/job';
+import { AppViewJobPublic } from './views/job';
+import UpdateJobDashboard from './views/job/workDashboard/updateJobDashboard';
 import { EditQuote } from '../../modules/quotes';
 import { EditContract } from './views/contract';
-import Withdraw from './views/withdraw';
-import ViewProposal from './views/viewProposal';
-import { PickArtist } from './views/pickArtist';
-import { NewQuote } from './views/newQuote';
 import { ToastContainer } from 'react-toastify';
 import { Query } from 'react-apollo';
-import { FAVOURITES, PROFILE, PREVIEW_CONTRACT } from '../../data/queries';
-import { ContentTop, StyledNavBar, MenuButtonShortcut } from '../../components';
+import {
+  FAVOURITES,
+  PROFILE,
+  PREVIEW_CONTRACT,
+  COUNTS,
+} from '../../data/queries';
 import { PreviewProfile } from '../../layouts/preview/views/previewProfile';
 import logout from '../../utils/logout';
 import CreativeRosterWidget from '../../widgets/creativeRoster';
 import {
-  QuoteInWidget,
-  QuoteOutWidget,
-  QuoteViewWidget,
-  JobBoardWidget,
-  FullContractWidget,
-  JobDescriptionWidget,
-  Kickstarters,
-} from '../../widgets';
+  ProfileContext,
+  HistoryContext,
+  UserContext,
+  CreativeContext,
+  CountContext,
+  MenuContext,
+  ParamsContext,
+} from '../../context';
+import Cookies from 'js-cookie';
+import PrimaryMenu from './primaryMenu';
+import { mainMenu } from '../menuArray';
+import { MainWrapper, ContentScroll } from '../../components';
+import Stats from './stats';
 
 export default function AppLayout(props) {
-  const [page, setPage] = React.useState('tasks');
-  const [activeButton, setActiveButton] = React.useState('Tasks');
-  const [profile, setProfile] = React.useState(null);
-  const pageJump = props.match ? props.match.params.page : null;
-  const mobile = useMediaQuery('(max-width:800px)');
   const { history } = props;
+  const [page, setPage] = React.useState('home');
+  const [profile, setProfile] = React.useState(null);
+  const [counts, setCounts] = React.useState({
+    jobAds: 0,
+    myJobAds: 0,
+    work: 0,
+    myWork: 0,
+    invites: 0,
+    inviteList: 0,
+    quotes: 0,
+    messages: 0,
+    quotesIn: 0,
+  });
+
+  const pageJump = props.match ? props.match.params.page : null;
+  const userId = Cookies.get('userId');
 
   //TODO: I guess this is proper dirty
   const pathParam = props
@@ -65,252 +70,187 @@ export default function AppLayout(props) {
       : null
     : null;
 
-  const pathParam2 = props
-    ? props.match
-      ? props.match.params.pathParam2
-        ? props.match.params.pathParam2
-        : null
-      : null
-    : null;
-
   if (pageJump !== page) {
     setPage(pageJump);
   }
 
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
   function drawerButtonChange(url, page) {
-    setActiveButton(page);
     history.push(url);
   }
 
+  const [pageValues, setPageValues] = React.useState({
+    savedUserId: null,
+    jumpPage: null,
+    updateParamsContext: () => {},
+  });
+
   useEffect(() => {
-    setActiveButton(page);
-  }, [page]);
+    setPageValues({
+      savedUserId: pathParam ? pathParam : null,
+      jumpPage: pageJump ? pageJump : null,
+    });
+  }, [pageJump, pathParam, history]);
 
   return (
-    <div className={classes.root}>
-      <ToastContainer />
-      <StyledNavBar open={open} history={history} theme={props.theme}>
-        {!mobile && (
-          <MenuButtonShortcut
-            text={{
-              name: profile ? profile.name : 'Fetching...',
-              color: '#222',
-              icon: 'face',
-              count: 0,
-            }}
-            onClickEvent={() => {
-              history.push('/app/edit-profile');
-            }}
-            active={false}
-            imageIcon={profile && profile.profileImg}
-            countIcon="star"
-            iconPos="right"
-          />
-        )}
-      </StyledNavBar>
-      {profile && (
-        <AppDrawer
-          handleDrawerClose={handleDrawerClose}
-          handleDrawerOpen={handleDrawerOpen}
-          open={open}
-          history={history}
-          activeButton={activeButton}
-          profile={profile}
-        />
-      )}
-      <main
-        className={clsx({
-          [classes.content]: true,
-          [classes.contentMobile]: mobile,
-        })}
-      >
-        <ContentTop style={{ width: '100%' }}>
-          {page === 'dashboard' && profile ? (
-            <AppDashboard
-              history={history}
-              profile={profile}
-              setProfile={setProfile}
-            />
-          ) : page === 'conversations' ? (
-            <ConversationModule history={history} />
-          ) : page === 'tasks' && profile ? (
-            <TaskDashboard
-              history={history}
-              profile={profile}
-              setProfile={setProfile}
-              drawerButtonChange={drawerButtonChange}
-            />
-          ) : page === 'notifications' && profile ? (
-            <NotificationDashboard
-              history={history}
-              profile={profile}
-              setProfile={setProfile}
-            />
-          ) : page === 'help' ? (
-            <AppHelp history={history} />
-          ) : page === 'help' ? (
-            <AppHelp history={history} />
-          ) : page === 'creative-roster' ? (
-            <Query query={FAVOURITES} fetchPolicy="network-only">
-              {({ data, loading }) => {
-                return loading
-                  ? null
-                  : data && <CreativeRosterWidget history={history} />;
-              }}
-            </Query>
-          ) : page === 'account' ? (
-            <Account history={history} />
-          ) : page === 'invites' ? (
-            <AppInvites history={history} />
-          ) : page === 'submitted' ? (
-            <ProjectSubmitted history={history} />
-          ) : page === 'games' ? (
-            <Games history={history} />
-          ) : page === 'projects' ? (
-            <Jobs history={history} tab={pathParam} />
-          ) : page === 'edit-profile' ? (
-            <AppProfileEdit
-              theme={props.theme}
-              history={history}
-              isolate={pathParam}
-            />
-          ) : page === 'edit-game' ? (
-            <EditGame
-              theme={props.theme}
-              gameId={pathParam}
-              autosaveIsOn={true}
-              history={history}
-            />
-          ) : page === 'withdraw' ? (
-            <Withdraw contractId={pathParam} history={history} />
-          ) : page === 'view-game' ? (
-            <PreviewGame
-              theme={props.theme}
-              gameId={pathParam}
-              autosaveIsOn={true}
-              history={history}
-            />
-          ) : page === 'job-description' ? (
-            <JobDescriptionWidget jobId={pathParam} history={history} />
-          ) : page === 'edit-job' ? (
-            <EditJob
-              jobId={pathParam}
-              history={history}
-              creativeId={pathParam2}
-            />
-          ) : page === 'quotes-out' ? (
-            <QuoteOutWidget history={history} />
-          ) : page === 'quotes-in' ? (
-            <QuoteInWidget history={history} />
-          ) : page === 'view-quote' ? (
-            <QuoteViewWidget history={history} quoteId={pathParam} />
-          ) : page === 'edit-quote' ? (
-            <Query
-              query={PREVIEW_CONTRACT}
-              variables={{ contractId: pathParam }}
-              fetchPolicy="network-only"
-            >
-              {({ data, loading }) => {
-                return loading
-                  ? null
-                  : data && (
-                      <EditQuote
-                        history={history}
-                        jobId={pathParam}
-                        contractData={data.contractById}
-                      />
-                    );
-              }}
-            </Query>
-          ) : page === 'view-job' && profile ? (
-            <AppViewJob jobId={pathParam} history={history} />
-          ) : page === 'kickstarters' ? (
-            <Kickstarters history={history} />
-          ) : page === 'view-quote-job' && profile ? (
-            <AppViewQuoteJob jobId={pathParam} history={history} />
-          ) : page === 'contract' && profile ? (
-            <AppViewJob jobId={pathParam} history={history} />
-          ) : page === 'view-public-job' && profile ? (
-            <AppViewJobPublic jobId={pathParam} history={history} />
-          ) : page === 'job-board' && profile ? (
-            <JobBoardWidget history={history} />
-          ) : page === 'view-proposal' ? (
-            <ViewProposal jobId={pathParam} history={history} />
-          ) : page === 'view-contract' ? (
-            <EditContract contractId={pathParam} history={history} />
-          ) : page === 'view-full-contract' ? (
-            <FullContract contractId={pathParam} history={history} />
-          ) : page === 'view-sign-full-contract' ? (
-            <FullContractWidget contractId={pathParam} history={history} />
-          ) : page === 'edit-contract' ? (
-            <EditContract contractId={pathParam} history={history} />
-          ) : page === 'community' ? (
-            <CommunityPage history={history} />
-          ) : page === 'public-preview' ? (
-            <PreviewProfile
-              profileId={pathParam}
-              theme={props.theme}
-              publicView={true}
-              history={history}
-            />
-          ) : page === 'pick-artist' ? (
-            <Query query={FAVOURITES} fetchPolicy="network-only">
-              {({ data, loading }) => {
-                return loading ? null : (
-                  <PickArtist
-                    theme={props.theme}
-                    jobId={pathParam}
-                    creativeId={pathParam2}
-                    autosaveIsOn={true}
-                    history={history}
-                    favourites={data.profile.favourites.map(
-                      (fav) => fav.receiver && fav.receiver._id
-                    )}
-                  />
-                );
-              }}
-            </Query>
-          ) : page === 'choose-job-type' ? (
-            <PickJobType
-              jobId={pathParam}
-              creativeId={pathParam2}
-              history={history}
-            />
-          ) : page === 'confirm-job' ? (
-            <ConfirmJob jobId={pathParam} history={history} />
-          ) : page === 'submit-job' ? (
-            <SubmitJob jobId={pathParam} history={history} />
-          ) : page === 'create-quote' ? (
-            <NewQuote projectId={pathParam} />
-          ) : null}
-        </ContentTop>
-      </main>
-
-      <Query
-        query={PROFILE}
-        onCompleted={(data) => {
-          setProfile(data.profile);
-        }}
-        fetchPolicy="network-only"
-        onError={(error) => {
-          logout(history);
-        }}
-      >
-        {({ data }) => {
-          return null;
-        }}
-      </Query>
-    </div>
+    <ParamsContext.Provider
+      value={{
+        savedUserId: pageValues.savedUserId,
+        jumpPage: pageValues.jumpPage,
+        updateParamsContext: setPageValues,
+      }}
+    >
+      <HistoryContext.Provider value={history}>
+        <ProfileContext.Provider value={profile}>
+          <UserContext.Provider value={userId}>
+            <CountContext.Provider value={counts}>
+              <MenuContext.Consumer>
+                {(menuContext) => (
+                  <MainWrapper>
+                    <ToastContainer />
+                    <PrimaryMenu mainMenu={mainMenu} />
+                    <ContentScroll>
+                      {menuContext.primaryPage === 'stats' && profile ? (
+                        <Stats
+                          history={history}
+                          profile={profile}
+                          setProfile={setProfile}
+                        />
+                      ) : menuContext.primaryPage === 'dashboard' && profile ? (
+                        <AppDashboard
+                          history={history}
+                          profile={profile}
+                          setProfile={setProfile}
+                        />
+                      ) : menuContext.primaryPage === 'messages' ? (
+                        <ConversationModule history={history} />
+                      ) : menuContext.primaryPage === 'tasks' && profile ? (
+                        <TaskDashboard
+                          history={history}
+                          profile={profile}
+                          setProfile={setProfile}
+                          drawerButtonChange={drawerButtonChange}
+                        />
+                      ) : menuContext.primaryPage === 'notifications' &&
+                        profile ? (
+                        <NotificationDashboard
+                          history={history}
+                          profile={profile}
+                          setProfile={setProfile}
+                        />
+                      ) : menuContext.primaryPage === 'help' ? (
+                        <AppHelp history={history} />
+                      ) : menuContext.primaryPage === 'creative-roster' ? (
+                        <Query query={FAVOURITES} fetchPolicy="network-only">
+                          {({ data, loading }) => {
+                            return loading
+                              ? null
+                              : data && (
+                                  <CreativeRosterWidget history={history} />
+                                );
+                          }}
+                        </Query>
+                      ) : menuContext.primaryPage === 'account' ? (
+                        <Account history={history} />
+                      ) : menuContext.primaryPage === 'invites' ? (
+                        <AppInvites history={history} />
+                      ) : menuContext.primaryPage === 'submitted' ? (
+                        <ProjectSubmitted history={history} />
+                      ) : menuContext.primaryPage === 'update-job' ? (
+                        <CreativeContext.Provider>
+                          <UpdateJobDashboard jobId={pathParam} />
+                        </CreativeContext.Provider>
+                      ) : menuContext.primaryPage === 'edit-profile' ? (
+                        <AppProfileEdit
+                          theme={props.theme}
+                          history={history}
+                          isolate={pathParam}
+                        />
+                      ) : menuContext.primaryPage === 'edit-quote' ? (
+                        <Query
+                          query={PREVIEW_CONTRACT}
+                          variables={{ contractId: pathParam }}
+                          fetchPolicy="network-only"
+                        >
+                          {({ data, loading }) => {
+                            return loading
+                              ? null
+                              : data && (
+                                  <EditQuote
+                                    history={history}
+                                    jobId={pathParam}
+                                    contractData={data.contractById}
+                                  />
+                                );
+                          }}
+                        </Query>
+                      ) : menuContext.primaryPage === 'view-public-job' ? (
+                        <AppViewJobPublic jobId={pathParam} history={history} />
+                      ) : menuContext.primaryPage === 'view-contract' ? (
+                        <EditContract
+                          contractId={pathParam}
+                          history={history}
+                        />
+                      ) : menuContext.primaryPage === 'home' ? (
+                        <HomePage />
+                      ) : menuContext.primaryPage === 'work' ? (
+                        <WorkPage />
+                      ) : menuContext.primaryPage === 'jobs' ? (
+                        <JobPage jumpTo={pathParam} />
+                      ) : menuContext.primaryPage === 'user-profile' ? (
+                        <PreviewProfile
+                          profileId={pathParam}
+                          theme={props.theme}
+                          publicView={true}
+                          history={history}
+                        />
+                      ) : menuContext.primaryPage === 'submit-job' ? (
+                        <SubmitJob jobId={pathParam} history={history} />
+                      ) : null}
+                    </ContentScroll>
+                    <Query
+                      query={PROFILE}
+                      onCompleted={(data) => {
+                        setProfile(data.profile);
+                      }}
+                      onError={(error) => {
+                        logout(history);
+                      }}
+                    >
+                      {({ data }) => {
+                        return null;
+                      }}
+                    </Query>
+                    <Query
+                      query={COUNTS}
+                      onCompleted={(data) => {
+                        setCounts({
+                          jobAds: data.counts.unansweredQuotes,
+                          myJobAds: data.counts.unansweredQuotes,
+                          work:
+                            data.counts.invites +
+                            data.counts.quotesDeclined +
+                            data.counts.quotesAccepted,
+                          myWork: data.counts.quotesAccepted,
+                          invites: data.counts.invites,
+                          inviteList: data.counts.invites,
+                          quotes: 0,
+                          history: data.counts.quotesDeclined,
+                          messages: data.counts.messages,
+                        });
+                      }}
+                      fetchPolicy="network-only"
+                    >
+                      {({ data }) => {
+                        return null;
+                      }}
+                    </Query>
+                  </MainWrapper>
+                )}
+              </MenuContext.Consumer>
+            </CountContext.Provider>
+          </UserContext.Provider>
+        </ProfileContext.Provider>
+      </HistoryContext.Provider>
+    </ParamsContext.Provider>
   );
 }

@@ -62,6 +62,7 @@ export const JOB = gql`
       speculative
       inLieu
       termsAccepted
+      approved
       gallery {
         _id
         summary
@@ -164,12 +165,6 @@ export const JOB = gql`
       creativeSummary
       submitted
       paid
-      game {
-        _id
-        backgroundImg
-        name
-        summary
-      }
       user {
         _id
         name
@@ -327,6 +322,7 @@ export const JOBS = gql`
       contactEmail
       submitted
       backgroundImg
+      approved
       assignedCreative {
         _id
         name
@@ -343,11 +339,7 @@ export const JOBS = gql`
         }
         status
       }
-      game {
-        _id
-        name
-        backgroundImg
-      }
+
       invites {
         status
         messages

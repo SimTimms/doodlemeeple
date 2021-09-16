@@ -22,7 +22,7 @@ export default function ChosenCreative({ user, history, setConversationUser }) {
               <Typography
                 style={{ fontSize: 12 }}
                 onClick={() => {
-                  history.push(`/app/public-preview/${user._id}`);
+                  history.push(`/app/user-profile/${user._id}`);
                 }}
               >
                 {user.name}

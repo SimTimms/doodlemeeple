@@ -1,14 +1,13 @@
 import React from 'react';
-import { Typography, Icon } from '@material-ui/core';
 import { useStyles } from './styles';
 import { CurrencySelector, Column, Row } from '../';
 import clsx from 'clsx';
-
+import InputLabel from './inputLabel';
 export default function FieldBox({ title, value, onChangeEvent, ...props }) {
-  const [infoOpen, setInfoOpen] = React.useState(false);
   const classes = useStyles();
   const {
     maxLength,
+    minLength,
     replaceMode,
     placeholder,
     info,
@@ -29,25 +28,15 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
             [classes.hide]: title === '',
           })}
         >
-          <Typography
-            className={classes.inputLabel}
-            style={{ marginLeft: icon && 44 }}
-          >{`${title}`}</Typography>
-          <Row j="flex-end" w={70}>
-            <Typography className={classes.inputLabel}>{`${
-              maxLength > 0 ? maxLength - value.length : ''
-            }`}</Typography>
-            {(warning !== '' || info !== '') && (
-              <Icon
-                className={classes.helpIcon}
-                onClick={() => {
-                  infoOpen === false ? setInfoOpen(true) : setInfoOpen(false);
-                }}
-              >
-                {infoOpen === false ? 'info' : 'keyboard_arrow_up'}
-              </Icon>
-            )}
-          </Row>
+          <InputLabel
+            title={title}
+            value={value}
+            maxLength={maxLength}
+            minLength={minLength}
+            info={info}
+            warning={warning}
+            icon={icon}
+          />
         </div>
         {multiline ? (
           <Row>
@@ -61,7 +50,7 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
                 const eReplaced =
                   replaceMode === 'loose'
                     ? e.target.value.replace(
-                        /[^A-Za-z0-9&:;|/\\?!@£$%*()_ ,-."`'[]\n]/g,
+                        /[^A-Za-z0-9&:;|/\\?!@=£$%*()_ ,-."`'[]\n]/g,
                         ''
                       )
                     : replaceMode === 'tight'
@@ -93,7 +82,7 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
                 const eReplaced =
                   replaceMode === 'loose'
                     ? e.target.value.replace(
-                        /[^A-Za-z0-9&:;|/\\?!@£$%*()_ ,-."`'[\]\n]/g,
+                        /[^A-Za-z0-9&:;|/\\?!@=£$%*()_ ,-."`'[\]\n]/g,
                         ''
                       )
                     : replaceMode === 'number'
@@ -107,23 +96,6 @@ export default function FieldBox({ title, value, onChangeEvent, ...props }) {
           </Row>
         )}
       </Column>
-      <div
-        className={clsx({
-          [classes.openClose]: true,
-          [classes.openCloseOff]: !infoOpen,
-        })}
-      >
-        <Typography variant="body1" className={classes.descriptionBox}>
-          {info}
-          {warning !== '' && (
-            <span style={{ fontWeight: 900 }}>
-              <br />
-              <br />
-              {warning}
-            </span>
-          )}
-        </Typography>
-      </div>
     </Column>
   );
 }

@@ -5,9 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     width: '100%',
     overflow: 'auto',
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingBottom: 20,
+
     boxSizing: 'border-box',
   },
   dashboard: {
@@ -15,9 +13,7 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     justifyContent: 'space-around',
     flexWrap: 'wrap',
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingBottom: 20,
+
     boxSizing: 'border-box',
   },
 }));

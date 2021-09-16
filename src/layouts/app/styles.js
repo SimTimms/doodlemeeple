@@ -3,7 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 const drawerWidth = 160;
 
 export const useStyles = makeStyles((theme) => ({
-  root: { height: '100vh', background: '#efeff5' },
+  root: {
+    background: '#efeff5',
+    display: 'flex',
+    width: '100vw',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    height: '100vh',
+    overflow: 'hidden ',
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -32,11 +40,11 @@ export const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    marginLeft: 140,
     display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
     background: '#efeff5',
+    width: 'calc(100vw - 150px)',
+    height: '100vh',
   },
-  contentMobile: { width: '100%', marginLeft: 0 },
 }));

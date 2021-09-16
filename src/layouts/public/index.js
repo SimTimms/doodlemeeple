@@ -8,6 +8,7 @@ import { PasswordForgot } from './views/passwordForgot';
 import { PasswordReset } from './views/passwordReset';
 import Deleted from './views/deleted';
 import { useStyles } from './styles';
+import dmChibi from '../../assets/dmChibi.png';
 
 export function PublicLayout(props) {
   const [page, setPage] = React.useState('home');
@@ -36,7 +37,7 @@ export function PublicLayout(props) {
         sidebarMissing={true}
       >
         <img
-          src={process.env.REACT_APP_DEVICE}
+          src={dmChibi}
           style={{ maxHeight: 40 }}
           alt={`${process.env.REACT_APP_COMPANY_PUBLIC_NAME} Logo`}
         />

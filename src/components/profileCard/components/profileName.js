@@ -4,7 +4,7 @@ import { IconButton } from '../../';
 export default function ProfileName({ history, creative, setFullProfile }) {
   return (
     <a
-      href={`/public-preview/${creative._id}`}
+      href={`/user-profile/${creative._id}`}
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -23,6 +23,7 @@ export default function ProfileName({ history, creative, setFullProfile }) {
           textDecoration: 'underline',
           marginTop: 0,
           marginBottom: 0,
+          justifyContent: 'center',
         }}
         type="button"
       />

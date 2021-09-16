@@ -9,7 +9,7 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   dull: { color: '#aaa' },
-  red: { color: theme.palette.error.main },
+  red: { color: theme.palette.primary.main },
   green: { color: theme.palette.secondary.main },
   countsStyle: {
     position: 'absolute',
@@ -23,7 +23,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: theme.palette.error.main,
+    background: theme.palette.primary.main,
     color: '#fff',
   },
   profileThumb: {
