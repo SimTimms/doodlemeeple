@@ -8,7 +8,7 @@ import { PasswordForgot } from './views/passwordForgot';
 import { PasswordReset } from './views/passwordReset';
 import Deleted from './views/deleted';
 import { useStyles } from './styles';
-import dmChibi from '../../assets/dmChibi.png';
+import dmChibi from '../../assets/devicedm.svg';
 
 export function PublicLayout(props) {
   const [page, setPage] = React.useState('home');
