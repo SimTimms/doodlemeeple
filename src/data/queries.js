@@ -25,6 +25,7 @@ export const CREATIVES = gql`
       summary
       profileBG
       profileImg
+      lastOn
       badges {
         badgeType
         link
@@ -548,6 +549,7 @@ export const PROFILE_PREVIEW = gql`
       summary
       profileBG
       profileImg
+      lastOn
       viewCount
       paymentMethod
       responsePercent
