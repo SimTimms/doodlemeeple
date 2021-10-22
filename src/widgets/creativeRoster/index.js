@@ -22,7 +22,6 @@ export default function CreativeRosterWidget({ history }) {
   const [endPage, setEndPage] = React.useState(false);
   const [filter, setFilter] = React.useState(['artist']);
   const [group, setGroup] = React.useState('artist');
-  console.log(creativeArray);
   return (
     <div className={classes.root}>
       <Column w="100%">
