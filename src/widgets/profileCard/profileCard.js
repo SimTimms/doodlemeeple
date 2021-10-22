@@ -267,6 +267,7 @@ export default function ProfileCard({ creative, setLarge }) {
                           status="Featured"
                           key="key"
                           onClickEvent={() => mutation()}
+                          red={true}
                         />
                       ) : (
                         <StatusBadge
