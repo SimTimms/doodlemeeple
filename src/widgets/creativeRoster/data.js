@@ -6,6 +6,7 @@ export const CREATIVE_ROSTER_WIDGET = gql`
       _id
       name
       profileBG
+      priority
       lastOn
       profileImg
       sections {

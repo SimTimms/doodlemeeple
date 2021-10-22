@@ -8,6 +8,14 @@ export const PROFILE_IMAGES = gql`
   }
 `;
 
+export const MAKE_FEATURED = gql`
+  mutation userUpdateById($_id: MongoID!, $priority: Float!) {
+    userUpdateById(record: { _id: $_id, priority: $priority }) {
+      recordId
+    }
+  }
+`;
+
 export const PROFILE_PREVIEW = gql`
   query ProfilePreview($userId: MongoID!) {
     userByIdWithTracker(_id: $userId) {

@@ -25,6 +25,7 @@ export const CREATIVES = gql`
       summary
       profileBG
       profileImg
+      priority
       lastOn
       badges {
         badgeType
