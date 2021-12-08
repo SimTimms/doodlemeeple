@@ -26,3 +26,13 @@ export const CHOSEN_CREATIVE = gql`
     }
   }
 `;
+
+export const POST_FEED = gql`
+  query postFeed($userId: MongoID!) {
+    postFeed(_id: $userId) {
+      _id
+      name
+      summary
+    }
+  }
+`;

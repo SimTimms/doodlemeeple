@@ -25,7 +25,7 @@ import {
 } from '../../../../context';
 import { ProfileCardMacro } from '../../../../widgets/profileCard';
 import { Query } from 'react-apollo';
-import { CHOSEN_CREATIVE } from './data';
+import { CHOSEN_CREATIVE, POST_FEED } from './data';
 
 export default function CommunityPage() {
   const classes = useStyles();
