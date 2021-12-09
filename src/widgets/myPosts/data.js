@@ -24,6 +24,25 @@ export const MY_POST_BY_ID = gql`
   }
 `;
 
+export const POST_FEED = gql`
+  query {
+    postFeed {
+      name
+      summary
+      type
+      featuredImage
+      createdAt
+      url
+      user {
+        _id
+        name
+        profileImg
+        profileBG
+      }
+    }
+  }
+`;
+
 export const GAME_POSTS_WIDGET = gql`
   query myPostMany($gameId: MongoID) {
     myPostMany(

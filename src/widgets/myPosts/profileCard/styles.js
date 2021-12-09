@@ -9,6 +9,50 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: '10px 10px 20px rgba(0,0,0,0.2)',
     background: '#fff',
     margin: 5,
+    maxWidth: 400,
+    width: '100%',
+  },
+  postCardBG: {
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: 60,
+  },
+  postCardBGKick: {
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  },
+  postType: {
+    height: 28,
+    width: 90,
+    minWidth: 90,
+    borderRadius: '50%',
+    padding: 4,
+    boxSizing: 'border-box',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    whiteSpace: 'nowrap',
+  },
+  job: {
+    background: theme.job,
+  },
+  jobPrivate: {
+    background: theme.jobPrivate,
+  },
+  kickstarter: {
+    background: theme.kickstarter,
+  },
+  lastOn: {
+    background: theme.lastOn,
+  },
+  game: {
+    background: theme.game,
+  },
+  newUser: {
+    background: theme.newUser,
+  },
+  public: {
+    background: theme.public,
   },
   featureImage: { maxWidth: 500 },
   avatar: {

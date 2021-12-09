@@ -1,7 +1,7 @@
 export default function communityMenu(menu) {
   return [
     {
-      name: 'Dashboard',
+      name: 'Feed',
       icon: 'dashboard',
       machineName: 'dashboard',
       link: () =>

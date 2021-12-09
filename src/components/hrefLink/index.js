@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 
-export default function HrefLink({ url, title, underline }) {
+export default function HrefLink({ url, title, underline, onBlack }) {
   const classes = useStyles();
   return (
     <a
@@ -16,6 +16,7 @@ export default function HrefLink({ url, title, underline }) {
         className={clsx({
           [classes.root]: true,
           [classes.underline]: underline,
+          [classes.onBlack]: onBlack,
         })}
       >
         {title}
