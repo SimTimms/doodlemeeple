@@ -76,5 +76,10 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: 'auto',
     paddingBottom: 6,
   },
-  summary: { paddingBottom: 6, paddingRight: 5, width: '100%' },
+  summary: {
+    paddingBottom: 6,
+    paddingRight: 5,
+    paddingLeft: 5,
+    width: '100%',
+  },
 }));
