@@ -73,6 +73,15 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
           <Icon
             style={{ fontSize: '1rem', marginLeft: 5 }}
             title={titleHelper[myPost.type]}
+            className={clsx({
+              [classes.publicIcon]: true,
+              [classes.public]: myPost.type === 'public',
+              [classes.kickstarter]: myPost.type === 'kickstarter',
+              [classes.game]: myPost.type === 'game',
+              [classes.newUser]: myPost.type === 'newUser',
+              [classes.lastOn]: myPost.type === 'lastOn',
+              [classes.job]: myPost.type === 'job',
+            })}
           >
             {iconHelper[myPost.type]}
           </Icon>

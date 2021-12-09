@@ -32,7 +32,9 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     whiteSpace: 'nowrap',
+    marginTop: 10,
   },
+  publicIcon: { color: '#fff', borderRadius: '50%', padding: 2 },
   job: {
     background: theme.job,
   },
