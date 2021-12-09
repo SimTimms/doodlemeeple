@@ -106,26 +106,57 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
             underline={true}
           />
         </div>
-      ) : myPost.type === 'jobPrivate' ? (
+      ) : myPost.type === 'newUser' ? (
         <div
           className={clsx({
             [classes.postCard]: true,
-            [classes.postCardBG]: true,
           })}
-          style={{ backgroundImage: `url(${myPost.user.profileBG})` }}
         >
-          <Column a="flex-start" w="60px">
+          <Column>
             <div
-              className={classes.avatar}
-              style={{ backgroundImage: `url(${myPost.user.profileImg})` }}
+              className={clsx({
+                [classes.postCardBGKick]: true,
+              })}
+              style={{
+                backgroundImage: `url(${myPost.user.profileBG})`,
+                height: 80,
+                width: '100%',
+              }}
             ></div>
+            <Row j="space-between" a="flex-start" pt={10} pr={10}>
+              <Column a="flex-start" w="60px">
+                <div
+                  className={classes.avatar}
+                  style={{ backgroundImage: `url(${myPost.user.profileImg})` }}
+                ></div>
+              </Column>
+
+              <Column a="flex-start">
+                <Column a="flex-start">
+                  <Row j="space-between" a="flex-start" h={20}>
+                    <HrefLink
+                      title={myPost.user.name}
+                      url={`/user-profile/${myPost.user._id}`}
+                    />
+                  </Row>
+
+                  <Row j="space-between">
+                    <Typography
+                      style={{
+                        fontWeight: 'bold',
+                        fontSize: 16,
+                        marginTop: 5,
+                      }}
+                    >
+                      {myPost.user.summary}
+                    </Typography>
+                  </Row>
+
+                  <DividerMini />
+                </Column>
+              </Column>
+            </Row>
           </Column>
-          <HrefLink
-            title={myPost.user.name}
-            url={`/user-profile/${myPost.user._id}`}
-            onBlack={true}
-            underline={true}
-          />
         </div>
       ) : myPost.type === 'kickstarter' ? (
         <div

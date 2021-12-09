@@ -38,6 +38,7 @@ export const POST_FEED = gql`
         name
         profileImg
         profileBG
+        summary
       }
     }
   }
