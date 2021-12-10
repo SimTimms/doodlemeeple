@@ -47,7 +47,7 @@ export default function GameProfile({ game }) {
                 <HrefLink
                   title={game.user.name}
                   url={`/user-profile/${game.user._id}`}
-                ></HrefLink>
+                />
               </Row>
             </Column>
 

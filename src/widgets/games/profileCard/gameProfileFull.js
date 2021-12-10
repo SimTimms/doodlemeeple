@@ -94,11 +94,11 @@ export default function GameProfileFull() {
                         </Column>
                       )}
 
-                      <Column w="100%" a="flex-start">
+                      {/*  <Column w="100%" a="flex-start">
                         <DividerWithBorder />
                         <MainTitle title="Comments" />
                         <GamePostWidget gameId={game._id} withForm={true} />
-                      </Column>
+                      </Column>*/}
 
                       <DividerMini />
                     </Column>

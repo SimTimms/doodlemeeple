@@ -18,6 +18,7 @@ import { REMOVE_MY_POST } from '../data';
 import { toaster } from '../../../utils/toaster';
 import Cookies from 'js-cookie';
 import { randomKey } from '../../../utils';
+import { MenuContext } from '../../../context';
 
 const titleHelper = {
   lastOn: 'This user has been active recently',
@@ -182,6 +183,74 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
             />
             <Typography variant="body1">{myPost.summary}</Typography>
           </div>
+        </div>
+      ) : myPost.type === 'game' ? (
+        <div
+          className={clsx({
+            [classes.postCard]: true,
+          })}
+        >
+          <Column>
+            <div
+              className={clsx({
+                [classes.postCardBGKick]: true,
+              })}
+              style={{
+                backgroundImage: `url(${myPost.featuredImage})`,
+                height: 80,
+                width: '100%',
+              }}
+            ></div>
+            <Row j="space-between" a="flex-start" pt={10} pr={10}>
+              <Column a="flex-start" w="60px">
+                <div
+                  className={classes.avatar}
+                  style={{ backgroundImage: `url(${myPost.featuredImage})` }}
+                ></div>
+              </Column>
+
+              <Column a="flex-start">
+                <Column a="flex-start">
+                  <Row j="space-between" a="flex-start" h={20}>
+                    <MenuContext.Consumer>
+                      {(menuContext) => {
+                        return (
+                          <Typography
+                            variant="body1"
+                            style={{
+                              fontWeight: 'bold',
+                              fontSize: 16,
+                              textDecoration: 'underline',
+                              marginbottom: 10,
+                              cursor: 'pointer',
+                            }}
+                            onClick={() =>
+                              menuContext.updateMenuContext({
+                                ...menuContext,
+                                homePage: {
+                                  ...menuContext.homePage,
+                                  secondaryPage: 'game_profile',
+                                  gameId: myPost.game._id,
+                                },
+                              })
+                            }
+                          >
+                            {myPost.name}
+                          </Typography>
+                        );
+                      }}
+                    </MenuContext.Consumer>
+                  </Row>
+
+                  <Row j="space-between">
+                    <Typography variant="body1">{myPost.summary}</Typography>
+                  </Row>
+
+                  <DividerMini />
+                </Column>
+              </Column>
+            </Row>
+          </Column>
         </div>
       ) : (
         <div

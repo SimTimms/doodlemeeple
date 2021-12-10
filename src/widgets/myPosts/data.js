@@ -27,6 +27,9 @@ export const MY_POST_BY_ID = gql`
 export const POST_FEED = gql`
   query {
     postFeed {
+      game {
+        _id
+      }
       name
       summary
       type

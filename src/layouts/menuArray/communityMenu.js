@@ -13,6 +13,7 @@ export default function communityMenu(menu) {
             ...menu.homePage,
             primaryPage: 'community',
             secondaryPage: 'dashboard',
+            gameId: null,
           },
         }),
       count: null,

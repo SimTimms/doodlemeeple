@@ -10,7 +10,6 @@ export default function PublicPosts() {
     <Column>
       <Query query={POST_FEED} fetchPolicy="network-only">
         {({ data }) => {
-          console.log(data);
           if (data) {
             return data.postFeed.map((myPost) => (
               <MyPostProfile myPost={myPost} key={randomKey()} />
