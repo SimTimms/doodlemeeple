@@ -200,7 +200,37 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
                 height: 80,
                 width: '100%',
               }}
-            ></div>
+            >
+              <MenuContext.Consumer>
+                {(menuContext) => {
+                  return (
+                    <div
+                      style={{
+                        background: 'rgba(0,0,0,0.3)',
+                        color: '#fff',
+                        padding: 3,
+                        width: '100%',
+                        textDecoration: 'underline',
+                        cursor: 'pointer',
+                        '&:hover': { color: '#ddd' },
+                      }}
+                      onClick={() =>
+                        menuContext.updateMenuContext({
+                          ...menuContext,
+                          homePage: {
+                            ...menuContext.homePage,
+                            secondaryPage: 'game_profile',
+                            gameId: myPost.game._id,
+                          },
+                        })
+                      }
+                    >
+                      <Typography variant="body1"> {myPost.name}</Typography>
+                    </div>
+                  );
+                }}
+              </MenuContext.Consumer>
+            </div>
             <Row j="space-between" a="flex-start" pt={10} pr={10}>
               <Column a="flex-start" w="60px">
                 <div
@@ -211,37 +241,6 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
 
               <Column a="flex-start">
                 <Column a="flex-start">
-                  <Row j="space-between" a="flex-start" h={20}>
-                    <MenuContext.Consumer>
-                      {(menuContext) => {
-                        return (
-                          <Typography
-                            variant="body1"
-                            style={{
-                              fontWeight: 'bold',
-                              fontSize: 16,
-                              textDecoration: 'underline',
-                              marginbottom: 10,
-                              cursor: 'pointer',
-                            }}
-                            onClick={() =>
-                              menuContext.updateMenuContext({
-                                ...menuContext,
-                                homePage: {
-                                  ...menuContext.homePage,
-                                  secondaryPage: 'game_profile',
-                                  gameId: myPost.game._id,
-                                },
-                              })
-                            }
-                          >
-                            {myPost.name}
-                          </Typography>
-                        );
-                      }}
-                    </MenuContext.Consumer>
-                  </Row>
-
                   <Row j="space-between">
                     <Typography variant="body1">{myPost.summary}</Typography>
                   </Row>
