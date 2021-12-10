@@ -43,7 +43,7 @@ export default function GameProfileFull() {
                       <Row j="space-between" w="100%">
                         <MainTitle title={game.name} />
                         <a
-                          href={`/app/user-profile/${game.user._id}`}
+                          href={`/user-profile/${game.user._id}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{
