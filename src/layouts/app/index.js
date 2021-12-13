@@ -190,6 +190,8 @@ export default function AppLayout(props) {
                           contractId={pathParam}
                           history={history}
                         />
+                      ) : menuContext.primaryPage === 'profiles' ? (
+                        <CreativeRosterWidget />
                       ) : menuContext.primaryPage === 'home' ? (
                         <HomePage />
                       ) : menuContext.primaryPage === 'work' ? (

@@ -25,10 +25,16 @@ export const MY_POST_BY_ID = gql`
 `;
 
 export const POST_FEED = gql`
-  query {
-    postFeed {
+  query postFeed($filter: [String]) {
+    postFeed(filter: $filter) {
       game {
         _id
+      }
+      job {
+        _id
+        user {
+          _id
+        }
       }
       name
       summary

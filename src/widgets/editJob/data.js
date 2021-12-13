@@ -75,8 +75,20 @@ export const REMOVE_JOB = gql`
 `;
 
 export const CREATE_JOB = gql`
-  mutation CreateJob($name: String!) {
-    jobCreateOne(record: { name: $name }) {
+  mutation CreateJob(
+    $name: String!
+    $summary: String
+    $isPublic: Boolean
+    $approved: Boolean
+  ) {
+    jobCreateOne(
+      record: {
+        name: $name
+        summary: $summary
+        isPublic: $isPublic
+        approved: $approved
+      }
+    ) {
       recordId
       record {
         gallery {

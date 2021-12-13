@@ -11,6 +11,7 @@ export const useStyles = makeStyles((theme) => ({
     margin: 5,
     maxWidth: 400,
     width: '100%',
+    display: 'flex',
   },
   postCardBG: {
     backgroundSize: 'cover',

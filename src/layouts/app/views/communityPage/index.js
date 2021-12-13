@@ -107,34 +107,6 @@ export default function CommunityPage() {
                     )}
 
                     <Column a="flex-start" w="100%">
-                      {/*  <SubTitle
-                        title="Community Posts"
-                        menuStr="View All"
-                        onClickEvent={() => {
-                          menu.updateMenuContext({
-                            ...menu,
-                            homePage: {
-                              ...menu.homePage,
-                              primaryPage: 'my_posts',
-                              secondaryPage: 'all_posts',
-                            },
-                          });
-                        }}
-                        primaryButton={{
-                          title: 'Add',
-                          icon: 'add',
-                          onClickEvent: () => {
-                            menu.updateMenuContext({
-                              ...menu,
-                              homePage: {
-                                ...menu.homepage,
-                                primaryPage: 'my_posts',
-                                secondaryPage: 'create_my_post',
-                              },
-                            });
-                          },
-                        }}
-                      />*/}
                       <Column w="100%" wrap="flex-wrap">
                         <PublicPostsWidget />
                       </Column>

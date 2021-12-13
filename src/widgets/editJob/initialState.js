@@ -20,4 +20,5 @@ export const initialState = {
   _id: 'new',
   gameId: '',
   submitted: '',
+  gallery: '',
 };

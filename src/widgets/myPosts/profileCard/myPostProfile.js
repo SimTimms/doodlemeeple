@@ -9,7 +9,9 @@ import {
   Column,
   HrefLink,
   DividerMini,
+  DividerWithBorder,
   MenuButtonStandard,
+  MenuButtonStandardText,
   StatusBadge,
 } from '../../../components';
 import { timeDifferenceForDate } from '../../../utils/dates';
@@ -19,6 +21,9 @@ import { toaster } from '../../../utils/toaster';
 import Cookies from 'js-cookie';
 import { randomKey } from '../../../utils';
 import { MenuContext } from '../../../context';
+import imageOptimiser from '../../../utils/imageOptimiser';
+import JobDescriptionButton from '../../job/profileCard/components/jobDescriptionButton';
+import { HistoryContext } from '../../../context';
 
 const titleHelper = {
   lastOn: 'This user has been active recently',
@@ -34,7 +39,7 @@ const headerHelper = {
   lastOn: 'Activity',
   job: 'Job',
   jobPrivate: 'This user has posted an invite only job',
-  newUser: 'Welcome',
+  newUser: 'New',
   game: 'Game',
   kickstarter: 'Kickstarter',
   public: 'Post',
@@ -91,14 +96,76 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
           {timeDifferenceForDate(myPost.createdAt)}
         </Typography>
       </div>
+      {myPost.type === 'job' ? (
+        <div
+          className={clsx({
+            [classes.postCard]: true,
+          })}
+        >
+          <div
+            className={clsx({
+              [classes.job]: myPost.type === 'job',
+            })}
+            style={{ width: '100%', height: 10 }}
+          ></div>
+          <Typography
+            style={{
+              fontWeight: 'bold',
+              marginTop: 5,
+            }}
+          >
+            Job Post
+          </Typography>
+          <HrefLink
+            title={`Posted by: ${myPost.user.name}`}
+            url={`/user-profile/${myPost.user._id}`}
+            underline={true}
+          />
+          <DividerWithBorder />
+          <Typography style={{}}>{myPost.summary}</Typography>
 
-      {myPost.type === 'lastOn' ? (
+          {userId === myPost.job.user._id ? (
+            <MenuContext.Consumer>
+              {(menuContext) => {
+                return (
+                  <MenuButtonStandardText
+                    title="Edit"
+                    onClickEvent={() =>
+                      menuContext.updateMenuContext({
+                        ...menuContext,
+                        primaryPage: 'jobs',
+                        jobPage: {
+                          ...menuContext.jobPage,
+                          primaryPage: 'editing_job',
+                          secondaryPage: 'edit_job',
+                          jobId: myPost.job._id,
+                        },
+                      })
+                    }
+                  />
+                );
+              }}
+            </MenuContext.Consumer>
+          ) : (
+            <HistoryContext.Consumer>
+              {(history) => (
+                <JobDescriptionButton
+                  jobId={myPost.job._id}
+                  history={history}
+                />
+              )}
+            </HistoryContext.Consumer>
+          )}
+        </div>
+      ) : myPost.type === 'lastOn' ? (
         <div
           className={clsx({
             [classes.postCard]: true,
             [classes.postCardBG]: true,
           })}
-          style={{ backgroundImage: `url(${myPost.user.profileBG})` }}
+          style={{
+            backgroundImage: `url(${imageOptimiser(myPost.user.profileBG)})`,
+          }}
         >
           <HrefLink
             title={myPost.user.name}
@@ -119,7 +186,9 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
                 [classes.postCardBGKick]: true,
               })}
               style={{
-                backgroundImage: `url(${myPost.user.profileBG})`,
+                backgroundImage: `url(${imageOptimiser(
+                  myPost.user.profileBG
+                )})`,
                 height: 80,
                 width: '100%',
               }}
@@ -128,7 +197,11 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
               <Column a="flex-start" w="60px">
                 <div
                   className={classes.avatar}
-                  style={{ backgroundImage: `url(${myPost.user.profileImg})` }}
+                  style={{
+                    backgroundImage: `url(${imageOptimiser(
+                      myPost.user.profileImg
+                    )})`,
+                  }}
                 ></div>
               </Column>
 
@@ -144,7 +217,6 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
                   <Row j="space-between">
                     <Typography
                       style={{
-                        fontWeight: 'bold',
                         fontSize: 16,
                         marginTop: 5,
                       }}
@@ -165,7 +237,9 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
             [classes.postCard]: true,
             [classes.postCardBGKick]: true,
           })}
-          style={{ backgroundImage: `url(${myPost.featuredImage})` }}
+          style={{
+            backgroundImage: `url(${imageOptimiser(myPost.featuredImage)})`,
+          }}
         >
           <div
             style={{
@@ -196,7 +270,7 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
                 [classes.postCardBGKick]: true,
               })}
               style={{
-                backgroundImage: `url(${myPost.featuredImage})`,
+                backgroundImage: `url(${imageOptimiser(myPost.featuredImage)})`,
                 height: 80,
                 width: '100%',
               }}
@@ -235,7 +309,11 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
               <Column a="flex-start" w="60px">
                 <div
                   className={classes.avatar}
-                  style={{ backgroundImage: `url(${myPost.featuredImage})` }}
+                  style={{
+                    backgroundImage: `url(${imageOptimiser(
+                      myPost.featuredImage
+                    )})`,
+                  }}
                 ></div>
               </Column>
 
@@ -261,7 +339,11 @@ export default function MyPostProfile({ myPost, onDeleteEvent }) {
             <Column a="flex-start" w="60px">
               <div
                 className={classes.avatar}
-                style={{ backgroundImage: `url(${myPost.user.profileImg})` }}
+                style={{
+                  backgroundImage: `url(${imageOptimiser(
+                    myPost.user.profileImg
+                  )})`,
+                }}
               ></div>
             </Column>
 
