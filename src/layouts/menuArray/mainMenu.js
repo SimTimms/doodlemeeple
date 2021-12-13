@@ -29,7 +29,7 @@ export default function mainMenu(history, counts, mainMenuContext, profile) {
 
     {
       name: 'Profiles',
-      icon: 'post_add',
+      icon: 'face',
       machineName: 'profiles',
       link: () =>
         mainMenuContext.updateMenuContext({
