@@ -23,5 +23,5 @@ export const useStyles = makeStyles((theme) => ({
     borderBottom: '1px solid rgba(255,255,255,0.1)',
     background: '#39354E',
   },
-  device: { height: 40 },
+  device: { height: 30 },
 }));

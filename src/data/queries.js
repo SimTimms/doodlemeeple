@@ -510,6 +510,7 @@ export const PROFILE = gql`
       instagram
       linkedIn
       publicEmail
+      keywords
       skype
       phone
       sections {

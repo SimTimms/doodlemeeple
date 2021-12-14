@@ -12,6 +12,18 @@ export const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: 14,
   },
+  keywordButton: {
+    background: '#ccc',
+    color: '#fff',
+    padding: 3,
+    borderRadius: 4,
+    cursor: 'pointer',
+    margin: 2,
+  },
+  keywordButtonOn: {
+    background: theme.palette.secondary.main,
+    boxShadow: '3px 3px 5px rgba(0,0,0,0.1)',
+  },
   avatar: {
     borderRadius: '50%',
     border: '10px solid #fff',

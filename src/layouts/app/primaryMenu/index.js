@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from './button';
 import { useStyles } from './styles';
-import dmDevice from '../../../assets/dmDevice.png';
+import dmDevice from '../../../assets/dmChibi.png';
 import {
   HistoryContext,
   CountContext,

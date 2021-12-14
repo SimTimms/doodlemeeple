@@ -6,7 +6,7 @@ import { Query } from 'react-apollo';
 import { BgImg, ProfileImg } from './components';
 import { Row, Column, IconButton, StatusBadge } from '../../components';
 import * as socials from '../../assets/social';
-import dmDevice from '../../assets/dmDevice.png';
+import dmDevice from '../../assets/dmChibi.png';
 import { PROFILE_IMAGES, MAKE_FEATURED } from './data';
 import imageOptimiser from '../../utils/imageOptimiser';
 import { nameShortener } from '../../utils';

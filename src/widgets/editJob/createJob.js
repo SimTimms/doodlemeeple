@@ -1,7 +1,7 @@
 import React from 'react';
 import { Slide } from '@material-ui/core';
 import { useStyles } from './styles';
-import { Column, NoticeBoardSecondary } from '../../components';
+import { Column, NoticeBoardSecondary,  } from '../../components';
 import { Mutation } from 'react-apollo';
 import { CREATE_JOB } from './data';
 import { toaster } from '../../utils/toaster';
@@ -12,9 +12,6 @@ export default function CreateJob({ menu, cb }) {
   const classes = useStyles();
   const [job, setJob] = React.useState(initialState);
 
-  function setImages(imageArray) {
-    setJob({ ...job, gallery: { ...job.gallery, images: [...imageArray] } });
-  }
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
