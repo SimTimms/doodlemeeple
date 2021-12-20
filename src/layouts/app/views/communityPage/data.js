@@ -26,3 +26,14 @@ export const CHOSEN_CREATIVE = gql`
     }
   }
 `;
+
+export const POST_FEED = gql`
+  query {
+    postFeed {
+      name
+      summary
+      type
+      createdAt
+    }
+  }
+`;

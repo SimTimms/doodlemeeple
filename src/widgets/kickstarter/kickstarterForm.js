@@ -135,13 +135,14 @@ export default function KickstarterForm({ ...props }) {
                       variables={{
                         ...kickstarter,
                       }}
-                      onCompleted={() => {
+                      onCompleted={(data) => {
                         toaster('Saved');
                         menu.updateMenuContext({
                           ...menu,
                           homePage: {
                             ...menu.homePage,
-                            secondaryPage: 'my_kickstarters',
+                            secondaryPage: 'create_kickstarter',
+                            kickstarterId: data.kickstarterCreateOne.recordId,
                           },
                         });
                       }}
@@ -218,19 +219,21 @@ export default function KickstarterForm({ ...props }) {
                 )}
               </Column>
             </div>
-            <Query
-              query={KICKSTARTER_BY_ID}
-              fetchPolicy="network-only"
-              variables={{ _id: menu.homePage.kickstarterId }}
-              onCompleted={(data) =>
-                data.kickstarterById !== null &&
-                setKickstarter({ ...data.kickstarterById })
-              }
-            >
-              {({ data }) => {
-                return null;
-              }}
-            </Query>
+            {menu.homePage.kickstarterId && (
+              <Query
+                query={KICKSTARTER_BY_ID}
+                fetchPolicy="network-only"
+                variables={{ _id: menu.homePage.kickstarterId }}
+                onCompleted={(data) =>
+                  data.kickstarterById !== null &&
+                  setKickstarter({ ...data.kickstarterById })
+                }
+              >
+                {({ data }) => {
+                  return null;
+                }}
+              </Query>
+            )}
           </div>
         );
       }}

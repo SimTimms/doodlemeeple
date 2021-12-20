@@ -31,14 +31,6 @@ export default function MyPostForm({ ...props }) {
     game: type === 'game' ? objectId : null,
   });
 
-  useEffect(() => {
-    setMyPost({
-      ...myPost,
-      type: type ? type : 'public',
-      game: type === 'game' ? objectId : null,
-    });
-  }, [type, objectId, myPost]);
-
   return (
     <MenuContext.Consumer>
       {(menu) => {
@@ -130,7 +122,7 @@ export default function MyPostForm({ ...props }) {
                   }}
                   replaceMode="loose"
                   placeholder="Example: My new game is available for sale now....."
-                  info="Go ahead, say what you've got to say, unless it's crude, sweary, or illegal, in which case please keep that to yourself. See our terms and conditions"
+                  info="Go ahead, say what you've got to say, unless it's crude, sweary, or illegal, offensive, etc. in which case please keep that to yourself. See our terms and conditions"
                   warning=""
                   size="s"
                   multiline={true}

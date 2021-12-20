@@ -9,4 +9,10 @@ export const useStyles = makeStyles((theme) => ({
   underline: {
     textDecoration: 'underline',
   },
+  onBlack: {
+    background: 'rgba(0,0,0,0.3)',
+    color: '#fff',
+    padding: 3,
+    '&:hover': { color: '#ddd' },
+  },
 }));

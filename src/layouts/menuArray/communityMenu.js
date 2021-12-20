@@ -1,7 +1,7 @@
 export default function communityMenu(menu) {
   return [
     {
-      name: 'Dashboard',
+      name: 'Feed',
       icon: 'dashboard',
       machineName: 'dashboard',
       link: () =>
@@ -13,6 +13,7 @@ export default function communityMenu(menu) {
             ...menu.homePage,
             primaryPage: 'community',
             secondaryPage: 'dashboard',
+            gameId: null,
           },
         }),
       count: null,

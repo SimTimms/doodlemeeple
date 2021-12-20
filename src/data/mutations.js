@@ -330,6 +330,7 @@ export const UPDATE_USER_MUTATION = gql`
     $publicEmail: String
     $skype: String
     $phone: String
+    $keywords: [String]
   ) {
     userUpdateOne(
       record: {
@@ -347,6 +348,7 @@ export const UPDATE_USER_MUTATION = gql`
         publicEmail: $publicEmail
         skype: $skype
         phone: $phone
+        keywords: $keywords
       }
     ) {
       recordId

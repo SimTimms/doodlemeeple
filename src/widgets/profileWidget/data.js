@@ -7,6 +7,7 @@ export const CREATIVE_ROSTER_WIDGET = gql`
       name
       profileBG
       profileImg
+      lastOn
       sections {
         type
       }

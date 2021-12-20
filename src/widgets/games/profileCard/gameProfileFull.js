@@ -43,7 +43,7 @@ export default function GameProfileFull() {
                       <Row j="space-between" w="100%">
                         <MainTitle title={game.name} />
                         <a
-                          href={`/app/user-profile/${game.user._id}`}
+                          href={`/user-profile/${game.user._id}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{
@@ -94,11 +94,11 @@ export default function GameProfileFull() {
                         </Column>
                       )}
 
-                      <Column w="100%" a="flex-start">
+                      {/*  <Column w="100%" a="flex-start">
                         <DividerWithBorder />
                         <MainTitle title="Comments" />
                         <GamePostWidget gameId={game._id} withForm={true} />
-                      </Column>
+                      </Column>*/}
 
                       <DividerMini />
                     </Column>

@@ -18,6 +18,13 @@ export default function themeDesigner() {
         background: process.env.REACT_APP_PALETTE_INPUT_BACKGROUND,
       },
     },
+    job: '#a0d08e',
+    jobPrivate: '#ff4242',
+    newUser: '#8ed0bc',
+    lastOn: '#8eb8d0',
+    game: '#d08e8e',
+    kickstarter: '#d0b58e',
+    public: '#7163b7',
   });
   theme.palette.primary = {
     ...theme.palette.primary,

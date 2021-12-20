@@ -25,6 +25,8 @@ export const CREATIVES = gql`
       summary
       profileBG
       profileImg
+      priority
+      lastOn
       badges {
         badgeType
         link
@@ -508,6 +510,7 @@ export const PROFILE = gql`
       instagram
       linkedIn
       publicEmail
+      keywords
       skype
       phone
       sections {
@@ -548,6 +551,7 @@ export const PROFILE_PREVIEW = gql`
       summary
       profileBG
       profileImg
+      lastOn
       viewCount
       paymentMethod
       responsePercent

@@ -4,14 +4,17 @@ import { useStyles } from './styles';
 import clsx from 'clsx';
 import { Query } from 'react-apollo';
 import { BgImg, ProfileImg } from './components';
-import { Row, Column, IconButton } from '../../components';
+import { Row, Column, IconButton, StatusBadge } from '../../components';
 import * as socials from '../../assets/social';
-import dmDevice from '../../assets/dmDevice.png';
-import { PROFILE_IMAGES } from './data';
+import dmDevice from '../../assets/dmChibi.png';
+import { PROFILE_IMAGES, MAKE_FEATURED } from './data';
 import imageOptimiser from '../../utils/imageOptimiser';
 import { nameShortener } from '../../utils';
 import { HistoryContext } from '../../context';
 import { timeDifferenceForDate } from '../../utils/dates';
+import { ProfileContext } from '../../context';
+import { Mutation } from 'react-apollo';
+
 export default function ProfileCard({ creative, setLarge }) {
   const classes = useStyles();
 
@@ -21,10 +24,12 @@ export default function ProfileCard({ creative, setLarge }) {
   const instagram = !creative.instagram ? null : creative.instagram;
   const [previewImage, setPreviewImage] = React.useState(null);
   const [images, setImages] = React.useState([]);
+  const [featured, setFeatured] = React.useState(0);
 
   useEffect(() => {
     creative.profileBG && setPreviewImage(creative.profileBG);
     creative.profileBG && setImages([{ img: creative.profileBG }]);
+    creative.priority && setFeatured(creative.priority);
   }, [creative]);
 
   return (
@@ -243,6 +248,39 @@ export default function ProfileCard({ creative, setLarge }) {
                 }}
               />
             )}
+            <Mutation
+              mutation={MAKE_FEATURED}
+              variables={{
+                _id: creative._id,
+                priority: creative.priority === 0 ? 1 : 0,
+              }}
+              onCompleted={() => setFeatured(featured === 0 ? 1 : 0)}
+            >
+              {(mutation) => {
+                return (
+                  <ProfileContext.Consumer>
+                    {(profile) =>
+                      (profile.email === 'tim-simms@hotmail.com' ||
+                        profile.email === 'jamie@doodlemeeple.com') &&
+                      featured === 0 ? (
+                        <StatusBadge
+                          status="Featured"
+                          key="key"
+                          onClickEvent={() => mutation()}
+                          red={true}
+                        />
+                      ) : (
+                        <StatusBadge
+                          status="Normal"
+                          key="key"
+                          onClickEvent={() => mutation()}
+                        />
+                      )
+                    }
+                  </ProfileContext.Consumer>
+                );
+              }}
+            </Mutation>
           </Column>
         </div>
       )}

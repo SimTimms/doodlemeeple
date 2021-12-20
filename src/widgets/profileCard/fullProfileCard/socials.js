@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStyles } from './styles';
 import { Row } from '../../../components';
-import dmDevice from '../../../assets/dmDevice.png';
+import dmDevice from '../../../assets/dmChibi.png';
 import Social from './social';
 
 export default function Socials({ creative }) {

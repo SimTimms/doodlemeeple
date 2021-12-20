@@ -19,4 +19,36 @@ export const useStyles = makeStyles((theme) => ({
     height: 160,
     border: '1px solid #ccc',
   },
+  publicIcon: {
+    color: '#fff',
+    borderRadius: '50%',
+    padding: 2,
+    cursor: 'pointer',
+    background: '#bbb',
+  },
+  clickable: {
+    cursor: 'pointer',
+    '&:hover': { background: 'rgba(0,0,0,0.05)' },
+  },
+  job: {
+    background: theme.job,
+  },
+  jobPrivate: {
+    background: theme.jobPrivate,
+  },
+  kickstarter: {
+    background: theme.kickstarter,
+  },
+  lastOn: {
+    background: theme.lastOn,
+  },
+  game: {
+    background: theme.game,
+  },
+  newUser: {
+    background: theme.newUser,
+  },
+  public: {
+    background: theme.public,
+  },
 }));

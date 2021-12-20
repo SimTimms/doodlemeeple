@@ -22,6 +22,7 @@ import autosave from '../../../../utils/autosave';
 import * as social from '../../../../assets/social';
 import SocialHeader from './socialHeader';
 import { randomKey } from '../../../../utils';
+import KeywordWrapper from './KeywordWrapper';
 
 export default function TabProfile({
   profile,
@@ -131,6 +132,20 @@ export default function TabProfile({
                       }}
                       autosaveFunction={SignupMutation}
                     />
+                  </div>
+                </DMCard>
+                <DMCard>
+                  <InlineHeader>
+                    <IconTitle icon="mail" title="Keywords (6 Max)" />
+                  </InlineHeader>
+                  <div style={{ padding: 10 }}>
+                    <Row mb={10}>
+                      <KeywordWrapper
+                        setProfile={setProfile}
+                        profile={profile}
+                        SignupMutation={SignupMutation}
+                      />
+                    </Row>
                   </div>
                 </DMCard>
                 {/*

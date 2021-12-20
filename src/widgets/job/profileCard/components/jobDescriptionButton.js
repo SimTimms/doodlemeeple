@@ -1,12 +1,12 @@
 import React from 'react';
-import { MenuButtonStandard } from '../../../../components';
+import { MenuButtonStandardText } from '../../../../components';
 import { MenuContext } from '../../../../context';
 
 export default function JobDescriptionButton({ jobId }) {
   return (
     <MenuContext.Consumer>
       {(menu) => (
-        <MenuButtonStandard
+        <MenuButtonStandardText
           title="Full Description"
           mb={true}
           styleOverride={{ marginTop: 0 }}

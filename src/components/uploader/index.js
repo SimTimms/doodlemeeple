@@ -72,7 +72,6 @@ function Uploader({
             })
             .catch((error) => {
               setStatusMessage(error);
-              console.log(error);
             });
         } else {
           setStatusMessage(response.data.error);

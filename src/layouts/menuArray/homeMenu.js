@@ -1,7 +1,7 @@
 export default function homeMenu(menu) {
   return [
     {
-      name: 'Community',
+      name: 'Feed',
       icon: 'home',
       machineName: 'community',
       link: () =>

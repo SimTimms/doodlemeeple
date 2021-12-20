@@ -25,8 +25,8 @@ import {
 } from '../../../../context';
 import { ProfileCardMacro } from '../../../../widgets/profileCard';
 import { Query } from 'react-apollo';
-import { CHOSEN_CREATIVE } from './data';
-
+import { CHOSEN_CREATIVE, POST_FEED } from './data';
+import { timeDifferenceForDate } from '../../../../utils/dates';
 export default function CommunityPage() {
   const classes = useStyles();
 
@@ -107,147 +107,9 @@ export default function CommunityPage() {
                     )}
 
                     <Column a="flex-start" w="100%">
-                      <SubTitle
-                        title="Jobs"
-                        menuStr="View All"
-                        onClickEvent={() =>
-                          menu.updateMenuContext({
-                            ...menu,
-                            primaryPage: 'jobs',
-                          })
-                        }
-                        primaryButton={{
-                          title: 'Add',
-                          icon: 'add',
-                          onClickEvent: () => {
-                            menu.updateMenuContext({
-                              ...menu,
-                              primaryPage: 'jobs',
-                              jobPage: {
-                                ...menu.jobPage,
-                                primaryPage: 'job_posts',
-                                secondaryPage: 'create_job_ad',
-                              },
-                            });
-                          },
-                        }}
-                      />
-                      <JobBoardMiniWidget history={history} dashboard={true} />
-                    </Column>
-                    <Column a="flex-start" w="100%">
-                      <SubTitle
-                        title="Featured Professionals"
-                        menuStr="View All"
-                        onClickEvent={() => {
-                          menu.updateMenuContext({
-                            ...menu,
-                            homePage: {
-                              ...menu.homePage,
-                              secondaryPage: 'profiles',
-                            },
-                          });
-                        }}
-                      />
-                      <Typography className={classes.summary}>
-                        The best profiles chosen by us this week
-                      </Typography>
-                      <Row w="100%" wrap="flex-wrap">
-                        <FeaturedCreativeHomeWidget />
-                      </Row>
-                    </Column>
-                    <Column a="flex-start" w="100%">
-                      <SubTitle
-                        title="Community Posts"
-                        menuStr="View All"
-                        onClickEvent={() => {
-                          menu.updateMenuContext({
-                            ...menu,
-                            homePage: {
-                              ...menu.homePage,
-                              primaryPage: 'my_posts',
-                              secondaryPage: 'all_posts',
-                            },
-                          });
-                        }}
-                        primaryButton={{
-                          title: 'Add',
-                          icon: 'add',
-                          onClickEvent: () => {
-                            menu.updateMenuContext({
-                              ...menu,
-                              homePage: {
-                                ...menu.homepage,
-                                primaryPage: 'my_posts',
-                                secondaryPage: 'create_my_post',
-                              },
-                            });
-                          },
-                        }}
-                      />
-                      <Row w="100%" wrap="flex-wrap">
+                      <Column w="100%" wrap="flex-wrap">
                         <PublicPostsWidget />
-                      </Row>
-                    </Column>
-                    <Column a="flex-start" w="100%">
-                      <SubTitle
-                        title="Articles"
-                        menuStr={null}
-                        onClickEvent={() => {}}
-                      />
-                      <FeaturedArticle history={history} />
-                    </Column>
-
-                    <Column a="flex-start">
-                      <SubTitle
-                        title="New to DoodleMeeple"
-                        menuStr={null}
-                        onClickEvent={() => {}}
-                      />
-                      <Typography className={classes.summary}>
-                        Professionals that have recently registered
-                      </Typography>
-                      <LatestCreativesWidget
-                        history={history}
-                        dashboard={true}
-                      />
-                    </Column>
-
-                    <Column a="flex-start">
-                      <SubTitle
-                        title="Kickstarters"
-                        menuStr="View All"
-                        onClickEvent={() =>
-                          menu.updateMenuContext({
-                            ...menu,
-                            homePage: {
-                              ...menu.homepage,
-                              primaryPage: 'kickstarters',
-                              secondaryPage: 'kickstarters',
-                            },
-                          })
-                        }
-                        primaryButton={{
-                          title: 'Add',
-                          icon: 'add',
-                          onClickEvent: () => {
-                            menu.updateMenuContext({
-                              ...menu,
-                              homePage: {
-                                ...menu.homepage,
-                                primaryPage: 'kickstarters',
-                                secondaryPage: 'create_kickstarter',
-                              },
-                            });
-                          },
-                        }}
-                      />
-                      <Typography className={classes.summary}>
-                        Kickstarter campaigns posted by community members
-                      </Typography>
-                      <FeaturedKickstarters
-                        history={history}
-                        dashboard={true}
-                      />
+                      </Column>
                     </Column>
                   </Column>
                 </Row>

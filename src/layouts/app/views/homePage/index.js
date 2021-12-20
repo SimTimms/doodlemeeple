@@ -34,7 +34,7 @@ export default function HomePage() {
                   ? gameProfileMenu(menu)
                   : gameMenu(menu)
                 : menu.homePage.primaryPage === 'community'
-                ? communityMenu(menu)
+                ? null
                 : menu.homePage.primaryPage === 'kickstarters'
                 ? kickstarterMenu(menu)
                 : menu.homePage.primaryPage === 'my_posts' && myPostsMenu(menu)

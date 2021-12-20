@@ -26,6 +26,23 @@ export default function mainMenu(history, counts, mainMenuContext, profile) {
         }),
       count: null,
     },*/
+
+    {
+      name: 'Profiles',
+      icon: 'face',
+      machineName: 'profiles',
+      link: () =>
+        mainMenuContext.updateMenuContext({
+          primaryPage: 'profiles',
+          jobPage: { ...mainMenuContext.jobPage },
+          workPage: { ...mainMenuContext.workPage },
+          homePage: {
+            ...mainMenuContext.homePage,
+            secondaryPage: 'profiles',
+          },
+        }),
+      count: { icon: 'star', count: counts.jobAds },
+    },
     {
       name: 'Job Ads',
       icon: 'post_add',
