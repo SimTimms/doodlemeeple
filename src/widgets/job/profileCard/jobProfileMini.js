@@ -11,7 +11,7 @@ import PublicProfileButton from './components/publicProfileButton';
 import JobDescriptionButton from './components/jobDescriptionButton';
 
 export default function JobProfileMini({ job, history }) {
-  const userId = Cookies.get('userId');
+  const userId = Cookies.get('DMuserId');
 
   const classes = useStyles();
   return (

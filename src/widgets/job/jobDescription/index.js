@@ -15,7 +15,7 @@ import ReactPlayer from 'react-player';
 import Cookies from 'js-cookie';
 
 export default function JobDescription({ job }) {
-  const userId = Cookies.get('userId');
+  const userId = Cookies.get('DMuserId');
   const classes = useStyles();
   const [large, setLarge] = React.useState(null);
   const [previewImage, setPreviewImage] = React.useState(null);

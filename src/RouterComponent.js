@@ -13,7 +13,7 @@ import PublicRoutes from './routes/routesPublic';
 import { MenuContext } from './context';
 
 function RouterComponent(props) {
-  const authToken = Cookies.get('token');
+  const authToken = Cookies.get('DMtoken');
   const theme = themeDesigner();
   const httpLink = createHttpLink({
     uri: process.env.REACT_APP_API,

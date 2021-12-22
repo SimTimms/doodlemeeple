@@ -77,7 +77,21 @@ function GallerySection({
         galleryId: section._id,
       }}
       onCompleted={(data) => {
-        const copyArr = Object.assign([], sections);
+        const indexOf = sections.map((item, index) =>
+          item._id === section._id ? index : null
+        );
+        const indexFilter = indexOf.filter((item) => item !== null);
+        console.log(sections);
+        const filterOtherSections = sections.splice(indexFilter[0], 1, {
+          ...section,
+          summary,
+          title,
+          showreel,
+          type,
+        });
+        console.log(filterOtherSections);
+
+        const copyArr = Object.assign([], [...filterOtherSections]);
         if (section._id === 'new') {
           const indexProject = copyArr
             .map((section, index) => section._id === 'new' && index)
@@ -87,8 +101,8 @@ function GallerySection({
           copyArr[indexProject ? indexProject : 0].gallery._id =
             data.sectionCreateOne.record.gallery._id;
         }
-        setSections(copyArr);
-        setChanges();
+        //  setSections(copyArr);
+        // setChanges();
         toaster('Saved');
       }}
     >
@@ -119,8 +133,9 @@ function GallerySection({
                   maxLength={256}
                   minLength={1}
                   onChangeEvent={(e) => {
-                    autosave(mutation, 'summary');
                     setSummary(e);
+
+                    autosave(mutation, 'summary');
                   }}
                   replaceMode="loose"
                   placeholder=""
@@ -143,8 +158,9 @@ function GallerySection({
                       maxLength={256}
                       minLength={7}
                       onChangeEvent={(e) => {
-                        autosave(mutation, 'summary');
                         setShowreel(e);
+
+                        autosave(mutation, 'summary');
                       }}
                       replaceMode="none"
                       placeholder=""

@@ -57,7 +57,7 @@ const iconHelper = {
 
 export default function MyPostProfile({ myPost, onDeleteEvent }) {
   const classes = useStyles();
-  const userId = Cookies.get('userId');
+  const userId = Cookies.get('DMuserId');
   return (
     <Row a="flex-start">
       <div

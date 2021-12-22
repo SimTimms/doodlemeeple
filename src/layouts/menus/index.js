@@ -51,7 +51,7 @@ export function AppMenu({ handleDrawerOpen, open, history }) {
 }
 
 export function PublicMenu({ history }) {
-  const authToken = Cookies.get('token');
+  const authToken = Cookies.get('DMtoken');
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:800px)');
 

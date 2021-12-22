@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 
 export function Message({ message }) {
   const classes = useStyles();
-  const isUserMessage = message.sender._id !== Cookies.get('userId');
+  const isUserMessage = message.sender._id !== Cookies.get('DMuserId');
   const mobile = useMediaQuery('(max-width:800px)');
   return (
     <Card

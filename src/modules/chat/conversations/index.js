@@ -12,7 +12,7 @@ import Cookies from 'js-cookie';
 
 export default function Conversations({ history, setConversationObj }) {
   const [conversationArray, setConversationArray] = React.useState([]);
-  const userId = Cookies.get('userId');
+  const userId = Cookies.get('DMuserId');
   return (
     <Column j="flex-start">
       {conversationArray.length === 0 && (
