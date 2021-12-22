@@ -84,11 +84,11 @@ export default function AccountPage({ history }) {
                 <Mutation
                   mutation={DELETE_ACCOUNT}
                   onCompleted={() => {
-                    Cookies.remove('token');
+                    Cookies.remove('DMtoken');
                     history.push('/deleted');
                   }}
                   onError={() => {
-                    Cookies.remove('token');
+                    Cookies.remove('DMtoken');
                     history.push('/deleted');
                   }}
                 >

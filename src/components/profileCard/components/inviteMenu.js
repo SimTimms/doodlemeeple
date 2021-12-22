@@ -4,11 +4,11 @@ import Cookies from 'js-cookie';
 import { IconButton } from '../../';
 
 export default function InviteMenu({ history, creative, favourite, ...props }) {
-  const userId = Cookies.get('userId');
+  const userId = Cookies.get('DMuserId');
   const { jobId, invite, updateInviteList, removeInviteList, disabled } = props;
 
   return userId === creative._id ? null : updateInviteList &&
-    Cookies.get('userId') !== creative._id ? (
+    Cookies.get('DMuserId') !== creative._id ? (
     <InviteButton
       history={history}
       creative={creative}

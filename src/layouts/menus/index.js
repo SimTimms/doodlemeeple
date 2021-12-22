@@ -80,8 +80,8 @@ export function PublicMenu({ history }) {
       {authToken ? (
         <StyledButton
           onClick={() => {
-            Cookies.remove('token');
-            Cookies.remove('userId');
+            Cookies.remove('DMtoken');
+            Cookies.remove('DMuserId');
             localStorage.removeItem('featureArticle');
             localStorage.removeItem('posts');
             history.push(`/`);

@@ -59,7 +59,7 @@ export default function AppLayout(props) {
   });
 
   const pageJump = props.match ? props.match.params.page : null;
-  const userId = Cookies.get('userId');
+  const userId = Cookies.get('DMuserId');
 
   //TODO: I guess this is proper dirty
   const pathParam = props
