@@ -24,7 +24,7 @@ export default function CreativeRosterWidget({ history }) {
   const [group, setGroup] = React.useState('artist');
   return (
     <div className={classes.root}>
-      <Column w="100%">
+      <Column w="100%" h="100%">
         <Filters
           filter={filter}
           setFilter={setFilter}
@@ -34,47 +34,56 @@ export default function CreativeRosterWidget({ history }) {
           setPage={setPage}
           setEndPage={setEndPage}
         />
-        <Grid cols={4}>
-          {large !== null && <BigImage large={large} setLarge={setLarge} />}
-          <Query
-            query={CREATIVE_ROSTER_WIDGET}
-            fetchPolicy="network-only"
-            variables={{ page, filter }}
-            onCompleted={(data) => {
-              data.creativeRosterWidget.length === 0 && setEndPage(true);
-              setCreativeArray([
-                ...creativeArray,
-                ...data.creativeRosterWidget,
-              ]);
-            }}
-          >
-            {() => {
-              if (creativeArray.length === 0)
-                return (
-                  <Column w={700}>
-                    <Divider />
-                    <Fade in={true} timeout={3000}>
-                      <div style={{ width: '100%' }}>
-                        <CardComponent type="dark">
-                          <Typography>No Results</Typography>
-                        </CardComponent>
-                      </div>
-                    </Fade>
-                  </Column>
-                );
-              return creativeArray.map((creative, index) => {
-                return (
-                  <ProfileCard
-                    creative={creative}
-                    key={`creative_${index}`}
-                    setLarge={setLarge}
-                    history={history}
-                  />
-                );
-              });
-            }}
-          </Query>
-        </Grid>
+        <div
+          style={{
+            height: '100%',
+            width: '100%',
+            overflow: 'auto',
+            paddingBottom: 40,
+          }}
+        >
+          <Grid cols={4}>
+            {large !== null && <BigImage large={large} setLarge={setLarge} />}
+            <Query
+              query={CREATIVE_ROSTER_WIDGET}
+              fetchPolicy="network-only"
+              variables={{ page, filter }}
+              onCompleted={(data) => {
+                data.creativeRosterWidget.length === 0 && setEndPage(true);
+                setCreativeArray([
+                  ...creativeArray,
+                  ...data.creativeRosterWidget,
+                ]);
+              }}
+            >
+              {() => {
+                if (creativeArray.length === 0)
+                  return (
+                    <Column w={700}>
+                      <Divider />
+                      <Fade in={true} timeout={3000}>
+                        <div style={{ width: '100%' }}>
+                          <CardComponent type="dark">
+                            <Typography>No Results</Typography>
+                          </CardComponent>
+                        </div>
+                      </Fade>
+                    </Column>
+                  );
+                return creativeArray.map((creative, index) => {
+                  return (
+                    <ProfileCard
+                      creative={creative}
+                      key={`creative_${index}`}
+                      setLarge={setLarge}
+                      history={history}
+                    />
+                  );
+                });
+              }}
+            </Query>
+          </Grid>
+        </div>
         {!endPage && creativeArray.length > 0 && (
           <IconButton
             title="Load More"
