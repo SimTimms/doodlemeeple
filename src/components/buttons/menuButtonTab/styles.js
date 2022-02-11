@@ -11,6 +11,8 @@ export const useStyles = makeStyles((theme) => ({
     paddingRight: 20,
     minWidth: 60,
     margin: 3,
+    borderRadius: 2,
+    background: '#eee',
   },
   active: {
     background: theme.palette.primary.main,

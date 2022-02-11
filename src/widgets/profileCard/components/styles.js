@@ -11,6 +11,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   filterRoot: {
     width: '100%',
+    maxWidth: 800,
     paddingTop: 3,
     paddingBottom: 3,
   },

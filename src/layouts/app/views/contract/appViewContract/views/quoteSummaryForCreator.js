@@ -34,7 +34,7 @@ export default function QuoteSummaryCreator({
   const [contractStatus, setContractStatus] = React.useState(null);
   const [declineWarning, setDeclineWarning] = React.useState(false);
   const [favourites, setFavourites] = React.useState([]);
-  const userId = Cookies.get('userId');
+  const userId = Cookies.get('DMuserId');
   useEffect(() => {
     setContractStatus(contractData.status);
   }, [contractData]);

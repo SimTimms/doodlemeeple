@@ -35,8 +35,8 @@ export const MutationLogin = ({ parameters }) => {
 
         if (token) {
           const tokenDecode = jwtDecode(token);
-          await Cookies.set('token', token, { expires: 7 });
-          await Cookies.set('userId', tokenDecode.userId, {
+          await Cookies.set('DMtoken', token, { expires: 7 });
+          await Cookies.set('DMuserId', tokenDecode.userId, {
             expires: 7,
           });
 

@@ -36,7 +36,7 @@ function Uploader({
     };
 
     const uploadURL = `${process.env.REACT_APP_API_S3}/sign_s3`;
-    const token = Cookies.get('token');
+    const token = Cookies.get('DMtoken');
     let config = {
       headers: {
         Authorization: 'Bearer ' + token,

@@ -6,5 +6,6 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'center',
     width: '100%',
+    height: '100%',
   },
 }));

@@ -9,7 +9,7 @@ import { JOB_WIDGET } from '../../../../../widgets/job/data';
 import { MenuContext } from '../../../../../context';
 
 export default function AppViewJobPublic({ jobId, history }) {
-  const userId = Cookies.get('userId');
+  const userId = Cookies.get('DMuserId');
 
   return (
     <MenuContext.Consumer>

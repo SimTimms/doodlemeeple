@@ -8,7 +8,7 @@ import { HistoryContext } from '../../../../context';
 
 export default function FullProfile({ profileId, publicView, ...props }) {
   const classes = useStyles();
-  const userId = Cookies.get('userId');
+  const userId = Cookies.get('DMuserId');
   const { setFullProfile } = props;
 
   return (

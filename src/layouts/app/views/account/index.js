@@ -12,7 +12,7 @@ import { PreviewProfile } from '../../../preview/views/previewProfile';
 export function Account() {
   const classes = useStyles();
   const [primaryPage, setPrimaryPage] = React.useState('profile');
-  const userId = Cookies.get('userId');
+  const userId = Cookies.get('DMuserId');
 
   return (
     <HistoryContext.Consumer>

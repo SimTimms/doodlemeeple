@@ -13,7 +13,7 @@ import Cookies from 'js-cookie';
 export default function AppViewContract({ contractId, history }) {
   const [tabs] = React.useState([true, false, false]);
 
-  const userId = Cookies.get('userId');
+  const userId = Cookies.get('DMuserId');
 
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
